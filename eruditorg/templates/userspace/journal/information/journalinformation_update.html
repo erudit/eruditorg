@@ -16,6 +16,9 @@
 {% endblock %}
 
 {% block section_intro %}
+  {% if form.errors or formset.errors %}
+  {% trans "Veuillez corriger les erreurs dans le formulaire" %}
+  {% endif %}
 {% blocktrans %}
 <p>La page <em>À propos</em> est la vitrine de votre revue sur Érudit&nbsp;: c’est ici que vous pourrez présenter votre publication, sa ligne éditoriale, son équipe, bref, tous les éléments que vous considérez importants. Il est ainsi recommandé de rédiger du contenu pour chacune des sections, tant en français qu’en anglais.</p>
 <p>Cette page sera consultée par des lecteurs qui souhaiteront mieux connaître votre revue, mais aussi par de potentiels auteurs, des agrégateurs et des bibliothécaires.</p>
@@ -27,6 +30,7 @@
 <form  class="form-vertical"
        method="post"
        action="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ selected_language }}">{% csrf_token %}
+
   {% if form.non_field_errors %}
   {% for error in form.non_field_errors %}
   <p class="alert">{{ error }}</p>
@@ -49,7 +53,25 @@
     </div>
     <hr/>
   </fieldset>
+  {{ formset.management_form }}
+  <h2>Équipe</h2>
+  <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
 
+  {% for line in formset %}
+    <div class="row" data-object="{{ forloop.counter0 }}">
+      {{ line.id }}
+      {{ line.journal_information }}
+    {% include field_template with field=line.type col_sm=2 col_md=2 only %}
+    {% include field_template with field=line.name col_sm=4 col_md=4 only %}
+    {% include field_template with field=line.role col_sm=4 col_md=4 only %}
+
+      <div class="col-sm-2 col-md-2">
+        <button type="button" class="btn btn-primary" data-object="{{ forloop.counter0 }}" data-action="delete">{% trans "Supprimer" %}</button>
+      </div>
+    </div>
+  {% endfor %}
+  <button type="button" class="btn btn-secondary" id="button-add-contributor">{% trans "Ajouter un contributeur" %}</button>
+  </fieldset>
   <fieldset>
     <legend>{% trans "Gestion de la revue" %}</legend>
     <div class="row">
@@ -60,7 +82,7 @@
       </p>
       {% include field_template with select_field=form.peer_review_process only %}
       {% include field_template with select_field=form.languages only %}
-      {% include field_template with field=form.frequency default_value="" only %}
+      {% include field_template with field=form.frequency only %}
     </div>
     <hr/>
   </fieldset>

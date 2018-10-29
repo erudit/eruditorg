@@ -1,4 +1,4 @@
-<div class="col-sm-8 col-md-6 form-group">
+<div class="col-sm-{{ col_sm|default:8 }} col-md-{{ col_md|default:6 }} form-group">
   <label class="control-label" for="{{ field.id_for_label }}">
     {{ field.label }}
     {% if icon %}
@@ -23,16 +23,7 @@
     {{ select_field }}
   </div>
   {% else %}
-  <input
-    id="{{ field.id_for_label }}"
-    name="{{ field.name }}"
-    {% if default_value != None %}
-    value="{{ field.value|default_if_none:default_value }}"
-    {% else %}
-    value="{{ field.value }}"
-    {% endif %}
-    type="{{ type|default:'text' }}"
-    autocomplete="{{ autocomplete|default:'name'   }}"/>
+  {{ field }}
   {% endif %}
   {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
 </div>

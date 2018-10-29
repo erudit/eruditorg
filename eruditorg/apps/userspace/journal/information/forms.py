@@ -4,8 +4,9 @@ from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.forms.models import fields_for_model
 from django.utils.translation import gettext as _
+from django.forms import inlineformset_factory
 
-from erudit.models import JournalInformation
+from erudit.models import JournalInformation, Contributor
 
 
 class JournalInformationForm(forms.ModelForm):
@@ -21,7 +22,7 @@ class JournalInformationForm(forms.ModelForm):
         'organisation_name', 'email', 'subscription_email', 'languages',
         'phone', 'facebook_url', 'facebook_enable_feed', 'frequency',
         'twitter_url', 'twitter_enable_feed', 'website_url',
-        'peer_review_process'
+        'peer_review_process',
     ]
 
     class Meta:
@@ -106,3 +107,8 @@ class JournalInformationForm(forms.ModelForm):
         if commit:
             obj.save()
         return obj
+
+
+ContributorInlineFormset = inlineformset_factory(
+    JournalInformation, Contributor, fields=('type', 'name', 'role'), can_delete=True, extra=1
+)

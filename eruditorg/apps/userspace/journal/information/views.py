@@ -2,14 +2,31 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
+from django.http import HttpResponseRedirect
 
 from base.viewmixins import MenuItemMixin
-from erudit.models import JournalInformation
+from erudit.models import JournalInformation, Contributor
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
-from .forms import JournalInformationForm
+from .forms import JournalInformationForm, ContributorInlineFormset
+
+
+class JournalInformationCollaboratorDeleteView(DeleteView):
+
+    def get_object(self):
+        if 'contributor_id' not in self.request.POST:
+            raise ValueError
+        contributor_id = self.request.POST.get('contributor_id')
+        contributor = Contributor.objects.get(pk=contributor_id)
+        journal = contributor.journal_information.journal
+        if not self.request.user.has_perm('journal.edit_journal_information', journal):
+            raise PermissionError
+        return contributor
+
+    def get_success_url(self):
+        return "/"
 
 
 class JournalInformationUpdateView(
@@ -43,6 +60,31 @@ class JournalInformationUpdateView(
         journal_info, dummy = JournalInformation.objects.get_or_create(journal=journal)
         return journal_info
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        new_keys = {}
+        contributor_inline_form = ContributorInlineFormset(self.request.POST, instance=self.object)
+        for key in contributor_inline_form.data.keys():
+            if "contributor_set" in key:
+                new_keys[key] = contributor_inline_form.data[key]
+        if (form.is_valid() and contributor_inline_form.is_valid()):
+
+            return self.form_valid(form, contributor_inline_form)
+        return self.form_invalid(form, contributor_inline_form)
+
+    def form_invalid(self, form, contributor_form):
+
+        return self.render_to_response(self.get_context_data(form=form, formset=contributor_form))
+
+    def form_valid(self, form, contributor_form):
+        self.object = form.save()
+        contributor_form.instance = self.object
+        contributor_form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
     def get_permission_object(self):
         # Note: we work on a JournalInformation instance but the permission check
         # is performed against a Journal instance.
@@ -56,6 +98,10 @@ class JournalInformationUpdateView(
     def get_context_data(self, **kwargs):
         context = super(JournalInformationUpdateView, self).get_context_data(**kwargs)
         context['selected_language'] = self.selected_language
+        if 'formset' in kwargs:
+            context['formset'] = kwargs['formset']
+        else:
+            context['formset'] = ContributorInlineFormset(instance=self.object)
         return context
 
     def get_success_url(self):

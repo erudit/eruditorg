@@ -6,6 +6,7 @@ from base.test.factories import UserFactory
 from base.test.testcases import Client
 from erudit.models import JournalInformation
 from erudit.test.factories import JournalFactory
+from apps.userspace.journal.information.forms import ContributorInlineFormset
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
@@ -46,16 +47,21 @@ class TestJournalInformationUpdateView(TestCase):
 
     def test_can_be_used_to_update_journal_information_using_the_current_lang(self):
         # Setup
-        journal = JournalFactory()
         user = UserFactory()
-        journal.members.add(user)
+        journal = JournalFactory(members=[user])
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
             user=user, authorization_codename=AC.can_edit_journal_information.codename)
         client = Client(logged_user=user)
         post_data = {
             'about_fr': 'Ceci est un test',
+            'contributor_set-TOTAL_FORMS': 0,
+            'contributor_set-INITIAL_FORMS':  0,
+            'contributor_set-MAX_FORMS': 1,
+            'contributor_set-MIN_FORMS': 0
+
         }
+        formset = ContributorInlineFormset()
         url = reverse('userspace:journal:information:update',
                       kwargs={'journal_pk': journal.pk})
         # Run
@@ -67,15 +73,18 @@ class TestJournalInformationUpdateView(TestCase):
 
     def test_can_be_used_to_update_journal_information_using_a_specific_lang(self):
         # Setup
-        journal = JournalFactory()
         user = UserFactory()
-        journal.members.add(user)
+        journal = JournalFactory(members=[user])
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
             user=user, authorization_codename=AC.can_edit_journal_information.codename)
         client = Client(logged_user=user)
         post_data = {
             'about_en': 'This is a test',
+            'contributor_set-TOTAL_FORMS': 0,
+            'contributor_set-INITIAL_FORMS': 0,
+            'contributor_set-MAX_FORMS': 1,
+            'contributor_set-MIN_FORMS': 0
         }
         url = '{}?lang=en'.format(
             reverse('userspace:journal:information:update',

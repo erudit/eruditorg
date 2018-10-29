@@ -1295,6 +1295,9 @@ class JournalInformation(models.Model):
     about = models.TextField(verbose_name=_('Revue'), blank=True, null=True)
     editorial_policy = models.TextField(
         verbose_name=_('Politiques de la revue'), blank=True, null=True)
+    editorial_leaders = models.ManyToManyField(
+        to="Contributor"
+    )
     subscriptions = models.TextField(verbose_name=_('Abonnements'), blank=True, null=True)
     team = models.TextField(verbose_name=_('Équipe'), blank=True, null=True)
     contact = models.TextField(verbose_name=_('Coordonnées'), blank=True, null=True)
@@ -1306,3 +1309,17 @@ class JournalInformation(models.Model):
 
     def __str__(self):
         return self.journal.name
+
+
+class Contributor(models.Model):
+
+    type = models.CharField(
+        max_length=1, verbose_name=_("Type"),
+        choices=(
+            ('D', _("Direction")),
+            ('R', _("Rédaction"))
+        )
+    )
+    name = models.CharField(max_length=200, verbose_name=_("Prénom et nom"))
+    journal_information = models.ForeignKey(JournalInformation, on_delete=models.CASCADE)
+    role = models.CharField(max_length=200, verbose_name=_("Rôle"))
