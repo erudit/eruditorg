@@ -46,9 +46,8 @@
       {% include field_template with field=form.email type="email" autocomplete="email" only %}
       {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
     </div>
+    <hr/>
   </fieldset>
-
-  <hr/>
 
   <fieldset>
     <legend>{% trans "Gestion de la revue" %}</legend>
@@ -59,11 +58,10 @@
         {% endblocktrans %}
       </p>
       {% include field_template with select_field=form.peer_review_process only %}
+      {% include field_template with select_field=form.languages only %}
     </div>
-    </div>
+    <hr/>
   </fieldset>
-
-  <hr/>
 
   <fieldset>
     <legend>{% trans "Liens" %}</legend>
@@ -91,10 +89,6 @@
     </li>
     {% endfor %}
   </ul>
-
-  <h2><label>{{ form.languages.label }}</label></h2>
-  {{ form.languages|add_class:'form-control' }}
-  <hr>
 
   {% for field in form.get_textbox_fields %}
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
