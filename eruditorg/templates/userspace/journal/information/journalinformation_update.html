@@ -34,9 +34,10 @@
   {% endif %}
 
 
-  <h2>{% trans "Coordonnées générales" %}</h2>
+  <h2>{% trans "Informations générales" %}</h2>
   {% with field_template="userspace/journal/information/partials/info_single_field.html" %}
   <fieldset>
+    <legend>{% trans "Coordonnées" %}</legend>
     <div class="row">
       <p class="col-sm-9">
         {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
@@ -83,6 +84,8 @@
     <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Sauvegarder' %}</button>
   </div>
 
+  <h2>{% trans "À propos de la revue" %}</h2>
+
   <ul class="tabs">
     {% for langcode, langname in LANGUAGES %}
     <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
@@ -93,7 +96,7 @@
 
   {% for field in form.get_textbox_fields %}
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
-    <h2><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></h2>
+    <legend>{{ field.label }}</legend>
     {% if field.help_text %}
     <div class="row">
       <p class="col-md-10">{{ field.help_text }}</p>
