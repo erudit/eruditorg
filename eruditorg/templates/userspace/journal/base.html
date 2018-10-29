@@ -1,5 +1,5 @@
 {% extends "userspace/base.html" %}
-{% load rules userspace_journal_tags %}
+{% load i18n rules userspace_journal_tags %}
 
 {% block userspace_title %}{{ scope_current_journal.name }}{% endblock %}
 
@@ -12,7 +12,7 @@
       <option
         value="{% if not force_scope_switch_to_pattern_name %}{% journal_url j %}{% else %}{% url force_scope_switch_to_pattern_name j.id %}{% endif %}"
         {% if j.id == scope_current_journal.id %}selected{% endif %}
-        {% if can_switch != None and not can_switch %} disabled{% endif %}>{{ j.name }}</option>
+        {% if can_switch != None and not can_switch %} disabled{% endif %}>{{ j.name }}{% if j.subtitle %}{% trans '&nbsp;:' %} {{ j.subtitle }}{% endif %}</option>
     {% endfor %}
   </select>
 </li>
