@@ -10,8 +10,8 @@ from erudit.models import JournalInformation
 
 class JournalInformationForm(forms.ModelForm):
     i18n_field_bases = [
-        'about', 'editorial_policy', 'subscriptions',
-        'team', 'contact', 'partners', 'publishing_ethics', 'instruction_for_authors'
+        'about', 'team', 'editorial_policy', 'publishing_ethics', 'instruction_for_authors',
+        'subscriptions', 'partners', 'contact',
     ]
 
     # Fields that aren't translatable. You could be wanting to but them in Meta.fields, but that
@@ -66,30 +66,29 @@ class JournalInformationForm(forms.ModelForm):
     @property
     def i18n_field_help_texts(self):
         return {
-            self.get_i18n_field_name('about'): _("Décrivez les objectifs, \
-            les champs d'étude et l’historique de votre revue. Vous pouvez \
-            également y présenter l’éditeur (société savante, département, \
-            groupe de recherche) et votre calendrier de publication. "),
-            self.get_i18n_field_name('editorial_policy'): _("Présentez la \
-            politique éditoriale, le processus de révision par les pairs, \
-            la politique de droits d’auteur, incluant votre licence de \
-            diffusion; dans le cas d’une revue en libre accès diffusée sous \
-            une licence Creative Commons, vous pouvez insérer un lien vers le \
-            site de la licence. Vous pouvez également y présenter le contrat \
-            auteur-revue s’il y a lieu, la politique anti-plagiat, ainsi que \
-            les instructions aux auteurs pour la soumission d’articles à la \
-            revue."),
-            self.get_i18n_field_name('team'): _("Décrivez le comité éditorial, \
-            le conseil d’administration, le comité scientifique \
+            self.get_i18n_field_name('about'): _("<p>Décrivez :</p><ul><li>les objectifs, \
+            <li>les champs d’étude</li> <li>et l’historique de votre revue.</li></ul>"),
+            self.get_i18n_field_name('team'): _("<p>Présentez :</p><ul><li>le comité éditorial,</li>\
+            <li>le conseil d’administration,</li><li>le comité scientifique \
             international (incluant l’affiliation institutionnelle de chacun \
-            de ses membres)."),
-            self.get_i18n_field_name('subscriptions'): _("Décrivez les \
-            modalités d’abonnements numérique et papier de votre revue \
-            (coordonnées de la personne-ressource). "),
-            self.get_i18n_field_name('partners'): _("Présentez les partenaires \
+            de ses membres).</li></ul>"),
+            self.get_i18n_field_name('editorial_policy'): _("<p>Présentez :</p><ul><li>la \
+            politique éditoriale,</li><li>le processus de révision par les pairs</li> \
+            <li>et la politique de droits d’auteur, incluant votre licence de \
+            diffusion.</li></ul>"),
+            self.get_i18n_field_name('publishing_ethics'): _("<p>Décrivez :</p><ul><li>la \
+            politique anti-plagiat,</li><li>ou tout autre élément se rapportant aux règles \
+            d’éthique.</li></ul>"),
+            self.get_i18n_field_name('instruction_for_authors'): _("<p>Décrivez :</p><ul><li>le \
+            contrat auteur-revue (s’il y a lieu)</li><li>et les instructions aux auteurs pour la \
+            soumission d’articles à la revue.</li></ul>"),
+            self.get_i18n_field_name('subscriptions'): _("<p>Décrivez les \
+            modalités d’abonnements numérique et papier de votre revue, et présentez les \
+            coordonnées des personnes-ressources.</p>"),
+            self.get_i18n_field_name('partners'): _("<p>Présentez les partenaires \
             de votre revue (Organismes subventionnaires, départements ou \
-            associations) qui soutiennent votre revue. Vous pouvez insérer le \
-            logo de ces partenaires et/ou un lien vers leur site."),
+            associations) qui soutiennent votre revue.</p><p>Vous pouvez insérer le \
+            logo de ces partenaires et/ou un lien vers leur site.</p>"),
         }
 
     def get_i18n_field_name(self, fname):

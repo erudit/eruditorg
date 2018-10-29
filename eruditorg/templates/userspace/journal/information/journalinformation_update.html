@@ -98,9 +98,7 @@
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
     <legend>{{ field.label }}</legend>
     {% if field.help_text %}
-    <div class="row">
-      <p class="col-md-10">{{ field.help_text }}</p>
-    </div>
+    {{ field.help_text|safe }}
     {% endif %}
     {{ field|add_class:'form-control' }}
     {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
