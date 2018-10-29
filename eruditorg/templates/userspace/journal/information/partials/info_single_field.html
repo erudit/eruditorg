@@ -26,7 +26,11 @@
   <input
     id="{{ field.id_for_label }}"
     name="{{ field.name }}"
+    {% if default_value != None %}
+    value="{{ field.value|default_if_none:default_value }}"
+    {% else %}
     value="{{ field.value }}"
+    {% endif %}
     type="{{ type|default:'text' }}"
     autocomplete="{{ autocomplete|default:'name'   }}"/>
   {% endif %}
