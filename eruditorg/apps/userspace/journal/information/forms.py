@@ -19,7 +19,7 @@ class JournalInformationForm(forms.ModelForm):
     # i18n fields will be blank.
     non_i18n_field_names = [
         'organisation_name', 'email', 'subscription_email', 'languages',
-        'phone', 'facebook_url', 'facebook_enable_feed',
+        'phone', 'facebook_url', 'facebook_enable_feed', 'frequency',
         'twitter_url', 'twitter_enable_feed', 'website_url',
         'peer_review_process'
     ]

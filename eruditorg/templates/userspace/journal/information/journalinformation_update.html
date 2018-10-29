@@ -59,6 +59,7 @@
       </p>
       {% include field_template with select_field=form.peer_review_process only %}
       {% include field_template with select_field=form.languages only %}
+      {% include field_template with field=form.frequency default_value="" only %}
     </div>
     <hr/>
   </fieldset>

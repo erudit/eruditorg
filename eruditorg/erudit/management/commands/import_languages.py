@@ -22,6 +22,7 @@ class Command(BaseCommand):
             for row in reader:
                 shortname = row[0]
                 languages = row[12].split('/')
+                frequency = row[27]
                 status = row[4]
                 if status == "à paraître":
                     continue
@@ -29,6 +30,8 @@ class Command(BaseCommand):
                 try:
                     journal = Journal.legacy_objects.get_by_id(shortname)
                     info = JournalInformation.objects.get(journal=journal)
+                    if len(frequency) > 0:
+                        info.frequency = int(frequency)
                     if len(languages) == 0:
                         raise Exception
                     else:
