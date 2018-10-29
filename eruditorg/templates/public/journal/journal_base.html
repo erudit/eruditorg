@@ -103,7 +103,11 @@
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
             </span>
+            {% if journal.peer_review_process %}({{ journal.peer_review_process }}){% endif %}
           </dd>
+
+          <dt>{% trans "Frais de publication (<em>APC</em>)" %}</dt>
+          <dd>{% trans "Non" %}</dd>
           {% endif %}
 
           <dt>{% trans "Politique d'accès" %}</dt>
@@ -215,12 +219,8 @@
           <a href="{% url 'public:journal:journal_detail' journal.code %}">
             <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
           </a>
-          {% if content_access_granted and subscription_type == 'individual' %}
-          <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
-          {% endif %}
         </div>
         {% endcache %}
-        {% include "public/partials/subscription_sponsor_badge.html" %}
       </section>
 
       {% if journal_info.email or journal_info.subscription_email or journal_info.phone %}
@@ -263,6 +263,17 @@
         {{ journal_info.partners|safe }}
       </section>
       {% endif %}
+
+      <section class="sidebar-block">
+        <h2>{% trans "Accès" %}</h2>
+        {% if content_access_granted and subscription_type == 'individual' %}
+        <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
+        {% endif %}
+        {% include "public/partials/subscription_sponsor_badge.html" %}
+        <p>
+          <a href="{% trans 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
+        </p>
+      </section>
 
     </aside>
   </div>
