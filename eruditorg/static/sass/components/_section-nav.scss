@@ -1,0 +1,26 @@
+/**
+ * In-page section navigation
+ */
+
+.section-nav {
+  margin: 0;
+  list-style: none;
+}
+
+.section-nav__item {
+  display: inline-block;
+  margin-right: 2em;
+
+  &:before {
+    content: "-> ";
+  }
+}
+
+a.section-nav__link {
+  border-bottom: 1px dotted #000;
+
+  &:hover {
+    color: $coral-red;
+    border-bottom-color: $coral-red;
+  }
+}

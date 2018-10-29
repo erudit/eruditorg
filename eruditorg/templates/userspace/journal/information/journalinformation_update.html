@@ -94,8 +94,17 @@
     {% endfor %}
   </ul>
 
+  <p>{% trans "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:" %}</p>
+  <ul class="section-nav">
   {% for field in form.get_textbox_fields %}
-  <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
+  <li class="section-nav__item"><a href="#{{ field.html_name }}" class="section-nav__link">{{ field.label }}</a></li>
+  {% endfor %}
+  </ul>
+
+  <hr>
+
+  {% for field in form.get_textbox_fields %}
+  <fieldset id="{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
     <legend>{{ field.label }}</legend>
     {% if field.help_text %}
     {{ field.help_text|safe }}
