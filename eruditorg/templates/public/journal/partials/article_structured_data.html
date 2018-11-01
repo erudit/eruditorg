@@ -41,7 +41,7 @@
       {% if article.first_page %}"pageStart": "{{ article.first_page }}",{% endif %}
       {% if article.last_page %}"pageEnd": "{{ article.last_page }}",{% endif %}
       "name": "{{ citation_title_metadata }}",
-      {% if article.doi %}"sameAs": "http://dx.doi.org/{{ article.doi }}",{% endif %}
+      {% if article.doi %}"sameAs": "https://doi.org/{{ article.doi }}",{% endif %}
       "publisher": "{{ article.publisher_name }}"
     }
   ]

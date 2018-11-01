@@ -34,7 +34,7 @@
 <meta name="citation_journal_title" content="{{ citation_journal_title_metadata }}">
 <meta name="citation_journal_abbrev" content="{{ article.issue.journal.code }}">
 <meta name="citation_online_date" content="{{ article.issue.date_published|date:'Y/m/d' }}">
-<meta name="citation_abstract_html_url" content="http://id.erudit.org/iderudit/{{ article.localidentifier }}" />
+<meta name="citation_abstract_html_url" content="https://id.erudit.org/iderudit/{{ article.localidentifier }}" />
 {% for author in article.authors %}
 {% if author.firstname and author.lastname %}
 <meta name="citation_author" content="{{ author.lastname }}, {{ author.firstname }}" />
@@ -77,7 +77,7 @@
 {% endif %}
 <meta name="citation_publication_date" content="{{ article.issue.year }}" />
 <meta name="citation_publisher" content="{{ article.publisher_name }}" />
-{% if article.doi %}<meta name="citation_doi" content="{{ article.doi }}" />{% endif %}
+{% if article.doi %}<meta name="citation_doi" content="https://doi.org/{{ article.doi }}" />{% endif %}
 {% if article.processing == 'C' %}
 <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% endif %}

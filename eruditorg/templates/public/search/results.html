@@ -315,7 +315,7 @@
                           {{ article.get_formatted_authors_mla }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
                           <em>{{ article.series_display }}</em>,
-                          {{ article.publication_year|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+                          {{ article.publication_year|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
@@ -325,7 +325,7 @@
                           {{ article.title|safe }}
                           <em>{{ article.series_display }}</em>,
                           {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
-                          {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+                          {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
                         </dd>
 
                         <dt>Chicago</dt>
@@ -334,7 +334,7 @@
                           {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
                           <em>{{ article.series_display }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
-                          ({{ article.issue_published }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+                          ({{ article.issue_published }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
                         </dd>
                       </dl>
                       <hr/>

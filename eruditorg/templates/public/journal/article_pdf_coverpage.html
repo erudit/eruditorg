@@ -210,7 +210,7 @@
           </p>
           <p class="sub-title">
             <span>{% trans 'URI&nbsp;:' %} <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}">id.erudit.org/iderudit/{{ article.localidentifier }}</a></span>
-            {% if article.doi %}<span>{% trans 'DOI&nbsp;:' %} <a href="http://dx.doi.org/{{ article.doi }}">{{ article.doi }}</a></span>{% endif %}
+            {% if article.doi %}<span><a href="https://doi.org/{{ article.doi }}">https://doi.org/{{ article.doi }}</a></span>{% endif %}
           </p>
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
             {% trans "Aller au sommaire du numéro" %}
@@ -245,7 +245,7 @@
             {{ article|format_article_html_title }}.
             <em>{{ article.issue.journal.name }}</em>,
             {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %}{% if article.first_page %},
-            {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+            {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
           </div>
         </div>
       </div>

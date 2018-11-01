@@ -23,8 +23,8 @@
     </xsl:choose>
   </xsl:variable>
   <xsl:variable name="titreAbrege" select="article/admin/revue/titrerevabr"/>
-  <xsl:variable name="uriStart">http://id.erudit.org/iderudit/</xsl:variable>
-  <xsl:variable name="doiStart">http://dx.doi.org/</xsl:variable>
+  <xsl:variable name="uriStart">https://id.erudit.org/iderudit/</xsl:variable>
+  <xsl:variable name="doiStart">https://doi.org/</xsl:variable>
 
   <v:variables>
     {% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
@@ -157,8 +157,8 @@
             <dt>URI</dt>
             <dd>
               <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
-                <a href="http://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
-                  http://id.erudit.org/iderudit/{{ article.localidentifier }}
+                <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
+                  https://id.erudit.org/iderudit/{{ article.localidentifier }}
                   <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                   <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                 </a>
@@ -170,7 +170,7 @@
               <dd>
                 <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
                   <a href="{$doiStart}{$doi}" class="clipboard-data">
-                    <xsl:value-of select="$doi"/>
+                    <xsl:value-of select="$doiStart"/><xsl:value-of select="$doi"/>
                     <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                     <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                   </a>
@@ -186,6 +186,13 @@
           <p>
             {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
             <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
+            {# Peer review seal #}
+            {% if article.issue.journal.type.code == 'S' %}
+            <xsl:text>&#160;</xsl:text>
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+              <i class="icon ion-ios-checkmark-circle" size="small"></i>
+            </span>
+            {% endif %}
           </p>
           <p class="refpapier">
             <xsl:apply-templates select="admin/numero" mode="refpapier"/>
@@ -448,7 +455,6 @@
       <xsl:if test="contains( . , '10.7202')">
         <img src="{% static 'svg/symbole-erudit.svg' %}" title="DOI Érudit" alt="Icône pour les DOIs Érudit" class="erudit-doi"/>
       </xsl:if>
-      <xsl:text>DOI:</xsl:text>
       <xsl:value-of select="."/>
     </a>
   </xsl:template>
@@ -483,14 +489,6 @@
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
       <xsl:apply-templates select="."/>
-      <xsl:if test="self::titre">
-        {# Peer review seal #}
-        {% if article.issue.journal.type.code == 'S' %}
-        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-          <i class="icon ion-ios-checkmark-circle" size="small"></i>
-        </span>
-        {% endif %}
-      </xsl:if>
     </span>
   </xsl:template>
 
