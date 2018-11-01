@@ -357,7 +357,7 @@ class Command(BaseCommand):
 
             try:
                 subscription_period.clean()
-            except ValidationError as ve:
+            except ValidationError:
                 # We are saving multiple periods for multiple journals under the same subscription
                 # instance so period validation errors can happen.
                 logger.error('subscriptionperiod.validationerror')

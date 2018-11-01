@@ -242,7 +242,7 @@ class Command(BaseCommand):
         for jpid in journal_pids:
             try:
                 self.import_journal(jpid, collection, False)
-            except Exception as e:
+            except Exception:
                 journal_errored_count += 1
                 logger.error(
                     "journal.import.error",
@@ -288,7 +288,7 @@ class Command(BaseCommand):
             else:
                 try:
                     self._import_issue(ipid, journal)
-                except Exception as e:
+                except Exception:
                     issue_errored_count += 1
                     logger.error(
                         "issue.import.error",

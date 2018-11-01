@@ -99,7 +99,7 @@ class FedoraMixin:
             assert fedora_xml_content is None
             fedora_object = self.get_fedora_object()
             fedora_xml_content = fedora_object.xml_content
-        except (RequestFailed, ConnectionError) as e:  # pragma: no cover
+        except (RequestFailed, ConnectionError):  # pragma: no cover
             logger.warn("fedora.exception", e={}, pid=self.pid)
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur

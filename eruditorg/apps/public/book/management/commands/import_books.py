@@ -61,7 +61,7 @@ def _get_by_label(root_node, label):
 
 
 def cleanup_isbn(isbn):
-    return re.sub('[^0-9\-X]', '', isbn)
+    return re.sub(r'[^0-9\-X]', '', isbn)
 
 
 def extract_ibsn_from_book_index(root):
@@ -195,7 +195,7 @@ class Command(BaseCommand):
             notices = root.findall(".//div[@class='notice']")
             for notice in notices:
                 link = notice.find(".//div[@class='format']/a").get('href')
-                book_id_match = re.search("/livre/([\w+]+)/.*", link)
+                book_id_match = re.search(r"/livre/([\w+]+)/.*", link)
                 if book_id_match:
                     collection = book_id_match.group(1)
                     # collections have an index.xml file in their directory

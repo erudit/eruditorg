@@ -49,7 +49,7 @@ class Command(BaseCommand):
             try:
                 self._check_restriction_subscription(restriction_subscription)
                 logger.info("subscription.check", id=restriction_subscription.id, status="OK")
-            except AssertionError as e:
+            except AssertionError:
                 logger.info("subscription.check", id=restriction_subscription.id, status="ERROR")
 
     def _check_restriction_subscription(self, restriction_subscription):

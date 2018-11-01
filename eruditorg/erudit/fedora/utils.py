@@ -29,7 +29,7 @@ def get_pids(query):
             pid_nodes = tree.findall('.//type:pid', ns_type)
             session_token = tree.find('./type:listSession//type:token', ns_type)
             _pids = [n.text for n in pid_nodes]
-        except RequestFailed as e:
+        except RequestFailed:
             return
         else:
             pids.extend(_pids)
