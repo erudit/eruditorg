@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-19 13:33-0500\n"
+"POT-Creation-Date: 2018-11-01 13:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,108 +112,112 @@ msgstr ""
 msgid "Supprimer les couvertures"
 msgstr ""
 
-#: apps/public/book/models.py:12
+#: apps/public/book/models.py:14
 msgid "Titre de collection"
 msgstr ""
 
-#: apps/public/book/models.py:22
+#: apps/public/book/models.py:24
 msgid "Logo de collection"
 msgstr ""
 
-#: apps/public/book/models.py:28
+#: apps/public/book/models.py:30
 msgid "Description de la collection"
 msgstr ""
 
-#: apps/public/book/models.py:32
+#: apps/public/book/models.py:34
 msgid "répertoire"
 msgstr ""
 
-#: apps/public/book/models.py:38
+#: apps/public/book/models.py:40
 msgid "Collection d’actes ou de livres"
 msgstr ""
 
-#: apps/public/book/models.py:39
+#: apps/public/book/models.py:41
 msgid "Collections d’actes ou de livres"
 msgstr ""
 
-#: apps/public/book/models.py:51 apps/public/book/models.py:154
+#: apps/public/book/models.py:53 apps/public/book/models.py:163
 msgid "Livre"
 msgstr ""
 
-#: apps/public/book/models.py:52 apps/public/search/forms.py:73
+#: apps/public/book/models.py:54 apps/public/search/forms.py:73
 #: apps/userspace/reporting/forms.py:17
 msgid "Actes"
 msgstr ""
 
-#: apps/public/book/models.py:57 apps/public/search/forms.py:29
+#: apps/public/book/models.py:59 apps/public/search/forms.py:29
 #: core/subscription/models.py:351
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:50
 msgid "Titre"
 msgstr ""
 
-#: apps/public/book/models.py:68
+#: apps/public/book/models.py:70
 msgid "Sous-titre"
 msgstr ""
 
-#: apps/public/book/models.py:73 templates/public/book/book_detail.html:150
+#: apps/public/book/models.py:75 templates/public/book/book_detail.html:150
 msgid "Année de publication"
 msgstr ""
 
-#: apps/public/book/models.py:78 templates/public/book/book_detail.html:138
+#: apps/public/book/models.py:80 templates/public/book/book_detail.html:138
 msgid "Couverture"
 msgstr ""
 
-#: apps/public/book/models.py:85 erudit/models/core.py:114
+#: apps/public/book/models.py:87 erudit/models/core.py:114
 #: templates/public/book/book_detail.html:153
 msgid "Éditeur"
 msgstr ""
 
-#: apps/public/book/models.py:91
+#: apps/public/book/models.py:93
 msgid "Site web de l’éditeur"
 msgstr ""
 
-#: apps/public/book/models.py:102 apps/public/search/forms.py:36
+#: apps/public/book/models.py:104 apps/public/search/forms.py:36
 #: templates/public/book/book_detail.html:160
 msgid "ISBN"
 msgstr ""
 
-#: apps/public/book/models.py:108
+#: apps/public/book/models.py:110
 msgid "ISBN numérique"
 msgstr ""
 
-#: apps/public/book/models.py:114 apps/public/search/forms.py:264
+#: apps/public/book/models.py:116 apps/public/search/forms.py:264
 #: templates/public/journal/journal_authors_list.html:60
 #: templates/public/journal/journal_authors_list.html:70
 msgid "Auteurs"
 msgstr ""
 
-#: apps/public/book/models.py:121
+#: apps/public/book/models.py:123
 msgid "Contributeurs"
 msgstr ""
 
-#: apps/public/book/models.py:125
+#: apps/public/book/models.py:127
 msgid "Contribution des auteurs de type direction ?"
 msgstr ""
 
-#: apps/public/book/models.py:126
+#: apps/public/book/models.py:128
 msgid ""
 "La liste des auteurs sera précédée de         la mention «&nbsp;Sous la "
 "direction de…&nbsp;»."
 msgstr ""
 
-#: apps/public/book/models.py:140
+#: apps/public/book/models.py:142
 msgid "Mention du droit d’auteur"
 msgstr ""
 
-#: apps/public/book/models.py:144
+#: apps/public/book/models.py:146
 msgid "Répertoire"
 msgstr ""
 
-#: apps/public/book/models.py:149
+#: apps/public/book/models.py:151
 msgid "Disponible en libre accès ?"
 msgstr ""
 
-#: apps/public/book/models.py:155 apps/public/search/forms.py:72
+#: apps/public/book/models.py:155
+msgid "Est publié ?"
+msgstr ""
+
+#: apps/public/book/models.py:164 apps/public/search/forms.py:72
 #: apps/userspace/reporting/forms.py:19
 msgid "Livres"
 msgstr ""
@@ -541,7 +545,7 @@ msgid "Articles culturels"
 msgstr ""
 
 #: apps/public/search/forms.py:71 templates/base.html:166
-#: templates/base.html:398 templates/public/home.html:70
+#: templates/base.html:398 templates/public/home.html:76
 #: templates/public/thesis/collection_home.html:24
 #: templates/public/thesis/collection_home.html:50
 #: templates/public/thesis/collection_home.html:70
@@ -556,7 +560,7 @@ msgid "Thèses et mémoires"
 msgstr ""
 
 #: apps/public/search/forms.py:74 templates/base.html:178
-#: templates/base.html:404 templates/public/home.html:71
+#: templates/base.html:404 templates/public/home.html:77
 msgid "Rapports de recherche"
 msgstr ""
 
@@ -679,7 +683,7 @@ msgstr ""
 msgid "Chinois"
 msgstr ""
 
-#: apps/public/search/forms.py:147 templates/public/home.html:53
+#: apps/public/search/forms.py:147 templates/public/home.html:59
 #: templates/public/search/base.html:6
 msgid "Recherche"
 msgstr ""
@@ -710,8 +714,8 @@ msgstr ""
 msgid "Types de publication"
 msgstr ""
 
-#: apps/public/search/forms.py:210
-msgid "Types d'articles savants"
+#: apps/public/search/forms.py:210 apps/public/search/forms.py:255
+msgid "Types d’articles savants"
 msgstr ""
 
 #: apps/public/search/forms.py:213 apps/public/search/forms.py:257
@@ -729,7 +733,7 @@ msgstr ""
 #: apps/public/search/forms.py:225 core/editor/models.py:222
 #: core/subscription/models.py:86 core/subscription/models.py:125
 #: erudit/models/journal.py:202 templates/base.html:163 templates/base.html:397
-#: templates/public/home.html:68 templates/public/journal/article_base.html:117
+#: templates/public/home.html:74 templates/public/journal/article_base.html:117
 #: templates/public/journal/article_base.html:154
 #: templates/public/journal/article_summary.html:33
 #: templates/public/journal/issue_detail.html:48
@@ -757,10 +761,6 @@ msgstr ""
 
 #: apps/public/search/forms.py:253
 msgid "Années"
-msgstr ""
-
-#: apps/public/search/forms.py:255
-msgid "Types d’articles"
 msgstr ""
 
 #: apps/public/search/forms.py:263
@@ -2037,7 +2037,7 @@ msgid "Discipline"
 msgstr ""
 
 #: erudit/models/core.py:115 erudit/models/journal.py:124
-#: templates/public/home.html:184
+#: templates/public/home.html:190
 msgid "Éditeurs"
 msgstr ""
 
@@ -2317,7 +2317,8 @@ msgstr ""
 msgid "Coordonnées"
 msgstr ""
 
-#: erudit/models/journal.py:1276 templates/public/journal/journal_base.html:262
+#: erudit/models/journal.py:1276 templates/public/20_years.html:389
+#: templates/public/journal/journal_base.html:262
 msgid "Partenaires"
 msgstr ""
 
@@ -2367,7 +2368,7 @@ msgstr ""
 msgid "Logo du 20e anniversaire d’Érudit"
 msgstr ""
 
-#: templates/base.html:136 templates/public/home.html:51
+#: templates/base.html:136 templates/public/home.html:57
 msgid "Effectuer une recherche simple"
 msgstr ""
 
@@ -2403,7 +2404,7 @@ msgstr ""
 #: templates/public/book/home.html:4 templates/public/book/home.html:12
 #: templates/public/book/home.html:22 templates/public/book/home.html:46
 #: templates/public/book/home.html:58 templates/public/book/home.html:68
-#: templates/public/home.html:69
+#: templates/public/home.html:75
 msgid "Livres et actes"
 msgstr ""
 
@@ -2509,7 +2510,7 @@ msgstr ""
 msgid "Effectuer une recherche avancée"
 msgstr ""
 
-#: templates/base.html:238 templates/public/home.html:74
+#: templates/base.html:238 templates/public/home.html:80
 #: templates/public/search/advanced_search.html:4
 #: templates/public/search/advanced_search.html:19
 msgid "Recherche avancée"
@@ -2557,7 +2558,7 @@ msgid ""
 msgstr ""
 
 #: templates/base.html:344 templates/public/book/home.html:87
-#: templates/public/journal/journal_detail.html:192
+#: templates/public/journal/journal_detail.html:199
 #: templates/public/journal/journal_list_per_disciplines.html:84
 msgid "Retourner en haut"
 msgstr ""
@@ -2640,7 +2641,7 @@ msgstr ""
 msgid "J’ai compris"
 msgstr ""
 
-#: templates/base.html:540 templates/public/home.html:174
+#: templates/base.html:540 templates/public/home.html:180
 msgid "En savoir plus"
 msgstr ""
 
@@ -2868,6 +2869,657 @@ msgstr ""
 #: templates/emails/subscription/journal/new_subscription_subject.html:2
 #, python-format
 msgid "[Érudit] Abonnement à la revue %(journal_name)s\n"
+msgstr ""
+
+#: templates/public/20_years.html:4 templates/public/20_years.html:6
+#: templates/public/20_years.html:26 templates/public/20_years.html:42
+msgid "20 ans d’Érudit"
+msgstr ""
+
+#: templates/public/20_years.html:36
+msgid "20 ans"
+msgstr ""
+
+#: templates/public/20_years.html:46
+msgid "Mot de l’équipe"
+msgstr ""
+
+#: templates/public/20_years.html:48
+msgid ""
+"\n"
+"        <p>Érudit célèbre cet automne ses 20 ans. </p>\n"
+"        <p>20 ans, c’est un âge vénérable dans le numérique, un secteur où "
+"les choses évoluent à un rythme effréné. Érudit est pourtant en pleine "
+"forme, plus dynamique que jamais.</p>\n"
+"        <p>20 ans durant, nous avons consacré toute notre énergie à notre "
+"mission&nbsp;: la libre diffusion des connaissances pour toutes et tous.</"
+"p>\n"
+"        <p>20 ans durant, notre équipe a travaillé avec plus de 200 revues "
+"savantes et culturelles pour les diffuser à travers le monde, grâce à la "
+"collaboration de centaines de centres de recherche, de presses "
+"universitaires, de bibliothèques et d’autres institutions de diffusion du "
+"savoir.</p>\n"
+"        <p>À l’occasion de cet anniversaire, nous vous invitons à découvrir "
+"un bref historique de notre organisme, et les grands projets en cours qui "
+"constitueront les bases d’un écosystème de la publication scientifique "
+"encore plus riche et plus équitable pour les années à venir.</p>\n"
+"        <p>Bonne lecture&nbsp;!</p>\n"
+"        <p>&ndash; L’équipe d’Érudit</p>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:64
+#: templates/userspace/journal/editor/detail.html:84
+#: templates/userspace/journal/editor/form.html:106
+#: templates/userspace/journal/editor/issues.html:28
+msgid "Historique"
+msgstr ""
+
+#: templates/public/20_years.html:68
+msgid "Projet pilote"
+msgstr ""
+
+#: templates/public/20_years.html:70
+msgid ""
+"\n"
+"                <p>L’ancêtre d’Érudit est créé par les Presses de "
+"l’Université de Montréal (PUM) afin d’accompagner cinq revues savantes vers "
+"le numérique&nbsp;: <a href=\"https://web.archive.org/web/19991013211916/"
+"http://www.erudit.org:80/erudit/gpq/index.html\" target=\"_blank"
+"\">Géographie physique et Quaternaire</a>, <a href=\"https://web.archive.org/"
+"web/19990502024927/http://www.erudit.org:80/erudit/meta/index.html\" target="
+"\"_blank\">Meta</a>, <a href=\"https://web.archive.org/web/19991001094723/"
+"http://www.erudit.org:80/erudit/ri/index.html\" target=\"_blank\">Relations "
+"Industrielles&nbsp;/ Industrial Relations</a>, <a href=\"https://web.archive."
+"org/web/19990428135922/http://www.erudit.org:80/erudit/haf/index.html\" "
+"target=\"_blank\">Revue d’histoire de l’Amérique française</a> et <a href="
+"\"https://web.archive.org/web/19991004202426/http://www.erudit.org:80/erudit/"
+"socsoc/index.html\" target=\"_blank\">Sociologie et Sociétés</a>. Le projet "
+"est lancé par Gérard Boismenu, alors directeur scientifique des PUM, et "
+"Guylaine Beaudry, alors récemment diplômée de la maîtrise à l’École de "
+"bibliothéconomie et des sciences de l’information.</p>\n"
+"                <p>Les revues sont produites en format SGML (<em>Standard "
+"Generalized Markup Language</em>), l’un des premiers langages qui permettent "
+"de décrire un document numérique à l’aide de balises.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:81
+msgid "1<sup>re</sup> plateforme"
+msgstr ""
+
+#: templates/public/20_years.html:83
+msgid ""
+"\n"
+"                <p>La première version de la plateforme est enfin en "
+"ligne&nbsp;!</p>\n"
+"                <p>Les internautes à travers le monde peuvent y consulter "
+"gratuitement les derniers articles parus dans ces cinq revues savantes. La "
+"plateforme diffuse également <a href=\"https://pum.umontreal.ca/revues/"
+"surfaces/\" target=\"_blank\">Surfaces</a>, l’une des toutes premières "
+"revues scientifiques francophones entièrement numériques, dirigée par Jean-"
+"Claude Guédon, professeur de littérature à l’Université de Montréal qui a "
+"largement contribué à l’internet libre.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:90 templates/public/20_years.html:106
+#: templates/public/20_years.html:215
+msgid "La même année"
+msgstr ""
+
+#: templates/public/20_years.html:91
+msgid ""
+"\n"
+"                <p>Création de <a href=\"https://www.scielo.org/php/index."
+"php?lang=en\" target=\"_blank\">SciELO</a>, qui est aujourd’hui la "
+"principale plateforme non commerciale de diffusion numérique pour les revues "
+"savantes d’Amérique du Sud, avec plus de 1500 revues diffusées.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:98
+msgid "Diffusion des archives de revues"
+msgstr ""
+
+#: templates/public/20_years.html:100
+msgid ""
+"\n"
+"                <p>Les articles en sciences humaines et sociales ont une "
+"longue durée de vie et sont toujours utiles pour les chercheurs, même "
+"plusieurs dizaines d’années après leur publication. C’est pourquoi Érudit "
+"entame la numérisation et la diffusion de numéros d’archives avec deux "
+"revues scientifiques historiques issues du monde francophone&nbsp;: Meta "
+"(fondée en 1966) et Sociologie et sociétés (1969).</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:107
+msgid ""
+"\n"
+"                <p>Le moteur de recherche Google, lancé à l’automne 1998, "
+"dépasse les 3 millions de requêtes par jour et devient l’un des premiers "
+"sites consultés dans le monde.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:114
+msgid "Pilotage interuniversitaire"
+msgstr ""
+
+#: templates/public/20_years.html:116
+msgid ""
+"\n"
+"                <p>Devant la demande de la communauté universitaire "
+"canadienne pour des services d’édition numérique, un Groupe "
+"interuniversitaire pour l’édition numérique est mis en place afin de piloter "
+"Érudit. Il comprend des instances de l’Université de Montréal, de "
+"l’Université Laval, de l’Université du Québec à Montréal et du Réseau "
+"d’informations scientifiques du Québec (RISQ). Ce groupe sera à l’origine de "
+"la fondation du Consortium Érudit en 2004.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:123
+msgid "2<sup>e</sup> version de la plateforme"
+msgstr ""
+
+#: templates/public/20_years.html:125
+msgid ""
+"\n"
+"                <p>Cette nouvelle version nous a permis de diffuser d’autres "
+"types de contenus en format numérique (livres, prépublications et thèses). "
+"La plateforme comprend à l’époque 6&nbsp;000 documents numériques, tous "
+"disponibles en libre accès.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:135
+msgid "Mise en place du Consortium"
+msgstr ""
+
+#: templates/public/20_years.html:137
+msgid ""
+"\n"
+"                <p>Afin d’être plus représentatif de sa mission, Érudit "
+"devient un consortium comprenant l’Université de Montréal, l’Université "
+"Laval et l’Université du Québec à Montréal. La plateforme devient également "
+"le lieu de diffusion des revues soutenues par le Fonds de recherche du "
+"Québec.</p>\n"
+"                <p>29 revues supplémentaires sont diffusées&nbsp;: "
+"<em>Anthropologie et sociétés</em>, <em>Cinémas</em>, <em>Phytoprotection</"
+"em>, <em>Théologiques</em> et <em>Voix et images</em>, pour ne citer que "
+"quelques exemples.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:141
+msgid "L’année précédente"
+msgstr ""
+
+#: templates/public/20_years.html:142
+msgid ""
+"\n"
+"                <p>En 2003, la <a href=\"https://openaccess.mpg.de/68042/"
+"BerlinDeclaration_wsis_fr.pdf\" target=\"_blank\">Déclaration de Berlin</a> "
+"sur le Libre Accès à la connaissance est signé par plus de 400 responsables "
+"d’universités dans le monde, qui s’engagent ainsi à promouvoir le libre "
+"accès à la connaissance.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:149
+msgid "Début de la commercialisation"
+msgstr ""
+
+#: templates/public/20_years.html:151
+msgid ""
+"\n"
+"                <p>La majorité des revues, qui voient la vente de leurs "
+"exemplaires imprimés diminuer, demandent à mettre en place un abonnement "
+"numérique sur Érudit pour compenser cette perte financière. L’accès aux "
+"articles des numéros publiés au cours des deux dernières années se voit "
+"limité aux institutions abonnées, tandis que l’ensemble des archives demeure "
+"en libre accès.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:158
+msgid "3<sup>e</sup> version de la plateforme"
+msgstr ""
+
+#: templates/public/20_years.html:160
+msgid ""
+"\n"
+"                <p>Les consultations de la plateforme, notamment de "
+"l’extérieur du Canada, deviennent de plus en plus importantes. Une nouvelle "
+"version, qui comprend une interface trilingue (français, anglais et "
+"espagnol) et de nouvelles fonctionnalités (exportation de notices, recherche "
+"avancée, etc.), est mise en ligne.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:170
+msgid "Arrivée des revues culturelles"
+msgstr ""
+
+#: templates/public/20_years.html:172
+msgid ""
+"\n"
+"                <p>Un projet de numérisation rétrospective des revues "
+"culturelles membres de la Société de développement des périodiques culturels "
+"québécois (SODEP) est lancé. 250&nbsp;000 pages sont numérisées et plus de "
+"60&nbsp;000 articles sont mis en ligne grâce à une subvention accordée par "
+"Patrimoine canadien à la SODEP.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:178 templates/public/20_years.html:231
+msgid "L’année suivante"
+msgstr ""
+
+#: templates/public/20_years.html:179
+msgid ""
+"\n"
+"                <p>Lancement du portail <a href=\"https://www.openedition."
+"org/\" target=\"_blank\">OpenEdition</a> qui regroupe les 3 "
+"plateformes&nbsp;: Revues.org, Calenda et Hypothèses.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:186
+msgid "Consolidation de la zone Thèses"
+msgstr ""
+
+#: templates/public/20_years.html:188
+msgid ""
+"\n"
+"                <p>Érudit moissonne gratuitement les métadonnées des dépôts "
+"de thèses des bibliothèques universitaires canadiennes afin de valoriser "
+"leurs contenus. En 2013, avec l’arrivée de plusieurs nouvelles universités "
+"(UQAM, UQAT, UQTR, UQAC), ce sont plus de 55&nbsp;000 thèses et mémoires qui "
+"sont référencés.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:195 templates/public/home.html:137
+msgid "Partenariat pour le libre accès"
+msgstr ""
+
+#: templates/public/20_years.html:197
+msgid ""
+"\n"
+"                <p>En association avec le Réseau canadien de documentation "
+"pour la recherche, Érudit met en place son premier <a href=\"https://erudit."
+"squarespace.com/accueil\" target=\"_blank\">Partenariat pour le libre accès</"
+"a>, réunissant 107 revues canadiennes et 53 bibliothèques universitaires. "
+"Autre fait marquant, la plateforme Érudit est maintenant reconnue comme une "
+"<a href=\"https://apropos.erudit.org/fr/investissement-de-14-million-dans-la-"
+"plateforme-erudit-par-la-fondation-canadienne-pour-linnovation/\" target="
+"\"_blank\">Initiative scientifique majeure</a> par la Fondation canadienne "
+"pour l’innovation.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:207
+msgid "Création de CO.SHS"
+msgstr ""
+
+#: templates/public/20_years.html:209
+msgid ""
+"\n"
+"                <p>Financée par la Fondation Canadienne pour l’innovation et "
+"dirigée par le professeur Vincent Larivière (Université de Montréal), la <a "
+"href=\"https://co-shs.ca/fr/\" target=\"_blank\">Cyberinfrastructure ouverte "
+"pour les sciences humaines et sociales</a> (CO.SHS) est une initiative "
+"nationale de recherche en sciences humaines et sociales et en arts et "
+"lettres qui vise à soutenir la découverte d’information, l’exploration de "
+"vastes corpus de données textuelles et la production de nouveaux résultats "
+"de recherche. Le projet est issu d’une collaboration entre Érudit, plusieurs "
+"équipes multidisciplinaires de recherche et différentes institutions "
+"documentaires au pays et à l’international.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:216
+msgid ""
+"\n"
+"                <p>Les Bibliothèques de l’Université de Montréal prennent la "
+"décision de <a href=\"http://www.bib.umontreal.ca/communiques/20160505-DC-"
+"annulation-springer.htm\" target=\"_blank\">déconstruire leurs ententes</a> "
+"concernants les grands ensembles de revues commercialisés avec leurs "
+"éditeurs commerciaux.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:223
+msgid "4<sup>e</sup> version de la plateforme"
+msgstr ""
+
+#: templates/public/20_years.html:225
+msgid ""
+"\n"
+"                <p>Une nouvelle version de la plateforme Érudit a été "
+"instaurée afin d’améliorer l’expérience de lecture, d’optimiser la diffusion "
+"et le référencement des documents, et de prévoir l’arrivée de nouveaux "
+"services.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:232
+msgid ""
+"\n"
+"                <p>L’<a href=\"https://jussieucall.org/#call\" target="
+"\"_blank\">Appel de Jussieu</a> pour la Science ouverte et la "
+"bibliodiversité est signé par plusieurs dizaines d’institutions et acteurs "
+"majeurs de l’édition scientifique.</p>\n"
+"                "
+msgstr ""
+
+#: templates/public/20_years.html:246
+msgid "Aujourd’hui"
+msgstr ""
+
+#: templates/public/20_years.html:248
+msgid ""
+"\n"
+"          Érudit diffuse et préserve 206 revues scientifiques et "
+"culturelles, ce qui représente 210 000 articles. Plus de 21 millions de "
+"pages vues sont enregistrées chaque année sur la plateforme &ndash; et ce, "
+"grâce à un bassin d’utilisateur.trice.s provenant de plus de 85 pays "
+"différents &ndash; et 1 100 ententes partenariales ou commerciales avec des "
+"institutions documentaires à travers le monde ont été établies.\n"
+"          "
+msgstr ""
+
+#: templates/public/20_years.html:255
+msgid ""
+"\n"
+"            <h3>Volet recherche et développement stratégique</h3>\n"
+"            <p>Avec la création d’une direction scientifique assurée par le "
+"professeur Vincent Larivière en 2015 et d’un comité scientifique en 2017, "
+"Érudit bénéficie maintenant de l’expertise de nombreux.ses acteur.trice.s du "
+"milieu de la recherche au Québec et au Canada, qui participent à la "
+"définition des grandes orientations stratégiques d’Érudit et à la réflexion "
+"sur les enjeux qui concernent les revues en sciences humaines et sociales. "
+"C’est aussi dans ce contexte que nous développons de nouveaux services aux "
+"chercheur.e.s dans le cadre de CO.SHS.</p>\n"
+"            <p>--> <a href=\"https://co-shs.ca/fr/\" target=\"_blank\">En "
+"savoir plus</a></p>\n"
+"            <p>--> <a href=\"https://apropos.erudit.org/fr/chercheurs/"
+"activites-de-recherche/\" target=\"_blank\">Sur nos activités de recherche</"
+"a></p>\n"
+"            "
+msgstr ""
+
+#: templates/public/20_years.html:264
+msgid ""
+"\n"
+"            <h3>Le <em>Partenariat pour le libre accès</em></h3>\n"
+"            <p>Le <em>Partenariat pour le libre accès</em> est un modèle "
+"économique innovant de collaboration entre les bibliothèques universitaires "
+"et les revues savantes dans un contexte de transition vers le libre accès. "
+"Il est actuellement soutenu par 90 institutions à travers le monde, en "
+"collaboration avec des consortiums du Canada, de la France et de la "
+"Belgique. Nous travaillons actuellement à développer le <em>Partenariat</em> "
+"en Europe, notamment au Royaume-Uni avec l’organisme JISC.</p>\n"
+"            <p>--> <a href=\"https://partnership.erudit.org/accueil\" target="
+"\"_blank\">En savoir plus</a></p>\n"
+"            "
+msgstr ""
+
+#: templates/public/20_years.html:272
+msgid ""
+"\n"
+"            <h3>Coalition Publi.ca</h3>\n"
+"            <p>Érudit et l’organisme Public Knowledge Project se sont "
+"associés pour lancer Coalition Publi.ca au printemps 2017, un partenariat "
+"stratégique pancanadien. L’un des objectifs principaux de cette initiative "
+"est de présenter une offre de services complète aux revues savantes "
+"canadiennes, francophones et anglophones, en collaboration avec l’ensemble "
+"des acteurs du milieu de la diffusion scientifique.</p>\n"
+"            <p>Coalition Publi.ca s’inscrit dans le mouvement international "
+"de redéfinition des rapports de forces dans le milieu pour soutenir la "
+"circulation libre des savoirs, la bibliodiversité, et le développement "
+"d’outils en code source ouvert.</p>\n"
+"            <p>--> <a href=\"https://www.coalition-publi.ca/le-projet/\" "
+"target=\"_blank\">En savoir plus</a></p>\n"
+"            "
+msgstr ""
+
+#: templates/public/20_years.html:287
+msgid "Citations"
+msgstr ""
+
+#: templates/public/20_years.html:288
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Rémi Quirion, scientifique en chef du Québec</cite>\n"
+"          <p>Partenaires de longue date d’Érudit, les Fonds de recherche du "
+"Québec reconnaissent l’importance d’offrir à la communauté scientifique un "
+"outil unique et performant en matière de publication savante en ligne. Cette "
+"plateforme numérique de pointe fait rayonner nos publications en sciences "
+"sociales et humaines, en arts et en lettres dans la Francophonie.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:294
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Guy Berthiaume, Bibliothécaire et archiviste du Canada</"
+"cite>\n"
+"          <p>Grâce à Érudit, nous avons assisté ces deux dernières décennies "
+"à un accès sans précédent à la production canadienne en sciences humaines et "
+"sociales. Érudit a su miser sur des partenariats dans le monde de la "
+"recherche, de l’édition, des universités, des bibliothèques, pour bâtir ce "
+"qui est devenu aujourd’hui une plateforme incontournable.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:300
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Sophie Montreuil, Directrice générale, Association des "
+"communicateurs scientifiques du Québec</cite>\n"
+"          <p>Pour l’ACS, les 20 ans d’Érudit, c’est 20 ans à enrichir la "
+"culture scientifique de la population québécoise par une diffusion plus "
+"étendue de la recherche en sciences humaines et sociales. Félicitations à "
+"toute l’équipe d’Érudit pour son travail innovant et merci d’être un fidèle "
+"partenaire de notre association.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:306
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Aminata Keita, Bibliothécaire, Université de Montréal</"
+"cite>\n"
+"          <p>Tout bibliothécaire travaillant dans une bibliothèque "
+"universitaire valorise la documentation de qualité auprès des étudiants. "
+"Dans le domaine des arts, des lettres, des sciences humaines et sociales, "
+"Érudit est devenue une ressource incontournable pour la recherche en ligne "
+"d’articles de revues scientifiques québécoises en langue française dont "
+"plusieurs sont en libre accès.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:312
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Jean-Marie Bioteau, rédacteur adjoint, revue Santé mentale "
+"au Québec</cite>\n"
+"          <p>Sans Érudit, la revue Santé mentale au Québec ne serait pas là "
+"où elle en est aujourd’hui. Le support indéfectible dont nous avons joui "
+"lors de notre transition vers le libre accès est inestimable. Érudit : une "
+"collaboration chaleureuse, humaine et hyperprofessionnelle.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:318
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Yves Gingras, directeur de la Chaire de recherche du Canada "
+"en histoire et sociologie des sciences</cite>\n"
+"          <p>Vingt ans déjà que les fondateurs d’Érudit ont trouvé la clé "
+"pour libérer le savoir accumulé dans les revues savantes et le rendre ainsi "
+"accessible à toute personne curieuse. Érudit contribue de manière "
+"essentielle à remettre dans le domaine public un savoir essentiellement "
+"produit grâce à des fonds publics. Longue vie à Érudit&nbsp;!</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:324
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Louise Poissant, Directrice scientifique, Fonds de recherche "
+"du Québec – Société et culture</cite>\n"
+"          <p>Je salue la vision, la compétence et la détermination d’Érudit, "
+"qui a développé au cours des vingt dernières années une plateforme de "
+"diffusion exceptionnelle dans les domaines des sciences humaines et "
+"sociales, des arts et des lettres. Le FRQSC est fier de s’associer à ces "
+"travaux, et souhaite étendre encore nos collaborations. Bravo et bon vent "
+"pour les vingt prochaines années.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:330
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Pauline Curien, Rédactrice de la revue Études "
+"internationales</cite>\n"
+"          <p>Études internationales est entièrement diffusée par Érudit "
+"depuis 2009. Nous n’avons eu qu’à nous féliciter de cette entreprise, car "
+"Érudit fournit un service hors pair en matière de construction de "
+"métadonnées (compétences technologiques inaccessibles aux éditeurs de revue) "
+"et de diffusion (déploiement de stratégies commerciales tout aussi "
+"inaccessibles). Ces services, en plus des efforts incessants du consortium "
+"pour aider les revues dans leur transition vers le libre accès, rendent "
+"Érudit incontournable pour Études internationales. Nous en avons pleinement "
+"conscience et l’apprécions énormément&nbsp;!</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:336
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Jean-Claude Guédon, Expert pour l’UNESCO sur le libre accès "
+"non commercial</cite>\n"
+"          <p>Érudit a commencé avec deux revues, une de géologie du "
+"quaternaire, et la revue Surfaces, purement électronique, que j’avais lancée "
+"en 1991 avec l’aide de Bill Readings. Sur le plan de la publication "
+"électronique, Érudit a ouvert beaucoup de chemins, et je salue bas ce "
+"succès. Sur le plan de l’accès libre, ce fut plus long, mais, petit à petit, "
+"Érudit a trouvé le moyen de se réorienter dans cette direction. Je l’en "
+"félicite, ainsi que ses têtes pensantes. Il reste encore beaucoup à faire, "
+"mais le monde francophone, désormais, dispose de deux plateformes non "
+"commerciales de taille significative, et Érudit est l’une d’entre elles.</"
+"p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:342
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Guy Jobin, Directeur de la revue Laval théologique et "
+"philosophique, Université Laval</cite>\n"
+"          <p>Le partenariat du Laval théologique et philosophique (LTP) avec "
+"Érudit a permis une croissance constante des abonnements institutionnels à "
+"la version électronique de la revue. Par son appui, Érudit offre au LTP une "
+"plus grande visibilité. Merci et félicitations pour les vingt ans "
+"d’existence d’Érudit&nbsp;!</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:348
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Elsa Drevon, Doctorante en sciences de l’information, "
+"Université de Montréal</cite>\n"
+"          <p>Érudit est une plateforme incontournable pour l’accessibilité "
+"au savoir francophone en sciences humaines et sociales. Je m’y rends "
+"régulièrement pour des revues dans mon domaine en sciences de l’information "
+"ou en gestion. Et c’est avec plaisir que je découvre dans la lettre "
+"d’information mensuelle des articles dans d’autres disciplines. Érudit ouvre "
+"les horizons et stimule la curiosité&nbsp;!</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:354
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Daniel Marquis, bibliothécaire professionnel, Cégep de "
+"Granby</cite>\n"
+"          <p>L’accès à l’information est fondamental dans le monde "
+"d’aujourd’hui. C’est ce qu’offre Érudit&nbsp;: un accès à l’information, "
+"mais pas n’importe laquelle… de l’information validée dans le domaine de la "
+"recherche avec les revues scientifiques (information validée par les pairs) "
+"et dans le domaine culturel avec les revues de la SODEP. Et le tout au bout "
+"d’un clic&nbsp;!</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:360
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Lionel Villalonga, directeur général de l’Association pour "
+"l’avancement des sciences et des techniques de la documentation (ASTED)</"
+"cite>\n"
+"          <p>La plateforme Érudit nous a permis de rejoindre l’ensemble des "
+"professionnels et professionnelles de l’information aux quatre coins du "
+"globe. Nous pouvons maintenant «&nbsp;cultiver notre savoir&nbsp;» en "
+"bibliothéconomie partout sur la planète&nbsp;!</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:366
+msgid ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>L’équipe de la revue Liberté</cite>\n"
+"          <p>Érudit rend accessible notre mémoire collective.</p>\n"
+"        </blockquote>\n"
+"        "
+msgstr ""
+
+#: templates/public/20_years.html:375
+msgid "Sur le libre accès"
+msgstr ""
+
+#: templates/public/20_years.html:392
+msgid "Universitaires"
+msgstr ""
+
+#: templates/public/20_years.html:410
+#: templates/public/journal/journal_list_per_disciplines.html:60
+#: templates/public/journal/journal_list_per_disciplines.html:80
+#: templates/public/journal/journal_list_per_names.html:115
+msgid "Autres"
 msgstr ""
 
 #: templates/public/403.html:4
@@ -3591,7 +4243,7 @@ msgstr ""
 
 #: templates/public/citations/list.html:104
 #: templates/public/citations/list.html:216
-#: templates/public/journal/eruditxsd300_to_html.xsl:326
+#: templates/public/journal/eruditxsd300_to_html.xsl:335
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:150
 #: templates/public/search/results.html:271
@@ -3614,8 +4266,8 @@ msgstr ""
 
 #: templates/public/citations/list.html:116
 #: templates/public/citations/list.html:226
-#: templates/public/journal/eruditxsd300_to_html.xsl:334
-#: templates/public/journal/eruditxsd300_to_html.xsl:399
+#: templates/public/journal/eruditxsd300_to_html.xsl:343
+#: templates/public/journal/eruditxsd300_to_html.xsl:408
 #: templates/public/journal/partials/issue_detail_article_item.html:22
 #: templates/public/search/results.html:288
 #: templates/userspace/library/stats/legacy/landing.html:116
@@ -3708,142 +4360,146 @@ msgstr ""
 msgid "Accueil d’Érudit"
 msgstr ""
 
-#: templates/public/home.html:48
-msgid "Érudit <br/>célèbre <br/>ses 20 ans&nbsp;!"
+#: templates/public/home.html:49
+msgid "Aller vers la page du 20e anniversaire d’Érudit"
 msgstr ""
 
-#: templates/public/home.html:57
+#: templates/public/home.html:50
+msgid "Érudit <br/>célèbre <br/>ses"
+msgstr ""
+
+#: templates/public/home.html:52
+msgid "ans&nbsp;!"
+msgstr ""
+
+#: templates/public/home.html:63
 msgid "Par auteur, titre, mots-clés&hellip;"
 msgstr ""
 
-#: templates/public/home.html:60 templates/public/journal/journal_base.html:75
+#: templates/public/home.html:66 templates/public/journal/journal_base.html:75
 #: templates/public/search/advanced_search.html:72
 #: templates/public/search/advanced_search.html:130
 msgid "Rechercher"
 msgstr ""
 
-#: templates/public/home.html:86
+#: templates/public/home.html:92
 msgid "Derniers numéros"
 msgstr ""
 
-#: templates/public/home.html:93
+#: templates/public/home.html:99
 #, python-format
 msgid "Couverture du numéro '%(issue_title)s' de la revue '%(journal_name)s'"
 msgstr ""
 
-#: templates/public/home.html:97
+#: templates/public/home.html:103
 #, python-format
 msgid "Logo de la revue %(journal_name)s"
 msgstr ""
 
-#: templates/public/home.html:107
+#: templates/public/home.html:113
 msgid "De la revue"
 msgstr ""
 
-#: templates/public/home.html:114
+#: templates/public/home.html:120
 msgid "Voir toutes les revues"
 msgstr ""
 
-#: templates/public/home.html:123
+#: templates/public/home.html:129
 msgid "Annonce"
 msgstr ""
 
-#: templates/public/home.html:126
+#: templates/public/home.html:132
 msgid "Voir le site du partenariat"
 msgstr ""
 
-#: templates/public/home.html:127
+#: templates/public/home.html:133
 msgid "Illustration du partenariat"
 msgstr ""
 
-#: templates/public/home.html:131
-msgid "Partenariat pour le libre accès"
-msgstr ""
-
-#: templates/public/home.html:132
+#: templates/public/home.html:138
 msgid ""
 "Le Partenariat pour le libre accès soutient depuis 2014 les revues "
 "canadiennes en SHS dans une transition graduelle vers le libre accès."
 msgstr ""
 
-#: templates/public/home.html:146
+#: templates/public/home.html:152
 msgid "Nouvelles"
 msgstr ""
 
-#: templates/public/home.html:154
+#: templates/public/home.html:160
 #: templates/public/thesis/collection_list_base.html:96
 msgid "Lire la suite"
 msgstr ""
 
-#: templates/public/home.html:160
+#: templates/public/home.html:166
 msgid "Toutes les nouvelles d'Érudit"
 msgstr ""
 
-#: templates/public/home.html:174
+#: templates/public/home.html:180
 msgid ""
 "Érudit offre l'accès à de nombreuses collections de documents en sciences "
 "humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de "
 "recherche."
 msgstr ""
 
-#: templates/public/home.html:179 templates/public/home.html:181
+#: templates/public/home.html:185 templates/public/home.html:187
 msgid "https://apropos.erudit.org/fr/bibliotheques/"
 msgstr ""
 
-#: templates/public/home.html:179
+#: templates/public/home.html:185
 msgid "Bibliothécaires"
 msgstr ""
 
-#: templates/public/home.html:180
+#: templates/public/home.html:186
 msgid ""
 "Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers."
 msgstr ""
 
-#: templates/public/home.html:181
+#: templates/public/home.html:187
 msgid "Abonnez-vous"
 msgstr ""
 
-#: templates/public/home.html:184 templates/public/home.html:186
+#: templates/public/home.html:190 templates/public/home.html:192
 msgid "https://apropos.erudit.org/fr/editeurs/"
 msgstr ""
 
-#: templates/public/home.html:185
+#: templates/public/home.html:191
 msgid "Diffusez votre revue en format numérique partout dans le monde."
 msgstr ""
 
-#: templates/public/home.html:186
+#: templates/public/home.html:192
 msgid "Publiez avec nous"
 msgstr ""
 
-#: templates/public/home.html:189 templates/public/home.html:191
+#: templates/public/home.html:195 templates/public/home.html:197
 msgid "https://apropos.erudit.org/fr/chercheurs/"
 msgstr ""
 
-#: templates/public/home.html:189
+#: templates/public/home.html:195
 msgid "Chercheurs"
 msgstr ""
 
-#: templates/public/home.html:190
+#: templates/public/home.html:196
 msgid "Accédez à des services adaptés à l’exploitation de corpus."
 msgstr ""
 
-#: templates/public/home.html:191
+#: templates/public/home.html:197
 msgid "Explorez nos données"
 msgstr ""
 
-#: templates/public/home.html:194 templates/public/home.html:196
+#: templates/public/home.html:200 templates/public/home.html:202
 msgid "https://apropos.erudit.org/fr/usagers/"
 msgstr ""
 
-#: templates/public/home.html:194
+#: templates/public/home.html:200
 msgid "Utilisateurs"
 msgstr ""
 
-#: templates/public/home.html:195
+#: templates/public/home.html:201
 msgid "Trouvez les ressources et données pertinentes pour vos recherches."
 msgstr ""
 
-#: templates/public/home.html:196
+#: templates/public/home.html:202
 msgid "Repérez des articles"
 msgstr ""
 
@@ -3891,10 +4547,6 @@ msgstr ""
 msgid "URI&nbsp;:"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:213
-msgid "DOI&nbsp;:"
-msgstr ""
-
 #: templates/public/journal/article_pdf_coverpage.html:216
 msgid "Aller au sommaire du numéro"
 msgstr ""
@@ -3918,7 +4570,7 @@ msgid "Découvrir la revue"
 msgstr ""
 
 #: templates/public/journal/article_pdf_coverpage.html:235
-#: templates/public/journal/eruditxsd300_to_html.xsl:341
+#: templates/public/journal/eruditxsd300_to_html.xsl:350
 #: templates/public/journal/partials/article_citation_modal_content.html:6
 #: templates/public/search/results.html:279
 msgid "Citer cet article"
@@ -4073,102 +4725,102 @@ msgstr ""
 msgid "<xsl:apply-templates select=\"../article/@typeart\"/> de la revue"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:198
-#: templates/public/journal/eruditxsd300_to_html.xsl:301
-#: templates/public/journal/journal_base.html:219
-msgid "Vous êtes abonné à cette revue."
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:209
-msgid "Plan de l’article"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:213
-msgid "Retour au début"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:218
-#: templates/public/journal/partials/issue_detail_article_item.html:74
-msgid "Résumé"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:232
-msgid "Texte intégral (PDF)"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:277
-#: templates/public/journal/eruditxsd300_to_html.xsl:421
-msgid "Liste des figures"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:282
-#: templates/public/journal/eruditxsd300_to_html.xsl:428
-msgid "Liste des tableaux"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:291
-msgid "ACFAS 2019"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:309
-msgid "Boîte à outils"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:313
-msgid "Retourner en haut de la page"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:322
-#: templates/public/journal/partials/issue_detail_article_item.html:10
-#: templates/public/search/results.html:267
-#: templates/userspace/journal/information/journalinformation_update.html:90
-msgid "Sauvegarder"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:350
-msgid "Partager"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:362
-msgid "Résumés"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:377
-#: templates/public/journal/partials/article_abstract_content.html:13
-msgid "&#160;:"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:393
-msgid "Corps de l’article"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:399
-msgid "Veuillez télécharger l’article en PDF pour le lire."
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:464
-msgid "Un article"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:465
-msgid "Un compte rendu"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:466
-msgid "Une note"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:467
-msgid "Un document"
-msgstr ""
-
-#: templates/public/journal/eruditxsd300_to_html.xsl:487
+#: templates/public/journal/eruditxsd300_to_html.xsl:192
 #: templates/public/journal/issue_detail.html:101
 #: templates/public/journal/journal_base.html:103
 #: templates/public/journal/journal_detail.html:83
 msgid ""
 "Tous les articles de cette revue sont soumis à un processus d’évaluation par "
 "les pairs."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:205
+#: templates/public/journal/eruditxsd300_to_html.xsl:310
+#: templates/public/journal/journal_base.html:219
+msgid "Vous êtes abonné à cette revue."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:216
+msgid "Plan de l’article"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:220
+msgid "Retour au début"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:225
+#: templates/public/journal/partials/issue_detail_article_item.html:74
+msgid "Résumé"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:239
+msgid "Texte intégral (PDF)"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:284
+#: templates/public/journal/eruditxsd300_to_html.xsl:430
+msgid "Liste des figures"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:289
+#: templates/public/journal/eruditxsd300_to_html.xsl:437
+msgid "Liste des tableaux"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:299
+msgid "ACFAS 2019"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:318
+msgid "Boîte à outils"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:322
+msgid "Retourner en haut de la page"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:331
+#: templates/public/journal/partials/issue_detail_article_item.html:10
+#: templates/public/search/results.html:267
+#: templates/userspace/journal/information/journalinformation_update.html:90
+msgid "Sauvegarder"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:359
+msgid "Partager"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:371
+msgid "Résumés"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:386
+#: templates/public/journal/partials/article_abstract_content.html:13
+msgid "&#160;:"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:402
+msgid "Corps de l’article"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:408
+msgid "Veuillez télécharger l’article en PDF pour le lire."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:472
+msgid "Un article"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:473
+msgid "Un compte rendu"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:474
+msgid "Une note"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:475
+msgid "Un document"
 msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:602
@@ -4321,7 +4973,7 @@ msgid "Diffusion numérique"
 msgstr ""
 
 #: templates/public/journal/issue_detail.html:175
-#: templates/public/journal/journal_detail.html:161
+#: templates/public/journal/journal_detail.html:168
 msgid "Historique de la revue"
 msgstr ""
 
@@ -4334,7 +4986,7 @@ msgid "Anciens numéros de"
 msgstr ""
 
 #: templates/public/journal/issue_detail.html:190
-#: templates/public/journal/journal_detail.html:161
+#: templates/public/journal/journal_detail.html:168
 msgid "numéros"
 msgstr ""
 
@@ -4625,16 +5277,16 @@ msgid "Revue suivie de"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:142
-#: templates/public/journal/journal_detail.html:207
+#: templates/public/journal/journal_detail.html:208
 msgid "Politique éditoriale et éthique"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:144
-#: templates/public/journal/journal_detail.html:214
+#: templates/public/journal/journal_detail.html:215
 msgid "Comité de rédaction"
 msgstr ""
 
-#: templates/public/journal/journal_detail.html:165
+#: templates/public/journal/journal_detail.html:172
 msgid ""
 "\n"
 "            L’archivage pérenne des articles sur Érudit est assuré par <a "
@@ -4658,12 +5310,6 @@ msgstr ""
 #: templates/public/journal/journal_list_per_names.html:4
 #: templates/public/journal/journal_list_per_names.html:47
 msgid "Revues par ordre alphabétique"
-msgstr ""
-
-#: templates/public/journal/journal_list_per_disciplines.html:60
-#: templates/public/journal/journal_list_per_disciplines.html:80
-#: templates/public/journal/journal_list_per_names.html:115
-msgid "Autres"
 msgstr ""
 
 #: templates/public/journal/journal_list_per_disciplines.html:97
@@ -4798,11 +5444,12 @@ msgid ""
 "sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres "
 "disponibles.</p>\n"
 "            <p>Vous pouvez obtenir de l’aide dans votre recherche en "
-"consultant notre <a href=\"https://www.erudit.org/public/documents/"
-"Guide_recherche.pdf?utm_source=platform_guide&utm_campaign=rechercheavancee"
-"\" target=\"_blank\">guide en ligne</a>, ou encore nous envoyer vos "
-"commentaires à l’aide de l’outil <em>Votre avis</em> à droite de cette page."
-"</p>\n"
+"consultant notre <a href=\"https://www.youtube.com/watch?v=_ThmnQn9bpA\" "
+"target=\"_blank\">tutoriel vidéo</a> ou notre <a href=\"https://www.erudit."
+"org/public/documents/Guide_recherche.pdf?"
+"utm_source=platform_guide&utm_campaign=rechercheavancee\" target=\"_blank"
+"\">guide en ligne</a>. Vous pouvez également nous envoyer vos commentaires à "
+"l’aide de l’outil <em>Votre avis</em> à droite de cette page.</p>\n"
 "            "
 msgstr ""
 
@@ -5293,12 +5940,6 @@ msgstr ""
 
 #: templates/userspace/journal/editor/detail.html:77
 msgid "[Aucun fichier soumis]"
-msgstr ""
-
-#: templates/userspace/journal/editor/detail.html:84
-#: templates/userspace/journal/editor/form.html:106
-#: templates/userspace/journal/editor/issues.html:28
-msgid "Historique"
 msgstr ""
 
 #: templates/userspace/journal/editor/detail.html:88
