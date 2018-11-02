@@ -58,9 +58,25 @@
   }
 
   .home-header__title {
-    margin-top: 25vh;
+    margin-top: 20vh;
     font-size: 4vh;
-    color: #fff;
+
+    a {
+      color: #fff;
+      display: inline-block;
+    }
+
+    .icon-20-white {
+      height: 45px;
+      margin-top: -15px;
+      vertical-align: bottom;
+    }
+  }
+
+  .home-header__link {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
   }
 
   /* Search tool */

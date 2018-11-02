@@ -1,0 +1,162 @@
+/**
+* 20 years anniversary page
+*/
+
+#twenty-years {
+
+  h1 {
+    margin-bottom: 0.5em;
+    color: $coral-red;
+    font-size: 1.953em;
+  }
+
+  ol, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  section a {
+    border-bottom: 1px dotted #000;
+
+    &:hover {
+      border-bottom-style: solid;
+    }
+  }
+
+  #timeline {
+    background-color: $midnight-blue;
+    color: #fff;
+
+    &:before, &:after {
+      content: ' ';
+      display: block;
+      width: 100%;
+      height: 250px;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    &:before {
+      background-color: #fff;
+      background-image: url('../img/20years/bg-1.png');
+      background-position: bottom left;
+    }
+
+    &:after {
+      background-color: $light-grey;
+      background-image: url('../img/20years/bg-2.png');
+      background-position: bottom left;
+    }
+
+    ul {
+      border-left: 1px solid #fff;
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 7.5vh;
+
+      &:before {
+        content: '— ';
+        position: absolute;
+        left: 10px;
+      }
+    }
+
+    h3:hover {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    h4 {
+      margin-top: 2.5vh;
+
+      &:before {
+        content: '-> ';
+      }
+    }
+
+    a {
+      color: #fff;
+      border-color: #fff;
+    }
+  }
+
+  #today {
+    background-color: $light-grey;
+
+    h3 {
+      font-size: 1em;
+      color: $coral-red;
+    }
+
+    hr {
+      border-color: $light-grey;
+    }
+  }
+
+  #citations {
+    background-color: $coral-red;
+    color: #fff;
+
+    &:before, &:after {
+      content: ' ';
+      display: block;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    &:before {
+      height: 250px;
+      background-color: $light-grey;
+      background-image: url('../img/20years/bg-3.png');
+      background-position: bottom left;
+    }
+
+    &:after {
+      height: 750px;
+      background-color: #fff;
+      background-image: url('../img/20years/bg-4.png');
+      background-position: top center;
+    }
+
+    li {
+      margin-bottom: 5vh;
+    }
+
+    cite {
+      display: block;
+      margin-bottom: 2.5vh;
+    }
+
+    a {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    hr {
+      border-color: $coral-red;
+    }
+
+    blockquote {
+      margin: 0 0 2.5vh 0;
+      border: 0;
+
+      @media (min-width: $screen-sm-min) {
+        &:nth-child(3n+1) {
+          clear: both;
+        }
+      }
+    }
+  }
+
+  #partners {
+    margin-top: -175px;
+
+    figure {
+      padding-right: 2.5vw;
+      margin-bottom: 5vh;
+    }
+  }
+}
