@@ -2948,15 +2948,15 @@ msgstr "[Érudit] Subscribe to %(journal_name)s\n"
 #: templates/public/20_years.html:4 templates/public/20_years.html:6
 #: templates/public/20_years.html:26 templates/public/20_years.html:42
 msgid "20 ans d’Érudit"
-msgstr ""
+msgstr "20 years of Érudit"
 
 #: templates/public/20_years.html:36
 msgid "20 ans"
-msgstr ""
+msgstr "20 years"
 
 #: templates/public/20_years.html:46
 msgid "Mot de l’équipe"
-msgstr ""
+msgstr "A word from our team"
 
 #: templates/public/20_years.html:48
 msgid ""
@@ -2970,6 +2970,15 @@ msgid ""
 "        <p>&ndash; L’équipe d’Érudit</p>\n"
 "        "
 msgstr ""
+"\n"
+"        <p>This fall, Érudit celebrates its 20<sup>th</sup> anniversary.</p>\n"
+"        <p>20 years is a lifetime in the digital realm, where things evolve at an astounding pace. Despite its venerable age, Érudit is as fit as ever.</p>\n"
+"        <p>20 years during which we have devoted all of our energy to one mission: the open dissemination of knowledge for the benefit all.</p>\n"
+"        <p>20 years during which our team has worked to disseminate over 200 scholarly and cultural journals internationally in collaboration with hundreds of research centres, university presses, libraries, and other institutions dedicated to the dissemination of knowledge./p>\n"
+"        <p>To mark this anniversary, we invite you to discover a brief history of our organization, as well as our major ongoing projects, which will provide the foundations for an even more substantial and fair scholarly publishing ecosystem in the years to come. </p>\n"
+"        <p>Enjoy!</p>\n"
+"        <p>&ndash; The Érudit team</p>\n"
+"        "
 
 #: templates/public/20_years.html:64
 #: templates/userspace/journal/editor/detail.html:84
@@ -2980,7 +2989,7 @@ msgstr "History"
 
 #: templates/public/20_years.html:68
 msgid "Projet pilote"
-msgstr ""
+msgstr "Pilot project"
 
 #: templates/public/20_years.html:70
 msgid ""
@@ -2989,10 +2998,14 @@ msgid ""
 "                <p>Les revues sont produites en format SGML (<em>Standard Generalized Markup Language</em>), l’un des premiers langages qui permettent de décrire un document numérique à l’aide de balises.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Érudit’s forerunner was created by the Presses de l’Université de Montréal (PUM) in order to assist five scholarly journals in their transition towards a digital format: <a href=\"https://web.archive.org/web/19991013211916/http://www.erudit.org:80/erudit/gpq/index.html\" target=\"_blank\">Géographie physique et Quaternaire</a>, <a href=\"https://web.archive.org/web/19990502024927/http://www.erudit.org:80/erudit/meta/index.html\" target=\"_blank\">Meta</a>, <a href=\"https://web.archive.org/web/19991001094723/http://www.erudit.org:80/erudit/ri/index.html\" target=\"_blank\">Relations Industrielles&nbsp;/ Industrial Relations</a>, <a href=\"https://web.archive.org/web/19990428135922/http://www.erudit.org:80/erudit/haf/index.html\" target=\"_blank\">Revue d’histoire de l’Amérique française</a> and <a href=\"https://web.archive.org/web/19991004202426/http://www.erudit.org:80/erudit/socsoc/index.html\" target=\"_blank\">Sociologie et Sociétés</a>. The project was launched by Gérard Boismenu, then scientific director of the press, and by Guylaine Beaudry, then a recent graduate of the Master’s programme at the École de bibliothéconomie et des sciences de l’information.</p>\n"
+"                <p>The journals were produced in SGML format (<em>Standard Generalized Markup Language</em>), one of the first standards used to describe digital documents with a tag set.</p>\n"
+"                "
 
 #: templates/public/20_years.html:81
 msgid "1<sup>re</sup> plateforme"
-msgstr ""
+msgstr "First website"
 
 #: templates/public/20_years.html:83
 msgid ""
@@ -3001,11 +3014,15 @@ msgid ""
 "                <p>Les internautes à travers le monde peuvent y consulter gratuitement les derniers articles parus dans ces cinq revues savantes. La plateforme diffuse également <a href=\"https://pum.umontreal.ca/revues/surfaces/\" target=\"_blank\">Surfaces</a>, l’une des toutes premières revues scientifiques francophones entièrement numériques, dirigée par Jean-Claude Guédon, professeur de littérature à l’Université de Montréal qui a largement contribué à l’internet libre.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>The first version of the Érudit platform is finally online!</p>\n"
+"                <p>The platform also disseminated <a href=\"https://pum.umontreal.ca/revues/surfaces/\" target=\"_blank\">Surfaces</a>, one of the very first entirely digital French-language scholarly journals, edited by Jean-Claude Guédon, professor of literature at the Université de Montréal and advocate for an open Internet.</p>\n"
+"                "
 
 #: templates/public/20_years.html:90 templates/public/20_years.html:106
 #: templates/public/20_years.html:215
 msgid "La même année"
-msgstr ""
+msgstr "In the same year"
 
 #: templates/public/20_years.html:91
 msgid ""
@@ -3013,10 +3030,13 @@ msgid ""
 "                <p>Création de <a href=\"https://www.scielo.org/php/index.php?lang=en\" target=\"_blank\">SciELO</a>, qui est aujourd’hui la principale plateforme non commerciale de diffusion numérique pour les revues savantes d’Amérique du Sud, avec plus de 1500 revues diffusées.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Creation of <a href=\"https://www.scielo.org/php/index.php?lang=en\" target=\"_blank\">SciELO</a>, now the leading non-commercial digital dissemination platform for South-American scholarly journals, is created. It currently disseminates over 1500 journals.</p>\n"
+"                "
 
 #: templates/public/20_years.html:98
 msgid "Diffusion des archives de revues"
-msgstr ""
+msgstr "Disseminating journal archives"
 
 #: templates/public/20_years.html:100
 msgid ""
@@ -3024,6 +3044,9 @@ msgid ""
 "                <p>Les articles en sciences humaines et sociales ont une longue durée de vie et sont toujours utiles pour les chercheurs, même plusieurs dizaines d’années après leur publication. C’est pourquoi Érudit entame la numérisation et la diffusion de numéros d’archives avec deux revues scientifiques historiques issues du monde francophone&nbsp;: Meta (fondée en 1966) et Sociologie et sociétés (1969).</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Papers in the humanities and social sciences have a long lifespan and remain useful to researchers for several decades after their publication. This is why Érudit took on the endeavour of digitizing and disseminating archival issues with two historical French-language scholarly journals: Meta (launched in 1966) and Sociologie et sociétés (launched in 1969).</p>\n"
+"                "
 
 #: templates/public/20_years.html:107
 msgid ""
@@ -3031,10 +3054,13 @@ msgid ""
 "                <p>Le moteur de recherche Google, lancé à l’automne 1998, dépasse les 3 millions de requêtes par jour et devient l’un des premiers sites consultés dans le monde.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Google’s search engine, launched in 1998, gathers over 3 million searches daily and becomes one of the most visited websites worldwide.</p>\n"
+"                "
 
 #: templates/public/20_years.html:114
 msgid "Pilotage interuniversitaire"
-msgstr ""
+msgstr "An interuniversity steering committee"
 
 #: templates/public/20_years.html:116
 msgid ""
@@ -3042,10 +3068,13 @@ msgid ""
 "                <p>Devant la demande de la communauté universitaire canadienne pour des services d’édition numérique, un Groupe interuniversitaire pour l’édition numérique est mis en place afin de piloter Érudit. Il comprend des instances de l’Université de Montréal, de l’Université Laval, de l’Université du Québec à Montréal et du Réseau d’informations scientifiques du Québec (RISQ). Ce groupe sera à l’origine de la fondation du Consortium Érudit en 2004.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>With the growing demand for digital publishing services within the Canadian academic community, an Interuniversity group for digital publishing was created in order to manage Érudit. It was comprised of representatives from Université de Montréal, Université Laval, Université du Québec à Montréal and the Réseau d’informations scientifiques du Québec (RISQ). The Érudit Consortium, created in 2004, was derived from this group.</p>\n"
+"                "
 
 #: templates/public/20_years.html:123
 msgid "2<sup>e</sup> version de la plateforme"
-msgstr ""
+msgstr "Second iteration of the website"
 
 #: templates/public/20_years.html:125
 msgid ""
@@ -3053,10 +3082,13 @@ msgid ""
 "                <p>Cette nouvelle version nous a permis de diffuser d’autres types de contenus en format numérique (livres, prépublications et thèses). La plateforme comprend à l’époque 6&nbsp;000 documents numériques, tous disponibles en libre accès.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>The website’s new version allowed us to disseminate other types of content in digital format (books, prepublications, and dissertations). The platform then included 6,000 digital documents, all available in open access.</p>\n"
+"                "
 
 #: templates/public/20_years.html:135
 msgid "Mise en place du Consortium"
-msgstr ""
+msgstr "Establishing a consortium"
 
 #: templates/public/20_years.html:137
 msgid ""
@@ -3065,10 +3097,14 @@ msgid ""
 "                <p>29 revues supplémentaires sont diffusées&nbsp;: <em>Anthropologie et sociétés</em>, <em>Cinémas</em>, <em>Phytoprotection</em>, <em>Théologiques</em> et <em>Voix et images</em>, pour ne citer que quelques exemples.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>In order to better reflect its mission, Érudit became a consortium comprised of Université de Montréal, Université Laval and Université du Québec à Montréal. The platform also began disseminating journals funded by the Fonds de recherche du Québec.</p>\n"
+"                <p>29 additional journals were disseminated, including <em>Anthropologie et sociétés</em>, <em>Cinémas</em>, <em>Phytoprotection</em>, <em>Théologiques</em> and <em>Voix et images</em>.</p>\n"
+"                "
 
 #: templates/public/20_years.html:141
 msgid "L’année précédente"
-msgstr ""
+msgstr "During the previous year"
 
 #: templates/public/20_years.html:142
 msgid ""
@@ -3076,10 +3112,13 @@ msgid ""
 "                <p>En 2003, la <a href=\"https://openaccess.mpg.de/68042/BerlinDeclaration_wsis_fr.pdf\" target=\"_blank\">Déclaration de Berlin</a> sur le Libre Accès à la connaissance est signé par plus de 400 responsables d’universités dans le monde, qui s’engagent ainsi à promouvoir le libre accès à la connaissance.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>The <a href=\"https://openaccess.mpg.de/68042/BerlinDeclaration_wsis_en.pdf\" target=\"_blank\">Berlin Declaration</a> for Open Access to Knowledge is signed by over 400 university leaders worldwide, thus expressing their commitment to the promotion of open access to knowledge.</p>\n"
+"                "
 
 #: templates/public/20_years.html:149
 msgid "Début de la commercialisation"
-msgstr ""
+msgstr "Implementing a moving paywall"
 
 #: templates/public/20_years.html:151
 msgid ""
@@ -3087,10 +3126,13 @@ msgid ""
 "                <p>La majorité des revues, qui voient la vente de leurs exemplaires imprimés diminuer, demandent à mettre en place un abonnement numérique sur Érudit pour compenser cette perte financière. L’accès aux articles des numéros publiés au cours des deux dernières années se voit limité aux institutions abonnées, tandis que l’ensemble des archives demeure en libre accès.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Most journals, seeing a decrease in their sales, asked Érudit to implement a digital subscription rate to compensate for these financial losses. Access to articles published in the last two years’ issues was limited to subscribing institutions, whereas all of the archives remained in open access. </p>\n"
+"                "
 
 #: templates/public/20_years.html:158
 msgid "3<sup>e</sup> version de la plateforme"
-msgstr ""
+msgstr "Third iteration of the website"
 
 #: templates/public/20_years.html:160
 msgid ""
@@ -3098,10 +3140,13 @@ msgid ""
 "                <p>Les consultations de la plateforme, notamment de l’extérieur du Canada, deviennent de plus en plus importantes. Une nouvelle version, qui comprend une interface trilingue (français, anglais et espagnol) et de nouvelles fonctionnalités (exportation de notices, recherche avancée, etc.), est mise en ligne.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>The readership of the platform was ever-increasing, with more and more visits from abroad. A new version, with a trilingual interface (French, English, and Spanish) as well as new features (export of bibliographic records, advanced search options, etc.), was made available.</p>\n"
+"                "
 
 #: templates/public/20_years.html:170
 msgid "Arrivée des revues culturelles"
-msgstr ""
+msgstr "Welcoming cultural magazines"
 
 #: templates/public/20_years.html:172
 msgid ""
@@ -3109,10 +3154,13 @@ msgid ""
 "                <p>Un projet de numérisation rétrospective des revues culturelles membres de la Société de développement des périodiques culturels québécois (SODEP) est lancé. 250&nbsp;000 pages sont numérisées et plus de 60&nbsp;000 articles sont mis en ligne grâce à une subvention accordée par Patrimoine canadien à la SODEP.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>A retrospective digitization project for magazines that are members of the Société de développement des périodiques culturels québécois (SODEP) was launched. 250,000 pages were digitized and over 60,000 articles were published online thanks to a grant from Canadian Heritage by the SODEP.</p>\n"
+"                "
 
 #: templates/public/20_years.html:178 templates/public/20_years.html:231
 msgid "L’année suivante"
-msgstr ""
+msgstr "The following year"
 
 #: templates/public/20_years.html:179
 msgid ""
@@ -3120,10 +3168,13 @@ msgid ""
 "                <p>Lancement du portail <a href=\"https://www.openedition.org/\" target=\"_blank\">OpenEdition</a> qui regroupe les 3 plateformes&nbsp;: Revues.org, Calenda et Hypothèses.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Launch of the <a href=\"https://www.openedition.org/\" target=\"_blank\">OpenEdition</a> portal, which aggregates three existing platforms: Revues.org, Calenda, and Hypothèses.</p>\n"
+"                "
 
 #: templates/public/20_years.html:186
 msgid "Consolidation de la zone Thèses"
-msgstr ""
+msgstr "Developing the Theses section"
 
 #: templates/public/20_years.html:188
 msgid ""
@@ -3131,6 +3182,9 @@ msgid ""
 "                <p>Érudit moissonne gratuitement les métadonnées des dépôts de thèses des bibliothèques universitaires canadiennes afin de valoriser leurs contenus. En 2013, avec l’arrivée de plusieurs nouvelles universités (UQAM, UQAT, UQTR, UQAC), ce sont plus de 55&nbsp;000 thèses et mémoires qui sont référencés.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Érudit harvests metadata from Canadian university libraries’ thesis and dissertation repositories, free of charge, in order to showcase their contents. In 2013, several new universities were added (UQAM, UQAT, UQTR, UQAC), and over 55,000 theses and dissertations are now referenced.</p>\n"
+"                "
 
 #: templates/public/20_years.html:195 templates/public/home.html:137
 msgid "Partenariat pour le libre accès"
@@ -3142,10 +3196,13 @@ msgid ""
 "                <p>En association avec le Réseau canadien de documentation pour la recherche, Érudit met en place son premier <a href=\"https://erudit.squarespace.com/accueil\" target=\"_blank\">Partenariat pour le libre accès</a>, réunissant 107 revues canadiennes et 53 bibliothèques universitaires. Autre fait marquant, la plateforme Érudit est maintenant reconnue comme une <a href=\"https://apropos.erudit.org/fr/investissement-de-14-million-dans-la-plateforme-erudit-par-la-fondation-canadienne-pour-linnovation/\" target=\"_blank\">Initiative scientifique majeure</a> par la Fondation canadienne pour l’innovation.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>In association with the Canadian Research Knowledge Network, Érudit has established its first <a href=\"https://erudit.squarespace.com/\" target=\"_blank\">Partnership for Open Access</a>, involving 107 Canadian journals and 53 university libraries. Another highlight of this year, the Érudit platform was recognized as a <a href=\"https://apropos.erudit.org/en/investment-of-1-4-million-in-the-erudit-platform-by-the-canada-foundation-for-innovation/\" target=\"_blank\">Initiative scientifique majeure</a> by the Canada Foundation for Innovation.</p>\n"
+"                "
 
 #: templates/public/20_years.html:207
 msgid "Création de CO.SHS"
-msgstr ""
+msgstr "Creation of CO.SHS"
 
 #: templates/public/20_years.html:209
 msgid ""
@@ -3153,6 +3210,9 @@ msgid ""
 "                <p>Financée par la Fondation Canadienne pour l’innovation et dirigée par le professeur Vincent Larivière (Université de Montréal), la <a href=\"https://co-shs.ca/fr/\" target=\"_blank\">Cyberinfrastructure ouverte pour les sciences humaines et sociales</a> (CO.SHS) est une initiative nationale de recherche en sciences humaines et sociales et en arts et lettres qui vise à soutenir la découverte d’information, l’exploration de vastes corpus de données textuelles et la production de nouveaux résultats de recherche. Le projet est issu d’une collaboration entre Érudit, plusieurs équipes multidisciplinaires de recherche et différentes institutions documentaires au pays et à l’international.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Funded by the Canada Foundation for Innovation and overseen by Professor Vincent Larivière (Université de Montréal), the <a href=\"https://co-shs.ca/en/\" target=\"_blank\">Open Cyberinfrastructure for the Humanities and Social Sciences</a> (CO.SHS) is a national research initiative in the humanities and social sciences as well as in the arts and letters, supporting the discovery of information, the exploration of vast textual datasets and the production of new research results. The project is is a collaborative effort between Érudit, several multidisciplinary research teams, as well as various national and international documentary institutions. </p>\n"
+"                "
 
 #: templates/public/20_years.html:216
 msgid ""
@@ -3160,10 +3220,13 @@ msgid ""
 "                <p>Les Bibliothèques de l’Université de Montréal prennent la décision de <a href=\"http://www.bib.umontreal.ca/communiques/20160505-DC-annulation-springer.htm\" target=\"_blank\">déconstruire leurs ententes</a> concernants les grands ensembles de revues commercialisés avec leurs éditeurs commerciaux.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>Université de Montréal libraries <a href=\"http://www.bib.umontreal.ca/communiques/20160506-DC-annulation-springer-va.htm\" target=\"_blank\">cut back</a> on a large bundle of scholarly journals.</p>\n"
+"                "
 
 #: templates/public/20_years.html:223
 msgid "4<sup>e</sup> version de la plateforme"
-msgstr ""
+msgstr "Fourth iteration of the website"
 
 #: templates/public/20_years.html:225
 msgid ""
@@ -3171,6 +3234,9 @@ msgid ""
 "                <p>Une nouvelle version de la plateforme Érudit a été instaurée afin d’améliorer l’expérience de lecture, d’optimiser la diffusion et le référencement des documents, et de prévoir l’arrivée de nouveaux services.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>A new version of the Érudit platform has been implemented in order to improve the reading experience, to enhance the dissemination and the referencing of documents, and to prepare the ground for the development of new services.</p>\n"
+"                "
 
 #: templates/public/20_years.html:232
 msgid ""
@@ -3178,10 +3244,13 @@ msgid ""
 "                <p>L’<a href=\"https://jussieucall.org/#call\" target=\"_blank\">Appel de Jussieu</a> pour la Science ouverte et la bibliodiversité est signé par plusieurs dizaines d’institutions et acteurs majeurs de l’édition scientifique.</p>\n"
 "                "
 msgstr ""
+"\n"
+"                <p>The <a href=\"https://jussieucall.org/#call\" target=\"_blank\">Jussieu Call</a> for Open Science and Bibliodiversity is signed by dozens of institutions and major stakeholders of the scholarly publishing field.</p>\n"
+"                "
 
 #: templates/public/20_years.html:246
 msgid "Aujourd’hui"
-msgstr ""
+msgstr "Today"
 
 #: templates/public/20_years.html:248
 msgid ""
@@ -3189,6 +3258,9 @@ msgid ""
 "          Érudit diffuse et préserve 206 revues scientifiques et culturelles, ce qui représente 210 000 articles. Plus de 21 millions de pages vues sont enregistrées chaque année sur la plateforme &ndash; et ce, grâce à un bassin d’utilisateur.trice.s provenant de plus de 85 pays différents &ndash; et 1 100 ententes partenariales ou commerciales avec des institutions documentaires à travers le monde ont été établies.\n"
 "          "
 msgstr ""
+"\n"
+"          Érudit disseminates and preserves 206 scholarly and cultural journals, which have collectively published more than 210,000 articles. Over 21 million page views are tracked every year on the platform, owing to a user base from over 85 countries, and 1,100 commercial or partnership agreements have been established with documentary institutions all around the world. \n"
+"          "
 
 #: templates/public/20_years.html:255
 msgid ""
@@ -3199,6 +3271,12 @@ msgid ""
 "            <p>--> <a href=\"https://apropos.erudit.org/fr/chercheurs/activites-de-recherche/\" target=\"_blank\">Sur nos activités de recherche</a></p>\n"
 "            "
 msgstr ""
+"\n"
+"            <h3>Research and strategic development</h3>\n"
+"            <p>Thanks to the appointment of Professor Vincent Larivière as scientific director in 2015 and of a scientific committee in 2017, Érudit now benefits from the expertise of several members of Québec and Canada’s research community, who take part in defining Érudit’s major strategic orientations and in the discussions surrounding issues facing journals in the humanities and social sciences. With the support of these new entities, we are also developing new services for researchers as part of the CO.SHS project.</p>\n"
+"            <p>--> <a href=\"https://co-shs.ca/en/\" target=\"_blank\">More information</a></p>\n"
+"            <p>--> <a href=\"https://apropos.erudit.org/en/researchers/research-activities/\" target=\"_blank\">Our research activities</a></p>\n"
+"            "
 
 #: templates/public/20_years.html:264
 msgid ""
@@ -3208,6 +3286,11 @@ msgid ""
 "            <p>--> <a href=\"https://partnership.erudit.org/accueil\" target=\"_blank\">En savoir plus</a></p>\n"
 "            "
 msgstr ""
+"\n"
+"            <h3>The <em>Partnership for Open Access</em></h3>\n"
+"            <p>The <em>Partnership for Open Access</em> is an innovative and collaborative economic model partnering university libraries with scholarly journals in a context of transition towards open access. It is currently supported by 90 institutions worldwide, in collaboration with Canadian, French, and Belgian consortia. We are currently working on developing the <em>Partnership</em> in Europe, namely in the UK, with the JISC organization.</p>\n"
+"            <p>--> <a href=\"https://partnership.erudit.org/\" target=\"_blank\">More information</a></p>\n"
+"            "
 
 #: templates/public/20_years.html:272
 msgid ""
@@ -3218,10 +3301,16 @@ msgid ""
 "            <p>--> <a href=\"https://www.coalition-publi.ca/le-projet/\" target=\"_blank\">En savoir plus</a></p>\n"
 "            "
 msgstr ""
+"\n"
+"            <h3>Coalition Publi.ca</h3>\n"
+"            <p>In the spring of 2017, Érudit and the Public Knowledge Project have joined forces to launch Coalition Publi.ca, a pan-Canadian strategic partnership. One of its main goals is to offer comprehensive services to Canadian scholarly journals, published both in French and in English, in collaboration with the entire scientific dissemination community.</p>\n"
+"            <p>Coalition Publi.ca is part of the global effort to redefine the power relations in the field in order to support the free circulation of knowledge, bibliodiversity, as well as the development of open source tools.</p>\n"
+"            <p>--> <a href=\"https://www.coalition-publi.ca/\" target=\"_blank\">More information</a></p>\n"
+"            "
 
 #: templates/public/20_years.html:287
 msgid "Citations"
-msgstr ""
+msgstr "Testimonials"
 
 #: templates/public/20_years.html:288
 msgid ""
@@ -3232,6 +3321,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Rémi Quirion, Chief Scientist of Québec</cite>\n"
+"          <p>The Fonds de recherche du Québec is a long-standing partner of Érudit, and we recognize the importance of offering the scientific community this unique and powerful digital scholarly publishing tool. This cutting-edge digital platform ensures that our publications in the humanities, social sciences, arts and letters have a broad outreach in the Francophonie.</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:294
 msgid ""
@@ -3242,6 +3337,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Guy Berthiaume, Librarian and Archivist of Canada</cite>\n"
+"          <p>Thanks to Érudit, over the past two decades, we have enjoyed access to Canadian research outputs in the humanities and social sciences. Érudit was able to successfully leverage worldwide partnerships in the fields of research, publishing, academia, and libraries, in order to create what has now become an essential platform.</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:300
 msgid ""
@@ -3252,6 +3353,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Sophie Montreuil, General Director, Association des communicateurs scientifiques du Québec</cite>\n"
+"          <p>For the ACS, Érudit’s 20th anniversary means 20 years devoted enriching the scientific culture of the population of Quebec through an extensive dissemination of research in the humanities and social sciences. Congratulations to the Érudit team for its innovative work, and thank you for being a loyal partner to our association.</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:306
 msgid ""
@@ -3262,6 +3369,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Aminata Keita, Librarian, Université de Montréal</cite>\n"
+"          <p>Any librarian working in a university libraries seeks to provide students with quality documentation. In the arts and letters and the humanities and social sciences, Érudit has become a critical resource for online research, making available articles from Quebec scholarly journals in French, many of which are in open access.</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:312
 msgid ""
@@ -3282,6 +3395,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Yves Gingras, Chairholder, Canada Research Chair in History and Sociology of Science</cite>\n"
+"          <p>Twenty years have already gone by since Érudit’s founders designed the key to free all of the knowledge that was locked up in scholarly journals to make it available for any curious person to peruse. Érudit makes a critical contribution by returning knowledge that has essentially been produced thanks to public funds into the hands of the public. Here’s to wishing Érudit a long life!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:324
 msgid ""
@@ -3292,6 +3411,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Louise Poissant, Scientific director, Fonds de recherche du Québec – Société et culture</cite>\n"
+"          <p>I applaud Érudit’s vision, competence, and determination, which helped it develop, over the course of the past twenty years, a remarkable dissemination platform for the humanities, social sciences, arts and letters. The FRQSC is proud to support this work, and wishes to further extend our collaboration. Congratulations, and wishing you the best of luck for the next twenty years!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:330
 msgid ""
@@ -3302,6 +3427,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Pauline Curien, Editor of Études internationales</cite>\n"
+"          <p>Études internationales has been disseminated on Érudit in its entirety since 2009. We have nothing but good things to say about this initiative, as Érudit provides remarkable services in terms of metadata construction (a technological skill set that is unattainable for journal editors) as well as dissemination (developing commercial strategies is also out of reach). These services, in addition to the consortium’s tireless efforts to accompany journals in their transition towards open access, are what makes Érudit vital for Études internationales. We are truly aware and appreciative of this!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:336
 msgid ""
@@ -3312,6 +3443,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Jean-Claude Guédon, UNESCO Open Access Strategy Expert</cite>\n"
+"          <p>Érudit started with two journals, the first was in quaternary geology, and the second was Surfaces, an entirely electronic journal that I had launched in 1991 with Bill Readings. Érudit has opened many doors in terms of electronic publishing, and I salute this success. When it comes to open access, it took some more time, but little by little, Érudit found its way. I applaud its decision-makers for doing so. A lot of work lies ahead, but the French-speaking world now has access to two major non-commercial platforms, and Érudit is one of them.</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:342
 msgid ""
@@ -3322,6 +3459,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Guy Jobin, Editor of Laval théologique et philosophique, Université Laval</cite>\n"
+"          <p>The partnership between Laval théologique et philosophique (LTP) and Érudit has resulted in a continuous increase in institutional subscriptions to the electronic version of the journal. By supporting LTP, Érudit offers it a broader readership. Thank you and congratulations to Érudit for its twenty years of existence!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:348
 msgid ""
@@ -3332,6 +3475,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Elsa Devron, PhD student in Information science, Université de Montréal </cite>\n"
+"          <p>Érudit is an indispensable platform providing access to French-language knowledge in the humanities and social sciences. I regularly use it to browse journals in my field, be it in information science or in management. I am also glad to discover articles in other disciplines thanks to its monthly newsletter. Érudit opens new horizons and fosters curiosity!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:354
 msgid ""
@@ -3342,6 +3491,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Daniel Marquis, Professional Librarian, Cégep de Granby</cite>\n"
+"          <p>Access to information is crucial in today’s world. This is what Érudit makes available: access to information, but not just of any kind… verified information in the field of research, with scholarly journals (peer-reviewed knowledge) and in the cultural sector, with the SODEP journals. And all of that is at our fingertips!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:360
 msgid ""
@@ -3352,6 +3507,12 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>Lionel Villalonga, General Director of l’Association pour l’avancement des sciences et des techniques de la documentation (ASTED)</cite>\n"
+"          <p>The Érudit platform has allowed us to reach all of the information professionals around the world. We are now able to “cultivate our knowledge” in library studies all across the globe!</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:366
 msgid ""
@@ -3362,14 +3523,20 @@ msgid ""
 "        </blockquote>\n"
 "        "
 msgstr ""
+"\n"
+"        <blockquote class=\"col-sm-4\">\n"
+"          <cite>The Liberté journal team</cite>\n"
+"          <p>Érudit gives us access to our collective memory.</p>\n"
+"        </blockquote>\n"
+"        "
 
 #: templates/public/20_years.html:375
 msgid "Sur le libre accès"
-msgstr ""
+msgstr "Articles on open access"
 
 #: templates/public/20_years.html:392
 msgid "Universitaires"
-msgstr ""
+msgstr "Universities"
 
 #: templates/public/20_years.html:410
 #: templates/public/journal/journal_list_per_disciplines.html:60
@@ -4251,15 +4418,15 @@ msgstr "Érudit Home"
 
 #: templates/public/home.html:49
 msgid "Aller vers la page du 20e anniversaire d’Érudit"
-msgstr ""
+msgstr "See Érudit’s 20th anniversary page"
 
 #: templates/public/home.html:50
 msgid "Érudit <br/>célèbre <br/>ses"
-msgstr ""
+msgstr "Érudit <br/>celebrates its <br/>"
 
 #: templates/public/home.html:52
 msgid "ans&nbsp;!"
-msgstr ""
+msgstr "anniversary!"
 
 #: templates/public/home.html:63
 msgid "Par auteur, titre, mots-clés&hellip;"
@@ -4678,7 +4845,7 @@ msgstr "List of tables"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:299
 msgid "ACFAS 2019"
-msgstr ""
+msgstr "ACFAS 2019"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:318
 msgid "Boîte à outils"
@@ -5384,6 +5551,10 @@ msgid ""
 "            <p>Vous pouvez obtenir de l’aide dans votre recherche en consultant notre <a href=\"https://www.youtube.com/watch?v=_ThmnQn9bpA\" target=\"_blank\">tutoriel vidéo</a> ou notre <a href=\"https://www.erudit.org/public/documents/Guide_recherche.pdf?utm_source=platform_guide&utm_campaign=rechercheavancee\" target=\"_blank\">guide en ligne</a>. Vous pouvez également nous envoyer vos commentaires à l’aide de l’outil <em>Votre avis</em> à droite de cette page.</p>\n"
 "            "
 msgstr ""
+"\n"
+"            <p>Refine your search in the corpus of documents available on Érudit by entering various keywords and selecting available filters.</p>\n"
+"            <p>For more information, consult our <a href=\"https://www.youtube.com/watch?v=125MMiC1vu8\" target=\"_blank\">video tutorial</a> or our <a href=\"https://www.erudit.org/public/documents/Guide_Performing_searches.pdf?utm_source=platform_guide&utm_campaign=performingsearches\" target=\"_blank\">advanced search guide</a>. For any comments, use the <em>Feedback</em> widget on the right side of this page.</p>\n"
+"            "
 
 #: templates/public/search/advanced_search.html:32
 msgid "Formulaire de recherche"
