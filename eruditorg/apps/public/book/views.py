@@ -43,11 +43,11 @@ class BookDetailView(DetailView):
     model = Book
     template_name = "public/book/book_detail.html"
 
-    def get_object(self):
-        object = super().get_object()
-        if not object.is_published:
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if not obj.is_published:
             raise Http404
-        return object
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,11 +61,11 @@ class ChapterDetailView(DetailView):
     model = Book
     template_name = "public/book/chapter_detail.html"
 
-    def get_object(self):
-        object = super().get_object()
-        if not object.is_published:
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if not obj.is_published:
             raise Http404
-        return object
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

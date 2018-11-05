@@ -8,8 +8,10 @@ from bs4 import UnicodeDammit
 
 from django.core.files.storage import default_storage
 from django.core.management.base import BaseCommand
-from apps.public.book.models import BookCollection, Book
-
+from apps.public.book.models import (
+    BookCollection,
+    Book,
+)
 
 to_import = ('ACFASSudbury', 'aidelf', 'artefact', 'sqrsf', 'artsVisuels', 'CEFAN', 'npqs', )
 
@@ -19,21 +21,6 @@ BOOKS_TO_SKIP = (
     'livre/lachapellej/2001',
     'livre/larouchej/2001',
 )
-
-STOPWORDS = {'le', 'la', 'un', 'une', 'de', 'd', 'du', 'des', 'et', 'son', 'sa', 'ses'}
-
-
-def short_slug(s):
-    s = slugify(s)
-    parts = s.split('-')
-    parts = [part for part in parts if part not in STOPWORDS]
-    length = 0
-    for i, part in enumerate(parts):
-        length += len(part) + 1
-        if length > 80:
-            parts = parts[:i]
-            break
-    return '-'.join(parts)
 
 
 def get_unicode_root(fd):
@@ -156,10 +143,6 @@ class Command(BaseCommand):
                     book.copyright = _get_text(copyright_node)
 
             book.title = _get_text(root.find('.//h1[@class="titrelivre"]'))
-            slug = short_slug(book.title)
-            if book.isbn or book.digital_isbn:
-                slug = '{}--{}'.format(slug, book.digital_isbn or book.isbn)
-            book.slug = slug
             editeur = root.find('.//h1[@class="editeur"]')
             if editeur is not None:
                 book.publisher = _get_text(editeur)

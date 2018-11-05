@@ -1,4 +1,7 @@
+from typing import Optional
+
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
 from .managers import PublishedBooksManager
@@ -165,3 +168,26 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = short_slug(self.title, self.isbn or self.digital_isbn)
+        return super().save(*args, **kwargs)
+
+
+def short_slug(title: str, isbn: Optional[str]) -> str:
+    s = slugify(title)
+    parts = s.split('-')
+    parts = [part for part in parts if part not in STOPWORDS]
+    length = 0
+    for i, part in enumerate(parts):
+        length += len(part) + 1
+        if length > 80:
+            parts = parts[:i]
+            break
+    slug = '-'.join(parts)
+    if isbn:
+        slug = '{}--{}'.format(slug, isbn)
+    return slug
+
+
+STOPWORDS = {'le', 'la', 'un', 'une', 'de', 'd', 'du', 'des', 'et', 'son', 'sa', 'ses'}
