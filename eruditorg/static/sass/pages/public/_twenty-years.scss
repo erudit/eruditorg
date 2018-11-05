@@ -143,6 +143,10 @@
       margin: 0 0 2.5vh 0;
       border: 0;
 
+      p {
+        @include fw-sans-italic;
+      }
+
       @media (min-width: $screen-sm-min) {
         &:nth-child(3n+1) {
           clear: both;
