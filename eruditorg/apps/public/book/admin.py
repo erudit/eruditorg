@@ -54,6 +54,11 @@ class BookAdmin(admin.ModelAdmin):
                 ('is_open_access', 'is_published'),
             )
         }),
+        (None, {
+            'fields': (
+                ('path', ),
+            )
+        }),
     ]
 
     actions = [
