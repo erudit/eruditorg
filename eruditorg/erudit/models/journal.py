@@ -134,10 +134,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         help_text=_("Cette revue est en accès libre?"))
     """ Defines whether the journal can be accessed by anyone """
 
-    issues_per_year = models.IntegerField(
-        null=True, blank=True, verbose_name=_('Numéros par année'))
-    """ Defines the number of issues per year """
-
     first_publication_year = models.PositiveIntegerField(
         verbose_name=_('Première année de publication'), blank=True, null=True)
     """ The first year when an issue of this journal has been published. """
