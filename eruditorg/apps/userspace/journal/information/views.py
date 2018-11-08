@@ -64,14 +64,8 @@ class JournalInformationUpdateView(
         self.object = self.get_object()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-
-        new_keys = {}
         contributor_inline_form = ContributorInlineFormset(self.request.POST, instance=self.object)
-        for key in contributor_inline_form.data.keys():
-            if "contributor_set" in key:
-                new_keys[key] = contributor_inline_form.data[key]
-        if (form.is_valid() and contributor_inline_form.is_valid()):
-
+        if form.is_valid() and contributor_inline_form.is_valid():
             return self.form_valid(form, contributor_inline_form)
         return self.form_invalid(form, contributor_inline_form)
 

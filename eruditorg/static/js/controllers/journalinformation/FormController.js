@@ -3,9 +3,8 @@ import Select2 from 'select2/dist/js/select2.full';
 export class JournalInformationFormController {
   init() {
     $('#id_languages').select2();
-    this.set_formset_state();
     this.contributor_fieldset = $('fieldset[name="contributors"]');
-
+    this.set_formset_state();
   }
 
   dump_fieldset() {
@@ -62,7 +61,7 @@ export class JournalInformationFormController {
 
     // update the django management form
     var total_forms = $(this.contributor_fieldset).children('div.row').length;
-    var initial_forms = $('input[type="hidden"][name$="id"][value]').length
+    var initial_forms = $('input[type="hidden"][name$="id"][value]').length;
     $('#id_contributor_set-TOTAL_FORMS').val(total_forms);
     $('#id_contributor_set-INITIAL_FORMS').val(initial_forms);
   }
