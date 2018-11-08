@@ -1,10 +1,4 @@
-<div class="col-sm-{{ col_sm|default:8 }} col-md-{{ col_md|default:6 }} form-group">
-  <label class="control-label" for="{{ field.id_for_label }}">
-    {{ field.label }}
-    {% if icon %}
-      &nbsp;<span class="{{ icon }}"></span>
-    {% endif %}
-  </label>
+<div class="col-xs-{{ col_xs|default:10 }} col-sm-{{ col_sm|default:8 }} col-md-{{ col_md|default:6 }} form-group">
   {% if checkbox_field %}
   <div class="checkbox">
     <input
@@ -16,13 +10,17 @@
     <label for="{{ checkbox_field.id_for_label }}">{{ checkbox_field.label }}</label>
   </div>
   {% elif select_field %}
-  <div>
-    <label class="control-label" for="{{ checkbox_field.id_for_label }}">
+    <label class="control-label" for="{{ select_field.id_for_label }}">
       {{ select_field.label }}
     </label>
     {{ select_field }}
-  </div>
   {% else %}
+  <label class="control-label" for="{{ field.id_for_label }}">
+    {{ field.label }}
+    {% if icon %}
+      &nbsp;<span class="{{ icon }}"></span>
+    {% endif %}
+  </label>
   {{ field }}
   {% endif %}
   {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}

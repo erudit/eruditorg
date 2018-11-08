@@ -37,7 +37,6 @@
   {% endfor %}
   {% endif %}
 
-
   <h2>{% trans "Informations générales" %}</h2>
   {% with field_template="userspace/journal/information/partials/info_single_field.html" %}
   <fieldset>
@@ -51,42 +50,8 @@
       {% include field_template with field=form.email type="email" autocomplete="email" only %}
       {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
     </div>
-    <hr/>
   </fieldset>
-  {{ formset.management_form }}
-  <h2>Équipe</h2>
-  <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
-
-  {% for line in formset %}
-    <div class="row" data-object="{{ forloop.counter0 }}">
-      {{ line.id }}
-      {{ line.journal_information }}
-    {% include field_template with field=line.type col_sm=2 col_md=2 only %}
-    {% include field_template with field=line.name col_sm=4 col_md=4 only %}
-    {% include field_template with field=line.role col_sm=4 col_md=4 only %}
-
-      <div class="col-sm-2 col-md-2">
-        <button type="button" class="btn btn-primary" data-object="{{ forloop.counter0 }}" data-action="delete">{% trans "Supprimer" %}</button>
-      </div>
-    </div>
-  {% endfor %}
-  <button type="button" class="btn btn-secondary" id="button-add-contributor">{% trans "Ajouter un contributeur" %}</button>
-  </fieldset>
-  <fieldset>
-    <legend>{% trans "Gestion de la revue" %}</legend>
-    <div class="row">
-      <p class="col-sm-9">
-        {% blocktrans %}
-        Saisissez ici les informations liées à l’administration, l’aspect légal et le processus de publication de votre revue.
-        {% endblocktrans %}
-      </p>
-      {% include field_template with select_field=form.peer_review_process only %}
-      {% include field_template with select_field=form.languages only %}
-      {% include field_template with field=form.frequency only %}
-    </div>
-    <hr/>
-  </fieldset>
-
+  <hr/>
   <fieldset>
     <legend>{% trans "Liens" %}</legend>
     <div class="row">
@@ -100,6 +65,52 @@
       {% include field_template with field=form.website_url type="url" autocomplete="url" icon="ion-ios-world-outline" only %}
     </div>
   </fieldset>
+
+  <h2>{% trans "Gestion de la revue" %}</h2>
+  <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
+    {{ formset.management_form }}
+    <legend>{% trans "Rôles de direction et de rédaction" %}</legend>
+    <div class="row">
+      <p class="col-sm-9">
+        {% blocktrans %}
+        Mettez à jour les contributeurs principaux et personnes responsables de la direction et de la rédaction de la revue. Vous pouvez saisir un rôle ou un titre pour chaque personne, par exemple&nbsp;: <em>Rédactrice en chef</em>, <em>Coordonnatrice à la rédaction</em>, <em>Coordonnateur éditorial</em>, <em>Directeur adjoint</em>.
+        {% endblocktrans %}
+      </p>
+    </div>
+    {% for line in formset %}
+    <div class="row" data-object="{{ forloop.counter0 }}">
+      {{ line.id }}
+      {{ line.journal_information }}
+      {% include field_template with field=line.type col_xs=12 col_sm=12 col_md=3 only %}
+      {% include field_template with field=line.name col_xs=5 col_sm=4 col_md=4 only %}
+      {% include field_template with field=line.role col_xs=5 col_sm=4 col_md=4 only %}
+      <div class="col-xs-2 col-sm-4 col-md-1 form-group">
+        <button type="button" data-object="{{ forloop.counter0 }}" data-action="delete">
+          <i class="icon ion-ios-close" style="font-size: 40px; line-height: 110px;"></i>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+    <button type="button" class="btn btn-secondary" id="button-add-contributor">{% trans "Ajouter un contributeur" %}</button>
+  </fieldset>
+  <hr/>
+  <fieldset>
+    <legend>{% trans "Administration et légal" %}</legend>
+    <div class="row">
+      <p class="col-sm-9">
+        {% blocktrans %}
+        Saisissez ici les informations liées à l’administration, l’aspect légal et le processus de publication de votre revue.
+        {% endblocktrans %}
+      </p>
+      {% include field_template with select_field=form.peer_review_process  col_xs=12 col_sm=6 col_md=6 only %}
+      {% include field_template with select_field=form.languages col_xs=12 col_sm=6 col_md=6 only %}
+    </div>
+    <div class="row">
+      {% include field_template with field=form.frequency col_xs=12 col_sm=6 col_md=6 only %}
+    </div>
+    <hr/>
+  </fieldset>
+
   {% endwith %}
 
   <div class="text-right">
@@ -118,9 +129,9 @@
 
   <p>{% trans "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:" %}</p>
   <ul class="section-nav">
-  {% for field in form.get_textbox_fields %}
-  <li class="section-nav__item"><a href="#{{ field.html_name }}" class="section-nav__link">{{ field.label }}</a></li>
-  {% endfor %}
+    {% for field in form.get_textbox_fields %}
+    <li class="section-nav__item"><a href="#{{ field.html_name }}" class="section-nav__link">{{ field.label }}</a></li>
+    {% endfor %}
   </ul>
 
   <hr>
