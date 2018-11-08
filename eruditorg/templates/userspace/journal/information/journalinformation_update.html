@@ -78,7 +78,7 @@
       </p>
     </div>
     {% for line in formset %}
-    <div class="row" data-object="{{ forloop.counter0 }}">
+    <div class="row" class="contributor" id="contributor-{{ forloop.counter0 }}" data-object="{{ forloop.counter0 }}">
       {{ line.id }}
       {{ line.journal_information }}
       {% include field_template with field=line.type col_xs=12 col_sm=12 col_md=3 only %}

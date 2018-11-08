@@ -8,7 +8,7 @@ export class JournalInformationFormController {
   }
 
   dump_fieldset() {
-    var rows = $(this.contributor_fieldset).children("div.row");
+    var rows = $(this.contributor_fieldset).children('div[class="row"][id]');
     var instance = this;
 
     $(rows).each(function(row) {
@@ -43,7 +43,7 @@ export class JournalInformationFormController {
     });
 
     // set the proper indexes on rows ans inputs
-    var rows = $(this.contributor_fieldset).children("div.row");
+    var rows = $(this.contributor_fieldset).children('div[class="row"][id]');
     $(rows).each(function(row_idx) {
       $(this).attr('data-object', row_idx);
       $(instance.get_inputs($(this))).each(function (idx) {
@@ -60,7 +60,7 @@ export class JournalInformationFormController {
     });
 
     // update the django management form
-    var total_forms = $(this.contributor_fieldset).children('div.row').length;
+    var total_forms = $(this.contributor_fieldset).children('div[class="row"][id]').length;
     var initial_forms = $('input[type="hidden"][name$="id"][value]').length;
     $('#id_contributor_set-TOTAL_FORMS').val(total_forms);
     $('#id_contributor_set-INITIAL_FORMS').val(initial_forms);
@@ -85,7 +85,8 @@ export class JournalInformationFormController {
   }
 
   delete_contributor(row) {
-    var confirm = window.confirm("Veuillez confirmer la suppression de ce collaborateur");
+    var name = $(row).find('[id$="name"]').val();
+    var confirm = window.confirm("Êtes-vous certain de vouloir retirer " + name + " de la liste des collaborateurs?");
     var url = $(this.contributor_fieldset).data('form-url');
     console.log(url);
     if (confirm) {
@@ -100,14 +101,14 @@ export class JournalInformationFormController {
           data: {"contributor_id": contributor_id},
           success: function() {
             instance.clear_inputs(row);
-            if ($(this.contributor_fieldset).children('div[class="row"]').length > 1) {
+            if ($(this.contributor_fieldset).children('div[class="row"][id]').length > 1) {
               $(row).hide();
             }
           }
         });
       }
       // do not remove the last row
-      if ($(this.contributor_fieldset).children('div[class="row"]').length == 1) {
+      if ($(this.contributor_fieldset).children('div[class="row"][id]').length == 1) {
         this.clear_inputs(row);
       } else {
         $(row).remove();
