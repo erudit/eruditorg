@@ -189,6 +189,20 @@
             {% endif %}
           </dd>
 
+          {% if journal.information.languages.all|length > 0 %}
+          <dt>
+            {% blocktrans count journal.languages.all|length as disciplines_count %}
+            Langue
+            {% plural %}
+            Langues
+            {% endblocktrans %}
+
+            {% for language in journal.information.languages.all %}
+            <dd>{{ language }}</dd>
+            {% endfor %}
+          </dt>
+          {% endif %}
+
           {% if journal.disciplines.all|length > 0 %}
           <dt>
             {% blocktrans count journal.disciplines.all|length as disciplines_count %}
