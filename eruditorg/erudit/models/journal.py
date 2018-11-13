@@ -1325,4 +1325,4 @@ class Contributor(models.Model):
     )
     name = models.CharField(max_length=200, verbose_name=_("Prénom et nom"))
     journal_information = models.ForeignKey(JournalInformation, on_delete=models.CASCADE)
-    role = models.CharField(max_length=200, verbose_name=_("Rôle"))
+    role = models.CharField(max_length=200, verbose_name=_("Rôle"), null=True, blank=True)
