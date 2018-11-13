@@ -95,6 +95,35 @@
       <div class="main-header__intro">
         {# Directors and editors #}
         <p>
+
+          {% if journal_info.contributor_set.all|length > 0%}
+          {% with directors=journal_info.get_directors %}
+          {% if directors %}
+          {% trans "Direction&nbsp;:" %}
+          {% for director in directors %}
+          {{ director.name }}
+          {% if director.role %}
+          ({{ director.role }})
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          /
+          {% endwith %}
+
+          {% with editors=journal_info.get_editors %}
+          {% if editors %}
+          {% trans "Rédaction&nbsp;:" %}
+          {% for editor in editors %}
+          {{ editor.name }}
+          {% if editor.role %}
+          ({{ editor.role }})
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          {% else %}
+
           {% with directors=meta_info_issue.erudit_object.get_directors editors=meta_info_issue.erudit_object.get_editors %}
           {% if directors %}
           {% trans "Direction&nbsp;:" %}
@@ -106,6 +135,7 @@
           {% for issue_contributor in editors %}{% if not forloop.first %}, {% endif %}{{ issue_contributor | format_editor }}</dd>{% endfor %}
           {% endif %}
           {% endwith %}
+          {% endif %}
         </p>
 
         {# History #}

@@ -1299,6 +1299,12 @@ class JournalInformation(models.Model):
     contact = models.TextField(verbose_name=_('Coordonnées'), blank=True, null=True)
     partners = models.TextField(verbose_name=_('Partenaires'), blank=True, null=True)
 
+    def get_directors(self):
+        return self.contributor_set.all().filter(type='D')
+
+    def get_editors(self):
+        return self.contributor_set.all().filter(type='R')
+
     class Meta:
         verbose_name = _('Information de revue')
         verbose_name_plural = _('Informations de revue')
