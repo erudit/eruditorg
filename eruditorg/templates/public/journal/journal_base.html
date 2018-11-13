@@ -121,14 +121,19 @@
           <dd>{% trans "Oui&nbsp;: avec" %} <a href="https://www.portico.org/" target="_blank">Portico</a></dd>
 
           {% if meta_info_issue %}
-          {% with directors=meta_info_issue.erudit_object.get_directors editors=meta_info_issue.erudit_object.get_editors %}
+          {% block directors %}
+          {% with directors=meta_info_issue.erudit_object.get_directors %}
           {% if directors %}
           <dt>{% trans "Direction" %}</dt>
           {% for issue_contributor in directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
+          {% endwith %}
+          {% endblock %}
 
+          {% block editors %}
+          {% with editors=meta_info_issue.erudit_object.get_editors %}
           {% if editors %}
           <dt>{% trans "Rédaction" %}</dt>
           {% for issue_contributor in editors %}
@@ -136,6 +141,7 @@
           {% endfor %}
           {% endif %}
           {% endwith %}
+          {% endblock %}
 
           {% if meta_info_issue.erudit_object.publishers %}
           <dt>

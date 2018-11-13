@@ -25,6 +25,39 @@
 <meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 {% endblock meta_tags %}
 
+{% block directors %}
+{% with directors=journal_info.get_directors %}
+{% if directors %}
+<dt>{% trans "Direction" %}</dt>
+{% for director in directors %}
+<dd>{{ director.name }}
+{% if director.role %}
+  ({{ director.role }})
+{% endif %}
+</dd>
+{% endfor %}
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endwith %}
+{% endblock %}
+{% block editors %}
+{% with editors=journal_info.get_editors %}
+{% if editors %}
+<dt>{% trans "Rédaction" %}</dt>
+{% for editor in editors %}
+<dd>{{ editor.name }}
+{% if editor.role %}
+({{ editor.role }})
+{% endif %}
+</dd>
+{% endfor %}
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endwith %}
+{% endblock %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">
