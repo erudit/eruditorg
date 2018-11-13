@@ -970,6 +970,7 @@ class Article(FedoraMixin):
         ))
 
     @property
+    @cache_fedora_result
     @fedora_only
     def pdf_url(self):
         if not self.publication_allowed:
