@@ -103,7 +103,7 @@
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
             </span>
-            {% if journal.peer_review_process %}({{ journal.peer_review_process }}){% endif %}
+            {% if journal.information.peer_review_process %}({{ journal.information.get_peer_review_process_display }}){% endif %}</dd>
           </dd>
 
           <dt>{% trans "Frais de publication (<em>APC</em>)" %}</dt>
@@ -121,14 +121,19 @@
           <dd>{% trans "Oui&nbsp;: avec" %} <a href="https://www.portico.org/" target="_blank">Portico</a></dd>
 
           {% if meta_info_issue %}
-          {% with directors=meta_info_issue.erudit_object.get_directors editors=meta_info_issue.erudit_object.get_editors %}
+          {% block directors %}
+          {% with directors=meta_info_issue.erudit_object.get_directors %}
           {% if directors %}
           <dt>{% trans "Direction" %}</dt>
           {% for issue_contributor in directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
+          {% endwith %}
+          {% endblock %}
 
+          {% block editors %}
+          {% with editors=meta_info_issue.erudit_object.get_editors %}
           {% if editors %}
           <dt>{% trans "Rédaction" %}</dt>
           {% for issue_contributor in editors %}
@@ -136,6 +141,7 @@
           {% endfor %}
           {% endif %}
           {% endwith %}
+          {% endblock %}
 
           {% if meta_info_issue.erudit_object.publishers %}
           <dt>
@@ -161,10 +167,10 @@
           {% endif %}
           {% endif %}
 
-          {% if journal.issues_per_year %}
+          {% if journal.information.frequency %}
           <dt>{% trans "Fréquence de publication" %}</dt>
           <dd>
-            {% blocktrans count issues_per_year=journal.issues_per_year %}
+            {% blocktrans count issues_per_year=journal.information.frequency %}
             {{ issues_per_year }} numéro par année
             {% plural %}
             {{ issues_per_year }} numéros par année
@@ -188,6 +194,20 @@
             {% trans "Numérique" %}
             {% endif %}
           </dd>
+
+          {% if journal.information.languages.all|length > 0 %}
+          <dt>
+            {% blocktrans count journal.languages.all|length as disciplines_count %}
+            Langue
+            {% plural %}
+            Langues
+            {% endblocktrans %}
+
+            {% for language in journal.information.languages.all %}
+            <dd>{{ language }}</dd>
+            {% endfor %}
+          </dt>
+          {% endif %}
 
           {% if journal.disciplines.all|length > 0 %}
           <dt>

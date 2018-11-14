@@ -134,10 +134,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         help_text=_("Cette revue est en accès libre?"))
     """ Defines whether the journal can be accessed by anyone """
 
-    issues_per_year = models.IntegerField(
-        null=True, blank=True, verbose_name=_('Numéros par année'))
-    """ Defines the number of issues per year """
-
     first_publication_year = models.PositiveIntegerField(
         verbose_name=_('Première année de publication'), blank=True, null=True)
     """ The first year when an issue of this journal has been published. """
@@ -973,6 +969,7 @@ class Article(FedoraMixin):
         ))
 
     @property
+    @cache_fedora_result
     @fedora_only
     def pdf_url(self):
         if not self.publication_allowed:
@@ -1302,6 +1299,12 @@ class JournalInformation(models.Model):
     contact = models.TextField(verbose_name=_('Coordonnées'), blank=True, null=True)
     partners = models.TextField(verbose_name=_('Partenaires'), blank=True, null=True)
 
+    def get_directors(self):
+        return self.contributor_set.all().filter(type='D')
+
+    def get_editors(self):
+        return self.contributor_set.all().filter(type='R')
+
     class Meta:
         verbose_name = _('Information de revue')
         verbose_name_plural = _('Informations de revue')
@@ -1321,4 +1324,4 @@ class Contributor(models.Model):
     )
     name = models.CharField(max_length=200, verbose_name=_("Prénom et nom"))
     journal_information = models.ForeignKey(JournalInformation, on_delete=models.CASCADE)
-    role = models.CharField(max_length=200, verbose_name=_("Rôle"))
+    role = models.CharField(max_length=200, verbose_name=_("Rôle"), null=True, blank=True)
