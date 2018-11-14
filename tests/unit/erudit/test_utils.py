@@ -1,6 +1,7 @@
-from erudit.utils import locale_aware_sort, get_sort_key_func, pairify, catch_and_log
+import pytest
+from erudit.utils import locale_aware_sort, get_sort_key_func, pairify, catch_and_log, qs_cache_key
 from erudit.test import needs_fr_ca
-
+from erudit.test.factories import JournalFactory, IssueFactory
 
 @needs_fr_ca
 def test_locale_aware_sort():
@@ -62,3 +63,11 @@ def test_catch_and_log(caplog):
 
     assert zerodiv() is None
     assert 'ZeroDivisionError' in caplog.text
+
+
+@pytest.mark.django_db
+def test_qs_cache_key():
+    journal = JournalFactory()
+    issues = IssueFactory.create_batch(5, journal=journal)
+    cache_key = qs_cache_key(journal.issues.all())
+    assert cache_key == "1,2,3,4,5"

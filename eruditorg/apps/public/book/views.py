@@ -18,6 +18,7 @@ from django.views.generic import (
 )
 
 from apps.public.book.toc import read_toc
+from erudit.utils import qs_cache_key
 
 
 class BookListView(TemplateView):
@@ -27,8 +28,8 @@ class BookListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['published_books_cache_key'] = ",".join(
-            [str(b.id) for b in Book.published_objects.order_by('pk').all()]
+        context['published_books_cache_key'] = qs_cache_key(
+            Book.published_objects.order_by('pk').all()
         )
 
         context['collections'] = BookCollection.objects \

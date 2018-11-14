@@ -3,6 +3,7 @@ import logging
 import re
 from itertools import islice
 from functools import wraps
+from django.db import models
 
 
 logger = logging.getLogger(__name__)
@@ -120,3 +121,18 @@ def catch_and_log(func):
             return None
 
     return wrapper
+
+
+def qs_cache_key(qs: models.QuerySet) -> str:
+    """ Build a cache key using the primary key of all the objects in the queryset
+
+    The cache key will change whenever the queryset changes. This is useful in the case where
+    you want to burst the cache whenever the children of an object changes.
+
+    :param qs: ``QuerySet`` with which the cache key will be built.
+    :returns: the cache key
+
+    """
+    if qs.count() == 0:
+        return ""
+    return ",".join([str(o.id) for o in qs.all()])
