@@ -36,7 +36,7 @@ from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
 from erudit.solr.models import get_fedora_ids
-from erudit.utils import locale_aware_sort
+from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
@@ -202,6 +202,8 @@ class JournalDetailView(
         # Fetches the JournalInformation instance associated to the current journal
         try:
             journal_info = self.object.information
+            context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
+            context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             pass
         else:

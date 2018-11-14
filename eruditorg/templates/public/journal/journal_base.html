@@ -94,7 +94,7 @@
       <section class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
 
-        {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
+        {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id directors_cache_key editors_cache_key %}
         <dl>
 
           {% if journal.type.code == 'S' %}
