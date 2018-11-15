@@ -300,11 +300,9 @@
           {% if article.issue.is_published %}
           <!-- promotional campaign -->
           <aside class="campaign">
-            <h2 class="sr-only">{% trans 'ACFAS 2019' %}</h2>
-            <a href="https://www.acfas.ca/evenements/congres/appel-propositions" target="_blank" class="campaign-sidebar">
-              <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% static 'img/banners/acfas-2019.gif' %}" class="img-responsive"/>
-              </div>
+            <h2 class="sr-only">{% trans 'Érudit célèbre ses 20 ans!' %}</h2>
+            <a href="{% url "public:20_years" %}" target="_blank" class="campaign-sidebar">
+            <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}"></div>
             </a>
           </aside>
           {% endif %}
