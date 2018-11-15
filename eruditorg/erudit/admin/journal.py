@@ -58,7 +58,7 @@ class JournalAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 ('open_access', 'paper'),
-                ('issues_per_year', 'first_publication_year', 'last_publication_year'),
+                ('first_publication_year', 'last_publication_year'),
             ),
         }),
         ('Membres', {
