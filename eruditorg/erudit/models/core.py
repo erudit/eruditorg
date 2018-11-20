@@ -123,7 +123,12 @@ class ThesisRepository(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
     name = models.CharField(max_length=200, verbose_name=_('Nom'))
     # Most of the time, same as "name", but not always...
-    solr_name = models.CharField(max_length=200, db_index=True, verbose_name=_('Nom dans Solr'))
+    solr_name = models.CharField(
+        max_length=200,
+        db_index=True,
+        verbose_name=_('Nom dans Solr'),
+        help_text=_('Saisir la valeur du champs Editeur de Solr'),
+    )
     logo = models.ImageField(verbose_name=_('Logo'), blank=True)
 
     class Meta:
