@@ -13,14 +13,16 @@ class TestSearchForm:
         form = SearchForm(data=form_data)
         assert not form.is_valid()
 
-    def test_cannot_validate_a_search_with_a_incoherent_publication_years_period(self):
+    def test_can_be_lenient_with_incoherent_publication_years_period(self):
         form_data = {
             'basic_search_term': 'test',
             'pub_year_start': 2014,
             'pub_year_end': 2012,
         }
         form = SearchForm(data=form_data)
-        assert not form.is_valid()
+        assert form.is_valid()
+        assert form.cleaned_data['pub_year_start'] == '2012'
+        assert form.cleaned_data['pub_year_end'] == '2014'
 
 
 class TestResultsFilterForm:

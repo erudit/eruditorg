@@ -198,7 +198,9 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             pass
         else:
             # We have some unhandled form validation here that we'd like to know about.
-            logger.error('search.form.invalid', extra={'stack': True})
+            logger.error('search.form.invalid', extra={
+                'stack': True, 'search_form_errors': search_form.errors.as_json(),
+                'options_form_errors': options_form.errors.as_json()})
         return HttpResponseRedirect(
             '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))
 

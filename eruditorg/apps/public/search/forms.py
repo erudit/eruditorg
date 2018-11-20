@@ -243,8 +243,10 @@ class SearchForm(forms.Form):
         # Validates publication year fields
         pub_year_start = cleaned_data.get('pub_year_start', None)
         pub_year_end = cleaned_data.get('pub_year_end', None)
+
         if pub_year_start and pub_year_end and int(pub_year_start) > int(pub_year_end):
-            self.add_error('pub_year_start', _('Cette intervalle est incorrecte'))
+            cleaned_data['pub_year_start'] = pub_year_end
+            cleaned_data['pub_year_end'] = pub_year_start
 
 
 class ResultsFilterForm(forms.Form):
