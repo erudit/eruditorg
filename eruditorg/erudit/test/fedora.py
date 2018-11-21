@@ -80,7 +80,10 @@ FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <datastream dsid="RELS-EXT" label="Relationships" mimeType="application/rdf+xml"/>
 {extra}
 </objectDatastreams>
-""" # noqa
+"""  # noqa
+
+FAKE_EMPTY_QUERY_RESULTS = """<?xml version="1.0" encoding="UTF-8"?>
+<result xmlns="http://www.fedora.info/definitions/1/0/types/"><resultList></resultList></result>"""
 
 
 class FakeResponse:
@@ -205,7 +208,10 @@ class FakeAPI(ApiFacade):
             wrapper.add_issue(issue)
 
     def get(self, url, **kwargs):
+        if url == 'objects':
+            return FakeResponse(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'), url)
         result = None
+        pid = None
         m = re.match(r"^objects/(erudit:[\w\-.]+)(/datastreams)?(.*)", url)
         if m:
             pid, datastream, subselection = m.groups()
