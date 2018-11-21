@@ -1,9 +1,12 @@
+from unittest import mock
+
 import pytest
 from django.test import Client
+from django.urls import reverse
 
+from apps.public.journal.views_compat import get_fedora_ids_from_url_kwargs
 from erudit.fedora import repository
-from erudit.test.factories import ArticleFactory
-from erudit.test.factories import IssueFactory
+from erudit.test.factories import IssueFactory, ArticleFactory
 from erudit.test.factories import JournalFactory
 
 pytestmark = pytest.mark.django_db
@@ -17,8 +20,6 @@ def test_can_redirect_to_retro_for_unknown_urls():
 
 @pytest.mark.django_db
 class TestCanRedirectToRetro:
-
-
     def test_can_redirect_to_retro_for_unknown_urls(self):
         # Setup
         url = '/fr/test/unknown'
@@ -52,13 +53,12 @@ def test_can_handle_legacy_journal_year_number_pattern():
     assert Client().get(legacy_url).status_code == 301
 
 
-def test_will_propagate_prepublication_ticket_received_in_querystring():
+def test_will_propagate_prepublication_ticket_received_in_querystring_for_issue():
     journal = JournalFactory(code="dummy")
 
     # Create a fake fedora issue for this journal
     issue_localidentifier = "{}.fake_publication".format(journal.pid)
     repository.api.register_publication(issue_localidentifier)
-
 
     legacy_url = "/revue/{journal_code}/1000/v1/n1/index.html".format(  # noqa
         journal_code=journal.code,
@@ -71,3 +71,77 @@ def test_will_propagate_prepublication_ticket_received_in_querystring():
     resp = Client().get(legacy_url, data=data)
     assert "?ticket=ticket" in resp.url
     assert resp.status_code == 301
+
+
+def test_will_propagate_prepublication_ticket_received_in_querystring_for_article():
+    article = ArticleFactory(
+        issue__volume="1", issue__number="1", issue__year=1000, issue__is_published=False
+    )
+    issue = article.issue  # type: Issue
+    journal = issue.journal  # type: Journal
+
+    legacy_url = "/revue/{journal_code}/1000/v1/n1/{article_localidentifier}.html".format(
+        journal_code=journal.code,
+        article_localidentifier=article.localidentifier
+    )
+    data = dict(id=issue.localidentifier, ticket=issue.prepublication_ticket)
+
+    resp = Client().get(legacy_url, data=data, follow=True)
+    url = resp.redirect_chain[-1][0]
+
+    expected_url = reverse('public:journal:article_detail',
+                           kwargs={'journal_code': journal.code,
+                                   'issue_slug': issue.volume_slug,
+                                   'issue_localid': issue.localidentifier,
+                                   'localid': article.localidentifier,
+                                   })
+    expected_url += "?ticket={}".format(issue.prepublication_ticket)
+    assert expected_url == url
+    assert resp.status_code == 200
+
+
+@pytest.mark.django_db
+class TestGetArticleFromUrlKwargs:
+    def test_returns_none_when_no_localid(self):
+        assert get_fedora_ids_from_url_kwargs({}) is None
+
+    def test_returns_ids_when_issue_id_provided(self):
+        fedora_ids = get_fedora_ids_from_url_kwargs({'journal_code': 'jc',
+                                                     'issue_localid': 'issue_id',
+                                                     'localid': 'article_id'})
+        assert fedora_ids == ('jc', 'issue_id', 'article_id')
+
+    def test_returns_none_when_no_issue_for_year_volume_number(self):
+        with mock.patch('apps.public.journal.views_compat.get_pids') as mock_get_pids:
+            mock_get_pids.return_value = []
+            fedora_ids = get_fedora_ids_from_url_kwargs({'journal_code': 'jc',
+                                                         'year': '2018',
+                                                         'v': '2',
+                                                         'issue_number': '1',
+                                                         'localid': 'article_id'})
+            # since we do not find the issue in the db, and it's not in fake solr
+            # nor in fake fedora, the funciton should return none
+            assert fedora_ids is None
+
+    def test_returns_ids_when_issue_found_for_year_volume_number(self):
+        journal = JournalFactory(code='jc')
+        IssueFactory(journal=journal, year='2018', volume='2', number='1',
+                     localidentifier='issue_id')
+        fedora_ids = get_fedora_ids_from_url_kwargs({'journal_code': 'jc',
+                                                     'year': '2018',
+                                                     'v': '2',
+                                                     'issue_number': '1',
+                                                     'localid': 'article_id'})
+        assert fedora_ids == ('jc', 'issue_id', 'article_id')
+
+    def test_returns_ids_when_found_in_solr(self):
+        with mock.patch('apps.public.journal.views_compat.get_fedora_ids') as mock_get_fedora_ids:
+            mock_get_fedora_ids.return_value = ('jc', 'issue_id', 'article_id')
+            fedora_ids = get_fedora_ids_from_url_kwargs({'localid': 'article_id'})
+            assert fedora_ids == ('jc', 'issue_id', 'article_id')
+
+    def test_returns_ids_when_not_found_in_solr_but_found_in_fedora(self):
+        with mock.patch('apps.public.journal.views_compat.get_pids') as mock_get_pids:
+            mock_get_pids.return_value = ['erudit:erudit.jc.issueid.000666ar']
+            fedora_ids = get_fedora_ids_from_url_kwargs({'localid': '000666ar'})
+            assert fedora_ids == ('jc', 'issueid', '000666ar')

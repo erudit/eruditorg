@@ -12,6 +12,7 @@ from erudit.test.solr import FakeSolrClient
 
 import erudit.fedora.repository
 import erudit.fedora.modelmixins
+import erudit.fedora.utils
 
 
 @pytest.fixture(autouse=True)
@@ -31,6 +32,7 @@ def mock_fedora_api(monkeypatch):
     monkeypatch.setattr(erudit.fedora.repository.repo, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.repository, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.modelmixins, 'api', mocked_api)
+    monkeypatch.setattr(erudit.fedora.utils, 'api', mocked_api)
 
 
 @pytest.fixture(autouse=True)
