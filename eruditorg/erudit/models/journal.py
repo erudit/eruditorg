@@ -3,6 +3,7 @@ import datetime as dt
 import dateutil.relativedelta as dr
 from hashlib import md5
 from functools import wraps
+import structlog
 
 from lxml import etree as et
 
@@ -45,6 +46,7 @@ from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 from .core import Collection, Publisher, Language
 
 cache = caches['fedora']
+logger = structlog.get_logger(__name__)
 
 
 class JournalType(models.Model):
@@ -399,17 +401,31 @@ class Issue(FedoraMixin, FedoraDated):
     """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
     title = models.CharField(max_length=255, null=True, blank=True)
-    """ The title of the issue """
+    """ .. note::
+
+        Will be removed in favor of a property that queries Fedora once we confirm that
+        no calls to the database are needed.
+
+    The title of the issue"""
 
     html_title = models.CharField(max_length=400, null=True, blank=True)
-    """ The title of the issue in HTML """
+    """ .. note::
+
+        Will be removed in favor of a property that queries Fedora once we confirm that
+        no calls to the database are needed.
+
+    The title of the issue in HTML """
 
     year = models.PositiveIntegerField(verbose_name=_('Année'))
     """ The publication year of the issue """
 
     publication_period = models.CharField(
         max_length=255, verbose_name=_('Période de publication'), null=True, blank=True)
-    """ The publication period of the issue """
+    """ .. deprecated:: 2.5.26
+
+        Will be removed in next version.
+
+    The publication period of the issue """
 
     volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
     """ The volume of the issue """
@@ -419,11 +435,20 @@ class Issue(FedoraMixin, FedoraDated):
 
     first_page = models.CharField(
         max_length=16, null=True, blank=True, verbose_name=_('Première page'))
-    """ The first page of the issue """
+    """ .. deprecated:: 2.5.26
 
+        Will be removed in next version.
+
+    The first page of the issue """
+
+    # deprecated: will be removed shortly
     last_page = models.CharField(
         max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
-    """ The last page of the issue """
+    """ .. deprecated:: 2.5.26
+
+        Will be removed in next version.
+
+    The last page of the issue """
 
     special_issue = models.BooleanField(
         default=False, verbose_name=_('Numéro spécial'),
@@ -651,6 +676,8 @@ class Issue(FedoraMixin, FedoraDated):
                 formatted=True
             )
 
+        logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+
         publication_period = self.publication_period if self.publication_period else str(self.year)
         number = self.number
         if self.volume and number:
@@ -678,6 +705,9 @@ class Issue(FedoraMixin, FedoraDated):
 
         if self.is_in_fedora:
             return self.erudit_object.get_volume_numbering(formatted=True)
+
+        logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+
         publication_period = self.publication_period if self.publication_period else self.year
 
         number = self.number_for_display
@@ -698,8 +728,13 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def volume_title_with_pages(self):
         """ Returns a title for the current issue using its volume, its number and its pages. """
-        first_page = self.first_page
-        last_page = self.last_page
+        if self.is_in_fedora:
+            first_page = self.erudit_object.first_page
+            last_page = self.erudit_object.last_page
+        else:
+            logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+            first_page = self.first_page
+            last_page = self.last_page
 
         if first_page and last_page and (first_page != '0' and first_page != last_page):
             return _('{title}, p. {first_page}-{last_page}').format(
