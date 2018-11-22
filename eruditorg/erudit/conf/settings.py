@@ -57,14 +57,6 @@ DEFAULT_JOURNAL_PROVIDERS = {
             'localidentifier': 'erudit',
         },
     ],
-    'oai': [
-        {
-            'collection_title': 'Persée',
-            'collection_code': 'persee',
-            'endpoint': 'http://oai.persee.fr/oai',
-            'issue_metadataprefix': 'persee_mets',
-        },
-    ],
 }
 JOURNAL_PROVIDERS = getattr(settings, 'ERUDIT_JOURNAL_PROVIDERS', DEFAULT_JOURNAL_PROVIDERS)
 

@@ -400,13 +400,6 @@ class TestIssue:
         with pytest.raises(Issue.DoesNotExist):
             Issue.from_fedora_ids(journal.code, 'dummy123')
 
-    def test_support_persee_solr_ids(self):
-        # Issue IDs in solr are prefixed differently than IDs in our django DB. Make sure that
-        # we support them.
-        issue = IssueFactory(localidentifier='num-foobar')
-        result = Issue.from_fedora_ids('whatever', 'oai:persee:issue/foobar')
-        assert result.id == issue.id
-
 
 class TestArticle:
     def test_properties(self):

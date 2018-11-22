@@ -25,7 +25,6 @@ from PIL import Image
 from requests.exceptions import ConnectionError
 
 from ..abstract_models import FedoraDated
-from ..abstract_models import OAIDated
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import ArticleDigitalObject
@@ -82,7 +81,7 @@ class JournalType(models.Model):
         return self.name
 
 
-class Journal(FedoraMixin, FedoraDated, OAIDated):
+class Journal(FedoraMixin, FedoraDated):
     """ The main Journal model.
 
     A journal is a collection of issues. It should be associated with a collection: Érudit, Persée,
@@ -393,7 +392,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.type.code == JournalType.CODE_CULTURAL
 
 
-class Issue(FedoraMixin, FedoraDated, OAIDated):
+class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal. """
 
     journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'))
@@ -522,10 +521,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """
         if not localidentifier:
             raise Issue.DoesNotExist()
-        # special case: Persée issue ids that come from solr are prefixed. differently in our DB
-        #               Mangle accordingly before querying.
-        if localidentifier.startswith('oai:persee:issue/'):
-            localidentifier = 'num-' + localidentifier[len('oai:persee:issue/'):]
         try:
             return Issue.objects.get(localidentifier=localidentifier)
         except Issue.DoesNotExist:
