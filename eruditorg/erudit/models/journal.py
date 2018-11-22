@@ -450,17 +450,6 @@ class Issue(FedoraMixin, FedoraDated):
 
     The last page of the issue """
 
-    special_issue = models.BooleanField(
-        default=False, verbose_name=_('Numéro spécial'),
-        help_text=_("Cocher s'il s'agit d'un numéro spécial."))
-    """ Indicates if the issue is a special issue """
-
-    thematic_issue = models.BooleanField(default=False, verbose_name=_('Numéro thématique'))
-    """ Indicates if the issue is a thematic issue """
-
-    date_produced = models.DateField(null=True, blank=True, verbose_name=_('Date de production'))
-    """ The production date of the issue """
-
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
 
@@ -587,7 +576,6 @@ class Issue(FedoraMixin, FedoraDated):
         self.last_page = erudit_object.last_page
         self.title = erudit_object.theme
         self.html_title = erudit_object.html_theme
-        self.thematic_issue = erudit_object.theme is not None
         pubdate = erudit_object.publication_date
         if pubdate:
             self.date_published = dt.datetime.strptime(pubdate, '%Y-%m-%d').date()
