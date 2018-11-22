@@ -1,8 +1,6 @@
 import structlog
 import lxml.etree as et
 
-from eulfedora.util import RequestFailed
-from .repository import rest_api
 from .repository import api
 from .objects import JournalDigitalObject
 from eruditarticle.utils import remove_xml_namespaces
@@ -22,17 +20,13 @@ def get_pids(query):
         # The session token is used by the Fedora Commons repository to paginate a list of
         # results. We have to use it in order to construct the list of PIDs to import!
         session_token = session_token.text if session_token is not None else None
-        try:
-            response = rest_api.findObjects(query, chunksize=1000, session_token=session_token)
-            # Tries to fetch the PIDs by parsing the response
-            tree = et.fromstring(response.content)
-            pid_nodes = tree.findall('.//type:pid', ns_type)
-            session_token = tree.find('./type:listSession//type:token', ns_type)
-            _pids = [n.text for n in pid_nodes]
-        except RequestFailed:
-            return
-        else:
-            pids.extend(_pids)
+        response = api.findObjects(query, chunksize=1000, session_token=session_token)
+        # Tries to fetch the PIDs by parsing the response
+        tree = et.fromstring(response.content)
+        pid_nodes = tree.findall('.//type:pid', ns_type)
+        session_token = tree.find('./type:listSession//type:token', ns_type)
+        _pids = [n.text for n in pid_nodes]
+        pids.extend(_pids)
 
         remaining_pids = len(_pids) and session_token is not None
 

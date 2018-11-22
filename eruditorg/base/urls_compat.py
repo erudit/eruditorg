@@ -114,7 +114,7 @@ journal_url_patterns = [
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail_no_volume_no_number",
     ),
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<volume_number>\w+)/n/(?P<localid>[\w-]+)\.html$',  # noqa
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>\w+)/n/(?P<localid>[\w-]+)\.html$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail_volume"
     ),
