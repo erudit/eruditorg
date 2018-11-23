@@ -212,31 +212,15 @@ class Journal(FedoraMixin, FedoraDated):
     def __str__(self):
         return '{:s} [{:s}]'.format(self.name, self.code)
 
-    # Fedora-related methods and properties
-    # --
-    @property
-    def provided_by_fedora(self):
-        """ Tells if an object is in Fedora
-
-        .. deprecated:: 0.4.39
-           use :meth:`~.is_in_fedora` instead
-        """
-        # We assume that the journals provided by a Fedora endpoint have a localidentifier.
-        if self.redirect_to_external_url:
-            return False
-
-        if self.localidentifier and self.collection.localidentifier:
-            return True
-        return False
-
     def get_full_identifier(self):
-        if self.provided_by_fedora:
-            return "{}:{}.{}".format(
-                erudit_settings.FEDORA_PIDSPACE,
-                self.collection.localidentifier,
-                self.localidentifier
-            )
-        return None
+        if not self.localidentifier or not self.collection.localidentifier:
+            return None
+
+        return "{}:{}.{}".format(
+            erudit_settings.FEDORA_PIDSPACE,
+            self.collection.localidentifier,
+            self.localidentifier
+        )
 
     def get_fedora_model(self):
         return JournalDigitalObject
@@ -530,12 +514,13 @@ class Issue(FedoraMixin, FedoraDated):
         return EruditPublication
 
     def get_full_identifier(self):
-        if self.journal.provided_by_fedora and self.localidentifier:
-            return '{}.{}'.format(
-                self.journal.get_full_identifier(),
-                self.localidentifier
-            )
-        return None
+        if not self.localidentifier or not self.journal.get_full_identifier():
+            return None
+
+        return '{}.{}'.format(
+            self.journal.get_full_identifier(),
+            self.localidentifier
+        )
 
     @staticmethod
     def from_fedora_ids(journal_code, localidentifier):
@@ -894,12 +879,13 @@ class Article(FedoraMixin):
         return EruditArticle
 
     def get_full_identifier(self):
-        if self.issue.journal.provided_by_fedora:
-            return '{}.{}'.format(
-                self.issue.get_full_identifier(),
-                self.localidentifier
-            )
-        return None
+        if not self.localidentifier or not self.issue.get_full_identifier():
+            return None
+
+        return '{}.{}'.format(
+            self.issue.get_full_identifier(),
+            self.localidentifier
+        )
 
     def get_summary_node(self):
         summary_tree = self.issue.fedora_object.summary.content.node
