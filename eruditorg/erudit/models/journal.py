@@ -108,13 +108,19 @@ class Journal(FedoraMixin, FedoraDated):
 
     issn_print = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('ISSN imprimé'))
-    """ The print ISSN of the journal """
+    """ .. warning:: Not imported.
+
+    The print ISSN of the journal """
 
     issn_web = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('ISSN web'))
-    """ The web ISSN of the journal """
+    """ .. warning:: Not imported.
+
+    The web ISSN of the journal """
 
     subtitle = models.CharField(max_length=255, null=True, blank=True)
-    """ The subtitle of the journal """
+    """ .. warning:: Not imported
+
+    The subtitle of the journal """
 
     localidentifier = models.CharField(
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
@@ -123,12 +129,19 @@ class Journal(FedoraMixin, FedoraDated):
 
     publishers = models.ManyToManyField(
         Publisher, related_name='journals', blank=True, verbose_name=_('Éditeurs'))
-    """ The publishers of the journal """
+    """ .. warning:: Not imported.
+
+        The publishers stored in this field are only displayed on the PDF cover page.
+        Everywhere else, the publishers are fetched from the ``erudit_object``.
+
+    The publishers of the journal """
 
     paper = models.NullBooleanField(
         default=None, verbose_name=_('Papier'),
         help_text=_('Est publiée également en version papier?'))
-    """ Defines whether this Journal is printed in paper or not """
+    """ .. warning:: Not imported.
+
+    Defines whether this Journal is printed in paper or not """
 
     open_access = models.BooleanField(
         default=False, verbose_name=_('Libre accès'),
