@@ -394,7 +394,7 @@ class Issue(FedoraMixin, FedoraDated):
     journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'))
     """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
-    title = models.CharField(max_length=255, null=True, blank=True)
+    _title = models.CharField(max_length=255, null=True, blank=True)
     """ .. note::
 
         Will be removed in favor of a property that queries Fedora once we confirm that
@@ -402,13 +402,35 @@ class Issue(FedoraMixin, FedoraDated):
 
     The title of the issue"""
 
-    html_title = models.CharField(max_length=400, null=True, blank=True)
+    @property
+    def title(self):
+        if self.is_in_fedora:
+            return self.erudit_object.theme
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        self._title = value
+
+    _html_title = models.CharField(max_length=400, null=True, blank=True)
     """ .. note::
 
         Will be removed in favor of a property that queries Fedora once we confirm that
         no calls to the database are needed.
 
     The title of the issue in HTML """
+
+    @property
+    def html_title(self):
+        if self.is_in_fedora:
+            return self.erudit_object.html_theme
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        return self._title
+
+    @html_title.setter
+    def html_title(self, value):
+        self._html_title = value
 
     year = models.PositiveIntegerField(verbose_name=_('Année'))
     """ The publication year of the issue """
@@ -427,7 +449,7 @@ class Issue(FedoraMixin, FedoraDated):
     number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Numéro'))
     """ The number of the issue """
 
-    first_page = models.CharField(
+    _first_page = models.CharField(
         max_length=16, null=True, blank=True, verbose_name=_('Première page'))
     """ .. deprecated:: 2.5.26
 
@@ -435,14 +457,34 @@ class Issue(FedoraMixin, FedoraDated):
 
     The first page of the issue """
 
+    @property
+    def first_page(self):
+        if self.is_in_fedora:
+            return self.erudit_object.first_page
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+
+    @first_page.setter
+    def first_page(self, value):
+        self._first_page = value
+
     # deprecated: will be removed shortly
-    last_page = models.CharField(
+    _last_page = models.CharField(
         max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
     """ .. deprecated:: 2.5.26
 
         Will be removed in next version.
 
     The last page of the issue """
+
+    @property
+    def last_page(self):
+        if self.is_in_fedora:
+            return self.erudit_object.last_page
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+
+    @last_page.setter
+    def last_page(self, value):
+        self._last_page = value
 
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
