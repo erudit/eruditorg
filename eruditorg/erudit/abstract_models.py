@@ -16,15 +16,3 @@ class FedoraDated(models.Model):
 
     class Meta:
         abstract = True
-
-
-class OAIDated(models.Model):
-    """ Provides a datestamp for OAI-related models.
-
-    Note that these fields do not used the auto_now_add/auto_now attributes. So these values should
-    be set manually.
-    """
-    oai_datestamp = models.DateTimeField(verbose_name=_('Datestamp OAI'), blank=True, null=True)
-
-    class Meta:
-        abstract = True

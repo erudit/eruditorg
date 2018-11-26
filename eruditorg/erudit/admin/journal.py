@@ -46,7 +46,6 @@ class JournalAdmin(admin.ModelAdmin):
                 ('is_new',),
                 ('previous_journal', 'next_journal', ),
                 ('issn_print', 'issn_web', ),
-                ('website_url', ),
                 ('external_url', 'redirect_to_external_url'),
             ),
         }),

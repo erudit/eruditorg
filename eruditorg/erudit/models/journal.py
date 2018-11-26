@@ -3,6 +3,7 @@ import datetime as dt
 import dateutil.relativedelta as dr
 from hashlib import md5
 from functools import wraps
+import structlog
 
 from lxml import etree as et
 
@@ -25,7 +26,6 @@ from PIL import Image
 from requests.exceptions import ConnectionError
 
 from ..abstract_models import FedoraDated
-from ..abstract_models import OAIDated
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import ArticleDigitalObject
@@ -46,6 +46,7 @@ from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 from .core import Collection, Publisher, Language
 
 cache = caches['fedora']
+logger = structlog.get_logger(__name__)
 
 
 class JournalType(models.Model):
@@ -82,7 +83,7 @@ class JournalType(models.Model):
         return self.name
 
 
-class Journal(FedoraMixin, FedoraDated, OAIDated):
+class Journal(FedoraMixin, FedoraDated):
     """ The main Journal model.
 
     A journal is a collection of issues. It should be associated with a collection: Érudit, Persée,
@@ -107,13 +108,19 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     issn_print = models.CharField(
         max_length=255, null=True, blank=True, verbose_name=_('ISSN imprimé'))
-    """ The print ISSN of the journal """
+    """ .. warning:: Not imported.
+
+    The print ISSN of the journal """
 
     issn_web = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('ISSN web'))
-    """ The web ISSN of the journal """
+    """ .. warning:: Not imported.
+
+    The web ISSN of the journal """
 
     subtitle = models.CharField(max_length=255, null=True, blank=True)
-    """ The subtitle of the journal """
+    """ .. warning:: Not imported
+
+    The subtitle of the journal """
 
     localidentifier = models.CharField(
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
@@ -122,12 +129,19 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     publishers = models.ManyToManyField(
         Publisher, related_name='journals', blank=True, verbose_name=_('Éditeurs'))
-    """ The publishers of the journal """
+    """ .. warning:: Not imported.
+
+        The publishers stored in this field are only displayed on the PDF cover page.
+        Everywhere else, the publishers are fetched from the ``erudit_object``.
+
+    The publishers of the journal """
 
     paper = models.NullBooleanField(
         default=None, verbose_name=_('Papier'),
         help_text=_('Est publiée également en version papier?'))
-    """ Defines whether this Journal is printed in paper or not """
+    """ .. warning:: Not imported.
+
+    Defines whether this Journal is printed in paper or not """
 
     open_access = models.BooleanField(
         default=False, verbose_name=_('Libre accès'),
@@ -184,9 +198,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         'Journal', verbose_name=_('Revue précédente'), blank=True, null=True, related_name='+')
     """ The journal that precedes the current journal if any. """
 
-    website_url = models.URLField(verbose_name=_('Site web'), blank=True, null=True)
-    """ The website URL of the journal if any. """
-
     objects = models.Manager()
     internal_objects = InternalJournalManager()
     legacy_objects = LegacyJournalManager()
@@ -201,31 +212,15 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def __str__(self):
         return '{:s} [{:s}]'.format(self.name, self.code)
 
-    # Fedora-related methods and properties
-    # --
-    @property
-    def provided_by_fedora(self):
-        """ Tells if an object is in Fedora
-
-        .. deprecated:: 0.4.39
-           use :meth:`~.is_in_fedora` instead
-        """
-        # We assume that the journals provided by a Fedora endpoint have a localidentifier.
-        if self.redirect_to_external_url:
-            return False
-
-        if self.localidentifier and self.collection.localidentifier:
-            return True
-        return False
-
     def get_full_identifier(self):
-        if self.provided_by_fedora:
-            return "{}:{}.{}".format(
-                erudit_settings.FEDORA_PIDSPACE,
-                self.collection.localidentifier,
-                self.localidentifier
-            )
-        return None
+        if not self.localidentifier or not self.collection.localidentifier:
+            return None
+
+        return "{}:{}.{}".format(
+            erudit_settings.FEDORA_PIDSPACE,
+            self.collection.localidentifier,
+            self.localidentifier
+        )
 
     def get_fedora_model(self):
         return JournalDigitalObject
@@ -393,24 +388,60 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.type.code == JournalType.CODE_CULTURAL
 
 
-class Issue(FedoraMixin, FedoraDated, OAIDated):
+class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal. """
 
     journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'))
     """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
-    title = models.CharField(max_length=255, null=True, blank=True)
-    """ The title of the issue """
+    _title = models.CharField(max_length=255, null=True, blank=True)
+    """ .. note::
 
-    html_title = models.CharField(max_length=400, null=True, blank=True)
-    """ The title of the issue in HTML """
+        Will be removed in favor of a property that queries Fedora once we confirm that
+        no calls to the database are needed.
+
+    The title of the issue"""
+
+    @property
+    def title(self):
+        if self.is_in_fedora:
+            return self.erudit_object.theme
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        self._title = value
+
+    _html_title = models.CharField(max_length=400, null=True, blank=True)
+    """ .. note::
+
+        Will be removed in favor of a property that queries Fedora once we confirm that
+        no calls to the database are needed.
+
+    The title of the issue in HTML """
+
+    @property
+    def html_title(self):
+        if self.is_in_fedora:
+            return self.erudit_object.html_theme
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        return self._title
+
+    @html_title.setter
+    def html_title(self, value):
+        self._html_title = value
 
     year = models.PositiveIntegerField(verbose_name=_('Année'))
     """ The publication year of the issue """
 
     publication_period = models.CharField(
         max_length=255, verbose_name=_('Période de publication'), null=True, blank=True)
-    """ The publication period of the issue """
+    """ .. deprecated:: 2.5.26
+
+        Will be removed in next version.
+
+    The publication period of the issue """
 
     volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
     """ The volume of the issue """
@@ -418,24 +449,42 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Numéro'))
     """ The number of the issue """
 
-    first_page = models.CharField(
+    _first_page = models.CharField(
         max_length=16, null=True, blank=True, verbose_name=_('Première page'))
-    """ The first page of the issue """
+    """ .. deprecated:: 2.5.26
 
-    last_page = models.CharField(
+        Will be removed in next version.
+
+    The first page of the issue """
+
+    @property
+    def first_page(self):
+        if self.is_in_fedora:
+            return self.erudit_object.first_page
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+
+    @first_page.setter
+    def first_page(self, value):
+        self._first_page = value
+
+    # deprecated: will be removed shortly
+    _last_page = models.CharField(
         max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
-    """ The last page of the issue """
+    """ .. deprecated:: 2.5.26
 
-    special_issue = models.BooleanField(
-        default=False, verbose_name=_('Numéro spécial'),
-        help_text=_("Cocher s'il s'agit d'un numéro spécial."))
-    """ Indicates if the issue is a special issue """
+        Will be removed in next version.
 
-    thematic_issue = models.BooleanField(default=False, verbose_name=_('Numéro thématique'))
-    """ Indicates if the issue is a thematic issue """
+    The last page of the issue """
 
-    date_produced = models.DateField(null=True, blank=True, verbose_name=_('Date de production'))
-    """ The production date of the issue """
+    @property
+    def last_page(self):
+        if self.is_in_fedora:
+            return self.erudit_object.last_page
+        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+
+    @last_page.setter
+    def last_page(self, value):
+        self._last_page = value
 
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
@@ -507,12 +556,13 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return EruditPublication
 
     def get_full_identifier(self):
-        if self.journal.provided_by_fedora and self.localidentifier:
-            return '{}.{}'.format(
-                self.journal.get_full_identifier(),
-                self.localidentifier
-            )
-        return None
+        if not self.localidentifier or not self.journal.get_full_identifier():
+            return None
+
+        return '{}.{}'.format(
+            self.journal.get_full_identifier(),
+            self.localidentifier
+        )
 
     @staticmethod
     def from_fedora_ids(journal_code, localidentifier):
@@ -522,10 +572,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """
         if not localidentifier:
             raise Issue.DoesNotExist()
-        # special case: Persée issue ids that come from solr are prefixed. differently in our DB
-        #               Mangle accordingly before querying.
-        if localidentifier.startswith('oai:persee:issue/'):
-            localidentifier = 'num-' + localidentifier[len('oai:persee:issue/'):]
         try:
             return Issue.objects.get(localidentifier=localidentifier)
         except Issue.DoesNotExist:
@@ -567,7 +613,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         self.last_page = erudit_object.last_page
         self.title = erudit_object.theme
         self.html_title = erudit_object.html_theme
-        self.thematic_issue = erudit_object.theme is not None
         pubdate = erudit_object.publication_date
         if pubdate:
             self.date_published = dt.datetime.strptime(pubdate, '%Y-%m-%d').date()
@@ -656,6 +701,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 formatted=True
             )
 
+        logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+
         publication_period = self.publication_period if self.publication_period else str(self.year)
         number = self.number
         if self.volume and number:
@@ -683,6 +730,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
         if self.is_in_fedora:
             return self.erudit_object.get_volume_numbering(formatted=True)
+
+        logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+
         publication_period = self.publication_period if self.publication_period else self.year
 
         number = self.number_for_display
@@ -703,8 +753,13 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     @property
     def volume_title_with_pages(self):
         """ Returns a title for the current issue using its volume, its number and its pages. """
-        first_page = self.first_page
-        last_page = self.last_page
+        if self.is_in_fedora:
+            first_page = self.erudit_object.first_page
+            last_page = self.erudit_object.last_page
+        else:
+            logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+            first_page = self.first_page
+            last_page = self.last_page
 
         if first_page and last_page and (first_page != '0' and first_page != last_page):
             return _('{title}, p. {first_page}-{last_page}').format(
@@ -866,12 +921,13 @@ class Article(FedoraMixin):
         return EruditArticle
 
     def get_full_identifier(self):
-        if self.issue.journal.provided_by_fedora:
-            return '{}.{}'.format(
-                self.issue.get_full_identifier(),
-                self.localidentifier
-            )
-        return None
+        if not self.localidentifier or not self.issue.get_full_identifier():
+            return None
+
+        return '{}.{}'.format(
+            self.issue.get_full_identifier(),
+            self.localidentifier
+        )
 
     def get_summary_node(self):
         summary_tree = self.issue.fedora_object.summary.content.node

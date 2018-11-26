@@ -100,12 +100,6 @@ class TestJournal:
         assert j1.last_issue == i1
         assert j2.last_issue == i2
 
-    def test_knows_if_it_is_provided_by_fedora(self):
-        journal = JournalFactory(localidentifier='dummy139')
-        assert journal.provided_by_fedora
-        journal = JournalFactory(localidentifier=None)
-        assert not journal.provided_by_fedora
-
     def test_can_return_its_letter_prefix(self):
         journal_1 = JournalFactory.create(name='Test')
         assert journal_1.letter_prefix == 'T'
@@ -399,13 +393,6 @@ class TestIssue:
         journal = JournalFactory()
         with pytest.raises(Issue.DoesNotExist):
             Issue.from_fedora_ids(journal.code, 'dummy123')
-
-    def test_support_persee_solr_ids(self):
-        # Issue IDs in solr are prefixed differently than IDs in our django DB. Make sure that
-        # we support them.
-        issue = IssueFactory(localidentifier='num-foobar')
-        result = Issue.from_fedora_ids('whatever', 'oai:persee:issue/foobar')
-        assert result.id == issue.id
 
 
 class TestArticle:
