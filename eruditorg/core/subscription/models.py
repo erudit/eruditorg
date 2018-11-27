@@ -271,7 +271,7 @@ class JournalManagementSubscription(AbstractSubscription):
         return JournalManagementSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
-    def subscribe_email(self, email, firstname=None, lastname=None):
+    def subscribe_email(self, email, first_name=None, last_name=None):
         """ Create a JournalAccessSubscription for the given email
 
         Subscribe an email to the journal related to this
@@ -285,33 +285,28 @@ class JournalManagementSubscription(AbstractSubscription):
         :param last_name: last name of the user. Only used if the user is created.
         """
 
-        User = get_user_model()
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            user = User(email=email, username=email)
-            if firstname:
-                user.first_name = firstname
-            if lastname:
-                user.last_name = lastname
-            user.save()
+        user, created = get_user_model().objects.get_or_create(
+            email=email,
+            defaults={
+                "username": email,
+                "first_name": first_name or "",
+                "last_name": last_name or ""
+            }
+        )
+
+        if created:
             logger.info("user.created", user=user.username)
-        finally:
-            try:
-                JournalAccessSubscription.objects.get(
-                    journal_management_subscription=self, user=user
-                )
-            except JournalAccessSubscription.DoesNotExist:
-                subscription = JournalAccessSubscription(
-                    journal_management_subscription=self, user=user
-                )
-                subscription.save()
-                subscription.journals.add(self.journal)
-                subscription.save()
-                logger.info(
-                    "subscription.created",
-                    user=user.username, journal=self.journal.code, plan=self.pk
-                )
+
+        subscription, created = JournalAccessSubscription.objects.get_or_create(
+            journal_management_subscription=self, user=user
+        )
+
+        if created:
+            subscription.journals.add(self.journal)
+            logger.info(
+                "subscription.created",
+                user=user.username, journal=self.journal.code, plan=self.pk
+            )
 
     def get_pending_subscriptions(self):
         return AccountActionToken.pending_objects.get_for_object(self)

@@ -265,7 +265,7 @@ class TestJournalManagementSubscription:
     def test_can_subscribe_email(self, email, firstname, lastname):
         plan = JournalManagementPlanFactory(is_unlimited=True)
         subscription = JournalManagementSubscriptionFactory.create(plan=plan)
-        subscription.subscribe_email(email, firstname, lastname)
+        subscription.subscribe_email(email, first_name=firstname, last_name=lastname)
 
         assert JournalAccessSubscription.objects.filter(
             user__first_name=firstname if firstname else "",
