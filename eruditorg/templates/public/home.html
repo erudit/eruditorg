@@ -94,11 +94,11 @@
           <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
           {% if issue.has_coverpage %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive  home-issues__img">
+            <img src="{% url 'issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive  home-issues__img">
           </a>
           {% else %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
+            <img src="{% url 'journal_logo' issue.journal.code %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
           </a>
           {% endif %}
           <h3>
