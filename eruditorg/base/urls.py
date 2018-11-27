@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
 from django_js_reverse import views as js_reverse_views
 
+from apps.public.journal.views import JournalRawLogoView, IssueRawCoverpageView
 from . import sitemaps
 from . import urls_compat
 from . import views
@@ -34,6 +35,8 @@ urlpatterns = [
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
     # Canonical URLS (see #1934)
     url(r'^revues/', views.canonical_journal_urls_view, name='canonical_journal_urls'),
+    url(r'^static2/(?P<code>[\w-]+)/logo/', JournalRawLogoView.as_view(), name='journal_logo'),
+    url(r'^static2/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<localidentifier>[\w-]+)/logo/', IssueRawCoverpageView.as_view(), name="issue_coverpage"),  # noqa
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 ]
