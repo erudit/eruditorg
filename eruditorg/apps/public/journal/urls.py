@@ -16,17 +16,14 @@ urlpatterns = [
     # Journal URLs
     url(_(r'^revues/(?P<code>[\w-]+)/'), include([
         url(r'^$', views.JournalDetailView.as_view(), name='journal_detail'),
-        # Deprecated, please use the view in base/urls instead
         url(_(r'^logo.jpg$'), views.JournalRawLogoView.as_view(), name='journal_logo'),
         url(_(r'^auteurs/$'), views.JournalAuthorsListView.as_view(), name='journal_authors_list'),
         url(r'^rss\.xml$', feeds.LatestJournalArticlesFeed(), name='journal_articles_rss'),
     ])),
 
     # Issue URLs
-
     url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<localidentifier>[\w-]+)/'), include([  # noqa
         url(r'^$', views.IssueDetailView.as_view(), name='issue_detail'),
-        # Deprecated, please use the view in base/urls instead
         url(_(r'^logo.jpg$'), views.IssueRawCoverpageView.as_view(), name='issue_coverpage'),
     ])),
 
