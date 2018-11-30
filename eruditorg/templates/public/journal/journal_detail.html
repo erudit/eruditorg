@@ -223,6 +223,16 @@
         {{ journal_info.subscriptions|safe }}
       </section>
       {% endif %}
+
+      {% if journal_info.instruction_for_authors %}
+      <hr/>
+      <section class="journal-info-block">
+        <h2 class="sr-only">{% trans "Instruction pour les auteurs" %}</h2>
+        {{ journal_info.instruction_for_authors|safe }}
+      </section>
+
+      {% endif %}
+
     </section>
 
     {% if issues %}
