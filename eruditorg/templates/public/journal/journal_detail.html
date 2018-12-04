@@ -224,15 +224,6 @@
       </section>
       {% endif %}
 
-      {% if journal_info.instruction_for_authors %}
-      <hr/>
-      <section class="journal-info-block">
-        <h2 class="sr-only">{% trans "Instruction pour les auteurs" %}</h2>
-        {{ journal_info.instruction_for_authors|safe }}
-      </section>
-
-      {% endif %}
-
     </section>
 
     {% if issues %}
@@ -276,7 +267,7 @@
     </section>
     {% endif %}
 
-    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}
+    {% if journal_info.editorial_policy or journal_info.publishing_ethics or journal_info.instruction_for_authors %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-editorial_policy">
       <h2 class="sr-only">{% trans "Politique éditoriale et éthique" %}</h2>
       {% if journal_info.editorial_policy %}
@@ -285,6 +276,14 @@
 
       {% if journal_info.publishing_ethics %}
       {{ journal_info.publishing_ethics|safe }}
+      {% endif %}
+
+      {% if journal_info.instruction_for_authors %}
+      <hr/>
+      <section class="journal-info-block">
+        <h2 class="sr-only">{% trans "Instruction pour les auteurs" %}</h2>
+        {{ journal_info.instruction_for_authors|safe }}
+      </section>
       {% endif %}
     </section>
     {% endif %}
