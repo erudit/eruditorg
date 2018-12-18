@@ -344,6 +344,24 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         response = client.get(url)
         self.assertEqual(response.status_code, 302)
 
+    def test_filename_special_characters_are_urlencoded(self):
+        with open(os.path.join(FIXTURE_ROOT, 'pixel#.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel#.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        user = UserFactory()
+        AuthorizationFactory.create(
+            user=user, authorization_codename=AC.can_review_issuesubmission.codename)
+        self.journal.members.add(user)
+
+        client = Client(logged_user=user)
+        self.issue_submission.last_files_version.submissions.add(rfile)
+        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
+        response = client.get(url)
+        self.assertTrue("pixel%23" in response.url)
+
 
 class TestIssueSubmissionSubmitView(BaseEditorTestCase):
     def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
