@@ -1,5 +1,6 @@
 import datetime as dt
 import structlog
+from urllib.parse import quote_plus
 
 from django.conf import settings
 from django.contrib import messages
@@ -355,7 +356,8 @@ class IssueSubmissionAttachmentView(
         path = self.object.path
         if path.startswith(settings.MEDIA_ROOT):
             path = path[len(settings.MEDIA_ROOT):]
-        return HttpResponseRedirect(settings.MEDIA_URL + path)
+        redirect_to = quote_plus(settings.MEDIA_URL + path)
+        return HttpResponseRedirect(redirect_to)
 
     def has_permission(self):
         obj = self.get_permission_object()

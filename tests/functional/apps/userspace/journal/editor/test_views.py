@@ -1,3 +1,4 @@
+import pytest
 import os
 import unittest.mock
 
@@ -16,6 +17,7 @@ from resumable_uploads.models import ResumableFile
 
 from base.test.factories import UserFactory
 from base.test.testcases import Client, extract_post_args
+from core.editor.test.factories import IssueSubmissionFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
@@ -29,16 +31,28 @@ from apps.userspace.journal.editor.views import IssueSubmissionRefuseView
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
-class TestIssueSubmissionDetailView(BaseEditorTestCase):
+@pytest.fixture()
+def user_can_edit_journal():
+    user = UserFactory()
+    journal = JournalFactory(members=[user])
+    AuthorizationFactory.create_can_manage_issue_subscriptions(user, journal)
+    return user, journal
+
+
+@pytest.mark.django_db
+class TestIssueSubmissionDetailView:
     def test_includes_the_status_tracks_into_the_context(self):
         # Setup
-        self.issue_submission.submit()
-        self.issue_submission.refuse()
-        self.issue_submission.save()
+        journal = JournalFactory(publishers=[PublisherFactory()], members=[UserFactory()])
+        issue_submission = IssueSubmissionFactory(journal=journal, volume="2", contact=journal.members.first())
+
+        issue_submission.submit()
+        issue_submission.refuse()
+        issue_submission.save()
         user = UserFactory(is_superuser=True)
         client = Client(logged_user=user)
         url = reverse(
-            'userspace:journal:editor:detail', args=(self.journal.pk, self.issue_submission.pk))
+            'userspace:journal:editor:detail', args=(journal.pk, issue_submission.pk))
         # Run
         response = client.get(url)
         # Check
@@ -48,60 +62,59 @@ class TestIssueSubmissionDetailView(BaseEditorTestCase):
         assert response.context['status_tracks'][1].status == 'D'
 
 
-class TestIssueSubmissionView(BaseEditorTestCase):
+@pytest.mark.django_db
+class TestIssueSubmissionView:
     def test_editor_views_are_login_protected(self):
         """ Editor views should all be login protected """
 
+        issue_submission = IssueSubmissionFactory()
+
         client = Client()
-        result = client.get(reverse('userspace:journal:editor:add', args=(self.journal.pk, )))
-        self.assertIsInstance(result, HttpResponseRedirect)
+        result = client.get(reverse('userspace:journal:editor:add', args=(issue_submission.journal.pk, )))
+        assert isinstance(result, HttpResponseRedirect)
 
         result = client.get(
-            reverse('userspace:journal:editor:issues', args=(self.journal.pk, )))
-        self.assertIsInstance(result, HttpResponseRedirect)
+            reverse('userspace:journal:editor:issues', args=(issue_submission.journal.pk, )))
+        assert isinstance(result, HttpResponseRedirect)
 
         result = client.get(
             reverse('userspace:journal:editor:update', kwargs={
-                'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
+                'journal_pk': issue_submission.journal.pk, 'pk': issue_submission.pk})
         )
-        self.assertIsInstance(result, HttpResponseRedirect)
+        assert isinstance(result, HttpResponseRedirect)
 
     def test_user_filtered_issuesubmissions(self):
         """ A user should only be able to see the editor's submissions
             related to his journal's membership.
         """
-        self.other_user = UserFactory()
-        self.other_publisher = PublisherFactory()
-        self.other_journal = JournalFactory(publishers=[self.other_publisher])
-        self.other_journal.members.add(self.other_user)
-        self.other_journal.save()
-        self.other_issue_submission = IssueSubmission.objects.create(
-            journal=self.other_journal,
-            volume="2",
-            contact=self.user,
-        )
 
-        client = Client(logged_user=self.user)
+        issue_submission = IssueSubmissionFactory()
+
+        client = Client(logged_user=UserFactory())
 
         response = client.get(
             reverse(
                 'userspace:journal:editor:update',
-                kwargs={'journal_pk': self.other_journal.pk, 'pk': self.other_issue_submission.pk}
+                kwargs={'journal_pk': issue_submission.journal.pk, 'pk': issue_submission.pk}
             )
         )
 
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
-    def test_submit_changes_to_issue(self):
+    def test_can_submit_changes_to_issue(self):
         """ Submitting changes to an issue doesn't crash.
 
             Previously, we would crash due to a bad reverse match.
         """
-        client = Client(logged_user=self.user)
+        user = UserFactory()
+        issue_submission = IssueSubmissionFactory(journal__members=[user])
+        AuthorizationFactory.create_can_manage_issue_subscriptions(user, issue_submission.journal)
+        client = Client(logged_user=user)
         url = reverse(
             'userspace:journal:editor:update',
-            kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
+            kwargs={'journal_pk': issue_submission.journal.pk, 'pk': issue_submission.pk}
         )
+
         response = client.get(url)
         root = etree.HTML(response.content)
         args = extract_post_args(root)
@@ -109,19 +122,18 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         args['year'] = '2016'
         args['number'] = '01'
         response = client.post(url, data=args)
-        expected_url = reverse('userspace:journal:editor:detail',
-                               args=(self.journal.pk, self.issue_submission.pk))
-        self.assertRedirects(response, expected_url)
+        assert response.status_code == 200
 
     def test_logged_add_journalsubmission(self):
         """ Logged users should be able to see journal submissions """
-        client = Client(logged_user=self.user)
+        user = UserFactory()
+        journal = JournalFactory(members=[user])
+        AuthorizationFactory.create_can_manage_issue_subscriptions(user, journal)
+        client = Client(logged_user=user)
 
         result = client.get(
-            reverse('userspace:journal:editor:add', kwargs={'journal_pk': self.journal.pk}))
-        self.assertIsInstance(
-            result, TemplateResponse
-        )
+            reverse('userspace:journal:editor:add', kwargs={'journal_pk': journal.pk}))
+        assert isinstance(result, TemplateResponse)
 
     def test_cannot_upload_while_adding(self):
         """ Test upload widget absence in creation
@@ -129,158 +141,146 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         We need to save it before the IssueSubmission before
         uploading so that file chunks are associated with the issue
         submission."""
-        client = Client(logged_user=self.user)
-        response = client.get(
-            reverse('userspace:journal:editor:add', kwargs={'journal_pk': self.journal.pk}))
-        root = etree.HTML(response.content)
-        self.assertFalse(
-            root.cssselect('#id_submissions'),
-            "The rendered template should not contain an id_submissions"  # noqa
-        )
+        user = UserFactory()
+        journal = JournalFactory(members=[user])
+        AuthorizationFactory.create_can_manage_issue_subscriptions(user, journal)
 
-    def test_can_create_issuesubmission(self):
+        client = Client(logged_user=user)
+        response = client.get(
+            reverse('userspace:journal:editor:add', kwargs={'journal_pk': journal.pk}))
+        root = etree.HTML(response.content)
+        assert len(root.cssselect('#id_submissions')) == 0
+
+    def test_can_create_issuesubmission(self, user_can_edit_journal):
         """ Test that we can create an issue submission
         """
+        user, journal = user_can_edit_journal
         issue_submission_count = IssueSubmission.objects.count()
 
         data = {
-            'journal': self.journal.pk,
+            'journal': journal.pk,
             'year': '2015',
             'volume': '2',
             'number': '2',
-            'contact': self.user.pk,
+            'contact': user.pk,
             'comment': 'lorem ipsum dolor sit amet',
         }
 
-        client = Client(logged_user=self.user)
+        client = Client(logged_user=user)
 
         client.post(
-            reverse('userspace:journal:editor:add', args=(self.journal.pk, )),
+            reverse('userspace:journal:editor:add', args=(journal.pk, )),
             data
         )
 
-        self.assertEquals(
-            IssueSubmission.objects.count(),
-            issue_submission_count + 1,
-            "An issue submission should have been added"
-        )
+        assert IssueSubmission.objects.count() == issue_submission_count + 1
 
-    def test_can_upload_while_updating(self):
+    def test_can_upload_while_updating(self, user_can_edit_journal):
         """ Test upload widget presence in update
 
         The file upload widget should be present on update forms.
         Files are uploaded to an existing IssueSubmission so
         progress can be tracked.
         """
-        client = Client(logged_user=self.user)
+        user, journal = user_can_edit_journal
+        client = Client(logged_user=user)
+
+        issue_submission = IssueSubmissionFactory(journal=journal)
 
         response = client.get(
             reverse('userspace:journal:editor:update', kwargs={
-                'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
+                'journal_pk': journal.pk, 'pk': issue_submission.pk})
         )
 
         root = etree.HTML(response.content)
 
-        self.assertTrue(
-            root.cssselect('#id_submissions'),
-            "The rendered upload template should contain an id_submissions input"  # noqa
-        )
+        assert len(root.cssselect('#id_submissions')) > 0
 
-    def test_user_can_only_select_journal_contacts(self):
+    def test_user_can_only_select_journal_contacts(self, user_can_edit_journal):
         """ Test list of contacts
 
         Make sure the list contains all the contacts of the publisher
         and only that """
+        user, journal = user_can_edit_journal
+
         request = RequestFactory().get(
-            reverse('userspace:journal:editor:add'), args=(self.journal.pk, ))
-        request.user = self.user
+            reverse('userspace:journal:editor:add'), args=(journal.pk, ))
+        request.user = user
         middleware = SessionMiddleware()
         middleware.process_request(request)
         request.session.save()
-        view = IssueSubmissionCreate(request=request, journal_pk=self.journal.pk)
-        view.current_journal = self.journal
+        view = IssueSubmissionCreate(request=request, journal_pk=journal.pk)
+        view.current_journal = journal
         form = view.get_form()
 
         user_contacts = set(User.objects.filter(
-            journals=self.user.journals.all()
+            journals=user.journals.all()
         ).distinct())
 
         form_contacts = set(
             form.fields['contact'].queryset
         )
 
-        self.assertEquals(
-            user_contacts,
-            form_contacts
-        )
-
-    def test_user_can_only_list_where_he_has_journal_membership(self):
-        """ Test list of issue submissions
-
-        Make sure the list contains only issue submission link to a journal
-        with his membership"""
-        client = Client(logged_user=self.user)
-        response = client.get(
-            reverse('userspace:journal:editor:issues', args=(self.journal.pk, )), user=self.user)
-        journal_ids = [j.id for j in self.user.journals.all()]
-        issues = set(IssueSubmission.objects.filter(journal__in=journal_ids))
-        self.assertEqual(set(response.context_data['object_list']), issues)
+        assert user_contacts == form_contacts
 
     @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
     @unittest.mock.patch.object(InfluxDBClient, 'create_database')
     @unittest.mock.patch.object(InfluxDBClient, 'write_points')
     def test_can_capture_a_metric_when_a_submission_is_created(
-            self, mock_write_points, mock_list_db, mock_create_db):
+            self, mock_write_points, mock_list_db, mock_create_db, user_can_edit_journal):
         # Setup
+        user, journal = user_can_edit_journal
         test_points = []
         mock_write_points.side_effect = test_points.extend
 
         post_data = {
-            'journal': self.journal.pk,
+            'journal': journal.pk,
             'year': '2015',
             'volume': '2',
             'number': '2',
-            'contact': self.user.pk,
+            'contact': user.pk,
             'comment': 'lorem ipsum dolor sit amet',
         }
 
         request = RequestFactory().post(
-            reverse('userspace:journal:editor:add', args=(self.journal.pk, )), post_data)
-        request.user = self.user
+            reverse('userspace:journal:editor:add', args=(journal.pk, )), post_data)
+        request.user = user
         middleware = SessionMiddleware()
         middleware.process_request(request)
         request.session.save()
         MessageMiddleware().process_request(request)
-        view = IssueSubmissionCreate(request=request, journal_pk=self.journal.pk)
-        view.current_journal = self.journal
+        view = IssueSubmissionCreate(request=request, journal_pk=journal.pk)
+        view.current_journal = journal
 
         # Run
         view.post(request)
 
         # Check
         global test_points
-        self.assertEqual(len(test_points), 1)
+        assert len(test_points) == 1
         issuesubmission = IssueSubmission.objects.last()
-        self.assertEqual(
-            test_points,
-            [{
+        assert test_points == [
+            {
                 'tags': {},
                 'fields': {
-                    'author_id': self.user.pk,
+                    'author_id': user.pk,
                     'submission_id': issuesubmission.pk,
                     'num': 1,
                 },
                 'measurement': 'erudit__issuesubmission__create',
-            }])
+            }
+        ]
 
-    def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self):
+    def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self, user_can_edit_journal):
         # Setup
-        self.issue_submission.submit()
-        self.issue_submission.save()
-        client = Client(logged_user=self.user)
+        user, journal = user_can_edit_journal
+        issue_submission = IssueSubmissionFactory(journal=journal)
+        issue_submission.submit()
+        issue_submission.save()
+        client = Client(logged_user=user)
         url = reverse(
             'userspace:journal:editor:update',
-            kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
+            kwargs={'journal_pk': journal.pk, 'pk': issue_submission.pk})
         # Run
         response = client.get(url)
         # Check
@@ -343,6 +343,24 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
         self.assertEqual(response.status_code, 302)
+
+    def test_filename_special_characters_are_urlencoded(self):
+        with open(os.path.join(FIXTURE_ROOT, 'pixel#.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel#.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        user = UserFactory()
+        AuthorizationFactory.create(
+            user=user, authorization_codename=AC.can_review_issuesubmission.codename)
+        self.journal.members.add(user)
+
+        client = Client(logged_user=user)
+        self.issue_submission.last_files_version.submissions.add(rfile)
+        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
+        response = client.get(url)
+        self.assertTrue("pixel%23" in response.url)
 
 
 class TestIssueSubmissionSubmitView(BaseEditorTestCase):
