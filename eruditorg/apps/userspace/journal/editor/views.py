@@ -1,3 +1,4 @@
+import os.path
 import datetime as dt
 import structlog
 from urllib.parse import quote_plus
@@ -356,7 +357,10 @@ class IssueSubmissionAttachmentView(
         path = self.object.path
         if path.startswith(settings.MEDIA_ROOT):
             path = path[len(settings.MEDIA_ROOT):]
-        redirect_to = quote_plus(settings.MEDIA_URL + path)
+        # urlencode the filename
+        basename = os.path.basename(path)
+        escaped_basename = quote_plus(basename)
+        redirect_to = settings.MEDIA_URL + path.replace(basename, escaped_basename)
         return HttpResponseRedirect(redirect_to)
 
     def has_permission(self):
