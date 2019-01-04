@@ -141,7 +141,7 @@ def test_import_deletions():
     sub1 = RevueabonneFactory.create(
         abonneid=abonne1.abonneid,
         revueid=revue1.revueid,
-        anneeabonnement=2018)
+        anneeabonnement=2019)
 
     assert JournalAccessSubscriptionPeriod.objects.count() == 0
     call_command("import_restrictions", *[], **{})
