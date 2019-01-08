@@ -175,3 +175,22 @@ class TestRenderArticleTemplateTag(TestCase):
         # Check
         fp.close()
         self.assertTrue(ret is not None)
+
+    def test_html_tags_in_transformed_article_biblio_titles(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
+            xml = fp.read()
+        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
+        view = ArticleDetailView()
+        view.request = unittest.mock.MagicMock(return_value={})
+        view.get_context_data = unittest.mock.MagicMock(return_value={})
+        view.get_object = unittest.mock.MagicMock(return_value=ArticleFactory())
+
+        # Run the XSL transformation.
+        ret = view.render_xml_contents()
+
+        # Check that HTML tags in biblio titles are not stripped.
+        assert ret is not None
+        assert '<h3 class="titre">H3 avec balise <strong>strong</strong>\n</h3>' in ret
+        assert '<h4 class="titre">H4 avec balise <em>em</em>\n</h4>' in ret
+        assert '<h5 class="titre">H5 avec balise <small>small</small>\n</h5>' in ret

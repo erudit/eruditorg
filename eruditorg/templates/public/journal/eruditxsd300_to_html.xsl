@@ -1979,13 +1979,13 @@
   <xsl:template match="divbiblio | subdivbiblio | sssubdivbiblio">
     <xsl:choose>
       <xsl:when test="self::divbiblio">
-        <h3 class="titre"><xsl:value-of select="titre"/></h3>
+        <h3 class="titre"><xsl:apply-templates select="titre"/></h3>
       </xsl:when>
       <xsl:when test="self::subdivbiblio">
-        <h4 class="titre"><xsl:value-of select="titre"/></h4>
+        <h4 class="titre"><xsl:apply-templates select="titre"/></h4>
       </xsl:when>
       <xsl:when test="self::sssubdivbiblio">
-        <h5 class="titre"><xsl:value-of select="titre"/></h5>
+        <h5 class="titre"><xsl:apply-templates select="titre"/></h5>
       </xsl:when>
     </xsl:choose>
     <xsl:apply-templates select="*[not(self::titre)]"/>
