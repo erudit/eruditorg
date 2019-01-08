@@ -1,7 +1,7 @@
 import os.path
 import datetime as dt
 import structlog
-from urllib.parse import quote_plus
+from urllib.parse import quote
 
 from django.conf import settings
 from django.contrib import messages
@@ -359,7 +359,7 @@ class IssueSubmissionAttachmentView(
             path = path[len(settings.MEDIA_ROOT):]
         # urlencode the filename
         basename = os.path.basename(path)
-        escaped_basename = quote_plus(basename)
+        escaped_basename = quote(basename)
         redirect_to = settings.MEDIA_URL + path.replace(basename, escaped_basename)
         return HttpResponseRedirect(redirect_to)
 
