@@ -99,18 +99,3 @@ hr {
 [role="button"] {
   cursor: pointer;
 }
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  height: 7px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #fff;
-  border-radius: 3.5px;
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(#fff, 0.5);
-}
