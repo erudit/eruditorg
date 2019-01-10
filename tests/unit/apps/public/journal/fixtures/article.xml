@@ -940,6 +940,15 @@
     </grnotebio>
     <grbiblio>
       <biblio>
+        <divbiblio>
+          <titre>H3 avec balise <marquage typemarq="gras">strong</marquage></titre>
+          <subdivbiblio>
+            <titre>H4 avec balise <marquage typemarq="italique">em</marquage></titre>
+            <sssubdivbiblio>
+              <titre>H5 avec balise <marquage typemarq="taillep">small</marquage></titre>
+            </sssubdivbiblio>
+          </subdivbiblio>
+        </divbiblio>
         <refbiblio id="rb1">Bochmann, Klaus. 2001. Notre langue, votre patois, leur baragouin : stéréotypes et représentations des langues. <marquage typemarq="italique">Hermès</marquage> 30 : 93-102.</refbiblio>
         <refbiblio id="rb2">Boudreau, Annette. 1991. Les rapports que les jeunes Acadiens et Acadiennes entretiennent avec leur langue et avec la langue. <marquage typemarq="italique">Égalité</marquage> 30 : 13-37. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://www.umoncton.ca/egalite/article30.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.umoncton.ca/egalite/article30.html</liensimple></refbiblio>
         <refbiblio id="rb3">Boudreau, Annette et Françoise Gadet. 1998. Attitudes en situation minoritaire. L’exemple de l’Acadie. Dans <marquage typemarq="italique">Francophonies. Recueil d’études offert en hommage à Suzanne Lafage</marquage>, sous la direction de Ambroise Queffélec. Nice : Didier Érudition. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="http://www.unice.fr/ILF-CNRS/ofcaf/12/Boudreau.htm" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.unice.fr/ILF-CNRS/ofcaf/12/Boudreau.htm</liensimple></refbiblio>
