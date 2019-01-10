@@ -1,0 +1,98 @@
+<article schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1053699ar" typeart="autre" lang="fr" ordseq="3" idref="th1">
+    <admin>
+        <infoarticle>
+            <idpublic scheme="doi">10.7202/1053699ar</idpublic>
+            <pagination>
+                <ppage>11</ppage>
+                <dpage>16</dpage>
+            </pagination>
+        </infoarticle>
+        <revue id="raq135" lang="fr">
+            <titrerev>Recherches amérindiennes au Québec</titrerev>
+            <titrerevabr>raq</titrerevabr>
+            <idissn>0318-4137</idissn>
+            <idissnnum>1923-5151</idissnnum>
+            <directeur sexe="masculin">
+                <nompers>
+                    <prenom>Laurent</prenom>
+                    <nomfamille>Jérôme</nomfamille>
+                </nompers>
+            </directeur>
+            <redacteurchef typerc="invite" idrefs="th1" sexe="masculin">
+                <nompers>
+                    <prenom>Denis</prenom>
+                    <nomfamille>Bellemare</nomfamille>
+                </nompers>
+            </redacteurchef>
+            <redacteurchef typerc="invite" idrefs="th1" sexe="feminin">
+                <nompers>
+                    <prenom>Élisabeth</prenom>
+                    <nomfamille>Kaine</nomfamille>
+                </nompers>
+            </redacteurchef>
+            <redacteurchef typerc="regulier" sexe="feminin">
+                <fonction lang="fr">Rédactrice en chef</fonction>
+                <nompers>
+                    <prenom>Marie-Pierre</prenom>
+                    <nomfamille>Bousque</nomfamille>
+                </nompers>
+            </redacteurchef>
+        </revue>
+        <numero id="raq04104">
+            <volume>48</volume>
+            <nonumero>1</nonumero>
+            <nonumero>2</nonumero>
+            <pub>
+                <annee>2018</annee>
+            </pub>
+            <pubnum>
+                <date typedate="publication">2018-11-05</date>
+            </pubnum>
+            <grtheme id="th1">
+                <theme>Récits de savoirs partagés par l’art et la création en milieux autochtones</theme>
+            </grtheme>
+        </numero>
+        <editeur>
+            <nomorg>Recherches amérindiennes au Québec</nomorg>
+        </editeur>
+        <prodnum>
+            <nomorg>Érudit</nomorg>
+        </prodnum>
+        <diffnum>
+            <nomorg>Érudit</nomorg>
+        </diffnum>
+        <schema nom="Erudit Article" version="3.0.0" lang="fr"/>
+        <droitsauteur>Tous droits réservés © <nomorg>Recherches amérindiennes au Québec</nomorg>, 2018</droitsauteur>
+    </admin>
+    <liminaire>
+        <grtitre>
+            <titre>La pensée métisse comme méthodologie de création : organiser un chaos identitaire</titre>
+        </grtitre>
+        <grauteur>
+            <auteur id="au1">
+                <nompers>
+                    <prenom>Lydia</prenom>
+                    <nomfamille>Mestokosho-Paradis</nomfamille>
+                </nompers>
+            </auteur>
+        </grauteur>
+    </liminaire>
+    <corps>
+        <section1 id="s1n1">
+            <no>1</no>
+            <titre>Titre<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+        </section1>
+        <section1 id="s1n2">
+            <no>2</no>
+            <titre><marquage typemarq="gras">Titre gras<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi></marquage></titre>
+        </section1>
+        <section1 id="s1n3">
+            <no>3</no>
+            <titre><marquage typemarq="italique">Titre italique<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi></marquage></titre>
+        </section1>
+        <section1 id="s1n4">
+            <no>4</no>
+            <titre><marquage typemarq="petitecap">Titre petitecap<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi></marquage></titre>
+        </section1>
+    </corps>
+</article>

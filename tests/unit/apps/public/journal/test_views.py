@@ -131,21 +131,23 @@ class TestIssueDetailSummary:
 )
 class TestRenderArticleTemplateTag(TestCase):
 
-    def test_can_transform_article_xml_to_html(
-            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
-        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
+    def mock_article_detail_view(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, fixture='article.xml'):
+        """ Helper method to mock an article detail view from a given fixture."""
+        with open(FIXTURE_ROOT + '/' + fixture, mode='r') as fp:
             xml = fp.read()
         mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
-        issue = IssueFactory.create(
-            date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(issue=issue)
         view = ArticleDetailView()
         view.request = unittest.mock.MagicMock(return_value={})
-        view.get_context_data = unittest.mock.MagicMock(return_value={})
-        view.get_object = unittest.mock.MagicMock(return_value=article)
+        view.get_context_data = unittest.mock.MagicMock(return_value={'content_access_granted': True})
+        view.get_object = unittest.mock.MagicMock(return_value=ArticleFactory())
 
-        # Run
-        ret = view.render_xml_contents()
+        # Run the XSL transformation.
+        return view.render_xml_contents()
+
+    def test_can_transform_article_xml_to_html(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo)
 
         # Check
         self.assertTrue(ret is not None)
@@ -155,22 +157,12 @@ class TestRenderArticleTemplateTag(TestCase):
     def test_can_transform_article_xml_to_html_when_pdf_exists(
             self, mock_pdf, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
         # Setup
-        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
-            xml = fp.read()
         fp = open(FIXTURE_ROOT + '/article.pdf', mode='rb')
-        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
         mock_pdf.exists = True
         mock_pdf.content = fp
-        issue = IssueFactory.create(
-            journal=JournalFactory(), date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(issue=issue)
-        view = ArticleDetailView()
-        view.request = unittest.mock.MagicMock(return_value={})
-        view.get_context_data = unittest.mock.MagicMock(return_value={})
-        view.get_object = unittest.mock.MagicMock(return_value=article)
 
         # Run
-        ret = view.render_xml_contents()
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo)
 
         # Check
         fp.close()
@@ -178,19 +170,27 @@ class TestRenderArticleTemplateTag(TestCase):
 
     def test_html_tags_in_transformed_article_biblio_titles(
             self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
-        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
-            xml = fp.read()
-        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
-        view = ArticleDetailView()
-        view.request = unittest.mock.MagicMock(return_value={})
-        view.get_context_data = unittest.mock.MagicMock(return_value={})
-        view.get_object = unittest.mock.MagicMock(return_value=ArticleFactory())
-
-        # Run the XSL transformation.
-        ret = view.render_xml_contents()
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo)
 
         # Check that HTML tags in biblio titles are not stripped.
-        assert ret is not None
         assert '<h3 class="titre">H3 avec balise <strong>strong</strong>\n</h3>' in ret
         assert '<h4 class="titre">H4 avec balise <em>em</em>\n</h4>' in ret
         assert '<h5 class="titre">H5 avec balise <small>small</small>\n</h5>' in ret
+
+    def test_footnotes_in_section_titles_not_in_toc(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1053699ar.xml')
+
+        # Check that footnotes in section titles are stripped when displayed in
+        # table of content and not stripped when displayed as section titles.
+        assert '<a href="#s1n1">Titre</a>' in ret
+        assert '<h2>Titre <a href="#no1" id="re1no1" class="norenvoi hint--bottom hint--no-animate" data-hint="">[1]</a>\n</h2>' in ret
+
+        assert '<a href="#s1n2"><strong>Titre gras</strong></a>' in ret
+        assert '<h2><strong>Titre gras <a href="#no2" id="re1no2" class="norenvoi hint--bottom hint--no-animate" data-hint="">[2]</a></strong></h2>' in ret
+
+        assert '<a href="#s1n3"><em>Titre italique</em></a>' in ret
+        assert '<h2><em>Titre italique <a href="#no3" id="re1no3" class="norenvoi hint--bottom hint--no-animate" data-hint="">[3]</a></em></h2>' in ret
+
+        assert '<a href="#s1n4"><span class="petitecap">Titre petitecap</span></a>' in ret
+        assert '<h2><span class="petitecap">Titre petitecap <a href="#no4" id="re1no4" class="norenvoi hint--bottom hint--no-animate" data-hint="">[4]</a></span></h2>' in ret

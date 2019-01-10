@@ -705,22 +705,22 @@
     <xsl:choose>
       <xsl:when test="@typemarq='gras'">
         <strong>
-          <xsl:apply-templates/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
         </strong>
       </xsl:when>
       <xsl:when test="@typemarq='italique'">
         <em>
-          <xsl:apply-templates/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
         </em>
       </xsl:when>
       <xsl:when test="@typemarq='taillep'">
         <small>
-          <xsl:apply-templates/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
         </small>
       </xsl:when>
       <xsl:otherwise>
         <span class="{@typemarq}">
-          <xsl:apply-templates/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
         </span>
       </xsl:otherwise>
     </xsl:choose>
