@@ -44,8 +44,14 @@
   @include font-styles(serif);
 
   span + span {
-    display: block;
-    color: $dark-grey;
+    &:not(.petitecap) {
+      display: block;
+      color: $dark-grey;
+    }
+
+    &.petitecap {
+      display: inline-block;
+    }
   }
 }
 
