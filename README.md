@@ -24,7 +24,7 @@ instances, you can't really run this app locally if you're not part of Érudit.
 
 On Ubuntu 18.04, requirements can be installed with:
 
-    $ sudo apt-get install -y python3-venv python3-dev mariadb-server libxml2-dev libxslt1-dev zlib1g-dev git libffi-dev
+    $ sudo apt-get install -y python3-venv python3-dev mariadb-server libxml2-dev libxslt1-dev zlib1g-dev git libffi-dev libmariadbclient-dev build-essential qpdf
 
 ## Clone the repository:
 
@@ -57,8 +57,9 @@ this road is bumpy. To import a dump in mysql:
     $ gzip -dc dump.sql.gz | mysql -u root -D eruditorg
     
 To be able to restore production data, you will need to configure your mariadb 
-server to use the Barracuda file format by adding this line in your `my.cnf`:
+server to use the Barracuda file format by adding these lines in your `my.cnf`:
 
+    [mysqld]
     innodb_file_format = Barracuda 
 
 ## Creating settings_env.py
