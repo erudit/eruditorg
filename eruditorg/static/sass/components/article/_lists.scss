@@ -23,9 +23,20 @@ ul {
 
   &.tiret {
       list-style: none;
+      margin-left: 0;
 
-      li:before {
-        content: '– ';
+      & > li {
+        &:before {
+          content: '– ';
+        }
+
+        & > ul {
+          margin-left: 2em;
+
+          &.tiret {
+            margin-left: 1em;
+          }
+        }
       }
 
       .alinea {
