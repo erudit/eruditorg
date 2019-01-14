@@ -1,6 +1,6 @@
-Django>=1.11.12,<2.0
+Django>=2.0,<2.1
 -e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.30#egg=liberuditarticle
--e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.5#egg=django-resumable-uploads
+-e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.6#egg=django-resumable-uploads
 -e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 -e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
 -e git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
@@ -20,12 +20,13 @@ lxml[cssselect]>=3.5
 # dependencies for erudit-core
 
 # v1.3 supports django 1.11 and 1.10. v2.0 drops django 1.10.
-django-polymorphic>=1.3.0,<2.0  # at least 2.0.2 for django 1.11 and 2.0
-django-taggit>=0.23  # at least 0.22.2 to get django 1.11 and 2.0 support
+django-polymorphic>=2.0,<2.1
+django-taggit>=0.22
+eulfedora>=1.7.2
 Pillow>=3.2.0
 Sickle>=0.6
 structlog>=17.2.0
-django-modeltranslation>=0.12.2  # 0.13 for django 2.0 support
+django-modeltranslation>=v0.13-beta1
 
 # dependencies for eruditorg
 
