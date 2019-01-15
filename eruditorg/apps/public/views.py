@@ -18,11 +18,11 @@ from erudit.models import Discipline
 logger = structlog.getLogger(__name__)
 
 
-def internal_error_view(request):
+def internal_error_view(request, exception=None):
     return HttpResponseServerError(loader.render_to_string('public/500.html', None, request))
 
 
-def not_found_view(request):
+def not_found_view(request, exception=None):
     return HttpResponseNotFound(loader.render_to_string('public/404.html', None, request))
 
 

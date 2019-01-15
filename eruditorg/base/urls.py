@@ -16,10 +16,6 @@ from . import sitemaps
 from . import urls_compat
 from . import views
 
-js_info_dict = {
-    'packages': ('base', ),
-}
-
 sitemaps_dict = {
     'journal': sitemaps.JournalSitemap,
     'issue': sitemaps.IssueSitemap,
@@ -41,7 +37,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict, name='javascript-catalog'),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
     url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
 
     url(r'^' + settings.ADMIN_URL, admin.site.urls),

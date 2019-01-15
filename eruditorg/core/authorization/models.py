@@ -37,7 +37,9 @@ class Authorization(models.Model):
         verbose_name=_("Utilisateur"),
         on_delete=models.CASCADE
     )
-    group = models.ForeignKey('auth.Group', blank=True, null=True, verbose_name=_("Groupe"), on_delete=models.CASCADE)
+    group = models.ForeignKey(
+        'auth.Group', blank=True, null=True, verbose_name=_("Groupe"), on_delete=models.CASCADE
+    )
 
     # The 'authorization_codename' defines the authorization that will be
     # granted to the considered user or group.
