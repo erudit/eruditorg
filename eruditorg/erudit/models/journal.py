@@ -24,6 +24,7 @@ from eruditarticle.objects import EruditPublication
 from eulfedora.util import RequestFailed
 from PIL import Image
 from requests.exceptions import ConnectionError
+from urllib.parse import urlparse
 
 from ..abstract_models import FedoraDated
 from ..conf import settings as erudit_settings
@@ -680,18 +681,20 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def is_external(self):
         """
-        Returns ``True`` if the issue is external. An issue is considered to be external if one
-        of the two following conditions are met:
-
-        1. The issue has an external URL
-        2. The issue's journal is in the ``unb`` collection.
-
-        .. warning::
-
-           Avoid hardcoding the collection code.
+        Returns ``True`` if the issue is external. An issue is considered to be
+        external if the ``pdf_url`` of its first article is absolute.
 
         :returns: ``True`` if the issue is external"""
-        return bool(self.external_url) or self.journal.collection.code == 'unb'
+        try:
+            first_article = next(self.get_articles_from_fedora())
+        except StopIteration:
+            pass
+        else:
+            if first_article.pdf_url is not None:
+                return bool(urlparse(first_article.pdf_url).netloc)
+            else:
+                return True
+        return False
 
     @property
     @catch_and_log
