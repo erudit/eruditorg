@@ -6,12 +6,13 @@
 Référence de développement
 ==========================
 
-    .. toctree:: 
+    .. toctree::
         structure
         overview
         core_models
         fedora
         permissions
+        articles
         emails
         backends
         frontend

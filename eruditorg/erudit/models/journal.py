@@ -164,6 +164,7 @@ class Journal(FedoraMixin, FedoraDated):
         verbose_name=_("Rediriger vers l'URL externe"),
         help_text=_("Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit")  # noqa
     )
+    """ Redirects to the external URL of the Journal """
 
     # Status of the journal
     active = models.BooleanField(
@@ -492,7 +493,7 @@ class Issue(FedoraMixin, FedoraDated):
     external_url = models.URLField(
         null=True, blank=True,
         verbose_name=_('URL Externe'), help_text=_("URL du site où les numéros sont hébergés"))
-    """ External URL of the issue """
+    """ The external URL where the ``Issue`` is hosted. """
 
     is_published = models.BooleanField(default=False, verbose_name=_('Est publié sur www'))
     """ Defines if an issue is published """
@@ -671,6 +672,18 @@ class Issue(FedoraMixin, FedoraDated):
 
     @property
     def is_external(self):
+        """
+        Returns ``True`` if the issue is external. An issue is considered to be external if one
+        of the two following conditions are met:
+
+        1. The issue has an external URL
+        2. The issue's journal is in the ``unb`` collection.
+
+        .. warning::
+
+           Avoid hardcoding the collection code.
+
+        :returns: ``True`` if the issue is external"""
         return bool(self.external_url) or self.journal.collection.code == 'unb'
 
     @property
@@ -997,6 +1010,12 @@ class Article(FedoraMixin):
 
     @property
     def url(self):
+        """ The url of the article
+
+        If the article is external, the url that has been indexed in Solr will be returned.
+        Otherwise, the url of the article on the erudit platform will be returned.
+
+        """
         if self.is_external:
             return self.solr_object.url
         else:
@@ -1229,6 +1248,7 @@ class Article(FedoraMixin):
 
     @property
     def is_external(self):
+        """ :returns: ``True`` if the article's parent issue is external """
         return self.issue.is_external
 
     @property
