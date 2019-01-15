@@ -2,6 +2,7 @@
 
 from ckeditor.widgets import CKEditorWidget
 from django import forms
+from django.db.models import ManyToManyField
 from django.forms.models import fields_for_model
 from django.utils.translation import gettext as _
 from django.forms import inlineformset_factory
@@ -102,7 +103,11 @@ class JournalInformationForm(forms.ModelForm):
         obj = super().save(commit)
         # Our dynamically-generated fields aren't automatically saved. Save them.
         for fname in self.i18n_field_names + self.non_i18n_field_names:
-            setattr(obj, fname, self.cleaned_data[fname])
+            if isinstance(obj._meta.get_field(fname), ManyToManyField):
+                attr = getattr(obj, fname)
+                attr.set(self.cleaned_data[fname])
+            else:
+                setattr(obj, fname, self.cleaned_data[fname])
 
         if commit:
             obj.save()
