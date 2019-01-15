@@ -95,7 +95,8 @@ class Journal(FedoraMixin, FedoraDated):
     """ The :py:class`collection <erudit.models.core.Collection>` of which this
     ``Journal`` is part"""
 
-    type = models.ForeignKey(JournalType, null=True, blank=True, verbose_name=_('Type'),
+    type = models.ForeignKey(
+        JournalType, null=True, blank=True, verbose_name=_('Type'),
         on_delete=models.CASCADE
     )
     """ The type of the journal """
