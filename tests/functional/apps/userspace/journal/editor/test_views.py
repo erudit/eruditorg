@@ -214,7 +214,7 @@ class TestIssueSubmissionView:
         form = view.get_form()
 
         user_contacts = set(User.objects.filter(
-            journals=user.journals.all()
+            journals__in=user.journals.all()
         ).distinct())
 
         form_contacts = set(
