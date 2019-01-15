@@ -428,7 +428,7 @@ class IssueDetailView(
         )
 
         if width and height and w_idthL and h_eightL:
-            base_url = "{base_url}&height=800&width=618&h_eightL={h_eightL}&w_idthL={w_idthL}&p=oui".format(  # noqa
+            base_url = "{base_url}&height={height}&width={width}&h_eightL={h_eightL}&w_idthL={w_idthL}&p=oui".format(  # noqa
                 base_url=base_url,
                 h_eightL=h_eightL,
                 w_idthL=w_idthL,
