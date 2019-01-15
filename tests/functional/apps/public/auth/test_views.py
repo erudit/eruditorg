@@ -1,7 +1,7 @@
 import pytest
 
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import RequestFactory
 
 from base.test.testcases import Client

@@ -14,13 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='journal',
             name='collection',
-            field=models.ForeignKey(to='erudit.Collection', default=1),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Collection', default=1),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='journal',
             name='formerly',
-            field=models.ForeignKey(verbose_name='Anciennement', to='erudit.Journal', null=True, help_text="Choisir l'ancienne instance de la revue", blank=True),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Anciennement', to='erudit.Journal', null=True, help_text="Choisir l'ancienne instance de la revue", blank=True),
         ),
         migrations.AlterField(
             model_name='journal',

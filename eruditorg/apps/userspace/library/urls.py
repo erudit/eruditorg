@@ -9,6 +9,8 @@ import waffle
 
 from . import views
 
+app_name = "library"
+
 
 def get_stats_url():
     try:
@@ -17,32 +19,31 @@ def get_stats_url():
         # we're performing an initial migration
         new_stats_active = False
     if new_stats_active:
-        return url(_(r'^statistiques/'), include('apps.userspace.library.stats.new.urls', namespace='stats'))  # noqa
-    return url(_(r'^statistiques/'), include('apps.userspace.library.stats.legacy.urls', namespace='stats'))  # noqa
+        return url(_(r'^statistiques/'), include('apps.userspace.library.stats.new.urls'))  # noqa
+    return url(_(r'^statistiques/'), include('apps.userspace.library.stats.legacy.urls'))  # noqa
 
 
 section_apps_urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(_(r'^autorisations/'),
-        include('apps.userspace.library.authorization.urls', namespace='authorization')),
-    url(_(r'^membres/'), include('apps.userspace.library.members.urls', namespace='members')),
+        include('apps.userspace.library.authorization.urls')),
+    url(_(r'^membres/'), include('apps.userspace.library.members.urls')),
     url(_(r'^informations/'),
-        include('apps.userspace.library.subscription_information.urls',
-                namespace='subscription_information')),
+        include('apps.userspace.library.subscription_information.urls',)),
     url(_(r'^plages-ip/'),
-        include('apps.userspace.library.subscription_ips.urls', namespace='subscription_ips')),
+        include('apps.userspace.library.subscription_ips.urls')),
     get_stats_url(),
     url(
         _(r'^connexion/'), include(
-            'apps.userspace.library.connection.urls', namespace='connection')
+            'apps.userspace.library.connection.urls')
     ),
     url(
         _(r'^diagnosis/'), include(
-            'apps.userspace.library.diagnosis.urls', namespace='diagnosis')
+            'apps.userspace.library.diagnosis.urls')
     ),
     url(
         _(r'^collection/'), include(
-            'apps.userspace.library.collection.urls', namespace='collection')
+            'apps.userspace.library.collection.urls')
     ),
 
 ]

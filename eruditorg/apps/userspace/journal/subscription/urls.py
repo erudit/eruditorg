@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = "subscription"
 
 urlpatterns = [
     url(_(r'^individuel/$'),

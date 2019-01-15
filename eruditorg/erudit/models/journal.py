@@ -11,7 +11,7 @@ from django.core.cache import caches
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.db.models import Q, Case, When
 from django.utils.functional import cached_property
@@ -91,11 +91,13 @@ class Journal(FedoraMixin, FedoraDated):
     Journals that are not provided by Fedora should not use this field.
     """
 
-    collection = models.ForeignKey(Collection)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
     """ The :py:class`collection <erudit.models.core.Collection>` of which this
     ``Journal`` is part"""
 
-    type = models.ForeignKey(JournalType, null=True, blank=True, verbose_name=_('Type'))
+    type = models.ForeignKey(JournalType, null=True, blank=True, verbose_name=_('Type'),
+        on_delete=models.CASCADE
+    )
     """ The type of the journal """
 
     name = models.CharField(max_length=255, verbose_name=_('Nom'), help_text=_('Nom officiel'))
@@ -192,11 +194,15 @@ class Journal(FedoraMixin, FedoraDated):
     """ The disciplines associated with the journal. """
 
     next_journal = models.ForeignKey(
-        'Journal', verbose_name=_('Revue suivante'), blank=True, null=True, related_name='+')
+        'Journal', verbose_name=_('Revue suivante'), blank=True, null=True, related_name='+',
+        on_delete=models.CASCADE
+    )
     """ The journal that follows the current journal if any. """
 
     previous_journal = models.ForeignKey(
-        'Journal', verbose_name=_('Revue précédente'), blank=True, null=True, related_name='+')
+        'Journal', verbose_name=_('Revue précédente'), blank=True, null=True, related_name='+',
+        on_delete=models.CASCADE
+    )
     """ The journal that precedes the current journal if any. """
 
     objects = models.Manager()
@@ -392,7 +398,8 @@ class Journal(FedoraMixin, FedoraDated):
 class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal. """
 
-    journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'))
+    journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'),
+                                on_delete=models.CASCADE)
     """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
     _title = models.CharField(max_length=255, null=True, blank=True)
@@ -1315,7 +1322,7 @@ class JournalInformation(models.Model):
     """ Stores the information related to a specific Journal instance. """
 
     journal = models.OneToOneField(
-        Journal, verbose_name=_('Journal'), related_name='information')
+        Journal, verbose_name=_('Journal'), related_name='information', on_delete=models.CASCADE)
 
     # Contact
     organisation_name = models.TextField(

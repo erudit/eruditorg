@@ -1,6 +1,6 @@
 from lxml import etree
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from base.test.testcases import Client
 from core.editor.models import IssueSubmission

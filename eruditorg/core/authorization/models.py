@@ -25,16 +25,19 @@ class Authorization(models.Model):
         verbose_name=_("Date de modification")
     )
 
-    content_type = models.ForeignKey(ContentType, verbose_name=_('Type'), blank=True, null=True)
+    content_type = models.ForeignKey(ContentType, verbose_name=_('Type'), blank=True, null=True,
+                                     on_delete=models.CASCADE
+                                     )
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         blank=True, null=True,
-        verbose_name=_("Utilisateur")
+        verbose_name=_("Utilisateur"),
+        on_delete=models.CASCADE
     )
-    group = models.ForeignKey('auth.Group', blank=True, null=True, verbose_name=_("Groupe"))
+    group = models.ForeignKey('auth.Group', blank=True, null=True, verbose_name=_("Groupe"), on_delete=models.CASCADE)
 
     # The 'authorization_codename' defines the authorization that will be
     # granted to the considered user or group.

@@ -10,7 +10,7 @@ from account_actions.models import AccountActionToken
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.validators import EmailValidator
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _, ngettext

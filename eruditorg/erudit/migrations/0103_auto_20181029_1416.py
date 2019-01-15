@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contributor',
             name='journal_information',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='erudit.JournalInformation'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.JournalInformation'),
         ),
         migrations.AddField(
             model_name='journalinformation',

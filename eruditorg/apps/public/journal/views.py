@@ -8,7 +8,7 @@ import random
 from django.conf import settings
 from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader

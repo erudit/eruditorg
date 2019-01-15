@@ -1,7 +1,7 @@
 import datetime as dt
 
 from django.contrib.syndication.views import Feed
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import Http404
 from django.utils.translation import gettext as _

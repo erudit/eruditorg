@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = "subscription_ips"
+
 urlpatterns = [
     url(r'^$', views.InstitutionIPAddressRangeListView.as_view(), name='list'),
     url(_(r'^ajout/$'), views.InstitutionIPAddressRangeCreateView.as_view(), name='create'),

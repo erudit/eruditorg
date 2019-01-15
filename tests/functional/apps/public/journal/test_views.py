@@ -9,7 +9,7 @@ import itertools
 from hashlib import md5
 
 from django.contrib.auth.models import AnonymousUser
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
 from django.test import TestCase, RequestFactory

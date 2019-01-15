@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = "authorization"
+
 urlpatterns = [
     url(r'^$', views.AuthorizationUserView.as_view(), name='list'),
     url(_(r'^ajout/$'), views.AuthorizationCreateView.as_view(), name='create'),

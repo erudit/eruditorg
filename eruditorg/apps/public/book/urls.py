@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from . import views
 from waffle.decorators import waffle_flag
 
+app_name = "book"
+
 urlpatterns = [
     url(r'^$',
         waffle_flag('BOOKS')(

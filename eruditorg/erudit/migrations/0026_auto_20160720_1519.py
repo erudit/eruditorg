@@ -24,11 +24,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journal',
             name='next_journal',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='erudit.Journal', verbose_name='Revue suivante'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, related_name='+', to='erudit.Journal', verbose_name='Revue suivante'),
         ),
         migrations.AddField(
             model_name='journal',
             name='previous_journal',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='erudit.Journal', verbose_name='Revue précédente'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, related_name='+', to='erudit.Journal', verbose_name='Revue précédente'),
         ),
     ]

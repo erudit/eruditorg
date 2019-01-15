@@ -4,7 +4,7 @@ import copy
 import urllib.parse as urlparse
 from functools import reduce
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect, QueryDict
 from django.views.generic import View
 from django.views.generic.base import ContextMixin

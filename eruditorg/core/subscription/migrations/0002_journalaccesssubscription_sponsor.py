@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journalaccesssubscription',
             name='sponsor',
-            field=models.ForeignKey(to='erudit.Organisation', null=True, verbose_name='Commanditaire', related_name='sponsored_subscriptions', blank=True),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Organisation', null=True, verbose_name='Commanditaire', related_name='sponsored_subscriptions', blank=True),
         ),
     ]

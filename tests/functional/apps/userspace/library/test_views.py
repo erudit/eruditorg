@@ -1,7 +1,7 @@
 import pytest
 
 from django.test.client import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from erudit.test.factories import OrganisationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory

@@ -2,7 +2,7 @@
 
 from django.conf import settings
 from django.contrib.auth.models import Group
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.db.models import F
 from django.utils.translation import gettext as _
@@ -31,6 +31,7 @@ class IssueSubmission(models.Model):
     journal = models.ForeignKey(
         'erudit.journal',
         verbose_name=_("Revue"),
+        on_delete=models.CASCADE
     )
 
     year = models.CharField(
@@ -63,7 +64,8 @@ class IssueSubmission(models.Model):
 
     contact = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_("Personne-ressource")
+        verbose_name=_("Personne-ressource"),
+        on_delete=models.CASCADE
     )
 
     comment = models.TextField(
@@ -183,12 +185,14 @@ class IssueSubmission(models.Model):
 class IssueSubmissionStatusTrack(models.Model):
     """ Tracks the changes of an issue submission status. """
     issue_submission = models.ForeignKey(
-        IssueSubmission, related_name='status_tracks', verbose_name=_('Changements de statut'))
+        IssueSubmission, related_name='status_tracks', verbose_name=_('Changements de statut'),
+        on_delete=models.CASCADE
+    )
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
     status = models.CharField(max_length=100, verbose_name=_('statut'))
     files_version = models.ForeignKey(
         'IssueSubmissionFilesVersion', verbose_name=_('Version des fichiers'),
-        blank=True, null=True)
+        blank=True, null=True, on_delete=models.CASCADE)
 
     # A comment can be written when the status of an issue submission is updated by a user.
     # eg. when the status is changed from draft -> to submitted
@@ -203,7 +207,8 @@ class IssueSubmissionStatusTrack(models.Model):
 class IssueSubmissionFilesVersion(models.Model):
     """ An issue submission files version. """
     issue_submission = models.ForeignKey(
-        IssueSubmission, related_name='files_versions', verbose_name=_('Envoi de numéro'))
+        IssueSubmission, related_name='files_versions', verbose_name=_('Envoi de numéro'),
+        on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
     submissions = models.ManyToManyField('resumable_uploads.ResumableFile')
@@ -216,7 +221,7 @@ class IssueSubmissionFilesVersion(models.Model):
 
 class ProductionTeam(models.Model):
     """ Represents an Érudit production team. """
-    group = models.OneToOneField(Group, verbose_name=_('Groupe'))
+    group = models.OneToOneField(Group, verbose_name=_('Groupe'), on_delete=models.CASCADE)
     identifier = models.SlugField(
         max_length=48, unique=True, verbose_name=_('Identifiant'), db_index=True)
     journals = models.ManyToManyField('erudit.Journal', verbose_name=_('Revues'))

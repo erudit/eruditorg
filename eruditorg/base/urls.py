@@ -7,8 +7,10 @@ from django.contrib.sitemaps import views as sitemap_views
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 from django_js_reverse import views as js_reverse_views
+
+from resumable_uploads import urls as resumable_uploads_urls
 
 from . import sitemaps
 from . import urls_compat
@@ -39,20 +41,20 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict, name='javascript-catalog'),
     url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
 
-    url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
-    url(r'^upload/', include('resumable_uploads.urls', namespace='resumable_uploads')),
+    url(r'^' + settings.ADMIN_URL, admin.site.urls),
+    url(r'^upload/', include((resumable_uploads_urls.urlpatterns, "resumable_uploads",))),
 
     # The PDF viewer exposes a PDF.js template
     url(r'^pdf-viewer\.html$',
         TemplateView.as_view(template_name='pdf_viewer.html'), name='pdf-viewer'),
 
     # Apps
-    url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
-    url(r'^webservices/', include('apps.webservices.urls', namespace='webservices')),
-    url(r'^', include('apps.public.urls', namespace='public')),
+    url(_(r'^espace-utilisateur/'), include('apps.userspace.urls')),
+    url(r'^webservices/', include('apps.webservices.urls')),
+    url(r'^', include('apps.public.urls')),
 )
 
 # In DEBUG mode, serve media files through Django.

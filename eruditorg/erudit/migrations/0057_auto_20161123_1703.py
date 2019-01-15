@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(blank=True, max_length=600, null=True, verbose_name='Titre')),
                 ('language', models.CharField(blank=True, max_length=10, null=True, verbose_name='Code langue')),
                 ('paral', models.BooleanField(default=False, verbose_name='Titre parallèle')),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subtitles', to='erudit.Article', verbose_name='Article')),
+                ('article', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='subtitles', to='erudit.Article', verbose_name='Article')),
             ],
             options={
                 'verbose_name_plural': "Sous-titres d'articles",

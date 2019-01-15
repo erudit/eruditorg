@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = "search"
 
 urlpatterns = [
     url(r'^$', views.SearchResultsView.as_view(), name='results'),

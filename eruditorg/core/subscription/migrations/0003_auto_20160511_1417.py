@@ -62,11 +62,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journalmanagementsubscriptionperiod',
             name='subscription',
-            field=models.ForeignKey(to='subscription.JournalManagementSubscription', verbose_name='Abonnement'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='subscription.JournalManagementSubscription', verbose_name='Abonnement'),
         ),
         migrations.AddField(
             model_name='journalaccesssubscriptionperiod',
             name='subscription',
-            field=models.ForeignKey(to='subscription.JournalAccessSubscription', verbose_name='Abonnement'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='subscription.JournalAccessSubscription', verbose_name='Abonnement'),
         ),
     ]
