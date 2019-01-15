@@ -17,7 +17,7 @@ from . import urls_compat
 from . import views
 
 js_info_dict = {
-    'packages': ('base', ),
+    'packages': ['base', ],
 }
 
 sitemaps_dict = {
