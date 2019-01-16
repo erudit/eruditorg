@@ -36,9 +36,6 @@
   <!-- Savante, culturelle, ... -->
   <xsl:param name="typecoll" />
 
-  <!-- Eliminer les lignes vides dans le document resultant -->
-  <xsl:strip-space elements="alinea"/>
-
   <xsl:template match="/">
     <div class="article-wrapper">
       <xsl:apply-templates select="article"/>
