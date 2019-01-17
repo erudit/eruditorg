@@ -184,7 +184,7 @@ class TestRenderArticleTemplateTag(TestCase):
         # Check that footnotes in section titles are stripped when displayed in
         # table of content and not stripped when displayed as section titles.
         assert '<a href="#s1n1">Titre</a>' in ret
-        assert '<h2>Titre <a href="#no1" id="re1no1" class="norenvoi hint--bottom hint--no-animate" data-hint="">[1]</a>\n</h2>' in ret
+        assert '<h2>Titre <a href="#no1" id="re1no1" class="norenvoi hint--bottom hint--no-animate" data-hint="Note 1, avec espace entre deux marquages">[1]</a>\n</h2>' in ret
 
         assert '<a href="#s1n2"><strong>Titre gras</strong></a>' in ret
         assert '<h2><strong>Titre gras <a href="#no2" id="re1no2" class="norenvoi hint--bottom hint--no-animate" data-hint="">[2]</a></strong></h2>' in ret
@@ -194,3 +194,17 @@ class TestRenderArticleTemplateTag(TestCase):
 
         assert '<a href="#s1n4"><span class="petitecap">Titre petitecap</span></a>' in ret
         assert '<h2><span class="petitecap">Titre petitecap <a href="#no4" id="re1no4" class="norenvoi hint--bottom hint--no-animate" data-hint="">[4]</a></span></h2>' in ret
+
+    def test_space_between_two_tags(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1053699ar.xml')
+
+        # Check that the space is preserved between two tags.
+        assert '<span class="petitecap">Note 1,</span> <em>avec espace entre deux marquages</em>' in ret
+
+    def test_blockquote_between_two_spans(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1053699ar.xml')
+
+        # Check that the blockquote is displayed before the second paragraph.
+        assert '<blockquote class="bloccitation ">\n<p class="alinea">Citation</p>\n<cite class="source">Source</cite>\n</blockquote>\n<p class="alinea">Paragraphe</p>' in ret
