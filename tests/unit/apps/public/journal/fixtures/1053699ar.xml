@@ -100,6 +100,8 @@
             <note id="no1">
                 <no>1</no>
                 <alinea><marquage typemarq="petitecap">Note 1,</marquage> <marquage typemarq="italique">avec espace entre deux marquages</marquage></alinea>
+                <bloccitation><alinea>Citation</alinea><source>Source</source></bloccitation>
+                <alinea>Paragraphe</alinea>
             </note>
         </grnote>
     </partiesann>

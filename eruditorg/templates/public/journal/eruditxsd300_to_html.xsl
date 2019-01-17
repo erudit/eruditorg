@@ -1895,14 +1895,8 @@
           <xsl:text>[</xsl:text><xsl:apply-templates select="no"/><xsl:text>]</xsl:text>
         </a>
       </xsl:if>
-      <xsl:apply-templates select="alinea" mode="numero"/>
-      <xsl:apply-templates select="*[not(self::alinea)][not(self::no)]"/>
+      <xsl:apply-templates select="*[not(self::no)]"/>
     </li>
-  </xsl:template>
-  <xsl:template match="alinea" mode="numero">
-    <span class="alinea">
-      <xsl:apply-templates/>
-    </span>
   </xsl:template>
   <xsl:template match="renvoi">
     <xsl:text>&#160;</xsl:text>
