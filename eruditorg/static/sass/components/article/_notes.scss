@@ -31,6 +31,15 @@
 
   .note {
     margin-bottom: 0.5em;
+
+   .alinea {
+      margin-top: 0.5em;
+
+      &:nth-of-type(1) {
+        display: inline;
+      }
+    }
+
   }
 
 }
