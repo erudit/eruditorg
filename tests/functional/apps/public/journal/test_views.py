@@ -514,6 +514,33 @@ class TestIssueDetailView:
 
         assert b'ion-lock' not in response.content
 
+    def test_article_items_are_not_cached_for_unpublished_issues(self):
+        issue = IssueFactory(is_published=False)
+        article = ArticleFactory(issue=issue, title="thisismyoldtitle")
+
+        url = issue_detail_url(issue)
+        resp = Client().get(url, {'ticket': issue.prepublication_ticket})
+        assert "thisismyoldtitle" in resp.content.decode('utf-8')
+
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_title('thisismynewtitle')
+        resp = Client().get(url, {'ticket': issue.prepublication_ticket})
+        assert "thisismynewtitle" in resp.content.decode('utf-8')
+
+    def test_article_items_are_cached_for_published_issues(self):
+        issue = IssueFactory(is_published=True)
+        article = ArticleFactory(issue=issue, title="thisismyoldtitle")
+
+        url = issue_detail_url(issue)
+        resp = Client().get(url)
+        assert "thisismyoldtitle" in resp.content.decode('utf-8')
+
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_title('thisismynewtitle')
+        resp = Client().get(url, {'ticket': issue.prepublication_ticket})
+        assert "thisismyoldtitle" in resp.content.decode('utf-8')
+
+
     def test_can_return_301_when_issue_doesnt_exist(self):
         issue = IssueFactory.create(
             date_published=dt.datetime.now(), localidentifier='test')

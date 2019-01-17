@@ -90,7 +90,7 @@
   {% endfor %}
 </div>
 
-{% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE issue.is_published %}
+{% cache cache_timeout "public_issue_detail_summary" issue.id LANGUAGE_CODE issue.is_published %}
 {# Issue summary #}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header">
@@ -180,7 +180,7 @@
 {% endblock aside_issue %}
 
 {% block inner_footer %}
-{% cache LONG_TTL "public_issue_detail_back_issues" issue.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_issue_detail_back_issues" issue.id LANGUAGE_CODE %}
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">
