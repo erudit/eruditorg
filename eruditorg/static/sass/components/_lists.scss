@@ -21,11 +21,6 @@ ol {
 
   &.unstyled {
     @include list-unstyled;
-
-    li {
-      @include list-unstyled;
-    }
-
   }
 
   &.inline {
