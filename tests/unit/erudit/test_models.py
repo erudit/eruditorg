@@ -452,22 +452,10 @@ class TestArticle:
         with pytest.raises(Article.DoesNotExist):
             Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
 
-    @pytest.mark.parametrize('with_pdf,external_pdf_url,add_to_fedora_issue,is_external', [
-        # pdf_url is None, article is external.
-        (False, None, True, True),
-        # pdf_url is relative, article is NOT external.
-        (True, None, True, False),
-        # pdf_url is absolute, article is external.
-        (False, 'http://example.com', True, True),
-        # No articles in issue summary, we can't know so it defaults to NOT external.
-        (True, None, False, False),
-    ])
-    def test_is_external_from_pdf_url(self, with_pdf, external_pdf_url, add_to_fedora_issue, is_external):
-        article = ArticleFactory(
-            with_pdf=with_pdf,
-            external_pdf_url=external_pdf_url,
-            add_to_fedora_issue=add_to_fedora_issue,
-        )
+    @pytest.mark.parametrize('collection_code,is_external', [('erudit', False), ('unb', True)])
+    def test_is_external_by_collection(self, collection_code, is_external):
+        # an article is "external" if its collection code is "unb"
+        article = ArticleFactory(issue__journal__collection__code=collection_code)
         assert article.is_external == is_external
 
     def test_is_external_from_external_url(self):
@@ -479,7 +467,7 @@ class TestArticle:
         # When an article is "external", its absolute_url is the value of its first "URLDocument"
         # in Solr
         article = ArticleFactory(
-            issue__external_url='http://example.com',
+            issue__journal__collection__code='unb',
             solr_attrs={'URLDocument': ['http://example.com']}
         )
         assert article.get_absolute_url() == 'http://example.com'
