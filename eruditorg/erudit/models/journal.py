@@ -24,6 +24,7 @@ from eruditarticle.objects import EruditPublication
 from eulfedora.util import RequestFailed
 from PIL import Image
 from requests.exceptions import ConnectionError
+from urllib.parse import urlparse
 
 from ..abstract_models import FedoraDated
 from ..conf import settings as erudit_settings
@@ -685,14 +686,31 @@ class Issue(FedoraMixin, FedoraDated):
         of the two following conditions are met:
 
         1. The issue has an external URL
-        2. The issue's journal is in the ``unb`` collection.
-
-        .. warning::
-
-           Avoid hardcoding the collection code.
+        2. The first publication allowed article has an absolute URL for its PDF or HTML
 
         :returns: ``True`` if the issue is external"""
-        return bool(self.external_url) or self.journal.collection.code == 'unb'
+        if bool(self.external_url):
+            return True
+        try:
+            first_article = next(
+                article for article in self.get_articles_from_fedora()
+                if article.publication_allowed
+            )
+        except StopIteration:
+            pass
+        else:
+            summary_node = first_article.get_summary_node()
+            if summary_node is not None:
+                urlpdf = summary_node.find('urlpdf')
+                urlhtml = summary_node.find('urlhtml')
+                external_pdf = urlpdf is not None and urlpdf.text \
+                    and bool(urlparse(urlpdf.text).netloc)
+                external_html = urlhtml is not None and urlhtml.text \
+                    and bool(urlparse(urlhtml.text).netloc)
+                return external_pdf or external_html
+            else:
+                logger.warn("Article not in issue summary", localidentifier=self.localidentifier)
+        return False
 
     @property
     @catch_and_log

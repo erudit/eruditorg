@@ -194,12 +194,13 @@ class FakeAPI(ApiFacade):
         self.set_xml_for_pid(pid, newxml)
 
     def add_article_to_parent_publication(
-            self, article, publication_allowed=True, external_pdf_url=None):
+            self, article, publication_allowed=True, pdf_url=None, html_url=None):
         with self.open_publication(article.issue.pid) as wrapper:
             wrapper.add_article(
                 article,
                 publication_allowed=publication_allowed,
-                external_pdf_url=external_pdf_url)
+                pdf_url=pdf_url,
+                html_url=html_url)
 
     def add_publication_to_parent_journal(self, issue, journal=None):
         if journal is None:

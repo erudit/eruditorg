@@ -181,7 +181,7 @@ class ArticleRef(Article):
     def __init__(
             self, issue, localidentifier, from_fixture=None, title=None, type=None,
             section_titles=None, publication_allowed=True, authors=None, add_to_fedora_issue=True,
-            with_pdf=False, external_pdf_url=None, solr_attrs=None, abstracts=None):
+            with_pdf=False, pdf_url=None, html_url=None, solr_attrs=None, abstracts=None):
         self.issue = issue
         self.localidentifier = localidentifier
         if self.pid is not None:
@@ -203,7 +203,8 @@ class ArticleRef(Article):
                 repository.api.add_article_to_parent_publication(
                     self,
                     publication_allowed=publication_allowed,
-                    external_pdf_url=external_pdf_url)
+                    pdf_url=pdf_url,
+                    html_url=html_url)
             if with_pdf:
                 repository.api.add_pdf_to_article(self.pid)
         super().__init__(issue, localidentifier)

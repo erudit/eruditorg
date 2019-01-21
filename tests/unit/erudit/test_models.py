@@ -395,6 +395,52 @@ class TestIssue:
         with pytest.raises(Issue.DoesNotExist):
             Issue.from_fedora_ids(journal.code, 'dummy123')
 
+    @pytest.mark.parametrize('first_article,second_article,is_external', [
+        # The first publication allowed article has an absolue URL so the issue is external.
+        ({'pdf_url': 'http://example.com'}, {}, True),
+        ({'html_url': 'http://example.com'}, {'html_url': '/example'}, True),
+        ({'publication_allowed': False}, {'pdf_url': 'http://example.com'}, True),
+        # The first publication allowed article has a relative URL so the issue is not external.
+        ({'pdf_url': '/example'}, {}, False),
+        ({'html_url': '/example'}, {'html_url': 'http://example.com'}, False),
+        ({'publication_allowed': False}, {'pdf_url': '/example'}, False),
+    ])
+    def test_is_external_from_pdf_and_html_urls(self, first_article, second_article, is_external):
+        issue = IssueFactory()
+        first_article = ArticleFactory(
+            issue=issue,
+            **first_article,
+        )
+        second_article = ArticleFactory(
+            issue=issue,
+            **second_article,
+        )
+        assert issue.is_external == is_external
+
+    def test_is_external_if_no_publication_allowed(self):
+        # If there is no publication allowed articles, `is_external` defaults to False.
+        issue = IssueFactory()
+        first_article = ArticleFactory(
+            issue=issue,
+            publication_allowed=False,
+        )
+        second_article = ArticleFactory(
+            issue=issue,
+            publication_allowed=False,
+        )
+        assert not issue.is_external
+
+
+    def test_is_external_if_no_articles_in_summary(self):
+        # If there is no articles in the issue summary, `is_external` defaults to False.
+        issue = IssueFactory()
+        assert not issue.is_external
+
+    def test_is_external_from_external_url(self):
+        # If the issue has an external URL, `is external` is True.
+        issue = IssueFactory(external_url='http://example.com')
+        assert issue.is_external
+
 
 class TestArticle:
     def test_properties(self):
@@ -453,14 +499,38 @@ class TestArticle:
         with pytest.raises(Article.DoesNotExist):
             Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
 
-    @pytest.mark.parametrize('collection_code,is_external', [('erudit', False), ('unb', True)])
-    def test_is_external_by_collection(self, collection_code, is_external):
-        # an article is "external" if its collection code is "unb"
-        article = ArticleFactory(issue__journal__collection__code=collection_code)
+    @pytest.mark.parametrize('pdf_url,html_url,is_external', [
+        # At least one URL is absolute so `is_external` is True.
+        ('http://example.com', None, True),
+        (None, 'http://example.com', True),
+        ('/example', 'http://example.com', True),
+        ('http://example.com', '/example', True),
+        ('http://example.com', 'http://example.com', True),
+        # No URLs are absolute so `is_external` is False.
+        ('/example', None, False),
+        (None, '/example', False),
+        ('/example', '/example', False),
+        (None, None, False),
+    ])
+    def test_is_external_from_pdf_and_html_urls(self, pdf_url, html_url, is_external):
+        article = ArticleFactory(
+            pdf_url=pdf_url,
+            html_url=html_url,
+        )
         assert article.is_external == is_external
 
+    def test_is_external_if_no_publication_allowed(self):
+        # If there is no publication allowed articles, `is_external` defaults to False.
+        article = ArticleFactory(publication_allowed=False)
+        assert not article.is_external
+
+    def test_is_external_if_no_articles_in_summary(self):
+        # If there is no articles in the issue summary, `is_external` defaults to False.
+        article = ArticleFactory(add_to_fedora_issue=False)
+        assert not article.is_external
+
     def test_is_external_from_external_url(self):
-        # An article that has an external issue is external
+        # If the issue has an external URL, `is external` is True.
         article = ArticleFactory(issue__external_url='http://example.com')
         assert article.is_external
 
@@ -468,7 +538,7 @@ class TestArticle:
         # When an article is "external", its absolute_url is the value of its first "URLDocument"
         # in Solr
         article = ArticleFactory(
-            issue__journal__collection__code='unb',
+            issue__external_url='http://example.com',
             solr_attrs={'URLDocument': ['http://example.com']}
         )
         assert article.get_absolute_url() == 'http://example.com'
@@ -483,11 +553,11 @@ class TestArticle:
 
     def test_pdf_url_when_fedora_pdf_and_external_pdf(self):
         # fedora PDFs have priority over "urlpdf" in summary
-        article = ArticleFactory(with_pdf=True, external_pdf_url='http://example.com')
+        article = ArticleFactory(with_pdf=True, pdf_url='http://example.com')
         assert article.pdf_url and article.pdf_url != 'http://example.com'
 
     def test_pdf_url_when_external_pdf(self):
-        article = ArticleFactory(external_pdf_url='http://example.com')
+        article = ArticleFactory(pdf_url='http://example.com')
         assert article.pdf_url == 'http://example.com'
 
     def test_pdf_url_when_issue_external_pdf(self):
