@@ -1,6 +1,15 @@
 {% for group in articles_per_section.groups %}
   {% if group.type == 'objects' %}
     <ol class="bib-records toc__section-{{ group.level }}">
+      {% if group.notegens %}
+        <li class="bib-record notegen">
+          {% for notegen in group.notegens %}
+            {% for content in notegen.content %}
+              <p class="alinea">{{ content|safe }}</p>
+            {% endfor %}
+          {% endfor %}
+        </li>
+      {% endif %}
       {% for article in group.objects %}
       {% include "public/journal/partials/issue_detail_article_item.html" %}
       {% endfor %}

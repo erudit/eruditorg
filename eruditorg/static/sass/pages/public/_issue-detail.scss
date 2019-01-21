@@ -58,6 +58,18 @@
   }
 
   /**
+  * Section notegens
+  */
+  .notegen {
+
+    p, ol, ul, blockquote {
+      font-size: 12px;
+      color: $dark-grey;
+    }
+
+  }
+
+  /**
   * Restricted articles
   */
   .article-restricted {

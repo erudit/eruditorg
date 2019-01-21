@@ -462,11 +462,16 @@ class IssueDetailView(
             articles, lambda a: getattr(a, 'section_title_' + str(level + 1))
         ):
             articles = list(articles)
+            notegens = [
+                notegen for notegen in articles[0].get_notegens()
+                if notegen['scope'] in ['surtitre', 'surtitre2']
+            ]
             if title is None:
                 sections_tree['groups'].append({
                     'type': 'objects',
                     'objects': articles,
                     'level': level,
+                    'notegens': notegens,
                 })
             else:
                 title_paral = getattr(articles[0], 'section_title_' + str(level + 1) + '_paral')
