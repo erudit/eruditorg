@@ -1127,6 +1127,14 @@ class Article(FedoraMixin):
     def html_title(self):
         return self.erudit_object.get_title(formatted=True, html=True)
 
+    def _abstract_by_lang(self, abstracts):
+        """ Returns an abstract that can be used with the current language. """
+        lang = get_language()
+        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
+        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
+        _abstract = abstracts[0]['content'] if len(abstracts) else None
+        return _abstract_lang or _abstract
+
     @property
     @catch_and_log
     @fedora_only
@@ -1138,12 +1146,20 @@ class Article(FedoraMixin):
     @fedora_only
     def abstract(self):
         """ Returns an abstract that can be used with the current language. """
-        abstracts = self.abstracts
-        lang = get_language()
-        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
-        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
-        _abstract = abstracts[0]['content'] if len(abstracts) else None
-        return _abstract_lang or _abstract
+        return self._abstract_by_lang(self.abstracts)
+
+    @property
+    @catch_and_log
+    @fedora_only
+    def html_abstracts(self):
+        return self.erudit_object.get_abstracts(html=True)
+
+    @property
+    @catch_and_log
+    @fedora_only
+    def html_abstract(self):
+        """ Returns an HTML abstract that can be used with the current language. """
+        return self._abstract_by_lang(self.html_abstracts)
 
     @property
     @catch_and_log

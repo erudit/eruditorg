@@ -181,7 +181,7 @@ class ArticleRef(Article):
     def __init__(
             self, issue, localidentifier, from_fixture=None, title=None, type=None,
             section_titles=None, publication_allowed=True, authors=None, add_to_fedora_issue=True,
-            with_pdf=False, external_pdf_url=None, solr_attrs=None):
+            with_pdf=False, external_pdf_url=None, solr_attrs=None, abstracts=None):
         self.issue = issue
         self.localidentifier = localidentifier
         if self.pid is not None:
@@ -189,12 +189,14 @@ class ArticleRef(Article):
             if from_fixture:
                 xml = open('./tests/fixtures/article/{}.xml'.format(from_fixture)).read()
                 repository.api.set_article_xml(self.pid, xml)
-            if any(x is not None for x in (title, section_titles, publication_allowed, type)):
+            if any(x is not None for x in (title, section_titles, abstracts, type)):
                 with repository.api.open_article(self.pid) as wrapper:
                     if title is not None:
                         wrapper.set_title(title)
                     if section_titles is not None:
                         wrapper.set_section_titles(section_titles)
+                    if abstracts is not None:
+                        wrapper.set_abstracts(abstracts)
                     if type is not None:
                         wrapper.set_type(type)
             if add_to_fedora_issue:

@@ -91,6 +91,17 @@
 
   }
 
+  p {
+    font-size: 12px;
+    color: $dark-grey;
+
+    &.abstract-lang {
+      float: left;
+      margin-right: 0.25em;
+      margin-bottom: 0;
+    }
+  }
+
   .akkordion .icon {
     float: none;
     margin-left: 0.25em;

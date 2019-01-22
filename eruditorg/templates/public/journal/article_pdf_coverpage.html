@@ -251,10 +251,10 @@
       </div>
       <div class="right-content">
         <div class="content">
-        {% with abstract=article.abstract %}
+        {% with abstract=article.html_abstract %}
         {% if abstract %}
           <div class="sub-title">{% trans "Résumé de l'article" %}</div>
-          <div class="abstract">{{ abstract }}</div>
+          <div class="abstract">{{ abstract|safe }}</div>
         {% endif %}
         {% endwith %}
         </div>
