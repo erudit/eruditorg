@@ -5,6 +5,7 @@ import unittest.mock
 
 import pytest
 from django.conf import settings
+from django.test import override_settings
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 
@@ -497,6 +498,51 @@ class TestArticle:
     def test_pdf_url_when_not_publication_allowed(self):
         article = ArticleFactory(publication_allowed=False, with_pdf=True)
         assert article.pdf_url is None
+
+    def test_abstracts(self):
+        article = ArticleFactory(abstracts=[
+            {'content': 'Resume', 'lang': 'fr'},
+            {'content': 'Abstract', 'lang': 'en'},
+        ])
+        assert article.abstracts == [
+             {'content': 'Abstract', 'lang': 'en', 'type': 'main', 'typeresume': 'resume'},
+             {'content': 'Resume', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume'},
+        ]
+
+    def test_html_abstracts(self):
+        article = ArticleFactory(abstracts=[
+            {'content': 'Resume', 'lang': 'fr'},
+            {'content': 'Abstract', 'lang': 'en'},
+        ])
+        assert article.html_abstracts == [
+             {'content': '<p class="alinea"><em>Abstract</em></p>', 'lang': 'en', 'type': 'main', 'typeresume': 'resume'},
+             {'content': '<p class="alinea"><em>Resume</em></p>', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume'},
+        ]
+
+    @pytest.mark.parametrize('language,expected_abstract', [
+        ('fr', 'Resume'),
+        ('en', 'Abstract'),
+    ])
+    def test_abstract(self, language, expected_abstract):
+        article = ArticleFactory(abstracts=[
+            {'content': 'Resume', 'lang': 'fr'},
+            {'content': 'Abstract', 'lang': 'en'},
+        ])
+        with override_settings(LANGUAGE_CODE=language):
+            assert article.abstract == expected_abstract
+
+    @pytest.mark.parametrize('language,expected_abstract', [
+        ('fr', '<p class="alinea"><em>Resume</em></p>'),
+        ('en', '<p class="alinea"><em>Abstract</em></p>'),
+    ])
+    def test_html_abstract(self, language, expected_abstract):
+        article = ArticleFactory(abstracts=[
+            {'content': 'Resume', 'lang': 'fr'},
+            {'content': 'Abstract', 'lang': 'en'},
+        ])
+        with override_settings(LANGUAGE_CODE=language):
+            assert article.html_abstract == expected_abstract
+
 
 
 def test_journaltype_can_return_embargo_duration_in_days():

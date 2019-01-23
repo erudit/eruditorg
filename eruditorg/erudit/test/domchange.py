@@ -60,6 +60,21 @@ class EruditArticleDomChanger(BaseDomChanger):
         titre = self.root.find('.//grtitre/titre')
         titre.text = title
 
+    def set_abstracts(self, abstracts):
+        liminaire = self.root.find('./liminaire')
+        for abstract in abstracts:
+            subelem = E.resume(
+                E.alinea(
+                    E.marquage(
+                        abstract['content'],
+                        typemarq='italique',
+                    ),
+                ),
+                lang=abstract['lang'],
+                typeresume='resume',
+            )
+            liminaire.append(subelem)
+
     def set_type(self, type):
         self.root.getroot().attrib['typeart'] = type
 
