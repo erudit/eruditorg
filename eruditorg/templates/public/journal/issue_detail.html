@@ -162,7 +162,15 @@
 
 {% block aside_issue %}
 <div class="sidebar-block clearfix latest-issue">
-  <h2><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a></h2>
+  <h2>
+    <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">
+      {{ issue.journal.name }}
+      {% if issue.journal.subtitle %}
+      <br />
+      <span class="journal-subtitle">{{ issue.journal.subtitle }}</span>
+      {% endif %}
+    </a>
+  </h2>
   <p>{{ issue.volume_title_with_pages }}</p>
   <p>{% trans "Diffusion numérique" %} : {{ issue.date_published }}</p>
   {% if issue.has_coverpage %}

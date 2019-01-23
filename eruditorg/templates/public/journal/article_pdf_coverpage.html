@@ -72,6 +72,10 @@
         font-weight: bold;
       }
 
+      #journal_data_subtitle{
+        color: #707070;
+      }
+
       #journal_data_logo{
         float: right;
       }
@@ -213,7 +217,13 @@
       </div>
     </div>
     <div id="journal_data">
-      <div id="journal_data_title">{{ journal.name }}</div>
+      <div id="journal_data_title">
+        {{ journal.name }}
+        {% if journal.subtitle %}
+        <br />
+        <span id="journal_data_subtitle">{{ journal.subtitle }}</span>
+        {% endif %}
+      </div>
     </div>
     <br />
     <h1 class="main-title">{% trans "Article" as i18n_article_title %}{{ article|format_article_html_title }}</h1>

@@ -59,6 +59,14 @@ aside {
   * journal meta infos on sidebars
   */
 
+  h2 {
+    .journal-subtitle {
+      color: $dark-grey;
+      display: block;
+      margin-top: 0.25em;
+    }
+  }
+
   .journal-explore {
     margin: 0;
     list-style-type: none;
