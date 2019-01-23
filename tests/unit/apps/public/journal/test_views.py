@@ -187,7 +187,7 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<h2>Titre <a href="#no1" id="re1no1" class="norenvoi hint--bottom hint--no-animate" data-hint="Note 1, avec espace entre deux marquages">[1]</a>\n</h2>' in ret
 
         assert '<a href="#s1n2"><strong>Titre gras</strong></a>' in ret
-        assert '<h2><strong>Titre gras <a href="#no2" id="re1no2" class="norenvoi hint--bottom hint--no-animate" data-hint="">[2]</a></strong></h2>' in ret
+        assert '<h2><strong>Titre gras <a href="#no2" id="re1no2" class="norenvoi hint--bottom hint--no-animate" data-hint="Lien à encoder">[2]</a></strong></h2>' in ret
 
         assert '<a href="#s1n3"><em>Titre italique</em></a>' in ret
         assert '<h2><em>Titre italique <a href="#no3" id="re1no3" class="norenvoi hint--bottom hint--no-animate" data-hint="">[3]</a></em></h2>' in ret
@@ -208,3 +208,10 @@ class TestRenderArticleTemplateTag(TestCase):
 
         # Check that the blockquote is displayed before the second paragraph.
         assert '<blockquote class="bloccitation ">\n<p class="alinea">Citation</p>\n<cite class="source">Source</cite>\n</blockquote>\n<p class="alinea">Paragraphe</p>' in ret
+
+    def test_links_url_ecoding(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1053699ar.xml')
+
+        # Check that links' URL are correctly ecoded.
+        assert '<a href="http://example.com%23test" id="ls2" target="_blank">Lien à encoder</a>' in ret
