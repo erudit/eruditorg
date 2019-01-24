@@ -2100,7 +2100,7 @@
   <xsl:template match="liensimple">
     <xsl:element name="a">
       <xsl:attribute name="href">
-        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+        <xsl:value-of select="str:encode-uri(@href, false())" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:str="http://exslt.org/strings" />
       </xsl:attribute>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>

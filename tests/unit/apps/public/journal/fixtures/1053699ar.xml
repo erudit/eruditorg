@@ -103,6 +103,10 @@
                 <bloccitation><alinea>Citation</alinea><source>Source</source></bloccitation>
                 <alinea>Paragraphe</alinea>
             </note>
+            <note id="no2">
+                <no>1</no>
+                <alinea><liensimple id="ls2" xlink:href="http://example.com#test" xmlns:xlink="http://www.w3.org/1999/xlink">Lien à encoder</liensimple></alinea>
+            </note>
         </grnote>
     </partiesann>
 </article>
