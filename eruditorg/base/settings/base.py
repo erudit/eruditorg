@@ -128,7 +128,7 @@ MIDDLEWARE = (
     'core.citations.middleware.SavedCitationListMiddleware',
     'waffle.middleware.WaffleMiddleware',
     'base.middleware.RedirectToFallbackMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'base.middleware.PolyglotLocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
 )
 
