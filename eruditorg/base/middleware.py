@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from django.urls import translate_url
+from django.utils import translation
+from django.utils.deprecation import MiddlewareMixin
+from django.middleware.locale import LocaleMiddleware
 import datetime as dt
 
 from django.utils.translation import get_language
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.http import HttpResponsePermanentRedirect
-from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
 
 
@@ -32,13 +35,31 @@ class LanguageCookieMiddleware(MiddlewareMixin):  # pragma: no cover
         return response
 
 
+class PolyglotLocaleMiddleware(LocaleMiddleware):
+    """
+    Extends LocaleMiddleware to:
+
+    1. Try to find the language in which the pattern exists
+    2. If the pattern exists, translate it to the user's language
+    """
+    def process_response(self, request, response):
+        if response.status_code == 404:
+            user_lang = translation.get_language()
+            for language, _ in settings.LANGUAGES:
+                with translation.override(language):
+                    resp = super().process_response(request, response)
+                    if resp.status_code != 404:
+                        return self.response_redirect_class(translate_url(resp.url, user_lang))
+        return response
+
+
 class RedirectToFallbackMiddleware(MiddlewareMixin):
 
-    DO_NOT_REDIRECT_NAMESPACES = set((
+    DO_NOT_REDIRECT_NAMESPACES = {
         'userspace',
         'citations',
         'book',
-    ))
+    }
 
     def should_redirect(self, request):
         """ A request should be redirected if the resolver does not
