@@ -441,6 +441,20 @@ class TestIssue:
         issue = IssueFactory(external_url='http://example.com')
         assert issue.is_external
 
+    @pytest.mark.parametrize('fixture_name, language, expected_copyrights', [
+        ('images1080663', 'fr', 'Tous droits r&#233;serv&#233;s © 24 images inc., 1992'),
+        ('images1080663', 'en', 'All Rights Reserved © 24 images inc., 1992'),
+        ('images1080663', 'es', 'Reservados todos los derechos © 24 images inc., 1992'),
+    ])
+    def test_copyrights(self, fixture_name, language, expected_copyrights):
+        issue = IssueFactory()
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open('./tests/fixtures/issue/{}.xml'.format(fixture_name), 'rb').read(),
+        )
+        with override_settings(LANGUAGE_CODE=language):
+            assert issue.copyrights == expected_copyrights
+
 
 class TestArticle:
     def test_properties(self):
