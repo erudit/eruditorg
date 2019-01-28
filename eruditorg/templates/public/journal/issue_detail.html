@@ -95,7 +95,13 @@
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header">
     <p class="main-header__meta">
-      <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a>
+      <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">
+        {{ issue.journal.name }}
+        {% if issue.journal.subtitle %}
+        <br />
+        <span class="journal-subtitle">{{ issue.journal.subtitle }}</span>
+        {% endif %}
+      </a>
       {# Peer review seal #}
       {% if issue.journal.type.code == 'S' %}
       <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">

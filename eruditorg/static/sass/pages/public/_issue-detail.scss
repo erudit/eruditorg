@@ -5,6 +5,12 @@
   */
   .main-header {
 
+    .main-header__meta {
+      .journal-subtitle {
+        color: $dark-grey;
+      }
+    }
+
     h1 {
       font-size: 1.953em;
 
