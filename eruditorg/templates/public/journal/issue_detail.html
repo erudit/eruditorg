@@ -158,9 +158,13 @@
   {# This is displayed only if the Fedora repository is unavailable #}
 
   <p>
-  {% for copyright in issue.erudit_object.droitsauteur %}
-    <small>{{ copyright.text|safe }}</small>
-  {% endfor %}
+  {% if issue.copyrights %}
+    <small>{{ issue.copyrights|safe }}</small>
+  {% else %}
+    {% for copyright in issue.erudit_object.droitsauteur %}
+      <small>{{ copyright.text|safe }}</small>
+    {% endfor %}
+  {% endif %}
 </p>
 </main>
 {% endcache %}

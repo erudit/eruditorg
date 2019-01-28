@@ -888,6 +888,10 @@ class Issue(FedoraMixin, FedoraDated):
             return _format_theme(themes.pop())
         return self.title
 
+    @property
+    @catch_and_log
+    def copyrights(self):
+        return self.erudit_object.get_copyrights(get_language(), formatted=True, html=True)
 
 def fedora_only(method):
 
