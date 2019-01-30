@@ -28,11 +28,11 @@ class TestIssueDetailSummary:
             'titles': {'paral': None, 'main': None},
             'level': 0,
             'groups': [
-                {'objects': [article_1, article_2], 'type': 'objects', 'level': 0},
+                {'objects': [article_1, article_2], 'type': 'objects', 'level': 0, 'notegens': []},
                 {
                     'titles': {'paral': [], 'main': "section 1"},
                     'level': 1,
-                    'groups': [{'objects': [article_3], 'type': 'objects', 'level': 1}],
+                    'groups': [{'objects': [article_3], 'type': 'objects', 'level': 1, 'notegens': []}],
                     'type': 'subsection'
                 },
             ],
@@ -96,17 +96,48 @@ class TestIssueDetailSummary:
                         'paral': [], 'main': 'section 1'
                     },
                     'groups': [
-                        {'type': 'objects', 'level': 1, 'objects': [articles[0]]},
+                        {'type': 'objects', 'level': 1, 'objects': [articles[0]], 'notegens': []},
                         {
                             'type': 'subsection', 'level': 2, 'titles': {'paral': [], 'main': 'section 1.1'},  # noqa
-                            'groups': [{'type': 'objects', 'level': 2, 'objects': [articles[1]]}]
+                            'groups': [{'type': 'objects', 'level': 2, 'objects': [articles[1]], 'notegens': []}]
                         },
                         {
-                            'type': 'objects', 'level': 1, 'objects': [articles[2]]
+                            'type': 'objects', 'level': 1, 'objects': [articles[2]], 'notegens': []
                         }
                     ]
                 }
             ]
+        }
+
+    def test_can_generate_section_tree_with_notegens(self):
+        view = IssueDetailView()
+        articles = [
+            ArticleFactory(
+                notegens=[{'content': 'Note surtitre', 'scope': 'surtitre', 'type': 'edito'}]
+            ),
+            ArticleFactory(
+                section_titles=[SectionTitle(1, False, "Section 1")],
+                notegens=[{'content': 'Note surtitre2', 'scope': 'surtitre2', 'type': 'edito'}]
+            ),
+        ]
+        sections_tree = view.generate_sections_tree(articles)
+        assert sections_tree == {
+            'titles': {'paral': None, 'main': None},
+            'level': 0,
+            'groups': [
+                {'objects': [articles[0]], 'type': 'objects', 'level': 0, 'notegens': [
+                    {'content': ['Note surtitre'], 'scope': 'surtitre', 'type': 'edito'},
+                ]},
+                {
+                    'titles': {'paral': [], 'main': 'Section 1'},
+                    'level': 1,
+                    'groups': [{'objects': [articles[1]], 'type': 'objects', 'level': 1, 'notegens': [
+                        {'content': ['Note surtitre2'], 'scope': 'surtitre2', 'type': 'edito'}
+                    ]}],
+                    'type': 'subsection'
+                },
+            ],
+            'type': 'subsection',
         }
 
 

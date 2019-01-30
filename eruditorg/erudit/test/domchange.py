@@ -56,6 +56,16 @@ class EruditArticleDomChanger(BaseDomChanger):
             elem.text = title.title
             grtitre.append(elem)
 
+    def set_notegens(self, notegens):
+        article = self.root.getroot()
+        for notegen in notegens:
+            subelem = E.notegen(
+                E.alinea(notegen['content']),
+                porteenoteg=notegen['scope'],
+                typenoteg=notegen['type'],
+            )
+            article.append(subelem)
+
     def set_title(self, title):
         titre = self.root.find('.//grtitre/titre')
         titre.text = title
