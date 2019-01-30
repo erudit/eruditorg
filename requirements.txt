@@ -44,7 +44,7 @@ isodate==0.6.0            # via rdflib
 jdcal==1.4                # via openpyxl
 jsonfield==2.0.2          # via django-post-office
 lxml[cssselect]==4.3.0
-mysqlclient==1.4.1
+mysqlclient==1.3.14
 openpyxl==2.3.5
 pillow==5.4.1
 ply==3.11
@@ -61,7 +61,7 @@ pytz==2018.9              # via babel, django, influxdb
 raven==6.10.0
 rdflib==4.2.2
 redis==2.10.6             # via django-redis
-requests-toolbelt==0.8.0
+requests-toolbelt==0.9.1
 requests[socks]==2.21.0
 rules==2.0.1
 sickle==0.6.4
