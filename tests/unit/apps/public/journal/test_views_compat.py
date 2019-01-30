@@ -13,7 +13,7 @@ pytestmark = pytest.mark.django_db
 @pytest.fixture()
 def view():
     # Journal with volumes and numbers.
-    journal1 = JournalFactory(code='journal1')
+    journal1 = JournalFactory(code='journal1', localidentifier='journal1')
     IssueFactory(journal=journal1, localidentifier='issue11', year='2001', volume='1', number='1')
     IssueFactory(journal=journal1, localidentifier='issue21', year='2002', volume='2', number='1')
     IssueFactory(journal=journal1, localidentifier='issue22', year='2002', volume='2', number='2')
@@ -21,12 +21,12 @@ def view():
     IssueFactory(journal=journal1, localidentifier='issue32', year='2003', volume='3', number='2')
     IssueFactory(journal=journal1, localidentifier='issue33', year='2003', volume='3', number='3')
     # Journal with only volumes.
-    journal2 = JournalFactory(code='journal2')
+    journal2 = JournalFactory(code='journal2', localidentifier='journal2')
     IssueFactory(journal=journal2, localidentifier='issue1', year='2001', volume='1')
     IssueFactory(journal=journal2, localidentifier='issue2', year='2002', volume='2')
     IssueFactory(journal=journal2, localidentifier='issue3', year='2003', volume='3')
     # Journal with only numbers.
-    journal3 = JournalFactory(code='journal3')
+    journal3 = JournalFactory(code='journal3', localidentifier='journal3')
     IssueFactory(journal=journal3, localidentifier='issue4', year='2004', number='4')
     IssueFactory(journal=journal3, localidentifier='issue5', year='2005', number='5')
     IssueFactory(journal=journal3, localidentifier='issue6', year='2006', number='6')
@@ -85,8 +85,7 @@ class TestIssueDetailRedirectView:
         # If volume is omitted, the right issue should still be found.
         ('2001', '', '1', '/fr/revues/journal1/2001-v1-n1-issue11/'),
         # Wrong year, volume or number should raise 404.
-        ('2004', '1', '1', False),
-        ('2001', '4', '1', False),
+        ('2004', '4', '1', False),
         ('2001', '1', '4', False),
     ])
     def test_get_redirect_url_with_year_volume_and_number(self, year, volume, number, expected_url, view):
