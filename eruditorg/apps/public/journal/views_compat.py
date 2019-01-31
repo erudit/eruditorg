@@ -97,15 +97,17 @@ class IssueDetailRedirectView(
                 additional_filter.add((Q(year=year) | Q(publication_period__contains=year)), Q.AND)
             if volume:
                 # If we get multiple volumes like "1-3", we need to search for "1-3" OR "1" OR "3".
+                # Or if we get only "3", we need to search for "3" OR "3-*" OR "*-3".
                 volume_filter = Q(_connector=Q.OR)
-                volume_filter.add(Q(volume=volume), Q.OR)
+                volume_filter.add(Q(volume__regex=r'^{v}$|^{v}-|-{v}$'.format(v=volume)), Q.OR)
                 for v in volume.split('-'):
                     volume_filter.add(Q(volume=v), Q.OR)
                 additional_filter.add(volume_filter, Q.AND)
             if number:
                 # If we get multiple numbers like "1-3", we need to search for "1-3" OR "1" OR "3".
+                # Or if we get only "3", we need to search for "3" OR "3-*" OR "*-3".
                 number_filter = Q(_connector=Q.OR)
-                number_filter.add(Q(number=number) | Q(localidentifier=number), Q.OR)
+                number_filter.add(Q(number__regex=r'^{n}$|^{n}-|-{n}$'.format(n=number)) | Q(localidentifier=number), Q.OR)
                 for n in number.split('-'):
                     number_filter.add(Q(number=n) | Q(localidentifier=n), Q.OR)
                 additional_filter.add(number_filter, Q.AND)
