@@ -89,23 +89,26 @@ class IssueDetailRedirectView(
 
         # Then, based on the provided keyword arguments, we generate additional filters, trying to
         # make them not too strict to avoid no results and not too wide to avoid multiple results.
+        additional_filter = Q()
         if localidentifier:
-            additional_filter = Q(localidentifier=localidentifier)
-        elif year and volume and number:
-            additional_filter = (Q(year=year) | Q(volume=volume)) & \
-                                (Q(number=number) | Q(localidentifier=number))
-        elif volume and number:
-            additional_filter = Q(volume=volume) & (Q(number=number) | Q(localidentifier=number))
-        elif year and volume:
-            additional_filter = Q(year=year) & Q(volume=volume)
-        elif year and number:
-            additional_filter = Q(year=year) & Q(number=number)
-        elif number:
-            additional_filter = Q(number=number)
-        elif volume:
-            additional_filter = Q(volume=volume)
-        elif year:
-            additional_filter = Q(volume=volume)
+            additional_filter.add(Q(localidentifier=localidentifier), Q.AND)
+        else:
+            if year:
+                additional_filter.add((Q(year=year) | Q(publication_period__contains=year)), Q.AND)
+            if volume:
+                # If we get multiple volumes like "1-3", we need to search for "1-3" OR "1" OR "3".
+                volume_filter = Q(_connector=Q.OR)
+                volume_filter.add(Q(volume=volume), Q.OR)
+                for v in volume.split('-'):
+                    volume_filter.add(Q(volume=v), Q.OR)
+                additional_filter.add(volume_filter, Q.AND)
+            if number:
+                # If we get multiple numbers like "1-3", we need to search for "1-3" OR "1" OR "3".
+                number_filter = Q(_connector=Q.OR)
+                number_filter.add(Q(number=number) | Q(localidentifier=number), Q.OR)
+                for n in number.split('-'):
+                    number_filter.add(Q(number=n) | Q(localidentifier=n), Q.OR)
+                additional_filter.add(number_filter, Q.AND)
 
         # Try to get the object with the additional filters, or raise 404 if no object is found.
         # If multiple objects are found, we apply the filters again and default to the last one.
