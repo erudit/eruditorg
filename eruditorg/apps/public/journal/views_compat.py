@@ -107,7 +107,9 @@ class IssueDetailRedirectView(
                 # If we get multiple numbers like "1-3", we need to search for "1-3" OR "1" OR "3".
                 # Or if we get only "3", we need to search for "3" OR "3-*" OR "*-3".
                 number_filter = Q(_connector=Q.OR)
-                number_filter.add(Q(number__regex=r'^{n}$|^{n}-|-{n}$'.format(n=number)) | Q(localidentifier=number), Q.OR)
+                number_filter.add(Q(number__regex=r'^{n}$|^{n}-|-{n}$'.format(n=number)) | \
+                                  Q(localidentifier__regex=r'^{n}$|^{n}-|-{n}$'.format(n=number)), \
+                                  Q.OR)
                 for n in number.split('-'):
                     number_filter.add(Q(number=n) | Q(localidentifier=n), Q.OR)
                 additional_filter.add(number_filter, Q.AND)
