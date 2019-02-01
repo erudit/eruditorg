@@ -893,6 +893,7 @@ class Issue(FedoraMixin, FedoraDated):
     def copyrights(self):
         return self.erudit_object.get_copyrights(get_language(), formatted=True, html=True)
 
+
 def fedora_only(method):
 
     @wraps(method)
