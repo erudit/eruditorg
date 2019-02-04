@@ -11,7 +11,7 @@ from apps.public.journal.views_compat import IssueDetailRedirectView
 pytestmark = pytest.mark.django_db
 
 @pytest.fixture()
-def view():
+def issues_fixture():
     # Journal with volumes and numbers.
     journal1 = JournalFactory(code='journal1', localidentifier='journal1')
     IssueFactory(journal=journal1, localidentifier='issue11', year='2001', volume='1', number='1')
@@ -53,11 +53,6 @@ def view():
     IssueFactory(journal=journal3, localidentifier='issue5n', year='2005', number='5-6')
     IssueFactory(journal=journal3, localidentifier='issue7n', year='2005', number='7')
 
-    # View.
-    view = IssueDetailRedirectView()
-    view.request = unittest.mock.MagicMock()
-    yield view
-
 
 class TestIssueDetailRedirectView:
 
@@ -73,7 +68,9 @@ class TestIssueDetailRedirectView:
         # Nonexistent localidentifier should raise 404.
         ('issue404', '', False),
     ])
-    def test_get_redirect_url_with_id_in_request(self, localidentifier, ticket, expected_url, view):
+    def test_get_redirect_url_with_id_in_request(self, localidentifier, ticket, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         view.request.GET = {'id': localidentifier, 'ticket': ticket}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal1')
@@ -91,7 +88,9 @@ class TestIssueDetailRedirectView:
         # Nonexistent localidentifier should raise 404.
         ('issue404', False),
     ])
-    def test_get_redirect_url_with_localidentifier(self, localidentifier, expected_url, view):
+    def test_get_redirect_url_with_localidentifier(self, localidentifier, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal1', localidentifier=localidentifier)
         else:
@@ -135,7 +134,9 @@ class TestIssueDetailRedirectView:
         ('2007', '12-21', '43', '/fr/revues/journal1/2008-v12-21-n34-43-issue1221/'),
         ('2008', '12', '43', '/fr/revues/journal1/2008-v12-21-n34-43-issue1221/'),
     ])
-    def test_get_redirect_url_with_year_volume_and_number(self, year, volume, number, expected_url, view):
+    def test_get_redirect_url_with_year_volume_and_number(self, year, volume, number, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal1', year=year, v=volume, n=number)
         else:
@@ -171,7 +172,9 @@ class TestIssueDetailRedirectView:
         ('12-21', '34', '/fr/revues/journal1/2008-v12-21-n34-43-issue1221/'),
         ('12', '34', '/fr/revues/journal1/2008-v12-21-n34-43-issue1221/'),
     ])
-    def test_get_redirect_url_with_volume_and_number(self, volume, number, expected_url, view):
+    def test_get_redirect_url_with_volume_and_number(self, volume, number, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal1', v=volume, n=number)
         else:
@@ -195,7 +198,9 @@ class TestIssueDetailRedirectView:
         ('2005', '7-8', '/fr/revues/journal2/2005-v7-issue7v/'),
         ('2005', '7', '/fr/revues/journal2/2005-v7-issue7v/'),
     ])
-    def test_get_redirect_url_with_year_and_volume(self, year, volume, expected_url, view):
+    def test_get_redirect_url_with_year_and_volume(self, year, volume, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal2', year=year, v=volume)
         else:
@@ -215,7 +220,9 @@ class TestIssueDetailRedirectView:
         ('7-8', '/fr/revues/journal2/2005-v7-issue7v/'),
         ('7', '/fr/revues/journal2/2005-v7-issue7v/'),
     ])
-    def test_get_redirect_url_with_volume(self, volume, expected_url, view):
+    def test_get_redirect_url_with_volume(self, volume, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal2', v=volume)
         else:
@@ -239,7 +246,9 @@ class TestIssueDetailRedirectView:
         ('2005', '7-8', '/fr/revues/journal3/2005-n7-issue7n/'),
         ('2005', '7', '/fr/revues/journal3/2005-n7-issue7n/'),
     ])
-    def test_get_redirect_url_with_year_and_number(self, year, number, expected_url, view):
+    def test_get_redirect_url_with_year_and_number(self, year, number, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal3', year=year, n=number)
         else:
@@ -259,7 +268,9 @@ class TestIssueDetailRedirectView:
         ('7-8', '/fr/revues/journal3/2005-n7-issue7n/'),
         ('7', '/fr/revues/journal3/2005-n7-issue7n/'),
     ])
-    def test_get_redirect_url_with_number(self, number, expected_url, view):
+    def test_get_redirect_url_with_number(self, number, expected_url, issues_fixture):
+        view = IssueDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal3', n=number)
         else:
