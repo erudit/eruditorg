@@ -385,6 +385,11 @@ class IssueDetailView(
         except ObjectDoesNotExist:
             pass
 
+        titles = self.object.erudit_object.get_titles()
+        main = titles.get('main')
+        context['journal_title'] = main.title
+        context['journal_subtitle'] = main.subtitle
+
         context['meta_info_issue'] = self.object
         guest_editors = self.object.erudit_object.get_redacteurchef(
             typerc="invite",
@@ -792,10 +797,14 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         article = self.get_content()
 
         erudit_object = article.get_erudit_object()
+        titles = article.issue.erudit_object.get_titles()
+        main = titles.get('main')
         coverpage_context = {
             'article': article,
             'issue': article.issue,
             'journal': article.issue.journal,
+            'journal_title': main.title,
+            'journal_subtitle': main.subtitle,
             'fedora_article': self.fedora_object,
             'erudit_article': erudit_object,
             'authors': erudit_object.get_formatted_authors()

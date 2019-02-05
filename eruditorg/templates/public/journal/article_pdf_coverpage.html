@@ -218,10 +218,10 @@
     </div>
     <div id="journal_data">
       <div id="journal_data_title">
-        {{ journal.name }}
-        {% if journal.subtitle %}
+        {{ journal_title|safe }}
+        {% if journal_subtitle %}
         <br />
-        <span id="journal_data_subtitle">{{ journal.subtitle }}</span>
+        <span id="journal_data_subtitle">{{ journal_subtitle|safe }}</span>
         {% endif %}
       </div>
     </div>

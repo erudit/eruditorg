@@ -96,10 +96,10 @@
   <header class="main-header">
     <p class="main-header__meta">
       <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">
-        {{ issue.journal.name }}
-        {% if issue.journal.subtitle %}
+        {{ journal_title|safe }}
+        {% if journal_subtitle %}
         <br />
-        <span class="journal-subtitle">{{ issue.journal.subtitle }}</span>
+        <span class="journal-subtitle">{{ journal_subtitle|safe }}</span>
         {% endif %}
       </a>
       {# Peer review seal #}
@@ -170,10 +170,10 @@
 <div class="sidebar-block clearfix latest-issue">
   <h2>
     <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">
-      {{ issue.journal.name }}
-      {% if issue.journal.subtitle %}
+      {{ journal_title|safe }}
+      {% if journal_subtitle %}
       <br />
-      <span class="journal-subtitle">{{ issue.journal.subtitle }}</span>
+      <span class="journal-subtitle">{{ journal_subtitle|safe }}</span>
       {% endif %}
     </a>
   </h2>
