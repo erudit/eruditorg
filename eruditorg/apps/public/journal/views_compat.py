@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import RedirectView
+from django.core.exceptions import MultipleObjectsReturned
 
 from erudit.fedora.utils import get_pids
 from erudit.models import Article
@@ -46,17 +47,26 @@ class IssueDetailRedirectView(
 
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
+
+        # Get the journal or raise 404.
+        journal_code = kwargs.get('journal_code')
+        journal = Journal.legacy_objects.get_by_id_or_404(journal_code)
+
+        # If a specific ID is included in the request, try to load it from Fedora and generate its
+        # URL, otherwise raise 404. If a ticket is also included in the request, add it to the URL.
         if 'id' in self.request.GET:
             localidentifier = self.request.GET.get('id')
             ticket = self.request.GET.get('ticket')
             try:
                 issue = Issue.from_fedora_ids(
-                    self.kwargs['journal_code'],
+                    journal.code,
                     localidentifier
                 )
                 redirect_url = reverse(self.pattern_name, args=[
-                    kwargs['journal_code'], issue.volume_slug, localidentifier, ])
-
+                    journal.code,
+                    issue.volume_slug,
+                    localidentifier,
+                ])
                 if ticket:
                     return "{url}?ticket={ticket}".format(
                         url=redirect_url,
@@ -64,43 +74,75 @@ class IssueDetailRedirectView(
                     )
                 else:
                     return redirect_url
-
             except Issue.DoesNotExist:
                 raise Http404()
 
-        journal = Journal.legacy_objects.get_by_id_or_404(kwargs['journal_code'])
+        # Otherwise, we need to figure out wich issue is requested. We first get a queryset of all
+        # issues related to the journal.
         issue_qs = Issue.objects.select_related('journal').filter(journal=journal)
-        if 'journal_code' in kwargs and 'localidentifier' in kwargs:
-            issue = get_object_or_404(issue_qs, localidentifier=kwargs['localidentifier'])
-            return reverse(self.pattern_name, args=[
-                journal.code, issue.volume_slug, kwargs['localidentifier'], ])
-        elif 'journal_code' in kwargs and 'v' in kwargs and 'n' in kwargs:
-            additional_filter = (Q(number=kwargs['n']) | Q(localidentifier=kwargs['n']))
-            if kwargs['v']:
-                additional_filter &= Q(volume=kwargs['v'])
-            if 'year' in kwargs:
-                additional_filter &= Q(year=kwargs['year'])
-            if kwargs['v']:
-                issue = get_object_or_404(issue_qs, additional_filter)
-            else:
-                issue = issue_qs.filter(additional_filter).last()
-            if not issue:
+
+        # Get all the provided keyword arguments.
+        localidentifier = kwargs.get('localidentifier', '')
+        year = kwargs.get('year', '')
+        volume = kwargs.get('v', '')
+        number = kwargs.get('n', '')
+
+        # Then, based on the provided keyword arguments, we generate additional filters, trying to
+        # make them not too strict to avoid no results and not too wide to avoid multiple results.
+        additional_filter = Q()
+        if localidentifier:
+            additional_filter.add(Q(localidentifier=localidentifier), Q.AND)
+        else:
+            if year:
+                additional_filter.add((Q(year=year) | Q(publication_period__contains=year)), Q.AND)
+            if volume:
+                volume_filter = Q(_connector=Q.OR)
+                volume_filter.add(Q(volume=volume), Q.OR)
+                # If we get multiple volumes like "1-3", we need to search for "1-3" OR "1" OR "3".
+                if '-' in volume:
+                    for v in volume.split('-'):
+                        volume_filter.add(Q(volume=v), Q.OR)
+                # Or if we get only "3", we need to search for "3" OR "3-*" OR "*-3".
+                else:
+                    volume_filter.add(
+                        Q(volume__startswith='{}-'.format(volume)) |
+                        Q(volume__endswith='-{}'.format(volume)),
+                        Q.OR
+                    )
+                additional_filter.add(volume_filter, Q.AND)
+            if number:
+                number_filter = Q(_connector=Q.OR)
+                number_filter.add(Q(number=number) | Q(localidentifier=number), Q.OR)
+                # If we get multiple numbers like "1-3", we need to search for "1-3" OR "1" OR "3".
+                if '-' in number:
+                    for n in number.split('-'):
+                        number_filter.add(Q(number=n) | Q(localidentifier=n), Q.OR)
+                # Or if we get only "3", we need to search for "3" OR "3-*" OR "*-3".
+                else:
+                    number_filter.add(
+                        Q(number__startswith='{}-'.format(number)) |
+                        Q(number__endswith='-{}'.format(number)) |
+                        Q(localidentifier__startswith='{}-'.format(number)) |
+                        Q(localidentifier__endswith='-{}'.format(number)),
+                        Q.OR
+                    )
+                additional_filter.add(number_filter, Q.AND)
+
+        # Try to get the object with the additional filters, or raise 404 if no object is found.
+        # If multiple objects are found, we apply the filters again and default to the last one.
+        try:
+            issue = get_object_or_404(issue_qs, additional_filter)
+        except MultipleObjectsReturned:
+            issue = issue_qs.filter(additional_filter).last()
+            if issue is None:
                 raise Http404
-            return reverse(self.pattern_name, args=[
-                journal.code, issue.volume_slug, issue.localidentifier, ])
-        elif 'journal_code' in kwargs and 'v' in kwargs and 'year' in kwargs:
-            issue = issue_qs.filter(volume=kwargs['v'], year=kwargs['year']).last()
-            if not issue:
-                raise Http404
-            return reverse(self.pattern_name, args=[
-                journal.code, issue.volume_slug, issue.localidentifier,
-            ])
-        elif 'journal_code' in kwargs and 'v' in kwargs:
-            issue = get_object_or_404(issue_qs, volume=kwargs['v'])
-            return reverse(self.pattern_name, args=[
-                journal.code, issue.volume_slug, issue.localidentifier, ])
-        else:  # pragma: no cover
-            raise Http404
+
+        # Finally, we can generate the redirect URL.
+        return reverse(self.pattern_name, args=[
+            journal.code,
+            issue.volume_slug,
+            issue.localidentifier,
+        ])
 
 
 class ArticleDetailRedirectView(
