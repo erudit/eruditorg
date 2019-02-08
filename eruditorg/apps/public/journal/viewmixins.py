@@ -106,6 +106,10 @@ class ContentAccessCheckMixin:
             if content.open_access or not content.embargoed:
                 return True
 
+            if not content.issue.is_published:
+                if content.issue.prepublication_ticket == self.request.GET.get('ticket'):
+                    return True
+
         kwargs = self._get_subscriptions_kwargs_for_content()
         return self.request.subscriptions.provides_access_to(**kwargs)
 
