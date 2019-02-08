@@ -14,6 +14,7 @@ from apps.public.journal.viewmixins import SingleArticleMixin
 from apps.public.journal.viewmixins import SingleJournalMixin
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.middleware import SubscriptionMiddleware
+from core.subscription.models import UserSubscriptions
 from base.test.factories import get_anonymous_request, get_authenticated_request
 from erudit.test.factories import JournalFactory
 
@@ -79,6 +80,25 @@ class TestContentAccessCheckMixin:
 
         # Run # check
         assert not view.content_access_granted
+
+    @pytest.mark.parametrize('is_published,authorized', (
+        (False, True),
+        (True, False)
+    ))
+    def test_can_grant_access_to_an_article_if_prepublication_ticket_is_valid(self, is_published, authorized, single_article_view):
+        article = EmbargoedArticleFactory(issue__is_published=is_published)
+
+        view = single_article_view()
+        view.object = article
+        request = RequestFactory().get('/', {
+            'ticket': article.issue.prepublication_ticket
+        })
+        view.request = request
+        request.subscriptions = UserSubscriptions()
+        request.session = dict()
+
+        # Run # check
+        assert view.content_access_granted == authorized
 
     def test_can_grant_access_to_an_article_if_it_is_in_open_access(self, single_article_view):
         # Setup
