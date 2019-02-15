@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 from erudit.models import LegacyOrganisationProfile
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from ..viewmixins import OrganisationScopePermissionRequiredMixin

@@ -29,7 +29,7 @@ class TestViews:
         client = Client(logged_user=user_granted)
         url = reverse('userspace:journal:editor:issues', kwargs={'journal_pk': journal.pk})
         response = client.get(url)
-        assert response.status_code == 403
+        assert response.status_code == 302
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         Authorization.objects.create(
@@ -56,7 +56,7 @@ class TestViews:
         client = Client(logged_user=user_granted)
         url = reverse('userspace:journal:editor:add', kwargs={'journal_pk': journal.pk})
         response = client.get(url)
-        assert response.status_code == 403
+        assert response.status_code == 302
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         Authorization.objects.create(
@@ -86,7 +86,7 @@ class TestViews:
         url = reverse('userspace:journal:editor:update', kwargs={
             'journal_pk': journal.pk, 'pk': issue.pk})
         response = client.get(url)
-        assert response.status_code == 403
+        assert response.status_code == 302
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         Authorization.objects.create(

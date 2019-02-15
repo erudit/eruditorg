@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .shortcuts import get_managed_organisations
 from .viewmixins import OrganisationScopeMixin

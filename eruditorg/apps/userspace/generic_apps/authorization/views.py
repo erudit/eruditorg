@@ -9,7 +9,7 @@ from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from core.authorization.models import Authorization
 
 from .forms import AuthorizationForm

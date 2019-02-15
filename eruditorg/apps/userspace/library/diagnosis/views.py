@@ -3,7 +3,7 @@ from datetime import datetime
 from ipware.ip import get_ip
 from django.views.generic import TemplateView
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from core.subscription.models import JournalAccessSubscription

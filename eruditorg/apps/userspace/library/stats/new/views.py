@@ -8,7 +8,7 @@ from django.views.generic import View
 
 from erudit.models import Journal
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from core.counter.counter import JournalReport1
 from core.counter.counter import JournalReport1GOA
 from core.counter.csv import get_csv_journal_counter_report_rows

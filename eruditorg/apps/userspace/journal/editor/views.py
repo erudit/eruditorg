@@ -3,6 +3,7 @@ import datetime as dt
 import structlog
 from urllib.parse import quote
 
+from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
@@ -40,6 +41,7 @@ class IssueSubmissionListView(
         JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     menu_journal = 'editor'
     model = IssueSubmission
+    raise_exception = False
     template_name = 'userspace/journal/editor/issues.html'
 
     def get_queryset(self):
@@ -83,6 +85,7 @@ class IssueSubmissionCreate(
         CreateView):
     menu_journal = 'editor'
     model = IssueSubmission
+    raise_exception = False
     form_class = IssueSubmissionForm
     permission_required = 'editor.manage_issuesubmission'
     template_name = 'userspace/journal/editor/form.html'
@@ -123,6 +126,7 @@ class IssueSubmissionUpdate(
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
+    raise_exception = False
     form_class = IssueSubmissionUploadForm
     template_name = 'userspace/journal/editor/form.html'
 
@@ -178,11 +182,16 @@ class IssueSubmissionUpdate(
             'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
 
     def has_permission(self):
-        obj = self.get_permission_object()
         issue_submission = self.get_object()
-        return issue_submission.is_draft and (
+        if not issue_submission.is_draft:
+            raise PermissionDenied
+
+        obj = self.get_permission_object()
+
+        return (
             self.request.user.has_perm('editor.manage_issuesubmission', obj) or
-            self.request.user.has_perm('editor.review_issuesubmission'))
+            self.request.user.has_perm('editor.review_issuesubmission')
+        )
 
 
 class IssueSubmissionTransitionView(
@@ -329,7 +338,7 @@ class IssueSubmissionDeleteView(
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
-    raise_exception = True
+    raise_exception = False
     template_name = 'userspace/journal/editor/delete.html'
 
     def get_queryset(self):
@@ -351,7 +360,7 @@ class IssueSubmissionAttachmentView(
     Returns an IssueSubmission attachment.
     """
     model = ResumableFile
-    raise_exception = True
+    raise_exception = False
 
     def render_to_response(self, context, **response_kwargs):
         path = self.object.path

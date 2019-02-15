@@ -12,7 +12,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
