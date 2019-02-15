@@ -45,7 +45,9 @@ class IndividualSubscriptionAction(AccountActionBase):
             [token.email, ],
             html_template='emails/subscription/journal/new_subscription_content.html',
             subject_template='emails/subscription/journal/new_subscription_subject.html',
-            extra_context={'token': token})
+            extra_context={'token': token},
+            tag="www-subscription-nouvel-abonne"
+        )
         email.send()
 
     def _subscription_exists(self, token, user):

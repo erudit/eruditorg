@@ -37,7 +37,9 @@ class OrganisationMembershipAction(AccountActionBase):
             [token.email, ],
             html_template='emails/organisation/new_member_content.html',
             subject_template='emails/organisation/new_member_subject.html',
-            extra_context={'token': token})
+            extra_context={'token': token},
+            tag="www-organisation-nouveau-membre",
+        )
         email.send()
 
     def _member_exists(self, token, user):

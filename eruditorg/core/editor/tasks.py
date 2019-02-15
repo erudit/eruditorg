@@ -8,6 +8,7 @@ from core.email import Email
 from .conf import settings as editor_settings
 from .models import IssueSubmission
 from .shortcuts import get_production_team_group
+from .apps import EMAIL_TAG
 
 logger = structlog.getLogger(__name__)
 
@@ -49,5 +50,7 @@ def _handle_issuesubmission_files_removal():
             list(emails),
             html_template='emails/editor/issue_files_deletion_content.html',
             subject_template='emails/editor/issue_files_deletion_subject.html',
-            extra_context={'issue_submissions': issue_submissions_to_email})
+            extra_context={'issue_submissions': issue_submissions_to_email},
+            tag=EMAIL_TAG
+        )
         email.send()

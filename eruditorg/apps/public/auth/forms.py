@@ -52,7 +52,9 @@ class PasswordResetForm(BasePasswordResetForm):
             to_email,
             html_template=email_template_name,
             subject_template=subject_template_name,
-            extra_context=context)
+            extra_context=context,
+            tag="www-reinitialisation-mot-de-passe"
+        )
         email.send()
 
     def get_users(self, email):
