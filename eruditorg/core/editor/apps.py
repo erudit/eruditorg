@@ -2,6 +2,8 @@
 
 from django.apps import AppConfig
 
+EMAIL_TAG = "www-depot-fichier"
+
 
 class EditorConfig(AppConfig):
     label = 'editor'

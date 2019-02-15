@@ -20,12 +20,13 @@ class Email:
     """
     def __init__(
             self, recipient, html_template, text_template=None, subject='', from_email=None,
-            subject_template=None, extra_context={}, language=None, attachments={}):
+            subject_template=None, extra_context={}, language=None, attachments={}, tag=None):
         self.recipient = recipient if not email_settings.USE_DEBUG_EMAIL \
             else email_settings.DEBUG_EMAIL_ADDRESS
         self.language = language if language else translation.get_language()
         self.attachments = attachments
         self.from_email = from_email
+        self.tag = tag
         with switch_language(self.language):
             self.context = {
                 'site': Site.objects.get_current(),
@@ -39,6 +40,7 @@ class Email:
                 else html2text.html2text(self.html_message)
 
     def send(self):
+
         kwargs = {
             'subject': self.subject,
             'html_message': self.html_message,
@@ -46,6 +48,9 @@ class Email:
             'language': self.language,
             'attachments': self.attachments,
         }
+
+        if self.tag:
+            kwargs["headers"] = {'X-Mailgun-Tag': self.tag}
 
         if self.from_email:
             mail.send(self.recipient, self.from_email, **kwargs)
