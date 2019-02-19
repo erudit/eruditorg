@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from core.journal.rules_helpers import get_editable_journals
 from core.journal.rules_helpers import get_editable_organisations
 

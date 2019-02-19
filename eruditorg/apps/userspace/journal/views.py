@@ -7,8 +7,9 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.http import HttpResponse, Http404
 from django.views.generic import RedirectView, TemplateView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from base.viewmixins import LoginRequiredMixin, MenuItemMixin
+from base.viewmixins import MenuItemMixin
 from core.journal.rules_helpers import get_editable_journals
 
 from .viewmixins import JournalScopeMixin, JournalScopePermissionRequiredMixin

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .settings import ERUDIT_COUNTER_BACKEND_URL
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from apps.userspace.library.viewmixins import OrganisationScopePermissionRequiredMixin

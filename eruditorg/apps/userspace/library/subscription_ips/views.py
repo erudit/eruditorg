@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription

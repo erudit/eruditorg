@@ -8,7 +8,7 @@ from django.views.generic import UpdateView
 from django.views.generic import FormView
 from django.views.generic.base import RedirectView
 from django.http.response import HttpResponseForbidden
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from .forms import UserParametersForm

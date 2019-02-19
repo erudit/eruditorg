@@ -1,6 +1,5 @@
 import inspect
 
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
 from django.utils.translation import activate
 
@@ -29,13 +28,6 @@ class MenuItemMixin:
         menu_kwargs = dict(a for a in vattrs if a[0].startswith('menu_'))
         context.update(menu_kwargs)
         return context
-
-
-class LoginRequiredMixin:
-    @classmethod
-    def as_view(cls, **initkwargs):
-        view = super().as_view(**initkwargs)
-        return login_required(view)
 
 
 class ActivateLegacyLanguageViewMixin:

@@ -3,7 +3,7 @@ import datetime as dt
 from django.views.generic import TemplateView
 from django.utils.translation import gettext as _
 
-from base.viewmixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from apps.userspace.library.viewmixins import OrganisationScopePermissionRequiredMixin
