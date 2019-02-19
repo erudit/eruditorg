@@ -78,3 +78,26 @@ def get_unimported_issues_pids(include_unpublished_issues=False):
 def localidentifier_from_pid(pid):
     """ erudit:erudit.ae49.ae03128 --> ae03128 """
     return pid.split(".")[-1]
+
+
+def get_journal_issue_pids_to_sync(journal_pid):
+    """ Returns a list of issue pids in need for synchronization for a given journal.
+
+    Those issues are either:
+        * published in fedora bot not on www
+        * published on www but not in fedora """
+    from ..models import Journal
+
+    journal = Journal.objects.get(localidentifier=localidentifier_from_pid(journal_pid))
+    published_in_fedora_pids = journal.erudit_object.get_published_issues_pids()
+    pids_to_sync = []
+
+    for issue in journal.issues.all():
+        # If an issue is published in fedora but not on www, it needs synchronization.
+        if issue.pid in published_in_fedora_pids and not issue.is_published:
+            pids_to_sync.append(issue.pid)
+        # If an issue is published on www but not in fedora, it needs synchronization.
+        elif issue.is_published and issue.pid not in published_in_fedora_pids:
+            pids_to_sync.append(issue.pid)
+
+    return pids_to_sync

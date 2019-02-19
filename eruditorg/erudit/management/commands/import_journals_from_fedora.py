@@ -12,7 +12,7 @@ from ...conf import settings as erudit_settings
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
-from ...fedora.utils import get_unimported_issues_pids
+from ...fedora.utils import get_unimported_issues_pids, get_journal_issue_pids_to_sync
 from ...fedora.repository import api
 from ...models import Collection
 from ...models import Issue
@@ -238,10 +238,12 @@ class Command(BaseCommand):
         # STEP 2: import each journal using its PID
         # --
 
+        issue_pids_to_sync = []
         journal_count, journal_errored_count = 0, 0
         for jpid in journal_pids:
             try:
                 self.import_journal(jpid, collection, False)
+                issue_pids_to_sync += get_journal_issue_pids_to_sync(jpid)
             except Exception:
                 journal_errored_count += 1
                 logger.error(
@@ -273,7 +275,7 @@ class Command(BaseCommand):
 
         issue_count, issue_errored_count = 0, 0
 
-        for ipid in issue_pids:
+        for ipid in set(issue_pids + issue_pids_to_sync):
             try:
                 journal_localidentifier = ipid.split(':')[1].split('.')[1]
                 journal = Journal.objects.get(localidentifier=journal_localidentifier)
@@ -428,7 +430,8 @@ class Command(BaseCommand):
             journalid=journal.localidentifier
         )
         issue_pids = get_pids(issue_fedora_query)
-        for ipid in issue_pids:
+        issue_pids_to_sync = get_journal_issue_pids_to_sync(journal_pid)
+        for ipid in set(issue_pids + issue_pids_to_sync):
             if ipid.startswith(journal_pid):
                 # Imports the issue only if its PID is prefixed with the PID of the journal object.
                 # In any other case this means that the issue is associated with another journal and
@@ -472,8 +475,7 @@ class Command(BaseCommand):
         # Set the proper values on the Issue instance
         issue.sync_with_erudit_object()
         issue.fedora_updated = fedora_issue.modified
-        # TODO: uncomment this when we're confident about milestone 70
-        # issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
+        issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
         issue.save()
 
         # STEP 4: patches the journal associated with the issue

@@ -82,7 +82,7 @@ class TestJournal:
             journal=journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
             journal=journal, year=dt.datetime.now().year + 2, is_published=False,
-            date_published=dt.datetime.now() + dt.timedelta(days=30))
+            add_to_fedora_journal=False, date_published=dt.datetime.now() + dt.timedelta(days=30))
         assert journal.last_issue == issue_2
 
     def test_last_issue_of_renamed_journal(self):

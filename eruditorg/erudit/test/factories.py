@@ -62,6 +62,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
     redirect_to_external_url = False
     last_publication_year = dt.datetime.now().year
+    fedora_updated = dt.datetime.now()
 
     class Meta:
         model = 'erudit.journal'
@@ -139,6 +140,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
     date_published = dt.datetime.now().date()
     year = dt.datetime.now().year
     is_published = True
+    fedora_updated = dt.datetime.now()
 
     class Meta:
         model = 'erudit.issue'
@@ -151,7 +153,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
 
     @factory.post_generation
     def add_to_fedora_journal(obj, create, extracted, **kwargs):
-        if obj.localidentifier and obj.is_published and (extracted is None or extracted):
+        if obj.localidentifier and (extracted is None or extracted):
             repository.api.add_publication_to_parent_journal(obj)
 
 
