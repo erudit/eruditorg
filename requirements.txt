@@ -11,10 +11,10 @@ git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=
 git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.34#egg=liberuditarticle
 babel==2.3.4
 beautifulsoup4==4.6.1
-cairocffi==1.0.2          # via cairosvg, weasyprint
-cairosvg==2.3.0           # via weasyprint
+cairocffi==0.9.0
+cairosvg==2.2.1
 certifi==2018.11.29       # via requests
-cffi==1.12.0              # via cairocffi, weasyprint
+cffi==1.12.1              # via cairocffi, weasyprint
 chardet==3.0.4
 cssselect2==0.2.1         # via cairosvg, weasyprint
 cssselect==1.0.3          # via lxml
@@ -26,7 +26,7 @@ django-fsm==2.6.0
 django-ipware==2.1.0
 django-isbn-field==0.5.2
 django-js-reverse==0.8.2
-django-modeltranslation==0.13b2
+django-modeltranslation==0.13b3
 django-polymorphic==2.0.3
 django-post-office==3.0.4
 django-redis==4.9.1

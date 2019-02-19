@@ -28,6 +28,10 @@ Sickle>=0.6
 structlog>=17.2.0
 django-modeltranslation>=v0.13-beta1
 
+# cairocffi 1.0 drops support for python 3.4
+cairocffi<1.0.0
+CairoSVG<2.3.0
+
 # dependencies for eruditorg
 
 django-post-office>=3.0.4,<3.1.0  # ok for both django 1.11 and django 2.0
