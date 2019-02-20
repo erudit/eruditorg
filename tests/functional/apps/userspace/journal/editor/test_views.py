@@ -256,7 +256,6 @@ class TestIssueSubmissionView:
         view.post(request)
 
         # Check
-        global test_points
         assert len(test_points) == 1
         issuesubmission = IssueSubmission.objects.last()
         assert test_points == [
@@ -488,7 +487,6 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         view.post(request)
 
         # Check
-        global test_points
         self.assertEqual(len(test_points), 1)
         self.assertEqual(
             test_points,
@@ -613,7 +611,6 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         view.post(request)
 
         # Check
-        global test_points
         self.assertEqual(len(test_points), 1)
         self.assertEqual(
             test_points,

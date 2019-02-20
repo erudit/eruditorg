@@ -81,6 +81,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', year=year, v=volume, n=number)
         else:
@@ -129,6 +130,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', year=year, v=volume, n=number)
         else:
@@ -151,6 +153,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', v=volume, n=number)
         else:
@@ -175,6 +178,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', year=year, v=volume)
         else:
@@ -195,6 +199,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', v=volume)
         else:
@@ -219,6 +224,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', year=year, n=number)
         else:
@@ -239,6 +245,7 @@ class TestIssueDetailRedirectView:
         )
         view = IssueDetailRedirectView()
         view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
         if expected_url:
             assert expected_url == view.get_redirect_url(journal_code='journal-1', n=number)
         else:
