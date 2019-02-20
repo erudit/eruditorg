@@ -78,7 +78,7 @@ class Command(BaseCommand):
                         self.stdout.write("Journal {} has no plan.".format(journal_shortname))
                         raise
 
-                    plan.subscribe_email(email, firstname=first_name, lastname=last_name)
+                    plan.subscribe_email(email, first_name=first_name, last_name=last_name)
                 else:
                     user, _ = get_user_model().objects.get_or_create(
                         email=email,
