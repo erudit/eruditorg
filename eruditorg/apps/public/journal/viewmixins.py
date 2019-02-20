@@ -45,22 +45,7 @@ class SingleJournalMixin:
         return self.get_journal()
 
 
-class PrepublicationTicketValidationMixin:
-    """ Provides a way to checks if the prebublication ticket is valid. """
-
-    def is_prepublication_ticket_valid(self, issue_ticket, request_ticket):
-        """ Returns True if the issue's prepulication ticket is valid, False otherwise.
-
-        In Tournesol, if the prepublication ticket begins with a '0', it gets stripped before it
-        gets stored in the database. While we wait for this bug to get fixed in Tournesol, we should
-        support tickets with a stripped leading '0'.
-
-        See https://gitlab.erudit.org/erudit/production/tournesol/Tournesol/issues/35 """
-        return (issue_ticket == request_ticket) or \
-            (issue_ticket[:1] == '0' and issue_ticket[1:] == request_ticket)
-
-
-class ContentAccessCheckMixin(PrepublicationTicketValidationMixin):
+class ContentAccessCheckMixin:
     """ Defines a way to check whether the current user can browse a given Érudit content. """
 
     def get_content(self):
@@ -121,11 +106,8 @@ class ContentAccessCheckMixin(PrepublicationTicketValidationMixin):
             if content.open_access or not content.embargoed:
                 return True
 
-            valid_ticket = self.is_prepublication_ticket_valid(
-                content.issue.prepublication_ticket,
-                self.request.GET.get('ticket')
-            )
-            if not content.issue.is_published and valid_ticket:
+            if not content.issue.is_published and \
+                    content.issue.is_prepublication_ticket_valid(self.request.GET.get('ticket')):
                 return True
 
         kwargs = self._get_subscriptions_kwargs_for_content()
@@ -165,7 +147,7 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
         return context
 
 
-class PrepublicationTokenRequiredMixin(PrepublicationTicketValidationMixin):
+class PrepublicationTokenRequiredMixin:
 
     def get(self, request, *args, **kwargs):
 
@@ -177,11 +159,8 @@ class PrepublicationTokenRequiredMixin(PrepublicationTicketValidationMixin):
         else:
             raise ValueError("This mixin should only be used with Article and Issue objects")
 
-        valid_ticket = self.is_prepublication_ticket_valid(
-            issue.prepublication_ticket,
-            request.GET.get('ticket')
-        )
-        if not issue.is_published and not valid_ticket:
+        if not issue.is_published and \
+                not issue.is_prepublication_ticket_valid(request.GET.get('ticket')):
             return HttpResponseRedirect(
                 reverse('public:journal:journal_detail', args=(issue.journal.code, ))
             )
