@@ -100,4 +100,8 @@ class Command(BaseCommand):
                                 )
                         if basket_id:
                             subscription.basket = AccessBasket.objects.get(pk=basket_id)
+                        if journal_shortname:
+                            journal = Journal.objects.get(code=journal_shortname)
+                            subscription.save()
+                            subscription.journals.add(journal)
                     subscription.save()
