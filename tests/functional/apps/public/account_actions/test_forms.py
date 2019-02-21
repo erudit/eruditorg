@@ -54,10 +54,10 @@ class TestAccountActionRegisterForm(TestCase):
     def test_cannot_be_validated_if_a_user_with_the_same_email_address_already_exists(self):
         # Setup
         User.objects.create_user(
-            username='test', password='not_secret', email='test@exampe.com')
+            username='test@example.com', password='not_secret', email='test@exampe.com')
         token = AccountActionTokenFactory.create(email='test@exampe.com')
         form_data = {
-            'username': faker.simple_profile().get('username'),
+            'username': faker.simple_profile().get('email'),
             'email': 'test@exampe.com',
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
@@ -74,7 +74,7 @@ class TestAccountActionRegisterForm(TestCase):
         # Setup
         token = AccountActionTokenFactory.create()
         form_data = {
-            'username': faker.simple_profile().get('username'),
+            'username': faker.simple_profile().get('email'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
@@ -86,7 +86,7 @@ class TestAccountActionRegisterForm(TestCase):
         self.assertTrue(form.is_valid())
         form.save()
         user = User.objects.first()
-        self.assertEqual(user.username, form_data['username'])
+        self.assertEqual(user.username, form_data['email'])
         self.assertEqual(user.email, form_data['email'])
         self.assertEqual(user.first_name, form_data['first_name'])
         self.assertEqual(user.last_name, form_data['last_name'])
@@ -97,7 +97,7 @@ class TestAccountActionRegisterForm(TestCase):
         actions.register(TestAction)
         token = AccountActionTokenFactory.create(action='test-consumed')
         form_data = {
-            'username': faker.simple_profile().get('username'),
+            'username': faker.simple_profile().get('email'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),

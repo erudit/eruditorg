@@ -26,30 +26,14 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
-                  {{ form.username }}
-                  <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="id_username">{% trans "Adresse courriel" %}</label>
-                  {{ form.email }}
-                  <div class="alert alert-error-text">{{ form.email.errors.as_text }}</div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="id_username">{% trans "Prénom" %}</label>
+                  <label for="id_first_name">{% trans "Prénom" %}</label>
                   {{ form.first_name }}
                   <div class="alert alert-error-text">{{ form.first_name.errors.as_text }}</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_username">{% trans "Nom" %}</label>
+                  <label for="id_last_name">{% trans "Nom" %}</label>
                   {{ form.last_name }}
                   <div class="alert alert-error-text">{{ form.last_name.errors.as_text }}</div>
                 </div>
@@ -58,14 +42,23 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_username">{{ form.password1.label }}</label>
+                  <label for="id_email">{% trans "Adresse courriel" %}</label>
+                  {{ form.email }}
+                  <div class="alert alert-error-text">{{ form.email.errors.as_text }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_password1">{{ form.password1.label }}</label>
                   {{ form.password1 }}
                   <div class="alert alert-error-text">{{ form.password1.errors.as_text }}</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_username">{{ form.password2.label }}</label>
+                  <label for="id_password2">{{ form.password2.label }}</label>
                   {{ form.password2 }}
                   <div class="alert alert-error-text">{{ form.password2.errors.as_text }}</div>
                 </div>
