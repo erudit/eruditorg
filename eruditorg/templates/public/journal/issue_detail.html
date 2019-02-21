@@ -155,17 +155,20 @@
   </header>
   {% include "public/journal/partials/issue_detail_section.html" %}
 
-  {# This is displayed only if the Fedora repository is unavailable #}
-
-  <p>
   {% if issue.copyrights %}
-    <small>{{ issue.copyrights|safe }}</small>
+    <p><small>{{ issue.copyrights|safe }}</small></p>
+    {% for license in issue.licenses %}
+      <p><a href="{{ license.href }}" target="_blank"><img src="{{ license.img }}" alt="{% trans 'License' %}" /></a></p>
+    {% endfor %}
   {% else %}
     {% for copyright in issue.erudit_object.droitsauteur %}
-      <small>{{ copyright.text|safe }}</small>
+      {% if copyright.text %}
+        <p><small>{{ copyright.text|safe }}</small></p>
+      {% elif copyright.href and copyright.img %}
+        <p><a href="{{ copyright.href }}" target="_blank"><img src="{{ copyright.img }}" alt="{% trans 'License' %}" /></a></p>
+      {% endif %}
     {% endfor %}
   {% endif %}
-</p>
 </main>
 {% endcache %}
 {% endblock inner_main %}

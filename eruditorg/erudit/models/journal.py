@@ -891,7 +891,12 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     @catch_and_log
     def copyrights(self):
-        return self.erudit_object.get_copyrights(get_language(), formatted=True, html=True)
+        return self.erudit_object.get_copyrights(get_language(), html=True)
+
+    @property
+    @catch_and_log
+    def licenses(self):
+        return self.erudit_object.get_droitsauteur(links_only=True)
 
 
 def fedora_only(method):

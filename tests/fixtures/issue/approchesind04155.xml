@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="p0962873" date="2018-12-14" app="Tournesol 0.5.3"/>
+<copyright>
+	<year>2018</year>
+<contribution>
+<artificialperson>
+	<name>Approches inductives</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="en">Copyright Holder</label>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="es">Todos los derechos reservados</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2018">
+			<periodcode>autom</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/approchesind/2018/v5/n2</url>
+  <nbarticle>7</nbarticle>
+  <revue id="approchesind0522" lang="fr">
+    <titrerev>Approches inductives</titrerev>
+    <sstitrerev>Travail intellectuel et construction des connaissances</sstitrerev>
+    <titrerevabr>approchesind</titrerevabr>
+    <idissnnum>2292-0005</idissnnum>
+    <directeur sexe="masculin">
+      <nompers>
+        <prenom>Jason</prenom>
+        <nomfamille>Luckerhoff</nomfamille>
+      </nompers>
+      <key>directeurs</key>
+    </directeur>
+    <directeur sexe="masculin">
+      <nompers>
+        <prenom>François</prenom>
+        <nomfamille>Guillemette</nomfamille>
+      </nompers>
+      <key>directeurs</key>
+    </directeur>
+    <redacteurchef idrefs="th1" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>François</prenom>
+        <nomfamille>Guillemette</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+    <redacteurchef idrefs="th1" sexe="feminin" typerc="invite">
+      <nompers>
+        <prenom>Rosine</prenom>
+        <nomfamille>Horincq Detournay</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+    <redacteurchef idrefs="th1" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>Raphaële</prenom>
+        <nomfamille>Noël</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+  </revue>
+  <numero id="approchesind04155">
+    <volume>5</volume>
+    <nonumero>2</nonumero>
+    <pub>
+      <periode>Automne</periode>
+      <annee>2018</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2018-12-13</date>
+    </pubnum>
+    <grtheme id="th1">
+      <theme>Approches inductives en psychologie</theme>
+    </grtheme>
+  </numero>
+  <editeur>
+    <nomorg>Université du Québec à Trois-Rivières</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Approches inductives</nomorg>, 2018</droitsauteur>
+  <droitsauteur>
+    <liensimple id="ls1" xlink:actuate="onRequest"
+      xlink:href="http://creativecommons.org/licenses/by-sa/3.0/"
+      xlink:show="replace" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <objetmedia flot="ligne">
+        <image typeimage="forme" xlink:actuate="onLoad"
+          xlink:href="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"
+          xlink:show="embed" xlink:type="simple"/>
+      </objetmedia>
+    </liensimple>
+  </droitsauteur>
+</infosommaire>
+<article doi="10.7202/1054332ar" horstheme="oui" idproprio="1054332ar"
+  lang="fr" ordseq="1" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054332ar.html</urlhtml>
+  <urlpdf taille="278" unite="ko">/revue/approchesind/2018/v5/n2/1054332ar.pdf</urlpdf>
+  <pagination>
+    <ppage>1</ppage>
+    <dpage>10</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Introduction : points d’attention pour améliorer la recherche qualitative en psychologie</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Rosine</prenom>
+    <nomfamille>Horincq Detournay</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Libre de Bruxelles</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Raphaële</prenom>
+    <nomfamille>Noël</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Montréal</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>François</prenom>
+    <nomfamille>Guillemette</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Trois-Rivières</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1054333ar" idproprio="1054333ar" idref="th1"
+  lang="fr" ordseq="2" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054333ar.html</urlhtml>
+  <urlpdf taille="466" unite="ko">/revue/approchesind/2018/v5/n2/1054333ar.pdf</urlpdf>
+  <urlplan>/revue/approchesind/2018/v5/n2/1054333ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>11</ppage>
+    <dpage>40</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Groupes de parole non thérapeutiques pour proches : expériences vécues des acteurs</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Émilie</prenom>
+    <nomfamille>Charlier</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Mons, Belgique</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cette contribution a pour objectif d’illustrer la mise en oeuvre concrète des principes inhérents à la méthodologie de la théorisation enracinée (MTE) au travers d’une recherche exploratoire ayant pour point de départ les groupes de parole. Ces dispositifs, considérés comme « incontournables » par Galiano et Portalier (2012), renvoient à des pratiques de terrain extrêmement diversifiées. L’étude en cours vise la compréhension des vécus des acteurs de groupes de parole non thérapeutiques pour proches (parents, enfants, conjoints, fratries, etc.) animés par des intervenants professionnels et ciblant des thématiques liées à des événements de vie personnels ou familiaux – moins visibles dans les écrits scientifiques. Les résultats préliminaires, issus d’entretiens semi-directifs menés auprès de 27 informateurs (18 animateurs et 9 participants), situent la souffrance psychique au coeur du processus d’engagement au sein de ces dispositifs.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Groupe de parole</motcle><motcle>soutien par les pairs</motcle><motcle>MTE</motcle><motcle>souffrance psychique</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1054334ar" idproprio="1054334ar" idref="th1"
+  lang="fr" ordseq="3" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054334ar.html</urlhtml>
+  <urlpdf taille="524" unite="ko">/revue/approchesind/2018/v5/n2/1054334ar.pdf</urlpdf>
+  <urlplan>/revue/approchesind/2018/v5/n2/1054334ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>41</ppage>
+    <dpage>70</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Influences réciproques entre le devenir père et l’historicité : présentation sommaire d’une étude doctorale qualitative et psychanalytique</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Marilyne</prenom>
+    <nomfamille>Savard</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Montréal, Canada</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Louis</prenom>
+    <nomfamille>Brunet</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Montréal, Canada</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Le présent article a pour objet la présentation sommaire
+d’une recherche doctorale basée sur la psychanalyse et la
+méthodologie de la théorisation enracinée, et
+portant sur les interinfluences entre le devenir père et
+l’historicité. Ce terme désigne ici le bagage
+conscient, préconscient et inconscient issu de l’histoire
+singulière qui a contribué au développement
+identitaire, et à ses effets dans l’actuel. La
+première partie de l’article met en contexte
+l’émergence du sujet de recherche et la collecte des
+données. Elle est suivie de la présentation de quelques
+concepts sensibilisateurs et de la méthodologie utilisée.
+Puis, la présentation des deux catégories centrales
+constituant les résultats de l’analyse qualitative sert
+d’assise aux propositions conceptuelles explicitées dans
+un dernier temps. L’article met en lumière comment
+l’histoire des devenants pères rejaillit sous forme de
+reviviscences nécessaires à la construction de
+représentations psychiques d’un projet de famille
+idéale et à l’émergence de
+l’identité paternelle.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Devenir père</motcle><motcle>passage à la paternité</motcle><motcle>historicité</motcle><motcle>reviviscences</motcle><motcle>Idéal du Moi</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1054335ar" idproprio="1054335ar" idref="th1"
+  lang="fr" ordseq="4" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054335ar.html</urlhtml>
+  <urlpdf taille="543" unite="ko">/revue/approchesind/2018/v5/n2/1054335ar.pdf</urlpdf>
+  <urlplan>/revue/approchesind/2018/v5/n2/1054335ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>71</ppage>
+    <dpage>101</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Adolescents délinquants en transition vers l’âge adulte : analyse du processus de désistance à partir de leur récit</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Rosa</prenom>
+    <nomfamille>Puglia</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Liège, Belgique</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Fabienne</prenom>
+    <nomfamille>Glowacz</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Liège, Belgique</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cette recherche a pour objectif de comprendre le processus de désistance à partir de l’étude du récit de trois adolescents délinquants récidivistes. Pour ce faire, ces jeunes en transition vers l’âge adulte ont réalisé un entretien semi-directif puis ont répondu à quelques questionnaires. Les données collectées ont été analysées en suivant la méthode de l’<marquage typemarq="italique">Interpretative phenomenological analysis </marquage>(IPA), dont l’objectif est de comprendre un phénomène en profondeur (Smith &amp; Osboren, 2003). L’analyse fait émerger une série de thèmes dont la complexité de sortir de la délinquance, le sentiment d’ambivalence, la balance décisionnelle et le poids de l’entourage.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Délinquance</motcle><motcle>agentivité</motcle><motcle>désistance</motcle><motcle>transition vers l’âge adulte</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1054336ar" idproprio="1054336ar" idref="th1"
+  lang="fr" ordseq="5" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054336ar.html</urlhtml>
+  <urlpdf taille="408" unite="ko">/revue/approchesind/2018/v5/n2/1054336ar.pdf</urlpdf>
+  <urlplan>/revue/approchesind/2018/v5/n2/1054336ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>102</ppage>
+    <dpage>127</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Comprendre par une approche inductive les interventions de réadaptation basées sur les principes de la psychologie positive dans les processus de réadaptation des personnes atteintes de la sclérose latérale amyotrophique</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Bernard</prenom>
+    <nomfamille>Michallet</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Trois-Rivières, Canada</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Marie-Chantal</prenom>
+    <nomfamille>Falardeau</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Trois-Rivières, Canada</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Jocelyn</prenom>
+    <nomfamille>Chouinard</nomfamille>
+   </nompers>
+  <affiliation><alinea>CIUSSS-CHUS Centre de réadaptation Estrie, Canada</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>La recherche qualitative et inductive en psychologie est actuellement en émergence. Elle permet aux chercheurs de s’attarder aux vécus des patients et des intervenants, et de comprendre leurs réalités. Nous avons donc réalisé des entretiens qualitatifs pour comprendre les effets d’une intervention basée sur le courant de la psychologie positive auprès de personnes atteintes de la sclérose latérale amyotrophique (SLA) dans leur processus de réadaptation. Nous voulions aussi comprendre comment la psychologie positive s’insère dans les pratiques des intervenants de l’équipe de réadaptation auprès de ces personnes et discuter de l’apport de l’induction dans cette recherche. Les résultats de nos analyses montrent que l’intervention basée sur la psychologie positive permet aux personnes atteintes de la SLA de cultiver des moments de bonheur malgré l’issue fatale de leur pathologie. Ils ont aussi mis en lumière les caractéristiques de la pratique de la psychologie positive pour les intervenants et celles de cette pratique pour les participants ayant la SLA. Dans une perspective de comparaison, nous nous permettons d’affirmer que l’intervention de psychologie positive a stimulé une réflexion et un questionnement des intervenants sur leur pratique, alors qu’elle pose des défis importants pour les personnes atteintes d’une maladie incurable qui est vécue essentiellement comme une expérience négative.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Induction</motcle><motcle>psychologie positive</motcle><motcle>résilience</motcle><motcle>sclérose latérale amyotrophique</motcle><motcle>réadaptation</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1054337ar" idproprio="1054337ar" idref="th1"
+  lang="fr" ordseq="6" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054337ar.html</urlhtml>
+  <urlpdf taille="966" unite="ko">/revue/approchesind/2018/v5/n2/1054337ar.pdf</urlpdf>
+  <urlplan>/revue/approchesind/2018/v5/n2/1054337ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>128</ppage>
+    <dpage>159</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Vers une théorisation du vécu des patients et de leurs proches à la suite d’interventions de crise à domicile</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Charlotte</prenom>
+    <nomfamille>Vereecke</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Mons, Belgique</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Jennifer</prenom>
+    <nomfamille>Denis</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Mons, Belgique</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Stephan</prenom>
+    <nomfamille>Hendrick</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Mons, Belgique</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Les prises en charge de crise à domicile – proposées par des équipes mobiles – visent à intervenir auprès de patients en situation de détresse psychologique aiguë, et ce, dans un contexte où les proches sont systématiquement mobilisés dans la dynamique de soins. Les interventions s’étendent sur une période de trois à six semaines et ont comme visée la résolution de la crise individuelle et/ou familiale. À ce jour, l’efficacité de ce type de traitement n’est plus à prouver puisqu’il permet de réduire significativement le nombre d’hospitalisations. À travers notre étude, nous avons accordé une place aux patients et à leurs proches afin de les laisser exprimer leur vécu quant aux spécificités de ce dispositif de soins. L’objectif était de comprendre comment le patient et ses proches s’approprient de nouvelles stratégies de résolution de problèmes et comment ils acquièrent une meilleure compréhension de leur fonctionnement, individuel et relationnel, dans le but de prévenir d’éventuelles nouvelles crises. La vision bilatérale, c’est-à-dire le vécu des patients et de leurs proches, que nous proposons a abouti à une théorisation enracinée apportant des éléments de compréhension nouveaux quant à la manière dont les équipes de crise intervenant à domicile doivent continuer à soutenir les patients et leurs familles.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Patient</motcle><motcle>proches</motcle><motcle>vécu</motcle><motcle>équipe mobile de crise</motcle><motcle>théorisation enracinée</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1054338ar" horstheme="oui" idproprio="1054338ar"
+  lang="fr" ordseq="7" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/approchesind/2018/v5/n2/1054338ar.html</urlhtml>
+  <urlpdf taille="452" unite="ko">/revue/approchesind/2018/v5/n2/1054338ar.pdf</urlpdf>
+  <urlplan>/revue/approchesind/2018/v5/n2/1054338ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>160</ppage>
+    <dpage>189</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Hors-thème</surtitre>
+                  <titre>Pertinence de la méthodologie de la théorisation enracinée (Grounded Theory) dans la compréhension des logiques managériales du secteur informel en Afrique : une approche théorique</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Demba</prenom>
+    <nomfamille>Kane</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Gaston Berger de Saint Louis, Sénégal</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article plaide pour un usage de la méthodologie de la théorisation enracinée (MTE) en tant que méthodologie pertinente pour comprendre les logiques managériales du secteur informel en Afrique. D’abord, la nature inductive de la MTE est idéale pour appréhender un terrain dont les dimensions économiques, sociales et culturelles sont enchevêtrées et déteignent sur la relation entre les acteurs et la gestion de leurs activités. Ensuite, la nature substantive et l’interactionnisme symbolique dans la MTE permettent de comprendre les réalités managériales construites par les acteurs à travers les significations qu’ils donnent à leur vécu. Enfin, l’usage de la MTE dans un domaine encore largement inexploré sied au secteur informel où du travail reste à faire pour faire émerger et conceptualiser des théories appropriées en management. Cependant, le chercheur doit dépasser des limites académiques et personnelles qui constituent des défis à relever. Il doit aussi savoir adapter la MTE si nécessaire.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Méthodologie de la théorisation enracinée</motcle><motcle>management</motcle><motcle>secteur informel</motcle><motcle>Afrique</motcle></grmotcle>
+</liminaire>
+</article>
+</sommaire>
