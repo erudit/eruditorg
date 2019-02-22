@@ -86,7 +86,7 @@ class JournalAdmin(admin.ModelAdmin):
 class IssueAdmin(admin.ModelAdmin):
     list_display = (
         'journal', 'year', 'volume', 'number', 'title', 'localidentifier',
-        'is_published', 'is_published_in_fedora', 'view_issue_on_site', )
+        'is_published', 'view_issue_on_site', )
     search_fields = ('id', 'localidentifier', )
     list_filter = (
         'is_published', 'journal__collection', 'journal__name',
@@ -95,20 +95,6 @@ class IssueAdmin(admin.ModelAdmin):
         'make_published', 'make_unpublished',
         'force_free_access_to_true', 'force_free_access_to_false',
     ]
-
-    def is_published_in_fedora(self, obj):
-        return obj.is_published_in_fedora()
-    is_published_in_fedora.short_description = "Publié dans Fedora"
-
-    def make_published(self, request, queryset):
-        """Mark a set of issues as published"""
-        queryset.update(is_published=True)
-    make_published.short_description = _("Marquer les numéros sélectionnés comme diffusés")
-
-    def make_unpublished(self, request, queryset):
-        """Mark a set of issues as pre-published"""
-        queryset.update(is_published=False)
-    make_unpublished.short_description = _("Marquer les numéros sélectionnés comme pré-diffusés")
 
     def force_free_access_to_true(self, request, queryset):
         """Mark a set of issues as open access"""

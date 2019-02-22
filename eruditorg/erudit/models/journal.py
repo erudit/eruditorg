@@ -504,7 +504,7 @@ class Issue(FedoraMixin, FedoraDated):
         verbose_name=_('URL Externe'), help_text=_("URL du site où les numéros sont hébergés"))
     """ The external URL where the ``Issue`` is hosted. """
 
-    is_published = models.BooleanField(default=False, verbose_name=_('Est publié sur www'))
+    is_published = models.BooleanField(default=False, verbose_name=_('Est publié'))
     """ Defines if an issue is published """
 
     def is_published_in_fedora(self):

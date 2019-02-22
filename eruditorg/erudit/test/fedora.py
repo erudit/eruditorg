@@ -1,5 +1,7 @@
 import re
 from contextlib import contextmanager
+from lxml import etree
+from lxml.builder import E
 
 from eulfedora.api import ApiFacade
 from eulfedora.util import RequestFailed
@@ -101,6 +103,11 @@ class FakeAPI(ApiFacade):
         super().__init__(self.BASE_URL, 'username', 'password')
         self._content_map = {}
         self._articles_with_pdf = set()
+        self._query_results = {
+            'series': set(),
+            'publication': set(),
+            'unit': set(),
+        }
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
         raise AssertionError()  # we should never get there in a testing environment
@@ -201,12 +208,16 @@ class FakeAPI(ApiFacade):
                 publication_allowed=publication_allowed,
                 pdf_url=pdf_url,
                 html_url=html_url)
+            self._query_results['publication'].update({article.issue.pid})
+            self._query_results['unit'].update({article.pid})
 
     def add_publication_to_parent_journal(self, issue, journal=None):
         if journal is None:
             journal = issue.journal
         with self.open_journal(journal.pid) as wrapper:
             wrapper.add_issue(issue)
+            self._query_results['series'].update({journal.pid})
+            self._query_results['publication'].update({issue.pid})
 
     def add_notes_to_journal(self, notes, journal):
         with self.open_journal(journal.pid) as wrapper:
@@ -214,6 +225,14 @@ class FakeAPI(ApiFacade):
 
     def get(self, url, **kwargs):
         if url == 'objects':
+            params = kwargs.get('params')
+            query = params.get('query')
+            label = re.search("label='([A-Za-z]+) Erudit'", query)
+            if label:
+                xml = etree.fromstring(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'))
+                for pid in self._query_results.get(label.group(1).lower(), []):
+                    xml.append(E.objectField(E.pid(pid)))
+                return FakeResponse(etree.tostring(xml), url)
             return FakeResponse(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'), url)
         result = None
         pid = None
@@ -254,6 +273,11 @@ class FakeAPI(ApiFacade):
                     with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
                         result = xml.read()
             elif len(pidelems) == 2:  # journal
+                subselections = [
+                    '/PUBLICATIONS/content',
+                    '/OAISET_INFO/content',
+                    '/RELS-EXT/content',
+                ]
                 if not datastream:
                     # we're asking for the object profile
                     result = FAKE_FEDORA_PROFILE.format(
@@ -261,7 +285,7 @@ class FakeAPI(ApiFacade):
                     ).encode()
                 elif not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
-                elif subselection == '/PUBLICATIONS/content':
+                elif subselection in subselections:
                     result = self.get_journal_xml(pid) or b''
         if result is not None:
             response = FakeResponse(result, url)
