@@ -4,6 +4,7 @@ import dateutil.relativedelta as dr
 from hashlib import md5
 from functools import wraps
 import structlog
+import re
 
 from lxml import etree as et
 
@@ -675,6 +676,21 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def prepublication_ticket(self):
         return md5(self.localidentifier.encode('utf-8')).hexdigest()
+
+    def is_prepublication_ticket_valid(self, request_ticket):
+        """ Returns True if the issue's prepulication ticket is valid, False otherwise.
+
+        In Tournesol, if the prepublication ticket begins with a '0', it gets stripped before it
+        gets stored in the database. While we wait for this bug to get fixed in Tournesol, we should
+        support tickets with a stripped leading '0'.
+
+        See https://gitlab.erudit.org/erudit/production/tournesol/Tournesol/issues/35 """
+        if request_ticket is None:
+            return False
+        regex = re.compile('^0?(.*)$')
+        issue_ticket = re.match(regex, self.prepublication_ticket)
+        request_ticket = re.match(regex, request_ticket)
+        return issue_ticket.group(1) == request_ticket.group(1)
 
     # Issue-related methods and properties
     # --

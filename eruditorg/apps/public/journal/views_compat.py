@@ -47,6 +47,7 @@ class IssueDetailRedirectView(
 
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
+        ticket = self.request.GET.get('ticket')
 
         # Get the journal or raise 404.
         journal_code = kwargs.get('journal_code')
@@ -56,7 +57,6 @@ class IssueDetailRedirectView(
         # URL, otherwise raise 404. If a ticket is also included in the request, add it to the URL.
         if 'id' in self.request.GET:
             localidentifier = self.request.GET.get('id')
-            ticket = self.request.GET.get('ticket')
             try:
                 issue = Issue.from_fedora_ids(
                     journal.code,
@@ -138,11 +138,18 @@ class IssueDetailRedirectView(
                 raise Http404
 
         # Finally, we can generate the redirect URL.
-        return reverse(self.pattern_name, args=[
+        redirect_url = reverse(self.pattern_name, args=[
             journal.code,
             issue.volume_slug,
             issue.localidentifier,
         ])
+        if ticket:
+            return "{url}?ticket={ticket}".format(
+                url=redirect_url,
+                ticket=ticket
+            )
+        else:
+            return redirect_url
 
 
 class ArticleDetailRedirectView(

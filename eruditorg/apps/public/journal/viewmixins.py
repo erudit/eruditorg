@@ -106,9 +106,9 @@ class ContentAccessCheckMixin:
             if content.open_access or not content.embargoed:
                 return True
 
-            if not content.issue.is_published:
-                if content.issue.prepublication_ticket == self.request.GET.get('ticket'):
-                    return True
+            if not content.issue.is_published and \
+                    content.issue.is_prepublication_ticket_valid(self.request.GET.get('ticket')):
+                return True
 
         kwargs = self._get_subscriptions_kwargs_for_content()
         return self.request.subscriptions.provides_access_to(**kwargs)
@@ -159,7 +159,8 @@ class PrepublicationTokenRequiredMixin:
         else:
             raise ValueError("This mixin should only be used with Article and Issue objects")
 
-        if not issue.is_published and issue.prepublication_ticket != request.GET.get('ticket'):
+        if not issue.is_published and \
+                not issue.is_prepublication_ticket_valid(request.GET.get('ticket')):
             return HttpResponseRedirect(
                 reverse('public:journal:journal_detail', args=(issue.journal.code, ))
             )
