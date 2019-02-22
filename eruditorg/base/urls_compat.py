@@ -80,18 +80,12 @@ journal_url_patterns = ([
         name="legacy_journal_rss"),
 
     # Issue
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]+)/?$',  # noqa
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail"),
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]+)/index\.html?$',  # noqa
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/index\.html?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_index"),
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n/?$',  # noqa
-        journal_views_compat.IssueDetailRedirectView.as_view(),
-        name="legacy_issue_detail_no_number"),
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n/index\.html?$',  # noqa
-        journal_views_compat.IssueDetailRedirectView.as_view(),
-        name="legacy_issue_detail_index_no_number"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_culture_year_volume"),
@@ -106,23 +100,15 @@ journal_url_patterns = ([
         name="legacy_issue_detail_culture_index"),
 
     # Article
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]*)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail",
-    ),
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v/n/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
-        journal_views_compat.ArticleDetailRedirectView.as_view(),
-        name="legacy_article_detail_no_volume_no_number",
-    ),
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>\w+)/n/(?P<localid>[\w-]+)\.html$',  # noqa
-        journal_views_compat.ArticleDetailRedirectView.as_view(),
-        name="legacy_article_detail_volume"
     ),
     url(r'^iderudit/(?P<localid>[\w-]+)$',
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_id",
     ),
-    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]*)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail_culture"
     ),

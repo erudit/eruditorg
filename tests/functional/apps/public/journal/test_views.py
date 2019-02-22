@@ -986,10 +986,11 @@ class TestArticleFallbackRedirection:
                 'journal_code': 'nonexistent',
                 'year': "1974",
                 'v': "7",
+                'n': "",
             }],
             [
-                "legacy_journal:legacy_issue_detail_no_number",
-                "legacy_journal:legacy_issue_detail_index_no_number"
+                "legacy_journal:legacy_issue_detail",
+                "legacy_journal:legacy_issue_detail_index"
             ],
         ),
         itertools.product(
@@ -997,10 +998,11 @@ class TestArticleFallbackRedirection:
                 'journal_code': 'nonexistent',
                 'year': "1974",
                 'v': "7",
+                'n': "",
             }],
             [
-                "legacy_journal:legacy_issue_detail_no_number",
-                "legacy_journal:legacy_issue_detail_index_no_number"
+                "legacy_journal:legacy_issue_detail",
+                "legacy_journal:legacy_issue_detail_index"
             ],
         ),
         itertools.product([{

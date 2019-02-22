@@ -181,8 +181,7 @@ class ArticleDetailRedirectView(
 def get_issue_from_year_volume_number(journal_code: str, year: str, volume: str,
                                       number: Optional[str]) -> Optional[Issue]:
     """
-    Useful for URLS legacy_article_detail, legacy_article_detail_volume,
-    legacy_article_detail_culture
+    Useful for URLS legacy_article_detail & legacy_article_detail_culture.
 
     """
     try:
