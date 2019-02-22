@@ -58,7 +58,7 @@ class TestAccountActionRegisterView(TestCase):
         token = AccountActionTokenFactory.create(action='test-register')
 
         post_data = {
-            'username': faker.simple_profile().get('username'),
+            'username': faker.simple_profile().get('email'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
@@ -71,14 +71,14 @@ class TestAccountActionRegisterView(TestCase):
         response = Client().post(url, post_data, follow=False)
 
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(User.objects.filter(username=post_data['username']))
+        self.assertTrue(User.objects.filter(username=post_data['email']))
 
     def test_can_properly_consume_a_tokenr(self):
         actions.register(TestAction)
         token = AccountActionTokenFactory.create(action='test-register')
 
         post_data = {
-            'username': faker.simple_profile().get('username'),
+            'username': faker.simple_profile().get('email'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),

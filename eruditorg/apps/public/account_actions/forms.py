@@ -11,7 +11,7 @@ class AccountActionRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2', )
 
     def __init__(self, *args, **kwargs):
         self.token = kwargs.pop('token')
@@ -33,6 +33,7 @@ class AccountActionRegisterForm(UserCreationForm):
     def save(self, commit=True):
         user = super(AccountActionRegisterForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+        user.username = self.cleaned_data['email']
 
         if commit:
             user.save()

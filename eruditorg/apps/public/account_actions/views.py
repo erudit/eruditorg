@@ -31,7 +31,7 @@ class AccountActionRegisterView(PermissionRequiredMixin, AccountActionTokenMixin
 
         # We log the user in
         new_authenticated_user = authenticate(
-            username=form.cleaned_data['username'],
+            username=form.cleaned_data['email'],
             password=form.cleaned_data['password1'])
         login(self.request, new_authenticated_user)
 
