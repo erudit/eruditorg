@@ -239,6 +239,13 @@
         </p>
       </div>
       {% endif %}
+      {% for note in notes %}
+      <div class="alert alert-info">
+        <p><i class="icon ion-ios-information-circle alert-info-icon"></i>
+          {{ note }}
+        </p>
+      </div>
+      {% endfor %}
       {% regroup issues|dictsortreversed:"year" by year as year_list %}
       <ul class="year-list">
         {% for year in year_list %}

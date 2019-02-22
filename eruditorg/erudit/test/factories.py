@@ -105,6 +105,14 @@ class JournalFactory(factory.django.DjangoModelFactory):
         if obj.localidentifier:
             repository.api.register_pid(obj.pid)
 
+    @factory.post_generation
+    def notes(obj, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            repository.api.add_notes_to_journal(extracted, obj)
+
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
 

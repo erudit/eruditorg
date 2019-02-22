@@ -208,6 +208,10 @@ class FakeAPI(ApiFacade):
         with self.open_journal(journal.pid) as wrapper:
             wrapper.add_issue(issue)
 
+    def add_notes_to_journal(self, notes, journal):
+        with self.open_journal(journal.pid) as wrapper:
+            wrapper.add_notes(notes)
+
     def get(self, url, **kwargs):
         if url == 'objects':
             return FakeResponse(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'), url)

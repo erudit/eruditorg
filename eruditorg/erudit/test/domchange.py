@@ -140,3 +140,13 @@ class EruditJournalDomChanger(BaseDomChanger):
             volume='42')
         # Publications are in reverse order
         parentelem.insert(0, elem)
+
+    def add_notes(self, notes):
+        elem = E.notes()
+        for note in notes:
+            subelem = E.note(
+                note['content'],
+                langue=note['langue'],
+            )
+            elem.append(subelem)
+        self.root.find('.//revue').append(elem)
