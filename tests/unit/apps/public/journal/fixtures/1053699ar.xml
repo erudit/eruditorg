@@ -104,8 +104,12 @@
                 <alinea>Paragraphe</alinea>
             </note>
             <note id="no2">
-                <no>1</no>
+                <no>2</no>
                 <alinea><liensimple id="ls2" xlink:href="http://example.com#test" xmlns:xlink="http://www.w3.org/1999/xlink">Lien à encoder</liensimple></alinea>
+            </note>
+            <note id="no3">
+                <no>3</no>
+                <alinea><liensimple id="ls3" xlink:href="http://example.com%23test" xmlns:xlink="http://www.w3.org/1999/xlink">Lien déjà encodé</liensimple></alinea>
             </note>
         </grnote>
     </partiesann>

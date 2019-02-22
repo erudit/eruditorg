@@ -241,7 +241,7 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<h2><strong>Titre gras <a href="#no2" id="re1no2" class="norenvoi hint--bottom hint--no-animate" data-hint="Lien à encoder">[2]</a></strong></h2>' in ret
 
         assert '<a href="#s1n3"><em>Titre italique</em></a>' in ret
-        assert '<h2><em>Titre italique <a href="#no3" id="re1no3" class="norenvoi hint--bottom hint--no-animate" data-hint="">[3]</a></em></h2>' in ret
+        assert '<h2><em>Titre italique <a href="#no3" id="re1no3" class="norenvoi hint--bottom hint--no-animate" data-hint="Lien déjà encodé">[3]</a></em></h2>' in ret
 
         assert '<a href="#s1n4"><span class="petitecap">Titre petitecap</span></a>' in ret
         assert '<h2><span class="petitecap">Titre petitecap <a href="#no4" id="re1no4" class="norenvoi hint--bottom hint--no-animate" data-hint="">[4]</a></span></h2>' in ret
@@ -266,3 +266,5 @@ class TestRenderArticleTemplateTag(TestCase):
 
         # Check that links' URL are correctly ecoded.
         assert '<a href="http://example.com%23test" id="ls2" target="_blank">Lien à encoder</a>' in ret
+        # Check that already encoded links' URL are not ecoded again.
+        assert '<a href="http://example.com%23test" id="ls3" target="_blank">Lien déjà encodé</a>' in ret
