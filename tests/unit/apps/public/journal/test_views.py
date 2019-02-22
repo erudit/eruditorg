@@ -268,3 +268,20 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<a href="http://example.com%23test" id="ls2" target="_blank">Lien à encoder</a>' in ret
         # Check that already encoded links' URL are not ecoded again.
         assert '<a href="http://example.com%23test" id="ls3" target="_blank">Lien déjà encodé</a>' in ret
+
+    def test_annexes_footnotes(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1035294ar.xml')
+
+        # Check that annexes have an ID set.
+        assert '<div id="an1" class="article-section-content" role="complementary">' in ret
+        assert '<div id="an2" class="article-section-content" role="complementary">' in ret
+        assert '<div id="an3" class="article-section-content" role="complementary">' in ret
+        # Check that footnotes are linked to the annexes IDs.
+        assert '<a href="#an1" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[2]</a>' in ret
+        assert '<a href="#an2" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[ii]</a>' in ret
+        assert '<a href="#an3" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[**]</a>' in ret
+        # Check that footnotes are not wrapped in <sup>.
+        assert '<sup><a href="#an1" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[2]</a></sup>' not in ret
+        assert '<sup><a href="#an2" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[ii]</a></sup>' not in ret
+        assert '<sup><a href="#an3" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[**]</a></sup>' not in ret

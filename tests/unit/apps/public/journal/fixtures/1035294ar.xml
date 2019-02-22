@@ -1,0 +1,1458 @@
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1035294ar" typeart="article" lang="fr" ordseq="14" horstheme="oui"><admin><infoarticle><idpublic scheme="doi">10.7202/1035294ar</idpublic><pagination> <ppage>243</ppage> <dpage>274</dpage> 
+        </pagination></infoarticle><revue id="rssi136" lang="fr en"><titrerev>Recherches sémiotiques</titrerev><titrerevparal lang="en">Semiotic Inquiry</titrerevparal><titrerevabr>rssi</titrerevabr><idissn>0229-8651</idissn><idissnnum>1923-9920</idissnnum><redacteurchef typerc="regulier" sexe="masculin"><nompers><prenom>Martin</prenom><nomfamille>Lefebvre</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur adjoint</fonction><nompers><prenom>Bertrand</prenom><nomfamille>Gervais</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur adjoint</fonction><nompers><prenom>Will</prenom><nomfamille>Straw</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur adjoint</fonction><nompers><prenom>Daniel</prenom><nomfamille>Vaillancourt</nomfamille></nompers></redacteurchef></revue><numero id="rssi02379"><volume>33</volume><nonumero>1</nonumero><nonumero>2</nonumero><nonumero>3</nonumero><pub><annee>2013</annee></pub><pubnum><date typedate="publication">2016-02-22</date></pubnum><grtheme id="th1"><theme>Peirce et l’image</theme><themeparal lang="en">Peirce and the Image</themeparal></grtheme></numero><editeur><nomorg>Association canadienne de sémiotique / Canadian Semiotic Association</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Association canadienne de sémiotique / Canadian Semiotic Association</nomorg>, 2016</droitsauteur></admin><liminaire><grtitre><surtitre>Article hors-dossier</surtitre><surtitreparal lang="en">Individual Article</surtitreparal>
+      <titre>Καινα στοχεια (Nouveaux éléments)<exposant><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://www.erudit.org/revue/rssi/2013/v33/n1-2-3/1035294ar.html?vue=integral#an1" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">1</liensimple></exposant></titre>
+      
+    </grtitre><grauteur><auteur id="au1"><nompers>
+        <prenom>Charles</prenom>
+        <autreprenom>Sanders</autreprenom>
+        <nomfamille>Peirce</nomfamille>
+        </nompers></auteur><auteur id="au2"><contribution typecontrib="trl">Traduit de l’anglais par</contribution><nompers>
+        <prenom>François</prenom>
+        
+        <nomfamille>Latraverse</nomfamille>
+        </nompers><affiliation>
+        <alinea>Groupe de recherche Peirce-Wittgenstein, Université du Québec à          Montréal</alinea>
+        </affiliation></auteur><auteur id="au3"><contribution typecontrib="trl">Assisté de</contribution><nompers>
+        <prenom>Marc</prenom>
+        
+        <nomfamille>Gustavino</nomfamille>
+        </nompers><affiliation>
+        <alinea>Groupe de recherche Peirce-Wittgenstein, Université du Québec à Montréal</alinea>
+        </affiliation></auteur></grauteur></liminaire><corps><section1 id="s1n1"><no>1</no><titre>Présentation</titre><para id="pa1"><no>1</no>
+        <alinea>Le texte qui suit provient de la version qui fait maintenant autorité, publiée dans
+          le volume II de <marquage typemarq="italique">The Essential Peirce</marquage>, sous la
+          direction du Peirce Edition Project, Bloomington, Indianapolis, Indiana University Press,
+          1998, pp. 300-324. Il correspond au manuscrit 517 et a d’abord paru dans les <marquage typemarq="italique">New Elements of Mathematics</marquage> (NEM 4 : 235-263), sous la
+          direction de Carolyn Eisele, La Haye, Mouton, 1976. Il a sans doute été écrit au début de
+          1904, comme prologue à un livre que Peirce entendait rédiger sur les fondements des
+          mathématiques. À la manière de Leibniz, Peirce non seulement a laissé une oeuvre colossale
+          mais il a en outre élaboré toute sa vie des projets tous plus ambitieux les uns que les
+          autres destinés à dresser à diverses échelles les plans des édifices du savoir humain et
+          ces “prolégomènes à une mathématique raisonnée” s’inscrivent dans une longue série, que
+          prolongent encore de nombreuses tentatives d’ordonnancement des sciences et de
+          classification des signes.</alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>Il s’agit, selon Max Fisch, de sa “meilleure présentation à ce jour de sa théorie
+          générale des signes”. Rédigé au début de la dernière période très productive que Peirce
+          ait connue, à un moment où sa théorie des signes prenait une forme plus élaborée que
+          jamais auparavant, ce texte constitue un exposé très dense de sa sémiotique, dont la
+          puissance unificatrice se montre à ce qu’il intègre des considérations métaphysiques,
+          cosmologiques, logiques et même sociales. La plupart des très nombreuses définitions que
+          Peirce y propose de son vocabulaire fondamental peuvent être considérées comme définitives
+          et refléter un état achevé de sa pensée. Quoi qu’il en pense, le propos se déroule de
+          manière quasi-euclidienne, mais, comme il en est coutumier, il arrive que Peirce suive une
+          dynamique d’écriture relativement libre et passe de l’examen de principes sémiotiques à
+          des exercices d’exemplification et à des dérives parfois percutantes (on appréciera entre
+          autres l’association de la genèse des graphes existentiels à l’intuition du “big bang”).
+          Par sa pénétration conceptuelle, l’ampleur de sa visée, la synthèse sémiotique qu’il
+          réalise, de même qu’une qualité d’écriture exceptionnelle (difficile défi pour la
+          traduction), ce texte figure au premier rang des plus grandes réalisations de
+          Peirce.</alinea>
+        <verbatim typeverb="forme">
+          <bloc>
+            <ligne alignh="droite">François Latraverse</ligne>
+            <ligne alignh="droite">Université du Québec à Montréal</ligne>
+          </bloc>
+        </verbatim>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>Καινα στοχεια (Nouveaux éléments)</titre><section2 id="s2n1"><no>2.
+				1</no><titre>I</titre><para id="pa3"><no>3</no>
+        <alinea>J’estime utile de dire quelques mots sur ce texte.<exposant><renvoi typeref="annexe" idref="an1">i</renvoi></exposant> Il y a un certain nombre d’années, j’ai écrit un livre
+          intitulé “<marquage typemarq="italique">New Elements of </marquage><marquage typemarq="italique">Mathematics</marquage>”.<exposant><renvoi typeref="annexe" idref="an2">ii</renvoi></exposant> Il s’agissait d’un livre qu’avait été en mesure d’écrire, en lui
+          consacrant une année entière, un homme doué d’une aptitude naturelle considérable pour la
+          logique et les mathématiques et qui avait consacré l’essentiel de son temps pendant
+          quarante ans à l’étude de la première et de tout ce qu’on a écrit sur elle, sans non plus
+          négliger les secondes. Si l’auteur avait été allemand, il aurait partagé les conceptions
+          approximatives de la logique qui sont naturellement associées au subjectivisme et n’aurait
+          par conséquent pas pu écrire le même livre, mais l’eût-il fait qu’il y a longtemps qu’il
+          aurait été publié. Il le présenta néanmoins en l’état à trois éditeurs,<exposant><renvoi typeref="annexe" idref="an2">iii</renvoi></exposant> dont un lui avait demandé de le
+          rédiger. Tous trois étaient des hommes très humbles, qui ne prétendaient pas connaître
+          grand-chose d’autre que les éléments des mathématiques. L’un était à l’époque l’éditeur
+          d’un traité de géométrie qui entendait montrer comment inscrire, à la règle et au compas,
+          un polygone régulier à n’importe quel nombre de côtés dans un cercle. Les deux autres ont
+          publié des traités de géométrie aux prétentions tout aussi étonnantes. Aucun n’a approuvé
+          mon livre, parce qu’il place la perspective avant la géométrie métrique et la géométrie
+          topique avant les deux. C’était là le défaut du livre, à savoir qu’un éditeur aussi versé
+          dans les éléments des mathématiques n’a pas été convaincu que cet arrangement était
+          logique, bien qu’il ait apporté le livre chez lui et y ait jeté un coup d’oeil pendant la
+          soirée. En Amérique, quelqu’un qui écrit sur la logique des mathématiques doit satisfaire
+          aux exigences américaines.</alinea>
+      </para><para id="pa4"><no>4</no>
+        <alinea>Personnellement, je regrette que ce manuscrit ait été perdu,<exposant><renvoi typeref="annexe" idref="an2">iv</renvoi></exposant> car il témoignait d’un travail très
+          minutieux de la pensée. Je ne pourrai jamais le reproduire, car il était écrit dans le
+          style mathématique le plus strict et j’ai perdu avec les ans la capacité d’écrire sur la
+          logique dans ce style, alors que cela m’était naturel quand j’étais jeune. En perdant
+          cette capacité, j’ai en même temps perdu l’admiration que j’avais pour ce style. Je
+          demande la permission de présenter une critique du style mathématique en logique.</alinea>
+      </para><para id="pa5"><no>5</no>
+        <alinea>Je dis “en logique” parce que ce n’est que dans le but de présenter la logique du
+          sujet que les mathématiciens ont recours au style d’Euclide. Quand ils veulent simplement
+          résoudre des problèmes difficiles, ils l’oublient totalement. Je dis qu’il est d’Euclide
+          parce que le premier livre des <marquage typemarq="italique">Éléments</marquage> d’Euclide
+          est le modèle le plus ancien et le plus parfait de ce style. Dans une certaine mesure,
+          Euclide le conserve dans ses autres écrits, mais ce n’est que dans le premier livre des
+          <marquage typemarq="italique">Éléments</marquage> qu’il est poli avec un soin et une
+          pensée sans limite. On voit au premier regard que ce style trouve son origine dans
+          l’esthétique des Grecs. Tout ce qu’ils ont fait en littérature et en art montre l’ampleur
+          de leur horreur du “trop”. Peut-être cette horreur était-elle due à l’irrépressible
+          activité des esprits grecs et à l’intolérance qu’ils ont par conséquent développée pour ce
+          qui est des considérations inutiles, de même qu’aux coûts élevés en énergie de toutes
+          sortes que représentaient à l’époque les procédés mécaniques de l’écriture et de la
+          lecture. Ils tenaient pour acquis que le lecteur allait penser activement et les phrases
+          de l’auteur ne devaient servir que de jalons lui permettant de suivre le cours de sa
+          pensée, alors que le livre moderne, que je ne mentionne que pour l’opposer à l’autre,
+          doit, pour être accepté, l’être aussi par une jeune femme à l’épaisse stupidité et à
+          l’ineffable indolence, qui le feuillette en regardant par la fenêtre pour être admirée. Si
+          on veut donner à une idée une forme telle qu’elle ne puisse manquer de la saisir, la
+          première exigence est que cette idée occupe un certain nombre de lignes et la deuxième est
+          que même la plus petite étape ne soit laissée à une quelconque activité intellectuelle.
+        </alinea>
+      </para><para id="pa6"><no>6</no>
+        <alinea>L’idée directrice d’Euclide en rédigeant son premier livre était simplement que les
+          premiers éléments de géométrie ne peuvent être appréhendés que si l’on comprend la
+          structure logique de la doctrine, mais, dans son horreur du trop, du début à la fin, il ne
+          dit pas un seul mot de la logique. Il commence par quelques douzaines de “définitions”,
+          qui sont suivies de cinq “postulats”, lesquels sont suivis de nombre d’axiomes ou “notions
+          du sens commun”, mais il ne nous dit jamais ce qu’une “définition”, un “postulat” ou une
+          “notion commune” sont censés être et ce qu’il entendait par ces mots a été dans les trois
+          cas très mal compris. Les quarante-huit propositions du livre sont formulées et disposées
+          d’une manière qui révèle une compréhension profonde de leurs relations logiques. C’est là
+          que réside la valeur principale de ce travail et la seule valeur qu’il ait encore. Cette
+          connaissance est cependant si bien dissimulée qu’il faut la même connaissance pour la
+          détecter. </alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Ce travail profond se retrouve dans les mains de garçons qui ne sont pas grecs, et
+          sont suralimentés et apathiques. Ils rencontrent des difficultés qu’ils soumettent à un
+          enseignant beaucoup plus incompétent qu’eux puisqu’il ne sait rien de la structure logique
+          qui est le sujet sous-jacent du livre et qu’une longue fréquentation de ce sujet l’a rendu
+          incapable de percevoir les difficultés que ses élèves peuvent, au moins, percevoir. La
+          vieille méthode pédagogique consistant à battre les garçons jusqu’à ce qu’ils comprennent
+          était au moins efficace comme antidote à leur surconsommation de boeuf. Depuis que cette
+          méthode a été abandonnée, il est devenu nécessaire de renoncer à l’usage pédagogique de ce
+          livre.</alinea>
+      </para></section2><section2 id="s2n2"><no>2.
+				2</no><titre>II</titre><para id="pa8"><no>8</no>
+        <alinea>Il est devenu extrêmement difficile d’exposer clairement et complètement la logique
+          des mathématiques dans le style d’Euclide, car cela exigerait qu’on ne dise strictement
+          rien de la logique. Étant un logicien exact, j’approuve toutefois qu’on s’adresse selon
+          l’ancienne méthode à un lecteur dont l’intelligence est active, au moyen, premièrement de
+          <marquage typemarq="italique">définitions</marquage>, deuxièmement de <marquage typemarq="italique">postulats</marquage>, troisièmement d’<marquage typemarq="italique">axiomes</marquage>, quatrièmement de <marquage typemarq="italique">corollaires</marquage>, cinquièmement de <marquage typemarq="italique">diagrammes</marquage>, sixièmement de <marquage typemarq="italique">lettres</marquage>,
+          septièmement de <marquage typemarq="italique">théorèmes</marquage>, huitièmement de
+          <marquage typemarq="italique">scolies</marquage>. On peut aussi conserver la distinction
+          entre une proposition <marquage typemarq="italique">générale </marquage>(laquelle, s’il
+          s’agit d’un postulat, est souvent fallacieusement appelée “axiome”) et une proposition
+          <marquage typemarq="italique">indéfinie</marquage> (pour laquelle, si elle est
+          indémontrable, on réserve en allemand le mot “Postulat”).</alinea>
+      </para><para id="pa9"><no>9</no>
+        <alinea>Une <marquage typemarq="italique">définition</marquage> est l’analyse logique d’un
+          prédicat dans des termes généraux. Elle a deux branches, l’une qui affirme que le
+          <marquage typemarq="italique">definitum</marquage> est applicable à tout ce à quoi la
+          définition est applicable, l’autre (comportant habituellement plusieurs clauses), qui
+          affirme que la définition est applicable à tout ce à quoi le <marquage typemarq="italique">definitum</marquage> est applicable. <marquage typemarq="italique">Une définition
+          n’affirme pas que quoi que ce soit existe</marquage>.</alinea>
+      </para><para id="pa10"><no>10</no>
+        <alinea>Un <marquage typemarq="italique">postulat</marquage> est une hypothèse initiale
+          formulée dans des termes généraux. Il peut être accepté arbitrairement, pourvu (les
+          définitions étant acceptées) qu’il n’entre en conflit avec aucun principe de possibilité
+          substantive ou postulat déjà accepté. Par principe de possibilité substantive, j’entends,
+          par exemple, qu’on ne saurait postuler qu’il n’y a pas de relation, quelle qu’elle soit,
+          entre deux points ou formuler la proposition que rien n’est vrai sans exception, car, sans
+          contenir de contradiction, ce que cela signifie est en contradiction avec le fait même que
+          cela est affirmé.</alinea>
+      </para><para id="pa11"><no>11</no>
+        <alinea>Un <marquage typemarq="italique">axiome</marquage> est une vérité évidente en
+          elle-même, dont l’affirmation est superflue quant au caractère concluant du raisonnement
+          et qui sert seulement à montrer un principe impliqué dans le raisonnement. C’est en
+          général une vérité d’observation, comme l’affirmation que quelque chose est vrai.</alinea>
+      </para><para id="pa12"><no>12</no>
+        <alinea>Un <marquage typemarq="italique">corollaire</marquage>, au sens où j’utiliserai ce
+          mot, est une inférence tirée en termes généraux sans l’usage de quelque
+          construction<exposant><renvoi typeref="annexe" idref="an3">*</renvoi></exposant>.</alinea>
+      </para><para id="pa13"><no>13</no>
+        <alinea>Un <marquage typemarq="italique">diagramme</marquage> est une <marquage typemarq="italique">icône</marquage> ou une image schématique incorporant la signification
+          d’un prédicat général; et de l’observation de cette <marquage typemarq="italique">icône
+          </marquage>nous sommes censés construire un nouveau prédicat général.</alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>Une <marquage typemarq="italique">lettre</marquage> est une désignation définie
+          arbitraire, adoptée spécialement pour identifier un objet singulier quelconque.</alinea>
+      </para><para id="pa15"><no>15</no>
+        <alinea>Un <marquage typemarq="italique">théorème</marquage>, au sens où j’utiliserai ce
+          mot, est une inférence obtenue en construisant un diagramme selon un précepte général et,
+          après l’avoir modifié comme l’ingéniosité le dicte, en y observant certaines relations et,
+          montrant qu’elles doivent subsister dans tous les cas<exposant><renvoi typeref="annexe" idref="an3">**</renvoi></exposant>, en retraduisant la proposition en des termes généraux.
+          Un théorème commence normalement par – un – l’<marquage typemarq="italique">énoncé
+          général</marquage>. Suit – deux – un <marquage typemarq="italique">précepte</marquage>
+          pour un diagramme, dans lequel des lettres sont employées. Vient ensuite – trois –
+          l’<marquage typemarq="italique">ecthèse</marquage>, qui affirme [que] ce qu’il suffira de
+          montrer doit, dans tous les cas, être vrai en ce qui a trait au diagramme. Le quatrième
+          article est la <marquage typemarq="italique">construction subsidiaire</marquage>, par
+          laquelle le diagramme est modifié d’une manière dont la possibilité a déjà été montrée. Le
+          cinquième article est la <marquage typemarq="italique">démonstration</marquage>, qui
+          établit les raisons pour lesquelles une certaine relation doit toujours subsister entre
+          les parties du diagramme. Finalement – et sixièmement – il est indiqué, par une expression
+          comme le οπερ εδει δειξαι d’Euclide, ou l’habituel Q.E.D., ou autrement, que c’était tout
+          ce qu’il fallait montrer.</alinea>
+      </para><para id="pa16"><no>16</no>
+        <alinea>Un <marquage typemarq="italique">scolie</marquage> est un commentaire sur la
+          structure logique de la doctrine. Cette préface est un scolie.</alinea>
+      </para></section2><section2 id="s2n3"><no>2.
+				3</no><titre>III</titre><para id="pa17"><no>17</no>
+        <alinea>1. Je vais maintenant expliquer la différence entre une proposition <marquage typemarq="italique">théorique</marquage> et une proposition <marquage typemarq="italique">pratique</marquage>, avec les importantes distinctions parallèles entre <marquage typemarq="italique">défini</marquage> et <marquage typemarq="italique">vague</marquage>,
+          et <marquage typemarq="italique">individuel</marquage> et <marquage typemarq="italique">général</marquage>, notant en même temps quelques autres distinctions qui sont connectées
+          avec elles. Un <marquage typemarq="italique">signe</marquage> est connecté à la “Vérité”,
+          c’est-à-dire l’Univers entier de l’être ou, comme d’aucuns disent, l’Absolu, et ce, de
+          trois manières distinctes. En premier lieu, un signe n’est pas une chose réelle. Il est
+          d’une nature telle qu’il existe dans des <marquage typemarq="italique">répliques</marquage>. Regardez une page imprimée : chacun des <marquage typemarq="italique">le</marquage> que vous voyez est le même mot, chaque <marquage typemarq="italique">e</marquage> est la même lettre. Une chose réelle n’existe pas ainsi
+          en réplique. L’être d’un signe est simplement d’<marquage typemarq="italique">être
+          représenté</marquage>. <marquage typemarq="italique">Être réellement</marquage> et
+          <marquage typemarq="italique">être représenté</marquage> sont très différents. En donnant
+          au mot <marquage typemarq="italique">sign</marquage>e toute la portée qui lui revient en
+          toute raison à des fins logiques, un livre entier est un signe et sa traduction est une
+          réplique du même signe. Une littérature entière est un signe. La phrase “Roxane était
+          reine d’Alexandre” est un signe de Roxane et d’Alexandre, et bien qu’il y ait un accent
+          grammatical mis sur le premier terme, d’un point de vue logique le nom “Alexandre” est
+          autant un <marquage typemarq="italique">sujet</marquage> que le nom “Roxane” et les
+          personnes réelles que sont Roxane et Alexandre sont des <marquage typemarq="italique">objets réels</marquage> du signe. Tout signe assez complet réfère à divers objets réels.
+          Tous ces objets, même s’il s’agit de la folie d’Hamlet, font partie d’un seul et même
+          Univers de l’être, la “Vérité”. Mais dans la mesure où la “Vérité” est simplement l’objet
+          d’un signe, c’est simplement sa <marquage typemarq="italique">Matière</marquage>
+          aristotélicienne qui en est un. En plus de <marquage typemarq="italique">dénoter
+          </marquage>des objets,<exposant><renvoi typeref="annexe" idref="an2">v</renvoi></exposant> tout signe suffisamment complet <marquage typemarq="italique">signifie des </marquage><marquage typemarq="italique">caractères</marquage> ou qualités. Nous avons une connaissance directe d’objets réels
+          dans chaque réaction expériencielle, qu’elle soit de <marquage typemarq="italique">Perception</marquage> ou d’<marquage typemarq="italique">Effort</marquage> (l’une
+          théorique, l’autre pratique). Ceux-ci sont directement <marquage typemarq="italique">hic
+          et nunc</marquage>. Mais nous étendons la catégorie et parlons d’innombrables objets réels
+          avec lesquels nous ne sommes pas en réaction directe. Nous avons aussi une connaissance
+          directe de qualités de sensation, périphérique et viscérale. Mais nous étendons cette
+          catégorie à d’innombrables caractères dont nous n’avons aucune conscience immédiate. Tous
+          ces caractères sont des éléments de la “Vérité”. Tout signe signifie la “Vérité”. Mais ce
+          n’est que la <marquage typemarq="italique">Forme</marquage> aristotélicienne de l’univers
+          qu’il signifie. Le logicien n’a rien à faire de quelque théorie métaphysique que ce soit
+          et, si cela est possible, le mathématicien encore moins, mais il est très commode de nous
+          exprimer dans les termes d’une théorie métaphysique, et nous ne nous engageons nous-mêmes
+          pas plus à l’accepter que nous ne le faisons quand nous utilisons des substantifs comme
+          “humanité”, “variété”, etc. et en parlons comme s’il s’agissait de substances, au sens
+          métaphysique. Mais, en troisième lieu, chaque signe est destiné à déterminer un signe du
+          même objet avec la même signification ou le même <marquage typemarq="italique">sens</marquage>. Tout signe <marquage typemarq="italique">B</marquage>, qu’un signe
+          <marquage typemarq="italique">A</marquage> est apte à déterminer ainsi, tout en respectant
+          sa finalité (de <marquage typemarq="italique">A</marquage>), c’est-à-dire en accord avec
+          la “Vérité”, même s’il (<marquage typemarq="italique">B</marquage>) ne dénote qu’une
+          partie des objets du signe <marquage typemarq="italique">A</marquage>, et ne signifie
+          qu’une partie des caractères de <marquage typemarq="italique">A</marquage>, je l’appelle
+          un <marquage typemarq="italique">interprétant</marquage> de <marquage typemarq="italique">A</marquage>. Ce que nous appelons un “fait” est quelque chose qui a la structure d’une
+          proposition, mais que nous supposons être un élément de l’univers même. La finalité de
+          tout signe est d’exprimer un “fait” et, en étant joint à d’autres signes, d’en venir aussi
+          près que possible à déterminer un interprétant qui serait la <marquage typemarq="italique">Vérité parfaite</marquage>, la Vérité absolue, et en tant que tel (nous pouvons au moins
+          utiliser ce langage) qui serait l’Univers même. Aristote cherche à l’aveuglette une
+          conception de la perfection, ou <marquage typemarq="italique">entéléchie</marquage>, qu’il
+          ne parvient jamais à rendre claire. Nous pouvons adopter ce mot pour désigner le fait
+          même, c’est-à-dire le signe idéal qui serait tout à fait parfait et ainsi identique – de
+          l’identité qu’un signe peut avoir – à la matière dénotée unie à la forme même signifiée
+          par elle. L’entéléchie de l’Univers de l’être, l’Univers en tant que fait, sera cet
+          Univers sous son aspect de signe, la “Vérité” de l’être. La “Vérité”, le fait qui n’est
+          pas abstrait mais complet, est l’interprétant ultime de tout signe.</alinea>
+      </para><para id="pa18"><no>18</no>
+        <alinea>2. Des deux grandes tâches de l’humanité que sont la <marquage typemarq="italique">Théorie</marquage> et la <marquage typemarq="italique">Pratique</marquage>, la première
+          provient d’un signe d’un objet réel avec lequel elle est <marquage typemarq="italique">en
+          accointance</marquage>, passant de cela, qui constitue sa <marquage typemarq="italique">matière</marquage>, à des interprétants successifs qui incorporent de plus en plus sa
+          <marquage typemarq="italique">forme</marquage>, avec pour souhait dernier d’atteindre une
+          <marquage typemarq="italique">perception</marquage> directe de l’entéléchie, tandis que la
+          seconde, provenant d’un signe signifiant un caractère dont elle <marquage typemarq="italique">a une idée</marquage> passe de cela, comme sa <marquage typemarq="italique">forme</marquage>, à des interprétants successifs qui réalisent de plus
+          en plus précisément sa matière, avec pour espoir dernier d’être capable de faire un
+          <marquage typemarq="italique">effort</marquage> direct produisant l’entéléchie. Mais de
+          ces deux mouvements, la logique préfère très justement suivre celui de la Théorie comme
+          mouvement premier. Elle parle de l’<marquage typemarq="italique">antécédent</marquage>
+          comme de ce qui, étant connu, permet à quelque chose d’autre, le <marquage typemarq="italique">conséquent</marquage>, d’être <marquage typemarq="italique">aussi</marquage> connu. Dans nos manières de parler courantes, ce dernier est erronément
+          appelé <marquage typemarq="italique">conséquence</marquage>, mot que la terminologie
+          précise de la logique réserve à la proposition qui exprime la relation de tout conséquent
+          avec son antécédent, ou au fait que cette proposition exprime. La conception de la
+          relation de l’antécédent et du conséquent revient alors à une confusion de la pensée entre
+          la référence d’un signe et son sens, le caractère qu’il attribue à son objet, et son
+          recours à un interprétant. Mais c’est le premier terme qui est le plus essentiel. La
+          connaissance que le soleil s’est toujours levé environ une fois toutes les vingt-quatre
+          heures (en temps sidéral) est un signe dont l’objet est le soleil et dont une partie de la
+          signification (si elle est bien comprise) est que le soleil se lèvera demain matin. La
+          relation d’un antécédent à son conséquent, dans sa confusion de la signification avec
+          l’interprétant, n’est qu’un cas particulier de ce qu’il se passe dans toute action d’une
+          chose sur une autre, modifié de manière à n’être qu’une question d’être représenté plutôt
+          que d’être réellement. C’est l’action représentative du signe sur son objet, car chaque
+          fois qu’une chose agit sur une autre elle détermine en elle une qualité qui autrement n’y
+          aurait pas été. Dans nos manières de parler courantes, nous disons souvent que l’effet est
+          une “conséquence”, parce que ce qui est réellement peut être représenté correctement mais
+          nous refuserions d’appeler “effet” un simple conséquent logique, parce que ce qui est
+          simplement représenté, si légitimement que ce soit, ne peut être dit réellement être. Si
+          nous disons d’une argumentation qu’elle “produit un grand effet”, ce n’est d’aucune
+          manière à l’interprétant lui-même que nous référons, mais seulement à sa réplique
+          particulière qui se produit dans les esprits de ceux à qui l’on s’adresse.</alinea>
+      </para><para id="pa19"><no>19</no>
+        <alinea>Si un signe <marquage typemarq="italique">B</marquage> ne signifie que des
+          caractères qui sont des éléments (ou le tout) de la signification d’un autre signe
+          <marquage typemarq="italique">A</marquage>, on dit alors que <marquage typemarq="italique">B </marquage>est un <marquage typemarq="italique">prédicat</marquage> (ou une <marquage typemarq="italique">partie essentielle</marquage>) de <marquage typemarq="italique">A</marquage>. Si un signe <marquage typemarq="italique">A</marquage> dénote seulement des
+          objets réels qui sont une partie ou le tout des objets dénotés par un autre signe,
+          <marquage typemarq="italique">B</marquage>, on dit alors que <marquage typemarq="italique">A</marquage> est un <marquage typemarq="italique">sujet</marquage> (ou une <marquage typemarq="italique">partie substantielle</marquage>) de <marquage typemarq="italique">B</marquage>. La totalité des prédicats d’un signe, de même que la totalité des
+          caractères qu’il signifie sont chacune indifféremment appelées sa <marquage typemarq="italique">profondeur</marquage> logique. C’est le terme le plus ancien et le
+          plus commode. Des synonymes en sont la <marquage typemarq="italique">compréhension</marquage> de Port-Royal,<exposant><renvoi typeref="annexe" idref="an2">vi</renvoi></exposant> le <marquage typemarq="italique">contenu</marquage> (<marquage typemarq="italique">Inhalt</marquage>)
+          des Allemands, la <marquage typemarq="italique">force</marquage> de Morgan, la <marquage typemarq="italique">connotation</marquage> de J. S. Mill. (Cette dernière est discutable.)
+          La totalité des sujets et aussi, indifféremment, la totalité des objets réels d’un signe
+          s’appellent la <marquage typemarq="italique">largeur</marquage> logique. C’est le terme le
+          plus ancien et le plus commode. Des synonymes en sont l’<marquage typemarq="italique">extension</marquage> de Port-Royal (improprement appelée <marquage typemarq="italique">étendue</marquage> par certains logiciens français modernes), la <marquage typemarq="italique">sphère</marquage> (<marquage typemarq="italique">Umfang</marquage>)
+          des traducteurs de l’allemand, la <marquage typemarq="italique">portée</marquage>
+          (<marquage typemarq="italique">scope</marquage>) de Morgan, la <marquage typemarq="italique">dénotation </marquage>de J. S. Mill.</alinea>
+      </para><para id="pa20"><no>20</no>
+        <alinea>En plus de la profondeur et de la largeur logiques, j’ai proposé (en
+          1867<exposant><exposant><renvoi typeref="annexe" idref="an2">vii</renvoi></exposant></exposant>) les termes <marquage typemarq="italique">information</marquage> et <marquage typemarq="italique">surface</marquage> pour dénoter
+          la totalité de fait (vraie ou fausse) qu’un signe comprend dans un état de connaissance
+          donné.</alinea>
+      </para><para id="pa21"><no>21</no>
+        <alinea>3. D’autres distinctions dépendent de celles que nous avons tracées. J’ai dit des
+          relations réelles que ce sont des réactions. On peut se demander jusqu’à quel point je
+          veux vraiment dire que toutes les relations réelles sont des réactions. Il est rare qu’on
+          tombe sur un sujet aussi fascinant pour la pensée que l’analyse de ce problème dans toutes
+          ses ramifications, mathématiques, physiques, biologiques, sociologiques, psychologiques,
+          logiques et par là de nouveau mathématiques. On ne saurait donner une réponse
+          satisfaisante en quelques mots, mais elle se trouve cachée sous la vérité évidente que
+          toute nécessité exacte peut être exprimée par une équation générale, et rien ne peut être
+          ajouté à un membre d’une équation générale sans une addition égale à l’autre membre. La
+          nécessité logique est la nécessité qu’un signe soit vrai pour un objet <marquage typemarq="italique">réel</marquage>, de sorte qu’il y a une réaction <marquage typemarq="italique">logique</marquage> dans toute relation dyadique réelle. Si <marquage typemarq="italique">A</marquage> est dans une relation réelle à <marquage typemarq="italique">B</marquage>, <marquage typemarq="italique">B</marquage> est dans une
+          relation logiquement contraire à <marquage typemarq="italique">A</marquage>, c’est-à-dire
+          dans une relation immédiatement inverse et en contradiction avec la relation directe, car
+          nous parlons ici non d’un signe vague de la relation mais de la relation entre deux
+          individus, <marquage typemarq="italique">A</marquage> et <marquage typemarq="italique">B</marquage>. Cette relation même en est une dans laquelle <marquage typemarq="italique">A</marquage> seul est en rapport à quelque individu et cela avec <marquage typemarq="italique">B</marquage> seulement. Il y a toutefois des relations dyadiques
+          <marquage typemarq="italique">dégénérées</marquage> – <marquage typemarq="italique">dégénérées</marquage> au sens où deux lignes coplanaires forment une conique dégénéré –
+          dont cela n’est pas vrai. Plus précisément, ce sont des relations individuelles
+          d’identité, comme la relation de <marquage typemarq="italique">A</marquage> à <marquage typemarq="italique">A</marquage>. Toutes les simples ressemblances et relations de raison
+          sont de ce genre.</alinea>
+      </para><para id="pa22"><no>22</no>
+        <alinea>Les signes ont deux formes dégénérées différentes. Mais bien que je leur donne ce
+          nom peu flatteur, elles sont de la plus grande utilité et servent des fins auxquelles des
+          signes authentiques ne peuvent servir. Celle des deux formes qui est la plus dégénérée
+          (comme je vois les choses) est l’<marquage typemarq="italique">icône</marquage>. Celle-ci
+          est définie comme un signe dont le caractère qui le fait devenir un signe de l’espèce qui
+          est la sienne se trouve inhérent en lui simplement comme une qualité qu’il a. Par exemple,
+          une figure géométrique dessinée sur le papier peut être une <marquage typemarq="italique">icône</marquage> d’un triangle ou d’une autre forme géométrique. Si on rencontre un homme
+          dont on ne connaît pas la langue et qu’on a recours à des sons et à des gestes imitatifs,
+          ceux-ci donnent une idée de ce qu’est une icône. La raison pour laquelle ce ne sont pas
+          des icônes pures est que l’accent est mis sur leur finalité.<exposant><renvoi typeref="annexe" idref="an1">2</renvoi></exposant> Une
+          icône pure est indépendante de quelque finalité que ce soit. Elle sert comme signe
+          seulement et simplement en exhibant la qualité qu’elle sert à signifier. La relation
+          qu’elle a à son objet est une relation dégénérée. Elle n’affirme rien. Si elle transmet de
+          l’information, ce n’est qu’au sens où l’objet qu’elle sert à représenter peut être dit
+          transmettre de l’information. Une <marquage typemarq="italique">icône</marquage> ne peut
+          être qu’un fragment d’un signe plus complet.</alinea>
+      </para><para id="pa23"><no>23</no>
+        <alinea>On appellera <marquage typemarq="italique">index</marquage> l’autre forme de signe
+          dégénéré. L’index est défini comme un signe qui est apte à jouer ce rôle du fait d’être
+          dans une réaction réelle avec ses objets. Une girouette, par exemple, est un tel signe. On
+          peut la considérer comme un index du vent parce qu’elle est physiquement connectée à
+          celui-ci. La girouette transmet de l’information, mais elle le fait parce qu’en faisant
+          face au côté d’où souffle le vent elle ressemble à cet égard au vent et se trouve ainsi
+          connectée à une icône. À cet égard, ce n’est pas un index pur. Un index pur attire
+          simplement l’attention vers l’objet avec lequel il est en réaction et place l’interprète
+          dans une réaction médiate avec cet objet mais il ne transmet aucune information. Prenez
+          comme exemple l’exclamation “Oh !”. Les lettres attachées à une figure géométrique
+          fournissent un autre cas. On ne doit pas s’attendre à trouver des exemples qui
+          appartiennent absolument à l’une ou l’autre des formes dégénérées. Tout ce qui est
+          possible est de donner des exemples qui tendent suffisamment vers ces formes pour suggérer
+          ce qu’on entend. Il vaut d’être remarqué qu’alors que ni une icône pure ni un index pur ne
+          peuvent affirmer quoi que ce soit un index qui force quelque chose à être une <marquage typemarq="italique">icône</marquage>, comme le fait une girouette, ou qui nous force à le
+          considérer comme une <marquage typemarq="italique">icône</marquage>, comme le fait la
+          légende sous un portrait, fait une assertion et constitue une <marquage typemarq="italique">proposition</marquage>. Cela suggère la vraie définition d’une
+          proposition, question qui est l’objet de grands débats actuellement. Une proposition est
+          un signe qui indique séparément, ou indépendamment, son objet. Aucun index ne peut
+          toutefois être une <marquage typemarq="italique">argumentation</marquage>. Il peut être ce
+          que de nombreux auteurs appellent un <marquage typemarq="italique">argument</marquage>,
+          c’est-à-dire une base d’argumentation, mais il ne saurait être un argument au sens d’un
+          signe qui montre séparément quel interprétant il vise à déterminer.</alinea>
+      </para><para id="pa24"><no>24</no>
+        <alinea>On observera que l’icône est parfaite pour ce qui est de la signification, amenant
+          son interprète face à face avec le caractère même qui est signifié. Pour cette raison,
+          c’est le signe mathématique <marquage typemarq="italique">par
+            excellence</marquage>.<exposant><renvoi typeref="annexe" idref="an1">3</renvoi></exposant> Mais pour ce qui est de la dénotation elle
+          est déficiente, car elle ne donne aucune assurance qu’il existe réellement un objet tel
+          que celui qu’elle représente. De son côté, l’index y parvient le plus parfaitement, en
+          fournissant réellement à l’interprète l’expérience de l’objet même qui est dénoté. Mais il
+          est déficient pour ce qui est de la signification, à moins qu’il ne comprenne une partie
+          iconique.</alinea>
+      </para><para id="pa25"><no>25</no>
+        <alinea>Nous en venons maintenant au signe authentique, pour lequel je propose la
+          désignation technique de <marquage typemarq="italique">symbole</marquage>, suivant un
+          usage de ce mot qui n’est pas rare chez les logiciens, y compris chez Aristote. Un symbole
+          est défini comme un signe qui est apte à jouer ce rôle simplement parce qu’il est ainsi
+          interprété. </alinea>
+      </para><para id="pa26"><no>26</no>
+        <alinea>Pour récapituler,</alinea>
+        <listerelation type="1">
+          <elemrelation>
+            <lrsource>
+              <alinea>Une icône</alinea>
+            </lrsource>
+            <lrcible>
+              <verbatim typeverb="forme">
+                <bloc>
+                  <ligne alignh="droite">il possède la qualité signifiée</ligne>
+                </bloc>
+              </verbatim>
+            </lrcible>
+          </elemrelation>
+          <elemrelation>
+            <lrsource>
+              <alinea>Un index</alinea>
+            </lrsource>
+            <lrcible>
+              <verbatim typeverb="forme">
+                <bloc>
+                  <ligne alignh="droite">est un signe apte à être utilisé comme tel parce qu’ il est
+                    en réaction réelle avec l’objet dénoté</ligne>
+                </bloc>
+              </verbatim>
+            </lrcible>
+          </elemrelation>
+          <elemrelation>
+            <lrsource>
+              <alinea>Un symbole</alinea>
+            </lrsource>
+            <lrcible>
+              <verbatim typeverb="forme">
+                <bloc>
+                  <ligne alignh="droite">il détermine le signe interprétant</ligne>
+                </bloc>
+              </verbatim>
+            </lrcible>
+          </elemrelation>
+        </listerelation>
+      </para><para id="pa27"><no>27</no>
+        <alinea>Le langage et toute pensée abstraite, comme celle qui appartient aux esprits qui
+          pensent en mots, sont de nature symbolique. De nombreux mots, bien qu’ils soient à
+          strictement parler des symboles, sont iconique dans la mesure où ils sont aptes à
+          déterminer des interprétants iconiques ou, comme on dit, à susciter des images vivantes.
+          Sont de ce genre, par exemple, les mots dont on imagine qu’ils ont une ressemblance avec
+          les sons associés à leurs objets, les mots qualifiés d’onomatopées. Il y a des mots qui,
+          bien qu’ils soient des symboles, agissent à peu près comme des index. C’est le cas des
+          pronoms personnels, démonstratifs et relatifs, auxquels les lettres <marquage typemarq="italique">A</marquage>, <marquage typemarq="italique">B</marquage>, <marquage typemarq="italique">C</marquage>, etc. sont souvent substituées. De même, un <marquage typemarq="italique">Nom Propre</marquage>, qui dénote un seul individu, que le locuteur et
+          l’auditeur savent exister, ne diffère de l’index que par ce qu’il est un signe
+          conventionnel. D’autres mots font référence indirectement à des index. Il en va ainsi de
+          “<marquage typemarq="italique">yard</marquage>”, qui réfère à une barre donnée qui se
+          trouve à Westminster et n’a aucune signification à moins que l’interprète ne soit,
+          directement ou indirectement, en réaction physique avec cette barre. Les symboles sont
+          particulièrement éloignés de la Vérité elle-même. Ils sont abstraits. Ils ne montrent pas
+          les caractères signifiés comme les icônes le font, ni ne nous assurent de la réalité de
+          leurs objets comme les index le font. De nombreux dictons expriment cette faiblesse, comme
+          “Les mots ne prouvent rien” et d’autres du même genre. Les mots ont néanmoins un grand
+          pouvoir, dont les signes dégénérés sont dépourvus : eux seuls expriment des lois. Ils ne
+          sont toutefois pas limités à cet usage théorétique. Ils servent à susciter ce qui est
+          conforme à la raison et à la loi. Les mots <marquage typemarq="italique">justice</marquage> et <marquage typemarq="italique">vérité</marquage>, dans un monde qui
+          néglige habituellement ces choses et se moque ouvertement de ces mots, sont néanmoins
+          parmi les plus grands pouvoirs que le monde contient. Ils créent des défenseurs et leur
+          confèrent de la force. Il ne s’agit pas ici de rhétorique ou de métaphores : c’est un fait
+          important et solide dont le logicien a intérêt à tenir compte.</alinea>
+      </para><para id="pa28"><no>28</no>
+        <alinea>Un symbole est le seul genre de signe qui puisse être une
+          argumentation.<exposant><renvoi typeref="annexe" idref="an3">***</renvoi></exposant> </alinea>
+      </para><para id="pa29"><no>29</no>
+        <alinea>4. J’ai déjà défini l’argument comme un signe qui montre séparément ce qu’est son
+          interprétant visé et la proposition comme un signe qui indique séparément [ce qu’est] son
+          objet et nous avons vu que l’icône seule ne peut être une proposition alors que le symbole
+          seul peut être un argument. On voit qu’un signe ne peut être un argument sans être une
+          proposition quand on essaye de former un tel argument. “Tullius, c’<marquage typemarq="italique">est-à-dire </marquage><exposant><renvoi typeref="annexe" idref="an1">4</renvoi></exposant> un Romain” affirme à l’évidence que Tullius est un Romain. Les
+          raisons en sont claires. L’interprétant est un signe qui dénote ce que dénote le signe
+          dont il est l’interprétant. Mais s’il est un symbole, un signe authentique, il a un sens
+          (<marquage typemarq="italique">signification</marquage>) et représente par conséquent
+          l’objet du signe principal comme possédant les caractères que lui, l’interprétant,
+          signifie. On observera qu’un argument est un symbole qui montre séparément (d’une manière
+          ou d’une autre) l’interprétant qu’il vise. Du fait qu’un symbole n’est essentiellement un
+          signe qu’en vertu de ce qu’il peut être interprété comme tel, on ne peut en détacher
+          entièrement l’idée d’une finalité. Le symbole, de par sa définition même, a un
+          interprétant en vue. Sa signification même est visée. En fait, la finalité est précisément
+          l’interprétant d’un symbole. Mais la conclusion d’un argument est un interprétant montré
+          de manière particulière, singularisé au nombre des interprétants possibles. Il est par
+          conséquent singulier de par sa nature, bien qu’il ne soit pas nécessairement simple. Si
+          nous effaçons d’un argument toute monstration de sa finalité spécifique, il devient une
+          proposition, habituellement une proposition copulative, composée de plusieurs membres dont
+          le mode de conjonction est du genre exprimé par “et”, ce que les grammairiens appellent
+          une “conjonction copulative”. Si d’un symbole propositionnel nous effaçons l’une ou
+          plusieurs des parties qui dénotent séparément ses objets, le reste est appelé un <marquage typemarq="italique">rhème</marquage>, mais je prendrai la liberté de l’appeler <marquage typemarq="italique">terme</marquage>. Si de la proposition “Tout homme est mortel”, nous
+          effaçons “Tout homme”, dont on voit qu’il dénote un objet du fait que s’il est remplacé
+          par un symbole indexical comme “cela” ou “Socrate” le symbole est retransformé en une
+          proposition; nous obtenons ainsi le <marquage typemarq="italique">rhème</marquage> ou le
+          <marquage typemarq="italique">terme</marquage> “_______ est mortel”. La plupart des
+          logiciens diront que ce n’est pas un terme. Le terme, diront-ils, est “mortel”, alors que
+          j’ai aussi retenu la copule “est”. Or, bien qu’il soit vrai que dans l’un de ses
+          mémoires<exposant><renvoi typeref="annexe" idref="an2">viii</renvoi></exposant> Aristote dissèque une proposition en sujet, prédicat et
+          verbe, il n’en demeure pas moins que si le grec était la langue que ces logiciens avaient
+          en tête aucune importance n’y était attachée au verbe substantif “est”, parce que le grec
+          en permet l’omission. Ce n’est pas avant l’époque d’Abélard, quand le grec fut oublié et
+          que les logiciens avaient le latin en tête, que la copule fut reconnue comme une partie
+          constitutive de la proposition logique. Pour ma part, je ne considère pas les usages de la
+          langue comme un fondement satisfaisant des doctrines logiques. Pour moi, la logique est
+          l’étude des conditions essentielles auxquelles les signes doivent se conformer afin de
+          fonctionner en tant que signes. Il ne s’agit pas de savoir comment la constitution de
+          l’esprit humain force les hommes à penser et le recours à la langue ne me semble être rien
+          de mieux qu’une méthode insatisfaisante consistant à établir des faits psychologiques qui
+          n’ont aucune pertinence pour la logique. Mais si on y a recours (ce que les logiciens font
+          en général et leur doctrine de la copule en particulier semble ne reposer que sur cela),
+          ils devraient considérer les langues humaines en général et ne pas se limiter au petit
+          groupe très particulier des langues aryennes. Sans prétendre avoir moi-même une
+          connaissance étendue des langues, je crois que la majorité des langues non aryennes
+          n’utilisent généralement pas un verbe substantif équivalent à “est”. Certaines utilisent
+          un pronom démonstratif ou relatif, comme si l’on disait “______ est un homme <marquage typemarq="italique">qui</marquage> est traduit” au lieu de “Un homme est traduit”.
+          D’autres ont un mot, une syllabe, une lettre indiquant qu’on fait une assertion. J’en suis
+          venu à croire que dans bien peu de langues en dehors du groupe aryen le nom commun est une
+          partie du discours bien développée et indépendante. Même dans les langues sémitiques, qui
+          sont remarquablement proches des langues aryennes, les noms communs sont traités comme des
+          formes verbales et sont assez distincts des noms propres. Quoi qu’il en soit, la
+          conception ordinaire qu’on a d’un terme suppose qu’il est un nom commun au plein sens du
+          terme. Il est plutôt curieux que de toutes les langues que j’ai examinées pour donner un
+          fondement à cette conception répandue une langue aussi étrange que le basque soit la seule
+          qui semble être entièrement construite de la façon dont les logiciens nous enseignent que
+          tout être rationnel doit penser.<exposant><renvoi typeref="annexe" idref="an3">****</renvoi>
+          </exposant> </alinea>
+      </para><para id="pa30"><no>30</no>
+        <alinea>Quelle est la différence entre “______ est un homme” et “homme”? Les logiciens
+          soutiennent que l’essence du second se trouve dans une définition décrivant ses
+          caractères; cette doctrine rend “homme” virtuellement équivalent à “ce qu’est un homme”,
+          qui diffère ainsi de “_______ est un homme” par l’ajout de l’improprement nommé “pronom
+          indéfini” <marquage typemarq="italique">ce que</marquage>. Le rhème “_______ est un homme”
+          est un signe fragmentaire. Mais “homme” n’est jamais utilisé seul et n’aurait aucune
+          signification par lui-même. On l’écrit parfois sur un objet pour en montrer la nature
+          mais, dans ce cas, l’apparence de l’objet est un index de cet objet et les deux pris
+          ensemble forment une proposition. Les deux signes sont donc semblables dans la mesure où
+          ils sont tous deux fragmentaires. On peut dire que “Socrate sage” ne constitue pas une
+          phrase dans la langue qui est actuellement d’usage en logique, bien qu’en grec c’en soit
+          une, mais il importe de ne pas oublier que “Socrate” et “est sage” ne font pas non plus
+          une proposition, à moins qu’il n’y ait quelque chose qui indique qu’ils doivent être pris
+          pour des signes du même objet. Dans l’ensemble, il m’apparaît que la seule différence
+          entre mon rhème et le “terme” d’autres logiciens est que le second ne contient aucune
+          reconnaissance explicite de sa propre nature fragmentaire. Mais cela revient à dire que
+          leur signification est logiquement la même et c’est pour cette raison que je me permets
+          d’utiliser le vieux mot familier “terme” pour dénoter le rhème.</alinea>
+      </para><para id="pa31"><no>31</no>
+        <alinea>On pourrait se demander quelle est la nature du signe qui unit “Socrate” à “_______
+          est sage”, de façon à produire la proposition “Socrate est sage”. Je réponds que c’est un
+          index. Mais on pourra objecter qu’un index a pour objet une chose <marquage typemarq="italique">hic et nunc</marquage> et qu’un signe n’est pas une telle chose. Cela
+          est vrai si nous incluons dans les “choses” les événements singuliers, qui sont les seules
+          choses qui soient strictement <marquage typemarq="italique">hic et nunc</marquage>. Mais
+          ce ne sont pas les deux signes “Socrate” et “sage” qui sont liés, mais leurs <marquage typemarq="italique">répliques</marquage> utilisées dans la phrase. Nous ne disons pas que
+          “________ est sage”, en tant que signe général, est connecté spécifiquement à Socrate mais
+          seulement qu’il l’est tel qu’il est utilisé dans ce cas. Les deux répliques des mots
+          “Socrate” et “sage” sont <marquage typemarq="italique">hic et nunc</marquage> et leur
+          jonction est une partie de leur occurrence <marquage typemarq="italique">hic et
+          nunc</marquage>. Ils constituent une paire de choses en réaction que l’index de la
+          connexion dénote dans leur réaction présente et non d’une manière générale, bien qu’il
+          soit possible de généraliser le mode de cette réaction comme tout autre. On ne s’objectera
+          pas à une généralisation qui appellerait <marquage typemarq="italique">copule</marquage>
+          la marque de la jonction pourvu qu’on reconnaisse qu’elle n’est pas, en soi, générale mais
+          qu’elle est un <marquage typemarq="italique">index</marquage>. Aucun autre genre de signe
+          ne peut servir cette finalité, aucun verbe général “est” ne peut l’exprimer, car quelque
+          chose devrait encore ramener le sens général de ce verbe général au cas qui nous occupe.
+          Un index peut seul faire cela. Mais comment cet index signifie-t-il la connexion? De la
+          seule manière qu’un index puisse jamais signifier quoi que ce soit, en incluant une
+          <marquage typemarq="italique">icône</marquage>. Le signe lui-même est une connexion. On me
+          demandera comment cela s’applique au latin, où les parties de la phrase ne sont disposées
+          qu’en fonction de l’effet rhétorique. Je réponds qu’il est néanmoins évident qu’en latin,
+          comme en toute langue, c’est la juxtaposition qui connecte les mots. Autrement, on
+          pourrait les laisser à leur place dans le dictionnaire. L’inflexion y est pour un peu,
+          mais le principal travail de construction, soit tout le travail de la connexion, est
+          exécuté en mettant les mots ensemble. En latin, on s’en remet pour beaucoup au bon sens de
+          l’interprète. C’est dire que le fonds de connaissance commun au locuteur et à
+          l’interprète, que les mots font venir à l’esprit, est une partie du signe. C’est plus ou
+          moins le cas de toute conversation, qu’elle soit orale ou écrite. Il est donc clair que
+          l’étincelle vitale de toute proposition, l’élément propositionnel particulier de la
+          proposition, est une proposition indexicale, un index qui inclut une icône. Le rhème,
+          disons “______ aime _____”, a des espaces blancs qui appellent à être remplis et une
+          connexion actuelle concrète d’un sujet à chaque espace blanc montre la connexion des
+          idées.</alinea>
+      </para><para id="pa32"><no>32</no>
+        <alinea>C’est la Proposition qui constitue le sujet principal de tout ce scolie, car les
+          distinctions entre <marquage typemarq="italique">vague</marquage> et <marquage typemarq="italique">distinct</marquage>, <marquage typemarq="italique">général</marquage>
+          et <marquage typemarq="italique">individuel</marquage> sont des distinctions
+          propositionnelles. Je me suis efforcé de m’abstenir de longues discussions
+          terminologiques, mais nous atteignons ici un point où une terminologie très répandue
+          recouvre une conception erronée, celle de ces logiciens qui, entraînés par les Allemands,
+          parlent de “jugements” (<marquage typemarq="italique">Urtheile</marquage>) plutôt que de
+          traiter de propositions. Ils considèrent la proposition simplement comme l’expression
+          orale ou écrite d’un jugement. Plus d’une erreur provient de cette pratique. D’abord, un
+          jugement, comme ils l’enseignent très correctement, est un sujet de psychologie. Puisque
+          de nos jours les psychologues non seulement renoncent à toute prétention à une
+          connaissance de l’<marquage typemarq="italique">âme</marquage> mais s’efforcent aussi
+          d’éviter de parler de l’<marquage typemarq="italique">esprit</marquage>, celui-ci n’est
+          actuellement pas du tout un terme scientifique. Je ne suis pas prêt pour autant à dire que
+          la logique, en tant que telle, ne traite pas de l’esprit. J’aimerais prendre l’esprit en
+          un sens tel qu’on puisse affirmer cela, mais en quelque sens que la psychologie – la
+          psychologie scientifique maintenant reconnue – traite de l’esprit, la logique n’a, je le
+          maintiens, rien à voir avec lui. Sans m’attarder ici à discuter cette vaste question, je
+          dirai que la psychologie est une science qui fait des observations particulières et tout
+          son travail consiste à rendre définis et compréhensibles les phénomènes observés (de même
+          que les faits familiers qui leur sont reliés). La logique est une science très voisine des
+          mathématiques pures. Elle ne fait connaître aucun phénomène positif, bien qu’[elle] prenne
+          en compte et repose sur des phénomènes dont nous faisons l’expérience chaque jour et
+          chaque heure, qu’elle analyse de façon à révéler d’obscures vérités à leur sujet. On
+          pourrait penser qu’un pur mathématicien prendrait ces choses comme hypothèse de départ et
+          en déduirait la logique, mais il se révèle, à l’essai, que ce n’est pas le cas. Le
+          logicien doit procéder à un réexamen des phénomènes tout au long de ses recherches. Mais
+          la logique est tout aussi éloignée de la psychologie que les mathématiques pures. La
+          logique est l’étude de la nature essentielle des signes. Un signe est quelque chose qui
+          existe dans des répliques. Que le signe “il pleut” ou “toutes les paires de particules de
+          matière ont des composantes d’accélération l’une vers l’autre inversement proportionnelles
+          au carré de la distance” se trouve avoir une réplique dans l’écriture, la parole ou dans
+          la pensée silencieuse, cela n’a qu’un intérêt infime pour la logique, qui est l’étude non
+          des répliques, mais des signes. Mais ce n’est pas là la seule ni la plus grave erreur que
+          l’on commet quand on considère que la logique traite de “jugements” plutôt que de
+          propositions. Cela suppose qu’on confond deux choses qu’il faut distinguer pour parvenir à
+          une compréhension réelle de la logique. Comme je viens de l’indiquer, une <marquage typemarq="italique">proposition</marquage> ne doit pas être comprise comme l’expression
+          linguistique d’un jugement. Elle est, au contraire, ce signe dont le jugement est une
+          réplique et l’expression linguistique une autre. Mais un jugement est manifestement
+          <marquage typemarq="italique">plus</marquage> que la simple réplique mentale d’une
+          proposition. Il ne fait pas qu’exprimer la proposition, mais va plus loin et l’<marquage typemarq="italique">accepte</marquage>. Je concède que l’usage normal d’une proposition
+          est de l’affirmer et ses propriétés logiques principales sont liées à ce qui résulterait
+          de son affirmation. C’est pourquoi en logique il est commode d’exprimer dans la plupart
+          des cas les propositions au mode indicatif. Mais la proposition dans la phrase “Socrates
+          est sapiens”, strictement exprimée, est “<marquage typemarq="italique">Socratem sapientem
+            esse</marquage>”.<exposant><renvoi typeref="annexe" idref="an2">ix</renvoi></exposant> Cette position se défend de ce que nous
+          distinguons ainsi la proposition de son assertion et que sans une telle distinction il est
+          impossible d’obtenir une notion claire de la nature de la proposition. Une seule et même
+          proposition peut être affirmée, niée, jugée, mise en doute, examinée intérieurement,
+          formulée comme une question, désirée, demandée, effectivement ordonnée, enseignée ou
+          simplement exprimée et ne devient pas de ce fait une proposition différente. De quelle
+          nature sont ces opérations? La seule qui doive nous retenir est l’affirmation, incluant le
+          jugement, ou l’affirmation à soi-même. Pour aider à disséquer la constitution de
+          l’affirmation, j’utiliserai une certaine loupe logique dont j’ai souvent constaté
+          l’efficacité dans ce genre de travail. Imaginez que j’écrive une proposition sur un
+          morceau de papier, peut-être plusieurs fois, simplement comme exercice de calligraphie.
+          Cela ne risque pas de se révéler être un divertissement dangereux. Mais supposez que
+          j’apporte ensuite ce papier chez un notaire et fasse une déclaration sous serment quant à
+          son contenu. Ce peut être une autre paire de manches. La raison en est que cette
+          déclaration sous serment peut être utilisée pour établir dans les esprits d’un juge et
+          d’un jury un accord donné à la proposition qu’elle contient, effet que le morceau de
+          papier n’aurait pas eu si je n’avais pas prêté serment. Car certaines peines s’attachent,
+          à ce moment et par la suite, au serment prêté quant à une proposition fausse et par
+          conséquent le fait que j’ai juré de cette proposition sera considéré comme un index
+          négatif de ce qu’elle n’est pas fausse. Cet accord dans les esprits du juge et du jury
+          peut déclencher dans les esprits du shérif et de ses hommes une détermination à poser un
+          acte de force au détriment de la liberté ou de la propriété d’un innocent. Certaines idées
+          de la justice et de l’ordre sont si puissantes que le résultat final peut m’être très
+          défavorable. C’est à quoi ressemble cette affirmation sous le microscope, car la seule
+          différence entre prêter serment quant à une proposition et une affirmation ordinaire de
+          cette proposition, telle que la logique la considère, est que dans le deuxième cas les
+          peines sont moins sévères et même moins certaines que celles prévues par la loi. Comme
+          dans l’exemple précédent, la raison pour laquelle il existe des peines est que
+          l’affirmation peut déterminer un jugement ayant le même effet dans l’esprit de
+          l’interprète et à son détriment. La seule cause de sa croyance ne saurait être qu’il
+          existe de telles peines, puisque deux événements ne peuvent se causer l’un l’autre, à
+          moins d’être simultanés. Il doit y avoir eu et nous savons bien qu’il y a une sorte de
+          disposition hypnotique à croire ce qu’on nous dit sur le ton du commandement. C’est la
+          “créancivité” de Grimes, qui est l’essence de l’hypnotisme.<exposant><renvoi typeref="annexe" idref="an2">x</renvoi></exposant> Cette
+          disposition a produit la croyance, la croyance a produit les peines et la connaissance de
+          ces peines renforce la disposition à croire.</alinea>
+      </para><para id="pa33"><no>33</no>
+        <alinea>J’ai discuté de la nature de la croyance dans le numéro de novembre
+          1877<exposant><renvoi typeref="annexe" idref="an2">xi</renvoi></exposant> du <marquage typemarq="italique">Popular Science
+          Monthly</marquage>. De manière générale, nous pouvons établir les définitions suivantes
+          :</alinea>
+        <verbatim typeverb="forme">
+          <bloc>
+            <ligne>Une <marquage typemarq="italique">croyance</marquage> en une proposition est une
+              habitude contrôlée et satisfaite d’agir d’une manière apte à produire les résultats
+              désirés seulement si la proposition est vraie.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>Une <marquage typemarq="italique">affirmation</marquage> est un acte de la part
+              du locuteur d’une proposition à l’intention d’un interprète et consiste d’abord, en
+              prononçant la proposition, dans l’exercice délibéré d’une force tendant à déterminer
+              une croyance en cette proposition dans l’esprit de l’interprète. C’est peut-être là
+              une définition suffisante de l’affirmation, mais elle engage aussi une auto-sujétion à
+              des peines s’il advenait que l’esprit de l’interprète (et plus encore l’esprit général
+              de la société) en vienne par la suite à être résolument déterminé à croire en même
+              temps à la fausseté de la proposition et à la proposition supplémentaire que le
+              locuteur croyait la proposition fausse au moment où il l’a énoncée.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>Un <marquage typemarq="italique">jugement</marquage> est un acte mental qui
+              consiste à exercer délibérément une force tendant à déterminer dans l’esprit de
+              l’agent une croyance en la proposition, ce à quoi il faut peut-être ajouter que
+              l’agent doit être conscient qu’il s’expose à des inconvénients si la proposition se
+              révélait être fausse sous quelque aspect pratique.</ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa34"><no>34</no>
+        <alinea>Pour comprendre complètement la distinction entre une proposition et un argument, il
+          s’avérera important de classer ces actes, l’affirmation, etc. et de s’assurer de leur
+          nature précise. La question est purement logique, mais il se trouve qu’une fausse
+          métaphysique est répandue, en particulier chez des hommes qui sont influencés par la
+          physique mais ne sont pas assez physiciens pour la comprendre pleinement, laquelle
+          métaphysique retiendrait ceux qui croient en elle d’accepter l’énoncé purement logique de
+          la nature de l’affirmation. Je serai par conséquent forcé d’évoquer la métaphysique. Je
+          refuse toutefois d’entrer ici dans une discussion métaphysique et me contenterai
+          d’indiquer rapidement sur quel terrain il est nécessaire de se placer pour s’opposer à une
+          telle doctrine commune. L’affirmation est de la nature du symbole. On pourrait penser que
+          cela ne peut être le cas puisque, comme l’analyse qu’on a lue le montre, une affirmation
+          produit des effets réels, des effets physiques. Pourtant aucun signe n’est une chose
+          réelle. Il n’a pas d’être réel, mais seulement un être représenté. J’aurais plus de
+          facilité à persuader les lecteurs de penser que l’affirmation est un index, puisque
+          l’index est, peut-être, une chose réelle. Sa réplique est, en tout cas, dans une réaction
+          réelle avec son objet et elle force sur l’esprit une référence à cet objet. Mais un
+          symbole, un mot, n’existe certainement que dans une réplique, contrairement à la nature
+          d’une chose réelle et, en effet, le symbole ne devient un signe que parce que son
+          interprète se trouve être préparé à le représenter comme tel. C’est pourquoi je dois
+          admettre et admets qu’un symbole ne peut exercer aucune force réelle. Je maintiens
+          toutefois que tout symbole suffisamment complet gouverne des choses et que seuls des
+          symbole le font. Je veux dire que bien qu’il n’est pas une force, il est une loi. Ceux qui
+          considèrent la fausse métaphysique dont je parle comme la seule opinion claire sur le
+          sujet ont l’habitude d’appeler les lois des “uniformités”, entendant par là que ce que
+          nous appelons lois n’est en fait rien d’autre que des caractères communs de classes
+          d’événements. Il est vrai qu’ils les tiennent pour des symboles, ce que j’entreprendrai de
+          montrer qu’elles sont, mais cela revient pour eux à dire que ce sont des caractères
+          communs d’événements, car ils entretiennent une conception de la nature du symbole qui est
+          très différente de la mienne. Je commencerai donc par montrer qu’une loi n’est pas un
+          simple caractère commun d’événements. Supposez qu’un homme qui lance une paire de dés,
+          aussi honnêtes que des dés peuvent l’être, sorte des six cent fois de suite. Tout
+          mathématicien admettra que cela n’est pas une raison pour s’attendre à ce que des six
+          sortent au prochain lancer. Il est vrai que dans tout cas réel où nous verrions des six
+          sortir cent fois de suite nous serions très confiants, avec raison, que le prochain lancer
+          donnera aussi des six. Mais pourquoi devrions-nous l’être? Quelqu’un peut-il nier
+          sincèrement que c’est parce que nous pensons que le fait de sortir des six cent fois de
+          suite est une indication presque certaine qu’il y a une connexion réelle entre ces
+          lancers, de sorte que la série n’était pas une simple uniformité du caractère commun
+          consistant à obtenir des six, mais quelque chose de plus, le résultat d’un fait réel qui
+          entraîne la connexion entre les lancers des dés? Cet exemple illustre le principe logique
+          qu’une simple communauté de caractère entre les membres d’un ensemble ne constitue pas un
+          argument, si faible qu’il soit, tendant à montrer que le même caractère appartient à un
+          objet qui n’est pas membre de cet ensemble et qui n’a pas (dans la mesure où nous avons
+          une raison de le penser) une connexion réelle avec lui, à moins qu’il ne possède par
+          hasard le caractère en question. Car ce que nous supposons habituellement de dés honnêtes
+          est qu’il n’y pas de connexion réelle (ou aucune qui soit significative) entre les
+          différents lancers. Je sais que l’analyse médiocre du hasard comme fait de notre ignorance
+          s’est répandue parmi nombre d’auteurs.<exposant><renvoi typeref="annexe" idref="an2">xii</renvoi></exposant> Mais le calcul des
+          probabilités est pur non-sens s’il ne fournit pas d’assurance à long terme. Quelle
+          assurance pourrions-nous avoir relativement à une longue série de lancers d’une paire de
+          dés si, plutôt que de savoir qu’il s’agit de dés honnêtes, nous ne saurions simplement pas
+          s’ils sont pipés ou, si plutôt que de savoir qu’il n’y a aucune connexion importante entre
+          les lancers, nous ne saurions simplement pas s’il y en a une? Que l’on sache que des
+          objets <marquage typemarq="italique">A</marquage>, <marquage typemarq="italique">B</marquage>, <marquage typemarq="italique">C</marquage>, etc. ont un caractère donné
+          n’est pas du tout une raison de supposer qu’un autre objet, Ξ, que nous ne savons pas
+          avoir de relation avec les autres objets, possède ce caractère. Aussi cette proposition
+          évidente n’a-t-elle jamais été mise en doute. Chacun considère toutefois à juste titre une
+          “loi” comme une raison de prédire qu’un événement aura un certain caractère bien que les
+          événements dont on sait qu’ils ont ce caractère n’ont aucune autre connexion réelle avec
+          lui que cette loi. Cela montre que la loi n’est pas une simple uniformité mais qu’elle
+          implique une connexion réelle. Il est vrai que ces métaphysiciens disent que si l’on sait
+          que <marquage typemarq="italique">A</marquage>, <marquage typemarq="italique">B</marquage>, <marquage typemarq="italique">C</marquage>, etc. ont deux caractères en
+          commun et que l’on sait que Ξ possède l’un de ces caractères c’est là une raison de croire
+          qu’il possède l’autre. Mais c’est plutôt indéfendable. Le simple fait d’avoir un caractère
+          en commun ne constitue pas une connexion réelle, ce que ces mêmes auteurs reconnaissent
+          virtuellement en réduisant la loi à l’uniformité, c’est-à-dire à la possession d’un
+          caractère commun, pour nier que la “loi” implique quelque connexion réelle. Qu’est-ce
+          alors qu’une loi? C’est une formule à laquelle des événements réels se conforment
+          vraiment. Par “se conformer”, j’entends que, si l’on prend la formule comme un principe
+          général, si l’expérience montre que la formule s’applique à un événement donné, alors le
+          résultat sera confirmé par l’expérience. Mais il est évident qu’une telle formule générale
+          est un symbole et, plus spécifiquement, une proposition symbolique affirmée. La question
+          de savoir si ce symbole constitue une réalité, même si elle n’est pas reconnue par vous ou
+          par moi ou par quelque génération que ce soit, et celle de savoir, dans le cas où le
+          symbole est une réalité, s’il implique un Locuteur sont des questions métaphysiques dans
+          lesquelles je ne m’engagerai pas maintenant. Il y a un auteur distingué qui semble
+          soutenir que, bien que les événements se conforment à la formule ou, plutôt, bien que [la
+          formule] se conforme à la Vérité des faits, elle n’influence pas les faits pour
+          autant.<exposant><renvoi typeref="annexe" idref="an2">xiii</renvoi></exposant> Cela s’approche dangereusement du pur verbiage, car,
+          puisque personne ne prétend que la formule exerce une force coercitive sur les événements,
+          quel sens défini peut-il y avoir à ce refus catégorique d’une “influence” de la loi sur
+          les faits? La loi avait le mode d’existence qu’elle a avant même que tous les faits n’en
+          viennent à l’existence, car elle pourrait déjà avoir été connue expérimentalement; et, la
+          loi existant, quand les faits se produisent il y a accord entre eux et la loi. À quoi cet
+          auteur pense-t-il alors? Si ce n’était de l’extraordinaire conception fausse que Mill a du
+          mot “cause”, je dirais que l’idée d’une suite métaphysique impliquée dans ce mot, dans
+          “influence” et d’autres mots semblables est parfaitement claire. La singularité de Mill
+          est qu’il parle de la cause d’un événement singulier. Tous les autres parlent de la cause
+          d’un “fait”, qui est un élément de l’événement. Dans le cas de Mill, c’est l’événement
+          tout entier qui est causé. La conséquence en est que Mill est obligé de définir la cause
+          comme la totalité de toutes les circonstances qui entourent
+          l’événement.<exposant><renvoi typeref="annexe" idref="an2">xiv</renvoi>
+          </exposant> C’est, à strictement parler, l’Univers de l’être dans
+          sa totalité. Mais chaque événement, tel qu’il existe, dans son entièreté, n’est rien
+          d’autre que le même Univers de l’être dans sa totalité. De l’usage des mots que fait Mill
+          il découle donc strictement que le seul <marquage typemarq="italique">causatum</marquage>
+          est l’Univers de l’être tout entier et qu’il est lui-même sa seule <marquage typemarq="italique">cause</marquage>. Il enlève ainsi au mot toute utilité. Au sens que
+          tout le monde, à l’exception de Mill et de son école, donne plus ou moins clairement à ce
+          mot, il est très utile. Ce qui est causé, le <marquage typemarq="italique">causatum</marquage>, n’est pas l’événement entier, mais un élément abstrait d’un
+          événement tel qu’il peut être exprimé dans une proposition, c’est-à-dire ce que nous
+          appelons un “fait”. La cause est un autre “fait”, à savoir qu’elle est, premièrement, un
+          fait qui pourrait, à l’intérieur du champ de la possibilité, avoir l’être qu’il a sans que
+          le <marquage typemarq="italique">causatum</marquage> ne soit mais qui, deuxièmement, ne
+          pourrait être un fait réel si un troisième fait complémentaire, exprimé ou compris, ne se
+          réalisait, sans l’être du <marquage typemarq="italique">causatum</marquage>;
+          troisièmement, bien que le <marquage typemarq="italique">causatum</marquage> effectivement
+          réalisé puisse peut-être être réalisé par d’autres causes ou par accident, l’existence du
+          <marquage typemarq="italique">causatum</marquage> possible en entier ne pourrait quand
+          même être réalisée sans la cause en question. On pourrait ajouter qu’une partie d’une
+          cause, s’il s’agit d’une partie à l’égard de ce qui fait que la cause est une cause,
+          s’appelle aussi <marquage typemarq="italique">cause</marquage>. À d’autres égards, la
+          portée du mot sera quelque peu élargie par la suite. Si la cause ainsi définie est une
+          partie du <marquage typemarq="italique">causatum</marquage>, au sens où le <marquage typemarq="italique">causatum</marquage> ne saurait logiquement être sans la cause, on
+          l’appelle <marquage typemarq="italique">cause interne</marquage>; autrement, il s’agit
+          d’une <marquage typemarq="italique">cause externe</marquage>. Si la cause est de la nature
+          d’une chose individuelle ou d’un fait individuel et que l’autre facteur requis pour que le
+          <marquage typemarq="italique">causatum</marquage> soit nécessaire est un principe général,
+          je dirai qu’il s’agit d’une cause <marquage typemarq="italique">mineure</marquage>,
+          <marquage typemarq="italique">individuante</marquage> ou peut-être <marquage typemarq="italique">physique</marquage>. Si c’est au contraire le principe général qu’on
+          considère être la cause et le fait individuel auquel il s’applique qu’on considère être le
+          facteur compris, je dirai de la cause qu’elle est <marquage typemarq="italique">majeure</marquage>, <marquage typemarq="italique">définissante</marquage> ou peut-être
+          <marquage typemarq="italique">psychique</marquage>. La cause interne individuante est
+          appelée <marquage typemarq="italique">cause matérielle</marquage>. Les parties intégrantes
+          d’un sujet ou d’un fait forment ainsi sa <marquage typemarq="italique">matière</marquage>
+          ou sa cause matérielle. La cause externe individuante est appelée <marquage typemarq="italique">efficiente</marquage> ou <marquage typemarq="italique">cause
+          efficiente</marquage> et le <marquage typemarq="italique">causatum</marquage> est appelé
+          l’<marquage typemarq="italique">effet</marquage>. La cause interne définissante est
+          appelée <marquage typemarq="italique">cause formelle</marquage> ou <marquage typemarq="italique">forme</marquage>. Tous ces faits qui constituent la définition d’un
+          sujet ou d’un fait composent sa forme. La cause externe définissante est appelée <marquage typemarq="italique">cause finale</marquage> ou <marquage typemarq="italique">fin</marquage>. J’espère que ces formulations s’avéreront atteindre mieux que celles
+          d’Aristote ou des scolastiques la cible qu’ils visaient. Ces idées de la scholastique et
+          des universités du Moyen Âge sont passées sous une forme plus vague dans les habitudes de
+          penser et de parler de l’Europe occidentale, en particulier de l’Angleterre. Je pense donc
+          pouvoir au moyen de ces définitions établir ce que l’auteur mentionné a en tête quand il
+          dit que ce n’est pas la loi qui influence les faits ou en est la cause finale, mais les
+          faits qui constituent la cause de la loi. Il veut dire que le fait général qu’exprime la
+          loi de la gravitation universelle est composé des faits particuliers que telle pierre est
+          tombée au sol à tel moment dès qu’elle a été libre de le faire et que sa vitesse vers le
+          haut a été épuisée, que toutes les autres pierres ont fait la même chose, que chaque
+          planète a décrit à chaque moment une ellipse ayant le centre de masse du système solaire
+          pour foyer, etc., etc., de sorte que les faits individuels sont la cause matérielle du
+          fait général exprimé par la loi, tandis que les propositions qui expriment ces faits sont
+          la cause efficiente de la loi elle-même. C’est là une version possible qui s’accorde avec
+          la secte de pensée à laquelle appartient l’auteur et je crois que c’est le sens qu’il
+          visait. Mais il est facile de voir que cette version n’est pas vraie, car la formule est
+          liée à tous les événements possibles d’une description donnée, ce qui revient à dire
+          qu’elle concerne tous les événements possibles. Or, aucun ensemble d’événements
+          individuels présents, ou d’autres objets de quelque description générale ne peut
+          équivaloir à tous les événements ou objets possibles de cette description, car il est
+          possible qu’on doive faire un ajout à cet ensemble. Les individus ne constituent pas la
+          matière d’un général : ceux qui avec Kant,<exposant><renvoi typeref="annexe" idref="an2">xv</renvoi>
+          </exposant> ou longtemps avant lui,
+          ont dit qu’ils le font manquaient de l’acuité de pensée nécessaire à ces discussions. Au
+          contraire, la vérité de la formule, ce qui en fait réellement un signe de l’objet indiqué,
+          est la cause définissante de l’accord des faits individuels avec elle. Cela revient à dire
+          que sa vérité satisfait à la première condition, qui est qu’elle pourrait logiquement être
+          même s’il n’y avait pas un tel accord. Car il pourrait être vrai, c’est-à-dire ne contenir
+          aucune fausseté, que toute pierre qui se trouve sur la terre ait une composante
+          d’accélération vers le bas réelle même s’il n’existait aucune pierre sur la terre. Elle
+          satisfait aussi à la deuxième condition, qui est que dès que l’autre facteur (dans ce cas,
+          l’existence présente de chaque pierre sur la terre) est réalisé, le résultat de la
+          formule, la composante réelle d’accélération vers le bas, existerait. Elle satisfait
+          finalement à la troisième condition, qui est que bien que toutes les pierres qui existent
+          puissent être accélérées vers le bas par d’autres causes ou par un concours de
+          circonstances accidentel, l’accélération vers le bas de toute pierre possible impliquerait
+          néanmoins la vérité de la formule.</alinea>
+      </para><para id="pa35"><no>35</no>
+        <alinea>Il apparaît ainsi que la vérité de la formule, c’est-à-dire la loi, est au sens le
+          plus strict la cause définissante des faits individuels réels. Mais la formule, si elle
+          est un tant soit peu un symbole, est un symbole de cet objet qu’elle indique comme son
+          objet. Sa vérité consiste par conséquent en ce que la formule est un symbole. Un symbole
+          peut ainsi être la cause d’événements et de choses individuels réels. Il est aisé de voir
+          que rien d’autre qu’un symbole ne peut être une telle cause puisqu’une cause est par
+          définition la prémisse d’un argument et qu’un symbole peut seul être un argument. Chaque
+          symbole suffisamment complet est une cause finale d’événements réels, et les “influence”,
+          précisément au sens où mon désir que la fenêtre soit ouverte, c’est-à-dire le symbole qui
+          se trouve dans mon esprit de la nature agréable de la chose, influence les faits physiques
+          qui sont que je me lève de ma chaise, que j’aille à la fenêtre et que je l’ouvre. Qui,
+          hormis un millien ou un dément, pourrait nier que ce désir influence l’ouverture de la
+          fenêtre? Le sens dans lequel il le fait n’est pourtant rien d’autre que celui dans lequel
+          tout symbole suffisamment complet et vrai influence des faits réels.</alinea>
+      </para><para id="pa36"><no>36</no>
+        <alinea>Un symbole est défini comme un signe qui ne devient tel qu’en vertu du fait qu’il
+          est interprété comme tel. La signification d’un symbole complexe est déterminée par
+          certaines règles de syntaxe qui font partie de son sens. Un symbole simple est interprété
+          comme signifiant ce qu’il signifie à partir d’une circonstance ou d’une suite de
+          circonstances accidentelles, comme le montre l’histoire de n’importe quel mot. Par
+          exemple, dans la seconde moitié du XV˚ siècle, un type de véhicule fut utilisé dans la
+          ville de Kots (prononcé <marquage typemarq="italique">kotch</marquage>) en Hongrie. Il fut
+          copié dans d’autres villes, sans doute avec des modifications, et fut appelé <marquage typemarq="italique">kotsi szeker</marquage> ou “charrette de Kots”. Copié dans d’autres
+          villes encore, et toujours plus ou moins modifié, il en vint à être appelé simplement
+          <marquage typemarq="italique">cotch</marquage>. C’est ainsi que le mot <marquage typemarq="italique">coach</marquage> se trouva être utilisé, d’abord pour désigner un
+          magnifique véhicule tiré par des chevaux pour transporter des personnes de haut rang dans
+          les conditions de confort que ce rang imposait, puis pour désigner un gros véhicule
+          prétentieux tiré par quatre chevaux ou plus, destiné au transport de passagers d’une ville
+          à une autre, et finalement tout gros véhicule de transport de passagers payants d’une
+          ville à une autre. Dans tous les cas ordinaires, ce sont, comme il se doit, des
+          circonstances accidentelles qui sont cause de ce qu’un symbole signifie précisément les
+          caractères qu’il signifie, car s’il y avait une quelconque raison nécessaire ou quasi
+          nécessaire, ce serait elle qui ferait du signe un signe et non le simple fait qu’il est
+          ainsi interprété, comme le stipule la définition du symbole. Il convient de faire ici une
+          remarque sur l’identité du symbole. Un signe tient son être de ce qu’il convient à une
+          fonction. Le symbole convient à la fonction de signe simplement du fait qu’il la remplit,
+          à savoir qu’il est ainsi compris. Il est par conséquent ce qu’on comprend qu’il est. Dès
+          lors, si deux symboles sont utilisés sans qu’on tienne compte de différence entre eux ce
+          sont des répliques du même symbole. Si on considère que la différence est simplement
+          grammaticale (comme c’est le cas de <marquage typemarq="italique">il</marquage> et
+          <marquage typemarq="italique">lui</marquage>), ou simplement rhétorique (comme c’est le
+          cas de <marquage typemarq="italique">argent</marquage> et <marquage typemarq="italique">flouze</marquage>)<exposant><renvoi typeref="annexe" idref="an2">xvi</renvoi></exposant> ou autrement non significative, il s’agit
+          logiquement de deux répliques d’un même symbole. Il n’est guère de symbole qui signifie
+          directement les caractères qu’il signifie car il signifie tout ce qu’il signifie par le
+          pouvoir qu’il a de déterminer un autre signe qui signifie le même caractère. Si j’écris
+          “le bruit du sciage”, le lecteur se contentera probablement de jeter aux mots un coup
+          d’oeil suffisant pour s’assurer qu’il pourrait, s’il le voulait, imaginer le bruit auquel
+          j’ai fait référence. Cependant, si ce que [j’] entreprends de dire de ce bruit le pousse à
+          en faire plus, une sorte de composé auditif apparaîtra dans son imagination, fait des
+          différentes occasions où il s’est trouvé près d’une scie et cela servira d’icône de la
+          signification de l’expression “le bruit du sciage”). Si, au lieu de cette expression,
+          j’avais utilisé “zzzz”, cela aurait suscité de façon moins précise mais plus directe une
+          interprétation iconique, du fait que le son du mot est lui-même une sorte de zzzz.
+          Certains symboles sont ainsi bien supérieurs à d’autres pour ce qui est du caractère
+          direct de la signification. Cela est vrai non seulement des symboles tournés vers
+          l’extérieur mais aussi des idées générales. Quand une personne se rappelle quelque chose,
+          comme par exemple quand elle veut dans une boutique choisir un ruban dont la couleur soit
+          celle d’un article qu’elle a chez elle, elle sait que son idée est un souvenir et non un
+          produit de son imagination, par le sentiment d’avoir déjà eu cette idée auparavant, idée
+          dont elle a fort probablement déjà constaté le caractère trompeur. Il s’agit d’une sorte
+          de sentiment de ressemblance entre le présent et le passé. Même si elle avait les deux
+          couleurs sous les yeux, cette personne ne saurait qu’elles sont semblables que par un
+          sentiment particulier de ressemblance, car, puisque ce sont deux sensations, elles sont
+          différentes. Mais dans le cas qui nous occupe, ce n’est pas un simple sentiment général de
+          ressemblance qui est en cause mais bien cette variété particulière qui survient quand une
+          idée présente apparaît être semblable à une idée qui ne se trouve pas du tout dans
+          l’esprit maintenant mais qui y a déjà été. Il est clair que ce sentiment fonctionne comme
+          un symbole. Il serait absurde de dire que c’est une <marquage typemarq="italique">icône</marquage> du passé, car, plutôt que de servir de substitut de l’idée passée en
+          étant semblable à elle, l’idée présente n’est au contraire tenue pour semblable à l’idée
+          passée que par le sentiment qu’elle l’est. On ne peut non plus dire que c’est un <marquage typemarq="italique">index</marquage>, car l’essence de l’index est d’être en connexion
+          réelle avec son objet, de sorte qu’il ne peut être mensonger dans la mesure où il est
+          indexical, tandis qu’il n’est pas rare que ce sentiment soit trompeur et même parfois,
+          dans la vie de chacun, absolument dénué de fondement. Il est vrai qu’il est dans
+          l’ensemble véridique et que la véridicité – la vérité rendue nécessaire – ne peut
+          appartenir à un signe que s’il implique un index. Mais un symbole, s’il est suffisamment
+          complet, implique toujours un index, tout comme un index suffisamment complet implique une
+          icône. Il y a un critère infaillible pour distinguer l’index du
+          symbole.<exposant><renvoi typeref="annexe" idref="an2">xvii</renvoi></exposant> C’est le suivant : bien qu’un index, comme tout autre
+          signe, ne fonctionne comme signe que s’il est interprété, il peut pourtant, même s’il se
+          trouvait n’être jamais interprété, continuer à être tout aussi apte à être le signe qu’il
+          serait s’il l’était. En revanche, un symbole qui ne serait pas interprété soit ne serait
+          pas du tout un signe soit n’en serait un que d’une manière complètement différente. Une
+          inscription que personne n’a jamais interprétée ou n’interprétera jamais ne sera qu’un
+          gribouillage fantaisiste, l’index qu’un être quelconque a été là, mais elle ne transmettra
+          pas son sens ni ne sera apte à le faire. Imaginez que le sentiment qui nous dit qu’une
+          idée présente a déjà fait l’objet d’une expérience par le passé ne soit pas interprété
+          comme ayant ce sens. Que serait-il? Il serait comme tout autre sentiment. Aucun examen ne
+          pourrait découvrir qu’il avait quelque connexion que ce soit avec une idée passée et
+          disparue. Même si l’on découvrait une telle chose et que l’on découvrait de plus que cette
+          connexion était telle qu’elle nous assure que l’idée présente à laquelle le sentiment est
+          connecté est semblable à l’idée passée, il s’agirait d’une découverte supplémentaire, non
+          impliquée dans le signe lui-même, une découverte qui est aussi de la nature du symbole car
+          il s’agirait de la découverte d’une loi générale. La seule manière dont un index puisse
+          être une proposition est en impliquant une <marquage typemarq="italique">icône</marquage>.
+          Mais quelle <marquage typemarq="italique">icône</marquage> ce sentiment présente-t-il?
+          Montre-t-il quoi que ce soit de semblable à la ressemblance. Supposer que le sentiment en
+          question transmet son sens en présentant [dans] une nouvelle idée un vague double de
+          l’idée qui était présente en premier ne suffirait pas, si gratuite que soit cette
+          hypothèse, à prouver que le sentiment est un index, car il faudrait encore un symbole pour
+          nous informer que la première idée et l’idée nouvellement présentée sont semblables, et
+          même alors il faudrait transmettre l’idée qu’il s’agit de quelque chose de passé, ce
+          qu’aucune icône et par conséquent aucun index ne peuvent signifier. Il est donc plutôt
+          certain que nous avons dans ce sentiment un exemple clair d’un symbole qui, en un certain
+          sens, signifie <marquage typemarq="italique">nécessairement</marquage> ce qu’il signifie.
+          Nous avons déjà vu que ce ne peut être que par accident et non par une nécessité
+          intrinsèque qu’un symbole signifie ce qu’il signifie. Ces deux résultats se concilient si
+          l’on considère dans ce cas que l’accident est que nous sommes constitués de telle façon
+          que nous interpréterons ce sentiment comme nous le faisons. Un petit examen psychologique
+          justifiera la première assertion. Bien qu’il ne soit pas rare qu’on éprouve fortement le
+          sentiment d’avoir déjà été dans une situation donnée alors qu’en fait cette situation
+          n’est jamais arrivée, tout le monde, à moins d’être un psychologue, est à coup sûr
+          profondément impressionné par une telle expérience (ou du moins par sa <marquage typemarq="italique">première</marquage> expérience du genre), s’en souviendra pendant des
+          années et est troublé par l’idée qu’il a affaire à un phénomène profondément mystérieux,
+          si ce n’est surnaturel. Dans la satisfaction insouciante qu’il éprouve devant l’état de sa
+          science, le psychologue peut simplement balayer la question, mais il me semble négliger la
+          partie la plus instructive du phénomène. Il s’agit de ceci : bien que les sentiments
+          internes soient en général des témoignages dont il est bien connu qu’il faut les recevoir
+          avec prudence et réserve, quand ce sentiment particulier les trahit, les gens ont
+          l’impression que le fond de l’univers de l’être s’est dérobé. Pourquoi prendre la question
+          tellement au sérieux? C’est parce que si l’on essaye d’analyser ce qui est <marquage typemarq="italique">signifié </marquage>quand on dit qu’une idée présente “ressemble” à
+          une idée passée et disparue, nous découvrons que rien d’autre n’est <marquage typemarq="italique">signifié</marquage> que le fait que ce sentiment lui est connecté. Le
+          résultat semble en être qu’il est contradictoire que ce sentiment puisse être trompeur,
+          auquel cas nous pouvons dire que c’est le fond de la Vérité elle-même qui s’est dérobé.
+          Or, un symbole qui signifierait ce qu’il signifie par une nécessité logique ne peut à
+          l’évidence rien avoir pour signification en tant que prédicat que sa propre application ou
+          sa propre prédication, ou, pour dire les choses rapidement, il ne signifierait que
+          lui-même, car toute autre chose dont on peut supposer qu’elle est signifiée par ce symbole
+          pourrait, par possibilité logique, ne pas l’être. Qu’un tel symbole soit faux impliquerait
+          bien une contradiction. La stupéfaction ressentie devant le “sentiment de pré-existence”,
+          comme on l’a appelé, ne revient pratiquement à rien d’autre qu’à la confusion naturelle
+          entre ce qui est nécessaire en raison de la constitution de l’esprit et ce qui est
+          logiquement nécessaire. Le sentiment qui nous occupe n’est nécessaire qu’en ce dernier
+          sens. Sa fausseté n’est par conséquent pas absurde mais seulement anormale. Il n’est pas
+          non plus lui-même sa seule signification, mais seulement la seule signification qui puisse
+          être reconnue sans pensée transcendantale, parce que dire qu’une idée présente est
+          réellement semblable à une idée dont on a réellement fait l’expérience dans le passé
+          signifie qu’un être suffisamment informé saurait que l’effet de l’idée présente est une
+          revivification de l’effet de l’idée antérieure pour ce qui est de sa qualité de sentiment.
+          On doit toutefois remarquer que le seul effet d’une qualité de sentiment est de produire
+          un souvenir, qui est lui-même une qualité de sentiment, et que dire de deux souvenirs
+          qu’ils sont semblables n’est, après tout, que dire que le sentiment qui est le symbole de
+          la ressemblance s’attache à eux. Le sentiment de reconnaissance d’une idée présente comme
+          ayant déjà fait l’objet d’une expérience a pour signification l’applicabilité d’une partie
+          de lui-même. Le sentiment de ressemblance en général, bien qu’il soit moins saisissant,
+          est du même genre. Toutes les occurrences particulières du sentiment de ressemblances sont
+          elles-mêmes reconnues comme semblables, par le fait qu’on leur applique le même symbole de
+          ressemblance. C’est le “je pense” de Kant, qu’il considère être un acte de pensée,
+          c’est-à-dire être de la nature du symbole. Mais le fait qu’il introduit l’<marquage typemarq="italique">ego</marquage> dans cet acte est dû à la confusion de cela avec un
+          autre élément. </alinea>
+      </para><para id="pa37"><no>37</no>
+        <alinea>Ce sentiment n’est pas le seul à ne signifier que lui-même, car la même chose est
+          vraie du sentiment “bleu” ou de tout autre. On ne doit pas oublier qu’un sentiment n’est
+          pas une psychose<exposant><renvoi typeref="annexe" idref="an1">5</renvoi></exposant> ou état d’esprit, mais simplement une qualité d’une
+          psychose, à laquelle sont associés un degré de vivacité ou une perturbation relative ou un
+          relief de la qualité dans la psychose, que mesurent principalement les répercussions. Ces
+          psychoses sont des icônes, et c’est en étant un symbole que le sentiment de ressemblance
+          se distingue d’autres sentiments. Mais la signification de la psychose en tant que signe
+          est que le percept auquel elle renvoie ultimement a la même qualité, telle qu’elle est
+          déterminée par le symbole-sentiment de ressemblance.</alinea>
+      </para><para id="pa38"><no>38</no>
+        <alinea>Mon objectif principal en attirant l’attention sur ce symbole de ressemblance est de
+          montrer que les significations des symboles sont directes à divers degrés, jusqu’à la
+          limite où ils sont eux-mêmes leurs propres significations. Une icône signifie de manière
+          absolument directe le caractère qu’elle incorpore et tout symbole refère plus ou moins
+          indirectement à une icône. </alinea>
+      </para><para id="pa39"><no>39</no>
+        <alinea>Un index dénote directement l’objet réel avec lequel il est en réaction. Tout
+          symbole réfère plus ou moins indirectement à un objet réel par l’intermédiaire d’un index.
+          Quelqu’un entre dans une boutique et demande un “yard” de soie. Cette personne veut une
+          pièce de soie qui a été placée (soit en la mesurant soit au jugé, selon les habitudes
+          liées aux index) en comparaison réactive avec une règle d’un <marquage typemarq="italique">yard</marquage>, laquelle a elle-même, par réactions successives, été mise en réaction
+          avec une certaine barre réelle qui se trouve à Westminster. Le mot “yard” est un exemple
+          de symbole qui dénote très directement. Quand nous considérons plus scientifiquement les
+          comparaisons successives, nous devons reconnaître qu’elles sont toutes susceptibles
+          d’erreur. Plus nous nous efforçons de rendre la réaction significative, plus nous devons
+          reconnaître que chacun des actes de comparaison individuels livre ses propres résultats et
+          l’inférence générale que nous faisons à partir d’un grand nombre de ces actes représente
+          ce que chacun d’eux serait s’il était exécuté avec plus de précision. C’est par
+          l’intervention du symbole inférentiel que nous obtenons pratiquement une réaction plus
+          étroite. Quand un biologiste étiquette un spécimen, il exécute une comparaison, d’un ordre
+          tout aussi réactif que les deux étalons de longueur, avec un spécimen-type originel, comme
+          il appelle le prototype. Son étiquette implique ainsi quelque chose de la nature de
+          l’index, bien que ce soit moins patent que dans le cas du mot “yard”. Il serait plus
+          scientifique de faire des comparaisons, non avec un seul prototype, mais avec vingt-cinq
+          barres différentes faites de différentes matières et conservées dans des conditions
+          différentes, et qu’on appelle “yard” ce qui correspond à la moyenne de ces barres. De
+          même, en biologie, il devrait y avoir vingt-cinq spécimens-types, présentant toute la
+          gamme de variations permise comme caractère moyen normal. Cette procédure plus
+          scientifique est celle du sens commun en ce qui a trait aux noms ordinaires, sauf qu’au
+          lieu de vingt-cinq cas il y en a beaucoup plus. J’entre dans un magasin de meubles et dis
+          que je veux une “table”. Je m’en remets à ma supposition que le marchand et moi-même avons
+          connu des expériences réactionnelles qui, bien qu’elles soient différentes, ont été
+          connectées par des expériences réactionnelles de telle façon qu’elles sont virtuellement
+          les mêmes, en conséquence de quoi “table” suggère au marchand, tout comme à moi, un meuble
+          avec une surface plate d’une hauteur telle qu’on puisse commodément s’y asseoir pour
+          travailler. Cette hauteur commode, bien qu’elle ne soit pas mesurée, est du même ordre que
+          le <marquage typemarq="italique">yard</marquage> de soie que nous avons examiné. Il s’agit
+          de commodité pour des hommes de taille normale et l’expérience réactive du marchand
+          s’accorde présumément avec la mienne en ce qui a trait à ce qu’est une taille ordinaire.
+          J’entre dans une épicerie et demande du beurre. On me montre quelque chose et je demande
+          “Est-ce du beurre? Ou est-ce plutôt de l’oléomargarine ou quelque chose du genre?”. “Oh!
+          Je vous assure que c’est, du point de vue chimique le plus strict, du beurre”. “Hum, du
+          point de vue chimique le plus strict? Vous savez aussi bien que moi ce qu’est l’espèce
+          bovine. C’est un objet individuel, dont nous avons tous deux vu des parties. Je veux
+          savoir si cette substance a été barattée à partir de lait provenant de l’espèce bovine”.
+          Nous ne connaissons cette espèce que par une expérience réactionnelle réelle. Qu’est-ce
+          que l’or? C’est une substance élémentaire qui a une masse atomique d’environ 197
+          1/4.<exposant><renvoi typeref="annexe" idref="an2">xviii</renvoi></exposant> Quand nous disons “élémentaire”, nous voulons dire
+          “indécomposable dans l’état actuel de la chimie”, ce qu’on ne peut reconnaître que par une
+          expérience réactionnelle réelle. Quand nous disons que sa masse atomique est de 197 1/4,
+          nous voulons dire que c’est en comparaison de l’hydrogène. Mais qu’est-ce que l’hydrogène?
+          C’est un gaz élémentaire quatorze fois et demie plus léger que l’air. Et qu’est-ce que
+          l’air? Eh bien, c’est ce qui est autour de nous et avec quoi nous avons une expérience
+          réactionnelle. Le lecteur peut essayer avec des exemples de son cru jusqu’à ce qu’aucun
+          doute ne subsiste quant au fait que les symboles des choses dont on fait l’expérience
+          dénotent toujours par des index; pareille preuve sera beaucoup plus sûre que toute
+          démonstration apodictique. En ce qui concerne les symboles de choses dont on ne fait pas
+          l’expérience, il est clair qu’ils doivent décrire leurs objets au moyen de ce qui les
+          différencie des choses dont on fait l’expérience. Il est évident que le caractère direct
+          de la dénotation des symboles peut connaître tous les degrés de variation. Il est bien
+          entendu tout à fait possible qu’un symbole se représente lui-même, au moins au seul sens
+          où on peut dire d’une chose qui n’a pas d’<marquage typemarq="italique">être
+          réel</marquage> mais seulement un <marquage typemarq="italique">être représenté</marquage>
+          et qui existe en <marquage typemarq="italique">réplique</marquage> qu’elle est identique à
+          un objet réel et donc individuel. Une carte peut être une carte d’elle-même, c’est-à-dire
+          qu’une de ses réplique peut être l’objet cartographié. Mais cela ne rend pas la dénotation
+          extraordinairement directe. Comme exemple de symbole d’un tel caractère, nous pouvons
+          plutôt prendre le symbole qui s’exprime dans des mots comme “la Vérité” ou “Univers de
+          l’Être”. Tout symbole quel qu’il soit doit dénoter ce que ce symbole dénote, de sorte que
+          tout symbole dont on considère qu’il dénote la Vérité dénote nécessairement ce qu’il
+          dénote et, le dénotant, il <marquage typemarq="italique">est</marquage> cette chose même,
+          ou un fragment de cette chose pris pour le tout. C’est le tout pris dans la mesure où il
+          doit être pris pour les fins de la dénotation, car la dénotation prend essentiellement une
+          partie pour son tout.</alinea>
+      </para><para id="pa40"><no>40</no>
+        <alinea>Mais l’aspect le plus caractéristique d’un symbole est celui de sa relation à son
+          interprétant, car le symbole se distingue en ce que c’est un signe qui devient tel en
+          déterminant son interprétant. Un interprétant du symbole est une excroissance du symbole.
+          Nous avons dit que le symbole <marquage typemarq="italique">détermine</marquage> son
+          interprétant. La détermination implique un <marquage typemarq="italique">determinandum</marquage>, un sujet à déterminer. Qu’est-ce que c’est? Nous devons
+          supposer qu’il y a quelque chose comme une feuille de papier, une feuille blanche ou avec
+          un espace blanc où un signe interprétant peut être écrit. De quelle nature ce blanc
+          est-il? En fournissant la place pour l’écriture d’un symbole, il est lui-même <marquage typemarq="italique">ipso facto</marquage> un symbole, bien que totalement vague. En
+          fournissant la place pour un interprétant de ce symbole particulier, il est déjà un
+          interprétant de ce symbole, bien que seulement partiel. Un interprétant <marquage typemarq="italique">entier</marquage> devrait impliquer une réplique du symbole originel.
+          En fait, le symbole interprétant, dans la mesure où il n’est pas plus qu’un interprétant,
+          <marquage typemarq="italique">est</marquage> le symbole originel, bien que ce soit
+          peut-être dans un état plus développé. Mais le symbole interprétant peut être en même
+          temps un interprétant d’un symbole indépendant. Un symbole est quelque chose qui a le
+          pouvoir de se reproduire lui-même essentiellement car il n’est constitué comme symbole que
+          par l’interprétation. Cette interprétation implique que le symbole a le pouvoir de causer
+          un fait réel et, bien que je ne souhaite pas entrer dans des questions métaphysiques, je
+          suis forcé, quand une métaphysique fausse envahit le territoire de la logique, de dire que
+          rien ne peut être plus futile que de chercher à construire une conception de l’univers qui
+          néglige le pouvoir qu’ont les représentations de causer des faits réels. À quoi sert-il de
+          chercher à construire une conception de l’univers si ce n’est à rendre les choses
+          intelligibles? Mais si c’est là ce que nous cherchons à faire nous nous rendons
+          nécessairement la chose impossible si nous nous obstinons à tout réduire à une norme qui
+          rend essentiellement et <marquage typemarq="italique">ipso facto</marquage> inintelligible
+          tout ce qui arrive. C’est pourtant bien ce que nous faisons si nous n’admettons pas le
+          pouvoir qu’ont les représentations de causer des faits réels. Pour expliquer l’univers,
+          nous devons supposer qu’il y avait au début un état de choses dans lequel il n’y avait
+          rien, aucune réaction et aucune qualité, aucune matière, aucune conscience, aucun espace
+          et aucun temps, rien du tout. Pas rien de manière déterminée, car ce qui est de manière
+          déterminée non-<marquage typemarq="italique">A </marquage>suppose l’être de <marquage typemarq="italique">A</marquage> sous un mode quelconque. Une indétermination totale. Mais
+          seul un symbole est indéterminé. Par conséquent, Rien, l’indéterminé du commencement
+          absolu, est un symbole.<exposant><renvoi typeref="annexe" idref="an2">xix</renvoi></exposant> C’est la seule manière dont on puisse
+          comprendre le commencement des choses. Qu’en suit-il logiquement? Nous ne devons pas nous
+          satisfaire de notre sens instinctif de ce qui est logique. Est logique ce qui provient de
+          la nature essentielle du symbole. Or, il appartient à la nature essentielle du symbole de
+          déterminer un interprétant, qui est lui-même un symbole. Un symbole produit par conséquent
+          une série sans fin d’interprétants. Quelqu’un pense-t-il que tout cela est pur non-sens?
+          <marquage typemarq="italique">Distinguo</marquage>. Il ne peut, il est vrai, y avoir
+          aucune information positive sur ce qui a précédé l’Univers de l’être tout entier, ne
+          serait-ce que parce qu’il n’y avait rien sur quoi avoir de l’information. Mais l’univers
+          est intelligible et il est par conséquent possible d’en donner une explication en général,
+          ainsi que de son origine. Cette explication générale est un symbole et, en raison de la
+          nature du symbole, elle doit commencer par l’assertion formelle qu’il y avait d’abord un
+          rien indéterminé de l’ordre du symbole. Cela serait faux s’il transmettait quelque
+          information que ce soit. Mais c’est la manière correcte et logique de commencer une
+          explication de l’univers. En tant que symbole, il produit sa série infinie
+          d’interprétants, lesquels étaient à l’origine absolument vagues, tout comme lui. Mais
+          l’interprétant direct de tout symbole doit dans son premier état être simplement la
+          <marquage typemarq="italique">tabula rasa</marquage> pour un interprétant, de sorte que
+          l’interprétant immédiat de ce vague Rien n’était même pas vague de manière déterminée,
+          mais flottait vaguement entre la détermination et le vague, et <marquage typemarq="italique">son</marquage> interprétant immédiat flottait vaguement entre flotter
+          vaguement entre le vague et la détermination et le vague déterminé ou la détermination, et
+          ainsi de suite, <marquage typemarq="italique">ad infinitum</marquage>. Mais toute série
+          sans fin doit logiquement avoir une limite.<exposant><renvoi typeref="annexe" idref="an2">xx</renvoi>
+          </exposant></alinea>
+      </para><para id="pa41"><no>41</no>
+        <alinea>Laissant pour l’instant cette ligne de pensée en suspens, en raison du sentiment
+          d’insécurité qu’elle provoque, notons d’abord qu’il est de la nature du symbole de créer
+          une <marquage typemarq="italique">tabula rasa</marquage> et par conséquent une série sans
+          fin de <marquage typemarq="italique">tabulae rasae</marquage>, puisqu’une telle création
+          n’est que représentation, les <marquage typemarq="italique">tabulae rasae</marquage> étant
+          entièrement indéterminées, mis à part qu’elles sont représentatives. Il s’y trouve un
+          effet réel, mais<exposant><renvoi typeref="annexe" idref="an1">6</renvoi></exposant> un symbole ne pourrait être sans ce pouvoir de
+          produire un effet réel. Le symbole se représente lui-même comme étant représenté et cet
+          être représenté est réel en raison de son vague total. Car tout ce qui est représenté doit
+          être complètement mené à terme.</alinea>
+      </para><para id="pa42"><no>42</no>
+        <alinea>Car la réalité est coercitive. Mais la coercition est absolument <marquage typemarq="italique">hic et nunc</marquage>. Elle est pendant un instant et disparaît.
+          Qu’elle passe et elle n’est absolument rien. La réalité n’existe que comme un élément de
+          la régularité. Et la régularité est le symbole. La réalité ne peut par conséquent être vue
+          que comme la limite de la série sans fin des symboles.</alinea>
+      </para><para id="pa43"><no>43</no>
+        <alinea>Un symbole est essentiellement une finalité, c’est-à-dire qu’il est une
+          représentation qui cherche à se rendre définie, ou cherche à produire un interprétant plus
+          défini qu’elle-même. Car toute sa signification consiste en ce qu’elle détermine un
+          interprétant, de sorte que c’est à son interprétant qu’elle doit l’actualité de sa
+          signification.</alinea>
+      </para><para id="pa44"><no>44</no>
+        <alinea>Une <marquage typemarq="italique">tabula rasa</marquage> ayant été déterminée comme
+          représentative du symbole qui la détermine, cette <marquage typemarq="italique">tabula
+          rasa</marquage> tend à devenir déterminée. Le vague tend toujours à devenir déterminé,
+          simplement parce que son caractère vague ne le détermine pas à être vague (comme la limite
+          d’une série sans fin). Pour autant que l’interprétant est le symbole, ce qu’il est dans
+          une mesure quelconque, la détermination s’accorde avec celle du symbole. Mais pour autant
+          qu’il n’arrive pas à être son meilleur soi, il est capable de s’écarter du sens du
+          symbole. Sa finalité est pourtant de représenter le symbole dans sa représentation de son
+          objet et la détermination est par conséquent suivie d’un autre développement dans lequel
+          elle est corrigée. Il est de la nature du signe d’être une réplique individuelle et d’être
+          dans cette réplique un général vivant. De ce fait, l’interprétant est animé par la
+          réplique originelle ou par le signe qu’il contient, avec le pouvoir de représenter le vrai
+          caractère de l’objet. Que l’objet a le moindre caractère ne peut consister que dans la
+          représentation qu’il l’a – une représentation ayant le pouvoir de survivre à toute
+          opposition. Au cours de ces deux étapes, celle de la détermination et celle de la
+          correction, l’interprétant vise l’objet plus que la réplique originelle et peut être plus
+          vrai et plus plein que celle-ci. L’entéléchie même de l’être se trouve dans ce qu’il est
+          représentable. Un signe ne peut même être faux sans être un signe et, dans la mesure où il
+          est signe, il doit être vrai. Un symbole est une réalité embryonnaire dotée du pouvoir de
+          se développer dans la vérité même, l’entéléchie même de la réalité. Cela ne semble
+          mystique et mystérieux que parce que nous nous obstinons à rester aveugles devant ce qui
+          est évident, qu’il ne peut être aucune réalité qui n’ait la vie d’un symbole.</alinea>
+      </para><para id="pa45"><no>45</no>
+        <alinea>Comment une idée comme celle de <marquage typemarq="italique">rouge</marquage>
+          peut-elle survenir? Ce ne peut être que par une détermination graduelle à partir de la
+          pure indétermination. Un caractère vague qui n’est pas déterminée à être vague commence
+          immédiatement, de par sa propre nature, à se déterminer. Apparemment, c’est le plus près
+          que nous puissions être de la compréhension de l’univers. </alinea>
+      </para><para id="pa46"><no>46</no>
+        <alinea>N’est pas nécessairement logique ce qui me frappe aujourd’hui comme logique et
+          encore moins, comme les mathématiques le montrent à l’envi, n’est pas logique que ce qui
+          m’apparaît l’être. Est logique ce qu’il est nécessaire d’admettre pour rendre l’univers
+          intelligible. Et le premier de tous les principes logiques est que l’indéterminé doit se
+          déterminer du mieux qu’il le peut.</alinea>
+      </para><para id="pa47"><no>47</no>
+        <alinea>Un chaos de réactions totalement étranger à la loi n’est absolument rien et le pur
+          rien était donc un tel chaos. La pure indétermination ayant ensuite développé des
+          possibilités déterminées, la création a consisté en une médiation entre les réactions sans
+          loi et les possibilités générales par l’influx d’un symbole. Ce symbole était la finalité
+          de la création. Son objet était l’entéléchie de l’être, qui est la représentation
+          ultime.</alinea>
+      </para><para id="pa48"><no>48</no>
+        <alinea>Nous pouvons maintenant voir ce que sont <marquage typemarq="italique">jugement</marquage> et <marquage typemarq="italique">assertion</marquage>. L’homme est un
+          symbole. Des hommes différents, dans la mesure où ils peuvent avoir quelque idée en
+          commun, sont le même symbole. Le jugement est la détermination du symbole-homme à avoir
+          tout interprétant que possède la proposition qui est jugée. L’assertion est la
+          détermination du symbole-homme à déterminer l’interprète, dans la mesure où il est
+          interprète, de la même manière.</alinea>
+      </para></section2></section1></corps><partiesann lang="fr"><grannexe><annexe id="an1"><section1 id="s1n3"><no>3</no><titre>Notes du traducteur</titre><listeord numeration="decimal">
+            <elemliste>
+              <alinea>Le Groupe de recherche Peirce-Wittgenstein de l’Université du Québec à
+                Montréal a fait, au cours du trimestre d’hiver 2002, sans jamais être découragé par
+                ses très nombreuses difficultés, une lecture pas à pas de ce texte admirable, à
+                raison d’une page ou deux par rencontre. C’est André De Tienne (du Peirce Edition
+                Project) qui a eu la responsabilité du commentaire des deux dernières pages. Toute
+                la discussion s’étant déroulée en français, les traducteurs ont pu profiter de
+                nombre de suggestions de la part des membres du groupe, qu’ils remercient
+                collectivement. Deux d’entre eux (David Lachance et Nathalie Roy) ont proposé de
+                précieuses modifications, qui ont été apportées à une première version française.
+                Sont portées entre crochets les quelques omissions du manuscrit de Peirce. </alinea>
+              <alinea> Les notes de cet article sont établies de la façon suivante : les notes en
+                chiffres arabes sont du traducteur; celles en chiffres romains proviennent du Peirce
+                Edition Project et les adaptations françaises de celles-ci sont indiquées par des
+                crochets; les notes avec astérisques sont de Peirce.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Le mot “<marquage typemarq="italique">purpose</marquage>” est très fréquent
+                chez Peirce et il a un sens très large et très variable. Il n’est pas facile de
+                rendre toutes ses occurrences d’un mot français unique. Dans la plupart des cas, il
+                peut, comme ici, être traduit par “finalité”.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>En français dans le texte. </alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>En français dans le texte.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Peirce utilise le mot <marquage typemarq="italique">psychosis</marquage> pour
+                désigner simplement un état mental. L’<marquage typemarq="italique">Imperial
+                Dictionary</marquage> (Londres, 1883), le précurseur du <marquage typemarq="italique">Century Dictionary &amp; Cyclopedia</marquage>, auquel Peirce a
+                longuement et profondément collaboré, donne pour définition“<marquage typemarq="italique">mental constitution or condition</marquage>”, tandis que
+                <marquage typemarq="italique">CD&amp;C</marquage> (dans sa première édition, 1889)
+                reconnaît au mot trois sens : (1) “<marquage typemarq="italique">mental constitution
+                or condition</marquage>”; (2) “<marquage typemarq="italique">a change in the field
+                of consciousness</marquage>”; et (3) “<marquage typemarq="italique">In pathol., any
+                mental disorder any form of insanity</marquage>”. Bien qu’en français le mot
+                “psychose”, depuis son apparition à la fin du XIXe siècle, n’a de significations que
+                relativement à ce dernier usage, c’est le seul qui puisse convenir ici.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Liant des propositions dont la seconde confirme la première, cette conjonction
+                “mais” semble tenir lieu de “car”.</alinea>
+            </elemliste>
+          </listeord></section1></annexe><annexe id="an2"><section1 id="s1n4"><no>4</no><titre>Notes du Peirce Edition Project <marquage typemarq="italique">(The Essential
+            Peirce, volume 2)</marquage></titre><listeord numeration="romainmin">
+            <elemliste>
+              <alinea>Le titre grec est de Peirce et le titre anglais “New Elements”, ici repris en
+                [français], a été ajouté par les éditeurs du Peirce Edition Project. Peirce avait
+                inscrit le sous-titre “Préface” sous son titre, indiquant que tout ce manuscrit
+                devait servir de préface à un livre, qu’il n’a jamais terminé. On sait maintenant
+                que Peirce avait l’intention d’écrire un livre qui aurait revu les fondements
+                épistémologiques des mathématiques, en suivant une méthodologie rigoureuse à la
+                manière d’Euclide.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Le livre auquel il est fait référence a survécu dans les manuscrits 164-166,
+                dont la plus grande part fut composée en 1895.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Le seul éditeur auquel on sache que Peirce a soumis ses <marquage typemarq="italique">New Elements of </marquage><marquage typemarq="italique">Mathematics</marquage> est Edwin Ginn, de Ginn &amp; Co., avec lequel il a échangé
+                une abondante correspondance au cours des six premiers mois de l’année 1895. On ne
+                trouve aucune preuve que Peirce ait soumis son manuscrit à Macmillan, même si c’est
+                Macmillan qui a publié le “traité de géométrie” auquel Peirce fait référence trois
+                phrases plus loin. Ce traité est <marquage typemarq="italique">Science and Art
+                Drawing : Complete Geometry Course</marquage> de J. Humphrey Spanton (New York,
+                MacMillan 1895), au sujet duquel Peirce a rédigé un compte rendu négatif pour
+                <marquage typemarq="italique">The Nation</marquage> (CN 2 :126-127) en janvier
+                1896.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Peut-être Peirce avait-il mal rangé le manuscrit et pensé qu’il l’avait perdu.
+                Carolyn Eisele a publié le manuscrit 165 dans les bien connus <marquage typemarq="italique">New Elements of Mathematics</marquage>.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>C’est ici que commence la description de la deuxième des “trois manières
+                distinctes” dont le signe est connecté à la Vérité.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Peirce fait référence à Antoine Arnauld (1612-1694) et Pierre Nicole
+                (1625-1695). Bien que Peirce reconnaisse l’importance de Port-Royal pour la logique
+                moderne, il écrit dans un brouillon de la troisième Conférence de Harvard :
+                “Arnauld, par exemple, était un penseur doué d’une puissance considérable, mais
+                <marquage typemarq="italique">L’Art de penser </marquage>ou<marquage typemarq="italique"> Logique de Port-Roya</marquage>l est une démonstration honteuse
+                de ce qu’on pouvait tenir, pendant les deux siècles et demi des plus grandes
+                réalisations humaines, pour un bon exposé de la manière de penser” (CP
+                5.84).</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Dans “Upon Logical Comprehension and Extension”, <marquage typemarq="italique">Proceedings of the American Academy of Arts and Sciences</marquage>, 7, publié en
+                1868, présenté le 13 novembre 1867.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea><marquage typemarq="italique">De Interpretatione</marquage> : 17a,
+                19b.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>La différence entre les deux phrases latines est que la première est au style
+                direct et la seconde, au style indirect : c’est une phrase à l’infinitif, qui
+                présuppose implicitement un locuteur : “Quelqu’un dit que Socrate est
+                sage”.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>James Stanley Grimes (1807-1903), phrénologue et homme de science spéculative
+                amateur, vivant à Boston. Peirce semble faire référence à son traité <marquage typemarq="italique">Etherology</marquage><marquage typemarq="italique">, and the
+                Phreno-Philosophy of Mesmerism and Magic Eloquence</marquage> (New York, Boston,
+                Saxton &amp; Miles, Saxton, Peirce &amp; Co., etc.,1845; deuxième édition révisée,
+                Boston, J. Munroe &amp; Co., 1853). Grimes utilise le mot “<marquage typemarq="italique">credenciveness</marquage>” (que nous rendons par créancivité)
+                pour désigner un organe mental particulier du cerveau, dont la fonction est d’amener
+                les gens à modeler leur comportement en fonction des assertions qu’on a faites à
+                leur sujet (cette question est discutée aux pages 142-154 de l’ouvrage de Grimes).
+                Dans une étude (publiée en 1898 dans <marquage typemarq="italique">The
+                Nation</marquage>) du livre de Boris Sidi, <marquage typemarq="italique">Psychology
+                of Suggestion</marquage>, Peirce a écrit :</alinea>
+              <alinea>“Cette faculté [la suggestibilité (<marquage typemarq="italique">suggestibility</marquage>)] fut identifiée dès 1845 comme le principal facteur de
+                l’hypnotisme ordinaire par le conférencier itinérant américain Grimes. Mais il ne
+                s’agissait pas d’un universitaire et on l’a, bien entendu, ignoré… Nous devons
+                ajouter qu’en réduisant la Conscience au rang de faculté particulière, Grimes a pavé
+                la voie à l’idée moderne d’un esprit subconscient… Le mot “<marquage typemarq="italique">credenciveness</marquage>” n’est guère indiqué car il ne
+                comprend pas avec assez d’évidence une tendance à agir, alors que c’est ainsi que
+                Grimes l’entendait.”</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>“The Fixation of Belief”, <marquage typemarq="italique">The Essential
+                Peirce</marquage>, volume I, publié sous la direction de Nathan Houser et Christian
+                Kloesel, Bloomington, Indianapolis, Indiana University Press, 1992 : 109-123.
+                [Version française par Peirce, “Comment se fixe la croyance”, <marquage typemarq="italique">Revue philosophique</marquage>, décembre 1878 : 553-569, reprise
+                récemment dans Peirce, C. S., <marquage typemarq="italique">Oeuvres I. Pragmatisme
+                et pragmaticisme</marquage>, sous la direction de Claudine Tiercelin et Pierre
+                Thibaud, Paris, Éditions du Cerf, 2002 : 215-235]. </alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Paul Carus est cité par Peirce comme un de ceux qui semblent fonder le hasard
+                sur l’ignorance (“Reply to the Necessitarians”, <marquage typemarq="italique">The
+                Monist</marquage>, 3, 1893, 543; CP 6.602). Peirce fait ailleurs référence à John
+                Venn, qui aurait, dans son ouvrage <marquage typemarq="italique">Logic of
+                Chance</marquage>, réfuté de nombreux textes de logique qui souscrivent à cette idée
+                (CP 6.74). L’un des premiers auteurs auxquels Peirce peut avoir pensé est Laplace,
+                qui soutenait que les probabilités sont issues de l’ignorance.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Pour une raison quelconque, Peirce n’identifie pas cet “auteur distingué”
+                auquel il fait plusieurs fois référence. Une des meilleures hypothèses est qu’il
+                s’agit de Karl Pearson. Les deux derniers paragraphes de l’étude que Peirce a
+                consacrée à la <marquage typemarq="italique">Grammar of Science</marquage> de
+                Pearson (<marquage typemarq="italique">Popular Science Monthly</marquage>, 58,
+                janvier 1901 : 296-306; CP 8.132-152, repris dans <marquage typemarq="italique">The
+                Essential Peirce</marquage>, volume II, publié sous la direction du Peirce Edition
+                Project, Bloomington, Indianapolis, Indiana University Press, 1998 : 57-66)
+                attaquent justement la conception nominaliste (“pearsoniste”) selon laquelle la
+                formule est un outil humain qui se conforme aux faits.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea><marquage typemarq="italique">System of Logic</marquage>, vol. I, bk. 3, chap.
+                5, §§2-3.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Voir la <marquage typemarq="italique">Critique de la raison pure</marquage>,
+                A652, B680.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Le mot “spondesime” qu’utilise Peirce pour le comparer à “money” ne se trouve
+                ni dans le <marquage typemarq="italique">Oxford English Dictionary</marquage> ni
+                dans aucun des dictionnaires consultés par les éditeurs. Le mot le plus voisin est
+                “spondulics”, que le <marquage typemarq="italique">Century </marquage><marquage typemarq="italique">Dictionary</marquage> définit comme un mot argotique américain
+                signifiant “à l’origine du papier-monnaie et maintenant de l’argent, des fonds”.
+                Peirce ayant manifestement à l’esprit un contraste entre un mot ordinaire et un mot
+                rare, nous les rendons en français par “argent” et, choisi parmi nombre d’autres
+                candidats, “flouze”.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Le manuscrit porte“une icône” au lieu de “un symbole”, ce qui semble être une
+                répétition accidentelle du dernier mot de la phrase précédente. Dans le contexte qui
+                est fourni par la suite (“En revanche, un symbole qui ne serait pas interprété…”),
+                il est clair que Peirce distingue l’index du symbole.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>La masse atomique de l’or est 196,9665. Le<marquage typemarq="italique">
+                Century Dictionary</marquage> dit qu’il est de 196,7.</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>Cela fait penser à l’Evangéliste préféré de Peirce : “Au commencement était le
+                Verbe” (Jean 1 :1).</alinea>
+            </elemliste>
+            <elemliste>
+              <alinea>D’un point de vue mathématique, ce n’est pas toute série sans fin qui doit
+                avoir une limite, mais c’est un principe du raisonnement mathématico-logique de
+                Peirce qu’elle a bel et bien une limite. Si l’on en juge à partir d’exemples de
+                séries qu’il donne ailleurs, Peirce entend manifestement par “série” une succession
+                d’entités distinctes ordonnées selon une relation. Par “limite”, il entend “un objet
+                qui vient après tous les objets de la série, mais de telle manière que tout
+                <marquage typemarq="italique">autre</marquage> objet qui vient après ces objets
+                vient aussi après la limite” (1898, CP 6.185. “Ainsi, la série des nombres entiers
+                est une série augmentant sans fin. Sa limite est la multitude dénombrable” (1897, CP
+                4.213).</alinea>
+            </elemliste>
+          </listeord></section1></annexe><annexe id="an3"><section1 id="s1n5"><no>5</no><titre>Notes de l'auteur</titre><listerelation type="1">
+            <elemrelation>
+              <lrsource>
+                <alinea>*</alinea>
+              </lrsource>
+              <lrcible>
+                <alinea>De nos jours, <marquage typemarq="italique">corollaire</marquage> n’est pas
+                  un terme scientifique. Le mot latin, signifiant un bonus, était appliqué à des
+                  déductions évidentes ajoutées par des commentateurs aux propositions d’Euclide,
+                  que les preuves de celui-ci ont contraints à accepter, ce à quoi ils ont ajouté
+                  l’acceptation des corollaires sans exiger de preuve. Je propose d’utiliser ce mot
+                  en un sens défini comme un terme de logique.</alinea>
+              </lrcible>
+            </elemrelation>
+            <elemrelation>
+              <lrsource>
+                <alinea>** </alinea>
+              </lrsource>
+              <lrcible>
+                <alinea>Cela peut exclure certaines propositions appelées théorèmes. Mais je ne
+                  pense pas que les mathématiciens s’y opposent, considérant que je fais une
+                  distinction tranchée entre un corollaire et un théorème, fournissant ainsi à la
+                  logique des mathématiques deux termes techniques exacts et commodes au lieu de
+                  mots vagues et non scientifiques.</alinea>
+              </lrcible>
+            </elemrelation>
+            <elemrelation>
+              <lrsource>
+                <alinea>***</alinea>
+              </lrsource>
+              <lrcible>
+                <alinea>Je dis couramment que c’est un argument, car rien n’est plus faux d’un point
+                  de vue historique que de dire que ce mot n’a pas, de tout temps, été utilisé en ce
+                  sens. Le mot plus long est tout de même un peu plus précis.</alinea>
+              </lrcible>
+            </elemrelation>
+            <elemrelation>
+              <lrsource>
+                <alinea>****</alinea>
+              </lrsource>
+              <lrcible>
+                <alinea>Puisqu’il est maintenant question de langues, je saisis l’occasion pour
+                  faire remarquer, en relation au fait que je traite les “objets” directs et
+                  indirects du verbe comme autant de sujets de la proposition, qu’environ neuf
+                  langues sur dix soulignent souvent un des sujets et font de lui le principal, en
+                  le mettant dans un cas nominatif particulier ou par un autre moyen équivalent. La
+                  plupart des logiciens semblent penser que cela constitue aussi une nécessité de la
+                  pensée, bien que l’une des langues aryennes vivantes d’Europe mette habituellement
+                  au génitif le sujet que le latin met au nominatif. Cette pratique est fort
+                  probablement issue d’une langue semblable au basque et parlée par les ancêtres des
+                  Gaëls. Certaines langues utilisent à cette fin ce qui est en fait un ablatif.
+                  C’est sans aucun doute un enrichissement rhétorique de la langue que d’avoir une
+                  forme “<marquage typemarq="italique">B</marquage> est aimé de <marquage typemarq="italique">A</marquage>” en plus de “<marquage typemarq="italique">A</marquage> aime <marquage typemarq="italique">B</marquage>”. La langue serait
+                  encore plus riche si elle avait une troisième forme dans laquelle <marquage typemarq="italique">A</marquage> et <marquage typemarq="italique">B</marquage>
+                  seraient tous deux traités comme les sujets de ce qui est dit. D’un point de vue
+                  logique, les trois sont toutefois identiques.</alinea>
+              </lrcible>
+            </elemrelation>
+          </listerelation></section1></annexe></grannexe></partiesann></article>
