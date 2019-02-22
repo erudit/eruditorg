@@ -17,6 +17,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.encoding import force_bytes
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+from django.utils.translation import get_language
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
@@ -208,6 +209,9 @@ class JournalDetailView(
             pass
         else:
             context['journal_info'] = journal_info
+
+        # Notes
+        context['notes'] = self.journal.erudit_object.get_notes().get(get_language(), [])
 
         # Fetches the published issues and the latest issue associated with the current journal
         issues = [

@@ -4,17 +4,37 @@ import pytest
 import unittest.mock
 
 from django.template import Context
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from erudit.test.factories import IssueFactory, JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Issue
 from erudit.test.factories import ArticleFactory
 from erudit.test.domchange import SectionTitle
-from apps.public.journal.views import IssueDetailView, ArticleDetailView
+from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 pytestmark = pytest.mark.django_db
+
+
+class TestJournalDetailView:
+
+    @pytest.mark.parametrize('language, expected_note', [
+        ('fr', 'foobar'),
+        ('en', 'foobaz'),
+    ])
+    def test_get_context_data_with_notes(self, language, expected_note):
+        view = JournalDetailView()
+        view.object = unittest.mock.MagicMock()
+        view.request = unittest.mock.MagicMock()
+        view.kwargs = unittest.mock.MagicMock()
+        view.journal = JournalFactory(notes=[
+            {'langue': 'fr', 'content': 'foobar'},
+            {'langue': 'en', 'content': 'foobaz'}
+        ])
+        with override_settings(LANGUAGE_CODE=language):
+            context = view.get_context_data()
+            assert context['notes'] == [expected_note]
 
 
 class TestIssueDetailSummary:
