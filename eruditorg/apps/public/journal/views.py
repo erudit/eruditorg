@@ -811,7 +811,8 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
             'journal_subtitle': main.subtitle,
             'fedora_article': self.fedora_object,
             'erudit_article': erudit_object,
-            'authors': erudit_object.get_formatted_authors()
+            'authors': erudit_object.get_formatted_authors(),
+            'apa_authors': erudit_object.get_authors(formatted=True, style='apa'),
         }
         coverpage = generate_pdf(
             'public/journal/article_pdf_coverpage.html',
