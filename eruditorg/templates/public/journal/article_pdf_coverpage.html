@@ -266,7 +266,7 @@
           <div class="cite">
             {% for author in article.authors %}
               {% if author.firstname and author.lastname %}
-                {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
+                {{ author.lastname }}, {{ author.firstname|cut:" "|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
               {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
                 {{ author.othername }}.
               {% endif %}
