@@ -1830,7 +1830,7 @@
 
   <!-- appendices / supplements -->
   <xsl:template match="annexe">
-    <div class="article-section-content" role="complementary">
+    <div id="{@id}" class="article-section-content" role="complementary">
       <xsl:if test="no or titre">
         <h4 class="titreann">
           <xsl:if test="titre and no">
@@ -2071,7 +2071,7 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="exposant">
+  <xsl:template match="exposant[not(./exposant | ./renvoi)]">
     <xsl:element name="sup">
       <xsl:if test="@traitementparticulier = 'oui'">
         <xsl:attribute name="class">
