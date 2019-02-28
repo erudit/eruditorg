@@ -102,9 +102,9 @@ def test_list_provides_only_subscriptions_associated_with_the_current_journal():
 
     other_journal = JournalFactory.create(collection=journal.collection)
     subscription_1 = JournalAccessSubscriptionFactory.create(
-        user=user, journal=journal, journal_management_subscription=management_subscription)
+        user=user, journals=[journal], journal_management_subscription=management_subscription)
     JournalAccessSubscriptionFactory.create(
-        user=user, journal=other_journal)
+        user=user, journals=[other_journal])
 
     client = Client()
     client.login(username=user.username, password='default')
@@ -249,7 +249,7 @@ class TestIndividualJournalAccessSubscriptionDeleteView:
         user = UserFactory.create()
         journal = JournalFactory.create(members=[user])
         subscription = JournalAccessSubscriptionFactory.create(
-            user=user, journal=journal)
+            user=user, journals=[journal])
 
         client = Client()
         client.login(username=user.username, password='default')
@@ -339,7 +339,7 @@ def test_batch_subscribe_csv_validation_ignored():
     # We ignore emails that are already subscribed
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
-    JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    JournalAccessSubscriptionFactory.create(user=foouser, journals=[journal])
     lines = ['foo@example.com;Foo;Bar']
     hit_batch_subscribe_with_csv_and_test(
         user, journal, lines, [], ['foo@example.com'], [])
@@ -355,7 +355,7 @@ def test_batch_subscribe_csv_validation_toadd():
 def test_batch_subscribe_csv_validation_toadd_and_ignored():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
-    JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    JournalAccessSubscriptionFactory.create(user=foouser, journals=[journal])
     lines = ['foo@example.com;Foo;Bar', 'other@example.com;Other;Name']
     hit_batch_subscribe_with_csv_and_test(
         user, journal, lines, [('other@example.com', 'Other', 'Name')],
@@ -444,7 +444,7 @@ def test_batch_delete_csv_validation_ignored():
 def test_batch_delete_csv_validation_todelete():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
-    sub = JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    sub = JournalAccessSubscriptionFactory.create(user=foouser, journals=[journal])
     lines = ['foo@example.com']
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [sub], [], [])
@@ -453,7 +453,7 @@ def test_batch_delete_csv_validation_todelete():
 def test_batch_delete_csv_validation_todelete_and_ignored():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
-    sub = JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    sub = JournalAccessSubscriptionFactory.create(user=foouser, journals=[journal])
     lines = ['foo@example.com', 'other@example.com']
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [sub], ['other@example.com'], [])
@@ -462,7 +462,7 @@ def test_batch_delete_csv_validation_todelete_and_ignored():
 def test_batch_delete_csv_validation_errors():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
-    JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    JournalAccessSubscriptionFactory.create(user=foouser, journals=[journal])
     lines = ['foo@example.com', 'other@example.com', 'notanemail']
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [], [], [(3, 'notanemail')])
@@ -481,7 +481,7 @@ def test_batch_delete_ignore_trailing_delimiter():
 def test_batch_delete_proceed():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
-    sub = JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    sub = JournalAccessSubscriptionFactory.create(user=foouser, journals=[journal])
     client = Client()
     client.login(username=user.username, password='default')
     url = reverse('userspace:journal:subscription:batch_delete', args=[journal.pk])

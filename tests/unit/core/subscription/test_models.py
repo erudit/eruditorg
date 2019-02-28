@@ -51,12 +51,11 @@ class TestJournalAccessSubscription:
         assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INSTITUTIONAL
 
     def test_knows_its_underlying_journals(self):
-        journal = JournalFactory()
-        subscription_2 = JournalAccessSubscriptionFactory.create(journal=journal)
-        subscription_3 = JournalAccessSubscriptionFactory.create()
-        subscription_3.journals.add(journal)
-        assert list(subscription_2.get_journals()) == [journal, ]
-        assert list(subscription_3.get_journals()) == [journal, ]
+        journal_1, journal_2, journal_3 = JournalFactory.create_batch(3)
+        basket = AccessBasketFactory(journals=[journal_1])
+        subscription = JournalAccessSubscriptionFactory(basket=basket, journals=[journal_2])
+        subscription.journals.add(journal_3)
+        assert list(subscription.get_journals()) == [journal_1, journal_2, journal_3]
 
     def test_basket_provides_access(self):
         j1, j2, j3 = JournalFactory.create_batch(3)
