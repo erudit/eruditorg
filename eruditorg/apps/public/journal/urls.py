@@ -60,6 +60,7 @@ urlpatterns = [
     url(_(r'^scholar/'), include([
         url(_(r'^subscribers\.xml$'), views.GoogleScholarSubscribersView.as_view(), name='scholar_subscribers'),  # noqa
         url(_(r'^subscriber_journals\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
+        url(_(r'^subscriber_journals_(?P<subscription_id>[0-9]+)\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
     ])),
 
 ]

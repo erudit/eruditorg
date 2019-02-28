@@ -1,11 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE institutional_holdings PUBLIC "-//GOOGLE//Subscriber Journals 1.0//EN" "http://scholar.google.com/scholar/subscriber.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE institutions PUBLIC "-//GOOGLE//Subscriber List 1.0//EN" "http://scholar.google.com/scholar/subscribers.dtd">
 <subscribers>
-  <subscriber id="erudit">
-    <institution>Consortium Érudit</institution>
-    <country>WORLD</country>
-    <electronic_subscriptions>
-      <url>{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:scholar_subscriber_journals' %}</url>
-    </electronic_subscriptions>
-  </subscriber>
+    {# Include Érudit as a subscriber without any IP address ranges to allow our journals with open access issues to be included in the Subscriber Links program. #}
+    <subscriber id="erudit">
+        <institution>Consortium Érudit</institution>
+        <electronic_subscriptions>
+            <url>https://{{ request.site.domain }}{% url 'public:journal:scholar_subscriber_journals' %}</url>
+        </electronic_subscriptions>
+    </subscriber>
+    {% for id, subscriber in subscribers.items %}
+    <subscriber id="{{ id }}">
+        <institution>{{ subscriber.institution }}</institution>
+        {% for ip_range in subscriber.ip_ranges %}
+        <patron_ip_range>{{ ip_range|join:'-' }}</patron_ip_range>
+        {% endfor %}
+        <electronic_subscriptions>
+            <url>https://{{ request.site.domain }}{% url 'public:journal:scholar_subscriber_journals' id %}</url>
+        </electronic_subscriptions>
+    </subscriber>
+    {% endfor %}
 </subscribers>
