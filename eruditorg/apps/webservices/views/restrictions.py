@@ -45,7 +45,7 @@ class RestrictionsView(View):
             issues__is_published=True
         )
         root = E.journals(
-            *map(get_journal_elem, journals.all())
+            *map(get_journal_elem, journals.distinct().all())
         )
         return HttpResponse(etree.tostring(root), content_type='text/xml')
 
