@@ -21,7 +21,8 @@ def has_journal_management_subscription(user, journal):
 @rules.predicate
 def has_valid_subscription(user, organisation):
     return user.organisations.filter(id=organisation.id).exists() and \
-        JournalAccessSubscription.valid_objects.filter(organisation_id=organisation.id).exists()
+        JournalAccessSubscription.valid_objects.institutional() \
+        .filter(organisation_id=organisation.id).exists()
 
 
 rules.add_perm(

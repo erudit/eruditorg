@@ -35,9 +35,8 @@ class OrganisationScopeMixin:
     def get_context_data(self, **kwargs):
         context = super(OrganisationScopeMixin, self).get_context_data(**kwargs)
         context['scope_current_organisation'] = self.current_organisation
-        context['has_active_subscription'] = JournalAccessSubscription.valid_objects.filter(
-            organisation=self.current_organisation
-        ).exists()
+        context['has_active_subscription'] = JournalAccessSubscription.valid_objects \
+            .institutional().filter(organisation=self.current_organisation).exists()
         try:
             context['has_legacy_profile'] = True if \
                 self.current_organisation.legacyorganisationprofile else False

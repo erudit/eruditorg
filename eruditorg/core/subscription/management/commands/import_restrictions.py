@@ -71,9 +71,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
 
     # Get all organisations that have a valid subscription
     orgs_with_valid_subscription = Organisation.objects.filter(
-        pk__in=JournalAccessSubscription.valid_objects.exclude(
-            organisation=None
-        ).values_list(
+        pk__in=JournalAccessSubscription.valid_objects.institutional().values_list(
             'organisation', flat=True
         ).distinct()
     )
@@ -89,7 +87,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
     )
 
     # get their subscriptions
-    stale_subscriptions = set(JournalAccessSubscription.valid_objects.filter(
+    stale_subscriptions = set(JournalAccessSubscription.valid_objects.institutional().filter(
         organisation__in=orgs_with_subscription_and_no_revueabonne
     ))
 

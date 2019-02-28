@@ -22,7 +22,7 @@ class DiagnosisLandingView(
         context = super().get_context_data(**kwargs)
 
         try:
-            subscription = JournalAccessSubscription.valid_objects.get(
+            subscription = JournalAccessSubscription.valid_objects.institutional().get(
                 organisation=self.current_organisation
             )
             context['journals'] = subscription.journals.all()

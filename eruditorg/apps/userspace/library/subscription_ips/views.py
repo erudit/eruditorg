@@ -45,7 +45,7 @@ class InstitutionIPAddressRangeCreateView(
         return kwargs
 
     def get_current_subscription(self):
-        return JournalAccessSubscription.valid_objects.filter(
+        return JournalAccessSubscription.valid_objects.institutional().filter(
             organisation=self.current_organisation).first()
 
     def get_success_url(self):
