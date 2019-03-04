@@ -13,31 +13,28 @@ from apps.public.book.models import (
     Book,
 )
 from django.views.generic import (
-    TemplateView,
     DetailView,
+    ListView
 )
 
 from apps.public.book.toc import read_toc
 from erudit.utils import qs_cache_key
 
 
-class BookListView(TemplateView):
+class BookListView(ListView):
 
     template_name = "public/book/home.html"
+    queryset = Book.objects.all().published().top_level().order_by('pk')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        books = self.get_queryset()
 
-        books = Book.objects.all().published().top_level()
-
-        context['published_books_cache_key'] = qs_cache_key(
-            books.order_by('pk')
-        )
-
+        context['published_books_cache_key'] = qs_cache_key(books)
         context['collections'] = BookCollection.objects \
             .prefetch_related(Prefetch('books', queryset=books)).all()
 
-        context['books_count'] = Book.objects.count()
+        context['books_count'] = books.count()
         return context
 
 
