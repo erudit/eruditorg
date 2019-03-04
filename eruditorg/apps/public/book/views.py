@@ -46,7 +46,7 @@ class BookDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
-        if not obj.is_published:
+        if not obj.is_published and obj.parent_book is None:
             raise Http404
         return obj
 
