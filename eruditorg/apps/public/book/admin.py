@@ -11,7 +11,7 @@ class BookAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
             'fields': (
-                ('type', 'collection',),
+                ('type', 'collection', 'parent_book'),
             )
         }),
         (None, {

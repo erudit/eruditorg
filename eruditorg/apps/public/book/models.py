@@ -61,6 +61,14 @@ class Book(models.Model):
         max_length=400,
         verbose_name=_('Titre'),
     )
+
+    parent_book = models.ForeignKey(
+        'Book',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
+    )
+
     slug = models.SlugField(
         max_length=200,
         null=False,
