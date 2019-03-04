@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
         }),
         (None, {
             'fields': (
-                ('title', 'subtitle',),
+                ('title', 'subtitle', 'slug'),
             )
         }),
         (None, {

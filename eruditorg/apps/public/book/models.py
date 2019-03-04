@@ -179,7 +179,8 @@ class Book(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = short_slug(self.title, self.isbn or self.digital_isbn)
+        if not self.slug:
+            self.slug = short_slug(self.title, self.isbn or self.digital_isbn)
         return super().save(*args, **kwargs)
 
 
