@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
-from .managers import PublishedBooksManager
+from .managers import BooksManager
 
 
 class BookCollection(models.Model):
@@ -61,6 +61,14 @@ class Book(models.Model):
         max_length=400,
         verbose_name=_('Titre'),
     )
+
+    parent_book = models.ForeignKey(
+        'Book',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
+    )
+
     slug = models.SlugField(
         max_length=200,
         null=False,
@@ -160,8 +168,7 @@ class Book(models.Model):
         default=True
     )
 
-    objects = models.Manager()
-    published_objects = PublishedBooksManager()
+    objects = BooksManager()
 
     class Meta:
         verbose_name = _('Livre')
@@ -171,7 +178,8 @@ class Book(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = short_slug(self.title, self.isbn or self.digital_isbn)
+        if not self.slug:
+            self.slug = short_slug(self.title, self.isbn or self.digital_isbn)
         return super().save(*args, **kwargs)
 
 

@@ -13,29 +13,28 @@ from apps.public.book.models import (
     Book,
 )
 from django.views.generic import (
-    TemplateView,
     DetailView,
+    ListView
 )
 
 from apps.public.book.toc import read_toc
 from erudit.utils import qs_cache_key
 
 
-class BookListView(TemplateView):
+class BookListView(ListView):
 
     template_name = "public/book/home.html"
+    queryset = Book.objects.all().published().top_level().order_by('pk')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        books = self.get_queryset()
 
-        context['published_books_cache_key'] = qs_cache_key(
-            Book.published_objects.order_by('pk').all()
-        )
-
+        context['published_books_cache_key'] = qs_cache_key(books)
         context['collections'] = BookCollection.objects \
-            .prefetch_related(Prefetch('books', queryset=Book.published_objects.all())).all()
+            .prefetch_related(Prefetch('books', queryset=books)).all()
 
-        context['books_count'] = Book.objects.count()
+        context['books_count'] = books.count()
         return context
 
 
@@ -43,12 +42,7 @@ class BookDetailView(DetailView):
 
     model = Book
     template_name = "public/book/book_detail.html"
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        if not obj.is_published:
-            raise Http404
-        return obj
+    queryset = Book.objects.all().published()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,12 +55,7 @@ class ChapterDetailView(DetailView):
 
     model = Book
     template_name = "public/book/chapter_detail.html"
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        if not obj.is_published:
-            raise Http404
-        return obj
+    queryset = Book.objects.all().published()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

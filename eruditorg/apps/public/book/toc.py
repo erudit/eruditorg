@@ -2,6 +2,7 @@ import re
 from collections import namedtuple
 from pathlib import Path
 
+from django.utils.text import slugify
 from lxml import etree
 # noinspection PyProtectedMember
 from lxml.etree import _Element as XMLElement
@@ -27,6 +28,11 @@ TOCChapter = namedtuple(
     ('id', 'title', 'subtitle', 'authors', 'first_page', 'last_page', 'pdf_path', 'is_section')
 )
 
+TOCBook = namedtuple(
+    'TOCBook',
+    ('id', 'title', 'subtitle', 'authors', 'first_page', 'last_page',
+     'pdf_path', 'is_section', 'is_book', 'slug')
+)
 
 TOCSection = namedtuple(
     'TOCSection',
@@ -40,44 +46,72 @@ TableOfContents = namedtuple(
 )
 
 
-def read_toc(book_path: Path) -> TableOfContents:
-    book_relative_path = book_path.relative_to(book_path.parent.parent.parent)
-    xml = get_xml_from_file(book_path / 'index.xml')
+def parse_toc_chapter(href: XMLElement, book_path: Path, book_relative_path: Path) -> TOCChapter:
+    chapter_id = href[:-4]
+    chapter_xml = find_chapter_xml(book_path, chapter_id)
+    lang = chapter_xml.find('.//field[@name="Langue"]').text
+    title_field_path = './/field[@name="Titre_{}"]'.format(lang)
+    title = stringify_children(chapter_xml.find(title_field_path))
+    subtitle_field_path = './/field[@name="SousTitre_{}"]'.format(lang)
+    subtitle = stringify_children(chapter_xml.find(subtitle_field_path))
+    authors = []
+    for author_elem in chapter_xml.findall('.//field[@name="Auteur_fac"]'):
+        author = stringify_children(author_elem)
+        if author:
+            authors.append(author)
+    first_page_element = chapter_xml.find('.//field[@name="PremierePage"]')
+    first_page = None if first_page_element is None else first_page_element.text
+    last_page_element = chapter_xml.find('.//field[@name="DernierePage"]')
+    last_page = None if last_page_element is None else last_page_element.text
+    pdf_path = book_relative_path / href
+    chapter = TOCChapter(
+        id=chapter_id, title=title, subtitle=subtitle, authors=authors,
+        first_page=first_page, last_page=last_page, pdf_path=str(pdf_path), is_section=False
+    )
+    return chapter
+
+
+def parse_toc_book(xml: XMLElement) -> TOCBook:
+    book_desc, book_title, book_author = parse_book(xml)
+    return TOCBook(
+        id="", title=book_title, subtitle="", authors=book_author,
+        first_page="", last_page="", pdf_path="", is_book=True,
+        is_section=False, slug=slugify(book_title)
+    )
+
+
+def parse_book(xml: XMLElement) -> tuple:
     book_desc = stringify_children(xml.find('.//div[@class="desclivre"]'))
     book_title = stringify_children(xml.find('.//h1[@class="titrelivre"]'))
     book_author = stringify_children(xml.find('.//div[@class="auteurlivre"]'))
+    return book_desc, book_title, book_author
+
+
+def read_toc(book_path: Path) -> TableOfContents:
+    book_relative_path = book_path.relative_to(book_path.parent.parent.parent)
+    xml = get_xml_from_file(book_path / 'index.xml')
+    book_desc, book_title, book_author = parse_book(xml)
     toc_elements = xml.xpath('.//*[self::h3 or self::h4 or '
                              'self::div[@class="entreetdm"]]')
     toc_entries = []
+
     for toc_element in toc_elements:
         if toc_element.tag in ('h3', 'h4'):
             title = stringify_children(toc_element)
             toc_entries.append(TOCSection(title=title, level=toc_element.tag, is_section=True))
         else:
-            href = toc_element.find('p[@class="doc"]/a').attrib['href']
-            if href[-4:] != '.pdf':
-                raise Exception('only pdf chapters')
-            chapter_id = href[:-4]
-            chapter_xml = find_chapter_xml(book_path, chapter_id)
-            lang = chapter_xml.find('.//field[@name="Langue"]').text
-            title_field_path = './/field[@name="Titre_{}"]'.format(lang)
-            title = stringify_children(chapter_xml.find(title_field_path))
-            subtitle_field_path = './/field[@name="SousTitre_{}"]'.format(lang)
-            subtitle = stringify_children(chapter_xml.find(subtitle_field_path))
-            authors = []
-            for author_elem in chapter_xml.findall('.//field[@name="Auteur_fac"]'):
-                author = stringify_children(author_elem)
-                if author:
-                    authors.append(author)
-            first_page_element = chapter_xml.find('.//field[@name="PremierePage"]')
-            first_page = None if first_page_element is None else first_page_element.text
-            last_page_element = chapter_xml.find('.//field[@name="DernierePage"]')
-            last_page = None if last_page_element is None else last_page_element.text
-            pdf_path = book_relative_path / href
-            toc_entries.append(TOCChapter(
-                id=chapter_id, title=title, subtitle=subtitle, authors=authors,
-                first_page=first_page, last_page=last_page, pdf_path=str(pdf_path), is_section=False
-            ))
+            href = toc_element.find('p[@class="doc"]/a')
+            if href is not None:
+                href = href.attrib['href']
+                if href[-4:] != '.pdf':
+                    raise Exception('only pdf chapters')
+                toc_entry = parse_toc_chapter(href, book_path, book_relative_path)
+                toc_entries.append(toc_entry)
+            href = toc_element.find('p[@class="book"]/a')
+            if href is not None:
+                href = href.attrib['href']
+                book_xml = get_xml_from_file(book_path / href)
+                toc_entries.append(parse_toc_book(book_xml))
     previous_chapters = {}
     next_chapters = {}
     chapters = [entry for entry in toc_entries if not entry.is_section]
