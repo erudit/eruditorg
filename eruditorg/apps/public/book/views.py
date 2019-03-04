@@ -28,12 +28,14 @@ class BookListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        books = Book.objects.all().published().top_level()
+
         context['published_books_cache_key'] = qs_cache_key(
-            Book.published_objects.order_by('pk').all()
+            books.order_by('pk')
         )
 
         context['collections'] = BookCollection.objects \
-            .prefetch_related(Prefetch('books', queryset=Book.published_objects.all())).all()
+            .prefetch_related(Prefetch('books', queryset=books)).all()
 
         context['books_count'] = Book.objects.count()
         return context
@@ -43,12 +45,7 @@ class BookDetailView(DetailView):
 
     model = Book
     template_name = "public/book/book_detail.html"
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        if not obj.is_published and obj.parent_book is None:
-            raise Http404
-        return obj
+    queryset = Book.objects.all().published()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,12 +58,7 @@ class ChapterDetailView(DetailView):
 
     model = Book
     template_name = "public/book/chapter_detail.html"
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        if not obj.is_published:
-            raise Http404
-        return obj
+    queryset = Book.objects.all().published()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
