@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
-from .managers import PublishedBooksManager
+from .managers import BooksManager
 
 
 class BookCollection(models.Model):
@@ -168,8 +168,7 @@ class Book(models.Model):
         default=True
     )
 
-    objects = models.Manager()
-    published_objects = PublishedBooksManager()
+    objects = BooksManager()
 
     class Meta:
         verbose_name = _('Livre')
