@@ -20,6 +20,11 @@ def test_can_find_chapter_xml_when_located_in_book_directory():
     assert chapter_xml.find('doc/field[@name="ID"]').text == '000276li'
 
 
+def test_can_create_book_toc_entry():
+    toc = read_toc(FIXTURE_ROOT / 'subbook')
+    assert toc.entries[1].is_book
+
+
 def test_can_create_section_toc_entry():
     toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
     assert toc.entries[0].level == 'h3'

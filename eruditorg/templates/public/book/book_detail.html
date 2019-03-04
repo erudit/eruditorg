@@ -100,6 +100,12 @@
           </{{ entry.level }}>
 
           {# Chapter / article titles #}
+          {% elif entry.is_book %}
+          <div class="bib-record">
+            <h5 class="bib-record__title">
+              <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=entry.slug %}" title="{% trans 'Lire le chapitre' %}">{{ entry.title }}</a>
+            </h5>
+          </div>
           {% else %}
           <div class="bib-record">
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
