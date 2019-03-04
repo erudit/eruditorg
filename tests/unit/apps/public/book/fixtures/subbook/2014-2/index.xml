@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<div class="global">
+  <title>Érudit | L&#x2019;État inscrit dans la société</title>
+  
+  <div class="livre" id="num">
+   
+    <div class="entetedesc">
+          <div class="couverture">
+            <img src="/livre/images/boismenu2014.jpg" alt="Couverture du livre"/>
+          </div>    
+          <div class="notice">
+            <h1 class="titrelivre">PARTIE I - RÔLE DE L&#x2019;ÉTAT ET SA TRANSFORMATION</h1>
+            <div class="auteurlivre">Gérard Boismenu</div>
+            <div class="editeur">Gérard Boismenu, 2014</div>
+            <div class="editeur">ISBN PDF&#x00a0;: 978-2-9815043-0-2</div>
+          </div>
+     </div>
+    
+    <div class="desclivre">
+      <p>Les déterminants des politiques publiques occupent une place centrale dans la réflexion sur la transformation de l&#x2019;État. L&#x2019;étude de plusieurs pays permet de donner une intelligibilité à des comportements spécifiques.</p>
+      <p>La protection sociale est le centre d&#x2019;intérêt. La réflexion porte d&#x2019;abord sur la réalité québécoise et canadienne, puis étatsunienne, pour enfin embrasser plusieurs pays européens. La jonction de la transformation du traitement politique des sans-emploi et de la différenciation de l&#x2019;État social est riche d&#x2019;enseignement. En particulier, le renouvellement de la logique du traitement politique des sans-emploi annonce un changement dans la relation entre l&#x2019;État et les individus.</p>
+
+    </div>
+    
+    <div class="tdm" id="numerique">
+      <h2>Table des matières</h2>
+      <h3>PARTIE I - RÔLE DE L&#x2019;ÉTAT ET SA TRANSFORMATION</h3>
+      <!-- Partie 1 -->
+      <h4>Section 1 - Les politiques de l&#x2019;État et ses déterminants</h4>
+      <div class="entreetdm">
+        <p class="auteur">Gérard Boismenu</p>
+        <p class="titreContrib">Notes et propositions pour une étude sociologique du droit</p>
+        <p class="doc">[<a href="000174li.pdf" target="_blank">PDF</a>]</p>
+      </div>
+    </div>
+    <div class="piedlivre">
+      <p>&#x00A9; Gérard Boismenu, 2014</p>
+    </div>
+    
+  </div>
+  
+  <map name="Map" id="map1">
+    <area shape="rect" coords="195,12,295,30" href="/livre/index.html" alt="Livres"/>
+    <area shape="rect" coords="81,8,175,36" href="/index.html" alt="Érudit"/>
+  </map>
+</div>
