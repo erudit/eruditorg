@@ -25,7 +25,8 @@ def stringify_children(node):
 
 TOCChapter = namedtuple(
     'TOCChapter',
-    ('id', 'title', 'subtitle', 'authors', 'first_page', 'last_page', 'pdf_path', 'is_section')
+    ('id', 'title', 'subtitle', 'authors', 'first_page',
+     'last_page', 'pdf_path', 'is_section', 'is_book')
 )
 
 TOCBook = namedtuple(
@@ -114,7 +115,7 @@ def read_toc(book_path: Path) -> TableOfContents:
                 toc_entries.append(parse_toc_book(book_xml))
     previous_chapters = {}
     next_chapters = {}
-    chapters = [entry for entry in toc_entries if not entry.is_section]
+    chapters = [entry for entry in toc_entries if not entry.is_section and not entry.is_book]
     for i, chapter in enumerate(chapters):
         if i > 0:
             previous_chapters[chapter.id] = chapters[i - 1]
