@@ -95,23 +95,29 @@ class ContentAccessCheckMixin:
         The following verifications are performed in order to determine if a given content
         can be browsed:
 
-            1- it is in open access
-            2- the current user has access to it with its individual account
-            3- the current IP address is inside on of the IP address ranges allowed
-               to access to it
+            1- it is in open access or not embargoed
+            2- a valid prepublication ticket is provided
+            3- the current user has access to it with its individual account
+            4- the current IP address is inside the IP address ranges allowed to access to it
         """
-
         content = self.get_content()
         if isinstance(content, Article):
-            # If the article is in open access or if it's not embargoed, the access should always be
+            issue = content.issue
+        elif isinstance(content, Issue):
+            issue = content
+        else:
+            issue = None
+
+        if issue:
+            # If the issue is in open access or if it's not embargoed, the access should always be
             # granted.
-            if content.open_access or not content.embargoed:
+            if issue.journal.open_access or not issue.embargoed:
                 return True
 
             # If the issue is not published, the access should only be granted if a valid
             # prepublication ticket is provided.
-            if not content.issue.is_published:
-                return content.issue.is_prepublication_ticket_valid(self.request.GET.get('ticket'))
+            if not issue.is_published:
+                return issue.is_prepublication_ticket_valid(self.request.GET.get('ticket'))
 
         # Otherwise, check if the user has a valid subscription that provides access to the article.
         kwargs = self._get_subscriptions_kwargs_for_content()
