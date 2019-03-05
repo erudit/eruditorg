@@ -1908,11 +1908,11 @@
         <xsl:value-of select="@id"/>
       </xsl:attribute>
       <xsl:attribute name="class">
-        <xsl:text>norenvoi hint--bottom hint--no-animate</xsl:text>
+        <xsl:text>norenvoi</xsl:text>
       </xsl:attribute>
-      <xsl:attribute name="data-hint">
+      <xsl:attribute name="title">
         <xsl:variable name="idref" select="@idref"/>
-        <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200)"/>
+        <xsl:value-of select="normalize-space(substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200))"/>
         <xsl:if test="string-length(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)]) &gt; 200">
           <xsl:text>[…]</xsl:text>
         </xsl:if>
