@@ -47,7 +47,7 @@ TableOfContents = namedtuple(
 )
 
 
-def parse_toc_chapter(href: XMLElement, book_path: Path, book_relative_path: Path) -> TOCChapter:
+def parse_toc_chapter(href: XMLElement, book_path: Path) -> TOCChapter:
     chapter_id = href[:-4]
     chapter_xml = find_chapter_xml(book_path, chapter_id)
     lang = chapter_xml.find('.//field[@name="Langue"]').text
@@ -64,10 +64,11 @@ def parse_toc_chapter(href: XMLElement, book_path: Path, book_relative_path: Pat
     first_page = None if first_page_element is None else first_page_element.text
     last_page_element = chapter_xml.find('.//field[@name="DernierePage"]')
     last_page = None if last_page_element is None else last_page_element.text
-    pdf_path = book_relative_path / href
+    pdf_path = book_path / href
     chapter = TOCChapter(
         id=chapter_id, title=title, subtitle=subtitle, authors=authors,
-        first_page=first_page, last_page=last_page, pdf_path=str(pdf_path), is_section=False
+        first_page=first_page, last_page=last_page, pdf_path=str(pdf_path), is_section=False,
+        is_book=False
     )
     return chapter
 
@@ -89,7 +90,6 @@ def parse_book(xml: XMLElement) -> tuple:
 
 
 def read_toc(book_path: Path) -> TableOfContents:
-    book_relative_path = book_path.relative_to(book_path.parent.parent.parent)
     xml = get_xml_from_file(book_path / 'index.xml')
     book_desc, book_title, book_author = parse_book(xml)
     toc_elements = xml.xpath('.//*[self::h3 or self::h4 or '
@@ -106,7 +106,7 @@ def read_toc(book_path: Path) -> TableOfContents:
                 href = href.attrib['href']
                 if href[-4:] != '.pdf':
                     raise Exception('only pdf chapters')
-                toc_entry = parse_toc_chapter(href, book_path, book_relative_path)
+                toc_entry = parse_toc_chapter(href, book_path)
                 toc_entries.append(toc_entry)
             href = toc_element.find('p[@class="book"]/a')
             if href is not None:
