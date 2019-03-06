@@ -52,7 +52,7 @@ class TestSubscriptionMiddleware:
 
         subscription = JournalAccessSubscriptionFactory.create(
             user=request.user,
-            journal=journal,
+            journals=[journal],
             post__valid=True
         )
 
@@ -165,7 +165,7 @@ class TestSubscriptionMiddleware:
         article = EmbargoedArticleFactory()
 
         JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True,
             post__referers=['http://www.umontreal.ca']
         )
@@ -194,7 +194,7 @@ class TestSubscriptionMiddleware:
 
         # Create a subscription that has both an ip address range and a referer
         ip_subscription = JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True,
             post__ip_start='1.1.1.1', post__ip_end='1.1.1.1',
             post__referers=['http://umontreal.ca']
@@ -219,7 +219,7 @@ class TestSubscriptionMiddleware:
         article = EmbargoedArticleFactory()
 
         subscription = JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True,
             post__referers=['http://www.umontreal.ca']
         )

@@ -125,9 +125,6 @@ class JournalAccessSubscription(AbstractSubscription):
     """ JournalManagementSubscription towards which the subscription will count """
 
     # Which Journal instances can be accessed using this subscription?
-    journal = models.ForeignKey(
-        Journal, verbose_name=_('Revue'), blank=True, null=True, related_name='+',
-        on_delete=models.CASCADE)
     journals = models.ManyToManyField(
         Journal, verbose_name=_('Revues'), related_name='+', blank=True)
     basket = models.ForeignKey(
@@ -151,8 +148,6 @@ class JournalAccessSubscription(AbstractSubscription):
 
     def __str__(self):
         dest = self.user if self.user else self.organisation
-        if self.journal_id:
-            return '{} - {}'.format(dest, self.journal)
         return _('{} - Accès multiples').format(dest)
 
     @cached_property
@@ -188,9 +183,6 @@ class JournalAccessSubscription(AbstractSubscription):
         elif issue:
             journal = issue.journal
 
-        if self.journal == journal:
-            return True
-
         if journal in self.journals.all():
             return True
 
@@ -201,12 +193,10 @@ class JournalAccessSubscription(AbstractSubscription):
 
     def get_journals(self):
         """ Returns the Journal instances targeted by the subscription. """
-
-        journal_ids = []
-        if self.journal_id:
-            journal_ids.append(self.journal_id)
-        journal_ids.extend(list(self.journals.all().values_list('id', flat=True)))
-        return Journal.objects.filter(id__in=journal_ids)
+        journals = self.journals.all()
+        if self.basket_id:
+            journals |= self.basket.journals.all()
+        return journals.distinct().order_by('name')
 
 
 class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):

@@ -185,10 +185,7 @@ def test_delete_existing_subscriptions():
 
 @pytest.mark.django_db
 def test_import_deletion_will_not_modify_individual_subscriptions():
-    journal = JournalFactory()
     individual_subscription = JournalAccessSubscriptionFactory(valid=True, type="individual")
-    individual_subscription.journals.add(journal)
-    individual_subscription.save()
     assert individual_subscription.journals.count() == 1
     call_command("import_restrictions", *[], **{})
     assert individual_subscription.journals.count() == 1

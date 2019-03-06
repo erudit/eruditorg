@@ -121,28 +121,6 @@ class TestJournal:
             force_free_access=True)
         assert set(journal.published_open_access_issues) == {issue_2, issue_3}
 
-    def test_can_return_the_published_open_access_issues_period_coverage(self):
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        now_dt = dt.date.today()
-        journal = JournalFactory()
-        journal.last_publication_year = now_dt.year
-        journal.open_access = False
-        journal.save()
-        DATES = [
-            dt.date(now_dt.year, now_dt.month, 1),
-            now_dt - dr.relativedelta(months=ml),
-            now_dt - dr.relativedelta(months=(ml + 5)),
-            now_dt - dr.relativedelta(months=((ml + 5) * 2)),
-        ]
-
-        for d in reversed(DATES):
-            IssueFactory(journal=journal, year=d.year, date_published=d)
-        EXPECTED = {
-            'from': DATES[3],
-            'to': DATES[2],
-        }
-        assert journal.published_open_access_issues_period_coverage == EXPECTED
-
     def test_published_issues_uses_fedora_order(self):
         # The `published_issues` queryset returns a list that uses order fetched from fedora.
         journal = JournalFactory.create()

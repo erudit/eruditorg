@@ -280,7 +280,6 @@ class Journal(FedoraMixin, FedoraDated):
     @property
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
-        # FIXME avoid hardcoding the collection code
         if self.open_access or not self.active or not self.collection.is_main_collection:
             return None
         else:
@@ -339,13 +338,12 @@ class Journal(FedoraMixin, FedoraDated):
     @property
     def published_open_access_issues(self):
         """ Return the published open access issues of this Journal. """
-        # XXX should be non-embargoed
         if self.date_embargo_begins:
             return self.published_issues.filter(
                 Q(date_published__lt=self.date_embargo_begins) | Q(force_free_access=True)
-            )
+            ).order_by('date_published')
         else:
-            return self.published_issues
+            return self.published_issues.order_by('date_published')
 
     @cached_property
     def first_issue(self):
@@ -375,19 +373,6 @@ class Journal(FedoraMixin, FedoraDated):
                 return None
         else:
             return self.published_issues.order_by('-date_published').first()
-
-    @property
-    def published_open_access_issues_period_coverage(self):
-        """ Return the date coverage of the open access issues of this Journal.
-
-        .. deprecated:: 0.4.39
-           This method is unused.
-        """
-        open_access_issues = self.published_open_access_issues.order_by('-date_published')
-        return None if not open_access_issues.exists() else {
-            'from': open_access_issues.last().date_published,
-            'to': open_access_issues.first().date_published
-        }
 
     def is_scientific(self):
         """ Helper method that returns True if this journal is a scientific journal """

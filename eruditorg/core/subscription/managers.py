@@ -75,23 +75,33 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 class JournalAccessSubscriptionValidManager(models.Manager):
     def get_queryset(self):
         """ Returns all the valid JournalAccessSubscription instances. """
+        return self.institutional() | self.individual()
+
+    def institutional(self):
+        """ Returns all the valid institutional JournalAccessSubscription instances.
+
+        To be valid, an institutional subscription needs a valid JournalAccessSubscriptionPeriod.
+        """
         nowd = dt.datetime.now().date()
-        # institutional and individual saubscriptions don't have the same validity criterias.
-        # institutional subscription need a valid JournalAccessSubscriptionPeriod, but
-        # not individual (org=None) ones. On the individual side, it's a valid
-        # JournalManagementSubscriptionPeriod that we need.
-        # That's because in the case of individual subscriptions, we let the journal manage
-        # validity themselves.
         institutional = Q(
             organisation__isnull=False,
             journalaccesssubscriptionperiod__start__lte=nowd,
             journalaccesssubscriptionperiod__end__gte=nowd)
+        qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
+        return qs.filter(institutional)
+
+    def individual(self):
+        """ Returns all the valid individual JournalAccessSubscription instances.
+
+        To be valid, an individual subscription needs a valid JournalManagementSubscriptionPeriod.
+        That's because we let the journal manage validity themselves. """
+        nowd = dt.datetime.now().date()
         individual = Q(
             organisation__isnull=True,
             journal_management_subscription__period__start__lte=nowd,
             journal_management_subscription__period__end__gte=nowd)
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
-        return qs.filter(institutional | individual)
+        return qs.filter(individual)
 
     def get_for_ip_address(self, ip_address):
         """ Return all the subscriptions for the given ip address """

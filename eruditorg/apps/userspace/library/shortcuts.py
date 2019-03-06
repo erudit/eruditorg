@@ -20,7 +20,7 @@ def get_last_year_of_subscription(organisation):
 
 def get_last_valid_subscription(organisation):
     """ :returns: the last valid subscription of the organisation """
-    subscription = JournalAccessSubscription.valid_objects.filter(
+    subscription = JournalAccessSubscription.valid_objects.institutional().filter(
         organisation=organisation,
     ).order_by('-journalaccesssubscriptionperiod__end').first()
 

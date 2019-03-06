@@ -60,11 +60,9 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
             )
         journals = kwargs.get('journals')
         if journals:
-            obj.journal = journals[0]
+            obj.journals.set(journals)
             obj.journal_management_subscription = JournalManagementSubscription.objects \
                 .filter(journal=journals[0]).first()
-            for journal in journals:
-                obj.journals.add(journal)
             obj.save()
 
     @factory.post_generation
@@ -86,15 +84,16 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
             if not obj.journal_management_subscription:
                 obj.journal_management_subscription = JournalManagementSubscriptionFactory()
                 obj.journal_management_subscription.save()
-                obj.journal = obj.journal_management_subscription.journal
+                obj.journals.add(obj.journal_management_subscription.journal)
             obj.save()
 
     @factory.post_generation
-    def journal(obj, create, extracted, **kwargs):
+    def journals(obj, create, extracted, **kwargs):
         if extracted:
-            obj.journal = extracted
-            obj.journal_management_subscription = JournalManagementSubscription.objects \
-                .filter(journal=extracted).first()
+            for journal in extracted:
+                obj.journals.add(journal)
+                obj.journal_management_subscription = JournalManagementSubscription.objects \
+                    .filter(journal=journal).first()
 
     @factory.post_generation
     def valid(obj, create, extracted, **kwargs):

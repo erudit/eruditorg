@@ -130,7 +130,7 @@ class TestContentAccessCheckMixin:
 
         JournalAccessSubscriptionFactory.create(
             user=authenticated_request.user,
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True
         )
 
@@ -149,7 +149,7 @@ class TestContentAccessCheckMixin:
         article = EmbargoedArticleFactory.create()
         authenticated_request = get_authenticated_request()
 
-        JournalAccessSubscriptionFactory.create(user=authenticated_request.user, journal=article.issue.journal)
+        JournalAccessSubscriptionFactory.create(user=authenticated_request.user, journals=[article.issue.journal])
 
         view = single_article_view()
         view.object = article
@@ -164,7 +164,7 @@ class TestContentAccessCheckMixin:
         anonymous_request = get_anonymous_request()
 
         JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True,
             post__ip_start='192.168.1.2',
             post__ip_end='192.168.1.4'
@@ -188,7 +188,7 @@ class TestContentAccessCheckMixin:
         anonymous_request = get_anonymous_request()
 
         JournalAccessSubscriptionFactory.create(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__ip_start='192.168.1.2',
             post__ip_end='192.168.1.4'
         )
@@ -213,7 +213,7 @@ class TestContentAccessCheckMixin:
 
         # Create an institutional subscription that gives access to this article
         JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True,
             post__ip_start="0.0.0.1",
             post__ip_end="0.0.0.3",
@@ -224,7 +224,7 @@ class TestContentAccessCheckMixin:
 
         # Create an individual subscription that gives access to this article
         individual_subscription = JournalAccessSubscriptionFactory(
-            journal=other_article.issue.journal,
+            journals=[other_article.issue.journal],
             user=authenticated_request.user,
             post__valid=True
         )
@@ -249,7 +249,7 @@ class TestContentAccessCheckMixin:
 
         # Create an institutional subscription that gives access to this article
         ip_subscription = JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             post__valid=True,
             post__ip_start="0.0.0.1",
             post__ip_end="0.0.0.3",
@@ -257,7 +257,7 @@ class TestContentAccessCheckMixin:
 
         # Create an individual subscription that gives access to this article
         JournalAccessSubscriptionFactory(
-            journal=article.issue.journal,
+            journals=[article.issue.journal],
             user=authenticated_request.user,
             post__valid=True
         )

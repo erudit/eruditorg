@@ -11,7 +11,9 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Issue
 from erudit.test.factories import ArticleFactory
 from erudit.test.domchange import SectionTitle
-from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView
+from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView, \
+    GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView
+from core.subscription.test.factories import JournalAccessSubscriptionFactory
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 pytestmark = pytest.mark.django_db
@@ -19,22 +21,27 @@ pytestmark = pytest.mark.django_db
 
 class TestJournalDetailView:
 
-    @pytest.mark.parametrize('language, expected_note', [
-        ('fr', 'foobar'),
-        ('en', 'foobaz'),
+    @pytest.mark.parametrize('localidentifier, language, expected_notes', [
+        ('journal1', 'fr', ['foobar']),
+        ('journal1', 'en', ['foobaz']),
+        # Should not crash if the journal is not in fedora.
+        (None, 'fr', []),
     ])
-    def test_get_context_data_with_notes(self, language, expected_note):
+    def test_get_context_data_with_notes(self, localidentifier, language, expected_notes):
         view = JournalDetailView()
         view.object = unittest.mock.MagicMock()
         view.request = unittest.mock.MagicMock()
         view.kwargs = unittest.mock.MagicMock()
-        view.journal = JournalFactory(notes=[
-            {'langue': 'fr', 'content': 'foobar'},
-            {'langue': 'en', 'content': 'foobaz'}
-        ])
+        view.journal = JournalFactory(
+            localidentifier=localidentifier,
+            notes=[
+                {'langue': 'fr', 'content': 'foobar'},
+                {'langue': 'en', 'content': 'foobaz'}
+            ],
+        )
         with override_settings(LANGUAGE_CODE=language):
             context = view.get_context_data()
-            assert context['notes'] == [expected_note]
+            assert context['notes'] == expected_notes
 
 
 class TestIssueDetailSummary:
@@ -285,3 +292,51 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<sup><a href="#an1" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[2]</a></sup>' not in ret
         assert '<sup><a href="#an2" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[ii]</a></sup>' not in ret
         assert '<sup><a href="#an3" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[**]</a></sup>' not in ret
+
+
+class TestGoogleScholarSubscribersView:
+
+    @pytest.mark.parametrize('valid, expired, expected_subscribers', [
+        (True, False, {
+            1: {
+                'institution': 'foo',
+                'ip_ranges': [
+                    ['0.0.0.0', '255.255.255.255'],
+                ],
+            },
+        }),
+        (False, True, {}),
+    ])
+    def test_google_scholar_subscribers(self, valid, expired, expected_subscribers):
+        JournalAccessSubscriptionFactory(
+            pk=1,
+            post__valid=valid,
+            post__expired=expired,
+            post__ip_start='0.0.0.0',
+            post__ip_end='255.255.255.255',
+            organisation__name='foo',
+        )
+        view = GoogleScholarSubscribersView()
+        context = view.get_context_data()
+        assert context.get('subscribers') == expected_subscribers
+
+
+class TestGoogleScholarSubscriberJournalsView:
+
+    @pytest.mark.parametrize('valid, expired, subscription_id, expected_journal_ids', [
+        (False, True, '1', []),
+        (True, False, '1', ['journal_1']),
+        (True, False, '', ['journal_1', 'journal_2']),
+    ])
+    def test_google_scholar_subscriber_journals(self, valid, expired, subscription_id, expected_journal_ids):
+        journal_1 = JournalFactory(localidentifier='journal_1')
+        journal_2 = JournalFactory(localidentifier='journal_2')
+        JournalAccessSubscriptionFactory(
+            pk=1,
+            post__valid=valid,
+            post__expired=expired,
+            post__journals=[journal_1],
+        )
+        view = GoogleScholarSubscriberJournalsView()
+        context = view.get_context_data(subscription_id=subscription_id)
+        assert [journal.localidentifier for journal in context.get('journals')] == expected_journal_ids

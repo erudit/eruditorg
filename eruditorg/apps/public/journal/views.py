@@ -42,6 +42,7 @@ from erudit.utils import locale_aware_sort, qs_cache_key
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
 from core.metrics.metric import metric
+from core.subscription.models import JournalAccessSubscription
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
 from .forms import JournalListFilterForm
@@ -211,7 +212,8 @@ class JournalDetailView(
             context['journal_info'] = journal_info
 
         # Notes
-        context['notes'] = self.journal.erudit_object.get_notes().get(get_language(), [])
+        context['notes'] = self.journal.erudit_object.get_notes().get(get_language(), []) \
+            if self.journal.is_in_fedora else []
 
         # Fetches the published issues and the latest issue associated with the current journal
         issues = [
@@ -891,6 +893,20 @@ class GoogleScholarSubscribersView(CacheMixin, TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscribers.xml'
 
+    def get_context_data(self, **kwargs):
+        context = super(GoogleScholarSubscribersView, self).get_context_data(**kwargs)
+        context['subscribers'] = {}
+        subscriptions = JournalAccessSubscription.valid_objects.institutional()
+        for subscription in subscriptions:
+            context['subscribers'][subscription.id] = {
+                'institution': subscription.organisation.name,
+                'ip_ranges': [
+                    [ip_range.ip_start, ip_range.ip_end] for ip_range in
+                    subscription.institutionipaddressrange_set.order_by('ip_start').all()
+                ],
+            }
+        return context
+
 
 class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
     cache_timeout = 60 * 60 * 24  # 24 hours
@@ -899,10 +915,21 @@ class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(GoogleScholarSubscriberJournalsView, self).get_context_data(**kwargs)
-        context['journals'] = Journal.objects.filter(
-            collection__code__in=('erudit', 'unb')
-        )
-
+        # If no subscription ID is provided we are looking for all journals with open access issues
+        # and we set 'embargo' to True to include embargo information in the subscriber journals.
+        if not kwargs.get('subscription_id'):
+            context['journals'] = Journal.objects.filter(collection__is_main_collection=True)
+            context['embargo'] = True
+        else:
+            # Otherwise, look for a valid institutional subscription and return its journals.
+            try:
+                subscription = JournalAccessSubscription.valid_objects.institutional().get(
+                    pk=kwargs.get('subscription_id'),
+                )
+                context['journals'] = subscription.get_journals()
+            # If no valid institutional subscription is found, return an empty list.
+            except ObjectDoesNotExist:
+                context['journals'] = []
         return context
 
 

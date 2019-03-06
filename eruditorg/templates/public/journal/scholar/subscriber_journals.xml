@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!DOCTYPE institutional_holdings PUBLIC "-//GOOGLE//Subscriber Journals 1.0//EN" "http://scholar.google.com/scholar/subscriber_journals.dtd">
 <subscriber_journals>
-  {% for journal in journals %}
-  {% with journal=journal coverage=journal.published_open_access_issues_period_coverage %}
-  {% if coverage %}
-  <item>
-    <title>{{ journal.name }}</title>
-    {% if journal.issn_print %}<issn>{{ journal.issn_print }}</issn>{% endif %}
-    {% if journal.issn_web %}<issn>{{ journal.issn_web }}</issn>{% endif %}
-    <coverage>
-      <from><year>{{ journal.published_open_access_issues.first.year }}</year></from>
-      {% if journal.open_access == False %}
-      <embargo>
-        {% if journal.date_embargo_begins %}
-        <days_not_available>
-            {{ journal.days_not_available_from_today }}
-        </days_not_available>
+    {% for journal in journals %}
+    {% if journal.issn_web or journal.issn_print %}
+    <item>
+        <title>{{ journal.name }}</title>
+        {% if journal.issn_web %}
+        <issn>{{ journal.issn_web }}</issn>
         {% endif %}
-      </embargo>
-      {% endif %}
-    </coverage>
-  </item>
-  {% endif %}
-  {% endwith %}
-  {% endfor %}
+        {% if journal.issn_print %}
+        <issn>{{ journal.issn_print }}</issn>
+        {% endif %}
+        {% if embargo and not journal.open_access %}
+        <coverage>
+            {% with last_open_access_issue=journal.published_open_access_issues.last %}
+            <to>
+                {% if last_open_access_issue.year %}
+                <year>{{ last_open_access_issue.year }}</year>
+                {% endif %}
+                {% if last_open_access_issue.month %}
+                <month>{{ last_open_access_issue.month }}</month>
+                {% endif %}
+                {% if last_open_access_issue.volume %}
+                <volume>{{ last_open_access_issue.volume }}</volume>
+                {% endif %}
+                {% if last_open_access_issue.number %}
+                <issue>{{ last_open_access_issue.number }}</issue>
+                {% endif %}
+            </to>
+            {% endwith %}
+        </coverage>
+        {% endif %}
+    </item>
+    {% endif %}
+    {% endfor %}
 </subscriber_journals>
