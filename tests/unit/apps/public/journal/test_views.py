@@ -21,22 +21,27 @@ pytestmark = pytest.mark.django_db
 
 class TestJournalDetailView:
 
-    @pytest.mark.parametrize('language, expected_note', [
-        ('fr', 'foobar'),
-        ('en', 'foobaz'),
+    @pytest.mark.parametrize('localidentifier, language, expected_notes', [
+        ('journal1', 'fr', ['foobar']),
+        ('journal1', 'en', ['foobaz']),
+        # Should not crash if the journal is not in fedora.
+        (None, 'fr', []),
     ])
-    def test_get_context_data_with_notes(self, language, expected_note):
+    def test_get_context_data_with_notes(self, localidentifier, language, expected_notes):
         view = JournalDetailView()
         view.object = unittest.mock.MagicMock()
         view.request = unittest.mock.MagicMock()
         view.kwargs = unittest.mock.MagicMock()
-        view.journal = JournalFactory(notes=[
-            {'langue': 'fr', 'content': 'foobar'},
-            {'langue': 'en', 'content': 'foobaz'}
-        ])
+        view.journal = JournalFactory(
+            localidentifier=localidentifier,
+            notes=[
+                {'langue': 'fr', 'content': 'foobar'},
+                {'langue': 'en', 'content': 'foobaz'}
+            ],
+        )
         with override_settings(LANGUAGE_CODE=language):
             context = view.get_context_data()
-            assert context['notes'] == [expected_note]
+            assert context['notes'] == expected_notes
 
 
 class TestIssueDetailSummary:
