@@ -103,13 +103,17 @@ class ContentAccessCheckMixin:
 
         content = self.get_content()
         if isinstance(content, Article):
+            # If the article is in open access or if it's not embargoed, the access should always be
+            # granted.
             if content.open_access or not content.embargoed:
                 return True
 
-            if not content.issue.is_published and \
-                    content.issue.is_prepublication_ticket_valid(self.request.GET.get('ticket')):
-                return True
+            # If the issue is not published, the access should only be granted if a valid
+            # prepublication ticket is provided.
+            if not content.issue.is_published:
+                return content.issue.is_prepublication_ticket_valid(self.request.GET.get('ticket'))
 
+        # Otherwise, check if the user has a valid subscription that provides access to the article.
         kwargs = self._get_subscriptions_kwargs_for_content()
         return self.request.subscriptions.provides_access_to(**kwargs)
 
@@ -121,7 +125,7 @@ class SingleArticleMixin:
         # fetch the full PID from Solr first.
         journal_code = self.kwargs.get('journal_code')
         issue_localid = self.kwargs.get('issue_localid')
-        localidentifier = self.kwargs['localid']
+        localidentifier = self.kwargs.get('localid')
         if not (journal_code and issue_localid):
             fedora_ids = get_fedora_ids(localidentifier)
             if fedora_ids is None:

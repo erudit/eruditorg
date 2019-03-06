@@ -1,4 +1,5 @@
 import pytest
+import unittest.mock
 
 from django.http import Http404
 from django.test import RequestFactory
@@ -12,6 +13,7 @@ from erudit.models import Article
 from apps.public.journal.viewmixins import ContentAccessCheckMixin
 from apps.public.journal.viewmixins import SingleArticleMixin
 from apps.public.journal.viewmixins import SingleJournalMixin
+from apps.public.journal.views import ArticleRawPdfView, ArticleXmlView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.models import UserSubscriptions
@@ -297,3 +299,25 @@ class TestContentAccessCheckMixin:
         })
         # Run # check
         assert view.content_access_granted == True
+
+
+    @pytest.mark.parametrize('ticket_provided, access_granted', (
+        (False, False),
+        (True, True)
+    ))
+    @pytest.mark.parametrize('View', (ArticleRawPdfView, ArticleXmlView))
+    def test_cannot_grant_access_to_an_unpublished_article_pdf_and_xml_if_no_prepublication_ticket_is_provided(self, ticket_provided, access_granted, View):
+        article = ArticleFactory(issue__is_published=False)
+        view = View()
+        view.request = unittest.mock.MagicMock()
+        # Access should not be granted even if the user has a valid subscription.
+        view.request.subscriptions.provides_access_to = unittest.mock.MagicMock(return_value=True)
+        view.kwargs = {
+            'journal_code': article.issue.journal.code,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        }
+        view.request.GET = {
+            'ticket': article.issue.prepublication_ticket if ticket_provided else None,
+        }
+        assert view.content_access_granted == access_granted
