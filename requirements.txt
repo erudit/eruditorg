@@ -14,7 +14,7 @@ beautifulsoup4==4.6.1
 cairocffi==0.9.0
 cairosvg==2.2.1
 certifi==2018.11.29       # via requests
-cffi==1.12.1              # via cairocffi, weasyprint
+cffi==1.12.2              # via cairocffi, weasyprint
 chardet==3.0.4
 cssselect2==0.2.1         # via cairosvg, weasyprint
 cssselect==1.0.3          # via lxml
@@ -44,7 +44,7 @@ influxdb==2.12.0
 isodate==0.6.0            # via rdflib
 jdcal==1.4                # via openpyxl
 jsonfield==2.0.2          # via django-post-office
-lxml[cssselect]==4.3.1
+lxml[cssselect]==4.3.2
 mysqlclient==1.3.14
 openpyxl==2.3.5
 pillow==5.4.1
@@ -72,7 +72,7 @@ six==1.12.0               # via django-isbn-field, html5lib, influxdb, isodate, 
 sqlparse==0.2.4
 structlog==19.1.0
 suds-py3==1.3.3.0
-tinycss2==0.6.1           # via cairosvg, cssselect2, weasyprint
+tinycss2==0.6.1
 urllib3==1.24.1           # via requests
-weasyprint==45
+weasyprint==44
 webencodings==0.5.1       # via html5lib, tinycss2
