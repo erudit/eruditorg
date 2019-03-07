@@ -801,10 +801,21 @@
     <section id="{@id}">
       <xsl:if test="titre">
         <xsl:element name="h2">
-          <xsl:if test="titre/@traitementparticulier">
-            <xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
-          </xsl:if>
-          <xsl:apply-templates select="titre"/>
+          <xsl:choose>
+            <!-- When the title is empty, add the 'empty' class and don't bother applying templates. -->
+            <xsl:when test="titre[normalize-space()] = '&#160;'">
+              <xsl:attribute name="class">special empty</xsl:attribute>
+            </xsl:when>
+            <!-- When the title has special treatment, add the 'special' class and apply templates. -->
+            <xsl:when test="titre/@traitementparticulier">
+              <xsl:attribute name="class">special</xsl:attribute>
+              <xsl:apply-templates select="titre"/>
+            </xsl:when>
+            <!-- Otherwise, apply templates. -->
+            <xsl:otherwise>
+              <xsl:apply-templates select="titre"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:element>
       </xsl:if>
       <xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>

@@ -293,6 +293,16 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<sup><a href="#an2" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[ii]</a></sup>' not in ret
         assert '<sup><a href="#an3" id="" class="norenvoi hint--bottom hint--no-animate" data-hint="">[**]</a></sup>' not in ret
 
+    def test_article_titles_css_class(self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1055651ar.xml')
+        # A normal title should not have any class.
+        assert '<h2>La synthèse hoguettienne</h2>' in ret
+        # A special character title should have the 'special' class.
+        assert '<h2 class="special">*</h2>' in ret
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1055648ar.xml')
+        # An empty title should have the 'special' and 'empty' classes and should be empty.
+        assert '<h2 class="special empty"></h2>' in ret
+
 
 class TestGoogleScholarSubscribersView:
 
