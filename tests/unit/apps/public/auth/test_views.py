@@ -1,6 +1,7 @@
 import pytest
 from unittest import mock
 from django.urls import reverse
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.test import RequestFactory
 from base.test.factories import UserFactory
@@ -8,7 +9,12 @@ from base.test.factories import get_authenticated_request
 from erudit.test.factories import JournalFactory
 from core.authorization.test.factories import AuthorizationFactory
 from core.authorization.defaults import AuthorizationConfig as AC
-from apps.public.auth.views import UserLoginLandingRedirectView
+from apps.public.auth.views import (
+    UserPersonalDataUpdateView,
+    UserParametersUpdateView,
+    UserLoginLandingRedirectView,
+    UserPasswordChangeView,
+)
 
 
 @pytest.fixture()
@@ -51,5 +57,24 @@ class TestUserLoginLandingRedirectView:
         test_view.request = request
         assert test_view.get_redirect_url() == reverse('userspace:dashboard')
 
-    def test_login_redirects_organisation_member_to_dashboard(self, test_view):
-        pass
+
+@pytest.mark.django_db
+class TestCanModifyAccountMixin:
+
+    @pytest.mark.parametrize('view', [
+        (UserPersonalDataUpdateView),
+        (UserParametersUpdateView),
+        (UserPasswordChangeView),
+    ])
+    @pytest.mark.parametrize('user', [
+        (UserFactory),
+        (AnonymousUser),
+    ])
+    def test_can_modify_account_does_not_crash(self, user, view):
+        view = view()
+        view.object = mock.MagicMock()
+        view.request = mock.MagicMock()
+        view.request.user = user()
+        context = view.get_context_data()
+        assert context['can_modify_account']
+
