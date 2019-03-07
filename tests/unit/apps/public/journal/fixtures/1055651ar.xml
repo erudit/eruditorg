@@ -1,0 +1,908 @@
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1055651ar" typeart="article" lang="fr" ordseq="5" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1055651ar</idpublic><idpublic scheme="isbnepub">978-2-7606-4010-8</idpublic><pagination>
+            <ppage>61</ppage>
+            <dpage>82</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="etudfr13" lang="fr"><titrerev>Études françaises</titrerev><titrerevabr>etudfr</titrerevabr><idissn>0014-2085</idissn><idissnnum>1492-1405</idissnnum><directeur sexe="feminin"><fonction lang="fr">Directrice</fonction><nompers><prenom>Élisabeth</prenom><nomfamille>Nardout-Lafarge</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Frédéric</prenom><nomfamille>Charbonneau</nomfamille></nompers></redacteurchef></revue><numero id="etudfr04244"><volume>54</volume><nonumero>3</nonumero><pub><annee>2018</annee></pub><pubnum><date typedate="publication">2019-01-18</date></pubnum><grtheme id="th1"><theme>Frontières du témoignage aux <marquage typemarq="petitecap">xvii</marquage><exposant>e</exposant> et <marquage typemarq="petitecap">xviii</marquage><exposant>e</exposant> siècles</theme></grtheme><idisbn13>978-2-7606-4008-5</idisbn13><idisbnnum13>978-2-7606-4009-2</idisbnnum13></numero><editeur><nomorg>Les Presses de l’Université de Montréal</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Les Presses de l’Université de Montréal</nomorg>, 2018</droitsauteur></admin><liminaire><grtitre>
+                <titre>Le <marquage typemarq="italique">Testament </marquage>de Philippe Fortin de La Hoguette entre témoignage sur soi-même et témoignage de l’esprit</titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Louis</prenom><nomfamille>Laliberté-Bouchard</nomfamille></nompers></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>En dépit de son titre, le <marquage typemarq="italique">Testament</marquage> de Philippe Fortin de La Hoguette ne paraît pas testamentaire, surtout comparé à la tradition littéraire, ironique et polémique, incarnée par François Villon. Pour rendre compte d’un tel texte, il faut momentanément abandonner le modèle notarial de la tradition satirique pour se tourner vers l’étymologie : celle du <marquage typemarq="italique">testis</marquage>, qui fait du testateur un témoin, et celle de la <marquage typemarq="italique">testatio mentis</marquage>, qui fait du testament un témoignage de l’esprit. Ce détour permet de constater d’une part l’avantage rhétorique de la posture testamentaire – où l’on ne peut mentir, et où, pour cette raison, le témoignage ne peut être contesté –, et d’autre part la liberté intrinsèque de cette forme d’écriture, dans laquelle le message du testateur devient un bien à part entière.</alinea></resume><resume typeresume="resume" lang="en"><alinea><marquage typemarq="italique">Despite its title, </marquage>Testament<marquage typemarq="italique"> by Philippe Fortin de La Hoguette doesn’t appear testimentary, especially compared with the literary, ironic and polemic tradition characterized by François Villon. To approach such a text, one must momentarily abandon the notarial model of the satiric tradition to delve into the etymology of certain terms: that of </marquage>testis<marquage typemarq="italique">, which makes the witness a testator, and that of </marquage>testatio mentis<marquage typemarq="italique">, which makes the testimony a declaration of the mind. This detour makes it possible to observe, on the one hand, the rhetorical advantage of the testamentary position – where lying is enabled, hence making the testimony uncontestable – and, on the other hand, the intrinsic freedom of this form of writing, where the testator’s message becomes a wholly separate item.</marquage></alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no><alinea>La seconde moitié du dix-septième siècle voit se développer une « mode vigoureuse<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> » du testament didactique, moral, spirituel et politique, dont
+          le plus célèbre est assurément le <marquage typemarq="italique">Testament
+          politique</marquage> (1688) de Richelieu, fruit d’un travail éditorial complexe. Cette
+          tradition littéraire parallèle à celle des testaments facétieux, ironiques, satiriques ou
+          polémiques – parmi lesquels celui de François Villon est le plus illustre, mais pas le
+          plus ancien – naît à la fin du Moyen Âge avec quelques testaments allégoriques
+          sérieux<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>. D’abord publié chez Antoine Vitré en 1648 et
+          imprimé à plus d’une vingtaine d’occasions avant la fin du siècle<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi> après avoir connu un succès immédiat, le <marquage typemarq="italique">Testament ou Conseils d’un bon père à ses enfants</marquage><renvoi id="re1no4" idref="no4" typeref="note">4</renvoi> de Philippe Fortin de La Hoguette a contribué de façon indéniable à donner son
+          élan à cette vogue. Publié à la veille de la Fronde, le <marquage typemarq="italique">Testament</marquage> de La Hoguette a « prépar[é] les esprits à accepter “la prise du
+          pouvoir par Louis <marquage typemarq="petitecap">XIV</marquage>” en 1661<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi> » et l’absolutisme en gestation depuis la régence de Richelieu,
+          puisque l’oeuvre, adressée à l’ensemble de la jeunesse du royaume, encourage l’adhésion
+          aux moeurs communes et aux dogmes, le respect scrupuleux de la mode et une absence de
+          véritable remise en question philosophique susceptible de secouer le conformisme qu’il
+          valorise<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi>. Le <marquage typemarq="italique">Testament</marquage> est divisé en trois parties – comme le suggère le titre complet,
+          soit « les devoirs de l’homme envers Dieu, envers soy-mesme, &amp; envers autruy, qui sont
+          trois choses si relatives au devoir du sujet envers le Prince, qu’il est absolument
+          impossible qu’on puisse estre bon aux offices respectifs de la vie civile, qu’on en soit
+          pareillement un bon sujet » (<marquage typemarq="italique">T</marquage>, 1).</alinea></para><para id="pa2"><no>2</no><alinea>Selon Pierre et Marie-Hélène Servet, ces textes, parmi lesquels celui de La Hoguette occupe l’un des premiers rangs, « prenant au figuré la pratique des legs, se présentent comme une série de réflexions et de conseils moraux ou politiques […] n’ont en définitive de testamentaire que leur titre<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi> ». C’est également l’avis de Gabriel Peignot<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi>, bibliographe du dix-neuvième siècle ayant fait paraître un <marquage typemarq="italique">Choix de Testamens, anciens et modernes, remarquables par leur importance, leur singularité ou leur bizarrerie</marquage>, qui pour cette même raison les exclut de son recueil, quoiqu’il en fournisse une longue bibliographie<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi>. Contrairement à leurs cousins satiriques, humoristiques et polémiques, ces textes seraient en effet trop éloignés du modèle traditionnel et notarial du testament, de ses formules employées avec une régularité désarmante de la fin du Moyen Âge jusqu’à la fin de l’Ancien Régime : </alinea>
+        <bloccitation>
+          <alinea>Le testament est […] une forme, aux composants aussi stables que repérables […].
+            Un cadre initial précise le nom, la date, la qualité du testateur. Le préambule qui suit
+            développe des considérations sur la brièveté de la vie et la nécessité de tester […].
+            Puis, c’est la prière d’invocation comportant signe de croix, recommandation de l’âme à
+            Dieu, au <marquage typemarq="petitecap">xvii</marquage><exposant>e</exposant> siècle
+            appel aux mérites de Jésus-Christ, demande de pardon et d’accès au Paradis pour l’âme
+            pécheresse, appel aux saints intercesseurs. Viennent ensuite les clauses funéraires qui
+            règlent le déroulement des obsèques et de la sépulture, et les demandes de messes. Enfin
+            ce sont les dons, legs pies faits aux pauvres ou à l’Église, et legs civils faits à des
+            particuliers ou à la famille. L’ensemble se conclut par des formules de validation
+            juridique<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Or il nous apparaît problématique d’écarter si rapidement la dimension testamentaire
+          d’oeuvres intitulées « Testaments » par leur auteur, même si elles ne respectent pas
+          scrupuleusement ces quelques étapes qui correspondent à l’acte notarié. Nous souhaitons
+          ainsi faire le pari que ces textes peuvent être éclairés avec profit par la notion de
+          testament, mais qu’ils puisent à des fins différentes dans ce qui définit cet acte : un
+          retour sur la notion même du testament s’impose pour voir comment témoigner et léguer
+          peuvent irriguer l’ensemble des oeuvres testamentaires en prenant pour exemple
+          emblématique le <marquage typemarq="italique">Testament </marquage>de La Hoguette, et non
+          seulement son versant satirique.</alinea></para><para id="pa3"><no>3</no><alinea>Il existe une tradition satirique préexistante à l’oeuvre de François Villon, à laquelle ce dernier a donné une impulsion décisive et qui a été instrumentalisée au fil des siècles afin d’en accentuer la dimension polémique, de telle sorte que sous l’Ancien Régime ont abondé les testaments destinés à discréditer figures et opinions politiques, par exemple lors des guerres de religion, de la Fronde, et de la Révolution française. Ainsi, en mimant la forme de l’acte notarié, on a pu souligner la nature viciée et corrompue de Mazarin<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi>. Faute d’être authentiques – ils n’ont pas été écrits par le testateur lui-même –, ces textes respectent scrupuleusement la forme de l’acte notarié, ce que rendait nécessaire un souci d’efficacité, et surtout parce que la nature transgressive de cette tradition satirique et polémique est dans son principe opposée à l’aspect solennel qui accompagne dans la réalité la rédaction d’un testament. La tradition spirituelle, morale et philosophique de l’écriture testamentaire a coexisté avec la tradition satirique, même si la première a été éclipsée par l’intérêt des chercheurs envers l’oeuvre de François Villon, sans lui être coextensive.</alinea></para><para id="pa4"><no>4</no><alinea>Il est nécessaire, cependant, pour montrer comment cette tradition morale, politique et spirituelle partage un héritage commun avec la tradition satirique tout en s’en distinguant fondamentalement par ses visées, d’entreprendre notre enquête par des considérations sur le testament, plus précisément, sur le mot lui-même, tel qu’on l’a réfléchi au dix-septième siècle : « Tesmoignage qu’on laisse par escrit de sa derniere volonté », selon la définition du <marquage typemarq="italique">Dictionnaire de l’Académie française</marquage> de 1694, « acte solemnel &amp; authentique, par lequel un homme témoigne la volonté qu’il aura en mourant pour la disposition de son bien &amp; de sa sepulture » selon le <marquage typemarq="italique">Dictionnaire</marquage> de Furetière (1690). Au coeur du testament, se trouve donc d’abord et avant tout un témoignage, fait par le testateur, véritable <marquage typemarq="italique">testis</marquage> (témoin)<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi>, aspect plus fondamental que les étapes habituelles du testament notarié. Par vocation, le testament offre à son auteur un moyen de témoigner, et c’est en premier lieu cette caractéristique, alliée à la forme testamentaire qui ne s’est jamais définitivement figée<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi>, qui a permis l’introduction de la littérature dans cet acte spirituel et juridique. En effet, avant de n’être qu’un acte juridique privé dédié à la gestion du patrimoine, le testament a été le lieu d’un « témoignage personnel et chaleureux<renvoi id="re1no14" idref="no14" typeref="note">14</renvoi> », un « moyen d’expression de l’individu, le témoin de sa prise de conscience<renvoi id="re1no15" idref="no15" typeref="note">15</renvoi> », lui accordant entre autres une dimension biographique qui nous est désormais étrangère<renvoi id="re1no16" idref="no16" typeref="note">16</renvoi>.</alinea></para><para id="pa5"><no>5</no><alinea>L’écriture littéraire du testament, comme le roman ou les Mémoires, n’a pas une forme fixe, un art poétique venant en définir les règles, en rendre aisément reconnaissable l’appartenance de tel ou tel texte, au risque de voir se constituer des exclusions problématiques. Il est ainsi plus profitable de chercher à en dégager l’esprit, d’en discerner les tensions plutôt que d’établir un genre ou interpréter une essence. Ainsi, nous proposons dans un premier temps d’étudier le testament dans le contexte de la littérature de témoignage, celle du témoignage de soi-même, ce qui le rapproche de la figure du témoin ; puis, dans un deuxième temps, d’étudier le testament en tant que témoignage de l’esprit, dans un sens plus abstrait que certains testaments authentiques ont investi sous l’Ancien Régime. Cela nous permettra de voir en quoi le <marquage typemarq="italique">Testament</marquage> de La Hoguette fait la synthèse de cet héritage testamentaire, et de saisir comment, en s’appuyant sur la posture du testateur, notre auteur a fait en sorte que la forme de l’oeuvre a pu devenir l’incarnation de son témoignage, le legs à part entière.</alinea></para></section1><section1 id="s1n2"><no>2</no><titre>Le témoignage de soi comme problème, le testament comme solution partielle</titre><para id="pa6"><no>6</no><alinea>Aborder le testament en suivant la perspective étymologique du témoignage nous oblige à traiter d’abord de cette notion dans sa dimension juridique et problématique – un témoignage est toujours partiel, comme s’il n’était pas suffisant en lui-même pour établir sa vérité – pour ensuite présenter un contexte, un paysage testimonial dans lequel nous souhaitons envisager cette forme d’écriture. Cela nous permettra de dégager la spécificité du testament, son intérêt et la raison pour laquelle on a pu s’en saisir pour faire davantage qu’organiser sa succession. De fait, la position d’autorité qu’il offre au testateur le situe d’emblée dans la vérité, puisque sa parole est prononcée devant Dieu, et au seuil de la mort.</alinea></para><para id="pa7"><no>7</no><alinea>Dans un article intitulé « Le témoignage, du judiciaire au littéraire<renvoi id="re1no17" idref="no17" typeref="note">17</renvoi> », Pierre de Gaulmyn se livre à une réflexion théorique qui met en lumière la dimension intrinsèquement juridique de tout témoignage : </alinea>
+        <bloccitation>
+          <alinea>C’est l’appareil du tribunal qui m’a intéressé dans l’application à la littérature
+            de la notion de témoignage. L’écrivain témoin met en scène, soit avec évidence, soit
+            implicitement, une salle d’audience. Il y a une cause qui le dépasse, un enjeu qui
+            concerne le corps social. Il y a un tribunal qui juge selon des critères de bien et de
+            mal. Il y a un public, qu’il a fallu faire venir, qu’il faut retenir. Il lui arrive
+            aussi de jouer le rôle de l’accusateur ou du défenseur (ou même de l’avocat revêtu de
+            rhétorique qui le seconde). Mais s’il veut être, avant tout, témoin, il devra s’exposer
+            isolé à la barre, faire converger sur lui les regards et les désirs de juger, et se
+            montrer au croisement de son intimité et de l’événement<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Dans cet ordre d’idées, le témoignage est « par nature, fragile, et d’emploi
+          dangereux<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi> », car le témoin se trouve nécessairement en
+          position de déséquilibre : il doit être impliqué dans ce dont il traite, sinon il n’y a
+          aucun intérêt à écouter son témoignage, mais pas trop, car sa position risque alors d’être
+          biaisée. Puisque le témoignage repose sur un témoin, il est toujours partiel : le témoin
+          et son témoignage ne sont qu’une étape dans la recherche de la vérité que le procès
+          sous-entendu prend pour objet ; il s’agit toujours d’un témoignage <marquage typemarq="italique">de soi</marquage><renvoi id="re1no20" idref="no20" typeref="note">20</renvoi>, où le témoin est
+          mis à l’épreuve. Parce que le témoignage est intrinsèquement lié au témoin, il est par
+          nature suspect. La crédibilité qui permet d’attester son contenu lui fait défaut : il
+          faudrait d’autres témoins. D’où le principe du droit romain cité dans l’article :
+          « <marquage typemarq="italique">Testis unus, testis nullus</marquage><renvoi id="re1no21" idref="no21" typeref="note">21</renvoi> », c’est-à-dire qu’un témoin ne compte pas s’il est seul, car
+          rien ne valide sa déposition. En dernière analyse, le problème est celui du fardeau de la
+          preuve, ce qui cautionne le témoignage, lui donne son autorité.</alinea></para><para id="pa8"><no>8</no><alinea>Ces considérations s’appliquent spontanément à la littérature testimoniale de l’Ancien
+          Régime, puisque « porter témoignage hors du cadre judiciaire ne pouvait avoir […]
+          l’évidence que ce geste a acquise aujourd’hui<renvoi id="re1no22" idref="no22" typeref="note">22</renvoi> ». Les
+          exemples abondent pour la période qui nous intéresse : Pierre de Gaulmyn mentionne celui
+          des <marquage typemarq="italique">Confessions</marquage> de Rousseau<renvoi id="re1no23" idref="no23" typeref="note">23</renvoi>, où le tribunal est explicitement convoqué au début du premier livre : « Que
+          la trompette du jugement dernier sonne quand elle voudra ; je viendrai ce livre à la main
+          me présenter devant le souverain juge<renvoi id="re1no24" idref="no24" typeref="note">24</renvoi> », mais on peut
+          penser aussi à <marquage typemarq="italique">Rousseau juge de Jean-Jacques</marquage>, où
+          la dimension judiciaire est convoquée dès le titre. Avant même cette démarche
+          autobiographique, les Mémoires ont eux aussi fortement investi cette dimension judiciaire,
+          comme les travaux fondateurs de Marc Fumaroli l’ont démontré, soulignant à quel point ils
+          se rapprochent des mémoires en tant que « dossier préparé devant le tribunal de la
+          postérité<renvoi id="re1no25" idref="no25" typeref="note">25</renvoi> » pour réparer l’injustice, faire triompher la
+          vérité des grandes actions d’une vie. De même, pour donner un autre exemple, Simon Icard
+          et Pascale Thouvenin ont récemment mis en valeur la dimension juridique des Mémoires des
+          soeurs de l’abbaye de Port-Royal que la dimension spirituelle ou augustinienne tend à nous
+          faire oublier<renvoi id="re1no26" idref="no26" typeref="note">26</renvoi>. Quelques siècles plus tôt, dans les
+          débuts de la naissante République des Lettres, François Pétrarque fait son propre procès,
+          dans un dialogue entrepris avec saint Augustin devant nul autre que la Vérité, « <marquage typemarq="italique">illa de singulis in silentio iudicante</marquage><renvoi id="re1no27" idref="no27" typeref="note">27</renvoi> », celle qui juge en silence, ce procès où François cherche à
+          élucider ses conflits intérieurs, à en livrer un témoignage véridique sans se tromper
+          lui-même ou son interlocuteur. Cependant, si Pétrarque prend à témoin la Vérité à
+          plusieurs occasions – « <marquage typemarq="italique">Hec michi, coram qua loquimur,
+          testis est</marquage><renvoi id="re1no28" idref="no28" typeref="note">28</renvoi> » –, elle n’en reste pas moins
+          silencieuse. Son témoignage demeure problématique, comme celui des mémorialistes trop
+          engagés dans leur récit, et comme celui de Rousseau, qui pour témoigner de son moi exige
+          de toujours s’en rapprocher, suivant le mot de Perse, « <marquage typemarq="italique">intus et in cute</marquage><renvoi id="re1no29" idref="no29" typeref="note">29</renvoi> », sans jamais en venir à
+          bout. Le témoignage, par définition, n’atteint jamais complètement son but<renvoi id="re1no30" idref="no30" typeref="note">30</renvoi>.</alinea></para><para id="pa9"><no>9</no><alinea>Dans ce contexte testimonial problématique, le testament offre à sa manière une solution partielle car il possède une dimension juridique en ce qu’il vise à mettre de l’ordre – dans ses affaires, ses biens, sa vie – et une dimension spirituelle plus évidente que celle des exemples précédemment évoqués : on témoigne devant Dieu pour le salut de son âme. Il est alors inutile de mentir parce qu’on ne dupe pas Dieu – on ne croit d’ailleurs plus, sous l’Ancien Régime, qu’une belle mort sauve une mauvaise vie, même si l’on apprécie son exemplarité<renvoi id="re1no31" idref="no31" typeref="note">31</renvoi>. Le testateur médite sur sa vie, la cause pour laquelle il veut témoigner et dans laquelle il s’est investi, mais il n’a en principe plus rien à gagner dans le monde sublunaire<renvoi id="re1no32" idref="no32" typeref="note">32</renvoi>. Le testament est une solution partielle parce qu’il faut se garder d’avoir la naïveté de penser que tous les testateurs se plient honnêtement à l’exercice. Ce n’est pas sans raison que le père Garasse a trouvé un matériau fécond dans les testaments pour dénoncer le libertinage, l’athéisme et l’impiété<renvoi id="re1no33" idref="no33" typeref="note">33</renvoi>.</alinea></para><para id="pa10"><no>10</no><alinea>L’heure de la mort permet de prendre la mesure de soi-même au moment où l’on s’apprête à quitter le monde et ses luttes, ses déséquilibres : </alinea>
+        <bloccitation>
+          <alinea>Depuis le <marquage typemarq="petitecap">xii</marquage><exposant>e</exposant> siècle […] [où le testament a été réintroduit par
+            l’Église dans l’occident médiéval,] la solitude de l’homme devant la mort est l’espace
+            où celui-ci prend conscience de son individualité, et les clauses pieuses du testament
+            sont les moyens de sauver cette individualité de la destruction temporelle et de
+            l’étendre au-delà<renvoi id="re1no34" idref="no34" typeref="note">34</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Parce que le testament inclut une confession, la reconnaissance des torts, et qu’il
+          est un moyen pour mettre de l’ordre dans ses propres affaires, il incite à la méditation
+          sur sa propre vie<renvoi id="re1no35" idref="no35" typeref="note">35</renvoi>. En ce sens, le testament devient une
+          biographie, comme le met bien en valeur Philippe Ariès<renvoi id="re1no36" idref="no36" typeref="note">36</renvoi>,
+          car il exprime « la conscience de soi, la responsabilité de sa destinée, le droit et le
+          devoir de disposer de soi, de son âme, de son corps, de ses biens, l’importance donnée aux
+          volontés dernières<renvoi id="re1no37" idref="no37" typeref="note">37</renvoi> ». Les legs eux-mêmes, les
+          formulations et les réflexions qui les accompagnent révèlent le testateur : ils en
+          dressent le portrait. Dans une de ses lettres, Pline le Jeune s’oppose à l’idée que le
+          testament soit le miroir des moeurs et de la personnalité d’un être, soulignant ainsi à
+          quel point cette idée était un lieu commun, même dans l’Antiquité<renvoi id="re1no38" idref="no38" typeref="note">38</renvoi>. Montaigne la reprend en affirmant qu’un testament qui poursuit des querelles
+          mondaines est le signe de la mauvaise nature du testateur, concluant qu’en ce qui le
+          concerne : « Je me garderay, si je puis, que ma mort ne die chose, que ma vie n’ayt
+          premierement dit<renvoi id="re1no39" idref="no39" typeref="note">39</renvoi>. » Enfin Gabriel Peignot, dans son
+          <marquage typemarq="italique">Choix de Testamens</marquage>, inclut celui de Pétrarque,
+          non parce qu’il s’agit d’un testament exceptionnel, mais parce que ses legs montrent la
+          douceur de son tempérament. Il laisse en effet deux cents florins à Boccace, pour qu’il
+          puisse « [s’]acheter une robe d’hiver, convenable à ses études et à ses veilles<renvoi id="re1no40" idref="no40" typeref="note">40</renvoi> ». Le testament devient littéralement le miroir de la vie du
+          testateur lorsque ce dernier décide d’en livrer le récit, possibilité dont Michel de
+          l’Hospital s’est saisi, narrant sa vie sur plusieurs pages avant d’en venir aux
+          legs<renvoi id="re1no41" idref="no41" typeref="note">41</renvoi>, ce qui a encouragé Gabriel Peignot, dans son
+          <marquage typemarq="italique">Choix de testamens</marquage>, à couper cette partie sous
+          prétexte, comble de l’ironie, qu’elle « n’offre rien de testamentaire<renvoi id="re1no42" idref="no42" typeref="note">42</renvoi> ».</alinea></para><para id="pa11"><no>11</no><alinea>La solennité de l’enjeu – témoigner de soi, devant Dieu, à la veille de sa mort ou en préparation à celle-ci – a encouragé certains testateurs à porter une attention particulière à la langue de manière à rendre hommage à ce moment, « le dernier de tous, celui qui par conséquent exige le plus de soin et d’attention<renvoi id="re1no43" idref="no43" typeref="note">43</renvoi> » : ce sont les « beaux testaments » de Pierre Chaunu (comme celui de Loys de Herberay seigneur des Essarts<renvoi id="re1no44" idref="no44" typeref="note">44</renvoi>, dont on ne peut qu’admirer les périodes amples et majestueuses), qui oscillent entre un style vif et élevé, reflet de l’autorité et du pouvoir qu’a alors le testateur<renvoi id="re1no45" idref="no45" typeref="note">45</renvoi>, et un style humble et naïf, puisqu’il s’agit de parler devant Dieu<renvoi id="re1no46" idref="no46" typeref="note">46</renvoi>. Regard rétrospectif sur la vie, mais afin de la conclure, le testament est un témoignage de soi, libéré de la dimension agonistique du procès, mais conservant son poids argumentatif et juridique<renvoi id="re1no47" idref="no47" typeref="note">47</renvoi>. Donner un témoignage personnel dans son testament, y inclure une réflexion ou un récit sur sa vie, c’est en donner un récit réconcilié au plus près de la vérité, au contraire des Mémoires (où il s’agit toujours, ou au moins en partie, de faire sentir les injustices), et des interrogations sans conclusion définitive de Pétrarque, Montaigne et Rousseau.</alinea></para></section1><section1 id="s1n3"><no>3</no><titre>Le testament comme témoignage de l’esprit</titre><para id="pa12"><no>12</no><alinea>Nous avons jusqu’ici envisagé le témoignage du testament en ce qu’il renvoie au témoin qu’est le testateur, à ce qui dépend de lui : faire le point sur sa vie, solennellement, dans le contexte de ses dernières volontés. C’était le point de départ que nous ont offert les dictionnaires cités en introduction. Il nous reste désormais à voir comment la notion de témoignage jette la lumière sur certaines pratiques spirituelles et intellectuelles du legs, l’héritage transmis par le testament. C’est ce qui va nous permettre de décloisonner l’écriture testamentaire, tant par la prise en compte de testaments authentiques que d’oeuvres que l’on devra désormais qualifier de testamentaires.</alinea></para><para id="pa13"><no>13</no><alinea>Antoine Furetière nous offre une deuxième manière déjà ancienne au dix-septième siècle pour
+          aborder la dimension testimoniale du testament, qui lie le témoignage au legs, ou plutôt à
+          sa production. Il nous dit en effet que « [c]e mot [testament] vient du Latin <marquage typemarq="italique">testamentum</marquage>, que les Jurisconsultes Latins disent venir de
+          <marquage typemarq="italique">testatio mentis</marquage> », c’est-à-dire témoignage ou
+          déposition de l’esprit, du coeur ou de la conscience. Cette définition remonte au moins
+          jusqu’à Justinien qui la fait sienne dans ses <marquage typemarq="italique">Institutes :</marquage> « <marquage typemarq="italique">Testamentum ex eo appellatur,
+          quod testatio mentis est</marquage><renvoi id="re1no48" idref="no48" typeref="note">48</renvoi>. » Si l’on savait
+          depuis les travaux de Lorenzo Valla que cette étymologie était fausse<renvoi id="re1no49" idref="no49" typeref="note">49</renvoi>, elle a cependant eu une grande influence sur la conception du
+          testament, puisqu’elle nous mène précisément à une oeuvre comme celle de La Hoguette. Il
+          nous semble en effet que cette définition du testament informe le dernier sens qu’en donne
+          Furetière dans sa notice : « <marquage typemarq="petitecap">testament</marquage>, se dit
+          aussi de quelque parole &amp; instructions qu’un pere donne à ses enfants en mourant,
+          &amp; des choses qu’il leur recommende. Le Testament du bon pere à ses enfants du Sr.
+          Fortin de la Hoguette. » Ces « instructions » qu’un père lègue sont précisément son
+          témoignage de l’esprit, la <marquage typemarq="italique">testatio mentis</marquage> qui a
+          influencé le testament depuis le sixième siècle de Justinien et qui a eu force de loi dans
+          la France médiévale tant dans le droit écrit du Sud que le droit coutumier du Nord<renvoi id="re1no50" idref="no50" typeref="note">50</renvoi>. Une réflexion peut se constituer en un bien à transmettre tout
+          aussi valable qu’une somme d’argent, un meuble, une propriété. Cela confère au testament
+          une dimension intellectuelle et plus abstraite, qui s’ajoute à ses sens juridique
+          – transmettre des biens, ses dettes, prévoir sa sépulture – et spirituel – l’exercice de
+          préparation à la mort, le dialogue avec Dieu.</alinea></para><para id="pa14"><no>14</no><alinea>À nouveau, il est possible de vérifier ces intuitions par des testaments authentiques qui se sont saisis de cette forme abstraite, philosophique et intériorisée du legs. Le testament devient tout autant un exercice spirituel qu’une oeuvre d’édification. Ainsi, Philippe Mélanchton, le célèbre humaniste luthérien, ne livre aucune indication sur ses biens matériels et sa sépulture, mais plutôt une réflexion sur la fonction du testament, soit transmettre ses principes ou opinions religieuses à ses enfants et amis :</alinea>
+        <bloccitation>
+          <alinea><marquage typemarq="italique">Apparet, initio praecipue condita esse testamenta,
+            propter hanc causam, ut patres relinquerent liberis certum testimonium suae de
+            religione, quam volebant gravi auctoritate quasi obsignatam propagari ad posteros.
+            </marquage></alinea>
+          <alinea><marquage typemarq="italique">Item, ut liberos ipsos ad eamdem sententiam
+            obligarent, sicut exempla ostendunt in testamento Jacob et Davidis. </marquage></alinea>
+          <alinea><marquage typemarq="italique">Et quia testamenta continebant explicatas, certas,
+            immutabilesque sententias de doctrina caelesti, rerum magnitudo auxit testamentorum
+            auctoritatem. </marquage></alinea>
+          <alinea><marquage typemarq="italique">Quare et ego meorum liberorum et quorumdam amicorum
+            admonendorum causa, volui initio in testamento, et meam confessionem recitare, et
+            liberis meis praecipere pro officio patris, ut in eadem sententia constanter
+            maneant</marquage><renvoi id="re1no51" idref="no51" typeref="note">51</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Mélanchton livre son « <marquage typemarq="italique">testimonium</marquage> […]
+          <marquage typemarq="italique">de religione</marquage> » dans son testament afin que par
+          l’autorité qui lui revient dans cet acte, il puisse non seulement transmettre sa pensée
+          clairement et sans ambiguïté, mais aussi dans l’espoir de régler les conflits religieux de
+          son temps. Son témoignage revêt une dimension publique dans la mesure où il est
+          susceptible de mettre fin aux discordes (« <marquage typemarq="italique">discordias</marquage><renvoi id="re1no52" idref="no52" typeref="note">52</renvoi> ») : « <marquage typemarq="italique">Ergo hanc lucem, quamdiu possumus, conservamus</marquage><renvoi id="re1no53" idref="no53" typeref="note">53</renvoi>. » Le testament devient une lumière, un phare qui prévient la
+          dérive et les naufrages et grâce auquel les descendants pourront se repérer. Les pratiques
+          variées du testament en Occident, depuis le douzième siècle, d’abord religieuses, puis
+          laïques (la dimension concrètement juridique de l’acte) ont ainsi rendu possible cette
+          pratique philosophique et autobiographique. Elle est particulièrement importante au
+          seizième siècle et courue par un public avide de vies et de réflexions d’hommes
+          exemplaires, comme le souligne Giuliano Ferretti<renvoi id="re1no54" idref="no54" typeref="note">54</renvoi>.</alinea></para><para id="pa15"><no>15</no><alinea>L’érudit Pierre Pithou livre lui aussi une <marquage typemarq="italique">testatio</marquage> <marquage typemarq="italique">mentis</marquage> dans son testament – l’expression est citée littéralement –, mais dans une forme différente de celle de Mélanchton. Il ne s’agit plus pour lui de s’adresser directement à ses enfants – même s’il souhaite les édifier, leur consacrer cet exemple de vertu dans la période troublée des guerres de religion –, mais de faire, dans une suite d’articles, le portrait de sa personnalité et des principes moraux, politiques et religieux qui l’ont guidé : </alinea>
+        <bloccitation>
+          <alinea><marquage typemarq="petitecap">i</marquage><marquage typemarq="italique">. Moribus
+            valde corruptis ac pravis, saeculo infelicissino, quantum in me fuit, fidem
+            servavi.</marquage></alinea>
+          <alinea><marquage typemarq="petitecap">ii</marquage><marquage typemarq="italique">. Amicos
+            ex animo amavi et colui. Inimicos benefactis vincere aut contemnere, quam ulcisci,
+            malui. </marquage>[…]</alinea>
+          <alinea><marquage typemarq="petitecap">iv</marquage><marquage typemarq="italique">. Vitia
+            sic odi in meis, ut virtutes in externis vel hostibus reveratus sim.</marquage></alinea>
+          <alinea><marquage typemarq="petitecap">xii</marquage><marquage typemarq="italique">.
+            Privatus ultro publico studui : ei nihil praetuli, atque in commune consulere potius
+            tutiusque semper existimavi. </marquage>[…]</alinea>
+          <alinea><marquage typemarq="petitecap">xxiv</marquage><marquage typemarq="italique">. De
+            patrimonio ac bonis meis, quantulacumque post mortem meam erunt, legibus potius quam
+            mihi judicum permisi, permittoque. </marquage>[…] </alinea>
+          <alinea><marquage typemarq="petitecap">xxvi</marquage><marquage typemarq="italique">. Si
+            hoc apud posteros testatio mentis meae quam ab illis sic candide accipi velim, ut
+            simpliciter et ingenue ex animi mei sententia a me prolata est</marquage><renvoi id="re1no55" idref="no55" typeref="note">55</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Remarquons qu’il prend spécifiquement la peine, au vingt-quatrième article de son
+          testament, de régler sa succession matérielle en s’en désintéressant. Si s’en remettre aux
+          lois est signe de sagesse en matière successorale, l’exemple prouve que le testament, à
+          l’esprit des hommes de lettres et des érudits de l’Ancien Régime, exprimait bien plus que
+          ces soucis matériels<renvoi id="re1no56" idref="no56" typeref="note">56</renvoi>. Inversement, parce qu’ils ne sont
+          pas authentiques et sincères, faute d’avoir été écrits par ceux auxquels ils sont
+          attribués, les testaments satiriques de l’Ancien Régime restent au plus près du modèle
+          notarial et de la succession des objets légués, ce qui empêche la définition d’un genre
+          testamentaire à proprement parler, les textes étant trop variés, tant par leur ton que par
+          leurs caractéristiques formelles. S’il est commode de parler d’un genre testamentaire, il
+          faut donc entendre l’expression dans un sens large et non restrictif, au même titre que le
+          genre du roman.</alinea></para><para id="pa16"><no>16</no><alinea>Tandis qu’au début de cet article il semblait difficile d’inclure dans un quelconque genre du testament des textes qui n’imitent pas la forme testamentaire la plus régulière, c’est-à-dire la forme notariée, la conception du testament comme <marquage typemarq="italique">testatio mentis</marquage> crée un renversement : il semble que tout témoignage sur soi, <marquage typemarq="italique">a fortiori</marquage> ceux laissés à la descendance et à la postérité, est désormais embrassé par l’écriture testamentaire. L’appartenance générique qui semblait exclusive au respect des formes notariales éclate pour inclure des textes que l’on rattache à d’autres genres. Celui des Mémoires, en premier lieu, dans la mesure où il s’agit d’un « exercice, comme une pratique de soi […] [où la] rédaction […] sert moins à embellir un passé qu’à agir sur un présent et transformer un avenir<renvoi id="re1no57" idref="no57" typeref="note">57</renvoi> », comme l’écrit Frédéric Briot. Ils sont écrits, comme le testament, dans une visée performative. C’est en ce sens que les Mémoires sont testamentaires : non pas au regard de l’injustice à corriger, mais parce que la somme de l’expérience personnelle qu’ils contiennent édifie, donne également un flambeau à la postérité et la descendance. Le récit de l’existence est un legs, c’est-à-dire le modèle auquel devront se conformer les destinataires de l’oeuvre. Pensons aux Mémoires d’Agrippa d’Aubigné, éloquemment intitulés <marquage typemarq="italique">Sa Vie à ses enfants</marquage> : </alinea>
+        <bloccitation>
+          <alinea>Mes Enfans, […] voicy le discours de ma vie, en la privauté parternelle, qui ne
+            m’a point contrainct de cacher ce qui en l’<marquage typemarq="italique">Histoire
+            Universelle</marquage> eust esté de mauvais goust. Donc ne pouvant rougir envers vous ny
+            de ma gloire, ni de mes fautes, je vous conte l’un et l’autre comme si je vous
+            entretenois encores sur mes genoux. Je desire que mes heureuses et honorables actions
+            vous donnent sans envie l’emulation pourveu que vous vous attachiés plus expres à mes
+            fautes, que je vous descouvre toutes nues, comme le point qui vous porte le plus de
+            butin<renvoi id="re1no58" idref="no58" typeref="note">58</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Ou encore au <marquage typemarq="italique">Discours du Comte de Bussy-Rabutin à ses
+          enfans, sur le bon usage des adversitez &amp; les divers événements de sa vie</marquage>,
+          dans lequel il s’intègre à une filiation d’hommes illustres injustement déchus de toutes
+          les époques pour en tirer des leçons de piété :</alinea>
+        <bloccitation>
+          <alinea>Quand je fais reflection mes Enfans aux traverses de ma vie, que je considere les
+            marques d’honneur, les grands titres, et les grands établissements refusés a ma
+            naissance, a mes longs services, et a mes grands emplois, je rends graces a Dieu d’avoir
+            emploié la mauvaise fortune pour m’attirer à Luy prevoyant que je me serois perdu dans
+            la bonne. Je ne veux pas dire par la que tous les gens heureux soient reprouvés, il ny a
+            jamais eu une bonne fortune si longue, et si brillante que celle du Roy, cependant il ny
+            a jamais eu une plus solide vertu que la sienne. Je connois encor des gens a la Cour qui
+            vivent dans les prosperités comme des anges, mais j’en connois fort peu, et ma fragilité
+            me fait croire que je n’aurois pas eté du petit nombre.</alinea>
+          <alinea>Outre le profit que je pretends tirer de mes disgraces mes Enfans, je veux aussy
+            vous en faire profiter en vous faisant comprendre le peu d’etat que lon doit faire des
+            belles apparences de la fortune, et de la fortune memes, non seulement par ma propre
+            experience, mais encor par celle d’une partie des gens de qualité malheureux des siecles
+            passés jusqu’à moy<renvoi id="re1no59" idref="no59" typeref="note">59</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>L’éditeur du discours, Daniel-Henri Vincent, le qualifie avec justesse de
+          « testament moral<renvoi id="re1no60" idref="no60" typeref="note">60</renvoi> ». Méditation sur sa vie qu’il
+          transmet pour édifier, témoignage de sa « fragilité » et exemple de vertu et de rectitude
+          dans les malheurs, le <marquage typemarq="italique">Discours</marquage> a tout de la
+          <marquage typemarq="italique">testatio</marquage> <marquage typemarq="italique">mentis</marquage>. Ainsi, livrer un témoignage philosophique, religieux, moral et
+          politique est également l’un des fondements du testament, un acte qui permet d’offrir un
+          point de repère, une lumière au-dessus de la mêlée pour se prononcer sur un conflit sans
+          l’envenimer.</alinea></para></section1><section1 id="s1n4"><no>4</no><titre>La synthèse hoguettienne</titre><para id="pa17"><no>17</no><alinea>À la lumière de ce qui précède, le <marquage typemarq="italique">Testament</marquage> de La Hoguette peut être considéré comme la synthèse, la rencontre du testament en tant que témoignage de soi et de la <marquage typemarq="italique">testatio mentis</marquage>. La portée de l’oeuvre est définie par cet esprit testamentaire et cette conception philosophique du legs comme témoignage de l’esprit :</alinea>
+        <bloccitation>
+          <alinea>Mais d’autant qu’en l’aage de soixante &amp; dix ans que je cours presentement,
+            toutes les heures, tous les jours &amp; toutes les années me sont climateriques, je me
+            suis proposé au defaut de ma presence, si elle vous manque, de vous laisser quelques
+            preceptes pour la conduite de vostre vie, en forme de testament, afin que vous les
+            receviez avec plus de respect, &amp; que ce vous soit après nostre separation, un
+            modelle vivant sur lequel mon dessein estoit de vous façonner. Je me remets aux loix du
+            païs (que nous ne pouvons violer sans presumer d’estre plus sages qu’elles) à faire
+            entre vous le partage de mes autres biens. Ceux-cy que je voudrois bien leguer plus
+            utilement que je ne m’en suis servy, je vous les laisse tous à un chacun de vous ;
+            possedez-les mieux que moi, mes enfans, j’en ay eu la theorie sans en faire
+            l’application. Je les ay possedez comme un avare son tresor, sans les employer à mon
+            usage, parce que mes defauts ont prevenu ma connoissance, &amp; que je me suis veu sous
+            la tyrannie de mes vices, par la force de la coustume, avant que d’avoir pû descouvrir
+            leur laideur.</alinea>
+          <source><marquage typemarq="italique">T</marquage>, 2-3</source>
+        </bloccitation>
+        <alinea>À soixante-dix ans, La Hoguette est un vieillard pour lequel le temps est
+          « climatérique », c’est-à-dire critique : l’imminence de la mort est de plus en plus
+          certaine. Comme pour Mélanchton et Pithou, il ne s’agit pas ici d’une fiction
+          testamentaire, même si la <marquage typemarq="italique">testatio mentis</marquage> va
+          prendre, dans cette oeuvre de plusieurs centaines de pages, les dimensions d’un traité
+          d’éducation. Le <marquage typemarq="italique">Testament</marquage>, plus que le réceptacle
+          de la déposition, en est l’incarnation : « un modelle vivant ». Les conseils qu’il
+          contient sont les biens véritables, face à ces « autres biens » matériels auxquels, comme
+          Pithou et comme Montaigne le pensent également<renvoi id="re1no61" idref="no61" typeref="note">61</renvoi>, mieux
+          vaut ne pas consacrer un temps précieux. Ce faisant, rejoignant le témoignage de soi,
+          La Hoguette confesse par humilité ne pas avoir profité des conseils qu’il s’apprête à
+          donner, et qu’il a dû acquérir par sa propre expérience. Il investit l’autorité que la
+          position du testateur permet à chacun d’employer afin que ces conseils soient reçus avec
+          « respect ».</alinea></para><para id="pa18"><no>18</no><alinea>On voit déjà comment la notion de testament, prise dans son sens de témoignage, éclaire celui de notre auteur. En tant que témoin, tel que le modèle de Pierre de Gaulmyn le propose, La Hoguette s’avance sans oripeaux à la barre, n’ayant rien de plus que l’expérience vécue qui fonde sa position, ainsi qu’il l’explique dans la lettre dédicatoire adressée à Monseigneur de Bellièvre<renvoi id="re1no62" idref="no62" typeref="note">62</renvoi> :</alinea>
+        <bloccitation>
+          <alinea>J’avois dressé en faveur de mes enfans quelques Conseils fideles que j’avois assez
+            legerement donnez au public, sans qu’il y eust apparence que l’ouvrage d’une personne
+            privée, retirée dans sa maison aux champs, sans livres, sans employ, &amp; sans autre
+            estude que celuy d’un long usage du monde, pûst avoir une meilleure fortune que celle
+            d’un enfant exposé.</alinea>
+          <source><marquage typemarq="italique">T</marquage>, s.p.</source>
+        </bloccitation>
+        <alinea>Mais comme nous l’avons également constaté, son témoignage n’est pas agonistique.
+          C’est un témoignage réconcilié qui cherche à encourager l’harmonie, tout comme celui de
+          Mélanchton souhaitait mettre fin à la discorde. Devant un monde troublé où il n’est pas
+          aisé de bien mener son existence<renvoi id="re1no63" idref="no63" typeref="note">63</renvoi>, La Hoguette propose un
+          chemin et une lumière pour guider ses lecteurs : « Considerez-moy donc meshuy comme un
+          aveugle qui vous allume un flambeau, duquel il ne se peut esclairer, ou plustost comme une
+          personne qui marche devant sa lumiere &amp; qui tient son flambeau derriere luy, si
+          flambeaux se peuvent appeler ces petits enseignements que je vous laisse » (<marquage typemarq="italique">T</marquage>, 3). C’est ainsi que le testament s’offre comme l’art
+          d’écrire ou la forme la plus apte à livrer un tel enseignement, une méthode pour bien
+          mener son existence, car il concilie le monde – régler ses affaires avant de le quitter –
+          et la spiritualité – agir en conformité avec la foi, dans la peinture d’une
+          « autobiographie fragmentée<renvoi id="re1no64" idref="no64" typeref="note">64</renvoi> » racontée par les
+          anecdotes, les aveux et les différentes confessions au fil des articles du <marquage typemarq="italique">Testament</marquage>. Ainsi La Hoguette remercie-t-il Dieu de lui
+          avoir permis de « subsister honnêtement » (<marquage typemarq="italique">T</marquage>, 219) toute sa vie, confesse deux duels dans le chapitre où il cherche à les
+          condamner (voir <marquage typemarq="italique">T</marquage>, 236), raconte avec émotion la
+          chance inhabituelle qu’il a eue de se charger de l’éducation de ses deux plus jeunes fils
+          (<marquage typemarq="italique">T</marquage>, 306-307), etc. Le testateur est, pour
+          reprendre la formule de Jacqueline Cerquiglini-Toulet, « un sujet qui se rassemble dans
+          l’acte même de léguer<renvoi id="re1no65" idref="no65" typeref="note">65</renvoi> ». Contrairement à Pline le Jeune,
+          Fortin admet que son <marquage typemarq="italique">Testament</marquage> dresse son
+          portrait, puisque le moment auquel il se prépare (la mort) est la pièce maîtresse de la
+          vie :</alinea>
+        <bloccitation>
+          <alinea>En effet, bien vivre n’est autre chose que bien mourir ; parce que chaque instant
+            de la vie n’est qu’une fluxion de nostre aage vers la mort ; aussi n’y a-t-il rien qui
+            fasse moins de mutation en l’homme que cette derniere heure, un chacun de nous suivant
+            jusques en ce moment l’inclination naturelle du cours ordinaire de la vie. Ce qui a
+            donné sujet au Legislateur d’appeler nostre Testament ou derniere volonté, le miroüer de
+            nos moeurs.</alinea>
+          <source><marquage typemarq="italique">T</marquage>, 370</source>
+        </bloccitation></para><para id="pa19"><no>19</no><alinea>Le témoignage de soi et le témoignage de l’esprit qui donnent au testament sa valeur d’<marquage typemarq="italique">exemplum</marquage>, sa dimension édifiante, font en sorte que l’intérêt du <marquage typemarq="italique">Testament</marquage> est universel :</alinea>
+        <bloccitation>
+          <alinea>Quoy que ce petit discours, mes enfans, ne semble vous regarder qu’en vostre
+            particulier ; je confesse neantmoins que mon intention est de plus grande estenduë,
+            &amp; qu’estant obligé de considerer selon le conseil de l’Evangile, tous les hommes
+            comme mes freres, &amp; tous les jeunes gens comme mes enfans, mon affection suivant
+            cette regle, me contraint &amp; peut-estre aux despens de ma reputation, de laisser en
+            commun à toute jeunesse, &amp; au pillage du premier occupant, cet acquest que j’ay fait
+            sans en avoir esté l’usufruitier. Je seray bien ayse que la meilleure portion en demeure
+            aux miens : mais si quelque autre quel qu’il soit, s’en rend plus digne qu’eux, &amp;
+            qu’il en devienne plus sage, j’auray toûjours en quelque sorte satisfait mon intention.
+            Je ne diminuë rien du vostre dans le dessein que j’ay d’associer tout le monde en cette
+            heredité : je tasche au contraire d’estendre votre alliance avec tous les hommes, &amp;
+            de vous acquerir de nouveaux freres qui puissent contracter avec vous en la communauté
+            de ce legat, une fraternité spirituelle qui soit plus estroite encore &amp; plus
+            asseurée, que si le sang &amp; la chair l’avoient faite.</alinea>
+          <source><marquage typemarq="italique">T</marquage>, 4-5</source>
+        </bloccitation>
+        <alinea>Comme les mémorialistes de son siècle, La Hoguette prend la plume « aux despens de
+          [sa] reputation », risquant de « se voir attribuer le nom infamant d’auteur<renvoi id="re1no66" idref="no66" typeref="note">66</renvoi> ». L’intérêt universel de son propos en vaut le risque, puisque
+          le lien juridique né de son témoignage crée une « alliance » et fonde une
+          « communauté ».</alinea></para><para id="pa20"><no>20</no><alinea>C’est en ce sens que La Hoguette fait une alliance, un contrat social, pour reprendre l’expression qui, dans la pensée politique du dix-septième siècle, a servi à s’opposer à la monarchie de droit divin<renvoi id="re1no67" idref="no67" typeref="note">67</renvoi>. Les termes dans lesquels Giuliano Ferretti<renvoi id="re1no68" idref="no68" typeref="note">68</renvoi> résume l’oeuvre suggèrent également cette idée du testament en tant que contrat social, nouvelle alliance, comme l’était, en un sens, le Nouveau Testament. Un témoignage pourrait difficilement avoir plus d’autorité. La Hoguette a cependant la sagesse de ne pas se faire d’illusion sur le succès de sa démarche : les conseils n’ont pas la dimension normative d’un ordre. Son <marquage typemarq="italique">Testament</marquage> ne dresse pas moins le portrait d’une société idéale, ou plutôt de l’éducation qui y mène. En ce sens, le traité de l’immortalité de l’âme qu’il ajoute à la toute fin de son livre dans l’édition de 1656 (<marquage typemarq="italique">T</marquage>, 372-375) devrait peut-être nous rappeler celui qui conclut également la <marquage typemarq="italique">République </marquage>de Platon, le mythe d’Er, ou son pendant latin, le songe de Scipion qui termine la <marquage typemarq="italique">République </marquage>de Cicéron. Cette dissertation conclusive, plus qu’un simple exposé de spiritualité certes attendu dans un testament, signale peut-être l’ambition qu’il faut accorder à l’oeuvre et que seule la posture testamentaire pouvait légitimer de la part d’un simple particulier, car le testateur s’avance à la barre, prenant Dieu à témoin, et livre sa déposition afin de laisser ses affaires et le monde dans l’harmonie, autant qu’il est possible.</alinea></para></section1><section1 id="s1n5"><no>5</no><titre traitementparticulier="oui">*</titre><para id="pa21"><no>21</no><alinea>À cause du privilège accordé au <marquage typemarq="italique">Testament </marquage>de François Villon<renvoi id="re1no69" idref="no69" typeref="note">69</renvoi> de la part des chercheurs, la notion de testament ne semblait pas opérante dans l’histoire littéraire. Une conception trop réduite du testament avait même pour effet de faire en sorte que certains actes authentiques, comme celui de Michel de l’Hospital dicté sur son lit de mort<renvoi id="re1no70" idref="no70" typeref="note">70</renvoi>, se voient refuser leur dimension testamentaire. C’est la faille que nous avons tenté de combler en réinvestissant la notion par la dimension testimoniale qui lui est intrinsèque, révélée par l’étymologie – réelle, celle du <marquage typemarq="italique">testis</marquage>, ou fausse mais essentielle, celle de la <marquage typemarq="italique">testatio mentis</marquage> héritée du droit romain. Cela nous a permis de constater que les fondements de l’écriture testamentaire pouvaient être investis à des fins biens différentes de celles de la tradition satirique et polémique, bien vivante sous l’Ancien Régime : il est également possible de témoigner, ordonner et léguer au nom de Mazarin pour le discréditer, que de livrer ses conseils à la postérité. L’écriture testamentaire se déploie dans des avenues variées, qui puisent dans l’acte authentique lui-même, mais sans nécessairement respecter pas à pas ses étapes canoniques. Ainsi, nous nous sommes gardé de dénaturer la notion (les dimensions juridiques et spirituelles sont restées au coeur de notre questionnement) en nous rapportant au discours <marquage typemarq="italique">sur</marquage> le testament, rapidement esquissé à l’aide de Montaigne et le passage que nous avons cité de Pline le Jeune. Situé aux frontières du témoignage, le testament tel que nous l’avons envisagé offre un lieu d’équilibre entre le témoignage de soi-même (la dimension biographique) et la déposition de l’esprit (ce qui fait du legs un témoignage) entre la vie et la mort, la dimension privée (s’adresser à ses proches) et publique de l’existence (édifier, éduquer, jusqu’à léguer le modèle d’une société idéale, comme le <marquage typemarq="italique">Testament</marquage> de Fortin de La Hoguette). D’où son succès dans la littérature : situé dans ce carrefour, le testateur peut rendre compte de toutes les dimensions de sa vie. Le testament offre ainsi paradoxalement la possibilité d’une plénitude, ce point central d’où l’on peut observer son existence sous le regard de Dieu et en tirer les conclusions qui méritent d’être léguées à la descendance ou à la postérité.</alinea></para></section1></corps><partiesann lang="fr"><grnotebio><notebio id="nb1" idrefs="au1" lang="fr"><alinea>Louis Laliberté-Bouchard est étudiant au doctorat à l’Université McGill. Son travail porte sur l’écriture testamentaire dans les Mémoires du dix-septième siècle. Il est l’auteur de contributions sur Fortin de la Hoguette, le cardinal de Retz et Angélique de Saint-Jean Arnauld d’Andilly.</alinea></notebio></grnotebio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Pierre Servet et Marie-Hélène Servet, « Introduction », dans Pierre Servet et
+          Marie-Hélène Servet (dir.), <marquage typemarq="italique">Testaments pour rire. Testaments
+          facétieux et polémiques dans la littérature d’Ancien Régime</marquage>, t. 1, Genève,
+          Droz, coll. « Textes littéraires français », 2013, t. 1, p. 15. </alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea><marquage typemarq="italique">Idem</marquage>.</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Giuliano Ferretti a retracé vingt et un tirages de l’oeuvre (Giuliano Ferretti,
+          <marquage typemarq="italique">Un « soldat-philosophe », Philippe Fortin de La Hoguette :
+          1558-1668(?)</marquage>, Genève, Edizioni culturali internazionali, coll. « Tempi della
+          storia ; Stato moderno », 1988, p. 383-393). Un repérage sur Google Books a permis d’en
+          ajouter cinq autres, en incluant des réimpressions et vraisemblables contrefaçons, portant
+          le tout à vingt-six impressions entre 1648 et 1698, dont trois la première année.
+        </alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>Philippe Fortin de La Hoguette, <marquage typemarq="italique">Testament, ou Conseils
+          fidèles d’un bon pere à ses enfans. Où sont contenus plusieurs raisonnemens Chretiens,
+          Moraux et Politiques</marquage>, Paris, Antoine Vitré, 1656 [1648]. Désormais abrégé en
+          <marquage typemarq="italique">T</marquage>, suivi du numéro de la page. Nous utilisons le
+          texte de l’édition de 1656 puisque c’est la dernière ayant été remaniée par l’auteur. Il
+          s’agit d’une ample refonte de l’oeuvre, où de nombreux passages sont réécrits ou
+          ajoutés.</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>Marc Fumaroli, « La République Française des Lettres et ses réactions à la montée de
+          l’absolutisme », dans Philippe Fortin de La Hoguette, <marquage typemarq="italique">Lettres aux frères Dupuy et à leur entourage</marquage>, éd. Giuliano Ferretti, Florence,
+          Leo S. Olschki, coll. « Le Corrispondenze Letterarie, Scientifiche ed Erudite Dal
+          Rinascimento all’Età Moderna », 1997, t. 1, p. <marquage typemarq="petitecap">viii</marquage>.</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>L’objet de notre mémoire de maîtrise (« Le legs politique et éthique du <marquage typemarq="italique">Testament</marquage> de Philippe Fortin de La Hoguette : de la
+          transparence à l’honnête dissimulation », Université McGill, 2018), dont est tiré cet
+          article, consiste à montrer que La Hoguette n’est cependant pas si sage qu’il en a l’air
+          et que ce conformisme ne se transforme jamais en servitude. Nous suivons ainsi les traces
+          des travaux de Giuliano Ferretti précédemment cités et de Marc Fumaroli (voir « Le
+          témoignage de Fortin de la Hoguette », dans <marquage typemarq="italique">La République
+          des Lettres</marquage>, Paris, Gallimard, coll. « Bibliothèque des histoires », 2015,
+          p. 237-253). </alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>Pierre Servet et Marie-Hélène Servet, <marquage typemarq="italique">op.
+          cit</marquage>., t. <marquage typemarq="petitecap">i</marquage>, p. 13.</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>Gabriel Peignot (dir.), <marquage typemarq="italique">Choix de Testamens anciens et
+          modernes, remarquables par leur importance, leur singularité, ou leur
+          bizarrerie</marquage>, Paris et Dijon, Renouard et Victor Lagier, 1829, t. 1, p. <marquage typemarq="petitecap">xv</marquage>.</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, t. 2, p. 279.</alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea>Pierre Servet et Marie-Hélène Servet, <marquage typemarq="italique">op.
+          cit.</marquage>, t. 1, p. 19-20. Pour une analyse plus détaillée de la structure du
+          testament, on peut se référer à Pierre Chaunu, <marquage typemarq="italique">La mort à
+          Paris. <marquage typemarq="petitecap">xvi</marquage><exposant>e</exposant></marquage><marquage typemarq="italique">, <marquage typemarq="petitecap">xvii</marquage><exposant>e</exposant></marquage><marquage typemarq="italique"> et <marquage typemarq="petitecap">xviii</marquage><exposant>e</exposant></marquage><marquage typemarq="italique"> siècles</marquage>, Paris, Fayard, 1978, p. 297-301</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea>Par exemple, ces deux chefs-d’oeuvre de mauvaise foi : le « Testament du Cardinal
+          Mazarin qu’il a renouvelé à son départ » et le « Testament veritable du Cardinal Jules
+          Mazarin », dont les auteurs n’ont pas été identifiés, dans Pierre Servet et Marie-Hélène
+          Servet (dir.), <marquage typemarq="italique">op. cit.</marquage>, t. 2, respectivement
+          p. 1171-1179 et p. 1109-1122.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea>Du latin <marquage typemarq="italique">testator</marquage>,<marquage typemarq="italique"> oris</marquage>, « celui qui rend témoignage ; testateur ». (Centre
+          National de Ressources Textuelles et Lexicales. En ligne : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="http://www.cnrtl.fr/etymologie/testateur">www.cnrtl.fr/etymologie/testateur</liensimple>) Le mot <marquage typemarq="italique">testament</marquage> vient du latin <marquage typemarq="italique">testamentum</marquage>,
+          dont l’étymologie renvoie au verbe <marquage typemarq="italique">testari</marquage>,
+          signifiant « prise à témoin » (Centre National de Ressources Textuelles et Lexicales. En
+          ligne : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:type="simple" xlink:href="http://www.cnrtl.fr/etymologie/Testament">www.cnrtl.fr/etymologie/Testament</liensimple>), mais aussi prouver, témoigner, assurer,
+          appeler en témoignage.</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea>Philippe Ariès, <marquage typemarq="italique">L’homme devant la mort. 2. La mort
+          ensauvagée</marquage>, Paris, Seuil, coll. « Points histoire », 1985 [1977],
+          p. 178.</alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea>Philippe Ariès, <marquage typemarq="italique">Essais sur l’histoire de la mort en
+          Occident. Du Moyen Âge à nos jours</marquage>, Paris, Seuil, coll. « Points histoire »,
+          2015 [1975], p. 171.</alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 196.</alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea>On doit aux historiens d’avoir montré la richesse spirituelle et personnelle d’un
+          acte qui s’est progressivement limité à sa dimension juridique depuis le dix-huitième
+          siècle. Mentionnons, en plus des travaux précédemment cités de Philippe Ariès et
+          Pierre Chaunu, ceux de Michel Vovelle (<marquage typemarq="italique">Piété baroque et
+          déchristianisation</marquage>, Paris, Plon, 1973 ; <marquage typemarq="italique">Mourir
+          autrefois. Attitudes collectives devant la mort aux <marquage typemarq="petitecap">xvii</marquage><exposant>e</exposant></marquage><marquage typemarq="italique"> et
+          <marquage typemarq="petitecap">xviii</marquage><exposant>e</exposant></marquage><marquage typemarq="italique"> siècles</marquage>, Paris, Julliard/ Gallimard, coll. « Archives »,
+          1974 ; <marquage typemarq="italique">La mort et l’Occident, de 1300 à nos
+          jours</marquage>, Paris, Gallimard, 1983) et ceux plus récents de Valérie Leclerc Lafage
+          (<marquage typemarq="italique">Montpellier au temps des troubles de Religion. Pratiques
+          testamentaires et confessionnalisation (1554-1622)</marquage>, Paris, Honoré Champion,
+          coll. « Vie des Huguenots », 2010). </alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>Pierre de Gaulmyn, « Le témoignage, du judiciaire au littéraire », <marquage typemarq="italique">Villa Gillet</marquage>, cahier n<exposant>o</exposant> 3, novembre
+          1995, p. 69-77.</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 77.</alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 71.</alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea>Il ne s’agit pas ici de soutenir que l’on ne peut témoigner d’autre chose que de
+          soi-même, mais que le témoignage renvoie toujours au témoin qui l’énonce : « La
+          spécificité du témoignage consiste en ceci que l’assertion de réalité est inséparable de
+          son couplage avec l’autodésignation du sujet témoignant. » (Paul Ricoeur, <marquage typemarq="italique">La mémoire, l’histoire, l’oubli</marquage>, Paris, Seuil, coll.
+          « Points essais », 2000, p. 204.)</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea>Pierre de Gaulmyn, art. cit., p. 71.</alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>Christian Jouhaud, Dinah Ribard et Nicolas Schapira, <marquage typemarq="italique">Histoire Littérature Témoignage</marquage>, Paris, Gallimard, coll. « Folio histoire »,
+          2009, p. 16. </alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea>Pierre de Gaulmyn, art. cit., p. 71.</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea>Jean-Jacques Rousseau, « Les Confessions », <marquage typemarq="italique">Oeuvres
+          complètes</marquage>, éd. Bernard Gagnebin et Marcel Raymond, avec la collaboration de
+          Robert Osmont, Paris, Gallimard, coll. « Bibliothèque de la Pléiade », 1959, t. 1,
+          p. 5.</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea>Marc Fumaroli, « Les Mémoires au carrefour des genres en prose », dans <marquage typemarq="italique">La diplomatie de l’esprit</marquage>. <marquage typemarq="italique">De
+          Montaigne à La Fontaine</marquage>, Paris, Gallimard, coll. « Tel », 2001, p. 194 ;
+          article d’abord publié sous le titre « Les Mémoires du <marquage typemarq="petitecap">xvii</marquage><exposant>e</exposant> au carrefour des genres en prose », <marquage typemarq="italique">Dix-septième</marquage> <marquage typemarq="italique">siècle</marquage>, n<exposant>o</exposant> 94-95, 1971, p. 7-37.</alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea>« Mais cette conception classique de la mémoire comme acte religieux prend à
+          Port-Royal une dimension particulière. Il ne faut pas perdre de vue la dimension juridique
+          du témoignage chez les religieuses issues pour beaucoup de familles d’avocats et qui
+          furent, dans leurs pires épreuves, de terribles chicanières. Elles gardent mémoire du
+          passé pour témoigner. Le terme doit être pris à la fois dans son sens juridique (elles
+          défendent une cause) et dans son sens religieux le plus fort : le témoin par excellence
+          est le martyr », Simon Icard, « Port-Royal ou la vie <marquage typemarq="italique">in
+          memoriam</marquage> », dans Laurence Plazenet, <marquage typemarq="italique">La Mémoire à
+          Port-Royal. De la célébration eucharistique au témoignage</marquage>, Paris, Classiques
+          Garnier, coll. « Univers Port-Royal », 2016, p. 18-19. Pascale Thouvenin se livre à des
+          développements similaires dans une autre contribution du même livre (« Une mémoire en
+          quête d’histoire. L’idée de “devoir de mémoire” chez les religieuses de Port-Royal »,
+          p. 214-215).</alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>Francesco Petrarca, <marquage typemarq="italique">My Secret Book</marquage> –
+          <marquage typemarq="italique">De secreto conflictu curarum mearum</marquage>, éd. et trad.
+          fr. Nicolas Mann, Cambridge, Harvard University Press, coll. « The I. Tatti Renaissance
+          Library », p. 6.</alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 160. « Elle [la Vérité], en face
+          de qui nous parlons, est mon témoin. » (Notre traduction.) </alinea>
+      </note>
+      <note id="no29">
+        <no>29</no>
+        <alinea>« Intérieurement et sous la peau », Jean-Jacques Rousseau, « Les Confessions »,
+          p. 5 ; Jean-Jacques Rousseau, « Rousseau juge de Jean-Jacques », <marquage typemarq="italique">op. cit.</marquage>, t. 1, p. 905.</alinea>
+      </note>
+      <note id="no30">
+        <no>30</no>
+        <alinea>Les <marquage typemarq="italique">Essais</marquage> de Montaigne pourraient être
+          considérés comme un cas limite de témoignage de soi-même tel qu’ici entendu, au sens où il
+          n’a pas une cause à soutenir, une vérité à défendre, autre que celle de se peindre
+          soi-même, nu, devant public – derniers traits qui nous ramènent au modèle de Pierre de
+          Gaulmyn. Cependant, le témoignage, n’ayant rien à prouver parce qu’il n’est qu’une quête
+          de soi-même, une démarche pour se connaître, est sans fin, circulaire : « moy je me roulle
+          en moy mesme » (Michel de Montaigne, <marquage typemarq="italique">Les Essais</marquage>,
+          éd. Pierre Villey, Paris, Presses universitaires de France, coll. « Quadrige », 2004,
+          <marquage typemarq="petitecap">ii</marquage>, xvii, p. 657). La preuve décisive qui donne
+          l’autorité au témoignage (venir à bout de la connaissance de soi-même, à la limite du
+          contexte juridique), manque tout comme dans les exemples précédemment évoqués. Pour un
+          passage des <marquage typemarq="italique">Essais</marquage> où Montaigne parle de son
+          projet en termes de témoignage de soi, se référer à « De l’exercitation » (<marquage typemarq="italique">ibid.</marquage>, <marquage typemarq="petitecap">ii</marquage>, vi,
+          p. 378-379).</alinea>
+      </note>
+      <note id="no31">
+        <no>31</no>
+        <alinea>Philippe Ariès, <marquage typemarq="italique">op. cit</marquage>.,
+          p. 37-38.</alinea>
+      </note>
+      <note id="no32">
+        <no>32</no>
+        <alinea>Dans cet ordre d’idées, on peut dire que les Mémoires manifestement testamentaires
+          cherchent à profiter de cette autorité du testament, d’où l’insistance du mémorialiste, au
+          moment où il dénonce les torts qu’il a subis, à montrer son détachement du monde.</alinea>
+      </note>
+      <note id="no33">
+        <no>33</no>
+        <alinea>François Garasse, « Section <marquage typemarq="petitecap">xviii</marquage>.
+          L’impieté de nos Épicuriens paroist en leurs Testamens prophanes &amp; plein
+          d’Atheismes », dans <marquage typemarq="italique">La doctrine curieuse des beaux esprits
+          de ce temps, ou pretendus tels. Contenants plusieurs maximes pernicieuses à la Religion et
+          à l’État, &amp; aux bonnes Moeurs</marquage>, Paris, Sébastien Chappelet, 1624,
+          p. 909-918.</alinea>
+      </note>
+      <note id="no34">
+        <no>34</no>
+        <alinea>Philippe Ariès, <marquage typemarq="italique">op. cit</marquage>., p. 137.</alinea>
+      </note>
+      <note id="no35">
+        <no>35</no>
+        <alinea>La réflexion rétrospective a fait aussi du testament un véritable exercice spirituel
+          faisant partie de la préparation à la mort. Les <marquage typemarq="italique">Artes
+          moriendi</marquage> de l’Ancien Régime invitent le lecteur à rédiger son testament dans ce
+          but (Michel Vovelle, <marquage typemarq="italique">Mourir autrefois. Attitudes collectives
+          devant la mort aux <marquage typemarq="petitecap">xvii</marquage><exposant>e</exposant></marquage><marquage typemarq="italique"> et
+          <marquage typemarq="petitecap">xviii</marquage><exposant>e</exposant></marquage><marquage typemarq="italique"> siècles</marquage>, p. 70-71), tout comme pour la rédaction de son
+          épitaphe (Philippe Ariès, <marquage typemarq="italique">L’homme devant la mort. 1. Le
+          temps des gisants</marquage>, Paris, Seuil, coll. « Points histoire », 1985 [1977],
+          p. 225).</alinea>
+      </note>
+      <note id="no36">
+        <no>36</no>
+        <alinea>Philippe Ariès, <marquage typemarq="italique">op. cit</marquage>., p. 97. </alinea>
+      </note>
+      <note id="no37">
+        <no>37</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 199.</alinea>
+      </note>
+      <note id="no38">
+        <no>38</no>
+        <alinea>« <marquage typemarq="italique">Falsum est nimirum quod creditur vulgo, testamenta
+          hominum speculum esse morum »</marquage>, c’est-à-dire « C’est certainement une erreur de
+          croire, ce qu’on fait communément, que le testament de quelqu’un est le reflet de sa
+          personnalité », Pline le Jeune, <marquage typemarq="italique">Lettres. Livres <marquage typemarq="petitecap">vii-ix</marquage></marquage>, éd. Hubert Zehnacker, trad. Nicole
+          Méthy, Paris, Les Belles Lettres, coll. « Collection des Universités de France, série
+          Latine. Collection Budé », 2012, p. 59-62.</alinea>
+      </note>
+      <note id="no39">
+        <no>39</no>
+        <alinea>Michel de Montaigne, <marquage typemarq="italique">op. cit.</marquage>, <marquage typemarq="petitecap">i</marquage>, vii, p. 30-31.</alinea>
+      </note>
+      <note id="no40">
+        <no>40</no>
+        <alinea>François Pétrarque, « Testament (1374) », dans Gabriel Peignot (dir.),<marquage typemarq="italique"> op. cit</marquage>., t. 1, p. 59.</alinea>
+      </note>
+      <note id="no41">
+        <no>41</no>
+        <alinea>Cité par Pierre de Bourdeille Seigneur de Brantôme, « Grands capitaines françois »,
+          dans <marquage typemarq="italique">Oeuvres complètes</marquage>, Paris, Renouard, 1868,
+          t. 3, p. 315-326. Le testament de Brantôme s’empare lui aussi de cette dimension
+          biographique du testament, à l’exemple de celui de Michel de l’Hospital (Pierre de
+          Bourdeille Seigneur de Brantôme, « Opuscules et pièces diverses », dans <marquage typemarq="italique">Oeuvres complètes</marquage>, Paris, Renouard, 1881, t. 10.
+          p. 121-151).</alinea>
+      </note>
+      <note id="no42">
+        <no>42</no>
+        <alinea>Michel de l’Hospital, « Testament (1573) », dans Gabriel Peignot (dir.), <marquage typemarq="italique">op. cit</marquage>., t. 1, p. 227. </alinea>
+      </note>
+      <note id="no43">
+        <no>43</no>
+        <alinea>Gabriel Peignot (dir.), <marquage typemarq="italique">op. cit</marquage>.,
+          p. <marquage typemarq="petitecap">ix</marquage>.</alinea>
+      </note>
+      <note id="no44">
+        <no>44</no>
+        <alinea>Testament cité par Pierre Chaunu, « Un beau testament », <marquage typemarq="italique">op. cit.</marquage>, p. 480-482.</alinea>
+      </note>
+      <note id="no45">
+        <no>45</no>
+        <alinea>Par exemple, le testament de Luther : « <marquage typemarq="italique">Notus sum
+          </marquage>[…]<marquage typemarq="italique"> in caelo, in terra et in inferno, et
+          auctoritatem ad hoc sufficientem habeo, ut mihi solo credatur, cum Deus mihi, homini licet
+          damnabili et misero peccatori, ex paterna misericordia Evangelium filii sui crediderit,
+          dederitque ut in eo verax et fidelis fuerim, ita ut multi in mundi illud per me
+          acceperint, et me pro doctore veritatis agnoverint, spreto banno papae, Caeesaris, regum,
+          principum et sacerdotum, imo omnium daemonum odio : Quidni igitur ad dispositionem hanc in
+          re exigua sufficiat, si adsit manus meae testimonium et dici possit, haec scripsit
+          D. Martinus Lutherus, notarius Dei et testis Evangeliie ejus. »</marquage> « Je suis connu
+          dans le ciel, sur la terre et dans l’enfer : et cela m’autorise suffisamment à penser que
+          l’on peut s’en fier à moi seul, puisque Dieu, quoique je ne sois qu’un misérable pécheur
+          condamnable, m’a, dans sa miséricorde paternelle, confié l’Évangile de son fils, et m’a
+          fait la grâce d’être sincère et fidèle en le prêchant, de sorte que beaucoup, dans ce
+          monde, l’ont reçu par moi, et m’ont reconnu le docteur de la vérité, moi qui ai affronté
+          les proscriptions du pape, de l’empereur, des rois, des princes et des prêtres, et bien
+          plus, la haine de tous les diables. Pourquoi donc, dans une chose aussi minime que ce
+          testament, ne suffirait-il pas du témoignage de ma main, et que l’on pût dire : Cela est
+          écrit par Martin Luther, le notaire de Dieu et le témoin de son Évangile. » (Martin
+          Luther, « Testament (1542) », dans Gabriel Peignot (dir.), t. 1, p. 198 ; p. 200 pour sa
+          traduction.) </alinea>
+      </note>
+      <note id="no46">
+        <no>46</no>
+        <alinea>Par exemple, le testament de Fénélon : « Je déclare que je veux mourir entre les
+          bras de l’Église catholique, apostolitique et romaine, ma mère. Dieu qui lit dans les
+          coeurs et qui me jugera, sait qu’il n’y a aucun moment de ma vie où je n’aie conservé pour
+          elle une soumission et une docilité de petit enfant […] ». (François Fénelon, « Testament
+          (1715) », dans Gabriel Peignot [dir.], <marquage typemarq="italique">op. cit</marquage>.,
+          t. I, p. 384.)</alinea>
+      </note>
+      <note id="no47">
+        <no>47</no>
+        <alinea>C’est la raison pour laquelle la posture testamentaire est aussi intéressante, parce
+          qu’elle est accompagnée d’une grande autorité ; la mort devient une caution de vérité,
+          pour reprendre l’expression de Robert Favre, qui étudie comment les philosophes du
+          dix-huitième siècle présentent leurs textes les plus importants comme étant faits au bord
+          de la mort, ou comment ils exploitent cette possibilité. Robert Favre, « La mort-caution :
+          l’écriture testamentaire », dans Gilles Ernst (dir.), <marquage typemarq="italique">La
+          mort dans le texte</marquage>, Lyon, Presses universitaires de Lyon, 1988, p. 103-110.
+          C’est également ce qui rend la forme du testament aussi féroce et efficace lorsqu’elle est
+          utilisée dans des intentions polémiques, comme les testaments apocryphes publiés pendant
+          les guerres de religion, la Fronde ou la Révolution française que Pierre Servet et
+          Marie-Hélène Servet ont publié dans leur <marquage typemarq="italique">Testaments pour
+          rire</marquage> : les personnages attaqués et tournés en ridicule montrent, par leurs legs
+          et leur attitude dans leur testament, l’ampleur de leur corruption, de leur mauvaise
+          nature. Alors qu’ils sont incapables de quitter le monde avec élégance, cet acte solennel
+          fait signe vers leur perversion. </alinea>
+      </note>
+      <note id="no48">
+        <no>48</no>
+        <alinea>« Le testament est ainsi appelé, parce qu’il contient l’expression de notre
+          volonté » ; Justinien, <marquage typemarq="italique">Institutes</marquage>, éd. et trad.
+          Théodule Vaquette, Paris, T. Vaquette, 1885, t. 1, <marquage typemarq="petitecap">ii</marquage>, x, 1, p. 78.</alinea>
+      </note>
+      <note id="no49">
+        <no>49</no>
+        <alinea>« <marquage typemarq="italique">Quid ergo mens armentum, ad salsamentum, ad
+          condimentum, ad ornamentum</marquage> […]<marquage typemarq="italique"> et ad huiusmodi
+          infinita ? »</marquage>, Laurenzo Valla, <marquage typemarq="italique">Elegantiarum libri
+          sex</marquage>, s.l., s.n., 1522 [1473], f. 134. Disponible en ligne : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:type="simple" xlink:href="http://books.google.ca/books?id=IDFCAAAAcAAJ&amp;printsec=frontcover&amp;hl=fr&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false">books.google.ca/books?id=IDFCAAAAcAAJ&amp;printsec=frontcover&amp;hl=fr&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false</liensimple> ;
+          « Quel esprit [faut-il] donc [accorder] au troupeau, à la salaison, à l’assaisonnement, à
+          un ornement […] et à l’infinité d’autres mots du genre ? » (Je traduis.) Furetière le
+          précise d’ailleurs dans sa notice, en donnant l’un des exemples de Valla, que « ceux qui
+          s’en sont voulu moquer, ont dit qu’il faloit que <marquage typemarq="italique">calceamentum</marquage> [chaussure] fut aussi <marquage typemarq="italique">mentis
+          calceatio </marquage>[chaussure de l’esprit] ». Ce n’est pas, d’ailleurs, l’inventivité
+          étymologique la plus inattendue, les hommes du Moyen Âge y voyant également un lien avec
+          le mot latin <marquage typemarq="italique">testis</marquage>, testicule, identique au
+          <marquage typemarq="italique">testis</marquage>, témoin, pour lier le testament à l’enjeu
+          de la filiation et de la descendance, comme le mentionne Jacqueline Cerquiglini-Toulet
+          dans <marquage typemarq="italique">L’écriture testamentaire à la fin du Moyen Âge.
+          Identité, dispersion, trace</marquage>, Oxford, European Humanities Research Centre, coll.
+          « Legenda », 1999, p. 4. </alinea>
+      </note>
+      <note id="no50">
+        <no>50</no>
+        <alinea>Vladimir R. Rossman, <marquage typemarq="italique">François Villon. Les concepts
+          médiévaux du testament</marquage>, Paris, Jean-Pierre Delarge, coll. « Encyclopédie
+          universitaire », 1976, p. 37. Après le Moyen Âge, les représentants de l’humanisme
+          juridique qui cherchent à dépouiller le droit de la période médiévale pour se rapprocher
+          du vrai droit romain, se livrent aussi à une intense réflexion sur le droit testamentaire,
+          comme le souligne l’exemple du juriste Jacque Cujas, Xavier Prévost, « Le droit des
+          successions en pratique », dans <marquage typemarq="italique">Jacques Cujas (1522-1590)
+          Jurisconsulte humaniste</marquage>, Genève, Droz, coll. « Travaux d’Humanisme et
+          Renaissance », 2015, p. 361-437.</alinea>
+      </note>
+      <note id="no51">
+        <no>51</no>
+        <alinea>« Il apparaît qu’au commencement les testaments étaient principalement fondés, et
+          justement pour cette raison, afin que les pères laissent à leurs enfants leur propre
+          témoignage au sujet de la religion, qu’ils souhaitaient, par une sévère autorité, pour
+          ainsi dire marquée d’un sceau, voir transmise à leur descendance. / <marquage typemarq="italique">De même</marquage>, afin que les enfants eux-mêmes soient attachés à
+          ces principes, comme le montrent les exemples de Jacob et David dans leur testament. / Et
+          parce que les testaments contenaient leurs points de vue certains et inamovibles au sujet
+          de la doctrine céleste, la gravité de ces propos a augmenté l’autorité de leurs
+          testaments. / Je souhaite dans ce but, pour informer mes enfants et amis, tel que je l’ai
+          voulu au commencement de ce testament, partager ma confession et instruire mes enfants
+          dans ces devoirs paternels, afin qu’ils demeurent constants dans les mêmes principes. »
+          Gabriel Peignot n’a pas donné la traduction de testament, parce qu’il désapprouvait son
+          contenu théologique ; il s’agit donc de ma traduction. Philippe Mélanchton, « Testament
+          (1560) », dans Gabriel Peignot (dir.), <marquage typemarq="italique">op. cit</marquage>.,
+          t. 1., p. 206. </alinea>
+      </note>
+      <note id="no52">
+        <no>52</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 210.</alinea>
+      </note>
+      <note id="no53">
+        <no>53</no>
+        <alinea>« Conservons donc cette lumière aussi longtemps que nous le pouvons ». (Je traduis.)
+          <marquage typemarq="italique">Idem</marquage>.</alinea>
+      </note>
+      <note id="no54">
+        <no>54</no>
+        <alinea>Giuliano Ferretti, « Aux sources du <marquage typemarq="italique">Testament</marquage> de Fortin de La Hoguette », Giuliano Ferretti et Marc Seguin (dir.),
+          <marquage typemarq="italique">Mélanges offerts à Jean Glénisson</marquage>, Jonzac,
+          Université francophone d’été Saintonge-Québec, 2007, p. 111.</alinea>
+      </note>
+      <note id="no55">
+        <no>55</no>
+        <alinea>« 1. Dans le plus malheureux des siècles, au milieu de la corruption et de la
+          dépravation des moeurs, j’ai, autant que je l’ai pu, conservé mon intégrité. / 2. J’ai
+          chéri et cultivé mes amis dans toute l’effusion de mon coeur. Quant à mes ennemis, j’ai
+          toujours préféré l’espérance de les vaincre par de bons procédés, ou par le mépris des
+          injures, au désir de m’en venger. […] / 4. J’ai autant abhorré le vice dans ceux qui me
+          sont le plus chers, que j’ai aimé la vertu dans les étrangers et même dans mes ennemis.
+          […] / 12. Dans ma vie privée, le bien public a été ma plus chère occupation. Je l’ai mis
+          avant tout, bien convaincu que le parti le meilleur et le plus sûr, est de tout rapporter
+          au bien général. […] / 24. Je m’en suis rapporté et m’en rapporte plus à la sagesse des
+          lois qu’à mon propre jugement pour la disposition et le partage de mon patrimoine et de
+          mes biens, quels qu’ils soient, à ma mort. […] / 26. Je consacre à mes descendants cette
+          fidèle peinture de mon âme et de mon coeur : puissent-ils la recevoir avec la même candeur
+          et la même franchise que je l’ai tracée et que je la leur adresse. » Pithou a le privilège
+          de bénéficier d’une traduction de Gabriel Peignot. Pierre Pithou, « Testament (1596) »,
+          dans Gabriel Peignot (dir.), <marquage typemarq="italique">op. cit</marquage>., t. 1.,
+          p. 264-271. </alinea>
+      </note>
+      <note id="no56">
+        <no>56</no>
+        <alinea>Il ne servirait à rien de prolonger inutilement cette série d’exemples, mais il nous
+          apparaît intéressant d’ajouter brièvement celui d’Antoine Arnauld qui, en plus d’un
+          testament servant à consigner ses dernières volontés sur sa sépulture, à léguer quelques
+          biens et à souligner des amitiés, a également composé un <marquage typemarq="italique">Testament spirituel, ou déclaration en forme de testament des véritables dispositions de
+          mon âme dans toutes les rencontres de ma vie</marquage>. Des extraits des deux testaments
+          sont cités par Gabriel Peignot (Antoine Arnauld, « Testament (1694) », dans Gabriel
+          Peignot [dir.], <marquage typemarq="italique">op. cit</marquage>., t. 2, p. 443-448).
+        </alinea>
+      </note>
+      <note id="no57">
+        <no>57</no>
+        <alinea>Frédéric Briot, <marquage typemarq="italique">Usage du monde, usage de soi. Enquête
+          sur les mémorialistes d’Ancien Régime</marquage>, Paris, Seuil, coll. « La couleur de la
+          vie », 1994, p. 204. Marc Fumaroli avait également mis en lumière cette dimension
+          testamentaire des Mémoires, notamment dans les articles rassemblés dans la <marquage typemarq="italique">Diplomatie de l’esprit </marquage>précédemment cité, mais aussi dans
+          son introduction aux <marquage typemarq="italique">Mémoires</marquage> d’Henri de Campion.
+          (Marc Fumaroli, « Introduction », dans Henri de Campion, <marquage typemarq="italique">Mémoires</marquage> suivi de <marquage typemarq="italique">Trois entretiens sur divers
+          sujets d’histoire, de politique et de morale</marquage>, éd. Marc Fumaroli, Paris, Mercure
+          de France, coll. « Le Temps retrouvé », 1990 [1967], p. 10-42.)</alinea>
+      </note>
+      <note id="no58">
+        <no>58</no>
+        <alinea>Agrippa d’Aubigné, <marquage typemarq="italique">Sa Vie à ses enfants</marquage>,
+          éd. Gilbert Schrenck, Paris, Nizet – Société des textes français modernes, 1986,
+          p. 47-49.</alinea>
+      </note>
+      <note id="no59">
+        <no>59</no>
+        <alinea>Bussy-Rabutin, « Discours du Comte de Bussy-Rabutin à Sa famille », <marquage typemarq="italique">Discours à sa famille. 1. Les illustres malheureux. 2. Le bon usage
+          des prospérités</marquage>, éd. Daniel-Henri Vincent et Christophe Blanquie,
+          Précy-sous-Thil, Éditions de l’Armançon, 2000, p. 33. Cet extrait, et les éditeurs du
+          livre l’avaient bien noté, montre bien que Bussy-Rabutin ne cherche pas qu’à édifier,
+          puisque flattant ainsi le Prince, il espérait encore rentrer en grâce, ennuyé de son exil
+          en son âge avancé.</alinea>
+      </note>
+      <note id="no60">
+        <no>60</no>
+        <alinea>Daniel-Henri Vincent, « Introduction au <marquage typemarq="italique">Discours sur
+          le bon usage des adversités</marquage> », <marquage typemarq="italique">ibid.</marquage>,
+          p. 21. </alinea>
+      </note>
+      <note id="no61">
+        <no>61</no>
+        <alinea>« En general la plus saine distribution de noz biens en mourant, me semble estre,
+          les laisser distribuer à l’usage du païs. Les loix y ont mieux pensé que nous ; et vaut
+          mieux les laisser faillir en leur eslection que de nous hazarder temerairement de faillir
+          en la nostre. Ils ne sont pas proprement nostres, puis que, d’une prescription civile et
+          sans nous, ils sont destinez à certains successeurs. Et encore que nous ayons quelque
+          liberté au-delà, je tiens qu’il faut une grande cause et bien apparente pour nous faire
+          oster à un ce que sa fortune luy avoit acquis et à quoi la justice commune l’appelloit ;
+          et que c’est abuser contre raison de cette liberte, d’en servir noz fantasies frivoles et
+          privées. » (Montaigne, <marquage typemarq="italique">op. cit.</marquage>, <marquage typemarq="petitecap">ii</marquage>, viii, p. 397-398 ; il emprunte ce développement aux
+          <marquage typemarq="italique">Lois </marquage>de Platon, qu’il cite immédiatement après ce
+          passage.)</alinea>
+      </note>
+      <note id="no62">
+        <no>62</no>
+        <alinea>L’épître dédicatoire fait de Monseigneur de Bellièvre un témoin renforçant la force
+          du <marquage typemarq="italique">Testament</marquage> : « Quand on verra que celuy qui
+          représente la sacrée Majesté de son Roy en son lict de Justice dans son Palais, &amp; qui
+          preside à la plus celebre Compagnie qui soit dans le Royaume, estre l’attestant de mon
+          Testament, personne ne doutera plus de sa validité. » (<marquage typemarq="italique">Testament, ou Conseils fidèles d’un bon pere à ses enfans</marquage>, s.p.)</alinea>
+      </note>
+      <note id="no63">
+        <no>63</no>
+        <alinea>Cet enjeu est au coeur des préoccupations des moralistes du dix-septième siècle,
+          comme le souligne Louis Van Delft : « Cette pierre angulaire, on peut la désigner d’un
+          mot : l’existence. L’existence forme comme le dénominateur commun de tant d’aperçus
+          divers, le support d’un discours qui paraissait se disperser à l’infini. Quand bien même
+          le moraliste écrit sans suite et sans ordre, qu’il touche à toute sorte de sujets sans
+          jamais s’attarder ni circonscrire sa matière, le même rapport du moi au vécu, de l’être à
+          l’existence, sous-tend toutes ses observations. Chez certains auteurs (Fortin de
+          La Hoguette, Saint-Évremond, par exemple), on note aisément que ce rapport constitue
+          l’essentiel du propos. La question primordiale – comment <marquage typemarq="italique">conduire ma vie ?</marquage> comment <marquage typemarq="italique">me conduire</marquage>
+          au milieu de mes semblables ? – resurgit sans cesse. » (Louis Van Delft, <marquage typemarq="italique">Le moraliste classique. Essai de définition et de
+          typologie</marquage>, Genève, Droz, coll. « Histoire des idées et critique littéraire »,
+          1982, p. 174 ; l’auteur souligne.)</alinea>
+      </note>
+      <note id="no64">
+        <no>64</no>
+        <alinea>Marc Fumaroli, « Le témoignage de Fortin de la Hoguette », p. 238.</alinea>
+      </note>
+      <note id="no65">
+        <no>65</no>
+        <alinea>Jacqueline Cerquiglini-Toulet, <marquage typemarq="italique">op. cit</marquage>.,
+          p. 1. </alinea>
+      </note>
+      <note id="no66">
+        <no>66</no>
+        <alinea>Marc Fumaroli, « Les Mémoires au carrefour des genres en prose », p. 189. </alinea>
+      </note>
+      <note id="no67">
+        <no>67</no>
+        <alinea>« Dans l’esprit de ceux qui l’ont formulée, la théorie du contrat social était
+          destinée à combattre et à remplacer la doctrine du droit divin, ou théorie de l’origine
+          divine du pouvoir civil », Robert Derathé, <marquage typemarq="italique">Jean-Jacques
+          Rousseau et la science politique de son temps</marquage>, Paris, Vrin, 2009 [1971],
+          p. 33.</alinea>
+      </note>
+      <note id="no68">
+        <no>68</no>
+        <alinea>« Oeuvre du présent, le <marquage typemarq="italique">Testament</marquage> projetait
+          son plan dans le futur en s’adressant à des enfants qui, dans l’intention de son auteur,
+          devaient mettre un terme aux déchirements antérieurs et conquérir une unité intérieure et
+          extérieure, morale et politique, laquelle, comme la robe du Christ, ne devait être tissée
+          que d’un seul drap. Cette recherche d’union et de stabilité, qui marquait par opposition
+          les transformations de la société française pendant la guerre de Trente Ans et la montée
+          de l’absolutisme, devait s’exercer à tous les niveaux de la vie civile. Ainsi, la foi, la
+          nature, la cour, le monde et la politique, de même que l’amour, l’ambition et la carrière
+          faisaient l’objet d’une minutieuse réflexion philosophique et morale, dont les effets
+          pratiques étaient constamment envisagés », Giuliano Ferretti, art. cit.,
+          p. 109-110.</alinea>
+      </note>
+      <note id="no69">
+        <no>69</no>
+        <alinea>Nous n’avons pas repéré d’étude littéraire portant sur l’écriture testamentaire qui
+          n’était pas centrée, d’une manière ou d’une autre, sur François Villon (Vladimir R.
+          Rossman, <marquage typemarq="italique">op. cit. </marquage>; Jacqueline
+          Cerquiglini-Toulet, <marquage typemarq="italique">op. cit</marquage>. ; Winthrop
+          Huntington Rice, <marquage typemarq="italique">The European Ancestry of Villon’s Satirical
+          Testaments</marquage>, New York, The Corporate Press, 1941), alors que de l’aveu même des
+          historiens, la littérature s’est immiscée dans l’acte authentique sans qu’il ne soit
+          parodié.</alinea>
+      </note>
+      <note id="no70">
+        <no>70</no>
+        <alinea>André Bayrou, « La vie privée des serviteurs de l’État. Échos horatiens dans les
+          épîtres de Michel de L’Hospital (vers 1506-1573) », dans Bénédicte Delignon, Nathalie
+          Dauvois et Line Cottegnies, <marquage typemarq="italique">L’invention de la vie privée et
+          le modèle d’Horace</marquage>, Paris, Classiques Garnier, coll. « Rencontres », 2017,
+          p. 161.</alinea>
+      </note>
+    </grnote></partiesann></article>

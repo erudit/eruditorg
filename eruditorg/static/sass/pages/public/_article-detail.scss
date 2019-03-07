@@ -210,8 +210,8 @@ $article-toolbar-width: 80px;
       }
     }
 
-    // headings within the article body
-    h2 {
+    // empty headings within the article body
+    h2.empty {
       border-top: 1px solid $mid-grey;
       padding-top: 1em;
     }
