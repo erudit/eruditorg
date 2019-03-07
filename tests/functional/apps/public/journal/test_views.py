@@ -22,6 +22,8 @@ from erudit.test.factories import ArticleFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
 from erudit.test.factories import IssueFactory
+from erudit.test.factories import EmbargoedIssueFactory
+from erudit.test.factories import OpenAccessIssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
@@ -501,18 +503,21 @@ class TestIssueDetailView:
         articles = response.context['articles']
         assert articles == [a1, a2]
 
-    def test_publishing_issue_invalidates_cache(self):
-        # When publishing an issue, invalidate caches associated with that issue so that we have
-        # a proper view rendering. See #1856
-        issue = IssueFactory.create(is_published=False, journal__open_access=True)
+    @pytest.mark.parametrize("factory, expected_lock", [
+        (EmbargoedIssueFactory, True),
+        (OpenAccessIssueFactory, False),
+    ])
+    def test_embargo_lock_icon(self, factory, expected_lock):
+        issue = factory(is_published=False)
         url = issue_detail_url(issue)
         response = Client().get(url, {'ticket': issue.prepublication_ticket})
-        assert b'ios-lock' in response.content
+        # The embargo lock icon should never be displayed when a prepublication ticket is provided.
+        assert b'ion-ios-lock' not in response.content
         issue.is_published = True
         issue.save()
         response = Client().get(url)
-
-        assert b'ion-lock' not in response.content
+        # The embargo lock icon should only be displayed on embargoed issues.
+        assert (b'ion-ios-lock' in response.content) == expected_lock
 
     def test_article_items_are_not_cached_for_unpublished_issues(self):
         issue = IssueFactory(is_published=False)

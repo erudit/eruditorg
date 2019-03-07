@@ -186,6 +186,13 @@ class NonEmbargoedIssueFactory(IssueFactory):
     )
 
 
+class OpenAccessIssueFactory(IssueFactory):
+    journal = factory.SubFactory(
+        JournalFactory,
+        open_access=True,
+    )
+
+
 class ArticleRef(Article):
     """ An article that creates its own solr/fedora references upon instantiation. """
     def __init__(
