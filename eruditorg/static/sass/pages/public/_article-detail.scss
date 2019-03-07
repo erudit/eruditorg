@@ -36,9 +36,6 @@ $article-toolbar-width: 80px;
   }
 
   .titre:first-child,
-  .trefbiblio:only-child,
-  .trefbiblio:first-child,
-  .trefbiblio:first-child + .trefbiblio,
   .titreparal {
     color: #000;
   }
@@ -50,11 +47,6 @@ $article-toolbar-width: 80px;
   .titreparal + .titreparal,
   .trefbiblio  {
     color: $dark-grey;
-
-    + .trefbiblio {
-      color: $dark-grey;
-    }
-
   }
 
   .sstitre {
