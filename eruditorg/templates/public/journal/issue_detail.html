@@ -140,7 +140,12 @@
     {% if notegens %}
     <div class="row">
       {% for notegen in notegens %}
-      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-6 notegen">{{ notegen.content|safe }}</div>
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-6 notegen">
+        {{ notegen.content|safe }}
+        {% if notegen.authors %}
+        <p>{{ notegen.authors|safe }}</p>
+        {% endif %}
+      </div>
       {% endfor %}
     </div>
     {% endif %}
