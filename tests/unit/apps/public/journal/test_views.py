@@ -195,10 +195,11 @@ class TestRenderArticleTemplateTag(TestCase):
         with open(FIXTURE_ROOT + '/' + fixture, mode='r') as fp:
             xml = fp.read()
         mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
+        article = ArticleFactory()
         view = ArticleDetailView()
-        view.request = unittest.mock.MagicMock(return_value={})
-        view.get_context_data = unittest.mock.MagicMock(return_value={'content_access_granted': True})
-        view.get_object = unittest.mock.MagicMock(return_value=ArticleFactory())
+        view.request = unittest.mock.MagicMock()
+        view.object = article
+        view.get_object = unittest.mock.MagicMock(return_value=article)
 
         # Run the XSL transformation.
         return view.render_xml_contents()
@@ -292,6 +293,15 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<sup><a href="#an1" id="" class="norenvoi" title="">[2]</a></sup>' not in ret
         assert '<sup><a href="#an2" id="" class="norenvoi" title="">[ii]</a></sup>' not in ret
         assert '<sup><a href="#an3" id="" class="norenvoi" title="">[**]</a></sup>' not in ret
+
+    def test_space_between_keywords_and_colon(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1055726ar.xml')
+
+        # Check that a space is present before the colon in French, but not in the other languages.
+        assert 'Mots-clés :' in ret
+        assert 'Keywords:' in ret
+        assert 'Palabras clave:' in ret
 
 
 class TestGoogleScholarSubscribersView:
