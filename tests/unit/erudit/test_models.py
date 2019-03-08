@@ -556,11 +556,13 @@ class TestArticle:
 
     def test_pdf_url_when_fedora_pdf(self):
         article = ArticleFactory(with_pdf=True)
+        article.reset_fedora_objects()
         assert article.pdf_url
 
     def test_pdf_url_when_fedora_pdf_and_external_pdf(self):
         # fedora PDFs have priority over "urlpdf" in summary
         article = ArticleFactory(with_pdf=True, pdf_url='http://example.com')
+        article.reset_fedora_objects()
         assert article.pdf_url and article.pdf_url != 'http://example.com'
 
     def test_pdf_url_when_external_pdf(self):

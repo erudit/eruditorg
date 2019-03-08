@@ -234,9 +234,6 @@ class ArticleRef(Article):
                 SolrDocument.from_article(self, authors=authors, solr_attrs=solr_attrs)
             )
 
-    def _should_use_cache(self):
-        return False
-
 
 class ArticleFactory(factory.Factory):
     issue = factory.SubFactory(IssueFactory)

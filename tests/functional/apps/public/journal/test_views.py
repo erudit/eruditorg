@@ -638,9 +638,8 @@ class TestArticleDetailView:
             url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
             response = Client().get(url)
             assert response.status_code == 200
-            # Assert that the cache has only be called once, to store an issue
-            assert len(cache_mock.get.mock_calls) == 1
-            assert 'issue' in cache_mock.get.call_args[0][0]
+            # Assert that the cache has not be called.
+            assert cache_mock.get.call_count == 0
 
     def test_allow_ephemeral_articles(self):
         # When receiving a request for an article that doesn't exist in the DB, try querying fedora

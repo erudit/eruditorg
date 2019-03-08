@@ -680,7 +680,7 @@ class Issue(FedoraMixin, FedoraDated):
     # Issue-related methods and properties
     # --
 
-    @property
+    @cached_property
     def is_external(self):
         """
         Returns ``True`` if the issue is external. An issue is considered to be external if one
@@ -882,6 +882,11 @@ class Issue(FedoraMixin, FedoraDated):
     @catch_and_log
     def licenses(self):
         return self.erudit_object.get_droitsauteur(links_only=True)
+
+    def _should_use_cache(self):
+        if self.is_published:
+            return True
+        return False
 
 
 def fedora_only(method):
