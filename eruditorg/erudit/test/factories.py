@@ -175,16 +175,10 @@ class EmbargoedIssueFactory(IssueFactory):
 
 
 class NonEmbargoedIssueFactory(IssueFactory):
-    date_published = dt.datetime.now().date()
-    year = date_published.year - 5
-    journal = factory.SubFactory(
-        JournalFactory,
-        collection=factory.SubFactory(
-            CollectionFactory,
-            code='persee',  # not erudit
-            is_main_collection=False,
-        )
-    )
+    date_published = dt.datetime.now().date() - \
+        relativedelta(years=1 + max(months_cult, months_sc) / 12)
+    year = date_published.year
+    journal = factory.SubFactory(JournalFactory)
 
 
 class OpenAccessIssueFactory(IssueFactory):
@@ -192,13 +186,6 @@ class OpenAccessIssueFactory(IssueFactory):
         JournalFactory,
         open_access=True,
     )
-
-
-class OpenAccessIssueFactory(IssueFactory):
-    date_published = dt.datetime.now().date() - \
-        relativedelta(years=1 + max(months_cult, months_sc) / 12)
-    year = date_published.year
-    journal = factory.SubFactory(JournalFactory)
 
 
 class ArticleRef(Article):

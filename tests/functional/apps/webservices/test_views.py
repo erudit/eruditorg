@@ -4,7 +4,7 @@ import pytest
 from lxml import etree
 from django.urls import reverse
 from django.test import Client
-from erudit.test.factories import IssueFactory, EmbargoedIssueFactory, OpenAccessIssueFactory
+from erudit.test.factories import IssueFactory, EmbargoedIssueFactory, NonEmbargoedIssueFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -47,10 +47,10 @@ class TestRestrictionsView:
 class TestRestrictionsByJournalView:
 
     def test_that_journal_and_all_issues_works(self):
-        issue_openAccess_1 = OpenAccessIssueFactory(journal__collection__code='erudit')
+        issue_openAccess_1 = NonEmbargoedIssueFactory(journal__collection__code='erudit')
         journal = issue_openAccess_1.journal
-        issue_openAccess_2 = OpenAccessIssueFactory(journal=journal)
-        issue_openAccess_3 = OpenAccessIssueFactory(journal=journal)
+        issue_openAccess_2 = NonEmbargoedIssueFactory(journal=journal)
+        issue_openAccess_3 = NonEmbargoedIssueFactory(journal=journal)
 
         issue_whitelisted_1 = EmbargoedIssueFactory(journal=journal, force_free_access=True)
         issue_whitelisted_2 = EmbargoedIssueFactory(journal=journal, force_free_access=True)
