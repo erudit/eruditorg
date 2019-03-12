@@ -896,7 +896,9 @@ class GoogleScholarSubscribersView(CacheMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(GoogleScholarSubscribersView, self).get_context_data(**kwargs)
         context['subscribers'] = {}
-        subscriptions = JournalAccessSubscription.valid_objects.institutional()
+        subscriptions = JournalAccessSubscription.valid_objects.institutional().exclude(
+            organisation__google_scholar_opt_out=True,
+        )
         for subscription in subscriptions:
             context['subscribers'][subscription.id] = {
                 'institution': subscription.organisation.name,
@@ -923,7 +925,9 @@ class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
         else:
             # Otherwise, look for a valid institutional subscription and return its journals.
             try:
-                subscription = JournalAccessSubscription.valid_objects.institutional().get(
+                subscription = JournalAccessSubscription.valid_objects.institutional().exclude(
+                    organisation__google_scholar_opt_out=True,
+                ).get(
                     pk=kwargs.get('subscription_id'),
                 )
                 context['journals'] = subscription.get_journals()
