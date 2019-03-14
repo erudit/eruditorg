@@ -195,6 +195,46 @@ class TestIssueDetailSummary:
         assert mock_cache.get.call_count == expected_count
 
 
+class TestArticleDetailView:
+
+    @unittest.mock.patch('erudit.fedora.cache.cache')
+    @unittest.mock.patch('erudit.fedora.cache.get_datastream_file_cache')
+    @unittest.mock.patch('erudit.fedora.cache.get_cached_datastream_content')
+    @pytest.mark.parametrize('is_published, url_name, fixture, expected_count', [
+        # When an issue is not published, we should not get any cache.get() calls when displaying
+        # an article's PDF or XML.
+        (False, 'public:journal:article_raw_pdf', 'article.pdf', 0),
+        (False, 'public:journal:article_raw_xml', 'article.xml', 0),
+        # When an issue is published, we should get one cache.get() calls when displaying an
+        # article's PDF or XML.
+        (True, 'public:journal:article_raw_pdf', 'article.pdf', 1),
+        (True, 'public:journal:article_raw_xml', 'article.xml', 1),
+    ])
+    def test_datastream_caching(self, mock_cache, mock_get_datastream_file_cache, mock_get_cached_datastream_content, is_published, url_name, fixture, expected_count):
+        mock_cache.get.return_value = None
+        mock_get_datastream_file_cache.return_value = mock_cache
+        with open(FIXTURE_ROOT + '/' + fixture, mode='rb') as content:
+            mock_get_cached_datastream_content.return_value = content
+
+        article = ArticleFactory(
+            with_pdf=True,
+            issue__is_published=is_published,
+            issue__journal__open_access=True,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        mock_cache.get.reset_mock()
+
+        response = Client().get(url, {
+            'ticket': article.issue.prepublication_ticket,
+        })
+        assert mock_cache.get.call_count == expected_count
+
+
 @unittest.mock.patch.object(
     Issue,
     'erudit_object',

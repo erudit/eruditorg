@@ -128,7 +128,7 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
                 'Define {cls}.content_type.'.format(cls=self.__class__.__name__))
         return self.content_type
 
-    def get_datastream_content(self, fedora_object):
+    def get_datastream_content(self, fedora_object, use_cache=True):
         """
         Returns the content of the considered Fedora datastream.
 
@@ -137,7 +137,10 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         """
         try:
             assert hasattr(fedora_object, self.datastream_name)
-            content = get_cached_datastream_content(fedora_object, self.datastream_name)
+            if use_cache:
+                content = get_cached_datastream_content(fedora_object, self.datastream_name)
+            else:
+                content = getattr(fedora_object, self.datastream_name).content
         except (AssertionError, AttributeError):
             raise ImproperlyConfigured(
                 'The `{ds}` datastream cannot be retrieved on the {fedoracls} digital object. '
