@@ -3,6 +3,7 @@ from itertools import groupby
 from operator import attrgetter
 from string import ascii_uppercase
 import io
+import pysolr
 import random
 
 from django.conf import settings
@@ -982,3 +983,45 @@ class IssueExternalURLRedirectView(BaseExternalURLRedirectView):
 
     def get_collection(self, obj):
         return obj.journal.collection
+
+
+class JournalStatisticsView(PermissionRequiredMixin, TemplateView):
+    template_name = 'public/journal/journal_statistics.html'
+    permission_required = 'userspace:staff_access'
+
+    def get_context_data(self, **kwargs):
+        context = super(JournalStatisticsView, self).get_context_data(**kwargs)
+        solr = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
+        search_kwargs = {
+            'fq': [
+                'Corpus_fac:(Article OR Culturel)',
+                'Fonds_fac:(Érudit OR UNB)',
+            ],
+            'facet.field': [
+                'Corpus_fac',
+                'RevueAbr',
+            ],
+            'rows': 0,
+        }
+        results = solr.search('*:*', **search_kwargs)
+        facet_fields = results.raw_response['facet_counts']['facet_fields']
+        # Journal types.
+        # Facet counts are returned as a flat list, alterning between the facet name and the facet
+        # count, that's why we zip() the even and odd items from the list.
+        context['journal_types'] = zip(
+            facet_fields['Corpus_fac'][::2],
+            facet_fields['Corpus_fac'][1::2],
+        )
+        # Journals.
+        # Facet counts are returned as a flat list, alterning between the facet name and the facet
+        # count, that's why we get the index of the journal legacy code and add 1 to get the count.
+        context['journals'] = []
+        journals = Journal.objects.filter(collection__is_main_collection=True).order_by('name')
+        for journal in journals:
+            if journal.legacy_code in facet_fields['RevueAbr']:
+                index = facet_fields['RevueAbr'].index(journal.legacy_code)
+                count = facet_fields['RevueAbr'][index + 1]
+                context['journals'].append((journal.name, count))
+            else:
+                context['journals'].append((journal.name, 0))
+        return context
