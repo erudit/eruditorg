@@ -5,6 +5,7 @@ import ResultsController from './search/ResultsController';
 import ArticleDetailController from './journal/ArticleDetailController';
 import IssueDetailController from './journal/IssueDetailController';
 import JournalListController from './journal/JournalListController';
+import JournalDetailController from './journal/JournalDetailController';
 import CollectionListController from './thesis/CollectionListController';
 import SavedCitationListController from './citations/SavedCitationListController';
 import FormController from './editor/FormController';
@@ -20,6 +21,7 @@ const controllers = {
   'public:journal:article_detail': ArticleDetailController,
   'public:journal:issue_detail': IssueDetailController,
   'public:journal:journal_list': JournalListController,
+  'public:journal:journal_detail': JournalDetailController,
   'public:thesis:collection_list': CollectionListController,
   'public:citations:list': SavedCitationListController,
   'userspace:editor:form': FormController,
