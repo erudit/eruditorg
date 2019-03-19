@@ -4,7 +4,8 @@ import pytest
 import unittest.mock
 
 from django.template import Context
-from django.test import TestCase, override_settings
+from django.test import Client, TestCase, override_settings
+from django.urls import reverse
 
 from erudit.test.factories import IssueFactory, JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
@@ -166,6 +167,32 @@ class TestIssueDetailSummary:
             ],
             'type': 'subsection',
         }
+
+    @unittest.mock.patch('erudit.fedora.modelmixins.cache')
+    @pytest.mark.parametrize('is_published, expected_count', [
+        # When an issue is not published, the only cache.get() call we should get is for the
+        # journal. No cache.get() should be called for the issue or the articles.
+        (False, 1),
+        # When an issue is published, cache.get() should be called once for the journal, once for
+        # the issue and once for each article. There's an extra cache.get() call on the first
+        # article from the is_external() method on the issue, hance the 4 expected count.
+        (True, 4),
+    ])
+    def test_issue_caching(self, mock_cache, is_published, expected_count):
+        mock_cache.get.return_value = None
+
+        article = ArticleFactory(issue__is_published=is_published)
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'localidentifier': article.issue.localidentifier,
+        })
+        mock_cache.get.reset_mock()
+
+        response = Client().get(url, {
+            'ticket': article.issue.prepublication_ticket,
+        })
+        assert mock_cache.get.call_count == expected_count
 
 
 @unittest.mock.patch.object(
