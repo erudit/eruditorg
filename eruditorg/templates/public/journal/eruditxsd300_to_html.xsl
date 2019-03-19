@@ -2111,15 +2111,7 @@
   <xsl:template match="liensimple">
     <xsl:element name="a">
       <xsl:attribute name="href">
-        <!-- Encode URLs only when they're not already encoded. -->
-        <xsl:choose>
-          <xsl:when test="str:decode-uri(@href) = @href" xmlns:str="http://exslt.org/strings">
-            <xsl:value-of select="str:encode-uri(@href, false())" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:str="http://exslt.org/strings" />
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
-          </xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
       </xsl:attribute>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>

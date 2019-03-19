@@ -55,7 +55,7 @@ export default {
   },
 
   smooth_scroll : function () {
-    this.article.on('click', 'a[href*="#"]', (e) => {
+    this.article.on('click', 'a[href^="#"]', (e) => {
       if( e ) {
         e.preventDefault();
         e.stopPropagation();

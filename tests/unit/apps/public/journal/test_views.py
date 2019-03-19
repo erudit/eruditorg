@@ -295,15 +295,6 @@ class TestRenderArticleTemplateTag(TestCase):
         # Check that the blockquote is displayed before the second paragraph.
         assert '<blockquote class="bloccitation ">\n<p class="alinea">Citation</p>\n<cite class="source">Source</cite>\n</blockquote>\n<p class="alinea">Paragraphe</p>' in ret
 
-    def test_links_url_ecoding(
-            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
-        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1053699ar.xml')
-
-        # Check that links' URL are correctly ecoded.
-        assert '<a href="http://example.com%23test" id="ls2" target="_blank">Lien à encoder</a>' in ret
-        # Check that already encoded links' URL are not ecoded again.
-        assert '<a href="http://example.com%23test" id="ls3" target="_blank">Lien déjà encodé</a>' in ret
-
     def test_annexes_footnotes(
             self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
         ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1035294ar.xml')
