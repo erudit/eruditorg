@@ -6,7 +6,7 @@ from django.test import RequestFactory
 from django.views.generic import DetailView
 
 from erudit.test.factories import (
-    ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory
+    ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory, EmbargoedIssueFactory
 )
 from erudit.models import Article
 
@@ -115,11 +115,11 @@ class TestContentAccessCheckMixin:
     def test_can_grant_access_to_an_article_if_it_is_not_embargoed(self, single_article_view):
         # Setup
         article = NonEmbargoedArticleFactory.create()
+        issue_embargoed = EmbargoedIssueFactory(journal=article.issue.journal)
 
         view = single_article_view()
         view.object = article
         view.request = get_anonymous_request()
-
         # Run # check
         assert view.content_access_granted
 
@@ -277,6 +277,7 @@ class TestContentAccessCheckMixin:
     def test_inserts_a_flag_into_the_context(self, single_article_view):
         # Setup
         article = NonEmbargoedArticleFactory.create()
+        issue_embargoed = EmbargoedIssueFactory(journal=article.issue.journal)
         anonymous_request = get_anonymous_request()
 
         view = single_article_view()
