@@ -4,7 +4,8 @@ import pytest
 import unittest.mock
 
 from django.template import Context
-from django.test import TestCase, override_settings
+from django.test import Client, TestCase, override_settings
+from django.urls import reverse
 
 from erudit.test.factories import IssueFactory, JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
@@ -166,6 +167,25 @@ class TestIssueDetailSummary:
             ],
             'type': 'subsection',
         }
+
+
+class TestArticleDetailView:
+
+    def test_keywords_html_tags(self):
+        article = ArticleFactory(from_fixture='1055883ar')
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        # Check that HTML tags are displayed in the body.
+        assert '<ul>\n<li class="keyword">Charles Baudelaire, </li>\n<li class="keyword">\n<em>Fleurs du Mal</em>, </li>\n<li class="keyword">Seine, </li>\n<li class="keyword">mythe et réalité de Paris, </li>\n<li class="keyword">poétique du miroir</li>\n</ul>' in html  # noqa
+        # Check that HTML tags are not displayed in the head.
+        assert '<meta name="citation_keywords" lang="fr" content="Charles Baudelaire, Fleurs du Mal, Seine, mythe et réalité de Paris, poétique du miroir" />' in html
+
 
 
 @unittest.mock.patch.object(

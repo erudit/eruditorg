@@ -7,13 +7,13 @@
   {% endif %}
   {% endfor %}
   {{ abstract.content|safe }}
-  {% for lang, keywords in html_abstracts_keywords.items %}
+  {% for lang, keywords in html_keywords.items %}
   {% if lang == abstract.lang %}
   <div class="keywords">
     <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}</strong></p>
     <ul>
       {% for k in keywords %}
-      <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
+      <li class="keyword">{{ k|safe }}{% if not forloop.last %}, {% endif %}</li>
       {% endfor %}
     </ul>
   </div>

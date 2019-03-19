@@ -525,37 +525,30 @@ class BaseArticleDetailView(
     tracking_view_type = 'html'
 
     def get_context_data(self, **kwargs):
-
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
-        obj = context.get(self.context_object_name)
-
-        abstracts = self.object.erudit_object.get_abstracts(html=True)
-        abstracts_keywords = self.object.erudit_object.get_keywords()
-        other_keywords = abstracts_keywords.copy()
-        # Display HTML abstracts
-        abstracts_languages = [o['lang'] for o in abstracts]
-
-        for lang in abstracts_languages:
-            if lang in other_keywords.keys():
-                other_keywords.pop(lang)
 
         try:
+            abstracts = self.object.erudit_object.get_abstracts(html=True)
+            keywords = self.object.erudit_object.get_keywords(html=True)
+            # Remove keywords already associated with an abstract of the same language.
+            other_keywords = keywords.copy()
+            for abstract in abstracts:
+                if abstract['lang'] in other_keywords.keys():
+                    other_keywords.pop(abstract['lang'])
+            # Abstracts and keywords with HTML.
             context['html_abstracts'] = abstracts
-            context['html_abstracts_keywords'] = abstracts_keywords
+            context['html_keywords'] = keywords
             context['html_other_keywords'] = other_keywords
-        except ObjectDoesNotExist:
-            pass
-
-        # Display abstracts without HTML for metatags
-        try:
+            # Abstracts and keywords without HTML for metatags.
             context['meta_abstracts'] = self.object.erudit_object.get_abstracts(html=False)
+            context['meta_keywords'] = self.object.erudit_object.get_keywords(html=False)
+            # All titles for an article
+            context['titles'] = self.object.erudit_object.get_titles()
         except ObjectDoesNotExist:
             pass
-
-        # Display all titles for an article
-        context['titles'] = self.object.erudit_object.get_titles()
 
         # Get all article from associated Issue
+        obj = context.get(self.context_object_name)
         related_articles = list(obj.issue.get_articles_from_fedora())
 
         # Pick the previous article and the next article

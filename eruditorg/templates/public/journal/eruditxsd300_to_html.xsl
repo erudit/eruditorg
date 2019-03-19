@@ -385,7 +385,7 @@
               <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}</strong></p>
               <ul>
                 {% for k in keywords %}
-                <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
+                <li class="keyword">{{ k|safe }}{% if not forloop.last %}, {% endif %}</li>
                 {% endfor %}
               </ul>
             </div>
