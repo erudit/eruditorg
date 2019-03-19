@@ -128,6 +128,9 @@ class IssueAdmin(admin.ModelAdmin):
         )
     view_issue_on_site.short_description = _("Voir le numéro sur le site")
 
+    def get_readonly_fields(self, request, obj=None):
+        return self.readonly_fields + ('is_published',)
+
 
 class JournalInformationAdmin(TranslationAdmin):
     pass

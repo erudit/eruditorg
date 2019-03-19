@@ -23,6 +23,9 @@ class Organisation(models.Model):
 
     members = models.ManyToManyField(User, related_name='organisations', verbose_name=_('Membres'))
 
+    google_scholar_opt_out = models.BooleanField(
+        default=False, verbose_name=_('Ne pas inclure dans les programmes de Google Scholar'))
+
     objects = models.Manager()
     legacy_objects = LegacyOrganisationManager()
 
