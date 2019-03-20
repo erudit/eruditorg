@@ -416,6 +416,14 @@ class TestRenderArticleTemplateTag(TestCase):
         # There should be an hyphen between multiple months and no coma between month and year.
         assert '<p class="refpapier"><span class="volumaison"><span class="nonumero">Numéro 179</span>, Janvier–Avril 2018</span>, p. 1–2</p>' in ret
 
+    def test_separator_between_sections_in_different_languages(self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1046558ar.xml')
+        # There should not be a separator before the first section.
+        assert '<hr>\n<section id="s1n1"><div class="para" id="pa1">' not in ret
+        # There should be a separator before sections in different languages.
+        assert '<hr>\n<section id="s1n2"><div class="para" id="pa11">' in ret
+        assert '<hr>\n<section id="s1n3"><div class="para" id="pa21">' in ret
+
 
 class TestGoogleScholarSubscribersView:
 
