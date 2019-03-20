@@ -83,6 +83,10 @@
 
   &.maintenance {
     @extend .fallback;
+
+    p {
+        background-color: $yellow;
+    }
   }
 
 }
