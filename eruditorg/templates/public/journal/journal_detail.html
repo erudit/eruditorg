@@ -88,11 +88,11 @@
   }]
 }
 </script>
+
 {% endblock structured_data %}
 
 {% block body_id %}journal_detail{% endblock body_id %}
 {% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
-
 {% block inner_main %}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header row">
@@ -198,18 +198,18 @@
 
   {% if journal_info or issues %}
   <ul class="nav-tabs" role="tablist">
-    {% if journal_info.about %}<li role="presentation" class="active"><a href="#journal-info-about" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
+    {% if journal_info.about %}<li role="presentation" id="journal-info-about-li"><a href="#journal-info-about" onclick="window.location.hash='#journal-info-about';return false;" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
 
-    {% if issues %}<li role="presentation"><a href="#back-issues" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
+    {% if issues %}<li role="presentation" id="back-issues-li"><a href="#back-issues" onclick="window.location.hash='#back-issues';return false;" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
 
-    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation"><a href="#journal-info-editorial_policy" role="tab" data-toggle="tab">{% trans "Politique éditoriale et éthique" %}</a></li>{% endif %}
+    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation" id="journal-info-editorial_policy-li"><a href="#journal-info-editorial_policy" onclick="window.location.hash='#journal-info-editorial_policy';return false;" role="tab" data-toggle="tab">{% trans "Politique éditoriale et éthique" %}</a></li>{% endif %}
 
-    {% if journal_info.team %}<li role="presentation"><a href="#journal-info-team" role="tab" data-toggle="tab">{% trans "Comité de rédaction" %}</a></li>{% endif %}
+    {% if journal_info.team %}<li role="presentation" id="journal-info-team-li"><a href="#journal-info-team" onclick="window.location.hash='#journal-info-team';return false;" role="tab" data-toggle="tab">{% trans "Comité de rédaction" %}</a></li>{% endif %}
 
   </ul>
 
   <div class="tab-content">
-    <section role="tabpanel" class="tab-pane active journal-info-block" id="journal-info-about">
+    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about">
       <h2 class="sr-only">{% trans "À propos" %}</h2>
       {% if journal_info.about %}{{ journal_info.about|safe }}{% endif %}
       <section>
