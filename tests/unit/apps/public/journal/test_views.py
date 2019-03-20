@@ -331,6 +331,11 @@ class TestRenderArticleTemplateTag(TestCase):
         # An empty title should have the 'special' and 'empty' classes and should be empty.
         assert '<h2 class="special empty"></h2>' in ret
 
+    def test_volumaison_punctuation(self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1053504ar.xml')
+        # There should be an hyphen between multiple months and no coma between month and year.
+        assert '<p class="refpapier"><span class="volumaison"><span class="nonumero">Numéro 179</span>, Janvier–Avril 2018</span>, p. 1–2</p>' in ret
+
 
 class TestGoogleScholarSubscribersView:
 
