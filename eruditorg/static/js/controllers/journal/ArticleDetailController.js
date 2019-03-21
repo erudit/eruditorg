@@ -141,7 +141,7 @@ export default {
       fixedContentPos: true,
       mainClass: 'mfp-no-margins mfp-with-zoom',
       image: {
-        verticalFit: true,
+        verticalFit: false,
         titleSrc: false,
         markup: '<div class="mfp-figure">' +
                   '<div class="mfp-close"></div>' +
