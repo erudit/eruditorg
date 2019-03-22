@@ -270,16 +270,16 @@ class TestRenderArticleTemplateTag(TestCase):
         # Check that footnotes in section titles are stripped when displayed in
         # table of content and not stripped when displayed as section titles.
         assert '<a href="#s1n1">Titre</a>' in ret
-        assert '<h2>Titre <a href="#no1" id="re1no1" class="norenvoi" title="Note 1, avec espace entre deux marquages">[1]</a>\n</h2>' in ret
+        assert '<h2>Titre<a href="#no1" id="re1no1" class="norenvoi" title="Note 1, avec espace entre deux marquages">[1]</a>\n</h2>' in ret
 
         assert '<a href="#s1n2"><strong>Titre gras</strong></a>' in ret
-        assert '<h2><strong>Titre gras <a href="#no2" id="re1no2" class="norenvoi" title="Lien à encoder">[2]</a></strong></h2>' in ret
+        assert '<h2><strong>Titre gras<a href="#no2" id="re1no2" class="norenvoi" title="Lien à encoder">[2]</a></strong></h2>' in ret
 
         assert '<a href="#s1n3"><em>Titre italique</em></a>' in ret
-        assert '<h2><em>Titre italique <a href="#no3" id="re1no3" class="norenvoi" title="Lien déjà encodé">[3]</a></em></h2>' in ret
+        assert '<h2><em>Titre italique<a href="#no3" id="re1no3" class="norenvoi" title="Lien déjà encodé">[3]</a></em></h2>' in ret
 
         assert '<a href="#s1n4"><span class="petitecap">Titre petitecap</span></a>' in ret
-        assert '<h2><span class="petitecap">Titre petitecap <a href="#no4" id="re1no4" class="norenvoi" title="">[4]</a></span></h2>' in ret
+        assert '<h2><span class="petitecap">Titre petitecap<a href="#no4" id="re1no4" class="norenvoi" title="">[4]</a></span></h2>' in ret
 
     def test_space_between_two_tags(
             self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
