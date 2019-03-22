@@ -91,6 +91,39 @@
 
 }
 
+.site-messages {
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+
+  p {
+    padding: 1em;
+    font-size: 14px;
+    line-height: 1;
+    margin: 0;
+    text-align: center;
+    border: 0;
+    border-top: 1px solid $light-grey;
+  }
+
+  .site-message-debug p {
+    background-color: $mid-grey;
+  }
+  .site-message-info p {
+    background-color: $colour-success;
+  }
+  .site-message-warning p {
+    background-color: $yellow;
+  }
+  .site-message-error p {
+    background-color: $colour-warning;
+  }
+  .site-message-critical p {
+    background-color: $colour-error;
+  }
+}
+
 .alert-warning {
 
   p {
