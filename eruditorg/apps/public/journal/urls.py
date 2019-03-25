@@ -8,9 +8,7 @@ from . import feeds
 from . import views
 from . import views_compat
 
-app_name = "journal"
-
-urlpatterns = [
+journal_urlpatterns = ([
     url(_(r'^revues/$'), views.JournalListView.as_view(), name='journal_list'),
     url(_(r'^rss\.xml$'), feeds.LatestIssuesFeed(), name='latest_issues_rss'),
 
@@ -55,12 +53,11 @@ urlpatterns = [
         url(_(r'^numero/(?P<localidentifier>[\w-]+)/$'),
             views.IssueExternalURLRedirectView.as_view(), name='issue_external_redirect'),
     ])),
+], 'journal')
 
-    # Google Scholar URLs
-    url(_(r'^scholar/'), include([
-        url(_(r'^subscribers\.xml$'), views.GoogleScholarSubscribersView.as_view(), name='scholar_subscribers'),  # noqa
-        url(_(r'^subscriber_journals\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
-        url(_(r'^subscriber_journals_(?P<subscription_id>[0-9]+)\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
-    ])),
-
-]
+# Google Scholar URLs
+google_scholar_urlpatterns = ([
+    url(r'^subscribers\.xml$', views.GoogleScholarSubscribersView.as_view(), name='subscribers'),  # noqa
+    url(r'^subscriber_journals\.xml$', views.GoogleScholarSubscriberJournalsView.as_view(), name='subscriber_journals_erudit'),  # noqa
+    url(r'^subscriber_journals_(?P<subscription_id>[0-9]+)\.xml$', views.GoogleScholarSubscriberJournalsView.as_view(), name='subscriber_journals'),  # noqa
+], 'google_scholar')
