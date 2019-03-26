@@ -366,6 +366,11 @@ RAVEN_CONFIG = {
     'dsn': None,
 }
 
+# Openmetrics
+# -----------------------------------
+
+EXPOSE_OPENMETRICS = False
+
 # MailChimp settings
 # -----------------------------------
 

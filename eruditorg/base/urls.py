@@ -33,6 +33,11 @@ urlpatterns = [
     url('^', include(urls_compat.urlpatterns)),
 ]
 
+if settings.EXPOSE_OPENMETRICS:
+    urlpatterns.append(
+        url('^prometheus/', include('django_prometheus.urls')),
+    )
+
 urlpatterns += i18n_patterns(
     url(r'^jsi18n/$', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
     url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
