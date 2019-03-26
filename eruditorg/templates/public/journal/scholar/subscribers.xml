@@ -5,7 +5,7 @@
     <subscriber id="erudit">
         <institution>Consortium Érudit</institution>
         <electronic_subscriptions>
-            <url>https://{{ request.site.domain }}{% url 'public:journal:scholar_subscriber_journals' %}</url>
+            <url>https://{{ request.site.domain }}{% url 'google_scholar:subscriber_journals_erudit' %}</url>
         </electronic_subscriptions>
     </subscriber>
     {% for id, subscriber in subscribers.items %}
@@ -15,7 +15,7 @@
         <patron_ip_range>{{ ip_range|join:'-' }}</patron_ip_range>
         {% endfor %}
         <electronic_subscriptions>
-            <url>https://{{ request.site.domain }}{% url 'public:journal:scholar_subscriber_journals' id %}</url>
+            <url>https://{{ request.site.domain }}{% url 'google_scholar:subscriber_journals' id %}</url>
         </electronic_subscriptions>
     </subscriber>
     {% endfor %}

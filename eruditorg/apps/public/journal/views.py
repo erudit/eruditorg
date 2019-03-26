@@ -40,7 +40,6 @@ from erudit.solr.models import get_fedora_ids
 from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
-from base.viewmixins import CacheMixin
 from core.metrics.metric import metric
 from core.subscription.models import JournalAccessSubscription
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
@@ -304,11 +303,10 @@ class JournalAuthorsListView(SingleJournalMixin, TemplateView):
         return context
 
 
-class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamView):
+class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
     """
-    cache_timeout = 60 * 60 * 2  # 2 hours
     content_type = 'image/jpeg'
     datastream_name = 'logo'
     fedora_object_class = JournalDigitalObject
@@ -871,11 +869,10 @@ class ArticleRawPdfFirstPageView(
         response.content = get_pdf_first_page(content)
 
 
-class ArticleMediaView(CacheMixin, SingleArticleMixin, FedoraFileDatastreamView):
+class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     """
     Returns an image file embedded in the INFOIMG datastream.
     """
-    cache_timeout = 60 * 60 * 24 * 15  # 15 days
     datastream_name = 'content'
     fedora_object_class = MediaDigitalObject
 
@@ -888,8 +885,7 @@ class ArticleMediaView(CacheMixin, SingleArticleMixin, FedoraFileDatastreamView)
         return fedora_object.content.mimetype
 
 
-class GoogleScholarSubscribersView(CacheMixin, TemplateView):
-    cache_timeout = 60 * 60 * 24  # 24 hours
+class GoogleScholarSubscribersView(TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscribers.xml'
 
@@ -910,8 +906,7 @@ class GoogleScholarSubscribersView(CacheMixin, TemplateView):
         return context
 
 
-class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
-    cache_timeout = 60 * 60 * 24  # 24 hours
+class GoogleScholarSubscriberJournalsView(TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscriber_journals.xml'
 

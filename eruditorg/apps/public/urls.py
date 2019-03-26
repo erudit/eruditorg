@@ -6,10 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 
 from . import views
+from .journal.urls import journal_urlpatterns
 
-app_name = "public"
-
-urlpatterns = [
+public_urlpatterns = ([
     url(r'^$', views.HomeView.as_view(), name='home'),
 
     url(_(r'^compte/'), include('apps.public.auth.urls')),
@@ -25,5 +24,5 @@ urlpatterns = [
         name='20_years'),
 
     # The journal URLs are at the end of the list because some of them are catchalls.
-    url(r'^', include('apps.public.journal.urls')),
-]
+    url(r'^', include(journal_urlpatterns)),
+], 'public')
