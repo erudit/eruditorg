@@ -584,8 +584,8 @@ class TestArticle:
             {'content': 'Abstract', 'lang': 'en'},
         ])
         assert article.abstracts == [
-             {'content': 'Abstract', 'lang': 'en', 'type': 'main', 'typeresume': 'resume'},
-             {'content': 'Resume', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume'},
+             {'content': 'Abstract', 'lang': 'en', 'type': 'main', 'typeresume': 'resume', 'title': None},
+             {'content': 'Resume', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume', 'title': None},
         ]
 
     def test_html_abstracts(self):
@@ -594,8 +594,8 @@ class TestArticle:
             {'content': 'Abstract', 'lang': 'en'},
         ])
         assert article.html_abstracts == [
-             {'content': '<p class="alinea"><em>Abstract</em></p>', 'lang': 'en', 'type': 'main', 'typeresume': 'resume'},
-             {'content': '<p class="alinea"><em>Resume</em></p>', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume'},
+             {'content': '<p class="alinea"><em>Abstract</em></p>', 'lang': 'en', 'type': 'main', 'typeresume': 'resume', 'title': None},
+             {'content': '<p class="alinea"><em>Resume</em></p>', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume', 'title': None},
         ]
 
     @pytest.mark.parametrize('language,expected_abstract', [
