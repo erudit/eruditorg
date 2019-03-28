@@ -98,8 +98,9 @@ class Journal(FedoraMixin, FedoraDated):
     ``Journal`` is part"""
 
     type = models.ForeignKey(
-        JournalType, null=True, blank=True, verbose_name=_('Type'),
-        on_delete=models.CASCADE
+        JournalType, null=False, blank=False, verbose_name=_('Type'),
+        # 2 = Scientific
+        default=2, on_delete=models.CASCADE
     )
     """ The type of the journal """
 
