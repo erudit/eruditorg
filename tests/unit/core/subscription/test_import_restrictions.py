@@ -212,6 +212,24 @@ def test_existing_organisation_is_renamed_properly():
     call_command("import_restrictions", *[], **{})
     assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
 
+@pytest.mark.django_db
+def test_can_skip_subscribers_with_no_email():
+    journal = JournalFactory()
+    abonne1 = AbonneFactory.create(courriel="")
+    abonne1.save()
+
+    IpabonneFactory.create(abonneid=abonne1.pk)
+    revue1 = RevueFactory.create(titrerevabr=journal.code)
+
+    sub1 = RevueabonneFactory.create(
+        abonneid=abonne1.abonneid,
+        revueid=revue1.revueid
+    )
+
+    call_command("import_restrictions", *[], **{'dry_run': False})
+
+    assert LegacyAccountProfile.objects.count() == 0
+    assert JournalAccessSubscriptionPeriod.objects.count() == 0
 
 @pytest.mark.django_db
 def test_dry_run_mode_does_not_create_anything():

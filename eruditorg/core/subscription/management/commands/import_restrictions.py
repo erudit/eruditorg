@@ -199,6 +199,13 @@ class Command(BaseCommand):
             subscriber_id=restriction_subscriber.pk
         )
 
+        if not restriction_subscriber.courriel:
+            logger.warning(
+                "import_restriction_subscriber",
+                msg="Cannot import subscriber with empty email"
+            )
+            return
+
         try:
             profile = LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
             profile.organisation.name = restriction_subscriber.abonne
