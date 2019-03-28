@@ -315,6 +315,15 @@ class TestJournalDetailView:
         assert response.context['content_access_granted']
         assert response.context['subscription_type'] == 'individual'
 
+    def test_journal_detail_has_elements_for_anchors(self):
+        journal = JournalFactory()
+        issue = IssueFactory(journal=journal)
+        url = journal_detail_url(journal)
+        response = self.client.get(url)
+        content = response.content
+        assert b'<li role="presentation"' in content
+        assert b'<section role="tabpanel"' in content
+
 
 class TestJournalAuthorsListView:
     def test_provides_only_authors_for_the_first_available_letter_by_default(self):
@@ -1146,3 +1155,4 @@ def test_article_citation_doesnt_html_escape(export_type):
     response = Client().get(url)
     content = response.content.decode()
     assert title in content
+
