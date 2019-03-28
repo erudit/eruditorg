@@ -84,8 +84,8 @@
 {% if article.fedora_object.pdf.exists %}
 <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% endif %}
-{% for keywords_lang in article.keywords %}
-<meta name="citation_keywords" lang="{{ keywords_lang.lang }}" content="{% for k in keywords_lang.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+{% for lang, keywords in meta_keywords.items %}
+<meta name="citation_keywords" lang="{{ lang }}" content="{% for k in keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endfor %}
 {% for reference in citation_references %}
 <meta name="citation_reference" content="{{ reference.title}}" />
