@@ -1918,7 +1918,6 @@
     </li>
   </xsl:template>
   <xsl:template match="renvoi">
-    <xsl:text>&#160;</xsl:text>
     <xsl:element name="a">
       <xsl:attribute name="href">
         <xsl:text>#</xsl:text><xsl:value-of select="@idref"/>
