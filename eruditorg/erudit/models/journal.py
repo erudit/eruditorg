@@ -99,7 +99,7 @@ class Journal(FedoraMixin, FedoraDated):
 
     type = models.ForeignKey(
         JournalType, null=False, blank=False, verbose_name=_('Type'),
-        default=JournalType.CODE_SCIENTIFIC, on_delete=models.CASCADE
+        on_delete=models.CASCADE
     )
     """ The type of the journal """
 
