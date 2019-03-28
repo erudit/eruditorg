@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Nombre d'articles" %}{% endblock title %}
+{% block breadcrumb %}
+{{ block.super }}
+<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
+{% endblock breadcrumb %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h1>{% trans "Nombre d'articles" %}</h1>
+    <hr />
+    <h2>{% trans "Par type" %}</h2>
+    <dl>
+      {% for journal_type in journal_types %}
+      <dt>{{ journal_type.0 }}&#160;:</dt>
+      <dd>{{ journal_type.1 }}</dd>
+      {% endfor %}
+    </dl>
+    <br />
+    <hr />
+    <h2>{% trans "Par revue" %}</h2>
+    <dl>
+      {% for journal in journals %}
+      <dt>{{ journal.0 }}&#160;:</dt>
+      <dd>{{ journal.1 }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+</div>
+{% endblock content %}

@@ -13,6 +13,9 @@ journal_urlpatterns = ([
     url(_(r'^revues/$'), views.JournalListView.as_view(), name='journal_list'),
     url(_(r'^rss\.xml$'), feeds.LatestIssuesFeed(), name='latest_issues_rss'),
 
+    # Statistic page for total and per journal number of articles.
+    url(_(r'^revues/statistiques/$'), views.JournalStatisticsView.as_view(), name='statistics'),
+
     # Journal URLs
     url(_(r'^revues/(?P<code>[\w-]+)/'), include([
         url(r'^$', views.JournalDetailView.as_view(), name='journal_detail'),
