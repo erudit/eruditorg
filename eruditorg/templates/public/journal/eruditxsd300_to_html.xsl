@@ -610,9 +610,17 @@
     <span class="volumaison">
       <xsl:for-each select="volume | nonumero[1] | pub/periode | pub/annee | pagination">
         <xsl:apply-templates select="."/>
-        <xsl:if test="position() != last()">
-          <xsl:text>, </xsl:text>
-        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="name(.) = name(following-sibling::*)">
+            <xsl:text>–</xsl:text>
+          </xsl:when>
+          <xsl:when test="name(.) = 'periode' and name(following-sibling::*) = 'annee'">
+            <xsl:text> </xsl:text>
+          </xsl:when>
+          <xsl:when test="position() != last()">
+            <xsl:text>, </xsl:text>
+          </xsl:when>
+        </xsl:choose>
       </xsl:for-each>
     </span>
   </xsl:template>
