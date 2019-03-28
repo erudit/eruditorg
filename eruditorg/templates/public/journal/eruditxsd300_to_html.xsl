@@ -57,10 +57,8 @@
             </p>
           </xsl:if>
           <h1 class="doc-head__title">
-            <xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
-            <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
-            <xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
-            <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
+            <xsl:apply-templates select="liminaire/grtitre/titre | liminaire/grtitre/sstitre" mode="title"/>
+            <xsl:apply-templates select="liminaire/grtitre/titreparal | liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
             {% if only_summary %}<span><em>[{% trans 'Notice' %}]</em></span>{% endif %}
           </h1>

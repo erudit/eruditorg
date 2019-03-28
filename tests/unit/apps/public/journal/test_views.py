@@ -424,6 +424,11 @@ class TestRenderArticleTemplateTag(TestCase):
         assert '<hr>\n<section id="s1n2"><div class="para" id="pa11">' in ret
         assert '<hr>\n<section id="s1n3"><div class="para" id="pa21">' in ret
 
+    def test_multilingual_titreparal_and_sstitreparal_order(self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1058157ar.xml')
+        # Check that titreparal and sstitreparal are in the right order.
+        assert '<h1 class="doc-head__title">\n<span class="titre">Introduction au dossier spécial</span><span class="sstitre">À la découverte du lien organisationnel : avez-vous lu A. O. Hirschman ?</span><span class="titreparal">Introduction to the special section</span><span class="sstitreparal">Exploring the Organizational Link: Have You Read A. O.\n        Hirschman?</span><span class="titreparal">Introducción Dossier Especial</span><span class="sstitreparal">Descubriendo las relaciones organizativas: ¿leyó a A.O.\n        Hirschman?</span>\n</h1>' in ret
+
 
 class TestGoogleScholarSubscribersView:
 
