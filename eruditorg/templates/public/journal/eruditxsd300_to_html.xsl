@@ -802,6 +802,9 @@
   </xsl:template>
   <!--*** BODY ***-->
   <xsl:template match="corps">
+    <xsl:if test="@lang != preceding-sibling::*[@lang]">
+      <hr />
+    </xsl:if>
     <xsl:apply-templates select="*[not(self::texte)]"/>
   </xsl:template>
 
