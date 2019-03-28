@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="minimal" idproprio="1056823ar" typeart="compterendu" lang="fr" ordseq="8"><admin><infoarticle><idpublic scheme="doi">10.7202/1056823ar</idpublic><pagination>
+            <ppage>611</ppage>
+            <dpage>619</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="rgd01024" lang="fr en"><titrerev>Revue générale de droit</titrerev><titrerevabr>rgd</titrerevabr><idissn>0035-3086</idissn><idissnnum>2292-2512</idissnnum><directeur sexe="masculin"><fonction lang="fr">Directeur</fonction><nompers><prenom>Ernest</prenom><nomfamille>Caparros</nomfamille></nompers></directeur></revue><numero id="rgd04358"><volume>24</volume><nonumero>4</nonumero><pub><periode>Décembre</periode><annee>1993</annee></pub><pubnum><date typedate="publication">2019-02-27</date></pubnum></numero><editeur><nomorg>Éditions Wilson &amp; Lafleur, inc.</nomorg></editeur><prod><nomorg>Wilson &amp; Lafleur</nomorg></prod><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Droits d'auteur © <nomorg>Faculté de droit, Section de droit civil, Université d'Ottawa</nomorg>, 1994</droitsauteur></admin><liminaire><grtitre><surtitre>Notules</surtitre>
+                
+                <trefbiblio>Jean-Guy Desjardins, <marquage typemarq="italique">Traité de l’évaluation foncière</marquage>, Montréal, Wilson &amp; Lafleur Ltée, 1992, 547 pages, ISBN 2-89127-227-7</trefbiblio><trefbiblio>Michel Filion, <marquage typemarq="italique">Code de procédure des assemblées</marquage>, Bernières, Éditions associations et entreprises, 1992, 160 pages, ISBN 2-921512-00-9</trefbiblio><trefbiblio>Marc Giguère, <marquage typemarq="italique">Le droit de la PME — Notions fondamentales</marquage>, Québec, Les Presses de l’Université Laval, 1993, 266 pages, ISBN 2-7637-7316-8</trefbiblio><trefbiblio>Suzanne Guèvremont, <marquage typemarq="italique">Injonction 1987-1992</marquage>, Ville Mont-Royal, collection Atout Maître, SOQUIJ, 1992, 197 pages, ISBN 2-89032-598-9</trefbiblio><trefbiblio>André Jean, Louise Martineau, Lise Saintonge-Poitevin (éd.),<marquage typemarq="italique"> Loi et règlements sur la faillite et l’insolvabilité</marquage>, Montréal, Wilson &amp; Lafleur Ltée, 1992, 395 pages, ISBN 2-920831-34-8</trefbiblio><trefbiblio>Jacques-Yvan Morin, José Woehrling, <marquage typemarq="italique">Les constitutions du Canada et du Québec du régime français à nos jours</marquage>, Montréal, Les Éditions Thémis, 1992, 978 pages, ISBN 22-920376-98-5</trefbiblio><trefbiblio>Pierre Patenaude (sous la direction de), <marquage typemarq="italique">Québec-Communauté française de Belgique : Autonomie et Spécificité dans le cadre d’un système fédéral</marquage>, Montréal, Wilson et Lafleur Ltée, 1991, 231 pages, ISBN 2-89127-205-6</trefbiblio><trefbiblio>Hubert Reid, <marquage typemarq="italique">Code de procédure civile du Québec — complément jurisprudence et doctrine</marquage>, Collection Alter Ego, 8<exposant>e</exposant> édition, Montréal, Wilson &amp; Lafleur Ltée, 1992, 643 pages, ISBN 2-89127-216-1</trefbiblio><trefbiblio><marquage typemarq="italique">La Revue juridique des étudiants et étudiantes de l’Université Laval</marquage>, Montréal, Wilson &amp; Lafleur Ltée, 1992, 107 pages, ISSN 0832-848X</trefbiblio><trefbiblio>Maurice Tancelin, Daniel Gardner, <marquage typemarq="italique">Jurisprudence commentée sur les obligations</marquage>, 5<exposant>e</exposant> édition, Montréal, Wilson &amp; Lafleur Ltée, 1992, 865 pages, ISBN 2-89127-217-X</trefbiblio><trefbiblio>Michèle Thériault, Philippe Fortin, <marquage typemarq="italique">Droit des valeurs mobilières au Québec</marquage>, Montréal, Éditions Wilson et Lafleur, Martel Ltée, 1992, Volumes 1 et 2, ISBN 2-920831-31-3</trefbiblio><trefbiblio>Louise Viau, <marquage typemarq="italique">Recueil d’arrêts en preuve pénale</marquage>, Montréal, Les Éditions Thémis, 1992, 654 pages, ISBN 2-89400-008-1</trefbiblio><trefbiblio>Louise Viau, Anne-Marie Boisvert, Diane Labrèche, <marquage typemarq="italique">Droit pénal général; Recueil de jurisprudence</marquage>, Montréal, Les Éditions Thémis, 1992, 1168 pages, ISBN 2-89400-009-X</trefbiblio>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Gina</prenom><nomfamille>Lévesque</nomfamille></nompers></auteur><auteur id="au2"><nompers><prenom>Marcel</prenom><nomfamille>Lacoursière</nomfamille></nompers></auteur><auteur id="au3"><nompers><prenom>Michèle</prenom><nomfamille>Lafontaine</nomfamille></nompers></auteur><auteur id="au4"><nompers><prenom>Josée</prenom><nomfamille>Laliberté</nomfamille></nompers></auteur><auteur id="au5"><nompers><prenom>Catherine</prenom><nomfamille>Moroz</nomfamille></nompers></auteur></grauteur></liminaire><corps lang="fr"><texte typetexte="roc">﻿Notules
+cessus d’évaluation. Pour obtenir des conclu-
+sions fiables, l’évaluateur devra, en effet,
+utiliser la méthode statistique qui est claire-
+ment décrite par des exemples, des graphiques
+et des tableaux.
+              Me Desjardins termine son
+ouvrage avec un chapitre qui traite de la récon-
+ciliation, procédure essentielle pour permettre
+à l’évaluateur d’estimer et de choisir la valeur
+finale d’un immeuble à partir des données
+compilées au cours de l’évaluation.
+              Donc, un ouvrage de référence
+qui aborde un sujet sur lequel peu de documen-
+tation était disponible pour les gens œuvrant
+dans le domaine. Il faut noter également
+qu’une bibliographie ainsi qu’un index
+viennent compléter ce traité. Me Desjardins,
+avocat et lui-même évaluateur, a su, au fil des
+cinq cents pages de ce volume, vulgariser des
+notions qui souvent, pour les débutants,
+semblent à prime abord obscures.
+              Gina Lévesque
+Michel Filion, Code de procédure des
+assemblées, Bernières, Editions associations
+et entreprises, 1992, 160 pages, ISBN
+2-921512-00-9.
+              Du bon déroulement d’une
+assemblée dépend souvent la qualité des déci-
+sions qui y sont prises. C’est précisément ce à
+quoi s’attaque le Code de procédure des
+assemblées, de Michel Filion, avocat et auteur
+d’un certain nombre d’ouvrages dans ce
+domaine. Ce code, en format de poche pour en
+faciliter l’utilisation, sera particulièrement
+utile pour toutes les associations, les entre-
+prises, les municipalités et les établissements
+d’enseignement, de santé ou de services
+sociaux.
+              Un bon fonctionnement démo-
+cratique requiert des procédures claires, facile-
+ment compréhensibles et souples, faute de quoi
+il devient trop facile aux initiés d’influencer
+indûment les discussions et les débats dans des
+assemblées délibérantes.
+              L’auteur a repris la codification
+d’une partie des pratiques actuelles dans les
+Jean-Guy Des jardins, Traité de Vévalua-
+tion foncière, Montréal, Wilson &amp; Lafleur
+Ltée, 1992, 547 pages, ISBN 2-89127-227-7.
+              Le domaine de l’évaluation fon-
+cière a subi, au cours des dernières années, une
+évolution en raison de la modernisation des
+techniques qui sont utilisées dans ce champ
+d’activité. Me Desjardins a jugé opportun de
+fournir aux personnes œuvrant dans ce secteur
+un outil complet qui reflète ces récents déve-
+loppements. S’adressant d’abord aux étudiants
+en évaluation et aux évaluateurs, cet ouvrage
+pourra également être d’une très grande utilité
+pour les individus qui veulent se familiariser
+avec les principes de base de l’évaluation fon-
+cière.
+              Pour introduire son traité, l’au-
+teur s’attarde sur certains concepts juridiques
+liés à l’application des techniques d’évalua-
+tion. La notion d’immeuble et celle d’unité
+d’évaluation sont donc expliquées dans le pre-
+mier chapitre du livre, à l’aide des dispositions
+législatives pertinentes et d’extraits de juris-
+prudence.
+              La deuxième section du volume
+s’attarde à différents principes en relation avec
+le concept de la valeur réelle. Après avoir
+élaboré sur les éléments qui composent cette
+notion, Me Desjardins traite de la controverse
+entourant l’objet de l’évaluation et nous livre
+les différentes théories qui s’affrontent à ce
+sujet. Comme le droit de propriété est intime-
+ment lié à l’objet de l’évaluation, cette partie se
+termine par un exposé sur les caractères de ce
+droit.
+              Le titre troisième est consacré
+aux méthodes et aux techniques d’évaluation
+foncière. Entre autres, on y traite de la valeur
+des terres et des terrains, de la dépréciation, de
+la méthode par comparaison et de plusieurs
+autres procédés utilisés dans le domaine de
+l’évaluation foncière. Le champ d’application
+de chacune de ces démarches nous est expliqué
+dans les moindres détails.
+              Comme complément à la partie
+précédente, l’auteur aborde ensuite une tech-
+nique mathématique qui sert à analyser les
+données qui ont été recueillies pendant le pro-
+(1993) 24 R.G.D. 611-619﻿(1993) 24 R.G.D. 611-619
+Revue générale de droit
+ 612
+catégoriquement qu’il s’agit vraiment d’une
+branche spécifique du droit corporatif. Comme
+le souligne ce professeur à la Faculté de droit
+de l’Université Laval, « [l]e législateur corpo-
+ratif dit non, le législateur fiscal a envie de dire
+oui, mais la pratique corporative, fiscale et
+financière ne cesse d’organiser et d’institution-
+naliser son existence en marge de sa consécra-
+tion officielle. » (p. 1)
+              Déjà, certains États américains le
+reconnaissent et l’encadrent dans sa globalité.
+De son côté, le législateur corporatif n’intro-
+duit que des mesures particulières, dans des
+lois distinctes, sans envisager l’introduction
+d’un régime spécial. Cependant, l’auteur tâche
+de nous démontrer comment le droit de la PME
+existe et progresse dans un contexte bien réel.
+              Le premier des huit titres situe le
+lecteur dans la réalité spécifique de la PME.
+D’abord, Me Giguère définit les paramètres
+nous permettant de replacer le statut de la PME
+dans son contexte socio-économique. Il déter-
+mine dès le départ l’importance économique
+du sujet traité. Ensuite, il expose les différentes
+méthodes d’identification juridique adoptées
+par le législateur, qui varient au gré des résul-
+tats souhaités (compagnie privée, société
+fermée, etc.). Finalement, il examine les carac-
+téristiques socio-économiques et les problèmes
+particuliers qu’entraîne la notion de PME.
+              Le titre II étudie l’opportunité
+d’incorporer une entreprise, qu’elle soit nou-
+velle ou déjà existante. (L’auteur emploie l’ex-
+pression nouvelle ou « ancienne », expression
+qui s’intégre difficilement au style du texte). Il
+rappelle les connaissances fiscales nécessaires
+à la bonne compréhension des mécanismes
+retrouvés dans les lois de l’impôt sur le revenu,
+plus particulièrement celles concernant l’entre-
+prise incorporée. Il est alors plus à même de
+mettre en parallèle les avantages et les incon-
+vénients de l’incorporation d’une entreprise.
+              Lorsque la décision d’incorporer
+est prise, il faut s’assurer que la compagnie
+saura s’adapter aux nouvelles obligations qui
+lui seront imposées, et qu’elle pourra fonc-
+tionner dans le cadre prévu. Font donc l’objet
+du titre III, les clauses spécifiques à inclure
+dans les statuts et les règlements, telles la capi-
+talisation, la protection des actionnaires —
+minoritaires ou non, le vote, etc.
+              Ces aménagements particuliers
+doivent également impliquer un certain
+nombre de conventions comme actionnaires,
+conventions soulevant un intérêt prépondérant
+différentes assemblées, puis il propose cer-
+taines réformes qui ne manqueront pas d’inté-
+resser les habitués des assemblées. Ces
+réformes et cette présentation des règles de
+procédure poursuivent deux objectifs, l’un
+s’adressant au fond et amenant un discerne-
+ment quant aux règles qui devraient s’appli-
+quer aux assemblées et l’autre se référant à la
+forme, recherchant la clarté, la précision et la
+concision dans la présentation des règles de
+façon à rendre ces dernières facilement acces-
+sibles.
+             Après avoir présenté les règles
+générales de base concernant la souveraineté
+de l’assemblée, le quorum et d’autres questions
+du même type, monsieur Filion nous résume
+les rôles que doivent jouer les principaux par-
+ticipants d’une assemblée, tels le président, le
+secrétaire, les membres, etc. Une section est
+consacrée aux droits de parole, une autre à la
+mise aux voix et une pour les propositions et
+les demandes. Enfin, l’auteur dresse un portrait
+et propose un fonctionnement précis pour le
+bon déroulement de l’assemblée.
+             Dans le travail de Michel Filion,
+outre la codification de règles d’usages, nous
+pouvons étudier certaines règles qui sont le
+résultat d’une réforme importante. Ainsi, de
+nouvelles règles prévoient un tout nouvel ordre
+de priorité des propositions et demandes, établi
+en tenant compte de l’objet même des proposi-
+tions. D’autres admettent un débat restreint
+pour certains points en particulier. Enfin, nous
+retrouvons certaines modifications par rapport
+à d’autres guides, dont par exemple la possibi-
+lité pour les membres de délibérer même en
+l’absence de proposition.
+             Voici donc un document des plus
+utiles, qui participe de plain-pied aux habi-
+tudes démocratiques de plus en plus recher-
+chées dans différents secteurs de la vie en
+société.
+             Marcel Lacoursière
+Marc Giguère, Le droit de la PME —
+Notions fondamentales, Québec, Les Presses
+de l’Université Laval, 1993,266 pages, ISBN
+2-7637-7316-8.
+             Le droit de la PME : un titre qui
+aura certainement fait sursauter plus d’un
+juriste. En effet, l’auteur soulève la question de
+l’existence de ce droit de la petite et moyenne
+entreprise, mais peu se risqueront à affirmer﻿613
+Notules
+Suzanne Guèvremont, Injonction 1987-
+1992,   Ville Mont-Royal, collection Atout
+Maître, SOQUIJ, 1992, 197 pages, ISBN
+2-89032-598-9.
+              Ce volume est le sixième titre de
+la collection Atout Maître. Il répertorie plus de
+500 décisions publiées en matière d’injonction,
+notamment dans les domaines des biens et de
+la propriété, du contrat (clause de non-
+concurrence), de droit administratif, commer-
+cial ou municipal, du travail et de la propriété
+intellectuelle.
+              En plus des injonctions, la re-
+cherche présentée comprend également le
+recours prévu par la Loi sur la qualité de Ven-
+vironnement, de la Loi sur V aménagement et
+V urbanisme et par la procédure fédérale.
+Certains commentaires expliquent la structure
+de la jurisprudence à l’intérieur du plan et sou-
+lignent les différentes tendances jurispruden-
+tielles ou les jugements les plus importants.
+              La première partie regroupe les
+arrêts relatifs aux principes généraux des
+injonctions, telles les règles de common law, la
+compétence du tribunal, la théorie des « mains
+propres » ou l’injonction contre la Couronne.
+Une deuxième traite plus spécifiquement de
+l’injonction interlocutoire, des critères d’ad-
+missibilité, de la règle de l’intérêt public et de
+la procédure fédérale.
+              La troisième partie s’attarde à la
+procédure. L’auteure aborde ici des notions
+relatives aux injonctions provisoires, dont les
+critères d’admissibilité et la durée, à l’affi-
+davit, à la signification, au cautionnement ou à
+l’appel, pour ne nommer que celles-là.
+              Enfin, la quatrième partie, qui
+retient une centaine de pages à elle seule, est
+consacrée aux circonstances d’application,
+madame Guèvremont aborde tour à tour les
+arrêts relatifs aux injonctions permanentes,
+dans différents domaines de droit, puis ceux
+relatifs aux injonctions interlocutoires ou pro-
+visoires, toujours par domaine de droit.
+              La présentation de tous ces juge-
+ments, ajoutés aux commentaires de l’auteure,
+font de cet ouvrage un outil de première qualité
+pour les juristes et les professionnels intéressés
+par la question.
+pour le praticien et le théoricien du droit. Le
+contrat d’achat-vente constitue la clé du bon
+fonctionnement des PME en régissant les
+transferts d’intérêts dans la compagnie, que ce
+soit dans une situation de décès ou inter vivos.
+Par ailleurs, ce quatrième titre étudie les autres
+ententes organisant les relations entre les
+détenteurs d’actions : droit de préemption,
+élection des administrateurs, engagement de
+leur vote, bref, tous les accords pouvant inter-
+venir entre les actionnaires ou entre les admi-
+nistrateurs afin de faciliter l’administration de
+la compagnie.
+              « Le financement de la petite
+entreprise s’articule [...] sur de nombreux traits
+qui lui sont propres, liés tant à la personnalité
+de ses membres qu’à la hiérarchie de ses
+besoins. » (p. 160) C’est ainsi que l’auteur
+introduit le titre V sur le financement de la
+PME. Financements passif (obtention d’un
+bien à crédit), actif (capitaux), privé, public,
+sont traités tour à tour de façon plus ou moins
+succincte.
+              Le titre VI présente une synthèse,
+pouvant être utile au praticien, des dispositions
+fiscales touchant les petites et moyennes entre-
+prises : taux d’imposition variables selon cer-
+tains facteurs, revenus, dépenses, taxes et
+contributions financières influant sur les res-
+sources des PME.
+              Finalement, les deux derniers
+titres traitent brièvement du franchisage, qui
+entraîne inévitablement la création d’une
+PME, et de la faillite, puisque le taux d’échec
+demeure considérable pour les PME.
+              Ce volume possède l’avantage
+d’être bien structuré, clair et concis. La table
+des matières extrêmement bien détaillée faci-
+lite l’orientation du lecteur. Cependant, il est à
+noter que cet ouvrage s’adresse aux initiés du
+droit corporatif. En effet, il expose le droit
+applicable aux petites et moyennes entreprises
+en référant aux règles générales qui s’appli-
+quent parallèlement. Une bibliographie sélec-
+tive suggère néanmoins quelques ouvrages et
+articles permettant de compléter l’étude en
+question.
+              En somme, la PME est un véhi-
+cule commercial très important au Québec.
+Mais à défaut du législateur d’intervenir globa-
+lement, les spécialistes devront utiliser les
+outils qui s’offrent à tous les entrepreneurs.
+Marcel Lacoursière
+Michèle Lafontaine﻿(1993) 24 R.G.D. 611-619
+Revue générale de droit
+ 614
+Jacques-Yvan Morin, José Woehrling,
+Les constitutions du Canada et du Québec du
+régime français à nos jours, Montréal, Les
+Éditions Thémis, 1992, 978 pages, ISBN
+22-920376-98-5.
+               Les deux auteurs sont des consti-
+tutionnalistes bien connus et professeurs de
+droit public à l’Université de Montréal. Ils
+nous offrent ici une présentation globale de
+cette dimension de notre histoire que constitue
+notre vie constitutionnelle.
+               La première partie de l’ouvrage
+(pp. 1 à 121) est consacrée à l’évolution cons-
+titutionnelle du Canada et du Québec de 1534
+à 1867, et elle a été rédigée par monsieur
+Morin. Les institutions, l’exercice du pouvoir
+et les droits et libertés des sujets sont abordés
+tour à tour sous la constitution de la Nouvelle-
+France, pour la période de 1534 à 1760, puis
+sous le régime britannique de 1760 à 1867.
+               Mais c’est la deuxième partie
+(pp. 123 à 571), écrite par le professeur
+Woehrling, qui occupe la place principale dans
+ce livre. Elle se rapporte à la période de 1867
+à nos jours. Le contenu et les lacunes de la Loi
+constitutionnelle de 1867 y sont traités de
+façon exhaustive, de même que l’accession
+progressive du Canada à la souveraineté, jus-
+qu’au Statut de Westminster. Les problèmes
+soulevés par la modification et le rapatriement
+de la constitution de 1982 ne manqueront pas
+d’attirer l’attention de ceux qui sont intéressés
+par cette partie récente de notre histoire. Les
+péripéties entourant cette période d’intenses
+activités politiques sont présentées de façon
+plutôt factuelle, ce qui en fait un document
+d’histoire intéressant en soi. Le relevé des prin-
+cipaux événements et des documents a été
+complété jusqu’après l’échec du Lac Meech et
+les propositions fédérales de septembre 1991.
+               Les auteurs ont réservé une partie
+du livre (pp. 573 à 910) à la reproduction de
+24 documents à portée constitutionnelle. Parmi
+ceux-ci, soulignons la Commission de Fran-
+çois Ier à Jacques Cartier pour l’établissement
+du Canada, le 17 octobre 1540, les Capitu-
+lations de Québec (1759) et de Montréal
+(1760), les Quatre-Vingt-Douze Résolutions de
+VAssemblée législative du Bas-Canada (1834)
+et Y Accord constitutionnel du 3 juin 1987 (non
+entré en vigueur — Accord du Lac Meech).
+               Il              s’agit d’un travail imposant et
+exhaustif qui deviendra sans doute un outil de
+référence de première qualité en matière de
+ André Jean, Louise Martineau, Lise
+ Saintonge-Poitevin (éd.), Loi et règle-
+ ments sur la faillite et Vinsolvabilité,
+ Montréal, Wilson &amp; Lafleur Ltée, 1992,
+ 395 pages, ISBN 2-920831-34-8.
+              Cette publication contient les
+ versions française et anglaise de la Loi sur la
+ faillite et l’insolvabilité et ses amendements,
+ entrés en vigueur le 30 novembre 1992. Le
+ texte de la Loi provient soit des Lois révisées
+ du Canada, soit des suppléments de 1985 et
+ 1986 entrés en vigueur le 12 décembre 1988,
+ ou soit encore des statuts annuels postérieurs à
+ cette date. On y trouve également les princi-
+ paux règlements adoptés en vertu de cette Loi
+ soit, le règlement régissant la faillite et l’insol-
+ vabilité, le règlement sur le paiement métho-
+ dique des dettes ainsi que le règlement sur les
+ arrangements avec les créanciers des compa-
+ gnies. Tous proviennent de la codification des
+ règlements du Canada de 1978 ainsi que de la
+ Gazette du Canada, partie II et toutes les modi-
+ fications, adoptées depuis la date d’entrée en
+ vigueur de chacun de ces règlements, ont été
+ intégrées au texte.
+              D’ailleurs, un tableau indicateur
+ des modifications à la Loi entre le 12 décembre
+ 1988 et le 30 novembre 1992, ainsi que des
+ modifications aux règlements entre le 1er jan-
+ vier 1978 et le 30 novembre 1992, a été inséré
+ au tout début de la publication. Il fait état
+ notamment de la loi modificative, de la date de
+ son entrée en vigueur de même que de sa réfé-
+ rence et, en ce qui a trait aux règlements, au
+ règlement modifié et à la référence de sa modi-
+ fication dans la Gazette du Canada.
+              La Loi sur la faillite et l’insolva-
+ bilité, en tant que telle, contient une table des
+ matières et une table de concordance entre les
+ dispositions de la Loi sur la faillite de 1970 et
+ celle de 1985. Un index est aussi présent afin
+ de faciliter la consultation du lecteur.
+              Avec les 116 formules annexées
+ au règlement régissant la faillite et l’insolvabi-
+ lité et les 20 annexées au règlement sur le paie-
+ ment méthodique des dettes donnant, entre
+ autres, un exemple d’affidavit, d’avis d’audi-
+ tion ou de cession, cette publication s’avère
+ une source de référence par excellence pour les
+ personnes, juristes ou non, qui s’intéressent de
+ près ou de loin au droit de la faillite.
+            Josée Laliberté﻿ 615
+Notules
+nected by a unifying theme. Not only has
+Patenaude organized the papers in a clear and
+logical manner, but the authors themselves
+have bestowed upon the collection a greater
+sense of unity through repeated cross-
+referencing among authors in addition to their
+similarities and differences between their
+system and their trans-Atlantic counterparts’.
+               Catherine Moroz
+ Hubert Reid, Code de procédure civile du
+ Québec — complément jurisprudence et doc-
+ trine, Collection Alter Ego, 8e édition,
+ Montréal, Wilson &amp; Lafleur Ltée, 1992, 643
+ pages, ISBN 2-89127-216-1.
+              Voici la huitième édition de cet
+ ouvrage qui nous est présenté chaque année
+ par l’auteur Hubert Reid. Ce volume de la
+ Collection Alter Ego contient une mise à jour
+ au 1er janvier 1992, et en ce qui concerne les
+ décisions de la Cour suprême du Canada, les
+ recherches se sont poursuivies jusqu’au
+ 15 avril de la même année.
+              La présentation du volume de-
+ meure fidèle à celle des années antérieures. Au
+ total, cinq parties composent cet ouvrage. La
+ première consiste en une table des abréviations
+ qui se révèle un outil indispensable dans ce
+ genre d’ouvrage.
+              La seconde partie intitulée : Ju-
+ risprudence et doctrine constitue le corps de ce
+ livre et est, bien sûr, la plus importante. Pour la
+ plupart des articles du C.p.c., nous avons
+ d’abord accès à des notes explicatives extraites
+ des rapports présentés en 1964 par les commis-
+ saires chargés de rédiger le Code de procédure
+ civile actuel. Cet élément est très intéressant
+ puisqu’il nous permet de prendre connaissance
+ du contexte dans lequel les commissaires ont
+ conçu le C.p.c. Ensuite on retrouve pour
+ chaque article un résumé succinct des déci-
+ sions les plus pertinentes de nos tribunaux.
+ Notons que l’ouvrage ne contient pas toute la
+ jurisprudence se rapportant aux articles du
+ C.p.c., mais plutôt les décisions les plus
+ récentes, ou encore celles un peu plus
+ anciennes mais ayant conservé leur pertinence.
+ Des renvois à des résumés apparaissant sous
+ d’autres articles sont également fournis par
+ l’auteur et la plupart des dispositions sont com-
+ plétées par des références à la doctrine lorsque
+ celles-ci sont disponibles.
+droit constitutionnel, particulièrement du point
+de vue francophone.
+             Marcel Lacoursière
+Pierre Patenaude (sous la direction de),
+Québec-Communauté française de Belgique :
+Autonomie et Spécificité dans le cadre dyun
+système fédéral, Montréal, Wilson et Lafleur
+Ltée, 1991, 231 pages, ISBN 2-89127-205-6.
+             As linguistic minorities coping in
+federal systems, the Walloons and Québécois
+find themselves in startingly similar situations
+in the 1990’s. In March, 1991, a conference
+was held at the University of Sherbrooke to
+examine the degree of self-government attrib-
+uted to each of the groups as well as to evaluate
+the effectiveness of this autonomy in pre-
+serving their cultural and linguistic specificity.
+             Pierre Patenaude brings together
+the papers presented during this conference in
+five chapters exploring aspects of the central
+theme. Each chapter consists of an essay by a
+Walloon jurist and one by a Québécois jurist
+which examine the questions from their own
+national perspectives. Chapter 1 has Pierre
+Patenaude and Etienne Cerexhe discussing the
+division of legislative powers in Canada and
+Belgium respectively. In Chapter 2, Guy
+Tremblay and Jean-Claude Scholson show
+who holds the power of the purse in their coun-
+tries. Fundamental rights (Chapter 3) in
+Québec are examined by Pierre Blache and in
+Belgium by Silvio Marcus-Helmons. José
+Woehrling studies the principle of equality and
+non-discriminating from a Québec standpoint,
+while Xavier Delgrange does the same in a
+Belgian context in Chapter 4. Finally, in
+Chapter 5, the sub-theme of international rela-
+tions is surveyed by Armand de Mestral (who
+looks at Québec’s own international relations)
+and by Etienne Cerexhe (who explores the
+international relations of both Belgium’s com-
+munities and its language-based regions).
+             While the substance of the Can-
+adian perspective presented by the various
+Québec jurists at the conference is by no means
+news even to the average Canadian law stu-
+dent, for most North American readers uniniti-
+ated in Belgian law, the essays presented by
+the Walloon jurists will prove instructive and
+eye-opening. However, the object of any col-
+lection of essays lies in bringing together in
+one volume ideas from various sources all con-﻿(1993) 24 R.G.D. 611-619
+Revue générale de droit
+616
+une réflexion portant sur l’identité de la per-
+sonne pouvant invoquer l’abus de droits et sur
+les recours disponibles.
+              L’intégrité du territoire québé-
+ cois dans l’hypothèse de la souveraineté est le
+ titre de l’article rédigé par Pascal Girard. Ce
+ texte d’actualité, étant donné la situation cons-
+ titutionnelle, élabore, dans une première partie,
+ les moyens pouvant assurer l’intégrité du terri-
+ toire québécois, et particulièrement sur le prin-
+ cipe d'uti possidetis. La deuxième section
+ examine la possibilité d’un retranchement de
+ territoire advenant la souveraineté du Québec.
+              Dans un même ordre d’idées,
+ dans : De l’existence d’une convention consti-
+ tutionnelle reconnaissant le droit du Québec à
+ l’autodétermination, Caroline Beauchamps se
+ base sur des critères, dégagés par la Cour
+ suprême du Canada pour conclure à l’existence
+ d’une convention constitutionnelle, afin de
+ vérifier si le Québec peut prétendre à sa souve-
+ raineté.
+              Le dernier texte retenu pour
+ publication intégrale s’intitule : Le sida : son
+ assurabilité. Suzie Guillemette, auteure de cet
+ article, s’interroge sur les difficultés soulevées
+ par cette maladie infectueuse dans le domaine
+ de l’assurance-vie.
+              La deuxième section de la Revue
+ contient dix-huit sommaires de textes égale-
+ ment rédigés par les étudiants et étudiantes de
+ l’Université Laval. Les sujets abordés dans ces
+ articles sont très variés et touchent tous les
+ domaines du droit.
+              Donc, un numéro de la Revue
+ juridique qui renferme, encore une fois, des
+ textes bien rédigés et d’actualité. Bravo aux
+ étudiants pour cette belle initiative qui, en plus
+ de les enrichir sur le plan académique, leur
+ accorde une plus grande visibilité dans le
+ milieu juridique.
+              Gina Lévesque
+ Maurice Tancelin, Daniel Gardner,
+ Jurisprudence commentée sur les obligations,
+ 5e édition, Montréal, Wilson &amp; Lafleur
+ Ltée, 1992, 865 pages, ISBN 2-89127-217-X.
+             Maurice Tancelin et Daniel
+ Gardner nous présentent la cinquième édition
+ de leur volume Jurisprudence commentée sur
+ les obligations. Désireux d’offrir aux étudiants
+             Finalement, les trois dernières
+parties de l’ouvrage sont composées respecti-
+vement d’une table de la doctrine, d’une table
+de la jurisprudence et d’une table des lois et
+des règlements cités dans le livre.
+             Donc, en conservant le style de
+son ouvrage, l’auteur réussit encore une fois à
+fournir un document juridique très utile pour la
+personne à la recherche des plus récents déve-
+loppements juridiques concernant les disposi-
+tions du Code de procédure civile.
+             Gina Lévesque
+La Revue juridique des étudiants et étu-
+diantes de VVniversité Laval, Montréal,
+Wilson &amp; Lafleur Ltée, 1992, 107 pages,
+ISSN 0832-848X.
+              Cette revue juridique est une ini-
+tiative des étudiants et étudiantes de l’Univer-
+sité Laval. À l’origine, elle a été créée pour
+permettre la diffusion des travaux de recherche
+effectués dans le cadre du baccalauréat en droit
+et pour faire connaître ces mêmes étudiants à la
+communauté juridique. Le présent numéro
+constitue le sixième volume de la Revue juri-
+dique, qui est publiée sur une base annuelle.
+              Comme la plupart des étudiants
+en droit, ceux de l’Université Laval doivent, au
+cours de leurs études exécuter certains travaux
+de recherche. Devant cette réalité incontour-
+nable, certains d’entre eux y ont vu la pos-
+sibilité de profiter au maximum de cette
+expérience. Ainsi, chaque année, un comité de
+sélection choisit les quatre meilleurs textes et
+les retient pour publication intégrale. De plus,
+on sélectionne certains travaux qui se retrouve-
+ront également dans la Revue mais sous forme
+de sommaires que le lecteur intéressé pourra se
+procurer par la poste.
+              Cette année les quatre textes
+primés abordent divers domaines de notre
+droit. Le premier, intitulé : Abus des droits
+contractuels lors de la prise de possession par
+un fiduciaire ou un banquier, a été rédigé par
+Luc Vachon. Après avoir cerné les pouvoirs de
+prise de possession et de liquidation conférés
+aux fiduciaires et aux banquiers par différents
+textes législatifs, monsieur Vachon étudie l’ex-
+tension de la théorie de l’abus de droits au
+domaine contractuel. Par la suite, l’auteur
+envisage plusieurs circonstances où l’exercice
+des droits d’un créancier constituera un abus
+de droits. Finalement, le texte se termine par﻿617
+Notules
+tions, sans donner d’indices sur cet ouvrage.
+Le lecteur ayant pris conscience de la qua-
+trième édition devinera sans doute que la réfé-
+rence vise le volume de Me Tancelin Des
+obligations — contrat et responsabilité, dans
+son édition de 1988. Cependant, le juriste
+non initié à la jurisprudence commentée sur
+les obligations devra effectuer quelques
+recherches supplémentaires afin de com-
+prendre les renvois.
+              Quoi qu’il en soit, cette nouvelle
+ édition de la Jurisprudence commentée sur les
+ obligations contient de précieuses informa-
+ tions pour le praticien soucieux de vérifier
+ l’état du droit des obligations, aussi bien que
+ pour l’étudiant voulant approfondir ses con-
+ naissances sur le sujet.
+              Michèle Lafontaine
+ Michèle Thériault, Philippe Fortin,
+ Droit des valeurs mobilières au Québec,
+ Montréal, Éditions Wilson et Lafleur,
+ Martel Ltée, 1992, Volumes 1 et 2, ISBN
+ 2-920831-31-3.
+              Les praticiens du droit des va-
+ leurs mobilières au Québec sont enfin servis :
+ Mes Fortin et Thériault, avocats et professeurs
+ de l’Université du Québec à Montréal, ont pré-
+ paré un ouvrage impressionnant sur le sujet,
+ qui permettra aux intéressés de retrouver faci-
+ lement de multiples références. Les deux
+ volumes sont publiés sous forme de feuilles
+ mobiles (numérotation par chapitre), ce qui en
+ permettra une mise à jour régulière.
+              Les textes complets de la Loi et
+ du Règlement sur les valeurs mobilières ainsi
+ que des Instructions générales québécoises et
+ canadiennes y sont présentés dans le Vo-
+ lume 1, accompagnés d’un historique détaillé
+ article par article (qui contient à lui seul
+ 478 pages), des tables de concordance de la
+ Loi et du Règlement sur les valeurs mobilières,
+ par articles, et d’un index analytique de la loi.
+              Le Volume 2 nous présente des
+ annotations à la Loi, au Règlement et aux
+ Instructions générales. Les auteurs ont procédé
+ à une classification par article des principales
+ directives administratives et décisions inter-
+ prétatives rendues par la Commission des
+ valeurs mobilières du Québec (C.V.M.Q.) et
+ par les tribunaux judiciaires depuis l’entrée en
+ vigueur de la réforme majeure de la Loi, en
+ 1983. Des renvois ont également été inclus
+ et aux praticiens un guide sûr et pratique sur le
+ droit actuel des obligations, ils ont complété
+ leur ouvrage en ajoutant des arrêts en matière
+ d’offres et de consignation, ainsi que d’évalua-
+ tion des dommages-intérêts en cas de décès.
+ De plus, ils ont remplacé trois arrêts en matière
+ de responsabilité hospitalière, d’accidents
+ d’automobile et de prescription en cas de fail-
+ lite. Enfin, ils ont tenu compte de deux nou-
+ velles décisions de la Cour suprême venant
+ préciser celles de la Cour d’appel déjà réperto-
+ riées. (Il est à noter que leur recherche couvre
+ les arrêts publiés avant 1992.)
+             Le volume est toujours divisé en
+deux parties, soit les sources des obligations et
+les effets des obligations. Différentes rubriques
+regroupent les extraits d’arrêts pertinents,
+chacun ne se rapportant qu’à une seule ques-
+tion de droit. Cependant, les auteurs ne
+manquent pas de référer aux autres décisions
+susceptibles de présenter un intérêt particulier.
+Bref, cette cinquième édition reste fidèle à son
+objectif premier de mettre les extraits rapportés
+dans la perspective de l’évolution, de la légis-
+lation, de la jurisprudence et de la doctrine.
+             A cet égard, les auteurs n’avaient
+d’autre choix que de tenir compte de l’entrée
+en vigueur imminente du nouveau Code civil
+du Québec. C’est bien ce qu’ils ont fait en
+ajoutant, à la référence aux articles du Code
+civil du Bas-Canada, les articles correspon-
+dants du nouveau Code, sans toutefois en faire
+l’objet de leurs commentaires. En outre, ils ont
+annexé, à la table de la législation citée, une
+table des articles du Code civil du Québec (non
+en vigueur) se rapportant aux numéros des
+arrêts. Par contre, ils prennent soin de préciser
+que le renvoi ne suppose pas une identité de
+solution entre les deux versions du Code civil.
+Malgré tout, dans la mesure où la majorité des
+dispositions relatives aux obligations ne subi-
+ront que des modifications de forme, ces réfé-
+rences demeureront utiles. Par ailleurs, certains
+nouveaux articles s’inspirent des solutions
+développées par les tribunaux; la jurisprudence
+actuelle restera donc un outil privilégié d’inter-
+prétation.
+             Le lecteur pourra retrouver faci-
+lement ce qu’il cherche grâce à la table de la
+législation citée (avec son annexe sur le nou-
+veau Code), à l’index des sujets et à la table
+alphabétique des arrêts rapportés. Une seule
+chose est à déplorer: les auteurs signalent,
+avant chaque extrait d’arrêt, les numéros de
+paragraphes correspondants dans Des obliga-﻿ (1993) 24 R.G.D. 611-619
+Revue générale de droit
+618
+ pourrait entraîner une seule présentation alpha-
+ bétique et, afin d’éviter au lecteur un retour à
+ la table des arrêts, le numéro de la page où se
+ situe chacun d’eux dans l’ouvrage est donné.
+              Pour permettre à l’usager de ce
+recueil de faire référence à la pagination origi-
+nale des jugements, la numérotation utilisée
+dans les recueils officiels, où ils sont publiés,
+est indiquée dans le corps du texte ou en marge
+entre crochets.
+              Finalement, il est intéressant de
+noter que seule la version française des déci-
+sions de la Cour suprême a été reproduite, cet
+ouvrage étant destiné en premier lieu aux
+étudiants inscrits à la Faculté de droit de l’Uni-
+versité de Montréal. Cependant, constituant un
+outil précieux, ce recueil pourrait fort bien
+s’avérer un instrument de travail indispensable
+pour la majorité des juristes et des personnes
+s’intéressant à cette partie du droit pénal.
+              Josée Laliberté
+Louise Viau, Anne-Marie Boisvert, Diane
+Labrèche, Droit pénal général; Recueil
+de jurisprudence, Montréal, Les Editions
+Thémis, 1992, 1168 pages, ISBN 2-89400-
+009-X.
+              Le présent ouvrage a pour unique
+but de présenter et regrouper la majeure partie
+des arrêts fondamentaux de la jurisprudence
+canadienne en matière de droit pénal. En effet,
+puisque les principes de cette matière sont
+généralement non codifiés, il faut nécessaire-
+ment faire appel à la common law pour con-
+naître leur application, d’où l’importance de la
+jurisprudence.
+              Ce regroupement permet ainsi
+d’offrir une vue d’ensemble du système pénal
+canadien en mettant l’accent sur les aspects
+communs tout autant que sur les aspects qui
+distinguent les infractions criminelles des
+infractions réglementaires et en accordant aux
+arrêts de la Cour suprême du Canada concer-
+nant l’interprétation des garanties constitution-
+nelles, toute l’importance qu’ils méritent. Cet
+ouvrage ne peut cependant être vraiment com-
+plet étant donné l’abondance de la jurispru-
+dence et la longueur de certains jugements.
+              Afin de faciliter la consultation
+de ce recueil, les auteures ont, en plus d’avoir
+reproduit les différents arrêts dans un ordre
+alphabétique, fait précéder chaque numéro de
+ pour permettre aux lecteurs de retrouver rapi-
+ dement les articles susceptibles d’être en inter-
+ action. Pour chaque article, des indications
+ nous sont fournies sur le but de la disposi-
+ tion, sur des directives administratives (avis
+ et décisions de la C.V.M.Q., de nature admi-
+ nistrative et d’application générale), sur des
+ décisions interprétatives (judiciaires ou quasi
+ judiciaires), sur des renvois relatifs à tout autre
+ article de la Loi ou du Règlement et à toute ins-
+ truction générale québécoise et canadienne (y
+ inclus un bref rappel de leur contenu) ayant un
+ lien avec l’article sous étude ainsi que sur le
+ titre du délégataire et des pouvoirs conférés par
+ la Commission lorsqu’applicables.
+              Voilà donc un ouvrage de réfé-
+ rence complet qui vient s’ajouter à la docu-
+ mentation légale québécoise, dans un domaine
+ vital qui prend de plus en plus d’importance
+ dans notre société à l’heure de la mondialisa-
+ tion des marchés et de l’accroissement des
+ interpénétrations économiques.
+              Marcel Lacoursière
+ Louise Viau, Recueil d’arrêts en preuve
+ pénale, Montréal, Les Éditions Thémis,
+ 1992, 654 pages, ISBN 2-89400-008-1.
+              Le présent ouvrage a pour but de
+ regrouper en un seul volume les arrêts fonda-
+ mentaux de la jurisprudence canadienne en
+ matière de preuve pénale. Etant donné qu’il
+ faut nécessairement faire appel à la common
+ law pour connaître les règles qui la régissent,
+ l’étude de la jurisprudence et son analyse
+ approfondie sont d’une importance capitale.
+ Ainsi, on y retrouve plus particulièrement les
+ arrêts de la Cour suprême du Canada puisque,
+ la Charte canadienne des droits et libertés
+ ayant un impact considérable sur le processus
+ pénal, il importe de connaître l’interprétation
+ qu’en donne la Cour et la position qu’elle pré-
+ tend adopter.
+              Afin de faciliter la consultation
+ de cet ouvrage, les différents arrêts y sont
+ reproduits par ordre alphabétique et ce, autant
+ dans la table des arrêts que dans le recueil
+ même. De plus, chaque numéro de page du
+ recueil est précédé d’une lettre de l’alphabet
+ indiquant ainsi au lecteur l’endroit où il se situe
+ relativement à l’arrêt recherché.
+              Un plan analytique du contenu
+ des décisions qui sont reproduites est aussi
+ présent, palliant ainsi aux inconvénients que﻿ 619
+Notules
+articles 91 et 92 de la Loi constitutionnelle de
+1867 y sont reproduits en annexe.
+              Bien qu’ayant comme objectif
+premier de s’adresser aux étudiants des
+facultés de droit, ce recueil s’avère un outil
+indispensable et fort utile pour la majorité des
+juristes pratiquant ou s’intéressant au droit
+pénal général.
+              Josée Laliberté
+page du volume d’une lettre situant ainsi de
+façon excellente le lecteur par rapport à l’al-
+phabet. Un plan analytique du contenu des
+décisions est aussi présent afin de pallier aux
+inconvénients que pourraient comporter une
+présentation alphabétique.
+             De plus, pour augmenter la qua-
+lité de la citation des arrêts, la numérotation
+utilisée dans les recueils officiels est reproduite
+entre crochets dans le corps du texte ou en
+marge et un trait diagonal indique le début de
+la page de la version originale. Enfin, les</texte></corps></article>

@@ -158,15 +158,15 @@
 </li>
 <li>
   <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}">
-   {% if article.issue.html_title %}
-   {{ article.issue.html_title|striptags|safe|truncatewords_html:10 }}
+   {% if article.issue.title %}
+   {{ article.issue.title|safe|truncatewords:10 }}
    {% else %}
    {{ article.issue.volume_title_with_pages }}
    {% endif %}
   </a>
 </li>
 <li>
-  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}">{{ citation_title_metadata|truncatewords_html:10 }}</a>
+  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}">{{ citation_title_metadata|truncatewords:10 }}</a>
 </li>
 {% endblock breadcrumb %}
 

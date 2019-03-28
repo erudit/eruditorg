@@ -235,6 +235,27 @@ class TestArticleDetailView:
         assert mock_cache.get.call_count == expected_count
 
 
+class TestArticleDetailView:
+
+    def test_that_article_titles_are_truncated_in_breadcrumb(self):
+        article = ArticleFactory(
+            from_fixture='1056823ar',
+            localidentifier='article',
+            issue__localidentifier='issue',
+            issue__year='2000',
+            issue__journal__code='journal',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        assert '<a href="/fr/revues/journal/2000-issue/article/">Jean-Guy Desjardins, Traité de l’évaluation foncière, Montréal, Wilson &amp; Lafleur ...</a>' in html  # noqa
+
+
 @unittest.mock.patch.object(
     Issue,
     'erudit_object',
