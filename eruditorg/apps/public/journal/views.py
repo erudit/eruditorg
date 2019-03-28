@@ -891,7 +891,7 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
         return '{0}.{1}'.format(issue_pid, self.kwargs['media_localid'])
 
     def get_content_type(self, fedora_object):
-        return fedora_object.content.mimetype
+        return str(fedora_object.content.mimetype)
 
 
 class GoogleScholarSubscribersView(TemplateView):

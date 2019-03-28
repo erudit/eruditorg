@@ -141,7 +141,38 @@ export default {
       fixedContentPos: true,
       mainClass: 'mfp-no-margins mfp-with-zoom',
       image: {
-        verticalFit: true
+        verticalFit: false,
+        titleSrc: false,
+        markup: '<div class="mfp-figure">' +
+                  '<div class="mfp-close"></div>' +
+                  '<figure>' +
+                    '<div class="mfp-top-bar">' +
+                      '<div class="mfp-title"></div>' +
+                    '</div>' +
+                    '<div class="mfp-img"></div>' +
+                    '<figcaption>' +
+                      '<div class="mfp-bottom-bar">' +
+                        '<div class="mfp-counter"></div>' +
+                      '</div>' +
+                    '</figcaption>' +
+                  '</figure>' +
+                '</div>',
+      },
+      callbacks: {
+        open: function() {
+          // Put the figure caption above the figure.
+          $(this.content).find('.mfp-top-bar .mfp-title').prepend(
+            $(this.currItem.el).parent('figure').find('figcaption .legende').clone()
+          );
+          // Put the figure notes under the figure.
+          $(this.content).find('.mfp-bottom-bar').prepend(
+            $(this.currItem.el).parent('figure').find('.alinea').clone()
+          );
+          // Make sure the caption is not out of the window for big figures.
+          $(this.content).parent('.mfp-content').css('margin-top',
+            $(this.content).find('.mfp-top-bar').height() - 20
+          );
+        },
       },
       zoom: {
         enabled: true,

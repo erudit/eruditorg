@@ -430,6 +430,14 @@ button {
       margin: 0;
     }
   }
+  .mfp-top-bar {
+    margin-bottom: -$mfp-image-padding-bottom + 4;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    cursor: auto;
+  }
   .mfp-bottom-bar {
     margin-top: -$mfp-image-padding-bottom + 4;
     position: absolute;
