@@ -2,11 +2,8 @@
 import os
 import tempfile
 import subprocess
-import io
 import mimetypes
 
-from django.template.loader import get_template
-from weasyprint import HTML
 from weasyprint.urls import default_url_fetcher
 from django.conf import settings
 
@@ -84,29 +81,3 @@ def local_url_fetcher(url):
         return asset
 
     return default_url_fetcher(url)
-
-
-def generate_pdf(template_name, file_object=None, context=None, base_url=None):
-    """
-    Generates a PDF into the given file object from a specific Django template.
-    """
-    tmpl = get_template(template_name)
-    # calling replace() on a django SafeString leads to messy stuff sometimes
-    html = str(tmpl.render(context))
-    if file_object is None:
-        file_object = io.BytesIO()
-
-    try:
-        HTML(string=html, base_url=base_url, url_fetcher=local_url_fetcher).write_pdf(file_object)
-    except Exception:
-        # the 0xAD character is a soft hyphen. If we don't strip it, we *sometimes* get a decoding
-        # error at the weasyprint/Cairo level. It's not an encoding problem per se: the 0xAD
-        # character is encoded just fine. The problem is in the way that weasyprint splits lines
-        # during layout. It seems to sometimes split utf-8 multibytes characters in two.
-        # It's, however, very tricky to isolate. We could only manage to reproduce the problem
-        # on whole document rendering so far and we went with this temporary bandaid.
-        # ref eruditorg#1640
-        html = html.replace('\xad', '')
-        HTML(string=html, base_url=base_url, url_fetcher=local_url_fetcher).write_pdf(file_object)
-
-    return file_object

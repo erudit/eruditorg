@@ -12,7 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.template import RequestContext, loader
+from django.template import loader
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.encoding import force_bytes
@@ -40,7 +40,7 @@ from erudit.models import Issue
 from erudit.solr.models import get_fedora_ids
 from erudit.utils import locale_aware_sort, qs_cache_key
 
-from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
+from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
 from core.metrics.metric import metric
 from core.subscription.models import JournalAccessSubscription
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
@@ -802,26 +802,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     tracking_view_type = 'pdf'
 
     def write_datastream_content(self, response, content):
-        # We are going to put a generated coverpage at the beginning of our PDF
-        article = self.get_content()
-
-        erudit_object = article.get_erudit_object()
-        titles = article.issue.erudit_object.get_titles()
-        main = titles.get('main')
-        coverpage_context = {
-            'article': article,
-            'issue': article.issue,
-            'journal': article.issue.journal,
-            'journal_title': main.title,
-            'journal_subtitle': main.subtitle,
-            'fedora_article': self.fedora_object,
-            'erudit_article': erudit_object,
-            'authors': erudit_object.get_formatted_authors(),
-            'apa_authors': erudit_object.get_authors(formatted=True, style='apa'),
-        }
-
-        coverpage = get_coverpage(context=coverpage_context)
-
+        coverpage = get_coverpage(self.get_object())
         response.content = add_coverpage_to_pdf(coverpage, content)
 
     def get_response_object(self, fedora_object):

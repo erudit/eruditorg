@@ -239,7 +239,7 @@ LANGUAGES = (
     ('en', 'English'),
 )
 
-TIME_ZONE = 'EST'
+TIME_ZONE = 'America/Toronto'
 
 USE_I18N = True
 USE_L10N = True
