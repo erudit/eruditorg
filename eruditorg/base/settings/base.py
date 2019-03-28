@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'apps.public.citations',
     'apps.public.journal',
     'apps.public.search',
+    'apps.public.site_messages',
     'apps.public.thesis',
     'apps.userspace',
     'apps.userspace.journal',
@@ -153,6 +154,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'base.context_processors.cache_constants',
                 'base.context_processors.common_settings',
+                'apps.public.site_messages.context_processors.active_site_messages',
             ],
             'loaders': [
                 ('django.template.loaders.cached.Loader', [
