@@ -12,7 +12,8 @@ from ...conf import settings as erudit_settings
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
-from ...fedora.utils import get_unimported_issues_pids, get_journal_issue_pids_to_sync
+from ...fedora.utils import get_unimported_issues_pids, get_journal_issue_pids_to_sync, \
+    localidentifier_from_pid
 from ...fedora.repository import api
 from ...models import Collection
 from ...models import Issue
@@ -238,12 +239,17 @@ class Command(BaseCommand):
         # STEP 2: import each journal using its PID
         # --
 
-        issue_pids_to_sync = []
+        issue_pids_to_sync = set()
         journal_count, journal_errored_count = 0, 0
         for jpid in journal_pids:
             try:
                 self.import_journal(jpid, collection, False)
-                issue_pids_to_sync += get_journal_issue_pids_to_sync(jpid)
+                journal = Journal.objects.get(localidentifier=localidentifier_from_pid(jpid))
+                journal_erudit_object = journal.get_erudit_object(use_cache=False)
+                issue_pids_to_sync.update(get_journal_issue_pids_to_sync(
+                    journal,
+                    journal_erudit_object.get_published_issues_pids(),
+                ))
             except Exception:
                 journal_errored_count += 1
                 logger.error(
@@ -275,7 +281,7 @@ class Command(BaseCommand):
 
         issue_count, issue_errored_count = 0, 0
 
-        for ipid in set(issue_pids + issue_pids_to_sync):
+        for ipid in set(issue_pids) | issue_pids_to_sync:
             try:
                 journal_localidentifier = ipid.split(':')[1].split('.')[1]
                 journal = Journal.objects.get(localidentifier=journal_localidentifier)
@@ -357,7 +363,7 @@ class Command(BaseCommand):
             else rels_ext_tree.find('.//setName')
 
         # Fetches the Journal instance... or creates a new one
-        journal_localidentifier = journal_pid.split('.')[-1]
+        journal_localidentifier = localidentifier_from_pid(journal_pid)
         try:
             journal = Journal.objects.get(localidentifier=journal_localidentifier)
         except Journal.DoesNotExist:
@@ -369,8 +375,9 @@ class Command(BaseCommand):
 
         xml_issue = publications_tree.xpath(
             './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
-        journal.first_publication_year = journal.erudit_object.first_publication_year
-        journal.last_publication_year = journal.erudit_object.last_publication_year
+        journal_erudit_object = journal.get_erudit_object(use_cache=False)
+        journal.first_publication_year = journal_erudit_object.first_publication_year
+        journal.last_publication_year = journal_erudit_object.last_publication_year
 
         # Some journals share the same code in the Fedora repository so we have to ensure that our
         # journal instances' codes are not duplicated!
@@ -430,8 +437,11 @@ class Command(BaseCommand):
             journalid=journal.localidentifier
         )
         issue_pids = get_pids(issue_fedora_query)
-        issue_pids_to_sync = get_journal_issue_pids_to_sync(journal_pid)
-        for ipid in set(issue_pids + issue_pids_to_sync):
+        issue_pids_to_sync = get_journal_issue_pids_to_sync(
+            journal,
+            journal_erudit_object.get_published_issues_pids(),
+        )
+        for ipid in set(issue_pids) | issue_pids_to_sync:
             if ipid.startswith(journal_pid):
                 # Imports the issue only if its PID is prefixed with the PID of the journal object.
                 # In any other case this means that the issue is associated with another journal and
@@ -463,7 +473,7 @@ class Command(BaseCommand):
         # --
 
         # Fetches the Issue instance... or creates a new one
-        issue_localidentifier = issue_pid.split('.')[-1]
+        issue_localidentifier = localidentifier_from_pid(issue_pid)
         try:
             issue = Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
@@ -473,9 +483,11 @@ class Command(BaseCommand):
             issue.fedora_created = fedora_issue.created
 
         # Set the proper values on the Issue instance
-        issue.sync_with_erudit_object()
+        issue_erudit_object = issue.get_erudit_object(use_cache=False)
+        issue.sync_with_erudit_object(erudit_object=issue_erudit_object)
         issue.fedora_updated = fedora_issue.modified
-        issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
+        journal_erudit_object = journal.get_erudit_object(use_cache=False)
+        issue.is_published = issue_pid in journal_erudit_object.get_published_issues_pids()
         issue.save()
 
         # STEP 4: patches the journal associated with the issue
@@ -483,5 +495,5 @@ class Command(BaseCommand):
 
         # Journal name
         if journal.name is None:
-            journal.name = issue.erudit_object.get_journal_title(formatted=True)
+            journal.name = issue_erudit_object.get_journal_title(formatted=True)
         journal.save()

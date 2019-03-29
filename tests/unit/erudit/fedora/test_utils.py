@@ -18,4 +18,7 @@ def test_get_journal_issue_pids_to_sync():
     # Issue no longer in fedora but still published, synchronization needed.
     issue_4 = IssueFactory(journal=issue_1.journal, is_published=True, add_to_fedora_journal=False)
 
-    assert get_journal_issue_pids_to_sync(issue_1.journal.get_full_identifier()) == [issue_3.pid, issue_4.pid]
+    assert get_journal_issue_pids_to_sync(
+        issue_1.journal,
+        issue_1.journal.erudit_object.get_published_issues_pids()
+    ) == set([issue_3.pid, issue_4.pid])

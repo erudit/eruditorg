@@ -83,12 +83,12 @@ class FedoraMixin:
     def erudit_class(self):
         return self.get_erudit_class()
 
-    def get_erudit_object(self, fedora_object=None):
+    def get_erudit_object(self, fedora_object=None, use_cache=True):
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
 
-        if self._should_use_cache():
+        if self._should_use_cache() and use_cache:
             fedora_xml_content_key = 'fedora-object-{pid}'.format(pid=self.pid)
             fedora_xml_content = cache.get(fedora_xml_content_key, None)
         else:
@@ -115,7 +115,7 @@ class FedoraMixin:
             pass
         else:
             # Stores the XML content of the object for further use
-            if self._should_use_cache():
+            if self._should_use_cache() and use_cache:
                 cache.set(
                     fedora_xml_content_key, fedora_xml_content,
                     self.fedora_xml_content_cache_timeout
