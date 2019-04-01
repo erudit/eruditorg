@@ -217,7 +217,6 @@ class TestArticleDetailView:
             mock_get_cached_datastream_content.return_value = content
 
         article = ArticleFactory(
-            with_pdf=True,
             issue__is_published=is_published,
             issue__journal__open_access=True,
         )
@@ -233,9 +232,6 @@ class TestArticleDetailView:
             'ticket': article.issue.prepublication_ticket,
         })
         assert mock_cache.get.call_count == expected_count
-
-
-class TestArticleDetailView:
 
     def test_that_article_titles_are_truncated_in_breadcrumb(self):
         article = ArticleFactory(
@@ -255,9 +251,6 @@ class TestArticleDetailView:
         html = response.content.decode()
         assert '<a href="/fr/revues/journal/2000-issue/article/">Jean-Guy Desjardins, Traité de l’évaluation foncière, Montréal, Wilson &amp; Lafleur ...</a>' in html  # noqa
 
-
-class TestArticleDetailView:
-
     def test_keywords_html_tags(self):
         article = ArticleFactory(from_fixture='1055883ar')
         url = reverse('public:journal:article_detail', kwargs={
@@ -273,6 +266,50 @@ class TestArticleDetailView:
         # Check that HTML tags are not displayed in the head.
         assert '<meta name="citation_keywords" lang="fr" content="Charles Baudelaire, Fleurs du Mal, Seine, mythe et réalité de Paris, poétique du miroir" />' in html
 
+    def test_article_pdf_links(self):
+        article = ArticleFactory(
+            with_pdf=True,
+            from_fixture='602354ar',
+            localidentifier='602354ar',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__is_published=False,
+            issue__journal__code='journal',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url, {
+            'ticket': article.issue.prepublication_ticket if not article.issue.is_published else '',
+        })
+        html = response.content.decode()
+
+        # Check that the PDF download button URL has the prepublication ticket if the issue is not published.
+        assert '<a class="tool-btn tool-download" data-href="/fr/revues/journal/2000-issue/602354ar.pdf?ticket=0aae4c8f3cc35693d0cbbe631f2e8b52"><span class="toolbox-pdf">PDF</span><span class="tools-label">Télécharger</span></a>' in html
+        # Check that the PDF menu link URL has the prepublication ticket if the issue is not published.
+        assert '<a href="#pdf-viewer" id="pdf-viewer-menu-link">Texte intégral (PDF)</a><a href="/fr/revues/journal/2000-issue/602354ar.pdf?ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" id="pdf-download-menu-link" target="_blank">Texte intégral (PDF)</a>' in html
+        # Check that the embeded PDF URL has the prepublication ticket if the issue is not published.
+        assert '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?embed&amp;ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" type="application/pdf" width="100%" height="700px"></object>' in html
+        # Check that the PDF download link URL has the prepublication ticket if the issue is not published.
+        assert '<a href="/fr/revues/journal/2000-issue/602354ar.pdf?ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" class="btn btn-secondary" target="_blank">Télécharger</a>' in html
+
+        article.issue.is_published = True
+        article.issue.save()
+        response = Client().get(url)
+        html = response.content.decode()
+
+        # Check that the PDF download button URL does not have the prepublication ticket if the issue is published.
+        assert '<a class="tool-btn tool-download" data-href="/fr/revues/journal/2000-issue/602354ar.pdf"><span class="toolbox-pdf">PDF</span><span class="tools-label">Télécharger</span></a>' in html
+        # Check that the PDF menu link URL does not have the prepublication ticket if the issue is published.
+        assert '<a href="#pdf-viewer" id="pdf-viewer-menu-link">Texte intégral (PDF)</a><a href="/fr/revues/journal/2000-issue/602354ar.pdf" id="pdf-download-menu-link" target="_blank">Texte intégral (PDF)</a>' in html
+        # Check that the embeded PDF URL does not have the prepublication ticket if the issue is published.
+        assert '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?embed" type="application/pdf" width="100%" height="700px"></object>' in html
+        # Check that the PDF download link URL does not have the prepublication ticket if the issue is published.
+        assert '<a href="/fr/revues/journal/2000-issue/602354ar.pdf" class="btn btn-secondary" target="_blank">Télécharger</a>' in html
 
 
 @unittest.mock.patch.object(
