@@ -80,24 +80,17 @@ def localidentifier_from_pid(pid):
     return pid.split(".")[-1]
 
 
-def get_journal_issue_pids_to_sync(journal_pid):
+def get_journal_issue_pids_to_sync(journal, published_in_fedora_pids):
     """ Returns a list of issue pids in need for synchronization for a given journal.
 
     Those issues are either:
         * published in fedora bot not on www
-        * published on www but not in fedora """
-    from ..models import Journal
+        * published on www but not in fedora
 
-    journal = Journal.objects.get(localidentifier=localidentifier_from_pid(journal_pid))
-    published_in_fedora_pids = journal.erudit_object.get_published_issues_pids()
-    pids_to_sync = []
-
-    for issue in journal.issues.all():
-        # If an issue is published in fedora but not on www, it needs synchronization.
-        if issue.pid in published_in_fedora_pids and not issue.is_published:
-            pids_to_sync.append(issue.pid)
-        # If an issue is published on www but not in fedora, it needs synchronization.
-        elif issue.is_published and issue.pid not in published_in_fedora_pids:
-            pids_to_sync.append(issue.pid)
-
-    return pids_to_sync
+    symmetric_difference() returns the set of elements which are in either of the sets
+    `published_in_fedora_pids` or `published_in_database_pids` but not in both.
+    """
+    published_in_database_pids = set(
+        issue.pid for issue in journal.issues.filter(is_published=True)
+    )
+    return published_in_database_pids.symmetric_difference(published_in_fedora_pids)
