@@ -128,8 +128,10 @@ export default {
     }
     if (!can_display_pdf) {
         $('#pdf-viewer').hide();
+        $('#pdf-viewer-menu-link').hide();
     } else {
         $('#pdf-download').hide();
+        $('#pdf-download-menu-link').hide();
     }
   },
 

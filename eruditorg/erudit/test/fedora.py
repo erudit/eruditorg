@@ -148,6 +148,14 @@ class FakeAPI(ApiFacade):
         else:
             return None
 
+    def get_article_pdf(self, pid):
+        if pid in self._articles_with_pdf:
+            # default fixture
+            with open('./tests/unit/apps/public/journal/fixtures/article.pdf', 'rb') as pdf:
+                return pdf.read()
+        else:
+            return None
+
     def register_pid(self, pid, with_pdf=False):
         # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
         # but for when you don't really care about the contents.
@@ -259,6 +267,8 @@ class FakeAPI(ApiFacade):
                     result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid, extra=extra).encode()
                 elif subselection == '/ERUDITXSD300/content':
                     result = self.get_article_xml(pid) or b''
+                elif subselection == '/PDF/content':
+                    result = self.get_article_pdf(pid) or None
             elif len(pidelems) == 3:  # issue
                 if not datastream:
                     # we're asking for the object profile
