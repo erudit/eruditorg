@@ -64,6 +64,7 @@ pytz==2018.9              # via babel, django, influxdb
 raven==6.10.0
 rdflib==4.2.2
 redis==2.10.6             # via django-redis
+reportlab==3.5.16
 requests-toolbelt==0.9.1
 requests[socks]==2.21.0
 roman==3.1
