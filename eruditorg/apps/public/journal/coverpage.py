@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup, Tag
 from django.urls import reverse
 from django.utils import formats, timezone
 from django.utils.translation import gettext as _, get_language
+from pathlib import Path
 from reportlab.lib import colors
 from reportlab.lib.fonts import addMapping
 from reportlab.lib.pagesizes import letter
@@ -15,15 +16,15 @@ from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDo
 from reportlab.platypus.tables import Table, TableStyle
 
 # Fonts.
-FONTS_DIR = './eruditorg/static/fonts/Spectral/'
-pdfmetrics.registerFont(TTFont('Spectral', FONTS_DIR + 'Spectral-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Bold', FONTS_DIR + 'Spectral-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Italic', FONTS_DIR + 'Spectral-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-BoldItalic', FONTS_DIR + 'Spectral-BoldItalic.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC', FONTS_DIR + 'SpectralSC-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + 'SpectralSC-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + 'SpectralSC-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + 'SpectralSC-BoldItalic.ttf'))
+FONTS_DIR = str(Path(__file__).parents[3] / 'static' / 'fonts' / 'Spectral')
+pdfmetrics.registerFont(TTFont('Spectral', FONTS_DIR + '/Spectral-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral-Bold', FONTS_DIR + '/Spectral-Bold.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral-Italic', FONTS_DIR + '/Spectral-Italic.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral-BoldItalic', FONTS_DIR + '/Spectral-BoldItalic.ttf'))
+pdfmetrics.registerFont(TTFont('SpectralSC', FONTS_DIR + '/SpectralSC-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + '/SpectralSC-Bold.ttf'))
+pdfmetrics.registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + '/SpectralSC-Italic.ttf'))
+pdfmetrics.registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + '/SpectralSC-BoldItalic.ttf'))
 pdfmetrics.registerFontFamily(
     'Spectral',
     normal='Spectral',
