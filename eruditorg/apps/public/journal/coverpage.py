@@ -15,8 +15,11 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDocTemplate, Spacer
 from reportlab.platypus.tables import Table, TableStyle
 
+
+STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
+
 # Fonts.
-FONTS_DIR = str(Path(__file__).parents[3] / 'static' / 'fonts' / 'Spectral')
+FONTS_DIR = STATIC_ROOT + '/fonts/Spectral'
 pdfmetrics.registerFont(TTFont('Spectral', FONTS_DIR + '/Spectral-Regular.ttf'))
 pdfmetrics.registerFont(TTFont('Spectral-Bold', FONTS_DIR + '/Spectral-Bold.ttf'))
 pdfmetrics.registerFont(TTFont('Spectral-Italic', FONTS_DIR + '/Spectral-Italic.ttf'))
@@ -374,7 +377,7 @@ def get_coverpage(article):
     # Logo.
     logo = []
     logo.append(small_spacer)
-    logo.append(Image('./eruditorg/static/img/logo-erudit.png', width=75.75, height=25))
+    logo.append(Image(STATIC_ROOT + '/img/logo-erudit.png', width=75.75, height=25))
     logo.append(small_spacer)
 
     # Footer table
