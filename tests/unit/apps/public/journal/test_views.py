@@ -311,6 +311,50 @@ class TestArticleDetailView:
         # Check that the PDF download link URL does not have the prepublication ticket if the issue is published.
         assert '<a href="/fr/revues/journal/2000-issue/602354ar.pdf" class="btn btn-secondary" target="_blank">Télécharger</a>' in html
 
+    @pytest.mark.parametrize('casa_token, nonce_count, timestamp, user_ip, authorized', (
+        # Valid token
+        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', True),
+        # Badly formed token (no colon)
+        ('v9y_911WVFoAAAAAxpFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', False),
+        # Invalid nonce
+        ('xxxxxxxxxxxxxxxx:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', False),
+        # Modified message
+        ('v9y_911WVFoAAAAA:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 1, 1490149390861445, '128.12.45.0', False),
+        # Nonce seen more than 3 times
+        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 4, 1490149390861445, '128.12.45.0', False),
+        # Wrong IP
+        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '0.0.0.0', False),
+        # Expired token
+        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1500000000000000, '128.12.45.0', False),
+    ))
+    @pytest.mark.parametrize('url_name', (
+        ('public:journal:article_detail'),
+        ('public:journal:article_raw_pdf'),
+    ))
+    @unittest.mock.patch('apps.public.journal.viewmixins.GoogleCasaAuthorizationMixin.nonce_count')
+    @unittest.mock.patch('apps.public.journal.viewmixins.datetime')
+    @override_settings(GOOGLE_CASA_KEY='74796E8FF6363EFF91A9308D1D05335E')
+    def test_article_detail_with_google_casa_token(self, mock_datetime, mock_nonce_count, url_name, casa_token, nonce_count, timestamp, user_ip, authorized):
+        mock_datetime.now.return_value = dt.datetime.fromtimestamp(timestamp / 1000000)
+        mock_nonce_count.return_value = nonce_count
+        article = ArticleFactory(
+            issue__journal__open_access=False,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url, {
+            'casa_token': casa_token,
+        }, follow=True, REMOTE_ADDR=user_ip)
+        html = response.content.decode()
+        if authorized:
+            assert 'Seuls les 600 premiers mots du texte seront affichés.' not in html
+        else:
+            assert 'Seuls les 600 premiers mots du texte seront affichés.' in html
+
 
 @unittest.mock.patch.object(
     Issue,

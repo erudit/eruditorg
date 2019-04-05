@@ -54,6 +54,7 @@ from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from .viewmixins import PrepublicationTokenRequiredMixin
+from .viewmixins import GoogleCasaAuthorizationMixin
 
 from . import solr
 
@@ -651,7 +652,7 @@ class BaseArticleDetailView(
         return mark_safe(html_content)
 
 
-class ArticleDetailView(BaseArticleDetailView):
+class ArticleDetailView(GoogleCasaAuthorizationMixin, BaseArticleDetailView):
     """
     Displays an Article page.
     """
@@ -786,7 +787,7 @@ class ArticleXmlView(ArticleFormatDownloadView):
         response.write(content.serialize())
 
 
-class ArticleRawPdfView(ArticleFormatDownloadView):
+class ArticleRawPdfView(GoogleCasaAuthorizationMixin, ArticleFormatDownloadView):
     """
     Returns the PDF file associated with an article.
     """
