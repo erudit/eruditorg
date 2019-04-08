@@ -478,11 +478,6 @@ def clean(text, small_caps_font='SpectralSC'):
     for node in soup.find_all('span', attrs={'class': 'souligne'}):
         del node['class']
         node.name = 'u'
-    # Remove class from <span class="filet"> nodes
-    # TODO: find a way to add a border.
-    # See https://gitlab.erudit.org/erudit/portail/eruditorg/issues/2188
-    for node in soup.find_all('span', attrs={'class': 'filet'}):
-        del node['class']
     # Uppercase <span class="majuscule"> nodes.
     for node in soup.find_all('span', attrs={'class': 'majuscule'}):
         del node['class']
@@ -494,6 +489,17 @@ def clean(text, small_caps_font='SpectralSC'):
     # Remove any footnotes.
     for node in soup.find_all('a', attrs={'class': 'norenvoi'}):
         node.decompose()
+    # Classes to remove because we can't transform.
+    classes = [
+        'espacefixe',
+        'filet',
+        'surlignage',
+        'tailleg',
+        'taillep',
+    ]
+    for cls in classes:
+        for node in soup.find_all('span', attrs={'class': cls}):
+            del node['class']
     return str(soup)
 
 
