@@ -10,6 +10,7 @@ Dans le répertoire home de l'utilisateur, créer un fichier ``.transifexrc`` qu
 
     [https://www.transifex.com]
     hostname = https://www.transifex.com
+    api_hostname = https://api.transifex.com
     username = username
     password = password
     token =
@@ -25,6 +26,8 @@ Mise à jour des sources
 
   ::
 
+    cd eruditorg
+    sh ../tools/makemessages.sh
     tx push -s
 
 Mise à jour des traductions
@@ -32,5 +35,6 @@ Mise à jour des traductions
 
   ::
 
+    cd eruditorg
     tx pull -l en
-    python eruditorg/manage.py compilemessages
+    python manage.py compilemessages
