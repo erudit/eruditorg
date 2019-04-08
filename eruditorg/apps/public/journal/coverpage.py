@@ -121,8 +121,9 @@ def get_coverpage(article):
     header.append(extra_large_spacer)
 
     # Article titles.
+    html_title = article.html_title if article.html_title is not None else _("[Article sans titre]")
     header.append(Paragraph(
-        clean(article.html_title, small_caps_font='SpectralSC-Bold'),
+        clean(html_title, small_caps_font='SpectralSC-Bold'),
         styles['h1'],
     ))
     header.append(large_spacer)
@@ -267,7 +268,7 @@ def get_coverpage(article):
     cite_string = '{authors} ({year}). {title}. <em>{journal}</em>,'.format(**{
         'authors': article.get_formatted_authors_apa(),
         'year': article.issue.year,
-        'title': clean(article.html_title),
+        'title': clean(html_title),
         'journal': article.issue.journal.name,
     })
     if article.issue.volume:
