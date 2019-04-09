@@ -592,11 +592,6 @@ class BaseArticleDetailView(
         })
         context['media_url_prefix'] = url[:-1]
 
-        try:
-            context['journal_info'] = obj.issue.journal.information
-        except ObjectDoesNotExist:
-            pass
-
         if not obj.issue.is_published:
             context['ticket'] = obj.issue.prepublication_ticket
 
