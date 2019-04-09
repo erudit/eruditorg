@@ -49,10 +49,15 @@ AVAILABILITY_CHOICES = (
 
 def get_funds_choices():
 
+    collections = {
+        c.code: c.name
+        for c in Collection.objects.all().only('code', 'name')
+    }
+
     def get(fundid):
         try:
-            return Collection.objects.get(code=fundid).name
-        except Collection.DoesNotExist:
+            return collections[fundid]
+        except KeyError:
             # Something is deeply wrong...
             logger.error('search.form.missing_collection', id=fundid)
             return ''
