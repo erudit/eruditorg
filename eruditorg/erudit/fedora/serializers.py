@@ -24,7 +24,8 @@ def _default_deserializer(datastream):
 
 
 datastream_cache_serializers = {
-    'erudit_xsd300': (_xsd300_serializer, _xsd300_deserializer,)
+    'erudit_xsd300': (_xsd300_serializer, _xsd300_deserializer,),
+    'summary': (_xsd300_serializer, _xsd300_deserializer,)
 }
 """ define the serializer mapping """
 
