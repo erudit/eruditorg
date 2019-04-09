@@ -369,7 +369,15 @@ class IssueDetailView(
             self.object = super(IssueDetailView, self).get_object(queryset)
 
         qs = Issue.objects if allow_external else Issue.internal_objects
-        qs = qs.select_related('journal', 'journal__collection')
+        qs = qs.select_related(
+            'journal',
+            'journal__collection',
+            'journal__information',
+            'journal__type'
+        ).prefetch_related(
+            'journal__disciplines'
+        )
+
         try:
             self.object = qs.get(localidentifier=self.kwargs['localidentifier'])
         except Issue.DoesNotExist:
