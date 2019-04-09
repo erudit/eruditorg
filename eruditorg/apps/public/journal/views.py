@@ -329,6 +329,10 @@ class IssueDetailView(
     model = Issue
     template_name = 'public/journal/issue_detail.html'
 
+    def __init__(self):
+        super().__init__()
+        self.object = None
+
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
         obj = self.get_object()
@@ -359,13 +363,15 @@ class IssueDetailView(
             }
 
     def get_object(self, queryset=None, allow_external=False):
+        if self.object is not None:
+            return self.object
         if 'pk' in self.kwargs:
-            return super(IssueDetailView, self).get_object(queryset)
+            self.object = super(IssueDetailView, self).get_object(queryset)
 
         qs = Issue.objects if allow_external else Issue.internal_objects
         qs = qs.select_related('journal', 'journal__collection')
         try:
-            return qs.get(localidentifier=self.kwargs['localidentifier'])
+            self.object = qs.get(localidentifier=self.kwargs['localidentifier'])
         except Issue.DoesNotExist:
             if not allow_external:
                 if Issue.objects.filter(localidentifier=self.kwargs['localidentifier']).exists():
@@ -373,12 +379,13 @@ class IssueDetailView(
                     # object. raise the 404 so that the external redirect system kick in.
                     raise Http404()
             try:
-                return Issue.from_fedora_ids(
+                self.object = Issue.from_fedora_ids(
                     self.kwargs['journal_code'],
                     self.kwargs['localidentifier'],
                 )
             except Issue.DoesNotExist:
                 raise Http404()
+        return self.object
 
     def get_context_data(self, **kwargs):
         shouldcache = self.object.is_published
