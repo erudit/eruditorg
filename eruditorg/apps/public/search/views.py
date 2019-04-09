@@ -148,7 +148,10 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             context['main_qterm'] = self.request.GET.get('basic_search_term', '')
             context['start_at'] = (results['pagination']['current_page'] - 1) \
                 * results['pagination']['page_size']
-            context['search_elements'] = get_search_elements(self.request.GET)
+            context['search_elements'] = get_search_elements(
+                self.request.GET,
+                form=self.get_search_form()
+            )
 
         return context
 
