@@ -88,7 +88,7 @@ class JournalAccessSubscriptionValidManager(models.Manager):
             journalaccesssubscriptionperiod__start__lte=nowd,
             journalaccesssubscriptionperiod__end__gte=nowd)
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
-        return qs.filter(institutional)
+        return qs.filter(institutional).prefetch_related('journals')
 
     def individual(self):
         """ Returns all the valid individual JournalAccessSubscription instances.
@@ -101,7 +101,7 @@ class JournalAccessSubscriptionValidManager(models.Manager):
             journal_management_subscription__period__start__lte=nowd,
             journal_management_subscription__period__end__gte=nowd)
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
-        return qs.filter(individual)
+        return qs.filter(individual).prefetch_related('journals')
 
     def get_for_ip_address(self, ip_address):
         """ Return all the subscriptions for the given ip address """

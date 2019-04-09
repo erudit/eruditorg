@@ -125,10 +125,16 @@ class ContentAccessCheckMixin:
 
 
 class SingleArticleMixin:
+
+    def __init__(self):
+        self.object = None
+
     def get_object(self, queryset=None):
         # We support two IDing scheme here: full PID or localidentifier-only. If we have the full
         # PID, great! that saves us a request to Solr. If not, it's alright too, we just need to
         # fetch the full PID from Solr first.
+        if self.object is not None:
+            return self.object
         journal_code = self.kwargs.get('journal_code')
         issue_localid = self.kwargs.get('issue_localid')
         localidentifier = self.kwargs.get('localid')
@@ -138,7 +144,8 @@ class SingleArticleMixin:
                 raise Http404()
             journal_code, issue_localid, localidentifier = fedora_ids
         try:
-            return Article.from_fedora_ids(journal_code, issue_localid, localidentifier)
+            self.object = Article.from_fedora_ids(journal_code, issue_localid, localidentifier)
+            return self.object
         except Article.DoesNotExist:
             raise Http404()
 
