@@ -239,7 +239,7 @@ class SearchForm(forms.Form):
 
         disciplines = locale_aware_sort(Discipline.objects.all(), keyfunc=attrgetter('name'))
         self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in disciplines]
-        journals = locale_aware_sort(Journal.objects.all(), keyfunc=attrgetter('name'))
+        journals = locale_aware_sort(Journal.objects.all().only('name'), keyfunc=attrgetter('name'))
         self.fields['journals'].choices = [(j.name, j.name) for j in journals]
 
     def clean(self):
