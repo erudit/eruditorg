@@ -15,6 +15,7 @@ from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView, \
     GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
+from core.subscription.test.utils import generate_casa_token
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 pytestmark = pytest.mark.django_db
@@ -311,34 +312,41 @@ class TestArticleDetailView:
         # Check that the PDF download link URL does not have the prepublication ticket if the issue is published.
         assert '<a href="/fr/revues/journal/2000-issue/602354ar.pdf" class="btn btn-secondary" target="_blank">Télécharger</a>' in html
 
-    @pytest.mark.parametrize('casa_token, nonce_count, timestamp, user_ip, authorized', (
+    @pytest.mark.parametrize('kwargs, nonce_count, authorized', (
         # Valid token
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', True),
-        # Badly formed token (no colon)
-        ('v9y_911WVFoAAAAAxpFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', False),
+        ({}, 1, True),
+        # Badly formed token
+        ({'token_separator': '!'}, 1, False),
         # Invalid nonce
-        ('xxxxxxxxxxxxxxxx:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', False),
-        # Modified message
-        ('v9y_911WVFoAAAAA:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 1, 1490149390861445, '128.12.45.0', False),
+        ({'invalid_nonce': True}, 1, False),
+        # Invalid message
+        ({'invalid_message': True}, 1, False),
+        # Invalid signature
+        ({'invalid_signature': True}, 1, False),
         # Nonce seen more than 3 times
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 4, 1490149390861445, '128.12.45.0', False),
-        # Wrong IP
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '0.0.0.0', False),
+        ({}, 4, False),
+        # Badly formatted payload
+        ({'payload_separator': '!'}, 1, False),
         # Expired token
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1500000000000000, '128.12.45.0', False),
+        ({'time_delta': 3600000001}, 1, False),
+        # Wrong IP
+        ({'ip_subnet': '8.8.8.0/24'}, 1, False),
+        # Invalid subscription
+        ({'subscription_id': 2}, 1, False),
     ))
     @pytest.mark.parametrize('url_name', (
         ('public:journal:article_detail'),
         ('public:journal:article_raw_pdf'),
     ))
-    @unittest.mock.patch('apps.public.journal.viewmixins.GoogleCasaAuthorizationMixin.nonce_count')
-    @unittest.mock.patch('apps.public.journal.viewmixins.datetime')
+    @unittest.mock.patch('core.subscription.middleware.SubscriptionMiddleware._nonce_count')
     @override_settings(GOOGLE_CASA_KEY='74796E8FF6363EFF91A9308D1D05335E')
-    def test_article_detail_with_google_casa_token(self, mock_datetime, mock_nonce_count, url_name, casa_token, nonce_count, timestamp, user_ip, authorized):
-        mock_datetime.now.return_value = dt.datetime.fromtimestamp(timestamp / 1000000)
+    def test_article_detail_with_google_casa_token(self, mock_nonce_count, url_name, kwargs, nonce_count, authorized):
         mock_nonce_count.return_value = nonce_count
-        article = ArticleFactory(
-            issue__journal__open_access=False,
+        article = ArticleFactory()
+        subscription = JournalAccessSubscriptionFactory(
+            pk=1,
+            post__valid=True,
+            post__journals=[article.issue.journal],
         )
         url = reverse(url_name, kwargs={
             'journal_code': article.issue.journal.code,
@@ -347,8 +355,8 @@ class TestArticleDetailView:
             'localid': article.localidentifier,
         })
         response = Client().get(url, {
-            'casa_token': casa_token,
-        }, follow=True, REMOTE_ADDR=user_ip)
+            'casa_token': generate_casa_token(**kwargs),
+        }, follow=True)
         html = response.content.decode()
         if authorized:
             assert 'Seuls les 600 premiers mots du texte seront affichés.' not in html

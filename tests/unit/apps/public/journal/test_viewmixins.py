@@ -1,9 +1,8 @@
-import datetime as dt
 import pytest
 import unittest.mock
 
 from django.http import Http404
-from django.test import RequestFactory, override_settings
+from django.test import RequestFactory
 from django.views.generic import DetailView
 
 from erudit.test.factories import (
@@ -12,7 +11,6 @@ from erudit.test.factories import (
 from erudit.models import Article
 
 from apps.public.journal.viewmixins import ContentAccessCheckMixin
-from apps.public.journal.viewmixins import GoogleCasaAuthorizationMixin
 from apps.public.journal.viewmixins import SingleArticleMixin
 from apps.public.journal.viewmixins import SingleJournalMixin
 from apps.public.journal.views import ArticleRawPdfView, ArticleXmlView
@@ -324,30 +322,3 @@ class TestContentAccessCheckMixin:
             'ticket': article.issue.prepublication_ticket if ticket_provided else None,
         }
         assert view.content_access_granted == access_granted
-
-
-class TestGoogleCasaAuthorizationMixin:
-
-    @pytest.mark.parametrize('casa_token, nonce_count, timestamp, user_ip, authorized', (
-        # Valid token
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', True),
-        # Badly formed token (no colon)
-        ('v9y_911WVFoAAAAAxpFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', False),
-        # Invalid nonce
-        ('xxxxxxxxxxxxxxxx:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '128.12.45.0', False),
-        # Modified message
-        ('v9y_911WVFoAAAAA:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 1, 1490149390861445, '128.12.45.0', False),
-        # Nonce seen more than 3 times
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 4, 1490149390861445, '128.12.45.0', False),
-        # Wrong IP
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1490149390861445, '0.0.0.0', False),
-        # Expired token
-        ('v9y_911WVFoAAAAA:pFoeDNlu0gOfExehyQOzJp8g51WO3YS-Un8hpd1Uc-O150RW1pDsSUGxhYcC1Z0ZisfaHVbMAivkAw', 1, 1500000000000000, '128.12.45.0', False),
-    ))
-    @unittest.mock.patch('apps.public.journal.viewmixins.GoogleCasaAuthorizationMixin.nonce_count')
-    @unittest.mock.patch('apps.public.journal.viewmixins.datetime')
-    def test_casa_authorize(self, mock_datetime, mock_nonce_count, casa_token, nonce_count, timestamp, user_ip, authorized):
-        mock_datetime.now.return_value = dt.datetime.fromtimestamp(timestamp / 1000000)
-        mock_nonce_count.return_value = nonce_count
-        view = GoogleCasaAuthorizationMixin()
-        assert view.casa_authorize('74796E8FF6363EFF91A9308D1D05335E', casa_token, user_ip) == authorized
