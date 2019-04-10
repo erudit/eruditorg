@@ -209,9 +209,10 @@
   </ul>
 
   <div class="tab-content">
+    {% if journal_info.about %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about">
       <h2 class="sr-only">{% trans "À propos" %}</h2>
-      {% if journal_info.about %}{{ journal_info.about|safe }}{% endif %}
+      {{ journal_info.about|safe }}
       <section>
         <h2 class="sr-only">{% trans "Coordonnées" %}</h2>
         {% if journal_info.contact %}{{ journal_info.contact|safe }}{% endif %}
@@ -225,6 +226,7 @@
       {% endif %}
 
     </section>
+    {% endif %}
 
     {% if issues %}
     <section role="tabpanel" class="tab-pane" id="back-issues">
