@@ -3,7 +3,7 @@ import datetime as dt
 
 import pytest
 from django.contrib.auth.models import AnonymousUser
-from django.test import RequestFactory
+from django.test import RequestFactory, override_settings
 from django.http import HttpResponse
 
 from erudit.test.factories import OrganisationFactory
@@ -14,6 +14,7 @@ from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
+from core.subscription.test.utils import generate_casa_token
 
 pytestmark = pytest.mark.django_db
 
@@ -267,3 +268,42 @@ class TestSubscriptionMiddleware:
         request.META['HTTP_CLIENT_IP'] = '1.2.3.4'
         middleware = SubscriptionMiddleware()
         assert middleware._get_user_ip_address(request) == '1.1.1.1'
+
+    @pytest.mark.parametrize('kwargs, nonce_count, authorized', (
+        # Valid token
+        ({}, 1, True),
+        # Badly formed token
+        ({'token_separator': '!'}, 1, False),
+        # Invalid nonce
+        ({'invalid_nonce': True}, 1, False),
+        # Invalid message
+        ({'invalid_message': True}, 1, False),
+        # Invalid signature
+        ({'invalid_signature': True}, 1, False),
+        # Nonce seen more than 3 times
+        ({}, 4, False),
+        # Badly formatted payload
+        ({'payload_separator': '!'}, 1, False),
+        # Expired token
+        ({'time_delta': 3600000001}, 1, False),
+        # Wrong IP
+        ({'ip_subnet': '8.8.8.0/24'}, 1, False),
+        # Invalid subscription
+        ({'subscription_id': 2}, 1, False),
+    ))
+    @unittest.mock.patch('core.subscription.middleware.SubscriptionMiddleware._nonce_count')
+    @override_settings(GOOGLE_CASA_KEY='74796E8FF6363EFF91A9308D1D05335E')
+    def test_casa_authorize(self, mock_nonce_count, kwargs, nonce_count, authorized):
+        mock_nonce_count.return_value = nonce_count
+        subscription = JournalAccessSubscriptionFactory(pk=1, post__valid=True)
+        request = RequestFactory().get('/', {
+            'casa_token': generate_casa_token(**kwargs),
+        }, follow=True)
+        request.user = AnonymousUser()
+        request.session = dict()
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+        if authorized:
+            assert subscription in request.subscriptions._subscriptions
+        else:
+            assert subscription not in request.subscriptions._subscriptions

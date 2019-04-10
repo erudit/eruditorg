@@ -15,6 +15,7 @@ from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView, \
     GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
+from core.subscription.test.utils import generate_casa_token
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 pytestmark = pytest.mark.django_db
@@ -310,6 +311,57 @@ class TestArticleDetailView:
         assert '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?embed" type="application/pdf" width="100%" height="700px"></object>' in html
         # Check that the PDF download link URL does not have the prepublication ticket if the issue is published.
         assert '<a href="/fr/revues/journal/2000-issue/602354ar.pdf" class="btn btn-secondary" target="_blank">Télécharger</a>' in html
+
+    @pytest.mark.parametrize('kwargs, nonce_count, authorized', (
+        # Valid token
+        ({}, 1, True),
+        # Badly formed token
+        ({'token_separator': '!'}, 1, False),
+        # Invalid nonce
+        ({'invalid_nonce': True}, 1, False),
+        # Invalid message
+        ({'invalid_message': True}, 1, False),
+        # Invalid signature
+        ({'invalid_signature': True}, 1, False),
+        # Nonce seen more than 3 times
+        ({}, 4, False),
+        # Badly formatted payload
+        ({'payload_separator': '!'}, 1, False),
+        # Expired token
+        ({'time_delta': 3600000001}, 1, False),
+        # Wrong IP
+        ({'ip_subnet': '8.8.8.0/24'}, 1, False),
+        # Invalid subscription
+        ({'subscription_id': 2}, 1, False),
+    ))
+    @pytest.mark.parametrize('url_name', (
+        ('public:journal:article_detail'),
+        ('public:journal:article_raw_pdf'),
+    ))
+    @unittest.mock.patch('core.subscription.middleware.SubscriptionMiddleware._nonce_count')
+    @override_settings(GOOGLE_CASA_KEY='74796E8FF6363EFF91A9308D1D05335E')
+    def test_article_detail_with_google_casa_token(self, mock_nonce_count, url_name, kwargs, nonce_count, authorized):
+        mock_nonce_count.return_value = nonce_count
+        article = ArticleFactory()
+        subscription = JournalAccessSubscriptionFactory(
+            pk=1,
+            post__valid=True,
+            post__journals=[article.issue.journal],
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url, {
+            'casa_token': generate_casa_token(**kwargs),
+        }, follow=True)
+        html = response.content.decode()
+        if authorized:
+            assert 'Seuls les 600 premiers mots du texte seront affichés.' not in html
+        else:
+            assert 'Seuls les 600 premiers mots du texte seront affichés.' in html
 
 
 @unittest.mock.patch.object(
