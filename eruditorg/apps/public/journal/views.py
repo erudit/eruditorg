@@ -369,14 +369,14 @@ class IssueDetailView(
                 )
             except Issue.DoesNotExist:
                 raise Http404()
+
         return self.object
 
     def get_context_data(self, **kwargs):
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
         context['journal'] = self.object.journal
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if self.object.is_published else 0
+        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
 
         try:
             context['journal_info'] = self.object.journal.information
