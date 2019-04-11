@@ -316,13 +316,14 @@ class TestJournalDetailView:
         assert response.context['subscription_type'] == 'individual'
 
     def test_journal_detail_has_elements_for_anchors(self):
-        journal = JournalFactory()
-        issue = IssueFactory(journal=journal)
-        url = journal_detail_url(journal)
+        issue = IssueFactory()
+        url = journal_detail_url(issue.journal)
         response = self.client.get(url)
         content = response.content
         assert b'<li role="presentation"' in content
         assert b'<section role="tabpanel"' in content
+        assert b'<li role="presentation" id="journal-info-about-li"' not in content
+        assert b'<section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about"' not in content
 
 
 class TestJournalAuthorsListView:
