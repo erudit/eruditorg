@@ -9,8 +9,6 @@ from ipaddress import ip_address, ip_network
 from ipware import get_client_ip
 from typing import Union
 from urllib.parse import unquote
-from django.core.cache import caches
-
 
 from .models import JournalAccessSubscription
 from core.subscription.models import UserSubscriptions
@@ -19,7 +17,6 @@ from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
 
-cache = caches['default']
 
 class SubscriptionMiddleware(MiddlewareMixin):
     """ This middleware attaches subscription information to the request object.
@@ -52,29 +49,21 @@ class SubscriptionMiddleware(MiddlewareMixin):
             ip = request.META.get('HTTP_CLIENT_IP', ip)
 
         request.subscriptions = UserSubscriptions()
-
-        cache_key = 'ip-{ip}-subscription'.format(ip=ip)
-        subscription = cache.get(cache_key)
-        if not subscription:
-            subscription = JournalAccessSubscription.valid_objects\
-                .institutional()\
-                .get_for_ip_address(ip)\
-                .select_related('organisation').first()
-            cache.set(cache_key, subscription, 60 * 60)
-
+        subscription = JournalAccessSubscription.valid_objects.get_for_ip_address(ip)\
+            .select_related('organisation').first()
         if subscription:
             request.subscriptions.add_subscription(subscription)
 
         # Tries to determine if the subscriber is refered by a subscribed organisation
         referer = self._get_user_referer_for_subscription(request)
-        subscription = JournalAccessSubscription.valid_objects.institutional().get_for_referer(referer)
+        subscription = JournalAccessSubscription.valid_objects.get_for_referer(referer)
         if subscription:
             request.subscriptions.add_subscription(subscription)
             request.session['HTTP_REFERER'] = referer
 
         # Tries to determine if the user has an individual account
         if request.user.is_authenticated:
-            for subscription in JournalAccessSubscription.valid_objects.individual().select_related(
+            for subscription in JournalAccessSubscription.valid_objects.select_related(
                 'sponsor', 'organisation'
             ).filter(user=request.user):
                 request.subscriptions.add_subscription(subscription)
