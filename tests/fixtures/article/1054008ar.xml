@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1054008ar" typeart="article" lang="fr" ordseq="2" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1054008ar</idpublic><pagination>
+            <ppage>17</ppage>
+            <dpage>33</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="etudlitt68" lang="fr"><titrerev>Études littéraires</titrerev><titrerevabr>etudlitt</titrerevabr><idissn>0014-214X</idissn><idissnnum>1708-9069</idissnnum><directeur sexe="feminin"><fonction lang="fr">Directrice</fonction><nompers><prenom>Anne-Marie</prenom><nomfamille>Fortier</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><fonction lang="fr">Rédactrice invitée</fonction><nompers><prenom>Laure</prenom><nomfamille>Michel</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><fonction lang="fr">Rédactrice invitée</fonction><nompers><prenom>Anne</prenom><nomfamille>Tomiche</nomfamille></nompers></redacteurchef></revue><numero id="etudlitt04124"><volume>47</volume><nonumero>3</nonumero><pub><periode>Automne</periode><annee>2016</annee></pub><pubnum><date typedate="publication">2018-11-22</date></pubnum><grtheme id="th1"><theme>René Char : le poème et l'action</theme></grtheme><idisbn13>978-2-920949-74-4</idisbn13></numero><editeur><nomorg>Département de littérature, théâtre et cinéma de l’Université Laval</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Université Laval</nomorg>, 2018</droitsauteur></admin><liminaire><grtitre><surtitre>Études</surtitre>
+                <titre>L’action et le verbe dans <marquage typemarq="italique">Feuillets d’Hypnos</marquage></titre>
+                <titreparal lang="en">Action and language in <marquage typemarq="italique">Feuillets d’Hypnos</marquage> (<marquage typemarq="italique">Leaves of Hypnos</marquage>)</titreparal>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Bertrand</prenom><nomfamille>Marchal</nomfamille></nompers><affiliation><alinea>Sorbonne Université</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>À partir de la généalogie et de l’explicitation de la formule de la note 6 « transformer <marquage typemarq="italique">vieux ennemis</marquage> en <marquage typemarq="italique">loyaux adversaires</marquage> », cet article se propose de mettre en évidence la tension, plutôt que la dialectique, entre l’action et le verbe qui structure les <marquage typemarq="italique">Feuillets d’Hypnos</marquage> – comme elle structurait déjà le recueil précédent, <marquage typemarq="italique">Seuls demeurent</marquage> – et qui définit ce qu’on peut appeler la « poéthique » de René Char.</alinea></resume><resume typeresume="resume" lang="en"><alinea>Based on the genealogy and the clarification of the turn of phrase in note 6 “transforming <marquage typemarq="italique">old enemies</marquage> into <marquage typemarq="italique">loyal adversaries</marquage>”, this article proposes to highlight the tension, rather than the dialectic, between the action and the language that structures the <marquage typemarq="italique">Feuillets d’Hypnos</marquage> (<marquage typemarq="italique">Leaves of Hypnos</marquage>) – as it already structured the previous collection of poems, <marquage typemarq="italique">Seuls demeurent</marquage> – and that defines what can be called René Char’s “poethics.”</alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no>
+        <alinea>Poète combattant, René Char a renoncé à toute publication pendant la durée de la
+          guerre pour se vouer à l’action directe des maquis de la Résistance et devenir le
+          capitaine Alexandre de l’Armée Secrète, responsable départemental de la Section
+          Atterrissage Parachutage des Basses-Alpes. Mais ce refus de publication ne signifie pas
+          pour autant le renoncement à l’écriture, comme en témoignent les oeuvres qui paraîtront
+          après la Libération, <marquage typemarq="italique">Seuls demeurent</marquage> en 1945 et
+          <marquage typemarq="italique">Feuillets d’Hypnos</marquage> en 1946, repris dans <marquage typemarq="italique">Fureur et Mystère</marquage> en 1948. C’est dans ces oeuvres, dont la
+          plus grande part a été écrite dans les années noires, celles des « ténèbres
+          hitlériennes<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> », qu’on s’interrogera, non pas de façon
+          abstraite mais au plus près du texte, sur les rapports entre la poésie et l’action tels
+          que les thématise, directement ou plus souvent de façon cryptée, l’écriture toujours à la
+          fois poétique et méta-poétique de Char<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>.</alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>On partira pour cela de la note 6 des <marquage typemarq="italique">Feuillets
+          d’Hypnos</marquage> :</alinea>
+        <bloccitation>
+          <alinea>L’effort du poète vise à transformer <marquage typemarq="italique">vieux
+            ennemis</marquage> en <marquage typemarq="italique">loyaux adversaires</marquage>, tout
+            lendemain fertile étant fonction de la réussite de ce projet, surtout là où s’élance,
+            s’enlace, décline, est décimée toute la gamme des voiles où le vent des continents rend
+            son coeur au vent des abîmes.</alinea>
+        </bloccitation>
+      </para><para id="pa3"><no>3</no>
+        <alinea>Que sont donc ces vieux ennemis qu’il s’agit de transformer en loyaux adversaires ?
+          Le lecteur de <marquage typemarq="italique">Fureur et mystère</marquage> sait que
+          <marquage typemarq="italique">Les Loyaux Adversaires</marquage> sert de titre à la section
+          qui suit les <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, mais il n’est
+          pas sûr qu’à la lecture de cette section il se fasse une idée beaucoup plus claire de
+          l’identité de ces loyaux adversaires, qui ont toute une histoire dans l’oeuvre de
+          Char.</alinea>
+      </para><para id="pa4"><no>4</no>
+        <alinea>Pour renouer cette histoire, il faut faire le détour par un paratexte, la
+          correspondance de Char avec Gilbert Lély. Le 25 avril 1941, alors qu’il envisage encore de
+          publier <marquage typemarq="italique">Seuls demeurent</marquage>, le recueil qui précède
+          les <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, Char écrit à
+          Lély :</alinea>
+        <bloccitation>
+          <alinea>Je vais tout de même essayer de faire paraître mon recueil de poèmes dont le titre
+            définitif est <marquage typemarq="italique">Seuls demeurent</marquage>. J’ai craint que
+            <marquage typemarq="italique">Loyaux adversaires</marquage> fasse faussement actualité.
+            D’ailleurs le petit morceau-préface demeure avec son titre « Loyaux adversaires » et
+            directement au-dessus : 1938<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>.</alinea>
+        </bloccitation>
+      </para><para id="pa5"><no>5</no>
+        <alinea><marquage typemarq="italique">Loyaux adversaires</marquage> devait donc être le
+          titre originel de <marquage typemarq="italique">Seuls demeurent</marquage>, puis, à
+          défaut, demeurer au moins dans le recueil comme le titre de son « Argument ». Or, on le
+          sait, Char renonça finalement à publier <marquage typemarq="italique">Seuls
+          demeurent</marquage> pendant la durée de la guerre, et lorsque le recueil parut en 1945,
+          si l’on se reporte à l’ « Argument » qui l’ouvre, on trouve bien la date de 1938, mais le
+          titre est tout simplement « Argument » :</alinea>
+        <verbatim typeverb="forme">
+          <bloc>
+            <ligne alignh="centre">ARGUMENT</ligne>
+            <ligne alignh="droite">1938</ligne>
+          </bloc>
+          <bloc>
+            <ligne><marquage typemarq="italique">L’homme fuit l’asphyxie.</marquage></ligne>
+            <ligne><marquage typemarq="italique">L’homme dont l’appétit hors de l’imagination se
+              calfeutre sans finir de s’approvisionner, se délivrera par les mains, rivières
+              soudainement grossies.</marquage></ligne>
+            <ligne><marquage typemarq="italique">L’homme qui s’épointe dans la prémonition, qui
+              déboise son silence intérieur et le répartit en théâtres, ce second c’est le faiseur
+              de pain.</marquage></ligne>
+            <ligne><marquage typemarq="italique">Aux uns la prison et la mort. Aux autres la
+              transhumance du Verbe.</marquage></ligne>
+            <ligne><marquage typemarq="italique">Déborder l’économie de la création, agrandir le
+              sang des gestes, devoir de toute lumière.</marquage></ligne>
+            <ligne><marquage typemarq="italique">Nous tenons l’anneau où sont enchaînés côte à côte,
+              d’une part le rossignol diabolique, d’autre part la clé angélique.</marquage></ligne>
+            <ligne><marquage typemarq="italique">Sur les arêtes de notre amertume, l’aurore de la
+              conscience s’avance et dépose son limon.</marquage></ligne>
+            <ligne><marquage typemarq="italique">Aoûtement. Une dimension franchit le fruit de
+              l’autre. Dimensions adversaires. Déporté de l’attelage et des noces, je bats le fer
+              des fermoirs invisibles</marquage><renvoi id="re1no4" idref="no4" typeref="note">4</renvoi>.</ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa6"><no>6</no>
+        <alinea>Mais si le titre a disparu, cet argument n’en développe pas moins, de façon plus
+          cryptée, la logique des vieux ennemis et des loyaux adversaires.</alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Au point de départ de cet « Argument », un conflit essentiel qui dépasse de loin la
+          situation historique, celui de l’homme et de l’asphyxie qui nomme toutes les formes de
+          « l’anti-vie », tout ce qui empêche le souffle vital en même temps que le souffle
+          poétique.</alinea>
+      </para><para id="pa8"><no>8</no>
+        <alinea>Mais après cette position initiale à valeur universelle, la figure de l’homme
+          connaît, par le recours à deux relatives déterminatives, une dichotomie, qui oppose deux
+          humanités (non pas successives mais concurrentes). La première humanité, qui convoque
+          l’image d’une rivière en crue, est celle dont l’excès d’appétit ou de désir, faute de
+          trouver une dérivation dans l’imagination, se délivre par les mains : c’est celle de
+          l’homme d’action, voire de l’action criminelle<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi>. Sur le
+          manuscrit, Char avait d’abord écrit : « Aux uns l’action, la prison et la mort<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi> », avant de supprimer le terme trop explicite d’action.</alinea>
+      </para><para id="pa9"><no>9</no>
+        <alinea>Cette image de la crue est, comme l’a montré Jean-Claude Mathieu, séminale dans
+          l’écriture de Char au temps du nazisme : elle suggère, à défaut de nommer « l’innommable
+          situation dans laquelle nous sommes plongés<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi> », la réalité
+          de l’entreprise nazie, cette anti-vie qui apparaît comme une submersion absolue, un
+          nouveau déluge.</alinea>
+      </para><para id="pa10"><no>10</no>
+        <alinea>La définition de l’homme d’action comme celui dont le désir accumulé se délivre par
+          les mains faute d’imagination suggère donc en creux, implicitement, une définition de
+          l’homme du Verbe comme celui qui sublime son désir par l’imagination, mais cette
+          définition implicite se double d’une définition explicite qui recourt à d’autres
+          métaphores : « <marquage typemarq="italique">L’homme qui s’épointe dans la prémonition,
+          qui déboise son silence intérieur et le répartit en théâtres, ce second c’est le faiseur
+          de pain.</marquage> » </alinea>
+      </para><para id="pa11"><no>11</no>
+        <alinea>Si l’homme du Verbe est celui qui déboise son silence intérieur, le Verbe, dans la
+          logique de cette métaphore, est la clairière aménagée dans la forêt du silence intérieur.
+          Et l’on notera que pour définir le poète, Char recourt à des figures allégoriques qui
+          appartiennent toujours à l’univers agro-pastoral d’une France encore paysanne et
+          artisanale, celles du bûcheron (« qui déboise son silence intérieur »), du boulanger (« le
+          faiseur de pain »), du berger (« la transhumance du Verbe ») ou encore, plus loin, du
+          forgeron ou du maréchal-ferrant<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi> (« Je bats le fer de
+          fermoirs invisibles »).</alinea>
+      </para><para id="pa12"><no>12</no>
+        <alinea>L’homme d’action et l’homme du verbe, tels sont donc les vieux ennemis, dont les
+          destins sont évidemment divergents, mais entre lesquels Char ne marque aucune hiérarchie,
+          qu’elle soit de l’ordre de l’efficacité ou de la morale, comme le montre la fin, supprimée
+          dans la version imprimée, du troisième paragraphe dans le manuscrit original :</alinea>
+        <bloccitation>
+          <alinea><marquage typemarq="italique">Aux uns la prison et la mort. Aux autres la
+            transhumance du Verbe. Leur mérite actif est égal</marquage><renvoi id="re1no9" idref="no9" typeref="note">9</renvoi>.</alinea>
+        </bloccitation>
+      </para><para id="pa13"><no>13</no>
+        <alinea>Qu’est-ce qui définit alors ces vieux ennemis et qui les voue à des destins
+          contraires ? C’est l’économie d’une <marquage typemarq="italique">création</marquage>,
+          d’un ordre divin traditionnel fondé sur l’opposition du Bien et du Mal. C’est cette
+          étroitesse de vue, ce manichéisme moral, qui ne pense la réalité qu’à l’aide de deux
+          fausses clés complémentaires, « le rossignol<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi>
+          diabolique » et « la clé angélique », et donc cette opposition entre l’homme d’action et
+          l’homme du verbe, que la situation historique impose de dépasser, ou de déborder, de façon
+          à opposer au débordement mortifère de la terreur nazie un débordement vital, par-delà le
+          bien et le mal<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi>. </alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>L’image de l’arête, qui émerge seule du déluge nazi comme le mont Ararat
+          biblique<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi>, marque à la fois cette volonté de dépassement
+          par le haut et désigne la ligne où se rejoignent les deux versants opposés, les
+          « dimensions adversaires ». Quant à l’autre image, celle de l’aoûtement (terme
+          d’horticulture qui désigne à la fois l’accélération de la maturation des fruits par forte
+          chaleur et la lignification des jeunes bois avant l’hiver), elle dit aussi la croissance
+          accélérée et l’endurcissement de l’humanité nouvelle qu’exigent les circonstances
+          historiques.</alinea>
+      </para><para id="pa15"><no>15</no>
+        <alinea>Cette conjonction sous le signe du dépassement (« une dimension franchit le fruit de
+          l’autre ») fait que de la dualité de l’homme d’action et de l’homme du verbe résulte un
+          « nous » qui devient <marquage typemarq="italique">in fine</marquage> un « je » ; mais
+          elle ne signifie pas l’annulation des différences ni la fusion des contraires ; elle
+          maintient les contradictions selon un modèle qui n’est pas celui de la synthèse
+          hégélienne, mais celui de la tension héraclitéenne.</alinea>
+      </para><para id="pa16"><no>16</no>
+        <alinea>L’ouverture de <marquage typemarq="italique">Seuls demeurent</marquage> est en tout
+          cas une fermeture : « Je bats le fer de fermoirs invisibles. » Le poète déporté des noces
+          de la poésie devient le forgeron d’un artisanat moins furieux que mystérieux, qui enferme
+          à tout le moins les fausses clés d’une création condamnée.</alinea>
+      </para><para id="pa17"><no>17</no>
+        <alinea>Cette contradiction non dialectique de l’action et du verbe structure donc <marquage typemarq="italique">Seuls demeurent</marquage>, comme en témoignent ces quelques
+          extraits :</alinea>
+        <verbatim typeverb="forme">
+          <bloc>
+            <ligne alignh="centre">CHANT DU REFUS</ligne>
+            <ligne alignh="centre"><marquage typemarq="italique">Début du partisan</marquage></ligne>
+            <ligne>Le poète est retourné pour de longues années dans le néant du père<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi>. […]</ligne>
+          </bloc>
+          <bloc>
+            <ligne alignh="centre">PLISSEMENT</ligne>
+            <ligne>[…] Vers ta frontière, ô vie humiliée, je marche maintenant au pas des
+              certitudes, averti que la vérité ne précède pas obligatoirement l’action. Folle soeur
+              de <marquage typemarq="italique">ma phrase, ma maîtresse scellée</marquage>, je te
+              sauve d’un hôtel de décombres.</ligne>
+            <ligne>Le sabre bubonique tombe des mains du Monstre <marquage typemarq="italique">au
+              terme de l’exode du temps de s’exprimer</marquage><renvoi id="re1no14" idref="no14" typeref="note">14</renvoi>.</ligne>
+          </bloc>
+          <bloc>
+            <ligne alignh="centre">HOMMAGE ET FAMINE</ligne>
+            <ligne>[…] Le grillon chanta. Comment savait-il, solitaire, que la terre n’allait pas
+              mourir, <marquage typemarq="italique">que nous, les enfants sans clarté, allions
+              bientôt parler</marquage><renvoi id="re1no15" idref="no15" typeref="note">15</renvoi> ?</ligne>
+          </bloc>
+          <bloc>
+            <ligne alignh="centre">LA LIBERTÉ</ligne>
+            <ligne>Elle est venue par cette ligne blanche […].</ligne>
+            <ligne>Prenaient fin la renonciation à visage de lâche, la sainteté du mensonge,
+              l’alcool du bourreau.</ligne>
+            <ligne><marquage typemarq="italique">Son verbe ne fut pas un aveugle bélier mais la
+              toile où s’inscrivit mon souffle</marquage><renvoi id="re1no16" idref="no16" typeref="note">16</renvoi>.
+              […]</ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa18"><no>18</no>
+        <alinea>Si « Chant du refus », qui marque le début du partisan et de l’action clandestine,
+          marque en même temps le retrait du poète (le chant du refus est en somme le refus du
+          chant), « Plissement » et « Hommage et famine » tendent à restituer la perspective d’un
+          retour du Verbe et du chant, qui se réalisera avec l’ultime poème, « La Liberté ».
+        </alinea>
+      </para><para id="pa19"><no>19</no>
+        <alinea>Deux remarques à propos de ces extraits : le retrait du verbe fait du poète un
+          <marquage typemarq="italique">enfant</marquage>, au sens étymologique du terme,
+          c’est-à-dire celui qui ne parle pas encore (<marquage typemarq="italique">in-fans</marquage>) ; la définition de ce temps de retrait du verbe comme « l’exode du
+          temps de s’exprimer » justifie la formule de « la transhumance du Verbe ». Parler d’exode
+          du temps de s’exprimer, ce n’est pas simplement dire que ce « temps d’algèbre damnée »
+          (20) est une traversée du désert de la parole ; c’est convoquer plus directement la
+          connotation biblique du mot : l’Exode est bien une transhumance, de la terre d’Égypte à la
+          Terre promise, et la figure charienne du poète-berger, qui rappelle (pour s’y opposer) le
+          bon pasteur de l’Évangile, suggère aussi en filigrane la figure d’un autre poète-berger,
+          Moïse.</alinea>
+      </para><para id="pa20"><no>20</no>
+        <alinea>Il est temps, après ce préambule nécessaire sur les loyaux adversaires, d’en revenir
+          aux <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, en passant, là encore,
+          par une lettre à Gilbert Lély, du 17 juillet 1945, dans laquelle Char apprend à son ami
+          comment un carnet de notes de la guerre est devenu le recueil central de <marquage typemarq="italique">Fureur et mystère </marquage>:</alinea>
+        <bloccitation>
+          <alinea>Je me suis mis violemment au travail. Cela s’appelle <marquage typemarq="italique">Carnet d’Hypnos</marquage> (Hypnos est un nom d’homme) 1943-1944. J’ai été assez
+            heureux pour retrouver récemment le journal que je tenais à Céreste, enfoui à mon départ
+            pour Alger dans un trou de mur. C’est ce journal que je vais publier (une sorte de
+            Marc-Aurèle !). Je mets de l’ordre dedans, j’abrège ou je développe suivant les cas.
+            Ci-inclus l’avertissement […]. À la fin du mois j’aurai terminé […]. C’est en tout cas
+            nouveau dans mon oeuvre (rien du papier résistant, cocardier, récital et tout)<renvoi id="re1no17" idref="no17" typeref="note">17</renvoi>.</alinea>
+        </bloccitation>
+      </para><para id="pa21"><no>21</no>
+        <alinea>Comme le montre clairement cette lettre, les <marquage typemarq="italique">Feuillets
+          d’Hypnos</marquage> ne sont pas le carnet de guerre de René Char : si ce carnet est le
+          point de départ, il a subi une double transformation, par le détachement des feuillets qui
+          permet la recomposition des notes d’une part, par le travail de réélaboration qui
+          supprime, ajoute et corrige d’autre part. Et si Char est devenu au maquis le capitaine
+          Alexandre, le capitaine Alexandre du Carnet est devenu Hypnos, figure, par antiphrase ou
+          par alchimie, d’un contre-sommeil et d’une contre-hypnose<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi>, figure du <marquage typemarq="italique">veilleur</marquage> nocturne, mot
+          qui dit la vigilance de la conscience, mais qui doit se lire aussi comme le masculin de la
+          veilleuse, cette petite lampe qu’on tient allumée pendant la nuit, comme dans <marquage typemarq="italique">Madeleine à la veilleuse</marquage> de Georges de La Tour, le tableau
+          éponyme du poème de <marquage typemarq="italique">La Fontaine narrative. </marquage>C’est
+          cette métamorphose née de la confrontation d’Hypnos et de l’hiver que dit
+          l’épigraphe :</alinea>
+        <listenonord signe="nul">
+          <elemliste>
+            <alinea><marquage typemarq="italique">Hypnos saisit l’hiver et le vêtit de
+              granit.</marquage></alinea>
+          </elemliste>
+          <elemliste>
+            <alinea><marquage typemarq="italique">L’hiver se fit sommeil et Hypnos devint
+              feu.</marquage></alinea>
+          </elemliste>
+          <elemliste>
+            <alinea><marquage typemarq="italique">La suite appartient aux hommes</marquage></alinea>
+          </elemliste>
+        </listenonord>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>Suspension du verbe</titre><para id="pa22"><no>22</no>
+        <alinea>Comme dans <marquage typemarq="italique">Seuls demeurent</marquage>, on peut lire
+          dans les <marquage typemarq="italique">Feuillets d’Hypnos</marquage> un chant du refus qui
+          est un refus du chant, chant du refus qui peut s’entendre par exemple dans la note
+          114 :</alinea>
+        <bloccitation>
+          <alinea>Je n’écrirai pas de poème d’acquiescement.</alinea>
+        </bloccitation>
+      </para><para id="pa23"><no>23</no>
+        <alinea>ou dans la note 151 qui rappelle, comme « L’Absent » de <marquage typemarq="italique">L’Avant-monde</marquage>, la contradiction du poète à la fois présent
+          et absent :</alinea>
+        <bloccitation>
+          <alinea>Réponds « absent » toi-même, sinon tu risques de ne pas être compris.</alinea>
+        </bloccitation>
+      </para><para id="pa24"><no>24</no>
+        <alinea>L’avertissement qui précède les deux cent trente-sept notes des <marquage typemarq="italique">Feuillets d’Hypnos</marquage> sonne en tout cas comme une dénégation
+          de la littérature, et met en avant une justification essentiellement éthique de ces
+          notes :</alinea>
+        <bloccitation>
+          <alinea><marquage typemarq="italique">Ces notes n’empruntent rien à l’amour de soi, à la
+            nouvelle, à la maxime ou au roman. Un feu d’herbes sèches eût tout aussi bien été leur
+            éditeur. La vue du sang supplicié en a fait une fois perdre le fil, a réduit à néant
+            leur importance. </marquage>[<marquage typemarq="italique">…</marquage>]</alinea>
+          <alinea><marquage typemarq="italique">Ces notes marquent la résistance d’un humanisme
+            conscient de ses devoirs, discret sur ses vertus, désirant réserver
+            </marquage>l’inaccessible<marquage typemarq="italique"> champ libre à la fantaisie de
+            ses soleils, et décidé à payer le prix pour cela.</marquage></alinea>
+        </bloccitation>
+      </para><para id="pa25"><no>25</no>
+        <alinea>Beaucoup de notes thématisent ainsi l’impossibilité du verbe ou la nécessité du
+          silence :</alinea>
+        <bloccitation>
+          <alinea>La source est roc et la langue est tranchée. (57)</alinea>
+          <alinea>Conduire le réel jusqu’à l’action, comme une fleur glissée à la bouche acide des
+            petits enfants. Connaissance ineffable du diamant désespéré (la vie). (3)</alinea>
+        </bloccitation>
+      </para><para id="pa26"><no>26</no>
+        <alinea>La source est dans l’oeuvre du poète de l’Isle-sur-Sorgue une figure du
+          jaillissement poétique, comme la Sorgue qui jaillit du rocher à Fontaine de Vaucluse,
+          source et Sorgue ayant le même étymon latin, <marquage typemarq="italique">surgere</marquage>, jaillir. La transformation de la source en roc a donc à la fois la
+          dimension négative d’un tarissement de la source poétique, et la dimension positive d’une
+          force de résistance comme le « rocher de braves gens » de Forcalquier « est la citadelle
+          de l’amitié » (17). C’est donc en deçà de la parole que le poète résistant, redevenu petit
+          enfant ou nouveau primitif dans ce nouvel âge des cavernes<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi>, se voue à l’action, non pas la fleur au fusil, mais la fleur à la bouche,
+          cette floraison qui ferme la bouche étant le signe d’une connaissance, qui ne peut pas
+          passer par les mots, de la vie.</alinea>
+      </para><para id="pa27"><no>27</no>
+        <alinea>À cette suspension du verbe s’ajoute la suspension corollaire de ce qui est
+          inséparable, comme le suggérait l’ « Argument » de <marquage typemarq="italique">Seuls
+          demeurent</marquage>, de la poésie, l’imagination :</alinea>
+        <bloccitation>
+          <alinea>Remettre à plus tard la part imaginaire qui, elle aussi, est susceptible
+            d’action. (18)</alinea>
+          <alinea>« Les souris de l’enclume. » Cette image m’aurait paru charmante autrefois. Elle
+            suggère un essaim d’étincelles décimé en son éclair ; (L’enclume est froide, le fer pas
+            rouge, l’imagination dévastée.) (52)</alinea>
+        </bloccitation>
+      </para><para id="pa28"><no>28</no>
+        <alinea>C’est plus particulièrement l’image <marquage typemarq="italique">gratuite</marquage>, ou simplement charmante, celle des temps surréalistes et peut-être,
+          comme le suggère la parenthèse, du <marquage typemarq="italique">Marteau sans
+          maître</marquage>, qui est récusée désormais par celui qui connaît <marquage typemarq="italique">le prix</marquage> du sang.</alinea>
+      </para></section1><section1 id="s1n3"><no>3</no><titre>Une éthique de l’action</titre><para id="pa29"><no>29</no>
+        <alinea>L’action, qu’elle soit racontée ou théorisée, apparaît donc au premier plan dans les
+          <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, avec sa syntaxe jussive, qui
+          définit une véritable éthique.</alinea>
+      </para><para id="pa30"><no>30</no>
+        <alinea>Cette éthique de l’action se réfère au stoïcisme (« une sorte de Marc Aurèle ! »
+          disait la lettre à Gilbert Lély plus haut citée, et il y a évidemment dans les <marquage typemarq="italique">Feuillets d’Hypnos</marquage> quelque chose des <marquage typemarq="italique">Pensées pour soi-même</marquage> de l’empereur philosophe), mais elle
+          s’y réfère pour s’en distinguer (comme le suggère déjà la virtualité ironique du point
+          d’exclamation dans la référence à Marc Aurèle) :</alinea>
+        <bloccitation>
+          <alinea>Être stoïque, c’est se figer avec les beaux yeux de Narcisse. Nous avons recensé
+            toute la douleur qu’éventuellement le bourreau pouvait prélever sur chaque pouce de
+            notre corps ; puis le coeur serré, nous sommes allés et avons fait face. (4)</alinea>
+        </bloccitation>
+      </para><para id="pa31"><no>31</no>
+        <alinea>Si l’interprétation de cette note (et en particulier du verbe se figer) peut prêter
+          à discussion (éloge ou critique du stoïcisme), il semble bien que Char désigne ici la
+          tentation narcissique du stoïcisme (que manifeste un titre comme <marquage typemarq="italique">Pensées pour soi-même</marquage>). Il y a bien, chez le poète, une
+          forme aussi de retour sur soi, comme l’indique la première partie de la deuxième phrase,
+          mais ce retour sur soi ne relève pas de l’auto-complaisance ; il se donne comme le
+          nécessaire inventaire physique des capacités et des risques qui n’a de sens que de
+          préparer, dans un deuxième temps, le détournement de soi qui permet de faire
+          face.</alinea>
+      </para><para id="pa32"><no>32</no>
+        <alinea>À partir de là, l’éthique charienne de l’action, ce stoïcisme qui se confond avec la
+          vertu de résistance, peut se résumer en trois impératifs :</alinea>
+      </para><section2 id="s2n1"><no>3.
+				1</no><titre>1– Nécessité de limiter l’action.</titre><para id="pa33"><no>33</no>
+        <alinea>Cette nécessité première se formule dans la note inaugurale des <marquage typemarq="italique">Feuillets d’Hypnos</marquage> :</alinea>
+        <bloccitation>
+          <alinea>Autant que se peut, enseigne à devenir efficace, pour le but à atteindre mais pas
+            au delà. Au delà est fumée. Où il y a fumée il y a changement. (1)</alinea>
+        </bloccitation>
+      </para><para id="pa34"><no>34</no>
+        <alinea>Encore faut-il bien voir que cette nécessité de la limite est immédiatement corrigée
+          par la note 2, pour que la dimension positive de la limite ne serve pas d’alibi à sa
+          dimension négative :</alinea>
+        <bloccitation>
+          <alinea>Ne t’attarde pas à l’ornière des résultats. (2)</alinea>
+        </bloccitation>
+      </para><para id="pa35"><no>35</no>
+        <alinea>Cette positivité de la limite est illustrée par la destinée d’Arthur le
+          Fol :</alinea>
+        <bloccitation>
+          <alinea>Arthur le Fol, après les tâtonnements du début, participe maintenant, de toute sa
+            forte nature décidée, à nos jeux de hasard. <marquage typemarq="italique">Sa fringale
+            d’action doit se satisfaire de la tâche précise que je lui assigne. Il obéit et se
+            limite</marquage>, par crainte d’être tancé ! Sans cela, Dieu sait dans quel guêpier
+            final sa bravoure le ferait glisser ! Fidèle Arthur, comme un soldat de l’ancien
+            temps<renvoi id="re1no20" idref="no20" typeref="note">20</renvoi> ! (9)</alinea>
+        </bloccitation>
+      </para></section2><section2 id="s2n2"><no>3.
+				2</no><titre>2– Nécessité de simplifier, c’est-à-dire de réduire à l’essentiel.</titre><bloccitation>
+        <alinea>[L]es convaincre qu’à partir d’un certain point l’importance des idées reçues est
+          extrêmement relative et qu’en fin de compte « l’affaire » est une affaire de vie et de
+          mort et non de nuances à faire prévaloir […]. (38)</alinea>
+        <alinea>Je m’explique mieux aujourd’hui ce besoin de simplifier, de faire entrer tout dans
+          un, à l’instant de décider si telle chose doit avoir lieu ou non. L’homme s’éloigne à
+          regret de son labyrinthe. Les mythes millénaires le pressent de ne pas partir.
+          (153)</alinea>
+        <alinea>Le poète, susceptible d’exagération, évalue correctement dans le supplice.
+          (154)</alinea>
+      </bloccitation><para id="pa36"><no>36</no>
+        <alinea>Il y a sans doute quelque chose comme un aveu personnel dans l’affirmation que
+          l’homme s’éloigne à regret de son labyrinthe, figure de la complexité intellectuelle et
+          surtout psychique, pour le poète qui s’identifiait volontiers au Minotaure.</alinea>
+      </para><para id="pa37"><no>37</no>
+        <alinea>Mais cette nécessité de simplifier peut se manifester d’une autre façon, par une
+          parenthèse à valeur d’épanorthose :</alinea>
+        <bloccitation>
+          <alinea>Ce qui peut séduire dans le néant éternel c’est que le plus beau jour y soit
+            indifféremment celui-ci ou tel autre.</alinea>
+          <alinea>(Coupons cette branche. Aucun essaim ne viendra s’y pendre.) (49)</alinea>
+        </bloccitation>
+      </para><para id="pa38"><no>38</no>
+        <alinea>Simplifier, c’est en somme un travail d’élagage mental, d’élagage des branches
+          mortes de l’esprit, pour celui qui ne se dit pas pour rien frère de l’élagueur dans la
+          note 11, l’élagueur lui-même n’étant que la variante allégorique de celui qui déboise son
+          silence intérieur. </alinea>
+      </para><para id="pa39"><no>39</no>
+        <alinea>Ainsi prend tout son sens, quand on la rapproche de la note 49, la note
+          117 :</alinea>
+        <bloccitation>
+          <alinea>[…] Il sera toujours temps d’apprendre à Claude qu’on ne taille pas dans sa vie
+            sans se couper. (117)</alinea>
+        </bloccitation>
+      </para><para id="pa40"><no>40</no>
+        <alinea>Rien n’est moins simple en somme, ni plus douloureux, que cet élagage de
+          soi.</alinea>
+      </para></section2><section2 id="s2n3"><no>3.
+				3</no><titre>3– Nécessité (pour l’homme) de se transformer.</titre><para id="pa41"><no>41</no>
+        <alinea>Cette nécessité se fonde sur la conviction que, même dans une modernité
+          post-cartésienne qui a multiplié, de Darwin à Marx en passant par Freud, les déterminismes
+          biologiques, psychologiques ou sociaux, l’homme n’est pas réductible à la somme de ses
+          déterminismes, et que subsiste en lui un espace, si réduit soit-il, qui lui permet de
+          changer sa destinée. Cet espace irréductible, c’est la liberté :</alinea>
+        <bloccitation>
+          <alinea>[…] (Le libre arbitre n’existerait pas. L’être se définirait par rapport à ses
+            cellules, à son hérédité, à la course brève ou prolongée de son destin… Cependant il
+            existe entre tout cela et l’Homme une enclave d’inattendus et de métamorphoses dont il
+            faut défendre l’accès et assurer le maintien.) (155)</alinea>
+        </bloccitation>
+      </para><para id="pa42"><no>42</no>
+        <alinea>La terreur nazie est alors ce moment propice aux choix décisifs :</alinea>
+        <bloccitation>
+          <alinea>[…] L’heure est propice aux métamorphoses. Mettez-la à profit ou allez-vous-en.
+            (76)</alinea>
+        </bloccitation>
+      </para><para id="pa43"><no>43</no>
+        <alinea>Une métaphore agricole dit aussi la responsabilité du chef, du poète-paysan, dans
+          cette transformation de l’homme, qui est précisément une transplantation :</alinea>
+        <bloccitation>
+          <alinea>L’arracher à sa terre d’origine. Le replanter dans le sol présumé harmonieux de
+            l’avenir […]. (51)</alinea>
+        </bloccitation>
+      </para><para id="pa44"><no>44</no>
+        <alinea>Archiduc, comme Arthur le Fol, représente l’exemple privilégié de cette
+          transformation ou de cette métamorphose qui est proprement une alchimie de l’homme, une
+          alchimie dont l’homme est à la fois l’acteur et l’objet :</alinea>
+        <bloccitation>
+          <alinea>Archiduc me confie qu’il a découvert sa vérité quand il a épousé la Résistance.
+            Jusque-là il était un acteur de sa vie frondeur et soupçonneux. […] Aujourd’hui
+            <marquage typemarq="italique">il aime </marquage>[…]. J’apprécie beaucoup cet
+            alchimiste. (30)</alinea>
+        </bloccitation>
+      </para><para id="pa45"><no>45</no>
+        <alinea>Mais cette transformation peut relever aussi d’une alchimie à rebours. Juste avant
+          que soit évoquée, dans la note 9, la transformation d’Arthur le Fol en fidèle Arthur, la
+          note 8 constate l’alchimie inverse, l’effondrement du plus grand nombre :</alinea>
+        <bloccitation>
+          <alinea>Des êtres raisonnables perdent jusqu’à la notion de la durée probable de leur vie
+            et leur équilibre quotidien lorsque l’instinct de conservation s’effondre en eux sous
+            les exigences de l’instinct de propriété. […] (8)</alinea>
+        </bloccitation>
+      </para><para id="pa46"><no>46</no>
+        <alinea>Il reste que les <marquage typemarq="italique">Feuillets d’Hypnos</marquage> ne
+          sauraient se résumer à cette éthique de l’action occupant toute la place laissée vacante
+          par la suspension du verbe, mais définissent une nouvelle alliance entre l’action et le
+          verbe.</alinea>
+      </para></section2></section1><section1 id="s1n4"><no>4</no><titre>Une « poéthique »</titre><para id="pa47"><no>47</no>
+        <alinea>S’il est vrai que « l’effort du poète vise à transformer <marquage typemarq="italique">vieux ennemis</marquage> en <marquage typemarq="italique">loyaux
+          adversaires</marquage> » (6), on ne saurait s’en tenir à cette vision trop simple d’une
+          suspension du verbe poétique dans un temps tout entier voué à l’action
+          résistante.</alinea>
+      </para><para id="pa48"><no>48</no>
+        <alinea>Même dans les énoncés les plus évidemment gnomiques ou injonctifs, qui définissent
+          l’éthique de l’action, et qui peuvent apparaître, du point de vue du sens, comme des
+          énoncés fermés, une image, même discrète, produit un effet d’ouverture, notamment
+          lorsqu’elle fait apparaître en filigrane une des identités allégoriques du poète. On a vu
+          l’exemple de la note 49 où « Coupons la branche » renvoie au poète élagueur. Il en va de
+          même de la note 53, strictement narrative, qui se termine par cette mise en garde à
+          soi-même : « Prends garde à l’anecdote, c’est une gare où le chef de gare déteste
+          l’aiguilleur » (on imagine que le poète n’est pas du côté du chef de gare, c’est-à-dire de
+          l’arrêt et de la voie de garage, mais de l’aiguilleur, ou du mouvement), et de la note
+          32 : « Un homme sans défauts est une montagne sans crevasses. Il ne m’intéresse pas. /
+          (Règle de sourcier et d’inquiet.) », où le poète s’identifie au sourcier, celui qui
+          cherche à retrouver la source (poétique) souterraine. Mais on retrouvera aussi le
+          boulanger, le faiseur de pain de l’ « Argument » de <marquage typemarq="italique">Seuls
+          demeurent</marquage>, qui devient ainsi l’homme d’une nouvelle eucharistie, ou d’une
+          nouvelle communion : « Guérir le pain. Attabler le vin<renvoi id="re1no21" idref="no21" typeref="note">21</renvoi> »
+          (184), et bien entendu le berger : « Il n’est plus question que le berger soit guide.
+          Ainsi en décide le politique, ce nouveau fermier général » (216). Cette protestation du
+          poétique contre la mainmise du politique oppose le berger (nomade) au fermier
+          (sédentaire), le guide au général et ce berger guide (le poète chef de maquis) au fermier
+          général, ce collecteur d’impôt de l’Ancien Régime. Est ainsi visée, par l’homme de la
+          résistance intérieure, la résistance extérieure incarnée par les généraux
+          d’Alger.</alinea>
+      </para><para id="pa49"><no>49</no>
+        <alinea>Mieux, les notes qui évoquent l’action peuvent acquérir une dimension méta-poétique,
+          comme en témoignent les notes 97 et 98 :</alinea>
+        <bloccitation>
+          <alinea>L’avion déboule. Les pilotes invisibles se délestent de leur jardin nocturne puis
+            pressent un feu bref sous l’aisselle de l’appareil pour avertir que c’est fini. Il ne
+            reste plus qu’à rassembler le trésor éparpillé. De même le poète… (97)</alinea>
+          <alinea>La ligne de vol du poème. Elle devrait être <marquage typemarq="italique">sensible</marquage> à chacun. (98)</alinea>
+        </bloccitation>
+      </para><para id="pa50"><no>50</no>
+        <alinea>Inversement, une note méta-poétique peut devenir, par la métaphore, une forme
+          d’action, comme dans la note 194 qui retrouve la métaphore du Verbe-bélier de « La
+          Liberté » :</alinea>
+        <bloccitation>
+          <alinea>Je me fais violence pour conserver, malgré mon humeur, ma voix d’encre. Aussi,
+            est-ce d’une plume à bec de bélier, sans cesse éteinte, sans cesse rallumée, tendue et
+            d’une haleine, que j’écris ceci, que j’oublie cela. Automate de la vanité ? Sincèrement
+            non. Nécessité de contrôler l’évidence, de la faire créature. (194)</alinea>
+        </bloccitation>
+      </para><para id="pa51"><no>51</no>
+        <alinea>Dans ces conditions, il n’y a pas d’un côté une éthique de l’action et de l’autre
+          une poétique, mais, pour emprunter ce mot de Jean-Claude Pinson<renvoi id="re1no22" idref="no22" typeref="note">22</renvoi>, une « poéthique ».</alinea>
+      </para><para id="pa52"><no>52</no>
+        <alinea>Cette « poéthique » se définit par la nécessité du laconisme :</alinea>
+        <bloccitation>
+          <alinea>J’écris brièvement. Je ne puis guère m’absenter longtemps. S’étaler conduirait à
+            l’obsession. L’adoration des bergers n’est plus utile à la planète. (31)</alinea>
+          <alinea>Tu ne peux pas te relire mais tu peux signer. (96)</alinea>
+          <alinea>Lyre pour des monts internés. (182)</alinea>
+        </bloccitation>
+        <alinea>(Cette lyre pour des monts internés fait aussi surgir la figure du poète comme un
+          nouvel Orphée pour un nouvel enfer.)</alinea>
+      </para><para id="pa53"><no>53</no>
+        <alinea>Le laconisme n’est pas seulement imposé par les circonstances de la clandestinité ;
+          il n’est pas circonstanciel, mais <marquage typemarq="italique">essentiel </marquage>: tel
+          est bien en effet le mot qui définit la « poéthique » des <marquage typemarq="italique">Feuillets d’Hypnos</marquage>. La poésie, ce sont les mots essentiels, « la parole du
+          plus haut silence » qu’incarne l’ange (intérieur) de la note 16 ou celui du tableau de
+          Georges de La Tour évoqué dans la note 178 :</alinea>
+        <bloccitation>
+          <alinea>[…] Les mots qui tombent de cette terrestre silhouette d’ange rouge sont des mots
+            essentiels, des mots qui portent immédiatement secours. […]</alinea>
+        </bloccitation>
+      </para><para id="pa54"><no>54</no>
+        <alinea>Cette notion d’essentiel n’est pas seulement ce qui qualifie les mots dans la note
+          16, elle devient un substantif dans la note suivante : « […] Nous nous sommes épousés une
+          fois pour toutes devant l’essentiel », où l’essentiel prend la place de ce devant quoi
+          l’on s’épouse, traditionnellement : Dieu.</alinea>
+      </para><para id="pa55"><no>55</no>
+        <alinea>C’est à partir de cette notion d’essentiel que la parole poétique n’est pas
+          seulement la compagne forcée de l’action.</alinea>
+      </para></section1><section1 id="s1n5"><no>5</no><titre>L’en avant de la parole</titre><para id="pa56"><no>56</no>
+        <alinea>Le poète qui fait de l’hiver 1943-1944 sa <marquage typemarq="italique">Saison en
+          enfer</marquage> a fait sienne l’une des plus célèbres formules de celui qui a pensé
+          aussi, dans la lettre dite du voyant, le rapport de la poésie et de l’action : « La Poésie
+          ne rythmera plus l’action ; elle <marquage typemarq="italique">sera en
+          avant</marquage><renvoi id="re1no23" idref="no23" typeref="note">23</renvoi>. »</alinea>
+      </para><para id="pa57"><no>57</no>
+        <alinea>Considérons par exemple la note 19 :</alinea>
+        <bloccitation>
+          <alinea>Le poète ne peut pas longtemps demeurer dans la stratosphère du Verbe. Il doit se
+            lover dans de nouvelles larmes et pousser plus avant dans son ordre. (19)</alinea>
+        </bloccitation>
+      </para><para id="pa58"><no>58</no>
+        <alinea>Si la stratosphère s’oppose évidemment à l’atmosphère dans laquelle nous vivons,
+          cette stratosphère du Verbe n’est pas nécessairement négative : il y a de brefs moments,
+          d’extase poétique, où le poète a le sentiment d’accéder à la stratosphère du Verbe<renvoi id="re1no24" idref="no24" typeref="note">24</renvoi> (voir par exemple la note 203). Il ne s’agit donc pas de la
+          refuser <marquage typemarq="italique">a priori</marquage>, mais de ne pas s’y attarder,
+          sous peine de se couper du réel. Il y a donc une descente nécessaire, du Verbe
+          stratosphérique au Verbe atmosphérique, et cette descente prend la forme d’une incarnation
+          (le Verbe se fait chair) ou d’une renaissance, dans la douleur, comme le suggère le verbe
+          <marquage typemarq="italique">se lover</marquage> qui évoque la position foetale à partir
+          de laquelle une nouvelle croissance est possible, non pas celle de l’homme d’action, mais
+          du poète « dans son ordre ». Ce thème d’une régression prénatale qui prélude à une
+          renaissance est essentiel dans l’oeuvre de celui pour qui son prénom est tout un
+          programme : René.</alinea>
+      </para><para id="pa59"><no>59</no>
+        <alinea>La Résistance, dans un pays qui fait office de nouveau pays natal, est l’expérience
+          de cette réincarnation de la poésie, ou de sa renaturalisation, dont les résistants
+          fournissent le modèle, par l’image juste, « le mot de la situation » :</alinea>
+        <bloccitation>
+          <alinea>Un officier, venu d’Afrique du Nord, s’étonne que mes « bougres de maquisards »,
+            comme il les appelle, s’expriment dans une langue dont le sens lui échappe, son oreille
+            étant rebelle « au parler des images ». Je lui fais remarquer que l’argot n’est que
+            pittoresque alors que la langue qui est ici en usage est due à l’émerveillement
+            communiqué par les êtres et les choses dans l’intimité desquels nous vivons
+            continuellement<renvoi id="re1no25" idref="no25" typeref="note">25</renvoi>. (61)</alinea>
+          <alinea>« Le voilà ! » Il est deux heures du matin. L’avion a vu nos signaux et réduit son
+            altitude. La brise ne gênera pas la descente en parachute du visiteur que nous
+            attendons. La lune est d’étain vif et de sauge. « L’école des poètes du tympan »,
+            chuchote Léon qui a toujours le mot de la situation. (148)</alinea>
+          <alinea>Ce matin, comme j’examinais un tout petit serpent qui se glissait entre deux
+            pierres : « L’orvet du deuil », s’est écrié Félix. La disparition de Lefèvre, tué la
+            semaine passée, affleure superstitieusement en image. (94)</alinea>
+        </bloccitation>
+      </para><para id="pa60"><no>60</no>
+        <alinea>Voilà la poésie naturelle, et véridique, que parlent ces poètes qui n’ont pas été
+          dénaturés par toutes les formes d’artificialisme. </alinea>
+      </para><para id="pa61"><no>61</no>
+        <alinea>La renaturalisation de la poésie affecte aussi les noms propres, eux-mêmes
+          remotivés : les pseudonymes du maquis (Archiduc, Arthur le Fol, Carlate, Esclabesang,
+          l’ami des blés, sans parler d’Hypnos) sont en réalité des aléthonymes : ils cachent moins
+          l’identité des êtres qu’ils n’en révèlent la vérité profonde<renvoi id="re1no26" idref="no26" typeref="note">26</renvoi>.</alinea>
+      </para><para id="pa62"><no>62</no>
+        <alinea>Cette renaturalisation de la poésie est inséparable d’une renaturalisation de la
+          Vérité, tant il est vrai, comme le rappelle le fragment XVII de <marquage typemarq="italique">Partage formel</marquage>, que « poésie et vérité, comme nous savons,
+          [sont] synonymes ». </alinea>
+      </para><para id="pa63"><no>63</no>
+        <alinea>Encore faut-il s’entendre sur ce mot de vérité : les vérités qui dominent l’époque
+          sont les vérités abstraites ou formelles, produites par les idéologies, qui sont des
+          vérités assourdissantes et mortifères :</alinea>
+        <bloccitation>
+          <alinea>Le génie de l’homme, qui pense avoir découvert les vérités formelles, accommode
+            les vérités qui tuent en vérités qui <marquage typemarq="italique">autorisent</marquage>
+            à tuer. Parade des grands inspirés à rebours sur le front de l’univers cuirassé et
+            pantelant ! Cependant que les névroses collectives s’accusent dans l’oeil des mythes et
+            des symboles, l’homme psychique met la vie au supplice sans qu’il paraisse lui en coûter
+            le moindre remords. La fleur <marquage typemarq="italique">tracée</marquage>, la fleur
+            hideuse, tourne ses pétales noirs dans la chair folle du soleil. (18)</alinea>
+        </bloccitation>
+      </para><para id="pa64"><no>64</no>
+        <alinea>Symbole de cette vérité dénaturée, la croix gammée du nazisme, fausse fleur ou fleur
+          dénaturée qui dénature le soleil (on sait que la croix gammée est un symbole
+          solaire).</alinea>
+      </para><para id="pa65"><no>65</no>
+        <alinea>Face à cette vérité dénaturée, la vérité selon Char ne peut être que naturelle. En
+          témoigne cette apostrophe de la note 204 :</alinea>
+        <bloccitation>
+          <alinea>Ô vérité, infante mécanique, reste terre et murmure au milieu des astres
+            impersonnels ! (204)</alinea>
+        </bloccitation>
+      </para><para id="pa66"><no>66</no>
+        <alinea>Si le poète désigne la vérité comme une infante, c’est d’abord parce qu’<marquage typemarq="italique">infante</marquage> est le féminin d’<marquage typemarq="italique">enfant</marquage> : elle est celle qui, contre les vérités formelles tonitruantes, est en
+          deçà de la parole. Mais l’infante est aussi celle qui, en Espagne, est appelée à devenir
+          une reine toute-puissante, sauf qu’ici, le royaume dans lequel la vérité, cette « infante
+          mécanique », est appelée à devenir reine est celui de la machine, ou de la technique, ce
+          royaume de la dénaturation de l’homme. Par cette apostrophe, le poète implore ainsi la
+          vérité de rester « terre et murmure », c’est-à-dire de rester une vérité humble (au sens
+          étymologique du mot, à ras de terre) et qui parle à voix basse, de résister en somme à son
+          destin programmé de trôner un jour au milieu des vérités impersonnelles et abstraites,
+          aussi éloignées des hommes que les astres célestes. Ajoutons que ces astres impersonnels,
+          comme le signale Jean-Claude Mathieu<renvoi id="re1no27" idref="no27" typeref="note">27</renvoi>, sont aussi une
+          allusion aux généraux (étoilés) d’Alger.</alinea>
+      </para><para id="pa67"><no>67</no>
+        <alinea>C’est chez Claude Bernard, le fondateur de la médecine expérimentale, que Char
+          trouvera la caution de cette vérité dans un texte publié en 1946, « La liberté passe en
+          trombe » :</alinea>
+        <bloccitation>
+          <alinea>Des mots échangés tout bas au lendemain de 1940 s’enfouissaient dans la terre
+            patiente et devenaient progressivement des hommes debout… Miracle de la conscience, de
+            cette sensation de l’évidence qui, selon Claude Bernard, a nom vérité<renvoi id="re1no28" idref="no28" typeref="note">28</renvoi>.</alinea>
+        </bloccitation>
+      </para><para id="pa68"><no>68</no>
+        <alinea>Telle est la vérité, celle qui parle à voix basse, et qui se donne sous le double
+          signe de la sensation (contre l’abstraction) et de l’évidence, qu’invoquent les <marquage typemarq="italique">Feuillets d’Hypnos</marquage> :</alinea>
+        <bloccitation>
+          <alinea>[…] Qu’ils apprennent à chanter bas et à ne pas siffler d’air obsédant, à dire
+            <marquage typemarq="italique">telle qu’elle s’offre</marquage> la vérité<renvoi id="re1no29" idref="no29" typeref="note">29</renvoi>. (87)</alinea>
+          <alinea>[…] Surtout ne pas entièrement leur supprimer ces sentiers pénibles, à l’effort
+            desquels succède <marquage typemarq="italique">l’évidence de la vérité</marquage> à
+            travers pleurs et fruits<renvoi id="re1no30" idref="no30" typeref="note">30</renvoi>. (135)</alinea>
+        </bloccitation>
+      </para><para id="pa69"><no>69</no>
+        <alinea>Il faut dire que Char sollicite un peu le propos de Claude Bernard, qui distingue
+          deux ordres de vérités, les vérités subjectives et les vérités objectives. Ce ne sont bien
+          entendu, pour celui qui se recommande de la science et des vérités objectives validées par
+          l’expérimentation, que les vérités subjectives qui apportent « le sentiment d’une évidence
+          absolue et nécessaire<renvoi id="re1no31" idref="no31" typeref="note">31</renvoi> ».</alinea>
+      </para><para id="pa70"><no>70</no>
+        <alinea>La renaturalisation de la poésie s’accompagne aussi, bien évidemment, d’une
+          renaturalisation de l’imagination, qui restitue à la réalité immédiate de l’action sa part
+          d’inconnu, de mystère, sa puissance d’en avant :</alinea>
+        <bloccitation>
+          <alinea>Imagination, mon enfant. (101)</alinea>
+          <alinea>Ensoleiller l’imagination de ceux qui bégaient au lieu de parler, qui rougissent à
+            l’instant d’affirmer. Ce sont de fermes partisans. (60)</alinea>
+          <alinea>Dans ton corps conscient, <marquage typemarq="italique">la réalité est en avance
+            de quelques minutes d’imagination</marquage>. Ce temps jamais rattrapé est un gouffre
+            étranger aux actes de ce monde<renvoi id="re1no32" idref="no32" typeref="note">32</renvoi>. […] (218)</alinea>
+        </bloccitation>
+      </para><para id="pa71"><no>71</no>
+        <alinea>L’imagination rouvre une espérance (« Résistance n’est qu’espérance » [168]),
+          rapatriée dans l’horizon terrestre, ou s’ouvre à ce que Char nomme la chance, qui est une
+          forme de providence sans Dieu :</alinea>
+        <bloccitation>
+          <alinea>La perte de la vérité, l’oppression de cette ignominie dirigée qui s’intitule
+            <marquage typemarq="italique">bien</marquage> (le mal, non dépravé, inspiré, fantasque
+            est utile) a ouvert une plaie au flanc de l’homme que seul l’espoir du grand lointain
+            informulé (le vivant inespéré) atténue. Si l’absurde est maître ici-bas, je choisis
+            l’absurde, l’antistatique, celui qui me rapproche le plus des chances pathétiques. […]
+            (174)</alinea>
+        </bloccitation>
+      </para><para id="pa72"><no>72</no>
+        <alinea>C’est là la fécondité paradoxale de la nuit, qui retourne, comme la contre-terreur
+          retourne la terreur, les ténèbres hitlériennes : </alinea>
+        <bloccitation>
+          <alinea>La couleur noire renferme l’<marquage typemarq="italique">impossible</marquage>
+            vivant. Son champ mental est le siège de tous les inattendus, de tous les paroxysmes.
+            Son prestige escorte les poètes et prépare les hommes d’action. (229)</alinea>
+        </bloccitation>
+      </para><para id="pa73"><no>73</no>
+        <alinea>C’est ce mystère fondamental qu’incarne l’ange de la note 16, ou la Femme, « cette
+          terrestre silhouette d’ange rouge » du <marquage typemarq="italique">Prisonnier</marquage>
+          de Georges de La Tour qui est à la fois la poésie, la vérité, la liberté :</alinea>
+        <bloccitation>
+          <alinea>L’intelligence avec l’ange, notre primordial souci.</alinea>
+          <alinea>(Ange, ce qui, à l’intérieur de l’homme, tient à l’écart du compromis religieux,
+            la parole du plus haut silence, la signification qui ne s’évalue pas. Accordeur de
+            poumons qui dore les grappes vitaminées de l’impossible. Connaît le sang, ignore le
+            céleste. Ange : la bougie qui se penche au nord du coeur.)<renvoi id="re1no33" idref="no33" typeref="note">33</renvoi> (16)</alinea>
+          <alinea>[…] Le Verbe de la femme donne naissance à l’inespéré mieux que n’importe quelle
+            aurore. (178)</alinea>
+        </bloccitation>
+      </para><para id="pa74"><no>74</no>
+        <alinea>Et c’est au nom de ce mystère par lequel la poésie est l’en avant de l’action, ou
+          l’espérance qui la fonde, qu’il faut relire la laconique note 67 :</alinea>
+        <bloccitation>
+          <alinea>Armand, le météo, définit sa fonction : le service énigmatique. (67)</alinea>
+        </bloccitation>
+      </para><para id="pa75"><no>75</no>
+        <alinea>Char aurait pu ajouter, comme dans la note 97, « De même le poète ». Mais il n’est
+          pas besoin de cette explicitation pour faire une lecture méta-poétique de cette note, et y
+          voir la plus juste définition de la poésie des <marquage typemarq="italique">Feuillets
+          d’Hypnos</marquage>, qui est sans doute au service de l’homme, mais un service
+          énigmatique, non pas tant par son obscurité (réelle) que parce qu’il confronte son lecteur
+          à un mystère plus essentiel, celui de notre condition.</alinea>
+      </para></section1></corps><partiesann lang="fr"><grnotebio><notebio id="nb1" idrefs="au1" lang="fr"><alinea>Bertrand Marchal est professeur de littérature française du XIX<exposant>e</exposant> siècle à Sorbonne Université. Il a principalement travaillé sur Mallarmé dont il a édité les <marquage typemarq="italique">Œuvres complètes</marquage> en deux volumes dans la Bibliothèque de la Pléiade. Il a fréquenté René Char dans les quinze dernières années de sa vie.</alinea></notebio></grnotebio><grbiblio><biblio><titre>Références</titre><refbiblio id="rb1"><marquage typemarq="petitecap">Bernard</marquage>, Claude, <marquage typemarq="italique">Introduction à l’étude de la médecine expérimentale</marquage>, Paris, J. B. Baillière et fils, 1865.</refbiblio>
+<refbiblio id="rb2"><marquage typemarq="petitecap">Char</marquage>, René, <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, Paris, Gallimard, 1946.</refbiblio>
+      <refbiblio id="rb3"><marquage typemarq="petitecap">Char</marquage>, René, <marquage typemarq="italique">L’Action de la justice est éteinte</marquage>, Paris, Éditions Surréalistes, 1931.</refbiblio>
+      <refbiblio id="rb4"><marquage typemarq="petitecap">Char</marquage>, René, <marquage typemarq="italique">Le Marteau sans maître</marquage>, Paris, Éditions Surréalistes, 1934.</refbiblio>
+      <refbiblio id="rb5"><marquage typemarq="petitecap">Char</marquage>, René, <marquage typemarq="italique">Oeuvres complètes</marquage>, Paris, Gallimard (Bibliothèque de la Pléiade), 1995.</refbiblio>
+      <refbiblio id="rb6"><marquage typemarq="petitecap">Char</marquage>, René, <marquage typemarq="italique">Seuls demeurent</marquage>, Paris, Gallimard, 1945.</refbiblio>
+<refbiblio id="rb7"><marquage typemarq="petitecap">Garcin</marquage>, Jean, <marquage typemarq="italique">De l’Armistice à la Libération dans les Alpes de Haute-Provence 17 juin 1940-20 août 1944, Chronique. Essai sur l’histoire de la Résistance avec un prologue 1935-1940 et un épilogue 1944-1945</marquage>, Digne, Imprimerie B. Vial, 1983. </refbiblio>
+<refbiblio id="rb8"><marquage typemarq="petitecap">Marchal</marquage>, Bertrand, « Les yeux ouverts, les yeux fermés : René Char dans les ténèbres hitlériennes », dans Charles D. <marquage typemarq="petitecap">Minahen</marquage> (dir.), <marquage typemarq="italique">Figuring </marquage><marquage typemarq="italique">Things –</marquage><marquage typemarq="italique"> Char, Ponge and Poetry in the Twentieth Century</marquage>, Lexington (Kentucky), French Forum Publishers (French Forum Monograph Series), 1994, p. 53-64. </refbiblio>
+      <refbiblio id="rb9"><marquage typemarq="petitecap">Marchal</marquage>, Bertrand, « Le tableau pulvérisé : le prisonnier, la lampe, l’ange. René Char et Georges de La Tour », <marquage typemarq="italique">L’Information littéraire</marquage>, n° 5 (1989), p. 14-19.</refbiblio>
+<refbiblio id="rb10"><marquage typemarq="petitecap">Mathieu</marquage>, Jean-Claude, <marquage typemarq="italique">La Poésie de René Char</marquage>, Paris, José Corti, 1984 et 1985, 2 t. </refbiblio>
+<refbiblio id="rb11"><marquage typemarq="petitecap">Pinson</marquage>, Jean-Claude, <marquage typemarq="italique">Poéthique : une autothéorie</marquage>, Seyssel, Champ Vallon, 2013.</refbiblio>
+<refbiblio id="rb12"><marquage typemarq="petitecap">Rimbaud</marquage>, Arthur, <marquage typemarq="italique">Oeuvres complètes</marquage>, édition établie par André Guyaux, Paris, Gallimard (Bibliothèque de la Pléiade), 2009.</refbiblio>
+<refbiblio id="rb13"><marquage typemarq="petitecap">Veyne</marquage>, Paul, <marquage typemarq="italique">René Char en ses poèmes</marquage>, Paris, Gallimard, 1990.</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>René Char, <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, Paris,
+          Gallimard, 1946, p. 76. C’est à cette édition que renverront nos citations des <marquage typemarq="italique">Feuillets d’Hypnos</marquage>, suivies entre parenthèses du numéro de
+          la note.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>Ces remarques, comme tout travail sur la poésie de Char des années de guerre,
+          doivent beaucoup au livre de Jean-Claude Mathieu, <marquage typemarq="italique">La Poésie
+          de René Char</marquage>, Paris, José Corti, 1984 et 1985, 2 t. On les complétera par deux
+          articles : Bertrand Marchal, « Le tableau pulvérisé : le prisonnier, la lampe, l’ange.
+          René Char et Georges de La Tour », <marquage typemarq="italique">L’Information
+          littéraire</marquage>, n° 5 (1989), p. 14-19, et « Les yeux ouverts, les yeux fermés :
+          René Char dans les ténèbres hitlériennes », dans Charles D. Minahen (dir.), <marquage typemarq="italique">Figuring Things </marquage><marquage typemarq="italique">–</marquage><marquage typemarq="italique"> Char, Ponge and Poetry in the Twentieth
+          Century</marquage>, Lexington (Kentucky), French Forum Publishers (French Forum Monograph
+          Series), 1994, p. 53-64. Sur le contexte historique et sur la résistance dans les
+          Basses-Alpes, voir Jean Garcin, <marquage typemarq="italique">De l’Armistice à la
+          Libération dans les Alpes de Haute-Provence 17 juin 1940-20 août 1944, Chronique. Essai
+          sur l’histoire de la Résistance avec un prologue 1935-1940 et un épilogue
+          1944-1945</marquage>, Digne, Imprimerie B. Vial, 1983. </alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Cité par Jean-Claude Mathieu, <marquage typemarq="italique">La Poésie de René
+          Char</marquage>, t. II, <marquage typemarq="italique">op. cit</marquage>.,
+          p. 111.</alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>René Char, <marquage typemarq="italique">Seuls demeurent</marquage>, Paris,
+          Gallimard, 1945, p. 9.</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>Derrière cette évocation de l’action criminelle transparaît en filigrane la figure
+          de Lacenaire, le poète assassin cher aux surréalistes, auquel Char a consacré un poème,
+          « La main de Lacenaire », dans <marquage typemarq="italique">L’Action de la justice est
+          éteinte </marquage>(Paris, Éditions Surréalistes, 1931).</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>René Char, <marquage typemarq="italique">Oeuvres complètes</marquage>, Paris,
+          Gallimard (Bibliothèque de la Pléiade), 1995, p. 1200.</alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>René Char, « Billets à Francis Curel. I », <marquage typemarq="italique">Oeuvres
+          complètes</marquage>, <marquage typemarq="italique">op. cit</marquage>., p. 632.</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>Figure évidemment héritée du <marquage typemarq="italique">Marteau sans maître
+          </marquage>(Paris, Éditions Surréalistes, 1934).</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>René Char, <marquage typemarq="italique">Oeuvres complètes</marquage>, <marquage typemarq="italique">op. cit.</marquage>, p. 1200.</alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea>Char joue ici sur le sens argotique du mot <marquage typemarq="italique">rossignol</marquage>, instrument qui sert à crocheter les serrures.</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea>Cet « Argument » justifie aussi, plus indirectement, le titre de <marquage typemarq="italique">Seuls demeurent</marquage>. La formule « <marquage typemarq="italique">Déborder l’économie de la création, agrandir le sang des gestes, devoir de toute
+          lumière </marquage>» est en effet reprise presque littéralement dans un texte d’hommage à
+          Picasso écrit en 1939 mais qui ne sera publié qu’en 1966, « Mille planches de salut » :
+          « [<marquage typemarq="italique">D</marquage>]<marquage typemarq="italique">éborder</marquage><marquage typemarq="italique"> l’économie de la création, agrandir la
+          sensibilité des gestes de l’homme</marquage>, le pousser à plus d’exigence, de
+          connaissance et d’invention. […] Mais… la terreur nous cerne et une antivie artistique, le
+          nazisme, peu à peu s’empare de tous les leviers de l’activité et du loisir ; il se prépare
+          à gouverner en absolu équarrisseur. L’oeuvre de Picasso, consciemment ou involontairement
+          prévoyante, a su dresser pour l’esprit, bien avant qu’existât cette terreur, une
+          contre-terreur dont nous devons nous saisir […]. Face au pouvoir totalitaire, Picasso est
+          le maître-charpentier de mille planches de salut. […] » ; je souligne. Voilà donc une
+          nouvelle figure allégorique du poète ou du peintre qui, face à un absolu équarrisseur, se
+          fait le charpentier de mille planches de salut. Et quand il s’apprêtera à publier
+          <marquage typemarq="italique">Seuls demeurent</marquage>, Char écrira à Gilbert Lély, le
+          15 mars 1944 : « À la réflexion et sous réserve d’un meilleur titre non trouvé encore je
+          garde <marquage typemarq="italique">Seuls demeurent</marquage>, titre-conjonction qui
+          traduit je crois l’ascension de cette goutte d’homme et de chose parmi le chaos et la
+          nausée, cette goutte rescapée chargée comme l’arche légendaire. » En somme, ces mille
+          planches de salut sont l’arche d’un nouveau Noé dans le déluge nazi.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea>La référence au déluge biblique est bien en filigrane dans cet « Argument » (voir la
+          note qui précède).</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea>René Char, <marquage typemarq="italique">Seuls demeurent</marquage>,<marquage typemarq="italique"> op. cit.</marquage>, p.  48.</alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 50 ; je souligne.</alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 51 ; je souligne.</alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 52 ; je souligne.</alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>Cité par Jean-Claude Mathieu, <marquage typemarq="italique">La Poésie de René
+          Char</marquage>, t. II, <marquage typemarq="italique">op. cit</marquage>., p. 211. La
+          parenthèse finale vise évidemment Aragon.</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea>Cette contre-hypnose se manifeste tout particulièrement dans la longue note
+          128.</alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea>Voir la laconique note 124 : « <marquage typemarq="petitecap">La France-des
+          cavernes »,</marquage> formule à la fois négative (régression historique) et positive
+          (retour à une primitivité nécessaire : « Agir en primitif et prévoir en stratège »
+          [72]).</alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea>Je souligne.</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea><marquage typemarq="italique">Cf. </marquage>dans « Chant du refus » de <marquage typemarq="italique">Seuls demeurent</marquage> cette autre image du poète-boulanger,
+          pétrisseur d’âme : « Celui qui panifiait la souffrance n’est pas visible dans sa léthargie
+          rougeoyante » (p. 48).</alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>Jean-Claude Pinson, <marquage typemarq="italique">Poéthique</marquage> <marquage typemarq="italique">: une </marquage><marquage typemarq="italique">autothéorie</marquage>,
+          Seyssel, Champ Vallon, 2013.</alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea>Lettre à Paul Demeny du 15 mai 1871, Arthur Rimbaud, <marquage typemarq="italique">Oeuvres complètes</marquage>, édition établie par André Guyaux, Paris, Gallimard
+          (Bibliothèque de la Pléiade), 2009, p. 347.</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea>Sur la mystique (poétique) de Char, voir le livre de Paul Veyne, <marquage typemarq="italique">René Char en ses poèmes</marquage>, Paris, Gallimard, 1990.</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea>L’argot ici visé est celui de l’officier qui parle des « bougres de
+          maquisards ».</alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea>Archiduc dit la noblesse du personnage, Arthur évoque le roi Arthur de la légende
+          médiévale, Carlate est « un infra-rouge gras », Esclabesang est celui dont les cibles sont
+          éclaboussées de sang, L’ami des blés est celui qui a fait du silo à blé d’Oraison une
+          cache d’armes, mais qui est aussi un « faiseur de pain » en puissance.</alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>Jean-Claude Mathieu, <marquage typemarq="italique">La Poésie de René
+          Char</marquage>, t. II, <marquage typemarq="italique">op. cit</marquage>.,
+          p. 270.</alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea>René Char, <marquage typemarq="italique">Oeuvres complètes</marquage>, <marquage typemarq="italique">op. cit.</marquage>, p. 650.</alinea>
+      </note>
+      <note id="no29">
+        <no>29</no>
+        <alinea>Je souligne.</alinea>
+      </note>
+      <note id="no30">
+        <no>30</no>
+        <alinea>Je souligne.</alinea>
+      </note>
+      <note id="no31">
+        <no>31</no>
+        <alinea>Claude Bernard, <marquage typemarq="italique">Introduction à l’étude de la médecine
+          expérimentale</marquage>, Paris, J. B. Baillière et fils, 1865, p. 51.</alinea>
+      </note>
+      <note id="no32">
+        <no>32</no>
+        <alinea>Je souligne.</alinea>
+      </note>
+      <note id="no33">
+        <no>33</no>
+        <alinea>Voir mon article cité à la note 2 : « Le tableau pulvérisé : le prisonnier, la
+          lampe, l’ange. René Char et Georges de La Tour ».</alinea>
+      </note>
+    </grnote></partiesann></article>
