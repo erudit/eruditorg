@@ -60,27 +60,6 @@ from . import solr
 from .coverpage import get_coverpage
 
 
-class RedirectToExternalSourceMixin:
-    """ Redirects to get_object().external_url if set.
-
-    Common to Journal, Issue and Article detail views.
-
-    Subclasses of this view must override get_object() and add an `allow_external` flag. When
-    this flag is set, the query is made on all objects instead of limiting itself to internal
-    objects (which, by definition, are objects without external_url!) like it does by default.
-    """
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            return super().dispatch(request, *args, **kwargs)
-        except Http404:
-            self.object = self.get_object(allow_external=True)
-            if self.object.external_url:
-                return redirect(self.object.external_url)
-            else:
-                raise
-
-
 class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
     """
     Displays a list of Journal instances.
@@ -320,7 +299,6 @@ class IssueDetailView(
         FallbackObjectViewMixin,
         ContentAccessCheckMixin,
         PrepublicationTokenRequiredMixin,
-        RedirectToExternalSourceMixin,
         DetailView):
     """
     Displays an Issue instance.
@@ -328,6 +306,16 @@ class IssueDetailView(
     context_object_name = 'issue'
     model = Issue
     template_name = 'public/journal/issue_detail.html'
+
+    def __init__(self):
+        super().__init__()
+        self.object = None
+
+    def dispatch(self, *args, **kwargs):
+        object = self.get_object()
+        if object.external_url:
+            return redirect(self.object.external_url)
+        return super().dispatch(*args, **kwargs)
 
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
@@ -358,34 +346,37 @@ class IssueDetailView(
                 'issue_li': issue.localidentifier,
             }
 
-    def get_object(self, queryset=None, allow_external=False):
-        if 'pk' in self.kwargs:
-            return super(IssueDetailView, self).get_object(queryset)
+    def get_object(self, queryset=None):
+        if self.object is not None:
+            return self.object
 
-        qs = Issue.objects if allow_external else Issue.internal_objects
-        qs = qs.select_related('journal', 'journal__collection')
+        qs = Issue.internal_objects.select_related(
+            'journal',
+            'journal__collection',
+            'journal__information',
+            'journal__type'
+        ).prefetch_related(
+            'journal__disciplines'
+        )
+
         try:
-            return qs.get(localidentifier=self.kwargs['localidentifier'])
+            self.object = qs.get(localidentifier=self.kwargs['localidentifier'])
         except Issue.DoesNotExist:
-            if not allow_external:
-                if Issue.objects.filter(localidentifier=self.kwargs['localidentifier']).exists():
-                    # we don't want to return an ephemeral issue if we have an existing external
-                    # object. raise the 404 so that the external redirect system kick in.
-                    raise Http404()
             try:
-                return Issue.from_fedora_ids(
+                self.object = Issue.from_fedora_ids(
                     self.kwargs['journal_code'],
                     self.kwargs['localidentifier'],
                 )
             except Issue.DoesNotExist:
                 raise Http404()
 
+        return self.object
+
     def get_context_data(self, **kwargs):
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
         context['journal'] = self.object.journal
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if self.object.is_published else 0
+        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
 
         try:
             context['journal_info'] = self.object.journal.information

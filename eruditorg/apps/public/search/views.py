@@ -80,6 +80,10 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
     template_name = 'public/search/results.html'
     fallback_url = '/recherche/'
 
+    def __init__(self):
+        super().__init__()
+        self._search_form = None
+
     def get(self, request, *args, **kwargs):
         # This view works only for GET requests
         self.request = copy.copy(self.request)
@@ -93,7 +97,9 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
 
     def get_search_form(self):
         """ Returns an instance of the search form to be used in this view. """
-        return self.search_form_class(**self.get_search_form_kwargs())
+        if self._search_form is None:
+            self._search_form = self.search_form_class(**self.get_search_form_kwargs())
+        return self._search_form
 
     def get_search_form_kwargs(self):
         """ Returns the keyword arguments for instantiating the search form. """
@@ -148,7 +154,10 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             context['main_qterm'] = self.request.GET.get('basic_search_term', '')
             context['start_at'] = (results['pagination']['current_page'] - 1) \
                 * results['pagination']['page_size']
-            context['search_elements'] = get_search_elements(self.request.GET)
+            context['search_elements'] = get_search_elements(
+                self.request.GET,
+                form=self.get_search_form()
+            )
 
         return context
 
@@ -182,9 +191,15 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         # aggregations embedded in the results.
         filter_form = self.get_filter_form(api_results=results)
 
-        return self.render_to_response(self.get_context_data(
-            search_form=search_form, filter_form=filter_form, options_form=options_form,
-            results=results, documents=results.get('results')))
+        return self.render_to_response(
+            self.get_context_data(
+                search_form=search_form,
+                filter_form=filter_form,
+                options_form=options_form,
+                results=results,
+                documents=results.get('results')
+            )
+        )
 
     def forms_invalid(self, search_form, options_form):
         GET = self.request.GET

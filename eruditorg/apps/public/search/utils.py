@@ -46,7 +46,7 @@ def GET_as_dict(GET, multi_params=None):
         for k in GET}
 
 
-def get_search_elements(queryparams):
+def get_search_elements(queryparams, form=None):
     """ Returns the search query elements in a readable way.
 
     This should be used to express a query using the following format:
@@ -111,11 +111,12 @@ def get_search_elements(queryparams):
 
     # Other fields
 
-    dummy_form = SearchForm()
+    if not form:
+        form = SearchForm()
     for k, v in params.items():
         if not k.startswith('advanced_search_') and not k.startswith('basic_search_') \
-                and not k.startswith('pub_year') and k in dummy_form.fields and v:
-            f = dummy_form.fields[k].label
+                and not k.startswith('pub_year') and k in form.fields and v:
+            f = form.fields[k].label
             t = params.getlist(k)
             t = t[0] if len(t) == 1 else str(t)
             search_elements.append({

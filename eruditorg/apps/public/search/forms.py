@@ -49,10 +49,15 @@ AVAILABILITY_CHOICES = (
 
 def get_funds_choices():
 
+    collections = {
+        c.code: c.name
+        for c in Collection.objects.all().only('code', 'name')
+    }
+
     def get(fundid):
         try:
-            return Collection.objects.get(code=fundid).name
-        except Collection.DoesNotExist:
+            return collections[fundid]
+        except KeyError:
             # Something is deeply wrong...
             logger.error('search.form.missing_collection', id=fundid)
             return ''
@@ -234,7 +239,7 @@ class SearchForm(forms.Form):
 
         disciplines = locale_aware_sort(Discipline.objects.all(), keyfunc=attrgetter('name'))
         self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in disciplines]
-        journals = locale_aware_sort(Journal.objects.all(), keyfunc=attrgetter('name'))
+        journals = locale_aware_sort(Journal.objects.all().only('name'), keyfunc=attrgetter('name'))
         self.fields['journals'].choices = [(j.name, j.name) for j in journals]
 
     def clean(self):
