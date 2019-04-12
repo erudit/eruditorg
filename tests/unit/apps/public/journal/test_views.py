@@ -195,6 +195,20 @@ class TestIssueDetailSummary:
         })
         assert mock_cache.get.call_count == expected_count
 
+    def test_main_title_and_paral_title(self):
+        article = ArticleFactory(
+            from_fixture='1058197ar',
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'localidentifier': article.issue.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        # Check that there's only one space between the main title and the '/'.
+        assert 'Inaugural Lecture of the FR Scott Professor&nbsp;/ Conf&#233;rence inaugurale du Professeur FR Scott' in html
+
 
 class TestArticleDetailView:
 

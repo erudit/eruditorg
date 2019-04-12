@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1058197ar" typeart="article" lang="en" ordseq="6"><admin><infoarticle><idpublic scheme="doi">10.7202/1058197ar</idpublic><pagination>
+            <ppage>419</ppage>
+            <dpage>439</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="mlj128" lang="en fr"><titrerev>McGill Law Journal</titrerev><titrerevparal lang="fr">Revue de droit de McGill</titrerevparal><titrerevabr>mlj</titrerevabr><idissn>0024-9041</idissn><idissnnum>1920-6356</idissnnum><directeur sexe="feminin"><fonction lang="en">Managing Editor</fonction><nompers><prenom>Nigah</prenom><nomfamille>Awj</nomfamille></nompers></directeur><redacteurchef typerc="regulier" sexe="feminin"><fonction lang="en">Editor-in-Chief</fonction><nompers><prenom>Éléna Sophie</prenom><nomfamille>Drouin</nomfamille></nompers></redacteurchef></revue><numero id="mlj04454"><volume>63</volume><nonumero>2</nonumero><pub><periode>December</periode><annee>2017</annee></pub><pubnum><date typedate="publication">2019-03-20</date></pubnum></numero><editeur><nomorg>McGill Law Journal / Revue de droit de McGill</nomorg></editeur><prod><nomorg>McGill Law Journal / Revue de droit de McGill</nomorg></prod><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Copyright © <nompers><prenom>Mark</prenom><autreprenom>D.</autreprenom><nomfamille>Walters</nomfamille></nompers>, 2017</droitsauteur></admin><liminaire><grtitre><surtitre>Inaugural Lecture of the FR Scott Professor</surtitre><surtitreparal lang="fr">Conférence inaugurale du Professeur FR Scott</surtitreparal>
+                <titre>Toward the Unity of Constitutional Value—Or, How to Capture a Pluralistic Hedgehog</titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Mark</prenom><autreprenom>D.</autreprenom><nomfamille>Walters</nomfamille></nompers></auteur></grauteur><notegen typenoteg="edito"><alinea>FR Scott Professor in Public and Constitutional Law, McGill University. This article is a lightly edited version of my Inaugural Lecture as FR Scott Professor delivered in the Faculty of Law, McGill University, on March 30, 2017.</alinea></notegen><notegen typenoteg="edito"><alinea>Citation: (2017) 63:2 McGill LJ 419</alinea><alinea>Référence : (2017) 63:2 RD McGill 419</alinea></notegen></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no><alinea> L’honorable M<exposant>me</exposant> Deschamps, vice-doyen Gold, Mesdames et Messieurs, chers collègues, chères collègues, chers étudiants, chères étudiantes. I wish to thank you all for taking the time this evening to come and listen to this lecture.</alinea></para><para id="pa2"><no>2</no><alinea>Je voudrais exprimer mes sincères remerciements à M<exposant>me</exposant> Deschamps pour ses généreux mots d’introduction. C’est pour moi un honneur d’être présenté par une des plus grandes juristes du Canada, une personne dont le dossier en matière de service public est aussi vaste.</alinea></para><para id="pa3"><no>3</no><alinea>This evening I will defend a view of the constitution that is premised upon the ideal of normative unity. Evidence of this view may be found, I think, in the reasons authored by M<exposant>me</exposant> Deschamps when she was a justice of the Supreme Court of Canada—in particular in her insistence upon critical reflection about long-established cases and doctrine in light of underlying or unwritten constitutional principles or values. My students present here this evening are, I hope, mentally listing the names of the relevant cases right now. M<exposant>me</exposant> Deschamps, je vous remercie d’avoir pris le temps d’être ici ce soir. Cela signifie beaucoup pour moi.</alinea></para><para id="pa4"><no>4</no><alinea> I wish to thank also Associate Dean Gold for his kind introductory remarks. Although he is unable to be here this evening, I wish also to thank the Dean of the Faculty of Law, Robert Leckey, for the tremendous support that he has shown me since I arrived at McGill last summer.</alinea></para><para id="pa5"><no>5</no><alinea> Finally, I am thankful for the presence this evening of my parents, Wynn and Mary Margaret Walters, and my spouse, Gillian Ready.</alinea></para></section1><section1 id="s1n2"><no>2</no><titre traitementparticulier="oui">***</titre><para id="pa6"><no>6</no><alinea> We are gathered this evening within the traditional territory of the Kanien’kehá:ka people, a place that has long been a meeting point for other nations too, including the Anishinaabe and especially the Algonquin peoples. Indeed, this reality is one aspect of the themes of unity and pluralism that I want to address this evening. I return to this point in a few moments.</alinea></para><para id="pa7"><no>7</no><alinea> I am delivering the second inaugural F.R. Scott lecture. I want to start by going back to the first one, given by my predecessor, Rod Macdonald, on February 16, 1996. On that occasion, the Scott Professor reminded those present of the many ways in which Frank Scott had been, as Rod put it, “a “great Canadian”.<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> That Frank Scott could win the Governor General’s Award twice, once for his work in constitutional law and once for his work as a poet, is evidence of his unique capacities and contributions to public life.<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi> Rod said that it was an “honour” to deliver his lecture but also a “daunting task”, for Frank Scott was “an intellectual giant; [and] I do little more than walk in his shadow.”<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi></alinea></para><para id="pa8"><no>8</no><alinea> Of course, at this time Rod Macdonald was already one of Canada’s distinguished intellectuals himself. I will not list his accomplishments now—that would take more time than we have. But I do wish to register for the record my own view that Rod was beloved at McGill and throughout the legal academy in Canada and beyond because of his generous and original spirit, because of his ability to infuse within his students and colleagues a sense of wonder and optimism about law’s potential for good, and because of his steadfast refusal to accept orthodoxy as authority.<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi> If Rod Macdonald was walking in the shadow of Frank Scott, what am I doing? If it possible to walk in the shadow of a giant who walks in the shadow of a giant, then that is what I am doing. Rod may have been appointed to the Scott Chair because of his achievements, but I get the sense that I have been appointed because of my <marquage typemarq="italique">potential</marquage> achievements. My new colleagues have placed their trust in me to fulfill that potential, and I am deeply honoured and humbled to be given the opportunity.</alinea></para><para id="pa9"><no>9</no><alinea> So, then, let me begin. This evening, I want to defend a theory of constitutional value that is premised upon what I will call “normative unity”. I have, however, chosen the title of my lecture carefully. First, I wish only to gesture “toward” such a theory. I will not try to offer a complete account. I am, as it were, letting myself off the hook. Second, you will have noted that I have also alluded in the title to that most-important of McGill ideas, “pluralism”. My objective, then, is to offer some critical reflections about the ideals of unity and pluralism in constitutional law and how they may be seen to be mutually <marquage typemarq="italique">reinforcing</marquage> rather than <marquage typemarq="italique">conflicting</marquage> ideals. In particular, I want to examine and ultimately reject a view that appears to be gaining ground in Canada: the view that the Canadian constitution is characterized by something called “agonistic constitutionalism”. “Agonism” is a term derived from the Greek word <marquage typemarq="italique">agon</marquage>, meaning conflict or strife, and within moral and political philosophy it has come to represent a conflict-focused account of pluralism.<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi></alinea></para><para id="pa10"><no>10</no><alinea> I should, however, be clear in this respect. There is no question that persistent disagreement and therefore debate about basic constitutional values is not just inevitable but should be welcomed and cherished within any democratic pluralistic society. I want to suggest, however, that disagreement is not inconsistent with the commitment to the kind of normative unity that is necessary for the ideals associated with legality or constitutionalism to flourish. My concern is that the invocation of agonism may obscure this fundamental point. We are not yet in a post-truth world, though that world seems at times threatening, and so I think that we need a theory of constitutionalism that allows us to take a stand and to defend the truth about the meaning of certain basic constitutional values, including liberty, equality, democracy, justice, and, of course, legality or the rule of law. That theory must, at the same time, accept and defend another constitutional value, the value of pluralism. These are the values that must hold together, somehow, as a coherent whole if individuals, communities, and nations are to be equally valued and respected within Canada and the world beyond.</alinea></para><para id="pa11"><no>11</no><alinea> But what about this business of the hedgehog? It was, of course, Isaiah Berlin who famously stated in a 1953 essay: “There is a line among the fragments of the Greek poet Archilochus which says: ‘The fox knows many things, but the hedgehog knows one big thing.’”<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi> Berlin proceeded to explain that certain scholars are like foxes because they are fast and clever and pursue many ends and hold many ideas not all of which are related or consistent, and others are like hedgehogs because they seek gradually to reveal a single central vision that is more or less coherent. The commonly accepted view is that Isaiah Berlin was a fox par excellence.<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi> In his most famous essay, “Two Concepts of Liberty”, Berlin argued that liberal societies are, or should be, marked by two basic features: first, a commitment to so-called negative liberty, the idea that the individual has the right to exercise freedoms protected from the state; and, second, the acknowledgment of pluralism or value pluralism, the idea that freedom allows each person to develop conceptions of value or good of their own which will invariably be, among the people of any liberal community, multiple and conflicting.<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi></alinea></para><para id="pa12"><no>12</no><alinea> The basic question that I would like to address is whether pluralism means we must be foxes—or, in other words, whether if we are hedgehogs, we must deny pluralism. The answer to this question given by the legal philosopher Ronald Dworkin in his epic account of ethics and political morality, <marquage typemarq="italique">Justice for Hedgehogs</marquage>, is that we should be hedgehogs and reject value pluralism.<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi> But what does this really mean? Does the hedgehog really have to reject pluralism altogether? Hedgehogs are notoriously shy creatures. They are hard to find at the best of times. Finding a <marquage typemarq="italique">pluralistic </marquage>hedgehog might well be impossible. But that is our task this evening.</alinea></para><para id="pa13"><no>13</no><alinea>In pursuing this end in this inaugural lecture, it will be helpful for me to go back to the point where my predecessor ended his inaugural lecture. After a careful assessment of Frank Scott’s understanding of the Canadian constitution, Rod Macdonald concluded that this understanding left several challenges for the constitution unaddressed. One of those challenges he identified as follows:</alinea>
+        <bloccitation>
+          <alinea>[H]ow should governments respond to the challenges of pluralism? The forging of a
+            unitary Canadian civic identity, so central to F.R. Scott’s constitutional vision, has
+            little to say about the recognition and accommodation of ethnic and cultural diversity
+            in a modem multicultural state such as Canada. Rather, it is the theme of multiple
+            allegiances—the need to mediate between different and divided loyalties within a state
+            that does not seek to impose a homogeneous view of citizenship—that makes the explicit
+            claims of <marquage typemarq="italique">Charter </marquage>patriots possible.<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi> </alinea>
+        </bloccitation>
+        <alinea>Rod no doubt understood that Scott was a product of his time, and that given his
+          experiences of living through the Depression and the Duplessis era in Quebec it would have
+          been natural for him to assume that the ambitious project of building a modern
+          social-democratic state would require strong federal vision and action—or a unitary civic
+          identity. Macdonald’s actual concern about Scott’s constitutionalism ran to a different,
+          deeper level. Rod was struck by the fact that Scott, despite his stature as a great
+          Canadian poet, was relatively unpoetic in his approach to the constitution. The
+          constitution according to Scott was, Rod thought, all <marquage typemarq="italique">reason</marquage> and no <marquage typemarq="italique">rhyme</marquage>. As Rod
+          concluded: “The key challenges now facing Canada”—he had just mentioned pluralism, divided
+          loyalties, multiple allegiances, and a heterogeneous view of citizenship “cannot be
+          addressed without the rediscovery of rhyme and the celebration of both rhyme and reason in
+          Canadian constitutionalism.”<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi></alinea></para><para id="pa14"><no>14</no><alinea> The idea that rhyme is important to the value of constitutionalism in a pluralistic society strikes me as an important insight. Two figures overshadow much of modern legal and jurisprudential thought. These figures have been known by different names at different times and in different places. Facing off against each other, we find, for example, reason and will, principle and policy, right and might, <marquage typemarq="italique">jus</marquage> and <marquage typemarq="italique">lex</marquage>, justice and power, rationality and politics. Whatever names they bear, the power of their influence upon legal thought often leads us to accept an artificial binary that obscures essential truths about the value of legality. Law is not just a matter of either reason or right on the one hand and power or politics on the other. There is between them, Rod Macdonald reminds us, the moderating and humanizing influence of rhyme.</alinea></para><para id="pa15"><no>15</no><alinea> I am not certain that Rod would have agreed with me, but I think that rhyme is evident in two venerable strands of European legal thought. Renaissance humanists in France, and the English common lawyers in the time of Sir Edward Coke who were influenced by them, developed new approaches to the understanding of “logic” by turning to the ancient idea of “rhetoric” and its insistence upon harmony or elegance in the structuring of arguments.<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi> The common law, on this view, becomes, as the early seventeenth-century judge John Doderidge said, an “art” of reasoning in which “the truth is found out by [a]rgument, debate, and discourse of reason on both parts”.<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi> There is arguably a sense of rhyme implicit within rhetoric.</alinea></para><para id="pa16"><no>16</no><alinea> Rhyme may also be seen within the ancient concept of <marquage typemarq="italique">aequitas</marquage>, or equity in its broadest sense. The <marquage typemarq="italique">jus gentium</marquage> in Roman law, wrote the nineteenth-century legal philosopher John Austin, was “the law <marquage typemarq="italique">common</marquage> to ...various nations, or administered <marquage typemarq="italique">equally</marquage> or <marquage typemarq="italique">universally</marquage> to members of these various nations” and was thus also styled “<marquage typemarq="italique">jus aequum</marquage>, <marquage typemarq="italique">jus aequabile</marquage>, <marquage typemarq="italique">aequitas</marquage>”, with the term “<marquage typemarq="italique">aequitas</marquage>” meaning, he said, “<marquage typemarq="italique">conformity</marquage> or <marquage typemarq="italique">consonance</marquage> to a common or equal law.”<renvoi id="re1no14" idref="no14" typeref="note">14</renvoi> Given its “large and liberal spirit”, <marquage typemarq="italique">aequitas</marquage> came to be known for its “<marquage typemarq="italique">universality</marquage>” and “gradually came to signify <marquage typemarq="italique">impartiality</marquage>.”<renvoi id="re1no15" idref="no15" typeref="note">15</renvoi> Its “radical idea”, Austin concluded, was that law “should be applied <marquage typemarq="italique">uniformly</marquage> to <marquage typemarq="italique">all</marquage> the cases which come within its principle” and so it was based upon the value of “harmony or <marquage typemarq="italique">elegantia</marquage>” and it was opposed to “incoherency.”<renvoi id="re1no16" idref="no16" typeref="note">16</renvoi></alinea></para><para id="pa17"><no>17</no><alinea> Like Austin, Sir Henry Maine extolled the virtues of the Roman praetorian system with its vibrant body of case law based on “Aequitas”.<renvoi id="re1no17" idref="no17" typeref="note">17</renvoi> And like Austin, he emphasized the basic ideal of equality underlying this law: through the judicial search for “equal or proportionate distribution”, the principle of the “‘equality’ of laws” led to a “constant <marquage typemarq="italique">levelling</marquage> or removal of irregularities.”<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi> The Roman jurisconsults had “freely surrendered themselves” to “their sense of simplicity and harmony—of what they significantly termed ‘elegance.’”<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi> As the sixteenth-century English jurist, Christopher St. German, wrote—summarizing a point accepted by centuries of common law judges— the unwritten law of reason ensures that <marquage typemarq="italique">aequitas</marquage> is implicitly part of every written or positive law, rounding off its edges to avoid unjust results that general terms may produce in specific cases.<renvoi id="re1no20" idref="no20" typeref="note">20</renvoi> </alinea></para><para id="pa18"><no>18</no><alinea> Ideas of harmony, elegance, balance, proportion, coherence, integrity, symmetry, consistency, and reconciliation all have something to do with the juridical union of rhyme and reason. These are ideas that suggest an ideal of normative unity. How else could the objective of equal respect for everyone implicit within the concept of legality be realized? Yet the application of this ideal of legal elegance or harmony was not a matter of cold logic or reason aimed at bland sameness. It was not difference, but the prospect of discordance or disharmony within the law that was the concern.</alinea></para><para id="pa19"><no>19</no><alinea> There is probably good reason to think that the concept of constitutional rhyme informs Indigenous legal traditions as well, though, if so, in very different ways. My thoughts in this respect are offered tentatively and with a sense of humility, for my ability to interpret traditions of a very different set of cultures from my own is limited and even the attempt comes with moral risk.<renvoi id="re1no21" idref="no21" typeref="note">21</renvoi> As far as I can gather, however, it does seem that for the peoples indigenous to this part of the world, that is, the Great Lakes watershed and the St. Lawrence River valley—the Haudenosaunee and the Anishinaabe peoples in particular—legal order was, and perhaps still is, a matter of seeking harmony between a complex series of shifting normative spheres or domains.<renvoi id="re1no22" idref="no22" typeref="note">22</renvoi> Families, clans, villages, nations, and confederacies of nations represented a dynamic network of interconnecting jurisdictional domains—a kaleidoscope of jurisdictions really—within and between which normative meaning evolved through conference and council, and the forging of duties of trust and care by exchanges of gifts that formed a sort of spiritual kinship between peoples and communities.<renvoi id="re1no23" idref="no23" typeref="note">23</renvoi> These normative spheres shifted constantly in part because they were integrated within a dynamic physical environment that was alive spiritually with its own shifting normative spheres, and the constant search for normative order among people involved seeking balanced relations within and between these spheres or domains. Legality was thus grounded within the homeland of the people, though it was not territorial in the European sense, and did not involve the assertion of authority by a single sovereign over the land. It came rather through the daily effort to negotiate good relations in a swirling jurisdictional environment that shaped multiple sets of allegiances for people with layered and complex senses of identity.</alinea></para><para id="pa20"><no>20</no><alinea> The customary norms that governed relations within and between Haudenosaunee and Anishinaabe communities were extended to the treaty relationship with Europeans and informed, for example, the “covenant chain” relationship linking all nations within the Great Lakes region with the Crown, a relationship that was affirmed at (among other treaty councils) the Niagara council convened by the Crown’s representative, Sir William Johnson, in 1764.<renvoi id="re1no24" idref="no24" typeref="note">24</renvoi> On this occasion, as on many others, wampum belts—belts, that is, of white and purple sea shells carefully woven together to produce images of national friendship and national autonomy—were exchanged, including belts with the classic covenant chain imagery of a series of links between an Indigenous mountain and a European vessel.<renvoi id="re1no25" idref="no25" typeref="note">25</renvoi> The objective of these treaties was to establish duties of care and trust by forging with the Crown something like the kind of spiritual harmony and kinship that brought normative unity within and between their own communities.<renvoi id="re1no26" idref="no26" typeref="note">26</renvoi> There was a rhyme and reason to the covenant chain constitution. Consider, for example, the written account of a speech given by an unnamed Mohawk orator at a covenant chain council:</alinea>
+        <bloccitation>
+          <alinea>The <marquage typemarq="italique">Mohawks</marquage> Speaker said, “Where shall I
+            seek the Chain of Peace? Where shall I find it but upon our Path? And whither doth our
+            Path lead us, but into this House? This is a House of Peace;” after this he sang all the
+            Links of the Chain over.<renvoi id="re1no27" idref="no27" typeref="note">27</renvoi></alinea>
+        </bloccitation>
+        <alinea>This brief passage has a sort of poetic power to it. It may only be the summary of
+          the speaker’s words and songs; however, the idea that one could sing “all the Links of the
+          Chain over”, that the treaty relationship could be expressed through song, is significant.
+          There was, as the wampum belts often show, a linking of arms, a physical and spiritual
+          joining of people together. To invoke the language I have been using this evening, if I
+          may, these societies were deeply pluralistic in the sense that laws did not emanate from a
+          single sovereign commander. Each individual or community could go their own way should
+          they wish to, and yet precisely because of this sense of freedom (or pluralism) there was
+          a need to establish a deep sense of normative unity through a legal narrative that
+          captured rhyme and reason in a very distinctive sense, one that bound peoples who were
+          equally free in relations of care and trust.</alinea></para><para id="pa21"><no>21</no><alinea> Perhaps we can say, then, that rhyme is a part of each of the three sets of legal traditions now found in Canada—common law, civilian, and indigenous. Of course, these suggestions will seem rather lofty and detached from the hard realities of the Canadian constitution today. But they will, I hope, provide us with some direction in due course. Before developing these ideas further, however, it is time to address the ideas of agonism and agonistic constitutionalism.</alinea></para><para id="pa22"><no>22</no><alinea> To this end, it may be helpful to return to Isaiah Berlin. Berlin did not just think that basic values, like liberty and democracy, at times conflict. He seemed to think that fundamental values are ultimately incommensurable or rationally incomparable. Without a common measure or scale to compare liberty and democracy, for example, there can be no rational discourse about how to resolve competing claims about the two. To compare a claim about liberty with one about democracy is like asking whether a metre is bigger than a litre. In these circumstances, there can be no principled reconciliation of the values, but only at best a contingent rapprochement between opposing views.</alinea></para><para id="pa23"><no>23</no><alinea> Or at least this was the reading of Berlin adopted by another influential Oxford philosopher, John Gray. Taking Berlin’s views on incommensurability to an extreme conclusion, Gray argued that “[the] rationalist and universalist tradition of liberal political philosophy runs aground, along with the rest of the Enlightenment project, on the reef of value pluralism.”<renvoi id="re1no28" idref="no28" typeref="note">28</renvoi> Value pluralism implies not just opposing accounts of value between individuals, but also between entire cultures and cultural traditions. Once it is clear that competing visions of value between individuals and communities and indeed entire cultural traditions are incommensurable, then, Gray argues, it follows that they cannot be resolved through any “rational” method, including any “jurisprudential” or “legalist” method.<renvoi id="re1no29" idref="no29" typeref="note">29</renvoi> Gray thus insists that value pluralism leads us to accept what he calls—with echoes, I think, of Carl Schmitt—“<marquage typemarq="italique">the primacy of the political</marquage>”, meaning that choices about rights and values can only be made through politics and political struggle and never on the basis of principle.<renvoi id="re1no30" idref="no30" typeref="note">30</renvoi> This is, we may say, the legal and political philosophy of the fox. Berlin’s liberalism was, in fact, Gray insisted, “agonistic liberalism”, a liberalism that depended entirely on political and cultural contingency and not reason.<renvoi id="re1no31" idref="no31" typeref="note">31</renvoi></alinea></para><para id="pa24"><no>24</no><alinea> It is not my objective this evening to consider whether Gray was right to call Berlin an agonistic liberal. In fact, one of my new McGill colleagues, Daniel Weinstock, writes convincingly that Gray was very wrong about Berlin.<renvoi id="re1no32" idref="no32" typeref="note">32</renvoi> I am instead interested in the more general claim that the fact of pluralism means that we must accept value pluralism and thus also agonism. I am also interested in the troubling question of what agonism means for our commitment to the value of legality, because I think legality implies normative unity. If we are good pluralists must we accept that the value of legality or constitutionalism itself has been wrecked upon the reef of value pluralism?</alinea></para><para id="pa25"><no>25</no><alinea> Chantal Mouffe, who is perhaps the leading champion of agonism today, builds her account of the idea on the concept of “the political” developed by Carl Schmitt.<renvoi id="re1no33" idref="no33" typeref="note">33</renvoi> Schmitt, the German jurist associated with the Nazi regime, famously argued that the constituent power of the people exercised through the sovereign can never be legally limited, but must always be free to decide upon the exception—upon who is <marquage typemarq="italique">in</marquage> and who is <marquage typemarq="italique">out</marquage> of the <marquage typemarq="italique">demos</marquage>, who is <marquage typemarq="italique">friend</marquage> and who is <marquage typemarq="italique">enemy</marquage>.<renvoi id="re1no34" idref="no34" typeref="note">34</renvoi> Decisionism of the Schmittian kind is accepted because of a belief in the irrationality of the political, that no other way exists to reconcile values or aspirations or rights—which is, of course, the antithesis of a regime of law.<renvoi id="re1no35" idref="no35" typeref="note">35</renvoi> Mouffe does not follow Schmitt entirely. Her objective is to transform the eliminable tension between competing political values from one that produces <marquage typemarq="italique">antagonism</marquage> within society to one of <marquage typemarq="italique">agonism,</marquage> in which competitors see themselves as respectful adversaries rather than enemies. But agonism follows from and does not displace the assumption of radical moral indeterminacy; it is ultimately a vision of politics as pure power that is inconsistent with, among other ideals, the ideals of constitutionalism and legality.<renvoi id="re1no36" idref="no36" typeref="note">36</renvoi></alinea></para><para id="pa26"><no>26</no><alinea> A form of agonism has entered constitutional discourse in Canada—or at least its proponents <marquage typemarq="italique">say</marquage> it is agonism. The attraction of this form of agonism is that it responds to the reality that in Canada today there is disagreement not just about the meaning of this or that constitutional provision, but rather about the basic essence of the constitution itself, including its authority, its legitimacy, and its relationship to ideas about sovereignty. Just this week, my new colleague Stephen Scott was in the Superior Court of Quebec arguing against the constitutionality of so-called Bill 99, or la <marquage typemarq="italique">Loi sur l’exercice des droit fondamentaux et des prérogatives du peuple québécois et d’État du Québec</marquage>,<renvoi id="re1no37" idref="no37" typeref="note">37</renvoi> a provincial statute that contains a series of propositions about the powers of a Quebec “people” to determine its future that, on their face, seem difficult to reconcile with the vision of constitutionalism carefully articulated by the Supreme Court of Canada in its famous opinion in the 1998 <marquage typemarq="italique">Quebec Secession Reference</marquage>.<renvoi id="re1no38" idref="no38" typeref="note">38</renvoi> In this respect, we might also consider the following statement issued by the James Bay Cree, an Indigenous nation located within the province of Quebec, in October of 1995:</alinea>
+        <bloccitation>
+          <alinea>We are Eeyou.</alinea>
+          <alinea>We are a sovereign Peoples.</alinea>
+          <alinea>We are the original inhabitants of Eeyou Estchee and are one with Eeyou Estchee.
+            Our power derives from the Creator, from the Eeyou and from the living spirit of the
+            land and waters.</alinea>
+          <alinea>...</alinea>
+          <alinea>We have the inherent right to self-determination and the right to govern
+            ourselves. We have a distinct identity reflected in a distinct system of laws and
+            government, philosophy, language, culture, heritage, values, customs, traditions,
+            beliefs and territory.</alinea>
+          <alinea>...</alinea>
+          <alinea>... Cree consent is required and mandatory for any changes to our status as Eeyou
+            or to the status of Eeyou Estchee. </alinea>
+          <alinea>As Peoples with a right to self-determination, we shall freely decide our
+            political status and associations and freely pursue our future as a people.<renvoi id="re1no39" idref="no39" typeref="note">39</renvoi></alinea>
+        </bloccitation>
+        <alinea>Depending upon how it is read, this statement might also be difficult to reconcile
+          with existing statements of Canadian constitutional law found in the opinions of the
+          Supreme Court of Canada.<renvoi id="re1no40" idref="no40" typeref="note">40</renvoi> The Cree statement of
+          self-determination certainly appears inconsistent with the Quebec legislature’s statement
+          concerning “the right of the Québec people to self-determination” in Bill 99<renvoi id="re1no41" idref="no41" typeref="note">41</renvoi>—which assumes that the Quebec people speaks for Indigenous
+          peoples within Quebec’s boundaries. These appear to be diametrically opposing
+          constitutional visions. If disagreement is this deep and is grounded in the reality of
+          fundamental differences in cultural and national identities that demand and deserve to be
+          respected, how can a theory of constitutional normative unity be entertained? It seems
+          almost arrogant to suggest that it could.</alinea></para><para id="pa27"><no>27</no><alinea> The agonistic response thus appears to be the <marquage typemarq="italique">respectful</marquage> one, the one based upon <marquage typemarq="italique">humility</marquage>. But it also has a reformative or redemptive edge too. In arguing that the assertion of Indigenous legal traditions in Canada today may be seen to subvert or disrupt established constitutional assumptions in Canada, John Borrows invokes the theoretical insights of James Tully. In particular, Borrows invokes Tully’s exploration of the critical unbalancing of received political and legal notions and the patterns of domination they instantiate, a process that, Tully says, enables us “to see our island of disputation and negotiation” not as a utopian process of rational and transparent communication, but rather “as it is, in the rough and agonistic sea of relations of power.”<renvoi id="re1no42" idref="no42" typeref="note">42</renvoi> From relations of domination and power and the resistance that disrupts them cannot emerge a singular vision of constitutionalism, though workable compromises may be possible. As Jeremy Webber argues, Canadians have succeeded in sustaining a polity that does not require a single constitutional vision of its members; with the claims by Indigenous nations and Quebec nationalists in mind, he observes that “even questions of sovereignty, are held in abeyance.”<renvoi id="re1no43" idref="no43" typeref="note">43</renvoi> Webber, who also relies upon Tully’s work, writes as follows: </alinea>
+        <bloccitation>
+          <alinea> This might be called <marquage typemarq="italique">agonistic
+            constitutionalism</marquage>: a constitutionalism in which contending positions are seen
+            to be essential to the society, animating it, and where these positions are not neatly
+            contained within a comprehensive, overarching theory. ... It takes the diversity of the
+            country as it finds it, and treats the development of its constitution as something that
+            must proceed day by day, not through the fiat of a closed set of founding fathers or
+            their privileged successors.<renvoi id="re1no44" idref="no44" typeref="note">44</renvoi></alinea>
+        </bloccitation>
+        <alinea>Webber observes that the Supreme Court of Canada has, in effect, adopted a kind of
+          agonistic constitutionalism, by seeking, where possible, to address constitutional
+          conflict not by definitive, substantive rulings about rights and duties, but by crafting
+          procedural and substantive principles designed merely to inform, shape, discipline, and
+          channel on-going dialogue between political actors who appear to hold fundamentally
+          opposed visions of the constitution.</alinea></para><para id="pa28"><no>28</no><alinea> The Canadian school of agonistic constitutionalism offers powerful insights into governance within divided societies. Relations of domination should be disrupted. Constitutions should be understood as the product of the daily practice of constitutionalism, as individuals and communities work to understand better what just relations might look like. Each of these propositions seems right.<renvoi id="re1no45" idref="no45" typeref="note">45</renvoi> And yet, I remain concerned about a theoretical framework for considering the experience of constitutionalism that is based on the agonistic assumption of radical moral indeterminacy and the privileging of power over principle.</alinea></para><para id="pa29"><no>29</no><alinea> It is fair to say that Canadian constitutional agonists are not of the Mouffe-Schmitt kind.<renvoi id="re1no46" idref="no46" typeref="note">46</renvoi> Tully’s agonism is a kinder and gentler agonism.<renvoi id="re1no47" idref="no47" typeref="note">47</renvoi> His inspiration is not Schmitt but Michel Foucault. He invokes Foucault’s argument that the very idea of power implies the existence of freedom, that one can only exercise power over people who have some degree of freedom, and hence freedom itself is only to be understood through the existence and response to power. “Rather than speaking of an essential freedom,” writes Foucault in a passage upon which Tully relies, “it would be better to speak of an ‘agonism’—of a relationship which is at the same time reciprocal incitation and struggle, less of a face-to-face confrontation which paralyzes both sides than a permanent provocation.”<renvoi id="re1no48" idref="no48" typeref="note">48</renvoi> </alinea></para><para id="pa30"><no>30</no><alinea> Yet, for this “permanent provocation” to produce the kind of redemptive effect for the marginalized and the oppressed that Tully hopes for, it is necessary, Tully himself says, to imagine “diverse forms of citizen participation involv[ing] agonic dialogues and negotiations in which <marquage typemarq="italique">audi alteram partem</marquage> (always listen to the other side) is the immanent rule of reciprocity.”<renvoi id="re1no49" idref="no49" typeref="note">49</renvoi> In this way, “the rules of intersubjective recognition [may] be open to question and subject to the interplay of reasons and re-descriptions among free and equal citizens”, including both “multicultural citizens” and “suppressed nations and indigenous peoples.”<renvoi id="re1no50" idref="no50" typeref="note">50</renvoi> Tully’s agonic dialogue needs a normative framework premised upon a classic principle of natural justice or due process, or, in other words, the rule of law, that is in turn premised upon an underlying commitment to the idea that people are equally free. Agonistic dialogue seems to require a decidedly non-agonistic constitutionalism. Has the hedgehog infiltrated the pluralist camp?</alinea></para><para id="pa31"><no>31</no><alinea> It could be said that these framework requirements merely structure or contain power politics loosely and that <marquage typemarq="italique">real</marquage> agonism flourishes within. If only form and substance could be so neatly divided. Once a respectful (agonic) dialogue unfolds, once, that is, the sides in a relationship of power and domination begin to listen to each other, what will be said? It seems to me almost inevitable that, at some point in this deliberative process, one side will try to explain to the other that maintaining the unbalanced relationship of power involves moral incoherence—that the situation cannot be defended by the other side unless they abandon convictions or ideals that they, and indeed those on both sides, cherish; that the continued acceptance of the status quo shows their convictions as a whole to be in a state of discordance, indeed a shambles; that there is no <marquage typemarq="italique">reason</marquage> to the way the positions that they try to defend fit together, but also no <marquage typemarq="italique">rhyme</marquage>. The implicit lesson of the renaissance humanists and the old common lawyers is that truth is something toward which we work through an attempt to show, through discourse or disputation, how the specific or concrete convictions about value we do share or the established cases we do accept—there must be some—may be seen to hold together as coherent and unified in light of a theory of more abstract or general value which they presuppose. </alinea></para><para id="pa32"><no>32</no><alinea> This style of normative discourse is ancient, though it is now often associated with and also obscured by its principal modern champion, Ronald Dworkin, who calls it “interpretation”.<renvoi id="re1no51" idref="no51" typeref="note">51</renvoi> It is ‘interpretivism’ of some kind, whether Dworkinian or not we leave to the side for now, that, I think, offers a compelling alternative to agonism that allows us to reconcile normative unity with pluralism. Dworkin’s account does provide some useful starting points. On Dworkin’s view of the unity of value, truth about value is not anchored in some foundation or source external to the interpretive process; rather, different accounts of truth are presented and defended through a process of critical reflection involving the constant oscillation between concrete and general in search of equilibrium. The great insight offered by this style of normative discourse is, in my view, that it is a thoroughly non-foundational or “circular” theory of value generally, and it implies a “circular” theory of legality or the concept of law in particular, one in which there is no extra-legal or pre-legal fact or command or norm that holds the law together.<renvoi id="re1no52" idref="no52" typeref="note">52</renvoi></alinea></para><para id="pa33"><no>33</no><alinea> However, there are (at least) two things missing or under-emphasized in Dworkin’s interpretive account of normative unity. The first is that rhyme, though present, is not held up as a special feature of interpretation. If the interpretive process yields truth at all, it will not be by virtue of formal logic or analytical purity. Values may well be, as agonists say, incommensurable as a matter of strict reason, because no scale or measure exists to compare them scientifically. But humans are not machines and we should not expect their values to be explicable through mathematical formulae. The interpretive process is an art not a science, and a good argument about value will be, at some level, an aesthetically attractive arrangement of ideas—one that manifests harmony, equity, proportion, or <marquage typemarq="italique">elegantia</marquage>.</alinea></para><para id="pa34"><no>34</no><alinea> Second, the idea of normative unity must of course address the reality of pluralism. How can an interpretive or circular theory of law, with its incessant drive for normative unity, integrity, or coherence, account for and accommodate—let alone nurture and celebrate—the reality of a pluralistic society? There is much in Dworkin’s work suggestive of a monolithic liberal legalism: he does, after all, refer to law’s <marquage typemarq="italique">empire</marquage> and he imagines a superhuman judge Hercules who can find <marquage typemarq="italique">the</marquage> right answer to any legal question.<renvoi id="re1no53" idref="no53" typeref="note">53</renvoi> It all sounds very imperialistic. I am reminded at this point about an exchange that I witnessed in a seminar led by Dworkin at Oxford (he was, for a time, my doctoral supervisor and so naturally I attended all of his seminars). The discussion focused upon the very issues we are now addressing, and a student, no doubt a Canadian and perhaps a Quebecer, asked whether the Quebec sign laws, mandating the use of the French language on commercial signs, could be reconciled with liberal values.<renvoi id="re1no54" idref="no54" typeref="note">54</renvoi> My recollection is that Dworkin was far too dismissive of the possibility in answering no.</alinea></para><para id="pa35"><no>35</no><alinea> There are two reasons to think that he was wrong, on the basis of his own theory of interpretation, to be so dismissive. First, his is a circular theory. There is no sovereign root to the law or to any value, and values that are freed from a positivist foundation may have a distinctive ability to accommodate difference without forgoing the commitment to unity. The unity of value to emerge through interpretation must accept all differences that are necessary to accept in order to make coherent sense of a world full of diversity. Whether this approach might justify restrictive laws to protect a linguistic minority is, of course, still an open question—but it is an <marquage typemarq="italique">open</marquage> question. A commitment to normative unity is hardly a commitment to normative sameness.</alinea></para><para id="pa36"><no>36</no><alinea> Indeed, from my limited understanding of Indigenous legal traditions, I get the sense that
+          these traditions assume that respect for deep difference and the search for ultimate
+          harmony are twin objectives sensibly pursued together. On this point, it may be helpful to
+          contrast Indigenous and non-Indigenous images of the constitution as a (so-called) “living
+          tree”. In the hands of non-Indigenous judges, the living-tree constitution consists of an
+          impressive set of branches and leaves, alive and growing, but all emanating from one
+          single trunk.<renvoi id="re1no55" idref="no55" typeref="note">55</renvoi> It is a very linear account of law.
+          Indeed, it is arguably a positivist conception of law according to which every legal norm
+          is traceable back to a single originating phenomenon that is itself outside the law,
+          whether Austin’s sovereign, Kelsen’s <marquage typemarq="italique">grundnorm</marquage>,
+          or Hart’s rule of recognition.<renvoi id="re1no56" idref="no56" typeref="note">56</renvoi> It is a conception of law
+          that reduces constitutional pluralism to a system of delegated and subordinate
+          constitutional powers. The Great Tree of Peace central to Haudenosaunee traditions of
+          constitutionalism, in contrast, places equal emphasis on the branches <marquage typemarq="italique">and</marquage> the complex network of roots under the tree that are
+          also growing and extending, spreading, according to the tradition, the ideal of
+          peace.<renvoi id="re1no57" idref="no57" typeref="note">57</renvoi> This tree has no real beginning. It draws
+          distinctive peoples to its shade where they may meet in council. It was under the tree
+          that, according to one version of the tradition, the chiefs of different nations,
+          themselves “symbolized as trees”, bound themselves together “by taking hold of each
+          other’s hands firmly and forming a circle,” a “circle of unity”.<renvoi id="re1no58" idref="no58" typeref="note">58</renvoi> This is a much more complicated constitutional arrangement, for it lacks a
+          single sovereign root. However, it does suggest that normative unity can exist even when
+          an exclusive or singular conception of sovereignty does not.</alinea></para><para id="pa37"><no>37</no><alinea> Second, we need to attend to the distinction Dworkin draws between external and internal skepticism about value. Value pluralism is a form of external skepticism. It involves stepping out of the interpretive circle and passing judgment on the process, concluding that there can never be any truth about any value, only a plurality of different opinions or traditions all contingent upon culture or politics or power. Slavery and genocide are evil on this view—for us, perhaps, but perhaps not for others. If this is value pluralism, Dworkin was right to reject it. We all should. However, this does not end the matter. Pluralism may itself be reconceived as a value with its own truth and normative implications. In other words, if <marquage typemarq="italique">value pluralism</marquage> is exchanged for a conception of <marquage typemarq="italique">pluralism as a value,</marquage> then we can re-enter the interpretive circle and begin to construct interpretations about how, in specific situations, pluralism may be reconciled with the other constitutional values we cherish. If we can figure out how to engage in this interpretive process—if we accept pluralism as a value in place of value pluralism—then I think we will have captured the pluralistic hedgehog.</alinea></para><para id="pa38"><no>38</no><alinea> An interpretive theory of the normative unity of constitutional value permits us to develop and defend accounts of constitutionalism that seem true, right, or best to us, but it does not guarantee convergence of ideas among different interpretations. It is a mechanism for ongoing constitutional discourse, and, in part, of constructive <marquage typemarq="italique">dis</marquage>agreement; agreement and acceptance will emerge, if at all, through arguments aimed at truth rather than at agreement and acceptance as such.<renvoi id="re1no59" idref="no59" typeref="note">59</renvoi> The theory does not take an a priori position on whom in our system should, as a practical matter, determine which interpretation shall be, for the time being, legally enforced. Jeremy Webber is entirely right to say that a judicial pronouncement on deeply contested constitutional fundamentals may, on many occasions, hinder rather than help the search for just relationships.<renvoi id="re1no60" idref="no60" typeref="note">60</renvoi> But I remain worried about characterizing the space left by courts for dialogue and deliberation between political actors and citizens as one defined by agonism. The ensuing dialogue will go better, I think, if we begin with the assumption that we are all striving to show each other the best meaning of the constitution, as if there really is some truth to the matter, rather than just incomparable or incommensurable opinions to be compromised through political struggle. We do better if we accept and listen to Indigenous claims, for example, as if they really are claims about justice that must be accommodated in a way that shows all of our convictions about value as something more than a random or arbitrary jumble. Despite our intense differences, we should not be afraid of the ideal of normative unity. Indeed, the ideal of normative unity in constitutional value is what allows us to insist upon the <marquage typemarq="italique">right,</marquage> rather than just the fact of difference.</alinea></para><para id="pa39"><no>39</no><alinea> There <marquage typemarq="italique">is </marquage>an answer about how to accommodate competing nationalisms within Canada, as well as the many other visions that compete for ascendancy, but we can only find it by engaging in an interpretive enterprise that seeks to show how our conclusions cohere with the general values of equality and integrity that these conclusions presuppose. A Hercules could find the answer—but fortunately such a mythical creature does not exist. For us, the best we can do is to nurture an interpretive discourse that allows the constitution to evolve, in the incremental fashion that ordinary legal interpretation enables, with the belief that our sense of integrity and justice and our appreciation for the diversity and the unity of views about equality and respect for others will deepen and converge over time and with experience. A state of constitutional harmony that respects the equal freedom to be different is just over the horizon, but we can get there only by forging the best path possible for the part of the journey that we confront today.</alinea></para><para id="pa40"><no>40</no><alinea> Rod Macdonald ended his inaugural lecture by reciting several passages from the poems of F.R. Scott. Given the emphasis on constitutional rhyme this evening, perhaps it is appropriate if I do the same. You will forgive me in advance if this seems overdramatic—but if not now, then when?</alinea></para><para id="pa41"><no>41</no><alinea> Another great Canadian poet, Leonard Cohen, who was also a great songwriter and musician, and who passed away just a few months ago, once recorded a performance of Frank Scott’s poem “Villanelle for our Time”.<renvoi id="re1no61" idref="no61" typeref="note">61</renvoi> Cohen was, I should remind you, a student here in the Faculty of Law at McGill, though, fortunately for the literary and musical heritage of Canada and the rest of the world, only for one term.<renvoi id="re1no62" idref="no62" typeref="note">62</renvoi> Cohen’s performance of Scott’s poem was, I think, a fitting tribute to the law professor who gave him encouragement as a young poet.<renvoi id="re1no63" idref="no63" typeref="note">63</renvoi> The poem can be understood to be about constitutional unity amongst peoples characterized by diversity—or at least I like to read it that way. Here, then, is Scott’s “Villanelle for our Time”:</alinea>
+        <verbatim typeverb="poeme">
+          <bloc>
+            <ligne>From bitter searching of the heart,</ligne>
+            <ligne>Quickened with passion and with pain</ligne>
+            <ligne>We rise to play a greater part.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>This is the faith from which we start:</ligne>
+            <ligne>Men shall know commonwealth again</ligne>
+            <ligne>From bitter searching of the heart.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>We loved the easy and the smart,</ligne>
+            <ligne>But now, with keener hand and brain,</ligne>
+            <ligne>We rise to play a greater part.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>The lesser loyalties depart,</ligne>
+            <ligne>And neither race nor creed remain</ligne>
+            <ligne>From bitter searching of the heart.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>Not steering by the venal chart</ligne>
+            <ligne>That tricked the mass for private gain,</ligne>
+            <ligne>We rise to play a greater part.</ligne>
+          </bloc>
+          <bloc>
+            <ligne>Reshaping narrow law and art</ligne>
+            <ligne>Whose symbols are the millions slain,</ligne>
+            <ligne>From bitter searching of the heart</ligne>
+            <ligne>We rise to play a greater part.</ligne>
+          </bloc>
+        </verbatim></para><alinea>Thank you.</alinea></section1></corps><partiesann lang="en"><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Roderick A Macdonald, “FR Scott’s Constitution (Inaugural Lecture)” (1997) 42:1
+          McGill LJ 11 at 13. Another great Canadian and (one-time) Chief Justice of Canada once
+          described Scott as “heroic”: see Bora Laskin, Book Review of <marquage typemarq="italique">Civil Liberties and Canadian Federalism</marquage> by FR Scott, (1960) 13:2 UTLJ 288
+          at 288.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>Francis Reginald Scott (1899–1985), who studied at Bishop’s, McGill, and Oxford
+          Universities, was a long-standing member of the Faculty of Law at McGill University, a
+          leading mid-century Canadian poet (see e.g. FR Scott, <marquage typemarq="italique">The
+          Collected Poems of FR Scott </marquage>(Toronto: McClelland and Stewart, 1981)), and a
+          founding member of the Co-operative Commonwealth Federation, the precursor to the New
+          Democratic Party of Canada. He was the author of a series of important books and essays on
+          constitutional law. See e.g. FR Scott, <marquage typemarq="italique">Civil Liberties &amp;
+          Canadian Federalism</marquage> (Toronto: University of Toronto Press, 1959); Frank R
+          Scott, <marquage typemarq="italique">Essays on the Constitution: Aspects of Canadian Law
+          and Politics</marquage> (Toronto: University of Toronto Press, 1977). See also Sandra Djwa
+          &amp; RStJ Macdonald, eds, <marquage typemarq="italique">On FR Scott: Essays on His
+          Contributions to Law, Literature, and Politics</marquage> (Kingston: McGill-Queen’s
+          University Press, 1983); Sandra Djwa, <marquage typemarq="italique">The Politics of the
+          Imagination: A Life of FR Scott</marquage> (Toronto: McClelland and Stewart,
+          1987).</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Macdonald, <marquage typemarq="italique">supra</marquage> note 1 at 13.</alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>This is, of course, hardly just my own view. For accounts of Rod Macdonald’s
+          contributions to Canadian public and academic life, see e.g. Richard Janda, Rosalie Jukier
+          &amp; Daniel Jutras, eds, <marquage typemarq="italique">The Unbounded Level of the Mind:
+          Rod Macdonald’s Legal Imagination</marquage> (Montreal: McGill-Queen’s University Press,
+          2015); Andrée Lajoie, <marquage typemarq="italique">La vie intellectuelle de Roderick
+          Macdonald: un engagement </marquage>(Montréal: Thémis, 2014).</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>See generally Mark Wenman, <marquage typemarq="italique">Agonistic Democracy:
+          Constituent Power in the Era of Globalisation</marquage> (Cambridge: Cambridge University
+          Press, 2013) ch 1.</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>Isaiah Berlin, <marquage typemarq="italique">The Hedgehog and the Fox: An Essay on
+          Tolstoy’s View of History</marquage> (London, UK: Weidenfeld &amp; Nicolson, 1953)
+          at 1.</alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>See generally Michael Ignatieff, <marquage typemarq="italique">Isaiah Berlin: A
+          Life</marquage> (Toronto: Viking, 1998). It is worth noting, however, that Ignatieff saw
+          certain hedgehog qualities in Berlin. See <marquage typemarq="italique">ibid</marquage>
+          at 7, 201, 203.</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>Isaiah Berlin, <marquage typemarq="italique">Two Concepts of Liberty: An Inaugural
+          Lecture Delivered Before the</marquage> <marquage typemarq="italique">University of Oxford
+          on 31 October 1958 </marquage>(Oxford: Clarendon Press, 1958) at 56–57.</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>Ronald Dworkin, <marquage typemarq="italique">Justice for Hedgehogs</marquage>
+          (Cambridge, Mass: Belknap Press of Harvard University Press, 2011) at 1 [Dworkin,
+          <marquage typemarq="italique">Justice for Hedgehogs</marquage>]. </alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea>Macdonald, <marquage typemarq="italique">supra</marquage> note 1 at 23–24.</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> at 23.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea>I explore these ideas in Mark D Walters, “Legal Humanism and Law-as-Integrity”
+          (2008) 67:2 Cambridge LJ 352.</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea>Sir John Doderidge, <marquage typemarq="italique">The English Lawyer: Describing a
+          Method for the Managing of the Lawes of this Land </marquage>(London: I More, 1631)
+          at 62–64.</alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea>John Austin, <marquage typemarq="italique">Lectures on Jurisprudence
+          </marquage>(London, UK: John Murray, 1863) vol 2 at 249 [emphasis in original].</alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> at 272 [emphasis in
+          original].</alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> at 275–77 [emphasis in
+          original].</alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>See Henry Sumner Maine, <marquage typemarq="italique">Ancient Law: Its Connection
+          with the Early History of Society, and Its Relation to Modern Ideas</marquage> (London,
+          UK: John Murray, 1861) at 58.</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> at 58–60 [emphasis in
+          original].</alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> at 79.</alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea>See TFT Plucknett &amp; JL Barton, eds, <marquage typemarq="italique">St
+          German’s</marquage> <marquage typemarq="italique">Doctor and Student</marquage> (London,
+          UK: Selden Society, 1974) at 97. See generally Mark D Walters, “St. German on Reason and
+          Parliamentary Sovereignty” (2003) 62:2 Cambridge LJ 335.</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea>Like many other legal academics, I have been influenced in my views on this topic by
+          the works of John Borrows, including his books. See e.g. John Borrows, <marquage typemarq="italique">Freedom and Indigenous Constitutionalism</marquage> (Toronto:
+          University of Toronto Press, 2016) [Borrows, <marquage typemarq="italique">Freedom &amp;
+          Indigenous Constitutionalism</marquage>]; John Borrows, <marquage typemarq="italique">Canada’s Indigenous Constitution</marquage> (Toronto: University of Toronto Press, 2010)
+          [Borrows, <marquage typemarq="italique">Canada’s Indigenous Constitution</marquage>]; John
+          Borrows, <marquage typemarq="italique">Drawing Out Law: A Spirit’s Guide</marquage>
+          (Toronto: University of Toronto Press, 2010).</alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>See Mark D Walters, “Rights and Remedies within Common Law and Indigenous Legal
+          Traditions: Can the Covenant Chain be Judicially Enforced Today?” in John Borrows &amp;
+          Michael Coyle, eds, <marquage typemarq="italique">The Right Relationship: Reimagining the
+          Implementation of Historical Treaties</marquage> (Toronto: University of Toronto Press,
+          2017) 187 at 195. I have (no doubt naïvely) tried to summarize some of my views on this
+          topic in the following essay: Mark D Walters, “The Morality of Aboriginal Law” (2006) 31:2
+          Queen’s LJ 470.</alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea>See Roderick A MacDonald, “Kaleidoscopic Federalism” in Jean-François
+          Gaudrault-Desbiens &amp; Fabien Gélinas, eds, <marquage typemarq="italique">The States and
+          Moods of Federalism: Governance, Identity and Methodology</marquage>, (Cowansville, Qc,
+          Brussels: Yvon Blais, Bruylant, 2005) 273, where a similar theme is discussed.</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea>See John Borrows, “Wampum at Niagara: The Royal Proclamation, Canadian Legal
+          History, and Self-Government” in Michael Asch, ed, <marquage typemarq="italique">Aboriginal and Treaty Rights in Canada: Essays on Law, Equality, and Respect for
+          Difference </marquage>(Vancouver: UBC Press, 1997) 155 at 161–62. See also Jeremy Webber,
+          “Relations of Force and Relations of Justice: The Emergence of Normative Community between
+          Colonists and Aboriginal peoples” (1995) 33:4 Osgoode Hall LJ 623.</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea>The covenant chain wampum belts exchanged at Niagara in 1764 are now lost, but
+          drawings of them can be found in AF Hunter, “Wampum Records of the Ottawas” in <marquage typemarq="italique">Annual Archaeological Report 1901, Being Part of Appendix to the
+          Report of the Minister of Education Ontario</marquage> (Toronto: LK Cameron, 1902) 52
+          at 52–53, online: University of Toronto &lt;<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="http://scans.library.utoronto.ca/pdf/1/9/archaeologicalre00royauoft/archaeologicalre00royauoft.pdf">scans.library.utoronto.ca/pdf/1/9/archaeologicalre00royauoft/archaeologicalre00royauoft.pdf</liensimple>&gt;.</alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea>See Mark D Walters, “‘<marquage typemarq="italique">Your Sovereign</marquage> and
+          <marquage typemarq="italique">Our Father’</marquage>: The Imperial Crown and the Idea of
+          Legal-Ethnohistory” in Shaunnagh Dorsett &amp; Ian Hunter, eds, <marquage typemarq="italique">Law and Politics in British Colonial Thought: Transpositions of
+          Empire</marquage> (New York: Palgrave Macmillan, 2010) 91 at 94, 99.</alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>This speech was delivered at a treaty council that took place at Albany in September
+          1685, as reported in The Honourable Cadwallader Colden, <marquage typemarq="italique">The
+          History of the Five Indian Nations of Canada Which are Dependent on the Province of
+          New-York in America, and are the Barrier between the English and French in that Part of
+          the World</marquage> (London, UK: T Osborne, 1747) at 57, online: Internet Archive
+          &lt;<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:type="simple" xlink:href="https://archive.org/details/historyoffiveind04cold">https://archive.org/details/historyoffiveind04cold</liensimple>&gt; [emphasis in
+          original].</alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea>John Gray, “Agonistic Liberalism” (1995) 12:1 Social Philosophy &amp; Policy 111
+          at 114 [Gray, “Agnostic Liberalism”]. See also John Gray, <marquage typemarq="italique">Isaiah Berlin </marquage>(Princeton: Princeton University Press, 1996) at 22.</alinea>
+      </note>
+      <note id="no29">
+        <no>29</no>
+        <alinea>Gray, “Agonistic Liberalism”, <marquage typemarq="italique">supra </marquage>note 28
+          at 114.</alinea>
+      </note>
+      <note id="no30">
+        <no>30</no>
+        <alinea><marquage typemarq="italique"> Ibid </marquage>at 122 [emphasis in
+          original].</alinea>
+      </note>
+      <note id="no31">
+        <no>31</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> at 116.</alinea>
+      </note>
+      <note id="no32">
+        <no>32</no>
+        <alinea>See Daniel M Weinstock, “The Graying of Berlin” (1997) 11:4 Critical Rev 481
+          at 490.</alinea>
+      </note>
+      <note id="no33">
+        <no>33</no>
+        <alinea>See Chantal Mouffe, “Democracy and Pluralism: A Critique of the Rationalist
+          Approach” (1995) 16:5 Cardozo L Rev 1533; Chantal Mouffe, “Carl Schmitt and the Paradox of
+          Liberal Democracy” (1997) 10:1 Can JL &amp; Jur 21; Chantal Mouffe, <marquage typemarq="italique">The Democratic Paradox</marquage> (London: Verso, 2000) at 4; Chantal
+          Mouffe, <marquage typemarq="italique">On the Political </marquage>(Abingdon: Routledge,
+          2005) at 14–16; Chantal Mouffe, <marquage typemarq="italique">Agonistics: Thinking the
+          World Politically </marquage>(London: Verso, 2013) at 137–38.</alinea>
+      </note>
+      <note id="no34">
+        <no>34</no>
+        <alinea>See Carl Schmitt, <marquage typemarq="italique">Constitutional Theory</marquage>,
+          translated by Jeffrey Seitzer, ed (Durham: Duke University Press, 2008) at 405. See also
+          Carl Schmitt, <marquage typemarq="italique">Political Theology: Four Chapters on the
+          Concept of Sovereignty</marquage>, translated by George Schwab (Chicago: University of
+          Chicago Press, 2005) at 5–7. See generally Carl Schmitt, <marquage typemarq="italique">The
+          Concept of the Political</marquage>, expanded ed, translated by George Schwab (Chicago:
+          University of Chicago Press, 2007).</alinea>
+      </note>
+      <note id="no35">
+        <no>35</no>
+        <alinea>See David Dyzenhaus, <marquage typemarq="italique">Legality and Legitimacy: Carl
+          Schmitt, Hans Kelsen and Hermann Heller in Weimar</marquage> (Oxford: Clarendon Press,
+          1997) at 68, 96.</alinea>
+      </note>
+      <note id="no36">
+        <no>36</no>
+        <alinea>For a scathing critique of Mouffe’s agonism, see Radhika Desai, “Fetishizing
+          Phantoms: Carl Schmitt, Chantal Mouffe, and the ‘The Political’” in Abigail B Bakan &amp;
+          Eleanor Macdonald, eds, <marquage typemarq="italique">Critical Political Studies: Debates
+          and Dialogues from the Left</marquage> (Montreal: McGill-Queen’s University Press, 2002)
+          387. See also Martin Beckstein, “The Dissociative and Polemical Political: Chantal Mouffe
+          and the Intellectual Heritage of Carl Schmitt” (2011) 16:1 J Political
+          Ideologies 33.</alinea>
+      </note>
+      <note id="no37">
+        <no>37</no>
+        <alinea>RSQ c E-20.2 [<marquage typemarq="italique">Bill 99</marquage>]. Judgment in this
+          case has now been rendered in <marquage typemarq="italique">Henderson c Procureure
+          générale du Québec</marquage>, 2018 QCCS 1586 (j.c.s. Claude Dallaire). See also Graeme
+          Hamilton, “Quebec Independence back in Spotlight as Challenge of 17-year-old Secession Law
+          goes to Trial”, <marquage typemarq="italique">National Post</marquage> (March 20 2017),
+          online: &lt;<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:type="simple" xlink:href="http://nationalpost.com">nationalpost.com</liensimple>&gt;, archived at <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:type="simple" xlink:href="https://perma.cc/4ZG3-LVCQ">https://perma.cc/4ZG3-LVCQ</liensimple>.</alinea>
+      </note>
+      <note id="no38">
+        <no>38</no>
+        <alinea><marquage typemarq="italique"> Reference re Secession of Quebec</marquage>, [1998] 2
+          SCR 217, 161 DLR (4th) 385 [<marquage typemarq="italique">Quebec Secession
+          Reference</marquage>]. </alinea>
+      </note>
+      <note id="no39">
+        <no>39</no>
+        <alinea>Grand Council of the Crees, “Eeyou Estchee Declaration of Principles” (17–19 October
+          1995), online: &lt;<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:type="simple" xlink:href="http://www.gcc.ca/gcc/other.php">www.gcc.ca/gcc/other.php</liensimple>&gt;,
+          archived at <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:type="simple" xlink:href="https://perma.cc/C33Z-3ZNY">https://perma.cc/C33Z-3ZNY</liensimple> (original website now offline). This statement
+          was issued just weeks prior to the 1995 referendum on Quebec independence.</alinea>
+      </note>
+      <note id="no40">
+        <no>40</no>
+        <alinea>On competing conceptions of Indigenous sovereignty in Canada see generally Mark D
+          Walters, “‘Looking for a Knot in a Bulrush’: Reflections on Aboriginal and Crown
+          Sovereignty” in Patrick Macklem &amp; Douglas Sanderson, eds, <marquage typemarq="italique">From Recognition to Reconciliation: Essays on the Constitutional
+          Entrenchment of Aboriginal and Treaty Rights</marquage> (Toronto: University of Toronto
+          Press, 2016) 35.</alinea>
+      </note>
+      <note id="no41">
+        <no>41</no>
+        <alinea><marquage typemarq="italique"> Bill 99</marquage>, <marquage typemarq="italique">supra</marquage> note 37, s 1.</alinea>
+      </note>
+      <note id="no42">
+        <no>42</no>
+        <alinea>James Tully, <marquage typemarq="italique">Public Philosophy in a New
+          Key</marquage>, vol 1 (Cambridge: Cambridge University Press, 2008) at 130, cited in
+          Borrows, <marquage typemarq="italique">Canada’s Indigenous Constitution</marquage>,
+          <marquage typemarq="italique">supra</marquage> note 21 at 288.</alinea>
+      </note>
+      <note id="no43">
+        <no>43</no>
+        <alinea>Jeremy Webber, <marquage typemarq="italique">The Constitution of Canada: A
+          Contextual Analysis</marquage> (Oxford: Hart, 2015) at 8 [Webber, <marquage typemarq="italique">Constitution of Canada</marquage>].</alinea>
+      </note>
+      <note id="no44">
+        <no>44</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage> [emphasis added]. For a link between
+          Webber’s idea of “agonistic constitutionalism” and Tully, see Jeremy Webber, “We Are Still
+          in the Age of Encounter: Section 35 and a Canada beyond Sovereignty” in Macklem &amp;
+          Sanderson, <marquage typemarq="italique">supra</marquage> note 40, 63 at 64, n 1, citing
+          James Tully, <marquage typemarq="italique">Strange Multiplicity: Constitutionalism in an
+          Age of Diversity</marquage> (Cambridge: Cambridge University Press, 1995).</alinea>
+      </note>
+      <note id="no45">
+        <no>45</no>
+        <alinea>As John D Whyte, representing the Attorney General of Saskatchewan, stated in his
+          oral submissions before the Supreme Court of Canada in the <marquage typemarq="italique">Quebec Secession Reference</marquage>, <marquage typemarq="italique">supra</marquage>
+          note 38 at para 96: “The threads of a thousand acts of accommodation are the fabric of a
+          nation.” </alinea>
+      </note>
+      <note id="no46">
+        <no>46</no>
+        <alinea>See e.g. Jeremy Webber, “National Sovereignty, Migration, and the Tenuous Hold of
+          International Legality: The Resurfacing (and Resubmersion?) of Carl Schmitt” in Oliver
+          Schmidtke &amp; Saime Ozcurumez, eds, <marquage typemarq="italique">Of States, Rights, and
+          Social Closure: Governing Migration and Citizenship</marquage> (New York: Palgrave
+          Macmillan, 2008) 61 at 61–62: </alinea>
+        <bloccitation>
+          <alinea>For me, reading Schmitt is like looking the devil in the face. The implications of
+            his arguments are objectionable but they are also undeniably and powerfully seductive.
+            He uncovers—indeed celebrates—claims and motives that have more bite than we would like
+            to admit. We have an obligation to look at him, understand his attraction, and be very
+            clear where and why he goes off the rails.</alinea>
+        </bloccitation>
+      </note>
+      <note id="no47">
+        <no>47</no>
+        <alinea>Tully does occasionally cite Mouffe when explaining agonism (see e.g. James Tully,
+          “The Unfreedom of the Moderns in Comparison to Their Ideals of Constitutional Democracy”
+          (2002) 65:2 Mod L Rev 204 at 208, n 8; James Tully, “Struggles over Recognition and
+          Distribution” (2000) 7:4 Constellations 469 at<marquage typemarq="italique"> </marquage>476, 479 nn, 16, 23). Tully has been grouped with Mouffe among the agonists
+          who pursue a “politics of compulsion” over one of principle, though, it is also
+          acknowledged, that members of this group perceive “the potential for actual enjoyment,
+          liberation and hope in aspects of the bleak coercive political world” (see Marc Stears,
+          “Liberalism and the Politics of Compulsion” (2007) 37:3 British J Political Science 533
+          at 545).</alinea>
+      </note>
+      <note id="no48">
+        <no>48</no>
+        <alinea>Michel Foucault, “The Subject and Power” (1982) 8:4 Critical Inquiry 777 at 790,
+          cited in James Tully, “The Agonic Freedom of Citizens” (1999) 28:2 Economy &amp;
+          Society 161 at 167 [Tully, “Agonic Freedom”]. See also Borrows, <marquage typemarq="italique">Canada’s Indigenous Constitution</marquage>, <marquage typemarq="italique">supra</marquage> note 21 at 288 (where Borrows cites Tully); Borrows,
+          <marquage typemarq="italique">Freedom &amp; Indigenous Constitutionalism</marquage>,
+          <marquage typemarq="italique">supra</marquage> note 21 (discussing Webber’s “agonistic
+          constitutionalism” at 105).</alinea>
+      </note>
+      <note id="no49">
+        <no>49</no>
+        <alinea>Tully, “Agonic Freedom”, <marquage typemarq="italique">supra </marquage>note 48
+          at 174 [emphasis in original].</alinea>
+      </note>
+      <note id="no50">
+        <no>50</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage>.</alinea>
+      </note>
+      <note id="no51">
+        <no>51</no>
+        <alinea>Dworkin, <marquage typemarq="italique">Justice for Hedgehogs</marquage>, <marquage typemarq="italique">supra</marquage> note 9 at 130ff. See also Ronald Dworkin, “Law as
+          Interpretation” (1982) 60:3 Tex L Rev 527; Ronald Dworkin, <marquage typemarq="italique">Law’s Empire</marquage> (Cambridge, Mass: Belknap Press of Harvard University Press,
+          1986) ch 2 [Dworkin, <marquage typemarq="italique">Law’s Empire</marquage>]; Ronald
+          Dworkin, “Objectivity and Truth: You’d Better Believe It” (1996) 25:2 Philosophy &amp;
+          Public Affairs 87. The story of the link between ancient and modern interpretivism has not
+          really been fully told, but I think the principal intermediary links between, say,
+          Aristotle and Dworkin would be Henry Sidgwick and John Rawls, with countless and nameless
+          common law judges doing the background work.</alinea>
+      </note>
+      <note id="no52">
+        <no>52</no>
+        <alinea>These ideas are developed in Mark D Walters, “The Unwritten Constitution as a Legal
+          Concept” in David Dyzenhaus &amp; Malcolm Thorburn, eds, <marquage typemarq="italique">Philosophical Foundations of Constitutional Law</marquage> (Oxford: Oxford University
+          Press, 2016) 33.</alinea>
+      </note>
+      <note id="no53">
+        <no>53</no>
+        <alinea>See Dworkin, <marquage typemarq="italique">Law’s Empire</marquage>, <marquage typemarq="italique">supra</marquage> note 51 at 260–63.</alinea>
+      </note>
+      <note id="no54">
+        <no>54</no>
+        <alinea>See <marquage typemarq="italique">Charter of the French language</marquage>, RSQ
+          c C-11. The sign laws had been the subject of a controversial ruling by the Supreme Court
+          of Canada several years earlier (see <marquage typemarq="italique">Ford v Quebec
+          (AG)</marquage> [1988] 2 SCR 712, 54 DLR (4th) 577).</alinea>
+      </note>
+      <note id="no55">
+        <no>55</no>
+        <alinea>See <marquage typemarq="italique">Edwards v Canada (AG) </marquage>(1929), [1930]
+          AC 124 at 136, [1930] 1 DLR 98 (PC), Viscount Sankey (“[t]he British North America Act
+          planted in Canada a living tree capable of growth and expansion within its natural limits”
+          at 136).</alinea>
+      </note>
+      <note id="no56">
+        <no>56</no>
+        <alinea>See John Austin, <marquage typemarq="italique">The Province of Jurisprudence
+          Determined</marquage>, 2nd ed (London: John Murray, 1861); Hans Kelsen, <marquage typemarq="italique">General Theory of Law and State</marquage>, translated by Anders
+          Wedberg (Cambridge, Mass: Harvard University Press, 1945); HLA Hart, <marquage typemarq="italique">The Concept of Law</marquage> (Oxford: Clarendon Press,
+          1961).</alinea>
+      </note>
+      <note id="no57">
+        <no>57</no>
+        <alinea>See Paul AW Wallace, <marquage typemarq="italique">The White Roots of
+          Peace</marquage> (Philadelphia: University of Pennsylvania Press, 1946) at 7–8. For
+          another recent comparison of the “living tree” metaphor in Canadian constitutional law and
+          the Haudenosaunee Great Law of Peace, see Borrows, <marquage typemarq="italique">Freedom
+          and Indigenous Constitutionalism</marquage>, <marquage typemarq="italique">supra</marquage> note 21 at 151–52.</alinea>
+      </note>
+      <note id="no58">
+        <no>58</no>
+        <alinea>Arthur C Parker, “The Constitution of the Five Nations, or The Iroquois Book of the
+          Great Law” (1916) New York State Museum Bulletin No 184 at 102.</alinea>
+      </note>
+      <note id="no59">
+        <no>59</no>
+        <alinea>And so, it is different from deliberative discourse of the kind advanced by John
+          Rawls. See Mark D Walters, “Deliberating about Constitutionalism” in Ron Levy et al, eds,
+          <marquage typemarq="italique">The Cambridge Handbook of Deliberative
+          Constitutionalism </marquage>(Cambridge: Cambridge University Press, 2018) 167.</alinea>
+      </note>
+      <note id="no60">
+        <no>60</no>
+        <alinea>See Webber, <marquage typemarq="italique">Constitution of Canada</marquage>, supra
+          note 43 at 8, 259–65.</alinea>
+      </note>
+      <note id="no61">
+        <no>61</no>
+        <alinea>FR Scott, “Villanelle for Our Time” (1945) in Laura Moss, ed, <marquage typemarq="italique">Leaving the Shade of the Middle Ground: The Poetry of FR
+          Scott</marquage> (Waterloo: Wilfred Laurier University Press, 2011) 60. Leonard Cohen’s
+          recording of this poem is on his album “Dear Heather”, CDROM (Toronto: Sony BMG Music
+          Entertainment, 2004).</alinea>
+      </note>
+      <note id="no62">
+        <no>62</no>
+        <alinea>See Jeff Burger, ed, <marquage typemarq="italique">Leonard Cohen on Leonard Cohen:
+          Interviews and Encounters</marquage> (Chicago, Chicago Review Press, 2014) at xvi. See
+          generally Sylvie Simmons, <marquage typemarq="italique">I’m Your Man: The Life of Leonard
+          Cohen</marquage> (New York: Ecco, 2012).</alinea>
+      </note>
+      <note id="no63">
+        <no>63</no>
+        <alinea>In relation to his friendship with FR Scott, Leonard Cohen told Sandra Djwa that he
+          (Cohen) “had attended law school at McGill for a time because it had been a good place for
+          Scott”, and that Scott had later allowed Cohen to stay at his summer house in North Hatley
+          where he wrote much of his first novel <marquage typemarq="italique">The Favorite
+          Game</marquage>. Cohen said that he had been reluctant to undertake the life of a writer,
+          but Scott “gave me the courage to fail.” (See Sandra Djwa, “After the Wipeout, a Renewal”
+          in Burger, <marquage typemarq="italique">supra </marquage>note 62, 10 at 10).</alinea>
+      </note>
+    </grnote></partiesann></article>
