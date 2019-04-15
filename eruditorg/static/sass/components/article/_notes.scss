@@ -32,7 +32,7 @@
   .note {
     margin-bottom: 0.5em;
 
-   .alinea {
+   & > .alinea {
       margin-top: 0.5em;
 
       &:nth-of-type(1) {
