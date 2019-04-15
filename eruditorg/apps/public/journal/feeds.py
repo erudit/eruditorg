@@ -15,31 +15,26 @@ class LatestIssuesFeed(Feed):
     """ Provides a list of latest issues published on Érudit. """
     feed_type = EruditRssFeedGenerator
 
-    # Standard RSS elements
-    title = _("Syndication d'Érudit")
-    link = reverse_lazy('public:home')
-
-    # Item elements
-    title_template = 'public/journal/feeds/latest_issues_title.html'
-    description_template = 'public/journal/feeds/latest_issues_description.html'
-
-    days_delta = 90
-
     def get_start_date(self):
         """ Returns the publication date from which the issues are retrieved. """
-        return (dt.datetime.now() + dt.timedelta(-self.days_delta))
+        return dt.datetime.now() - dt.timedelta(90)
 
-    def description(self, obj):
+    def title(self):
+        """ Returns the title of the feed. """
+        return _("Syndication d'Érudit")
+
+    def description(self):
         """ Returns the description of the feed. """
         start_date_str = dt.datetime.strftime(self.get_start_date(), '%Y/%m/%d')
         today_str = dt.datetime.strftime(dt.datetime.now(), '%Y/%m/%d')
-        return '{start_date} - {today}'.format(start_date=start_date_str, today=today_str)
+        return '{start_date} - {today}'.format(
+            start_date=start_date_str,
+            today=today_str,
+        )
 
-    def item_link(self, item):
-        """ Returns the link of a feed item. """
-        return reverse_lazy(
-            'public:journal:issue_detail',
-            args=[item.journal.code, item.volume_slug, item.localidentifier])
+    def link(self):
+        """ Returns the link of the feed's website. """
+        return reverse_lazy('public:home')
 
     def items(self):
         """ Returns the items to embed in the feed. """
@@ -48,46 +43,81 @@ class LatestIssuesFeed(Feed):
             is_published=True
         ).order_by('-date_published')
 
+    def item_title(self, item):
+        """ Returns the title of a feed item. """
+        return '{journal_name}, {volume_title}'.format(
+            journal_name=item.journal.name,
+            volume_title=item.volume_title,
+        )
+
+    def item_description(self, item):
+        """ Returns the description of a feed item. """
+        return None
+
+    def item_pubdate(self, item):
+        """ Returns the publication date of a feed item. """
+        return dt.datetime.combine(item.date_published, dt.datetime.min.time())
+
+    def item_link(self, item):
+        """ Returns the link of a feed item. """
+        return reverse_lazy(
+            'public:journal:issue_detail', args=[
+                item.journal.code,
+                item.volume_slug,
+                item.localidentifier,
+            ])
+
 
 class LatestJournalArticlesFeed(Feed):
     """ Provides a list of latest articles associated with a journal. """
     feed_type = EruditRssFeedGenerator
 
-    # Standard RSS elements
-    title = _("Syndication d'Érudit")
-    link = reverse_lazy('public:home')
-
-    # Item elements
-    title_template = 'public/journal/feeds/latest_journal_articles_title.html'
-    description_template = 'public/journal/feeds/latest_journal_articles_description.html'
-
-    def description(self):
-        """ Returns the feed's description as a normal Python string. """
-        return self.last_issue.volume_title
-
     def get_object(self, request, code=None):
         """ Get the journal's latest issues. """
-        self.journal = Journal.objects.get(Q(code=code) | Q(localidentifier=code))
-        self.last_issue = self.journal.last_issue
+        journal = Journal.objects.get(Q(code=code) | Q(localidentifier=code))
+        self.last_issue = journal.last_issue
         if self.last_issue is None:
             raise Http404()
 
-    def get_context_data(self, **kwargs):
-        context = super(LatestJournalArticlesFeed, self).get_context_data(**kwargs)
-        obj = context.get('obj')
+    def title(self):
+        """ Returns the title of the feed. """
+        return _("Syndication d'Érudit")
 
-        context['authors'] = obj.get_formatted_authors()
-        context['abstract'] = obj.abstract
+    def description(self):
+        """ Returns the description of the feed. """
+        return self.last_issue.volume_title
 
-        return context
+    def link(self):
+        """ Returns the link of the feed's website. """
+        return reverse_lazy('public:home')
+
+    def items(self, obj):
+        return list(self.last_issue.get_articles_from_fedora())
+
+    def item_title(self, item):
+        """ Returns the title of a feed item. """
+        return item.title
+
+    def item_description(self, item):
+        """ Returns the description of a feed item. """
+        authors = item.get_formatted_authors()
+        abstract = item.abstract
+        if authors and not abstract:
+            return authors
+        elif not authors and abstract:
+            return abstract
+        else:
+            return '{authors}<br />{abstract}'.format(
+                authors=authors,
+                abstract=abstract,
+            )
 
     def item_link(self, item):
         """ Returns the link of a feed item. """
         return reverse_lazy(
-            'public:journal:article_detail',
-            args=[
-                item.issue.journal.code, item.issue.volume_slug, item.issue.localidentifier,
-                item.localidentifier])
-
-    def items(self, obj):
-        return list(self.last_issue.get_articles_from_fedora())
+            'public:journal:article_detail', args=[
+                item.issue.journal.code,
+                item.issue.volume_slug,
+                item.issue.localidentifier,
+                item.localidentifier,
+            ])
