@@ -363,6 +363,34 @@ class TestArticleDetailView:
         else:
             assert 'Seuls les 600 premiers mots du texte seront affichés.' in html
 
+    @pytest.mark.parametrize('prepublication_ticket', (
+        (False),
+        (True),
+    ))
+    @pytest.mark.parametrize('is_published', (
+        (False),
+        (True),
+    ))
+    def test_biblio_references_display(self, is_published, prepublication_ticket):
+        article = ArticleFactory(
+            from_fixture='1058447ar',
+            issue__is_published=is_published,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url, {
+            'ticket': article.issue.prepublication_ticket if prepublication_ticket else '',
+        })
+        html = response.content.decode()
+        if not is_published and prepublication_ticket:
+            assert '<p>Henri d’Aguesseau, Essai sur l’état des personnes, Oeuvres complètes, t. 9, Paris, Fantin et Cie Libraires, 1819;</p>' in html
+        else:
+            assert '<p>Henri d’Aguesseau, Essai sur l’état des personnes, Oeuvres complètes, t. 9, Paris, Fantin et Cie Libraires, 1819;</p>' not in html
+
 
 @unittest.mock.patch.object(
     Issue,

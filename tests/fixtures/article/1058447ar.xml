@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="minimal" idproprio="1058447ar" typeart="article" lang="fr" ordseq="1"><admin><infoarticle><idpublic scheme="doi">10.7202/1058447ar</idpublic><pagination>
+            <ppage>391</ppage>
+            <dpage>406</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="rgd01024" lang="fr en"><titrerev>Revue générale de droit</titrerev><titrerevabr>rgd</titrerevabr><idissn>0035-3086</idissn><idissnnum>2292-2512</idissnnum><directeur sexe="masculin"><fonction lang="fr">Directeur</fonction><nompers><prenom>Ernest</prenom><nomfamille>Caparros</nomfamille></nompers></directeur></revue><numero id="rgd04482"><volume>20</volume><nonumero>3</nonumero><pub><periode>Septembre</periode><annee>1989</annee></pub><pubnum><date typedate="publication">2019-03-28</date></pubnum></numero><editeur><nomorg>Éditions Wilson &amp; Lafleur, inc.</nomorg></editeur><prod><nomorg>Wilson &amp; Lafleur</nomorg></prod><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Droits d'auteur © <nomorg>Faculté de droit, Section de droit civil, Université d'Ottawa</nomorg>, 1990</droitsauteur></admin><liminaire><grtitre>
+                <titre>Aristote, rue Wellington, ou des philosophes et des juges</titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Alain-François</prenom><nomfamille>Bisson</nomfamille></nompers></auteur></grauteur></liminaire><corps lang="fr"><texte typetexte="roc">﻿                 Aristote, rue Wellington,
+                 ou
+                 des philosophes et des juges
+                                          Je manipule, dit l’Alchimiste
+                                          —  Non, tu rêves.
+                                          —  Je rêve, dit Novalis.
+                                          —  Non, tu manipules.
+                                          Gaston Bachelard,
+                                          La psychanalyse du feu
+                (Un salon des professeurs, non loin de la rue Wellington)
+   Primus (inceptor fere etiam juvenilis) — Ah ! bonjour, cher collègue !
+ Secundus (inceptor non venerabilis) — Ah! bonjour...
+ Primus — Vous me paraissez bien songeur... sombre même.
+ Secundus — Sombre? Non, pas vraiment. Songeur, sûrement; un peu,
+     beaucoup agacé peut-être. Pauvre civiliste perdu dans ces temps
+     constitutionnels, je suis, ainsi que toute la doctrine, agrippé à la
+     jurisprudence comme un naufragé à sa bouée, c’est Jestaz qui vient
+     d’avoir cette image.
+ Primus — Oui, et la bouée est poussée par des courants incertains ; nous
+     mènera-t-elle jamais vraiment au port? Mais à qui s’en prendre? La
+     construction théorique est une voie austère ; le commentaire législatif
+     demande de réelles connaissances, de la clairvoyance et de l’audace
+     intellectuelle ; il est bien plus confortable de gloser à la petite semaine
+     sur la jurisprudence; et cela donne le frisson pratique. Si j’étais juge,
+     c’est plutôt une image racinienne qui me viendrait à notre sujet : « Ce
+     n’est plus une ardeur dans leurs veines cachée : c’est la doctrine tout
+     entière à sa proie attachée. »
+ Secundus — Vous avez gâché le second alexandrin; vous en avez fait un
+     décatesséramètre, une monstruosité. Quoi qu’il en soit, naufragés ou
+     prédateurs, nous ne saurions ignorer ces grands débats jurisprudentiels
+     qui sont susceptibles d’influencer nos disciplines respectives. Alors,
+     j’ai profité de notre dernier congé pour lire ce que la rumeur publique
+     ou professionnelle désignait comme les grands arrêts de l’année
+     écoulée.
+ Primus — Et qu’est-ce qui vous a causé tant d’agacement dans cette
+     lecture?
+ Secundus — La Cour suprême cite de la doctrine...
+ (1989) 2« R.C.D. 391-406﻿ (1989) 20 R.G.D. 391-406
+Revue générale de droit
+ 392
+Primus — Et qu’y a-t-il de mal à cela? Ne devriez-vous pas vous réjouir de
+    cette réconciliation de la jurisprudence et de la doctrine et des
+    encouragements que notre actuel juge en chef a prodigués à celle-ci
+    dans ses discours de Toronto et d’Edmonton? Et ne vous est-il pas
+    arrivé d’être cité?...
+Secundus — Oh ! si peu...
+Primus — Oui, mais tout de même, quelle gratification...
+Secundus — Je n’ai pas vu que cela fût bien essentiel à la démonstration,
+    et cela rallonge des décisions déjà passablement longuettes en général.
+    Sauf autorité exceptionnelle, il me semble que la doctrine ne devrait
+    pas encombrer la motivation des jugements. J’ai tiré plus de satisfaction
+    lorsqu’au détour d’un argument, il m’a semblé que, dans des jugements
+    de tribunaux de juridiction inférieure, quelque chose de mes écrits
+    était passé, sans que je fusse cité, dans le raisonnement des juges ou la
+    formulation de leurs motifs.
+Primus — Je ne sais trop comment interpréter ce que vous dites. Ou bien
+    vous n’avez aucune vanité d’auteur, ce qui serait bien surprenant; ou
+    bien vous avez encore plus de prétention que ceux qui ne recherchent
+    rien tant que d’être cités : périsse la paternité de mes idées et de mes
+    formules, pourvu que, digérées par la jurisprudence, elles soient
+    restituées sous une forme normative ! Plaisir secret d’éminence grise
+    de la magistrature... étant entendu que vous espérez bien tout de
+    même que les commentaires doctrinaux rétabliront la filiation ! À la
+    continentale, en somme...
+Secundus — Je n’aime pas la confusion des genres, c’est tout.
+Primus — Je ne vois toujours pas là un motif suffisant d’agacement.
+Secundus — À votre aise, mais la Cour suprême ne fait pas que citer de la
+    doctrine juridique; elle persiste à citer aussi les philosophes et, tenez,
+    dans l’arrêt Andrews, elle cite, ou plutôt un juge cite, avec l’approbation
+    tacite de tous ses collègues, Aristote...
+Primus — Le prince des philosophes...
+Secundus — ... et je ne sais ce que je dois condamner le plus : le fait qu’elle
+    le cite ou la façon dont elle le cite...
+Primus — Ah oui? Moi, je trouve ça bien, que la Cour suprême se soit
+    décidée à citer Aristote ou d’autres philosophes. Bien et, somme toute,
+    naturel : pénétrer à la Cour suprême, c’est entrer dans le temple de la
+    philosophie. Il n’est même pas nécessaire d’y pénétrer, il suffit d’en
+    gravir les marches et déjà la philosophie, comme disent nos contempo-
+    rains, nous interpelle. Avez-vous remarqué les statues? À votre droite,
+    Justitia; à votre gauche, Veritas...﻿ 393
+ Aristote, rue Wellington, ou des philosophes et des juges
+ Bisson
+Secundus — Oui, bien sûr, j’ai remarqué; c’est comme le titre d’un livre
+    éblouissant d’érudition de Giorgio del Vecchio : La Justice — La
+    Vérité. Je conviens que c’est un couple philosophique, mais source de
+    perplexité : la justice et la vérité se confondent-elles? Apparemment
+    pas, car sinon il n’y aurait qu’une statue, ce que del Vecchio justement
+    aurait préféré, lui qui voyait dans la justice, en son essence, une vérité
+    nécessaire. S’opposent-elles alors? S’accompagnent-elles? S’engendrent-
+    elles? Elles ne se regardent pas en tout cas; je veux dire, les statues.
+Primus — Non, d’autant moins que notre Justitia, celle que le sculpteur a
+    choisie au sein d’une tradition diversifiée des représentations de la
+    justice, a le regard découvert, mais fixe et perdu dans la contemplation
+    des prétentions contradictoires.
+Secundus — Ah! cela m’avait échappé. Dans mon souvenir, elle avait le
+    capuchon rabattu sur les yeux et j’en gardais une impression sinistre.
+    Ce qui m’avait plutôt frappé, c’est que c’est une justice à épée, pas une
+    justice à balance...
+Primus — Oui, une justice qui tranche, pas une justice qui pèse. Mais il
+    faudrait se garder de le prendre en mauvaise part. S’il avait fallu que le
+    statuaire respectât toutes les traditions, notre justice, avec son épée, sa
+    balance, son capuchon, son bandeau sur un seul œil pour plaire à tout
+    le monde et peut-être le chiffre 8 et la lettre epsilon imprimés sur son
+    front ou accrochés à sa poitrine, aurait eu l’air d’une écumeuse
+    recyclée dans la brocante. Au reste, l’épée n’est pas seulement symbole
+    de force; elle est aussi, et surtout, l’instrument précis du partage égal.
+    Mais je vous ai détourné d’Aristote avec mes histoires de statues...
+Secundus — Aucunement, vous savez bien au contraire que ce que vous
+    venez de dire de l’épée lui aurait probablement convenu. C’est
+    d’ailleurs sur la question de l’égalité que la Cour suprême, puisqu’il
+    s’agit de l’affaire Andrews, cite Aristote...
+Primus — Bien sûr, YÉthique de Nicomaque... s’il faut citer, on ne
+    saurait trouver ouvrage mieux approprié, me semble-t-il... en tout cas,
+    comme point de départ...
+Secundus — On pourrait en douter, à voir le traitement que la Cour
+    suprême lui fait subir.
+Primus — ...?
+Secundus — Entreprenant, non sans raison, de critiquer les excès ou les
+    insuffisances, comme on voudra, du critère de la situation analogue, la
+    Cour suprême voit dans celui-ci une reformulation du principe aristo-
+    télicien de l’égalité formelle, selon lequel, et elle cite, les égaux doivent
+    être traités également et les inégaux inégalement à proportion de leur
+    inégalité.﻿(1989)20R.G.D. 391-406
+ Revue générale de droit
+ 394
+Primus — C’est une proposition fort raisonnable et dont la contre-
+    épreuve, en quelque sorte, se trouve dans l’article 15(2) de la Charte
+    canadienne...
+Secundus — Raisonnable et même increvable, sauf à discuter bien entendu
+    de la pertinence des critères de catégorisation, question préalable qui
+    n’entame pas la vérité générale de la proposition.
+Primus — Pour moi, qui ne fait pas partie de ce que la Cour suprême
+    appelle très étrangement une minorité discrète et isolée, je n’envisagerais
+    pas, à diplômes équivalents et à publications et expérience inégales, de
+    prétendre toucher le même salaire que vous.
+Secundus — Je vous vois dans les meilleures dispositions.
+Primus — Oh ! c’est que j’ai le nécessaire, et de bons espoirs d’avancement ;
+    et, comment dire, je ne me sens pas trop mal dans ma peau. Sauf chez
+    les esprits naturellement jaloux ou corrompus par quelque vision
+    doctrinaire de l’existence, le sentiment d’inégalité ne vient qu’avec le
+    malheur moral ou matériel.
+Secundus — Autrement dit, vous vous sentez respectable et respecté...
+Primus — Oui, mais vous ne m’avez toujours pas dit en quoi Aristote
+    aurait été maltraité.
+Secundus — C’est que, dans la version originale anglaise de l’arrêt, il y a
+    donc cette citation de trois lignes, que je viens de retraduire libéralement
+    en français, et à l’appui de sa citation, la Cour suprême se réfère au
+    fameux passage 1131 a de Y Éthique, dans la traduction de Ross. Or, de
+    deux choses l’une : ou bien la référence est fausse, ou bien la citation
+    est fausse. Mais je crois bien que c’est la citation qui est fausse.
+    Aristote ne s’est jamais exprimé de cette façon...
+Primus — C’est peut-être la traduction de Ross qui est fautive...
+Secundus — Oh! non, elle est plutôt scrupuleuse envers l’original et
+    d’ailleurs proche en tous points de la traduction française de Voilquin,
+    que l’on retrouve dans la version française de l’arrêt...
+Primus — Donc la Cour suprême a cité de seconde main...
+Secundus — De millième main, vous voulez dire...
+Primus — Et c’est ce qui explique alors — le point m’avait intrigué — que
+    la citation anglaise d’Aristote est de trois lignes, alors que la citation
+    française est de dix lignes.
+Secundus — En effet, le traducteur de la Cour suprême a fait ses devoirs et
+    il a été bien en peine de trouver dans aucune traduction autorisée
+    d’Aristote la citation qu’il avait à traduire.
+Primus — Alors, il aurait dû faire une traduction maison.﻿ 395
+ Aristote, rue Wellington, ou des philosophes et des juges
+Bisson
+Secundus — Ah ! c’est une autre question. Respectueux, il a reproduit ce
+    qui, dans la traduction française du passage 1131a, lui paraissait
+    correspondre en gros à l’idée exprimée dans la prétendue citation de la
+    traduction de Ross. Et il faut bien reconnaître que l’idée est dans le
+    passage, que ce soit en grec ou en traduction.
+Primus — Alors, ce n’est pas bien grave. Inexactitude n’est pas trahison,
+    Dieu merci pour nous tous !
+Secundus — Attendez! je n’ai pas fini. Ayant donc cité à peu près
+    Aristote, la Cour suprême poursuit en disant que le critère ainsi
+    formulé, appliqué au pied de la lettre, pourrait servir à justifier les lois
+    de Nuremberg d’Adolf Hitler. Les Juifs étaient en effet tous traités de
+    façon analogue.
+Primus — Et ce n’est pas vrai?
+Secundus — Si, sauf que si on se donne la peine d’aller voir le passage de
+    YÉthique qui suit immédiatement celui auquel la Cour suprême se
+    réfère, on s’aperçoit que, loin de se satisfaire de la formulation du
+    principe d’égalité formelle qu’on lui impute, Aristote le subordonne
+    au fait qu’il faut d’abord s’entendre sur le mérite de chacun. On ne
+    s’accorde pas, dit-il, sur la nature de ce mérite. Là en effet est la
+    difficulté, et il aurait été étonnant qu’il ne l’ait pas vue, compte tenu,
+    bien sûr, des mentalités de son temps. Et si, élargissant l’enquête
+    philosophique, on va lire cette fois le passage 1282b de la Politique
+    d’Aristote, celui des joueurs de flûte, on y trouvera bien de l’eau à
+    apporter au moulin des théories de la Cour suprême sur les distinctions
+    fondées sur des caractéristiques personnelles. Alors...
+Primus — Alors quoi? Que craignez-vous pour la mémoire d’Aristote? Si
+    deux millénaires de gloses n’ont pu ternir complètement sa pensée, un
+    dictum égaré de la Cour suprême du Canada le pourra-t-il?
+Secundus — Je crains seulement qu’ayant lu l’arrêt Andrews, on ne
+    s’arrête là et qu’on ne soit porté à en accepter l’amalgame : Aristote =
+    Hitler, comme en d’autres débats certains disent : bourgeois = flic.
+Primus — C’est présumer que personne ne lit Aristote. Et puis il me
+    semble que c’est une mauvaise querelle et que vous tombez vous-
+    même dans l’amalgame. Car enfin, la Cour suprême n’a pas dit
+    qu’Aristote était Hitler !
+Secundus — Admettons que je suis allé trop loin. Disons simplement que
+    je trouve la Cour suprême un peu prompte à conclure de sa connaissance
+    —   ou de sa citation — incomplète des écrits d’Aristote à leur
+    insuffisance.
+Primus — À lire rapidement l’arrêt Andrews, il m’aurait de toute façon
+    semblé que la Cour suprême s’en prend moins à Aristote lui-même﻿(1989) 20R.G.D. 391-406
+ Revue générale de droit
+ 396
+    qu’à son principe de l’égalité formelle tel qu’il se traduit dans le critère
+    de la situation analogue et, notamment, chez Tussman et ten Broek.
+Secundus — Les avez-vous lus ? Ces messieurs ne se réfèrent pas expressé-
+    ment à Aristote sur le point précis et, d’ailleurs, ils m’ont paru plutôt
+    critiques à l’endroit du critère.
+Primus — Diable ! Les juristes américains ne seraient-ils pas mieux traités
+    que les philosophes grecs? Mais je crois que vous montez en épingle un
+    cas isolé...
+Secundus — Un cas isolé? Je ne sais pas, je n’ai pas vérifié toutes les
+    références et citations philosophiques de la Cour suprême.
+Primus — Ah ! vous voyez bien que vous non plus vous n’êtes pas
+    constamment sérieux dans vos recherches...
+Secundus — Mais je pense surtout qu’on ne devrait pas citer...
+Primus — C’est une obsession...
+Secundus — ... qu’on ne devrait pas citer les philosophes. Il n’y a rien de
+    profitable à leur faire j ouer les utilités rhétoriques, comme dans l’arrêt
+    Andrews ou encore comme dans l’arrêt Opération Dismantle, où
+    Adler, Rawls et Dworkin sont appelés en renfort, pour donner du
+    lustre à des banalités.
+Primus — Là je vous tiens, car les cas ne sont pas absolument rares où les
+    juges de la Cour suprême recourent aux philosophes à des fins plus
+    directement substantielles, tenez, dans l’arrêt Edwards Books, où un
+    juge déclare appliquer à l’affaire les théories de Dworkin sur l’intégrité
+    du système juridique et la nécessité, dans les questions controversées,
+    de fonder la législation sur un principe...
+Secundus — C’est un juge dissident...
+Primus — ...?!
+Secundus — ... et ces histoires fumeuses d’intégrité et de principe n’en
+    imposent que parce qu’elles sont racontées par une des plus vives
+    intelligences du moment, parfois sur le ton de la conversation familière,
+    avec plein de personnages comme dans les bandes dessinées : Hercule
+    et Siegfried, Tim et Tom...
+Primus — Décidément, vous êtes monté contre tout. Quand les philosophes
+    sont cités à des fins décoratives, ce sont des victimes. Mais quand je
+    vous rappelle qu’ils sont quelquefois cités pour leur pensée propre,
+    c’est qu’ils ne sont pas bons.
+Secundus — Oh ! Je n’ai pas dit que Dworkin n’était pas bon, quoiqu’à
+    mesure que les critiques se font plus pressantes, sa pensée décapante
+    des débuts s’échafaude regrettablement en système. S’il n’y prend
+    garde, il sera bientôt objet de vénération scolastique...﻿ 397
+ Aristote, rue Wellington, ou des philosophes et des juges
+ Bisson
+Primus — Comme Aristote à certaines époques...
+Secundus — ... si ce n’est déjà fait, comme l’atteste l’arrêt que vous venez
+    de citer,
+Primus — Mais dites-moi tout de même, si je dois être jugé à la sauce
+    Hayek ou à la sauce Marx, j’ai bien le droit de le savoir, non?
+Secundus — Le droit, ce serait beaucoup dire. Mais supposons que le juge
+    vous fasse spontanément la grâce de vous donner expressément ses
+    sources philosophiques...
+Primus — Oui, et cela n’est pas aussi fréquent que vous le croyez, ou que
+    vous affectez de le croire pour les fins de votre petite diatribe...
+Secundus — Supposons donc qu’il le fasse, en serez-vous plus avancé? La
+    philosophie est une entreprise à la fois personnelle et universelle de
+    vérité. Si la philosophie, les raisons philosophiques, du juge, même
+    inexprimées, sont vraies, il n’y a aucun auteur qui puisse y ajouter : le
+    but est atteint, à supposer qu’il puisse jamais l’être vraiment. Et si elles
+    ne sont pas vraies, il n’y a aucun philosophe, fût-il cité à pleines pages,
+    qui puisse les sauver.
+Primus — Votre définition de la philosophie est ambitieuse...
+Secundus — Il ne saurait y en avoir une autre...
+Primus — Pour ma part, je me contenterais de celle, plus modeste, que
+    nous suggère Merleau-Ponty : c’est une réflexion sur un irréfléchi et
+    j’aimerais des juges qui me révèlent leurs sources pour que je puisse
+    vérifier sur quelle vision du monde ils ont eu conscience de fonder en
+    raison les choix qu’ils opèrent.
+Secundus — Ah ! Vous voyez ça d’ici ! Obliger les juges à invoquer Kant
+    chaque fois qu’ils rendent un jugement d’expédient ou qu’ils ordonnent
+    l’exécution de la moindre obligation contractuelle? Vous croyez que
+    les juges n’ont pas déjà assez de tâches urgentes et que les recueils de
+    jurisprudence ne sont pas suffisamment épais?
+Primus — Ce dont nous parlons depuis tout à l’heure, c’est des juridictions
+    supérieures d’appel.
+Secundus — Bien, prenons alors l’arrêt Slaight. Les raisons de la Cour
+    suprême ne sont-elles pas suffisamment philosophiques en elles-
+    mêmes et, selon l’opinion que vous en avez, vous auraient-elles paru
+    plus ou moins vraies parce qu’on aurait encombré le jugement de
+    citations de philosophes?
+Primus — La majorité cite Beatty, avec approbation.
+Secundus — Beatty est-il un philosophe? Ou un juriste? Ou un
+    économiste?
+Primus — À vrai dire, je n’en sais rien...﻿ (1989) 20 R.G.D. 391-406
+ Revue générale de droit
+ 398
+Secundus — Il suffirait de monter à la bibliothèque.
+Primus — Les philosophes n’ont pas le monopole de la philosophie...
+Secundus — Ça, c’est vrai. Pour le meilleur et pour le pire, il n’y a pas
+    d’exercice illégal de la philosophie.
+Primus — Alors, qu’il soit philosophe ou non de profession, tout ce que je
+    sais, c’est que dans la citation qu’on en fait...
+Secundus — Comment savez-vous que c’est lui qui est cité ou qu’il n’a
+    pas été cité fautivement ou hors contexte, puisque vous n’êtes pas
+    monté vérifier à la bibliothèque?
+Primus — Ah ! Là, vous exagérez !... Tout ce que je sais, c’est que, dans ce
+    que Beatty dit du travail et de l’emploi, je crois entendre des accents
+    marxiens et dworkiniens et qu’il me semble que cela m’éclaire un peu
+    sur la religion de la Cour...
+Secundus — De la majorité de la Cour. Marx! Dworkin! c’est de
+    l’éclectisme !
+Primus — C’est vous-même qui venez de dire qu’il est de l’essence de la
+    philosophie d’être vraie. La vérité ne pourrait-elle supporter d’être
+    trouvée à travers deux ou plusieurs auteurs, librement rapprochés?
+Secundus — La vérité dépend-elle d’une citation de Beatty?
+Primus — Ah ! j’y renonce !
+Secundus — Dans le même arrêt, l’un des juges dissidents parle, fort
+    philosophiquement, de la vérité. Homme cultivé, il aurait pu nous
+    citer des philosophes, et del Vecchio justement, qui n’entendait pas à
+    rire sur cette question. Mais il ne l’a pas fait et son opinion n’en est ni
+    plus ni moins respectable.
+Primus — J’entends bien ! Ce qui, chez la doctrine — donner les raisons
+    de ses raisons et faire étalage de culture — est vertu, deviendrait temps
+    perdu et pédanterie insupportable dans la jurisprudence ! Autant dire
+    que la philosophie n’y sert à rien. Je le dirai à vos étudiants. Vous serez
+    bien embêté.
+Secundus — Pas du tout ! Au contraire, dans une œuvre d’action comme
+    la jurisprudence, c’est prendre une philosophie au sérieux que de
+    s’attacher à la qualité de sa substance et non au fait qu’elle ait son
+    origine chez tel ou tel, fût-il Aristote. Sinon, c’est de la dissertation
+    académique, ce n’est plus de la motivation... ou c’est de la
+    surmotivation...
+Primus — Toujours votre confusion des genres !
+Secundus — Admettons d’ailleurs, encore une fois, que l’immense majorité
+    des procès ne requiert aucunement un traitement philosophique
+    explicite.﻿ 399
+ Aristote, rue Wellington, ou des philosophes et des juges
+ Bisson
+Primus — Vous avez encore oublié que nous ne parlons que des juridictions
+    supérieures d’appel. Et si ce que vous prenez pour de la vanité ou de
+    l’imprudence littéraires était au contraire, chez certains juges, un acte
+    de modestie et d’honnêteté intellectuelles? Voyez, nous disent-ils,
+    cette idée ou cette formule que j’approuve ou qu’il me paraît opportun
+    de discuter, je ne l’ai pas inventée; d’autres, que je cite, y ont pensé
+    avant moi et l’ont dit mieux que je ne saurais le faire...
+Secundus — Mais, les tribunaux, comme le législateur, sont des autorités
+    instituées ! La modestie n’a rien à voir avec leur fonction ! Tout ce
+    qu’il est demandé aux juges de faire, c’est de dire le droit et de nous
+    donner des raisons suffisantes de leurs décisions. Et la motivation
+    judiciaire n’est pas une activité justiciable de la loi sur le droit
+    d’auteur, ni même, je n’en démordrai pas, de l’éthique doctrinale.
+Primus — Et pourtant, tout à l’heure, vous faisiez tout un plat de ce qu’on
+    avait cité Aristote tout de travers...
+Secundus — Ah ! Si l’on cite, il faut bien citer et, surtout, ne pas tronquer
+    la pensée...
+Primus — Mais on n’aurait pas dû citer, n’est-ce pas? En tout cas, si la
+    seule vue du nom d’un philosophe dans un jugement vous hérisse et
+    que vous vous insurgez contre tout galvaudage de la philosophie, il y a
+    au moins un arrêt de la Cour suprême qui, l’an dernier, a dû vous
+    donner bien du contentement : l’arrêt Daigle...
+Secundus — L’arrêt Daigle ? Ah ! bien, parlons-en de l’arrêt Daigle !
+Primus — Mais!...
+Secundus — Même à ceux qui sont en accord avec le résultat, les motifs
+    paraîtront bien peu convaincants. Un jugement de bric et de broc.
+    Cela commence par des propositions hasardeuses sur la qualité pour
+    agir, suivies d’un déluge de paralogismes...
+Primus — De paralogismes? Eh! Lesquels?
+Secundus — Ah ! Oh ne sait où donner de la tête ! Par exemple, l’explication
+    des fluctuations de terminologie de la Charte québécoise ; l’interpré-
+    tation de l’article 608 du Code civil du Bas-Canada ; ou encore, ce qui
+    me semble être l’allure générale d’un des raisonnements principaux : tout
+    être humain a la personnalité juridique; or le fœtus n’a pas la
+    personnalité juridique; donc il n’est pas un être humain. On en
+    viendrait à douter de l’humanité de nos anciens morts civils ou des
+    esclaves. Une chatte civiliste n’y retrouverait pas ses petits.
+Primus — La Cour suprême pouvait-elle faire mieux ? Je concède que le
+    ton parfois péremptoire de l’arrêt cache mal l’extrême fragilité des
+    raisonnements. Mais je vous trouve bien sévère. Je crois pouvoir dire
+    que j’ai vraiment beaucoup lu sur la question et j’en ai retenu que, sauf﻿ (1989) 20 R.G.D. 391-406
+ Revue générale de droit
+ 400
+    rarissimes exceptions, des esprits habituellement rigoureux et ingénieux
+    devenaient subitement perplexes, incertains, peu cohérents, quelquefois
+    évasifs, sur la personnalité de l’enfant conçu ou sur le problème encore
+    plus précis de savoir si le géniteur peut contraindre la femme à
+    poursuivre sa grossesse ; à moins qu’ils ne se contentent des généralités
+    d’usage, peu compromettantes tant qu’on ne les confronte pas à des
+    situations dures ; ou que, défendant un solide préjugé, ils ne simplifient
+    outrageusement tout et ne deviennent captieux. Une vraie frustration !
+Secundus — C’est que, comme en Cour suprême, la discussion n’est peut-
+    être pas portée sur le bon terrain et qu’on présume fortement des
+    fonctions du droit civil.
+Primus — Oui, mais la Cour suprême n’était-elle pas liée par les prétentions
+    des parties?
+Secundus — Par leurs prétentions sans doute ! Mais par leurs arguments?
+    Car, vous en conviendrez avec moi, pour un procès dont la Cour elle-
+    même dit qu’il s’agissait d’une action civile entre deux particuliers, il y
+    avait beaucoup de monde dans la cabane !
+Primus — Bonté divine ! La Cour suprême, une cabane? !
+Secundus — Je veux dire, dans le prétoire. Vous avez déjà vu ça souvent,
+    vous, un procès prétendument purement privé où l’on autorise l’inter-
+    vention de deux procureurs généraux et de sept groupes, nationaux ou
+    provinciaux, de défense ou de pression? De grands oiseaux publics,
+    pénaux et constitutionnels, planent dans le ciel de cet arrêt... Une
+    affaire nationale, totale...
+Primus — Ah! les interventions... Mais si je pense que la motivation de
+    l’arrêt Daigle devrait au moins vous contenter sur un point, c’est que
+    la Cour suprême y déclare que sa tâche est juridique, que l’attribution
+    de la personnalité au fœtus est en droit une tâche essentiellement
+    normative et que la Cour n’a pas à entrer dans des débats
+    philosophiques...
+Secundus — Oui, je sais... ni, dit-elle, théologiques, métaphysiques, scien-
+    tifiques, sociaux, politiques, moraux, économiques...
+Primus — Vous mettez tout en paquet. La Cour suprême n’a pas exactement
+    aligné les choses comme cela...
+Secundus — Oh ! c’est tout comme, et si les juges doivent écarter toute
+    l’activité pensante, sur quoi concluront-ils?
+Primus — Il y a la loi, la jurisprudence et, ne vous en déplaise, la doctrine
+    juridique. La Cour cite même Pothier, encore un prince, le prince des
+    jurisconsultes français, et vous ne saurez nier cette fois qu’il s’agisse
+    d’une autorité exceptionnelle, universelle, citable selon vos critères,
+    au point qu’elle a inspiré plus d’un jugement de la Chambre des
+    Lords...﻿ 401
+ Aristote, rue Wellington, ou des philosophes et des juges
+ Bisson
+Secundus — Oui, mais à qui fera-t-on croire que la pensée et la pesée de ces
+    autorités, instituées ou non, puissent être vierges de toute référence à
+    des connaissances et à des valeurs?
+Primus — Tenons-nous en à ce qui cause votre tourment. Il n’est pas
+    douteux que, dans cet arrêt, sauf, à travers Pothier, une allusion
+    énigmatique aux stoïciens, ces mal aimés de la philosophie...
+Secundus — Énigmatique? Oh! il suffit d’aller voir Plutarque, côté
+    anciennes physique et métaphysique, et, plus près de nous, Sébag, côté
+    histoire du droit, pour mieux savoir à quoi s’en tenir sur cette allusion
+    stoïcienne de Pothier que la Cour prend pour argent comptant...
+Primus — ... sauf cette allusion en tout cas, il n’est pas douteux que la
+    Cour suprême tient fermement les philosophes à distance...
+Secundus — Les philosophes peut-être, mais pas la philosophie. On ne
+    saurait en effet être plus philosophique...
+Primus — ... !?
+Secundus — Plus philosophique, ni plus inconstant. Plus philosophique,
+    d’abord, car c’est justement un des ponts aux ânes de la philosophie
+    du droit que le droit interprète la réalité à sa manière...
+Primus — Ah ! vous allez encore me sortir votre Giraudoux : « Le droit
+    est la plus puissante des écoles de l’imagination. Jamais poète n’a
+    interprété la nature aussi librement qu’un juriste la réalité. »
+Secundus — Ah !je ne me lasse pas de l’entendre. N’est-ce pas exactement
+    cela? Le droit n’est pas aux ordres, il n’est pas le serviteur docile des
+    autres disciplines humaines, il a sa propre représentation de l’humanité.
+    C’est en ce sens que je comprends la Cour suprême, dans l’arrêt
+    Daigle, lorsqu’elle affirme que le sens de l’expression « être humain &gt;&gt;
+    ne peut être réglé par ce qu’elle appelle curieusement une décision
+    linguistique. Car s’il fallait prendre à la lettre, comme directive ferme
+    d’interprétation, son autre affirmation selon laquelle le recours aux
+    définitions du dictionnaire est un moyen non juridique de trancher un
+    débat juridique...
+Primus — Ce n’est pas une directive nouvelle... Déjà dans l’arrêt Hunier...
+    Et puis ce n’est tout de même pas vous, en tant que civiliste, qui allez
+    vous insurger contre l’idée que le sens et la portée des lois ne doivent
+    pas se décider à coups de dictionnaires !
+Secundus — Non certes ! Mais à moins de retourner à Babel, à l’incom-
+    municabilité, il faut bien partir de quelque sens premier, quitte à en
+    être détourné, comme cela n’est pas rare en droit, ni d’ailleurs dans le
+    cours ordinaire des affaires humaines, par ce que Visser’t Hooft appelle
+    une téléologie irréductible. Car, j’y reviens, s’il fallait prendre à la
+    lettre l’affirmation de la Cour suprême, il faudrait condamner une﻿ (1989) 20 R.G.D. 391-406
+ Revue générale de droit
+ 402
+    bonne partie de sa propre jurisprudence et admettre que ses juges eux-
+    mêmes n’ont cessé de recourir à un moyen non juridique et, tenez, par
+    exemple encore en 1988, dans l’arrêt Hills. Et puis, c’est quoi un
+    moyen juridique? Si l’on parle de moyens, et non de fins, y en a-t-il un
+    seul qui soit juridique? La loi même est-elle un moyen juridique?
+Primus — Tout de même, il y a ce que le jargon théorique moderne
+    appelle les instances juridiques. La loi est incontestablement un
+    moyen du droit...
+Secundus — Du droit ! Vous avez dit un moyen du droit ! Ce n’est pas du
+    tout la même chose que de dire un moyen juridique !
+Primus — Ah ! quel feu ! Nous voilà en plein bouillon philosophique...
+Secundus — Ni plus, ni moins que la Cour suprême...
+Primus — Évidemment, vous trouvez qu’elle parle trop...
+Secundus — Je trouve? Cela ne relève pas de l’opinion. C’est une consta-
+    tation objective que n’importe qui peut faire.
+Primus — Et vous la trouvez inconstante par-dessus le marché?
+Secundus — Oui, car j’ai beaucoup de mal à comprendre pourquoi, dans
+    l’arrêt Perka par exemple, les philosophes — en l’occurrence Aristote,
+    Bentham, Hart, Hobbes, Kant, Hegel...
+Primus — Le grand jeu !...
+Secundus — ... ont été jugés d’un certain secours pour préciser la nature
+    de la défense de nécessité...
+Primus — Encore un exemple d’usage non strictement rhétorique, je
+    vous ferai remarquer...
+Secundus — ... et comment il se fait que le crédit des philosophes deviendrait
+    subitement nul dès lors qu’il s’agit de décider de l’humanité du fœtus ;
+    ou plutôt — car, à la différence des tropis de Vercors, la nature
+    humaine de la vie de l’enfant conçu est biologiquement certaine — de
+    décider de la valeur, relativement à autrui, de cette vie.
+Primus — Voulez-vous dire que la Cour suprême aurait dû citer des
+    philosophes? Et, par exemple, ce passage de la Politique, que le
+    chancelier d’Aguesseau trouvait bizarre, où Aristote excuse l’avortement
+    commandé par des mesures de contrôle de la population, s’il a lieu
+    avant que l’enfant soit animé, ce qui semble indiquer une prise de
+    position, au demeurant peu favorable, sur la valeur de la vie humaine
+    à ce stade?
+Secundus—■ Non! non! non! Mais la Cour suprême n’aurait pas dû
+    prétendre n’être pas philosophique...﻿ 403
+ Aristote, rue Wellington, ou des philosophes et des juges
+ Bisson
+Primus — Il faudra que vous m’expliquiez un jour plus avant les rapports
+    mystérieux que, ni serviteur ni maître absolu, le droit entretient avec la
+    philosophie... Ah! chère collègue!
+Entre Tertia (inceptor quasi doctor) — Vous avez l’air de vrais conspirateurs,
+    tous les deux. Encore en train de dire du mal... voyons... d’un
+    collègue? Non, vous auriez une mine plus réjouie. Du législateur?
+    Cela fait plus de six mois que nos parlements somnolent et vous n’êtes
+    pas du genre à vous en plaindre. Ah ! des juges, bien sûr ! Vous dites du
+    mal des juges et, par la même occasion, des chartes...
+Secundus — Non, non, ce n’est pas tout à fait cela...
+Tertia — Mais c’est un peu cela tout de même, je savais bien...
+Secundus — Non, non, nous n’avons rien contre la qualité de leurs
+    personnes, ni contre leur imperium, leur pouvoir de commandement.
+    Nous nous inquiétions seulement du traitement peu satisfaisant de la
+    philosophie dans les motifs des jugements de la Cour suprême...
+Primus — Oh! C’est lui surtout que cela inquiète. Ce qu’il dit en gros,
+    c’est que, lorsque la Cour suprême se réfère expressément à des
+    philosophes, elle le fait toujours inutilement et parfois infidèlement et
+    que, lorsqu’elle déclare ne pas se soucier de l’opinion des philosophes,
+    elle nage malgré elle en pleine philosophie.
+Tertia — Oh! Pour ce qui est des citations infidèles, je ne saurais me
+    prononcer; mais, pour le reste, Primus, je suis entièrement d’accord
+    avec Secundus. D’abord, on ne voit généralement pas très bien
+    pourquoi la Cour cite ou ne cite pas des philosophes, et pourquoi
+    ceux-ci plutôt que ceux-là...
+Primus — Oh! Là-dessus, je serais plutôt d’accord aussi...
+Tertia — ... et, quand ils sont cités, j’ai souvent la fâcheuse impression
+    qu’on leur fait jouer les faire-valoir. Mais, surtout, je ne vois aucune
+    utilité à citer des philosophes pour dire le droit...
+Secundus — Bon !
+Tertia — ... et, à l’inverse, il me paraît impossible, dans les affaires
+    importantes, que l’on dise le droit sans quelque prise de position
+    philosophique, si l’on admet que la philosophie a quelque chose à voir
+    avec l’art des raisonnements corrects et la juste appréciation des
+    valeurs en présence.
+Secundus — Bon !
+Tertia — Mais, je ne vois pas l’un et l’autre pourquoi vous vous mettez
+    en peine des motifs, car au fond, en système de droit civil en tout cas, et
+    contrairement à des idées reçues, ce qui est susceptible de faire
+    jurisprudence, ce ne sont pas les motifs, mais les dispositifs : la﻿ (1989) 20 R.G.D. 391-406
+ Revue générale de droit
+ 404
+    solution constamment donnée par un ensemble de décisions au regard
+    de certains faits; une suite ininterrompue de décisions semblables,
+    disait Portalis; il n’a pas dit : de motivations semblables. Et comme
+    nous vivons dans un régime judiciaire hybride où une seule décision de
+    notre Cour suprême vaut pratiquement jurisprudence constante... Si
+    une solution est bonne, mais que les motifs en sont mauvais, que ceux
+    que cela intéresse les redressent ou qu’ils en substituent de meilleurs,
+    s’ils le peuvent...
+Secundus — Portalis parlait aussi de l’autorité des opinions reçues. Des
+    motivations à l’opinion reçue, il n’y a qu’un pas. Et justement les
+    motifs ne sont pas innocents, ils peuvent faire des dégâts; ils sont
+    comme la part légendaire du droit, et les légendes habitent les
+    consciences. Et s’il fallait tenir les motifs pour non écrits...
+Tertia — Mais je n’ai pas dit cela!...
+Secundus — ... qu’allez-vous enseigner à vos étudiants, disons, par exemple,
+    à la suite de l’arrêt Daiglel
+Tertia — J’enseignerai que, jusqu’à nouvel ordre, notre droit civil positif
+    ne permet pas à un présumé père, ex-conjoint de fait d’une femme
+    enceinte d’une vingtaine de semaines, d’empêcher celle-ci, par voie
+    d’injonction, d’interrompre volontairement sa grossesse.
+Primus — Et qu’enseignerez-vous dans l’hypothèse où la grossesse aurait
+    été beaucoup, beaucoup plus avancée...
+Tertia — Ah ! ce n’est pas honnête de votre part de raisonner d’hypothèses
+    d’infanticide ou de meurtre à des hypothèses d’avortement...
+Secundus — Non, non, nous sommes sur le terrain du droit civil, ou
+    plutôt nous tentons d’y rester...
+Primus — ... ou si l’affaire avait d’abord été portée devant les tribunaux
+    de l’Ontario...
+Secundus — ... ou si le demandeur avait été un mari... ou le voisin de
+    palier?
+Tertia — Eh bien, il me semble que les motifs de l’arrêt...
+Primus et Secundus (en chœur, triomphants) — Ah ! vous voyez bien que
+    vous donnez de l’autorité aux motifs !...﻿ 405
+ Aristote, rue Wellington, ou des philosophes et des juges
+ Bisson
+                                   Propos recueillis
+                                   par
+                                Alain-François Bisson
+            Avec la collaboration indirecte de Christian Brunelle
+            et la participation involontaire et parfois implicite de :
+Henri cI’Aguesseau, Essai sur l’état des personnes, Œuvres complètes, t. 9, Paris, Fantin
+     et Cie Libraires, 1819;
+Aristote, Éthique de Nicomaque ; Politique ;
+Gérard Cornu et autres, La vérité et le droit (Journées canadiennes), Travaux de
+     l’Association Henri Capitant, t. XXXVIII, Paris, Économica, 1987;
+  Brian Dickson, « The Rôle and Function of Judges », [1979] The Law Society Gazette
+  138; « The Public Responsabilities of Lawyers », (1983) 13 Man. L.J. 175;
+Jean Giraudoux, La guerre de Troie n’aura pas lieu, pièce en deux actes, Paris, Grasset,
+     1935;
+H. Patrick Glenn, « Persuasive Authority », (1987) 32 McGill L.J. 261 ;
+Marc Gold, « La rhétorique des droits constitutionnels », (1988) 22 R.J.T. 1 ;
+Philippe Jestaz, « La jurisprudence, ombre portée du contentieux », D. 1989, Chron.
+     149;
+Pierre-Gabriel Jobin, « Rapport canadien », dans Les réactions de la doctrine à la création
+     du droit par les juges (Journées italiennes), Travaux de l’Association Henri Capitant,
+     t. XXXI, Paris, Économica, 1980, p. 65;
+Philippe Malaurie, note sous Com. 8 novembre 1972 et 9 avril 1973, D.S. 1973, 753;
+     « Rapport français », dans Les réactions de la doctrine à la création du droit par les
+     juges, Travaux précités, p. 81 ;
+  Maurice Merleau-Ponty, Phénoménologie de la perception, Paris, Gallimard, 1945;
+Marie-Thérèse Meulders-Klein, « Rapport sur le corps humain, Personnalité juridique
+     et famille en droit belge », dans Le corps humain et le droit (Journées belges), Travaux
+     de l’Association Henri Capitant, t. XXVI, Paris, Dalloz, 1975, p. 19 ;
+Françoise Michaut, « La “bonne réponse” n’est-elle qu’une illusion? », (1989) 9 Droits
+     69;
+Plutarque, Des contradictions des stoïciens, XLI;
+Jean Portalis, « Discours préliminaire » (dit de Portalis), Recueil Fenet, t. 1, Paris, 1827,
+     p. 463 et s. ;
+  Daniel Proulx, « L’objet des droits constitutionnels à l’égalité », (1988) 29 C. de D. 567 ;
+Jean Racine, Phèdre;
+Miguel Reale, « La situation actuelle de la théorie tridimensionnelle du droit », Archives
+     de philosophie du droit, XXXII, 1987, p. 369;
+Jean-François Revel, Pourquoi des philosophes, Paris, Julliard, 1957;
+Louis Sébag, La condition juridique des personnes physiques et des personnes morales
+     avant leur naissance, Paris, Sirey, 1938;
+Philip Soper, « Dworkin’s Domain », (1987) 100 Harvard L.R. 1166;
+François Terré, L’enfant de l’esclave, Paris, Flammarion, 1987;
+Georges del Vecchio, La Justice — La Vérité, Essais de philosophie juridique et morale,
+     Paris, Dalloz, 1955;
+Vercors, Les animaux dénaturés, Paris, Albin Michel, 1952;﻿ (1989) 20 R.G.D. 391-406
+Revue générale de droit
+ 406
+Michel Villey, Les valeurs du droit, éd. de l’Institut international d’études européennes
+     « Antonio Rosmini », Bolzano, 1968, extrait cité par Julien Freund, Le droit
+     daujourd’hui, Paris, P.U.F., 1972, pp. 47-48;
+H.Ph. Visser’T Hooft, « La philosophie du langage ordinaire et le droit», Archives de
+     philosophie du droit, XIX, 1974, p. 19;
+     et de la Cour suprême du Canada, arrêts :
+     —  Andrews c. Law Society of British Columbia, [1989] 1 R.C.S. 143;
+     —  Daigle c. Tremblay, [1989] 2 R.C.S. 530;
+     —  Edwards Books and Arts c. R., [1986] 2 R.C.S. 713;
+     —  Hills c. Canada, [1988] 1 R.C.S. 513;
+     —  Hunter c. Southam, [1984] 2 R.C.S.;
+     —  Opération Dismantle c. La Reine, [1985] 1 R.C.S. 441 ;
+     —  Perka c. La Reine, [1984] 2 R.C.S. 232;
+     —  Slaight Communications Inc., c. Davidson [1989] 1 R.C.S. 1038.</texte></corps><partiesann lang="fr"><grbiblio><biblio><refbiblio id="rb1">Henri d’Aguesseau, Essai sur l’état des personnes, Oeuvres complètes, t. 9, Paris, Fantin et Cie Libraires, 1819; </refbiblio><refbiblio id="rb2">Aristote, Éthique de Nicomaque; Politique; </refbiblio><refbiblio id="rb3">Gérard Cornu et autres, La vérité et le droit (Journées canadiennes), Travaux de l’Association Henri Capitant, t. XXXVIII, Paris, Économica, 1987; </refbiblio><refbiblio id="rb4">Brian Dickson, «The Role and Function of Judges», [1979] The Law Society Gazette 138; «The Public Responsabilities of Lawyers», (1983) 13 Man. L.J. 175; </refbiblio><refbiblio id="rb5">Jean Giraudoux, La guerre de Troie n’aura pas lieu, pièce en deux actes, Paris, Grasset, 1935; </refbiblio><refbiblio id="rb6">H. Patrick Glenn, «Persuasive Authority», (1987) 32 McGill L.J. 261; </refbiblio><refbiblio id="rb7">Marc Gold, « La rhétorique des droits constitutionnels », (1988) 22 R.J.T. 1; </refbiblio><refbiblio id="rb8">Philippe Jestaz, « La jurisprudence, ombre portée du contentieux », D. 1989, Chron. 149; </refbiblio><refbiblio id="rb9">Pierre-Gabriel Jobin, « Rapport canadien », dans Les réactions de la doctrine à la création du droit par les juges (Journées italiennes), Travaux de l’Association Henri Capitant, t. XXXI, Paris, Économica, 1980, p. 65; </refbiblio><refbiblio id="rb10">Philippe Malaurie, note sous Com. 8 novembre 1972 et 9 avril 1973, D.S. 1973, 753; « Rapport français », dans Les réactions de la doctrine à la création du droit par les juges, Travaux précités, p. 81; </refbiblio><refbiblio id="rb11">Maurice Merleau-Ponty, Phénoménologie de la perception, Paris, Gallimard, 1945; </refbiblio><refbiblio id="rb12">Marie-Thérèse Meulders-Klein, « Rapport sur le corps humain, Personnalité juridique et famille en droit belge », dans Le corps humain et le droit (Journées belges), Travaux de l’Association Henri Capitant, t. XXVI, Paris, Dalloz, 1975, p. 19; </refbiblio><refbiblio id="rb13">Françoise Michaut, « La “bonne réponse” n’est-elle qu’une illusion? », (1989) 9 Droits 69; </refbiblio><refbiblio id="rb14">Plutarque, Des contradictions des stoïciens, XLI; </refbiblio><refbiblio id="rb15">Jean Portalis, « Discours préliminaire » (dit de Portalis), Recueil Fenet, t. 1, Paris, 1827, p. 463 et s.; </refbiblio><refbiblio id="rb16">Daniel Proulx, « L’objet des droits constitutionnels à l’égalité », (1988) 29 C. de D. 567; </refbiblio><refbiblio id="rb17">Jean Racine, Phèdre; </refbiblio><refbiblio id="rb18">Miguel Reale, « La situation actuelle de la théorie tridimensionnelle du droit », Archives de philosophie du droit, XXXII, 1987, p. 369; </refbiblio><refbiblio id="rb19">Jean-François Revel, Pourquoi des philosophes, Paris, Julliard, 1957; </refbiblio><refbiblio id="rb20">Louis Sébag, La condition juridique des personnes physiques et des personnes morales avant leur naissance, Paris, Sirey, 1938; </refbiblio><refbiblio id="rb21">Philip Soper, «Dworkin’s Domain», (1987) 100 Harvard L.R. 1166; </refbiblio><refbiblio id="rb22">François Terré, L’enfant de l’esclave, Paris, Flammarion, 1987; </refbiblio><refbiblio id="rb23">Georges del Vecchio, La Justice — La Vérité, Essais de philosophie juridique et morale, Paris, Dalloz, 1955; </refbiblio><refbiblio id="rb24">Vercors, Les animaux dénaturés, Paris, Albin Michel, 1952; </refbiblio><refbiblio id="rb25">Michel Villey, Les valeurs du droit, éd. de l’Institut international d’études européennes « Antonio Rosmini », Bolzano, 1968, extrait cité par Julien Freund, Le droit daujourd’hui, Paris, P.U.F., 1972, pp. 47-48; </refbiblio><refbiblio id="rb26">H.Ph. Visser’t Hooft, « La philosophie du langage ordinaire et le droit », Archives de philosophie du droit, XIX, 1974, p. 19; </refbiblio><refbiblio id="rb27">Andrews c. Law Society of British Columbia, [1989] 1 R.C.S. 143; </refbiblio><refbiblio id="rb28">Daigle c. Tremblay, [1989] 2 R.C.S. 530;</refbiblio><refbiblio id="rb29">Edwards Books and Arts c. R., [1986] 2 R.C.S. 713; </refbiblio><refbiblio id="rb30">Hills c. Canada, [1988] 1 R.C.S. 513; </refbiblio><refbiblio id="rb31">Hunter c. Southam, [1984] 2 R.C.S.; </refbiblio><refbiblio id="rb32">Operation Dismantle c. La Reine, [1985] 1 R.C.S. 441; </refbiblio><refbiblio id="rb33">Perka c. La Reine, [1984] 2 R.C.S. 232; </refbiblio><refbiblio id="rb34">Slaight Communications Inc., c. Davidson [1989] 1 R.C.S. 1038. </refbiblio></biblio></grbiblio></partiesann></article>

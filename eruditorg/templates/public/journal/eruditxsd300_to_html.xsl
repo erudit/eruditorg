@@ -438,6 +438,12 @@
         </xsl:if>
         {% endif %}
 
+        {% if not article.issue.is_published and article.issue.prepublication_ticket %}
+          {% for reference in citation_references %}
+            <p>{{ reference.title }}</p>
+          {% endfor %}
+        {% endif %}
+
       </div>
     </div>
 
