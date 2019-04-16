@@ -60,7 +60,8 @@
             <xsl:apply-templates select="liminaire/grtitre/titre | liminaire/grtitre/sstitre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/titreparal | liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
-            {% if only_summary %}<span><em>[{% trans 'Notice' %}]</em></span>{% endif %}
+            {% if only_display == 'summary' %}<span><em>[{% trans 'Notice' %}]</em></span>{% endif %}
+            {% if only_display == 'biblio' %}<span><em>[{% trans 'Bibliographie' %}]</em></span>{% endif %}
           </h1>
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur doc-head__authors">
@@ -78,7 +79,7 @@
           <div class="row">
             <div class="col-sm-8">
               <xsl:apply-templates select="liminaire/notegen"/>
-              {% if not content_access_granted and not only_summary %}
+              {% if not content_access_granted and not only_display %}
               <div class="alert">
                 <p>
                   {% blocktrans trimmed with code=article.issue.journal.code %}
@@ -136,7 +137,7 @@
             <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive doc-head__img" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
             {% endif %}
           </a>
-          {% if only_summary %}
+          {% if only_display %}
           <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
         </div>
@@ -224,7 +225,7 @@
                 <a href="#resume">{% trans "Résumé" %}</a>
               </li>
             </xsl:if>
-            {% if content_access_granted and not only_summary %}
+            {% if content_access_granted and not only_display %}
             <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
               <li class="article-toc--body">
                 <ul class="unstyled">
@@ -240,7 +241,7 @@
             </li>
             {% endif %}
             <xsl:for-each select="partiesann[1]">
-              {% if content_access_granted and not only_summary %}
+              {% if content_access_granted and not only_display %}
               <xsl:if test="grannexe">
                 <li>
                   <a href="#grannexe">
@@ -270,6 +271,7 @@
                 </li>
               </xsl:if>
               {% endif %}
+              {% if not is_of_type_roc %}
               <xsl:if test="grbiblio">
                 <li>
                   <a href="#grbiblio">
@@ -277,8 +279,9 @@
                   </a>
                 </li>
               </xsl:if>
+              {% endif %}
             </xsl:for-each>
-            {% if content_access_granted and not only_summary %}
+            {% if content_access_granted and not only_display %}
             <xsl:if test="//figure">
               <li>
                 <a href="#figures">{% trans "Liste des figures" %}</a>
@@ -363,6 +366,7 @@
       </xsl:if>
 
       <div class="full-article {% if article.processing == 'C' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
+        {% if only_display != 'biblio' %}
         {% if html_abstracts or html_other_keywords %}
         <!-- abstract -->
           <section id="resume" role="complementary" class="article-section grresume">
@@ -392,8 +396,9 @@
             {% endif %}
           </section>
         {% endif %}
+        {% endif %}
 
-        {% if content_access_granted and not only_summary and article.publication_allowed %}
+        {% if content_access_granted and not only_display and article.publication_allowed %}
           {% if article.processing == 'C' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
@@ -422,7 +427,7 @@
         </div>
 
         <!-- lists of tables & figures -->
-        {% if content_access_granted and not only_summary %}
+        {% if content_access_granted and not only_display %}
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
@@ -436,12 +441,6 @@
             <xsl:apply-templates select="//tableau" mode="liste"/>
           </section>
         </xsl:if>
-        {% endif %}
-
-        {% if not article.issue.is_published and article.issue.prepublication_ticket %}
-          {% for reference in citation_references %}
-            <p>{{ reference.title }}</p>
-          {% endfor %}
         {% endif %}
 
       </div>
@@ -1810,13 +1809,15 @@
   <xsl:template match="partiesann">
     <section class="{name()} col-xs-12">
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
-      {% if content_access_granted and not only_summary  %}
+      {% if content_access_granted and not only_display %}
       <xsl:apply-templates select="grannexe"/>
       <xsl:apply-templates select="grnote"/>
       {% endif %}
       <xsl:apply-templates select="merci"/>
       <xsl:apply-templates select="grnotebio"/>
+      {% if not is_of_type_roc or only_display == 'biblio' %}
       <xsl:apply-templates select="grbiblio"/>
+      {% endif %}
     </section>
   </xsl:template>
 

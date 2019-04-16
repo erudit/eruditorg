@@ -592,29 +592,14 @@ class BaseArticleDetailView(
     def dispatch(self, *args, **kwargs):
         return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
 
-    def _prepare_dom(self, article):
-        # Before sending it through the XSL, there are a couple of manipulations that we might need
-        # to make on the DOM.
-
-        eruditarticle = article.get_erudit_object()
-
-        if eruditarticle.is_of_type_roc:
-            # If the first "corps/texte" element of the article is of type "roc" that means that
-            # its content is minimally processed and that we can't really rely of the bibliography
-            # In this case, we *don't* want to show it. Rather than adding a rule for this in the
-            # XSL script, which could end up being complicated and hard to maintain, we simply
-            # remove the bibliography element on-the-fly, right here. ref support#198
-            grbiblio = eruditarticle.find('grbiblio')
-            if grbiblio is not None:
-                grbiblio.getparent().remove(grbiblio)
-        return eruditarticle._dom
-
-    def _render_xml_contents(self, only_summary):
+    def _render_xml_contents(self, only_display=False):
         """ Renders the given article instance as HTML. """
 
         article = self.get_object()
         context = self.get_context_data()
-        context['only_summary'] = only_summary
+        erudit_object = article.get_erudit_object()
+        context['is_of_type_roc'] = erudit_object.is_of_type_roc
+        context['only_display'] = only_display
         if 'article' not in context:
             context['article'] = article
 
@@ -627,8 +612,6 @@ class BaseArticleDetailView(
                 context['pdf_num_pages'] > 1
             )
 
-        article_dom = self._prepare_dom(article)
-
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
         xsl_template = loader.get_template('public/journal/eruditxsd300_to_html.xsl')
@@ -637,7 +620,7 @@ class BaseArticleDetailView(
         # Performs the XSLT transformation
         lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
         html_transform = et.XSLT(lxsl)
-        html_content = html_transform(article_dom)
+        html_content = html_transform(erudit_object._dom)
 
         return mark_safe(html_content)
 
@@ -681,7 +664,7 @@ class ArticleDetailView(BaseArticleDetailView):
             }
 
     def render_xml_contents(self):
-        return self._render_xml_contents(only_summary=False)
+        return self._render_xml_contents()
 
 
 class ArticleSummaryView(BaseArticleDetailView):
@@ -691,7 +674,17 @@ class ArticleSummaryView(BaseArticleDetailView):
     template_name = 'public/journal/article_summary.html'
 
     def render_xml_contents(self):
-        return self._render_xml_contents(only_summary=True)
+        return self._render_xml_contents(only_display='summary')
+
+
+class ArticleBiblioView(BaseArticleDetailView):
+    """
+    Displays the bibliography of an Article instance.
+    """
+    template_name = 'public/journal/article_biblio.html'
+
+    def render_xml_contents(self):
+        return self._render_xml_contents(only_display='biblio')
 
 
 class IdEruditArticleRedirectView(RedirectView):
