@@ -121,17 +121,28 @@ export default {
 
   display_pdf_based_on_mimetype : function () {
     var can_display_pdf = false;
-    var mimes = navigator.mimeTypes;
-    for (var i = 0, i_len = mimes.length; i < i_len; i++){
-      if (mimes[i].type === 'application/pdf')
-          can_display_pdf = true;
+
+    // Chrome and Safari can display PDFs when they have 'application/pdf' in their mimeTypes.
+    if (navigator.mimeTypes['application/pdf'] !== undefined) {
+      can_display_pdf = true;
     }
+
+    // Firefox does not have 'application/pdf' in its mimeTypes but can display PDFs since version 19.0.
+    else {
+      var re = /Firefox\/(\d+\.\d+)/
+      var ff_version = navigator.userAgent.match(re)
+      if (ff_version && ff_version[1] > 19.0) {
+        can_display_pdf = true;
+      }
+    }
+
     if (!can_display_pdf) {
-        $('#pdf-viewer').hide();
-        $('#pdf-viewer-menu-link').hide();
-    } else {
-        $('#pdf-download').hide();
-        $('#pdf-download-menu-link').hide();
+      $('#pdf-viewer').hide();
+      $('#pdf-viewer-menu-link').hide();
+    }
+    else {
+      $('#pdf-download').hide();
+      $('#pdf-download-menu-link').hide();
     }
   },
 
