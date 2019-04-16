@@ -952,7 +952,7 @@ class IssueExternalURLRedirectView(BaseExternalURLRedirectView):
 
 class JournalStatisticsView(PermissionRequiredMixin, TemplateView):
     template_name = 'public/journal/journal_statistics.html'
-    permission_required = 'userspace:staff_access'
+    permission_required = 'userspace.staff_access'
 
     def get_context_data(self, **kwargs):
         context = super(JournalStatisticsView, self).get_context_data(**kwargs)

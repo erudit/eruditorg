@@ -7,13 +7,14 @@ from django.template import Context
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
+from base.test.factories import UserFactory
 from erudit.test.factories import IssueFactory, JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Issue
 from erudit.test.factories import ArticleFactory
 from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView, \
-    GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView
+    GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView, JournalStatisticsView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.utils import generate_casa_token
 
@@ -611,3 +612,21 @@ class TestGoogleScholarSubscriberJournalsView:
         view = GoogleScholarSubscriberJournalsView()
         context = view.get_context_data(subscription_id=subscription_id)
         assert [journal.localidentifier for journal in context.get('journals')] == expected_journal_ids
+
+
+class TestJournalStatisticsView:
+
+    @pytest.mark.parametrize('is_staff, is_superuser, has_permission', [
+        (True, True, True),
+        (True, False, True),
+        (False, True, True),
+        (False, False, False),
+    ])
+    def test_journal_statistics_view_access(self, is_staff, is_superuser, has_permission):
+        view = JournalStatisticsView()
+        view.request = unittest.mock.MagicMock()
+        view.request.user = UserFactory(
+            is_staff=is_staff,
+            is_superuser=is_superuser,
+        )
+        assert view.has_permission() == has_permission
