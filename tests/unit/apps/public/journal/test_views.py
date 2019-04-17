@@ -437,6 +437,20 @@ class TestArticleDetailView:
         assert '<a href="/fr/revues/journal/2000-issue/prev_article/" class="toc-nav__prev" title="Article précédent"><span class="toc-nav__arrow">&lt;--</span><h4 class="toc-nav__title">\n        L’action et le verbe dans <em>Feuillets d’Hypnos</em>\n</h4></a>' in html  # noqa
         assert '<a href="/fr/revues/journal/2000-issue/next_article/" class="toc-nav__next" title="Article suivant"><span class="toc-nav__arrow">--&gt;</span><h4 class="toc-nav__title">\n        L’action et le verbe dans <em>Feuillets d’Hypnos</em>\n</h4></a>' in html  # noqa
 
+    def test_surtitre_not_split_in_multiple_spans(self):
+        article = ArticleFactory(
+            from_fixture='1056389ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        assert '<span class="surtitre">Cahier commémoratif : 25<sup>e</sup> anniversaire</span>' in html
+
 
 @unittest.mock.patch.object(
     Issue,
