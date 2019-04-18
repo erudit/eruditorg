@@ -16,6 +16,8 @@ from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDo
 from reportlab.platypus.tables import Table, TableStyle
 from urllib.parse import urlparse
 
+from erudit.fedora.cache import get_cached_datastream_content
+
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
 
@@ -152,12 +154,36 @@ def get_coverpage(article):
         styles['h2'],
     ))
 
-    # Grey line.
-    header.append(large_spacer)
-    header.append(grey_line)
-    header.append(large_spacer)
+    # Journal path.
+    journal_path = reverse('public:journal:journal_detail', kwargs={
+        'code': article.issue.journal.code,
+    })
+    # Journal logo.
+    journal_logo = HyperlinkedImage(
+        get_cached_datastream_content(article.issue.journal.fedora_object, 'logo'),
+        hyperlink='https://www.erudit.org{}'.format(journal_path),
+        hAlign='RIGHT',
+    )
+    # Convert image size from pixels to points.
+    journal_logo.drawWidth *= 0.55
+    journal_logo.drawHeight *= 0.55
+    # Resize journal logo if it's wider than 80 points.
+    if journal_logo.drawWidth > 80:
+        journal_logo.drawWidth = 80
+        journal_logo.drawHeight *= 80 / journal_logo.drawWidth
+    header_table = Table(
+        [(KeepInFrame(472, 250, header), KeepInFrame(80, 250, [journal_logo]))],
+        colWidths=(472, 80),
+    )
+    header_table.setStyle(TableStyle([
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ]))
+    story.append(header_table)
 
-    story.append(KeepInFrame(552, 250, header))
+    # Grey line.
+    story.append(large_spacer)
+    story.append(grey_line)
+    story.append(large_spacer)
 
     # -----------------------------------------------------------------------------
     # BODY
@@ -259,9 +285,6 @@ def get_coverpage(article):
     left_column.append(large_spacer)
 
     # Journal link.
-    journal_path = reverse('public:journal:journal_detail', kwargs={
-        'code': article.issue.journal.code,
-    })
     left_column.append(Paragraph(
         '<link href="{url}" color="#ff4242">{text}</link>'.format(
             url='https://www.erudit.org{}'.format(

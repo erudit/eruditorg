@@ -26,6 +26,7 @@ from erudit.test.factories import EmbargoedIssueFactory
 from erudit.test.factories import OpenAccessIssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
+from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
 from erudit.fedora import repository
@@ -679,12 +680,16 @@ class TestArticleDetailView:
 
 
 class TestArticleRawPdfView:
+    @unittest.mock.patch.object(JournalDigitalObject, 'logo')
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(subprocess, 'check_call')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_pdf):
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_pdf, mock_logo):
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
+        with open(os.path.join(FIXTURE_ROOT, 'logo.jpg'), 'rb') as f:
+            mock_logo.content = io.BytesIO()
+            mock_logo.content.write(f.read())
         journal = JournalFactory()
         issue = IssueFactory.create(
             journal=journal, year=2010,
