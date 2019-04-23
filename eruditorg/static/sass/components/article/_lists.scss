@@ -23,11 +23,12 @@ ul {
 
   &.tiret {
       list-style: none;
-      margin-left: 0;
+      margin-left: 12px;
 
       & > li {
         &:before {
           content: '– ';
+          margin-left: -12px;
         }
 
         & > ul {
