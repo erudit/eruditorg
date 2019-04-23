@@ -482,11 +482,9 @@
 
   <!-- issue-level section title / subhead -->
   <xsl:template match="liminaire/grtitre/surtitre | liminaire/grtitre/surtitreparal" mode="title">
-    <xsl:for-each select="child::node()">
-      <span class="surtitre">
-        <xsl:apply-templates select="."/>
-      </span>
-    </xsl:for-each>
+    <span class="surtitre">
+      <xsl:apply-templates/>
+    </span>
   </xsl:template>
 
   <!-- article title(s) -->
