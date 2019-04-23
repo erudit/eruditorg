@@ -430,7 +430,12 @@ def get_coverpage(article):
     # Logo.
     logo = []
     logo.append(small_spacer)
-    logo.append(Image(STATIC_ROOT + '/img/logo-erudit.png', width=75.75, height=25))
+    logo.append(HyperlinkedImage(
+        STATIC_ROOT + '/img/logo-erudit.png',
+        hyperlink='https://www.erudit.org/{lang}/'.format(lang=language),
+        width=75.75,
+        height=25,
+    ))
     logo.append(small_spacer)
 
     # Footer table

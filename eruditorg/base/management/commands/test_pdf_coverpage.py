@@ -9,7 +9,7 @@ from erudit.models import Article
 FEDORA_IDS = [
     'erudit:erudit.ae49.ae04480.1058425ar',
     'erudit:erudit.alterstice02303.alterstice03141.1040626ar',
-    'erudit:erudit.approchesind0522.approchesind04155.1054332ar'
+    'erudit:erudit.approchesind0522.approchesind04155.1054332ar',
     'erudit:erudit.arbo139.arbo04278.1055879ar',
     'erudit:erudit.bo02111.bo03553.1044260ar',
     'erudit:erudit.cqd27.cqd2435.600855ar',
