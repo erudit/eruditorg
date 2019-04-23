@@ -4,6 +4,7 @@ from base.settings.base import *  # noqa
 
 DEBUG = True
 
+
 class DisableMigrations:
     def __contains__(self, item):
         return True
@@ -11,7 +12,10 @@ class DisableMigrations:
     def __getitem__(self, item):
         return 'notmigrations'
 
+
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+SECRET_KEY = 'insecure'
 
 CACHES = {
     'default': {
@@ -78,3 +82,5 @@ SOLR_ROOT = 'http://erudit.org'
 POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',
 }
+
+EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER = 'main'
