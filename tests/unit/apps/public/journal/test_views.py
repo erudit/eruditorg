@@ -405,6 +405,37 @@ class TestArticleDetailView:
         else:
             assert '<p>Henri d’Aguesseau, Essai sur l’état des personnes, Oeuvres complètes, t. 9, Paris, Fantin et Cie Libraires, 1819;</p>' not in html
 
+    def test_article_detail_marquage_in_toc_nav(self):
+        issue = IssueFactory(
+            journal__code='journal',
+            localidentifier='issue',
+            year='2000',
+        )
+        prev_article = ArticleFactory(
+            from_fixture='1054008ar',
+            localidentifier='prev_article',
+            issue=issue,
+        )
+        article = ArticleFactory(
+            issue=issue,
+        )
+        next_article = ArticleFactory(
+            from_fixture='1054008ar',
+            localidentifier='next_article',
+            issue=issue,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        # Check that TOC navigation titles include converted marquage.
+        assert '<a href="/fr/revues/journal/2000-issue/prev_article/" class="toc-nav__prev" title="Article précédent"><span class="toc-nav__arrow">&lt;--</span><h4 class="toc-nav__title">\n        L’action et le verbe dans <em>Feuillets d’Hypnos</em>\n</h4></a>' in html  # noqa
+        assert '<a href="/fr/revues/journal/2000-issue/next_article/" class="toc-nav__next" title="Article suivant"><span class="toc-nav__arrow">--&gt;</span><h4 class="toc-nav__title">\n        L’action et le verbe dans <em>Feuillets d’Hypnos</em>\n</h4></a>' in html  # noqa
+
 
 @unittest.mock.patch.object(
     Issue,
