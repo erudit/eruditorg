@@ -8,6 +8,7 @@ from erudit.models import Article
 
 FEDORA_IDS = [
     'erudit:erudit.ae49.ae04480.1058425ar',
+    'erudit:erudit.alterstice02303.alterstice03141.1040626ar',
     'erudit:erudit.arbo139.arbo04278.1055879ar',
     'erudit:erudit.bo02111.bo03553.1044260ar',
     'erudit:erudit.cqd27.cqd2435.600855ar',
@@ -17,6 +18,7 @@ FEDORA_IDS = [
     'erudit:erudit.etudfr13.etudfr04244.1055654ar',
     'erudit:erudit.globe134.globe1498639.1000860ar',
     'erudit:erudit.haf18.haf700.007801ar',
+    'erudit:erudit.im118.im03868.1049943ar',
     'erudit:erudit.ncre040.ncre04255.1055733ar',
     'erudit:erudit.philoso16.philoso0186.1011608ar',
     'erudit:erudit.rgd01024.rgd04358.1056823ar',
@@ -27,6 +29,7 @@ FEDORA_IDS = [
     'erudit:erudit.rseau67.rseau3275.705195ar',
     'erudit:erudit.spirale1048177.spirale04246.89625ac',
     'erudit:erudit.uhr100.uhr0896.1019391ar',
+    'ierudit:erudit.mi115.mi04103.1053682ar',
 ]
 
 

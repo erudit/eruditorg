@@ -104,20 +104,34 @@ def get_coverpage(article):
 
     header = []
 
-    # Journal title.
-    journal_title = article.issue.erudit_object.get_titles().get('main')
+    # Journal main title.
+    journal_titles = article.issue.erudit_object.get_titles()
+    journal_main_title = journal_titles.get('main')
     header.append(Paragraph(
-        journal_title.title,
+        journal_main_title.title,
         styles['h3'],
     ))
-
-    # Journal subtitle.
-    if journal_title.subtitle:
-        header.append(small_spacer)
+    # Journal main subtitle.
+    if journal_main_title.subtitle:
         header.append(Paragraph(
-            journal_title.subtitle,
+            journal_main_title.subtitle,
             styles['h4'],
         ))
+
+    # Journal parallel titles.
+    for journal_paral_title in journal_titles.get('paral'):
+        if journal_main_title.title != journal_paral_title.title:
+            header.append(small_spacer)
+            header.append(Paragraph(
+                journal_paral_title.title,
+                styles['h3'],
+            ))
+        # Journal parallel subtitles.
+        if journal_paral_title.subtitle:
+            header.append(Paragraph(
+                journal_paral_title.subtitle,
+                styles['h4'],
+            ))
     header.append(extra_large_spacer)
 
     # Article titles.
