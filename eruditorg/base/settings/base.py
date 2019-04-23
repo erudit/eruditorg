@@ -11,6 +11,7 @@ ROOT_DIR = BASE_DIR.parents[2]
 
 env = environ.Env(
     DEBUG=(bool, False),
+    EXPOSE_OPENMETRICS=(bool, False),
     SECRET_KEY=(str, None),
     ADMIN_URL=(str, '/admin'),
     FALLBACK_BASE_URL=(str, 'http://retro.erudit.org/'),
@@ -109,9 +110,10 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
-
 # Application definition
 # -----------------------------------------------------------------------------
+
+EXPOSE_OPENMETRICS = env("EXPOSE_OPENMETRICS")
 
 INSTALLED_APPS = (
     # Érudit apps
@@ -176,6 +178,9 @@ INSTALLED_APPS = (
     'rangefilter',
 )
 
+if EXPOSE_OPENMETRICS:
+    INSTALLED_APPS = INSTALLED_APPS + ('django_prometheus', )
+
 MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -192,6 +197,13 @@ MIDDLEWARE = (
     'base.middleware.PolyglotLocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
 )
+
+if EXPOSE_OPENMETRICS:
+    MIDDLEWARE = (
+            ('django_prometheus.middleware.PrometheusBeforeMiddleware',) +
+            MIDDLEWARE +
+            ('django_prometheus.middleware.PrometheusAfterMiddleware',)
+    )
 
 ROOT_URLCONF = 'base.urls'
 
@@ -457,11 +469,6 @@ structlog.configure(
 RAVEN_CONFIG = {
     'dsn': env('RAVEN_DSN')
 }
-
-# Openmetrics
-# -----------------------------------
-
-EXPOSE_OPENMETRICS = False
 
 # MailChimp settings
 # -----------------------------------
