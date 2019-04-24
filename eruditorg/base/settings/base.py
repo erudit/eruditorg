@@ -200,9 +200,9 @@ MIDDLEWARE = (
 
 if EXPOSE_OPENMETRICS:
     MIDDLEWARE = (
-            ('django_prometheus.middleware.PrometheusBeforeMiddleware',) +
-            MIDDLEWARE +
-            ('django_prometheus.middleware.PrometheusAfterMiddleware',)
+        ('django_prometheus.middleware.PrometheusBeforeMiddleware',) +
+        MIDDLEWARE +
+        ('django_prometheus.middleware.PrometheusAfterMiddleware',)
     )
 
 ROOT_URLCONF = 'base.urls'
