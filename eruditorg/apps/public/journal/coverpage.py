@@ -168,9 +168,7 @@ def get_coverpage(article):
     journal_logo.drawWidth *= 0.55
     journal_logo.drawHeight *= 0.55
     # Resize journal logo if it's wider than 80 points.
-    if journal_logo.drawWidth > 80:
-        journal_logo.drawWidth = 80
-        journal_logo.drawHeight *= 80 / journal_logo.drawWidth
+    journal_logo._restrictSize(80, 250)
     header_table = Table(
         [(KeepInFrame(472, 250, header), KeepInFrame(80, 250, [journal_logo]))],
         colWidths=(472, 80),
