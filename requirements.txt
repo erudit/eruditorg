@@ -16,6 +16,7 @@ cairosvg==2.2.1
 certifi==2019.3.9         # via requests, sentry-sdk
 cffi==1.12.3              # via cairocffi, weasyprint
 chardet==3.0.4
+colorama==0.4.1
 cssselect2==0.2.1         # via cairosvg, weasyprint
 cssselect==1.0.3          # via lxml
 defusedxml==0.6.0         # via cairosvg

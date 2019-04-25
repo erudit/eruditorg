@@ -6,8 +6,6 @@ from pathlib import Path
 from sentry_sdk.integrations.logging import LoggingIntegration
 from structlog.stdlib import LoggerFactory
 
-from structlog.processors import JSONRenderer
-from datetime import datetime
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -454,10 +452,14 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'structured'
+            'formatter': 'verbose'
         },
     },
     'loggers': {
+        'root': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+        },
         'core.subscription.middleware': {
             'level': 'INFO',
             'handlers': ['referer', ],
@@ -466,20 +468,10 @@ LOGGING = {
     }
 }
 
-
-def add_timestamp(_, __, event_dict):
-    event_dict['timestamp'] = datetime.utcnow().strftime("%x %X")
-    return event_dict
-
-
 structlog.configure(
     logger_factory=LoggerFactory(),
     processors=[
-        add_timestamp,
-        structlog.stdlib.add_log_level,
-        structlog.stdlib.add_logger_name,
-        structlog.processors.format_exc_info,
-        JSONRenderer(sort_keys=True)
+        structlog.dev.ConsoleRenderer(),
     ]
 )
 

@@ -1,5 +1,7 @@
 from .base import *  # noqa
 
+import structlog
+
 DATABASE_ROUTERS = ['core.subscription.restriction.router.RestrictionRouter']
 
 FALLBACK_BASE_URL = 'https://retro.erudit.org/'
@@ -255,6 +257,12 @@ LOGGING = {
     },
 }
 
+structlog.configure(
+    logger_factory=LoggerFactory(),
+    processors=[
+        structlog.processors.JSONRenderer(sort_keys=True),
+    ]
+)
 
 # must be here in `prod.py` because some code tests for the existence of these settings
 FIXTURE_ROOT = env('FIXTURE_ROOT')
