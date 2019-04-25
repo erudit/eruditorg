@@ -1,7 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from .models import SiteMessage
+from .models import SiteMessage, TargetSite
 
 
 class SiteMessageAdmin(TranslationAdmin):
@@ -9,3 +9,4 @@ class SiteMessageAdmin(TranslationAdmin):
 
 
 admin.site.register(SiteMessage, SiteMessageAdmin)
+admin.site.register(TargetSite)

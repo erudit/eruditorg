@@ -9,6 +9,7 @@ from django.http import HttpResponse, Http404
 from django.views.generic import RedirectView, TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from apps.public.site_messages.models import SiteMessage
 from base.viewmixins import MenuItemMixin
 from core.journal.rules_helpers import get_editable_journals
 
@@ -28,6 +29,8 @@ class HomeView(LoginRequiredMixin, JournalScopeMixin, TemplateView):
             pass
         else:
             context['journal_info'] = journal_info
+
+        context['journal_site_messages'] = SiteMessage.objects.journal()
 
         return context
 

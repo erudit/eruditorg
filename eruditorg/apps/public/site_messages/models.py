@@ -1,10 +1,34 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .managers import SiteMessageManager
+
+
+class TargetSite(models.Model):
+    """
+    Target site where to display site messages.
+    """
+    label = models.CharField(
+        verbose_name=_('Site cible'),
+        blank=False,
+        null=False,
+        max_length=64,
+        help_text=_('Site cible, par exemple <em>Public</em>, <em>Tableau de bord des revues</em> \
+             ou <em>Tableau de bord des bibliothèques</em>.'),
+    )
+    """ The target site label. """
+
+    class Meta:
+        verbose_name = _('Site cible')
+        verbose_name_plural = _('Sites cibles')
+
+    def __str__(self):
+        return self.label
+
 
 class SiteMessage(models.Model):
     """
-    Site message to be displayed at the bottom of every pages.
+    Site message to be displayed on the targeted site.
     """
     label = models.CharField(
         verbose_name=_('Libelé'),
@@ -34,6 +58,13 @@ class SiteMessage(models.Model):
         help_text=_("Niveau du message (couleur d'affichage)."),
     )
     """ The level of the message, which will detemine it's displayed color. """
+    target_sites = models.ManyToManyField(
+        TargetSite,
+        verbose_name=_('Sites cibles'),
+        related_name='+',
+        blank=False,
+    )
+    """ The targeted sites where the message should be displayed. """
     active = models.BooleanField(
         verbose_name=_('Actif'),
         default=False,
@@ -60,9 +91,11 @@ class SiteMessage(models.Model):
         null=True,
         max_length=64,
         help_text=_('Si le site contient un réglage avec ce nom et que ce réglage est à \
-            <em>True</em>, le message sera afficher.'),
+            <em>True</em>, le message sera affiché.'),
     )
     """ The name of a site setting to display the message if it's set to True. """
+
+    objects = SiteMessageManager()
 
     class Meta:
         verbose_name = _('Message global du site')
