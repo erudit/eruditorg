@@ -18,6 +18,8 @@ env = environ.Env(
     ALLOWED_HOSTS=(list, []),
     STATIC_ROOT=(str, str(ROOT_DIR / 'static')),
     MEDIA_ROOT=(str, str(ROOT_DIR / 'media')),
+    STATIC_URL=(str, '/static/'),
+    MEDIA_URL=(str, '/media/'),
     UPLOAD_ROOT=(str, str(ROOT_DIR / 'media' / 'uploads')),
     MANAGED_COLLECTIONS=(list, ['erudit', 'unb']),
 
@@ -95,8 +97,8 @@ MANAGED_COLLECTIONS = env('MANAGED_COLLECTIONS')
 STATIC_ROOT = env('STATIC_ROOT')
 MEDIA_ROOT = env('MEDIA_ROOT')
 UPLOAD_ROOT = env('UPLOAD_ROOT')
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = env('STATIC_URL')
+MEDIA_URL = env('MEDIA_URL')
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
