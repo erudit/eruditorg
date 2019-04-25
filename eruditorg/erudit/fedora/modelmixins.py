@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.cache import caches
 from django.utils.functional import cached_property
 
+from sentry_sdk import configure_scope
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
@@ -100,7 +101,10 @@ class FedoraMixin:
             fedora_object = self.get_fedora_object()
             fedora_xml_content = fedora_object.xml_content
         except (RequestFailed, ConnectionError):  # pragma: no cover
-            logger.warn("fedora.exception", e={}, pid=self.pid)
+            with configure_scope() as scope:
+                scope.fingerprint = ['fedora-warnings']
+                logger.warn("fedora.exception", pid=self.pid)
+
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
                 # really often because the dataset provided by the Fedora repository
