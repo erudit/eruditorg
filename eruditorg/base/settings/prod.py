@@ -1,5 +1,7 @@
 from .base import *  # noqa
 
+import structlog
+
 DATABASE_ROUTERS = ['core.subscription.restriction.router.RestrictionRouter']
 
 FALLBACK_BASE_URL = 'https://retro.erudit.org/'
@@ -129,7 +131,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['console'],
     },
     'formatters': {
         'verbose': {
@@ -144,12 +146,8 @@ LOGGING = {
         }
     },
     'handlers': {
-        'sentry': {
-            'level': 'WARNING',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
@@ -214,20 +212,10 @@ LOGGING = {
     'loggers': {
         'root': {
             'level': 'WARNING',
-            'handlers': ['sentry'],
+            'handlers': ['console'],
         },
         'django.db.backends': {
             'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
         },
@@ -262,13 +250,19 @@ LOGGING = {
             'propagate': False,
         },
         'post_office': {
-            'level': 'INFO',
+            'level': 'ERROR',
             'handlers': ['cron_console', ],
             'propagate': False,
         }
     },
 }
 
+structlog.configure(
+    logger_factory=LoggerFactory(),
+    processors=[
+        structlog.processors.JSONRenderer(sort_keys=True),
+    ]
+)
 
 # must be here in `prod.py` because some code tests for the existence of these settings
 FIXTURE_ROOT = env('FIXTURE_ROOT')

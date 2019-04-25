@@ -1,10 +1,14 @@
 import environ
+import logging
 import structlog
 from pathlib import Path
+
+from sentry_sdk.integrations.logging import LoggingIntegration
 from structlog.stdlib import LoggerFactory
 
-from structlog.processors import JSONRenderer
-from datetime import datetime
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 BASE_DIR = Path(__file__).parent
 ROOT_DIR = BASE_DIR.parents[2]
@@ -112,6 +116,22 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
+# Initialize sentry
+# -----------------------------------------------------------------------------
+
+
+RAVEN_DSN = env('RAVEN_DSN')
+if RAVEN_DSN:
+    sentry_logging = LoggingIntegration(
+        level=logging.INFO,  # Capture info and above as breadcrumbs
+        event_level=logging.WARNING  # Send errors as events
+    )
+    sentry_sdk.init(
+        dsn=RAVEN_DSN,
+        integrations=[sentry_logging, DjangoIntegration()]
+    )
+
+
 # Application definition
 # -----------------------------------------------------------------------------
 
@@ -172,7 +192,6 @@ INSTALLED_APPS = (
     'resumable_uploads',
     'rules',
     'ckeditor',
-    'raven.contrib.django.raven_compat',
     'django_fsm',
     'easy_pjax',
     'django_js_reverse',
@@ -410,7 +429,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'root': {
         'level': 'INFO',
-        'handlers': ['sentry', 'console'],
+        'handlers': ['console'],
     },
     'formatters': {
         'structured': {
@@ -422,10 +441,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'WARNING',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'referer': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
@@ -437,10 +452,14 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'structured'
+            'formatter': 'verbose'
         },
     },
     'loggers': {
+        'root': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+        },
         'core.subscription.middleware': {
             'level': 'INFO',
             'handlers': ['referer', ],
@@ -449,28 +468,12 @@ LOGGING = {
     }
 }
 
-
-def add_timestamp(_, __, event_dict):
-    event_dict['timestamp'] = datetime.utcnow().strftime("%x %X")
-    return event_dict
-
-
 structlog.configure(
     logger_factory=LoggerFactory(),
     processors=[
-        add_timestamp,
-        structlog.stdlib.add_log_level,
-        structlog.stdlib.add_logger_name,
-        structlog.processors.format_exc_info,
-        JSONRenderer(sort_keys=True)
+        structlog.dev.ConsoleRenderer(),
     ]
 )
-
-# Raven settings
-
-RAVEN_CONFIG = {
-    'dsn': env('RAVEN_DSN')
-}
 
 # MailChimp settings
 # -----------------------------------
