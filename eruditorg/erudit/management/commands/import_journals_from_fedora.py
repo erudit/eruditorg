@@ -73,7 +73,6 @@ class Command(BaseCommand):
         with sentry_sdk.configure_scope() as scope:
             scope.fingerprint = ['import-journals-from-fedora']
 
-
         # Handles a potential XSLT test function
         try:
             assert self.test_xslt is not None
@@ -85,7 +84,7 @@ class Command(BaseCommand):
             logger.error(
                 "invalid_argument",
                 xslt_test_func=self.test_xslt,
-                msg="Cannot import XSLT test function"
+                msg="A XSLT test function has been specified, but it cannot be imported"
             )
             return
         except AssertionError:
@@ -98,6 +97,7 @@ class Command(BaseCommand):
         except ValueError:
             logger.error(
                 "invalid_argument",
+                msg="A modification date has been specified, but it cannot be parsed by strptime",
                 modification_date=self.modification_date
             )
             return
@@ -115,29 +115,29 @@ class Command(BaseCommand):
                     logger.error(
                         "invalid_argument",
                         issue_pid=self.issue_pid,
-                        msg="Not a valid issue pid"
+                        msg="The specified issue pid is not formatted correctly"
                     )
             else:
                 unimported_issues_pids = get_unimported_issues_pids()
                 logger.info(
                     "import.started",
                     issues_count=len(unimported_issues_pids),
-                    msg="importing missing issues"
+                    msg="Importing missing issues"
                 )
             for issue_pid in unimported_issues_pids:
                 journal_localidentifier = issue_pid.split(':')[1].split('.')[1]
                 try:
                     journal = Journal.objects.get(localidentifier=journal_localidentifier)
-                except Journal.DoesNotExist:
+                except Journal.exception:
                     logger.error(
                         "journal.import.error",
-                        journal_pid=journal_localidentifier
+                        journal_pid=journal_localidentifier,
                     )
                     return
                 try:
                     self._import_issue(issue_pid, journal)
                 except Exception as e:
-                    logger.error(
+                    logger.exception(
                         'issue.import.error',
                         issue_pid=issue_pid,
                         error=e,
@@ -154,6 +154,7 @@ class Command(BaseCommand):
             if not re.match(r'^\w+\:\w+\.\w+$', self.journal_pid):
                 logger.error(
                     "invalid_argument",
+                    msg="The specified journal pid is not formatted correctly",
                     journal_pid=self.journal_pid
                 )
                 return
@@ -162,10 +163,10 @@ class Command(BaseCommand):
             try:
                 collection = Collection.objects.get(localidentifier=collection_localidentifier)
             except Collection.DoesNotExist:
-                logger.error(
+                logger.exception(
                     "invalid_argument",
                     msg="Collection does not exist",
-                    collection_pid=collection_localidentifier
+                    collection_pid=collection_localidentifier,
                 )
                 return
 
@@ -257,9 +258,9 @@ class Command(BaseCommand):
                 ))
             except Exception:
                 journal_errored_count += 1
-                logger.error(
+                logger.exception(
                     "journal.import.error",
-                    journal_pid=jpid
+                    journal_pid=jpid,
                 )
             else:
                 journal_count += 1
@@ -292,18 +293,18 @@ class Command(BaseCommand):
                 journal = Journal.objects.get(localidentifier=journal_localidentifier)
             except Journal.DoesNotExist:
                 issue_errored_count += 1
-                logger.error(
+                logger.exception(
                     "issue.import.error",
                     msg="Journal does not exist",
                     issue_pid=ipid,
-                    journal_pid=journal_localidentifier
+                    journal_pid=journal_localidentifier,
                 )
             else:
                 try:
                     self._import_issue(ipid, journal)
                 except Exception:
                     issue_errored_count += 1
-                    logger.error(
+                    logger.exception(
                         "issue.import.error",
                         issue_pid=ipid
                     )
@@ -327,10 +328,10 @@ class Command(BaseCommand):
                 next_journal = Journal.objects.get(localidentifier=next_localid) \
                     if next_localid else None
             except Journal.DoesNotExist:
-                logger.error(
+                logger.exception(
                     "journal.import.error",
                     journal_pid=localid,
-                    msg="Unable to import precedences for journal"
+                    msg="Unable to import precedences for journal",
                 )
             else:
                 j.previous_journal = previous_journal
@@ -349,7 +350,10 @@ class Command(BaseCommand):
             assert fedora_journal.exists
         except AssertionError:
             msg = 'The journal with PID "{}" seems to be inexistant'.format(journal_pid)
-            logger.error("journal.import.error", msg=msg)
+            logger.exception(
+                "journal.import.error",
+                msg=msg,
+            )
             return  # We return here in order to try to import the other journals of the collection
 
         # STEP 2: creates or updates the journal object
@@ -470,7 +474,7 @@ class Command(BaseCommand):
             logger.error(
                 'issue.import.error',
                 issue_pid=issue_pid,
-                msg='Issue pid nonexistent'
+                msg='The issue with the given pid does not exist in Fedora',
             )
             raise
 

@@ -2,8 +2,6 @@ from .base import *  # noqa
 
 import structlog
 
-DATABASE_ROUTERS = ['core.subscription.restriction.router.RestrictionRouter']
-
 FALLBACK_BASE_URL = 'https://retro.erudit.org/'
 
 # Metrics
@@ -260,6 +258,7 @@ LOGGING = {
 structlog.configure(
     logger_factory=LoggerFactory(),
     processors=[
+        structlog.processors.format_exc_info,
         structlog.processors.JSONRenderer(sort_keys=True),
     ]
 )
