@@ -7,6 +7,7 @@ from django.db import transaction
 from django.utils.encoding import smart_str
 from eruditarticle.utils import remove_xml_namespaces
 import lxml.etree as et
+import sentry_sdk
 
 from ...conf import settings as erudit_settings
 from ...fedora.objects import JournalDigitalObject
@@ -68,6 +69,10 @@ class Command(BaseCommand):
         self.issue_pid = options.get('issue_pid', None)
         self.import_missing = options.get('import_missing', None)
         logger.info("import.started", **options)
+
+        with sentry_sdk.configure_scope() as scope:
+            scope.fingerprint = ['import-journals-from-fedora']
+
 
         # Handles a potential XSLT test function
         try:
