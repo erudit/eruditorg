@@ -16,6 +16,7 @@ ROOT_DIR = BASE_DIR.parents[2]
 env = environ.Env(
     DEBUG=(bool, False),
     EXPOSE_OPENMETRICS=(bool, False),
+    SENTRY_ENVIRONMENT=(str, 'default'),
     SECRET_KEY=(str, None),
     ADMIN_URL=(str, '/admin'),
     FALLBACK_BASE_URL=(str, 'http://retro.erudit.org/'),
@@ -128,7 +129,8 @@ if RAVEN_DSN:
     )
     sentry_sdk.init(
         dsn=RAVEN_DSN,
-        integrations=[sentry_logging, DjangoIntegration()]
+        integrations=[sentry_logging, DjangoIntegration()],
+        environment=env("SENTRY_ENVIRONMENT")
     )
 
 
