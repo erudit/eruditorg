@@ -495,11 +495,9 @@
 
   <!-- alternate title(s) for multilingual articles -->
   <xsl:template match="article/liminaire/grtitre/titreparal | article/liminaire/grtitre/sstitreparal" mode="title">
-    <xsl:if test="not(//resume)">
-      <span class="{name()}">
-        <xsl:apply-templates/>
-      </span>
-    </xsl:if>
+    <span class="{name()}">
+      <xsl:apply-templates/>
+    </span>
   </xsl:template>
 
   <!-- author(s) - person or organisation -->

@@ -446,6 +446,21 @@ class TestArticleDetailView:
         html = response.content.decode()
         assert '<span class="surtitre">Cahier commémoratif : 25<sup>e</sup> anniversaire</span>' in html
 
+    def test_title_and_paral_title_are_displayed(self):
+        article = ArticleFactory(
+            from_fixture='1058368ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        assert '<span class="titre">Les Parcs Nationaux de Roumanie : considérations sur les habitats Natura 2000 et sur les réserves IUCN</span>' in html
+        assert '<span class="titreparal">The National Parks of Romania: considerations on Natura 2000 habitats and IUCN reserves</span>' in html
+
 
 @unittest.mock.patch.object(
     Issue,
