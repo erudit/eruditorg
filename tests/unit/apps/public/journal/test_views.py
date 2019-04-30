@@ -210,6 +210,24 @@ class TestIssueDetailSummary:
         # Check that there's only one space between the main title and the '/'.
         assert 'Inaugural Lecture of the FR Scott Professor&nbsp;/ Conf&#233;rence inaugurale du Professeur FR Scott' in html
 
+    def test_issue_detail_view_with_untitled_article(self):
+        article = ArticleFactory(
+            from_fixture='1042058ar',
+            localidentifier='article',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__name='Revue',
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'localidentifier': article.issue.localidentifier,
+        })
+        response = Client().get(url)
+        html = response.content.decode()
+        assert '<h6 class="bib-record__title">\n    \n    <a href="/fr/revues/journal/2000-issue/article/"\n    \n    title="Lire l\'article">\n    [Article sans titre]\n    </a>\n  </h6>' in html
+
 
 class TestArticleDetailView:
 
@@ -463,6 +481,29 @@ class TestArticleDetailView:
         html = response.content.decode()
         assert '<span class="titre">Les Parcs Nationaux de Roumanie : considérations sur les habitats Natura 2000 et sur les réserves IUCN</span>' in html
         assert '<span class="titreparal">The National Parks of Romania: considerations on Natura 2000 habitats and IUCN reserves</span>' in html
+
+    def test_article_detail_view_with_untitled_article(self):
+        article = ArticleFactory(
+            from_fixture='1042058ar',
+            localidentifier='article',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__name='Revue',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that "[Article sans titre]" is displayed in the header title.
+        assert '<title>[Article sans titre] – Revue – Érudit</title>' in html
+        # Check that "[Article sans titre]" is displayed in the body title.
+        assert '<h1 class="doc-head__title"><span class="titre">[Article sans titre]</span></h1>' in html
+        # Check that "[Article sans titre]" is displayed in the breadcrumbs.
+        assert '<li>\n  <a href="/fr/revues/journal/2000-issue/article/">[Article sans titre]</a>\n</li>' in html
 
 
 @unittest.mock.patch.object(
