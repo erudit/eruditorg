@@ -378,19 +378,20 @@ class TestArticleDetailView:
         else:
             assert 'Seuls les 600 premiers mots du texte seront affichés.' in html
 
-    @pytest.mark.parametrize('url_name, fixture, display_biblio', (
+    @pytest.mark.parametrize('url_name, fixture, display_biblio, display_pdf_first_page', (
         # Complete treatment articles should always display a bibliography
-        ('public:journal:article_biblio', '009256ar', 1),
-        ('public:journal:article_summary', '009256ar', 1),
-        ('public:journal:article_detail', '009256ar', 1),
+        ('public:journal:article_biblio', '009256ar', 1, 0),
+        ('public:journal:article_summary', '009256ar', 1, 0),
+        ('public:journal:article_detail', '009256ar', 1, 0),
         # Retro minimal treatment articles should only display a bibliography in article_biblio view
-        ('public:journal:article_biblio', '1058447ar', 1),
-        ('public:journal:article_summary', '1058447ar', 0),
-        ('public:journal:article_detail', '1058447ar', 0),
+        ('public:journal:article_biblio', '1058447ar', 1, 0),
+        ('public:journal:article_summary', '1058447ar', 0, 1),
+        ('public:journal:article_detail', '1058447ar', 0, 1),
     ))
-    def test_biblio_references_display(self, url_name, fixture, display_biblio):
+    def test_biblio_references_display(self, url_name, fixture, display_biblio, display_pdf_first_page):
         article = ArticleFactory(
             from_fixture=fixture,
+            with_pdf=True,
         )
         url = reverse(url_name, kwargs={
             'journal_code': article.issue.journal.code,
@@ -400,6 +401,8 @@ class TestArticleDetailView:
         })
         html = Client().get(url).content.decode()
         assert html.count('<section id="grbiblio" class="article-section grbiblio" role="complementary">') == display_biblio
+        # Minimal treatment articles should not display PDF first page when displaying references.
+        assert html.count('<object id="pdf-viewer"') == display_pdf_first_page
 
     def test_article_detail_marquage_in_toc_nav(self):
         issue = IssueFactory(

@@ -411,7 +411,8 @@
             <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% trans 'Télécharger' %}</a></p>
           </div>
           {% endif %}
-        {% elif article.abstracts %}
+        {% elif article.abstracts or only_display == 'biblio' %}
+          {# Do nothong. #}
         {% elif not article.abstracts and can_display_first_pdf_page %}
         <p>
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
