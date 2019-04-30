@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="minimal" idproprio="1058368ar" typeart="article" lang="fr" ordseq="8" idref="th1"><admin><revue id="vertigo111" lang="fr"><titrerev>[VertigO] La revue électronique en sciences de l’environnement</titrerev><titrerevabr>vertigo</titrerevabr><idissnnum>1492-8442</idissnnum><directeur sexe="masculin"><fonction lang="fr">Co-directeur</fonction><nompers><prenom>Éric</prenom><nomfamille>Duchemin</nomfamille></nompers></directeur><directeur sexe="feminin"><fonction lang="fr">Co-directrice</fonction><nompers><prenom>Louise</prenom><nomfamille>Vandelac</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Philippe</prenom><nomfamille>Joseph</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Kévine</prenom><nomfamille>Baillard</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><nompers><prenom>Éric</prenom><nomfamille>Duchemin</nomfamille></nompers></redacteurchef></revue><numero id="vertigo04476"><volume>17</volume><nonumero>3</nonumero><pub><periode>Décembre</periode><annee>2017</annee></pub><pubnum><date typedate="publication">2019-03-27</date></pubnum><grtheme id="th1"><theme>Biodiversités et gestion des territoires : de la connaissance des territoires à leur gestion maitrisée au regard des différentes composantes biologiques</theme></grtheme></numero><editeur><nomorg>Université du Québec à Montréal</nomorg></editeur><editeur><nomorg>Éditions en environnement VertigO</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Université du Québec à Montréal</nomorg> et <nomorg>Éditions en environnement VertigO</nomorg>, 2017</droitsauteur></admin><liminaire><grtitre><surtitre>Biodiversités et gestion des territoires</surtitre><surtitre2>Protection, conservation, gestion et valorisation de la biodiversité</surtitre2>
+                <titre>Les Parcs Nationaux de Roumanie : considérations sur les habitats Natura 2000 et sur les réserves IUCN</titre>
+                <titreparal lang="en">The National Parks of Romania: considerations on Natura 2000 habitats and IUCN reserves</titreparal>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Adrian-Ilie</prenom><nomfamille>Stoica</nomfamille></nompers><affiliation><alinea>Docteur en biologie, Institut de biologie de Cluj-Napoca, Str. Republicii No. 48, Cluj-Napoca 400015, Romania</alinea></affiliation></auteur><auteur id="au2"><nompers><prenom>Gheorghe</prenom><nomfamille>Coldea</nomfamille></nompers><affiliation><alinea>Professeur de biologie Institut de biologie de Cluj-Napoca. Str. Republicii No. 48, Cluj-Napoca 400015, Romania</alinea></affiliation></auteur><auteur id="au3"><nompers><prenom>Nicolaie</prenom><nomfamille>Hodor</nomfamille></nompers><affiliation><alinea>Professeur de biogéographie, Université Babes-Bolyai, Faculté de Géographie, Cluj-Napoca, Str. Republicii No. 48, Cluj-Napoca 400015, Romania</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>Au niveau de l’Union Européenne, la Roumanie est considérée parmi les pays à forte biodiversité. La conservation de la nature joue un rôle important dans les politiques de l’Union Européenne. Parmi les sites de conservation de la nature, les parcs nationaux sont considérés très importants, car ils représentent la forme de gestion la plus cohérente pour la protection de la nature. L’étude tente de placer tous les parcs nationaux de Roumanie dans un cadre commun, en utilisant les habitats Natura 2000. En 2017, 9 des 13 parcs nationaux ont des plans de gestion approuvés par la loi. La plupart des plans ont été rédigés ou révisés en fonction des enquêtes de terrain des 5 dernières années. L’article résume l’apparition d’habitats Natura 2000 dans les parcs nationaux de Roumanie, la zone occupée et leur état de conservation. La couverture et la diversité de ces habitats sont discutées en relation avec les estimations de Corinne Land Cover de types similaires d’écosystèmes. Les habitats sont utilisés pour comparer la similitude des Parcs Nationaux. Le chevauchement des Parcs Nationaux avec les catégories pertinentes de l’UICN (cat. I, III et IV) est également étudié.</alinea></resume><grmotcle lang="fr"><motcle>Roumanie</motcle><motcle>parcs Nationaux</motcle><motcle>niche climatique</motcle><motcle>forêts de feuillus</motcle><motcle>forêts mixtes</motcle><motcle>pâturages</motcle><motcle>prairies naturelles</motcle><motcle>les réserves de l’UICN</motcle></grmotcle></liminaire><corps lang="fr"><texte typetexte="libre">Les Parcs Nationaux de Roumanie : considérations sur les habitats Natura 2000 et sur les réserves IUCN
+
+The National Parks of Romania : considerations on Natura 2000 habitats and IUCN reserves
+
+Adrian-Ilie Stoica
+
+Docteur en biologie, Institut de biologie de Cluj-Napoca, Str. Republicii No. 48, Cluj-Napoca 400015, Romania
+
+Gheorghe Coldea
+
+Professeur de biologie Institut de biologie de Cluj-Napoca. Str. Republicii No. 48, Cluj-Napoca 400015, Romania
+
+Nicolaie Hodor
+
+Professeur de biogéographie, Université Babes-Bolyai, Faculté de Géographie, Cluj-Napoca, Str. Republicii No. 48, Cluj-Napoca 400015, Romania
+
+Au niveau de l'Union Européenne, la Roumanie est considérée parmi les pays à forte biodiversité. La conservation de la nature joue un rôle important dans les politiques de l'Union Européenne. Parmi les sites de conservation de la nature, les parcs nationaux sont considérés très importants, car ils représentent la forme de gestion la plus cohérente pour la protection de la nature. L'étude tente de placer tous les parcs nationaux de Roumanie dans un cadre commun, en utilisant les habitats Natura 2000. En 2017, 9 des 13 parcs nationaux ont des plans de gestion approuvés par la loi. La plupart des plans ont été rédigés ou révisés en fonction des enquêtes de terrain des 5 dernières années. L'article résume l'apparition d'habitats Natura 2000 dans les parcs nationaux de Roumanie, la zone occupée et leur état de conservation. La couverture et la diversité de ces habitats sont discutées en relation avec les estimations de Corinne Land Cover de types similaires d'écosystèmes. Les habitats sont utilisés pour comparer la similitude des Parcs Nationaux. Le chevauchement des Parcs Nationaux avec les catégories pertinentes de l'UICN (cat. I, III et IV) est également étudié.
+
+Roumanie, parcs Nationaux, niche climatique, forêts de feuillus, forêts mixtes, pâturages, prairies naturelles, les réserves de l'UICN
+
+fr
+
+15 décembre 2017
+
+Introduction
+
+La conservation de la nature a une longue histoire en Roumanie. Après des années d'efforts continus en 1924 (commencé par Borza, 1924), Alexandru Borza a rédigé un des premiers projets de loi de protection de la nature dans le monde. En 1930, la Roumanie a approuvé par décret royal la Loi pour la protection des monuments naturels (4 juillet 1930). Le premier parc national a été déclaré en 1935, dans les Montagnes de Retezat, occupant une superficie totale d'environ 10 000 ha. Des parties des documents relatifs à la déclaration du parc ont été publiées lors de la création de réserves naturelles (Borza, 1943).
+
+Les efforts de conservation ont augmenté après la Seconde Guerre Mondiale, dans la période communiste, avec plus de 550 réserves naturelles déclarées pendant quatre décennies (1950-1989). Les réserves ont été créées par plusieurs décrets nationaux ou régionaux et sont une conséquence de l'approbation de deux projets de loi majeurs (Decret nr. 237/ 1950, Legea nr. 9/ 1973).
+
+En 1990, 10 autres parcs nationaux ont été déclarés par arrêté ministériel (Domogled - Valea Cernei, Cheile Nerei - Beuşniţa, Munţii Rodnei, Cheile Bicazului - Hăşmaş, Ceahlău, Călimani, Cozia, Piatra Craiului, Semenic - Cheile Caraşului, Munţii Măcinului). Comme l'arrêté ministériel n'a jamais été publié dans la Gazette officielle, le statut officiel de ces parcs n'a été entièrement reconnu qu'en 2000 (Legea nr.5/ 2000).
+
+La loi no. 5/2000 (le plan de développement pour le territoire national - axé sur plusieurs types de zones restreintes), contenait une liste des zones protégées avec des noms, une localisation approximative (comté - NUTS III ou commune - NUTS IV) et une surface estimée en hectares. Elle ne contenait pas de limites spatiales précises et ne faisait pas de distinction entre les types de parcs (parcs nationaux et naturels) ou les réserves (réserves strictes, monuments naturels ou réserves naturelles).
+
+La première délimitation spatiale officielle des parcs nationaux en Roumanie se trouve dans la décision gouvernementale de 2003 concernant les limites des réserves de biosphère, des parcs nationaux et naturels et la création de structures administratives (Hotărârea de Guvern nr. 230/ 2003). Outre la première délimitation officielle de la couverture spatiale, cette décision confirme également la protection internationale (UNESCO) des sites Ramsar, patrimoine mondial et réserve de la biosphère de plusieurs parcs nationaux, naturels et du Delta du Danube.
+
+Dans la même année (2003), par ordre du ministère de l'Agriculture, des Forêts, des Eaux et de l'Environnement, des zones de conservation ont été approuvées dans les parcs nationaux existants (Ordinul Ministrului nr. 552/ 2003).
+
+En plus des 11 parcs nationaux confirmés en 2003, 2 autres parcs nationaux ont été déclarés, également avec des limites et des structures administratives : Buila Vânturariţa (Hotărârea de Guvern nr. 2151/ 2004) et Defileul Jiului (Hotărârea de Guvern nr. 1581/ 2005).
+
+En 2007, une ordonnance d'urgence du gouvernement a été publiée, avec des détails sur le régime des aires protégées, la conservation des habitats naturels, de la flore et de la faune sauvages (Ordonanţa de Urgenţă nr. 57/ 2007). Cette ordonnance a été publiée en 2011 en tant que loi (Legea nr. 49/ 2011) et définit les catégories de zones protégées de la nature, chaque catégorie et son régime, ainsi que les zones internes. En outre, la loi décrit les étapes et les documents nécessaires à la création d'une nouvelle aire protégée, les responsabilités et les méthodes administratives du réseau des aires protégées et les mesures punitives en cas de viol de la loi. Bien que la loi comporte plusieurs annexes avec des espèces et des habitats nécessitant divers types de gestion, il n'y a pas de liste avec les réserves existantes et leur statut (catégorie, limites spatiales).
+
+En 2017, les plans de gestion sont approuvés pour 9 parcs : Buila-Vânturariţa (Ordinul Ministrului nr. 1151/ 2016), Călimani (Hotărârea de Guvern nr. 35/ 2011), Ceahlău (Ordinul Ministrului nr. 1934/ 2015), Cheile Bicazului - Hăşmaş (Ordinul Ministrului nr. 1523/ 2016), Cheile Nerei - Beuşniţa (Ordinul Ministrului nr. 1642/ 2016), Cozia (Ordinul Ministrului nr. 1060/ 2016), Domogled - Valea Cernei (Ordinul Ministrului nr. 1121/ 2016), Munţii Măcinului (Hotărârea de Guvern nr. 1074/ 2013), Piatra Craiului (Hotărârea de Guvern nr. 1057/ 2013). Les plans de gestion ne sont pas encore approuvés pour 4 parcs : Defileul Jiului, Munţii Rodnei, Retezat et Semenic - Cheile Carașului.
+
+En résumé, le réseau de conservation de la nature en Roumanie est composé d'aires protégées conçues par trois organismes internationaux clés : UICN (Union internationale pour la Conservation de la Nature), UNESCO (Organisation des Nations Unies pour l'Education, la Science et la Culture) et l'UE (Union Européenne).
+
+Alors que les sites Natura 2000 (Ordinul Ministrului nr. 1964/ 2008, Ordinul Ministrului nr. 2387/ 2011), les parcs nationaux et naturels ainsi que l'UNESCO Ramsar, les réserves du patrimoine mondial et de la biosphère (Hotărârea de Guvern nr. 230/ 2003) ont des limites spatiales précises reconnues par loi, et sont inclus dans les catégories appropriées, la situation est plus compliquée en ce qui concerne les réserves naturelles strictes (UICN cat. Ia), les monuments naturels (IUCN cat. III) et les zones de gestion de l'habitat et des espèces - également appelées réserves naturelles (cat. IV). Ces zones sont protégées par plusieurs lois (Decret nr. 237/ 1950, Legea nr. 9/ 1973, Legea nr. 5/ 2000, Legea nr. 49/ 2011), mais il n'existe pas de délimitation spatiale officielle pour la plupart des zones protégées créées avant l'année 2000. En revanche, les réserves créées récemment ont des limites spatiales claires (Hotărârea de Guvern nr. 2151/ 2004 ; Hotărârea de Guvern nr. 1581/ 2005 ; Hotărârea de Guvern nr. 1143/ 2007 ; Hotărârea de Guvern nr. 1066/ 2010).
+
+Le Ministère de l'Environnement a rendu public un ensemble de limites spatiales pour la plupart des zones protégées en Roumanie, en mentionnant que, pour plusieurs d'entre elles, les limites ne sont pas encore officielles. Cet ensemble de données contient 32 réserves naturelles strictes (cat. Ia), 13 parcs nationaux (cat. II), 161 monuments naturels (cat. III), 723 habitats / zones de gestion des espèces (cat. IV), 15 zones avec un paysage protégé ou paysage marin - Parcs Naturels (cat. V). En outre, il existe 19 sites RAMSAR, 3 réserves de biosphère (Programme UNESCO de l'homme et de la biosphère) et 1 site du patrimoine mondial (patrimoine mondial de l'UNESCO). Le réseau Natura 2000 comprend 148 zones de protection spéciale pour les oiseaux (Natura 2000 ZPS), 382 sites d'importance communautaire (Natura 2000 SIC) et 53 sites proposés d'importance communautaire (Natura 2000 pSIC).
+
+Figure 1. Parcs nationaux en Roumanie.
+
+Légende : 1. Cheile Nerei-Beușnița, 2. Semenic – Cheile Carașului, 3. Domogled – Valea Cernei, 4. Retezat, 5. Defileul Jiului, 6. Buila – Vânturarița, 7. Cozia, 8. Piatra Craiului, 9. Munții Măcinului, 10. Cheile Bicazului – Hășmaș, 11. Ceahlău, 12. Călimani, 13. Munții Rodnei
+
+L'information spatiale offerte par le Ministère comporte plusieurs incohérences avec les sources d'information précédentes. Le premier objectif de cet article est d'identifier les incohérences dans la couverture spatiale des parcs nationaux en comparant les informations contenues dans les fichiers SIG avec les sources d'information antérieures (Toniuc et al., 1992) et avec les plans de gestion (ou d'autres informations officielles - page web, règles de l'aire protégée, ou non officiel - littérature, etc.).
+
+Le réseau des zones protégées en Roumanie comporte un chevauchement spatial important (Iojă et al., 2010). Les parcs nationaux ont bénéficié du chevauchement avec les sites Natura 2000, car le financement de l'UE était disponible pour les inventaires d'habitats et d'espèces. L'information provenant des plans de gestion existants servira à évaluer la présence, la couverture et l'état de conservation des habitats Natura 2000 existants. Les habitats décrits sont importants car ils fournissent l'abri pour toutes les espèces, quel que soit le règne animal ou végétal. Les données spatiales sur la répartition des habitats ne sont pas accessibles au public, de sorte que la présence, l'état de conservation de l'habitat Natura 2000 sont abordées par rapport aux classes similaires de Corinne Land Cover. Les habitats Natura 2000 existants de chaque parc seront utilisés pour calculer la similitude entre les différents parcs, en supposant que, si les habitats sont mentionnés correctement, des groupes logiques de parcs devraient être visibles dans le dendrogramme de similarité.
+
+Matériel et méthode
+
+Le chevauchement entre les catégories d'aires protégées a été calculé à l'aide du logiciel R, paquet maptools (Bivand et Lewin-Koh, 2017). Seules les réserves de l'UICN (catégories I, III et IV) qui sont complètement incluses dans les parcs nationaux ont été prises en compte pour une analyse plus approfondie (cette méthode découle de la gestion de ces situations par les plans de gestion).
+
+L'information sur la présence d'habitats Natura 2000 a été extraite des formulaires de données standard (SDF), version février 2016 (tableau 3). Cette information a été comparée au contenu de la dernière version des plans de gestion disponibles au moment de l'étude (2017). Pour chaque parc, nous avons noté quels habitats provenant du formulaire de données standard Natura 2000 ont été confirmés par les études de terrain, qui ont été signalés comme douteux (non trouvés sur le terrain,), quels nouveaux habitats ont été trouvés (nouveaux par rapport à l'original Natura 2000 SDF ou aux versions précédentes du plan de gestion). Les habitats pour lesquels il existe des informations conflictuelles ou insuffisantes sont exclus des interprétations futures et de l'analyse de similarité.
+
+Pour le Parc National Retezat, compte tenu du manque d'informations (pas de version publique du plan de gestion, aucune mention officielle des habitats), nous avons consulté la littérature existante (Coldea, 1992).
+
+Dans certains cas, le SIC Natura 2000 ne chevauche pas complètement le parc national. Plusieurs habitats peuvent se produire dans les SIC Natura 2000 et non dans le parc. Ces situations seront également soulignées (les habitats qui existent dans le SDF du site Natura 2000 mais qui ne sont pas trouvés dans le plan de gestion du parc national seront marqués dans le tableau 3 à l'aide de l'étiquette « Non »). Dans de rares cas, la description de la végétation du plan de gestion soutiendrait l'inclusion dans un site Natura 2000, mais la végétation est considérée (injustement) comme non attribuée. De telles situations sont marquées comme "unatrib".
+
+Les données sur la couverture terrestre de Corinne (2006) ont été extraites pour l'ensemble des 13 parcs nationaux. La zone occupée par chaque classe Corinne a été calculée pour chaque parc et pour tous les parcs, en utilisant le logiciel R, les paquets raster (Hijmans et van Etten, 2012), rgdal (Bivand et al., 2016), rgeos (Bivand et Rundel, 2017), maptools (Bivand et Lewin-Koh, 2017). Les cours pertinents de Corinne Land Cover ont été extraits séparément (Table 1).
+
+Pour chaque classe pertinente de Corinne Land Cover, et pour chaque parc, les précipitations annuelles moyennes et la température moyenne minimale ont été extraites et tracées dans une parcelle de xy (niche de précipitation - température, annexe 2). Les données climatiques sont réduites à 100 m de résolution à partir d'un raster climatique de 200 m de résolution (résultat d'un projet international, IntraBioDiv FP6-GOCE-CT-2003-505376 (Gugerli et al., 2008)). De plus, pour chaque parc, une analyse de la taille des polygones a été effectuée, pour voir quels parcs abritent le plus grand polygone continu pour chaque classe de couverture terrestre Corinne (en utilisant les paquets raster (Hijmans et van Etten, 2012) et rgdal (Bivand et al., 2016 )).
+
+Tableau 1. Extrait Corine Land Cover - légende des classes.
+
+ÉTIQUETTE 1
+
+ÉTIQUETTE 2
+
+ÉTIQUETTE 3
+
+18
+
+231
+
+Aires agricoles
+
+Pâturages
+
+Pâturages
+
+23
+
+311
+
+Forêts et zones semi-naturelles
+
+Forêts
+
+Forêt feuillus
+
+24
+
+312
+
+Forêts et zones semi-naturelles
+
+Forêts
+
+Forêt de conifères
+
+25
+
+313
+
+Forêts et zones semi-naturelles
+
+Forêts
+
+Forêt mixte
+
+26
+
+321
+
+Forêts et zones semi-naturelles
+
+Gommage et / ou associations de végétation herbacée
+
+Prairies naturelles
+
+27
+
+322
+
+Forêts et zones semi-naturelles
+
+Gommage et / ou associations de végétation herbacée
+
+Maures et landes
+
+29
+
+324
+
+Forêts et zones semi-naturelles
+
+Gommage et / ou associations de végétation herbacée
+
+Transition bois-arbuste
+
+31
+
+332
+
+Forêts et zones semi-naturelles
+
+Les espaces ouverts avec peu ou pas de végétation
+
+Roches nues
+
+32
+
+333
+
+Forêts et zones semi-naturelles
+
+Les espaces ouverts avec peu ou pas de végétation
+
+Zones à la végétation éparse
+
+Pour tous les parcs, les graphiques du type de violon avec altitude, pente, précipitations et température minimale ont été construites en utilisant le paquet ggplot2 (Wickham, 2009), afin de comparer la disponibilité et la variabilité des niches. Ces parcelles sont utilisées pour décrire non seulement l'apparition de niche, mais aussi la fréquence d'occurrence (densité) et pour faciliter l'interprétation de la similitude des parcs nationaux.
+
+Sur la base des habitats confirmés par les plans de gestion existants, une analyse de similitude (indice Jaccard) des parcs nationaux existants a été calculée en R, en utilisant le paquet vegan (clustering moyen de liaison (UPGMA)) (Oksanen et al., 2013). Tous les habitats qui ne sont pas mentionnés dans le plan de gestion, qui sont mentionnés comme douteux (non trouvés par la dernière recherche) ont été exclus de l'analyse.
+
+Résultats
+
+Le chevauchement spatial des parcs nationaux et d'autres zones protégées pertinentes en Roumanie a été étudié, avec les résultats présentés dans les tableaux (tableau 2 - chevauchement de SIC et PN, tableau 3 - chevauchement de PN et UICN cat. I, III et IV - basé sur les fichiers SIG ministériels, version février 2016).
+
+Tableau 2. Chevauchement de SIC (Natura 2000) et PN.
+
+Nom de SIC
+
+Code de SIC
+
+PN % dans SIC
+
+Nom de PN
+
+Code de PN
+
+Buila - Vânturarița
+
+100,0
+
+100,0
+
+Buila - Vânturarița
+
+Călimani - Gurghiu
+
+17,9
+
+100,0
+
+Călimani
+
+Ceahlău
+
+100,0
+
+100,0
+
+Ceahlău
+
+Cheile Bicazului - Hășmaș
+
+90,3
+
+99,7
+
+Cheile Bicazului - Hășmaș
+
+Cheile Nerei - Beușnița
+
+97,6
+
+100,0
+
+Cheile Nerei - Beușnița
+
+Cozia
+
+100,0
+
+100,0
+
+Cozia
+
+Defileul Jiului
+
+100,0
+
+99,6
+
+Defileul Jiului
+
+Domogled - Valea Cernei
+
+98,7
+
+99,4
+
+Domogled - Valea Cernei
+
+Munții Măcinului
+
+66,2
+
+99,6
+
+Munții Măcinului
+
+Munții Rodnei
+
+98,5
+
+100,0
+
+Munții Rodnei
+
+Piatra Craiului
+
+81,0
+
+87,1
+
+Piatra Craiului
+
+Retezat
+
+88,0
+
+100,0
+
+Retezat
+
+Semenic - Cheile Carasului
+
+96,3
+
+99,9
+
+Semenic - Cheile Carasului
+
+Tableau 3. UICN cat. I, III et IV ( % du Aire de parc national)
+
+National Park
+
+cat. Ia
+
+cat. III
+
+cat. IV
+
+total
+
+Buila - Vânturariţa
+
+Călimani
+
+Ceahlău
+
+Cheile Bicazului - Hășmaș
+
+Cheile Nerei - Beușnița
+
+Cozia
+
+Defileul Jiului
+
+Domogled - Valea Cernei
+
+Munții Măcinului
+
+Munții Rodnei
+
+Piatra Craiului
+
+Retezat
+
+Semenic - Cheile Carasului
+
+La plupart des parcs ont de nouveaux plans de gestion, avec des recherches de terrain de la dernière décennie.
+
+Au total, 58 habitats Natura 2000 ont été trouvés comme mentionné au moins une fois dans les SIC qui correspondent aux 13 parcs nationaux de Roumanie (tableau 4).
+
+Tableau 4. Habitats Natura 2000 mentionnés dans les 13 parcs nationaux de Roumanie.
+
+Nom de l'habitat (Gafta and Mountford 2008) - Avec des informations supplémentaires sur la syntaxonomie
+
+* Steppes salées et marais salés pannoniques
+
+Lacs eutrophes naturels avec végétation du Magnopotamion ou Hydrocharition
+
+Rivières alpines avec végétation ripicole herbacée - Montio Cardaminetalia
+
+Rivières alpines avec végétation ripicole ligneuse à Myricaria germanica
+
+Rivières alpines avec végétation ripicole ligneuse à Salix elaeagnos – Salicion eleagni
+
+Rivières des étages planitiaire à montagnard avec végétation du Ranunculion fluitantis et du Callitricho-Batrachion
+
+Landes alpines et boréales - Rhododendro - Vaccinietalia
+
+* Fourrés à Pinus mugo et Rhododendron hirsutum (Mugo-Rhododendretum hirsuti) -
+
+Rhododendron hirsutum n'est pas présent en Roumanie ; Sa place est prise par l'espèce vicariante Rhododendron myrtifolium
+
+* Fourrés de Salix spp. subarctiques - – Salicetalia hastatae
+
+* Fourrés péri-pannoniques subcontinentaux - – Syringo – Carpinion orientalis
+
+* Taillis caducifoliés ponto-sarmatiques - - Berberidion
+
+Formations à Juniperus communis sur landes ou pelouses calcaires
+
+* Pelouses rupicoles calcaires ou basiphiles de l'Alysso-Sedion albi
+
+Pelouses boréo-alpines siliceuses - Caricion curvulae et Salicion herbaceae
+
+Pelouses calcaires alpines et subalpines - – Seslerietalia albicantis
+
+Pelouses pannoniques rupicoles (Stipo-Festucetalia pallentis)
+
+Pelouses sèches semi-naturelles et faciès d'embuissonnement sur calcaires (Brometalia) (* sites d'orchidées remarquables)
+
+* Formations herbeuses à Nardus, riches en espèces, sur substrats silicieux des zones montagnardes (et des zones submontagnardes de l'Europe continentale) – Nardetalia
+
+* Pelouses steppiques sub-pannoniques – Festucion valesiacae
+
+* Steppes ponto-sarmatiques – Festucetalia vaginatae
+
+Prairies à Molinia sur sols calcaires, tourbeux ou argilo-limoneux (Molinion caeruleae)
+
+Mégaphorbiaies hygrophiles d'ourlets planitiaires et des étages montagnard à alpin – Adenostyletalia
+
+Prairies alluviales inondables du Cnidion dubii
+
+Prairies maigres de fauche de basse altitude (Alopecurus pratensis, Sanguisorba officinalis)
+
+Prairies de fauche de montagne - Arrhenatheretalia
+
+* Tourbières hautes actives – Sphagnetalia magellanici
+
+Tourbières hautes dégradées encore susceptibles de régénération naturelle
+
+Tourbières de transition et tremblantes – Scheuchzerietalia palustris
+
+* Sources pétrifiantes avec formation de travertins (Cratoneurion)
+
+Tourbières basses alcalines – Caricion davallianae
+
+* Formations pionnières alpines du Caricion bicoloris-atrofuscae
+
+Éboulis siliceux de l'étage montagnard à nival (Androsacetalia alpinae et Galeopsietalia ladani)
+
+Éboulis calcaires et de schistes calcaires des étages montagnard à alpin (Thlaspietea rotundifolii)
+
+* Éboulis médio-européens calcaires des étages collinéen à montagnard – Achnatherion calamagrostis
+
+Pentes rocheuses calcaires avec végétation chasmophytique – Papavero – Thymion pulcherrimi
+
+Pentes rocheuses siliceuses avec végétation chasmophytique – Veronicion baumgartenii
+
+Roches siliceuses avec végétation pionnière du Sedo-Scleranthion ou du Sedo albi-Veronicion dillenii
+
+Grottes non exploitées par le tourisme
+
+Hêtraies du Luzulo-Fagetum
+
+Hêtraies de l'Asperulo-Fagetum
+
+Hêtraies calcicoles médio-européennes du Cephalanthero-Fagion
+
+Chênaies-charmaies du Galio-Carpinetum - Lathyro hallersteinii - Carpinion
+
+* Forêts de pentes, éboulis ou ravins du Tilio-Acerion
+
+* Forêts alluviales à Alnus glutinosa et Fraxinus excelsior (Alno-Padion, Alnion incanae, Salicion albae)
+
+* Chênaies blanches orientales – Aceri tatarici - Quercion
+
+* Bois pannoniques à Quercus pubescens - Orno - Cotinion
+
+* Bois eurosibériens steppiques à Quercus spp. 
+
+Forêts illyriennes à Fagus sylvatica (Aremonio-Fagion)
+
+Chênaies-charmaies illyriennes (Erythronio-Carpinion)
+
+Forêts de chênes chevelus et chênaies pannoniennes balkaniques – Quercetalia cerris
+
+Forêts calcicoles Pinus sylvestris des Carpathes occidentales – Seslerio rigidae – Pinion sylvestris
+
+Hêtraies daciennes (Symphyto-Fagion)
+
+* Hêtraies de la Dobrogea – Fagion orientalis ( ?)
+
+Chênaies-charmaies daciennes – Aro orientalis - Carpinenion
+
+Bois de tilleuls argentés moesiens
+
+Forêts acidophiles à Picea des étages montagnard à alpin (Vaccinio-Piceetea)
+
+Forêts alpines à Larix decidua et/ou Pinus cembra
+
+* Pinèdes (sub-)méditerranéennes de pins noirs endémiques
+
+Discussions
+
+Analyse de chevauchement spatial
+
+Le chevauchement spatial entre différentes catégories de protection de la nature est assez important (Iojă et al., 2010). Les parcs nationaux sont un exemple de chevauchement spatial. Chaque parc national a un site Natura 2000 d'importance communautaire (SIC) correspondant, avec lequel il a une congruence complète ou partielle (tableau 2).
+
+Tableau 5 – Confirmation de Natura 2000 Habitats des SDF des 13 SIC associés aux PN de Roumanie (SDF version 26 février 2016). La confirmation est donnée par les MP correspondants. Nous avons extrait également la superficie estimée (ha) pour chaque habitat et son état de conservation (FV - favorable, U1 - défavorable - insuffisant, U2 - défavorable - mauvais, U - défavorable). La confirmation est exprimée en D - douteux (habitats qui n'ont pas été trouvés sur le terrain) ; N - nouvel habitat trouvé après les enquêtes sur le terrain, identifié comme récemment par le député ; N.O - nouveau selon d'autres sources (littérature) ; C - confirmé par le plan de gestion ; C.O - confirmé par d'autres sources (littérature) ; I. - informations insuffisantes ou contradictoires liées à l'habitat dans le plan de gestion ; I.O - information insuffisante provenant d'autres sources (littérature) ; No - non mentionné dans le plan de gestion, UN. - les associations de plantes mentionnées comme trouvées dans le parc par le plan de gestion, mais non attribuées aux habitats N2000 (par erreur) ; 1 - mentionné par le SDF uniquement.
+
+Steppes intérieures halophiles et
+
+Eaux dormantes
+
+C
+
+ Eaux courantes
+
+C
+
+D
+
+C
+
+C
+
+20
+
+U2
+
+C
+
+5
+
+1
+
+N
+
+N
+
+D
+
+N
+
+C
+
+1
+
+-
+
+-
+
+1
+
+-
+
+-
+
+1
+
+I.
+
+C
+
+Landes et fourrés tempérés
+
+C
+
+C
+
+C
+
+C
+
+C
+
+1
+
+C
+
+C
+
+N
+
+C
+
+N
+
+C
+
+3,7
+
+U2
+
+C
+
+C
+
+Fourrés
+
+N
+
+I.
+
+C
+
+C
+
+2
+
+FV
+
+D
+
+1
+
+C
+
+N
+
+I.
+
+-
+
+C
+
+C
+
+14
+
+FV
+
+C
+
+C
+
+N
+
+C
+
+C
+
+1
+
+N
+
+C
+
+C
+
+1
+
+C
+
+N
+
+N
+
+55
+
+U2
+
+N
+
+N
+
+Prairies humides semi-naturelles à hautes herbes
+
+D
+
+-
+
+-
+
+1
+
+C
+
+C
+
+C
+
+C
+
+C
+
+C
+
+1
+
+I.
+
+N
+
+10
+
+U1
+
+C
+
+N
+
+30
+
+FV
+
+1
+
+C
+
+C
+
+C
+
+C
+
+C
+
+1
+
+1
+
+1
+
+Bas-marais calcaires
+
+I.
+
+C
+
+C
+
+0,3
+
+FV
+
+1
+
+N
+
+I.
+
+I.
+
+-
+
+1
+
+-
+
+-
+
+Éboulis rocheux
+
+C
+
+27
+
+FV
+
+C
+
+N
+
+27
+
+FV
+
+C
+
+1
+
+N
+
+C
+
+40
+
+FV
+
+Pentes rocheuses avec végétation
+
+C
+
+C
+
+C
+
+C
+
+90
+
+-
+
+C
+
+1
+
+C
+
+N
+
+3
+
+FV
+
+Autres habitats rocheux
+
+C
+
+-
+
+C
+
+-
+
+C
+
+-
+
+-
+
+C
+
+-
+
+1
+
+Forêts de l'Europe tempérée
+
+C
+
+N
+
+N
+
+C
+
+C
+
+C
+
+1
+
+C
+
+C
+
+1
+
+C
+
+C
+
+C
+
+1
+
+-
+
+-
+
+1
+
+I.
+
+I.
+
+C
+
+C
+
+1
+
+C
+
+C
+
+C
+
+C
+
+C
+
+C
+
+1
+
+N
+
+1.3
+
+FV
+
+C
+
+C
+
+1
+
+C
+
+C
+
+1
+
+C
+
+N
+
+C
+
+N
+
+7
+
+FV
+
+C
+
+C
+
+C
+
+C
+
+N
+
+C
+
+C
+
+C
+
+1
+
+Forêts de conifères des montagnes tempérées
+
+C
+
+C
+
+C
+
+C
+
+C
+
+C
+
+C
+
+Forêts de conifères des montagnes
+
+C
+
+Le degré d'inclusion du parc national dans les SIC de Natura 2000 est en moyenne de 98,9 %, 12 parcs sont entièrement inclus dans les SIC de Natura 2000 (Retezat, Cheile Nerei-Beuşniţa, Munţii Rodnei, Ceahlău, Călimani, Cozia, Buila-Vânturariţa - avec inclusion 100 %, Domogled-Valea Cernei, Cheile Bicazului - Hăşmaş, Semenic - Cheile Carasului, Munţii Măcinului, Defileul Jiului - avec une inclusion supérieure à 99 %). Le seul parc avec inclusion partielle dans un SIC Natura 2000 est Piatra Craiului (87,1 %).
+
+En miroir, des 16 SIC qui coupent les parcs nationaux, 3 ne sont que des intersections accidentelles (moins de 1 % de la zone SIC se trouve à l'intérieur du PN) et ne sont pas mentionnés ici. À l'exclusion de ces 3 sites, le degré d'inclusion des 13 SIC dans leur parc national correspondant est en moyenne de 87,3 %.
+
+Trois SIC sont parfaitement identiques à leur parc correspondant : ROSCI0015 - Buila Vânturariţa, ROSCI0024 - Ceahlău, ROSCI0046 - Cozia. En dehors de ces 3, ROSCI0063 - Defileul Jiului est également complètement inclus dans le parc national (et comme nous l'avons vu ci-dessus, le parc est également inclus dans le SIC de 99,6 %), de sorte que le match spatial est presque parfait.
+
+Les autres 4 SIC sont largement inclus/ correspondant à leur PN (plus de 95 % d'inclusion) : ROSCI0031 - Cheile Nerei - Beuşniţa, ROSCI0069 - Domogled - Valea Cernei, ROSCI00125 - Munţii Rodnei, ROSCI0226 - Semenic - Cheile Carasului.
+
+Les 5 SIC restants ont un gradient variable d'inclusion dans les parcs naturels. Pour ROSCI0027 Cheile Bicazului - Hăşmaş, nous pouvons encore considérer qu'il est largement inclus dans le parc national (cca 90 %). ROSCI0217 Retezat se trouve dans un poste similaire (88 % inclus dans le NP). ROSCI0194 Piatra Craiului est 81 % inclus dans le PN.
+
+Il y a 2 SIC qui sont considérablement plus grands que leurs PN correspondants : ROSCI0123 Munţii Măcinului, seulement 66,2 % inclus dans le parc national, et de loin la plus grande différence est pour ROSCI0019 Călimani-Gurghiu, seulement 17,9 % inclus dans le PN de Călimani.
+
+Il est important de noter que pour les SIC supérieurs à leur PN correspondant, les SDF Natura 2000 ne peuvent pas être utilisés pour décrire le parc national, car le SDF s'adresse aux SIC et comprendra des habitats et des espèces qui se situent en dehors des limites du parc.
+
+UICN catégorie I, III, IV
+
+Dans les 13 parcs nationaux, il existe 82 zones protégées de l'UICN (catégories I, III, IV). Pour la plupart de ces zones protégées, il faut une législation claire. Par exemple, alors qu'il existe des zones officielles de conservation des parcs (Ordinul Ministrului nr. 552/ 2003), ils ne sont pas exprimés dans une désignation de l'UICN. Certains plans de gestion mentionnent cette zone de conservation comme catégorie UICN Ib (Piatra Craiului), mais il n'existe pas de législation officielle en Roumanie pour étayer cette inclusion.
+
+Un problème supplémentaire est l'absence d'une liste officielle de ces réserves dans la législation existante avec une attribution correcte aux catégories de l'UICN. La seule loi visant à inclure une liste centralisée de réserves (Legea nr. 5/ 2000) n'a pas mentionné la catégorie UICN. C'est probablement la principale cause des changements de catégorie de l'UICN dans la législation actuelle par rapport aux sources d'information antérieures (Toniuc et al., 1992). Les changements dans la catégorie de réserves de l'UICN sont inclus dans les plans de gestion sans informations supplémentaires sur la cause du changement, une pratique qui devrait changer.
+
+Il y a une différence de 26 désignations UICN entre l'article de Toniuc et al. de 1992 et les fichiers SIG du ministère (Annexe 1). Les changements les plus notables sont pour les réserves de la catégorie Ia de l'UICN qui sont principalement remplacées par la catégorie IV dans les fichiers SIG. Dans certains cas, ce changement se reflète également dans le Plan de gestion des parcs (par exemple, Cheile Nerei - Beuşniţa, Domogled - Valea Cernei, Semenic-Cheile Carașului), mais dans d'autres cas, les plans contredisent les fichiers SIG, avec des mentions claires de la Catégorie appropriée de l'UICN pour les réserves (p. ex. Ceahlău, Munţii Rodna).
+
+Cette situation a également des répercussions sur les données que le ministère rapporte aux organismes internationaux sur la protection de la nature. La plupart des erreurs trouvées dans la base de données nationale ont également été trouvées dans la base de données mondiale sur les aires protégées (WDPA) (Programme des Nations Unies pour l'Environnement). La WDPA est un projet conjoint du Programme des Nations Unies pour l'Environnement (PNUE, World Conservation Monitoring Center - WCMC) et l'UICN (Union Internationale pour la Conservation de la Nature). Ces erreurs nationales entraînent un manque d'informations correctes pour toutes les analyses impliquant les catégories I, III et IV de l'UICN qui incluent la Roumanie au niveau international.
+
+Analyse des habitats
+
+Dans les 13 parcs, sur la base des informations existantes (dernière version des formulaires de données standard et des plans de gestion et de la littérature (Coldea, 1990 ; Coldea, 1992)), nous avons compté 58 habitats Natura 2000 uniques. Ils représentent 61 % des 94 habitats confirmés en Roumanie (Gafta et Mountford, 2008). La superficie totale occupée par les 13 parcs est de 881.729 ha, ce qui représente environ 4 % de la Roumanie (Cristea, 2013).
+
+Corinne Land Cover indique que la plus grande partie des parcs nationaux de Roumanie (75 %) est couverte par les forêts (cca. 39 % de forêt feuillus - classe 311, 21 % de forêts de conifères - classe 312, 15 % de forêts mixtes - classe 313). Environ 9 à 10 % des parcs nationaux sont couverts par des prairies naturelles (classe 321) et 3 % avec des pâturages (classe 231). La superficie restante est répartie entre les landes et broussailles (classe 322) - cca. 6 %, bois de transition et arbustes (classe 324) - cca. 4 %, roches nues (classe 332) - 0,6 % et zones à faible épaisseur (classe 333) - 1,2 %.
+
+Forêts : bien qu'il existe une congruence limitée entre les données de Corinne Land Cover et les habitats réels présents sur le terrain, la couverture de la classe Corinne (311 - forêts feuillus) se reflète en partie dans le nombre d'habitats décrits dans le domaine. Ils sont 17 habitats avec des arbres à feuilles caduques dominants (Habitat type 91, Forêts de l'Europe tempérée). La très grande diversité de ces habitats s'explique par le fait que certains d'entre eux intègrent également la végétation des forêts mixtes trouvées dans les données Corinne Land Cover (classe 313). Le grand nombre d'habitats à Fagus sylvatica est également justifié par des classifications récentes qui confirment plusieurs alliances de hêtres en Roumanie (Willner et al., 2016). Certains de ces alliances ne présentent qu’une présence sporadique, et il faut donc faire attention à la mention des habitats correspondants (par exemple 91K0, 91L0).
+
+Une analyse des parcelles continues de forêts de feuillus à l'intérieur des parcs nationaux (basé sur les données de Corinne Land Cover 2006) montre que le parc national Cheile Nerei-Beuşniţa possède la plus grande parcelle de forêts de feuillus (près de 30 000 ha), suivi de près par le parc national Semenic - Cheile Carașului (environ 29 000 ha). La 3ème place est occupée par le parc national Domogled - Valea Cernei (la plus grande parcelle de cca. 16.000 ha). Les trois parcs sont situés dans le sud-ouest de la Roumanie.
+
+Pour les forêts de conifères, il existe seulement 3 types d'habitats décrits dans les parcs nationaux (2 dans le type d'habitat 94 - Forêts de conifères des montagnes tempérées, 1 dans le type d'habitat 95 - Forêts de conifères des montagnes méditerranéennes et macaronésiennes).
+
+La plus grande parcelle continue de forêts de conifères est dans le Retezat PN (15 000 ha), le 2e plus grand est en PN Călimani (environ 11 000 ha), et la 3e en PN Rodna (environ 5.500 ha). Ces trois parcs sont les plus représentatifs pour l’étage montagnard supérieure et sa végétation associée.
+
+Il existe 13 habitats de prairies décrits dans les 13 PN : 4 sont des Pelouses naturelles (type d'habitat 61), 4 sont des Formations herbeuses sèches semi-naturelles à faciès d'embuissonnement (type d'habitat 62), 3 sont des Prairies humides semi-naturelles à hautes herbes (type d'habitat 64) et 2 sont des Pelouses mésophiles (type d'habitat 65).
+
+Les habitats de Pelouses naturelles (type 61) sont souvent difficiles à cartographier en fonction des données de Corinne Land Cover. Par exemple, l'habitat 6150 comprend des prairies primaires de la ceinture alpine décrites par Carex curvula, Juncus trifidus, Festuca airoides (classe Juncetea trifidi), mais elle comprend également la végétation cryophilique de la classe Salicetea herbaceae (décrit par des espèces comme Luzula alpino-pilosa, Salix herbacea, Ranunculus crenatus). La végétation cryophile couvre de plus grandes surfaces seulement dans les montagnes où la ceinture alpine est très développée. Dans les chaînes de montagnes inférieures, mais aussi dans des montagnes supérieures vers leur limite climatique, ces prairies forment souvent une mosaïque avec d'autres communautés, ce qui est difficile à cartographier à 1 ha de résolution. Un bon exemple est représenté par des mosaïques avec de petits arbustes dominés par Rhododendron myrtifolium, Vaccinium myrtillus qui, selon la structure floristique, peut appartenir à l'habitat 6150 mais aussi à l'habitat 4060. En raison de leur composition en petits arbustes, ces prairies sont parfois observées par Corinne Land Cover comme landes et broussailles (Corinne classe 322). Un autre exemple est l'habitat 6110*, qui se produit sur éboulis rocheux et peut facilement être inclus par les données de couverture terrestre par satellite dans Corinne classe 333 (zones à faible surface végétale).
+
+Les deux plus grandes parcelles continues de prairies détectées par Corinne Land Cover à l'intérieur des parcs nationaux se trouvent à l'intérieur du Rodna Mts. (environ 4200 ha et 4400 ha). Le deuxième parc dans ce classement est Domogled - Valea Cernei, également avec 2 grands parcelles continus (approx. 3600, 3000 ha). Le troisième parc est Retezat, avec les 3 parcelles juxtaposées (cca. 1600, 1500 et 1000 ha). Ces prairies correspondent à des parties des types d'habitats 61, 62 et 65. D'autres parties de l'habitat type 62 et 65 sont incluses dans la classe Corinne Land Cover 231 (pâturages). Habitat type 64 est difficile à attribuer à une certaine classe Corinne Land Cover, car elle occupe souvent des zones petites ou linéaires près des rivières ou des forêts, qui sont invisibles à la résolution des données Corinne Land Cover.
+
+En ce qui concerne la classe des landes et broussailles de Corinne (classe 322), alors qu'il correspond de manière générale aux habitats de landes et fourrés Natura 2000, il existe également des limitations liées à leur correspondance. Certaines landes et petits arbustes sont inclus parfois dans les prairies, et l'inverse peut être valable en fonction de l'abondance locale (il y a souvent des mosaïques associant des prairies et des arbustes, surtout à haute altitude).
+
+Il y a 6 habitats Natura 2000 de landes et fourrés trouvés dans les parcs nationaux : 5 du type d'habitat Landes et fourrés tempérés, et un dans le type d'habitat Fourrés subméditerranéens et tempérés.
+
+Tourbières hautes, tourbières basses et bas-marais sont également souvent classés par Corinne Land Cover données dans des prairies, pelouses ou landes et broussailles. La classe correspondante Corinne (412, tourbières) couvre en Roumanie seulement des zones situées à l'extérieur des parcs nationaux. Il n'y a que 3 polygones détectés avec des tourbières (CLC classe 412) en Roumanie, tous avec une faible couverture (une dans le comté de Braşov dans la région de Hărman, une dans le comté d'Harghita et la dernière dans le comté de Bihor, près de la frontière hongro-roumaine).
+
+Au total, il y a 6 habitats de tourbières hautes, tourbières basses et bas-marais (classe d'habitat 7) décrits dans les parcs nationaux de Roumanie : 3 Tourbières acides à sphaignes (habitat type 71) et 3 Bas-marais calcaires (type d'habitat 72) et leur cartographie ne devraient être élaborée qu’en fonction des données collectées uniquement sur le terrain.
+
+Correspondant aux roches et aux Végétation clairsemée trouvées dans l'ensemble de données sur la couverture terrestre de Corinne, il n’existe que 6 habitats Natura 2000 de roches et d’éboulis trouvés à l'intérieur des parcs nationaux. Plus précisément, il existe 3 habitats de Pentes rocheuses avec végétation chasmophytique (type d'habitat 82) et 3 habitats d’Éboulis rocheux (type d'habitat 81).
+
+Pour ces habitats, il est important de noter que la couverture terrestre de Corinne est souvent insuffisamment discriminante dans leur détection. Les murs de roche verticaux et près verticaux sont difficiles à repérer utilisant l'imagerie satellitaire, d'autant plus si elles se produisent dans la ceinture forestière, où les arbres et les arbustes peuvent les masquer encore plus. Par exemple, les roches nues (Corinne, classe de couverture terrestre 332) ne sont présentes que dans 3 parcs nationaux : Domogled-Valea Cernei, Munţii Rodnei, Retezat. Cela contraste avec leur occurrence connue dans d'autres parcs tels que Cheile Bicazului-Hăşmaş, Piatra Craiului, Ceahlău pour ne citer que quelques-uns. Dans ces parcs, les parois des roches sont perçues parfois comme des forêts (diverses classes de Corinne), des Végétation clairsemée (Corinne classe 333) - par ex. les murs de roche exposés au sud de Ceahlău Mts., ou même comme Landes et broussailles (Corinne classe 322) -e.g. la pente rocheuse abrupte du nord-ouest des montagnes de Piatra Craiului.
+
+Outre les habitats déjà mentionnés, les SDF et les plans de gestion mentionnent également 7 autres habitats : l'habitat 8310 (Grottes non exploitées par le tourisme), l'habitat 1530 (*Steppes salées et marais salés pannoniques), 1 habitat d'eau stagnant - 3150 (Lacs eutrophes naturels avec végétation du Magnopotamion ou Hydrocharition) et 4 habitats d'eau courante (3220, 3230, 3240, 3260). Les habitats de l'eau sont également difficiles à cartographier avec une résolution de 1 ha, et leur couverture peut être sous-estimée à un niveau national en raison de cette limitation.
+
+Statut de conservation de l'habitat
+
+Sur le total des 265 mentions d'habitat des 13 SDF des parcs nationaux, pour 101, il n'y a aucune indication liée à l'état de conservation (il manque soit, comme dans le cas des PN il n’y a pas de plan de gestion, ou soit il y a aucune indication du statut dans le plan de gestion).
+
+Parmi les 164 autres mentions d'habitat pour lesquelles l'état de conservation a été évalué sur le terrain, 116 sont considérés comme étant dans un état favorable (cca. 70 %), 33 autres ont été mentionnés comme Défavorables - Inadéquats (cca. 20 %), 13 de ces mentions se trouvent dans le parc Cheile Nerei-Beuşniţa.
+
+Dix mentions d'habitat ont été considérées comme Défavorables - Mauvais (cca. 6 %). Sur les 10 mentions de Défavorables – Mauvais comme éléments de conservation, 9 se réfèrent à différents habitats du parc national Domogled - Valea Cernei. Plusieurs habitats forestiers (91E0 *, 91M0) de ce parc ont été endommagés par des clairières illégales, et certaines par le feu (habitat naturel 9530*) ; les habitats 3220, 6150, 6230, 6240* ont été endommagés par le surpâturage, l'habitat 3230 par des actions antropiques (pâturage, construction) mais aussi par des processus naturels d'érosion ; les habitats 4060, 4070 et 4080 ont été endommagés par le défrichage pour l'expansion des prairies ; L'habitat 6440 a été endommagé par la ruderalization ; l'habitat 6520 a été endommagé par une invasion avec Pteridium aquilinum et par une réduction de la population humaine qui utilisait les zones de foin. Le plan de gestion détaille chacune de ces situations, avec des causes et des mesures.
+
+En ce qui concerne la superficie occupée par chaque habitat, la plus grande zone mentionnée concerne l'habitat 91K0 - 32.260 ha - à l'intérieur du parc Domogled - Valea Cernei. La deuxième plus grande zone mentionnée pour un habitat dans un plan de gestion est pour l'habitat 9130 à Cheile-Nerei Beuşniţa (18.130 ha). Le troisième plus grand est pour l'habitat 9410 dans le parc Călimani (13,964 ha).
+
+Analyse de similitude
+
+La base de l'analyse de similarité est la mention de l'habitat. Dans les 13 parcs, il existe 296 mentions d'habitat (des 58 habitats uniques), avec une moyenne de 22,7 habitats par parc (5,95 SD). Le plus petit nombre d'habitats a été mentionné dans le parc national Munţii Măcinului (11), et le plus dans le parc national Domogled - Valea Cernei (38). Une explication possible du grand nombre d'habitats présents à Domogled - Valea Cernei se trouve à la fig. 3 - où ce parc est mentionné comme ayant les plus fortes amplitudes pour les précipitations et la température de tous les parcs.
+
+En ce qui concerne les habitats, les habitats les plus communs mentionnés sont ceux référencés en 9110 (Hêtraies du Luzulo-Fagetum), mentionnés dans 12 parcs et confirmés sur le terrain en 9 et 6430 (Mégaphorbiaies hygrophiles d'ourlets planitiaires et des étages montagnard à alpin), mentionné également dans 12 parcs et confirmé en 9. Pour les deux habitats, les 3 parcs qui ne confirment pas leur présence sont ceux qui ne possèdent pas de plan de gestion.
+
+Figure 2. La similitude des parcs nationaux en provenance de Roumanie fondée sur les habitats Natura 2000.
+
+Le parc le plus distinct en ce qui concerne les habitats Natura 2000 présents est Munţii Măcinului. Toutes les méthodes de regroupement le placent comme un cluster distinct. Les 12 autres parcs sont regroupés en deux grands ensembles : l’un rassemblant les parcs situés à des altitudes moyennes inférieures et dominés par des forêts de feuillus caducifoliés (Cozia, Defileul Jiului, Domogled - Valea Cernei, Cheile Nerei - Beuşniţa, Semenic - Cheile Carasului) l’ autre comprenant des parcs localisés à des altitudes plus élevées ou des conditions plus fraîches, dominés par des forêts mixtes et des forêts de conifères (Cheile Bicazului - Hăşmaş, Buila - Vânturariţa, Ceahlău, Piatra Craiului, Călimani, Munţii Rodnei et Retezat) (fig. 2).
+
+Chacun de ces deux ensembles a également des sous-groupes logiques : Dans l’ensemble dominé par des arbres à feuilles caduques, il existe un sous-groupe géographique, basé sur la répartition spatiale, avec les parcs localisés au sud-ouest de la Roumanie (Domogled, Cheile Nerei-Beuşniţa, Semenic - Cheile Carasului) et un deuxième sous-groupe composé des parcs des Carpates méridionales centrales (Cozia, Defileul Jiului).
+
+Dans le groupe dominé par des conifères, les parcs aux zones plus importantes réparties sur des substrats calcaires sont regroupés (Piatra Craiului, Ceahlău, Buila), de même que les parcs des domaines alpins et sous-alpins étendus ont été regroupés (Călimani, Munţii Rodna, Retezat). Une similitude réduite avec les deux sous-groupes est remarquée pour Cheile Bicazului.
+
+Dans le groupe dominé par des conifères, la similitude de l'habitat semble être liée aux conditions thermiques spécifiques (fig. 3). Les 7 parcs qui ont formé ce groupe ont les températures minimales annuelles les plus froides. Quant aux précipitations considérées comme pertinentes elles permettent de distinguer un sous-groupe au sein de ce groupe : les 3 parcs avec des précipitations annuelles plus élevées se sont regroupés (Retezat, Munţii Rodnei, Călimani) et 3 des 4 parcs avec les précipitations annuelles les plus basses ont également été regroupés (Piatra Craiului, Ceahlău, Buila). Il est intéressant de noter que Cheile Bicazului s'est fortement regroupé, car leurs conditions climatiques semblent très semblables à Ceahlău. Le sous-groupe distinct de Cheile Bicazului est probablement dû à la grande domination des forêts de conifères (Annexe 2), ce qui limite le nombre d'habitats.
+
+Comme l'analyse des groupes a révélé des grappes logiques, qui s'expliquent par des variables indépendantes (distance, climat, topographie, substrat), nous pouvons conclure que la plupart des habitats ont été répertoriés correctement. Cependant, cette analyse ne peut pas confirmer la présence ponctuelle d'habitats dans les parcs, ni elle ne supporte d'autres hypothèses liées à la couverture spatiale de ces habitats dans chaque parc (la résolution spatiale de Corinne Land Cover n’est pas suffisante pour les détecter).
+
+Reconnaissance
+
+IAS et GC reconnaissent le financement du Ministère Roumain de la Recherche - programme PN16 19 Biodiversités.
+
+Figure 3. La gamme et la densité des altitudes, des pentes (degrés), des précipitations annuelle (cm) et des températures minime (oC) dans les 13 Parcs Nationaux de Roumanie.
+
+Conclusion
+
+Comme plusieurs études l'ont montré, il y a un haut degré de chevauchement dans le réseau des aires protégées. Un bon exemple sont les Parcs nationaux et SIC Natura 2000 (Iojă et al., 2010 ; Cristea, 2013). Trois SIC sont parfaitement identiques à leur parc correspondant : ROSCI0015 - Buila Vânturariţa, ROSCI0024 - Ceahlău, ROSCI0046 - Cozia. Les 5 SIC restants ont un chevauchement spatial très élevé (plus de 95 %) : ROSCI0063 - Defileul Jiului, ROSCI0031 - Cheile Nerei - Beuşniţa, ROSCI0069 - Domoglé - Valea Cernei, ROSCI00125 - Munţii Rodnei, ROSCI0226 - Semenic - Cheile Carasului. Les 5 autres SIC ont un gradient variable d'inclusion dans les parcs naturels (ROSCI0027 Cheile Bicazului - Hăşmaş - cca. 90 %, ROSCI0217 Retezat 88 %, ROSCI0194 Piatra Craiului - 81 %, ROSCI0123 Munţii Măcinului - 66,2 %, ROSCI0019 Călimani- Gurghiu - 17,9 %).
+
+Les parcs nationaux de Roumanie couvrent un nombre varié de niches à différentes altitudes, expositions et pentes, qui abritent un nombre important d'habitats en rapport avec la proportion du territoire national qu'ils occupent (61 % des habitats dans 4 % de territoire national). Le degré de conservation de ces habitats est étroitement lié à leur capacité à abriter les espèces endémiques et rares de plantes et d'animaux. Parmi les habitats des parcs nationaux étudiés sur le terrain, environ 70 % sont considérés dans un état favorable, environ 20 % sont considérés dans un état défavorable - état inadéquat et 10 % défavorable dans un mauvais état.
+
+En ce qui concerne leur similitude, en dehors du PN Munţii Măcinului, plutôt distincts, il existe 2 grands groupes de parcs : l'un dominé par des forêts de feuillus et l'autre dominé par des forêts de conifères et forêts mixtes. Outre l'utilisation des terres, la similitude de l'habitat semble être liée à la répartition spatiale, mais aussi aux variables climatiques, topographiques et géologiques, ce qui implique une description générale des habitats dans les 13 parcs.
+
+Les plans de gestion constituent un grand pas en avant pour la conservation de la nature en Roumanie. En 2017, 9 des 13 parcs nationaux ont des plans de gestion approuvés par la loi. Cependant, il existe encore des points qui peuvent être améliorées, tels que l'harmonisation des plans, notamment en ce qui a trait aux réserves naturelles, mais aussi aux espèces et aux habitats. Ceci est particulièrement valable pour les parcs nationaux qui ne se chevauchent que partiellement dans les sites de Natura 2000, où un écart par rapport à la structure de l'habitat de Natura 2000 est évident (par exemple, PN Călimani ).
+
+L'adoption des habitats Natura 2000 comme norme pour décrire et cartographier la végétation dans les parcs nationaux peut être remise en question. Alors que la taxonomie de l'habitat de Natura 2000 permet un processus plus rapide pour la cartographie, elle fait cela en associant une végétation parfois assez distincte sous le même type d'habitat (par exemple, l'habitat 6150, qui contient à la fois les prairies Juncus trifidus et Carex curvula et les arbustes Salix herbacea qui se produisent chez les cryonival micro-niches).
+
+L'utilisation de Corinne Land Cover dans la description des habitats Natura 2000 n'est pas recommandée pour des études approfondies sur l'habitat, car la résolution spatiale n’est pas assez fine. La couverture terrestre peut représenter un point de départ pour les recherches sur le terrain, mais une recherche approfondie à plus grande échelle est nécessaire pour déterminer correctement les habitats existants et leurs limites.
+
+Il existe un besoin évident d'un projet national traitant des aires protégées nationales (désignation de l'UICN, catégories I à V). Ces zones protégées devraient avoir leurs propres formulaires de données standards, des limites spatiales claires et la description des habitats et des espèces, car elles sont traitées différemment par la littérature existante, par l'administration des parcs dans les plans de gestion et par le ministère dans les fichiers SIG.
+
+Acronymes
+
+NUTS - Nomenclature des Unités Territoriales Statistiques, UE - Union Européenne, UNESCO - Organisation des Nations Unies pour l'Education, la Science et la Culture, UICN - Union Internationale pour la Conservation de la Nature, RAMSAR - Convention de Ramsar sur les zones humides, WDPA - Programme des Nations Unies pour l'Environnement, WCMC - Centre de surveillance de la conservation de la nature (World Conservation Monitoring Center), PNUE - Programme des Nations Unies pour l'Environnement, ZPS – Natura 2000, Zone de protection spéciale (Équivalent anglais : SPA pour Special Protection Area, Directive 79/409 / CEE du Conseil du 2 avril 1979) , SIC – Natura 2000, site d'importance communautaire (Directive 92/43 / CEE sur les habitats de la Commission européenne), SDF - formulaire de données standard Natura 2000, SIG - Système d'information géographique, PN - Parc national, MP - Plan de gestion
+
+Bivand R., Keitt T, Rowlingson B. (2016) rgdal : Bindings for the Geospatial Data Abstraction Library ;
+
+Bivand R., Lewin-Koh N. (2017) maptools : Tools for Reading and Handling Spatial Objects ;
+
+Bivand R., Rundel C. (2017) rgeos : Interface to Geometry Engine - Open Source (GEOS) ;
+
+Borza A. (1924) Protecția naturii în România. Bul Grăd Bot Cluj 4 :3–27 ;
+
+Borza A. (1943) Documente privitoare la înființarea Parcului Național al Retezatului. Bul Com Monum Nat 11 :5–18 ;
+
+Coldea G. (1992) Cormofite. Sintaxonomia și descrierea asociațiilor vegetale. In : Popovici I (ed) Parcul Național Retez. Stud. Ecol. Ed. West Side Computers, Ed. Eus, Brașov, Chișinău, p 287 ;
+
+Coldea G. (1990) Muntii Rodnei, studiu geobotanic. Editura Academiei, București ;
+
+Cristea V. (2013) Biodiversity and integrated rural development in National Parks. Colloq Phytosociologiques XXIX :109–122 ;
+
+Decret nr. 237 (1950) Ocrotirea monumentelor naturii din Republica Populară Română. Consiliul de Miniștri ;
+
+Gafta D., Mountford O. (2008) Manual de interpretare a habitatelor Natura 2000 din România. Risoprint, Cluj-Napoca ;
+
+Gugerli F., Englisch T., Niklfeld H., et al. (2008) Relationships among levels of biodiversity and the relevance of intraspecific diversity in conservation – a project synopsis. Perspect Plant Ecol Evol Syst 10 :259–281. doi : 10.1016/j.ppees.2008.07.001 ;
+
+Hijmans R. J., van Etten J. (2012) raster : Geographic analysis and modeling with raster data ;
+
+Hotărârea de Guvern nr. 1057 (2013) - Planul de management al Parcului Naţional Piatra Craiului. Guvernul României ;
+
+Hotărârea de Guvern nr. 1066 (2010) Instituirea regimului de arie naturală protejată asupra unor zone din Rezervația Biosferei ”Delta Dunării” și încadrarea acestora în categoria rezervațiilor științifice. Guvernul României ;
+
+Hotărârea de Guvern nr. 1074 (2013) Planul de management al Parcului Național Munții Măcinului. Guvernul României ;
+
+Hotărârea de Guvern nr. 1143 (2007) Instituirea de noi arii naturale protejate. Guvernul României ;
+
+Hotărârea de Guvern nr. 1581 (2005) Instituirea regimului de arie naturală protejată pentru noi zone. Guvernul României ;
+
+Hotărârea de Guvern nr. 2151 (2004) Instituirea regimului de arie naturala protejata pentru noi zone. Guvernul României ;
+
+Hotărârea de Guvern nr. 230 (2003) Delimitarea rezervațiilor biosferei, parcurilor naționale și parcurilor naturale și constituirea administrațiilor acesotra. Guvernul României ;
+
+Hotărârea de Guvern nr. 35 (2011) Planul de management al Parcului Național Călimani. Guvernul României ;
+
+Iojă C. I., Pătroescu M., Rozylowicz L., et al. (2010) The efficacy of Romania’s protected areas network in conserving biodiversity. Biol Conserv 143 :2468–2476. doi : 10.1016/j.biocon.2010.06.013 ;
+
+Legea nr. 5 (2000) Planul de amenajare a teritoriului național - Secțiunea a III-a - zone protejate. Parlamentul României ;
+
+Legea nr. 49 (2011) Regimul ariilor naturale protejate. Parlamentul României ;
+
+Legea nr. 9 (1973) Protecția mediului înconjurător. Marea Adunare Națională ;
+
+Oksanen J., Blanchet F. G., Kindt R., et al. (2013) vegan : Community Ecology Package ;
+
+Ordinul Ministrului nr. 1060 (2016) Planul de management și Regulamentului Parcului Național Cozia și al siturilor Natura 2000 din zona acestuia ROSCI0046 Cozia și ROSPA0025 Cozia-Buila-Vânturarița. Ministerul Mediului, Apelor și Pădurilor ;
+
+Ordinul Ministrului nr. 1121 (2016) Planul de management și a Regulamentului Parcului Național Domogled - Valea Cernei și al siturilor Natura 2000 ROSCI0069 și ROSPA0035. Ministerul Mediului, Apelor și Pădurilor ;
+
+Ordinul Ministrului nr. 1151 (2016) Planul de management al Parcului Național Buila-Vânturarița, al siturilor Natura 2000 ROSCI0015 Buila-Vânturarița, ROSPA0025 Cozia-Buila-Vânturarița și al ariilor naturale protejate incluse în acestea. Ministerul Mediului, Apelor și Pădurilor ;
+
+Ordinul Ministrului nr. 1523 (2016) Planul de management și a Regulamentului Parcului Național Cheile Bicazului-Hășmaș și al siturilor Natura 2000 ROSCI0027 și ROSPA0018 Cheile Bicazului-Hășmaș (fără suprafața de suprapunere cu ROSCI0033 Cheile șugăului-Munticelu). Ministerul Mediului, Apelor și Pădurilor ;
+
+Ordinul Ministrului nr. 1642 (2016) Planul de management și a Regulamentului Parcului Național Cheile Nerei-Beușnișa și al siturilor Natura 2000 ROSCI0031 Cheile Nerei-Beușnița și ROSPA0020 Cheile Nerei-Beușnița. Ministerul Mediului, Apelor și Pădurilor ;
+
+Ordinul Ministrului nr. 1934 (2015) Planul de management și a Regulamentului Parcului Național Ceahlău. Ministerul Mediului, Apelor și Pădurilor ;
+
+Ordinul Ministrului nr. 1964 (2008) Instituirea regimului de arie naturalã protejatã a siturilor de importanţã comunitarã, ca parte integrantã a reţelei ecologice europene Natura 2000 în România. Ministerul Mediului și Dezvoltării Durabile ;
+
+Ordinul Ministrului nr. 2387 (2011) Modificarea Ordinului ministrului mediului și dezvoltării durabile nr. 1964/2007 privind instituirea regimului de arie naturală protejată a siturilor de importanță comunitară, ca parte integrantă a rețelei ecologice europene Natura 2000 în România - Anexe. Ministerul Mediului și Pădurilor ;
+
+Ordinul Ministrului nr. 552 (2003) Aprobarea zonarii interioare a parcurilor naționale și a parcurilor naturale, din punct de vedere al necesității de conservare a diversitatii biologice. Ministerul Agriculturii, Pădurilor, Apelor și Mediului ;
+
+Ordonanța de Urgență nr. 57 (2007) Regimul ariilor naturale protejate, conservarea habitatelor naturale, a florei şi faunei sălbatice. Guvernul României ;
+
+Toniuc N, Oltean M, Romanca G, Zamfir M (1992) List of protected areas in Romania (1932 - 1991). Ocrotirea Nat si a Mediu Inconj 36 :23–33 ;
+
+United Nations Environment Programme Protected Planet. https://protectedplanet.net/. Accessed 25 Apr 2017 ;
+
+Wickham H. (2009) ggplot2 : Elegant Graphics for Data Analysis. Springer-Verlag New York ;
+
+Willner W., Jiménez-Alfaro B., Agrillo E., et al. (2016) Classification of European beech forests : a Gordian Knot ? Appl Veg Sci 1–19. doi : 10.1111/avsc.12299 ;
+</texte></corps><partiesann lang="fr"><grbiblio><biblio><refbiblio id="rb1">Bivand R., Keitt T, Rowlingson B. (2016) rgdal : Bindings for the Geospatial Data Abstraction Library ;</refbiblio><refbiblio id="rb2">Bivand R., Lewin-Koh N. (2017) maptools : Tools for Reading and Handling Spatial Objects ; </refbiblio><refbiblio id="rb3">Bivand R., Rundel C. (2017) rgeos : Interface to Geometry Engine - Open Source (GEOS) ; </refbiblio><refbiblio id="rb4">Borza A. (1924) Protecția naturii în România. Bul Grăd Bot Cluj 4 :3–27 ;</refbiblio><refbiblio id="rb5">Borza A. (1943) Documente privitoare la înființarea Parcului Național al Retezatului. Bul Com Monum Nat 11 :5–18 ;</refbiblio><refbiblio id="rb6">Coldea G. (1992) Cormofite. Sintaxonomia și descrierea asociațiilor vegetale. In : Popovici I (ed) Parcul Național Retez. Stud. Ecol. Ed. West Side Computers, Ed. Eus, Brașov, Chișinău, p 287 ;</refbiblio><refbiblio id="rb7">Coldea G. (1990) Muntii Rodnei, studiu geobotanic. Editura Academiei, București ;</refbiblio><refbiblio id="rb8">Cristea V. (2013) Biodiversity and integrated rural development in National Parks. Colloq Phytosociologiques XXIX :109–122 ;</refbiblio><refbiblio id="rb9">Decret nr. 237 (1950) Ocrotirea monumentelor naturii din Republica Populară Română. Consiliul de Miniștri ;</refbiblio><refbiblio id="rb10">Gafta D., Mountford O. (2008) Manual de interpretare a habitatelor Natura 2000 din România. Risoprint, Cluj-Napoca ;</refbiblio><refbiblio id="rb11">Gugerli F., Englisch T., Niklfeld H., et al. (2008) Relationships among levels of biodiversity and the relevance of intraspecific diversity in conservation – a project synopsis. Perspect Plant Ecol Evol Syst 10 :259–281. doi : 10.1016/j.ppees.2008.07.001 ;</refbiblio><refbiblio id="rb12">Hijmans R. J., van Etten J. (2012) raster : Geographic analysis and modeling with raster data ; </refbiblio><refbiblio id="rb13">Hotărârea de Guvern nr. 1057 (2013) - Planul de management al Parcului Naţional Piatra Craiului. Guvernul României ;</refbiblio><refbiblio id="rb14">Hotărârea de Guvern nr. 1066 (2010) Instituirea regimului de arie naturală protejată asupra unor zone din Rezervația Biosferei ”Delta Dunării” și încadrarea acestora în categoria rezervațiilor științifice. Guvernul României ;</refbiblio><refbiblio id="rb15">Hotărârea de Guvern nr. 1074 (2013) Planul de management al Parcului Național Munții Măcinului. Guvernul României ;</refbiblio><refbiblio id="rb16">Hotărârea de Guvern nr. 1143 (2007) Instituirea de noi arii naturale protejate. Guvernul României ;</refbiblio><refbiblio id="rb17">Hotărârea de Guvern nr. 1581 (2005) Instituirea regimului de arie naturală protejată pentru noi zone. Guvernul României ;</refbiblio><refbiblio id="rb18">Hotărârea de Guvern nr. 2151 (2004) Instituirea regimului de arie naturala protejata pentru noi zone. Guvernul României ;</refbiblio><refbiblio id="rb19">Hotărârea de Guvern nr. 230 (2003) Delimitarea rezervațiilor biosferei, parcurilor naționale și parcurilor naturale și constituirea administrațiilor acesotra. Guvernul României ;</refbiblio><refbiblio id="rb20">Hotărârea de Guvern nr. 35 (2011) Planul de management al Parcului Național Călimani. Guvernul României ;</refbiblio><refbiblio id="rb21">Iojă C. I., Pătroescu M., Rozylowicz L., et al. (2010) The efficacy of Romania’s protected areas network in conserving biodiversity. Biol Conserv 143 :2468–2476. doi : 10.1016/j.biocon.2010.06.013 ;</refbiblio><refbiblio id="rb22">Legea nr. 5 (2000) Planul de amenajare a teritoriului național - Secțiunea a III-a - zone protejate. Parlamentul României ;</refbiblio><refbiblio id="rb23">Legea nr. 49 (2011) Regimul ariilor naturale protejate. Parlamentul României ;</refbiblio><refbiblio id="rb24">Legea nr. 9 (1973) Protecția mediului înconjurător. Marea Adunare Națională ;</refbiblio><refbiblio id="rb25">Oksanen J., Blanchet F. G., Kindt R., et al. (2013) vegan : Community Ecology Package ; </refbiblio><refbiblio id="rb26">Ordinul Ministrului nr. 1060 (2016) Planul de management și Regulamentului Parcului Național Cozia și al siturilor Natura 2000 din zona acestuia ROSCI0046 Cozia și ROSPA0025 Cozia-Buila-Vânturarița. Ministerul Mediului, Apelor și Pădurilor ;</refbiblio><refbiblio id="rb27">Ordinul Ministrului nr. 1121 (2016) Planul de management și a Regulamentului Parcului Național Domogled - Valea Cernei și al siturilor Natura 2000 ROSCI0069 și ROSPA0035. Ministerul Mediului, Apelor și Pădurilor ;</refbiblio><refbiblio id="rb28">Ordinul Ministrului nr. 1151 (2016) Planul de management al Parcului Național Buila-Vânturarița, al siturilor Natura 2000 ROSCI0015 Buila-Vânturarița, ROSPA0025 Cozia-Buila-Vânturarița și al ariilor naturale protejate incluse în acestea. Ministerul Mediului, Apelor și Pădurilor ;</refbiblio><refbiblio id="rb29">Ordinul Ministrului nr. 1523 (2016) Planul de management și a Regulamentului Parcului Național Cheile Bicazului-Hășmaș și al siturilor Natura 2000 ROSCI0027 și ROSPA0018 Cheile Bicazului-Hășmaș (fără suprafața de suprapunere cu ROSCI0033 Cheile șugăului-Munticelu). Ministerul Mediului, Apelor și Pădurilor ;</refbiblio><refbiblio id="rb30">Ordinul Ministrului nr. 1642 (2016) Planul de management și a Regulamentului Parcului Național Cheile Nerei-Beușnișa și al siturilor Natura 2000 ROSCI0031 Cheile Nerei-Beușnița și ROSPA0020 Cheile Nerei-Beușnița. Ministerul Mediului, Apelor și Pădurilor ;</refbiblio><refbiblio id="rb31">Ordinul Ministrului nr. 1934 (2015) Planul de management și a Regulamentului Parcului Național Ceahlău. Ministerul Mediului, Apelor și Pădurilor ;</refbiblio><refbiblio id="rb32">Ordinul Ministrului nr. 1964 (2008) Instituirea regimului de arie naturalã protejatã a siturilor de importanţã comunitarã, ca parte integrantã a reţelei ecologice europene Natura 2000 în România. Ministerul Mediului și Dezvoltării Durabile ;</refbiblio><refbiblio id="rb33">Ordinul Ministrului nr. 2387 (2011) Modificarea Ordinului ministrului mediului și dezvoltării durabile nr. 1964/2007 privind instituirea regimului de arie naturală protejată a siturilor de importanță comunitară, ca parte integrantă a rețelei ecologice europene Natura 2000 în România - Anexe. Ministerul Mediului și Pădurilor ;</refbiblio><refbiblio id="rb34">Ordinul Ministrului nr. 552 (2003) Aprobarea zonarii interioare a parcurilor naționale și a parcurilor naturale, din punct de vedere al necesității de conservare a diversitatii biologice. Ministerul Agriculturii, Pădurilor, Apelor și Mediului ;</refbiblio><refbiblio id="rb35">Ordonanța de Urgență nr. 57 (2007) Regimul ariilor naturale protejate, conservarea habitatelor naturale, a florei şi faunei sălbatice. Guvernul României ;</refbiblio><refbiblio id="rb36">Toniuc N, Oltean M, Romanca G, Zamfir M (1992) List of protected areas in Romania (1932 - 1991). Ocrotirea Nat si a Mediu Inconj 36 :23–33 ;</refbiblio><refbiblio id="rb37">United Nations Environment Programme Protected Planet. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="https://protectedplanet.net/" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://protectedplanet.net/</liensimple>. Accessed 25 Apr 2017 ;</refbiblio><refbiblio id="rb38">Wickham H. (2009) ggplot2 : Elegant Graphics for Data Analysis. Springer-Verlag New York ;</refbiblio><refbiblio id="rb39">Willner W., Jiménez-Alfaro B., Agrillo E., et al. (2016) Classification of European beech forests : a Gordian Knot ? Appl Veg Sci 1–19. doi : 10.1111/avsc.12299 ;</refbiblio></biblio></grbiblio></partiesann></article>
