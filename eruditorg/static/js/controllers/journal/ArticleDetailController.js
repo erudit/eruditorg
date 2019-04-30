@@ -173,14 +173,43 @@ export default {
       },
       callbacks: {
         open: function() {
-          // Put the figure caption above the figure.
+          var figure = $(this.currItem.el).parent('figure')
+          var grfigure = figure.parent('div.grfigure')
+
+          // Figure group text (figure numbers).
+          // To get only the figure group text and not the text from every children, we clone the
+          // element, select all the children, remove all the children, go back to first element and
+          // get the text.
+          var grfigure_number = grfigure.clone().children().remove().end().text()
+          // Figure group caption.
+          var grfigure_caption = grfigure.find('p.alinea')
+          // Figure number.
+          var figure_number = figure.find('p.no')
+          // Figure caption.
+          var figure_caption = figure.find('p.legende')
+
+          // Figure notes.
+          var figure_notes = figure.find('p.alinea')
+          // Figure source.
+          var figure_source = $('<p>').html(figure.find('cite.source').html())
+          // Figure group source.
+          var grfigure_source = $('<p>').html(grfigure.find('cite.source').html())
+
+          // Put the figure number(s) and caption(s) above the figure.
           $(this.content).find('.mfp-top-bar .mfp-title').prepend(
-            $(this.currItem.el).parent('figure').find('figcaption .legende').clone()
+            grfigure_number,
+            grfigure_caption.clone(),
+            figure_number.clone(),
+            figure_caption.clone(),
           );
-          // Put the figure notes under the figure.
+
+          // Put the figure note(s) and source(s) under the figure.
           $(this.content).find('.mfp-bottom-bar').prepend(
-            $(this.currItem.el).parent('figure').find('.alinea').clone()
+            figure_notes.clone(),
+            figure_source.clone(),
+            grfigure_source.clone(),
           );
+
           // Make sure the caption is not out of the window for big figures.
           $(this.content).parent('.mfp-content').css('margin-top',
             $(this.content).find('.mfp-top-bar').height() - 20
