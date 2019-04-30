@@ -8,22 +8,32 @@ class TargetSite(models.Model):
     """
     Target site where to display site messages.
     """
-    label = models.CharField(
+    TARGET_SITE_PUBLIC, TARGET_SITE_LIBRARY, TARGET_SITE_JOURNAL = 'P', 'L', 'J'
+    TARGET_SITE_CHOICES = (
+        (TARGET_SITE_PUBLIC, _('Public')),
+        (TARGET_SITE_LIBRARY, _('Tableau de bord des bibliothèques')),
+        (TARGET_SITE_JOURNAL, _('Tableau de bord des revues')),
+    )
+    site = models.CharField(
         verbose_name=_('Site cible'),
+        choices=TARGET_SITE_CHOICES,
         blank=False,
         null=False,
-        max_length=64,
-        help_text=_('Site cible, par exemple <em>Public</em>, <em>Tableau de bord des revues</em> \
-             ou <em>Tableau de bord des bibliothèques</em>.'),
+        default=TARGET_SITE_PUBLIC,
+        max_length=8,
+        help_text=_('Site cible'),
     )
-    """ The target site label. """
+    """ The target site. """
 
     class Meta:
         verbose_name = _('Site cible')
         verbose_name_plural = _('Sites cibles')
 
     def __str__(self):
-        return self.label
+        for key, site in self.TARGET_SITE_CHOICES:
+            if key == self.site:
+                return str(site)
+        return self.site
 
 
 class SiteMessage(models.Model):

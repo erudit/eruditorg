@@ -36,10 +36,13 @@ class SiteMessageManager(Manager):
         ).values('message', 'level')
 
     def public(self):
-        return self.active().filter(target_sites__label='Public')
+        from .models import TargetSite
+        return self.active().filter(target_sites__site=TargetSite.TARGET_SITE_PUBLIC)
 
     def journal(self):
-        return self.active().filter(target_sites__label='Tableau de bord des revues')
+        from .models import TargetSite
+        return self.active().filter(target_sites__site=TargetSite.TARGET_SITE_JOURNAL)
 
     def library(self):
-        return self.active().filter(target_sites__label='Tableau de bord des bibliothèques')
+        from .models import TargetSite
+        return self.active().filter(target_sites__site=TargetSite.TARGET_SITE_LIBRARY)

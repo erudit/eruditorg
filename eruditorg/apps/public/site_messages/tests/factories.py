@@ -15,10 +15,6 @@ class SiteMessageFactory(factory.django.DjangoModelFactory):
         model = SiteMessage
 
     @factory.post_generation
-    def post(self, create, extracted, **kwargs):
-        self.target_sites.set([TargetSiteFactory(label='Public')])
-
-    @factory.post_generation
     def target_sites(self, create, extracted, **kwargs):
         if not create:
             return
