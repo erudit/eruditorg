@@ -162,16 +162,12 @@ def get_coverpage(article):
     journal_logo = HyperlinkedImage(
         get_cached_datastream_content(article.issue.journal.fedora_object, 'logo'),
         hyperlink='https://www.erudit.org{}'.format(journal_path),
-        hAlign='RIGHT',
     )
-    # Convert image size from pixels to points.
-    journal_logo.drawWidth *= 0.55
-    journal_logo.drawHeight *= 0.55
     # Resize journal logo if it's wider than 80 points.
     journal_logo._restrictSize(80, 250)
     header_table = Table(
-        [(KeepInFrame(472, 250, header), KeepInFrame(80, 250, [journal_logo]))],
-        colWidths=(472, 80),
+        [(KeepInFrame(472, 250, header), journal_logo)],
+        colWidths=(462, 90),
     )
     header_table.setStyle(TableStyle([
         ('VALIGN', (0, 0), (-1, -1), 'TOP'),
@@ -370,13 +366,13 @@ def get_coverpage(article):
                 parsed = urlparse(copyright['img'])
                 path = STATIC_ROOT + '/img/licensebuttons.net/' + parsed.path
                 image = HyperlinkedImage(path, hyperlink=copyright['href'])
-                # Convert image size from pixels to points.
-                image.drawWidth *= 0.55
-                image.drawHeight *= 0.55
+                # Resize license logo if it's wider than 50 points.
+                image._restrictSize(50, 35)
                 copyrights.append(image)
                 copyrights.append(small_spacer)
             except OSError:
                 pass
+    copyrights = KeepInFrame(271, 55, copyrights)
 
     # Policy.
     policy_urls = {
@@ -582,7 +578,7 @@ class Line(Flowable):
 class HyperlinkedImage(Image):
 
     def __init__(self, filename, width=None, height=None, kind='direct', mask="auto", lazy=1,
-                 hAlign='CENTER', hyperlink=None):
+                 hAlign='LEFT', hyperlink=None):
         self.hyperlink = hyperlink
         super(HyperlinkedImage, self).__init__(filename, width, height, kind, mask, lazy, hAlign)
 
