@@ -18,6 +18,10 @@
     @include font-styles(mono);
   }
 
+  & > p {
+    display: inline-block;
+  }
+
   .no {
     color: $dark-grey;
     margin-right: 1em;
