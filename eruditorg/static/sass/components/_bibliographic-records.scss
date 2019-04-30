@@ -42,15 +42,14 @@
   line-height: 1.25;
   letter-spacing: normal;
   @include font-styles(serif);
+}
 
-  span + span {
-    &:not(.petitecap) {
+.book_detail {
+  .bib-record__title {
+
+    span + span {
       display: block;
       color: $dark-grey;
-    }
-
-    &.petitecap {
-      display: inline-block;
     }
   }
 }
