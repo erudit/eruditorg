@@ -7,12 +7,18 @@ from django.views.generic import TemplateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from apps.public.site_messages.models import SiteMessage
 from .shortcuts import get_managed_organisations
 from .viewmixins import OrganisationScopeMixin
 
 
 class HomeView(LoginRequiredMixin, OrganisationScopeMixin, TemplateView):
     template_name = 'userspace/library/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['library_site_messages'] = SiteMessage.objects.library()
+        return context
 
 
 class LibrarySectionEntryPointView(LoginRequiredMixin, RedirectView):

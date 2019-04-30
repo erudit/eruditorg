@@ -92,10 +92,19 @@
 }
 
 .site-messages {
-  position: fixed;
-  bottom: 0;
-  z-index: 100;
-  width: 100%;
+
+  &.public {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+  }
+
+  &.userspace {
+    .alert {
+      margin: 0 0 1em 0;
+    }
+  }
 
   p {
     padding: 1em;
