@@ -138,8 +138,7 @@ def get_coverpage(article):
     if article.type_display == article.TYPE_DISPLAY.get(article.ARTICLE_REPORT):
         html_title = str(article.type_display)
     else:
-        html_title = article.html_title if article.html_title is not None \
-            else _("[Article sans titre]")
+        html_title = article.html_title if article.html_title else _("[Article sans titre]")
     header.append(Paragraph(
         clean(html_title, small_caps_font='SpectralSC-Bold'),
         styles['h1'],

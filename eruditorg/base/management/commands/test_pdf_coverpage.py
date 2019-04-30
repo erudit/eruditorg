@@ -14,6 +14,7 @@ FEDORA_IDS = [
     'erudit:erudit.cqd27.cqd2435.600855ar',
     'erudit:erudit.crs123.crs04254.1055716ar',
     'erudit:erudit.documentation0784.documentation03466.1043718ar',
+    'erudit:erudit.ei50.ei03272.1042058ar',
     'erudit:erudit.espace1041666.espace1049539.8928ac',
     'erudit:erudit.etudfr13.etudfr04244.1055654ar',
     'erudit:erudit.globe134.globe1498639.1000860ar',

@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property
+from django.utils.translation import gettext as _
 
 from erudit.models import Article
 from erudit.models import Issue
@@ -156,7 +157,8 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
-        context['citation_title_metadata'] = article.title
+        context['citation_title_metadata'] = article.title if article.title \
+            else _('[Article sans titre]')
         context['citation_journal_title_metadata'] = article.get_erudit_object()\
             .get_formatted_journal_title()
         context['citation_references'] = article.get_erudit_object()\
