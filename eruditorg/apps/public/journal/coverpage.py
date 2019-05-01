@@ -225,9 +225,9 @@ def get_coverpage(article):
         styles['normal'],
     ))
     left_column.append(medium_spacer)
-    for publisher in article.issue.journal.publishers.all():
+    for publisher in article.erudit_object.publishers:
         left_column.append(Paragraph(
-            publisher.name,
+            publisher,
             styles['small'],
         ))
     left_column.append(large_spacer)

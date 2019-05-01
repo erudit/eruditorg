@@ -109,19 +109,6 @@ class Discipline(models.Model):
         return self.name
 
 
-class Publisher(models.Model):
-    """ A simple publisher. """
-    name = models.CharField(max_length=255, verbose_name=_('Nom'))
-
-    class Meta:
-        verbose_name = _('Éditeur')
-        verbose_name_plural = _('Éditeurs')
-        ordering = ['name', ]
-
-    def __str__(self):
-        return self.name
-
-
 class ThesisRepository(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
     name = models.CharField(max_length=200, verbose_name=_('Nom'))

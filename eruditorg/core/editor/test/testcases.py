@@ -2,7 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 
 from base.test.factories import UserFactory
-from erudit.test.factories import JournalFactory, PublisherFactory
+from erudit.test.factories import JournalFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
@@ -14,10 +14,9 @@ class BaseEditorTestCase(TestCase):
 
     def setUp(self):
         self.user = UserFactory()
-        self.publisher = PublisherFactory()
 
         # Add a journal with a member
-        self.journal = JournalFactory(publishers=[self.publisher])
+        self.journal = JournalFactory()
         self.journal.members.add(self.user)
 
         self.issue_submission = IssueSubmission.objects.create(

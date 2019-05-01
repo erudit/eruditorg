@@ -45,7 +45,7 @@ from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 
-from .core import Collection, Publisher, Language
+from .core import Collection, Language
 
 cache = caches['fedora']
 logger = structlog.get_logger(__name__)
@@ -132,15 +132,6 @@ class Journal(FedoraMixin, FedoraDated):
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ Fedora commons identifier. Used to implement the
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
-
-    publishers = models.ManyToManyField(
-        Publisher, related_name='journals', blank=True, verbose_name=_('Éditeurs'))
-    """ .. warning:: Not imported.
-
-        The publishers stored in this field are only displayed on the PDF cover page.
-        Everywhere else, the publishers are fetched from the ``erudit_object``.
-
-    The publishers of the journal """
 
     paper = models.NullBooleanField(
         default=None, verbose_name=_('Papier'),
@@ -1355,11 +1346,7 @@ class Article(FedoraMixin):
 
     @property
     def publisher_name(self):
-        publisher = self.issue.journal.publishers.first()
-        if publisher:
-            return publisher.name
-        else:
-            return ''
+        return self.erudit_object.publishers[0]
 
     # Other
     # -
