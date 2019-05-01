@@ -2,7 +2,7 @@
 
 from django.conf.urls import url
 
-from apps.userspace.library.stats.legacy import views
+from apps.userspace.library.stats import views
 
 app_name = "stats"
 
