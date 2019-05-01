@@ -1135,8 +1135,8 @@ class Article(FedoraMixin):
     def authors(self):
         return self.erudit_object.get_authors()
 
-    def get_formatted_authors(self, style=None):
-        return self.erudit_object.get_authors(formatted=True, style=style)
+    def get_formatted_authors(self, style=None, suffixes=True):
+        return self.erudit_object.get_authors(formatted=True, style=style, suffixes=suffixes)
 
     def get_formatted_authors_mla(self):
         return self.get_formatted_authors(style='mla')
@@ -1146,6 +1146,9 @@ class Article(FedoraMixin):
 
     def get_formatted_authors_chicago(self):
         return self.get_formatted_authors(style='chicago')
+
+    def get_formatted_authors_without_suffixes(self):
+        return self.erudit_object.get_authors(formatted=True, suffixes=False)
 
     @property
     @catch_and_log

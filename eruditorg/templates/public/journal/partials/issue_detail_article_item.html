@@ -50,7 +50,7 @@
   </h6>
   <div class="bib-record__metadata row">
     <p class="bib-record__authors col-sm-9">
-      {{ article.get_formatted_authors | safe }}
+      {{ article.get_formatted_authors_without_suffixes | safe }}
     </p>
     <p class="bib-record__pages col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}

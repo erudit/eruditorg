@@ -147,7 +147,7 @@ def get_coverpage(article):
 
     # Article authors.
     header.append(Paragraph(
-        article.get_formatted_authors(),
+        article.get_formatted_authors_without_suffixes(),
         styles['h2'],
     ))
 
