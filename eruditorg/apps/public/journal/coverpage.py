@@ -14,6 +14,9 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDocTemplate, Spacer
 from reportlab.platypus.tables import Table, TableStyle
+from urllib.parse import urlparse
+
+from erudit.fedora.cache import get_cached_datastream_content
 
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
@@ -56,7 +59,7 @@ def get_coverpage(article):
     pdf_buffer = io.BytesIO()
     template = SimpleDocTemplate(
         pdf_buffer,
-        # Letter size: 612px x 792px
+        # Letter size: 612 points by 792 points
         pagesize=letter,
         rightMargin=30,
         leftMargin=30,
@@ -151,12 +154,30 @@ def get_coverpage(article):
         styles['h2'],
     ))
 
-    # Grey line.
-    header.append(large_spacer)
-    header.append(grey_line)
-    header.append(large_spacer)
+    # Journal path.
+    journal_path = reverse('public:journal:journal_detail', kwargs={
+        'code': article.issue.journal.code,
+    })
+    # Journal logo.
+    journal_logo = HyperlinkedImage(
+        get_cached_datastream_content(article.issue.journal.fedora_object, 'logo'),
+        hyperlink='https://www.erudit.org{}'.format(journal_path),
+    )
+    # Resize journal logo if it's wider than 80 points.
+    journal_logo._restrictSize(80, 250)
+    header_table = Table(
+        [(KeepInFrame(472, 250, header), journal_logo)],
+        colWidths=(462, 90),
+    )
+    header_table.setStyle(TableStyle([
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ]))
+    story.append(header_table)
 
-    story.append(KeepInFrame(552, 250, header))
+    # Grey line.
+    story.append(large_spacer)
+    story.append(grey_line)
+    story.append(large_spacer)
 
     # -----------------------------------------------------------------------------
     # BODY
@@ -258,9 +279,6 @@ def get_coverpage(article):
     left_column.append(large_spacer)
 
     # Journal link.
-    journal_path = reverse('public:journal:journal_detail', kwargs={
-        'code': article.issue.journal.code,
-    })
     left_column.append(Paragraph(
         '<link href="{url}" color="#ff4242">{text}</link>'.format(
             url='https://www.erudit.org{}'.format(
@@ -337,13 +355,24 @@ def get_coverpage(article):
     copyrights = []
     copyrights.append(small_spacer)
     for copyright in article.copyrights:
-        if 'text' not in copyright:
-            continue
-        copyrights.append(Paragraph(
-            copyright['text'],
-            styles['small'],
-        ))
-        copyrights.append(small_spacer)
+        if 'text' in copyright:
+            copyrights.append(Paragraph(
+                copyright['text'],
+                styles['small'],
+            ))
+            copyrights.append(small_spacer)
+        elif 'href' in copyright and 'img' in copyright:
+            try:
+                parsed = urlparse(copyright['img'])
+                path = STATIC_ROOT + '/img/licensebuttons.net/' + parsed.path
+                image = HyperlinkedImage(path, hyperlink=copyright['href'])
+                # Resize license logo if it's wider than 50 points.
+                image._restrictSize(50, 35)
+                copyrights.append(image)
+                copyrights.append(small_spacer)
+            except OSError:
+                pass
+    copyrights = KeepInFrame(271, 55, copyrights)
 
     # Policy.
     policy_urls = {
@@ -395,7 +424,12 @@ def get_coverpage(article):
     # Logo.
     logo = []
     logo.append(small_spacer)
-    logo.append(Image(STATIC_ROOT + '/img/logo-erudit.png', width=75.75, height=25))
+    logo.append(HyperlinkedImage(
+        STATIC_ROOT + '/img/logo-erudit.png',
+        hyperlink='https://www.erudit.org/{lang}/'.format(lang=language),
+        width=75.75,
+        height=25,
+    ))
     logo.append(small_spacer)
 
     # Footer table
@@ -539,3 +573,20 @@ class Line(Flowable):
     def draw(self):
         self.canv.setStrokeColor(self.color)
         self.canv.line(0, self.height, self.width, 0)
+
+
+class HyperlinkedImage(Image):
+
+    def __init__(self, filename, width=None, height=None, kind='direct', mask="auto", lazy=1,
+                 hAlign='LEFT', hyperlink=None):
+        self.hyperlink = hyperlink
+        super(HyperlinkedImage, self).__init__(filename, width, height, kind, mask, lazy, hAlign)
+
+    def drawOn(self, canvas, x, y, _sW=0):
+        if self.hyperlink:
+            x1 = self._hAlignAdjust(x, _sW)
+            y1 = y
+            x2 = x1 + self.drawWidth
+            y2 = y1 + self.drawHeight
+            canvas.linkURL(url=self.hyperlink, rect=(x1, y1, x2, y2), thickness=0, relative=1)
+        super(HyperlinkedImage, self).drawOn(canvas, x, y, _sW)
