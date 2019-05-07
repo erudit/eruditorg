@@ -20,7 +20,7 @@ class StatsLandingView(
 
     menu_library = 'stats'
     permission_required = 'library.has_access_to_dashboard'
-    template_name = 'userspace/library/stats/legacy/landing.html'
+    template_name = 'userspace/library/stats/landing.html'
     report_base_url = ERUDIT_COUNTER_BACKEND_URL
     counter_jr1_form = CounterJR1Form
     counter_jr1goa_form = CounterJR1GOAForm

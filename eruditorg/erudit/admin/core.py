@@ -6,7 +6,6 @@ from ..models import Discipline
 from ..models import JournalType
 from ..models import Organisation
 from ..models import LegacyOrganisationProfile
-from ..models import Publisher
 from ..models import Language
 
 
@@ -41,7 +40,6 @@ class OrganisationAdmin(admin.ModelAdmin):
 
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(JournalType)
-admin.site.register(Publisher)
 admin.site.register(Language)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Discipline, DisciplineAdmin)

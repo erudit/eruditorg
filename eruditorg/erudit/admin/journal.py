@@ -35,7 +35,7 @@ class JournalAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'code', 'type', 'open_access', 'external_url', 'active', )
     list_display_links = ('__str__', 'code', )
     list_filter = ('collection', 'type', 'paper', 'open_access', 'active', )
-    filter_horizontal = ('members', 'publishers', )
+    filter_horizontal = ('members', )
 
     fieldsets = [
         ('Identification', {
@@ -47,11 +47,6 @@ class JournalAdmin(admin.ModelAdmin):
                 ('previous_journal', 'next_journal', ),
                 ('issn_print', 'issn_web', ),
                 ('external_url', 'redirect_to_external_url'),
-            ),
-        }),
-        (None, {
-            'fields': (
-                ('publishers',),
             ),
         }),
         (None, {

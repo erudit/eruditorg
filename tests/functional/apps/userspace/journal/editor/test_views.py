@@ -22,7 +22,7 @@ from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
-from erudit.test.factories import JournalFactory, PublisherFactory
+from erudit.test.factories import JournalFactory
 
 from apps.userspace.journal.editor.views import IssueSubmissionApproveView
 from apps.userspace.journal.editor.views import IssueSubmissionCreate
@@ -43,7 +43,7 @@ def user_can_edit_journal():
 class TestIssueSubmissionDetailView:
     def test_includes_the_status_tracks_into_the_context(self):
         # Setup
-        journal = JournalFactory(publishers=[PublisherFactory()], members=[UserFactory()])
+        journal = JournalFactory(members=[UserFactory()])
         issue_submission = IssueSubmissionFactory(journal=journal, volume="2", contact=journal.members.first())
 
         issue_submission.submit()

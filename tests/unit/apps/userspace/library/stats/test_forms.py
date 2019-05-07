@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime, timedelta
-from apps.userspace.library.stats.legacy.forms import CounterJR1GOAForm, CounterJR1Form, CounterReport
+from apps.userspace.library.stats.forms import CounterJR1GOAForm, CounterJR1Form, CounterReport
 
 from erudit.test.factories import OrganisationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory, JournalAccessSubscriptionPeriodFactory
