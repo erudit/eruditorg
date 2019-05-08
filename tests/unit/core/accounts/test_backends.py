@@ -16,7 +16,7 @@ class TestEmailBackend(TestCase):
         backend = EmailBackend()
         # Run & check
         self.assertEqual(
-            backend.authenticate(username='test_user', password='test_password'), user)
+            backend.authenticate(None, username='test_user', password='test_password'), user)
 
     def test_can_authenticate_a_user_using_his_email_address(self):
         # Setup
@@ -25,7 +25,7 @@ class TestEmailBackend(TestCase):
         backend = EmailBackend()
         # Run & check
         self.assertEqual(
-            backend.authenticate(username='david.cormier@erudit.org', password='test_password'),
+            backend.authenticate(None, username='david.cormier@erudit.org', password='test_password'),
             user)
 
     def test_can_properly_handle_an_invalid_username(self):
@@ -34,7 +34,7 @@ class TestEmailBackend(TestCase):
             username='test_user', email='david.cormier@erudit.org', password='test_password')
         backend = EmailBackend()
         # Run & check
-        self.assertIsNone(backend.authenticate(username='test_u', password='test_password'))
+        self.assertIsNone(backend.authenticate(None, username='test_u', password='test_password'))
 
     def test_can_properly_handle_an_invalid_email_address(self):
         # Setup
@@ -43,7 +43,7 @@ class TestEmailBackend(TestCase):
         backend = EmailBackend()
         # Run & check
         self.assertIsNone(
-            backend.authenticate(username='foobar@erudit.org', password='test_password'))
+            backend.authenticate(None, username='foobar@erudit.org', password='test_password'))
 
     def test_can_properly_handle_an_invalid_password(self):
         # Setup
@@ -52,7 +52,7 @@ class TestEmailBackend(TestCase):
         backend = EmailBackend()
         # Run & check
         self.assertIsNone(
-            backend.authenticate(username='david.cormier@erudit.org', password='bad_password'))
+            backend.authenticate(None, username='david.cormier@erudit.org', password='bad_password'))
 
     def test_can_properly_handle_multiple_users_with_the_same_email_address(self):
         # Setup
@@ -63,4 +63,4 @@ class TestEmailBackend(TestCase):
         backend = EmailBackend()
         # Run & check
         self.assertIsNone(
-            backend.authenticate(username='david.cormier@erudit.org', password='test_password'))
+            backend.authenticate(None, username='david.cormier@erudit.org', password='test_password'))
