@@ -90,7 +90,7 @@ class FedoraMixin:
         """
 
         if self._should_use_cache() and use_cache:
-            fedora_xml_content_key = 'fedora-object-{pid}'.format(pid=self.pid)
+            fedora_xml_content_key = self.localidentifier
             fedora_xml_content = cache.get(fedora_xml_content_key, None)
         else:
             fedora_xml_content_key = None
