@@ -22,7 +22,7 @@ def get_or_create_legacy_user(username, email, hashed_password=None):
     except user_model.DoesNotExist:
         try:
             user_model.objects.get(username=username)
-            logger.warn(
+            logger.warning(
                 "user.create.error",
                 msg="User already exists",
                 username=username

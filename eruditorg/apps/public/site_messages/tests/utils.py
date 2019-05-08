@@ -1,11 +1,12 @@
 import datetime
 
 from ..models import TargetSite
+from django.utils import timezone
 from .factories import SiteMessageFactory, TargetSiteFactory
 
 
 def generate_site_messages():
-    now = datetime.datetime.now()
+    now = timezone.now()
     delta = datetime.timedelta(days=1)
     future_date = now + delta
     past_date = now - delta

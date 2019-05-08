@@ -394,7 +394,7 @@ class Issue(FedoraMixin, FedoraDated):
     def title(self):
         if self.is_in_fedora:
             return self.erudit_object.theme
-        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        logger.warning("Issue not in Fedora", localidentifier=self.localidentifier)
         return self._title
 
     @title.setter
@@ -413,7 +413,7 @@ class Issue(FedoraMixin, FedoraDated):
     def html_title(self):
         if self.is_in_fedora:
             return self.erudit_object.html_theme
-        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        logger.warning("Issue not in Fedora", localidentifier=self.localidentifier)
         return self._title
 
     @html_title.setter
@@ -449,7 +449,7 @@ class Issue(FedoraMixin, FedoraDated):
     def first_page(self):
         if self.is_in_fedora:
             return self.erudit_object.first_page
-        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        logger.warning("Issue not in Fedora", localidentifier=self.localidentifier)
 
     @first_page.setter
     def first_page(self, value):
@@ -468,7 +468,7 @@ class Issue(FedoraMixin, FedoraDated):
     def last_page(self):
         if self.is_in_fedora:
             return self.erudit_object.last_page
-        logger.warn("Issue not in Fedora", localidentifier=self.localidentifier)
+        logger.warning("Issue not in Fedora", localidentifier=self.localidentifier)
 
     @last_page.setter
     def last_page(self, value):
@@ -704,7 +704,7 @@ class Issue(FedoraMixin, FedoraDated):
                     and bool(urlparse(urlhtml.text).netloc)
                 return external_pdf or external_html
             else:
-                logger.warn("Article not in issue summary", localidentifier=self.localidentifier)
+                logger.warning("Article not in issue summary", localidentifier=self.localidentifier)
         return False
 
     @property
@@ -735,7 +735,7 @@ class Issue(FedoraMixin, FedoraDated):
                 formatted=True
             )
 
-        logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+        logger.warning("Issue not in fedora", localidentifier=self.localidentifier)
 
         publication_period = self.publication_period if self.publication_period else str(self.year)
         number = self.number
@@ -765,7 +765,7 @@ class Issue(FedoraMixin, FedoraDated):
         if self.is_in_fedora:
             return self.erudit_object.get_volume_numbering(formatted=True)
 
-        logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+        logger.warning("Issue not in fedora", localidentifier=self.localidentifier)
 
         publication_period = self.publication_period if self.publication_period else self.year
 
@@ -791,7 +791,7 @@ class Issue(FedoraMixin, FedoraDated):
             first_page = self.erudit_object.first_page
             last_page = self.erudit_object.last_page
         else:
-            logger.warn("Issue not in fedora", localidentifier=self.localidentifier)
+            logger.warning("Issue not in fedora", localidentifier=self.localidentifier)
             first_page = self.first_page
             last_page = self.last_page
 

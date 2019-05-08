@@ -103,7 +103,7 @@ class FedoraMixin:
         except (RequestFailed, ConnectionError):  # pragma: no cover
             with configure_scope() as scope:
                 scope.fingerprint = ['fedora-warnings']
-                logger.warn("fedora.exception", pid=self.pid)
+                logger.warning("fedora.exception", pid=self.pid)
 
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
