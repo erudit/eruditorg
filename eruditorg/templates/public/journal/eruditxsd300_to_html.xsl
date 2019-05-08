@@ -516,11 +516,13 @@
           <span class="nompers">
             <xsl:call-template name="element_nompers_affichage">
               <xsl:with-param name="nompers" select="nompers[1]"/>
+              <xsl:with-param name="suffixes">false</xsl:with-param>
             </xsl:call-template>
             <xsl:if test="nompers[2][@typenompers = 'pseudonyme']">
               <xsl:text>, </xsl:text>
               <xsl:call-template name="element_nompers_affichage">
                 <xsl:with-param name="nompers" select="nompers[2]"/>
+                <xsl:with-param name="suffixes">false</xsl:with-param>
               </xsl:call-template>
             </xsl:if>
           </span>
@@ -535,6 +537,7 @@
               <xsl:for-each select="membre">
                 <xsl:call-template name="element_nompers_affichage">
                   <xsl:with-param name="nompers" select="nompers"></xsl:with-param>
+                  <xsl:with-param name="suffixes">false</xsl:with-param>
                 </xsl:call-template>
                 <xsl:if test="position() != last()"><xsl:text>, </xsl:text></xsl:if>
               </xsl:for-each>)
@@ -555,15 +558,13 @@
 
   <!-- author affiliations -->
   <xsl:template match="auteur" mode="affiliations">
-    <xsl:if test="contribution | affiliation | courriel | siteweb">
-      <xsl:for-each select=".">
-        <li class="auteur-affiliation">
-          <p>
-            <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations"/>
-          </p>
-        </li>
-      </xsl:for-each>
-    </xsl:if>
+    <xsl:for-each select=".">
+      <li class="auteur-affiliation">
+        <p>
+          <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations"/>
+        </p>
+      </li>
+    </xsl:for-each>
   </xsl:template>
 
   <xsl:template match="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations">
@@ -573,11 +574,13 @@
           <strong>
             <xsl:call-template name="element_nompers_affichage">
               <xsl:with-param name="nompers" select="self::nompers[1]"/>
+              <xsl:with-param name="suffixes">true</xsl:with-param>
             </xsl:call-template>
             <xsl:if test="self::nompers[2][@typenompers = 'pseudonyme']">
               <xsl:text>, </xsl:text>
               <xsl:call-template name="element_nompers_affichage">
                 <xsl:with-param name="nompers" select="self::nompers[2]"/>
+                <xsl:with-param name="suffixes">true</xsl:with-param>
               </xsl:call-template>
             </xsl:if>
           </strong>
@@ -2146,6 +2149,7 @@
   <!-- element_nompers_affichage -->
   <xsl:template name="element_nompers_affichage">
     <xsl:param name="nompers"/>
+    <xsl:param name="suffixes"/>
     <xsl:if test="$nompers[@typenompers = 'pseudonyme']">
       <xsl:text> </xsl:text>
       <xsl:text>{% trans "alias" %}</xsl:text>
@@ -2177,12 +2181,14 @@
         <xsl:with-param name="texte" select="$nompers/nomfamille"/>
       </xsl:call-template>
     </xsl:if>
-    <xsl:for-each select="$nompers/suffixe[child::node()]">
-      <xsl:text>, </xsl:text>
-      <xsl:call-template name="syntaxe_texte_affichage">
-        <xsl:with-param name="texte" select="."/>
-      </xsl:call-template>
-    </xsl:for-each>
+    <xsl:if test="$suffixes = 'true'">
+      <xsl:for-each select="$nompers/suffixe[child::node()]">
+        <xsl:text>, </xsl:text>
+        <xsl:call-template name="syntaxe_texte_affichage">
+          <xsl:with-param name="texte" select="."/>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:if>
   </xsl:template>
 
   <!-- syntaxe_texte_affichage -->

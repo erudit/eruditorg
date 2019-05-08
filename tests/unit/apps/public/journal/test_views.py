@@ -228,6 +228,19 @@ class TestIssueDetailSummary:
         html = response.content.decode()
         assert '<h6 class="bib-record__title">\n    \n    <a href="/fr/revues/journal/2000-issue/article/"\n    \n    title="Lire l\'article">\n    [Article sans titre]\n    </a>\n  </h6>' in html
 
+    def test_article_authors_are_not_displayed_with_suffixes(self):
+        article = ArticleFactory(
+            from_fixture='1058611ar',
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'localidentifier': article.issue.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that authors' suffixes are not displayed on the issue detail view.
+        assert '<p class="bib-record__authors col-sm-9">\n      Mélissa Beaudoin, Stéphane Potvin, Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, André Ngamini-Ngui et Alexandre Dumais\n    </p>' in html
+
 
 class TestArticleDetailView:
 
@@ -504,6 +517,22 @@ class TestArticleDetailView:
         assert '<h1 class="doc-head__title"><span class="titre">[Article sans titre]</span></h1>' in html
         # Check that "[Article sans titre]" is displayed in the breadcrumbs.
         assert '<li>\n  <a href="/fr/revues/journal/2000-issue/article/">[Article sans titre]</a>\n</li>' in html
+
+    def test_article_authors_with_suffixes(self):
+        article = ArticleFactory(
+            from_fixture='1058611ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that authors' suffixes are not displayed on the the author list under the article title.
+        assert '<li class="auteur doc-head__author">\n<span class="nompers">André\n      Ngamini-Ngui</span> et </li>' in html
+        # Check that authors' suffixes are displayed on the 'more information' section.
+        assert '<li class="auteur-affiliation"><p><strong>André\n      Ngamini-Ngui, †</strong></p></li>' in html
 
 
 @unittest.mock.patch.object(

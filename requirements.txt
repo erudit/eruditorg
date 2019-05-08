@@ -8,7 +8,7 @@ git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#e
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.6#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.44#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.45#egg=liberuditarticle
 babel==2.3.4
 beautifulsoup4==4.6.1
 cairocffi==0.9.0
@@ -27,7 +27,7 @@ django-environ==0.4.5
 django-fsm==2.6.1
 django-ipware==2.1.0
 django-isbn-field==0.5.2
-django-js-reverse==0.8.2
+django-js-reverse==0.9.0
 django-modeltranslation==0.13.1
 django-polymorphic==2.0.3
 django-post-office==3.0.4
@@ -65,12 +65,12 @@ python-stdnum==1.11       # via django-isbn-field
 pytz==2019.1              # via babel, django, influxdb
 rdflib==4.2.2
 redis==2.10.6             # via django-redis
-reportlab==3.5.20
+reportlab==3.5.21
 requests-toolbelt==0.9.1
 requests[socks]==2.21.0
 roman==3.2
 rules==2.0.1
-sentry-sdk==0.7.11
+sentry-sdk==0.7.14
 sickle==0.6.4
 simplejson==3.16.0
 six==1.12.0               # via django-isbn-field, html5lib, influxdb, isodate, python-dateutil, structlog
@@ -78,6 +78,6 @@ sqlparse==0.3.0
 structlog==19.1.0
 suds-py3==1.3.3.0
 tinycss2==0.6.1
-urllib3==1.24.2           # via requests, sentry-sdk
+urllib3==1.24.3           # via requests, sentry-sdk
 weasyprint==44
 webencodings==0.5.1       # via html5lib, tinycss2
