@@ -159,12 +159,16 @@ def get_coverpage(article):
         'code': article.issue.journal.code,
     })
     # Journal logo.
-    journal_logo = HyperlinkedImage(
-        get_cached_datastream_content(article.issue.journal.fedora_object, 'logo'),
-        hyperlink='https://www.erudit.org{}'.format(journal_path),
-    )
-    # Resize journal logo if it's wider than 80 points.
-    journal_logo._restrictSize(80, 250)
+    journal_logo_ds = get_cached_datastream_content(article.issue.journal.fedora_object, 'logo')
+    if journal_logo_ds is not None:
+        journal_logo = HyperlinkedImage(
+            journal_logo_ds,
+            hyperlink='https://www.erudit.org{}'.format(journal_path),
+        )
+        # Resize journal logo if it's wider than 80 points.
+        journal_logo._restrictSize(80, 250)
+    else:
+        journal_logo = []
     header_table = Table(
         [(KeepInFrame(472, 250, header), journal_logo)],
         colWidths=(462, 90),
