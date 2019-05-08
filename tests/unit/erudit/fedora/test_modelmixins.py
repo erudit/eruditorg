@@ -9,7 +9,8 @@ from eruditarticle.objects import EruditArticle
 
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.fedora.objects import ArticleDigitalObject
-
+from erudit.test.factories import ArticleFactory, IssueFactory, JournalFactory
+from unittest.mock import Mock
 
 class DummyModel(FedoraMixin):
     localidentifier = 'dummy139'
@@ -95,3 +96,18 @@ class TestFedoraMixin:
         # Check
         assert mock_cache.get.call_count == 1
         assert mock_cache.set.call_count == 0
+
+    @pytest.mark.django_db
+    @pytest.mark.parametrize('ModelFactory', (
+        ArticleFactory, IssueFactory, JournalFactory
+    ))
+    @unittest.mock.patch('erudit.fedora.modelmixins.cache')
+    def test_uses_localidentifier_of_the_model_as_the_cache_key(self, mock_cache, ModelFactory):
+        mock_cache.get.return_value = None
+        model = ModelFactory(localidentifier='test')
+        # Fetch the erudit_object to make a call to Fedora
+        _ = model.erudit_object
+        # The mock_calls list contains a list of call tuples
+        mock_name, call_args, call_kwargs = mock_cache.set.mock_calls[0]
+        key, content, duration = call_args
+        assert key == model.localidentifier
