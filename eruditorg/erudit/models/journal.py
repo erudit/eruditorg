@@ -339,32 +339,13 @@ class Journal(FedoraMixin, FedoraDated):
 
     @cached_property
     def first_issue(self):
-        if self.is_in_fedora:
-            pids = self.erudit_object.get_published_issues_pids()
-            if pids:
-                return Issue.from_fedora_pid(pids[-1])
-            else:
-                return None
-        else:
-            return self.published_issues.order_by('date_published').first()
+        # Published issues are ordered by reverse published date, hence last() to get the first one.
+        return self.published_issues.last()
 
-    # We cache this because published_issues is expensive and this is called often when generating
-    # the journal detail view.
     @cached_property
     def last_issue(self):
-        if self.is_in_fedora:
-            journal_pid = self.pid
-            pids = self.erudit_object.get_published_issues_pids()
-            # Fedora holds pids for all issues of the journal even when it has been renamed. When
-            # we query for last_issue for a renamed journal, we want it to return the last_issue
-            # of the journal *before* the rename, hence, the pid prefix filter below.
-            pids = [pid for pid in pids if pid.startswith(journal_pid)]
-            if pids:
-                return Issue.from_fedora_pid(pids[0])
-            else:
-                return None
-        else:
-            return self.published_issues.order_by('-date_published').first()
+        # Published issues are ordered by reverse published date, hence first() to get the last one.
+        return self.published_issues.first()
 
     def is_scientific(self):
         """ Helper method that returns True if this journal is a scientific journal """

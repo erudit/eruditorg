@@ -63,27 +63,31 @@ class TestJournal:
 
     def test_can_return_its_first_issue(self):
         journal = JournalFactory()
-        issue_1 = IssueFactory.create(
-            journal=journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=1))
-        IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now())
-        IssueFactory.create(
-            journal=journal, year=dt.datetime.now().year + 2,
-            date_published=dt.datetime.now() + dt.timedelta(days=30))
-        assert journal.first_issue == issue_1
+        first_unpublished_issue = IssueFactory(
+            journal=journal,
+            is_published=False,
+        )
+        first_published_issue = IssueFactory(
+            journal=journal,
+        )
+        last_published_issue = IssueFactory(
+            journal=journal,
+        )
+        assert journal.first_issue == first_published_issue
 
     def test_can_return_its_last_issue(self):
         journal = JournalFactory()
-        IssueFactory.create(
-            journal=journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now())
-        IssueFactory.create(
-            journal=journal, year=dt.datetime.now().year + 2, is_published=False,
-            add_to_fedora_journal=False, date_published=dt.datetime.now() + dt.timedelta(days=30))
-        assert journal.last_issue == issue_2
+        first_published_issue = IssueFactory(
+            journal=journal,
+        )
+        last_published_issue = IssueFactory(
+            journal=journal,
+        )
+        last_unpublished_issue = IssueFactory(
+            journal=journal,
+            is_published=False,
+        )
+        assert journal.last_issue == last_published_issue
 
     def test_last_issue_of_renamed_journal(self):
         # A renamed journal ends up with a list of issue pids of *all* its issues, even when
