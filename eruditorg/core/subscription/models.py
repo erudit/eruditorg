@@ -163,7 +163,7 @@ class JournalAccessSubscription(AbstractSubscription):
         if self.user is not None:
             return JournalAccessSubscription.TYPE_INDIVIDUAL
 
-        logger.warn(
+        logger.warning(
             'unknown.subscription',
             pk=self.pk,
             message="no user and no organisation specified"

@@ -36,7 +36,7 @@ class EmailBackend(ModelBackend):
 
         return user
 
-    def authenticate(self, username=None, password=None, **kwargs):
+    def authenticate(self, request, username=None, password=None, **kwargs):
         user = self._get_user(username)
         if user and user.check_password(password):
             return user

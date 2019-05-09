@@ -1,4 +1,5 @@
 import datetime as dt
+
 from dateutil.relativedelta import relativedelta
 import factory
 import pysolr
@@ -55,8 +56,8 @@ class JournalFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
     redirect_to_external_url = False
-    last_publication_year = dt.datetime.now().year
-    fedora_updated = dt.datetime.now()
+    last_publication_year = dt.datetime.now(tz=dt.timezone.utc).year
+    fedora_updated = dt.datetime.now(tz=dt.timezone.utc)
 
     class Meta:
         model = 'erudit.journal'
@@ -131,7 +132,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
     date_published = dt.datetime.now().date()
     year = dt.datetime.now().year
     is_published = True
-    fedora_updated = dt.datetime.now()
+    fedora_updated = dt.datetime.now(tz=dt.timezone.utc)
 
     class Meta:
         model = 'erudit.issue'
