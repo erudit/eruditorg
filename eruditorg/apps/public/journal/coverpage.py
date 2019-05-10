@@ -138,14 +138,43 @@ def get_coverpage(article):
     header.append(extra_large_spacer)
 
     # Article titles.
+    titles = article.erudit_object.get_titles()
     if article.type_display == article.TYPE_DISPLAY.get(article.ARTICLE_REPORT):
         html_title = str(article.type_display)
+        header.append(Paragraph(
+            clean(html_title, small_caps_font='SpectralSC-Bold'),
+            styles['h1'],
+        ))
+    elif titles['main'].title is None:
+        html_title = _("[Article sans titre]")
+        header.append(Paragraph(
+            html_title,
+            styles['h1'],
+        ))
     else:
-        html_title = article.html_title if article.html_title else _("[Article sans titre]")
-    header.append(Paragraph(
-        clean(html_title, small_caps_font='SpectralSC-Bold'),
-        styles['h1'],
-    ))
+        html_title = article.html_title
+        header.append(Paragraph(
+            clean(titles['main'].title, small_caps_font='SpectralSC-Bold'),
+            styles['h1'],
+        ))
+        if titles['main'].subtitle:
+            header.append(Paragraph(
+                clean(titles['main'].subtitle, small_caps_font='SpectralSC-Bold'),
+                styles['h1_grey'],
+            ))
+        header.append(small_spacer)
+        paral_titles = titles['paral'] if titles['paral'] else titles['equivalent']
+        for title in paral_titles:
+            header.append(Paragraph(
+                clean(title.title, small_caps_font='SpectralSC-Bold'),
+                styles['h1'] if title.subtitle else styles['h1_grey'],
+            ))
+            if title.subtitle:
+                header.append(Paragraph(
+                    clean(title.subtitle, small_caps_font='SpectralSC-Bold'),
+                    styles['h1_grey'],
+                ))
+            header.append(small_spacer)
     header.append(large_spacer)
 
     # Article authors.
@@ -189,12 +218,17 @@ def get_coverpage(article):
     # Left column.
     left_column = []
 
-    # Issue title & volume.
-    if article.issue.title:
-        left_column.append(Paragraph(
-            article.issue.title,
-            styles['normal'],
-        ))
+    # Issue themes.
+    themes = article.issue.erudit_object.get_themes(formatted=True, html=True)
+    if themes:
+        for index, theme in enumerate(themes[0]['names']):
+            left_column.append(Paragraph(
+                clean(theme),
+                styles['normal'] if index == 0 else styles['normal_grey'],
+            ))
+        left_column.append(small_spacer)
+
+    # Volume title.
     left_column.append(Paragraph(
         article.issue.volume_title,
         styles['normal'],
@@ -519,6 +553,16 @@ def get_stylesheet():
     stylesheet.add(ParagraphStyle(
         name='small_grey',
         parent=stylesheet['small'],
+        textColor=colors.grey,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='h1_grey',
+        parent=stylesheet['h1'],
+        textColor=colors.grey,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='normal_grey',
+        parent=stylesheet['normal'],
         textColor=colors.grey,
     ))
     return stylesheet
