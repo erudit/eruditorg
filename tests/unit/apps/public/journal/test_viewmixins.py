@@ -13,12 +13,15 @@ from erudit.models import Article
 from apps.public.journal.viewmixins import ContentAccessCheckMixin
 from apps.public.journal.viewmixins import SingleArticleMixin
 from apps.public.journal.viewmixins import SingleJournalMixin
+from apps.public.journal.viewmixins import ContributorsMixin
 from apps.public.journal.views import ArticleRawPdfView, ArticleXmlView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.models import UserSubscriptions
 from base.test.factories import get_anonymous_request, get_authenticated_request
-from erudit.test.factories import JournalFactory
+from erudit.test.factories import JournalFactory, JournalInformationFactory, ContributorFactory, \
+    IssueFactory
+from erudit.fedora import repository
 
 middleware = SubscriptionMiddleware()
 pytestmark = pytest.mark.django_db
@@ -322,3 +325,46 @@ class TestContentAccessCheckMixin:
             'ticket': article.issue.prepublication_ticket if ticket_provided else None,
         }
         assert view.content_access_granted == access_granted
+
+
+class TestContributorsMixin:
+
+    @pytest.mark.parametrize('use_journal_info, use_issue, expected_contributors', (
+        (False, False, {
+            'directors': [],
+            'editors': [],
+        }),
+        (False, True, {
+            'directors': [{'name': 'Claude Racine', 'role': None}],
+            'editors': [{'name': 'Marie-Claude Loiselle', 'role': 'Rédactrice en chef'}],
+        }),
+        (True, False, {
+            'directors': [{'name': 'Foo', 'role': 'Bar'}],
+            'editors': [],
+        }),
+        (True, True, {
+            'directors': [{'name': 'Foo', 'role': 'Bar'}],
+            'editors': [],
+        }),
+    ))
+    def test_get_contributors(self, use_journal_info, use_issue, expected_contributors):
+        issue = IssueFactory()
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open('tests/fixtures/issue/images1102374.xml', 'rb').read(),
+        )
+        journal_info = JournalInformationFactory(journal=issue.journal)
+        journal_info.editorial_leaders.add(
+            ContributorFactory(
+                type='D',
+                name='Foo',
+                role='Bar',
+                journal_information=journal_info,
+            )
+        )
+        mixin = ContributorsMixin()
+        contributors = mixin.get_contributors(
+            journal_info=journal_info if use_journal_info else None,
+            issue=issue if use_issue else None,
+        )
+        assert contributors == expected_contributors

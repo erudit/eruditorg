@@ -117,6 +117,14 @@ class JournalInformationFactory(factory.django.DjangoModelFactory):
         model = 'erudit.journalinformation'
 
 
+class ContributorFactory(factory.django.DjangoModelFactory):
+
+    journal_information = factory.SubFactory(JournalInformationFactory)
+
+    class Meta:
+        model = 'erudit.contributor'
+
+
 class IssueFactory(factory.django.DjangoModelFactory):
 
     @classmethod

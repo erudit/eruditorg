@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 
 from erudit.models import Article
 from erudit.models import Issue
@@ -220,3 +220,41 @@ class ArticleViewMetricCaptureMixin:
 
     def get_tracking_view_type(self):
         return self.tracking_view_type
+
+
+class ContributorsMixin:
+
+    def get_contributors(self, journal_info=None, issue=None):
+        contributors = {
+            'directors': [],
+            'editors': [],
+        }
+
+        # Check if a journal_info has been provided and if it has any contributors.
+        if journal_info is not None and journal_info.contributor_set.exists():
+            for director in journal_info.get_directors():
+                contributors['directors'].append({
+                    'name': director.name,
+                    'role': director.role,
+                })
+            for editor in journal_info.get_editors():
+                contributors['editors'].append({
+                    'name': editor.name,
+                    'role': editor.role,
+                })
+
+        # Otherwise, use the contributors from the provided issue.
+        elif issue is not None:
+            language = get_language()
+            for director in issue.erudit_object.get_directors():
+                contributors['directors'].append({
+                    'name': director.format_name(),
+                    'role': director.role.get(language, director.role.get('fr')),
+                })
+            for editor in issue.erudit_object.get_editors():
+                contributors['editors'].append({
+                    'name': editor.format_name(),
+                    'role': editor.role.get(language, editor.role.get('fr')),
+                })
+
+        return contributors
