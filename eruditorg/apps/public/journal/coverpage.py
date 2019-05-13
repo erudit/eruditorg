@@ -162,8 +162,7 @@ def get_coverpage(article):
                 styles['h1_grey'],
             ))
         header.append(small_spacer)
-        paral_titles = titles['paral'] if titles['paral'] else titles['equivalent']
-        for title in paral_titles:
+        for title in titles['paral'] + titles['equivalent']:
             header.append(Paragraph(
                 clean(title.title, small_caps_font='SpectralSC-Bold'),
                 styles['h1'] if title.subtitle else styles['h1_grey'],
