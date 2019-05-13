@@ -583,6 +583,22 @@ class TestArticleDetailView:
         assert '<p class="no"><span class="no">Figures 1 - 2</span></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></figure><figure class="figure" id="lifi2"><figcaption class="notitre"><p class="allertexte"><a href="#fi2">|^</a></p>' in html
         assert '<p class="no"><span class="no">Figures 1 - 2</span></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></figure><figure class="figure" id="lifi3"><figcaption class="notitre"><p class="allertexte"><a href="#fi3">|^</a></p>' in html
 
+    def test_article_multilingual_titles(self):
+        article = ArticleFactory(
+            from_fixture='1059303ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that paral titles are displayed in the article header.
+        assert '<span class="titreparal">Détection d’ADN d’<em>Ophiostoma ulmi</em> introgressé naturellement        dans les régions entourant les loci contrôlant la pathogénie et le type sexuel chez        <em>O. novo-ulmi</em></span>' in html  # noqa
+        # Check that paral titles are not displayed in summary section.
+        assert '<h4><span class="title">Détection d’ADN d’<em>Ophiostoma ulmi</em> introgressé naturellement dans les régions entourant les loci contrôlant la pathogénie et le type sexuel chez <em>O. novo-ulmi</em></span></h4>' not in html  # noqa
+
 
 @unittest.mock.patch.object(
     Issue,

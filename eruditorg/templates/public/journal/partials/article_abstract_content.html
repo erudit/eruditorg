@@ -5,11 +5,6 @@
   {% else %}
     <h3>{% include "public/journal/partials/article_abstract_title.html" with lang=abstract.lang %}</h3>
   {% endif %}
-  {% for title_group in titles %}
-  {% if title_group.lang == abstract.lang %}
-  <h4><span class="title">{{ title_group.title|safe }}</span>{% if title_group.subtitle %} <br/><span class="subtitle">{{ title_group.subtitle|safe }}</span>{% endif %}</h4>
-  {% endif %}
-  {% endfor %}
   {{ abstract.content|safe }}
   {% for lang, keywords in html_keywords.items %}
   {% if lang == abstract.lang %}
