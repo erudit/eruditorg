@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1058470ar" typeart="article" lang="fr" ordseq="5" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1058470ar</idpublic></infoarticle><revue id="im118" lang="fr en"><titrerev>Intermédialités</titrerev><sstitrerev>Histoire et théorie des arts, des lettres et des techniques</sstitrerev><titrerevparal lang="en">Intermediality</titrerevparal><sstitrerevparal lang="en">History and Theory of the Arts, Literature and Technologies</sstitrerevparal><titrerevabr>im</titrerevabr><idissnnum>1920-3136</idissnnum><directeur sexe="feminin"><fonction lang="fr">Directrice</fonction><nompers><prenom>Marion</prenom><nomfamille>Froger</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Nathalie</prenom><nomfamille>Casemajor</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Sophie</prenom><nomfamille>Toupin</nomfamille></nompers></redacteurchef></revue><numero id="im04484"><nonumero>32</nonumero><pub><periode>Automne</periode><annee>2018</annee></pub><pubnum><date typedate="publication">2019-04-02</date></pubnum><grtheme id="th1"><theme>cacher</theme><themeparal lang="en">concealing</themeparal></grtheme></numero><editeur><nomorg>Revue intermédialités (Presses de l’Université de Montréal)</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Revue Intermédialités</nomorg>, 2019</droitsauteur></admin><liminaire><grtitre>
+                <titre>Prises de vue clandestines comme exercice du (contre)pouvoir de l’art : Trevor Paglen et Mohamed Bourouissa reprennent le contrôle du visible</titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Katrin</prenom><nomfamille>Gattinger</nomfamille></nompers><affiliation><alinea>Université de Strasbourg, France</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>L’article soulève le potentiel subversif de démarches artistiques contemporaines qui se positionnent face à la domination du regard et de la production d’images en visant des territoires invisibles, inaccessibles ou interdits. À travers les analyses de deux projets artistiques réalisés illégalement en prison — <marquage typemarq="italique">Temps mort</marquage> de Mohamed Bourouissa et <marquage typemarq="italique">Recording Carceral Landscapes </marquage>de Trevor Paglen<marquage typemarq="italique"> </marquage>— et de plusieurs séries photographiques de Trevor Paglen investiguant sur des secrets de l’armée américaine ou sur les câbles Internet transatlantiques, l’auteure présente les modes opératoires et les enjeux de telles représentations « volées ». Aux yeux de l’auteure, si ces oeuvres dévoilent des vues inédites, elles le font pour inviter à penser différemment le réel et exemplifier des possibilités de résistance menées de l’intérieur de la société du contrôle.</alinea></resume><resume typeresume="resume" lang="en"><alinea>This article reveals the subversive potential of contemporary artistic approaches, which, by targeting invisible, inaccessible or forbidden spaces, position themselves against the domination of the gaze and of image production. Through the analyses of two artistic projects carried out illegally in prison—Mohamed Bourouissa’s<marquage typemarq="italique"> Temps mort</marquage> and Trevor Paglen’s<marquage typemarq="italique"> Recording Carceral Landscapes</marquage>—and of several photographic series by Trevor Paglen investigating themes such as American army secrets or transatlantic internet cables, the author presents the operating procedures and the challenges of such “stolen” representations. In her view, if these works reveal new sights, they do so in order to invite us to think differently about reality and to exemplify the possibilities of resistance that exist from within the society of control.</alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no><alinea>Aller voir ce qui se dérobe malgré les risques encourus serait un comportement normal, puisque d’après une expérience récemment réalisée à l’Université de Chicago, nous serions tou·te·s des Pandores<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi>. Assouvir sa curiosité en comblant un déficit d’information — et par là même de compréhension — n’entraîne cependant pas forcément la production et la publication d’images de ce que l’on trouve, même si à l’ère du téléphone portable et des réseaux sociaux, c’est un réflexe. Souvent liée au désir de mise en scène de soi et de ses propres exploits, cette démarche photographique est à distinguer des investigations en milieu hostile de personnes (journalistes-reporters, scientifiques, militant·e·s, artistes ou autres) à la recherche de vérités dissimulées et protégées au profit de divers pouvoirs, et visant à révéler ces dernières pour le bien de la communauté, pour la défense des droits humains et de la justice. Au moment où la journaliste et blogueuse anticorruption Daphne Caruana Galizia vient d’être assassinée à Malte<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>, les risques de ce type d’investigations « gênantes » prennent une nouvelle acuité. </alinea></para><para id="pa2"><no>2</no><alinea>Les pratiques artistiques sur lesquelles je voudrais attirer l’attention ne font certes pas craindre pour la vie de leurs auteurs et ne relèvent pas de l’investigation documentaire ou journalistique, même si elles en empruntent certains sujets, principes, méthodes ou outils. Mais ce qui m’intéresse dans les oeuvres analysées ici, ce sont leurs stratégies pour, d’une part, déjouer les « défenses » et capturer l’invisible, et, d’autre part, créer des images qui ne se limitent pas à la livraison d’une vérité cachée, d’un <marquage typemarq="italique">scoop</marquage> immédiatement perceptible, mais à la production de formes de stimuli de la pensée à investir par celui ou celle qui les regarde. Ainsi, des artistes sont animés par la recherche de ce qui résiste au visible et inventent maintes ruses pour le soumettre aux regards. Bien plus que les découvertes, ce sont les démarches et les processus qui font dans ces cas oeuvre. </alinea></para><para id="pa3"><no>3</no><alinea>On peut se demander, bien sûr, à quels bastions du secret il s’agit encore de s’attaquer aujourd’hui, alors que rien ne semble pouvoir résister à la visibilité. Le développement de technologies de plus en plus efficaces a en effet permis l’exploration par l’image de territoires jusque-là invisibles et a participé de ce fait à l’avancement des connaissances aussi bien dans le registre scientifique que politique et social. L’usage de ces moyens technologiques s’est démocratisé, voire généralisé, et la diffusion des données récoltées est souvent simultanée et totale grâce à Internet. Il en résulte une « transparence » du monde (dans le sens de « tout montrer, tout voir ») ambivalente qui « sert » et « assouvit » à la fois : s’y disputent le droit de savoir et le droit à la vie privée, les mesures sécuritaires et les défenses des libertés, l’appétit du gain et le désir de se soustraire à une société mercantile. Dans ce contexte de la vision totale, il me semble intéressant de suivre des artistes qui, en plus de « secrets », révèlent les mécanismes mêmes des pouvoirs institutionnels, socio-politiques et économiques qui régentent la visibilité. En effet, avoir la possibilité d’établir ce qui <marquage typemarq="italique">doit</marquage> être visible et ce qui <marquage typemarq="italique">doit</marquage> être dissimulé dépend aujourd’hui aussi bien d’une autorité instituée que de l’accès aux technologies les plus performantes. Ces dernières soutiennent efficacement les volontés de contrer, voire simplement de décourager, toutes les tentatives d’y résister. Dévoiler des secrets protégés ou occulter des informations importantes n’est pas donné à chacun, parce que les institutions qui détiennent aussi le pouvoir sur la visibilité sont les forces dominantes du monde — entreprises multinationales, médias, États et, dans un sens plus large, forces qui régentent le contrôle généralisé. Agir sur et dans ce champ de forces est d’autant plus difficile que cette société de contrôle, qu’Antonio Negri et Michael Hardt définissent comme l’Empire<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>, serait un « dispositif […] supranational, mondial, total<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi> ». Pour ces philosophes postmarxistes, l’Empire est constitué par le marché mondial qui s’unifie politiquement autour des pouvoirs militaires (seule autorité possédant l’armement), monétaires (la monnaie hégémonique domine la finance) et communicationnel (triomphe d’un seul modèle culturel, voire d’une langue universelle)<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi> : </alinea>
+        <bloccitation>
+          <alinea>[…] l’Empire développe des dispositifs de contrôle qui investissent tous les
+            aspects de la vie et les recomposent à travers des schémas de production et de
+            citoyenneté correspondant à la manipulation totalitaire des activités, de
+            l’environnement, des rapports sociaux et culturels, etc.<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>L’efficacité de cet ordre, qui s’appuie — tel que Gilles Deleuze l’avait déjà
+          remarqué<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi> — sur de nouvelles sociétés qui sont celles des
+          ordinateurs, restreint les possibilités de résistance des citoyen·ne·s, journalistes,
+          militant·e·s, activistes et artistes, mais ne les empêche pas de réclamer de la
+          transparence sur des sujets qui concernent la société entière (écologie, argent public,
+          justice), d’enquêter et parfois de dévoiler des agissements animés par le profit de
+          certains, pour qui « la visibilité est un piège<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi> ». Parce
+          qu’ils agissent de l’intérieur de cet ordre, ils peuvent le faire aussi (quasiment) avec
+          les outils et infrastructures technologiques qui les observent et contrôlent.</alinea></para><para id="pa4"><no>4</no><alinea>À ce titre, l’étude qui suivra des oeuvres des artistes Mohamed Bourouissa et Trevor Paglen cherche à analyser les motifs, les modes opératoires et les enjeux esthétiques, artistiques et politiques de leurs atteintes à la domination du régime de visibilité<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi>. </alinea></para></section1><section1 id="s1n2"><no>2</no><titre>Bourouissa : condamnation à l’invisibilité et production d’images hors la loi</titre><para id="pa5"><no>5</no><alinea>Reprendre en main la visibilité, c’est, dans le cas de Bourouissa, activer l’émancipation du prisonnier qui, selon le dispositif panoptique, « est vu, mais ne voit pas<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi> » (et surtout ne <marquage typemarq="italique">montre</marquage> pas, pourrait-on ajouter). C’est, pour Paglen, l’exposition de signes pourtant dissimulés du pouvoir invisible de la vision totale, c’est-à-dire l’exposition de cette « surveillance permanente, exhaustive, omniprésente [...] à la condition de se rendre elle-même invisible<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi> ». Les oeuvres de ces deux artistes n’interrogent donc pas seulement la nature de secrets bien gardés. Au-delà des vérités cachées, elles s’intéressent aux discours qui produisent ces secrets, tout en proposant, comme nous le verrons, des principes de résistance, aussi modestes soient-ils.</alinea></para><para id="pa6"><no>6</no>
+        <alinea>Le film <marquage typemarq="italique">Temps mort</marquage><renvoi id="re1no12" idref="no12" typeref="note">12</renvoi> (2009) de Mohamed Bourouissa (voir les figures 1 – 6) est marqué par les
+          conditions relatives à l’interdiction de sa production. En effet, ses images sont
+          partiellement produites illégalement. Il est monté en 2008 à partir d’un échange de SMS et
+          de MMS, de messages écrits et de séquences filmées, entre l’artiste et un prisonnier nommé
+          « JC ». Le film est produit à l’aide de téléphones portables dont la possession est
+          strictement prohibée en prison. </alinea>
+      </para><grfigure id="gf1">
+        <no>Figures 1 - 2</no>
+        <legende lang="fr">
+          <alinea>Photogrammes de la vidéo <marquage typemarq="italique">Temps mort</marquage>,
+            Mohamed Bourouissa, 2009, projection vidéo (couleur, son), 18 min.</alinea>
+        </legende>
+        <figure id="fi1">
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="figure" xlink:type="simple"></image>
+          </objetmedia>
+        </figure>
+        <figure id="fi2">
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="figure" xlink:type="simple"></image>
+          </objetmedia>
+        </figure>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">ADAGP Mohamed Bourouissa</marquage></source>
+      </grfigure><figure id="fi3">
+        <no>Figure 3</no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">« Merci grave. Ya moyen de fair d’otre video come si
+            le phone étai t yeux. Recharge. » </marquage>Vue de l’exposition <marquage typemarq="italique">Temps mort</marquage>, Mohamed Bourouissa, 2009, projection vidéo
+            (couleur, son), 18 min, galerie kamel mennour, Paris.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">Mohamed Bourouissa. Photo : Charles Duprat</marquage></source>
+      </figure><figure id="fi4">
+        <no>Figure 4</no>
+        <legende lang="fr">
+          <alinea>Photogramme de la vidéo <marquage typemarq="italique">Temps mort</marquage>,
+            Mohamed Bourouissa, 2009, projection vidéo (couleur, son), 18 min.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">ADAGP Mohamed Bourouissa</marquage></source>
+      </figure><figure id="fi5">
+        <no>Figure 5</no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">« Alors s ke c posible d fair d video du paysage la
+            nui ou bien la journé merci » </marquage>Vue de l’exposition <marquage typemarq="italique">Temps mort</marquage>, Mohamed Bourouissa, 2009, projection vidéo
+            (couleur, son), 18 min, galerie kamel mennour, Paris.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">Mohamed Bourouissa. Photo : Charles Duprat</marquage></source>
+      </figure><figure id="fi6">
+        <no>Figure 6</no>
+        <legende lang="fr">
+          <alinea>Photogramme de la vidéo <marquage typemarq="italique">Temps mort</marquage>,
+            Mohamed Bourouissa, 2009, projection vidéo (couleur, son), 18 min.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im6" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">ADAGP Mohamed Bourouissa</marquage></source>
+      </figure><para id="pa7"><no>7</no>
+        <alinea>L’objet du délit est au coeur d’« un <marquage typemarq="italique">deal</marquage>
+          d’intimité<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi> » : Bourouissa envoie régulièrement des
+          recharges téléphoniques au détenu, qui de son côté réalise en cachette des images de
+          l’intérieur du centre de détention, c’est-à-dire de ses quelques mètres carrés d’intimité
+          dont il envoie les clichés par MMS à l’artiste. Le film montre des séquences représentant
+          les environnements respectifs des deux collaborateurs et des plans fixes sur des textos
+          qui apparaissent sur l’écran du téléphone de l’artiste (voir les figures 7 - 10).
+        </alinea>
+      </para><figure id="fi7">
+        <no>Figure 7</no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">« G fai d videos sur panam. tu veu ke je te les
+            envoi ? » </marquage>Vue de l’exposition <marquage typemarq="italique">Temps
+            mort</marquage>, Mohamed Bourouissa, 2009, projection vidéo (couleur, son), 18 min,
+            galerie kamel mennour, Paris.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im7" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">Mohamed Bourouissa. Photo : Charles Duprat</marquage></source>
+      </figure><figure id="fi8">
+        <no>Figure 8</no>
+        <legende lang="fr">
+          <alinea>Vue de l’exposition <marquage typemarq="italique">Temps mort</marquage>, Mohamed
+            Bourouissa, 2009, projection vidéo (couleur, son), 18 min, galerie kamel mennour,
+            Paris.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im8" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">Mohamed Bourouissa. Photo : Charles Duprat</marquage></source>
+      </figure><figure id="fi9">
+        <no>Figure 9</no>
+        <legende lang="fr">
+          <alinea>Photogramme de la vidéo <marquage typemarq="italique">Temps mort</marquage>,
+            Mohamed Bourouissa, 2009, projection vidéo (couleur, son), 18 min.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im9" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">ADAGP Mohamed Bourouissa</marquage></source>
+      </figure><figure id="fi10">
+        <no>Figure 10</no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">« Si tu pouvai fair d video d kelk1 entrain d bedav
+            sans voir le visage. Merci bocou! » </marquage>Vue de l’exposition <marquage typemarq="italique">Temps mort</marquage>, Mohamed Bourouissa, 2009, projection vidéo
+            (couleur, son), 18 min, galerie kamel mennour, Paris.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im10" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <marquage typemarq="italique">Mohamed Bourouissa. Photo : Charles Duprat</marquage></source>
+      </figure><para id="pa8"><no>8</no>
+        <alinea>Petit à petit, d’un plan à l’autre, le spectateur et la spectatrice suivent la
+          construction du film, tout comme celle d’une relation amicale. On apprend par exemple que
+          Bourouissa a donné des indications à JC sur le sujet, la durée, le point de vue à capter,
+          en lui envoyant par moments des modèles vidéo. Après que les modèles et les « copies » ont
+          été montés de façon à se suivre directement, on peut voir les mêmes gestes se poursuivant
+          d’un univers à l’autre, liant deux territoires, celui de l’enfermement et celui du
+          dehors : deux lavabos différents sont lavés consécutivement par une main; des pieds filmés
+          en plongée marchent sur un sol en skaï, puis sur la neige, sans que la marche semble
+          s’interrompre; un travelling vidéo de 360 degrés par-dessus les toits de Paris est
+          prolongé par le même mouvement réalisé à l’intérieur de la cellule aux murs si proches;
+          une main caresse un corps, puis une deuxième, un autre corps. Dans cette prolongation d’un
+          même mouvement ou d’un même geste d’un plan et d’un espace à l’autre, Christine Buignet
+          voit « une quasi-hybridation, [...] une métaphore du lien qui s’est créé et a engendré ce
+          projet artistique<renvoi id="re1no14" idref="no14" typeref="note">14</renvoi> ». Le protocole du modèle n’est
+          cependant pas systématique, il n’est qu’un point de départ et laisse la place à des envois
+          et à échanges amicaux, à des initiatives, voire à des prises de risque<renvoi id="re1no15" idref="no15" typeref="note">15</renvoi>, notamment quand JC trouve par hasard la porte de sa cellule
+          ouverte et s’aventure — en échappant à la surveillance — dans les couloirs de la prison,
+          tout en filmant son exploit de liberté, toute relative.</alinea>
+      </para><para id="pa9"><no>9</no><alinea>La plupart des gestes filmés pour <marquage typemarq="italique">Temps mort</marquage> relèvent d’une certaine banalité dès lors qu’on ne prend pas en considération leur conditionnement ou encore celui du tournage. Les images, elles, sont de médiocre qualité (floues, pixélisées, en basse définition, aux couleurs « bavantes »), et les échanges textuels intégrés dans le montage sont déterminés par le type d’échanges propre aux téléphones portables : verlan, argot, abréviations, etc.<renvoi id="re1no16" idref="no16" typeref="note">16</renvoi>. Pour Julie Portier, « [l]’aridité du langage “texto” et la pauvreté des images donnent [...] une intensité au hors-champ, dans lequel se situe l’incommunicabilité du sentiment d’enfermement [...]<renvoi id="re1no17" idref="no17" typeref="note">17</renvoi> ». Ces images créent par leur basse définition une familiarité avec les images d’amateurs non dépourvues d’une certaine poésie, avec les <marquage typemarq="italique">poor images</marquage>, « images pauvres », théorisées par Hito Steyerl<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi>, réalisatrice de films documentaires, artiste et écrivaine. Les conditions de production de ces « images pauvres » prises en cachette, à l’insu des sujets et « à la sauvette », ou encore « piquées » sur Internet, influent sur leur cadrage, netteté et audibilité. Si la faible résolution des images pauvres atteste en général l’appropriation et le déplacement, comme l’écrit Steyerl, et qu’elle est souvent associée à l’urgence, à l’immédiateté et à la catastrophe, l’indéfinition visuelle des images de <marquage typemarq="italique">Temps mort</marquage>, quant à elle, révèle la « dimension illicite et dangereuse de l’enregistrement<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi> ». Cette dernière est conditionnée par l’illégalité. Et c’est bien là que réside le principal intérêt de telles images : parce que le téléphone est le support d’une relation hors la loi, il devient celui d’une résistance, celle de « faire circuler des signes de liberté dans un espace qui la contraint<renvoi id="re1no20" idref="no20" typeref="note">20</renvoi> » et de réaliser par là-même « l’inversion effective des pouvoirs du regard<renvoi id="re1no21" idref="no21" typeref="note">21</renvoi> ».</alinea></para><para id="pa10"><no>10</no><alinea>En effet, en tant qu’<marquage typemarq="italique">objet</marquage> visé par le regard panoptique, le prisonnier JC saisit l’occasion de devenir, à travers l’objectif du téléphone lui-même, <marquage typemarq="italique">sujet</marquage> regardant, sujet maîtrisant la production de son image et de son conditionnement (contrairement aux documentaires télévisuels sur les prisons). Le procédé de Bourouissa sort cette personne — mais aussi son environnement, voire le rapport concret, tangible, quotidien à l’enfermement — de l’invisibilité générale en l’exposant dans des lieux publics, et notamment ceux de l’art<renvoi id="re1no22" idref="no22" typeref="note">22</renvoi>, qui l’accueillent, permettant ainsi une sorte d’« évasion virtuelle<renvoi id="re1no23" idref="no23" typeref="note">23</renvoi> ». C’est une manière de « retourner la caméra en faisant du sujet désigné par l’image médiatique le chef opérateur d’une image artistique<renvoi id="re1no24" idref="no24" typeref="note">24</renvoi> », c’est-à-dire « de permuter le point de vue de l’image médiatique et d’en contredire les codes<renvoi id="re1no25" idref="no25" typeref="note">25</renvoi> ». Ainsi, le regard du spectateur peut pénétrer dans une intimité du quotidien carcéral de la privation de liberté, tout en échappant au discours <marquage typemarq="italique">sur</marquage> cet univers et <marquage typemarq="italique">sur</marquage> les individus qui s’y trouvent. C’est une manière de s’approprier, malgré l’interdiction et avec le soutien de l’artiste, le pouvoir du regard et le pouvoir de produire et de diffuser des images. C’est aussi, pour le détenu, un moyen de reprendre le contrôle d’une représentation de soi dont il est privé de fait.</alinea></para><para id="pa11"><no>11</no><alinea>À travers <marquage typemarq="italique">Temps mort</marquage>, Mohamed Bourouissa et JC rendent publics les aspects habituellement « cachés » de la vie des personnes dans une institution carcérale : l’intimité de pratiques aussi bien banales (faire la vaisselle, arroser une plante) que défendues (utiliser un téléphone, sortir dans le couloir), le désir de partager ce qu’on vit et de créer des relations. Ils résistent par là, admirablement, non seulement à une invisibilité imposée, à l’abrutissement par l’ennui et à la privation de contacts, mais aussi aux clichés imaginaires ou télévisuels sur les détenus.</alinea></para></section1><section1 id="s1n3"><no>3</no><titre>Paglen : Rendre visibles les forces et intérêts qui oeuvrent à couvert </titre><para id="pa12"><no>12</no><alinea>L’artiste, auteur et géographe californien Trevor Paglen, quant à lui, concentre ses investigations sur les secrets des espaces sous haute surveillance et s’efforce de les dévoiler, ou de décrypter ce qui se joue sous les yeux de tou<marquage typemarq="gras">·</marquage>te<marquage typemarq="gras">·</marquage>s, mais qui reste cependant non vu. Contrairement à celle des artisans de <marquage typemarq="italique">Temps mort</marquage>, sa démarche vise davantage les conséquences, les principes et les mécanismes dissimulés du pouvoir (de l’État, de l’armée, des intérêts économiques et politiques) que les destins singuliers, les histoires personnelles et les émotions individuelles. Son travail d’enquête consiste à relever des données dissimulées, à les vérifier et à les croiser avec d’autres, afin de révéler des faits cachés ou inaperçus, et d’en produire des documents, récits et oeuvres. La méthode de travail et l’approche scientifiques au coeur de son processus de création artistique lui viennent de sa formation et de son expérience de géographe<renvoi id="re1no26" idref="no26" typeref="note">26</renvoi> : l’exercice d’une science qui observe et décrit des phénomènes susceptibles d’acquérir une valeur objective, universelle. Il décortique les processus déterministes qui résistent à la divulgation pour montrer leurs impacts sur la société et par conséquent sur les histoires individuelles, alors que Bourouissa et JC, eux, partent de leurs expériences personnelles pour offrir un aperçu de la situation carcérale en général. Si ces démarches se distinguent par le point de vue que les artistes adoptent et par leurs méthodes pour « pénétrer » illégalement leur objet d’étude (ou du moins de manière imprévue et non désirée pour ce qui est de certains des projets de Paglen), force est de constater que tous deux cherchent à s’approcher au plus près du terrain qu’ils étudient : même si c’est par procuration, c’est-à-dire à travers des instruments plus ou moins sophistiqués d’enregistrement audiovisuel, ils ont le souci de traquer le réel là où il se cache.</alinea></para><para id="pa13"><no>13</no><alinea>Tout comme Bourouissa, Trevor Paglen avait mené un projet en prison en y introduisant de manière illégale des instruments d’enregistrement : <marquage typemarq="italique">Recording Carceral Landscapes </marquage>(2001–2005), une enquête sur l’environnement sonore des prisons d’État américaines. Les intentions de l’artiste étaient au départ d’enregistrer les sons à l’intérieur de plusieurs prisons californiennes, de les comparer et d’intégrer ces paysages sonores à l’histoire de l’architecture et de la surveillance carcérales. La question qui animait alors l’artiste était de savoir « whether an investigation into prison soundscapes would complicate, undermine or somehow augment the unquestioned “ocular-centrisms” and “panopticisms” that animate so many discourses around the history of prisons<renvoi id="re1no27" idref="no27" typeref="note">27</renvoi> ». N’obtenant pas l’autorisation pour de telles captations, l’artiste a travaillé à la conception d’un système d’enregistrement audio de haute performance, que l’on pouvait aisément introduire (pour qui en avait le courage) derrière les murs de ces institutions, le <marquage typemarq="italique">Prison</marquage> <marquage typemarq="italique">Infiltration and Surveillance Suit</marquage> (2001–2005) : un costume équipé d’une cravate, d’une épinglette du drapeau américain, de microphones miniaturisés, de transmetteurs sans fil, de préamplificateurs adaptés, tout un matériel dissimulé pour réaliser des enregistrements audio et vidéo. </alinea></para><para id="pa14"><no>14</no><alinea>Quelle ne fut cependant pas sa surprise, en écoutant les prises de son effectuées à l’aide de ce costume d’espionnage, quand il découvrit que la prison était silencieuse :</alinea>
+        <bloccitation>
+          <alinea>After a sharp hiss of compressed air, the vault door slams shut with the sharp
+            bang of metal on metal. Concrete corridors reverberate like the walls of an ancient and
+            long-forgotten tomb. A distorted voice on a small speaker momentarily fills the hallway,
+            followed by the click of a walkie-talkie shutting off. A guard’s keys jangle on a ring
+            against his leg. However, the most distinctive thing about Pelican Bay State Prison, the
+            nation’s premier Supermax prison, is how quiet it is. There are no shouts, no rambling
+            televisions, no blaring radios. There is a delicate calm in the Security Housing Unit
+            (SHU), an underground chamber where more than 2,000 prisoners are kept in solitary
+            confinement 23½ hours a day for years at a time. The tape is rolling<renvoi id="re1no28" idref="no28" typeref="note">28</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Le silence de ce <marquage typemarq="italique">Secure Housing Unit</marquage> (SHU)
+          à Pelican Bay<renvoi id="re1no29" idref="no29" typeref="note">29</renvoi> « is silence of both “business as usual”
+          and total domination<renvoi id="re1no30" idref="no30" typeref="note">30</renvoi> » : pour l’artiste, ce silence
+          documente non seulement celui de 165 000 détenus, mais aussi « the shameful silence of a
+          society that spends more money on incarceration than higher education<renvoi id="re1no31" idref="no31" typeref="note">31</renvoi> ». Il serait surtout représentatif de « the unspoken and
+          unacknowledged structures of the state<renvoi id="re1no32" idref="no32" typeref="note">32</renvoi> ». En effet,
+          Paglen se rend compte que les dynamiques économique et politique à l’origine de ce système
+          carcéral sont bien plus invisibles et impénétrables que les enceintes de la prison
+          SuperMax elle-même : </alinea>
+        <bloccitation>
+          <alinea>In order to hear the architecture of the prison system, I had to listen to the
+            places where prisons rose with the stroke of a pen, where racism was manufactured and
+            fostered for private gain, and where one person’s gain in the abstract world of finance
+            meant that the state would have more prison beds to fill. To record the prison system,
+            in other words, I only had to walk down my own street, with the tapes rolling<renvoi id="re1no33" idref="no33" typeref="note">33</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>L’idée que des forces et intérêts oeuvrent à couvert dans ces espaces partiellement
+          invisibles, derrière ces blancs, vides et silences perçus, anime d’autres projets de
+          Paglen, parce que cartographier ces lieux et en créer des représentations, c’est se
+          focaliser également sur ce qui s’y joue à l’abri du regard et, <marquage typemarq="italique">a fortiori</marquage>, parfois, à l’abri de la justice, de l’éthique,
+          du droit. </alinea></para><para id="pa15"><no>15</no>
+        <alinea>En observant par exemple la série photographique que Paglen réalise en 2010 (voir la
+          figure 11), on découvre d’abord de belles vues de ciels aux dégradés pastel, moins
+          contrastés que ceux peints par Eugène Boudin, moins expressifs que ceux de J. M. William
+          Turner, et moins dramatiques encore que les photographies des années 1920 d’Alfred
+          Stieglitz. Ces images sont une sorte d’<marquage typemarq="italique">all-over
+          </marquage>imprécis de couleurs dont l’insaisissabilité nuageuse n’est perturbée par aucun
+          autre élément. Rien ne semble s’y passer, rien n’accroche le regard rêveur. Seul le
+          spectateur attentif peut découvrir sur ces grandes photographies le petit point, à peine
+          perceptible, de la taille d’une mouche, qui pollue cet univers cotonneux. L’artiste
+          renvoie ici le regard, d’une manière assez dérisoire, avec une pincée d’humour et beaucoup
+          de ténacité, à la figure de « Big Brother » : pour prendre ces photographies intitulées
+          <marquage typemarq="italique">Untitled (Reaper Drone)</marquage>, il s’est installé dans
+          le désert, observant le ciel jusqu’à y voir passer un drone et à parvenir à le
+          photographier. À la lumière de cette information, le petit point noir fait réellement
+          tache, parce que le drone qu’il représente sur chaque image impose une réalité bien
+          concrète qui semble percer une image apparemment paisible.</alinea>
+      </para><figure id="fi11">
+        <no>Figure 11</no>
+        <legende lang="fr">
+          <alinea>Trevor Paglen, <marquage typemarq="italique">Untitled (Reaper Drone)</marquage>,
+            C-print, 121.92 × 152.4 cm/48 × 60 in, 2010.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im11" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et Altman Siegel, San Francisco</source>
+      </figure><para id="pa16"><no>16</no>
+        <alinea>Il s’agit, sur chaque vue de la série photographique, d’un drone de type <marquage typemarq="italique">Reaper</marquage>, littéralement « la faucheuse », un modèle armé non
+          seulement d’une caméra transmettant les images filmées en direct, mais également de
+          missiles, un drone utilisé pour la chasse à l’humain ou des assassinats ciblés. Une arme
+          redoutable donc, dont l’atout majeur pour qui s’en sert réside en sa capacité à tout voir
+          et à « toucher », tout en étant presque invisible et, surtout, en laissant inatteignable
+          la personne qui le dirige. Avec le drone <marquage typemarq="italique">Reaper</marquage>,
+          il est possible, selon David A. Deptula, officier de l’Air Force, de « projeter du pouvoir
+          sans projeter de la vulnérabilité<renvoi id="re1no34" idref="no34" typeref="note">34</renvoi> », c’est-à-dire d’agir
+          sur place sans prendre de risques<renvoi id="re1no35" idref="no35" typeref="note">35</renvoi> liés à l’exploration
+          physique du territoire et à l’exposition directe du corps et de la personne, celle-ci se
+          tenant confortablement assise à la base militaire à des milliers de kilomètres de l’action
+          meurtrière qu’elle mène. En effet, grâce à ces instruments, « il devient <marquage typemarq="italique">a priori</marquage> impossible de mourir en tuant<renvoi id="re1no36" idref="no36" typeref="note">36</renvoi> », écrit Grégoire Chamayou, chercheur en philosophie. Ce
+          dernier précise qu’avec de telles armes, la guerre serait passée d’asymétrique à
+          unilatérale : « Ce qui pouvait encore se présenter comme un combat se convertit en simple
+          campagne d’abattage<renvoi id="re1no37" idref="no37" typeref="note">37</renvoi>. » </alinea>
+      </para><para id="pa17"><no>17</no><alinea>Les photographies de Paglen montrent cette vérité qui traverse le ciel. Mais elles signalent également la difficulté de la percevoir et de la comprendre : la petitesse des drones sur ces images est relative aux situations et aux moyens de l’artiste pour réaliser ses prises de vue; elle est représentative de l’invisibilité de leurs passages au-dessus de nos têtes ; elle est caractéristique de la place qu’elle occupe dans nos consciences quotidiennes. Pourtant, <marquage typemarq="italique">Untitled (Reaper Drone)</marquage> signale, modestement, que l’activité de l’armée ne reste pas inaperçue. Si l’artiste avertit que des civils peuvent observer les manoeuvres militaires, en produire des « preuves » toutes relatives — ils ne risquent de toute façon pas d’inquiéter l’armée, qui agit de plein droit —, les clichés semblent aussi inviter les citoyens à mieux regarder et à aller découvrir ce qui se trame loin de leurs yeux.</alinea></para><para id="pa18"><no>18</no><alinea>« Il n’y a pas de guerre sans représentation, [...] les armes sont non seulement des outils de destruction mais aussi des outils de perception<renvoi id="re1no38" idref="no38" typeref="note">38</renvoi> », signalait Paul Virilio au milieu des années 1980 dans son essai sur la relation entre guerre et cinéma :</alinea>
+        <bloccitation>
+          <alinea>Des premières armes spatiales de la Seconde Guerre mondiale à l’éclair
+            d’Hiroshima, <marquage typemarq="italique">l’arme de théâtre</marquage> a remplacé le
+            <marquage typemarq="italique">théâtre d’opération</marquage> et, bien que démodé, ce
+            terme d’<marquage typemarq="italique">arme de théâtre</marquage> employé par les
+            militaires est révélateur d’une situation : <marquage typemarq="italique">l’histoire des
+            batailles, c’est d’abord celle de la métamorphose de leurs champs de
+            perception</marquage>. Autrement dit, la guerre consiste moins à remporter des victoires
+            « matérielles » (territoriales, économiques...) qu’à s’approprier « l’immatérialité »
+            des champs de perception et c’est dans la mesure où les modernes belligérants étaient
+            décidés à envahir la totalité de ces champs que s’imposa l’idée que le véritable
+            <marquage typemarq="italique">film de guerre</marquage> ne devait pas forcément montrer
+            la guerre ou une quelconque bataille, puisqu’à partir du moment où le cinéma était apte
+            à créer la surprise (technique, psychologique...), il entrait de facto dans la catégorie
+            des armes<renvoi id="re1no39" idref="no39" typeref="note">39</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Ce que Virilio soulignait déjà il y a trente ans, c’est que non seulement le
+          développement des technologies de perception a accompagné celui des armes pour augmenter
+          la capacité de visée (l’aviation d’observation ayant entraîné l’arme aérienne, par
+          exemple), mais que la représentation elle-même, en ce qu’elle peut créer la surprise, la
+          crédibilité, la terreur — même si c’est par la fiction et même sans montrer un conflit —
+          pourrait être considérée comme une arme. Disons que cette arme ne tire pas des balles mais
+          des charges d’influence, et c’est en sa capacité à convaincre et à manipuler qu’elle peut
+          agir, atteindre sa cible, voire tuer. </alinea></para><para id="pa19"><no>19</no><alinea>À mes yeux, avec cette série photographique, Trevor Paglen saisit un signe du pouvoir de surveillance et d’action, et en déplace l’influence. En montrant qu’il est possible de voir ce « mirador volant<renvoi id="re1no40" idref="no40" typeref="note">40</renvoi> », il lui soustrait ponctuellement, symboliquement, une partie de son pouvoir, c’est-à-dire l’aspect <marquage typemarq="italique">invérifiable</marquage> de la surveillance, celui qui ferait, selon Michel Foucault, la perfection du panoptisme. De même que « pour l’homme de guerre la fonction de l’arme est la fonction de l’oeil<renvoi id="re1no41" idref="no41" typeref="note">41</renvoi> », il braque le regard sur la surveillance (qui menace moins nos vies que nos droits) et expose le trophée (la photo du drone) pour sa force de persuasion. Par là même, il réinstaure <marquage typemarq="italique">symboliquement</marquage> le rapport de réciprocité que le drone a fait perdre aux conflits guerriers et aux relations de pouvoir qu’anime la question de la surveillance. L’influence de l’image du drone change, momentanément et partiellement, de camp : la photographie indique un élan subversif.</alinea></para><para id="pa20"><no>20</no><alinea>La manière dont Paglen traque l’invisible et perce le camouflage ne s’arrête cependant pas là. Se servant des outils des astronomes, et notamment de la téléphotographie, très proche de l’astrophotographie, pour sa série photographique <marquage typemarq="italique">Limit Telephotography </marquage>(voir les figures 12 - 13), débutée en 2005, il parvient à photographier des objets à plus de 40 km de distance : les sites de l’armée américaine, des bases militaires classées confidentielles — dont certaines installations sont absolument inaccessibles pour un civil, car très éloignées et cachées derrière « five miles of thick atmosphere<renvoi id="re1no42" idref="no42" typeref="note">42</renvoi> », au fond des déserts.</alinea></para><figure id="fi12">
+        <no>Figure 12</no>
+        <legende lang="fr">
+          <alinea>Trevor Paglen, <marquage typemarq="italique">Open Hangar</marquage>, Cactus Flats,
+            NV; distance ~ 18 miles; 10:04 a.m., C-print, 76.2 × 91.44 cm/30 × 36 in, 2007.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im12" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et Altman Siegel, San Francisco</source>
+      </figure><figure id="fi13">
+        <no>Figure 13</no>
+        <legende lang="fr">
+          <alinea>Trevor Paglen, <marquage typemarq="italique">NSA/GCHQ Surveillance
+            Base</marquage>, Bude, Cornwall, UK, pigment print, 91.4 × 121.9 cm/36 × 48 in,
+            2014.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im13" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et Altman Siegel, San Francisco</source>
+      </figure><para id="pa21"><no>21</no><alinea>L’un des secrets les mieux gardés du gouvernement américain est l’existence d’un certain nombre de prisons mises en place par la CIA en Afghanistan et dans d’autres endroits du monde : les fameux <marquage typemarq="italique">black sites </marquage>(voir la figure 14). </alinea></para><figure id="fi14">
+        <no>Figure 14</no>
+        <legende lang="fr">
+          <alinea>Trevor Paglen, <marquage typemarq="italique">The Black Sites,</marquage> Black
+            Site, Kabul, Afghanistan, C-Print, 60.96 × 86.36 cm/24 × 34 in, 2006.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im14" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste et Altman Siegel, San Francisco</source>
+      </figure><para id="pa22"><no>22</no>
+        <alinea>Traversés par de nombreux prisonniers, ces lieux sont devenus synonymes de torture
+          et d’irrespect des droits humains. Trevor Paglen, équipé d’une collection d’images
+          satellites commerciales, d’un compas, d’un plan dessiné et de témoignages d’anciens
+          détenus<renvoi id="re1no43" idref="no43" typeref="note">43</renvoi>, est parvenu à localiser plusieurs de ces lieux
+          tenus secrets. Par exemple, il a trouvé celui nommé <marquage typemarq="italique">Salt
+          Pit</marquage>, la « Fosse à sel », dans une vieille usine de briques à quelques
+          kilomètres au nord-est de Kaboul et l’a pris en photo (voir la figure 15).</alinea>
+      </para><figure id="fi15">
+        <no>Figure 15</no>
+        <legende lang="fr">
+          <alinea>Trevor Paglen, <marquage typemarq="italique">The Black Sites</marquage>, Salt Pit,
+            Shomali Plains Northeast of Kabul, Afghanistan, C-print, 60.96 × 91.44 cm/24 × 36 in,
+            2006.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im15" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste, Metro Pictures New York et Altman Siegel,
+          San Francisco</source>
+      </figure><para id="pa23"><no>23</no><alinea>Ce qui est en jeu dans ces investigations — qui demandent en amont un travail minutieux d’enquête, d’étude de données, de collaboration, etc. —, c’est de se rapprocher physiquement des installations pour, comme le formule Paglen, « be able to put you in the position to see something<renvoi id="re1no44" idref="no44" typeref="note">44</renvoi> ». Cette position ne vise pas uniquement un objet précis (drone, <marquage typemarq="italique">black site</marquage>), mais elle cible également une certaine conscience de l’invisible : quand on sait ce qu’on cherche, on a davantage de chances de le voir ! « Les relations de pouvoir sont peut-être parmi les choses les plus cachées du corps social<renvoi id="re1no45" idref="no45" typeref="note">45</renvoi> », écrivait Michel Foucault. Trevor Paglen essaie d’apprendre à les voir, d’apprendre à modifier sa vision afin d’être capable de repérer ces choses au quotidien, tout comme il tente de montrer aux citoyens comment eux-mêmes peuvent les voir, également<renvoi id="re1no46" idref="no46" typeref="note">46</renvoi><marquage typemarq="italique">.</marquage> Ce sont ces zones de frontière entre visible et invisible qu’il traque. </alinea></para><para id="pa24"><no>24</no><alinea>Que ses images ne prouvent en définitive pas grand-chose, parce que, d’une part, ce ne sont que des images et que, d’autre part, en plus d’être souvent floues ou illisibles, elles ne représentent que des outils ou infrastructures — et pas des faits —, n’est pas le plus important. L’artiste avance que les moyens qui lui ont permis d’arriver aux abstractions colorées de certaines de ses photographies sont cruciaux, puisqu’ils impliquent une politique d’observation et des relations d’observation<renvoi id="re1no47" idref="no47" typeref="note">47</renvoi>. En désignant ces oeuvres comme étant de l’ordre d’un « “performative” act of photography<renvoi id="re1no48" idref="no48" typeref="note">48</renvoi> », voire d’une « political performance<renvoi id="re1no49" idref="no49" typeref="note">49</renvoi> », l’artiste souligne l’importance du processus et des enjeux politiques qui travaillent <marquage typemarq="italique">visiblement </marquage>ses photographies et qui conditionnent également les images de <marquage typemarq="italique">Temps mort</marquage> de Bourouissa et JC. Influencées formellement par la situation de prise de vue, leurs oeuvres exposent les traces de leur arrachement à ce contexte.</alinea></para></section1><section1 id="s1n4"><no>4</no><titre>Tactiques défensives de l’art : Arracher au réel dissimulé des images qui font penser </titre><para id="pa25"><no>25</no><alinea>Plutôt que de prouver quelque chose (quoi ?), il est plus important pour l’artiste d’insister sur le fait qu’on y soit attentif<renvoi id="re1no50" idref="no50" typeref="note">50</renvoi>, que certaines personnes verront de leurs propres yeux et exerceront par là même leurs droits, tels qu’ils existent dans une société démocratique<renvoi id="re1no51" idref="no51" typeref="note">51</renvoi> dans laquelle les citoyens auraient le pouvoir. Rebecca Solnit, en affirmant que « that invisibility is a type of shield, while democracy is founded upon visibility<renvoi id="re1no52" idref="no52" typeref="note">52</renvoi> », souligne un autre point fort dans la pratique de l’artiste : les actions menées par Trevor Paglen sont principalement légales, mêmes si elles sont mal considérées par les pouvoirs concernés. Il ne s’agit pas réellement non plus d’espionnage. Et c’est justement une autre frontière qu’investit l’artiste à mes yeux, en se positionnant à l’extrémité du droit pour défendre, pour affirmer des droits, afin qu’ils ne reculent pas.</alinea></para><para id="pa26"><no>26</no><alinea>Cette façon de Paglen d’aller vérifier ne vise pas exclusivement les dissimulations de l’armée. L’artiste s’est aussi intéressé à l’infrastructure d’Internet après que Edward Snowden a révélé que la NSA se branchait sur des câbles sous-marins. Paglen a en effet localisé les emplacements précis des câbles transatlantiques qu’il a ensuite photographiés au fond de la mer lors d’une trentaine de plongées<renvoi id="re1no53" idref="no53" typeref="note">53</renvoi>. </alinea></para><para id="pa27"><no>27</no>
+        <alinea><marquage typemarq="italique">Americas II. NSA-GCHQ-Tapped Undersea Cable Atlantic
+          Ocean</marquage> (2015) est le titre d’une de ces photographies réalisées au fond de l’eau
+          (voir la figure 16). Si l’image produite par Paglen semble opaque, c’est non seulement
+          parce que l’eau est si trouble qu’on parvient à peine à y voir à plus de deux mètres, mais
+          aussi parce qu’on ne discerne pas tout à fait ce qui y est à découvrir : un câble qui
+          disparaît dans la profondeur de l’eau et s’enfonce dans la vase et le sable ? Cette vision
+          trouble, cette difficulté à saisir à première vue l’objet matériel aussi bien que
+          l’intention du photographe, est à l’opposé des caractéristiques du sujet lui-même : « The
+          lack of visual information in these images is inverse to the breath and depth of
+          information that cable carries and conveys<renvoi id="re1no54" idref="no54" typeref="note">54</renvoi>. » </alinea>
+      </para><figure id="fi16">
+        <no>Figure 16</no>
+        <legende lang="fr">
+          <alinea>Trevor Paglen, <marquage typemarq="italique">Bahamas Internet Cable System
+            (BICS- 1)</marquage>, NSA/GCHQ-Tapped Undersea Cable, Atlantic Ocean, C-Print,
+            152.40 × 121.92 cm/60 × 48 in, 2015.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im16" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source>Avec l’aimable autorisation de l’artiste, Metro Pictures New York et Altman Siegel,
+          San Francisco</source>
+      </figure><para id="pa28"><no>28</no>
+        <alinea>Ces images contredisent l’absolue transparence, immédiateté et étendue que fait
+          régner Internet; elles dévoilent un champ de vision opaque qui est une métaphore de notre
+          aveuglement face aux usages réels d’une partie des informations qui transitent via
+          Internet et qui nous concernent. Si ce « filtre » couleur bleu azur et blanc sable trouble
+          notre perception, il stimule également beaucoup l’imagination. On suit le câble en pensée
+          et on invente des paysages et scénarios. L’inconnu des situations que traversent ces
+          fibres optiques fragiles est à l’image de ce que nous ignorons de la destinée de nos
+          informations qui y transitent<renvoi id="re1no55" idref="no55" typeref="note">55</renvoi>. </alinea>
+      </para><para id="pa29"><no>29</no><alinea>Même si elles sont loin de nos yeux, ces autoroutes « virtuelles » ne sont pas invisibles ou parfaitement soustraites, il suffit de regarder ! Paglen nous facilite la tâche en nous montrant la partie matérielle d’un système qui rend aujourd’hui possible de tout exposer à tout le monde. Ce geste artistique et militant — qui a demandé plusieurs années de recherche, de croisement d’informations réunies à partir de cartes, de documents maritimes, de données de la Federal Communications Commission (FCC) et de la National Security Agency (NSA), ainsi qu’un cours de plongée — a plusieurs conséquences : que Paglen ait pu trouver ce câble et y accéder sans que l’on cherche à l’en empêcher permet d’envisager que la NSA et d’autres pourraient tout aussi bien y parvenir, sans avoir forcément les bienveillantes ambitions de l’artiste. En faisant la démonstration de la vulnérabilité du câble transatlantique, Paglen soulève le potentiel d’espionnage ou de destruction de ce mode d’échange d’informations qu’est Internet et sur lequel s’appuient aujourd’hui nos sociétés à tout niveau, voire notre mode de vie. Les conséquences pourraient être fatales<renvoi id="re1no56" idref="no56" typeref="note">56</renvoi>. C’est bien ce risque-là que rendent visible les photographies de la dizaine de câbles Internet trouvés par Paglen sur les côtes de la Floride, d’Hawaï et de Guam. De la même manière que montrer des images de fûts de déchets nucléaires exposés à la corrosion au fond des mers rend caduque l’idée romantique que ce qui y est déposé, accidentellement ou délibérément, y reposerait à jamais, cette photographie de l’artiste américain révèle aux consciences que le fond de la mer n’est plus tout à fait la cachette parfaite où règnerait l’inaccessibilité absolue. Le danger vient de la matérialité effective des câbles — qui traversent à la fois des territoires géographiques et aquatiques, des formations politiques et des pratiques culturelles, mais aussi des processus biologiques, atmosphériques, thermodynamiques et géologiques avec leurs logiques spécifiques, comme le souligne Nicole Starosielski. Quand cette matérialité est ignorée par une « cultural imagination of dematerialization<renvoi id="re1no57" idref="no57" typeref="note">57</renvoi> », le risque est justement de ne pas voir qu’il y en a un.</alinea></para><para id="pa30"><no>30</no><alinea>L’écrivain et essayiste Olivier Mongin note dans <marquage typemarq="italique">L’artiste et le politique</marquage> :</alinea>
+        <bloccitation>
+          <alinea>[... le] cinéma est un art qui doit « montrer », montrer ce qui est, mais au sens
+            de rendre ce qui se trouve derrière, c’est-à-dire l’envers du décor, ce qui participe du
+            visible tout en demeurant invisible. Montrer le réel, c’est justement se désengluer du
+            réel immédiat, non pas pour s’en séparer, mais pour le voir autrement, renvoyer le
+            visible à ce qui n’est pas visible pour l’oeil naïf. Mettre en scène le réel, c’est
+            comprendre que la mise en scène ne produit pas un « plus » d’illusion, mais un
+            « surcroît de réel », c’est-à-dire une amélioration de notre relation au monde<renvoi id="re1no58" idref="no58" typeref="note">58</renvoi>.</alinea>
+        </bloccitation>
+        <alinea>Dans cet ouvrage, Mongin s’intéresse en particulier à la mise en scène en tant que
+          « choix pour mieux élargir notre compréhension de la réalité, visible ou non<renvoi id="re1no59" idref="no59" typeref="note">59</renvoi> » — une définition qui s’adapte tout à fait aux productions des
+          deux artistes présentés ici. Il s’agit pour eux de montrer une part du réel et de rétablir
+          un équilibre de vérité au sein d’une crise de l’information qui a entre autres « frappé de
+          discrédit le discours télévisuel<renvoi id="re1no60" idref="no60" typeref="note">60</renvoi> ». Leurs images
+          relèvent d’un genre documentaire inhabituel : elles possèdent une certaine retenue et ne
+          plaquent pas des discours sur leur sujet. Loin des images événementielles et
+          spectaculaires où, selon l’expression de Walter Benjamin, « le réel a brûlé le caractère
+          de l’image<renvoi id="re1no61" idref="no61" typeref="note">61</renvoi> », les images de Mohamed Bourouissa et de
+          Trevor Paglen montrent ce qu’ils ont pu arracher au réel. Ces artistes usent de moyens
+          pour approcher ce dernier au plus près, sans chercher à en présenter cependant des
+          manifestations éclatantes. Leurs images ne sont pas concernées par l’esthétique de
+          l’objectivité. Cette façon de pointer des choses indirectement permet de réintroduire de
+          la distance avec les connaissances et opinions que nous avons d’un sujet, avec les
+          croyances et doutes que nous avons des représentations. Si ce sont effectivement des
+          « images performatives », l’« exploit » de leurs oeuvres n’est pas d’avoir réussi à livrer
+          des vues inédites, mais à les mettre en scène de façon à ce qu’elles soient vues, moins
+          pour ce qu’elles montrent que pour ce qu’elles donnent à penser.</alinea></para><para id="pa31"><no>31</no><alinea>Outre leurs sujets spécifiques, ces oeuvres signalent que l’invisibilité instaurée (par omission, par mensonge, par dissimulation, par souci de sécurité) est un outil de l’exercice de la force : un moyen pour la liberté d’action à couvert, pour l’abus de pouvoir et la manipulation de l’opinion. Cette invisibilité peut rendre possible la violence dans des lieux extra-légaux (<marquage typemarq="italique">black site</marquage>), le contrôle total exercé par des institutions politiques, militaires, financières (photos des câbles sous-marins et des drones), ou le maintien de représentations stéréotypées des détenu<marquage typemarq="gras">·</marquage>e<marquage typemarq="gras">·</marquage>s. Parvenir à provoquer le sentiment que des moyens existent pour faire dérailler ces mécanismes, sans user de la force, ne serait-ce qu’en commençant par dévoiler quelques-uns de leurs aspects cachés, c’est la démonstration faite par les deux artistes. Ils agissent à travers des gestes qui ont de tout temps existé <marquage typemarq="italique">et</marquage> du côté de l’art, <marquage typemarq="italique">et </marquage>du côté de la constitution des pouvoirs institutionnels, c’est-à-dire des représentations. En effet, les institutions ont pu établir leur pouvoir d’action en partie à partir des représentations et des cartographies qu’elles ont produites. Pensons par exemple à « l’anthropométrie judiciaire » d’Alphonse Bertillon<renvoi id="re1no62" idref="no62" typeref="note">62</renvoi>, qui a servi d’outil de condamnation et de criminalisation à partir de types physionomiques; ou à la cartographie des espaces du Wild West américain, un premier pas vers la délimitation des réserves indiennes. Représentations et cartographies de ce qui se dérobe aux regards des citoyens servent ici à des tactiques défensives de l’art : elles ramènent contre toute attente des éléments à la surface du perceptible, à partir desquels on peut remonter le fil d’agissements non vus, mettre en crise des idées et des discours établis, et rayer la surface du « texte caché des dominants<renvoi id="re1no63" idref="no63" typeref="note">63</renvoi> ».</alinea></para><para id="pa32"><no>32</no><alinea>Au-delà de l’invitation à réfléchir sur des sujets spécifiques, les oeuvres de Paglen et de Bourouissa font aussi la démonstration d’un agir face au fatalisme : les artistes donnent des exemples de moyens d’action dans des contextes contraignants (prison, désert, fond d’océan) et face à des sujets sensibles (secrets de l’armée) et à des pouvoirs institutionnels puissants (carcéraux, militaires, économiques, politiques). Comment ne pas saluer leur persévérance, leurs prises de risque, leur capacité à trouver et à inventer des moyens d’action malgré des situations <marquage typemarq="italique">a priori</marquage> sans issue et les accès si difficiles aux lieux, moyens techniques et informations stratégiques ? </alinea></para><para id="pa33"><no>33</no><alinea>« I think it points in the direction of unfulfilled forms of freedom and justice, but only indirectly and obscurely<renvoi id="re1no64" idref="no64" typeref="note">64</renvoi> », remarque Paglen à propos de son travail. Face à la puissance du système de contrôle que les oeuvres abordées ici questionnent, les artistes ripostent : s’ils incitent à une mobilisation de la pensée, leurs contre-attaques par représentations inédites, par « surveillance de la surveillance », par reprise du contrôle (aussi minimes, indirectes, symboliques, inconséquentes soient-elles), participent, parmi d’autres luttes politiques, militantes et artistiques, à une prise de conscience collective. Par leur force active, ils exemplifient également des possibilités de résistance menées de l’intérieur de la société du contrôle et invitent, indirectement, à passer à l’action pour réaliser, peut-être, certaines de ces « forms of freedom and justice » qu’évoque Paglen. </alinea></para></section1></corps><partiesann lang="fr"><grnotebio><notebio id="nb1" idrefs="au1" lang="fr"><alinea>Katrin Gattinger est artiste, enseignante-chercheuse en arts et sciences de l’art à l’Université de Strasbourg, ainsi que membre du collectif HIC SUNT et du comité de la revue <marquage typemarq="italique">Tête-à-tête</marquage> (<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://www.revuetat.com" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">www.revuetat.com</liensimple>). Ses recherches récentes se concentrent sur les ruses dans les oeuvres d’art contemporaines. Elle écrit pour différentes revues et a participé à des ouvrages collectifs (p. ex. : Samuel Bianchini et Erik Verhagen (dir.), <marquage typemarq="italique">Praticable—From Participation to Interaction in Contemporary Art</marquage>, MIT Press, 2016; Jean Arnaud et Bruno Goosse (dir.), <marquage typemarq="italique">Document, fiction et droit en art contemporain</marquage>, PUB, 2015). Elle expose régulièrement depuis 20 ans : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="http://www.katrin-gattinger.net" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">www.katrin-gattinger.net</liensimple>.</alinea></notebio></grnotebio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Christopher K. Hsee et Ruan Bowen, « The Pandora Effect: The Power and Peril of
+          Curiosity », <marquage typemarq="italique">Psychological Science</marquage>, vol. 27,
+          mars 2016, p. 659–666.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>Daphne Caruana Galizia a été victime d’un attentat à la bombe le 16 octobre 2017
+          dans sa voiture. Les journalistes de l’organisation Forbidden Stories ont repris les
+          investigations de leur collègue tuée, dans le but de démasquer les agissements que les
+          assassins avaient justement cherché à protéger. Ils envoient ainsi le signal que les
+          meurtres et intimidations ne pourront pas arrêter le travail d’enquête, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:type="simple" xlink:href="http://www.forbiddenstories.org/">http://www.forbiddenstories.org/</liensimple> (consultation le 29 juin 2018).</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Antonio Negri et Michael Hardt, <marquage typemarq="italique">Empire</marquage>,
+          Cambridge, Massachusetts/London, England, Havard University Press, 2000.</alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>Antonio Negri, « L’“Empire”, stade suprême de l’impérialisme », <marquage typemarq="italique">Le Monde diplomatique</marquage>, janvier 2001, p. 3.</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>Gilles Deleuze, « Post-scriptum sur les sociétés de contrôle », <marquage typemarq="italique">L’autre journal</marquage>, n° l, mai 1990, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:type="simple" xlink:href="http://1libertaire.free.fr/DeleuzePostScriptum.html">http://1libertaire.free.fr/DeleuzePostScriptum.html</liensimple> (consultation le
+          29 juin 2018). </alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>Michel Foucault, <marquage typemarq="italique">Surveiller et punir</marquage>,
+          Paris, Éditions Gallimard, 1975, p. 234.</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>J’utilise la formule « régime de visibilité » pour désigner la manière avec laquelle
+          les niveaux et degrés de visibilité sont organisés plus ou moins intentionnellement en
+          fonction d’objectifs sociaux, politiques, économiques. Cette formule est utilisée en
+          géographie, lorsque l’on parle du « régime de visibilité des substances sociales », pour
+          évoquer leur présentation aux regards. Michel Lussault, « Visibilité (régime de) »,
+          Jacques Lévy et Michel Lussault (éd.), <marquage typemarq="italique">Dictionnaire de la
+          géographie et de l'espace des sociétés</marquage>, Paris, Éditions Belin, 2003, p. 997.
+        </alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea>Foucault, 1975, p. 234.</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 249.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea>Un extrait du film est visible sur le site de l’artiste, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:type="simple" xlink:href="http://www.mohamedbourouissa.com/temps-mort/">http://www.mohamedbourouissa.com/temps-mort/</liensimple> (consultation le
+          28 juin 2018).</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea>Julie Portier, « Mohamed Bourouissa », <marquage typemarq="italique">Zérodeux</marquage>, n° 64, hiver 2012, p. 34.</alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea>Christine Buignet, « <marquage typemarq="italique">Temps mort</marquage> de Mohamed
+          Bourouissa : Quand l’artiste produit du document, hors la loi », Jean Arnaud et Bruno
+          Goosse (dir.), <marquage typemarq="italique">Document, fiction et droit en art
+          contemporain</marquage>, actes du colloque co-organisé par le LESA (Laboratoire d’études
+          en sciences des arts, Université Aix-Marseille) et le POL®ART (pôle de recherche coordonné
+          par l’Académie royale des Beaux-Arts de Bruxelles), 28–29 octobre 2013,
+          Aix-en-Provence/Bruxelles, Presses universitaires de Provence/Académie royale des
+          Beaux-Arts de Bruxelles, 2015, p. 113. Colloque filmé : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:type="simple" xlink:href="https://vimeo.com/83378986">https://vimeo.com/83378986</liensimple> (consultation le 28 juin 2018). </alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea>Pour JC, il y avait un risque réel à utiliser un téléphone. Ce dernier n’a
+          d’ailleurs plus donné de nouvelles au bout de quelques mois d’échanges, ayant été
+          transféré dans une autre prison. Bourouissa a terminé le film seul.</alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea>Pour les spécificités de ce langage, Zouhour Messili-Ben Aziza, « Le langage SMS :
+          sous-produit de l'oral et de l'écrit ou véritable langage écrit ? », <marquage typemarq="italique">Researchgate.net</marquage>, 2010. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:type="simple" xlink:href="https://www.researchgate.net/publication/277031816_Le_langage_sms_sous-produit_de_l'oral_et_de_l'ecrit_ou_veritable_langage_ecrit">https://www.researchgate.net/publication/277031816_Le_langage_sms_sous-produit_de_l'oral_et_de_l'ecrit_ou_veritable_langage_ecrit</liensimple>
+          (consultation le 3 novembre 2017).</alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>Portier, 2012, p. 34.</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea>Hito Steyerl, « In Defense of the Poor Image », <marquage typemarq="italique">e-flux</marquage>, Journal #10, novembre 2009, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:type="simple" xlink:href="http://www.e-flux.com/journal/10/61362/in-defense-of-the-poor-image/">http://www.e-flux.com/journal/10/61362/in-defense-of-the-poor-image/</liensimple>
+          (consultation le 23 septembre 2017).</alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea>Buignet, 2015, p. 110.</alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 119.</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>Le film a été présenté à plusieurs occasions, par exemple à l’exposition <marquage typemarq="italique">Dynasty</marquage> au Palais de Tokyo, Paris,
+          11 juin–5 septembre 2010. Avant de le réaliser, l’artiste avait eu un échange similaire de
+          SMS et de MMS avec Al, un ami incarcéré. Les photos et SMS de cet échange ont donné lieu à
+          une installation photographique, <marquage typemarq="italique">Mohamed Bourouissa – Temps
+          mort</marquage>, Galerie Kamel Mennour, 8 septembre–9 octobre 2010, Paris, et la
+          réalisation d’un livre d’artiste, <marquage typemarq="italique">Temps mort, Mohammed
+          Bourouissa</marquage>, texte de Magalie Jauffret, Kamel Mennour et Études Books (éd.),
+          Dijon, Les Presses du réel, 2014.</alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea>Fadia Miad, « Évasion virtuelle », <marquage typemarq="italique">Courrier de
+          l’Atlas</marquage>, n° 81, mai 2014.</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea>Julie Portier associe ce retournement à un autre projet de l’artiste, <marquage typemarq="italique">Legend</marquage> (2010). Portier, 2012, p. 32.</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea>Il a obtenu un doctorat en géographie en 2008 (University of California, Berkeley),
+          un Master of Fine Arts en 2002 (School of the Art Institute of Chicago) et un baccalauréat
+          en études religieuses en 1998. </alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>Trevor Paglen, « Recording Carceral Landscapes », <marquage typemarq="italique">Leonardo Music Journal</marquage>, vol. 16, n° 16, Massachusetts, MIT Press, 2006, p. 56.
+        </alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no29">
+        <no>29</no>
+        <alinea>Cette prison située à Del Norte County est l’unique « Supermax Prison » de
+          Californie, c’est-à-dire une prison avec le niveau de sécurité le plus élevé, enfermant
+          les plus dangereux détenus masculins de l’État, condamnés pour la plupart à des peines
+          d’emprisonnement à perpétuité. Elle est représentative du « Prison Industrial Complex »
+          (PIC), terme utilisé pour une première fois par Mike Davis. Dr. Ruth Wilson Gilmore défend
+          l’idée que ce PIC a été pensé et mis en place aux É.-U. dans les années 1960 et 1970 à
+          partir du contexte des luttes contre le colonialisme, le racisme et l’oppression
+          économique comme « counter-revolution », et désignerait, à l’instar du « Military
+          Industrial Complexe » (MIC), l’ensemble des institutions et personnes qui trouvent leur
+          intérêt concret dans son existence : « Hell Factories in the Field: A
+          Prison-Industrial-Complex », <marquage typemarq="italique">The Nation</marquage>,
+          20 février 1995, p. 5 et 229. Cette « counter-revolution » consisterait, selon Gilmore,
+          dans le fait de ne pas chercher des solutions aux problèmes existants, mais de
+          criminaliser et d’enfermer les victimes pour des comportements pour lesquels on ne
+          condamnait personne avant. Dr. Ruth Wilson Gilmore, entretien avec Trevor Paglen, « From
+          Military Industrial Complexe to Prison Industriel Complex », <marquage typemarq="italique">Recording Carceral Landscapes</marquage>, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:type="simple" xlink:href="https://fr.scribd.com/document/84972024/From-Military-Industrial-Complex-to-Prison-Industrial-Complex-by-Dr-Ruth-Gilmore">https://fr.scribd.com/document/84972024/From-Military-Industrial-Complex-to-Prison-Industrial-Complex-by-Dr-Ruth-Gilmore</liensimple>
+          (consultation le 30 mai 2018).</alinea>
+      </note>
+      <note id="no30">
+        <no>30</no>
+        <alinea>Paglen, 2006, p. 56.</alinea>
+      </note>
+      <note id="no31">
+        <no>31</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no32">
+        <no>32</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no33">
+        <no>33</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 57.</alinea>
+      </note>
+      <note id="no34">
+        <no>34</no>
+        <alinea>David A. Deptula à l’émission <marquage typemarq="italique">Amanpour</marquage>,
+          « The Use of Drones in Afghanistan », diffusée le 24 novembre 2009, CNN, cité par Grégoire
+          Chamayou, <marquage typemarq="italique">Théorie du drone</marquage>, Paris, La Fabrique,
+          2013, p. 22.</alinea>
+      </note>
+      <note id="no35">
+        <no>35</no>
+        <alinea>Les risques sont de mal identifier les cibles et de commettre une bavure comme celle
+          de la frappe aérienne sur la province de Daikundi en Afghanistan la nuit du 20 au
+          21 février 2010, orchestrée à partir de la base Creech de l’U.S. Air Force dans le Nevada.
+          La retranscription du dialogue entre opérateur, coordinateur et « pilote » du drone et des
+          hélicoptères de la frappe aérienne montre clairement la zone de flou dans l’interprétation
+          des images transmises des « ennemis » et comment le désir de tirer balaie le doute sur
+          l’identité des cibles, aboutissant aux décès de plusieurs dizaines de civils.</alinea>
+      </note>
+      <note id="no36">
+        <no>36</no>
+        <alinea>Chamayou, 2013, p. 24.</alinea>
+      </note>
+      <note id="no37">
+        <no>37</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage></alinea>
+      </note>
+      <note id="no38">
+        <no>38</no>
+        <alinea>Paul Virilio, <marquage typemarq="italique">Guerre et cinéma 1 – Logistique de la
+          perception</marquage>, Paris, Cahiers du Cinéma, Éditions de l’Étoile, 1984,
+          p. 8.</alinea>
+      </note>
+      <note id="no39">
+        <no>39</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 10.</alinea>
+      </note>
+      <note id="no40">
+        <no>40</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 23.</alinea>
+      </note>
+      <note id="no41">
+        <no>41</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 26.</alinea>
+      </note>
+      <note id="no42">
+        <no>42</no>
+        <alinea>Trevor Paglen, site de l’artiste, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls10" xlink:type="simple" xlink:href="http://www.paglen.com/?l=work&amp;s=limit">http://www.paglen.com/?l=work&amp;s=limit</liensimple> (consultation le 27
+          mars 2017).</alinea>
+      </note>
+      <note id="no43">
+        <no>43</no>
+        <alinea>Ils parvenaient à situer cette prison à une distance de dix minutes de l’aéroport de
+          Kaboul (alors qu’on les y avait conduits les yeux bandés).</alinea>
+      </note>
+      <note id="no44">
+        <no>44</no>
+        <alinea>Trevor Paglen dans le film documentaire <marquage typemarq="italique">The Creators
+          Project: Trevor Paglen’s Deep Web Dive (Behind the Scenes</marquage>), Sebastian Ischer,
+          2016, Vice channels<marquage typemarq="italique">,</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls11" xlink:type="simple" xlink:href="https://www.youtube.com/watch?v=h7guR5ei30Y&amp;feature=youtu.be">https://www.youtube.com/watch?v=h7guR5ei30Y&amp;feature=youtu.be</liensimple>
+          (consultation le 2 septembre 2018).</alinea>
+      </note>
+      <note id="no45">
+        <no>45</no>
+        <alinea>Michel Foucault, <marquage typemarq="italique">Dits et écrits</marquage>, tome II,
+          Paris, Gallimard, 1978, p. 264.</alinea>
+      </note>
+      <note id="no46">
+        <no>46</no>
+        <alinea>« I feel like my job as an artist is to take something like interstate surveillance
+          [...],try to learn how to see it for myself, learn how to change my own vision, so when I
+          walk around everyday I can see the fact that this is happening, because these are often
+          abstract things and try to show people how to see them. », Trevor Paglen dans le film
+          documentaire <marquage typemarq="italique">The Creators Project: Photographing Secret
+          Sites and Satellites / Meet Trevor Paglen,</marquage> Jordan Kinley, CREATORS PROJECT
+          production, Vice channels, 2015, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls12" xlink:type="simple" xlink:href="https://www.youtube.com/watch?v=9Igfu0VwdkQ">https://www.youtube.com/watch?v=9Igfu0VwdkQ</liensimple> (consultation le
+          29 juin 2018).</alinea>
+      </note>
+      <note id="no47">
+        <no>47</no>
+        <alinea>« But the means by which I got to that particular abstraction are crucial to the
+          work. They imply a politics of seeing and of relations of seeing and so forth. I think
+          that there are tremendous and largely unexplored critical possibilities in this
+          approach. », Trevor Paglen, entretien avec Julian Stallabrass, « Negative Dialects in the
+          Google Era: A conversation with Trevor Paglen », <marquage typemarq="italique">October</marquage>, automne 2011, n° 138, MIT Press, p. 7.</alinea>
+      </note>
+      <note id="no48">
+        <no>48</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 4.</alinea>
+      </note>
+      <note id="no49">
+        <no>49</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 7.</alinea>
+      </note>
+      <note id="no50">
+        <no>50</no>
+        <alinea>Trevor Paglen, « What I’m particularly interested in is to contribute to the culture
+          by insisting that we pay attention to certain things », <marquage typemarq="italique">The
+          Creators Project: Trevor Paglen’s Deep Web Dive (Behind the Scenes)</marquage>, 2016.
+        </alinea>
+      </note>
+      <note id="no51">
+        <no>51</no>
+        <alinea>Trevor Paglen, « I’m not interested in doing anything that is illegal. Anyway, I’m
+          interested in exercising the rights that [… the lawyers] have as people are living in […]
+          a democratic society. »,<marquage typemarq="italique"> Ibid.</marquage></alinea>
+      </note>
+      <note id="no52">
+        <no>52</no>
+        <alinea>Rebecca Solnit citée par Julian Stallabrass, 2011<marquage typemarq="italique">,
+          </marquage>p. 13. Rebecca Solnit, Trevor Paglen, <marquage typemarq="italique">Invisible:
+          Covert Operations and Classified Landscapes</marquage>, New York, Aperture, 2010,
+          p. 10.</alinea>
+      </note>
+      <note id="no53">
+        <no>53</no>
+        <alinea>À l’instar de Nicole Starosielski, professeure associée à la New York University
+          Steinhardt en médias, culture et communication, qui, elle, est allée chercher les points
+          d’émergence sur la terre ferme de ces mêmes câbles. Nicole Starosielski, <marquage typemarq="italique">The Undersea Network</marquage>, Durham, Duke University Press,
+          2015.</alinea>
+      </note>
+      <note id="no54">
+        <no>54</no>
+        <alinea>Christy Lang, « Bending toward Stealing », <marquage typemarq="italique">L’image
+          volée</marquage>, catalogue d’exposition, Thomas Demand (commissaire), 18 mars–28
+          août 2016, Milan, Fondation Prada, p. 21.</alinea>
+      </note>
+      <note id="no55">
+        <no>55</no>
+        <alinea>Presque 100 pour cent des télécommunications mondiales (y compris les conversations
+          téléphoniques, SMS, MMS, courriels, sites Internet et certaines chaînes de télévision)
+          transitent aujourd’hui par voie sous-marine. Karl Frederick Rauscher, <marquage typemarq="italique">IEEE Reliability of Global Undersea Communications Cable
+          Infrastructure (ROGUCCI) Study, The Report</marquage>, n° 1, 2010, p. 33. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls13" xlink:type="simple" xlink:href="http://www.ieee-rogucci.org/files/The%20ROGUCCI%20Report.pdf">http://www.ieee-rogucci.org/files/The%20ROGUCCI%20Report.pdf</liensimple> (consultation
+          le 7 juin 2018).</alinea>
+      </note>
+      <note id="no56">
+        <no>56</no>
+        <alinea>« In addition to the obvious danger to lives and property, such [hostile] activity
+          could cause long-term service outages. » <marquage typemarq="italique">Ibid</marquage>.,
+          p. 25.</alinea>
+      </note>
+      <note id="no57">
+        <no>57</no>
+        <alinea>Starosielski, 2015, p. 6.</alinea>
+      </note>
+      <note id="no58">
+        <no>58</no>
+        <alinea>Olivier Mongin, <marquage typemarq="italique">L’artiste et le politique. Éloge de la
+          scène dans la société des écrans</marquage>, entretien avec Philippe Petit, Paris,
+          <marquage typemarq="italique">Textuel</marquage>, coll. « Conversations pour demain »,
+          2004, p. 25–26.</alinea>
+      </note>
+      <note id="no59">
+        <no>59</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 21.</alinea>
+      </note>
+      <note id="no60">
+        <no>60</no>
+        <alinea>Dominique Baqué, <marquage typemarq="italique">Pour un nouvel art politique. De
+          l’art contemporain au documentaire</marquage>, Paris, Flammarion, 2004, p. 177. Baqué
+          rappelle à ce sujet l’ouvrage <marquage typemarq="italique">Les nouveaux chiens de
+          garde</marquage> de Serge Halimi, Paris, Liber-Raisons d'agir, 1997 ; le film documentaire
+          <marquage typemarq="italique">Pas vu, pas pris</marquage> de Pierre Carles (1998), tout
+          comme la manipulation télévisuelle autour des charniers « truqués » de Timisoara en
+          Roumanie et les images de la guerre du Golfe « orchestrées par l’instance militaire et
+          l’instance télévisuelle », p. 179. </alinea>
+      </note>
+      <note id="no61">
+        <no>61</no>
+        <alinea>Walter Benjamin, <marquage typemarq="italique">Essais 1, 1922–1934</marquage>, trad.
+          de l’allemand par Maurice de Gandillac, Paris, Éditions Denoël/Gonthier,
+          coll. « Bibliothèque Médiations », 1983, p. 152–153.</alinea>
+      </note>
+      <note id="no62">
+        <no>62</no>
+        <alinea>À propos de la figure du criminel, constituée d’une multitude de portraits
+          possibles, sans véritable typicité : Amélie Bernazzani (dir.), <marquage typemarq="italique">Les enfants de Caïn</marquage> <marquage typemarq="italique">: la
+          représentation du criminel en France et en Italie, de la Renaissance au début du
+          XX</marquage><exposant><marquage typemarq="italique">e</marquage></exposant><marquage typemarq="italique"> siècle</marquage>, Turnhout, Brepols Publishers, 2016.</alinea>
+      </note>
+      <note id="no63">
+        <no>63</no>
+        <alinea>« Tout groupe dominé produit, de par sa condition, un “texte caché” aux yeux des
+          dominants, qui représente une critique du pouvoir. Les dominants, pour leur part,
+          élaborent également un texte caché comprenant les pratiques et les dessous du pouvoir qui
+          ne peuvent être révélés publiquement. » James C. Scott, <marquage typemarq="italique">La
+          domination et les arts de la résistance. Fragments du discours subalterne</marquage>,
+          Paris, Éditions Amsterdam, 2008, p. 12.</alinea>
+      </note>
+      <note id="no64">
+        <no>64</no>
+        <alinea>Trevor Paglen, entretien avec Julian Stallabrass, 2011, p. 14.</alinea>
+      </note>
+    </grnote></partiesann></article>
