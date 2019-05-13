@@ -132,9 +132,13 @@
         <div class="col-md-3">
           <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
             {% if article.issue.has_coverpage %}
-            <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive doc-head__img" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
+            <div class="doc-head__img coverpage">
+              <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
+            </div>
             {% else %}
-            <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive doc-head__img" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
+            <div class="doc-head__img logo">
+              <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
+            </div>
             {% endif %}
           </a>
           {% if only_display %}
