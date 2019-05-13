@@ -2048,7 +2048,7 @@
     <figure class="{name()}" id="li{@id}">
       <figcaption class="notitre">
         <p class="allertexte"><a href="#{@id}">|^</a></p>
-        <p class="no"><xsl:apply-templates select="no" mode="liste"/></p>
+        <p class="no"><xsl:apply-templates select="no|ancestor::grfigure/no" mode="liste"/></p>
         <xsl:apply-templates select="legende/titre | legende/sstitre" mode="liste"/>
       </figcaption>
       <xsl:apply-templates select="objetmedia | tabtexte"/>

@@ -563,6 +563,26 @@ class TestArticleDetailView:
         assert '<figure class="figure" id="fi1"><figcaption><p class="no"></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite><p class="voirliste"><a href="#lifi1">-&gt; Voir la liste des figures</a></p></figure>' in html
         assert '<figure class="figure" id="fi2"><figcaption><p class="no"></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite><p class="voirliste"><a href="#lifi2">-&gt; Voir la liste des figures</a></p></figure>' in html
 
+    def test_figure_groups_numbers_display_in_figure_list(self):
+        article = ArticleFactory(
+            from_fixture='1058470ar',
+            localidentifier='article',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that the figure numbers are displayed above both figures 1 & 2 which are in the same figure group.
+        assert '<p class="no"><span class="no">Figures 1 - 2</span></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></figure><figure class="figure" id="lifi2"><figcaption class="notitre"><p class="allertexte"><a href="#fi2">|^</a></p>' in html
+        assert '<p class="no"><span class="no">Figures 1 - 2</span></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></figure><figure class="figure" id="lifi3"><figcaption class="notitre"><p class="allertexte"><a href="#fi3">|^</a></p>' in html
+
 
 @unittest.mock.patch.object(
     Issue,
