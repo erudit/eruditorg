@@ -139,14 +139,13 @@ def get_coverpage(article):
 
     # Article titles.
     titles = article.erudit_object.get_titles()
-    if article.type_display == article.TYPE_DISPLAY.get(article.ARTICLE_REPORT):
-        html_title = str(article.type_display)
-        header.append(Paragraph(
-            clean(html_title, small_caps_font='SpectralSC-Bold'),
-            styles['h1'],
-        ))
-    elif titles['main'].title is None:
-        html_title = _("[Article sans titre]")
+    if titles['main'].title is None:
+        # If there's no main title and the article is of type report, display 'Review' as the title.
+        if article.type_display == article.TYPE_DISPLAY.get(article.ARTICLE_REPORT):
+            html_title = str(article.type_display)
+        # Otherwise, display '[Untitled article]'.
+        else:
+            html_title = _("[Article sans titre]")
         header.append(Paragraph(
             html_title,
             styles['h1'],
