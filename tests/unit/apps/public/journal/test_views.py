@@ -47,6 +47,15 @@ class TestJournalDetailView:
             assert context['notes'] == expected_notes
 
 
+class TestJournalAuthorsListView:
+
+    def test_do_not_crash_for_journal_with_no_issue(self):
+        journal = JournalFactory()
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': journal.code})
+        response = Client().get(url)
+        assert response.status_code == 200
+
+
 class TestIssueDetailSummary:
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()

@@ -281,7 +281,9 @@ class JournalAuthorsListView(SingleJournalMixin, TemplateView):
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_issue
         context['meta_info_issue'] = context['latest_issue']
-        context['cache_timeout'] = 60 * 60 if self.journal.last_issue.is_published else 0
+        context['cache_timeout'] = 60 * 60
+        if self.journal.last_issue is not None and not self.journal.last_issue.is_published:
+            context['cache_timeout'] = 0
         try:
             context['journal_info'] = self.journal.information
         except ObjectDoesNotExist:
