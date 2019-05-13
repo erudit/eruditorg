@@ -182,7 +182,7 @@ export default {
           // get the text.
           var grfigure_number = grfigure.clone().children().remove().end().text()
           // Figure group caption.
-          var grfigure_caption = grfigure.find('p.alinea')
+          var grfigure_caption = grfigure.find('p.alinea, p.legende')
           // Figure number.
           var figure_number = figure.find('p.no')
           // Figure caption.
