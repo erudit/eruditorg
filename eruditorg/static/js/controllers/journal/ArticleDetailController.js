@@ -182,7 +182,7 @@ export default {
           // get the text.
           var grfigure_number = grfigure.clone().children().remove().end().text()
           // Figure group caption.
-          var grfigure_caption = grfigure.find('p.alinea')
+          var grfigure_caption = grfigure.find('p.alinea, p.legende')
           // Figure number.
           var figure_number = figure.find('p.no')
           // Figure caption.
@@ -192,8 +192,6 @@ export default {
           var figure_notes = figure.find('p.alinea')
           // Figure source.
           var figure_source = $('<p>').html(figure.find('cite.source').html())
-          // Figure group source.
-          var grfigure_source = $('<p>').html(grfigure.find('cite.source').html())
 
           // Put the figure number(s) and caption(s) above the figure.
           $(this.content).find('.mfp-top-bar .mfp-title').prepend(
@@ -207,7 +205,6 @@ export default {
           $(this.content).find('.mfp-bottom-bar').prepend(
             figure_notes.clone(),
             figure_source.clone(),
-            grfigure_source.clone(),
           );
 
           // Make sure the caption is not out of the window for big figures.

@@ -978,7 +978,7 @@
   <!-- figures & tables -->
   <xsl:template match="grfigure|grtableau">
     <div class="{name()}" id="{@id}">
-      <xsl:apply-templates/>
+      <xsl:apply-templates select="node()[name() != 'source']"/>
     </div>
   </xsl:template>
 
@@ -991,7 +991,7 @@
       <xsl:apply-templates select="tabtexte | objetmedia"/>
       <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
       <xsl:apply-templates select="notefig | notetabl"/>
-      <xsl:apply-templates select="source"/>
+      <xsl:apply-templates select="source|ancestor::grfigure/source"/>
       <p class="voirliste">
         <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
       </p>
@@ -2048,7 +2048,7 @@
     <figure class="{name()}" id="li{@id}">
       <figcaption class="notitre">
         <p class="allertexte"><a href="#{@id}">|^</a></p>
-        <p class="no"><xsl:apply-templates select="no" mode="liste"/></p>
+        <p class="no"><xsl:apply-templates select="no|ancestor::grfigure/no" mode="liste"/></p>
         <xsl:apply-templates select="legende/titre | legende/sstitre" mode="liste"/>
       </figcaption>
       <xsl:apply-templates select="objetmedia | tabtexte"/>

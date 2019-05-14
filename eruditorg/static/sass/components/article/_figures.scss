@@ -3,8 +3,12 @@
  * Includes lists at the end of the article
  */
 .grfigure, .grtableau {
+  padding: 1em 0;
+  border-top: 1px dotted $mid-grey;
 
   .figure, .tableau {
+    padding: 0;
+    border-top: none;
 
     &:not(:last-child) .voirliste {
       display: none;
