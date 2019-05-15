@@ -68,7 +68,7 @@
               <xsl:apply-templates select="liminaire/grauteur/auteur[not(contribution[@typecontrib != 'aut'])]" mode="author"/>
             </ul>
           </xsl:if>
-          <xsl:if test="liminaire/grauteur/auteur/contribution or liminaire/grauteur/auteur/affiliation or liminaire/grauteur/auteur/courriel or liminaire/grauteur/auteur/siteweb">
+          <xsl:if test="liminaire/grauteur/auteur/contribution or liminaire/grauteur/auteur/affiliation or liminaire/grauteur/auteur/courriel or liminaire/grauteur/auteur/siteweb or liminaire/grauteur/auteur/nompers/suffixe">
             <div class="akkordion doc-head__more-info" data-akkordion-single="true">
               <p class="akkordion-title">{% trans '…plus d’informations' %} <span class="icon ion-ios-arrow-down"></span></p>
               <ul class="akkordion-content unstyled">

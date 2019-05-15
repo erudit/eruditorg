@@ -599,6 +599,20 @@ class TestArticleDetailView:
         # Check that paral titles are not displayed in summary section.
         assert '<h4><span class="title">Détection d’ADN d’<em>Ophiostoma ulmi</em> introgressé naturellement dans les régions entourant les loci contrôlant la pathogénie et le type sexuel chez <em>O. novo-ulmi</em></span></h4>' not in html  # noqa
 
+    def test_authors_more_information_for_author_with_suffix_and_no_affiliation(self):
+        article = ArticleFactory(
+            from_fixture='1059571ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that more information akkordion is displayed for author with suffix and no affiliation.
+        assert '<ul class="akkordion-content unstyled"><li class="auteur-affiliation"><p><strong>Guy\n      Sylvestre, o.c.</strong></p></li></ul>' in html
+
 
 @unittest.mock.patch.object(
     Issue,
