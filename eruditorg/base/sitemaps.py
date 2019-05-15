@@ -90,4 +90,11 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
         return dt.datetime.strptime(obj.solr_data['DateAjoutIndex'][:10], '%Y-%m-%d')
 
     def location(self, obj):
-        return obj.get_absolute_url()
+        return reverse(
+            'public:journal:article_detail', args=(
+                obj.issue.journal.code,
+                obj.issue.volume_slug,
+                obj.issue.localidentifier,
+                obj.localidentifier,
+            )
+        )
