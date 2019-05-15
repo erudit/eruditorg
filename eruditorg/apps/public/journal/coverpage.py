@@ -139,19 +139,12 @@ def get_coverpage(article):
 
     # Article titles.
     titles = article.erudit_object.get_titles()
-    if titles['main'].title is None:
-        # If there's no main title and the article is of type report, display 'Review' as the title.
-        if article.type_display == article.TYPE_DISPLAY.get(article.ARTICLE_REPORT):
-            html_title = str(article.type_display)
-        # Otherwise, display '[Untitled article]'.
-        else:
-            html_title = _("[Article sans titre]")
+    if titles['main'].title is None and not titles['reviewed_works']:
         header.append(Paragraph(
-            html_title,
+            _('[Article sans titre]'),
             styles['h1'],
         ))
-    else:
-        html_title = article.html_title
+    if titles['main'].title:
         header.append(Paragraph(
             clean(titles['main'].title, small_caps_font='SpectralSC-Bold'),
             styles['h1'],
@@ -161,8 +154,8 @@ def get_coverpage(article):
                 clean(titles['main'].subtitle, small_caps_font='SpectralSC-Bold'),
                 styles['h1_grey'],
             ))
-        header.append(small_spacer)
         for title in titles['paral'] + titles['equivalent']:
+            header.append(small_spacer)
             header.append(Paragraph(
                 clean(title.title, small_caps_font='SpectralSC-Bold'),
                 styles['h1'] if title.subtitle else styles['h1_grey'],
@@ -172,7 +165,12 @@ def get_coverpage(article):
                     clean(title.subtitle, small_caps_font='SpectralSC-Bold'),
                     styles['h1_grey'],
                 ))
-            header.append(small_spacer)
+    for title in titles['reviewed_works']:
+        header.append(small_spacer)
+        header.append(Paragraph(
+            clean(title, small_caps_font='SpectralSC-Bold'),
+            styles['h1_grey'],
+        ))
     header.append(large_spacer)
 
     # Article authors.
@@ -193,11 +191,11 @@ def get_coverpage(article):
             hyperlink='https://www.erudit.org{}'.format(journal_path),
         )
         # Resize journal logo if it's wider than 80 points.
-        journal_logo._restrictSize(80, 250)
+        journal_logo._restrictSize(80, 220)
     else:
         journal_logo = []
     header_table = Table(
-        [(KeepInFrame(472, 250, header), journal_logo)],
+        [(KeepInFrame(472, 220, header), journal_logo)],
         colWidths=(462, 90),
     )
     header_table.setStyle(TableStyle([
@@ -336,6 +334,7 @@ def get_coverpage(article):
         styles['normal'],
     ))
     left_column.append(medium_spacer)
+    html_title = article.html_title if article.html_title else _('[Article sans titre]')
     cite_string = '{authors} ({year}). {title}. <em>{journal}</em>,'.format(**{
         'authors': article.get_formatted_authors_apa(),
         'year': article.issue.year,
@@ -623,7 +622,7 @@ class Line(Flowable):
 
 class HyperlinkedImage(Image):
 
-    def __init__(self, filename, width=None, height=None, kind='direct', mask="auto", lazy=1,
+    def __init__(self, filename, width=None, height=None, kind='direct', mask='auto', lazy=1,
                  hAlign='LEFT', hyperlink=None):
         self.hyperlink = hyperlink
         super(HyperlinkedImage, self).__init__(filename, width, height, kind, mask, lazy, hAlign)
