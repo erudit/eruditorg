@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1059303ar" typeart="article" lang="en" ordseq="1"><admin><infoarticle><idpublic scheme="doi">10.7202/1059303ar</idpublic><pagination> <ppage>1</ppage> <dpage>11</dpage>   
+    </pagination></infoarticle><revue id="phyto71" lang="fr"><titrerev>Phytoprotection</titrerev><titrerevabr>phyto</titrerevabr><idissnnum>1710-1603</idissnnum><directeur sexe="masculin"><nompers><prenom>Guy</prenom><nomfamille>Bélair</nomfamille></nompers></directeur><redacteurchef typerc="regulier" sexe="masculin"><nompers><prenom>Guy</prenom><nomfamille>Bélair</nomfamille></nompers></redacteurchef></revue><numero id="phyto04531"><volume>99</volume><nonumero>1</nonumero><pub><annee>2019</annee></pub><pubnum><date typedate="publication">2019-05-01</date></pubnum></numero><editeur><nomorg>Société de protection des plantes du Québec (SPPQ)</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><histpapier lang="en"><alinea><marquage typemarq="italique">Received 2018-07-13; accepted 2018-11-20</marquage></alinea></histpapier><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>La société de protection des plantes du Québec</nomorg>, 2019</droitsauteur></admin><liminaire><grtitre><surtitre>Article scientifique</surtitre><surtitreparal lang="en">Scientific Article</surtitreparal>
+      <titre><marquage typemarq="italique">Ophiostoma ulmi</marquage> DNA naturally introgressed into an isolate of <marquage typemarq="italique">Ophiostoma        novo-ulmi</marquage> is clustered around pathogenicity and mating type loci</titre>
+      
+      <titreparal lang="fr">Détection d’ADN d’<marquage typemarq="italique">Ophiostoma ulmi</marquage> introgressé naturellement        dans les régions entourant les loci contrôlant la pathogénie et le type sexuel chez        <marquage typemarq="italique">O. novo-ulmi</marquage></titreparal>
+    </grtitre><grauteur><auteur id="au1"><nompers>
+        <prenom>Abdelali</prenom>
+        
+        <nomfamille>Et-Touil</nomfamille>
+        </nompers><affiliation>
+        <alinea>Centre d’étude de la forêt (CEF), Faculté de foresterie, de géographie et de          géomatique, Pavillon Charles-Eugène-Marchand, Université Laval, Québec, QC, Canada G1V          0A6</alinea>
+        </affiliation></auteur><auteur id="au2"><nompers>
+        <prenom>Mathieu</prenom>
+        
+        <nomfamille>Dusabenyagasani</nomfamille>
+        </nompers><affiliation>
+        <alinea>Canadian Grain Commission, Winnipeg, MB, Canada R3C 3G8</alinea>
+        </affiliation></auteur><auteur id="au3"><nompers>
+        <prenom>Guillaume</prenom>
+        <autreprenom>F.</autreprenom>
+        <nomfamille>Bouvet</nomfamille>
+        </nompers><affiliation>
+        <alinea>Centre de Recherche Clinique et Évaluative en Oncologie, Québec, QC, Canada G1R          3S1</alinea>
+        </affiliation></auteur><auteur id="au4"><nompers>
+        <prenom>Clive</prenom>
+        <autreprenom>M.</autreprenom>
+        <nomfamille>Brasier</nomfamille>
+        </nompers><affiliation>
+        <alinea>Forest Research, Farnham, Surrey GU10 4LH, UK</alinea>
+        </affiliation></auteur><auteur id="au5"><nompers>
+        <prenom>Louis</prenom>
+        
+        <nomfamille>Bernier</nomfamille>
+        </nompers><affiliation>
+        <alinea>Centre d’étude de la forêt (CEF), Faculté de foresterie, de géographie et de          géomatique, Pavillon Charles-Eugène-Marchand, Université Laval, Québec, QC, Canada G1V          0A6</alinea>
+        </affiliation><courriel><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:Louis.bernier@sbf.ulaval.ca" xlink:type="simple">Louis.bernier@sbf.ulaval.ca</liensimple></courriel></auteur></grauteur><resume typeresume="resume" lang="en"><alinea>The invasive fungal pathogens <marquage typemarq="italique">Ophiostoma ulmi</marquage> and<marquage typemarq="italique"> O. novo-ulmi</marquage> have caused two successive pandemics of Dutch elm disease since the beginning of the 20<exposant>th</exposant> century. In nature, the highly aggressive <marquage typemarq="italique">O. novo-ulmi</marquage> may hybridize with the less aggressive<marquage typemarq="italique"> O. ulmi</marquage>. Growth rate and molecular analyses were conducted on an unusual, moderately aggressive <marquage typemarq="italique">O. novo-ulmi</marquage> isolate, AST27, carrying an introgressed pathogenicity gene, <marquage typemarq="italique">Pat1-m</marquage>; on highly aggressive <marquage typemarq="italique">O. novo-ulmi</marquage> isolate H327; on <marquage typemarq="italique">O. ulmi</marquage> isolates Q412T and W9; and on progeny from laboratory crosses between H327 and AST27. Genetic analysis indicated that the <marquage typemarq="italique">Pat1</marquage> and <marquage typemarq="italique">Mat1</marquage> (mating type) loci were in different linkage groups corresponding to <marquage typemarq="italique">O. novo-ulmi</marquage> H327 chromosomes 1 and 2, respectively. Most of the molecular differences between the nuclear genomes of H327 and AST27 occurred in the vicinity of <marquage typemarq="italique">Pat1</marquage> and <marquage typemarq="italique">Mat1</marquage>. In addition, two putative quanti-tative trait loci, <marquage typemarq="italique">Mgr1</marquage> and <marquage typemarq="italique">Mgr2</marquage>, which influence mycelial growth rate at 21°C and 28°C, the optima for <marquage typemarq="italique">O. novo-ulmi</marquage> and <marquage typemarq="italique">O. ulmi</marquage>, were linked to <marquage typemarq="italique">Mat1</marquage> and <marquage typemarq="italique">Pat1</marquage>, respectively.</alinea></resume><resume typeresume="resume" lang="fr"><alinea>Les champignons pathogènes envahissants <marquage typemarq="italique">Ophiostoma ulmi</marquage> et <marquage typemarq="italique">O. novo-ulmi </marquage>ont causé deux pandémies successives de maladie hollandaise de l’orme depuis le début du 20<exposant>e</exposant> siècle. On a mesuré la croissance et procédé à des analyses moléculaires chez l’isolat <marquage typemarq="italique">O. novo-ulmi</marquage> AST27, modérément agressif et chez lequel le gène de pathogénie <marquage typemarq="italique">Pat1-m</marquage> est introgressé; chez l’isolat <marquage typemarq="italique">O. novo-ulmi </marquage>H327; chez les isolats <marquage typemarq="italique">O. ulmi</marquage> Q412T et W9; ainsi que chez les descendants de croisements dirigés entre les isolats H327 et AST27. Les analyses génétiques indiquent que les loci <marquage typemarq="italique">Pat1</marquage> et <marquage typemarq="italique">Mat1</marquage> (type sexuel) sont situés sur des groupes de liaison différents qui correspondent respectivement aux chromosomes 1 et 2. Les différences moléculaires entre les génomes nucléaires des souches H327 et AST27 se retrouvent majoritairement dans le voisinage de <marquage typemarq="italique">Pat1</marquage> et de <marquage typemarq="italique">Mat1</marquage>. De plus, deux loci présumés de caractères quantitatifs, <marquage typemarq="italique">Mgr1</marquage> et <marquage typemarq="italique">Mgr2</marquage>, qui influencent la croissance mycélienne à 21 °C et à 28 °C (températures optimales pour <marquage typemarq="italique">O. novo-ulmi</marquage> et <marquage typemarq="italique">O. ulmi</marquage>) sont liés respectivement à <marquage typemarq="italique">Mat1</marquage> et à <marquage typemarq="italique">Pat1</marquage>.</alinea></resume><grmotcle lang="en"><motcle><marquage typemarq="italique">Ophiostoma ulmi</marquage></motcle><motcle><marquage typemarq="italique">Ophiostoma novo-ulmi</marquage></motcle><motcle>Dutch elm disease</motcle><motcle>introgression</motcle></grmotcle><grmotcle lang="fr"><motcle><marquage typemarq="italique">Ophiostoma ulmi</marquage></motcle><motcle><marquage typemarq="italique">Ophiostoma novo-ulmi</marquage></motcle><motcle>maladie hollandaise de l’orme</motcle><motcle>introgression</motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><titre>INTRODUCTION</titre><para id="pa1"><no>1</no>
+        <alinea>The invasive ascomycete fungus <marquage typemarq="italique">Ophiostoma
+          novo-ulmi</marquage> Brasier is a highly aggressive vascular wilt pathogen of elms and the
+          principal agent of Dutch elm disease today. Over the past 50 years, it has progressively
+          replaced the less aggressive <marquage typemarq="italique">Ophiostoma ulmi</marquage>
+          (Buism.) Nannf., which was responsible for the first pandemic of Dutch elm disease across
+          Europe, central Asia and North America in the early 1900s (Brasier 1990). <marquage typemarq="italique">Ophiostoma ulmi</marquage> and <marquage typemarq="italique">O. novo-ulmi</marquage> differ in many behavioural and morphological properties. For
+          example, they differ in their growth-temperature optima of <marquage typemarq="italique">ca</marquage> 22°C and 28°C respectively and in their perithecial dimensions; <marquage typemarq="italique">O. ulmi</marquage> secretes little or none of the cell surface
+          hydrophobin cerato-ulmin while <marquage typemarq="italique">O. novo-ulmi</marquage>
+          secretes high levels; and the two species are characte-ristically non-overlapping in their
+          levels of aggressiveness on elms of moderate resistance (Brasier 1991). They also differ
+          extensively in their molecular architecture and are phylo-genetically distinct and
+          probably anciently divergent (Pipe <marquage typemarq="italique">et al</marquage>. 1995).
+          From their temperature relation and other properties, <marquage typemarq="italique">O. ulmi</marquage> and <marquage typemarq="italique">O. novo-ulmi</marquage> are believed
+          to be adapted to tropical and temperate conditions in their res-pective centres of origin
+          (Brasier and Mehrotra 1995). </alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>Both species are outcrossing with two mating types, designated MAT-1 and MAT-2,
+          controlled by alleles at a single <marquage typemarq="italique">Mat</marquage> locus
+          located on chromosome 2 of the <marquage typemarq="italique">O. novo-ulmi </marquage>H327
+          genome (Comeau <marquage typemarq="italique">et al</marquage>. 2015). They are also
+          strongly but not totally reproductively isolated at the pre- and postzygotic levels
+          (Brasier 1986b, 1991). Detailed analysis of natural populations in <marquage typemarq="italique">O. ulmi/ O. novo-ulmi</marquage> overlap zones has revealed the
+          occurrence of rare and transient <marquage typemarq="italique">O. ulmi</marquage> x <marquage typemarq="italique">O. novo</marquage>-<marquage typemarq="italique">ulmi </marquage>interspecific hybrids with distinct phenotypes and
+          reduced growth and parasitic fitness (Brasier <marquage typemarq="italique">et al.</marquage> 1995, 1998; Pipe <marquage typemarq="italique">et al.</marquage> 2000).
+          An unusual, only moderately pathogenic isolate of <marquage typemarq="italique">O. novo-ulmi</marquage>, AST27 (Brasier 1986a, 1987), collected in Iran at a location
+          where <marquage typemarq="italique">O. novo-ulmi</marquage> had recently replaced
+          <marquage typemarq="italique">O. ulmi</marquage> (Brasier and Afsharpour 1979), was later
+          shown to be an introgressant harbouring some <marquage typemarq="italique">O. ulmi-</marquage>specific alleles (Bates <marquage typemarq="italique">et al</marquage>. 1993; Et-Touil <marquage typemarq="italique">et al</marquage>. 1999).
+          These included <marquage typemarq="italique">Pat1-m</marquage>, a putative <marquage typemarq="italique">O. ulmi</marquage> pathogenicity allele conferring the mode-rately
+          aggressive phenotype in AST27 (Et-Touil <marquage typemarq="italique">et al</marquage>.
+          1999, 2005), and the <marquage typemarq="italique">OPHIO2-int.</marquage> DNA transposon
+          (Bouvet <marquage typemarq="italique">et al</marquage>. 2008). Analysis of population
+          samples collected in Portugal and Poland during the 1980s, when <marquage typemarq="italique">O. novo-ulmi</marquage> was in the process of displacing<marquage typemarq="italique"> O. ulmi</marquage>, revealed other interspecific hybrids, including
+          individuals with intermediate aggressi-veness and a distinctive growth response to
+          temperature (Brasier <marquage typemarq="italique">et al</marquage>. 1998). </alinea>
+      </para><para id="pa3"><no>3</no>
+        <alinea>These hybrids and introgressants are known to have a major role in the continuing
+          evolution of <marquage typemarq="italique">O. novo-ulmi</marquage> (reviewed in Brasier
+          <marquage typemarq="italique">et al</marquage>. 2004). They also provide an opportunity to
+          identify genes associated with fitness. Thus, previous genetic analysis of introgressant
+          isolate AST27 allowed the identification of the <marquage typemarq="italique">Pat1</marquage> pathogenicity locus (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). Matching alleles for moderate (<marquage typemarq="italique">Pat1-m</marquage>) and high (<marquage typemarq="italique">Pat1-h</marquage>)
+          aggressiveness were identified in AST27 and in normal and highly aggressive <marquage typemarq="italique">O. novo-ulmi</marquage> isolate H327 respectively, whereas molecular
+          studies with restriction fragment length polymorphisms (RFLPs; Bates <marquage typemarq="italique">et al</marquage>. 1993) and random amplified polymorphic DNAs (RAPDs;
+          Et-Touil <marquage typemarq="italique">et al</marquage>. 1999) confirmed that a portion of
+          the AST27 nuclear genome comprised <marquage typemarq="italique">O. ulmi</marquage>-specific sequences. Some, but not all, of the latter were found to be
+          linked to <marquage typemarq="italique">Pat1</marquage> (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). </alinea>
+      </para><para id="pa4"><no>4</no>
+        <alinea>In these previous studies, lower aggressiveness towards moderately resistant elms
+          was the only phenotypic trait found to distinguish introgressant AST27 from other isolates
+          of <marquage typemarq="italique">O. novo-ulmi</marquage> (Brasier 1986a). However, the
+          evidence for <marquage typemarq="italique">O. ulmi</marquage>-like DNA sequences at
+          various locations in the AST27 genome led us to investigate whether this intro-gressant
+          isolate expressed other <marquage typemarq="italique">O. ulmi</marquage>-like behavioural
+          traits that might contribute to fitness. In the present study, mycelial growth rates at
+          different temperatures, yeast phase development and cerato-ulmin production levels were
+          quantified in progeny sets from controlled sexual crosses involving AST27 and in wild type
+          isolates of <marquage typemarq="italique">O. novo-ulmi</marquage> and <marquage typemarq="italique">O. ulmi</marquage>. Molecular polymorphisms among the isolates were
+          then investigated by polymerase chain reaction (PCR) using specific amplification of
+          coding loci and random amplification of anonymous loci and possible associations between
+          the various characters and isolates analyzed. </alinea>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>MATERIALS AND METHODS</titre><section2 id="s2n1"><no>2.
+				1</no><titre>Isolates and culture media</titre><para id="pa5"><no>5</no>
+        <alinea>The following isolates, described by Et-Touil <marquage typemarq="italique">et al</marquage>. (1999), were analyzed: highly aggressive <marquage typemarq="italique">O. novo-ulmi</marquage> subsp. <marquage typemarq="italique">novo-ulmi</marquage> isolate
+          H327 (<marquage typemarq="italique">Pat1-h</marquage>, MAT-1); moderately aggressive
+          <marquage typemarq="italique">O. novo-ulmi</marquage> subsp. <marquage typemarq="italique">novo-ulmi</marquage> introgressant isolate AST27 (<marquage typemarq="italique">Pat1-m</marquage>, MAT-2); 40 F<indice>1 </indice>progeny from the cross H327 x AST27;
+          and 50 progeny from the backcross H327 x A2P30 (<marquage typemarq="italique">Pat1-m</marquage>, MAT-2). An additional set of 93 F<indice>1</indice> progeny was
+          recovered from the cross H327 x AST27. <marquage typemarq="italique">Ophiostoma
+          novo-ulmi</marquage> subsp. <marquage typemarq="italique">novo-ulmi</marquage> isolates
+          AST20 (MAT-1) and CKT11 (MAT-2), <marquage typemarq="italique">O.</marquage> <marquage typemarq="italique">novo-ulmi</marquage> subsp. <marquage typemarq="italique">americana</marquage> isolates FG245 (MAT-1), W2 (MAT-2), MH75 (MAT-2) and CESS16K
+          (MAT-2), and <marquage typemarq="italique">O. ulmi</marquage> isolates Q412T (MAT-1), R21
+          (MAT-1) and W9 (MAT-2) were also used in some tests. Isolates were routinely grown on
+          solid complete medium (CM) with 2.0 g L<exposant>-1</exposant> ammonium sulfate as
+          nitrogen source (Bernier and Hubbes 1990a). Genetic crosses were carried out on elm
+          sapwood agar (Brasier 1981) supplemented with linoleic acid at 6 ml/L (Bernier and Hubbes
+          1990a, 1990b). The mating type of progeny strains was determined by crossing each
+          individual with strains H327 and AST27. For long-term storage, aliquots of yeastlike cells
+          grown in liquid CM with L-proline (1.15 g L<exposant>-1</exposant>) as nitrogen source
+          (Bernier and Hubbes 1990a) were mixed with glycerol (to a final concentration of 15%) and
+          stored at -80°C (Bernier 1993). Modified 2% Oxoid (Nepean, ON, Canada) malt extract agar
+          (MEA) was prepared as described in Brasier (1981).</alinea>
+      </para></section2><section2 id="s2n2"><no>2.
+				2</no><titre>Growth measurements</titre><para id="pa6"><no>6</no>
+        <alinea>Mycelial growth rate on solid medium was measured according to Brasier (1981). Each
+          isolate was inoculated centrally on two sets of MEA plates and incubated in the dark at
+          21°C and 28°C (Brasier <marquage typemarq="italique">et al</marquage>. 1981). After 2 d
+          (T1) and 7 d (T2), the diameter (D) of each colony was measured. The mean radial growth
+          rate of each isolate was calculated from three replicates using the equation described by
+          Brasier and Webber (1987):
+          D<indice>2</indice>-D<indice>1</indice>/2(T<indice>2</indice>-T<indice>1</indice>) = Radial
+          growth rate per day.</alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Growth curves were established for yeastlike cell cultures in liquid CM using the
+          method of Bernier and Hubbes (1990a). One-week-old cultures in liquid CM were filtered
+          through eight layers of cheesecloth to remove clumps of cells and mycelia and centrifuged
+          at 4100 x g for 5 min. The pellet was resuspended in sterile distilled water at
+          1 x 10<exposant>6</exposant> cells mL<exposant>-1</exposant>. A 500-µL aliquot was added
+          to 50 mL of medium in a 125-mL Erlenmeyer flask and incubated on a rotary shaker
+          (120 rev min<exposant>-1</exposant>) at 25°C in the dark. The cell concentration was
+          quantified with a haemocytometer from three replicates and monitored over 8 d.</alinea>
+      </para></section2><section2 id="s2n3"><no>2.
+				3</no><titre>Cerato-ulmin measurement</titre><para id="pa8"><no>8</no>
+        <alinea>Cerato-ulmin production levels in 1-wk-old culture filtrates of <marquage typemarq="italique">O. novo-ulmi </marquage>H327, <marquage typemarq="italique">O. ulmi</marquage> W9 and Q412T, introgressant AST27, F<indice>1</indice> progeny A2P5
+          (<marquage typemarq="italique">Pat1-h</marquage>, MAT-2) and A2P30 (<marquage typemarq="italique">Pat1-m</marquage>, MAT-2), and backcross progeny A3P48 (<marquage typemarq="italique">Pat1-h</marquage>, MAT-2) and A3P11 (<marquage typemarq="italique">Pat1-m</marquage>, MAT-1), grown in liquid shake culture at 25°C in CM, were determined
+          by the turbidity method described by Takai and Richards (1978) and expressed by the
+          cerato-ulmin production index (CPI). The CPI of each isolate was measured as
+          100 x<marquage typemarq="gras"> </marquage>the optical density at 400 nm from three
+          replicates.</alinea>
+      </para></section2><section2 id="s2n4"><no>2.
+				4</no><titre>DNA extraction and amplification</titre><para id="pa9"><no>9</no>
+        <alinea>Total genomic DNA was extracted from yeastlike cells grown in liquid CM, according
+          to the procedure of Zolan and Pukkila (1986). DNA was amplified by the polymerase chain
+          reaction (PCR) using RAPD primers (Operon Technologies, Alameda, CA, USA) as described by
+          Et-Touil <marquage typemarq="italique">et al</marquage>. (1999), as well as primers
+          designed for the specific amplification of coding sequences (Dewar and Bernier 1995;
+          Dusabenyagasani <marquage typemarq="italique">et al</marquage>. 2000). Bulked segregant
+          analysis (Michelmore <marquage typemarq="italique">et al</marquage>. 1991) was used to
+          find RAPD markers linked to the mating-type locus. Two bulked DNA samples were prepared
+          from 15 MAT-1 strains (A2P2, A2P3, A2P4, A2P10, A2P11, A2P16, A2P19, A2P20, A2P21, A2P22,
+          A2P25, A2P26, A2P33, A2P35, A2P40) and 15 MAT-2 strains (A2P1, A2P5, A2P6, A2P7, A2P8,
+          A2P9, A2P12, A2P13, A2P14, A2P15, A2P18, A2P23, A2P29, A2P31, A2P34) from the original set
+          of 40 F<indice>1</indice> progeny from the H327 x AST27 cross (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). The bulked DNA and parent DNA were screened
+          for differences using 80 RAPD primers as described by Et-Touil <marquage typemarq="italique">et al</marquage>. (1999). RAPD amplicons were electrophoresed in 1%
+          agarose and 0.5% Synergel (Diversified Biotechologies, Boston, MA, USA) gels in 0.09 M
+          Tris-phosphate and 0.002 M EDTA, and visualized by ethidium bromide fluorescence. Gel
+          electrophoresis, alone or in combination with RFLP or single strand confor-mation
+          polymorphism (SSCP) analysis (Orita <marquage typemarq="italique">et al</marquage>. 1989)
+          was used to detect polymorphisms in PCR-amplified coding sequences located on six of the
+          eight chromosomes (chr) found in <marquage typemarq="italique">O. novo-ulmi</marquage>
+          H327 (Comeau <marquage typemarq="italique">et al</marquage>. 2015): 60S ribo-somal protein
+          L34-B and hypothetical eukaryotic translation initiation factor 6 (chr 1); β-tubulin,
+          mitochondrial ATPase inhibitor, 60S ribosomal protein L35 and elongation factor 1-α
+          (chr 2); 60S ribosomal protein L30, cytochrome C oxidase chain VIIc-like protein,
+          histidyl-tRNA mitochondrial, cerato-ulmin and nuclear ribosomal rRNA (chr 3); O-glycosyl
+          hydrolase (chr 4); probable eukaryotic translation initiation factor 2-β, BRCT-containing
+          protein 1 and serine proteinase-like protein (chr 6); actin (chr 8); (Genbank accession
+          numbers AF378547 to AF378553, and AF378555 to AF37867). In addition, Ins-OPHIO2-AST27-L
+          and R primers were used to amplify AST27-specific DNA transposon <marquage typemarq="italique">OPHIO2-int</marquage>. (Bouvet <marquage typemarq="italique">et al.</marquage> 2008) in the H327 x AST27 F<indice>1</indice> progeny.</alinea>
+      </para></section2><section2 id="s2n5"><no>2.
+				5</no><titre>Statistical analysis of growth rate and linkage data</titre><para id="pa10"><no>10</no>
+        <alinea>Mycelial growth rate data for the two sets of H327 x AST27 F<indice>1</indice>
+          progeny, and the H327 x A2P30 backcross were subjected to ANOVA followed by a Duncan’s
+          multiple comparison test. The relationships between mycelial growth rate, pathoge-nicity,
+          mating-type, and molecular markers were analyzed by carrying out two-tailed Student’s
+          <marquage typemarq="italique">t</marquage> tests. These statistical analyses were
+          performed with SAS version 6.1 software package (SAS Institute Inc., Cary, NC, USA).
+          Recombination among the physiological and molecular markers was studied in the first set
+          of 40 H327 x AST27 F<indice>1</indice> progeny, using MapMaker Macintosh V2.0 Software
+          (Lander <marquage typemarq="italique">et al</marquage>. 1987). Linkage among markers
+          segregating in Mendelian fashion was verified with a logarithm of the odds (LOD) score of
+          4.0 and Theta value of 0.3. Linkage distances, estimated using the Kosambi function, were
+          first calculated by a two-point analysis, and then by multipoint analysis. </alinea>
+      </para></section2></section1><section1 id="s1n3"><no>3</no><titre><marquage typemarq="majuscule">Results</marquage></titre><para id="pa11"><no>11</no>
+        <alinea>Forty H327 x AST27 F<indice>1</indice> progeny (F<indice>1</indice> set 1) and fifty
+          H327 x A2P30 backcross progeny examined for pathogenicity by Et-Touil <marquage typemarq="italique">et al</marquage>. (1999) during the identification of the <marquage typemarq="italique">Pat1</marquage> locus were investigated for mating type, for other
+          phenotypically observable traits, for segregation of putative quantitative trait loci
+          (QTLs), and for additional associated molecular markers. A further 93 F<indice>1</indice>
+          progeny from the cross H327 x AST27 (F<indice>1</indice> set 2) was also examined in many
+          of the tests.</alinea>
+      </para><section2 id="s2n6"><no>3.
+				1</no><titre>Mating types</titre><para id="pa12"><no>12</no>
+        <alinea>The MAT-1 and MAT-2 mating types segregated in Mendelian fashion in H327 x AST27
+          F<indice>1</indice> set 1 (15:25; χ<exposant>2</exposant> = 2.500) but not in set 2
+          (34:59; χ<exposant>2</exposant> = 6.720, <marquage typemarq="italique">P </marquage>&lt; 0.01). The two mating types also segregated in Mendelian fashion
+          (22:25; χ<exposant>2</exposant> = 0.191) in the 47 isolates from the H327 x A2P30
+          backcross progeny for which mating reactions could be determined.</alinea>
+      </para></section2><section2 id="s2n7"><no>3.
+				2</no><titre>Mycelial growth rate at 21°C and 28°C</titre><para id="pa13"><no>13</no>
+        <alinea>Growth rate tests of the two F<indice>1</indice> and one backcross progeny sets were
+          conducted on MEA at 21°C and at 28°C, close to the optima for <marquage typemarq="italique">O. novo-ulmi</marquage> and <marquage typemarq="italique">O. ulmi</marquage>, respectively (Brasier <marquage typemarq="italique">et al</marquage>.
+          1981). The data were then analyzed for their relationship to parental growth rates, to
+          mating type and to pathogenicity (<marquage typemarq="italique">Pat1-h</marquage> or
+          <marquage typemarq="italique">Pat1-m</marquage>). The pathogenicity data were available
+          only for F<indice>1</indice> set 1 and for the backcross progeny (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). The results are summarized in Tables 1 and 2
+          and Figs. 1 and 2.</alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>At 21°C, <marquage typemarq="italique">O. novo-ulmi</marquage> isolate H327 grew
+          significantly faster (4.95 mm d<exposant>-1</exposant>; <marquage typemarq="italique">F</marquage> = 7.70, <marquage typemarq="italique">P</marquage> &lt; 0.001) than
+          <marquage typemarq="italique">O. novo-ulmi</marquage> introgressant AST27
+          (4.11 mm d<exposant>-1</exposant>); and AST27 grew signifi-cantly faster than <marquage typemarq="italique">O. ulmi </marquage>isolates Q412T and W9 (3.25 and
+          2.95 mm d<exposant>-1</exposant>, respectively) (Fig. 1A). Both H327 and AST27 therefore
+          show the <marquage typemarq="italique">O. novo-ulmi</marquage> characteristic of a faster
+          growth rate than <marquage typemarq="italique">O. ulmi</marquage> at this temperature.
+          Linear growth rates of both F<indice>1</indice> progeny sets were continuously distributed
+          (Fig. 1A for set 1). For each set, the overall progeny mean did not differ significantly
+          from the H327/AST27 midparent value. In set 1, the 21 <marquage typemarq="italique">Pat1-h</marquage> and the 19 <marquage typemarq="italique">Pat1-m</marquage> siblings
+          exhibited comparable mean mycelial growth rates. The 15 MAT-1 individuals, however, grew
+          significantly (<marquage typemarq="italique">P</marquage> &lt; 0.01) faster than their 25
+          MAT-2 siblings (Table 1). This behavior was also observed in the 93 F<indice>1</indice>
+          progeny set 2.</alinea>
+      </para><para id="pa15"><no>15</no>
+        <alinea>At 28°C, <marquage typemarq="italique">O. novo-ulmi</marquage> AST27
+          (3.05 mm d<exposant>-1</exposant>) and <marquage typemarq="italique">O. ulmi</marquage>
+          Q412T (4.21 mm d<exposant>-1</exposant>) grew significantly faster than <marquage typemarq="italique">O. novo-ulmi</marquage> H327 (2.95 mm d<exposant>-1</exposant>;
+          <marquage typemarq="italique">F</marquage> = 6.72, <marquage typemarq="italique">P</marquage> &lt; 0.001). Isolate AST27 also grew significantly faster than H327 at 28°C
+          in two retests (4.98 vs 4.30 and 5.12 vs 4.17 mm d<exposant>-1</exposant>, respectively)
+          i.e. it exhibited a more <marquage typemarq="italique">O. ulmi</marquage>-like property.
+          In both F<indice><marquage typemarq="gras">1</marquage></indice> progeny sets, the
+          distribution of growth rates was again continuous (Fig. 1B for set 1). The overall means
+          of the two progeny sets were again similar to their respective H327 and AST27 midparent
+          values. With set 1, however, the <marquage typemarq="italique">Pat1-m</marquage> progeny
+          grew at a significantly higher rate than <marquage typemarq="italique">Pat1-h</marquage>
+          progeny (<marquage typemarq="italique">P</marquage> &lt; 0.001), whereas the MAT-1 and
+          MAT-2 progeny of both F<indice>1</indice> sets exhibited similar growth rates (Table 1).
+        </alinea>
+      </para><tableau id="ta1">
+        <no>Table 1</no>
+        <legende lang="en">
+          <titre>Relationship between mycelial growth rate, mating type and pathogenicity in
+            <marquage typemarq="italique">O. novo-ulmi</marquage> H327 x AST27 progeny sets</titre>
+          <alinea><exposant>a</exposant> Vertical bar, significant difference between the two
+            values: *, <marquage typemarq="italique">P </marquage>&lt; 0.05; **, <marquage typemarq="italique">P </marquage>&lt; 0.01; ***, <marquage typemarq="italique">P </marquage>&lt; 0.001.</alinea>
+          <alinea><exposant>b</exposant> In two retests, no significant differences in growth rate
+            at 28°C were observed between MAT-1 and MAT-2 backcross progeny.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="tableau" xlink:type="simple"></image>
+          <texte>Mean growth rate (mm d-1)H327 x AST27 F1H327 x A2P30 backcrossSet 1 (n = 40)Set 2
+            (n = 93)(n = 50)PARAMETER21°COverall progeny mean Parent midpoint4.47 4.533.54 3.753.94
+            3.86Pat1-h progeny Pat1-m progeny4.36 4.59nd nd4.01 3.86MAT-1 progeny MAT-2 progeny4.85
+            4.24 **a3.69 3.41 **4.29 3.61 ***28°COverall progeny mean Parent midpoint2.80 3.003.89
+            3.423.49 3.52Pat1-h progeny Pat1-m progeny2.62 3.00 ***nd nd3.48 3.51MAT-1 progeny MAT-2
+            progeny2.75 2.833.56 3.473.72 3.36 ***b</texte>
+        </objetmedia>
+      </tableau><para id="pa16"><no>16</no>
+        <alinea>The 50 H327 x A2P30 backcross progeny also exhibited continuous distributions for
+          growth rates at 21°C and 28°C (Fig. 2). The 24 <marquage typemarq="italique">Pat1-m</marquage> individuals and 26 <marquage typemarq="italique">Pat1-h</marquage>
+          individuals displayed a similar growth rate at both 21°C and 28°C (Table 1). The 22 MAT-1
+          progeny grew significantly faster, on average, than the 25 MAT-2 progeny at 21°C
+          (<marquage typemarq="italique">P</marquage> &lt; 0.001; Table 1).</alinea>
+      </para><para id="pa17"><no>17</no>
+        <alinea>Overall, therefore, these data suggested that genetic factors controlling growth
+          rate were segregating among the H327 x AST27 progeny and that some of these factors might
+          be associated with the <marquage typemarq="italique">Mat1</marquage> or <marquage typemarq="italique">Pat1</marquage> loci.</alinea>
+      </para><tableau id="ta2">
+        <no>Table 2</no>
+        <legende lang="en">
+          <titre>Physiological characteristics of <marquage typemarq="italique">O. novo-ulmi
+            </marquage>(H327), introgressant (AST27), progeny from H327 x AST27 crosses (A2P5,
+            A2P30), backcross progeny from H327 x A2P30 crosses (A3P11, A3P48), and <marquage typemarq="italique">O. ulmi</marquage> (W9 and Q412T)</titre>
+          <alinea><exposant>a</exposant> The <marquage typemarq="italique">Pat1-m</marquage> allele
+            is expected to occur in <marquage typemarq="italique">O. ulmi</marquage>
+            strains.</alinea>
+          <alinea><exposant>b</exposant> Within a line, means followed by a different letter differ
+            significantly (<marquage typemarq="italique">P </marquage>&lt; 0.05) according to
+            Duncan’s multiple-range test following ANOVA.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="tableau" xlink:type="simple"></image>
+          <texte>StrainsCharacterH327 O. novo-ulmiAST27 IntrogressantA2P5 F1A2P30 F1A3P48
+            BackcrossA3P11 BackcrossQ412T O. ulmiW9 O. ulmiPat1
+            allelePat1-hPat1-mPat1-hPat1-mPat1-hPat1-mPat1-maPat1-maMating
+            typeMAT-1MAT-2MAT-2MAT-2MAT-2MAT-1MAT-1MAT-2Cerato-ulmin production indexb61 a58 a62 a60
+            a60 a57 a2 b7 bGrowth rate at 21°C4.95 a4.11 c3.95 c4.36 b3.93 c4.88 a3.25 d2.95 eGrowth
+            rate at 28°C2.95 e3.05 d2.76 f3.26 c3.05 d3.63 b4.21 a2.95 e</texte>
+        </objetmedia>
+      </tableau><grfigure id="gf1">
+        <no>Figure 1</no>
+        <legende lang="en">
+          <titre>Mycelial growth rate distribution at 21°C (A) and 28°C (B) of the 40
+            F<indice>1</indice> set 1 progeny from a cross between the highly aggressive <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage> H327 and the moderately aggressive
+            <marquage typemarq="italique">O. novo-ulmi</marquage> introgressant AST27</titre>
+          <alinea>Isolates W9 and Q412T belong to <marquage typemarq="italique">O. ulmi</marquage>.
+            All measurements are means of three replicates. Vertical bars represent standard error.
+            A continuous distribution at 21°C and 28°C was also observed for a second set of 93
+            F<indice>1</indice> progeny (data not shown).</alinea>
+        </legende>
+        <figure id="fi1">
+          <no>A</no>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="figure" xlink:type="simple"></image>
+            <texte>Mycelial growth rate (mm d-1) at 21°C Isolate</texte>
+          </objetmedia>
+        </figure>
+        <figure id="fi2">
+          <no>B</no>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="figure" xlink:type="simple"></image>
+            <texte>Mycelial growth rate (mm d-1) at 28°C Isolate</texte>
+          </objetmedia>
+        </figure>
+      </grfigure></section2><section2 id="s2n8"><no>3.
+				3</no><titre>Yeast growth and cerato-ulmin production</titre><para id="pa18"><no>18</no>
+        <alinea>In liquid shake cultures, the yeast phases of <marquage typemarq="italique">O. novo-ulmi</marquage> isolates H327 and AST27 grown in CM displayed nearly similar
+          growth kinetics at 25°C. The only notable difference was observed after 96 h of incubation
+          when cell concentrations of AST27 were lower than those recorded for H327 (Fig. 3). Both
+          isolates grew more rapidly than <marquage typemarq="italique">O. ulmi</marquage> Q412T and
+          W9 after <marquage typemarq="italique">ca</marquage> 80 h (Fig. 3). Similarly, H327 and
+          AST27, two selected F<indice>1</indice> progeny isolates (A2P5 and A2P30) and two selected
+          backcross isolates (A3P48 and A3P11) produced comparably high levels of cerato-ulmin,
+          whereas isolates Q412T and W9 produced very small amounts of cerato-ulmin (Table 2)
+          typical of <marquage typemarq="italique">O. ulmi</marquage> (Scala et al. 1997; Takai
+          1980). Since yeast growth kinetics and cerato-ulmin production were similar for parent
+          isolates, these traits were not studied further in progeny isolates. </alinea>
+      </para></section2><section2 id="s2n9"><no>3.
+				4</no><titre>Molecular polymorphisms</titre><para id="pa19"><no>19</no>
+        <alinea>Sixteen coding sequences which had been previously assigned to the six <marquage typemarq="italique">O. novo-ulmi</marquage> chromosomes distinguishable by pulsed-field
+          gel electrophoresis (Dewar and Bernier 1995; Dewar <marquage typemarq="italique">et al.</marquage> 1997; Dusabenyagasani <marquage typemarq="italique">et al</marquage>.
+          unpubl.) were amplified in H327 and AST27 and subjected to RFLP or SSCP analysis to
+          determine whether they corresponded to <marquage typemarq="italique">O. ulmi</marquage> or
+          <marquage typemarq="italique">O. novo-ulmi</marquage> specific alleles. Results indicated
+          that intro-gressant AST27 harboured no <marquage typemarq="italique">O. ulmi</marquage>-specific alleles among the 16 coding loci analyzed. Following
+          sequencing and assembly of the <marquage typemarq="italique">O. novo-ulmi</marquage> H327
+          nuclear genome into eight chromosomes (Forgetta <marquage typemarq="italique">et al</marquage>. 2013) and its subsequent annotation (Comeau <marquage typemarq="italique">et al</marquage>. 2015), it was found that two chromosomes (chr 5 and
+          7) were not represented in the set of 16 coding sequences. On the other hand, the
+          <marquage typemarq="italique">OPHIO2-int</marquage>. DNA transposon (Bouvet <marquage typemarq="italique">et al</marquage>. 2008) segregated in the progeny (Table 1).</alinea>
+      </para><para id="pa20"><no>20</no>
+        <alinea>A comparison of RAPD patterns of H327 and AST27 yielded 26 additional reproducible
+          polymorphisms. These included the 10 RAPD loci linked to <marquage typemarq="italique">Pat1</marquage> reported previously (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). These loci were assigned to chDNA II (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999) which corresponds to chromosome 1 of the
+          <marquage typemarq="italique">O. novo-ulmi</marquage> reference genome (Forgetta <marquage typemarq="italique">et al.</marquage> 2013; Comeau <marquage typemarq="italique">et al</marquage>. 2015). Seven RAPD loci were polymorphic between MAT-1 and MAT-2 bulked
+          samples of F<indice>1</indice> progeny: OPA8<indice>500</indice>,
+          OPA11<indice>1900</indice>, OPA12<indice>1900</indice>, OPJ1<indice>600</indice>,
+          OPJ6<indice>1200</indice>, OPK12<indice>500</indice>, and OPK17<indice>1400</indice>. One
+          of these markers, OPA12<indice>1900</indice>, was am-plified in parent strain AST27 and in
+          <marquage typemarq="italique">O. ulmi</marquage> strains but not in parent strain H327 nor
+          in other <marquage typemarq="italique">O. novo-ulmi</marquage> strains tested.
+          Recombination analysis of the first set of 40 F<indice>1</indice> progeny confirmed that
+          the above markers were all linked to the <marquage typemarq="italique">Mat1</marquage>
+          locus, located on <marquage typemarq="italique">O. novo-ulmi</marquage> H327 chromo-some 2
+          (Comeau <marquage typemarq="italique">et al.</marquage> 2015), and further indicated that
+          an additional locus, OPJ1<indice>680</indice>, was also linked to <marquage typemarq="italique">Mat1</marquage>. These eight RAPD markers and the <marquage typemarq="italique">Mat1</marquage> locus segregated independently from <marquage typemarq="italique">Pat1</marquage> and the 11 molecular markers linked to it. Among the
+          remaining eight RAPD polymorphisms, three loci (OPC2<indice>635</indice>,
+          OPC2<indice>760</indice> and OPK18<indice>760</indice>) cosegregated only with each other
+          and were assigned to linkage group III (<marquage typemarq="italique">O. novo-ulmi</marquage> H327 chr 8). Locus OPC2<indice>1100</indice> was tentatively
+          assigned to chromosome 3 (Dusabenyagasani <marquage typemarq="italique">et al</marquage>.
+          unpubl), whereas OPC19<indice>1900</indice>, OPJ1<indice>620</indice>,
+          OPJ1<indice>2050</indice> and OPK5<indice>1060</indice> could not be assigned to any
+          linkage group or chromosome (Fig. 4).</alinea>
+      </para><grfigure id="gf2">
+        <no>Figure 2</no>
+        <legende lang="en">
+          <titre>Mycelial growth rate distribution at 21°C (A) and 28°C (B) of 50 progeny from a
+            backcross between the highly aggressive <marquage typemarq="italique">Ophiostoma
+            novo-ulmi</marquage> H327 and a moderately aggressive F<indice>1</indice> progeny
+            (A2P30)</titre>
+          <alinea>All measurements are means of three replicates. Vertical bars represent standard
+            error.</alinea>
+        </legende>
+        <figure id="fi3">
+          <no>A</no>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="figure" xlink:type="simple"></image>
+            <texte>Mycelial growth rate (mm d<exposant>-1</exposant>) at 21°C Isolate</texte>
+          </objetmedia>
+        </figure>
+        <figure id="fi4">
+          <no>B</no>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im6" typeimage="figure" xlink:type="simple"></image>
+            <texte>Mycelial growth rate (mm d<exposant>-1</exposant>) at 28°C Isolate</texte>
+          </objetmedia>
+        </figure>
+      </grfigure><figure id="fi5">
+        <no>Figure 3</no>
+        <legende lang="en">
+          <titre>Yeastlike cell growth kinetics of <marquage typemarq="italique">O. novo-ulmi</marquage> (H327), <marquage typemarq="italique">O. novo-ulmi</marquage>
+            introgressant (AST27) and <marquage typemarq="italique">O. ulmi</marquage> (Q412T, W9)
+            in liquid complete medium</titre>
+          <alinea>Triplicate cultures were incubated on a rotary shaker
+            (120 rev min<exposant>-1</exposant>) at 25°C in the dark. Standard errors are shown only
+            when they exceed the size of the symbol.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im7" typeimage="figure" xlink:type="simple"></image>
+          <texte>Cell concentration (x 106 mL-1)Time (h)</texte>
+        </objetmedia>
+      </figure><figure id="fi6">
+        <no>Figure 4</no>
+        <legende lang="en">
+          <titre>Linkage analysis of coding loci (<marquage typemarq="italique">Pat1</marquage> and
+            <marquage typemarq="italique">Mat</marquage>), transposon <marquage typemarq="italique">OPHIO2-int</marquage>. and 26 anonymous RAPD loci</titre>
+          <alinea>The map is based on the analysis of 40 F<indice>1</indice> set 1 progeny from the
+            cross between <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage> H327
+            (<marquage typemarq="italique">Pat1-h</marquage>, MAT-1) x introgressant AST27
+            (<marquage typemarq="italique">Pat1-m</marquage>, MAT-2). Map distances, estimated with
+            the Kosambi function, were calculated by multipoint analysis with a LOD score of 4.0 and
+            theta of 0.3, using MapMaker V2.0 for Macintosh.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im8" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure></section2><section2 id="s2n10"><no>3.
+				5</no><titre>Relationship between RAPD markers and growth rate</titre><para id="pa21"><no>21</no>
+        <alinea>Mycelial growth rates of the 40 F<indice>1</indice> set 1 progeny data were compared
+          to their allelic differences at the RAPD loci described above. Allelic differences at all
+          eight RAPD loci linked to <marquage typemarq="italique">Mat1</marquage> were associated
+          with significant (<marquage typemarq="italique">P</marquage> &lt; 0.01) differences in
+          mycelial growth rate at 21°C (Table 3). None of the polymorphisms at the remaining RAPD
+          loci were associated with the significant differences in mycelial growth rates observed at
+          this temperature (Table 1). The <marquage typemarq="italique">OPHIO2-int</marquage>.
+          transposon and 10 RAPD polymorphisms linked to <marquage typemarq="italique">Pat1
+          </marquage>were associated with significant (<marquage typemarq="italique">P</marquage> &lt; 0.01) differences in mycelial growth rate at 28°C (Table 3). None of
+          the other RAPD loci investigated showed a significant association with mycelial growth
+          rate at 28°C. </alinea>
+      </para><tableau id="ta3">
+        <no>Table 3</no>
+        <legende lang="en">
+          <titre>Segregation of parental <marquage typemarq="italique">Pat1</marquage> or <marquage typemarq="italique">Mat</marquage> alleles, molecular markers and mycelial growth rates
+            in the set 1 F<indice>1</indice> progeny from the cross H327 x AST27</titre>
+          <alinea><exposant>a</exposant> α and β represent H327-type and AST27-type alleles,
+            respectively.</alinea>
+          <alinea><exposant>b</exposant> For any given locus, values are the difference in mean
+            mycelial growth rate (mm d<exposant>-1</exposant>) between progeny with the H327 allele
+            (α) or the AST27 allele (β). *, <marquage typemarq="italique">P</marquage> &lt; 0.05;
+            **, <marquage typemarq="italique">P</marquage> &lt; 0.01. </alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im9" typeimage="figure" xlink:type="simple"></image>
+          <texte>Inferred linkage groupMarkerH327 allele (Pat1-h or Mat1-1) αaAST27 allele (Pat1-m
+            or Mat1-2) βχ2∆ 21°C(α-β)b∆
+            28°C(α-β)IPat121190.100-0.23-0.38**OPA1862016241.600-0.25-0.41**OPC16189019210.100-0.23-0.38**OPC16261021190.100-0.23-0.38**OPC18940
+            15252.500+0.01-0.33**OPC1992019210.100-0.18-0.46**OPJ1841020200.000-0.22-0.45**OPJ18275020200.000-0.22-0.45**OPJ2054021190.100-0.23-0.38**OPK3105021190.100-0.23-0.38**OPK101270OPHIO2-int.191621240.1001.600-0.17-0.14-0.40**-0.47**IIMat15252.500+0.61**-0.08OPA8500
+            19210.100+0.45**-0.01OPA11190017230.900+0.63**-0.08OPA12190015252.500+0.61**-0.08OPJ160015252.500+0.61**-0.08OPJ168018220.400+0.43**-0.03OPJ6120015252.500+0.61**-0.08OPK1250015252.500+0.61**-0.08OPK17140015252.500+0.61**-0.08IIIOPC2635
+            23170.900+0.14-0.06OPC2760
+            21190.100+0.18-0.12OPK1876023170.900+0.16-0.07UnlinkedOPC21100
+            25152.500-0.06+0.01OPC19190018220.400+0.03+0.15OPJ162015252.500+0.26-0.18OPJ1205014263.600-0.10+0.17OPK5106020200.000+0.30+0.13</texte>
+        </objetmedia>
+      </tableau></section2></section1><section1 id="s1n4"><no>4</no><titre><marquage typemarq="majuscule">Discussion</marquage></titre><para id="pa22"><no>22</no>
+        <alinea>In a previous study, the unusually low aggressiveness of AST27 relative to wild-type
+          <marquage typemarq="italique">O. novo-ulmi</marquage> isolates (Brasier 1986a) was shown
+          to be due to a single nuclear allele, <marquage typemarq="italique">Pat1-m</marquage>.
+          Since this allele was also closely linked to two of the five <marquage typemarq="italique">O. ulmi</marquage>-specific amplicons found in the AST27 genome, it was considered to be
+          introgressed from <marquage typemarq="italique">O. ulmi</marquage> (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). In this study we have used a combination of
+          physiological and molecular tests to identify other traits in AST27 and its derivatives
+          that might be both genetically tractable and associated with interspecific
+          hybridization.</alinea>
+      </para><para id="pa23"><no>23</no>
+        <alinea>One feature observed in AST27 was that it exhibited distinctive mycelial growth
+          rates at 21°C and at 28°C, close to the optima for growth of <marquage typemarq="italique">O. novo-ulmi</marquage> and <marquage typemarq="italique">O. ulmi</marquage>,
+          respectively (Brasier <marquage typemarq="italique">et al</marquage>. 1981). When
+          incubated at either temperature, isolate AST27 exhibited a growth rate that was
+          intermediate between the rates of <marquage typemarq="italique">O. novo-ulmi</marquage>
+          H327 and <marquage typemarq="italique">O. ulmi</marquage> Q412T. Two sets of H327 x AST27
+          F<indice>1</indice> progeny, and a backcross population showed a continuous distribution
+          for growth rate at both 21°C and 28°C. This was in marked contrast to the heritability
+          pattern of their pathogenicity phenotypes, which segregated 1:1 for highly vs moderate
+          aggressiveness, consistent with monogenic control (Brasier 1987; Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). The observed differences in
+          temperature-growth responses of H327 and AST27 at 21°C and 28°C were therefore most
+          probably due to multiple genetic differences. The assumption that some of these loci were
+          segregating independently from each other was supported by the fact that some of the
+          fastest growing progeny isolates at 21°C were among the slowest growing at 28°C and vice
+          versa (Figs. 1 and 2). </alinea>
+      </para><para id="pa24"><no>24</no>
+        <alinea>Co-analysis of additional markers with the F<indice>1</indice> set 1 progeny further
+          supported the hypothesis that the growth rate differences between isolates H327 and AST27
+          were due to allelic differences at several loci. The MAT-1 progeny grew faster than their
+          MAT-2 siblings at 21°C and the <marquage typemarq="italique">Pat1-m</marquage> progeny
+          grew faster than the <marquage typemarq="italique">Pat1-h</marquage> progeny at 28°C.
+          Similar results were obtained when linkage of molecular markers to <marquage typemarq="italique">Pat1 </marquage>or <marquage typemarq="italique">Mat</marquage> was
+          examined (Table 2). Linkage analysis of 29 genetic markers that included <marquage typemarq="italique">Pat1</marquage>, <marquage typemarq="italique">Mat1</marquage>,
+          <marquage typemarq="italique">OPHIO2-int</marquage>. and 26 RAPD polymorphisms (Fig. 4)
+          clearly showed that the <marquage typemarq="italique">Pat1</marquage> and <marquage typemarq="italique">Mat1</marquage> loci belonged to different linkage groups (I and II,
+          respectively), as expected from markers located on different chromosomes (1 and 2,
+          respectively, according to Comeau <marquage typemarq="italique">et al</marquage>.
+          2015).</alinea>
+      </para><para id="pa25"><no>25</no>
+        <alinea>Among the F<indice>1</indice> and backcross progeny analyzed, however, some
+          <marquage typemarq="italique">Pat1-h</marquage> isolates grew significantly faster than
+          both parents at 28°C. Likewise, some MAT-2 individuals were among the fastest growing
+          isolates at 21°C. These findings suggest that the <marquage typemarq="italique">Mat1</marquage> and <marquage typemarq="italique">Pat1</marquage> loci themselves do not
+          directly influence mycelial growth rates at 21°C and 28°C; but are rather linked to two
+          genetic factors or putative quantitative trait loci (QTLs) controlling mycelial growth
+          rate (mgr) that we propose to call <marquage typemarq="italique">Mgr1</marquage> and
+          <marquage typemarq="italique">Mgr2</marquage>, respectively. The precise localization of
+          these putative QTLs is unclear owing to the low number of informative genetic
+          polymor-phisms found so far between H327 and AST27 and the small sets of progeny analyzed.
+          Nevertheless, it is evident from the RAPD and growth rate data that both putative mgr QTLs
+          are located in regions of the AST27 nuclear genome that contain many <marquage typemarq="italique">O. ulmi</marquage>-specific sequences. It therefore appears likely
+          that they are derived from <marquage typemarq="italique">O. ulmi</marquage> and that
+          intro-gression of <marquage typemarq="italique">O. ulmi</marquage> DNA is responsible for
+          the distinctive growth phenotype of AST27 in addition to its reduced aggressiveness
+          (Et-Touil <marquage typemarq="italique">et al</marquage>. 1999). We found no evidence for
+          mgr QTLs elsewhere in the <marquage typemarq="italique">Ophiostom</marquage>a genome. This
+          is not surprising since we analyzed progeny derived from only two field isolates (H327 and
+          AST27) and sampled a very small portion of the <marquage typemarq="italique">ca</marquage>. 32-megabase nuclear genome of the Dutch elm disease fungi (Forgetta
+          <marquage typemarq="italique">et al</marquage>. 2013; Khoshraftar <marquage typemarq="italique">et al</marquage>; 2013). Nevertheless, our data indicate that a region
+          of chromosome 8 in introgressant AST27 also contains <marquage typemarq="italique">O. ulmi</marquage>-specific RAPD markers. We therefore expect neighbouring genes to be
+          polymorphic between isolates H327 and AST27. </alinea>
+      </para><para id="pa26"><no>26</no>
+        <alinea>The significant difference in mycelial growth rate between <marquage typemarq="italique">Pat1-m</marquage> and <marquage typemarq="italique">Pat1-h</marquage>
+          F<indice>1</indice> progeny at 28°C was not observed in the H327 x A2P30 backcross
+          population. This apparent discrepancy may be explained by the genotype of backcross parent
+          isolate A2P30, which not only carried the <marquage typemarq="italique">Pat1-m</marquage>
+          and <marquage typemarq="italique">Mat1-2</marquage> alleles from AST27 but also H327-type
+          alleles for four of the 26 RAPD loci analyzed, <marquage typemarq="italique">viz</marquage>. OPJ1<indice>680</indice>, OPC2<indice>1100</indice>,
+          OPC19<indice>1900</indice> and OPK5<indice>1060</indice>. H327-type coding genes linked to
+          any of these markers may have interacted with the <marquage typemarq="italique">Mgr1</marquage> locus. </alinea>
+      </para><para id="pa27"><no>27</no>
+        <alinea>The clustering of <marquage typemarq="italique">O. ulmi</marquage> DNA around the
+          <marquage typemarq="italique">Mat1 </marquage>and <marquage typemarq="italique">Pat1
+          </marquage>loci may have adaptive significance. Little is known about the genome
+          reorganization in interspecific hybrids among filamentous fungi, but it is likely that
+          natural selection will have a strong influence on the process (Brasier 1995). It has been
+          shown that as <marquage typemarq="italique">O. novo-ulmi</marquage> has replaced <marquage typemarq="italique">O. ulmi</marquage> across the Northern Hemisphere it has acquired the
+          <marquage typemarq="italique">Mat1</marquage>-1 allele and vegetative compatibility
+          (<marquage typemarq="italique">Vic</marquage>) alleles from <marquage typemarq="italique">O. ulmi</marquage> at a high frequency (Paoletti <marquage typemarq="italique">et al.</marquage> 2006). We have also found that most <marquage typemarq="italique">O. ulmi</marquage> DNA detected in the <marquage typemarq="italique">O. novo-ulmi</marquage> isolates examined flanked the introgressed <marquage typemarq="italique">Mat1</marquage> and <marquage typemarq="italique">Vic</marquage> loci.
+          Brasier <marquage typemarq="italique">et al</marquage> (2004) proposed that the most
+          likely mode of introgression of the <marquage typemarq="italique">Mat1 </marquage>and
+          <marquage typemarq="italique">Vic</marquage> loci was via sexual hybri-dization of
+          <marquage typemarq="italique">O. novo-ulmi</marquage> with <marquage typemarq="italique">O. ulmi</marquage> followed by sequential backcrossing of resulting F<indice>1</indice>s
+          to <marquage typemarq="italique">O. novo-ulmi</marquage>. <marquage typemarq="italique">O. ulmi</marquage> x <marquage typemarq="italique">O. novo-ulmi</marquage> F<indice>1
+          </indice>progeny tend to be highly unfit and transient in nature, most being of very low
+          pathogenicity. Backcross genotypes still carrying “unuseful” <marquage typemarq="italique">O. ulmi</marquage> genes, i.e. alleles conferring low fitness on <marquage typemarq="italique">O. novo-ulmi</marquage>, are also probably transient, i.e. eliminated
+          by natural selection. The end result is likely to be selective acquisition and fixation by
+          <marquage typemarq="italique">O. novo-ulmi</marquage> of “useful” <marquage typemarq="italique">O. ulmi</marquage> alleles (in this case, alleles at the <marquage typemarq="italique">Mat</marquage> and <marquage typemarq="italique">Vic </marquage>loci
+          that confer resistance to fungal viruses) and a clustering of residual neutral <marquage typemarq="italique">O. ulmi</marquage> DNA around these loci. </alinea>
+      </para><para id="pa28"><no>28</no>
+        <alinea>Isolate AST27 exhibits higher pathogenic fitness than most <marquage typemarq="italique">O. ulmi</marquage> x <marquage typemarq="italique">O. novo-ulmi</marquage> F<indice>1 </indice>progeny and is also more aggressive to
+          healthy elms than is <marquage typemarq="italique">O. ulmi. </marquage>It was originally
+          isolated from the xylem of a symptomatic elm sapling and was therefore successful in the
+          vascular wilt phase of the pathogen<marquage typemarq="italique">. </marquage>AST27 shares
+          most of its other properties with <marquage typemarq="italique">O. novo-ulmi</marquage>.
+          It may therefore be an intermediate or late backcross product in which some phenotypically
+          important <marquage typemarq="italique">O. ulmi</marquage> genes, including <marquage typemarq="italique">O. ulmi</marquage> genes for lower aggressi-veness (<marquage typemarq="italique">Pat1-m</marquage>) and faster growth rate at 28°C (<marquage typemarq="italique">Mgr2</marquage>), are still present. In areas with populations of
+          moderately to highly resistant elms, it is likely that AST27 would soon have been
+          eliminated through competition with fitter <marquage typemarq="italique">O. novo-ulmi</marquage> genotypes. However, in areas where susceptible elms are frequent,
+          an AST27-type introgressant could overcome host resistance (Et-Touil <marquage typemarq="italique">et al</marquage>. 2005) and be disseminated effi-ciently by elm bark
+          beetles given its ability to secrete high amounts of cerato-ulmin (Temple <marquage typemarq="italique">et al</marquage>. 1997). Genetic ana-lysis of progeny from laboratory
+          crosses suggests that such introgressants might contribute additional useful traits to
+          <marquage typemarq="italique">O. novo-ulmi</marquage> through sexual hybridization. For
+          instance, H327 x AST27 F<indice>1</indice> isolate A2P33 and backcross isolates A3P26 and
+          A3P33 grew well at both 21°C and 28°C (Figs. 1 and 2) and were highly aggressive (Et-Touil
+          <marquage typemarq="italique">et al</marquage>. 1999). Large scale genomic analyses of
+          <marquage typemarq="italique">O. novo-ulmi</marquage> populations in historical <marquage typemarq="italique">O. ulmi/O. novo</marquage>-<marquage typemarq="italique">ulmi</marquage> overlap zones are needed to determine whether, apart from<marquage typemarq="italique"> O. ulmi</marquage> <marquage typemarq="italique">Vic
+          </marquage>and<marquage typemarq="italique"> Mat1</marquage> loci, <marquage typemarq="italique">O. ulmi</marquage> loci governing some other adaptive traits have been
+          fixed or simply eliminated by intense post-epidemic selection. </alinea>
+      </para></section1></corps><partiesann lang="en"><merci><alinea>This work was supported by grants from the Natural Sciences and Engineering Research Council of Canada (NSERC) to L. Bernier. We wish to thank Susan Kirk, Sébastien Leduc, and Marie-Ève Sigouin for technical assistance.</alinea></merci><grbiblio><biblio><titre>REFERENCES</titre><refbiblio id="rb1"><marquage typemarq="gras">Bates, M.R., K.W. Buck, and C.M. Brasier. 1993.</marquage> Molecular relationships between <marquage typemarq="italique">Ophiostoma ulmi</marquage> and the NAN and EAN races of <marquage typemarq="italique">O. novo-ulmi</marquage> determined by restriction fragment length polymorphisms of nuclear DNA. Mycol. Res. 97 : 449-455.</refbiblio><refbiblio id="rb2"><marquage typemarq="gras">Bernier, L. 1993.</marquage> Conventional and molecular genetic approaches to the study of pathogenicity in <marquage typemarq="italique">Ophiostoma ulmi sensu lato</marquage>. Pages 293-307 <marquage typemarq="italique">in</marquage> M. Sticklen and J. Sherald (eds.), Dutch Elm Disease Research: Cellular and Molecular Approaches. Springer-Verlag, New York, NY, USA.</refbiblio><refbiblio id="rb3"><marquage typemarq="gras">Bernier, L., and M. Hubbes. 1990a.</marquage> Mutations in <marquage typemarq="italique">Ophiostoma ulmi</marquage> induced by <marquage typemarq="italique">N</marquage>-methyl-<marquage typemarq="italique">N</marquage>'-nitro-<marquage typemarq="italique">N</marquage>-nitrosoguanidine. Can. J. Bot. 68 : 225-231.</refbiblio><refbiblio id="rb4"><marquage typemarq="gras">Bernier, L, and M. Hubbes. 1990b.</marquage> Meiotic analysis of induced mutations in <marquage typemarq="italique">Ophiostoma ulmi</marquage>. Can. J. Bot. 68 : 232-235.</refbiblio><refbiblio id="rb5"><marquage typemarq="gras">Bouvet, G.F., V. Jacobi, K.V. Plourde, and L. Bernier. 2008. </marquage>Stress-induced mobility of OPHIO1 and OPHIO2, DNA transposons of the Dutch elm disease fungi. Fungal Genet. Biol. 45 : 565-578.</refbiblio><refbiblio id="rb6"><marquage typemarq="gras">Brasier, C.M. 1981.</marquage> Laboratory investigation of <marquage typemarq="italique">Ceratocystis ulmi</marquage>. Pages 76-79 <marquage typemarq="italique">in</marquage> R.J. Stipes and R.J. Campana (eds.), Compendium of Elm Diseases. American Phytopathological Society Press. St. Paul, MN, USA.</refbiblio><refbiblio id="rb7"><marquage typemarq="gras">Brasier, C.M. 1986a.</marquage> A comparison of pathogenicity and cultural characteristics in the EAN and NAN aggressive sub-groups of <marquage typemarq="italique">Ophiostoma ulmi</marquage>. Trans. Brit. Mycol. Soc. 87 : 1-13.</refbiblio><refbiblio id="rb8"><marquage typemarq="gras">Brasier, C.M. 1986b.</marquage> The population biology of Dutch elm disease: its principal feature and some implications for other host-pathogen systems. Adv. Plant Pathol. 5 : 55-118.</refbiblio><refbiblio id="rb9"><marquage typemarq="gras">Brasier, C.M. 1987.</marquage> Some genetical aspects of necrotrophy with special reference to <marquage typemarq="italique">Ophiostoma-ulmi</marquage>. Pages 297-310 <marquage typemarq="italique">in </marquage>P.R. Day and G.J. Jellis (eds.), Genetics and Plant Pathogenesis. Blackwell Scientific Publications, Oxford, UK.</refbiblio><refbiblio id="rb10"><marquage typemarq="gras">Brasier, C.M. 1990. </marquage>China and the origins of Dutch elm disease: an appraisal. Plant Pathol. 39 : 5-16.</refbiblio><refbiblio id="rb11"><marquage typemarq="gras">Brasier, C.M. 1991.</marquage> <marquage typemarq="italique">Ophiostoma novo-ulmi </marquage>sp. <marquage typemarq="italique">nov.</marquage>, causative agent of current Dutch elm disease pandemics. Mycopathologia 115 : 151-161.</refbiblio><refbiblio id="rb12"><marquage typemarq="gras">Brasier, C.M. 1995. </marquage>Episodic selection as a force in fungal evolution with special reference to clonal speciation and hybrid introgression. Can. J. Bot. 73 : S1213-1221.</refbiblio><refbiblio id="rb13"><marquage typemarq="gras">Brasier, C.M., and F. Afsharpour. 1979.</marquage> The aggressive and non-aggressive strains of <marquage typemarq="italique">Ceratocystis ulmi </marquage>in Iran. Eur. J. For. Pathol. 9 : 113-122. </refbiblio><refbiblio id="rb14"><marquage typemarq="gras">Brasier, C.M., K.W. Buck, M. Paoletti, L. Crawford, and S.A. Kirk. 2004.</marquage> Molecular analysis of evolutionary changes in populations of <marquage typemarq="italique">Ophiostoma novo-ulmi. </marquage>Invest Agrar: Sist Recur For 13 : 93-103.</refbiblio><refbiblio id="rb15"><marquage typemarq="gras">Brasier, C.M., S.A. Kirk, N.D. Pipe, and K.W. Buck. 1998. </marquage>Rare interspecific hybrids in natural populations of the Dutch elm disease pathogens <marquage typemarq="italique">Ophiostoma ulmi</marquage> and <marquage typemarq="italique">O. novo-ulmi</marquage>. Mycol. Res. 102 : 45-57.</refbiblio><refbiblio id="rb16"><marquage typemarq="gras">Brasier, C.M., S.A Kirk, and S. Tegli. 1995. </marquage>Naturally occurring non cerato-ulmin producing mutants of <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage> are pathogenic but lack aerial mycelium. Mycol. Res. 99 : 436-440.</refbiblio><refbiblio id="rb17"><marquage typemarq="gras">Brasier, C.M., J. Lea, and M.K. Rawlings. 1981.</marquage> The aggressive and non-aggressive strains of <marquage typemarq="italique">Ceratocystis ulmi</marquage> have different temperature optima for growth. Trans. Brit. Mycol. Soc. 76 : 213-218. </refbiblio><refbiblio id="rb18"><marquage typemarq="gras">Brasier, C.M., and M.D. Mehrotra. 1995.</marquage> <marquage typemarq="italique">Ophiostoma himal-ulmi </marquage>sp. <marquage typemarq="italique">nov</marquage>., a new species of Dutch elm disease fungus endemic to the Himalayas. Mycol. Res. 99 : 205-215.</refbiblio><refbiblio id="rb19"><marquage typemarq="gras">Brasier, C.M., and J.F. Webber. 1987.</marquage> Positive correlations between in vitro growth rate and pathogenesis in <marquage typemarq="italique">Ophiostoma ulmi</marquage>. Plant Pathol. 36 : 462-466.</refbiblio><refbiblio id="rb20"><marquage typemarq="gras">Comeau, A.M., J. Dufour, G.F. Bouvet, M. Nigg, V. Jacobi, B. Henrissat, J. Laroche, R.C. Levesque, and L. Bernier. 2015.</marquage> Functional annotation of the <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage> genome: insights into the phytopathogenicity of the fungal agent of Dutch elm disease. Genome Biol. Evol. 7 : 410-430.</refbiblio><refbiblio id="rb21"><marquage typemarq="gras">Dewar, K., and L. Bernier. 1995.</marquage> Inheritance patterns of nonhomologous chromosomes in <marquage typemarq="italique">Ophiostoma ulmi sensu lato</marquage>. Curr. Genet. 27 : 541-549.</refbiblio><refbiblio id="rb22"><marquage typemarq="gras">Dewar, K., J. Bousquet, J. Dufour, and L. Bernier. 1997.</marquage> A meiotically reproducible chromosome length polymorphism in the ascomycete fungus <marquage typemarq="italique">Ophiostoma ulmi</marquage> (<marquage typemarq="italique">sensu lato</marquage>). Mol. Gen. Genet. 255 : 38-44.</refbiblio><refbiblio id="rb23"><marquage typemarq="gras">Dusabenyagasani, M., J. Dufour, and L. Bernier. 2000.</marquage> Approaches for genomic mapping of the Dutch elm disease pathogens. Phytopathology 90 : S21 (Abstract).</refbiblio><refbiblio id="rb24"><marquage typemarq="gras">Et-Touil, A., C.M. Brasier, and L. Bernier. 1999.</marquage> Localization of a pathogenicity gene in <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage> and evidence that it may be introgressed from <marquage typemarq="italique">O. ulmi</marquage>. Molec. Plant-Microbe Interac. 12 : 6-15.</refbiblio><refbiblio id="rb25"><marquage typemarq="gras">Et-Touil, A., D. Rioux, F.M. Mathieu, and L. Bernier. 2005.</marquage> External symptoms and histopathological changes following inoculation of elms putatively resistant to Dutch elm disease with genetically close strains of <marquage typemarq="italique">Ophiostoma</marquage>. Can. J. Bot. 83 : 656-667.</refbiblio><refbiblio id="rb26"><marquage typemarq="gras">Forgetta, V., G. Leveque, J. Dias, D. Grove, R. Lyons Jr., S. Genik, C. Wright, S. Singh, N. Peterson, M. Zianni, J. Kieleczawa, W. Hintz, V. Jacobi, L. Bernier, R. Levesque, and K. Dewar. 2013.</marquage> Sequencing of the Dutch elm disease fungus genome using the Roche/454 GS-FLX Titanium system in a comparison of multiple genomics core facilities. J. Biomol. Tech. 24 : 39-49.</refbiblio><refbiblio id="rb27"><marquage typemarq="gras">Khoshraftar, S., S. Hung, S. Khan, Y. Gong, V. Tyagi, J. Parkinson, M. Sain, A.M. Moses, and D. Christendat. 2013. </marquage>Sequencing and annotation of the <marquage typemarq="italique">Ophiostoma ulmi</marquage> genome. BMC Genomics 14 : 162.</refbiblio><refbiblio id="rb28"><marquage typemarq="gras">Lander, E.S, P. Green, J. Abrahamson, A. Barlow, M.J. Daly, S.E. Lincoln, and L. Newburg. 1987.</marquage> MAPMAKER: an interactive computer package for constructing primary genetic linkage maps of experimental and natural populations. Genomics 1 : 174-181.</refbiblio><refbiblio id="rb29"><marquage typemarq="gras">Michelmore, R.W., I. Paran, and R.V. Kessell. 1991. </marquage>Identification of markers linked to disease resistance genes by bulked segregant analysis: a rapid method to detect markers in specific genomic regions using segregating populations. Proc. Natl. Acad. Sci. USA 88 : 9828-9832.</refbiblio><refbiblio id="rb30"><marquage typemarq="gras">Orita, M., Y. Suzuki, T. Sekiya, and K. Hayashi. 1989.</marquage> Rapid and sensitive detection of point mutations and DNA polymorphisms using the polymerase chain reaction. Genomics 5 : 874-879.</refbiblio><refbiblio id="rb31"><marquage typemarq="gras">Paoletti, M., K.W. Buck, and C.M. Brasier. 2006. </marquage>Selective acquisition of novel mating type and vegetative incompatibility genes via interspecies gene transfer in the globally invading eukaryote <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage>. Mol. Ecol. 15 : 249-262.</refbiblio><refbiblio id="rb32"><marquage typemarq="gras">Pipe, N.D., C.M. Brasier, and K.W. Buck. 2000. </marquage>Two natural cerato-ulmin deficient mutants of <marquage typemarq="italique">Ophiostoma novo-ulmi</marquage>: one has an introgressed <marquage typemarq="italique">O. ulmi</marquage> <marquage typemarq="italique">cu</marquage> gene; the other has an <marquage typemarq="italique">O. novo-ulmi</marquage> <marquage typemarq="italique">cu</marquage> gene with a mutation in an intron splice consensus sequence. Mol. Plant Pathol. 1 : 379-382.</refbiblio><refbiblio id="rb33"><marquage typemarq="gras">Pipe, N.D., K.W. Buck, and C.M. Brasier. 1995.</marquage> Molecular relationships between <marquage typemarq="italique">Ophiostoma ulmi</marquage> and the NAN and EAN races of <marquage typemarq="italique">O. novo-ulmi</marquage> determined by RAPD markers. Mycol. Res. 99 : 653-658.</refbiblio><refbiblio id="rb34"><marquage typemarq="gras">Scala, F., F. Bertelli, L. Coppola, G. Del Sorbo, S. Tegli, and A. Scala. 1997.</marquage> Comparative determination of cerato-ulmin on cell surface and in mycelial extracts of pathogenic and non-pathogenic <marquage typemarq="italique">Ophiostoma</marquage> species. Mycol. Res. 101 : 829-834.</refbiblio><refbiblio id="rb35"><marquage typemarq="gras">Takai, S. 1980. </marquage>Relationship of the production of the toxin, cerato-ulmin, to synnemata formation, pathogenicity, mycelial habit, and growth of <marquage typemarq="italique">Ceratocystis ulmi</marquage> isolates. Can. J. Bot. 58 : 658-662.</refbiblio><refbiblio id="rb36"><marquage typemarq="gras">Takai, S., and W.C. Richards. 1978.</marquage> Cerato-ulmin, a wilting toxin of <marquage typemarq="italique">Ceratocystis ulmi</marquage>: isolation and some properties of cerato-ulmin from the culture of <marquage typemarq="italique">C. ulmi</marquage>. Phytopathol. Z. 91 : 129-146.</refbiblio><refbiblio id="rb37"><marquage typemarq="gras">Temple, B, P.A. Horgen, L. Bernier, and W.E. Hintz. 1997.</marquage> Cerato-ulmin, a hydrophobin secreted by the causal agents of Dutch elm disease, is a parasitic fitness factor. Fungal Genet. Biol. 22 : 39-53.</refbiblio><refbiblio id="rb38"><marquage typemarq="gras">Zolan, M., and P. Pukkila. 1986.</marquage> Inheritance of DNA methylation in <marquage typemarq="italique">Coprinus cinereus</marquage>. Mol. Cell. Biol. 6 : 195-200.</refbiblio></biblio></grbiblio></partiesann></article>
