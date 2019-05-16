@@ -138,14 +138,39 @@ def get_coverpage(article):
     header.append(extra_large_spacer)
 
     # Article titles.
-    if article.type_display == article.TYPE_DISPLAY.get(article.ARTICLE_REPORT):
-        html_title = str(article.type_display)
-    else:
-        html_title = article.html_title if article.html_title else _("[Article sans titre]")
-    header.append(Paragraph(
-        clean(html_title, small_caps_font='SpectralSC-Bold'),
-        styles['h1'],
-    ))
+    titles = article.erudit_object.get_titles()
+    if titles['main'].title is None and not titles['reviewed_works']:
+        header.append(Paragraph(
+            _('[Article sans titre]'),
+            styles['h1'],
+        ))
+    if titles['main'].title:
+        header.append(Paragraph(
+            clean(titles['main'].title, small_caps_font='SpectralSC-Bold'),
+            styles['h1'],
+        ))
+        if titles['main'].subtitle:
+            header.append(Paragraph(
+                clean(titles['main'].subtitle, small_caps_font='SpectralSC-Bold'),
+                styles['h1_grey'],
+            ))
+        for title in titles['paral'] + titles['equivalent']:
+            header.append(small_spacer)
+            header.append(Paragraph(
+                clean(title.title, small_caps_font='SpectralSC-Bold'),
+                styles['h1'] if title.subtitle else styles['h1_grey'],
+            ))
+            if title.subtitle:
+                header.append(Paragraph(
+                    clean(title.subtitle, small_caps_font='SpectralSC-Bold'),
+                    styles['h1_grey'],
+                ))
+    for title in titles['reviewed_works']:
+        header.append(small_spacer)
+        header.append(Paragraph(
+            clean(title, small_caps_font='SpectralSC-Bold'),
+            styles['h1_grey'],
+        ))
     header.append(large_spacer)
 
     # Article authors.
@@ -166,11 +191,11 @@ def get_coverpage(article):
             hyperlink='https://www.erudit.org{}'.format(journal_path),
         )
         # Resize journal logo if it's wider than 80 points.
-        journal_logo._restrictSize(80, 250)
+        journal_logo._restrictSize(80, 220)
     else:
         journal_logo = []
     header_table = Table(
-        [(KeepInFrame(472, 250, header), journal_logo)],
+        [(KeepInFrame(472, 220, header), journal_logo)],
         colWidths=(462, 90),
     )
     header_table.setStyle(TableStyle([
@@ -189,12 +214,17 @@ def get_coverpage(article):
     # Left column.
     left_column = []
 
-    # Issue title & volume.
-    if article.issue.title:
-        left_column.append(Paragraph(
-            article.issue.title,
-            styles['normal'],
-        ))
+    # Issue themes.
+    themes = article.issue.erudit_object.get_themes(formatted=True, html=True)
+    if themes:
+        for index, theme in enumerate(themes[0]['names']):
+            left_column.append(Paragraph(
+                clean(theme),
+                styles['normal'] if index == 0 else styles['normal_grey'],
+            ))
+        left_column.append(small_spacer)
+
+    # Volume title.
     left_column.append(Paragraph(
         article.issue.volume_title,
         styles['normal'],
@@ -304,6 +334,7 @@ def get_coverpage(article):
         styles['normal'],
     ))
     left_column.append(medium_spacer)
+    html_title = article.html_title if article.html_title else _('[Article sans titre]')
     cite_string = '{authors} ({year}). {title}. <em>{journal}</em>,'.format(**{
         'authors': article.get_formatted_authors_apa(),
         'year': article.issue.year,
@@ -521,6 +552,16 @@ def get_stylesheet():
         parent=stylesheet['small'],
         textColor=colors.grey,
     ))
+    stylesheet.add(ParagraphStyle(
+        name='h1_grey',
+        parent=stylesheet['h1'],
+        textColor=colors.grey,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='normal_grey',
+        parent=stylesheet['normal'],
+        textColor=colors.grey,
+    ))
     return stylesheet
 
 
@@ -581,7 +622,7 @@ class Line(Flowable):
 
 class HyperlinkedImage(Image):
 
-    def __init__(self, filename, width=None, height=None, kind='direct', mask="auto", lazy=1,
+    def __init__(self, filename, width=None, height=None, kind='direct', mask='auto', lazy=1,
                  hAlign='LEFT', hyperlink=None):
         self.hyperlink = hyperlink
         super(HyperlinkedImage, self).__init__(filename, width, height, kind, mask, lazy, hAlign)
