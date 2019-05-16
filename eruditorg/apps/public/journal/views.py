@@ -201,21 +201,19 @@ class JournalDetailView(
         issues = [
             IssueAnnotator.annotate(issue, self) for issue in self.object.published_issues.all()]
         context['issues'] = issues
-        last_issue = IssueAnnotator.annotate(self.object.last_issue, self)
-        context['latest_issue'] = last_issue
+        last_published_issue = IssueAnnotator.annotate(self.object.last_published_issue, self)
+        context['latest_issue'] = last_published_issue
         context['cache_timeout'] = 60 * 60
-        if last_issue is not None and last_issue.is_in_fedora:
-            titles = last_issue.erudit_object.get_journal_title()
+        if last_published_issue is not None and last_published_issue.is_in_fedora:
+            titles = last_published_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
-            context['meta_info_issue'] = last_issue
-            if not last_issue.is_published:
-                context['cache_timeout'] = 0
+            context['meta_info_issue'] = last_published_issue
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
             journal_info=journal_info,
-            issue=last_issue,
+            issue=last_published_issue,
         )
 
         return context
@@ -286,11 +284,9 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['letter'] = self.letter
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
-        context['latest_issue'] = self.journal.last_issue
+        context['latest_issue'] = self.journal.last_published_issue
         context['meta_info_issue'] = context['latest_issue']
         context['cache_timeout'] = 60 * 60
-        if self.journal.last_issue is not None and not self.journal.last_issue.is_published:
-            context['cache_timeout'] = 0
         try:
             context['journal_info'] = self.journal.information
         except ObjectDoesNotExist:

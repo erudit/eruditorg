@@ -174,9 +174,9 @@
           <dt>{% trans "Période de publication" %}</dt>
           <dd>{{ journal.publication_period }}</dd>
 
-          {% if journal.first_issue %}
+          {% if journal.first_published_issue %}
           <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
-          <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
+          <dd>{{ journal.first_published_issue.date_published|date:"Y" }}</dd>
           {% endif %}
 
           <dt>{% trans "Type de support" %}</dt>

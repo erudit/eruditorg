@@ -61,7 +61,7 @@ class TestJournal:
         journal = JournalFactory(active=False)
         assert journal.date_embargo_begins is None
 
-    def test_can_return_its_first_issue(self):
+    def test_can_return_its_first_published_issue(self):
         journal = JournalFactory()
         first_unpublished_issue = IssueFactory(
             journal=journal,
@@ -73,9 +73,9 @@ class TestJournal:
         last_published_issue = IssueFactory(
             journal=journal,
         )
-        assert journal.first_issue == first_published_issue
+        assert journal.first_published_issue == first_published_issue
 
-    def test_can_return_its_last_issue(self):
+    def test_can_return_its_last_published_issue(self):
         journal = JournalFactory()
         first_published_issue = IssueFactory(
             journal=journal,
@@ -87,12 +87,12 @@ class TestJournal:
             journal=journal,
             is_published=False,
         )
-        assert journal.last_issue == last_published_issue
+        assert journal.last_published_issue == last_published_issue
 
-    def test_last_issue_of_renamed_journal(self):
+    def test_last_published_issue_of_renamed_journal(self):
         # A renamed journal ends up with a list of issue pids of *all* its issues, even when
         # its journal pid has changed. When we call get_published_issues_pids(), we actually want
-        # all issues to show up, so that's ok. However, for last_issue, it's special: we want the
+        # all issues to show up, so that's ok. However, for last_published_issue, it's special: we want the
         # last published issue *that is part of the journal before the rename*.
         j1 = JournalFactory()
         j2 = JournalFactory(previous_journal=j1)
@@ -102,8 +102,8 @@ class TestJournal:
         i2 = IssueFactory(journal=j2)
         repository.api.add_publication_to_parent_journal(i1, journal=i2.journal)
         repository.api.add_publication_to_parent_journal(i2, journal=i1.journal)
-        assert j1.last_issue == i1
-        assert j2.last_issue == i2
+        assert j1.last_published_issue == i1
+        assert j2.last_published_issue == i2
 
     def test_can_return_its_letter_prefix(self):
         journal_1 = JournalFactory.create(name='Test')
@@ -267,17 +267,17 @@ class TestIssue:
         assert not issue_2.embargoed
         assert not issue_3.embargoed
 
-    def test_last_issue_is_always_embargoed(self):
+    def test_last_published_issue_is_always_embargoed(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
         issue1 = IssueFactory(date_published=outside_embargo)
         issue2 = IssueFactory(journal=issue1.journal, date_published=outside_embargo)
-        assert issue1 != issue1.journal.last_issue
+        assert issue1 != issue1.journal.last_published_issue
         assert not issue1.embargoed
-        assert issue2 == issue2.journal.last_issue
+        assert issue2 == issue2.journal.last_published_issue
         assert issue2.embargoed
 
-    def test_last_issue_is_not_always_embargoed_when_next_journal(self):
+    def test_last_published_issue_is_not_always_embargoed_when_next_journal(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
         issue = IssueFactory(
