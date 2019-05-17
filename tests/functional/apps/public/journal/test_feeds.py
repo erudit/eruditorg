@@ -36,7 +36,7 @@ class TestLatestIssuesFeed:
 
 
 class TestLatestJournalArticlesFeed:
-    def test_can_return_all_the_articles_associated_with_the_last_issue_of_a_journal(self):
+    def test_can_return_all_the_articles_associated_with_the_last_published_issue_of_a_journal(self):
         journal = JournalFactory()
         issue1 = IssueFactory.create(journal=journal, is_published=True)
         issue2 = IssueFactory.create(journal=journal, is_published=True)

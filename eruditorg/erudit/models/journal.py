@@ -233,12 +233,12 @@ class Journal(FedoraMixin, FedoraDated):
     @cache_fedora_result
     @catch_and_log
     def get_titles(self):
-        last_issue = self.last_issue
-        if not self.is_in_fedora or not last_issue:
+        last_published_issue = self.last_published_issue
+        if not self.is_in_fedora or not last_published_issue:
             titles = {'main': self.name}
         else:
 
-            titles = last_issue.erudit_object.get_journal_title()
+            titles = last_published_issue.erudit_object.get_journal_title()
         return titles
 
     # Journal-related methods and properties
@@ -338,12 +338,12 @@ class Journal(FedoraMixin, FedoraDated):
             return self.published_issues.order_by('date_published')
 
     @cached_property
-    def first_issue(self):
+    def first_published_issue(self):
         # Published issues are ordered by reverse published date, hence last() to get the first one.
         return self.published_issues.last()
 
     @cached_property
-    def last_issue(self):
+    def last_published_issue(self):
         # Published issues are ordered by reverse published date, hence first() to get the last one.
         return self.published_issues.first()
 
@@ -816,7 +816,7 @@ class Issue(FedoraMixin, FedoraDated):
             # a "next_journal" because that means that the journal hasn't stopped publishing, it
             # merely changed its name. We don't want the last issue of the old journal to be stuck
             # in embargo forever.
-            if journal.next_journal is None and self == journal.last_issue:
+            if journal.next_journal is None and self == journal.last_published_issue:
                 return True
             else:
                 return False

@@ -75,8 +75,8 @@ class LatestJournalArticlesFeed(Feed):
     def get_object(self, request, code=None):
         """ Get the journal's latest issues. """
         journal = Journal.objects.get(Q(code=code) | Q(localidentifier=code))
-        self.last_issue = journal.last_issue
-        if self.last_issue is None:
+        self.last_published_issue = journal.last_published_issue
+        if self.last_published_issue is None:
             raise Http404()
 
     def title(self):
@@ -85,14 +85,14 @@ class LatestJournalArticlesFeed(Feed):
 
     def description(self):
         """ Returns the description of the feed. """
-        return self.last_issue.volume_title
+        return self.last_published_issue.volume_title
 
     def link(self):
         """ Returns the link of the feed's website. """
         return reverse_lazy('public:home')
 
     def items(self, obj):
-        return list(self.last_issue.get_articles_from_fedora())
+        return list(self.last_published_issue.get_articles_from_fedora())
 
     def item_title(self, item):
         """ Returns the title of a feed item. """

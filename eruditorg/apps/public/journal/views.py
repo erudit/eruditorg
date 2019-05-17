@@ -54,6 +54,7 @@ from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from .viewmixins import PrepublicationTokenRequiredMixin
+from .viewmixins import ContributorsMixin
 
 from . import solr
 
@@ -170,8 +171,8 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 
 
 class JournalDetailView(
-        RedirectExceptionsToFallbackWebsiteMixin,
-        SingleJournalMixin, ContentAccessCheckMixin, DetailView):
+        RedirectExceptionsToFallbackWebsiteMixin, SingleJournalMixin,
+        ContentAccessCheckMixin, ContributorsMixin, DetailView):
     """
     Displays a journal.
     """
@@ -188,7 +189,7 @@ class JournalDetailView(
             context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
             context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
-            pass
+            journal_info = None
         else:
             context['journal_info'] = journal_info
 
@@ -200,21 +201,25 @@ class JournalDetailView(
         issues = [
             IssueAnnotator.annotate(issue, self) for issue in self.object.published_issues.all()]
         context['issues'] = issues
-        last_issue = IssueAnnotator.annotate(self.object.last_issue, self)
-        context['latest_issue'] = last_issue
+        last_published_issue = IssueAnnotator.annotate(self.object.last_published_issue, self)
+        context['latest_issue'] = last_published_issue
         context['cache_timeout'] = 60 * 60
-        if last_issue is not None and last_issue.is_in_fedora:
-            titles = last_issue.erudit_object.get_journal_title()
+        if last_published_issue is not None and last_published_issue.is_in_fedora:
+            titles = last_published_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
-            context['meta_info_issue'] = last_issue
-            if not last_issue.is_published:
-                context['cache_timeout'] = 0
+            context['meta_info_issue'] = last_published_issue
+
+        # Directors & editors.
+        context['contributors'] = self.get_contributors(
+            journal_info=journal_info,
+            issue=last_published_issue,
+        )
 
         return context
 
 
-class JournalAuthorsListView(SingleJournalMixin, TemplateView):
+class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView):
     """
     Displays a list of authors associated with a specific journal.
     """
@@ -279,15 +284,20 @@ class JournalAuthorsListView(SingleJournalMixin, TemplateView):
         context['letter'] = self.letter
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
-        context['latest_issue'] = self.journal.last_issue
+        context['latest_issue'] = self.journal.last_published_issue
         context['meta_info_issue'] = context['latest_issue']
         context['cache_timeout'] = 60 * 60
-        if self.journal.last_issue is not None and not self.journal.last_issue.is_published:
-            context['cache_timeout'] = 0
         try:
             context['journal_info'] = self.journal.information
         except ObjectDoesNotExist:
-            pass
+            context['journal_info'] = None
+
+        # Directors & editors.
+        context['contributors'] = self.get_contributors(
+            journal_info=context['journal_info'],
+            issue=context['latest_issue'],
+        )
+
         return context
 
 
@@ -305,6 +315,7 @@ class IssueDetailView(
         FallbackObjectViewMixin,
         ContentAccessCheckMixin,
         PrepublicationTokenRequiredMixin,
+        ContributorsMixin,
         DetailView):
     """
     Displays an Issue instance.
@@ -410,6 +421,12 @@ class IssueDetailView(
         context['reader_url'] = self._get_reader_url()
         if not self.object.is_published:
             context['ticket'] = self.object.prepublication_ticket
+
+        # Directors & editors.
+        context['contributors'] = self.get_contributors(
+            issue=self.object
+        )
+
         return context
 
     def _get_reader_url(self):

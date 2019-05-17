@@ -34,7 +34,7 @@ class JournalDetailCheckRedirectView(
                 'public:journal:journal_detail', args=[
                     journal.code,
                 ]
-            ) if journal.last_issue \
+            ) if journal.last_published_issue \
                 else reverse(self.pattern_name, args=[journal.code])
         raise Http404
 

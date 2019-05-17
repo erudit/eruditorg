@@ -1,17 +1,16 @@
-import datetime as dt
 import os
 import pytest
 import unittest.mock
 
-from django.template import Context
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
 from base.test.factories import UserFactory
-from erudit.test.factories import IssueFactory, JournalFactory
+from erudit.test.factories import ArticleFactory, IssueFactory, JournalFactory, \
+    JournalInformationFactory, ContributorFactory
+from erudit.fedora import repository
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Issue
-from erudit.test.factories import ArticleFactory
 from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView, \
     GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView, JournalStatisticsView
@@ -45,6 +44,35 @@ class TestJournalDetailView:
         with override_settings(LANGUAGE_CODE=language):
             context = view.get_context_data()
             assert context['notes'] == expected_notes
+
+    def test_contributors(self):
+        issue = IssueFactory()
+        url = reverse('public:journal:journal_detail', kwargs={'code': issue.journal.code})
+
+        # No contributors in journal_info, issue's contributors should be displayed.
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open('tests/fixtures/issue/images1102374.xml', 'rb').read(),
+        )
+        html = Client().get(url).content.decode()
+        assert 'Claude Racine' in html
+        assert 'Marie-Claude Loiselle (Rédactrice en chef)' in html
+        assert 'Foo (Bar)' not in html
+
+        # There's a director in journal_info, issue's contributors should not be displayed.
+        journal_info = JournalInformationFactory(journal=issue.journal)
+        journal_info.editorial_leaders.add(
+            ContributorFactory(
+                type='D',
+                name='Foo',
+                role='Bar',
+                journal_information=journal_info,
+            )
+        )
+        html = Client().get(url).content.decode()
+        assert 'Claude Racine (Éditeur)' not in html
+        assert 'Isabelle Richer (Rédactrice adjointe)' not in html
+        assert 'Foo (Bar)' in html
 
 
 class TestJournalAuthorsListView:
