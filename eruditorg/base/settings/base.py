@@ -32,7 +32,7 @@ env = environ.Env(
     RESTRICTION_DATABASE_URL=(str, 'mysql://root@localhost/restriction'),
 
     CACHE_URL=(str, 'locmemcache://'),
-
+    FEDORA_XML_CONTENT_CACHE_TIMEOUT=(int, 3600),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(int, 25),
     EMAIL_HOST_USER=(str, None),
@@ -288,6 +288,8 @@ CACHES = {
     'fedora': env.cache("CACHE_URL"),
     'files': env.cache("CACHE_URL"),
 }
+
+FEDORA_XML_CONTENT_CACHE_TIMEOUT = env("FEDORA_XML_CONTENT_CACHE_TIMEOUT")
 
 # Emails
 # -----------------------------------------------------------------------------
