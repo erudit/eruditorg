@@ -1,6 +1,6 @@
 import pytest
 
-from base.sitemaps import IssueSitemap, ArticleSitemap
+from base.sitemaps import JournalSitemap, IssueSitemap, ArticleSitemap
 
 from erudit.test.factories import ArticleFactory, IssueFactory
 
@@ -27,3 +27,9 @@ def test_published_articles_are_in_sitemap(is_published, should_be_in_sitemap):
     expected = [article.localidentifier] if should_be_in_sitemap else []
     result = [a.localidentifier for a in ArticleSitemap().items()]
     assert result == expected
+
+def test_external_journal_issues_and_articles_are_not_in_sitemaps():
+    external_article = ArticleFactory(issue__journal__collection__name='unb')
+    assert external_article.issue.journal.code not in JournalSitemap().items()
+    assert external_article.issue.localidentifier not in IssueSitemap().items()
+    assert external_article.localidentifier not in ArticleSitemap().items()
