@@ -70,13 +70,6 @@ class JournalAdmin(admin.ModelAdmin):
 
     inlines = (JournalDisciplineInline, )
 
-    def save_formset(self, request, form, formset, change):
-        instances = formset.save(commit=False)
-        for instance in instances:
-            instance.author = request.user
-            instance.save()
-        formset.save_m2m()
-
 
 class IssueAdmin(admin.ModelAdmin):
     list_display = (
