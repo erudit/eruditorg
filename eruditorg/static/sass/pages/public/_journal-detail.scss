@@ -72,6 +72,8 @@
     margin: 0 0 2em 0;
     line-height: 1.15;
     @include column-break-inside(avoid);
+    display: inline-block;
+    width: 100%;
   }
 
   .year-list__title {
