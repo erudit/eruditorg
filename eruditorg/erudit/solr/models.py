@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 import pysolr
@@ -203,9 +202,12 @@ def get_all_articles(rows, page):
     solr_results = client.search(**args)
 
     def get(solr_data):
+        solr_doc = SolrDocument(solr_data)
+        if solr_doc.document_type != 'article':
+            return None
         try:
-            return get_model_instance(solr_data)
-        except ObjectDoesNotExist:
+            return erudit_models.Article.from_solr_object(Article(solr_data))
+        except erudit_models.Article.DoesNotExist:
             print("Warning: Article {} from Solr does not exist in Fedora!".format(solr_data['ID']))
             return None
 
