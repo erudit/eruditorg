@@ -626,6 +626,13 @@ class TestArticle:
         with override_settings(LANGUAGE_CODE=language):
             assert article.html_abstract == expected_abstract
 
+    @pytest.mark.parametrize('fixture,expected_publisher_name', [
+        ('1001948ar', 'HEC Montréal'),
+        ('1018860ar', None),
+    ])
+    def test_publisher_name(self, fixture, expected_publisher_name):
+        article = ArticleFactory(from_fixture=fixture)
+        assert article.publisher_name == expected_publisher_name
 
 
 def test_journaltype_can_return_embargo_duration_in_days():
