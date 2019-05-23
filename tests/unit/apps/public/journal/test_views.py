@@ -85,6 +85,43 @@ class TestJournalAuthorsListView:
 
 
 class TestIssueDetailSummary:
+    def test_generate_sections_tree_with_scope_surtitre(self):
+        view = IssueDetailView()
+        article_1 = ArticleFactory(from_fixture='1059644ar')
+        article_2 = ArticleFactory(from_fixture='1059645ar')
+        article_3 = ArticleFactory(from_fixture='1059646ar')
+        sections_tree = view.generate_sections_tree([article_1, article_2, article_3])
+        assert sections_tree == {
+            'level': 0,
+            'type': 'subsection',
+            'titles': {'main': None, 'paral': None},
+            'groups': [{
+                'level': 1,
+                'type': 'subsection',
+                'titles': {'main': 'La recherche qualitative aujourd&#8217;hui. 30 ans de diffusion et de r&#233;flexion', 'paral': []},
+                'notegens': [{
+                    'content': ['Sous la direction de Fr&#233;d&#233;ric Deschenaux, Chantal Royer et Colette Baribeau'],
+                    'scope': 'surtitre',
+                    'type': 'edito',
+                }],
+                'groups': [{
+                    'level': 2,
+                    'type': 'subsection',
+                    'titles': {'main': 'Introduction', 'paral': []},
+                    'notegens': [],
+                    'groups': [{
+                        'level': 2,
+                        'type': 'objects',
+                        'objects': [article_1],
+                    }],
+                }, {
+                    'level': 1,
+                    'type': 'objects',
+                    'objects': [article_2, article_3],
+                }],
+            }],
+        }
+
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()
         article_1 = ArticleFactory()
@@ -95,12 +132,13 @@ class TestIssueDetailSummary:
             'titles': {'paral': None, 'main': None},
             'level': 0,
             'groups': [
-                {'objects': [article_1, article_2], 'type': 'objects', 'level': 0, 'notegens': []},
+                {'objects': [article_1, article_2], 'type': 'objects', 'level': 0},
                 {
                     'titles': {'paral': [], 'main': "section 1"},
                     'level': 1,
-                    'groups': [{'objects': [article_3], 'type': 'objects', 'level': 1, 'notegens': []}],
-                    'type': 'subsection'
+                    'groups': [{'objects': [article_3], 'type': 'objects', 'level': 1}],
+                    'type': 'subsection',
+                    'notegens': [],
                 },
             ],
             'type': 'subsection',
@@ -123,17 +161,20 @@ class TestIssueDetailSummary:
                 'type': 'subsection',
                 'level': 1,
                 'titles': {'paral': [], 'main': 'section 1'},
+                'notegens': [],
                 'groups': [{
                     'type': 'subsection',
                     'level': 2,
                     'titles': {'paral': [], 'main': 'section 2'},
+                    'notegens': [],
                     'groups': [{
                         'type': 'subsection',
                         'level': 3,
                         'titles': {'paral': [], 'main': 'section 3'},
                         'groups': [
                             {'objects': [article], 'type': 'objects', 'level': 3},
-                        ]
+                        ],
+                        'notegens': [],
                     }]
                 }]
             }]
@@ -162,14 +203,16 @@ class TestIssueDetailSummary:
                     'titles': {
                         'paral': [], 'main': 'section 1'
                     },
+                    'notegens': [],
                     'groups': [
-                        {'type': 'objects', 'level': 1, 'objects': [articles[0]], 'notegens': []},
+                        {'type': 'objects', 'level': 1, 'objects': [articles[0]]},
                         {
                             'type': 'subsection', 'level': 2, 'titles': {'paral': [], 'main': 'section 1.1'},  # noqa
-                            'groups': [{'type': 'objects', 'level': 2, 'objects': [articles[1]], 'notegens': []}]
+                            'groups': [{'type': 'objects', 'level': 2, 'objects': [articles[1]]}],
+                            'notegens': [],
                         },
                         {
-                            'type': 'objects', 'level': 1, 'objects': [articles[2]], 'notegens': []
+                            'type': 'objects', 'level': 1, 'objects': [articles[2]],
                         }
                     ]
                 }
@@ -180,31 +223,57 @@ class TestIssueDetailSummary:
         view = IssueDetailView()
         articles = [
             ArticleFactory(
-                notegens=[{'content': 'Note surtitre', 'scope': 'surtitre', 'type': 'edito'}]
+                section_titles=[
+                    SectionTitle(1, False, "Section 1"),
+                ],
+                notegens=[
+                    {'content': 'Note surtitre', 'scope': 'surtitre', 'type': 'edito'},
+                ],
             ),
             ArticleFactory(
-                section_titles=[SectionTitle(1, False, "Section 1")],
-                notegens=[{'content': 'Note surtitre2', 'scope': 'surtitre2', 'type': 'edito'}]
+                section_titles=[
+                    SectionTitle(1, False, "Section 1"),
+                    SectionTitle(2, False, "Section 2"),
+                ],
+                notegens=[
+                    {'content': 'Note surtitre2', 'scope': 'surtitre2', 'type': 'edito'},
+                ],
             ),
         ]
         sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
-            'titles': {'paral': None, 'main': None},
             'level': 0,
-            'groups': [
-                {'objects': [articles[0]], 'type': 'objects', 'level': 0, 'notegens': [
-                    {'content': ['Note surtitre'], 'scope': 'surtitre', 'type': 'edito'},
-                ]},
-                {
-                    'titles': {'paral': [], 'main': 'Section 1'},
-                    'level': 1,
-                    'groups': [{'objects': [articles[1]], 'type': 'objects', 'level': 1, 'notegens': [
-                        {'content': ['Note surtitre2'], 'scope': 'surtitre2', 'type': 'edito'}
-                    ]}],
-                    'type': 'subsection'
-                },
-            ],
             'type': 'subsection',
+            'titles': {'main': None, 'paral': None},
+            'groups': [{
+                'level': 1,
+                'type': 'subsection',
+                'titles': {'main': 'Section 1', 'paral': []},
+                'notegens': [{
+                    'content': ['Note surtitre'],
+                    'scope': 'surtitre',
+                    'type': 'edito',
+                }],
+                'groups': [{
+                    'level': 1,
+                    'objects': [articles[0]],
+                    'type': 'objects',
+                }, {
+                    'level': 2,
+                    'type': 'subsection',
+                    'titles': {'main': 'Section 2', 'paral': []},
+                    'notegens': [{
+                        'content': ['Note surtitre2'],
+                        'scope': 'surtitre2',
+                        'type': 'edito',
+                    }],
+                    'groups': [{
+                        'level': 2,
+                        'objects': [articles[1]],
+                        'type': 'objects',
+                    }],
+                }],
+            }],
         }
 
     @unittest.mock.patch('erudit.fedora.modelmixins.cache')
