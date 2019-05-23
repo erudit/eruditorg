@@ -488,29 +488,29 @@ class IssueDetailView(
             articles, lambda a: getattr(a, 'section_title_' + str(level + 1))
         ):
             articles = list(articles)
-            notegens = [
-                notegen for notegen in articles[0].get_notegens()
-                if notegen['scope'] in ['surtitre', 'surtitre2']
-            ]
             if title is None:
                 sections_tree['groups'].append({
                     'type': 'objects',
                     'objects': articles,
                     'level': level,
-                    'notegens': notegens,
                 })
             else:
                 title_paral = getattr(articles[0], 'section_title_' + str(level + 1) + '_paral')
                 # liberuditarticle returns an `odict_value()` wrapper around the list. We just want
                 # to make sure that this wrapper doesn't cause problems down the line. Force list.
                 title_paral = list(title_paral)
-                sections_tree['groups'].append(
-                    self.generate_sections_tree(
-                        articles, level=level + 1,
-                        title=title,
-                        title_paral=title_paral,
-                    )
+                sub_tree = self.generate_sections_tree(
+                    articles, level=level + 1,
+                    title=title,
+                    title_paral=title_paral,
                 )
+                notegens = [
+                    notegen for notegen in articles[0].get_notegens() if
+                    notegen['scope'] == 'surtitre' and level == 0 or
+                    notegen['scope'] == 'surtitre2' and level == 1
+                ]
+                sub_tree.update({'notegens': notegens})
+                sections_tree['groups'].append(sub_tree)
         return sections_tree
 
 
