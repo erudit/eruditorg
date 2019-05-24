@@ -1330,7 +1330,7 @@ class Article(FedoraMixin):
 
     @property
     def publisher_name(self):
-        return self.erudit_object.publishers[0]
+        return self.erudit_object.publishers[0] if self.erudit_object.publishers else None
 
     # Other
     # -
