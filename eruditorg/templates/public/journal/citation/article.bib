@@ -2,7 +2,7 @@
 @article{{ '{' }}{{ article.localidentifier }},
   title="{{ article|format_article_title|safe }}",
   author="{% for author in article.authors %}{% if not forloop.first %}{% trans ' ; ' %}{% endif %}{% if author.firstname and author.lastname %}{{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}{{ author.othername|safe }}{% endif %}{% endfor %}",
-  journal="{{ article.issue.journal.name|safe }}",
+  journal="{{ journal_title|safe }}",
   {% if article.issue.volume %}volume="{{ article.issue.volume }}",{% endif %}
   {% if article.issue.number %}number="{{ article.issue.number }}",{% endif %}
   {% if article.first_page and article.last_page %}pages="{{ article.first_page }}--{{ article.last_page }}",{% endif %}
