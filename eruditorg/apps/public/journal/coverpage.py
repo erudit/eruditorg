@@ -102,13 +102,17 @@ def get_coverpage(article):
     story.append(black_line)
     story.append(medium_spacer)
 
+    # Erudit objects.
+    article_erudit_object = article.get_erudit_object()
+    issue_erudit_object = article.issue.get_erudit_object()
+
     # -----------------------------------------------------------------------------
     # HEADER
 
     header = []
 
     # Journal main title.
-    journal_titles = article.issue.erudit_object.get_titles()
+    journal_titles = issue_erudit_object.get_titles()
     journal_main_title = journal_titles.get('main')
     header.append(Paragraph(
         journal_main_title.title,
@@ -138,7 +142,7 @@ def get_coverpage(article):
     header.append(extra_large_spacer)
 
     # Article titles.
-    titles = article.erudit_object.get_titles()
+    titles = article_erudit_object.get_titles()
     if titles['main'].title is None and not titles['reviewed_works']:
         header.append(Paragraph(
             _('[Article sans titre]'),
@@ -215,7 +219,7 @@ def get_coverpage(article):
     left_column = []
 
     # Issue themes.
-    themes = article.issue.erudit_object.get_themes(formatted=True, html=True)
+    themes = issue_erudit_object.get_themes(formatted=True, html=True)
     if themes:
         for index, theme in enumerate(themes[0]['names']):
             left_column.append(Paragraph(
@@ -280,7 +284,7 @@ def get_coverpage(article):
         styles['normal'],
     ))
     left_column.append(medium_spacer)
-    for publisher in article.erudit_object.publishers:
+    for publisher in article_erudit_object.publishers:
         left_column.append(Paragraph(
             publisher,
             styles['small'],
@@ -339,7 +343,7 @@ def get_coverpage(article):
         'authors': article.get_formatted_authors_apa(),
         'year': article.issue.year,
         'title': clean(html_title),
-        'journal': article.issue.journal.name,
+        'journal': issue_erudit_object.get_journal_title(formatted=True),
     })
     if article.issue.volume:
         cite_string += ' <em>{}</em>,'.format(article.issue.volume)

@@ -610,6 +610,9 @@ class BaseArticleDetailView(
         })
         context['media_url_prefix'] = url[:-1]
 
+        # Journal title, in all languages if the journal in multilingual.
+        context['journal_title'] = obj.issue.erudit_object.get_journal_title(formatted=True)
+
         if not obj.issue.is_published:
             context['ticket'] = obj.issue.prepublication_ticket
 
@@ -733,7 +736,19 @@ class IdEruditArticleRedirectView(RedirectView):
             article.localidentifier, ])
 
 
-class ArticleEnwCitationView(SingleArticleMixin, DetailView):
+class BaseArticleCitationView(SingleArticleMixin, DetailView):
+    """
+    Base view for the article citation views (ENW, RIS, BIB).
+    """
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseArticleCitationView, self).get_context_data(**kwargs)
+        # Journal title, in all languages if the journal in multilingual.
+        context['journal_title'] = self.object.issue.erudit_object.get_journal_title(formatted=True)
+        return context
+
+
+class ArticleEnwCitationView(BaseArticleCitationView):
     """
     Returns the enw file of a specific article.
     """
@@ -742,7 +757,7 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     template_name = 'public/journal/citation/article.enw'
 
 
-class ArticleRisCitationView(SingleArticleMixin, DetailView):
+class ArticleRisCitationView(BaseArticleCitationView):
     """
     Returns the ris file of a specific article.
     """
@@ -751,7 +766,7 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     template_name = 'public/journal/citation/article.ris'
 
 
-class ArticleBibCitationView(SingleArticleMixin, DetailView):
+class ArticleBibCitationView(BaseArticleCitationView):
     """
     Returns the bib file of a specific article.
     """

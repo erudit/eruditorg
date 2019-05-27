@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="pabis18" date="2019-04-01" app="Tournesol 0.5.3"/>
+<copyright>
+	<year>2019</year>
+<contribution>
+<artificialperson>
+	<name>Département des relations industrielles de l’Université Laval</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="en">Copyright Holder</label>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="es">Reservados todos los derechos</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2018">
+			<periodcode>autom</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/ri/2018/v73/n4</url>
+  <nbarticle>17</nbarticle>
+  <revue id="ri17" lang="fr en">
+    <titrerev>Relations industrielles / Industrial Relations</titrerev>
+    <titrerevabr>ri</titrerevabr>
+    <idissn>0034-379X</idissn>
+    <idissnnum>1703-8138</idissnnum>
+    <directeur sexe="masculin">
+      <fonction lang="fr">Directeur</fonction>
+      <nompers>
+        <prenom>Anthony</prenom>
+        <autreprenom>M.</autreprenom>
+        <nomfamille>Gould</nomfamille>
+      </nompers>
+      <key>directeur</key>
+    </directeur>
+    <directeur sexe="masculin">
+      <fonction lang="fr">Directeur adjoint</fonction>
+      <nompers>
+        <prenom>Yves</prenom>
+        <nomfamille>Hallée</nomfamille>
+      </nompers>
+      <key>directeuradjoint</key>
+    </directeur>
+  </revue>
+  <numero id="ri04376">
+    <volume>73</volume>
+    <nonumero>4</nonumero>
+    <pub>
+      <periode>Automne</periode>
+      <annee>2018</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2019-03-06</date>
+    </pubnum>
+  </numero>
+  <editeur>
+    <nomorg>Département des relations industrielles de l’Université Laval</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Département des relations industrielles de l’Université Laval</nomorg>, 2019</droitsauteur>
+</infosommaire>
+<article doi="10.7202/1056972ar" idproprio="1056972ar" lang="fr en"
+  ordseq="1" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/ri/2018/v73/n4/1056972ar.html</urlhtml>
+  <urlpdf taille="802" unite="ko">/revue/ri/2018/v73/n4/1056972ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056972ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>641</ppage>
+    <dpage>663</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Conférence</surtitre>
+  <surtitreparal lang="en">Conference</surtitreparal>
+                  <titre>Réflexions sur les mutations de la négociation collective</titre>
+                  <titreparal lang="en">Reflections on the Transformations of Collective Bargaining</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Claude</prenom>
+    <nomfamille>Rioux</nomfamille>
+   </nompers>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:cl_rioux@sympatico.ca" xlink:type="simple">cl_rioux@sympatico.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur><notegen typenoteg="edito"><alinea>Conférence H.D. Woods, prononcée lors du Congrès annuel de l’Association canadienne des relations industrielles (ACRI), le 3 mai 2018, à Montréal.</alinea><alinea>H.D. Woods Conference, delivered at the annual Canadian Industrial Relations Association Conference (CIRA), May 3, 2018, in Montreal.</alinea></notegen>
+</liminaire>
+</article>
+<article doi="10.7202/1056973ar" idproprio="1056973ar" lang="en"
+  ordseq="2" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056973ar.html</urlhtml>
+  <urlpdf taille="1,4" unite="mo">/revue/ri/2018/v73/n4/1056973ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056973ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>664</ppage>
+    <dpage>701</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>Evaluating the State of the Employment Relationship: A Balanced Scorecard Approach Built on Mackenzie King’s Model of an Industrial Relations System</titre>
+                  <titreparal lang="fr">Évaluation de l’état de la relation d’emploi : application d’un système d’évaluation équilibré basé sur le modèle de système de relations industrielles de Mackenzie King</titreparal>  <titreparal lang="es">Evaluar el estado de las relaciones laborales: concepción de una matriz de control equilibrada basada en el modelo de sistema de relaciones laborales de MacKenzie King</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Bruce</prenom><autreprenom>E.</autreprenom>
+    <nomfamille>Kaufman</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professor of Economics, Georgia State University, Atlanta USA, and Research Fellow, Centre for Work, Organization, and Wellbeing, Department of Employment Relations and Human Resources, Griffith University, Brisbane, Australia</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:bkaufman@gsu.edu" xlink:type="simple">bkaufman@gsu.edu</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Michael</prenom>
+    <nomfamille>Barry</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professor of Employment Relations and Human Resources, Griffith University, Brisbane, Australia</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:m.barry@griffith.edu.au" xlink:type="simple">m.barry@griffith.edu.au</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Rafael</prenom>
+    <nomfamille>Gomez</nomfamille>
+   </nompers>
+  <affiliation><alinea>Director, Centre for Industrial Relations and Human Resources, University of Toronto, Toronto, Canada</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:ralph.gomez@utoronto.ca" xlink:type="simple">ralph.gomez@utoronto.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Adrian</prenom>
+    <nomfamille>Wilkinson</nomfamille>
+   </nompers>
+  <affiliation><alinea>Director, Centre for Work, Organization, and Wellbeing, Griffith University, Brisbane, Australia</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="mailto:Adrian.wilkinson@griffith.edu.au" xlink:type="simple">ralph.gomez@utoronto.caAdrian.wilkinson@griffith.edu.au</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>The industrial relations (IR) field in Canada and the United States (US) emerged in the late 1910s-early 1920s and is thus on the cusp of its 100th anniversary. The impetus for the creation of the IR field was growing public alarm in both countries over the escalating level of conflict, violence, and class polarization in employer-employee relations. The two countries established federal-level government investigative committees, the <marquage typemarq="italique">Royal Commission on Industrial Relations</marquage> (1919) in Canada and the <marquage typemarq="italique">Commission on Industrial Relations</marquage> (1911-1915) in the US, to travel cross-country, gather evidence, and report their findings and overall evaluation.</alinea><alinea>To commemorate the IR field’s centenary, this paper conducts the same type of cross-national ER evaluation, but with modern methods. First, this exercise requires a formal evaluation instrument, like a physical exam worksheet. Adopted is a modified version of a balanced scorecard. Second, the scorecard’s framework and questions should be theoretically informed. The framework used is a modified version of the diagrammatic model of an IR system presented by Mackenzie King in <marquage typemarq="italique">Industry and Humanity</marquage> (1918). The third step is to fill in the scorecard with data from individual workplaces, which are obtained for the US from a new nationally-representative survey of 2000+ workplaces, the <marquage typemarq="italique">State of Workplace Employment Relations Survey</marquage> (SWERS). The fourth step is to aggregate all the diagnostic measures to obtain a summary numerical estimate for each of the companies of its state of ER performance and health.</alinea><alinea>Based on a 1-7 (7 = highest) scale, then converted to F to A grades, we find that the average ER grade given by managers is B+ and by employees C+. The company scores are graphed in a frequency distribution that visually represents, for the first time in the literature, the lowest-to-highest pattern of employment relations performance and health across the US.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Le champ des relations industrielles (RI) au Canada et aux États-Unis (É-U), qui a vu le jour à la fin des années 1910 et au début des années 1920, se trouve à l’aube de son centième anniversaire. L’impulsion pour la création du champ des RI a été donné par l’inquiétude publique grandissante dans les deux pays face à l’intensification du niveau de conflit, de la violence et de la polarisation des classes dans les relations entre employeurs et employés. Les deux pays ont alors mis en place des Commissions d’enquête gouvernementales fédérales, la <marquage typemarq="italique">Commission royale sur les relations industrielles </marquage>(1919) au Canada et la <marquage typemarq="italique">Commission sur les relations industrielles </marquage>(1911-1915) aux États-Unis, afin de parcourir le pays, rassembler des preuves, ainsi que rendre compte des résultats et donner leur évaluation globale.</alinea><alinea>Afin de commémorer le centenaire du champ des RI, nous avons effectué le même type d’évaluation à travers le pays, mais avec des méthodes modernes. Premièrement, cet exercice nécessite un instrument d’évaluation formel, telle une grille de calcul lors d’un examen de physique. Nous avons opté pour une version adaptée d’un système d’évaluation équilibré (<marquage typemarq="italique">Balanced Scorecard</marquage>). Deuxièmement, le cadre conceptuel et les questions sous-jacentes à ce système devraient être théoriquement fondés. Le cadre utilisé est une version modifiée du modèle schématique d’un système de RI présenté par Mackenzie King dans <marquage typemarq="italique">Industry and Humanity</marquage> (1918). Troisièmement, il faut compléter le système d’évaluation avec les données provenant de chaque milieu de travail, obtenues pour ce qui est de É-U à partir d’une nouvelle enquête représentative au niveau national et portant sur plus de 2000 milieux de travail, l’étude SWERS (<marquage typemarq="italique">State of Workplace Employment Relations Survey</marquage>). Quatrièmement, il faut regrouper toutes les mesures de diagnostic afin d’obtenir une évaluation numérique sommaire, pour chacune des entreprises enquêtées, de son état de santé et de ses performances en matière de relation d’emploi.</alinea><alinea>Sur une échelle de 1 à 7 échelons (7 étant le niveau le plus élevé), que nous avons reconverti en une nouvelle échelle allant de F à A, nous constatons que la note moyenne en matière de relation d’emploi attribuée par les gestionnaires est B + et celle attribuée par les employés est C +. Les pointages des entreprises sont représentés graphiquement par une distribution de fréquences qui, pour la première fois dans la littérature, révèle la configuration des niveaux de performance et de santé de la relation d’emploi aux É-U, allant du plus faible au plus élevé.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>El campo de las relaciones industriales (RI) en Canadá y Estados Unidos (EU) surgió hace cien años, entre fines de los años 1910 y comienzos de los años 1920. El impulso para la creación del campo de RI fue dado por la creciente alarma pública en ambos países respecto a la escalada de conflicto, violencia y polarización de clases en las relaciones laborales. Los dos países establecieron comités de investigación de nivel federal, la <marquage typemarq="italique">Royal Commission on Industrial Relations</marquage> (1919) en Canadá y la <marquage typemarq="italique">Commission on Industrial Relations</marquage> (1911-1915) en EU, para viajar à través del país, colectar datos, y formular un informe de los resultados y una evaluación global.</alinea><alinea>Para conmemorar el centenario del campo de RI, se realizó el mismo tipo de evaluación de las RE a través de todo el país, pero con métodos modernos. Primero, este ejercicio requería un instrumento formal de evaluación, como una hoja de cálculo en un examen físico. Se optó por una versión adaptada de la matriz de control equilibrado. Segundo, el marco conceptual y las cuestiones subyacentes a la matriz de control deberían ser tener un fundamento teórico. La matriz utilizada es una versión modificada del modelo esquemático de un sistema de RI presentado por MacKenzie King en <marquage typemarq="italique">Industry and Humanity</marquage> (1918). Tercero, la matriz de control debe ser completada con datos provenientes de cada lugar de trabajo, obtenidas en EU a partir de una nueva encuesta representativa a nivel nacional y realizada en más de 2000 lugares de trabajo, el estudio SWERS (<marquage typemarq="italique">State of Workplace Employment Relations Survey</marquage>). Cuarto, se trata de reagrupar todas las medidas de diagnóstico para obtener una evaluación numérica resumida, para cada empresa encuestada, de su estado de salud y de su rendimiento en materia de relaciones laborales.</alinea><alinea>Sobre una escala de 1 a 7 escalones (7 representaba el nivel más alto), que fue reconvertida en una nueva escala que va de F a A, se obtiene que la nota promedio en materia de relaciones laborales atribuida por los empleadores es B+ y aquella atribuida por los empleados es de C+. Los puntajes de las empresas son representados gráficamente por una distribución de frecuencias que, por la primera vez en la literatura, revela la configuración de niveles de rendimiento y de la salud de la relación de empleo en EU, yendo del más bajo al más alto.</alinea>
+ </resume><grmotcle lang="en">  <titre>Keywords</titre><motcle>industrial relations (IR) theory</motcle><motcle>Mackenzie King</motcle><motcle>balanced scorecard</motcle><motcle>IR climate</motcle><motcle>IR systems</motcle></grmotcle><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>théorie des relations industrielles (RI)</motcle><motcle>Mackenzie King</motcle><motcle>système d’évaluation équilibré</motcle><motcle>climat des RI</motcle><motcle>systèmes de RI</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>teoría de relaciones industriales (RI)</motcle><motcle>Mackenzie King</motcle><motcle>matriz de control equilibrado</motcle><motcle>clima de relaciones industriales</motcle><motcle>sistemas de RI</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056974ar" idproprio="1056974ar" lang="fr"
+  ordseq="3" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056974ar.html</urlhtml>
+  <urlpdf taille="693" unite="ko">/revue/ri/2018/v73/n4/1056974ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056974ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>702</ppage>
+    <dpage>727</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>Firmes multinationales et droits syndicaux : la contribution des alliances syndicales internationales à l’effectivité des Accords-cadres internationaux</titre>
+                  <titreparal lang="en">Multinational companies and trade union rights: How International Unions Alliances contribute to the effectiveness of International Framework Agreements</titreparal>  <titreparal lang="es">Firmas multinacionales y derechos sindicales: la contribución de las alianzas sindicales internacionales a la efectividad de los acuerdos marco internacionales</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Marc-Antonin</prenom>
+    <nomfamille>Hennebert</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur agrégé, Département de gestion des ressources humaines, HEC Montréal, Québec, Canada</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:marc-antonin.hennebert@hec.ca" xlink:type="simple">marc-antonin.hennebert@hec.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Christian</prenom>
+    <nomfamille>Lévesque</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur titulaire, Département de gestion des ressources humaines, HEC Montréal, Montréal, Québec, Canada</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:christian.lévesque@hec.ca" xlink:type="simple">christian.lévesque@hec.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Gregor</prenom>
+    <nomfamille>Murray</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur titulaire, École de relations industrielles, Université de Montréal et titulaire de la Chaire de recherche du Canada sur la mondialisation et le travail (CRIMT), Montréal, Québec, Canada</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:gregor.murray@umontreal.ca" xlink:type="simple">gregor.murray@umontreal.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Reynald</prenom>
+    <nomfamille>Bourque</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur titulaire (retraité), École de relations industrielles, Université de Montréal, Montréal, Québec, Canada</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="mailto:reynald.bourque@umontreal.ca" xlink:type="simple">reynald.bourque@umontreal.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur><notegen typenoteg="edito"><alinea>Les auteurs sont tous membres du Centre de recherche interuniversitaire sur la mondialisation et le travail (CRIMT).</alinea></notegen>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article s’intéresse à la contribution des
+alliances syndicales internationales (ASI) à
+l’effectivité des Accords-cadres internationaux (ACI),
+notamment à leur capacité à favoriser le processus
+de syndicalisation et de négociation de conventions collectives
+dans des pays où la législation nationale peine à
+assurer le respect de ces droits fondamentaux. Le contenu de ces
+accords, généralement le fruit d’une entente
+bilatérale entre la direction d’une multinationale et
+celle d’une Fédération syndicale internationale,
+repose habituellement sur certaines conventions de l’OIT dont
+celles relatives au droit d’association et à la
+liberté de recourir à la négociation collective.</alinea><alinea>Comme les études sur cet objet de recherche se sont
+d’abord limitées à l’analyse de leur contenu
+et à leurs contributions potentielles à la
+régulation sociale des multinationales, cet article
+s’inscrit plutôt dans des recherches plus récentes
+qui se consacrent à l’analyse des conditions
+d’effectivité des ACI comme outil de protection des droits
+des travailleurs au plan local. Se basant sur une étude de cas
+longitudinale et sur un important corpus empirique
+récolté au fil de multiples enquêtes de terrain en
+Europe et en Amérique du Sud, cette recherche montre comment un
+tel accord a été mobilisé au sein d’une
+multinationale européenne du secteur de la distribution.</alinea><alinea>Si, à bien des égards, les différents contextes
+nationaux au sein desquels l’ACI a été
+utilisé se voulaient plutôt défavorables à
+la mise en application d’un tel dispositif de régulation
+sociale, nos résultats montrent que les ASI peuvent favoriser la
+mise en oeuvre de tels accords. Ces ASI seront d’autant en mesure
+d’assurer l’effectivité des ACI lorsqu’elles
+parviennent à façonner préalablement des
+intérêts communs entre leurs membres par
+l’intermédiaire de la formulation d’un projet
+collectif, à structurer et mobiliser d’importantes
+ressources organisationnelles, à profiter de la synergie
+émergente des dynamiques d’échanges multiniveaux
+qui leur sont propres et, enfin, à combiner des approches de
+dialogue et de pressions sociales.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This article examines how international union alliances (IUA)
+contribute to the effectiveness of International Framework Agreements
+(IFAs) and, in particular, considers their ability to promote the
+process of organizing and negotiating collective agreements in
+countries where national governments struggle to ensure these
+fundamental rights are respected. The content of these agreements,
+which are generally the result of a bilateral agreement between the
+management of a multinational company and a Global Union Federation
+(GUF), usually rests on certain ILO conventions, including those
+relating to the right of association and the freedom to bargain
+collectively.</alinea><alinea>Since studies on this subject have been initially limited to the
+analysis of their content and their potential contributions to the
+social regulation of multinationals, this article is aligned with more
+recent research devoted to the analysis of the effectiveness of IFAs as
+a tool for protecting workers’ rights at the local level. Based
+on a longitudinal case study and a large body of empirical evidence
+gathered from multiple field surveys in Europe and South America, this
+research shows how such an agreement was mobilized within a European
+multinational company operating in the distribution sector.</alinea><alinea>Although, in many ways, the different national contexts in which the
+IFA was applied were rather unfavourable to the implementation of such
+a system of social regulation, our results show that the IUA can
+promote the implementation of such agreements. These IUAs are also able
+to ensure the effectiveness of IFAs when they succeed in firstly
+shaping common interests between their members through the formulation
+of a collective project, by structuring and mobilizing important
+resources, by taking advantage of the emerging synergy of their own
+multilevel exchange dynamics and, finally, by combining the approach to
+dialogue and social pressures.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>Este artículo se interesa a la contribución de las
+alianzas sindicales internacionales (ASI) a la efectividad de los
+Acuerdos marco internacionales (AMI), especialmente a su capacidad de
+favorecer el proceso de sindicalización y de negociación
+de convenciones colectivas en los países donde la
+legislación nacional puede a penas asegurar el respeto de esos
+derechos fundamentales. El contenido de esos acuerdos, generalmente le
+fruto de un acuerdo bilateral entre la dirección de una
+multinacional y de la dirección de una Federación
+sindical internacional, reposa usualmente sobre ciertas convenciones de
+la OIT en particular aquellas que refieren al derecho de
+asociación y a la libertad de recurrir a la negociación
+colectiva.</alinea><alinea>Como los estudios sobre este objeto de investigación estaban en
+un inicio limitados al análisis de su contenido y a sus
+contribuciones potenciales a la regulación social de las
+multinacionales, este artículo se inscribe más bien en la
+corriente de investigaciones más recientes que se interesan al
+análisis de condiciones de efectividad de los AMI como
+instrumento de protección de los derechos de trabajadores en el
+plano local. À partir de un estudio de caso longitudinal y de un
+corpus empírico importante colectado en el curso de
+múltiples encuestas de terreno en Europa y en América del
+Centro, esta investigación muestra cómo un tal acuerdo ha
+sido movilizado en el seno de una multinacional europea del sector de
+la distribución.</alinea><alinea>A pesar que los diferentes contextos nacionales dentro de los cuales el
+AMI ha sido utilizado, se han mostrado más bien desfavorables a
+la aplicación de un tal dispositivo de regulación social,
+nuestros resultados indican que las ASI pueden favorecer la
+implantación de dichos acuerdos. Estos AMI serán
+más aún capaces de asegurar la efectividad de los AMI
+cuando ellos logran a) moldear de antemano los intereses comunes entre
+los miembros mediante la formulación de un proyecto colectivo,
+b) estructurar y movilizar importantes recursos organizacionales, c)
+aprovechar de la sinergia emergente de las dinámicas de
+intercambio multi-niveles que les caracteriza y, por último, d)
+combinar enfoques de dialogo y de presión sociales.</alinea>
+ </resume><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>Accord-cadre international</motcle><motcle>alliances syndicales internationales</motcle><motcle>responsabilité sociale des entreprises</motcle><motcle>firmes multinationales</motcle></grmotcle><grmotcle lang="en">  <titre>Keywords</titre><motcle>international framework agreement</motcle><motcle>international union alliances</motcle><motcle>corporate social responsibility</motcle><motcle>multinational companies</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>Acuerdo marco internacional</motcle><motcle>alianzas sindicales internacionales</motcle><motcle>responsabilidad social de empresas</motcle><motcle>firmas multinacionales</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056975ar" idproprio="1056975ar" lang="en"
+  ordseq="4" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056975ar.html</urlhtml>
+  <urlpdf taille="776" unite="ko">/revue/ri/2018/v73/n4/1056975ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056975ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>728</ppage>
+    <dpage>752</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>Going the Extra Mile: Managers and Supervisors as Moral Agents for Workers with Disability at Two Social Enterprises</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Timothy</prenom>
+    <nomfamille>Bartram</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professor, School of Management, College of Business, RMIT, Melbourne, Victoria</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:timothy.bartram@rmit.edu.au" xlink:type="simple">timothy.bartram@rmit.edu.au</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Jillian</prenom>
+    <nomfamille>Cavanagh</nomfamille><suffixe typesuff="grade">Ph. D.</suffixe>
+   </nompers>
+  <affiliation><alinea>Senior Lecturer, Business School, La Trobe University, Bundoora, Melbourne, Victoria</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:j.cavanagh@latrobe.edu.au" xlink:type="simple">j.cavanagh@latrobe.edu.au</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Stephen</prenom>
+    <nomfamille>Sim</nomfamille>
+   </nompers>
+  <affiliation><alinea>Senior Lecturer, Business School, Curtin University, Malaysia</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:stephen.sim@curtin.edu.my" xlink:type="simple">stephen.sim@curtin.edu.my</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Patricia</prenom>
+    <nomfamille>Pariona-Cabrera</nomfamille><suffixe typesuff="grade">Ph. D.</suffixe>
+   </nompers>
+  <affiliation><alinea>Student, School of Management, College of Business, RMIT, Melbourne, Victoria</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="mailto:Patricia.Pariona-Cabrera@rmit.edu.au" xlink:type="simple">Patricia.Pariona-Cabrera@rmit.edu.au</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au5">
+   <nompers>
+    <prenom>Hannah</prenom>
+    <nomfamille>Meacham</nomfamille>
+   </nompers>
+  <affiliation><alinea>Lecturer, Monash Business School, Monash University, Melbourne, Victoria</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="mailto:hannah.meacham@monash.edu.au" xlink:type="simple">hannah.meacham@monash.edu.au</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>This study examines the ethical management of workers with disability
+(WWD) employed at two social enterprises in Australia. Viewed largely
+through the spectrum of institutionally-based conflict in the
+employment relationship, this research draws on a framework of situated
+moral agency (Wilcox, 2012) to establish the ways in which WWD are
+afforded opportunities to engage in work and how managers and
+supervisors practise situated moral agency at the workplace. A
+qualitative case study approach is used with 62 participants through
+semi-structured interviews and focus groups.</alinea><alinea>Key findings demonstrate supervisors constantly have to reshape and
+reinterpret human resource management (HRM) policies and practices to
+exercise and extend moral agency. This phenomenon suggests
+contradictions between moral agency and ethical management practice
+within current HRM regimes. The key message of the paper is that HRM
+does not always support the ethical management of WWD.</alinea><alinea>Consequently, we question the ethical nature of contemporary HRM policy
+and practice for WWD, and argue for further research to unpack ethical
+ways to more effectively support WWD in the workplace. For WWD to be
+included at work, achieve life skills and their goals, managers and
+supervisors need to engage with their moral agency. Finally, we draw
+implications for management and employment relations theory and
+practice.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Cette étude examine la gestion éthique des travailleurs avec handicap (TAH) employés dans deux entreprises sociales en Australie. Prenant appui sur la relation d’emploi, cette recherche s’inspire du cadre théorique de l’agence morale locale (Wilcox, 2012) pour établir de quelle manière les TAH se voient offrir des possibilités de s’engager dans leur travail, ainsi que comment les gestionnaires et les superviseurs mettent de l’avant les principes de l’action morale située (en anglais, <marquage typemarq="italique">situated moral agency</marquage>) dans leur milieu de travail. Pour ce faire, nous avons eu recours à une étude de cas qualitative auprès de 62 participants au moyen d’entretiens semi-structurés et de groupes de discussion.</alinea><alinea>Les principales observations sont à l’effet que les
+superviseurs doivent constamment remodeler et
+réinterpréter les politiques et les pratiques de gestion
+des ressources humaines (GRH) afin de mieux exercer et étendre
+leurs pratiques d’action morale. Ce faisant, nous trouvons des
+contradictions entre l’action morale et les pratiques de gestion
+éthique dans les régimes actuels de GRH. Le
+message-clé de l’article est que la GRH ne soutient pas
+toujours la gestion éthique de TAH.</alinea><alinea>Par conséquent, nous remettons en question la nature
+éthique des politiques et pratiques contemporaines de GRH envers
+les TAH et plaidons en faveur de la poursuite de recherches afin de
+découvrir des moyens éthiques permettant de soutenir plus
+efficacement les TAH en milieu de travail. Si l’on veut que les
+TAH se sentent intégrés dans leur travail,
+acquièrent les compétences de la vie courante et
+atteignent leurs objectifs, les gestionnaires et les superviseurs
+doivent s’engager davantage au niveau de leur action morale. En
+conclusion, nous dégageons les implications pour la
+théorie et la pratique en matière de gestion et de
+relations de travail.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>Este estudio examina la gestión ética de los casos de trabajadores con discapacidad (TCD) empleados en dos empresas sociales en Australia. Visto más ampliamente a través del espectro de conflictos de base institucional en la relación laboral, esta investigación se inspira del cuadro teórico del discernimiento moral contextualizado (<marquage typemarq="italique">situated moral agency</marquage>) (WIlcox, 2012) para examinar de qué manera los TCD disponen de oportunidades para participar en el trabajo y cómo los gerentes y supervisores ponen en práctica el discernimiento moral contextualizado en el lugar de trabajo. Un enfoque cualitativo de estudio de caso es utilizado con 62 participantes mediante entrevistas semi-estructuradas y <marquage typemarq="italique">focus groups</marquage>.</alinea><alinea>Los resultados principales demuestran que los supervisores deben
+constantemente remodelar y reinterpretar las políticas y las
+prácticas de gestión de recursos humanos (GRH) para
+ejercer y desplegar el discernimiento moral. Este fenómeno
+sugiere contradicciones entre la intervención moral y las
+prácticas de gestión éticas con los
+regímenes actuales de GRH. El mensaje clave de este
+artículo es que la GRH no siempre apoya la gestión
+ética de los casos de TCD.</alinea><alinea>Por consecuencia, se cuestiona la naturaleza ética de las
+políticas y prácticas de GRH respecto a los casos de TCD
+y se aboga por una mayor investigación para descubrir formas
+éticas que apoyen más eficazmente los TCD en el lugar de
+trabajo. Para impulsar la integración de TCD en el trabajo, la
+obtención de competencias de vida y el logro de sus objetivos,
+los gerentes y supervisores deben implicarse con su discernimiento
+moral. Para terminar, se formulan implicaciones respecto a la
+gestión y respecto a la teoría y practica de relaciones
+laborales.</alinea>
+ </resume><grmotcle lang="en">  <titre>Keywords</titre><motcle>disability</motcle><motcle>ethical management</motcle><motcle>human resource management</motcle><motcle>moral agency</motcle><motcle>social enterprises</motcle></grmotcle><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>handicap</motcle><motcle>gestion éthique</motcle><motcle>gestion des ressources humaines</motcle><motcle>action morale</motcle><motcle>entreprises sociales</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>discapacidad</motcle><motcle>gestión ética</motcle><motcle>gestión de recursos humanos</motcle><motcle>discernimiento moral</motcle><motcle>empresas sociales</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056976ar" idproprio="1056976ar" lang="fr"
+  ordseq="5" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056976ar.html</urlhtml>
+  <urlpdf taille="1022" unite="ko">/revue/ri/2018/v73/n4/1056976ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056976ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>753</ppage>
+    <dpage>783</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>Syndicats et responsabilité sociétale de l’entreprise : analyse longitudinale des stratégies des Confédérations françaises</titre>
+                  <titreparal lang="en">Trade Unions and Corporate Social Responsibility: Longitudinal Analysis of the Strategies of French Trade Union Confederations</titreparal>  <titreparal lang="es">Sindicatos y responsabilidad social de la empresa: análisis longitudinal de estrategias de las Confederaciones sindicales francesas</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Christelle</prenom>
+    <nomfamille>Havard</nomfamille>
+   </nompers>
+  <affiliation><alinea>Enseignante-chercheure, Burgundy School of Business - Université Bourgogne Franche-Comté, Dijon, France</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:christelle.havard@bsb-education.com" xlink:type="simple">christelle.havard@bsb-education.com</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>André</prenom>
+    <nomfamille>Sobczak</nomfamille>
+   </nompers>
+  <affiliation><alinea>Directeur académique et de la recherche, Audencia Business School, Nantes, France</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:asobczak@audencia.com" xlink:type="simple">asobczak@audencia.com</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Au cours des vingt dernières années, la responsabilité sociétale de l’entreprise (RSE) est devenue une préoccupation majeure du débat public et de la recherche en sciences sociales. La multiplication des démarches RSE a nécessairement un impact sur les organisations syndicales qui sont amenés à s’adapter et à réagir ou qui peuvent se saisir des opportunités offertes par la RSE. L’objectif de cet article est d’apporter un éclairage sur la manière dont les stratégies des centrales syndicales en matière de RSE se construisent.</alinea><alinea>Deux types de travaux sont mobilisés pour analyser ces stratégies et la manière dont elles se sont construites : les travaux de Boxall (2008) en relations industrielles et ceux de Whittington (2006) du courant de la « stratégie comme pratique » (<marquage typemarq="italique">strategy as practice</marquage>, en anglais). Une grille d’analyse est proposée pour étudier la construction de la stratégie en matière de RSE de cinq Confédérations syndicales représentatives en France au cours de la période 2006-2016.</alinea><alinea>Les résultats de l’étude longitudinale révèlent trois catégories de stratégies : 1- des Confédérations syndicales qui ont formulé assez tôt une stratégie favorable à la RSE ; 2- des Confédérations qui se sont engagés dans une stratégie plus récemment ; et, 3- une Confédération qui reste critique à l’égard de la RSE. Les éléments déterminants de ces stratégies sont, d’une part, les relations externes que ces Confédérations ont nouées avec les ONG et les pouvoirs publics, et, d’autre part, les ressources affectées à la RSE et les actions engagées. Sur le plan théorique, l’article permet d’élargir le potentiel des courants théoriques retenus et d’ouvrir de futures perspectives de recherche. Sur le plan pratique, il permet de mieux comprendre ces stratégies et, le cas échéant, de mieux s’y adapter, voire de les influencer.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Over the last twenty years, corporate social responsibility (CSR) has become a major subject of public debate and research in social sciences. The development of CSR strategies has an impact on trade unions, which have to adapt and react, or even use the opportunities offered by CSR. The aim of this article is to shed further light on the way trade unions develop their strategies in the field of CSR.</alinea><alinea>Two works are used to analyze these strategies and their development: the work of Boxall (2008) in the field of industrial relations and that of Whittington (2006) on “strategies as practice”. The article presents an analysis grid to study how five representative trade union confederations in France developed their CSR strategies between 2006 and 2016.</alinea><alinea>The results of this longitudinal study reveal three kinds of strategies: 1- Confederations that have formulated a strategy in favour of CSR very early on; 2- Confederations that have committed themselves more recently to CSR; and, 3- one Confederation that remains very critical of CSR. The major drivers of these strategies are, on the one hand, the external relations trade unions develop with NGOs and public authorities, and, on the other, the resources trade unions dedicate to CSR and the actions put in place. At the theoretical level, this article broadens the potential of the selected theories and opens up new perspectives for research. At the practical level, it allows for a better understanding of trade unions’ strategies and, if appropriate, better adaptation and even influence.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>Durante los últimos veinte años, la responsabilidad social de la empresa (RSE) se ha vuelto una preocupación mayor del debate público y de la investigación en ciencias sociales. La multiplicación de gestiones RSE tiene necesariamente un impacto en las organizaciones sindicales que deben adaptarse y reaccionar o que pueden aprovechar las oportunidades abiertas por la RSE. El objetivo de este artículo es de contribuir a esclarecer la manera cómo se construyen las estrategias sindicales en materia de RSE.</alinea><alinea>Dos tipos de trabajos son movilizados para analizar estas estrategias y la manera cómo son construidas: los trabajos de Boxall (2008) en relaciones industriales y los de Whittington (2006) de la corriente de la estrategia como práctica (<marquage typemarq="italique">strategy as practice</marquage>). Un esquema de análisis es propuesto para estudiar la construcción de la estrategia en materia de RSE de cinco Confederaciones sindicales representativas de Francia durante el periodo 2006-2016.</alinea><alinea>Los resultados del estudio longitudinal revelan tres categorías de estrategias: 1- las Confederaciones sindicales que han formulado temprano una estrategia favorable a la RSE; 2 - las Confederaciones que se han implicado en una estrategia más recientemente; y, 3- una Confederación que se mantiene crítica frente a la RSE. Los elementos determinantes de estas estrategias son, de un lado, las relaciones externas que estas Confederaciones han establecido con las ONG y los poderes públicos, y, de otro lado, los recursos afectados a la RSE y las acciones emprendidas. En el plano teórico, el artículo permite ampliar el potencial de corrientes teóricas retenidas y abrir futuras perspectivas de investigación. En el plano práctico, se permite de comprender mejor estas estrategias y, si es el caso, de mejor adaptarse et incluso de influenciarlas.</alinea>
+ </resume><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>responsabilité sociétale de l’entreprise</motcle><motcle>syndicat</motcle><motcle>France</motcle><motcle>stratégie comme pratique</motcle></grmotcle><grmotcle lang="en">  <titre>Keywords</titre><motcle>corporate social responsibility</motcle><motcle>union</motcle><motcle>France</motcle><motcle>strategy as practice</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>responsabilidad social de empresa</motcle><motcle>sindicato</motcle><motcle>Francia</motcle><motcle>estrategia como práctica</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056977ar" idproprio="1056977ar" lang="en"
+  ordseq="6" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056977ar.html</urlhtml>
+  <urlpdf taille="859" unite="ko">/revue/ri/2018/v73/n4/1056977ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056977ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>784</ppage>
+    <dpage>813</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>Social Movement Unionism as Union-Civil Alliances: A Democratizing Force? The New Zealand Case</titre>
+                  <titreparal lang="fr">Le syndicalisme et les alliances civiles-syndicales : une force de démocratisation? Le cas de la Nouvelle-Zélande</titreparal>  <titreparal lang="es">Sindicalismo de movilización social como Alianzas sindicales civiles: ¿una fuerza de democratización? El caso de Nueva Zelandia</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jane</prenom>
+    <nomfamille>Parker</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professor (Employment Relations and HRM), School of Management, Massey Business School, Massey University, Auckland, New Zealand</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:j.parker@massey.ac.nz" xlink:type="simple">j.parker@massey.ac.nz</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Ozan</prenom>
+    <nomfamille>Alakavuklar</nomfamille>
+   </nompers>
+  <affiliation><alinea>Doctor, School of Management, Massey Business School, Massey University, Auckland, New Zealand</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:o.n.alakavuklar@massey.ac.nz" xlink:type="simple">o.n.alakavuklar@massey.ac.nz</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>This exploratory study examines union-civil alliances in New Zealand (NZ). It focuses on the involvement of NZ’s peak union body, the Council of Trade Unions, in three civil group coalitions around the Living Wage Campaign, Decent Work Agenda and Environmental Agenda. It assesses how the CTU and its affiliates’ coalition involvement are informed by and seek to progress liberal (representative), participatory and/or more radical democratic principles, and what this means for organizational practice; the relations between the coalition parties; workplaces; and beyond.</alinea><alinea>Through case discussions, the study finds that civil alliances involving the CTU and its affiliates do not reflect a core trait of union activity in NZ. Among the union-civil alliances that do exist, there is a prevailing sense of their utility to progress shared interests alongside, and on the union side, a more instrumental aim to encourage union revival. However, the alliances under examination reflect an engagement with various liberal and participatory democratic arrangements at different organizational levels. More radical democratic tendencies emerge in relation to <marquage typemarq="italique">ad hoc</marquage> elements of activity and the aspirational goals of such coalitions as opposed to their usual processes and institutional configurations.</alinea><alinea>In essence, what emerges is a labour centre and movement which, on the one hand, is in a survivalist mode primarily concerned with economistic matters, and on the other, in a position of relative political and bargaining weakness, reaching out to other civil groups where it can so as to challenge the neo-liberal hegemony. Based on our findings, we conclude that Laclau and Mouffe’s (2001) view of radical democracy holds promise for subsequent coalitions involving the CTU, particularly in the context of NZ workers’ diverse interests and the plurality of other civil groups and social movements’ interests. This view concerns <marquage typemarq="italique">on-going</marquage> agency, change, organizing and strategy by coalitions to build inclusive (counter-) hegemony, arguing for a politic from below that challenges existing dominant neo-liberal assumptions in work and other spheres of life.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Cette étude prospective évalue les accords entre syndicats et groupes civils en Nouvelle-Zélande (NZ). Elle se concentre sur la participation du Conseil des syndicats néo-zélandais (<marquage typemarq="italique">Council of Trade Unions</marquage>-CTU) aux trois coalitions relatives au salaire minimum vital, au travail décent et au programme environnemental. Elle examine trois courants d’idées (soit la démocratie libérale, la démocratie participative et la pensée radicale) dans le cadre de ces coalitions auxquelles le CTU et ses syndicats affiliés participent, ainsi que leur signification au niveau des pratiques syndicales, des relations entre les participants de la coalition, des milieux de travail et, enfin, de la société en général.</alinea><alinea>Grâce à ces études de cas, nous constatons que les coalitions civiles auxquelles participent le CTU et ses affiliés ne constituent pas des traits déterminants des activités syndicales en Nouvelle-Zélande. Parmi les alliances existantes, un sentiment domine quant à leur contribution au progrès des intérêts communs, mais, du côté syndical, un but davantage orienté vers le renouveau du syndicalisme prédomine. Toutefois, les alliances étudiées traduisent un engagement envers divers principes démocratiques à différents niveaux de l’organisation. Pour leur part, les tendances radicales émergent grâce aux activités <marquage typemarq="italique">ad hoc</marquage> et aux objectifs recherchés par ces alliances, et non pas par leurs procédés ou configurations institutionnels. Fondamentalement, il appert que le mouvement syndical s’efforce, d’une part, de survivre en se concentrant sur les salaires et les conditions de travail, et, d’autre part, étant donné sa position de faiblesse, il tente de tendre la main aux groupes civils dans le but de contrecarrer l’hégémonie néo-libérale. À partir de nos observations, nous concluons que le concept de démocratie radicale de Laclau et Mouffe (2001) pourrait être prometteur dans le cadre de futures coalitions auxquelles participerait le CTU, particulièrement sur le plan des divers intérêts communs partagés par le syndicalisme et les autres groupes civils. Cette vision concerne, notamment, les engagements moraux, le changement social, l’organisation et la stratégie des coalitions visant à bâtir une contre-hégémonie basée sur une participation qui va du bas vers le haut et qui pourrait, ainsi, venir contrecarrer les thèses néo-libérales dominantes dans les milieux de travail et dans les autres sphères de la vie.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>Este estudio exploratorio evalúa las alianzas entre sindicatos y grupos civiles en Nueva Zelandia (NZ). El estudio se concentra en la implicación del Consejo de sindicatos neo-zelandeses (<marquage typemarq="italique">Council of Trade Unions</marquage> - CTU) en tres coaliciones en torno a los temas del salario mínimo vital, el trabajo decente y la agenda del medio ambiente. Se examina hasta qué punto la participación del CTU y de sus afiliados en la coalición se inspira de los principios de tres corrientes de ideas, esto es, la democracia liberal, la democracia participativa y el pensamiento radical. Se aborda igualmente, la significación de dichas influencias a nivel de la práctica organizacional, de las relaciones entre participantes de la coalición, de los medios de trabajo y de la sociedad en general.</alinea><alinea>Gracias a estos estudios de casos, se constata que las coaliciones civiles a las cuales participaron la CTU y sus afiliados no constituyen una característica central de la actividad sindical en Nueva Zelandia. En el seno de las alianzas existentes, domina un sentimiento respecto a su contribución al progreso de los intereses comunes, pero, del lado sindical, predomina un objetivo más instrumental de promover la renovación sindical. Sin embargo, las alianzas estudiadas traducen un compromiso con los diversos principios de la democracia liberal y participativa a diferentes niveles de la organización. Por su lado, las tendencias más radicales emergen gracias a actividades ad hoc y a las aspiraciones formuladas por las alianzas en oposición a los procedimientos habituales y las configuraciones institucionales.</alinea><alinea>Aparece de manera fundamental, que el movimiento sindical se esfuerza, de un lado, por sobrevivir concentrándose en los trabajadores asalariados y las condiciones de trabajo, y, de otro lado, dada la posición de debilidad el intenta tender la mano a los grupos civiles con el objetivo de desafiar la hegemonía neo-liberal. A partir de estas observaciones, se concluye que el concepto de democracia radical de Laclau y Mouffe (2001) podría ser prometedor en el marco de futuras coaliciones a las cuales participaría el CTU, particularmente en el plano de diversos intereses comunes compartidos por el sindicalismo y los otros grupos civiles. Esta visión concierne, especialmente, los compromisos morales, el cambio social, la organización y la estrategia de coaliciones con miras a construir una contra-hegemonía inclusiva que fomente una política que va de abajo hacia arriba y que podría ser capaz de desafiar las concepciones neoliberales dominantes en los medios de trabajo y en las otras esferas de la vida.</alinea>
+ </resume><grmotcle lang="en">  <titre>Keywords</titre><motcle>social movement unionism (SMU)</motcle><motcle>trade unions</motcle><motcle>peak body</motcle><motcle>liberal democracy</motcle><motcle>participatory democracy</motcle><motcle>radical democracy</motcle><motcle>civil alliance</motcle><motcle>coalition-building</motcle><motcle>New Zealand</motcle></grmotcle><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>syndicalisme</motcle><motcle>mouvement social</motcle><motcle>centrales syndicales</motcle><motcle>démocratie libérale</motcle><motcle>démocratie participative</motcle><motcle>pensée radicale</motcle><motcle>alliance civile</motcle><motcle>coalition</motcle><motcle>Nouvelle-Zélande</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>sindicalismo</motcle><motcle>movimiento social</motcle><motcle>centrales sindicales</motcle><motcle>democracia liberal</motcle><motcle>democracia participativa</motcle><motcle>pensamiento radical</motcle><motcle>alianza civil</motcle><motcle>coalición</motcle><motcle>Nueva Zelandia</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056978ar" idproprio="1056978ar" lang="fr"
+  ordseq="7" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056978ar.html</urlhtml>
+  <urlpdf taille="776" unite="ko">/revue/ri/2018/v73/n4/1056978ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056978ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>814</ppage>
+    <dpage>839</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>Les référentiels de compétences comme outils de gestion : concilier les apports déterministes et constructivistes</titre>
+                  <titreparal lang="en">Competency Models as Management Tools: Conciliating Deterministic and Constructivist Contributions</titreparal>  <titreparal lang="es">Los referenciales de competencias como instrumentos de gestión: conciliar las contribuciones deterministas y constructivistas</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Roland</prenom>
+    <nomfamille>Foucher</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur titulaire, Département de relations industrielles, Université du Québec en Outaouais, Gatineau, Québec</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:roland.foucher@uqo.ca" xlink:type="simple">roland.foucher@uqo.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Aziz</prenom>
+    <nomfamille>Rhnima</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur agrégé, Département de management et de gestion des ressources humaines, École de gestion, Université de Sherbrooke, Sherbrooke, Québec</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:aziz.rhnima@usherbrooke.ca" xlink:type="simple">aziz.rhnima@usherbrooke.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Les démarches relatives aux « compétences », qui marquent la gestion des ressources humaines (GRH) depuis quelques décennies, recourent à des référentiels servant à établir les compétences à maîtriser et déployer. Ces outils de gestion s’inscrivent dans un contexte organisationnel évolutif et interactif suscitant des interrogations, particulièrement sur la façon de les déployer afin qu’ils traduisent les compétences valorisées par les parties concernées et celles effectivement déployées.</alinea><alinea>Ce questionnement est à l’origine d’une recherche qualitative en deux étapes. La première, qui s’applique à des concepts liés à l’approche de la théorie ancrée, a permis de retracer cinq propositions qui proviennent d’écrits sur les outils de gestion et les référentiels de compétences : ces dernières font ressortir : 1-les limites d’une approche déterministe, 2-les interactions entre instruments et usagers, ainsi que 3- celles entre individus et travail effectué, 4-les appropriations sociopolitiques, psycho-cognitives et symboliques qu’elles suscitent, et 5- la pertinence de créer une rétroaction entre les expériences vécues et la révision des référentiels. En second lieu, l’analyse de différents courants de pensée appartenant à l’approche constructiviste a fourni un complément d’information pouvant servir d’assise aux mécanismes d’appropriation.</alinea><alinea>Le cadre de référence résultant de ces deux apports a été illustré, lors de la seconde étape de la recherche, par quatre cas prenant racine dans des apports théoriques pertinents, logiquement reliés à un des processus d’appropriation et basés sur une méthodologie reconnue. Ainsi, la recherche montre qu’une complémentarité fructueuse est possible entre les approches déterministes et constructivistes lorsque l’on considère les rapports entre compétences inscrites dans un référentiel, compétences déployées et exigences du travail.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Competency management, which has marked Human Resource Management (HRM) over the last few decades, uses competency models to establish the competencies to be mastered and deployed. These management tools are part of an evolving and interactive organizational context that raises questions, particularly about how to deploy them so that they reflect the competencies effectively deployed and valorized by the stakeholders.</alinea><alinea>These questions underlie a two-step qualitative research design. Firstly, a grounded theory approach was taken that allowed us to identify five propositions coming from writings on management tools and competency models: these are 1-limits of a deterministic approach; 2-interactions between instruments and users; as well as 3) between individuals and work performed; 4-socio-political, psycho-cognitive and symbolic appropriations arising from these interactions; 5-relevance of creating feedback on lived experiences and the revision of competency models. Secondly, additional information providing a theoretical basis for the appropriation processes emerged from an analysis of different streams of thought belonging to the constructivist paradigm.</alinea><alinea>The frame of reference resulting from these two contributions was illustrated, during the second step of the research by four case studies rooted in relevant theoretical contributions, logically related to the appropriation processes, and satisfying methodological standards. Research results indicate that fruitful complementary information can arise from the deterministic and constructivist approaches when the relationships between competencies deployed, competencies included in a competency model, and work requirements are considered.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>Los procedimientos relativos a las « competencias », que marcan la gestión de los recursos humanos (GRH) desde hace algunas décadas, recurren a referenciales que sirven a establecer las competencias a dominar e implementar. Estos instrumentos de gestión se inscriben en un contexto organizacional evolutivo e interactivo que suscitan interrogaciones, particularmente sobre la manera de implementarlos para que traduzcan las competencias valorizadas por las partes implicadas y aquellas efectivamente implementadas.</alinea><alinea>Este cuestionamiento está al origen de una investigación cualitativa en dos etapas. La primera, que se aplica a los conceptos asociados al enfoque de la teoría enraizada, ha permitido de reconstituir cinco proposiciones que provienen de escritos sobre los instrumentos de gestión y los referenciales de competencias. Estos últimos hacen resaltar: 1 – los límites de un enfoque determinista, 2- las interacciones entre instrumentos y utilizadores, y así mismo, 3- aquellas entre individuos y trabajo efectuado, 4 – las apropiaciones sociopolíticas, psico-cognitivas y simbólicas que ellas suscitan, y 5 – la pertinencia de crear una retroacción entre las experiencias vividas y la revisión de los referenciales. En segundo lugar, el análisis de diferentes corrientes de pensamiento correspondientes al enfoque constructivista ha proporcionado un complemento de información que puede servir de ASSISE a los mecanismos de apropiación.</alinea><alinea>El cuadro de referencia que resulta de estas dos contribuciones ha sido ilustrado durante la segunda etapa de la investigación, mediante cuatro casos inspirados de las contribuciones teóricas pertinentes, lógicamente vinculados a uno de los procesos de apropiación y basados en una metodología reconocida. Así, la investigación muestra que una complementariedad fructuosa es posible entre los enfoques deterministas y constructivistas cuando se considera las relaciones entre las competencias implementadas, las competencias inscritas en un referencial y las exigencias del trabajo.</alinea>
+ </resume><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>gestion des ressources humaines</motcle><motcle>référentiel</motcle><motcle>compétence</motcle><motcle>déterminisme</motcle><motcle>constructivisme</motcle></grmotcle><grmotcle lang="en">  <titre>Keywords</titre><motcle>human resource management</motcle><motcle>competence model</motcle><motcle>competence</motcle><motcle>determinism</motcle><motcle>constructivism</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>gestión de recursos humanos</motcle><motcle>referencial</motcle><motcle>competencia</motcle><motcle>determinismo</motcle><motcle>constructivismo</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056979ar" idproprio="1056979ar" lang="fr"
+  ordseq="8" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056979ar.html</urlhtml>
+  <urlpdf taille="1,3" unite="mo">/revue/ri/2018/v73/n4/1056979ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056979ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>840</ppage>
+    <dpage>877</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="en">Articles</surtitreparal>
+                  <titre>La qualité d’emploi en France : cartographie et classification des professions d’exécution</titre>
+                  <titreparal lang="en">Job Quality in France: Mapping and Classification of Low-Skilled Occupations</titreparal>  <titreparal lang="es">La calidad del empleo en Francia: cartografía y clasificación de las profesiones de ejecución</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Olivier</prenom>
+    <nomfamille>Brolis</nomfamille>
+   </nompers>
+  <affiliation><alinea>Chargé de recherche en Sciences économiques, Université catholique de Louvain, Louvain-la-Neuve, Belgique et membre du Centre interdisciplinaire de recherche Travail, État et Société (CIRTES) et du Centre lillois d’études et de recherches en sociologie et économie (CLERSÉ)</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:olivier.brolis@uclouvain.be" xlink:type="simple">olivier.brolis@uclouvain.be</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>François-Xavier</prenom>
+    <nomfamille>Devetter</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeur des Universités en Sciences économiques, Université de Lille, France et membre du Centre lillois d’études et de recherches en sociologie et économie (CLERSÉ)</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:Francois-Xavier.devetter@imt-lille-douai.fr" xlink:type="simple">Francois-Xavier.devetter@imt-lille-douai.fr</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article vise, en s’appuyant sur <marquage typemarq="italique">L’Enquête Conditions de travail</marquage> (2013), à construire une typologie des professions relevant d’un statut « ouvrier » ou « employé » à partir du niveau et du type de qualité de l’emploi qu’elles induisent. Cette approche de la qualité d’emploi par les professions apparaît importante pour trois raisons complémentaires : d’abord, parce que la nature de la profession s’avère déterminante au-delà des caractéristiques des individus qui l’occupent pour expliquer les écarts en termes de qualité de l’emploi; ensuite, du fait de l’importance de la nature des professions dans la détermination des règles encadrant le travail; et, enfin, en raison du rôle joué par les politiques publiques dans le soutien de la qualité dans certaines professions.</alinea><alinea>Dans un premier temps, nous élaborons un faisceau de 15 indicateurs mesurant les différentes dimensions de la qualité d’emploi en combinant des variables relatives à la relation d’emploi (rémunération notamment), au niveau d’attractivité non matériel des tâches à effectuer (comme le degré d’autonomie ou nouer des rapports sociaux de qualité) ou, encore, les conditions de travail (notamment les contraintes liées au travail ou aux pénibilités vécues par les salariés comme les pénibilités physiques).</alinea><alinea>Dans un second temps, nous menons, sur la base de ces 15 indicateurs, une classification ascendante hiérarchique qui fait apparaître huit classes de professions. Les lignes de fracture qui les opposent, permettent ensuite d’établir une hiérarchisation partielle des professions en termes de qualité de l’emploi.</alinea><alinea>Enfin, nous précisons la composition de ces classes (professions concernées et caractéristiques sociodémographiques des individus) et soulignons une concentration de certains types de travailleurs au sein des professions de bonne ou de mauvaise qualité.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Based on the <marquage typemarq="italique">Working Conditions Survey</marquage> (2013), this article aims to construct a typology of occupations with a ‘worker’ or ‘employee’ status based on their level and type of job quality. This approach to job quality by occupation appears to be important for three complementary reasons: first, because the nature of the occupation, beyond the characteristics of the individuals who do the jobs, explain differences in terms of job quality: second, because of the importance of the nature of occupations in terms of the rules governing work; and finally, because of the role played by public policies in supporting quality in many occupations.</alinea><alinea>As a first step, we develop a set of 15 indicators measuring the different dimensions of job quality by combining variables relating to the wage relationship (in particular remuneration), non-material interest in exercising a profession (such as degree of autonomy or social relations), or working conditions (in particular the constraints related to work or difficulties experiences by employees, such as physical difficulties).</alinea><alinea>As a second step, based on these 15 indicators, we construct a hierarchical ascending classification that reveals eight occupational classes. The fracture lines that oppose them then make it possible to establish a partial hierarchy of occupations in terms of job quality.</alinea><alinea>Finally, we specify the compositions of these classes (relevant occupations and socio-demographic characteristics of individuals) and highlight the concentration of some types of workers in good or poor quality occupations.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="es"><alinea>Basándose en la Encuesta sobre las condiciones de trabajo (2013), este artículo se propone de construir una tipología de profesiones de tipo « obrero » o « empleado » a partir del nivel y del tipo de calidad de empleo que ellas inducen. Este enfoque de la calidad de empleo según las profesiones aparece importante por tres razones complementarias : primeo, porque la naturaleza de la profesión aparece determinante más allá de las características de los individuos que la ocupan para explicar las diferencias en términos de calidad de empleo ; segundo, del hecho de la importancia de la naturaleza de profesiones en la determinación de reglas que encuadran el trabajo ; y tercero, en razón del rol que juegan las políticas públicas en el soporte de la calidad en ciertas profesiones.</alinea><alinea>En un primer momento, elaboramos un haz de 15 indicadores que miden las diferentes dimensiones de calidad de empleo combinando las variables relativas a la relación de empleo (especialmente la remuneración), al nivel de atractividad no material de las tareas a efectuar (como el grado de autonomía o la posibilidad de establecer relaciones sociales de calidad) o, además, las condiciones de trabajo (especialmente las exigencias vinculadas al trabajo o a las penosidades vividas por los asalariados como, por ejemplo, la rudeza de las exigencias físicas).</alinea><alinea>En un segundo momento, se lleva a cabo, sobre la base de esos 15 indicadores, una clasificación ascendente jerárquica que hace aparecer ocho clases de profesiones. Las líneas de ruptura que las oponen, permiten enseguida de establecer una jerarquización parcial de las profesiones en términos de calidad de empleo.</alinea><alinea>Para terminar, precisamos la composición de estas clases (profesiones implicadas y características sociodemográficas de los individuos) y resaltamos una concentración de ciertos tipis de trabajadores en el seno de profesiones de buena o mala calidad.</alinea>
+ </resume><grmotcle lang="fr">  <titre>Mots-clés</titre><motcle>qualité de l’emploi</motcle><motcle>professions peu qualifiées</motcle><motcle>classification</motcle><motcle>France</motcle></grmotcle><grmotcle lang="en">  <titre>Keywords</titre><motcle>job quality</motcle><motcle>low-skilled occupations</motcle><motcle>classification</motcle><motcle>France</motcle></grmotcle><grmotcle lang="es">  <titre>Palabras claves</titre><motcle>calidad de empleo</motcle><motcle>profesiones poco calificadas</motcle><motcle>clasificación</motcle><motcle>Francia</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1056980ar" idproprio="1056980ar" lang="en"
+  ordseq="9" qualtraitement="complet" typeart="compterendu">
+  <urlhtml>/revue/ri/2018/v73/n4/1056980ar.html</urlhtml>
+  <urlpdf taille="92" unite="ko">/revue/ri/2018/v73/n4/1056980ar.pdf</urlpdf>
+  <pagination>
+    <ppage>878</ppage>
+    <dpage>879</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">Labour Arbitration in Canada</marquage>, By Morton Mitchnick and Brian Etherington (2018), 3rd edition, Toronto: Lancaster House, 730 pages. ISBN: 978-0-920450-66-6</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Andrea</prenom>
+    <nomfamille>Talarico</nomfamille>
+   </nompers>
+  <affiliation><alinea>PhD Candidate,  Faculty of Law, University of Ottawa</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056981ar" idproprio="1056981ar" lang="fr"
+  ordseq="10" qualtraitement="complet" typeart="compterendu">
+  <urlhtml>/revue/ri/2018/v73/n4/1056981ar.html</urlhtml>
+  <urlpdf taille="141" unite="ko">/revue/ri/2018/v73/n4/1056981ar.pdf</urlpdf>
+  <pagination>
+    <ppage>879</ppage>
+    <dpage>882</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">Performants… et licenciés – Enquête sur la banalisation des licenciements</marquage>, Par Mélanie Guyonvarc’h (2017) Rennes : Presses Universitaires de Rennes, 263 pages. ISBN 978-2-7535-5385-9</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Josée</prenom>
+    <nomfamille>Côté</nomfamille>
+   </nompers>
+  <affiliation><alinea>Candidate au doctorat, École de relations industrielles, Université de Montréal</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056982ar" idproprio="1056982ar" lang="en"
+  ordseq="11" qualtraitement="complet" typeart="compterendu">
+  <urlhtml>/revue/ri/2018/v73/n4/1056982ar.html</urlhtml>
+  <urlpdf taille="95" unite="ko">/revue/ri/2018/v73/n4/1056982ar.pdf</urlpdf>
+  <pagination>
+    <ppage>882</ppage>
+    <dpage>883</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">Technology and the Future of Work: The Impact on Labour Markets and Welfare States</marquage>, By Bent Greve (2017) Cheltenham, UK and Northampton, MA, USA: Edward Elgar Publishing, 168 pages. ISBN: 978-1-78643-428-9</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Travis</prenom><autreprenom>William</autreprenom>
+    <nomfamille>Fast</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professor, Département des relations industrielles, Université Laval</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056983ar" idproprio="1056983ar" lang="fr"
+  ordseq="12" qualtraitement="complet" typeart="compterendu">
+  <urlhtml>/revue/ri/2018/v73/n4/1056983ar.html</urlhtml>
+  <urlpdf taille="128" unite="ko">/revue/ri/2018/v73/n4/1056983ar.pdf</urlpdf>
+  <pagination>
+    <ppage>883</ppage>
+    <dpage>886</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">Les peurs au travail</marquage>, Dirigé par Alain Max Guénette et Sophie Le Garrec (2016) Collection Le travail en débats, Série Colloques et Congrès, Toulouse : Éditions Octares, 226 pages. ISBN : 978-2-36630-053-6</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Johanne</prenom>
+    <nomfamille>Dompierre</nomfamille>
+   </nompers>
+  <affiliation><alinea>Professeure, Département des relations industrielles, Université Laval</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056984ar" idproprio="1056984ar" lang="en"
+  ordseq="13" qualtraitement="complet" typeart="compterendu">
+  <urlhtml>/revue/ri/2018/v73/n4/1056984ar.html</urlhtml>
+  <urlpdf taille="101" unite="ko">/revue/ri/2018/v73/n4/1056984ar.pdf</urlpdf>
+  <pagination>
+    <ppage>886</ppage>
+    <dpage>888</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">Multinational Enterprises and Host Country Development</marquage>, Edited by Holger Görg (2016) Singapore: World Scientific Publishing Company, volume 53, 388 pages. ISBN: 978-981-4749-22-0</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Sondes</prenom>
+    <nomfamille>Turki</nomfamille>
+   </nompers>
+  <affiliation><alinea>Candidate au doctorat et chargée de cours, École de relations industrielles, Université de Montréal</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056985ar" idproprio="1056985ar" lang="fr"
+  ordseq="14" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/ri/2018/v73/n4/1056985ar.html</urlhtml>
+  <urlpdf taille="108" unite="ko">/revue/ri/2018/v73/n4/1056985ar.pdf</urlpdf>
+  <pagination>
+    <ppage>888</ppage>
+    <dpage>890</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">La désindustrialisation : une fatalité ?</marquage>, Dirigé par Jean-Claude Daumas, Ivan Kharaba et Philippe Mioche (2017) Besançon : Presses universitaires de Franche-Comté, 266 pages. ISBN : 978-2-84867-583-1</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Yves</prenom>
+    <nomfamille>Blanchet</nomfamille><suffixe typesuff="grade">Ph D.</suffixe>
+   </nompers>
+  <affiliation><alinea>École de relations industrielles, Université de Montréal</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056986ar" idproprio="1056986ar" lang="fr"
+  ordseq="15" qualtraitement="complet" typeart="compterendu">
+  <urlhtml>/revue/ri/2018/v73/n4/1056986ar.html</urlhtml>
+  <urlpdf taille="116" unite="ko">/revue/ri/2018/v73/n4/1056986ar.pdf</urlpdf>
+  <pagination>
+    <ppage>890</ppage>
+    <dpage>892</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Recensions</surtitre>
+  <surtitreparal lang="en">Book Reviews</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="italique">Hard Labor: The Battle that Birthed the Billion-Dollar NBA</marquage>, By Sam Smith (2017) Chicago, Triumph Books, 351 pages. ISBN: 978-1-62937-278-5</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Braham</prenom>
+    <nomfamille>Dabscheck</nomfamille>
+   </nompers>
+  <affiliation><alinea>Senior Fellow, Melbourne Law School, University of Melbourne, Australia</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1056987ar" idproprio="1056987ar" lang="fr en"
+  ordseq="16" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/ri/2018/v73/n4/1056987ar.html</urlhtml>
+  <urlpdf taille="54" unite="ko">/revue/ri/2018/v73/n4/1056987ar.pdf</urlpdf>
+  <pagination>
+    <ppage>893</ppage>
+    <dpage>894</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Liste des évaluateurs – 2018</titre>
+                  <titreparal lang="en">List of Referees – 2018</titreparal>
+         </grtitre>
+</liminaire>
+</article>
+<article doi="10.7202/1056988ar" idproprio="1056988ar" lang="fr"
+  ordseq="17" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/ri/2018/v73/n4/1056988ar.html</urlhtml>
+  <urlpdf taille="184" unite="ko">/revue/ri/2018/v73/n4/1056988ar.pdf</urlpdf>
+  <urlplan>/revue/ri/2018/v73/n4/1056988ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>895</ppage>
+    <dpage>900</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Index — Volume 73 — 2018</titre>
+                
+         </grtitre>
+</liminaire>
+</article>
+</sommaire>
