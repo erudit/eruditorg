@@ -732,16 +732,21 @@ class TestArticleDetailView:
         assert '<dd id="id_cite_apa_article" class="cite-apa">\n        Pratt, L.\n        (2019).\n        Robert Southey, Writing and Romanticism.\n        <em>Relations industrielles / Industrial Relations</em>,\n        . https://doi.org/10.7202/009255ar\n      </dd>' in html
         assert '<dd id="id_cite_chicago_article" class="cite-chicago">\n        Pratt, Lynda\n        «&nbsp;Robert Southey, Writing and Romanticism&nbsp;».\n        <em>Relations industrielles / Industrial Relations</em>\n        \n        (2019). https://doi.org/10.7202/009255ar\n      </dd>' in html
 
-    @pytest.mark.parametrize('url_name, expected_result', (
-        ('public:journal:article_citation_enw', '%J Relations industrielles / Industrial Relations'),
-        ('public:journal:article_citation_ris', 'JO  - Relations industrielles / Industrial Relations'),
-        ('public:journal:article_citation_bib', 'journal="Relations industrielles / Industrial Relations",'),
+    @pytest.mark.parametrize('fixture, url_name, expected_result', (
+        # Multilingual journals should have all titles in citations.
+        ('ri04376', 'public:journal:article_citation_enw', '%J Relations industrielles / Industrial Relations'),
+        ('ri04376', 'public:journal:article_citation_ris', 'JO  - Relations industrielles / Industrial Relations'),
+        ('ri04376', 'public:journal:article_citation_bib', 'journal="Relations industrielles / Industrial Relations",'),
+        # Sub-titles should not be in citations.
+        ('im03868', 'public:journal:article_citation_enw', '%J Intermédialités / Intermediality'),
+        ('im03868', 'public:journal:article_citation_ris', 'JO  - Intermédialités / Intermediality'),
+        ('im03868', 'public:journal:article_citation_bib', 'journal="Intermédialités / Intermediality'),
     ))
-    def test_journal_multilingual_titles_in_article_citation_views(self, url_name, expected_result):
+    def test_journal_multilingual_titles_in_article_citation_views(self, fixture, url_name, expected_result):
         issue = IssueFactory()
         repository.api.set_publication_xml(
             issue.get_full_identifier(),
-            open('tests/fixtures/issue/ri04376.xml', 'rb').read(),
+            open('tests/fixtures/issue/{}.xml'.format(fixture), 'rb').read(),
         )
         article = ArticleFactory(
             issue=issue,
