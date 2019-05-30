@@ -611,7 +611,10 @@ class BaseArticleDetailView(
         context['media_url_prefix'] = url[:-1]
 
         # Journal title, in all languages if the journal in multilingual.
-        context['journal_title'] = obj.issue.erudit_object.get_journal_title(formatted=True)
+        context['journal_title'] = obj.issue.erudit_object.get_journal_title(
+            formatted=True,
+            subtitles=False,
+        )
 
         if not obj.issue.is_published:
             context['ticket'] = obj.issue.prepublication_ticket
@@ -744,7 +747,10 @@ class BaseArticleCitationView(SingleArticleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(BaseArticleCitationView, self).get_context_data(**kwargs)
         # Journal title, in all languages if the journal in multilingual.
-        context['journal_title'] = self.object.issue.erudit_object.get_journal_title(formatted=True)
+        context['journal_title'] = self.object.issue.erudit_object.get_journal_title(
+            formatted=True,
+            subtitles=False,
+        )
         return context
 
 

@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="robichma" date="2019-05-16" app="Tournesol 0.5.3"/>
+<copyright>
+	<year>2018</year>
+<contribution>
+<artificialperson>
+	<name>Revue Intermédialités</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="en">Copyright Holder</label>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="es">Todos los derechos reservados</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2017">
+			<periodcode>autom</periodcode>
+		</year>
+		<year value="2018">
+			<periodcode>print</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/im/2018/v/n30-31</url>
+  <nbarticle>18</nbarticle>
+  <revue id="im118" lang="fr en">
+    <titrerev>Intermédialités</titrerev>
+    <sstitrerev>Histoire et théorie des arts, des lettres et des techniques</sstitrerev>
+    <titrerevparal lang="en">Intermediality</titrerevparal>
+    <sstitrerevparal lang="en">History and Theory of the Arts, Literature and Technologies</sstitrerevparal>
+    <titrerevabr>im</titrerevabr>
+    <idissnnum>1920-3136</idissnnum>
+    <directeur sexe="feminin">
+      <fonction lang="fr">Directrice</fonction>
+      <nompers>
+        <prenom>Marion</prenom>
+        <nomfamille>Froger</nomfamille>
+      </nompers>
+      <key>directrice</key>
+    </directeur>
+    <redacteurchef idrefs="th1" sexe="feminin" typerc="invite">
+      <nompers>
+        <prenom>Caroline</prenom>
+        <nomfamille>Bem</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+  </revue>
+  <numero id="im03868">
+    <nonumero>30</nonumero>
+    <nonumero>31</nonumero>
+    <pub>
+      <periode>Automne</periode>
+      <annee>2017</annee>
+      <periode>Printemps</periode>
+      <annee>2018</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2018-07-10</date>
+    </pubnum>
+    <grtheme id="th1">
+      <theme>cartographier (l’intermédialité)</theme>
+      <themeparal lang="en">mapping (intermediality)</themeparal>
+    </grtheme>
+  </numero>
+  <editeur>
+    <nomorg>Revue intermédialités (Presses de l’Université de Montréal)</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Revue Intermédialités</nomorg>, 2018</droitsauteur>
+</infosommaire>
+<article doi="10.7202/1049942ar" horstheme="oui" idproprio="1049942ar"
+  lang="fr" ordseq="1" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/im/2018/v/n30-31/1049942ar.html</urlhtml>
+<liminaire>
+ <grtitre>
+                  <titre>Liminaire</titre>
+                  <titreparal lang="en">Frontmatter</titreparal>
+         </grtitre>
+</liminaire>
+</article>
+<article doi="10.7202/1049943ar" idproprio="1049943ar" idref="th1"
+  lang="fr" ordseq="2" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/im/2018/v/n30-31/1049943ar.html</urlhtml>
+  <urlpdf taille="1,2" unite="mo">/revue/im/2018/v/n30-31/1049943ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049943ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Introduction. L’intermédialité est la carte autant que le territoire</titre>
+                 </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Caroline</prenom>
+    <nomfamille>Bem</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Montréal</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1050892ar" idproprio="1050892ar" idref="th1"
+  lang="en" ordseq="3" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/im/2018/v/n30-31/1050892ar.html</urlhtml>
+  <urlpdf taille="1,1" unite="mo">/revue/im/2018/v/n30-31/1050892ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1050892ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+        <titre>Introduction. Intermediality Is the Map as Much as the Territory</titre>
+      
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Caroline</prenom>
+        
+        
+    <nomfamille>Bem</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Montréal</alinea>
+        
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1050893ar" idproprio="1050893ar" idref="th1"
+  lang="es" ordseq="4" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/im/2018/v/n30-31/1050893ar.html</urlhtml>
+  <urlpdf taille="1,1" unite="mo">/revue/im/2018/v/n30-31/1050893ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1050893ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+        <titre>Introducción. La intermedialidad es a la vez mapa y territorio</titre>
+      
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Caroline</prenom>
+        
+        
+    <nomfamille>Bem</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Montréal</alinea>
+        
+  </affiliation>
+  </auteur>
+  <auteur id="au2"><contribution typecontrib="trl">Traduction de</contribution>
+   <nompers>
+        
+    <prenom>Humberto</prenom>
+        
+        
+    <nomfamille>Medina</nomfamille>
+        
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1049944ar" idproprio="1049944ar" idref="th1"
+  lang="fr" ordseq="5" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049944ar.html</urlhtml>
+  <urlpdf taille="1,1" unite="mo">/revue/im/2018/v/n30-31/1049944ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049944ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Une dynamique tensive</titre>
+                  <titreparal lang="en">A dynamic tension</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Fabien</prenom>
+    <nomfamille>Dumais</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Trois-Rivières</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Dans sa conférence de clôture présentée lors du premier colloque du CRI en 1999, Éric Méchoulan se questionnait déjà sur l’étrange usage, que font certains chercheurs en études intermédiales, des ouvrages de Gilles Deleuze : « [...] il faudrait à ce moment-là se dire que l’intermédialité ne consisterait pas tant à traquer les jeux incessants et innombrables des médiations qui nous constituent, mais plus sourdement à repérer les moments d'immédiateté qui nous emportent. » C’est la lecture de cette phrase qui a déclenché la présente réflexion; on tentera justement d’articuler théoriquement ces deux manières de penser l’intermédialité, en décrivant par le biais de la philosophie deleuzienne ce que l’on pourrait définir comme une <marquage typemarq="italique">dynamique tensive</marquage> entre les médiations et ce que Méchoulan appelle les immédiatetés complexes.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>In his closing address at the first edition of the CRI Conference in 1999, Éric Méchoulan was already questioning the use of Gilles Deleuze’s work by some scholars working within intermediality studies: “[W]e should, at this point, say that intermediality does not consist of tracking the continuous and numerous plays of mediations that constitute us, but that it consists, in a more inconspicuous manner, of locating those instants of immediacy that carry us forward.ˮ This sentence is the starting point of the present reflection; we will attempt to articulate these two ways of thinking intermediality by elaborating, with the help of Deleuze’s philosophy, what we could define as a <marquage typemarq="italique">dynamic tension</marquage> between mediations and what Méchoulan calls complex immediacies.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049945ar" idproprio="1049945ar" idref="th1"
+  lang="en" ordseq="6" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049945ar.html</urlhtml>
+  <urlpdf taille="2,4" unite="mo">/revue/im/2018/v/n30-31/1049945ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049945ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>“Arts Once More United”: Bridging Disciplines through Creative Media Research, Toronto, 1953–55<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Michael</prenom>
+    <nomfamille>Darroch</nomfamille>
+   </nompers>
+  <affiliation><alinea>School of Creative Arts, University of Windsor</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>From 1953 to 1955, the Ford Foundation funded a unique experiment in intermedial study and experimentation at the University of Toronto. The <marquage typemarq="italique">Culture and Communications</marquage> Seminar and the journal <marquage typemarq="italique">Explorations</marquage>, led by Edmund Carpenter, Marshall McLuhan, and Jaqueline Tyrwhitt, are indicative of the ways in which intermedial studies became organized and institutionalized in the 1950s and 1960s. The scholarly network that took shape during these years of Ford Foundation funding laid the framework in Canada for initiatives in creative media research that have become fundamental aspects of arts and humanities education. This article charts the assemblage of geographic, disciplinary, artistic, and organizational connections that facilitated this educational experiment.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Durant les années 1953–55, la Ford Foundation a financé, à l’Université de Toronto, une expérience inédite d’études intermédiales. Le séminaire <marquage typemarq="italique">Culture and Communication </marquage>ainsi que le journal <marquage typemarq="italique">Explorations </marquage>qu’ont dirigés Edmund Carpenter, Marshall McLuhan et Jaqueline Tyrwhitt témoignent ainsi de l’organisation et de l’institutionnalisation des études intermédiales durant les années 1950 et 1960. Le réseau didactique qui prend forme dans l’orbe du financement de la Ford Foundation jette les bases de la recherche créative sur les médias, maintenant devenue un aspect fondamental des programmes d’éducation en arts et en sciences humaines. Cet article retrace les connexions géographiques, disciplinaires, artistiques et organisationnelles qui ont facilité cette expérience éducationnelle.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049946ar" idproprio="1049946ar" idref="th1"
+  lang="en" ordseq="7" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049946ar.html</urlhtml>
+  <urlpdf taille="1,7" unite="mo">/revue/im/2018/v/n30-31/1049946ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049946ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre><marquage typemarq="italique">Readings</marquage> at the Intersection: Social Ecologies in Critical Texts</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Claire</prenom><autreprenom>M.</autreprenom>
+    <nomfamille>Holdsworth</nomfamille>
+   </nompers>
+  <affiliation><alinea>Kingston School of Art, Kingston University London</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>Taking extracts from <marquage typemarq="italique">Readings</marquage>, a short-lived reviews magazine edited by artists Annabel Nicolson and Paul Burwell in 1977, this article explores the intersection between two collectively organized artist-led groups—the London Musicians’ Collective and the London Film-makers’ Co-operative, which were based at the same address between 1977 and 1988. It considers how texts, as extensions of artistic practices, garnered innovative performance criticism and cultures in London at that time. Magazines such as this are posited as a productive means of mapping complex social ecologies and histories involving multiple disciplines.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>À partir d’extraits de compte-rendus de la revue éphémère <marquage typemarq="italique">Readings</marquage> qu’ont éditée les artistes Annabel Nicolson et Paul Burwell en 1977, cet article examine le lien entre les collectifs d’artistes The London Musicians’ Collective et la London Film-makers’ Co-operative, tous deux basés à la même adresse entre 1977 et 1988. Il s’agit de montrer la façon dont les textes, en tant qu’ils prolongent les pratiques artistiques, engrangent une pensée critique de la performance, mais également différentes cultures contemporaines. Des revues comme <marquage typemarq="italique">Readings</marquage> fournissent des outils idoines pour cartographier la complexité des écologies sociales et les croisements entre les disciplines.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049947ar" idproprio="1049947ar" idref="th1"
+  lang="fr" ordseq="8" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049947ar.html</urlhtml>
+  <urlpdf taille="1,3" unite="mo">/revue/im/2018/v/n30-31/1049947ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049947ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Intermédialité et écologie des médias : essai de cartographie comparative<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+                  <titreparal lang="en">Intermediality and media ecology: A comparative cartography</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jean-François</prenom>
+    <nomfamille>Vallée</nomfamille>
+   </nompers>
+  <affiliation><alinea>Collège de Maisonneuve</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>À partir d’une comparaison entre intermédialité et écologie des médias — qui partagent une quantité étonnante de traits communs, tant du point de vue de leur développement historique et institutionnel que de celui de leurs fondements épistémiques et méthodologiques —, cet article tente de saisir ce qui lie et ce qui distingue ces deux « interdisciplines ». Nous essaierons ensuite de comprendre ce qu’elles peuvent nous apprendre sur le contexte médiatique et institutionnel de leur émergence et de leur développement dans les interstices disciplinaires de nos « universités en ruines » (Readings).</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Through a comparison of intermediality and media ecology–that share a surprising number of common traits not only from the point of view of their historical and institutional development but also from that of their epistemological and methodological principles–this essay tries to determine what these two “interdisciplines” actually have in common and what distinguishes them from each other. We will then try to understand the technological and institutional context of their emergence and evolution within the disciplinary interstices of our “universities in ruins” (Readings).</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049948ar" idproprio="1049948ar" idref="th1"
+  lang="fr" ordseq="9" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049948ar.html</urlhtml>
+  <urlpdf taille="1,1" unite="mo">/revue/im/2018/v/n30-31/1049948ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049948ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Le geste intermédial dans une cartographie des études mémorielles<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+                  <titreparal lang="en">Intermedial gestures in the mapping of memory research</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Sébastien</prenom>
+    <nomfamille>Fevry</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université catholique de Louvain</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Depuis dix ans, les <marquage typemarq="italique">Memory Studies</marquage> se sont constituées comme un champ multidisciplinaire principalement implanté dans le monde anglo-saxon et dans de nombreux pays européens. L’objectif de cet article sera de montrer en quoi l’intermédialité peut être envisagée comme un opérateur de champ capable de mieux dessiner les articulations qui composent le paysage actuel des <marquage typemarq="italique">Memory Studies</marquage>. Dans un premier temps, nous montrerons que le recours à la méthode intermédiale permet de distinguer ce qui sépare les <marquage typemarq="italique">Memory Studies</marquage> des études de mémoire en France. Alors que les premières utilisent la théorie intermédiale pour soutenir une approche centrifuge de la mémoire, attentive aux dynamiques de transfert et de déplacement, les secondes privilégient, dans leur approche des productions médiatiques, une conception des phénomènes mémoriels plus statique, patrimoniale et davantage centrée sur le territoire. Dans un deuxième temps, nous envisagerons les différentes conceptions de l’intermédialité qui se croisent au sein même des <marquage typemarq="italique">Memory Studies</marquage>. Malgré les références nombreuses à Bolter et Grusin, les <marquage typemarq="italique">Memory Studies</marquage> semblent souffrir d’une certaine sous-théorisation concernant l’intermédialité. Les médias occupent dès lors une place paradoxale au sein du champ, puisqu’ils sont à la fois au centre de l’échiquier mémoriel, mais, en même temps, relativement peu travaillés en tant que tels.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Over the past ten years, Memory Studies has become a multidisciplinary field based primarily in the English-speaking world and in many European countries. This article aims to show how intermediality acts as a “field operator” allowing us to better trace the linkages currently constituting the area of Memory Studies. In its first part, the article explains how the use of the intermedial method enables us to distinguish Memory Studies from the studies of memory practiced in France. While Memory Studies uses intermedial theory to develop a decentralized approach to memory, focusing on dynamics of transfer and displacement, French studies of memory seem to privilege a media perspective related to a more static, patrimonial, and territorial approach. In its second part, the article considers different conceptions of intermediality currently at play in the field of Memory Studies. Despite numerous references to the work of Bolter and Grusin, Memory Studies seem to suffer from a lack of theorization about intermediality. Media thus occupy a paradoxical place within the field, since they are at the centre of the memory chessboard, but at the same time, they are relatively little analyzed as such.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049949ar" idproprio="1049949ar" idref="th1"
+  lang="fr" ordseq="10" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049949ar.html</urlhtml>
+  <urlpdf taille="1,2" unite="mo">/revue/im/2018/v/n30-31/1049949ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049949ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Sur les ondes transculturelles. La diversité (des expressions) culturelle(s) selon l’UNESCO</titre>
+                  <titreparal lang="en">Mediating transculturalism: UNESCO’s conceptualization of the diversity of cultural expressions</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Phillip</prenom>
+    <nomfamille>Rousseau</nomfamille>
+   </nompers>
+  <affiliation><alinea>Chercheur visiteur au Centre d’études ethniques des universités montréalaises (CEETUM), Université de Montréal</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article se penche sur le cas de la <marquage typemarq="italique">Convention sur la protection et la promotion de la diversité des expressions culturelles </marquage>adoptée par une très grande majorité à l’UNESCO en 2005. Les pages qui suivent sont consacrées aux manières dont cette convention, qui joua un rôle d’interface, devint opérationnelle à travers un parcours sinueux au sein des organisations internationales. Je chercherai à mettre à l’avant-plan les divers engrenages nécessaires (idéels et matériels) ayant facilité son assemblage (et son acceptation) et qui tentent d’assurer aujourd’hui son fonctionnement. Nous verrons comment le problème de l’occupation de l’espace médiatique (notamment le problème de l’hégémonie américaine) est à la source de la promotion d’une certaine esthétique de la diversité culturelle précisément accordée aux supports et capacités médiatiques contemporaines.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This article focuses on UNESCO’s <marquage typemarq="italique">Convention for the protection and promotion of the diversity of cultural expressions</marquage> adopted by a large majority in 2005. I will discuss the ways in which the Convention, that plays the role of interface, became operational by following a sinuous institutional path within international organizations. My goal is to highlight the different mechanisms (both material and conceptual) on which it was built and the assemblage of connections meant to ensure its proper functioning. I will demonstrate that the struggle to occupy media spaces (and, most notably, the problem of the hegemonic presence of the United States) lies at the source of the promotion of a certain aesthetic of cultural diversity that is particularly well fit for contemporary media supports and capacities.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049950ar" idproprio="1049950ar" idref="th1"
+  lang="en" ordseq="11" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049950ar.html</urlhtml>
+  <urlpdf taille="1,7" unite="mo">/revue/im/2018/v/n30-31/1049950ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049950ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>The Politics of Intermediality in African Theatre Contexts</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Catherine</prenom>
+    <nomfamille>Makhumula</nomfamille>
+   </nompers>
+  <affiliation><alinea>University of Malawi</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>In this article, I discuss the politics of intermediality in African theatre contexts. My underlying assumption is that the study of intermediality is inevitably contextual in nature because intermediality is strongly linked to the sociopolitical and economic context. Jens Schröter explores the links between intermediality and ideological/politico-economic factors in his article “The Politics of Intermediality.” He argues that questions concerning intermediality are by no means purely theoretical or aesthetic questions; rather, they are laden with political connotations. Following Schröter, my approach emphasizes how different cultures understand media differences and their interaction in a given historical phase. Using examples from the Southern region of the African continent, this article navigates through divergent theories of African theatre in its attempt to understand how media interrelations are conceptualized within the theoretical discourses in the region.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Dans cet article, nous discutons de la politique de l’intermédialité saisie dans le contexte du théâtre africain. Notre hypothèse est que l’étude de l’intermédialité est de nature inévitablement contextuelle en étant fortement liée aux sphères socio-politique et économique. Dans son article « The Politics of Intermediality », Jean Schröter explore les liens entre l’intermédialité et les facteurs idéologiques / politico-économiques, soutenant que les questions relatives à l’intermédialité ne sont jamais exclusivement théoriques ou esthétiques, mais au contraire chargées de connotations politiques. S’appuyant sur ce dernier, notre approche se focalise sur la façon dont une culture développe sa compréhension propre des interactions et des différences entre les médias, à un moment historique donné. En utilisant des exemples provenant de la région sud du continent africain, cet article parcourt des théories divergentes sur le théâtre en Afrique, afin de mieux comprendre les relations entre les médias, telles que le discours théorique propre à cette région les conceptualise.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049951ar" idproprio="1049951ar" idref="th1"
+  lang="en" ordseq="12" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049951ar.html</urlhtml>
+  <urlpdf taille="1,7" unite="mo">/revue/im/2018/v/n30-31/1049951ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049951ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Thinking Intermediality in Mexico through Artistic Input</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Susana</prenom>
+    <nomfamille>González Aktories</nomfamille><suffixe typesuff="grade">PhD</suffixe>
+   </nompers>
+  <affiliation><alinea>National Autonomous University of Mexico</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>María</prenom><autreprenom>Andrea</autreprenom>
+    <nomfamille>Giovine Yáñez</nomfamille><suffixe typesuff="grade">PhD</suffixe>
+   </nompers>
+  <affiliation><alinea>National Autonomous University of Mexico</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>By highlighting certain paradigmatic moments and protagonists in Mexican contemporary art that reach back to the second half of the last century and continue until today, this article aims to show the undeniable “intermedial turn” that has become foundational not only for understanding current artistic movements in Mexico, but also for Mexican academia, where critics have only gradually started to recognize how an intermedial perspective may help them understand and analyze artistic proposals that can no longer be discussed from a strictly mono-disciplinary standpoint. Contributions by emblematic artists such as Mathias Goeritz, Felipe Ehrenberg, and Ulises Carrión, who have used words, images, and sound elements to broaden artistic boundaries in new and surprising ways, have been echoed and problematized in novel forms by contemporary visual artists such as Carlos Amorales and Jorge Méndez Blake as well as media artists Rafael Lozano Hemmer and Eugenio Tisselli, some of whom are also valuable interlocutors in matters of intermediality as they continue to critically theorize and sharply reflect on these types of practices.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article présente quelques moments paradigmatiques de l’art mexicain contemporain de la seconde moitié du 20<exposant>e</exposant> siècle jusqu’à aujourd’hui. Il a pour but de montrer l’indéniable « virage intermédial » qui s’est opéré au cours de cette période et qui permet de comprendre certains mouvements artistiques mexicains actuels ainsi que la réflexion qui s’est parallèlement élaborée dans le milieu universitaire. Ce n’est que depuis très récemment que les chercheurs reconnaissent qu’une approche intermédiale peut contribuer à la compréhension et à l’analyse de propositions artistiques qui ne peuvent plus uniquement être discutées d’un point de vue monodisciplinaire. Les contributions des artistes emblématiques Mathias Goeritz, Felipe Ehrenberg et Ulises Carrión, qui ont employé des mots, des images et des éléments sonores pour élargir les frontières artistiques, ont par exemple trouvé un écho chez des artistes visuels comme Carlos Amorales et Jorge Méndez Blake, ainsi que chez des artistes pratiquant les arts médiatiques comme Rafael Lozano Hemmer et Eugenio Tisselli. Ces artistes, puisqu’ils adoptent une posture théorique par rapport à leur pratique, constituent des interlocuteurs pertinents à l’égard de la réflexion sur l’intermédialité.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049952ar" idproprio="1049952ar" idref="th1"
+  lang="en" ordseq="13" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049952ar.html</urlhtml>
+  <urlpdf taille="1,2" unite="mo">/revue/im/2018/v/n30-31/1049952ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049952ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Intermedial Products for Digital Natives: British Theatre-Cinema on Italian Screens</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Maddalena</prenom>
+    <nomfamille>Pennacchia</nomfamille>
+   </nompers>
+  <affiliation><alinea>Roma Tre University</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en"><alinea>The concept of intermediality underwent a deep transformation with the digital turn, when the difference between media became entirely virtual and a continuous communication system superseded the discontinuous analogic system. Does intermediality still make sense in the era of post-media? And, in particular, how do digital natives, with their specific cognitive abilities, perceive intermediality? Can we think of literature in terms of a fluid intermedial relation of writing to other media? And does such an approach help when it comes to teaching literature to digital natives? What are the intermedial products that the creative industries are designing specifically for them? Taking Shakespeare as an eminent example of a writer whose work has been adapted to all kinds of media, this article focuses on the phenomenon of British theatre productions that are conceived to be screened live in cinemas all over the world and presents the results of a pilot experiment devised to investigate the reception of one of these productions by a sample audience of Italian teenagers.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="fr"><alinea>Le concept d’intermédialité a connu une transformation profonde avec le tournant numérique, qui a provoqué l’amenuisement des différences entre les médias, jusqu’à les rendre virtuelles, et la supplantation d’un système analogique discontinu par un système de communication continu. Est-ce que l’intermédialité fait encore sens à l’ère post-médiatique ? Comment les enfants du numérique la perçoivent-ils avec leurs habiletés cognitives particulières ? Pouvons-nous penser la littérature au sein d’une relation intermédiale fluide avec d’autres médias ? Une telle approche peut-elle contribuer à l’enseignement de la littérature aux enfants du numérique ? Quels sont les produits intermédiaux que les industries culturelles conçoivent spécifiquement pour eux ? Prenant Shakespeare comme exemple éminent d’un écrivain dont l’oeuvre a été adapté pour différents médias, cet article est consacré aux productions théâtrales britanniques qui sont conçues pour être diffusées sur les écrans des cinémas du monde entier. Il présentera à cet effet les résultats d’une expérience lors de laquelle nous avons évalué la réception de ces productions par un échantillon d’adolescents italiens.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049953ar" idproprio="1049953ar" idref="th1"
+  lang="fr" ordseq="14" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049953ar.html</urlhtml>
+  <urlpdf taille="1,4" unite="mo">/revue/im/2018/v/n30-31/1049953ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049953ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Cartographie/Thermographie. Regards et corps instruits dans <marquage typemarq="italique">Hollow Man</marquage> (Paul Verhoeven, 2000)</titre>
+                  <titreparal lang="en">Mapping/thermography: Knowledgeable gazes and bodies in Paul Verhoeven’s <marquage typemarq="italique">Hollow Man</marquage> (2000)</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Rémi</prenom>
+    <nomfamille>Lauvin</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Paris 7 – Denis Diderot</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article porte sur les images thermographiques dans le film hollywoodien <marquage typemarq="italique">Hollow Man </marquage>(Paul Verhoeven, 2000). La thermographie y est employée comme outil de surveillance faillible, permettant au corps scruté de se camoufler et brisant le pouvoir de contrôle de l'observateur. Nous mettons également en évidence la part <marquage typemarq="italique">impure</marquage> de l'image thermique, presque étrangère au modèle rétinien de la caméra. En cela, la thermographie annonce le devenir abstrait du cinéma numérique.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This article focuses on thermal imaging in the Hollywood film <marquage typemarq="italique">Hollow Man</marquage> (Paul Verhoeven, 2000). In these two cases, thermography appears as a fallible technique of surveillance, which enables the watched body to camouflage itself and shatters the watcher's power of scrutiny. We also highlight the <marquage typemarq="italique">impure</marquage> quality of thermal imaging, which is radically different from the camera's retinal mode of perception. This foreshadows the abstract quality of the digital image.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049954ar" idproprio="1049954ar" idref="th1"
+  lang="fr" ordseq="15" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049954ar.html</urlhtml>
+  <urlpdf taille="1,3" unite="mo">/revue/im/2018/v/n30-31/1049954ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049954ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+                  <titre>Une cartographie des relations intermédiales entre le jeu vidéo et les autres médias dans le cadre des franchises transmédiatiques</titre>
+                  <titreparal lang="en">Mapping the intermedial relations between video games and other media within transmediatic franchises</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Christophe</prenom>
+    <nomfamille>Duret</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Sherbrooke</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article propose une cartographie sommaire de l’intermédialité telle qu’elle est mobilisée dans les recherches portant sur les relations entre le jeu vidéo et les autres médias au sein des franchises transmédiatiques. L’objectif poursuivi est d’identifier, grâce à une telle entreprise, plusieurs aspects problématiques du récit transmédiatique conceptualisé par Henry Jenkins : la complémentarité, la synergie et l’égalité statutaire des médias, la fluidité dans la circulation d’éléments fictionnels entre les textes et la cohérence narrative, par exemple. Afin de réduire l’angle mort intermédial que recèle le concept de récit transmédiatique, il convient de distinguer les phénomènes relevant de la transfictionnalité et de l’intermédialité (et plus précisément de l’intermédialité de milieu, de l’intermédialité formelle et de la référence intermédiale) qui s’y trouvent impliqués.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This article proposes a brief cartography of research on the intermedial relationships between video games and other media within transmedial franchises. The aim is to identify several problematic aspects of the transmedia storytelling concept as proposed by Henry Jenkins (e.g. synergy and complementarity between media, free flow of fictional elements between texts, and narrative consistency). In order to reduce the intermedial blindspot present within transmedia storytelling, distinctions are made between the transfictional and intermedial phenomena implied by this concept, and more specifically between intermediality of the milieu, formal intermediality, and intermedial reference.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049955ar" horstheme="oui" idproprio="1049955ar"
+  lang="fr" ordseq="16" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049955ar.html</urlhtml>
+  <urlpdf taille="1,6" unite="mo">/revue/im/2018/v/n30-31/1049955ar.pdf</urlpdf>
+  <urlplan>/revue/im/2018/v/n30-31/1049955ar.html?vue=plan</urlplan>
+<liminaire>
+ <grtitre>
+  <surtitre>Notes de labo</surtitre>
+                  <titre>De la critique des dispositifs à l’intermédialité pour approcher les productions artistiques : bilan des travaux du séminaire <marquage typemarq="italique">Intermedialidades</marquage> (Université Toulouse-Jean Jaurès, France)</titre>
+                  <titreparal lang="en">Exploring art productions, from dispositive theory to intermediality: An overview of the work of the <marquage typemarq="italique">Intermedialidades</marquage> seminar</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Fabrice</prenom>
+    <nomfamille>Corrons</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Emmanuelle</prenom>
+    <nomfamille>Garnier</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Euriell</prenom>
+    <nomfamille>Gobbé-Mévellec</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Émilie</prenom>
+    <nomfamille>Lumière</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au5">
+   <nompers>
+    <prenom>Monique</prenom>
+    <nomfamille>Martinez Thomas</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au6">
+   <nompers>
+    <prenom>Agatha</prenom>
+    <nomfamille>Mohring</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au7">
+   <nompers>
+    <prenom>Bruno</prenom>
+    <nomfamille>Péran</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au8">
+   <nompers>
+    <prenom>Agnès</prenom>
+    <nomfamille>Surbezy</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au9">
+   <nompers>
+    <prenom>Anne-Claire</prenom>
+    <nomfamille>Yemsi-Paillissé</nomfamille>
+   </nompers>
+  <affiliation><alinea>LLA-CREATIS, Université Toulouse-Jean Jaurès</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>À l’occasion de la publication du numéro « Cartographier/<marquage typemarq="italique">Mapping</marquage> » de la revue <marquage typemarq="italique">Intermédialités</marquage>, le groupe des hispanistes du laboratoire LLA-CREATIS de l’Université Toulouse-Jean Jaurès a souhaité établir un bilan des travaux qu’il a menés depuis quatre ans en lien avec l’intermédialité, au sein du séminaire <marquage typemarq="italique">Intermedialidades</marquage>. L’article s’attache ainsi à dégager les principales lignes de force de ces travaux, notamment : l’articulation des outils de l’intermédialité avec ceux de la critique des dispositifs développée au sein du laboratoire ces dix dernières années; l’intérêt de l’intermédialité entendue comme une approche conceptuelle plurielle pour explorer « l’entre-jeu complexe des médias » (Müller) dans toute production culturelle — artistique ou non —, quelles que soient son ampleur et sa complexité, et en mesurer finement les multiples enjeux; l’hypothèse, enfin, que dans cette perspective très large, il soit possible d’affirmer une spécificité du média artistique, que l’analyse d’objets <marquage typemarq="italique">intermédiaux</marquage> permet de percevoir dans la mesure où ces objets peuvent porter la trace d’une intention artistique intermédiale, réfléchissant précisément sur la porosité, l’articulation, la friction entre les médias et sur la place de la création dans l’espace médiatique où elle émerge.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>The publication of this issue on “Cartographier/Mapping” provides an opportunity for Hispanist researchers at the LLA-CREATIS Laboratory (at the University of Toulouse) to reflect upon four years of research on intermediality conducted within the <marquage typemarq="italique">Intermedialidades</marquage> seminar. This article presents their contributions on the linkages between intermedial tools and a decade-long research on “dispositive theory” at the LLA-CREATIS Laboratory. It stresses intermediality as a pluralistic approach that explores the “complex media midfield” (Müller) of cultural—artistic and non-artistic—products. Intermediality takes stock of the scope and sophistication of these products and provides a fine-grained analytical tool to address their multiple challenges. This article advances the hypothesis that by using this broad outlook one may outline what is specific in artistic media through the analysis of intermedial objects, under the condition that these artistic products display an intermedial artistic intent—in other words, that they reflect on the permeability, linkages, and frictions between various media, as well as on the media environment in which creation occurs.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1049956ar" horstheme="oui" idproprio="1049956ar"
+  lang="fr" ordseq="17" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/im/2018/v/n30-31/1049956ar.html</urlhtml>
+  <urlpdf taille="1,1" unite="mo">/revue/im/2018/v/n30-31/1049956ar.pdf</urlpdf>
+<liminaire>
+ <grtitre>
+  <surtitre>Contrepoints – archives</surtitre>
+                  <titre>La nouvelle sphère intermédiatique<marquage typemarq="italique"> (colloque du CRI – 1999) à l’épreuve de la remédiation : supports, approches et discours</marquage></titre>
+                  <titreparal lang="en">“The new intermedial sphere” (a 1999 CRI conference) resisting remediation: mediums, approaches and discourses</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Caroline</prenom>
+    <nomfamille>Bem</nomfamille>
+   </nompers>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Rémy</prenom>
+    <nomfamille>Besson</nomfamille>
+   </nompers>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Suzanne</prenom>
+    <nomfamille>Beth</nomfamille>
+   </nompers>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Claudia</prenom>
+    <nomfamille>Polledri</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1049957ar" horstheme="oui" idproprio="1049957ar"
+  lang="fr" ordseq="18" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/im/2018/v/n30-31/1049957ar.html</urlhtml>
+<liminaire>
+ <grtitre>
+                  <titre>Index des numéros papier</titre>
+                
+         </grtitre>
+</liminaire>
+</article>
+</sommaire>

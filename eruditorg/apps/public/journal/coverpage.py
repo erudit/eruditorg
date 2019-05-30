@@ -343,7 +343,7 @@ def get_coverpage(article):
         'authors': article.get_formatted_authors_apa(),
         'year': article.issue.year,
         'title': clean(html_title),
-        'journal': issue_erudit_object.get_journal_title(formatted=True),
+        'journal': issue_erudit_object.get_journal_title(formatted=True, subtitles=False),
     })
     if article.issue.volume:
         cite_string += ' <em>{}</em>,'.format(article.issue.volume)

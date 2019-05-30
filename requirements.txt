@@ -8,7 +8,7 @@ git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#e
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.7#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.49#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.50#egg=liberuditarticle
 babel==2.3.4
 beautifulsoup4==4.6.1
 cairocffi==0.9.0
@@ -56,7 +56,7 @@ pillow==6.0.0
 ply==3.11
 prometheus-client==0.6.0  # via django-prometheus
 pycparser==2.19           # via cffi
-pycryptodome==3.8.1
+pycryptodome==3.8.2
 pyparsing==2.4.0          # via rdflib
 pypdf2==1.25.1
 pyphen==0.9.5             # via weasyprint
