@@ -7,29 +7,17 @@
     <dl class="cite-modal--style-list">
       <dt><strong>MLA</strong></dt>
       <dd id="id_cite_mla_{{ article.localidentifier }}" class="cite-mla">
-        {{ article.get_formatted_authors_mla }}
-        {% trans '«&nbsp;' %}{{ article|format_article_html_title }}.{% trans '&nbsp;»' %}
-        <em>{{ journal_title }}</em>,
-        {{ article.issue.volume_title|lower }}{% if article.first_page %}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
+        {{ article.cite_string_mla|safe }}
       </dd>
 
       <dt><strong>APA</strong></dt>
       <dd id="id_cite_apa_{{ article.localidentifier }}" class="cite-apa">
-        {{ article.get_formatted_authors_apa }}
-        ({{ article.issue.year }}).
-        {{ article|format_article_html_title }}.
-        <em>{{ journal_title }}</em>,
-        {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %}{% if article.first_page %},
-        {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
+        {{ article.cite_string_apa|safe }}
       </dd>
 
       <dt><strong>Chicago</strong></dt>
       <dd id="id_cite_chicago_{{ article.localidentifier }}" class="cite-chicago">
-        {{ article.get_formatted_authors_chicago }}
-        {% trans '«&nbsp;' %}{{ article|format_article_html_title }}{% trans '&nbsp;»' %}.
-        <em>{{ journal_title }}</em>
-        {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}{% trans 'n<sup>o</sup>' %} {{ article.issue.number }}{% endif %}
-        ({{ article.issue.year }}){% if article.first_page %}{% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
+        {{ article.cite_string_chicago|safe }}
       </dd>
     </dl>
 

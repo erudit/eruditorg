@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 13:33-0400\n"
+"POT-Creation-Date: 2019-05-31 14:11-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2019\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -301,12 +301,12 @@ msgstr "Title (Z–A)"
 msgid "Ce document n'est pas présent dans les notices"
 msgstr "This document does not exist in the records."
 
-#: apps/public/journal/coverpage.py:91
+#: apps/public/journal/coverpage.py:92
 #, python-format
 msgid "Document généré le %(now_dt)s"
 msgstr "Document generated on %(now_dt)s"
 
-#: apps/public/journal/coverpage.py:148 apps/public/journal/coverpage.py:341
+#: apps/public/journal/coverpage.py:149 apps/public/journal/coverpage.py:349
 #: apps/public/journal/templatetags/public_journal_tags.py:17
 #: apps/public/journal/templatetags/public_journal_tags.py:26
 #: apps/public/journal/viewmixins.py:161
@@ -314,38 +314,38 @@ msgstr "Document generated on %(now_dt)s"
 msgid "[Article sans titre]"
 msgstr "[Untitled article]"
 
-#: apps/public/journal/coverpage.py:241
+#: apps/public/journal/coverpage.py:242
 msgid "URI&nbsp;:"
 msgstr "URI:"
 
-#: apps/public/journal/coverpage.py:251
+#: apps/public/journal/coverpage.py:252
 msgid "DOI&nbsp;:"
 msgstr ""
 
-#: apps/public/journal/coverpage.py:271
+#: apps/public/journal/coverpage.py:272
 msgid "Aller au sommaire du numéro"
 msgstr "See table of contents"
 
-#: apps/public/journal/coverpage.py:283
+#: apps/public/journal/coverpage.py:284
 msgid "Éditeur(s)"
 msgstr "Publisher(s)"
 
-#: apps/public/journal/coverpage.py:297 apps/public/search/forms.py:35
+#: apps/public/journal/coverpage.py:298 apps/public/search/forms.py:35
 #: templates/public/journal/journal_base.html:153
 msgid "ISSN"
 msgstr "ISSN"
 
-#: apps/public/journal/coverpage.py:305
+#: apps/public/journal/coverpage.py:306
 #: templates/public/journal/journal_base.html:155
 msgid "imprimé"
 msgstr "print"
 
-#: apps/public/journal/coverpage.py:313
+#: apps/public/journal/coverpage.py:314
 #: templates/public/journal/journal_base.html:158
 msgid "numérique"
 msgstr "digital"
 
-#: apps/public/journal/coverpage.py:325
+#: apps/public/journal/coverpage.py:326
 msgid "Découvrir la revue"
 msgstr "Explore this journal"
 
@@ -356,11 +356,23 @@ msgstr "Explore this journal"
 msgid "Citer cet article"
 msgstr "Cite this article"
 
-#: apps/public/journal/coverpage.py:367
+#: apps/public/journal/coverpage.py:338
+msgid "Citer ce compte rendu"
+msgstr "Cite this review"
+
+#: apps/public/journal/coverpage.py:339
+msgid "Citer ce document"
+msgstr "Cite this document"
+
+#: apps/public/journal/coverpage.py:340
+msgid "Citer cette note"
+msgstr "Cite this note"
+
+#: apps/public/journal/coverpage.py:375
 msgid "Résumé de l'article"
 msgstr "Article abstract"
 
-#: apps/public/journal/coverpage.py:424
+#: apps/public/journal/coverpage.py:432
 msgid ""
 "Ce document est protégé par la loi sur le droit d’auteur. L’utilisation des "
 "services         d’Érudit (y compris la reproduction) est assujettie à sa "
@@ -370,11 +382,11 @@ msgstr ""
 "(including reproduction) is subject to its terms and conditions, which can "
 "be viewed online."
 
-#: apps/public/journal/coverpage.py:442
+#: apps/public/journal/coverpage.py:450
 msgid "Cet article est diffusé et préservé par Érudit."
 msgstr "This article is disseminated and preserved by Érudit."
 
-#: apps/public/journal/coverpage.py:447
+#: apps/public/journal/coverpage.py:455
 msgid ""
 "Érudit est un consortium interuniversitaire sans but lucratif composé de "
 "l’Université de         Montréal, l’Université Laval et l’Université du "

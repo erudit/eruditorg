@@ -1137,7 +1137,8 @@ class Article(FedoraMixin):
     @property
     @catch_and_log
     def html_title(self):
-        return self.erudit_object.get_title(formatted=True, html=True)
+        html_title = self.erudit_object.get_title(formatted=True, html=True)
+        return html_title if html_title is not None else _('[Article sans titre]')
 
     def _abstract_by_lang(self, abstracts):
         """ Returns an abstract that can be used with the current language. """
@@ -1341,6 +1342,72 @@ class Article(FedoraMixin):
     @property
     def type_display(self):
         return self.TYPE_DISPLAY.get(self.type, self.type)
+
+    @cached_property
+    def cite_string_mla(self):
+        cite_string = '{authors} {open}{title}{period}{close} <em>{journal}</em>,'.format(**{
+            'authors': self.get_formatted_authors_mla(),
+            'open': _('«&nbsp;'),
+            'title': self.html_title,
+            'period': '.' if self.html_title[-1] not in '.!?' else '',
+            'close': _('&nbsp;»'),
+            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+        })
+        if self.issue.volume_title:
+            cite_string += ' {}'.format(self.issue.volume_title.lower())
+        if self.first_page:
+            cite_string += ', {}&nbsp;{}–{}'.format(_('p.'), self.first_page, self.last_page)
+        cite_string += '.'
+        if self.doi:
+            cite_string += ' https://doi.org/{}'.format(self.doi)
+        return cite_string
+
+    @cached_property
+    def cite_string_apa(self):
+        cite_string = '{authors} ({year}). {title}{period} <em>{journal}</em>,'.format(**{
+            'authors': self.get_formatted_authors_apa(),
+            'year': self.issue.year,
+            'title': self.html_title,
+            'period': '.' if self.html_title[-1] not in '.!?' else '',
+            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+        })
+        if self.issue.volume:
+            cite_string += ' <em>{}</em>'.format(self.issue.volume)
+        if self.issue.number:
+            cite_string += ' ({})'.format(self.issue.number)
+        if self.first_page:
+            cite_string += ', {}–{}'.format(self.first_page, self.last_page)
+        if cite_string[-1] == ',':
+            cite_string = cite_string[:-1] + '.'
+        else:
+            cite_string += '.'
+        if self.doi:
+            cite_string += ' https://doi.org/{}'.format(self.doi)
+        return cite_string
+
+    @cached_property
+    def cite_string_chicago(self):
+        cite_string = '{authors} {open}{title}{close}. <em>{journal}</em>'.format(**{
+            'authors': self.get_formatted_authors_chicago(),
+            'open': _('«&nbsp;'),
+            'title': self.html_title,
+            'close': _('&nbsp;»'),
+            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+        })
+        if self.issue.volume:
+            cite_string += ' {},'.format(self.issue.volume)
+        if self.issue.number:
+            cite_string += ' {} {}'.format(_('n<sup>o</sup>'), self.issue.number)
+        cite_string += ' ({})'.format(self.issue.year)
+        if self.first_page:
+            cite_string += '&nbsp;: {}–{}'.format(self.first_page, self.last_page)
+        if cite_string[-1] == ',':
+            cite_string = cite_string[:-1] + '.'
+        else:
+            cite_string += '.'
+        if self.doi:
+            cite_string += ' https://doi.org/{}'.format(self.doi)
+        return cite_string
 
 
 class JournalInformation(models.Model):
