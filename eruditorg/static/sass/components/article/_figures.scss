@@ -27,12 +27,6 @@
   padding: 1em 0;
   border-top: 1px dotted $mid-grey;
 
-  p, ul, ol, blockquote {
-    margin-bottom: 0;
-    font-size: 14px;
-    @include font-styles('sans');
-  }
-
   figcaption {
 
     .legende {
@@ -63,5 +57,63 @@
     margin: 0.75em 0;
     text-align: right;
   }
+}
 
+.grfigure, .grtableau, .figure, .tableau {
+  p, ul, ol, blockquote {
+    margin-bottom: 0;
+    font-size: 14px;
+    @include font-styles('sans');
+  }
+}
+
+/**
+ * List of figures & tables.
+ */
+#figures,
+#tableaux {
+  img {
+    max-width: 150px;
+  }
+
+  figure {
+    figcaption {
+      margin: 0 0 1em 0;
+    }
+
+    div.figure-wrapper {
+      margin: 1em 0 0 0;
+
+      @media (min-width: $screen-xs-min) {
+        display: table-row;
+      }
+
+      div.figure-object {
+        a.objetmedia {
+          margin: 0 0 1em 0;
+        }
+
+        @media (min-width: $screen-xs-min) {
+          display: table-cell;
+        }
+      }
+
+      div.figure-legende-notes-source {
+
+        cite.source {
+          text-align: left;
+        }
+
+        & > :first-child {
+          margin-top: 0;
+        }
+
+        @media (min-width: $screen-xs-min) {
+          display: table-cell;
+          vertical-align: top;
+          padding-left: 15px;
+        }
+      }
+    }
+  }
 }

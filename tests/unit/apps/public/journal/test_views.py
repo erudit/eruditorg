@@ -657,8 +657,8 @@ class TestArticleDetailView:
         })
         html = Client().get(url).content.decode()
         # Check that the source is displayed under both figures 1 & 2 which are in the same figure group.
-        assert '<figure class="figure" id="fi1"><figcaption><p class="no"></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite><p class="voirliste"><a href="#lifi1">-&gt; Voir la liste des figures</a></p></figure>' in html
-        assert '<figure class="figure" id="fi2"><figcaption><p class="no"></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite><p class="voirliste"><a href="#lifi2">-&gt; Voir la liste des figures</a></p></figure>' in html
+        assert '<figure class="figure" id="fi1"><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
+        assert '<figure class="figure" id="fi2"><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
 
     def test_figure_groups_numbers_display_in_figure_list(self):
         article = ArticleFactory(
@@ -676,9 +676,8 @@ class TestArticleDetailView:
             'localid': article.localidentifier,
         })
         html = Client().get(url).content.decode()
-        # Check that the figure numbers are displayed above both figures 1 & 2 which are in the same figure group.
-        assert '<p class="no"><span class="no">Figures 1 - 2</span></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></figure><figure class="figure" id="lifi2"><figcaption class="notitre"><p class="allertexte"><a href="#fi2">|^</a></p>' in html
-        assert '<p class="no"><span class="no">Figures 1 - 2</span></p></figcaption><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></figure><figure class="figure" id="lifi3"><figcaption class="notitre"><p class="allertexte"><a href="#fi3">|^</a></p>' in html
+        # Check that the figure numbers are displayed in the figure list for figure groups.
+        assert '<div class="grfigure" id="ligf1">\n<div class="grfigure-caption">\n<p class="allertexte"><a href="#gf1">|^</a></p>\n<p class="no">Figures 1 - 2</p>' in html
 
     def test_article_multilingual_titles(self):
         article = ArticleFactory(

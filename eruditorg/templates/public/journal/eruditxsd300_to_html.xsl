@@ -436,14 +436,22 @@
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
-            <xsl:apply-templates select="//figure" mode="liste"/>
+            <xsl:for-each select="//grfigure | //figure[name(..) != 'grfigure']">
+              <xsl:apply-templates select=".">
+                <xsl:with-param name="mode" select="'liste'"/>
+              </xsl:apply-templates>
+            </xsl:for-each>
           </section>
         </xsl:if>
 
         <xsl:if test="//tableau">
           <section id="tableaux" class="article-section tableaux" role="complementary">
             <h2>{% trans "Liste des tableaux" %}</h2>
-            <xsl:apply-templates select="//tableau" mode="liste"/>
+            <xsl:for-each select="//grtableau | //tableau[name(..) != 'grtableau']">
+              <xsl:apply-templates select=".">
+                <xsl:with-param name="mode" select="'liste'"/>
+              </xsl:apply-templates>
+            </xsl:for-each>
           </section>
         </xsl:if>
         {% endif %}
@@ -979,26 +987,75 @@
     <br/>
   </xsl:template>
 
-  <!-- figures & tables -->
-  <xsl:template match="grfigure|grtableau">
-    <div class="{name()}" id="{@id}">
-      <xsl:apply-templates select="node()[name() != 'source']"/>
+  <!-- groups of figures & tables -->
+  <xsl:template match="grfigure | grtableau">
+    <xsl:param name="mode"/>
+    <xsl:variable name="id">
+      <xsl:choose>
+        <xsl:when test="$mode = 'liste'">
+          <xsl:value-of select="concat('li', @id)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="@id"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <div class="{name()}" id="{$id}">
+      <div class="grfigure-caption">
+        <xsl:if test="$mode = 'liste'">
+          <p class="allertexte"><a href="#{@id}">|^</a></p>
+        </xsl:if>
+        <p class="no"><xsl:apply-templates select="no"/></p>
+        <div class="legende"><xsl:apply-templates select="legende/*"/></div>
+      </div>
+      <xsl:apply-templates select="figure">
+        <xsl:with-param name="mode" select="$mode"/>
+      </xsl:apply-templates>
     </div>
   </xsl:template>
 
-  <xsl:template match="figure|tableau">
-    <figure class="{name()}" id="{@id}">
-      <figcaption>
-        <p class="no"><xsl:apply-templates select="no"/></p>
-        <xsl:apply-templates select="legende/titre | legende/sstitre"/>
-      </figcaption>
-      <xsl:apply-templates select="tabtexte | objetmedia"/>
-      <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
-      <xsl:apply-templates select="notefig | notetabl"/>
-      <xsl:apply-templates select="source|ancestor::grfigure/source"/>
-      <p class="voirliste">
-        <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
-      </p>
+  <!-- figures & tables -->
+  <xsl:template match="tableau | figure">
+    <xsl:param name="mode"/>
+    <xsl:variable name="id">
+      <xsl:choose>
+        <xsl:when test="$mode = 'liste'">
+          <xsl:value-of select="concat('li', @id)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="@id"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <figure class="{name()}" id="{$id}">
+      <xsl:if test="name(..) != 'grfigure' and name(..) != 'grtableau'">
+        <figcaption>
+          <xsl:if test="$mode = 'liste'">
+            <p class="allertexte"><a href="#{@id}">|^</a></p>
+          </xsl:if>
+          <p class="no"><xsl:apply-templates select="no"/></p>
+          <xsl:apply-templates select="legende/titre | legende/sstitre"/>
+        </figcaption>
+      </xsl:if>
+      <div class="figure-wrapper">
+        <div class="figure-object">
+          <xsl:apply-templates select="tabtexte | objetmedia"/>
+        </div>
+        <div class="figure-legende-notes-source">
+          <xsl:if test="name(..) != 'grfigure' and name(..) != 'grtableau'">
+            <div class="figure-legende">
+              <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
+            </div>
+          </xsl:if>
+          <xsl:apply-templates select="notefig | notetabl"/>
+          <xsl:apply-templates select="source | ancestor::grfigure/source"/>
+        </div>
+      </div>
+      <xsl:if test="not($mode)">
+        <p class="voirliste">
+          <a href="#li{@id | ancestor::grfigure/@id | ancestor::grtableau/@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
+        </p>
+      </xsl:if>
     </figure>
   </xsl:template>
 
@@ -2046,34 +2103,6 @@
   <xsl:template match="refbiblio/no">
     <span class="{name()}"><xsl:apply-templates/>.&#160;</span>
   </xsl:template>
-
-  <!--*** LISTS OF TABLES & FIGURES ***-->
-  <xsl:template match="tableau | figure" mode="liste">
-    <figure class="{name()}" id="li{@id}">
-      <figcaption class="notitre">
-        <p class="allertexte"><a href="#{@id}">|^</a></p>
-        <p class="no"><xsl:apply-templates select="no|ancestor::grfigure/no" mode="liste"/></p>
-        <xsl:apply-templates select="legende/titre | legende/sstitre" mode="liste"/>
-      </figcaption>
-      <xsl:apply-templates select="objetmedia | tabtexte"/>
-    </figure>
-  </xsl:template>
-
-  <xsl:template match="no" mode="liste">
-    <span class="no">
-      <xsl:apply-templates mode="liste"/>
-    </span>
-  </xsl:template>
-
-  <xsl:template match="legende/titre | legende/sstitre" mode="liste">
-    <div class="legende">
-      <p class="{name()}">
-        <xsl:apply-templates mode="liste"/>
-      </p>
-    </div>
-  </xsl:template>
-
-  <xsl:template match="tableau//renvoi | figure//renvoi" mode="liste"/>
 
   <!--*** all-purpose typographic markup ***-->
   <xsl:template match="espacev">

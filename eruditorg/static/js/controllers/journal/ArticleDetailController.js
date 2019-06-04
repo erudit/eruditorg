@@ -173,29 +173,28 @@ export default {
       },
       callbacks: {
         open: function() {
-          var figure = $(this.currItem.el).parent('figure')
-          var grfigure = figure.parent('div.grfigure')
+          var figure = $(this.currItem.el).closest('.figure, .tableau')
+          var grfigure = figure.closest('.grfigure, .grtableau')
 
-          // Figure group text (figure numbers).
-          // To get only the figure group text and not the text from every children, we clone the
-          // element, select all the children, remove all the children, go back to first element and
-          // get the text.
-          var grfigure_number = grfigure.clone().children().remove().end().text()
+          // Figure group numbers.
+          var grfigure_number = grfigure.find('.no')
           // Figure group caption.
-          var grfigure_caption = grfigure.find('p.alinea, p.legende')
+          var grfigure_caption = grfigure.find('.legende')
           // Figure number.
-          var figure_number = figure.find('p.no')
+          var figure_number = figure.find('.no')
           // Figure caption.
-          var figure_caption = figure.find('p.legende')
+          var figure_caption = figure.find('.legende')
 
+          // Figure bottom caption.
+          var figure_bottom_legende = figure.find('div.figure-legende')
           // Figure notes.
-          var figure_notes = figure.find('p.alinea')
+          var figure_notes = figure.find('div.notefigtab')
           // Figure source.
-          var figure_source = $('<p>').html(figure.find('cite.source').html())
+          var figure_source = $('<p>').html(figure.find('.source').html())
 
           // Put the figure number(s) and caption(s) above the figure.
           $(this.content).find('.mfp-top-bar .mfp-title').prepend(
-            grfigure_number,
+            grfigure_number.clone(),
             grfigure_caption.clone(),
             figure_number.clone(),
             figure_caption.clone(),
@@ -203,6 +202,7 @@ export default {
 
           // Put the figure note(s) and source(s) under the figure.
           $(this.content).find('.mfp-bottom-bar').prepend(
+            figure_bottom_legende.clone(),
             figure_notes.clone(),
             figure_source.clone(),
           );
