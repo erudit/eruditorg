@@ -728,9 +728,9 @@ class TestArticleDetailView:
         })
         html = Client().get(url).content.decode()
         # Check that the journal name is displayed in French and English (Relations industrielles / Industrial Relations).
-        assert '<dd id="id_cite_mla_article" class="cite-mla">\n        Pratt, Lynda.\n        «&nbsp;Robert Southey, Writing and Romanticism.&nbsp;»\n        <em>Relations industrielles / Industrial Relations</em>,\n        volume 73, numéro 4, automne 2018. https://doi.org/10.7202/009255ar\n      </dd>' in html
-        assert '<dd id="id_cite_apa_article" class="cite-apa">\n        Pratt, L.\n        (2019).\n        Robert Southey, Writing and Romanticism.\n        <em>Relations industrielles / Industrial Relations</em>,\n        . https://doi.org/10.7202/009255ar\n      </dd>' in html
-        assert '<dd id="id_cite_chicago_article" class="cite-chicago">\n        Pratt, Lynda\n        «&nbsp;Robert Southey, Writing and Romanticism&nbsp;».\n        <em>Relations industrielles / Industrial Relations</em>\n        \n        (2019). https://doi.org/10.7202/009255ar\n      </dd>' in html
+        assert '<dd id="id_cite_mla_article" class="cite-mla">\n        Pratt, Lynda. «&nbsp;Robert Southey, Writing and Romanticism.&nbsp;» <em>Relations industrielles / Industrial Relations</em>, volume 73, numéro 4, automne 2018. https://doi.org/10.7202/009255ar\n      </dd>' in html
+        assert '<dd id="id_cite_apa_article" class="cite-apa">\n        Pratt, L. (2019). Robert Southey, Writing and Romanticism. <em>Relations industrielles / Industrial Relations</em>. https://doi.org/10.7202/009255ar\n      </dd>' in html
+        assert '<dd id="id_cite_chicago_article" class="cite-chicago">\n        Pratt, Lynda «&nbsp;Robert Southey, Writing and Romanticism&nbsp;». <em>Relations industrielles / Industrial Relations</em> (2019). https://doi.org/10.7202/009255ar\n      </dd>' in html
 
     @pytest.mark.parametrize('fixture, url_name, expected_result', (
         # Multilingual journals should have all titles in citations.

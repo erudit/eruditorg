@@ -16,6 +16,7 @@ from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDo
 from reportlab.platypus.tables import Table, TableStyle
 from urllib.parse import urlparse
 
+from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
 
@@ -332,29 +333,21 @@ def get_coverpage(article):
     left_column.append(grey_half_line)
     left_column.append(large_spacer)
 
+    cite_strings = {
+        Article.ARTICLE_DEFAULT: _('Citer cet article'),
+        Article.ARTICLE_REPORT: _('Citer ce compte rendu'),
+        Article.ARTICLE_OTHER: _('Citer ce document'),
+        Article.ARTICLE_NOTE: _('Citer cette note'),
+    }
+
     # Cite this article.
     left_column.append(Paragraph(
-        _('Citer cet article'),
+        cite_strings.get(article.type),
         styles['normal'],
     ))
     left_column.append(medium_spacer)
-    html_title = article.html_title if article.html_title else _('[Article sans titre]')
-    cite_string = '{authors} ({year}). {title}. <em>{journal}</em>,'.format(**{
-        'authors': article.get_formatted_authors_apa(),
-        'year': article.issue.year,
-        'title': clean(html_title),
-        'journal': issue_erudit_object.get_journal_title(formatted=True, subtitles=False),
-    })
-    if article.issue.volume:
-        cite_string += ' <em>{}</em>,'.format(article.issue.volume)
-    if article.issue.number:
-        cite_string += ' ({}),'.format(article.issue.number)
-    if article.first_page:
-        cite_string += ' {}–{}.'.format(article.first_page, article.last_page)
-    if article.doi:
-        cite_string += ' https://doi.org/{}'.format(article.doi)
     left_column.append(Paragraph(
-        cite_string,
+        clean(article.cite_string_apa),
         styles['small'],
     ))
 
