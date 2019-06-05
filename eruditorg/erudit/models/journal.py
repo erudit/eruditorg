@@ -1142,7 +1142,7 @@ class Article(FedoraMixin):
     @catch_and_log
     def html_title(self):
         html_title = self.erudit_object.get_title(formatted=True, html=True)
-        return html_title if html_title is not None else _('[Article sans titre]')
+        return html_title if html_title else _('[Article sans titre]')
 
     def _abstract_by_lang(self, abstracts):
         """ Returns an abstract that can be used with the current language. """
@@ -1353,15 +1353,20 @@ class Article(FedoraMixin):
             'authors': self.get_formatted_authors_mla(),
             'open': _('«&nbsp;'),
             'title': self.html_title,
-            'period': '.' if self.html_title[-1] not in '.!?' else '',
+            'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
             'close': _('&nbsp;»'),
             'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
         })
         if self.issue.volume_title:
             cite_string += ' {}'.format(self.issue.volume_title.lower())
+        if cite_string[-1] != ',':
+            cite_string += ','
         if self.first_page:
-            cite_string += ', {}&nbsp;{}–{}'.format(_('p.'), self.first_page, self.last_page)
-        cite_string += '.'
+            cite_string += ' {}&nbsp;{}–{}'.format(_('p.'), self.first_page, self.last_page)
+        if cite_string[-1] == ',':
+            cite_string = cite_string[:-1] + '.'
+        else:
+            cite_string += '.'
         if self.doi:
             cite_string += ' https://doi.org/{}'.format(self.doi)
         return cite_string
@@ -1372,15 +1377,17 @@ class Article(FedoraMixin):
             'authors': self.get_formatted_authors_apa(),
             'year': self.issue.year,
             'title': self.html_title,
-            'period': '.' if self.html_title[-1] not in '.!?' else '',
+            'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
             'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
         })
         if self.issue.volume:
             cite_string += ' <em>{}</em>'.format(self.issue.volume)
         if self.issue.number:
             cite_string += ' ({})'.format(self.issue.number)
+        if cite_string[-1] != ',':
+            cite_string += ','
         if self.first_page:
-            cite_string += ', {}–{}'.format(self.first_page, self.last_page)
+            cite_string += ' {}–{}'.format(self.first_page, self.last_page)
         if cite_string[-1] == ',':
             cite_string = cite_string[:-1] + '.'
         else:

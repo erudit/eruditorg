@@ -1,0 +1,55 @@
+
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" idproprio="47130ac" lang="fr" ordseq="16" qualtraitement="minimal" typeart="article" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd">
+          <admin>
+            <infoarticle>
+              <pagination>
+                <ppage>39</ppage>
+                <dpage>39</dpage>
+              </pagination>
+            </infoarticle>
+            <revue id="inter1068986" lang="fr">
+              <titrerev>Inter</titrerev>
+              <sstitrerev>Art actuel</sstitrerev>
+              <titrerevabr>inter</titrerevabr>
+              <idissn>0825-8708</idissn>
+              <idissnnum>1923-2764</idissnnum>
+            </revue>
+            <numero id="inter1102623">
+              <nonumero>30</nonumero>
+              <pub>
+                <periode>Hiver</periode>
+                <annee>1986</annee>
+              </pub>
+              <pubnum>
+                <date typedate="publication">2010-04-01</date>
+              </pubnum>
+            </numero>
+            <editeur>
+              <nomorg>Les Éditions Intervention</nomorg>
+            </editeur>
+            <prodnum>
+              <nomorg>Érudit</nomorg>
+            </prodnum>
+            <diffnum>
+              <nomorg>Érudit</nomorg>
+            </diffnum>
+            <schema lang="fr" nom="Erudit Article" version="3.0.0"></schema>
+            <droitsauteur>Tous droits réservés © <nomorg>Les Éditions Intervention</nomorg>, 1986</droitsauteur>
+          </admin>
+          <liminaire>
+            <grtitre>
+              <titre></titre>
+            </grtitre>
+            <grauteur>
+              <auteur id="au1">
+                <nompers>
+                  <prenom>Lise</prenom>
+                  <nomfamille>Bégin</nomfamille>
+                </nompers>
+              </auteur>
+            </grauteur>
+          </liminaire>
+          <corps>
+            <texte>\fts:^1Sar...   &gt;  TVr.^\■/-&lt;J4a*é:   Ifmmt.[.,»7\trv~m» *m.y•H«W*Van%J9ta1fco»W\fiu\«S«*4)ar*n«S-M*uavtO*eifl¥*   *   &gt;r»dx*\T*6»-e*V»&gt;O*1s\tf%A..f.o»»»*#^Oitv^.■ïlivt•,&apos;îH!xi7NH«4&gt;-g.H*tïAOl&gt;&amp;vOvfe-QfaôI*t--»».--J^.«-*&gt;H-O\C&apos;a*•»■B»/».♦Ov...».)*/£•._-■a-*/vW5*&quot;eMauf&lt;dv&lt;-!7a*s*0*.t&gt;-&lt;#.eïaatfU$Vf)o* ■•&gt;&gt;•s-■a.*wr*«u-*\****•</texte>
+          </corps>
+        </article>
