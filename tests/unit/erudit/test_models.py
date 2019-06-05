@@ -663,6 +663,12 @@ class TestArticle:
         article = ArticleFactory(from_fixture=fixture)
         assert article.publisher_name == expected_publisher_name
 
+    def test_cite_strings_with_untitled_article(self):
+        article = ArticleFactory(from_fixture='47130ac')
+        assert article.cite_string_mla == 'Bégin, Lise. «&nbsp;[Article sans titre].&nbsp;» <em>Inter</em>, numéro 110, supplément, hiver 2012, p.&nbsp;39–39.'
+        assert article.cite_string_apa == 'Bégin, L. (2019). [Article sans titre]. <em>Inter</em>, 39–39.'
+        assert article.cite_string_chicago == 'Bégin, Lise «&nbsp;[Article sans titre]&nbsp;». <em>Inter</em> (2019)&nbsp;: 39–39.'
+
 
 def test_journaltype_can_return_embargo_duration_in_days():
     journal_type = JournalTypeFactory.create(code='S')
