@@ -1,5 +1,5 @@
 Django>=2.0,<2.1
--e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.51#egg=liberuditarticle
+-e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.52#egg=liberuditarticle
 -e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.7#egg=django-resumable-uploads
 -e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 -e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
