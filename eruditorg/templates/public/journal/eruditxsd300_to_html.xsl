@@ -5,7 +5,7 @@
   <!--=========== VARIABLES & PARAMETERS ===========-->
   <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
   <xsl:variable name="iderudit" select="article/@idproprio"/>
-  <xsl:variable name="doi" select="article/admin/infoarticle/idpublic[@scheme = 'doi']"/>
+  <xsl:variable name="doi" select="normalize-space(article/admin/infoarticle/idpublic[@scheme = 'doi'])"/>
   <xsl:variable name="typeudoc">
     <xsl:choose>
       <xsl:when test="article/@typeart='article'">

@@ -760,6 +760,21 @@ class TestArticleDetailView:
         # Check that the journal name is displayed in French and English (Relations industrielles / Industrial Relations).
         assert expected_result in citation
 
+    def test_doi_with_extra_space(self):
+        article = ArticleFactory(
+            from_fixture='1009368ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that extra space around DOIs is stripped.
+        assert '<meta name="citation_doi" content="https://doi.org/10.7202/1009368ar" />' in html
+        assert '<a href="https://doi.org/10.7202/1009368ar" class="clipboard-data">' in html
+
 
 @unittest.mock.patch.object(
     Issue,
