@@ -94,7 +94,7 @@ def get_journal_authors_dict(journal_code, first_letter, article_type):
         query += ' TypeArticle_fac:"{}"'.format(article_type)
     args = {
         'q': query,
-        'fl': 'ID,AuteurNP_fac,Annee,URLDocument,Titre_fr,Titre_en,TitreRefBiblio_aff',
+        'fl': 'ID,AuteurNP_fac,Annee,URLDocument,Titre_fr,Titre_en,Titre_defaut,TitreRefBiblio_aff',
         'rows': '99999',
         'facet.limit': '0',
 
