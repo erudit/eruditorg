@@ -26,7 +26,7 @@ def send_production_team_email(sender, issue_submission, transition_name, reques
         emails,
         html_template='emails/editor/new_issue_submission_content.html',
         subject_template='emails/editor/new_issue_submission_subject.html',
-        extra_context={'issue': issue_submission},
+        extra_context={'issue': issue_submission, 'journal': issue_submission.journal},
         tag=EMAIL_TAG
     )
     email.send()
@@ -62,7 +62,7 @@ def send_notification_email_after_issue_submission_refusal(
         sender, issue_submission, transition_name, request, **kwargs):
     if not issue_submission.is_draft:
         return
-    extra_context = {'issue': issue_submission}
+    extra_context = {'issue': issue_submission, 'journal': issue_submission.journal}
     emails = [issue_submission.contact.email, ]
 
     comment = issue_submission.status_tracks.last().comment
