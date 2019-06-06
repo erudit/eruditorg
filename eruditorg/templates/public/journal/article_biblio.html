@@ -81,7 +81,7 @@
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
   >
 
-  {% cache cache_timeout "public_article_biblio_content" article.localidentifier in_citation_list LANGUAGE_CODE %}
+  {% cache cache_timeout "public_article_biblio_content" article.localidentifier in_citation_list LANGUAGE_CODE subscription_cache_key %}
   {# XSL transformation article render #}
   {{ view.render_xml_contents }}
   {% endcache %}

@@ -27,7 +27,7 @@
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
     role="main"
   >
-  {% cache cache_timeout "public_article_detail_content" article.localidentifier content_access_granted in_citation_list LANGUAGE_CODE %}
+  {% cache cache_timeout "public_article_detail_content" article.localidentifier content_access_granted in_citation_list LANGUAGE_CODE subscription_cache_key %}
   {# XSL transformation article render #}
   {{ view.render_xml_contents }}
   {% endcache %}
