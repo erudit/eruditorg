@@ -647,7 +647,7 @@ class Issue(FedoraMixin, FedoraDated):
         See https://gitlab.erudit.org/erudit/production/tournesol/Tournesol/issues/35 """
         if request_ticket is None:
             return False
-        regex = re.compile('^0?(.*)$')
+        regex = re.compile('^0*(.*)$')
         issue_ticket = re.match(regex, self.prepublication_ticket)
         request_ticket = re.match(regex, request_ticket)
         return issue_ticket.group(1) == request_ticket.group(1)
