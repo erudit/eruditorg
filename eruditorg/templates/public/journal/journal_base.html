@@ -33,24 +33,24 @@
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
       <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>
 
-      {# latest and back issues #}
+      {# Current and back issues #}
       {% block aside_issue %}
       <section class="sidebar-block clearfix">
         {% if journal.published_issues.exists %}
-        {% if latest_issue %}
+        {% if current_issue %}
         <h2>{% trans "Dernier numéro" %}</h2>
         <p>
-          <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
-            {% if latest_issue.html_title %}
-            <span class="issue-list--theme">{{ latest_issue.html_title|safe }}</span>
+          <a href="{% url 'public:journal:issue_detail' current_issue.journal.code current_issue.volume_slug current_issue.localidentifier %}">
+            {% if current_issue.html_title %}
+            <span class="issue-list--theme">{{ current_issue.html_title|safe }}</span>
             <br/>
             {% endif %}
-            <span class="issue-list--volume">{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
+            <span class="issue-list--volume">{{ current_issue.volume_title }}</span>
           </a>
         </p>
-        {% if latest_issue.has_coverpage %}
-        <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
-          <img src="{% url 'public:journal:issue_coverpage' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="img-responsive latest-issue--cover issue-cover" alt="{{ latest_issue.title }}" />
+        {% if current_issue.has_coverpage %}
+        <a href="{% url 'public:journal:issue_detail' current_issue.journal.code current_issue.volume_slug current_issue.localidentifier %}">
+          <img src="{% url 'public:journal:issue_coverpage' current_issue.journal.code current_issue.volume_slug current_issue.localidentifier %}" class="img-responsive current-issue--cover issue-cover" alt="{{ current_issue.title }}" />
         </a>
         {% endif %}
         {% endif %}
@@ -177,9 +177,9 @@
           <dt>{% trans "Période de publication" %}</dt>
           <dd>{{ journal.publication_period }}</dd>
 
-          {% if journal.first_published_issue %}
+          {% if journal.first_issue_published_on_erudit %}
           <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
-          <dd>{{ journal.first_published_issue.date_published|date:"Y" }}</dd>
+          <dd>{{ journal.first_issue_published_on_erudit.date_published|date:"Y" }}</dd>
           {% endif %}
 
           <dt>{% trans "Type de support" %}</dt>

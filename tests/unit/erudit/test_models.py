@@ -61,38 +61,38 @@ class TestJournal:
         journal = JournalFactory(active=False)
         assert journal.date_embargo_begins is None
 
-    def test_can_return_its_first_published_issue(self):
+    def test_can_return_its_first_issue_published_on_erudit(self):
         journal = JournalFactory()
         first_unpublished_issue = IssueFactory(
             journal=journal,
             is_published=False,
         )
-        first_published_issue = IssueFactory(
+        first_issue_published_on_erudit = IssueFactory(
             journal=journal,
         )
-        last_published_issue = IssueFactory(
+        current_issue = IssueFactory(
             journal=journal,
         )
-        assert journal.first_published_issue == first_published_issue
+        assert journal.first_issue_published_on_erudit == first_issue_published_on_erudit
 
-    def test_can_return_its_last_published_issue(self):
+    def test_can_return_its_current_issue(self):
         journal = JournalFactory()
-        first_published_issue = IssueFactory(
+        first_issue_published_on_erudit = IssueFactory(
             journal=journal,
         )
-        last_published_issue = IssueFactory(
+        current_issue = IssueFactory(
             journal=journal,
         )
         last_unpublished_issue = IssueFactory(
             journal=journal,
             is_published=False,
         )
-        assert journal.last_published_issue == last_published_issue
+        assert journal.current_issue == current_issue
 
-    def test_last_published_issue_of_renamed_journal(self):
+    def test_current_issue_of_renamed_journal(self):
         # A renamed journal ends up with a list of issue pids of *all* its issues, even when
         # its journal pid has changed. When we call get_published_issues_pids(), we actually want
-        # all issues to show up, so that's ok. However, for last_published_issue, it's special: we want the
+        # all issues to show up, so that's ok. However, for current_issue, it's special: we want the
         # last published issue *that is part of the journal before the rename*.
         j1 = JournalFactory()
         j2 = JournalFactory(previous_journal=j1)
@@ -102,8 +102,8 @@ class TestJournal:
         i2 = IssueFactory(journal=j2)
         repository.api.add_publication_to_parent_journal(i1, journal=i2.journal)
         repository.api.add_publication_to_parent_journal(i2, journal=i1.journal)
-        assert j1.last_published_issue == i1
-        assert j2.last_published_issue == i2
+        assert j1.current_issue == i1
+        assert j2.current_issue == i2
 
     def test_can_return_its_letter_prefix(self):
         journal_1 = JournalFactory.create(name='Test')
@@ -160,6 +160,13 @@ class TestJournal:
         i2 = IssueFactory.create_published_after(i1)
 
         assert list(i1.journal.published_issues.all()) == [i2, i1]
+
+    def test_first_issue_published_on_erudit_when_issues_are_not_produced_in_the_same_order_as_their_published_date(self):
+        journal = JournalFactory()
+        issue_1 = IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
+        issue_2 = IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
+        issue_3 = IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
+        assert journal.first_issue_published_on_erudit.date_published == dt.date(2015, 1, 1)
 
 
 class TestIssue:
@@ -267,17 +274,17 @@ class TestIssue:
         assert not issue_2.embargoed
         assert not issue_3.embargoed
 
-    def test_last_published_issue_is_always_embargoed(self):
+    def test_current_issue_is_always_embargoed(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
         issue1 = IssueFactory(date_published=outside_embargo)
         issue2 = IssueFactory(journal=issue1.journal, date_published=outside_embargo)
-        assert issue1 != issue1.journal.last_published_issue
+        assert issue1 != issue1.journal.current_issue
         assert not issue1.embargoed
-        assert issue2 == issue2.journal.last_published_issue
+        assert issue2 == issue2.journal.current_issue
         assert issue2.embargoed
 
-    def test_last_published_issue_is_not_always_embargoed_when_next_journal(self):
+    def test_current_issue_is_not_always_embargoed_when_next_journal(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
         issue = IssueFactory(

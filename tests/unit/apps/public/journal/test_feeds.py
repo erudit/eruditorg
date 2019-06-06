@@ -84,21 +84,21 @@ class TestLatestJournalArticlesFeed:
             year='2011',
             localidentifier='old_issue',
         )
-        latest_issue = IssueFactory(
+        current_issue = IssueFactory(
             journal=journal,
             year='2012',
-            localidentifier='latest_issue',
+            localidentifier='current_issue',
         )
         old_article = ArticleFactory(
             issue=old_issue,
             localidentifier='old_article',
         )
         article1 = ArticleFactory(
-            issue=latest_issue,
+            issue=current_issue,
             localidentifier='article1',
         )
         article2 = ArticleFactory(
-            issue=latest_issue,
+            issue=current_issue,
             localidentifier='article2',
         )
 
@@ -112,7 +112,7 @@ class TestLatestJournalArticlesFeed:
         assert '<link>http://example.com/fr/</link>' in rss
         # Check the feed's description
         assert '<description>{description}</description>'.format(
-            description=latest_issue.volume_title,
+            description=current_issue.volume_title,
         ) in rss
         # Check the feed's language
         assert '<language>fr</language>' in rss
@@ -120,7 +120,7 @@ class TestLatestJournalArticlesFeed:
         assert '<image><url>/static/img/logo-erudit.png</url><title>Érudit</title><link>https://erudit.org</link></image>' in rss
 
         # Check the feed's items order
-        assert '<item><title>Robert Southey, Writing and Romanticism</title><link>http://example.com/fr/revues/journal/2012-latest_issue/article1/</link><description>Lynda Pratt</description><guid>http://example.com/fr/revues/journal/2012-latest_issue/article1/</guid></item><item><title>Robert Southey, Writing and Romanticism</title><link>http://example.com/fr/revues/journal/2012-latest_issue/article2/</link><description>Lynda Pratt</description><guid>http://example.com/fr/revues/journal/2012-latest_issue/article2/</guid></item>'
+        assert '<item><title>Robert Southey, Writing and Romanticism</title><link>http://example.com/fr/revues/journal/2012-current_issue/article1/</link><description>Lynda Pratt</description><guid>http://example.com/fr/revues/journal/2012-current_issue/article1/</guid></item><item><title>Robert Southey, Writing and Romanticism</title><link>http://example.com/fr/revues/journal/2012-current_issue/article2/</link><description>Lynda Pratt</description><guid>http://example.com/fr/revues/journal/2012-current_issue/article2/</guid></item>'
 
         # Check that old issues and articles are not included
         assert 'old_issue' not in rss

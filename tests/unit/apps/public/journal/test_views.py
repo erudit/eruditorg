@@ -1,3 +1,4 @@
+import datetime as dt
 import os
 import pytest
 import unittest.mock
@@ -73,6 +74,17 @@ class TestJournalDetailView:
         assert 'Claude Racine (Éditeur)' not in html
         assert 'Isabelle Richer (Rédactrice adjointe)' not in html
         assert 'Foo (Bar)' in html
+
+    def test_available_since_when_issues_are_not_produced_in_the_same_order_as_their_published_date(self):
+        journal = JournalFactory()
+        issue_1 = IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
+        issue_2 = IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
+        issue_3 = IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
+        url = reverse('public:journal:journal_detail', kwargs={
+            'code': journal.code,
+        })
+        html = Client().get(url).content.decode()
+        assert '<dt>Disponible dans Érudit depuis</dt>\n          <dd>2015</dd>' in html
 
 
 class TestJournalAuthorsListView:
