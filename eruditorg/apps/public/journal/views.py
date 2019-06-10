@@ -629,15 +629,6 @@ class BaseArticleDetailView(
         if not obj.issue.is_published:
             context['ticket'] = obj.issue.prepublication_ticket
 
-        # TODO: Get the subscription badge out of the article cached template to get rid of this.
-        active_subscription = self.request.subscriptions.active_subscription
-        context['subscription_cache_key'] = ''
-        if active_subscription is not None:
-            context['subscription_cache_key'] += str(active_subscription.sponsor.pk) \
-                if active_subscription.sponsor is not None else ''
-            context['subscription_cache_key'] += str(active_subscription.organisation.pk) \
-                if active_subscription.organisation is not None else ''
-
         return context
 
     @method_decorator(ensure_csrf_cookie)

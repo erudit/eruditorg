@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load cache i18n model_formatters waffle_tags %}
+{% load adv_cache i18n model_formatters waffle_tags %}
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
@@ -279,7 +279,9 @@
       </section>
       {% endif %}
 
-      {# TODO: Do not cache. #}
+      {# We must not cache the subscription sponsor badge with the rest of this fragment #}
+      {# because it has to vary based on the current user subscription. #}
+      {% nocache %}
       <section class="sidebar-block">
         <h2>{% trans "Accès" %}</h2>
         {% if content_access_granted and subscription_type == 'individual' %}
@@ -290,6 +292,7 @@
           <a href="{% trans 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
         </p>
       </section>
+      {% endnocache %}
 
     </aside>
     {% endcache %}

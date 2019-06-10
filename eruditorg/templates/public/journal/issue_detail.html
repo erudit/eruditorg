@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load cache i18n model_formatters staticfiles %}
+{% load adv_cache i18n model_formatters staticfiles %}
 
 {% block title %}{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal.name|safe }}{% endblock title %}
 

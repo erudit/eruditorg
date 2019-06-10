@@ -1,5 +1,5 @@
 {% extends "public/journal/article_base.html" %}
-{% load cache i18n public_journal_tags staticfiles %}
+{% load adv_cache i18n public_journal_tags staticfiles %}
 
 {% block title %}{% trans 'Notice.' %} {{ block.super }}{% endblock title %}
 
@@ -75,7 +75,7 @@
 {# Article's summary content is cached for 1 day based on the article localidentifier, #}
 {# the issue published status, whether it is saved in the citation list and the current language code. #}
 {# If the issue is not published, the cache timeout is 0. #}
-{% cache cache_timeout "public_article_summary" article.localidentifier article.issue.is_published in_citation_list LANGUAGE_CODE subscription_cache_key %}
+{% cache cache_timeout "public_article_summary" article.localidentifier article.issue.is_published in_citation_list LANGUAGE_CODE %}
 <main
     id="article-{{ article.localidentifier }}"
     class="container"

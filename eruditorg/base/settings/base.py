@@ -204,6 +204,7 @@ INSTALLED_APPS = (
     'django_js_reverse',
     'widget_tweaks',
     'rangefilter',
+    'adv_cache_tag',
 )
 
 if EXPOSE_OPENMETRICS:

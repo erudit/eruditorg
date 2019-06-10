@@ -1,4 +1,4 @@
-{% load i18n public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
+{% load adv_cache i18n public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
 
@@ -315,7 +315,11 @@
             <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
           </div>
           {% endif %}
+          {# We must not cache the subscription sponsor badge with the rest of this fragment #}
+          {# because it has to vary based on the current user subscription. #}
+          {% nocache %}
           {% include "public/partials/subscription_sponsor_badge.html" %}
+          {% endnocache %}
         </nav>
 
         <!-- toolbox -->

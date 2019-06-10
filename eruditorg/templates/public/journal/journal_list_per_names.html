@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load cache i18n static widget_tweaks %}
+{% load adv_cache i18n static widget_tweaks %}
 
 {% block title %}{% trans "Revues par ordre alphabétique" %}{% endblock title %}
 
@@ -104,8 +104,11 @@
               </div>
             </div>
           </form>
-          {# TODO: Do not cache. #}
+          {# We must not cache the subscription sponsor badge with the rest of this fragment #}
+          {# because it has to vary based on the current user subscription. #}
+          {% nocache %}
           {% include "public/partials/subscription_sponsor_badge.html" %}
+          {% endnocache %}
         </aside>
         <nav class="col-md-9 col-lg-offset-1 list-header">
           <h2 class="sr-only">{% trans 'Par lettre' %}</h2>

@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load cache i18n model_formatters staticfiles %}
+{% load adv_cache i18n model_formatters staticfiles %}
 
 {% block title %}{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle }}{% endif %}{% endblock title %}
 
