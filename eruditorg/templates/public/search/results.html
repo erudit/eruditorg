@@ -159,7 +159,7 @@
             <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.localidentifier }}" {% if document.localidentifier in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
-                {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.localidentifier LANGUAGE_CODE %}
+                {% cache SHORT_TTL "public_search_result_document_fragment" document.document_type document.localidentifier LANGUAGE_CODE %}
                 <div class="header">
                   {# authors #}
                   <p class="authors">

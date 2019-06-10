@@ -85,7 +85,7 @@
 
 {% block content %}
 {% with chapter.title|slugify as chapter_slug %}
-{% cache LONG_TTL "chapter_detail_content" chapter_slug LANGUAGE_CODE %}
+{% cache SHORT_TTL "chapter_detail_content" chapter_slug LANGUAGE_CODE %}
 <main class="container" id="article-{{ article.id }}" data-document-id="{{ article.solr_id }}" role="main">
   <header class="main-header doc-head">
     <div class="row">

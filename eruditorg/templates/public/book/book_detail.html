@@ -67,7 +67,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-{% cache LONG_TTL "book_detail_content" book.id LANGUAGE_CODE %}
+{% cache SHORT_TTL "book_detail_content" book.id LANGUAGE_CODE %}
 <div class="container">
   <div class="row">
     {# Book TOC #}

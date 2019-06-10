@@ -208,7 +208,7 @@ class JournalDetailView(
         context['issues'] = issues
         last_published_issue = IssueAnnotator.annotate(self.object.last_published_issue, self)
         context['latest_issue'] = last_published_issue
-        context['cache_timeout'] = 60 * 60
+        context['cache_timeout'] = settings.LONG_TTL
         if last_published_issue is not None and last_published_issue.is_in_fedora:
             titles = last_published_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
@@ -295,7 +295,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_published_issue
         context['meta_info_issue'] = context['latest_issue']
-        context['cache_timeout'] = 60 * 60
+        context['cache_timeout'] = settings.LONG_TTL
         try:
             context['journal_info'] = self.journal.information
         except ObjectDoesNotExist:
@@ -403,7 +403,7 @@ class IssueDetailView(
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
         context['journal'] = self.object.journal
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else 0
 
         try:
             context['journal_info'] = self.object.journal.information
@@ -607,7 +607,7 @@ class BaseArticleDetailView(
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
         shouldcache = obj.issue.is_published
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else 0
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
         # media URL and then remove the media_localid part to get the prefix only.
