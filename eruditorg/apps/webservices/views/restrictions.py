@@ -3,13 +3,17 @@ import datetime as dt
 from lxml import etree
 from lxml.builder import E
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import View
 
 from erudit.models import Journal
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class RestrictionsView(View):
     http_method_names = ['get', ]
 

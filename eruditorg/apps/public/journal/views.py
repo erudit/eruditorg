@@ -20,6 +20,7 @@ from django.utils.encoding import force_bytes
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
@@ -305,6 +306,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         return context
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
@@ -892,6 +894,7 @@ class ArticleRawPdfFirstPageView(
         response.content = get_pdf_first_page(content)
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     """
     Returns an image file embedded in the INFOIMG datastream.
@@ -908,6 +911,7 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
         return str(fedora_object.content.mimetype)
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class GoogleScholarSubscribersView(TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscribers.xml'
@@ -929,6 +933,7 @@ class GoogleScholarSubscribersView(TemplateView):
         return context
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class GoogleScholarSubscriberJournalsView(TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscriber_journals.xml'

@@ -29,7 +29,7 @@ urlpatterns = [
         content_type="text/plain"), name='robots-txt'),
     url(r'^sitemap\.xml$', sitemap_views.index,
         {'sitemaps': sitemaps_dict, 'sitemap_url_name': 'sitemaps'}, name="sitemap"),
-    url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
+    url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(settings.LONG_TTL)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
     # Google Scholar URLs
     url(r'^scholar/', include(google_scholar_urlpatterns)),
