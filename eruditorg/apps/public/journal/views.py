@@ -191,10 +191,14 @@ class JournalDetailView(
         # Fetches the JournalInformation instance associated to the current journal
         try:
             journal_info = self.object.information
+            # Generate cache keys based on journal info's directors and editors so that the cache
+            # is not used when a director or editor is added (or removed).
             context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
             context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             journal_info = None
+            context['directors_cache_key'] = None
+            context['editors_cache_key'] = None
         else:
             context['journal_info'] = journal_info
 
@@ -298,8 +302,14 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['cache_timeout'] = settings.LONG_TTL
         try:
             context['journal_info'] = self.journal.information
+            # Generate cache keys based on journal info's directors and editors so that the cache
+            # is not used when a director or editor is added (or removed).
+            context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
+            context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             context['journal_info'] = None
+            context['directors_cache_key'] = None
+            context['editors_cache_key'] = None
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
@@ -440,6 +450,11 @@ class IssueDetailView(
         # Generate a cache key based on the list of articles so that the cache is not used when a
         # new article is added (or removed).
         context['articles_cache_key'] = ','.join([article.localidentifier for article in articles])
+
+        # We don't need the directors & editors cache keys because in the context of an issue we
+        # are getting the directors & editors from the XML.
+        context['directors_cache_key'] = None
+        context['editors_cache_key'] = None
 
         return context
 
