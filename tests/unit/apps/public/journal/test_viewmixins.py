@@ -290,16 +290,24 @@ class TestContentAccessCheckMixin:
         assert view.content_access_granted
         assert view.get_context_data()['content_access_granted']
 
-    def test_can_grant_access_to_an_issue_if_prepublication_ticket_start_with_zero(self, single_article_view):
-        # Create an article from an issue with a prepublication ticket starting with a '0'.
+    @pytest.mark.parametrize('issue_localidentifier, number_of_zeros', (
         # md5('moebius04311'.encode('utf-8')).hexdigest() == '08844a3d4413c44ab754c60fd23c83fc'
-        article = ArticleFactory(issue__is_published=False, issue__localidentifier='moebius04311')
+        ('moebius04311', 1),
+        # md5('rdus04617'.encode('utf-8')).hexdigest() == '001d439b42b50157ca60b3afad4df227'
+        ('rdus04617', 2)
+    ))
+    def test_can_grant_access_to_an_issue_if_prepublication_ticket_start_with_zeros(self, issue_localidentifier, number_of_zeros, single_article_view):
+        # Create an article from an issue with a prepublication ticket starting with one or more '0'.
+        article = ArticleFactory(
+            issue__is_published=False,
+            issue__localidentifier=issue_localidentifier,
+        )
 
         view = single_article_view()
         view.object = article
         # Try to access the article without the leading '0' in the prepublication ticket.
         view.request = RequestFactory().get('/', {
-            'ticket': article.issue.prepublication_ticket[1:]
+            'ticket': article.issue.prepublication_ticket[number_of_zeros:]
         })
         # Run # check
         assert view.content_access_granted == True
