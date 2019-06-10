@@ -19,7 +19,6 @@ lxml[cssselect]>=3.5
 
 # dependencies for erudit-core
 
-# v1.3 supports django 1.11 and 1.10. v2.0 drops django 1.10.
 django-polymorphic>=2.0,<2.1
 django-taggit>=0.22
 eulfedora>=1.7.2
@@ -28,43 +27,42 @@ Sickle>=0.6
 structlog>=17.2.0
 django-modeltranslation>=v0.13-beta1
 
-# cairocffi 1.0 drops support for python 3.4
-cairocffi<1.0.0
-CairoSVG<2.3.0
+cairocffi>=1.0.2
+CairoSVG>=2.4.0
 
 # dependencies for eruditorg
 
-django-post-office>=3.0.4,<3.1.0  # ok for both django 1.11 and django 2.0
-mysqlclient>=1.3.7,<1.4
+django-post-office>=3.2.1
+mysqlclient>=1.4.2
 django-environ>=0.4.5
 chardet>=1.0.3
 rules>=1.1.1
-PyPDF2>=1.25.1,<1.26
-WeasyPrint>=0.26,<45 # upgrade after dropping python 3.4 support
-django-ckeditor>=5.6,<5.7
+PyPDF2>=1.26.0
+WeasyPrint>=47
+django-ckeditor>=5.7.1
 sentry-sdk>=0.7.11
 sqlparse>=0.2.0
-django-ipware>=1.1.3  # upgrade to 2.1.0 to get django 2.0 and 1.11 support
+django-ipware>=2.1.0
 feedparser>=5.2.1
-django-fsm>=2.3.0  # latest version 2.6, no tests for django 2.0
+django-fsm>=2.6.1
 pysolr>=3.4.0
 html2text>=2016.1.8
 django-easy-pjax>=1.3.0  # no update since django 1.9
 
-django-js-reverse>=0.7.1  # at least 0.8.2 for django 1.11 and 2.0
-django-widget-tweaks>=1.4.1  # at least 1.4.2 for django 1.11 and 2.0
+django-js-reverse>=0.9.1
+django-widget-tweaks>=1.4.3
 influxdb>=2.12.0,<2.13
 Babel>=2.3.4,<2.4
 openpyxl>=2.3.5,<2.4
 diskcache>=3.0.0,<4.0.0
 requests[socks]>=2.19
-django-waffle>=0.12.0  # at least 0.13 for django 1.11 and 2.0
+django-waffle>=0.16.0
 django-redis>=4.9.0,<4.10
 suds-py3>=1.3.3
-tinycss2<1.0.0
+tinycss2>=1.0.2
 beautifulsoup4==4.6.1
-django-isbn-field==0.5.2  # ok for 1.11 and 2.0
+django-isbn-field==0.5.2
 django-admin-rangefilter==0.3.12
 django_prometheus>=1.0.15
 reportlab>=3.5.15
-colorama
+colorama>=0.4.1
