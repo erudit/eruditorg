@@ -191,6 +191,7 @@ class JournalDetailView(
         # Fetches the JournalInformation instance associated to the current journal
         try:
             journal_info = self.object.information
+            context['journal_info'] = journal_info
             # Generate cache keys based on journal info's directors and editors so that the cache
             # is not used when a director or editor is added (or removed).
             context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
@@ -199,8 +200,6 @@ class JournalDetailView(
             journal_info = None
             context['directors_cache_key'] = None
             context['editors_cache_key'] = None
-        else:
-            context['journal_info'] = journal_info
 
         # Notes
         context['notes'] = self.journal.erudit_object.get_notes().get(get_language(), []) \
@@ -218,6 +217,13 @@ class JournalDetailView(
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
             context['meta_info_issue'] = last_published_issue
+        else:
+            # If the journal does not have any issue yet, simulate one so the cache template tag
+            # does have something to use to generate the cache key.
+            context['meta_info_issue'] = {
+                'localidentifier': None,
+                'is_published': None,
+            }
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
@@ -298,22 +304,33 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_published_issue
-        context['meta_info_issue'] = context['latest_issue']
         context['cache_timeout'] = settings.LONG_TTL
+        if context['latest_issue'] is not None:
+            context['meta_info_issue'] = context['latest_issue']
+        else:
+            # If the journal does not have any issue yet, simulate one so the cache template tag
+            # does have something to use to generate the cache key.
+            context['meta_info_issue'] = {
+                'localidentifier': None,
+                'is_published': None,
+            }
+
+        # Fetches the JournalInformation instance associated to the current journal
         try:
-            context['journal_info'] = self.journal.information
+            journal_info = self.journal.information
+            context['journal_info'] = journal_info
             # Generate cache keys based on journal info's directors and editors so that the cache
             # is not used when a director or editor is added (or removed).
             context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
             context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
-            context['journal_info'] = None
+            journal_info = None
             context['directors_cache_key'] = None
             context['editors_cache_key'] = None
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
-            journal_info=context['journal_info'],
+            journal_info=journal_info,
             issue=context['latest_issue'],
         )
 
