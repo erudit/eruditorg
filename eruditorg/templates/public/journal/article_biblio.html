@@ -11,9 +11,7 @@
 {% endblock meta_tags %}
 
 {% block structured_data %}
-{% cache cache_timeout "public_article_biblio_structured_data" article.localidentifier LANGUAGE_CODE %}
-{% include "public/journal/partials/article_structured_data.html" %}
-{% endcache %}
+{{ block.super }}
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -74,22 +72,21 @@
 
 {% block content %}
 {% csrf_token %}
+{# Article's biblio content is cached for 1 day based on the article localidentifier, #}
+{# the issue published status, whether it is saved in the citation list and the current language code. #}
+{# If the issue is not published, the cache timeout is 0. #}
+{% cache cache_timeout "public_article_biblio" article.localidentifier article.issue.is_published in_citation_list LANGUAGE_CODE subscription_cache_key %}
 <main
     id="article-{{ article.localidentifier }}"
     class="container"
     data-document-id="{{ article.solr_id }}"
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
   >
-
-  {% cache cache_timeout "public_article_biblio_content" article.localidentifier in_citation_list LANGUAGE_CODE subscription_cache_key %}
-  {# XSL transformation article render #}
   {{ view.render_xml_contents }}
-  {% endcache %}
 </main>
 
-{{ block.super }}
+{% include "public/journal/partials/article_footer.html" %}
 
-{% cache cache_timeout "public_article_biblio_citation" article.localidentifier LANGUAGE_CODE %}
 <div class="hidden">
   {% include "public/journal/partials/article_citation_modal_content.html" %}
 </div>
