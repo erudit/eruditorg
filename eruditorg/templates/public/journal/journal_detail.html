@@ -61,6 +61,9 @@
 {% block body_id %}journal_detail{% endblock body_id %}
 {% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
 {% block inner_main %}
+{# Journal detail is cached for 1 day based on the journal code, whether the access is granted, #}
+{# the published issues IDs and the current language code. #}
+{% cache LONG_TTL "public_journal_detail" journal.code content_access_granted issues_cache_key LANGUAGE_CODE %}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header row">
     <div class="col-sm-12">
@@ -169,7 +172,6 @@
 
     {% if issues %}
     <section role="tabpanel" class="tab-pane" id="back-issues">
-      {% cache LONG_TTL "public_journal_detail_issues" journal.id content_access_granted LANGUAGE_CODE %}
       <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
       {% if journal.collection.code == 'erudit' %}
       <div class="alert alert-info">
@@ -193,14 +195,12 @@
         <li class="year-list__item"><h3 class="year-list__title">{{ year.grouper }}</h3>
           <ul class="issue-list">
             {% for issue in year.list %}
-            {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
             <li class="issue-list__item">
               <a {{ issue.extra.detail_link_attrs }}>
                 {% if issue.extra.is_locked %}<i class="icon ion-ios-lock"></i>&nbsp;{% endif %}<span>{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                 {% if issue.html_title %}<br/><span class="issue-list__theme">{{ issue.html_title|safe }}</span>{% endif %}
               </a>
             </li>
-            {% endcache %}
             {% endfor %}
           </ul>
         </li>
@@ -211,7 +211,6 @@
         <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}">|^</a>
       </div>
       {% endif %}
-      {% endcache %}
     </section>
     {% endif %}
 
@@ -247,4 +246,5 @@
   {% endif %}
 
 </main>
+{% endcache %}
 {% endblock inner_main %}

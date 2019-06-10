@@ -25,6 +25,10 @@
   <div class="row">
     {# Main content #}
     {% block inner_main %}{% endblock inner_main %}
+    {# Journal's metadata are cached for 1 day based on the meta info issue localidentifier, #}
+    {# the meta info issue published status, the directors IDs, the editors IDs and the current language code. #}
+    {# If the meta info issue is not published, the cache timeout is 0. #}
+    {% cache cache_timeout "public_journal_base_journal_meta" meta_info_issue.localidentifier meta_info_issue.is_published directors_cache_key editors_cache_key LANGUAGE_CODE %}
     {# Journal information sidebar #}
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
       <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>
@@ -94,7 +98,6 @@
       <section class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
 
-        {% cache cache_timeout "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id meta_info_issue.is_published directors_cache_key editors_cache_key %}
         <dl>
 
           {% if journal.type.code == 'S' %}
@@ -233,7 +236,6 @@
             <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
           </a>
         </div>
-        {% endcache %}
       </section>
 
       {% if journal_info.email or journal_info.subscription_email or journal_info.phone %}
@@ -277,6 +279,7 @@
       </section>
       {% endif %}
 
+      {# TODO: Do not cache. #}
       <section class="sidebar-block">
         <h2>{% trans "Accès" %}</h2>
         {% if content_access_granted and subscription_type == 'individual' %}
@@ -289,6 +292,7 @@
       </section>
 
     </aside>
+    {% endcache %}
   </div>
 </div>
 

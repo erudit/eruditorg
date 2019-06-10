@@ -133,6 +133,6 @@ def qs_cache_key(qs: models.QuerySet) -> str:
     :returns: the cache key
 
     """
-    if qs.count() == 0:
+    if not qs.exists():
         return ""
     return ",".join([str(o.id) for o in qs.all()])

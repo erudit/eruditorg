@@ -221,6 +221,10 @@ class JournalDetailView(
             issue=last_published_issue,
         )
 
+        # Generate a cache key based on the list of published issues so that the cache is not used
+        # when a new issue is published (or unpublished).
+        context['issues_cache_key'] = qs_cache_key(self.object.published_issues)
+
         return context
 
 
@@ -432,6 +436,10 @@ class IssueDetailView(
         context['contributors'] = self.get_contributors(
             issue=self.object
         )
+
+        # Generate a cache key based on the list of articles so that the cache is not used when a
+        # new article is added (or removed).
+        context['articles_cache_key'] = ','.join([article.localidentifier for article in articles])
 
         return context
 
