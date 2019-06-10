@@ -204,6 +204,7 @@ INSTALLED_APPS = (
     'django_js_reverse',
     'widget_tweaks',
     'rangefilter',
+    'adv_cache_tag',
 )
 
 if EXPOSE_OPENMETRICS:
@@ -302,6 +303,8 @@ CACHES = {
         },
     },
 }
+SHORT_TTL = 60 * 60         # 1 hour
+LONG_TTL = 60 * 60 * 24     # 1 day
 
 ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT = env("ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT")
 

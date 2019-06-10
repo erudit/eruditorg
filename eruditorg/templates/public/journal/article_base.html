@@ -1,12 +1,15 @@
 {% extends "base.html" %}
-{% load cache i18n public_journal_tags staticfiles %}
+{% load adv_cache i18n public_journal_tags staticfiles %}
 
 {% block title %}{{ citation_title_metadata|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
 
 {% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal.name|safe article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
-{% cache cache_timeout "public_article_detail_metatags" article.localidentifier LANGUAGE_CODE %}
+{# Article's metatags are cached for 1 day based on the article localidentifier, #}
+{# the issue published status and the current language code. #}
+{# If the issue is not published, the cache timeout is 0. #}
+{% cache cache_timeout "public_article_base_metatags" article.localidentifier article.issue.is_published LANGUAGE_CODE %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="article">
@@ -95,51 +98,12 @@
 
 {% block structured_data %}
 {{ block.super }}
-{% cache cache_timeout "public_article_detail_structured_data" article.localidentifier LANGUAGE_CODE %}
+{# Article's structured data are cached for 1 day based on the article localidentifier, #}
+{# the issue published status and the current language code. #}
+{# If the issue is not published, the cache timeout is 0. #}
+{% cache cache_timeout "public_article_base_structured_data" article.localidentifier article.issue.is_published LANGUAGE_CODE %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
-      "name": "Érudit"
-    }
-  },{
-    "@type": "ListItem",
-    "position": 2,
-    "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
-      "name": "{% trans 'Revues' %}"
-    }
-  },{
-    "@type": "ListItem",
-    "position": 3,
-    "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}",
-      "name": "{{ article.issue.journal.name }}"
-    }
-  },{
-    "@type": "ListItem",
-    "position": 4,
-    "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}",
-      "name": "{{ article.issue.volume_title_with_pages }}"
-    }
-  },{
-    "@type": "ListItem",
-    "position": 5,
-    "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
-      "name": "{{ citation_title_metadata }}"
-    }
-  }]
-}
-</script>
 {% endblock structured_data %}
 
 {% block body_class %}public static-header{% endblock body_class %}
@@ -169,28 +133,3 @@
   <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}">{{ citation_title_metadata|truncatewords:10 }}</a>
 </li>
 {% endblock breadcrumb %}
-
-{% block content %}
-{% if related_articles %}
-<footer class="container">
-  <h2>{% trans "Autres articles de ce numéro" %}</h2>
-  <div class="row">
-    {% for related_article in related_articles %}
-    {% cache cache_timeout "public_article_detail_related_article" related_article.localidentifier LANGUAGE_CODE %}
-    <article class="col-sm-6 col-md-3">
-      <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}" class="card">
-        <h3 class="card__title">{{ related_article|format_article_html_title }}</h3>
-        {% if related_article.authors|length > 0 %}
-        <p class="card__metadata">{% trans 'Par' %}
-          {% for author in related_article.erudit_object.authors %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}{% endfor %}
-        </p>
-        {% endif %}
-      </a>
-    </article>
-    {% endcache %}
-    {% endfor %}
-  </div>
-
-</footer>
-{% endif %}
-{% endblock content %}

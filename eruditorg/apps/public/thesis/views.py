@@ -1,10 +1,13 @@
 import re
 from collections import OrderedDict, defaultdict
 
+from django.conf import settings
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
@@ -36,6 +39,7 @@ def first_letter_counts(summary):
     return sorted(counts.items())
 
 
+@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
 class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
     """ Displays the home page of thesis repositories. """
     template_name = 'public/thesis/home.html'
@@ -63,6 +67,7 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
         return context
 
 
+@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
 class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
     """ Displays the home page of a collection repository. """
     context_object_name = 'repository'
@@ -169,6 +174,7 @@ class BaseThesisListView(ListView):
         return solr.get_repository_summary(self.repository.solr_name)
 
 
+@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
 class ThesisPublicationYearListView(FallbackObjectViewMixin, BaseThesisListView):
     """ Displays theses for a specific year. """
     template_name = 'public/thesis/collection_list_per_year.html'
@@ -195,6 +201,7 @@ class ThesisPublicationYearListView(FallbackObjectViewMixin, BaseThesisListView)
         return {'year': self.kwargs.get(self.year_url_kwarg)}
 
 
+@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
 class ThesisPublicationAuthorNameListView(FallbackObjectViewMixin, BaseThesisListView):
     """ Displays theses for a specific year. """
     template_name = 'public/thesis/collection_list_per_author_name.html'

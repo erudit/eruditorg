@@ -20,6 +20,7 @@ from django.utils.encoding import force_bytes
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
@@ -190,12 +191,15 @@ class JournalDetailView(
         # Fetches the JournalInformation instance associated to the current journal
         try:
             journal_info = self.object.information
+            context['journal_info'] = journal_info
+            # Generate cache keys based on journal info's directors and editors so that the cache
+            # is not used when a director or editor is added (or removed).
             context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
             context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             journal_info = None
-        else:
-            context['journal_info'] = journal_info
+            context['directors_cache_key'] = None
+            context['editors_cache_key'] = None
 
         # Notes
         context['notes'] = self.journal.erudit_object.get_notes().get(get_language(), []) \
@@ -207,18 +211,29 @@ class JournalDetailView(
         context['issues'] = issues
         last_published_issue = IssueAnnotator.annotate(self.object.last_published_issue, self)
         context['latest_issue'] = last_published_issue
-        context['cache_timeout'] = 60 * 60
+        context['cache_timeout'] = settings.LONG_TTL
         if last_published_issue is not None and last_published_issue.is_in_fedora:
             titles = last_published_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
             context['meta_info_issue'] = last_published_issue
+        else:
+            # If the journal does not have any issue yet, simulate one so the cache template tag
+            # does have something to use to generate the cache key.
+            context['meta_info_issue'] = {
+                'localidentifier': None,
+                'is_published': None,
+            }
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
             journal_info=journal_info,
             issue=last_published_issue,
         )
+
+        # Generate a cache key based on the list of published issues so that the cache is not used
+        # when a new issue is published (or unpublished).
+        context['issues_cache_key'] = qs_cache_key(self.object.published_issues)
 
         return context
 
@@ -289,22 +304,40 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_published_issue
-        context['meta_info_issue'] = context['latest_issue']
-        context['cache_timeout'] = 60 * 60
+        context['cache_timeout'] = settings.LONG_TTL
+        if context['latest_issue'] is not None:
+            context['meta_info_issue'] = context['latest_issue']
+        else:
+            # If the journal does not have any issue yet, simulate one so the cache template tag
+            # does have something to use to generate the cache key.
+            context['meta_info_issue'] = {
+                'localidentifier': None,
+                'is_published': None,
+            }
+
+        # Fetches the JournalInformation instance associated to the current journal
         try:
-            context['journal_info'] = self.journal.information
+            journal_info = self.journal.information
+            context['journal_info'] = journal_info
+            # Generate cache keys based on journal info's directors and editors so that the cache
+            # is not used when a director or editor is added (or removed).
+            context['directors_cache_key'] = qs_cache_key(journal_info.get_directors())
+            context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
-            context['journal_info'] = None
+            journal_info = None
+            context['directors_cache_key'] = None
+            context['editors_cache_key'] = None
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
-            journal_info=context['journal_info'],
+            journal_info=journal_info,
             issue=context['latest_issue'],
         )
 
         return context
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
@@ -397,7 +430,7 @@ class IssueDetailView(
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
         context['journal'] = self.object.journal
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else 0
 
         try:
             context['journal_info'] = self.object.journal.information
@@ -430,6 +463,15 @@ class IssueDetailView(
         context['contributors'] = self.get_contributors(
             issue=self.object
         )
+
+        # Generate a cache key based on the list of articles so that the cache is not used when a
+        # new article is added (or removed).
+        context['articles_cache_key'] = ','.join([article.localidentifier for article in articles])
+
+        # We don't need the directors & editors cache keys because in the context of an issue we
+        # are getting the directors & editors from the XML.
+        context['directors_cache_key'] = None
+        context['editors_cache_key'] = None
 
         return context
 
@@ -597,7 +639,7 @@ class BaseArticleDetailView(
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
         shouldcache = obj.issue.is_published
-        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else 0
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
         # media URL and then remove the media_localid part to get the prefix only.
@@ -618,15 +660,6 @@ class BaseArticleDetailView(
 
         if not obj.issue.is_published:
             context['ticket'] = obj.issue.prepublication_ticket
-
-        # TODO: Get the subscription badge out of the article cached template to get rid of this.
-        active_subscription = self.request.subscriptions.active_subscription
-        context['subscription_cache_key'] = ''
-        if active_subscription is not None:
-            context['subscription_cache_key'] += str(active_subscription.sponsor.pk) \
-                if active_subscription.sponsor is not None else ''
-            context['subscription_cache_key'] += str(active_subscription.organisation.pk) \
-                if active_subscription.organisation is not None else ''
 
         return context
 
@@ -892,6 +925,7 @@ class ArticleRawPdfFirstPageView(
         response.content = get_pdf_first_page(content)
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     """
     Returns an image file embedded in the INFOIMG datastream.
@@ -908,6 +942,7 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
         return str(fedora_object.content.mimetype)
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class GoogleScholarSubscribersView(TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscribers.xml'
@@ -929,6 +964,7 @@ class GoogleScholarSubscribersView(TemplateView):
         return context
 
 
+@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class GoogleScholarSubscriberJournalsView(TemplateView):
     content_type = 'text/xml'
     template_name = 'public/journal/scholar/subscriber_journals.xml'

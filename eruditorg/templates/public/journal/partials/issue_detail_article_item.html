@@ -1,6 +1,5 @@
-{% load cache i18n model_formatters public_journal_tags waffle_tags %}
+{% load i18n model_formatters public_journal_tags waffle_tags %}
 
-{% cache cache_timeout "public_issue_detail_articles_item" article.localidentifier LANGUAGE_CODE article.issue.is_published %}
 <li class="bib-record{% if not article.publication_allowed %} article-restricted{% endif %}">
   <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
     {% spaceless %}
@@ -83,4 +82,3 @@
     {% endif %}
   </div>
 </li>
-{% endcache %}

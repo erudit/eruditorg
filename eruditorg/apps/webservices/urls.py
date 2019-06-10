@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.views.decorators.cache import cache_page
 
 from .views.restrictions import RestrictionsView, RestrictionsByJournalView
 
@@ -8,8 +7,7 @@ app_name = "webservices"
 urlpatterns = [
     url(
         r'^restrictions/$',
-        cache_page(3600 * 24)(RestrictionsView.as_view()),
-        name='restrictions'
+        RestrictionsView.as_view(), name='restrictions'
     ),
     url(
         r'^restrictionsByJournal/(?P<journal_code>\w+)/$',

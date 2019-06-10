@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load cache i18n static %}
+{% load adv_cache i18n static %}
 
 {% block title %}{% trans "Revues par disciplines" %}{% endblock title %}
 
@@ -39,6 +39,8 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+{# Journal list per disciplines is cached for one day based on the language code. #}
+{% cache LONG_TTL "public_journal_list_per_disciplines" LANGUAGE_CODE %}
 <main>
   <header class="main-header sorting-index container-fluid">
       <div class="container">
@@ -67,7 +69,6 @@
         </div>
       </div>
   </header>
-  {% cache FOREVER_TTL "public_journal_list_disciplines" LANGUAGE_CODE %}
   {% for objects_group in sorted_objects %}
   <section class="container-fluid alternating-row">
     <a id="{% if not objects_group.key %}section-void{% else %}{{ objects_group.key }}{% endif %}" class="invisible"></a>
@@ -139,6 +140,6 @@
     {% endfor %}
   </section>
   {% endfor %}
-  {% endcache %}
 </main>
+{% endcache %}
 {% endblock content %}

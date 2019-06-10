@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load cache i18n static widget_tweaks %}
+{% load adv_cache i18n static widget_tweaks %}
 
 {% block title %}{% trans "Revues par ordre alphabétique" %}{% endblock title %}
 
@@ -40,6 +40,8 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+{# Journal list per names & filter form are cached for one day based on the filter form values and the current language code. #}
+{% cache LONG_TTL "public_journal_list_per_names" filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value LANGUAGE_CODE %}
 <main class="container">
   <div class="row">
     <div class="col-sm-8">
@@ -62,7 +64,6 @@
   <section id="id_journal_list_body" class="row">
       <nav class="list-nav">
         <aside class="col-md-3 col-lg-2 sidebar-block filters">
-          {% cache LONG_TTL "public_journal_list_form" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value %}
           <form id="filter_form" action="#" method="get" class="akkordion">
             <h2 class="akkordion-title filter-title" aria-expanded="false" aria-controls="filter-form-content">
               {% trans "Filtres" %}
@@ -103,8 +104,11 @@
               </div>
             </div>
           </form>
-          {% endcache %}
+          {# We must not cache the subscription sponsor badge with the rest of this fragment #}
+          {# because it has to vary based on the current user subscription. #}
+          {% nocache %}
           {% include "public/partials/subscription_sponsor_badge.html" %}
+          {% endnocache %}
         </aside>
         <nav class="col-md-9 col-lg-offset-1 list-header">
           <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
@@ -127,7 +131,6 @@
           </div>
         </nav>
       </nav>
-      {% cache LONG_TTL "public_journal_list_list" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value %}
       <div class="col-md-9 col-lg-offset-1 journals-list">
         {% for objects_group in sorted_objects %}
         <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
@@ -185,7 +188,7 @@
         </div>
         {% endfor %}
       </div>
-      {% endcache %}
     </section>
-</main>
+  </main>
+{% endcache %}
 {% endblock content %}

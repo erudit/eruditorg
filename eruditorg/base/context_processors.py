@@ -34,8 +34,6 @@ def cache_constants(request):
     different expirations.
     """
     return {
-        'SHORT_TTL': 600,       # 10 minutes
-        'MIDDLE_TTL': 1800,     # 30 minutes
-        'LONG_TTL': 3600,       # 1 hour
-        'FOREVER_TTL': 604800,  # 7 days
+        'SHORT_TTL': settings.SHORT_TTL,    # 1 hour
+        'LONG_TTL': settings.LONG_TTL,      # 1 day
     }

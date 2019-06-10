@@ -1,5 +1,5 @@
 {% extends "public/journal/article_base.html" %}
-{% load cache i18n public_journal_tags staticfiles %}
+{% load adv_cache i18n public_journal_tags staticfiles %}
 
 {% block link_rel_tags %}
   {% if previous_article %}
@@ -13,13 +13,57 @@
 
 {% block structured_data %}
 {{ block.super }}
-{% cache cache_timeout "public_article_detail_structured_data" article.localidentifier LANGUAGE_CODE %}
-{% include "public/journal/partials/article_structured_data.html" %}
-{% endcache %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
+      "name": "{% trans 'Revues' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}",
+      "name": "{{ article.issue.journal.name }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 4,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}",
+      "name": "{{ article.issue.volume_title_with_pages }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 5,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
+      "name": "{{ citation_title_metadata }}"
+    }
+  }]
+}
+</script>
 {% endblock structured_data %}
 
 {% block content %}
 {% csrf_token %}
+{# Article's detail content is cached for 1 day based on the article localidentifier, #}
+{# the issue published status, whether it is saved in the citation list, #}
+{# whether the access is granted and the current language code. #}
+{# If the issue is not published, the cache timeout is 0. #}
+{% cache cache_timeout "public_article_detail" article.localidentifier article.issue.is_published in_citation_list content_access_granted LANGUAGE_CODE %}
 <main
     class="container"
     id="article-{{ article.localidentifier }}"
@@ -27,18 +71,13 @@
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
     role="main"
   >
-  {% cache cache_timeout "public_article_detail_content" article.localidentifier content_access_granted in_citation_list LANGUAGE_CODE subscription_cache_key %}
-  {# XSL transformation article render #}
   {{ view.render_xml_contents }}
-  {% endcache %}
 </main>
 
-{{ block.super }}
+{% include "public/journal/partials/article_footer.html" %}
 
-{% cache cache_timeout "public_article_detail_citation" article.localidentifier LANGUAGE_CODE %}
 <div class="hidden">
   {% include "public/journal/partials/article_citation_modal_content.html" %}
 </div>
 {% endcache %}
-
 {% endblock content %}

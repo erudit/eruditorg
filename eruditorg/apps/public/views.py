@@ -4,6 +4,7 @@ import datetime as dt
 import structlog
 import time
 
+from django.conf import settings
 from django.core.cache import cache
 from django.utils import translation
 from django.views.generic import TemplateView
@@ -77,6 +78,6 @@ class HomeView(TemplateView):
                 item['dt_published'] = dt.datetime.fromtimestamp(time.mktime(item.published_parsed))
 
             # Stores the entries in the cache
-            cache.set(entries_cache_key, entries, 60 * 60)  # 1 hour
+            cache.set(entries_cache_key, entries, settings.SHORT_TTL)  # 1 hour
 
         return entries

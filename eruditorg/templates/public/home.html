@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load cache i18n static waffle_tags %}
+{% load adv_cache i18n static waffle_tags %}
 
 {% block title %}{% trans "Cultivez votre savoir" %}{% endblock title %}
 
@@ -39,9 +39,9 @@
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
+{% cache LONG_TTL "public_home" LANGUAGE_CODE %}
 <main role="main">
   <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
-  {% cache LONG_TTL "public_home" LANGUAGE_CODE %}
   {# SEARCH #}
   <header class="home-header">
     <div class="container">

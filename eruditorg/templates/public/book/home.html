@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load humanize i18n staticfiles cache %}
+{% load humanize i18n staticfiles adv_cache %}
 
 {% block title %}{% trans "Livres et actes" %}{% endblock title %}
 
@@ -59,7 +59,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-{% cache LONG_TTL "book_home_content" LANGUAGE_CODE published_books_cache_key %}
+{% cache SHORT_TTL "book_home_content" LANGUAGE_CODE published_books_cache_key %}
 <main>
   <div class="container">
     <div class="row">
