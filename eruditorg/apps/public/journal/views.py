@@ -226,7 +226,7 @@ class JournalDetailView(
             # does have something to use to generate the cache key.
             context['meta_info_issue'] = {
                 'localidentifier': None,
-                'is_published': None,
+                'fedora_updated': None,
             }
 
         # Directors & editors.
@@ -316,7 +316,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
             # does have something to use to generate the cache key.
             context['meta_info_issue'] = {
                 'localidentifier': None,
-                'is_published': None,
+                'fedora_updated': None,
             }
 
         # Fetches the JournalInformation instance associated to the current journal
@@ -434,7 +434,11 @@ class IssueDetailView(
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
         context['journal'] = self.object.journal
-        context['cache_timeout'] = settings.LONG_TTL if shouldcache else 0
+        # If the issue is published, the template should be cached forever (None = forever).
+        # If the issue is not published, the template should not be cached (0 = never).
+        # It's OK to cache the published issue templates forever because we are using the issue's
+        # updated time from Fedora as the cache version.
+        context['cache_timeout'] = None if shouldcache else 0
 
         try:
             context['journal_info'] = self.object.journal.information
@@ -643,7 +647,13 @@ class BaseArticleDetailView(
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
         shouldcache = obj.issue.is_published
-        context['cache_timeout'] = settings.LONG_TTL if shouldcache else 0
+        # If the issue is published, the template should be cached forever (None = forever).
+        # If the issue is not published, the template should not be cached (0 = never).
+        # It's OK to cache the published issue templates forever because we are using the issue's
+        # updated time from Fedora as the cache version.
+        context['cache_timeout'] = None if shouldcache else 0
+        # Issue's update time from Fedora to use as the cache version.
+        context['fedora_updated'] = obj.fedora_object.modified
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
         # media URL and then remove the media_localid part to get the prefix only.

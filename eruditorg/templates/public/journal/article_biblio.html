@@ -72,10 +72,12 @@
 
 {% block content %}
 {% csrf_token %}
-{# Article's biblio content is cached for 1 day based on the article localidentifier, #}
-{# the issue published status, whether it is saved in the citation list and the current language code. #}
-{# If the issue is not published, the cache timeout is 0. #}
-{% cache cache_timeout "public_article_biblio" article.localidentifier article.issue.is_published in_citation_list LANGUAGE_CODE %}
+{# If the issue is published, the article biblio will be cached forever (TTL = None) or until the cache content version change. #}
+{# If the issue is not published, the article biblio will not be cached (TTL = 0). #}
+{# The article's localidentifier is used as a primary key for the cache key. #}
+{# The in_citation_list and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
+{# The article's update time from Fedora is used as the cache content version. #}
+{% cache cache_timeout "public_article_biblio" article.localidentifier in_citation_list LANGUAGE_CODE fedora_updated %}
 <main
     id="article-{{ article.localidentifier }}"
     class="container"

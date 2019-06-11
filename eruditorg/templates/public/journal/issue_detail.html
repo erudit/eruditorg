@@ -90,10 +90,12 @@
   {% endfor %}
 </div>
 
-{# Issue detail is cached for 1 day based on the issue localidentifier, #}
-{# the issue published status, the articles localidentifiers and the current language code. #}
-{# If the issue is not published, the cache timeout is 0. #}
-{% cache cache_timeout "public_issue_detail" issue.localidentifier issue.is_published articles_cache_key LANGUAGE_CODE %}
+{# If the issue is published, the issue detail will be cached forever (TTL = None) or until the cache content version change. #}
+{# If the issue is not published, the issue detail will not be cached (TTL = 0). #}
+{# The issue's localidentifier is used as a primary key for the cache key. #}
+{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The issue's update time from Fedora is used as the cache content version. #}
+{% cache cache_timeout "public_issue_detail" issue.localidentifier LANGUAGE_CODE issue.fedora_updated %}
 {# Issue summary #}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header">
@@ -209,8 +211,11 @@
 {% endblock aside_issue %}
 
 {% block inner_footer %}
-{# Back issues are cached for 1 day based on the issue localidentifier and the current language code. #}
-{% cache LONG_TTL "public_issue_detail_back_issues" issue.localidentifier LANGUAGE_CODE %}
+{# The issue detail will be cached forever (TTL = None) or until the cache content version change. #}
+{# The issue's localidentifier is used as a primary key for the cache key. #}
+{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The issue's update time from Fedora is used as the cache content version. #}
+{% cache None "public_issue_detail_back_issues" issue.localidentifier LANGUAGE_CODE issue.fedora_updated %}
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">
