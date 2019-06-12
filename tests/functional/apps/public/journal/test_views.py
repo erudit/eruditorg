@@ -265,7 +265,7 @@ class TestJournalDetailView:
         assert response.status_code == 200
         assert list(response.context['issues']) == [issue]
 
-    def test_can_embed_the_latest_issue_in_the_context(self):
+    def test_can_embed_the_current_issue_in_the_context(self):
         issue1 = IssueFactory.create()
         issue2 = IssueFactory.create_published_after(issue1)
 
@@ -273,9 +273,9 @@ class TestJournalDetailView:
         response = self.client.get(url)
 
         assert response.status_code == 200
-        assert response.context['latest_issue'] == issue2
+        assert response.context['current_issue'] == issue2
 
-    def test_can_embed_the_latest_issue_external_url_in_the_context(self):
+    def test_can_embed_the_current_issue_external_url_in_the_context(self):
         # If the latest issue has an external URL, it's link properly reflects that (proper href,
         # blank target.
         external_url = 'https://example.com'
@@ -286,8 +286,8 @@ class TestJournalDetailView:
         response = self.client.get(url)
 
         assert response.status_code == 200
-        assert response.context['latest_issue'] == issue2
-        link_attrs = response.context['latest_issue'].extra.detail_link_attrs()
+        assert response.context['current_issue'] == issue2
+        link_attrs = response.context['current_issue'].extra.detail_link_attrs()
         assert external_url in link_attrs
         assert '_blank' in link_attrs
 
@@ -301,7 +301,7 @@ class TestJournalDetailView:
         url = journal_detail_url(issue1.journal)
         response = self.client.get(url)
 
-        assert not response.context['latest_issue'].extra.is_locked()
+        assert not response.context['current_issue'].extra.is_locked()
 
     def test_embeds_subscription_info_to_context(self):
         subscription = JournalAccessSubscriptionFactory(

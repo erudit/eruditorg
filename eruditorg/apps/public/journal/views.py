@@ -209,14 +209,14 @@ class JournalDetailView(
         issues = [
             IssueAnnotator.annotate(issue, self) for issue in self.object.published_issues.all()]
         context['issues'] = issues
-        last_published_issue = IssueAnnotator.annotate(self.object.last_published_issue, self)
-        context['latest_issue'] = last_published_issue
+        current_issue = IssueAnnotator.annotate(self.object.current_issue, self)
+        context['current_issue'] = current_issue
         context['cache_timeout'] = settings.LONG_TTL
-        if last_published_issue is not None and last_published_issue.is_in_fedora:
-            titles = last_published_issue.erudit_object.get_journal_title()
+        if current_issue is not None and current_issue.is_in_fedora:
+            titles = current_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
-            context['meta_info_issue'] = last_published_issue
+            context['meta_info_issue'] = current_issue
         else:
             # If the journal does not have any issue yet, simulate one so the cache template tag
             # does have something to use to generate the cache key.
@@ -228,7 +228,7 @@ class JournalDetailView(
         # Directors & editors.
         context['contributors'] = self.get_contributors(
             journal_info=journal_info,
-            issue=last_published_issue,
+            issue=current_issue,
         )
 
         # Generate a cache key based on the list of published issues so that the cache is not used
@@ -303,10 +303,10 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['letter'] = self.letter
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
-        context['latest_issue'] = self.journal.last_published_issue
+        context['current_issue'] = self.journal.current_issue
         context['cache_timeout'] = settings.LONG_TTL
-        if context['latest_issue'] is not None:
-            context['meta_info_issue'] = context['latest_issue']
+        if context['current_issue'] is not None:
+            context['meta_info_issue'] = context['current_issue']
         else:
             # If the journal does not have any issue yet, simulate one so the cache template tag
             # does have something to use to generate the cache key.
@@ -331,7 +331,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         # Directors & editors.
         context['contributors'] = self.get_contributors(
             journal_info=journal_info,
-            issue=context['latest_issue'],
+            issue=context['current_issue'],
         )
 
         return context

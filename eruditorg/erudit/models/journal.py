@@ -233,12 +233,12 @@ class Journal(FedoraMixin, FedoraDated):
     @cache_fedora_result
     @catch_and_log
     def get_titles(self):
-        last_published_issue = self.last_published_issue
-        if not self.is_in_fedora or not last_published_issue:
+        current_issue = self.current_issue
+        if not self.is_in_fedora or not current_issue:
             titles = {'main': self.name}
         else:
 
-            titles = last_published_issue.erudit_object.get_journal_title()
+            titles = current_issue.erudit_object.get_journal_title()
         return titles
 
     # Journal-related methods and properties
@@ -303,9 +303,7 @@ class Journal(FedoraMixin, FedoraDated):
     # Issues-related methods and properties
     # --
 
-    # PERFORMANCE WARNING: this query is somewhat expensive, call responsibly. We can't cache this
-    # property because the result is a queryset, not actual results.
-    @property
+    @cached_property
     @catch_and_log
     def published_issues(self):
         """ Return the published issues of this Journal. """
@@ -338,13 +336,16 @@ class Journal(FedoraMixin, FedoraDated):
             return self.published_issues.order_by('date_published')
 
     @cached_property
-    def first_published_issue(self):
-        # Published issues are ordered by reverse published date, hence last() to get the first one.
-        return self.published_issues.last()
+    def first_issue_published_on_erudit(self):
+        """ Return the first issue ever published on erudit.org """
+        return self.issues.filter(is_published=True).order_by('date_published').first()
 
     @cached_property
-    def last_published_issue(self):
-        # Published issues are ordered by reverse published date, hence first() to get the last one.
+    def current_issue(self):
+        """ Return the journal's current issue.
+
+        Published issues are ordered by reverse published date, hence first() to get the last one,
+        or in other words, the current issue. """
         return self.published_issues.first()
 
     def is_scientific(self):
@@ -820,7 +821,7 @@ class Issue(FedoraMixin, FedoraDated):
             # a "next_journal" because that means that the journal hasn't stopped publishing, it
             # merely changed its name. We don't want the last issue of the old journal to be stuck
             # in embargo forever.
-            if journal.next_journal is None and self == journal.last_published_issue:
+            if journal.next_journal is None and self == journal.current_issue:
                 return True
             else:
                 return False
