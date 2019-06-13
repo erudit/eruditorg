@@ -1,5 +1,6 @@
 import io
 import datetime
+import re
 
 from bs4 import BeautifulSoup, Tag
 from django.urls import reverse
@@ -583,17 +584,9 @@ def clean(text, small_caps_font='SpectralSC'):
     # Remove any footnotes.
     for node in soup.find_all('a', attrs={'class': 'norenvoi'}):
         node.decompose()
-    # Classes to remove because we can't transform.
-    classes = [
-        'espacefixe',
-        'filet',
-        'surlignage',
-        'tailleg',
-        'taillep',
-    ]
-    for cls in classes:
-        for node in soup.find_all('span', attrs={'class': cls}):
-            del node['class']
+    # Remove all other classes we can't transform.
+    for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
+        del node['class']
     return str(soup)
 
 
