@@ -97,7 +97,7 @@
               {% endif %}
             </h4>
             {% if book.authors %}
-            <p class="card__metadata">{{ book.authors|safe }}</p>
+            <p class="card__metadata">{% if book.contribution %}{% trans "Sous la direction de" %} {% endif %}{{ book.authors|safe }}</p>
             {% endif %}
             {% if book.cover %}
             <div class="row">
