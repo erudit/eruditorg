@@ -40,6 +40,7 @@ class HomeView(TemplateView):
         context['new_journals'] = Journal.objects.filter(is_new=True)
         context['latest_issues'] = Issue.internal_objects.filter(
             date_published__isnull=False, is_published=True) \
+            .prefetch_related('journal__collection', 'journal__disciplines') \
             .select_related('journal').order_by('-date_published', 'journal_id')[:20]
 
         # Includes the 'apropos' news ; note that this is a temporary behavior as
