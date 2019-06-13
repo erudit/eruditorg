@@ -54,7 +54,6 @@ django-widget-tweaks>=1.4.3
 influxdb>=2.12.0,<2.13
 Babel>=2.3.4,<2.4
 openpyxl>=2.3.5,<2.4
-diskcache>=3.0.0,<4.0.0
 requests[socks]>=2.19
 django-waffle>=0.16.0
 django-redis>=4.9.0,<4.10
