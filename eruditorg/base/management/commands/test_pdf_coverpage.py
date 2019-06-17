@@ -12,6 +12,7 @@ FEDORA_IDS = [
     'erudit:erudit.approchesind0522.approchesind04155.1054332ar',
     'erudit:erudit.arbo139.arbo04278.1055879ar',
     'erudit:erudit.bioethics04274.bioethics04449.1058139ar',
+    'erudit:erudit.bl1000329.bl1005371.6625ac',
     'erudit:erudit.bo02111.bo03553.1044260ar',
     'erudit:erudit.cqd27.cqd2435.600855ar',
     'erudit:erudit.crs123.crs04254.1055716ar',
