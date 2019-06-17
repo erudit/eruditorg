@@ -787,6 +787,22 @@ class TestArticleDetailView:
         assert '<meta name="citation_doi" content="https://doi.org/10.7202/1009368ar" />' in html
         assert '<a href="https://doi.org/10.7202/1009368ar" class="clipboard-data">' in html
 
+    def test_unicode_combining_characters(self):
+        article = ArticleFactory(
+            from_fixture='1059577ar',
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Pre-combined character is present (ă = ă)
+        assert '<em>Studii de lingvistică</em>' in html
+        # Combining character is not present (ă = a + ˘)
+        assert '<em>Studii de lingvistică</em>' not in html
+
 
 @unittest.mock.patch.object(
     Issue,

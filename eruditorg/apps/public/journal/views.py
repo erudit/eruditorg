@@ -6,6 +6,7 @@ import io
 import pysolr
 import random
 import structlog
+import unicodedata
 
 from django.conf import settings
 from django.shortcuts import redirect
@@ -702,6 +703,10 @@ class BaseArticleDetailView(
         lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
         html_transform = et.XSLT(lxsl)
         html_content = html_transform(erudit_object._dom)
+
+        # Combine unicode characters (like "a") followed by a unicode combining character (like "˘")
+        # by the unicode pre-combined version (like ă).
+        html_content = unicodedata.normalize('NFC', str(html_content))
 
         return mark_safe(html_content)
 
