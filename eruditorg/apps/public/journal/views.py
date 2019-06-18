@@ -199,6 +199,9 @@ class JournalDetailView(
             context['editors_cache_key'] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             journal_info = None
+            # If the journal does not have a journal info, simulate one so the cache template tag
+            # does have something to use to generate the cache key.
+            context['journal_info'] = {'updated': None}
             context['directors_cache_key'] = None
             context['editors_cache_key'] = None
 

@@ -239,7 +239,7 @@ class TestJournalDetailView:
         assert response_1.status_code == response_2.status_code == 200
 
         assert response_1.context['journal_info'] == journal_info
-        assert 'journal_info' not in response_2.context
+        assert response_2.context['journal_info'] == {'updated': None}
 
     def test_can_display_when_issues_have_a_space_in_their_number(self, monkeypatch):
         monkeypatch.setattr(Issue, 'has_coverpage', unittest.mock.Mock(return_value=True))
