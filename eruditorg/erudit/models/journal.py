@@ -1485,6 +1485,7 @@ class JournalInformation(models.Model):
     team = models.TextField(verbose_name=_('Équipe'), blank=True, null=True)
     contact = models.TextField(verbose_name=_('Coordonnées'), blank=True, null=True)
     partners = models.TextField(verbose_name=_('Partenaires'), blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
 
     def get_directors(self):
         return self.contributor_set.all().filter(type='D')
