@@ -203,6 +203,13 @@ class SubscriptionMiddleware(MiddlewareMixin):
 
         # The subscriber_id field is URL-escaped in the token. It needs to be unescaped before use.
         subscriber_id = unquote(fields[1])
+        structlogger.info(
+            'CASA',
+            msg='Successful authorization.',
+            subscriber_id=subscriber_id,
+            token=token,
+            user_ip=user_ip,
+        )
 
         return subscriber_id
 
