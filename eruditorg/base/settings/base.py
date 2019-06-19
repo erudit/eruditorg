@@ -82,6 +82,11 @@ env = environ.Env(
     ANALYTICS_HOTJAR_TRACKING_CODE=(str, None),
     ANALYTICS_GOOGLE_TRACKING_CODE=(str, None),
 
+    GOOGLE_CASA_KEY=(str, None),
+
+    REDIS_HOST=(str, None),
+    REDIS_PORT=(int, None),
+    REDIS_INDEX=(int, None),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 
@@ -502,3 +507,13 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
+
+# Google CASA
+# -----------
+GOOGLE_CASA_KEY = env('GOOGLE_CASA_KEY')
+
+# Redis
+# -----
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
+REDIS_INDEX = env('REDIS_INDEX')
