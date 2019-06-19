@@ -82,7 +82,9 @@
             </span>
             {% endif %}
           </h1>
-        {% if toc.book_author %}<p class="book-authors">{{ toc.book_author }}</p>{% endif %}
+        {% if toc.book_author %}
+          <p class="book-authors">{% if book.contribution %}{% trans "Sous la direction de" %} {% endif %}{{ toc.book_author }}</p>
+        {% endif %}
         {% if toc.book_description %}
         <div class="main-header__intro">
           {{ toc.book_description|safe }}
