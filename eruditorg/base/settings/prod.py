@@ -145,9 +145,9 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
+            'formatter': 'structlog'
         },
         'cron_console': {
             'level': 'ERROR',
@@ -239,7 +239,7 @@ LOGGING = {
         },
         'core.subscription.middleware': {
             'level': 'INFO',
-            'handlers': ['referer', ],
+            'handlers': ['referer', 'console', ],
             'propagate': False,
         },
         'erudit.fedora': {
