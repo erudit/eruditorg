@@ -1,5 +1,6 @@
 import logging
 import redis
+import structlog
 
 from base64 import urlsafe_b64decode
 from binascii import unhexlify
@@ -16,6 +17,7 @@ from django.conf import settings
 from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
+structlogger = structlog.getLogger(__name__)
 
 
 class SubscriptionMiddleware(MiddlewareMixin):
@@ -122,6 +124,12 @@ class SubscriptionMiddleware(MiddlewareMixin):
         components = token.split(':')
         if len(components) != 2:
             # Badly formed token.
+            structlogger.info(
+                'CASA',
+                msg='Badly formed token.',
+                token=token,
+                user_ip=user_ip,
+            )
             return False
 
         # The CASA token components are encoded using Base-64 encoding suitable for URLs. They need
@@ -136,28 +144,61 @@ class SubscriptionMiddleware(MiddlewareMixin):
             data = cipher.decrypt_and_verify(payload[:-16], payload[-16:])
         except ValueError:
             # Either the message has been modified or it didn’t come from Google Scholar.
+            structlogger.info(
+                'CASA',
+                msg='Decryption failed.',
+                token=token,
+                user_ip=user_ip,
+            )
             return False
 
         # Allow up to three times to handle user clicking on a search result a few times
         # (e.g., comparing figures in a few papers etc).
         if self._nonce_count(nonce) > 3:
+            structlogger.info(
+                'CASA',
+                msg='Token used more than 3 times.',
+                token=token,
+                user_ip=user_ip,
+            )
             return False
 
         fields = data.decode().split(':')
         if len(fields) < 3:
             # Badly formatted payload.
+            structlogger.info(
+                'CASA',
+                msg='Badly formed payload.',
+                token=token,
+                user_ip=user_ip,
+            )
             return False
 
         # The timestamp in the token is the number of microseconds since Unix Epoch.
         timestamp = fields[0]
-        if int(datetime.now().timestamp() * 1000000) - int(timestamp) > 60 * 60 * 1000000:
+        if int(datetime.now().timestamp() * 1e6) - int(timestamp) > 60 * 60 * 1e6:
             # Token is too old and is no longer valid.
+            structlogger.info(
+                'CASA',
+                msg='Token is older than 1 hour.',
+                time_now=datetime.now().isoformat(),
+                time_token=datetime.fromtimestamp(int(timestamp) / 1e6).isoformat(),
+                token=token,
+                user_ip=user_ip,
+            )
             return False
 
         # The ip_subnet field is URL-escaped in the token. It needs to be unescaped before use.
         ip_subnet = unquote(fields[2])
         if ip_address(user_ip) not in ip_network(ip_subnet):
             # User IP is outside the IP subnet the token is valid for.
+            structlogger.info(
+                'CASA',
+                msg='IP address not in subnet.',
+                ip_subnet=ip_subnet,
+                token=token,
+                user_ip=user_ip,
+            )
             return False
 
         # The subscriber_id field is URL-escaped in the token. It needs to be unescaped before use.
