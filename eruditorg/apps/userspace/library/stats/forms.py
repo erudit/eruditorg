@@ -1,9 +1,9 @@
 import datetime as dt
+import typing
 from django import forms
-from django.utils.translation import gettext as _
-from apps.userspace.library.shortcuts import get_last_year_of_subscription
-
-current_year = dt.datetime.now().year
+from django.utils.translation import (
+    ugettext_lazy as _,
+)
 
 FORMAT_CHOICES = [
     ('csv', 'CSV'),
@@ -12,34 +12,33 @@ FORMAT_CHOICES = [
 ]
 
 MONTH_CHOICES = [('', '')] + [
-    (month, _(dt.date(2000, month, 1).strftime("%B"))) for month in range(1, 13)
+    (str(month), _(dt.date(2000, month, 1).strftime("%B"))) for month in range(1, 13)
 ]
 
 
 class CounterReport(forms.Form):
-    def __init__(self, organisation=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    month_start = forms.TypedChoiceField(choices=MONTH_CHOICES, required=False, coerce=int)
+    month_end = forms.TypedChoiceField(choices=MONTH_CHOICES, required=False, coerce=int)
+    format = forms.ChoiceField(choices=FORMAT_CHOICES, required=False)
 
-        end_year = get_last_year_of_subscription(organisation)
-        if end_year is None:
-            end_year = current_year
-        else:
-            end_year = end_year if end_year <= current_year else current_year
+    def __init__(self, form_info, end_year, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.form_info = form_info
 
         year_choices = [('', '')] + [
-            (y, y) for y in range(end_year, end_year - (end_year - 2008), -1)
+            (str(y), str(y)) for y in range(end_year, 2008, -1)
         ]
 
         year_period_choices = [('', '')] + [
-            (y, y) for y in range(end_year, end_year - (end_year - 2010), -1)
+            (str(y), str(y)) for y in range(end_year, 2010, -1)
         ]
 
-        self.fields['year'] = forms.ChoiceField(choices=year_choices, required=False)
-        self.fields['year_start'] = forms.ChoiceField(choices=year_period_choices, required=False)
-        self.fields['year_end'] = forms.ChoiceField(choices=year_period_choices, required=False)
-        self.fields['month_start'] = forms.ChoiceField(choices=MONTH_CHOICES, required=False)
-        self.fields['month_end'] = forms.ChoiceField(choices=MONTH_CHOICES, required=False)
-        self.fields['format'] = forms.ChoiceField(choices=FORMAT_CHOICES, required=False)
+        self.fields['year'] = forms.TypedChoiceField(choices=year_choices, required=False,
+                                                     coerce=int)
+        self.fields['year_start'] = forms.TypedChoiceField(choices=year_period_choices,
+                                                           required=False, coerce=int)
+        self.fields['year_end'] = forms.TypedChoiceField(choices=year_period_choices,
+                                                         required=False, coerce=int)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -80,3 +79,38 @@ class CounterJR1GOAForm(CounterReport):
     report_type = forms.CharField(
         initial="counter-jr1-goa", widget=forms.HiddenInput()
     )
+
+
+class StatsFormInfo(typing.NamedTuple):
+    code: str
+    form_class: typing.Type[CounterReport]
+    tab_label: str
+    title: str
+    description: str
+    counter_release: str
+
+    @property
+    def submit_name(self):
+        return 'submit-{}'.format(self.code)
+
+
+STATS_FORMS_INFO = [
+    StatsFormInfo(
+        code='counter-jr1',
+        form_class=CounterJR1Form,
+        tab_label=_('JR1'),
+        title=_('Journal Report 1 (R4)'),
+        description=_("Nombre de requêtes réussies d’articles en texte intégral par mois et par "
+                      "revue"),
+        counter_release='R4',
+    ),
+    StatsFormInfo(
+        code='counter-jr1-goa',
+        form_class=CounterJR1GOAForm,
+        tab_label=_('JR1_GOA'),
+        title=_('Journal Report 1 GOA (R4)'),
+        description=_("Nombre de requêtes réussies d’articles en libre accès en texte intégral par "
+                      "mois et par revue"),
+        counter_release='R4',
+    )
+]
