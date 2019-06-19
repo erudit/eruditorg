@@ -1885,10 +1885,12 @@
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
       {% if content_access_granted and not only_display %}
       <xsl:apply-templates select="grannexe"/>
-      <xsl:apply-templates select="grnote"/>
       {% endif %}
       <xsl:apply-templates select="merci"/>
       <xsl:apply-templates select="grnotebio"/>
+      {% if content_access_granted and not only_display %}
+      <xsl:apply-templates select="grnote"/>
+      {% endif %}
       {% if not is_of_type_roc or only_display == 'biblio' %}
       <xsl:apply-templates select="grbiblio"/>
       {% endif %}

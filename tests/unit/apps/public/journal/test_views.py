@@ -3,6 +3,7 @@ import os
 import pytest
 import unittest.mock
 
+from bs4 import BeautifulSoup
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
@@ -802,6 +803,25 @@ class TestArticleDetailView:
         assert '<em>Studii de lingvistică</em>' in html
         # Combining character is not present (ă = a + ˘)
         assert '<em>Studii de lingvistică</em>' not in html
+
+    def test_acknowledgements_and_footnotes_sections_order(self):
+        article = ArticleFactory(
+            from_fixture='1060048ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        partiesann = dom.find_all('section', {'class': 'partiesann'})[0]
+        sections = partiesann.find_all('section')
+        # Check that acknowledgements are displayed before footnotes.
+        assert sections[0].attrs['id'] == 'merci'
+        assert sections[1].attrs['id'] == 'grnote'
 
 
 @unittest.mock.patch.object(

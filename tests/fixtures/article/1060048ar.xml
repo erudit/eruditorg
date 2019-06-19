@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1060048ar" typeart="article" lang="fr" ordseq="7" horstheme="oui"><admin><infoarticle><idpublic scheme="doi">10.7202/1060048ar</idpublic><pagination>
+            <ppage>148</ppage>
+            <dpage>179</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="approchesind0522" lang="fr"><titrerev>Approches inductives</titrerev><sstitrerev>Travail intellectuel et construction des connaissances</sstitrerev><titrerevabr>approchesind</titrerevabr><idissnnum>2292-0005</idissnnum><directeur sexe="masculin"><nompers><prenom>Jason</prenom><nomfamille>Luckerhoff</nomfamille></nompers></directeur><directeur sexe="masculin"><nompers><prenom>François</prenom><nomfamille>Guillemette</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><fonction lang="fr">Rédacteur invité</fonction><nompers><prenom>François</prenom><nomfamille>Guillemette</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><fonction lang="fr">Rédacteur invité</fonction><nompers><prenom>Jason</prenom><nomfamille>Luckerhoff</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><fonction lang="fr">Rédactrice invitée</fonction><nompers><prenom>Jennifer</prenom><nomfamille>Denis</nomfamille></nompers></redacteurchef></revue><numero id="approchesind04618"><volume>6</volume><nonumero>1</nonumero><pub><periode>Hiver</periode><annee>2019</annee></pub><pubnum><date typedate="publication">2019-06-03</date></pubnum><grtheme id="th1"><theme>L’induction dans les méthodes de collecte et d’analyse des données</theme></grtheme></numero><editeur><nomorg>Université du Québec à Trois-Rivières</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Approches inductives</nomorg>, 2019</droitsauteur><droitsauteur><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://creativecommons.org/licenses/by-sa/3.0/" xlink:actuate="onRequest" xlink:show="replace" xlink:type="simple"><objetmedia flot="ligne"><image typeimage="forme" xlink:href="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" xlink:actuate="onLoad" xlink:show="embed" xlink:type="simple"/></objetmedia></liensimple></droitsauteur></admin><liminaire><grtitre><surtitre>Hors-thème</surtitre>
+                <titre>Les enjeux éthiques de la formation clinique en ergothérapie</titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Marie-Josée</prenom><nomfamille>Drolet</nomfamille></nompers><affiliation><alinea>Université du Québec à Trois-Rivières, Canada</alinea></affiliation></auteur><auteur id="au2"><nompers><prenom>Anick</prenom><nomfamille>Sauvageau</nomfamille></nompers><affiliation><alinea>Université du Québec à Trois-Rivières, Canada</alinea></affiliation></auteur><auteur id="au3"><nompers><prenom>Nancy</prenom><nomfamille>Baril</nomfamille></nompers><affiliation><alinea>Université du Québec à Trois-Rivières, Canada</alinea></affiliation></auteur><auteur id="au4"><nompers><prenom>Rébecca</prenom><nomfamille>Gaudet</nomfamille></nompers><affiliation><alinea>Université du Québec à Trois-Rivières, Canada</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>Les stages occupent une place centrale dans la formation des futures ergothérapeutes, mais les enjeux éthiques de la formation clinique en ergothérapie sont peu documentés. Une étude auprès de 23 ergothérapeutes ayant de l’expérience comme superviseur de stage<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> a été menée afin d’accroître les données sur cet aspect de la profession. Il ressort des entretiens qualitatifs individuels semi-dirigés réalisés avec les participantes que ceux-ci vivent tous des enjeux éthiques comme formateurs cliniques. L’analyse des verbatims fait émerger des enjeux correspondant à six thèmes, soit : 1) les conflits de loyautés multiples; 2) les étudiantes en difficulté ou en situation d’échec; 3) les tensions entre quatre postures éthiques; 4) l’enseignement de l’idéal, du possible ou de rien du tout; 5) les difficultés à soutenir les compétences éthiques et culturelles; 6) les iniquités reliées à la formation clinique. L’étude révèle notamment des enjeux inédits et préoccupants. Puisque certains d’entre eux peuvent occasionner de la souffrance chez la superviseure et la stagiaire, une réflexion critique sur ce rôle de gardienne de la profession s’impose.</alinea></resume><grmotcle lang="fr"><motcle>Stage</motcle><motcle>supervision</motcle><motcle>éducation</motcle><motcle>éthique</motcle><motcle>réadaptation</motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><titre>Introduction</titre><para id="pa1"><no>1</no><alinea>La formation clinique fait partie intégrante du parcours universitaire des étudiants en ergothérapie autant au Canada (Canadian Association of Occupational Therapist [CAOT] &amp; Association of Canadian Occupational Therapy University Programs [ACOTUP], 2012) qu’ailleurs dans le monde. Pour qu’un programme universitaire soit accrédité à décerner le diplôme menant à l’exercice de la profession, la Fédération mondiale des ergothérapeutes (FME) exige qu’un minimum de mille heures de stage soit effectué par l’aspirante ergothérapeute (World Federation of Occupational Therapy [WFOT], 2016). Deux principaux arguments sont avancés pour justifier cette exigence. D’une part, la formation clinique est essentielle au développement des compétences requises pour exercer la profession (Holmes et al., 2010). D’autre part, les stages constituent des ponts nécessaires entre les apprentissages réalisés en classe et la réalité terrain de la pratique (Jung, Sainsbury, Grum, Wilkins, &amp; Tryssenaar, 2002). </alinea></para><para id="pa2"><no>2</no><alinea>Les écrits portant sur la formation clinique en ergothérapie sont nombreux. La majorité des
+          124 écrits recensés par Roberts, Hooper, Wood et King (2015) discutent des différents
+          curriculums des programmes universitaires, de la perception des étudiants de leurs
+          expériences de stage et des ressources pédagogiques pouvant soutenir les superviseurs. Sur
+          ce dernier point, puisque la formation clinique continue à être la pierre angulaire de la
+          préparation clinique des étudiants en ergothérapie (Aiken, Menaker, &amp; Barsky, 2001) et
+          qu’une minorité de superviseurs sont formés en pédagogie (Cardinal, Couturier, Savard,
+          Tremblay, &amp; Desmarais, 2014), plusieurs écrits proposent des cadres, des modèles et
+          d’autres ressources aux ergothérapeutes pour les outiller dans ce rôle pédagogique afin
+          d’assurer aux étudiants une formation clinique de qualité (Cardinal et al., 2014;
+          Christie, Joyce, &amp; Moeller, 1985; Kasar &amp; Muscari, 2000). Car « l’expérience
+          professionnelle à elle seule ne suffit pas pour exercer des fonctions de supervision »
+          (Cardinal et al., 2014, p.<marquage typemarq="gras"> </marquage>44). De nombreux écrits se
+          penchent également sur le problème récurrent du manque de places de stages en ergothérapie
+          et proposent des solutions pour que tout étudiant ait accès aux mille heures de formation
+          clinique exigées par la FME (Clampin, 2012; Jung et al., 2002; Kirke, Layton, &amp; Sim,
+          2007; Rodger et al., 2008; Sloggett, Kim, &amp; Cameron, 2003; Thomas et al.,
+          2007).</alinea></para><para id="pa3"><no>3</no><alinea>Bien que certains de ces écrits discutent indirectement d’enjeux éthiques reliés à la formation clinique, rares sont les écrits qui ont, à ce jour, spécifiquement documenté les enjeux éthiques de la formation clinique en ergothérapie. Comme l’observent Bushby, Chan, Druif, Ho et Kinsella (2015), les enjeux éthiques de la pratique ergothérapique sont en général peu documentés. Cela est d’autant plus vrai lorsqu’on s’intéresse à la formation clinique. Quelques études seulement abordent certains enjeux éthiques que pose la supervision de stagiaires en ergothérapie. Par exemple, Barton et al. (2013), de même que De Witt (2016) ont montré que le superviseur peut vivre un conflit entre son rôle de clinicien et celui de formateur clinique et être ainsi partagé entre ses obligations envers la clientèle et celles envers le stagiaire. Ce conflit est abondamment documenté en psychologie où le clinicien qui accepte de prendre des stagiaires est appelé à vivre un conflit de loyauté envers les deux personnes vulnérables sous sa responsabilité, soit le client auquel il veut offrir les meilleurs services et le stagiaire à qui il entend prodiguer un encadrement propice à ses apprentissages et au développement de ses compétences (Barnett, Goodyear, Cornish, &amp; Lichtenberg, 2007; Hambrick, Pimentel, &amp; Albano, 2009; Rubin, 1997). Plus encore, le superviseur peut être confronté à des conflits de loyautés multiples, envers la profession, l’établissement, la clientèle, le stagiaire, etc. (Copeland, Dean, &amp; Wladkowski, 2011; Govender, 2015; Luhanga, Myrick, &amp; Yonge, 2010).</alinea></para><para id="pa4"><no>4</no><alinea>Drake et Irurita (1997), Ilott (1996), James et Musselman (2005) et Le Maistre, Boudreau et Paré (2006) se sont, pour leur part, intéressés aux cas d’étudiants en difficulté ou en situation d’échec. Ils ont montré que ces situations sont vécues difficilement par les ergothérapeutes qui sont peu confortables dans leur rôle de certificateurs, voire de gardiens de la profession (<marquage typemarq="italique">gatekeepers</marquage>) et avec le fait de faire échouer un étudiant. Cet enjeu (<marquage typemarq="italique">failing to fail incompetent trainees</marquage>) est abondamment documenté en sciences infirmières. Comme les ergothérapeutes, les infirmières ont tendance à donner le bénéfice du doute aux étudiantes, voire à accorder un résultat de succès à des stagiaires potentiellement incompétentes ou à risque pour la clientèle, et ce, pour diverses raisons liées à la nature bienveillante (<marquage typemarq="italique">caring</marquage>) de la profession, au manque de formation en pédagogie, au peu de soutien dans leur rôle de superviseur ou au déficit de courage éthique que requiert un tel processus de décision (Black, Curzio, &amp; Terry, 2014; Gopee, 2008; Luhanga et al., 2010; Yepes-Rios et al., 2016). Pour sa part, Lemay (2002) estime que le rôle de superviseur est en lui-même lié à un paradoxe où deux types d’autorité sont en conflit, soit l’autorité du formateur (posture pédagogique basée sur la confiance et la proximité) et l’autorité du certificateur (posture normative basée sur la neutralité et la distance), ce qui complexifie l’accompagnement et l’évaluation des stagiaires. Au final, estime Lemay, le formateur est confronté à deux injonctions paradoxales impossibles à réconcilier.</alinea></para><para id="pa5"><no>5</no><alinea>D’autres enjeux éthiques ne sont pas documentés en ergothérapie, mais le sont dans d’autres
+          disciplines notamment en éducation, en médecine, en psychologie, en sciences infirmières
+          ou en travail social. Des exemples de tels enjeux sont les suivants : 1) des clients qui
+          sont impliqués dans la formation d’étudiants sans qu’ils n’aient donné leur consentement
+          (Torrance, Mansell, &amp; Wilson, 2012; Waterbury, 2001); 2) des formateurs ayant accès à
+          des informations confidentielles au sujet de leurs stagiaires à leur insu (Luhanga et al.,
+          2010) et qui peuvent les transmettre à des tiers dont à d’autres stagiaires (Desaulniers,
+          2002); 3) des superviseurs ayant tendance à abuser du pouvoir qu’ils détiennent dans leur
+          relation avec des stagiaires (Copeland et al., 2011; Desaulniers, 2002; Pope &amp; Vetter,
+          1992); 4) des formateurs manquant d’objectivité dans l’évaluation des compétences de
+          stagiaires (Desaulniers, 2002; Lemay, 2002); 5) des superviseurs qui sont peu formés à
+          l’éthique et donc peu capables de soutenir le développement des compétences éthiques des
+          stagiaires (Barnett et al., 2007; Gopee, 2008; Pope &amp; Vetter, 1992); 6) les valeurs
+          qui devraient être transmises par le formateur, que celui-ci ait reçu une formation à
+          l’éthique ou non (Desaulniers, 2002). </alinea></para><para id="pa6"><no>6</no><alinea>L’étude dont une partie des résultats est présentée dans cet article avait pour objectif de
+          documenter les enjeux éthiques de la formation clinique en ergothérapie et de repérer des
+          pistes de solution pour les résoudre. Puisque la formation clinique occupe une place
+          cruciale dans la formation des futurs ergothérapeutes, que les superviseurs ont un impact
+          majeur sur l’identité professionnelle des étudiants (De Swardt, van Rensburg, &amp;
+          Oosthuizen, 2014; Maclellan, Lordly, &amp; Gingras, 2011) et qu’il est souhaité que cette
+          formation soit de qualité, la documentation de ces enjeux et de leurs solutions s’avère
+          incontournable. </alinea></para></section1><section1 id="s1n2"><no>2</no><titre>1. Aspects méthodologiques : les participantes, la collecte et l’analyse des
+        données</titre><para id="pa7"><no>7</no><alinea>Le présent article porte essentiellement sur les résultats de l’étude en ce qui a trait aux
+          enjeux éthiques (ceux relatifs aux solutions seront publiés ultérieurement). La
+          méthodologie utilisée pour la collecte et l’analyse des données est d’abord brièvement
+          expliquée, de même que certaines caractéristiques des participantes. Les types d’enjeux
+          sont ensuite présentés et exemplifiés à l’aide d’extraits des entrevues puis les
+          principaux constats qui en ressortent font l’objet de la discussion. Étant donné l’état
+          limité des connaissances sur le sujet, un devis inductif de nature qualitative a été mis
+          en place (DePoy &amp; Gitlin, 2011). Aussi, comme peu d’études empiriques ont documenté
+          les perceptions d’ergothérapeutes sur leurs expériences de supervision (Richard, 2008), la
+          participation d’ergothérapeutes ayant fait de la formation clinique était primordiale.
+          Pour recruter les participantes, l’Ordre des ergothérapeutes du Québec (OEQ) a transmis
+          une invitation à participer à l’étude aux ergothérapeutes acceptant d’être sollicités pour
+          prendre part à des recherches. Pour participer à l’étude, il suffisait d’être
+          ergothérapeute et d’avoir supervisé au moins un stagiaire. Pour compléter l’échantillon,
+          des ergothérapeutes connues de l’équipe de recherche et ayant de l’expérience comme
+          superviseur ont été sollicitées. Vingt-trois ergothérapeutes (n=23) ayant de l’expérience
+          en supervision ont pris part à la recherche.</alinea></para><para id="pa8"><no>8</no><alinea>Des entrevues qualitatives individuelles semi-dirigées de 45 à 90 minutes ont été réalisées
+          par téléphone avec les participantes. Elles ont été enregistrées sur une bande
+          audionumérique pour en permettre la transcription. Le schéma d’entrevue comportait deux
+          sections : une consacrée aux enjeux éthiques que soulève, le cas échéant, la formation
+          clinique et une autre consacrée aux manières de résoudre ces derniers, si enjeux il y a.
+          Ce schéma était constitué de questions ouvertes pour permettre aux participantes de
+          partager librement leurs perceptions sur des sujets abordés. Il leur a été transmis par
+          courriel, préalablement aux entrevues, pour qu’ils puissent s’y préparer. Un questionnaire
+          sociodémographique complétait la collecte des données. Par ailleurs, il est à noter qu’une
+          certification éthique pour cette étude a été octroyée par le comité d’éthique de la
+          recherche avec des êtres humains de l’UQTR, que le consentement écrit des participantes a
+          été obtenu et qu’une compensation de 25 $ a été remise à chacun.</alinea></para><para id="pa9"><no>9</no><alinea>L’analyse des verbatims a été réalisée par une équipe de quatre analystes. La lecture
+          répétée des trames narratives collectées et la concertation des interprétations ont permis
+          la création graduelle des thèmes visant à capturer la signification que les
+          ergothérapeutes attribuent aux enjeux éthiques que soulève la formation clinique et aux
+          moyens de les résoudre. Précisons enfin quelques concepts clés au coeur de cette étude.
+          L’éthique correspond à une discipline philosophique qui a pour objet d’intérêt les valeurs
+          qui devraient présider le vivre ensemble (Drolet, 2014). Il s’ensuit qu’un enjeu éthique
+          correspond à toute situation susceptible de compromettre le respect d’au moins une valeur
+          (Drolet, 2018; Swisher, Arslanian, &amp; Davis, 2005). Enfin, selon Glaser (1994), les
+          trois domaines de l’éthique correspondent aux domaines individuel (micro-environnement),
+          organisationnel (méso-environnement) et sociétal (macro-environnement). Tandis que le
+          micro-environnement concerne les individus et leurs interactions, le méso-environnement a
+          trait aux relations entre les individus et les organisations, et le macro-environnement
+          regroupe les relations entre les individus, les organisations et la société.</alinea></para></section1><section1 id="s1n3"><no>3</no><titre>2. Résultats</titre><para id="pa10"><no>10</no><alinea>Maintenant que le contexte de la recherche a été décrit, de même que les méthodes utilisées
+          pour atteindre l’objectif de l’étude, cette section présente les résultats de la recherche
+          ayant trait aux enjeux éthiques de la formation clinique en ergothérapie. Après avoir
+          énoncé les principales thématiques qui émergent des données, chacune d’elle est expliquée
+          et illustrée par des extraits des verbatims des entretiens réalisés avec les
+          participantes.</alinea></para><section2 id="s2n1"><no>3.
+				1</no><titre>2.1 Enjeux éthiques</titre><para id="pa11"><no>11</no><alinea>Bien que des participantes aient tendance à discuter plus aisément et spontanément des enjeux éthiques qu’ils rencontrent comme cliniciens, tous ont rapporté vivre des enjeux éthiques lorsqu’ils supervisent des stagiaires. Six unités de sens émergent des données d’entrevues analysées (voir la Figure 1). Tandis que les conflits de loyautés multiples sont l’enjeu éthique le plus discuté, traiter avec des étudiants en difficulté ou en situation d’échec représente l’enjeu éthique le plus éprouvant pour les formateurs cliniques. Le superviseur vit aussi des tensions entre quatre postures éthiques parfois difficiles à concilier. Il hésite de plus entre enseigner l’idéal ou le possible, voire à prendre des stagiaires, notamment dans le contexte actuel de surcharge de travail, de pression de performance et de reddition de compte. Par ailleurs, des superviseurs se sentent peu outillés pour soutenir le développement des compétences éthiques ou culturelles des étudiants. Enfin, certains superviseurs notent des iniquités en lien avec la formation clinique.</alinea></para><figure id="fi1">
+        <no><marquage typemarq="italique">Figure 1</marquage></no>
+        <legende lang="fr">
+          <titre>Les enjeux éthiques de la formation clinique</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa12"><no>12</no><alinea>Les paragraphes qui suivent décrivent plus en détail ces enjeux. De nombreux extraits des entretiens réalisés avec les participantes illustrent les propos.</alinea></para><section3 id="s3n1"><no>3.
+				1.
+				1</no><titre>2.1.1 Conflits de loyautés multiples</titre><para id="pa13"><no>13</no><alinea>L’ergothérapeute qui supervise maintient diverses loyautés en raison de ses responsabilités professionnelles à l’égard des stagiaires, des clients, de l’équipe avec laquelle il collabore, de l’établissement au sein duquel il évolue, de sa profession, de l’université de provenance des stagiaires et à l’égard de lui-même (voir la Figure<marquage typemarq="gras"> </marquage>2). Or, conjuguer ces multiples loyautés ne va pas de soi lorsque des conflits se présentent entre elles ou certaines d’entre elles. Par exemple, des participantes ont dit se sentir tiraillées entre les besoins des stagiaires et ceux des clients. Ce faisant, elles vivent des dilemmes éthiques.</alinea>
+        <bloccitation>
+          <alinea>Un dilemme en particulier, c’est le dilemme entre l’apprentissage du stagiaire
+            puis le bien-être du client. Je veux laisser le stagiaire faire ses propres choses,
+            avoir son propre rythme, faire ses erreurs, même. Mais en même temps, de l’autre côté,
+            je ne veux pas que le client soit brimé […]. </alinea>
+          <alinea>C’est difficile de faire l’équilibre entre je le laisse faire, mais là, en même
+            temps c’est le client qui paie</alinea>
+          <source>participante 13</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>Un stagiaire, ça a besoin de se développer dans l’action. Tu ne peux pas juste
+            tout le temps faire de l’observation. Tu as besoin d’être dans l’action. Mais la qualité
+            du service peut être moins bonne […]. J’ai aussi le client qui, lui, a besoin d’avoir
+            une bonne qualité de service et mon stagiaire qui a besoin de se développer</alinea>
+          <source>participante 19</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>[Le dilemme éthique est donc le suivant] : offrir des services de qualité à la
+            population versus [des opportunités] d’apprentissage à l’étudiant. […] Comment conjuguer
+            les deux : s’assurer que l’étudiant ait l’opportunité d’apprendre […] sans mettre en jeu
+            la qualité des services?</alinea>
+          <source>participante 7</source>
+        </bloccitation></para><figure id="fi2">
+        <no><marquage typemarq="italique">Figure 2</marquage></no>
+        <legende lang="fr">
+          <titre>Les loyautés multiples du formateur clinique</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa14"><no>14</no><alinea>Des ergothérapeutes discutent aussi du conflit qui survient entre leur loyauté envers une collègue et celle envers un stagiaire. Ces situations se présentent lorsqu’elles considèrent une collègue plus ou moins compétente, que ce soit comme clinicienne ou comme superviseure.</alinea>
+        <bloccitation>
+          <alinea>Moindrement qu’on a une collègue avec des attitudes personnelles et sociales
+            particulières, dont la collaboration est très difficile en équipe, c’est dur d’expliquer
+            à l’étudiant tout le découlant de la chose. Pourquoi cette personne-là ou l’autre
+            collègue va faire une prise en charge [pour laquelle] on n’était pas d’accord? Pourquoi
+            elle a fermé le dossier plus rapidement? Pourquoi on n’a pas de collaboration avec elle?
+            […] Ça peut créer justement des malaises éthiques</alinea>
+          <source>participante 14</source>
+        </bloccitation></para><para id="pa15"><no>15</no><alinea>Pour sa part, la participante 22 parle du malaise qu’elle ressent à conseiller une collègue qui supervise une stagiaire, car elle estime que cette collègue ne devrait pas former d’étudiantes étant peu compétente comme clinicienne et comme superviseure.</alinea></para><para id="pa16"><no>16</no><alinea>Aussi, des ergothérapeutes rapportent vivre parfois un conflit entre leur loyauté envers l’établissement et celle envers la stagiaire. Par exemple, certaines sont partagées entre leur désir d’être productives et leur souhait de donner le temps nécessaire à une supervision de qualité. D’autres superviseures sont mal à l’aise avec le fait que la clientèle se fait imposer des stagiaires sans que leur avis soit considéré, même si elles considèrent que c’est une bonne chose que les stagiaires puissent voir des clients.</alinea>
+        <bloccitation>
+          <alinea>[Nous avons une] culture organisationnelle de prendre des stagiaires. Donc, les
+            clients n’ont pas vraiment le choix. C’est tentant de ne pas changer les choses, car on
+            veut que la stagiaire voie un maximum de clients et on est contente de la formation
+            qu’on reçoit avec l’argent de l’université. Et si le client refuse, on se ramasse avec
+            plus de clients [et] les stagiaires ne pourront pas voir de clients</alinea>
+          <source>participante 2</source>
+        </bloccitation></para><para id="pa17"><no>17</no><alinea>Par ailleurs, si elles souhaitent former des stagiaires aux plus hautes exigences de la
+          profession et offrir des enseignements cohérents avec ceux prodigués à l’université, des
+          superviseures expriment des réserves quant à certaines exigences professionnelles ou
+          formations universitaires. Elles vivent alors un conflit entre leur loyauté à l’égard de
+          leur ordre professionnel ou de l’université et celle à l’égard des stagiaires. Par
+          exemple, bien qu’elle souhaite répondre aux exigences de l’OEQ en ce qui a trait à la
+          tenue de dossiers, la participante 13 affirme avoir tendance à mettre de côté ses notes
+          professionnelles pour s’occuper des stagiaires. Pour sa part, la participante 17 émet des
+          réserves sur certains enseignements de l’université.</alinea>
+        <bloccitation>
+          <alinea>La stagiaire arrive avec une connaissance théorique ou un modèle de pratique qui
+            fonctionne bien en théorie à l’université, mais quand on arrive dans la réalité […], il
+            arrive qu’on ne fasse pas vraiment ce que l’Ordre voudrait. […] Des fois, la modalité ou
+            l’intervention que je fais et que je montre à la stagiaire, ce ne serait pas quelque
+            chose qui est montré à l’université. Ainsi, parfois, j’ai un dilemme : est-ce qu’il faut
+            que je lui montre ce qui va lui servir à l’université ou ce qui va lui servir comme
+            thérapeute?</alinea>
+          <source>participante 17</source>
+        </bloccitation></para><para id="pa18"><no>18</no><alinea>Enfin, des superviseures rapportent vivre des conflits entre leurs valeurs et celles des stagiaires.</alinea>
+        <bloccitation>
+          <alinea>J’ai mes propres valeurs comme clinicienne. […] J’ai fait ma maîtrise en santé
+            communautaire. Donc, pour moi, c’est important la justice sociale, l’équité, offrir des
+            services aux populations qui sont plus marginalisées ou vulnérables. […] Parfois, les
+            valeurs des étudiants ne sont pas exactement les mêmes. Donc, comment les accompagner
+            dans leur apprentissage quand on ne partage pas exactement les mêmes valeurs?</alinea>
+          <source>participante 7</source>
+        </bloccitation></para><para id="pa19"><no>19</no><alinea>En somme, plusieurs formatrices cliniques vivent des conflits entre diverses loyautés étant donné qu’elles ont des responsabilités professionnelles à l’égard de différents acteurs ou organisations.</alinea></para></section3><section3 id="s3n2"><no>3.
+				1.
+				2</no><titre>2.1.2 Étudiantes en difficulté ou en situation d’échec</titre><para id="pa20"><no>20</no><alinea>La dimension évaluative, voire certificative, de la formation clinique n’est pas l’aspect qu’apprécie en premier lieu la superviseure. Pour elle, cette dimension peut même être une source importante de stress, notamment lorsque la stagiaire rencontre des difficultés durant le stage. Cela est d’autant plus vrai lorsque la stagiaire est en fin de parcours.</alinea>
+        <bloccitation>
+          <alinea>Je pense que l’enjeu le plus grand, puis ce que j’ai toujours trouvé le plus
+            difficile […], c’est quand tu te demandes si elle [la stagiaire] va passer le stage. […]
+            Puis, c’est d’autant plus difficile lorsque l’étudiante est en fin de formation. Là, tu
+            dis : <marquage typemarq="italique">« </marquage><marquage typemarq="italique">Oh my
+            god!</marquage><marquage typemarq="italique"> »</marquage> T’as l’impression d’avoir son
+            diplôme entre les mains. […] J’ai la responsabilité de poser un jugement sur elle.
+            Est-ce que je la juge apte à traiter des clients? Est-ce je voudrais qu’elle traite ma
+            mère? […] Ce n’est jamais noir puis blanc. Les situations extrêmes, ça va bien. […]
+            C’est une évidence, puis tout le monde en convient. Mais quand c’est [moins évident], ça
+            demande du courage</alinea>
+          <source>participante 22</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>Est-ce que c’était à moi de mettre fin à son stage et ainsi de mettre fin à sa
+            carrière? C’est beaucoup de pression […] C’était très difficile de m’asseoir dans le
+            bureau avec elle, puis de lui expliquer qu’elle coulait son stage et donc par le fait
+            même qu’elle coulait son curriculum. […] Quand tu as une étudiante devant toi qui pleure
+            sa vie […] ce n’est vraiment pas facile […] Moi, j’étais en détresse. […] Est-ce que
+            c’était vraiment à moi de juger de son avenir?</alinea>
+          <source>participante 5</source>
+        </bloccitation></para><para id="pa21"><no>21</no><alinea>Dans ce contexte, des superviseures évitent de confronter les étudiantes aux difficultés
+          qu’elles vivent en stage, passent sous silence certaines fautes, voire remettent l’odieux
+          de la décision à la prochaine superviseure, espérant ainsi que celle-ci confrontera la
+          stagiaire à ses difficultés.</alinea>
+        <bloccitation>
+          <alinea>Parfois, on pourrait être tenté de passer sous silence certaines fautes ou
+            certaines difficultés, parce que dans le fond c’est peut-être plus facile que de
+            confronter une étudiante ou de la faire échouer. Parce que, dans le fond, ça a des
+            conséquences pour nous comme superviseure, pour l’étudiante aussi</alinea>
+          <source>participante 7</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>Les situations d’échec, c’est ben effrayant. […] C’est comme si toute l’estime de
+            soi de la stagiaire était en jeu. C’est fou toute la blessure que la personne peut
+            vivre. Mais, en même temps, elle a besoin de se développer. […] J’ai vu des
+            superviseures qui se sont mis à terre après des échecs de stage de leur stagiaire parce
+            qu’elles voulaient vraiment [qu’elle réussisse]. C’est tellement grave avoir un échec à
+            un stage que je vais tout faire pour ne pas qu’elle poche [ma stagiaire]. […] J’ai déjà
+            entendu des superviseures dire ça : « Ah, elle a tellement travaillé fort, on va lui
+            permettre de passer, puis, au pire, au prochain stage, elles le feront
+            échouer »</alinea>
+          <source>participante 19</source>
+        </bloccitation></para><para id="pa22"><no>22</no><alinea>En résumé, lorsqu’une superviseure se retrouve avec une étudiante en situation de difficulté ou d’échec, cela peut être très éprouvant affectivement et moralement pour elle et l’étudiante. La plupart des formatrices cliniques qui discutent de cet enjeu affirment avoir alors vécu de la détresse éthique. Certaines ont même hésité à reprendre des stagiaires par la suite.</alinea></para></section3><section3 id="s3n3"><no>3.
+				1.
+				3</no><titre>2.1.3 Tensions entre quatre postures éthiques</titre><para id="pa23"><no>23</no><alinea>La superviseure peut être appelée à adopter quatre postures éthiques différentes lorsqu’elle supervise des stagiaires (voir la Figure<marquage typemarq="gras"> </marquage>3), lesquelles postures se basent sur des valeurs différentes et difficiles à concilier. Bien qu’elle soit toujours appelée à effectuer les rôles d’éducatrice et de certificatrice, il lui arrive aussi parfois de réaliser les rôles de thérapeute et de collègue, voire d’amie. Or ces postures entrent parfois en conflit entre elles.</alinea></para><figure id="fi3">
+        <no><marquage typemarq="italique">Figure 3</marquage></no>
+        <legende lang="fr">
+          <titre>Les quatre postures éthiques du superviseur</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa24"><no>24</no><alinea>Comme l’affirme la participante 19, pour favoriser le développement des compétences de la
+          stagiaire, il faut créer une relation de confiance et une proximité dans la relation avec
+          l’étudiante, être son mentor. Cependant, comme certificatrice, tôt ou tard, des
+          confrontations adviennent étant donné que l’évaluation est au coeur du rôle de la
+          superviseure. De fait, on demande à la superviseure de stage de soutenir le développement
+          des compétences des étudiantes (éducateur), tout en évaluant le degré de développement de
+          ces compétences chez ces étudiantes (certificateur). Pour parvenir à confronter
+          l’étudiante à ses difficultés dans le contexte où celle-ci sera réceptive à ses propos,
+          cette participante mentionne qu’elle se sent parfois manipulatrice : elle investit le lien
+          de confiance pour pouvoir ensuite confronter l’étudiante.</alinea></para><para id="pa25"><no>25</no><alinea>De plus, pour certaines étudiantes, le stage peut être un moment où leurs propres problèmes de santé se manifestent. La superviseure peut alors se sentir partagée entre ses rôles de mentor, de certificatrice et de clinicienne qui se fonde sur la valeur qu’est l’altruisme.</alinea>
+        <bloccitation>
+          <alinea>J’ai déjà eu une stagiaire qui avait visiblement un trouble anxieux. Puis, moi, je
+            travaille avec les troubles anxieux de l’humeur. […] J’essayais de la soutenir, mais en
+            même temps de rester dans mon rôle de superviseure. Mais je dirais que ce double rôle
+            n’est vraiment pas évident. C’est sûr que je l’ai référé à des ressources, mais on sait
+            que ce n’est pas facile d’avoir des ressources dans notre système actuel…</alinea>
+          <source>participante 3</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>Être superviseure, ce n’est pas être thérapeute. Mais, en même temps, tu es
+            thérapeute parce que tu aimes aider les gens. […] Voir une étudiante qui vit des
+            problèmes difficiles, personnels : t’es comme en dualité […] parce que t’as la
+            propension à aider, c’est ton réflexe naturel […] T’es comme en conflit de valeurs, de
+            rôles : thérapeute vs superviseure […] C’est <marquage typemarq="italique">tough</marquage>. Ça je dirais que c’est une des choses difficiles</alinea>
+          <source>participante 22</source>
+        </bloccitation></para><para id="pa26"><no>26</no><alinea>Enfin, certaines superviseures perçoivent les stagiaires comme de futures collègues et parfois comme des amies. Des superviseures hésitent alors quant à la façon de doser la relation en termes d’autorité et d’amicalité.</alinea>
+        <bloccitation>
+          <alinea>Je pense que le principal enjeu que plusieurs vivent, c’est beaucoup la relation
+            avec la stagiaire : [avoir une relation amicale] versus une relation d’autorité. […]
+            Disons, ne pas être trop amicale, puis en même temps faire son travail en tant que
+            superviseure. D’être capable de bien critiquer et de garder cette relation-là en même
+            temps</alinea>
+          <source>participante 13</source>
+        </bloccitation></para><para id="pa27"><no>27</no><alinea>Somme toute, la relation avec la stagiaire est au coeur de la formation clinique, mais il
+          n’est pas toujours simple de déterminer quel type de relation la superviseure et la
+          stagiaire devraient établir pour assurer le développement optimal des apprentissages et
+          des compétences de cette dernière.</alinea></para></section3><section3 id="s3n4"><no>3.
+				1.
+				4</no><titre>2.1.4 Enseignement de l’idéal, du possible ou rien du tout</titre><para id="pa28"><no>28</no><alinea>Les ergothérapeutes qui acceptent de faire de la formation clinique souhaitent participer à la formation d’excellentes thérapeutes. Elles aspirent à transmettre le meilleur d’elles-mêmes. Cela dit, certaines hésitent parfois entre enseigner l’idéal ou ce qu’il est possible d’actualiser au quotidien. Faut-il, se demandent celles-ci, abaisser ses standards compte tenu du contexte de contraintes et de la rareté des ressources ou rester fidèles à ses idéaux?</alinea>
+        <bloccitation>
+          <alinea>Enseigner […] la réalité clinique versus le meilleur : qu’est-ce qui devrait être
+            fait? Quand on rencontre les stagiaires, elles sont remplies de bonne volonté, de bonnes
+            théories […] Et parfois, on se heurte un peu à la réalité clinique […] moi, mon enjeu en
+            fait c’était plus : est-ce que je me dois comme superviseure de leur dire : « Fais ce
+            que je te dis, mais ne fais pas ce que je fais? »</alinea>
+          <source>participante 8</source>
+        </bloccitation></para><para id="pa29"><no>29</no><alinea>Cet enjeu est complexifié par des éléments organisationnels sur lesquels la professionnelle a peu de contrôle comme le manque de temps, de ressources et de reconnaissance, la surcharge de travail, la pression de performance et la culture de reddition de comptes par la complétion de statistiques<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>.</alinea>
+        <bloccitation>
+          <alinea>La pression de l’établissement versus le temps que je vais accorder à la
+            stagiaire. Des fois, je suis comme prise entre les deux</alinea>
+          <source>participante 13</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>Vouloir faire des interventions, mais […] manquer de ressources […] Les stagiaires
+            aussi vont être confrontées à ce genre de choses là. Il faut comme essayer de trouver
+            une façon d’accepter, de gérer […] l’impuissance professionnelle finalement</alinea>
+          <source>participante 4</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>La difficulté qu’on vit comme thérapeute, comme clinicienne, c’est qu’on a de la
+            pression de nos chefs de programme pour performer. De plus en plus, notre système de
+            santé s’en va vers un système de santé axé sur la performance, puis le financement à la
+            performance</alinea>
+          <source>participante 5</source>
+        </bloccitation></para><para id="pa30"><no>30</no><alinea>La surcharge de travail et la pression de performance sont si grandes que des ergothérapeutes trouvent peu de place dans leur horaire de travail pour contribuer comme elles le souhaiteraient à la formation clinique des futures ergothérapeutes.</alinea>
+        <bloccitation>
+          <alinea>Je dirais que dans le contexte actuel où on nous demande de plus en plus de
+            productivité, des statistiques et tout ça, c’est de plus en plus un défi de pouvoir
+            prendre des stagiaires, parce que ça nous rajoute vraiment une grosse charge de
+            travail</alinea>
+          <source>participante 6</source>
+        </bloccitation></para><para id="pa31"><no>31</no><alinea>En bref, la superviseure hésite entre enseigner l’idéal ou le possible, voire accueillir des
+          stagiaires, en raison de la surcharge qu’apporte la formation clinique. Ainsi, des
+          éléments organisationnels complexifient le travail de la superviseure et constituent des
+          barrières à la prise de stagiaires pour les former.</alinea></para></section3><section3 id="s3n5"><no>3.
+				1.
+				5</no><titre>2.1.5 Difficulté à soutenir deux compétences </titre><para id="pa32"><no>32</no><alinea>Quelques ergothérapeutes émettent des doutes quant à leurs capacités de soutenir le
+          développement de certaines compétences chez la stagiaire. Lorsqu’elles discutent de cet
+          enjeu, les superviseures réfèrent aux compétences éthiques et culturelles. La
+          participante 7, par exemple, se questionne : « Est-ce que comme superviseure je me sens à
+          l’aise et compétente pour assister les étudiantes face aux enjeux éthiques qu’elles
+          rencontrent dans la pratique? ». Pour sa part, la participante 23 estime que le fait que
+          les enjeux éthiques ne soient pas abordés ou discutés « avec du vocabulaire qui arrive de
+          l’éthique » fait en sorte que les compétences éthiques des stagiaires se développent peu,
+          voire pas du tout. Si le vocabulaire éthique n’est ni maîtrisé par la stagiaire ni par la
+          superviseure, cela constitue une limite importante au développement de cette compétence.
+          Selon cette participante, le vocabulaire éthique permet d’ouvrir les perspectives, de
+          percevoir les situations cliniques autrement et de se poser les questions qui permettent
+          de repérer les enjeux éthiques et leurs solutions. </alinea></para><para id="pa33"><no>33</no><alinea>Relativement aux compétences culturelles, des participantes affirment se sentir peu
+          outillées pour intervenir adéquatement :</alinea>
+        <bloccitation>
+          <alinea>C’est assez nouveau dans la région […] des familles de culture musulmane ou
+            d’autres cultures. En fait, on a vraiment une explosion de cultures diversifiées dans la
+            région. C’est sûr qu’on ne se sent pas toujours nécessairement bien outillée pour
+            comprendre puis résoudre ces enjeux culturels, puis adapter nos recommandations à la
+            culture ou en tenir compte</alinea>
+          <source>participante 12</source>
+        </bloccitation></para><para id="pa34"><no>34</no><alinea>La compétence culturelle est liée à la compétence éthique, car les professionnelles peu outillées sur le plan de la culture contribuent aux iniquités en santé et occasionnent de l’insécurité culturelle chez les clients qui appartiennent à des cultures distinctes de la leur (Drolet &amp; Goulet, 2018). En somme, si le fait d’être une professionnelle compétente n’est pas une condition suffisante pour être une bonne superviseure, cela demeure nécessaire. Cela dit, certaines ergothérapeutes avouent ne pas se sentir compétentes en matière d’éthique et de culture, ce qui compromet la qualité de la formation clinique dans ces domaines.</alinea></para></section3><section3 id="s3n6"><no>3.
+				1.
+				6</no><titre>2.1.6 Iniquités liées à la formation clinique</titre><para id="pa35"><no>35</no><alinea>Certaines superviseures discutent des iniquités de la formation clinique. Selon elles, ces iniquités sont relatives aux macro, méso et micro environnements (voir la Figure<marquage typemarq="gras"> </marquage>4).</alinea></para><figure id="fi4">
+        <no><marquage typemarq="italique">Figure 4</marquage></no>
+        <legende lang="fr">
+          <titre>Les iniquités reliées la formation clinique</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa36"><no>36</no><alinea>Les iniquités de nature macro-environnementale se rapportent aux montants d’argent donnés par les universités aux milieux cliniques et au partage du devoir de formation clinique entre les ergothérapeutes. D’une part, certaines ergothérapeutes jugent que les montants d’argent versés par les universités aux établissements en reconnaissance du travail réalisé par les superviseures devraient être les mêmes, peu importe l’université de provenance de l’étudiant et la discipline de ce dernier. Elles considèrent qu’il est injuste qu’une université donne davantage qu’une autre et qu’une discipline reçoive plus qu’une autre.</alinea>
+        <bloccitation>
+          <alinea>Pour un stagiaire en kinésithérapie, tu reçois zéro. Puis, en orthophonie,
+            c’est 18$, nous autres [en ergothérapie] on est rendus à 20$. […] En psychoéducation, je
+            crois que c’est zéro. Ainsi, même à l’UQTR, des stagiaires de la même université, ce ne
+            sont même pas les mêmes montants</alinea>
+          <source>participante 21</source>
+        </bloccitation></para><para id="pa37"><no>37</no><alinea>D’autre part, certaines pensent aussi que la responsabilité de la formation clinique devrait être partagée plus équitablement entre les ergothérapeutes, car ce sont souvent les mêmes qui prennent des stagiaires. Bien entendu, ce ne sont pas toutes les ergothérapeutes qui sont compétentes comme superviseures, mais celles qui le sont devraient contribuer à leur juste part, estiment des participantes.</alinea>
+        <bloccitation>
+          <alinea>Je ne sais pas c’est quoi l’avenir par rapport à la prise en charge des étudiantes
+            dans notre milieu à nous, dans le sens que je connais beaucoup de mes collègues qui
+            refusent maintenant de prendre des étudiantes par manque de temps</alinea>
+          <source>participante 5</source>
+        </bloccitation></para><para id="pa38"><no>38</no><alinea>Des ergothérapeutes observent aussi des iniquités de nature méso-environnementale,
+          c’est-à-dire par rapport à l’établissement pour lequel elles travaillent. Ces iniquités
+          ont trait à la culture de leur milieu quant à la prise de stagiaires et au manque de
+          reconnaissance de leur travail comme superviseures. Comme l’affirment des participantes,
+          leur milieu valorise la prise de stagiaires, pourtant aucun accommodement n’est fait pour
+          faciliter le travail des superviseures. Ces dernières se retrouvent donc devant une
+          injonction paradoxale : d’une part, on leur dit « prenez des stagiaires, c’est important »
+          et, d’autre part, on leur dit « soyez plus efficientes, car des clients sont en attente de
+          services ». Pour ces participantes, il est incohérent d’exiger ces deux choses en même
+          temps. S’il est vrai que d’accueillir une stagiaire compétente en fin de parcours peut
+          permettre à l’ergothérapeute de diminuer la liste d’attente, dans la plupart des cas,
+          accueillir une stagiaire est plutôt une surcharge. Dans ce contexte, des superviseures
+          critiquent le manque de reconnaissance de leur travail :</alinea>
+        <bloccitation>
+          <alinea>On n’a juste pas de reconnaissance. Il y a des centres […] qui reçoivent un chèque
+            de paie de plus parce qu’ils ont des étudiantes, mais nous autres on prend des
+            étudiantes puis on n’a pas vraiment de plus-value ni sur notre salaire ni sur notre
+            formation [… L’établissement] se pète un peu les bretelles en disant : « Nous, on est un
+            établissement affilié universitaire, on rayonne et tout ça. » Mais, nous, on est brûlées
+            au bout du compte</alinea>
+          <source>participante 5</source>
+        </bloccitation></para><para id="pa39"><no>39</no><alinea>Enfin, des formatrices cliniques discutent des iniquités de nature micro-environnementale,
+          c’est-à-dire celles qui concernent l’évaluation des compétences des stagiaires. « C’est
+          sûr que c’est dur d’être totalement neutre. Tu pars avec un préjugé. Moi, je pars avec un
+          préjugé favorable ou défavorable. Je pars avec une opinion de la personne »
+          (participante 19). Plusieurs superviseures affirment en effet que leur jugement peut être
+          biaisé, c’est-à-dire manquer d’objectivité, de neutralité, d’impartialité, notamment :
+          1) lorsque la stagiaire est connue de la superviseure ou d’une collègue; 2) lorsqu’un
+          groupe de stagiaires est formé par une superviseure; 3) lors de la reprise d’un stage;
+          4) lorsque la superviseure se reconnaît dans la stagiaire et fait du transfert.</alinea>
+        <bloccitation>
+          <alinea>L’étudiante, ça ne va pas bien. Alors la superviseure appelle [le coordonnateur de
+            stage de l’université] pour lui dire qu’elle va [la] faire échouer, et là tu as
+            l’orthopédiste ou le médecin de la place qui va voir l’ergothérapeute pour lui dire :
+            « Hé, toi là, tu vas faire passer mon fils! »</alinea>
+          <source>participante 21</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>En supervisant parfois deux étudiantes en même temps, on voit des différences. […]
+            De comparer la tenue de dossiers de l’une versus l’autre, c’est sûr qu’un moment donné
+            il y a une étudiante que je voyais qu’elle n’atteignait pas les standards […] J’étais
+            tentée de ne pas la faire échouer […] parce que bon, elle est en processus
+            d’apprentissage, parce que je ne voulais pas non plus créer de conflits entre
+            l’étudiante et moi</alinea>
+          <source>participante 10</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>L’étudiante que j’ai en ce moment a vécu une situation d’échec dans le passé.
+            C’est sûr qu’ils font bien de nous le dire, mais ça met un peu de pression. Bon, elle a
+            vécu un échec, c’est sa reprise. [Cette information] vient teinter, je trouve, un peu
+            mon jugement, parce que veut, veut pas, j’ai de l’empathie pour elle : ce n’est pas le
+            fun de passer à travers une reprise. Mais en même temps, il faut rester objectif, parce
+            que c’est son dernier stage, donc après elle s’en va traiter des patients. Ça rend un
+            peu inconfortable. C’est comme si ça altère notre opinion dès le départ</alinea>
+          <source>participante 18</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>[La stagiaire] avait eu des problèmes d’anxiété […] elle avait pris une petite
+            pause. Pendant un an, elle n’était pas allé à l’école […] et elle était revenue. […]
+            Moi, étant étudiante, je ressemblais à ça beaucoup. Ça a changé depuis, mais bon je me
+            voyais en elle. […] Je pouvais lui mentionner mon expérience : comment j’étais […], lui
+            faire ressortir ses forces, lui dire que j’admirais sa force de caractère et le fait
+            qu’elle revienne, qu’elle n’ait pas abandonné. Je trouvais ça très bien</alinea>
+          <source>participante 3</source>
+        </bloccitation></para><para id="pa40"><no>40</no><alinea>En somme, des superviseures remarquent que divers éléments peuvent venir biaiser leur jugement lors de l’évaluation des compétences des stagiaires et qu’il n’est pas aisé de gérer ces biais de façon à demeurer impartial et ainsi rendre justice aux compétences des étudiantes.</alinea></para></section3></section2></section1><section1 id="s1n4"><no>4</no><titre>3. Discussion</titre><para id="pa41"><no>41</no><alinea>L’un des objectifs de cette étude était de documenter les enjeux éthiques de la formation clinique en ergothérapie. La section précédente a présenté une synthèse de ces enjeux. Cette section discute des résultats obtenus. Tout en comparant ceux-ci avec les résultats d’autres études, les principaux constats de l’étude sont articulés, avant de spécifier les forces et les limites de celle-ci.</alinea></para><section2 id="s2n2"><no>4.
+				1</no><titre>3.1 Comparaisons des résultats avec ceux d’autres études</titre><para id="pa42"><no>42</no><alinea>Plusieurs résultats rejoignent ceux des études similaires réalisées en ergothérapie ou dans d’autres domaines. Premièrement, à l’instar de Barton et al. (2013) et De Witt (2016), la superviseure vit parfois un dilemme entre ses devoirs envers la clientèle et ceux envers la stagiaire. Se sentant loyale envers les deux individus vulnérables qui sont sous sa responsabilité, elle peut avoir de la difficulté à départager ces devoirs lorsque ceux-ci sont en conflit, comme cela est aussi constaté en psychologie (Barnett et al., 2007; Hambrick et al., 2009; Rubin, 1997). Par ailleurs, comme le notent plusieurs chercheurs (Copeland et al., 2011; Govender, 2015; Luhanga et al., 2010), ces conflits de loyauté peuvent s’étendre à d’autres acteurs ou entités (équipe, établissement et profession), ce qui complexifie le rôle de superviseur et la gestion de ces loyautés. En fait, comme le notent Bégin et Centeno (2015), le phénomène des loyautés multiples et le mal-être au travail qui y est lié traversent les professions et les milieux.</alinea></para><para id="pa43"><no>43</no><alinea>Deuxièmement, le fait que l’ergothérapeute soit peu formée en pédagogie est aussi constaté
+          par plusieurs (Cardinal et al., 2014; Christie et al., 1985; Cohn &amp; Frum, 1988).
+          Effectivement, le rôle de superviseur de stage échoit souvent à l’ergothérapeute sans
+          qu’elle ait de formation préalable en pédagogie et dans un contexte où elle a peu de
+          soutien organisationnel pour l’effectuer convenablement. De plus, la profession est
+          tellement en manque de places de stage (Clampin, 2012; Jung et al., 2002; Kirke et al.,
+          2007; Rodger et al. 2008; Sloggett et al., 2003; Thomas et al., 2007) qu’il a été décidé
+          qu’après une année de pratique seulement, l’ergothérapeute devait et pouvait prendre des
+          stagiaires (WFOT, 2016). Et si les universités offrent des formations aux superviseures,
+          ces formations sont généralement de courte durée. On en sait aussi très peu sur la qualité
+          de ces formations. Par ailleurs, les cadres, les modèles et les autres ressources
+          pédagogiques qui se trouvent dans les écrits sont souvent peu connus des ergothérapeutes.
+          Il faut dire que l’ergothérapeute a en général peu de temps à consacrer aux ouvrages
+          pédagogiques et est peu encouragée à faire de telles recherches et lectures. En général,
+          elle aura tendance à se documenter sur divers aspects cliniques plutôt que sur des aspects
+          pédagogiques. Cela dit, compte tenu de l’importance que revêt la formation clinique dans
+          la profession, une réflexion critique s’impose sur les meilleures pratiques dans ce
+          domaine et sur les conditions à mettre à place afin de soutenir et de reconnaître cette
+          contribution essentielle à la profession.</alinea></para><para id="pa44"><no>44</no><alinea>Troisièmement, les résultats rejoignent aussi les constats de Drake et Irurita (1997),
+          d’Ilott (1996) ainsi que ceux de Le Maistre et al. (2006) quant aux difficultés rapportées
+          par les formateurs cliniques de superviser des étudiants en difficulté ou en situation
+          d’échec. Ces situations inconfortables sont éprouvantes. Devant la souffrance que cette
+          décision apporte, plusieurs ergothérapeutes évitent de faire échouer une étudiante même si
+          elles ont de sérieux doutes sur ses compétences, comme cela est aussi constaté en sciences
+          infirmières (Black et al., 2014; Gopee, 2008; Luhanga et al., 2010; Yepes-Rios et al.,
+          2016). Des ergothérapeutes décident même de ne plus prendre de stagiaires tellement
+          l’expérience a été pénible. Dans le contexte où la superviseure est considérée comme la
+          gardienne de la profession, en ceci que c’est souvent elle au final qui donne son accord
+          pour l’entrée d’une étudiante dans la profession (De Witt, 2016; Le Maistre et al., 2006;
+          Richard, 2008), cette difficulté à faire échouer une étudiante potentiellement
+          incompétente doit être abordée. Il est en effet préoccupant que des étudiantes aient accès
+          à la profession alors qu’elles sont incompétentes, voire dangereuses pour la clientèle, en
+          plus d’être un fardeau pour une future équipe professionnelle. Mais, comme l’affirment
+          Lemay (2002) et Le Maistre et al. (2006), le rôle de formateur clinique est paradoxal
+          puisqu’au moins deux postures pédagogiques antinomiques sont en tension, soit celle de
+          formateur ou de mentor (qui nécessite une posture pédagogique basée sur la relation de
+          confiance et la proximité relationnelle) et celle d’évaluateur ou de certificateur (qui
+          requiert une posture normative basée sur l’impartialité et la distance relationnelle).
+          Suivant cette judicieuse analyse, des alternatives à la manière actuelle de procéder
+          devraient être envisagées. Par exemple, des superviseures considèrent que la décision de
+          l’échec devrait être prise par l’université ou, à tout le moins, partagée avec elle. Pour
+          leur part, Aiken et al. (2001) envisagent des modèles de supervision où les rôles
+          d’éducateur (mentor) et de certificateur (évaluateur) seraient répartis entre différents
+          superviseurs (cosupervision). Dans la mesure où cet enjeu constitue une source de
+          souffrance importante à la fois pour la superviseure et la stagiaire, il doit être abordé
+          sérieusement afin d’entrevoir des manières d’en minimiser les conséquences négatives.
+          L’apriori selon lequel l’évaluation va de pair avec la supervision devrait être examiné de
+          manière critique. De plus, le formateur clinique devrait être mieux outillé sur le plan de
+          la pédagogie, car la formation est l’une des clés du développement des compétences des
+          étudiants (Barnett et al., 2007).</alinea></para><para id="pa45"><no>45</no><alinea>Quatrièmement, comme le notent Torrance et al. (2012) en sciences infirmières et Waterbury (2001) en médecine, des clients sont impliqués dans la formation d’étudiantes en ergothérapie sans qu’ils n’aient donné leur consentement. De fait, maints clients sont mis devant le fait accompli. C’est souvent la stagiaire qui contacte elle-même les clients pour les informer que c’est elle qui commencera ou poursuivra le suivi. Or plusieurs clients n’osent pas exprimer leur désaccord d’être pris en charge par une stagiaire pour diverses raisons ou ignorent carrément qu’ils peuvent contester cette pratique. Bien que certains établissements fassent signer un formulaire de consentement au début de la prestation des services spécifiant qu’il est possible que ceux-ci soient donnés par des stagiaires, ces formulaires n’offrent généralement pas le choix aux clients d’accepter ou de refuser d’être pris en charge par des étudiantes, ce qui constitue encore ici un manquement au libre choix. Cette option devrait faire d’emblée partie de l’offre des soins et services.</alinea></para><para id="pa46"><no>46</no><alinea>Cinquièmement, comme le notent des chercheurs en éducation (Desaulniers, 2002; Lemay, 2002), des formateurs peuvent manquer d’objectivité dans l’évaluation des compétences de stagiaires, et ce, pour diverses raisons. L’équité dans l’évaluation est un enjeu éthique commun aux pratiques pédagogiques qui devrait faire partie des formations éthiques offertes aux superviseures de stage en ergothérapie. Au sujet de l’éthique, les résultats rejoignent aussi des constats en psychologie (Barnett et al., 2007; Pope &amp; Vetter, 1992) et en sciences infirmières (Gopee, 2008) o<marquage typemarq="gras">ù</marquage> il appert que les superviseurs sont peu formés à l’éthique et donc peu habilités à soutenir le développement des compétences éthiques des stagiaires. Or l’éthique devrait faire partie des formations pédagogiques données aux formateurs, tout comme la dimension culturelle.</alinea></para><para id="pa47"><no>47</no><alinea>Sixièmement, certains résultats de la présente étude sont, à notre connaissance, inédits. Comme il a été vu précédemment, bien que le conflit entre les rôles de mentor et de certificateur soit discuté dans les écrits, la mise au jour de l’existence d’au moins quatre postures pédagogiques différentes pouvant être à l’origine de tensions vécues par le superviseur est un résultat nouveau en ergothérapie. Le fait de circonscrire cet enjeu pourrait permettre aux ergothérapeutes de mettre le doigt sur des malaises vécus lorsqu’elles supervisent des étudiantes et de développer des outils pour mieux vivre ces tensions. </alinea></para><para id="pa48"><no>48</no><alinea>Septièmement, le dilemme rencontré par le formateur clinique entre l’enseignement de la
+          pratique idéale et l’enseignement de la pratique possible est aussi un aspect nouveau en
+          ergothérapie. Si les barrières à une pratique exemplaire de la profession et la détresse
+          éthique liée à cette réalité commencent à être documentées (Drolet &amp; Goulet, 2017;
+          Penny, Ewing, Hamid, Shutt, &amp; Walter, 2014), le fait que cette réalité affecte la
+          formation clinique des étudiantes en ergothérapie n’avait pas été dévoilé. Le contexte
+          actuel de la pratique de la profession est en effet préoccupant. Comme l’indique le
+          président de l’Ordre des ergothérapeutes du Québec (OEQ), « l’OEQ est interpellé de plus
+          en plus fréquemment par des ergothérapeutes s’alarmant de ce contexte où l’organisation et
+          les conditions de travail nuisent à l’accès et [à] la qualité des services » (Bibeau,
+          2018, p. 2). Comme c’est le cas en sciences infirmières avec leur ordre, des
+          ergothérapeutes contactent l’OEQ pour dénoncer le contexte organisationnel actuel qui ne
+          leur permet pas de respecter leurs devoirs déontologiques. Le président de l’Ordre somme
+          donc le gouvernement de porter « un regard critique sur la situation actuelle et [de
+          reconnaître] l’urgence d’agir » (Bibeau, 2018, p. 2). Les résultats de la présente étude
+          attestent du fait que des éléments d’ordre macro et méso environnemental sur lesquels les
+          superviseures ont peu de contrôle affectent négativement la formation clinique des
+          étudiantes en ergothérapie. Il importe que le contexte de la pratique soit propice au
+          respect des droits des clients, des étudiants et des formateurs cliniques. Ainsi, une
+          réflexion sur les droits et les devoirs des clients, des étudiants et des formateurs
+          cliniques s’impose en ergothérapie afin d’offrir des services professionnels de qualité,
+          une formation clinique contribuant au développement des compétences des étudiants, tout en
+          procurant aux superviseurs les conditions leur permettant d’exercer leur rôle dans un
+          contexte favorisant leur bien-être au travail. Notamment, des solutions de rechange aux
+          modes managériaux néolibéraux actuels doivent être mises de l’avant afin que
+          l’ergothérapeute puisse avoir une pratique respectueuse des valeurs phares de la
+          profession dont fait partie l’autonomie professionnelle (Drolet &amp; Goulet, 2017). Ne
+          pas le faire risque de confronter la profession à une augmentation des refus des
+          ergothérapeutes à former des stagiaires.</alinea></para></section2><section2 id="s2n3"><no>4.
+				2</no><titre>3.2 Forces et limites de l’étude</titre><para id="pa49"><no>49</no><alinea>Cette étude, qui a donné la parole à des ergothérapeutes ayant de l’expérience en supervision, décrit des enjeux éthiques peu ou pas documentés en ergothérapie, ce qui constitue une force. L’adoption d’un devis qualitatif inductif était appropriée étant donné l’état actuel limité des connaissances sur le sujet. Aussi, l’étude a été menée par une équipe d’ergothérapeutes ayant développé une expertise en éthique et en formation clinique, ce qui a enrichi l’analyse des verbatims. </alinea></para><para id="pa50"><no>50</no><alinea>En ce qui concerne les limites, afin d’éviter qu’une étudiante se retrouve à interroger sa
+          superviseure ou qu’une superviseure hésite à se confier à une étudiante en ergothérapie,
+          une partie des entretiens a été réalisée par un intervieweur qui ne détenait pas de
+          connaissances en ergothérapie, ce qui a limité sa capacité à échanger avec les
+          participantes sur la pratique ergothérapique. Aussi, en dépit de l’atteinte de la
+          saturation des données, la transférabilité des résultats est à géométrie variable étant
+          donné les différences qui se présentent entre les programmes et les cursus
+          universitaires.</alinea></para></section2></section1><section1 id="s1n5"><no>5</no><titre>Conclusion</titre><para id="pa51"><no>51</no><alinea>Cette étude avait pour objectif de décrire des enjeux éthiques peu documentés en
+          ergothérapie, soit ceux reliés à la supervision de stagiaires. Si le rôle de formateur
+          clinique soulève apriori peu d’enjeux éthiques, l’étude révèle que la supervision est liée
+          à des enjeux éthiques préoccupants ayant des dimensions personnelles, organisationnelles
+          et sociétales. Cette étude constitue un premier pas menant à l’identification de moyens
+          visant à résoudre ces enjeux, dont la formation et la reconnaissance de ce rôle essentiel
+          à la formation des futures ergothérapeutes font assurément partie. Il importe aussi de
+          trouver d’autres manières de certifier les stagiaires pour diminuer la détresse des
+          superviseurs ainsi que de mettre en place dans le domaine de la santé des modes
+          managériaux plus respectueux des personnes, de leur santé et leur bien-être au travail.
+          Ainsi, une réflexion critique sur les droits et les devoirs des clients, des étudiants et
+          des formateurs s’impose afin d’assurer le respect des droits de ces différents acteurs et
+          de soutenir la mise en place d’environnements capacitants pour toutes ces personnes. Cette
+          étude est susceptible d’avoir des retombées pour la pratique en ceci qu’elle sensibilise
+          les acteurs concernés par la formation clinique aux meilleures pratiques pédagogiques dans
+          le contexte de la supervision de stagiaires et met à jour les impacts négatifs des
+          pratiques managériales actuelles en santé qui soutiennent peu les superviseurs. Elle
+          encourage enfin la poursuite d’études empiriques et de réflexions éthiques dans ce domaine
+          encore trop peu exploré en ergothérapie.</alinea></para></section1></corps><partiesann lang="fr"><merci><alinea>Les auteures remercient chaleureusement les participantes à cette étude. Elles témoignent également leur reconnaissance à l’UQTR qui, grâce au Fonds pour la Recherche clinique, a financé cette étude et le FQRSC qui soutient Marie-Josée Drolet pour documenter les enjeux éthiques en ergothérapie. Enfin, elles remercient les assistantes de recherche qui ont collecté les données.</alinea></merci><grbiblio><biblio><refbiblio id="rb1">Aiken, F., Menaker, L., &amp; Barsky, L. (2001). Fieldwork education. <marquage typemarq="italique">Occupational Therapy International</marquage>, <marquage typemarq="italique">8</marquage>(2), 86-95.</refbiblio>
+<refbiblio id="rb2">Barnett, J. E., Goodyear, R. K., Cornish, J. A. E., &amp; Lichtenberg, J. W. (2007). Commentaries on the ethical and effective practice of clinical supervision. <marquage typemarq="italique">Professional Psychology</marquage>, <marquage typemarq="italique">38</marquage>(3), 268-275.</refbiblio>
+<refbiblio id="rb3">Barton, R., Corban, A., Herrli-Warner, L., McClain, E., Riehle, D., &amp; Tinner, E. (2013). Role strain in occupational therapy fieldwork educators. <marquage typemarq="italique">Work</marquage>, <marquage typemarq="italique">44</marquage>(3), 317-328.</refbiblio>
+<refbiblio id="rb4">Bégin, L., &amp; Centeno, J. (2015). <marquage typemarq="italique">Les loyautés multiples. </marquage>Montréal : Nota Bene.</refbiblio>
+<refbiblio id="rb5">Bibeau, A. (2018). Une réforme qui continue d’inquiéter. <marquage typemarq="italique">Ergothérapie express</marquage>, <marquage typemarq="italique">29</marquage>(1), 1-2.</refbiblio>
+<refbiblio id="rb6">Black, S., Curzio, J., &amp; Terry, L. (2014). Failing a student nurse. <marquage typemarq="italique">Nursing Ethics</marquage>, <marquage typemarq="italique">21</marquage>(2), 224-238.</refbiblio>
+<refbiblio id="rb7">Bushby, K., Chan, J., Druif, S., Ho, K., &amp; Kinsella, E. A. (2015). Ethical tensions in occupational therapy practice. <marquage typemarq="italique">British Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">78</marquage>(4), 212-221.</refbiblio>
+<refbiblio id="rb8">Canadian Association of Occupational Therapist (CAOT) &amp; Association of Canadian Occupational Therapy University Programs (ACOTUP). (2012). <marquage typemarq="italique">Position statement</marquage> <marquage typemarq="italique">: Professional responsibility in fieldwork education in occupational therapy</marquage>. Ottawa : CAOT &amp; ACOTUP.</refbiblio>
+<refbiblio id="rb9">Cardinal, D., Couturier, L., Savard, J., Tremblay, M., &amp; Desmarais, M. (2014). La supervision de stagiaires : un art qui s’apprend. <marquage typemarq="italique">Reflets</marquage>, <marquage typemarq="italique">20</marquage>(1), 41-75.</refbiblio>
+<refbiblio id="rb10">Christie, B. A., Joyce, P. C., &amp; Moeller, P. L. (1985). Fieldwork experience, part II : the supervisor’s dilemma. <marquage typemarq="italique">The American Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">39</marquage>(10), 675-681.</refbiblio>
+<refbiblio id="rb11">Clampin, A. (2012). Not the right time to take a student? Think again. <marquage typemarq="italique">British Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">75</marquage>(10), 441.</refbiblio>
+<refbiblio id="rb12">Cohn, E. S., &amp; Frum, D. C. (1988). Fieldwork supervision : More education is warranted. <marquage typemarq="italique">The American journal of Occupational Therapy</marquage>, <marquage typemarq="italique">42</marquage>(5), 325-327.</refbiblio>
+<refbiblio id="rb13">Copeland, P., Dean, R. G., &amp; Wladkowski, S. P. (2011). The power dynamics of supervision : Ethical dilemmas. <marquage typemarq="italique">Smith College Studies in Social Work</marquage>, <marquage typemarq="italique">81</marquage>(1), 26-40.</refbiblio>
+<refbiblio id="rb14">DePoy, E., &amp; Gitlin, L. N. (2011). <marquage typemarq="italique">Introduction to research.</marquage> St. Louis, MO : Elsevier Mosby.</refbiblio>
+<refbiblio id="rb15">Desaulniers, M.-P. (2002). La dimension éthique de la supervision ou l’art de la médiation. Dans M. Boutet, &amp; N. Rousseau (Éds), <marquage typemarq="italique">Les enjeux de la supervision pédagogique des stages</marquage> (pp. 129-140). Québec : Presses de l’Université du Québec.</refbiblio>
+<refbiblio id="rb16">De Swardt, H. C., van Rensburg, G. H., &amp; Oosthuizen, M. J. (2014). Teaching and facilitation strategies for the professional socialisation of student nurses. <marquage typemarq="italique">South African Journal of Higher Education</marquage>, <marquage typemarq="italique">28</marquage>(6), 1861-1875.</refbiblio>
+<refbiblio id="rb17">De Witt, P. A. (2016). Ethics and clinical education. <marquage typemarq="italique">South African Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">46</marquage>(3), 4-9.</refbiblio>
+<refbiblio id="rb18">Drake, V., &amp; Irurita, V. (1997). Clarifying ambiguity in problem fieldwork placements. <marquage typemarq="italique">Australian Occupational Therapy Journal</marquage>, <marquage typemarq="italique">44</marquage>(2), 62-70.</refbiblio>
+<refbiblio id="rb19">Drolet, M.-J. (2014). <marquage typemarq="italique">De l’éthique à l’ergothérapie. La philosophie au service de la pratique ergothérapique</marquage>. Québec : Presses de l’Université du Québec.</refbiblio>
+<refbiblio id="rb20">Drolet, M.-J. (2018). <marquage typemarq="italique">Acting ethically? </marquage><marquage typemarq="italique">A theoretical framework and a method designed to overcome ethical tensions in occupational therapy</marquage>. Ottawa : CAOT Publications ACE.</refbiblio>
+<refbiblio id="rb21">Drolet, M.-J., &amp; Goulet, M. (2017). Les barrières et facilitateurs à l’actualisation des valeurs professionnelles. <marquage typemarq="italique">Recueil annuel d’ergothérapie</marquage>, <marquage typemarq="italique">9</marquage>, 7-42.</refbiblio>
+<refbiblio id="rb22">Drolet, M.-J., &amp; Goulet, M. (2018). Travailler avec des patients autochtones du Canada? <marquage typemarq="italique">Recueil annuel francophone d’ergothérapie</marquage>, <marquage typemarq="italique">10</marquage>, 25-56.</refbiblio>
+<refbiblio id="rb23">Glaser, J. W. (1994). <marquage typemarq="italique">Three realms of ethics: individual institutional societal</marquage>. Lanham, MD: Rowman and Littlefield.</refbiblio>
+<refbiblio id="rb24">Gopee, N. (2008). Assessing student nurses’ clinical skills : The ethical competence of mentors. <marquage typemarq="italique">International Journal of Therapy and Rehabilitation</marquage>, <marquage typemarq="italique">15</marquage>(9), 401-407.</refbiblio>
+<refbiblio id="rb25">Govender, P. (2015). An ethical dilemma. <marquage typemarq="italique">African Journal of Health Professions Education,</marquage> <marquage typemarq="italique">7</marquage>(1), 8-9.</refbiblio>
+<refbiblio id="rb26">Hambrick, J. P., Pimentel, S., &amp; Albano, A. M. (2009). From theory to practice : Facing ethical challenges as a clinical intern. <marquage typemarq="italique">Cognitive and Behavioral Practice</marquage>, <marquage typemarq="italique">16</marquage>, 191-204.</refbiblio>
+<refbiblio id="rb27">Holmes, J. D., Bossers, A. M., Polatajko, H. J., Drynan, D. P., Gallagher, M., O’Sullivan, C. M., … Denney, J. L. (2010). 1000 fieldwork hours. <marquage typemarq="italique">Canadian Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">77</marquage>(3), 135-143.</refbiblio>
+<refbiblio id="rb28">Ilott, I. (1996). Ranking the problems of fieldwork supervision reveals a new problem : Failing students. <marquage typemarq="italique">British Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">59</marquage>(11), 525-528.</refbiblio>
+<refbiblio id="rb29">James, K. L., &amp; Musselman, L. (2005). Commonalities in level II fieldwork failure. <marquage typemarq="italique">Occupational Therapy in Health Care</marquage>, <marquage typemarq="italique">19</marquage>(4), 67-81.</refbiblio>
+<refbiblio id="rb30">Jung, B., Sainsbury, S., Grum, R. M., Wilkins, S., &amp; Tryssenaar, J. (2002). Collaborative fieldwork education with student occupational therapists and student occupational therapist assistants. <marquage typemarq="italique">Canadian Journal of Occupational Therapy, 69</marquage>, 95-103.</refbiblio>
+<refbiblio id="rb31">Kasar, J., &amp; Muscari, M. E. (2000). A conceptual model for the development of professional behaviours in occupational therapists. <marquage typemarq="italique">Canadian Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">67</marquage>(1), 42-50.</refbiblio>
+<refbiblio id="rb32">Kirke, P., Layton, N., &amp; Sim, J. (2007). Informing fieldwork design. <marquage typemarq="italique">Australian Occupational Therapy Journal</marquage>, <marquage typemarq="italique">54</marquage>, S13-S22.</refbiblio>
+<refbiblio id="rb33">Le Maistre, C., Boudreau, S., &amp; Paré, A. (2006). Mentor or evaluator? <marquage typemarq="italique">Journal of Workplace Learning</marquage>, <marquage typemarq="italique">18</marquage>(6), 344-354.</refbiblio>
+<refbiblio id="rb34">Lemay, V. (2002). La supervision et la théorie des sphères de la justice. Dans M. Boutet, &amp; N. Rousseau (Éds), <marquage typemarq="italique">Les enjeux de la supervision pédagogique des stages</marquage> (pp. 217-231). Québec : Presses de l’Université du Québec.</refbiblio>
+<refbiblio id="rb35">Luhanga, F., Myrick, F., &amp; Yonge, O. (2010). The preceptor experience : An examination of ethical and accountability issues. <marquage typemarq="italique">Journal of Professional Nursing</marquage>, <marquage typemarq="italique">26</marquage>(5), 264-271.</refbiblio>
+<refbiblio id="rb36">Maclellan, D., Lordly, D., &amp; Gingras, J. (2011). Professional socialization in dietetics. <marquage typemarq="italique">Canadian Journal of Dietetic Practice &amp; Research</marquage>, <marquage typemarq="italique">72</marquage>(1), 37-42.</refbiblio>
+<refbiblio id="rb37">Penny, N. H., Ewing, T. L., Hamid, R. C., Shutt, K. A., &amp; Walter, A. S. (2014). An investigation of moral distress experienced by occupational therapists. <marquage typemarq="italique">Occupational Therapy in Health Care</marquage>, <marquage typemarq="italique">28</marquage>(4), 382-393.</refbiblio>
+<refbiblio id="rb38">Pope, K. S., &amp; Vetter, V. A. (1992). Ethical dilemmas encountered by members of the American Psychological Association. <marquage typemarq="italique">American Psychologist</marquage>, <marquage typemarq="italique">47</marquage>(3), 397-411.</refbiblio>
+<refbiblio id="rb39">Richard, L. F. (2008). Exploring connections between theory and practice : Stories from fieldwork supervisors. <marquage typemarq="italique">Occupational Therapy in Mental Health</marquage>, <marquage typemarq="italique">24</marquage>(2), 154-175.</refbiblio>
+<refbiblio id="rb40">Roberts, M. E., Hooper, B .R., Wood, W. H., &amp; King, R. M. (2015). An international systematic mapping review of fieldwork education in occupational therapy. <marquage typemarq="italique">Canadian Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">82</marquage>(2), 106-118.</refbiblio>
+<refbiblio id="rb41">Rodger, S., Webb, G., Devitt, L., Gilbert, J., Wrightson, P., &amp; McMeeken, J. (2008). A clinical education and practice placements in the allied health professions<marquage typemarq="italique">. Journal of Allied Health</marquage>, <marquage typemarq="italique">37</marquage>(1), 53-62.</refbiblio>
+<refbiblio id="rb42">Rubin, S. S. (1997). Balancing duty to client and therapist in supervision. <marquage typemarq="italique">The Clinical Supervisor</marquage>, <marquage typemarq="italique">16</marquage>(1), 1-23.</refbiblio>
+<refbiblio id="rb43">Sloggett, K., Kim, N., &amp; Cameron, D. (2003). Private practice : Benefits, barriers and strategies of providing fieldwork placements. <marquage typemarq="italique">Canadian Journal of Occupational Therapy</marquage>, <marquage typemarq="italique">70</marquage>(1), 42-50.</refbiblio>
+<refbiblio id="rb44">Swisher, L. L. D., Arslanian, L. E., &amp; Davis, C. M. (2005). The realm-individual process-situation (RIPS) model of ethical decision-making. <marquage typemarq="italique">HPA Ressource</marquage>, <marquage typemarq="italique">5</marquage>(3), 3-8.</refbiblio>
+<refbiblio id="rb45">Thomas, Y., Dickson, D., Broadbridge, J., Hopper, L., Hawkins, R., Edwards, A., &amp; McBryde, C. (2007). Benefits and challenges of supervising occupational therapy fieldwork students. <marquage typemarq="italique">Australian Occupational Therapy Journal</marquage>, <marquage typemarq="italique">54</marquage>, S2-S12.</refbiblio>
+<refbiblio id="rb46">Torrance, C., Mansell, I., &amp; Wilson, C. (2012). Learning objects? Nurse educators’ views on using patients for student learning. <marquage typemarq="italique">Education for Health</marquage>, <marquage typemarq="italique">25</marquage>(2), 9297.</refbiblio>
+<refbiblio id="rb47">Waterbury, J. T. (2001). Refuting patients’ obligations to clinical training. <marquage typemarq="italique">Medical Education</marquage>, <marquage typemarq="italique">35</marquage>, 286-294.</refbiblio>
+<refbiblio id="rb48">World Federation of Occupational Therapy (WFOT). (2016). <marquage typemarq="italique">Minimum standards for the education of occupational therapists</marquage>. Repéré à <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="https://www.mailmens.nl/files/21072349/copyrighted+world+federation+of+occupational+therapists+minimum+standards+for+the+education+of+occupational+therapists+2016a.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.mailmens.nl/files/21072349/copyrighted+world+federation+of+occupational+therapists+minimum+standards+for+the+education+of+occupational+therapists+2016a.pdf</liensimple></refbiblio>
+<refbiblio id="rb49">Yepes-Rios, M., Dudek, N., Duboyce, R., Curtis, J., Allard, R. J., &amp; Varpio, L. (2016). The failure to fail underperforming trainees in health professions education. <marquage typemarq="italique">Medical Teacher</marquage>, <marquage typemarq="italique">38</marquage>(11), 1092-99.</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Dans cet article, les expressions <marquage typemarq="italique">formatrice
+          clinique</marquage> et <marquage typemarq="italique">superviseure de stages ou de
+          stagiaires</marquage> réfèrent aux ergothérapeutes qui contribuent à la formation clinique
+          d’étudiants. Aussi, les mots <marquage typemarq="italique">stagiaire</marquage> et
+          étudiant sont utilisés comme synonymes.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>Les ergothérapeutes doivent noter aux 15 minutes ce qu’ils font. Des pressions sont
+          mises pour que la majorité de leur temps soit consacrée à des interventions directes avec
+          la clientèle.</alinea>
+      </note>
+    </grnote></partiesann></article>
