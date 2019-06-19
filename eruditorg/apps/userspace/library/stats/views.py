@@ -54,7 +54,7 @@ class StatsLandingView(
         submitted_form = context.get('submitted_form', None)
         if submitted_form and submitted_form.is_valid():
             # Get the report
-            report = self.get_report(submitted_form.cleaned_data)
+            report = self.get_report(submitted_form)
             return report
 
         return super().get(request, *args, **kwargs)
@@ -76,66 +76,34 @@ class StatsLandingView(
         context['R5_forms'] = [f for f in forms if f.form_info.counter_release == 'R5']
         return context
 
-    def get_report(self, form_data):
-        dstart, dend = self.get_report_period(form_data)
+    def get_report(self, form):
+        dstart, dend = form.get_report_period()
         # report_arguments = form_data
-        report_arguments = {}
-        report_arguments['format'] = form_data['format']
-        report_arguments['id'] = self.current_organisation.legacyorganisationprofile.account_id
-        report_arguments['beginPeriod'] = dstart.strftime("%Y-%m-%d")
-        report_arguments['endPeriod'] = dend.strftime("%Y-%m-%d")
-        if form_data.get('report_type') == 'counter-jr1-goa':
+        report_arguments = {'format': form.cleaned_data['format'],
+                            'id': self.current_organisation.legacyorganisationprofile.account_id,
+                            'beginPeriod': dstart.strftime("%Y-%m-%d"),
+                            'endPeriod': dend.strftime("%Y-%m-%d")}
+
+        if form.cleaned_data['report_type'] == 'counter-jr1-goa':
             report_arguments['isGoldOpenAccess'] = True
 
-        format = report_arguments['format']
-        report = requests.get(self._get_report_url(format), params=report_arguments)
+        report_format = report_arguments['format']
+        report = requests.get(self._get_report_url(report_format), params=report_arguments)
         filename = "{id}-{beginPeriod}-{endPeriod}".format(**report_arguments)
         response = HttpResponse(
             report, content_type="application/{format}".format(**report_arguments)
         )
         response['Content-Disposition'] = 'attachment; filename="{filename}.{format}"'.format(
-            filename=filename, format=format
+            filename=filename, format=report_format
         )
         return response
 
-    def get_report_period(self, form_data):
-        """ Returns a tuple (start date, end date) containing the period of the report. """
-        now_dt = dt.datetime.now()
-        year = form_data.get('year', None)
-        month_start = form_data.get('month_start', None)
-        month_end = form_data.get('month_end', None)
-        year_start = form_data.get('year_start', None)
-        year_end = form_data.get('year_end', None)
-
-        # First handles the case where a precise period has been specified
-        try:
-            dstart_str = "{year}-{month}-01".format(year=year_start, month=month_start)
-            dstart = dt.datetime.strptime(dstart_str, '%Y-%m-%d').date()
-            dend_str = "{year}-{month}-01".format(year=year_end, month=month_end)
-            dend = dt.datetime.strptime(dend_str, '%Y-%m-%d').date()
-        except (ValueError, TypeError):
-            dstart, dend = None, None
-        else:
-            return dstart, dend
-
-        # Then handles
-        try:
-            year = int(year)
-            assert year <= now_dt.year
-        except (ValueError, TypeError, AssertionError):
-            dstart, dend = None, None
-        else:
-            return dt.date(year, 1, 1), dt.date(year, 12, 31)
-
-        # We cannot determine the period to consider so we use the current year
-        return dt.date(now_dt.year, 1, 1), dt.date(now_dt.year, 12, 31)
-
-    def _get_report_url(self, format):
-        if format == 'xml':
+    def _get_report_url(self, report_format):
+        if report_format == 'xml':
             return "{}/counterXML.php".format(
                 self.report_base_url
             )
-        if format == 'html':
+        if report_format == 'html':
             return "{}/counterHTML.php".format(
                 self.report_base_url
             )

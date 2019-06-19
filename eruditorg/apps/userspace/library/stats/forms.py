@@ -66,6 +66,23 @@ class CounterReport(forms.Form):
 
         return cleaned_data
 
+    def get_report_period(self) -> typing.Tuple[dt.date, dt.date]:
+        # TODO: incohérence: la date de fin est-elle incluse dans le rapport ou non ?
+        #    dans tous les cas soit l'année, soit le dernier mois sont faux.
+        cleaned_data = self.cleaned_data
+        year = cleaned_data.get('year', None)
+        if year:
+            return dt.date(year, 1, 1), dt.date(year, 12, 31)
+
+        month_start = cleaned_data['month_start']
+        month_end = cleaned_data['month_end']
+        year_start = cleaned_data['year_start']
+        year_end = cleaned_data['year_end']
+
+        return dt.date(year_start, month_start, 1), dt.date(year_end, month_end, 1)
+
+
+
 
 class CounterJR1Form(CounterReport):
     prefix = "counter_jr1"
