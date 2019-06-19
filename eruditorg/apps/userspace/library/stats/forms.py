@@ -16,10 +16,9 @@ MONTH_CHOICES = [('', '')] + [
 ]
 
 
-class CounterReport(forms.Form):
+class CounterReportForm(forms.Form):
     month_start = forms.TypedChoiceField(choices=MONTH_CHOICES, required=False, coerce=int)
     month_end = forms.TypedChoiceField(choices=MONTH_CHOICES, required=False, coerce=int)
-    format = forms.ChoiceField(choices=FORMAT_CHOICES, required=False)
 
     def __init__(self, form_info, end_year, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -82,16 +81,18 @@ class CounterReport(forms.Form):
         return dt.date(year_start, month_start, 1), dt.date(year_end, month_end, 1)
 
 
+class CounterR4Form(CounterReportForm):
+    format = forms.ChoiceField(choices=FORMAT_CHOICES, required=False)
 
 
-class CounterJR1Form(CounterReport):
+class CounterJR1Form(CounterR4Form):
     prefix = "counter_jr1"
     report_type = forms.CharField(
         initial="counter-jr1", widget=forms.HiddenInput(), required=False
     )
 
 
-class CounterJR1GOAForm(CounterReport):
+class CounterJR1GOAForm(CounterR4Form):
     prefix = "counter_jr1_goa"
     report_type = forms.CharField(
         initial="counter-jr1-goa", widget=forms.HiddenInput()
@@ -100,7 +101,7 @@ class CounterJR1GOAForm(CounterReport):
 
 class StatsFormInfo(typing.NamedTuple):
     code: str
-    form_class: typing.Type[CounterReport]
+    form_class: typing.Type[CounterReportForm]
     tab_label: str
     title: str
     description: str

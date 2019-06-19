@@ -15,7 +15,7 @@ from base.viewmixins import MenuItemMixin
 from apps.userspace.library.viewmixins import OrganisationScopePermissionRequiredMixin
 
 from .forms import (
-    CounterReport,
+    CounterReportForm,
     StatsFormInfo,
     STATS_FORMS_INFO,
 )
@@ -31,7 +31,7 @@ def compute_end_year(current_year: int, last_year_of_subscription: typing.Option
 
 
 def get_stats_form(form_info: StatsFormInfo, request_data: dict,
-                   end_year: int) -> typing.Tuple[CounterReport, bool]:
+                   end_year: int) -> typing.Tuple[CounterReportForm, bool]:
     is_submitted = form_info.submit_name in request_data
     kwargs = {
         'data': request_data if is_submitted else None,
