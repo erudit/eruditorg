@@ -437,28 +437,17 @@ LOGGING = {
         'level': 'INFO',
         'handlers': ['console'],
     },
-    'formatters': {
-        'structured': {
-            'format': '%(message)s'
-        },
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
-        },
-    },
     'handlers': {
         'referer': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'when': 'midnight',
             'filename': '/tmp/www.erudit.org.referer.log',
-            'formatter': 'verbose',
         },
 
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
         },
     },
     'loggers': {
@@ -468,7 +457,7 @@ LOGGING = {
         },
         'core.subscription.middleware': {
             'level': 'INFO',
-            'handlers': ['referer', ],
+            'handlers': ['referer', 'console', ],
             'propagate': False,
         },
     }
