@@ -64,7 +64,7 @@
 
     em, i    { @include fw-sans-italic; }
 
-    strong, b  { @include fw-sans-medium; }
+    strong, b  { @include fw-sans-bold; }
 
     // bold italics
     em strong,
