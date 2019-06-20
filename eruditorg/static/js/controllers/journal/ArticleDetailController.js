@@ -179,7 +179,7 @@ export default {
           // Figure group numbers.
           var grfigure_number = grfigure.find('.no')
           // Figure group caption.
-          var grfigure_caption = grfigure.find('.legende')
+          var grfigure_caption = grfigure.find('div.legende')
           // Figure number.
           var figure_number = figure.find('.no')
           // Figure caption.
