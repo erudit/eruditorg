@@ -669,8 +669,23 @@ class TestArticleDetailView:
         })
         html = Client().get(url).content.decode()
         # Check that the source is displayed under both figures 1 & 2 which are in the same figure group.
-        assert '<figure class="figure" id="fi1"><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
-        assert '<figure class="figure" id="fi2"><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
+        assert '<figure class="figure" id="fi1"><figcaption></figcaption><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
+        assert '<figure class="figure" id="fi2"><figcaption></figcaption><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
+
+    def test_figure_back_arrow_is_displayed_when_theres_no_number_or_title(self):
+        article = ArticleFactory(
+            from_fixture='1031003ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that the arrow to go back to the figure is present event if there's no figure number or caption.
+        assert '<figure class="tableau" id="lita7"><figcaption><p class="allertexte"><a href="#ta7">|^</a></p></figcaption>' in html
 
     def test_figure_groups_numbers_display_in_figure_list(self):
         article = ArticleFactory(
