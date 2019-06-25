@@ -111,9 +111,9 @@ class TestIssueDetailSummary:
             'groups': [{
                 'level': 1,
                 'type': 'subsection',
-                'titles': {'main': 'La recherche qualitative aujourd&#8217;hui. 30 ans de diffusion et de r&#233;flexion', 'paral': []},
+                'titles': {'main': 'La recherche qualitative aujourd’hui. 30 ans de diffusion et de réflexion', 'paral': []},
                 'notegens': [{
-                    'content': ['Sous la direction de Fr&#233;d&#233;ric Deschenaux, Chantal Royer et Colette Baribeau'],
+                    'content': ['Sous la direction de Frédéric Deschenaux, Chantal Royer et Colette Baribeau'],
                     'scope': 'surtitre',
                     'type': 'edito',
                 }],
@@ -327,7 +327,7 @@ class TestIssueDetailSummary:
         response = Client().get(url)
         html = response.content.decode()
         # Check that there's only one space between the main title and the '/'.
-        assert 'Inaugural Lecture of the FR Scott Professor&nbsp;/ Conf&#233;rence inaugurale du Professeur FR Scott' in html
+        assert 'Inaugural Lecture of the FR Scott Professor&nbsp;/ Conférence inaugurale du Professeur FR Scott' in html
 
     def test_issue_detail_view_with_untitled_article(self):
         article = ArticleFactory(

@@ -355,7 +355,7 @@ class TestIssue:
 
     @pytest.mark.parametrize('fixture_name,expected', [
         ('inter02349', "Affirmation autochtone"),
-        ('images1080663', "David Cronenberg / La production au Qu&#233;bec: Cinq cin&#233;astes sur le divan"),  # noqa
+        ('images1080663', "David Cronenberg / La production au Québec: Cinq cinéastes sur le divan"),  # noqa
     ])
     def test_can_return_its_name_with_themes(self, fixture_name, expected):
         issue = IssueFactory()
@@ -431,7 +431,7 @@ class TestIssue:
         assert issue.is_external
 
     @pytest.mark.parametrize('fixture_name, language, expected_copyrights', [
-        ('images1080663', 'fr', 'Tous droits r&#233;serv&#233;s © 24 images inc., 1992'),
+        ('images1080663', 'fr', 'Tous droits réservés © 24 images inc., 1992'),
         ('images1080663', 'en', 'All Rights Reserved © 24 images inc., 1992'),
         ('images1080663', 'es', 'Reservados todos los derechos © 24 images inc., 1992'),
     ])
