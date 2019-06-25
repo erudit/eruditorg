@@ -215,7 +215,7 @@
 {# The issue's localidentifier is used as a primary key for the cache key. #}
 {# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
 {# The issue's update time from Fedora is used as the cache content version. #}
-{% cache None "public_issue_detail_back_issues" issue.localidentifier LANGUAGE_CODE issue.fedora_updated %}
+{% cache FOREVER_TTL "public_issue_detail_back_issues" issue.localidentifier LANGUAGE_CODE issue.fedora_updated %}
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">

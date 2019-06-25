@@ -289,8 +289,10 @@ CACHES = {
     'fedora': env.cache("CACHE_URL"),
     'files': env.cache("CACHE_URL"),
 }
-SHORT_TTL = 60 * 60         # 1 hour
-LONG_TTL = 60 * 60 * 24     # 1 day
+NEVER_TTL = 0               # Do not cache
+SHORT_TTL = 60 * 60         # Cache for 1 hour
+LONG_TTL = 60 * 60 * 24     # Cache for 1 day
+FOREVER_TTL = None          # Cache forever
 
 # django-adv-cache-tag settings
 # -----------------------------------------------------------------------------

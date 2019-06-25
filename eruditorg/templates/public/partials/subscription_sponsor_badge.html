@@ -3,7 +3,7 @@
 {% if request.subscriptions.active_subscription.sponsor or request.subscriptions.active_subscription.organisation %}
 {% with organisation=request.subscriptions.active_subscription.sponsor|default:request.subscriptions.active_subscription.organisation %}
 {# The organisation badge is cached forever or until the organisation name or badge is modified. #}
-{% cache None "public_journal_base_organisation" organisation.id organisation.name organisation.badge LANGUAGE_CODE "v1" %}
+{% cache FOREVER_TTL "public_journal_base_organisation" organisation.id organisation.name organisation.badge LANGUAGE_CODE "v1" %}
   <div class="text-center subscription-sponsor">
     <p>{% trans "Votre accès est offert par" %}</p>
     {% if organisation.badge %}

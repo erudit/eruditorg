@@ -438,7 +438,7 @@ class IssueDetailView(
         # If the issue is not published, the template should not be cached (0 = never).
         # It's OK to cache the published issue templates forever because we are using the issue's
         # updated time from Fedora as the cache version.
-        context['cache_timeout'] = None if shouldcache else 0
+        context['cache_timeout'] = settings.FOREVER_TTL if shouldcache else settings.NEVER_TTL
 
         try:
             context['journal_info'] = self.object.journal.information
@@ -651,7 +651,7 @@ class BaseArticleDetailView(
         # If the issue is not published, the template should not be cached (0 = never).
         # It's OK to cache the published issue templates forever because we are using the issue's
         # updated time from Fedora as the cache version.
-        context['cache_timeout'] = None if shouldcache else 0
+        context['cache_timeout'] = settings.FOREVER_TTL if shouldcache else settings.NEVER_TTL
         # Issue's update time from Fedora to use as the cache version.
         context['fedora_updated'] = obj.fedora_object.modified
 
