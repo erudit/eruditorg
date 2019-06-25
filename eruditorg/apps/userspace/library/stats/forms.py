@@ -23,6 +23,7 @@ class CounterReportForm(forms.Form):
     def __init__(self, form_info, end_year, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.form_info = form_info
+        self.release = form_info.counter_release
 
         year_choices = [('', '')] + [
             (str(y), str(y)) for y in range(end_year, 2008, -1)
@@ -99,6 +100,18 @@ class CounterJR1GOAForm(CounterR4Form):
     )
 
 
+class CounterR5TRJ1Form(CounterReportForm):
+    prefix = "counter_r5_trj1"
+
+
+class CounterR5TRJ3Form(CounterReportForm):
+    prefix = "counter_r5_trj3"
+
+
+class CounterR5IRA1Form(CounterReportForm):
+    prefix = "counter_r5_ira1"
+
+
 class StatsFormInfo(typing.NamedTuple):
     code: str
     form_class: typing.Type[CounterReportForm]
@@ -117,7 +130,7 @@ STATS_FORMS_INFO = [
         code='counter-jr1',
         form_class=CounterJR1Form,
         tab_label=_('JR1'),
-        title=_('Journal Report 1 (R4)'),
+        title=_('Journal Report 1'),
         description=_("Nombre de requêtes réussies d’articles en texte intégral par mois et par "
                       "revue"),
         counter_release='R4',
@@ -126,9 +139,36 @@ STATS_FORMS_INFO = [
         code='counter-jr1-goa',
         form_class=CounterJR1GOAForm,
         tab_label=_('JR1_GOA'),
-        title=_('Journal Report 1 GOA (R4)'),
+        title=_('Journal Report 1 GOA'),
         description=_("Nombre de requêtes réussies d’articles en libre accès en texte intégral par "
                       "mois et par revue"),
         counter_release='R4',
-    )
+    ),
+    StatsFormInfo(
+        code='counter-r5-trj1',
+        form_class=CounterR5TRJ1Form,
+        tab_label=_('TR_J1'),
+        title=_('Journal Requests (Excluding OA_Gold)'),
+        description=_("Nombre de requêtes réussies d’articles en accès restreint en texte intégral "
+                      "par mois et par revue"),
+        counter_release='R5',
+    ),
+    StatsFormInfo(
+        code='counter-r5-trj3',
+        form_class=CounterR5TRJ3Form,
+        tab_label=_('TR_J3'),
+        title=_('Journal Usage by Access Type'),
+        description=_("Nombre de requêtes réussies d’articles en texte intégral "
+                      "par mois, par revue et par type d'accès"),
+        counter_release='R5',
+    ),
+    StatsFormInfo(
+        code='counter-r5-ira1',
+        form_class=CounterR5TRJ3Form,
+        tab_label=_('IR_A1'),
+        title=_('Journal Article Requests'),
+        description=_("Nombre de requêtes réussies d’articles en texte intégral "
+                      "par mois et par article"),
+        counter_release='R5',
+    ),
 ]

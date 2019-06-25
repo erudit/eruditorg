@@ -70,10 +70,16 @@ class StatsLandingView(
             forms.append(form)
             if is_submitted:
                 context['submitted_form'] = form
-        context['active_form'] = context.get('submitted_form', None) or forms[0]
-
-        context['R4_forms'] = [f for f in forms if f.form_info.counter_release == 'R4']
-        context['R5_forms'] = [f for f in forms if f.form_info.counter_release == 'R5']
+        submitted_form = context.get('submitted_form', None)
+        submitted_release = submitted_form.release if submitted_form else None
+        releases = {}
+        for release in ('R4', 'R5'):
+            release_forms = [f for f in forms if f.release == release]
+            releases[release] = {
+                'forms': release_forms,
+                'active_form': submitted_form if submitted_release == release else release_forms[0]
+            }
+        context['releases'] = releases
         return context
 
     def get_report(self, form):
