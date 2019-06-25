@@ -1032,17 +1032,17 @@
       </xsl:choose>
     </xsl:variable>
     <figure class="{name()}" id="{$id}">
-      <xsl:if test="no | legende/titre | legende/sstitre">
-        <figcaption>
-          <xsl:if test="name(..) != 'grfigure' and name(..) != 'grtableau'">
-            <xsl:if test="$mode = 'liste'">
-              <p class="allertexte"><a href="#{@id}">|^</a></p>
-            </xsl:if>
+      <figcaption>
+        <xsl:if test="name(..) != 'grfigure' and name(..) != 'grtableau'">
+          <xsl:if test="$mode = 'liste'">
+            <p class="allertexte"><a href="#{@id}">|^</a></p>
+          </xsl:if>
+          <xsl:if test="no">
             <p class="no"><xsl:apply-templates select="no"/></p>
           </xsl:if>
-          <xsl:apply-templates select="legende/titre | legende/sstitre"/>
-        </figcaption>
-      </xsl:if>
+        </xsl:if>
+        <xsl:apply-templates select="legende/titre | legende/sstitre"/>
+      </figcaption>
       <div class="figure-wrapper">
         <div class="figure-object">
           <xsl:apply-templates select="tabtexte | objetmedia"/>
