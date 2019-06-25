@@ -691,6 +691,23 @@ class TestArticleDetailView:
         # Check that the figure numbers are displayed in the figure list for figure groups.
         assert '<div class="grfigure" id="ligf1">\n<div class="grfigure-caption">\n<p class="allertexte"><a href="#gf1">|^</a></p>\n<p class="no">Figures 1 - 2</p>' in html
 
+    def test_figcaption_display_for_figure_groups_and_figures(self):
+        article = ArticleFactory(
+            from_fixture='1060169ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that figure group caption and the figure captions are displayed.
+        assert '<div class="grfigure-caption">\n<p class="allertexte"><a href="#gf1">|^</a></p>\n<p class="no">Figure 1</p>\n<div class="legende"><p class="legende"><strong class="titre">RMF frequencies in German data</strong></p></div>\n</div>' in html
+        assert '<figcaption><p class="legende"><strong class="titre">German non-mediated</strong></p></figcaption>' in html
+        assert '<figcaption><p class="legende"><strong class="titre">German interpreted</strong></p></figcaption>' in html
+
     def test_article_multilingual_titles(self):
         article = ArticleFactory(
             from_fixture='1059303ar',
