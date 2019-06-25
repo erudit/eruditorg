@@ -25,10 +25,12 @@
   <div class="row">
     {# Main content #}
     {% block inner_main %}{% endblock inner_main %}
-    {# Journal's metadata are cached for 1 day based on the meta info issue localidentifier, #}
-    {# the meta info issue published status, the directors IDs, the editors IDs and the current language code. #}
-    {# If the meta info issue is not published, the cache timeout is 0. #}
-    {% cache cache_timeout "public_journal_base_journal_meta" meta_info_issue.localidentifier meta_info_issue.is_published directors_cache_key editors_cache_key LANGUAGE_CODE %}
+    {# If the meta info issue is published, the journal's metadata will be cached forever (TTL = None) or until the cache content version change. #}
+    {# If the meta info issue is not published, the journal's metadata will not be cached (TTL = 0). #}
+    {# The meta info issue's localidentifier is used as a primary key for the cache key. #}
+    {# The directors_cache_key, editors_cache_key and the LANGUAGE_CODE arguments are use to generate the cache key hash. #}
+    {# The meta info issue's update time from Fedora is used as the cache content version. #}
+    {% cache cache_timeout "public_journal_base_journal_meta" meta_info_issue.localidentifier directors_cache_key editors_cache_key LANGUAGE_CODE meta_info_issue.fedora_updated %}
     {# Journal information sidebar #}
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
       <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>

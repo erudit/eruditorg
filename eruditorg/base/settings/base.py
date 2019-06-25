@@ -294,8 +294,22 @@ CACHES = {
     'fedora': env.cache("CACHE_URL"),
     'files': env.cache("CACHE_URL"),
 }
-SHORT_TTL = 60 * 60         # 1 hour
-LONG_TTL = 60 * 60 * 24     # 1 day
+NEVER_TTL = 0               # Do not cache
+SHORT_TTL = 60 * 60         # Cache for 1 hour
+LONG_TTL = 60 * 60 * 24     # Cache for 1 day
+FOREVER_TTL = None          # Cache forever
+
+# django-adv-cache-tag settings
+# -----------------------------------------------------------------------------
+# The first argument of the cache tag (after the fragment's name) will be used
+# as a primary key in the cache key.
+ADV_CACHE_INCLUDE_PK = True
+# The last argument of the cache tag will be used as the cache version in the
+# cache content (not the key). This means that the cache key will not change,
+# but the cache content will be invalidated if the version change.
+ADV_CACHE_VERSIONING = True
+# Compress the cache content with zlib.
+ADV_CACHE_COMPRESS = True
 
 ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT = env("ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT")
 

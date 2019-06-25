@@ -39,7 +39,7 @@
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
-{% cache LONG_TTL "public_home" LANGUAGE_CODE %}
+{% cache LONG_TTL "public" "home" LANGUAGE_CODE "v1" %}
 <main role="main">
   <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
   {# SEARCH #}

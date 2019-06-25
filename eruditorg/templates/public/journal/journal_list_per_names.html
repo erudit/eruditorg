@@ -41,7 +41,7 @@
 
 {% block content %}
 {# Journal list per names & filter form are cached for one day based on the filter form values and the current language code. #}
-{% cache LONG_TTL "public_journal_list_per_names" filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value LANGUAGE_CODE %}
+{% cache LONG_TTL "public_journal_list" "per_names" filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value LANGUAGE_CODE "v1" %}
 <main class="container">
   <div class="row">
     <div class="col-sm-8">

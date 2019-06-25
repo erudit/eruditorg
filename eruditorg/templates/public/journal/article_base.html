@@ -6,10 +6,12 @@
 {% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal.name|safe article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
-{# Article's metatags are cached for 1 day based on the article localidentifier, #}
-{# the issue published status and the current language code. #}
-{# If the issue is not published, the cache timeout is 0. #}
-{% cache cache_timeout "public_article_base_metatags" article.localidentifier article.issue.is_published LANGUAGE_CODE %}
+{# If the issue is published, the article metatags will be cached forever (TTL = None) or until the cache content version change. #}
+{# If the issue is not published, the article metatags will not be cached (TTL = 0). #}
+{# The article's localidentifier is used as a primary key for the cache key. #}
+{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The article's update time from Fedora is used as the cache content version. #}
+{% cache cache_timeout "public_article_base_metatags" article.localidentifier LANGUAGE_CODE fedora_updated %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="article">
@@ -98,10 +100,12 @@
 
 {% block structured_data %}
 {{ block.super }}
-{# Article's structured data are cached for 1 day based on the article localidentifier, #}
-{# the issue published status and the current language code. #}
-{# If the issue is not published, the cache timeout is 0. #}
-{% cache cache_timeout "public_article_base_structured_data" article.localidentifier article.issue.is_published LANGUAGE_CODE %}
+{# If the issue is published, the article structured data will be cached forever (TTL = None) or until the cache content version change. #}
+{# If the issue is not published, the article structured data will not be cached (TTL = 0). #}
+{# The article's localidentifier is used as a primary key for the cache key. #}
+{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The article's update time from Fedora is used as the cache content version. #}
+{% cache cache_timeout "public_article_base_structured_data" article.localidentifier LANGUAGE_CODE fedora_updated %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
 {% endblock structured_data %}

@@ -40,7 +40,7 @@
 
 {% block content %}
 {# Journal list per disciplines is cached for one day based on the language code. #}
-{% cache LONG_TTL "public_journal_list_per_disciplines" LANGUAGE_CODE %}
+{% cache LONG_TTL "public_journal_list" "per_disciplines" LANGUAGE_CODE "v1" %}
 <main>
   <header class="main-header sorting-index container-fluid">
       <div class="container">
