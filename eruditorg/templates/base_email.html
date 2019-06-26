@@ -298,7 +298,7 @@
 
     #templatePreheader .mcnTextContent a, #templatePreheader .mcnTextContent p a {
       /*@editable*/
-      color: #656565;
+      color: #ff4242;
       /*@editable*/
       font-weight: normal;
       /*@editable*/
@@ -588,7 +588,7 @@
 
     #templateFooter .mcnTextContent a, #templateFooter .mcnTextContent p a {
       /*@editable*/
-      color: #656565;
+      color: #ff4242;
       /*@editable*/
       font-weight: normal;
       /*@editable*/
@@ -961,7 +961,8 @@
                                   </tr>
                                 </table>
                                 <p>
-                                {% blocktrans %}Le bouton ne fonctionne pas? Veuillez copier-coller cet url dans votre navigateur: <strong>{{ cta_url }}</strong>{% endblocktrans %}
+                                {% blocktrans %}Le bouton ne fonctionne pas ? Veuillez copier-coller cet url dans votre navigateur :{% endblocktrans %}
+                                <a href="{{ cta_url }}" style="color:#ff4242; text-decoration:underline;">{{ cta_url }}</a>
                                 </p>
 
                                 {% endblock cta %}
@@ -1190,7 +1191,7 @@
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
-                                                                      <a href="https://www.linkedin.com/company-beta/3628951/" target="_blank"><img class="" height="24" src="https://cdn-images.mailchimp.com/icons/social-block-v2/dark-linkedin-48.png" style="display:block;" width="24"></a>
+                                                                      <a href="https://www.linkedin.com/company/%C3%A9rudit" target="_blank"><img class="" height="24" src="https://cdn-images.mailchimp.com/icons/social-block-v2/dark-linkedin-48.png" style="display:block;" width="24"></a>
                                                                     </td>
                                                                   </tr>
                                                                 </tbody>
@@ -1240,7 +1241,7 @@
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;" align="center" valign="top">
-                              <a href="http://{{ site.domain }}" target="_blank">{% blocktrans with sitename=site.name %}{{ sitename }}{% endblocktrans %}</a>
+                              <a href="http://{{ site.domain }}" target="_blank" style="color:#ff4242; text-decoration:underline;">{% blocktrans with sitename=site.name %}{{ sitename }}{% endblocktrans %}</a>
                             </td>
                           </tr>
                         </tbody>
@@ -1282,7 +1283,7 @@
                         <tbody>
                           <tr>
                             <td class="mcnImageContent" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;" valign="top">
-                              <a href="{% trans 'https://jamaistrop.erudit.org/' %}" title="{% trans 'Consulter la campagne « On n’est jamais trop érudit »' %}" target="_blank"><img align="center" alt="" class="mcnImage" src="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ site.domain }}{% if LANGUAGE_CODE == 'fr' %}{% static 'img/email/banner-FR.png' %}{% else %}{% static 'img/email/banner-EN.png' %}{% endif %}" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" width="600"></a>
+                              <a href="{% trans 'https://www.erudit.org/fr/20ans/' %}" title="{% trans 'Érudit célèbre ses 20 ans ! Découvrez notre histoire.' %}" target="_blank"><img align="center" alt="" class="mcnImage" src="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ site.domain }}{% if LANGUAGE_CODE == 'fr' %}{% static 'img/email/banniere_20_ans-fr.png' %}{% else %}{% static 'img/email/banniere_20_ans-en.png' %}{% endif %}" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" width="600"></a>
                             </td>
                           </tr>
                           <tr>
