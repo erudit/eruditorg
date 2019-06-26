@@ -10,7 +10,7 @@
 <p>{% trans "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:" %}</p>
 <ul>
 {% for issue in issue_submissions %}
-  <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}">{{ issue }}</a></li>
+  <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
 {% endfor %}
 </ul>
 <p>{% trans "Assurez-vous d’en avoir une copie." %}</p>
@@ -27,6 +27,6 @@
 {% block signature %}
 {% trans 'L’Équipe Érudit' %}<br>
 {% blocktrans %}
-<a href="mailto:info@erudit.org?subject=Suppression de fichiers déposés">info@erudit.org</a>
+<a href="mailto:info@erudit.org?subject=Suppression de fichiers déposés" style="color:#ff4242; text-decoration:underline;">info@erudit.org</a>
 {% endblocktrans %}
 {% endblock signature %}
