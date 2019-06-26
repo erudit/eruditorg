@@ -25,7 +25,7 @@
         <p><strong>{% trans "Impossible de rejoindre l’organisation." %}</strong></p>
         {% trans "Ce lien a déjà été utilisé." %}
       </div>
-    {% elif not token.active %}
+    {% elif token.is_canceled %}
       <div class="alert">
         <p><strong>{% trans "Impossible de rejoindre l’organisation." %}</strong></p>
         {% trans "Ce lien n'est plus valide." %}

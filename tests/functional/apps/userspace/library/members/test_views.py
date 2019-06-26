@@ -236,4 +236,4 @@ class TestOrganisationMemberCancelView(TestCase):
         # Check
         self.assertEqual(response.status_code, 302)
         token.refresh_from_db()
-        self.assertFalse(token.active)
+        self.assertTrue(token.is_canceled)
