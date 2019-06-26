@@ -694,7 +694,7 @@ class BaseArticleDetailView(
 
         if article.fedora_object.pdf.exists:
             try:
-                pdf = PdfFileReader(article.fedora_object.pdf.content)
+                pdf = PdfFileReader(article.fedora_object.pdf.content, strict=False)
                 context['pdf_exists'] = True
                 context['pdf_num_pages'] = pdf.getNumPages()
                 context['can_display_first_pdf_page'] = (
