@@ -102,14 +102,17 @@ class CounterJR1GOAForm(CounterR4Form):
 
 class CounterR5TRJ1Form(CounterReportForm):
     prefix = "counter_r5_trj1"
+    report_code = 'TR_J1'
 
 
 class CounterR5TRJ3Form(CounterReportForm):
     prefix = "counter_r5_trj3"
+    report_code = 'TR_J3'
 
 
 class CounterR5IRA1Form(CounterReportForm):
     prefix = "counter_r5_ira1"
+    report_code = 'IR_A1'
 
 
 class StatsFormInfo(typing.NamedTuple):

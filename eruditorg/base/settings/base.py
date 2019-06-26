@@ -92,6 +92,9 @@ env = environ.Env(
     REDIS_HOST=(str, None),
     REDIS_PORT=(int, None),
     REDIS_INDEX=(int, None),
+    ELASTICSEARCH_STATS_INDEX=(str, "patterns"),
+    ELASTICSEARCH_STATS_HOST=(str, None),
+    ELASTICSEARCH_STATS_PORT=(str, "9200"),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 

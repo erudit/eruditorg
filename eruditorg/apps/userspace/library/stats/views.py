@@ -1,7 +1,9 @@
 import datetime as dt
 import typing
+from io import StringIO
 
 import requests
+from django.conf import settings
 
 from django.http import HttpResponse
 from django.views.generic import TemplateView
@@ -19,6 +21,8 @@ from .forms import (
     StatsFormInfo,
     STATS_FORMS_INFO,
 )
+
+from counter_r5.generate import CounterR5Report
 
 
 def compute_end_year(current_year: int, last_year_of_subscription: typing.Optional[int]) -> int:
@@ -54,7 +58,10 @@ class StatsLandingView(
         submitted_form = context.get('submitted_form', None)
         if submitted_form and submitted_form.is_valid():
             # Get the report
-            report = self.get_report(submitted_form)
+            if submitted_form.release == 'R4':
+                report = self.get_r4_report(submitted_form)
+            else:
+                report = self.get_r5_report(submitted_form)
             return report
 
         return super().get(request, *args, **kwargs)
@@ -82,11 +89,11 @@ class StatsLandingView(
         context['releases'] = releases
         return context
 
-    def get_report(self, form):
+    def get_r4_report(self, form):
         dstart, dend = form.get_report_period()
         # report_arguments = form_data
         report_arguments = {'format': form.cleaned_data['format'],
-                            'id': self.current_organisation.legacyorganisationprofile.account_id,
+                            'id': self.get_organisation_id(),
                             'beginPeriod': dstart.strftime("%Y-%m-%d"),
                             'endPeriod': dend.strftime("%Y-%m-%d")}
 
@@ -94,23 +101,40 @@ class StatsLandingView(
             report_arguments['isGoldOpenAccess'] = True
 
         report_format = report_arguments['format']
-        report = requests.get(self._get_report_url(report_format), params=report_arguments)
+        url = self.report_base_url
+        if report_format == 'xml':
+            url = "{}/counterXML.php".format(url)
+        elif report_format == 'html':
+            url = "{}/counterHTML.php".format(url)
+        report = requests.get(url, params=report_arguments)
         filename = "{id}-{beginPeriod}-{endPeriod}".format(**report_arguments)
-        response = HttpResponse(
-            report, content_type="application/{format}".format(**report_arguments)
-        )
+        response = HttpResponse(report, content_type="application/{}".format(report_format))
         response['Content-Disposition'] = 'attachment; filename="{filename}.{format}"'.format(
             filename=filename, format=report_format
         )
         return response
 
-    def _get_report_url(self, report_format):
-        if report_format == 'xml':
-            return "{}/counterXML.php".format(
-                self.report_base_url
-            )
-        if report_format == 'html':
-            return "{}/counterHTML.php".format(
-                self.report_base_url
-            )
-        return self.report_base_url
+    def get_organisation_id(self):
+        return self.current_organisation.legacyorganisationprofile.account_id
+
+    def get_r5_report(self, form):
+        begin_date, end_date = form.get_report_period()
+        organisation_id = self.get_organisation_id()
+        report = CounterR5Report(
+            report_type=form.report_code,
+            customer_id=organisation_id,
+            customer_name=self.current_organisation.name,
+            es_index=settings.ELASTICSEARCH_STATS_INDEX,
+            es_host=settings.ELASTICSEARCH_STATS_HOST,
+            es_port=settings.ELASTICSEARCH_STATS_PORT,
+            begin_date=begin_date,
+            end_date=end_date,
+        )
+        f = StringIO()
+        report.write_csv(f)
+        response = HttpResponse(f.getvalue(), content_type="application/csv")
+        filename = "{}-{}-{}".format(
+            organisation_id, begin_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d")
+        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
+        return response
