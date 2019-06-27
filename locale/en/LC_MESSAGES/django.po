@@ -2989,6 +2989,8 @@ msgid ""
 "href=\"%(site_name)s\" style=\"color:#ff4242; text-"
 "decoration:underline;\">%(site_name)s</a>."
 msgstr ""
+"You have asked to reset your account password on <a href=\"%(site_name)s\" "
+"style=\"color:#ff4242; text-decoration:underline;\">%(site_name)s</a>."
 
 #: templates/emails/auth/password_reset_email.html:13
 msgid ""
