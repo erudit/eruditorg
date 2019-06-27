@@ -26,7 +26,7 @@
           <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Ce lien d'abonnement a déjà été utilisé." %}
         </div>
-      {% elif not token.active %}
+      {% elif token.is_canceled %}
         <div class="alert">
           <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Ce lien d'abonnement n'est plus valide." %}
