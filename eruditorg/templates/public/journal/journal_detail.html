@@ -62,10 +62,10 @@
 {% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
 {% block inner_main %}
 {# The journal detail will be cached forever (TTL = None) or until the cache content version change. #}
-{# The journal's localidentifier is used as a primary key for the cache key. #}
+{# The journal's code is used as a primary key for the cache key. #}
 {# The content_access_granted and LANGUAGE_CODE arguments are use to generate the cache key hash. #}
 {# The journal info's update time is used as the cache content version. #}
-{% cache FOREVER_TTL "public_journal_detail" journal.localidentifier content_access_granted LANGUAGE_CODE journal_info.updated %}
+{% cache FOREVER_TTL "public_journal_detail" journal.code content_access_granted LANGUAGE_CODE journal_info.updated %}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header row">
     <div class="col-sm-12">
@@ -175,10 +175,10 @@
     {# The journal's back issues should be cached separately. #}
     {% nocache %}
     {# The journal's back issues will be cached forever (TTL = None) or until the cache content version change. #}
-    {# The journal's localidentifier is used as a primary key for the cache key. #}
+    {# The journal's code is used as a primary key for the cache key. #}
     {# The content_access_granted and LANGUAGE_CODE arguments are use to generate the cache key hash. #}
     {# The journal's update time from Fedora is used as the cache content version. #}
-    {% cache FOREVER_TTL "public_journal_detail_back_issues" journal.localidentifier content_access_granted LANGUAGE_CODE journal.fedora_updated %}
+    {% cache FOREVER_TTL "public_journal_detail_back_issues" journal.code content_access_granted LANGUAGE_CODE journal.fedora_updated %}
     {% if issues %}
     <section role="tabpanel" class="tab-pane" id="back-issues">
       <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
