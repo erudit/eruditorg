@@ -9,6 +9,7 @@ import structlog
 import unicodedata
 
 from django.conf import settings
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
@@ -35,6 +36,7 @@ from lxml import etree as et
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
+from erudit.fedora.objects import PageDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Discipline
@@ -462,7 +464,13 @@ class IssueDetailView(
         articles = list(self.object.get_articles_from_fedora())
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
-        context['reader_url'] = self._get_reader_url()
+        # If this is a cultural journal, we need the URL for the issue reader.
+        if self.object.journal.type.code == 'C':
+            context['reader_url'] = reverse('public:journal:issue_reader', kwargs={
+                'journal_code': self.object.journal.code,
+                'issue_slug': self.object.volume_slug,
+                'localidentifier': self.object.localidentifier,
+            })
         if not self.object.is_published:
             context['ticket'] = self.object.prepublication_ticket
 
@@ -481,42 +489,6 @@ class IssueDetailView(
         context['editors_cache_key'] = None
 
         return context
-
-    def _get_reader_url(self):
-        issue = self.get_object()
-        if issue.journal.type.code != 'C':
-            return None
-        pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
-        pages = et.fromstring(pages_ds.content.serialize())
-
-        if len(pages) == 0:
-            return None
-
-        last_page = pages[::-1][0].get('valeur')
-
-        width, w_idthL, height, h_eightL = None, None, None, None
-        if pages.get('smallImage') == 'true':
-            w_idthL = pages.get('imageWidth')
-            h_eightL = pages.get('imageHeight')
-            width = pages.get('smallImageWidth')
-            height = pages.get('smallImageHeight')
-
-        base_url = "http://retro.erudit.org/feuilletage/index.html?{journal_localidentifier}.{issue_localidentifier}@{pages}".format(  # noqa
-            journal_localidentifier=issue.journal.localidentifier,
-            issue_localidentifier=issue.localidentifier,
-            pages=last_page
-        )
-
-        if width and height and w_idthL and h_eightL:
-            base_url = "{base_url}&height={height}&width={width}&h_eightL={h_eightL}&w_idthL={w_idthL}&p=oui".format(  # noqa
-                base_url=base_url,
-                h_eightL=h_eightL,
-                w_idthL=w_idthL,
-                height=height,
-                width=width
-            )
-
-        return base_url
 
     def generate_sections_tree(self, articles, title=None, title_paral=None, level=0):
         sections_tree = {
@@ -578,6 +550,68 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+
+class IssueReaderView(
+        ContentAccessCheckMixin,
+        PrepublicationTokenRequiredMixin,
+        DetailView):
+    """
+    Display the issue reader.
+    """
+    model = Issue
+    template_name = 'public/journal/issue_reader.html'
+    context_object_name = 'issue'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        issue = self.get_object()
+        # Raise 404 if journal is not cultural.
+        if issue.journal.type.code != 'C':
+            raise Http404()
+        pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
+        pages = et.fromstring(pages_ds.content.serialize())
+        context['num_leafs'] = pages.get('nb')
+        context['page_width'] = pages.get('imageWidth')
+        context['page_height'] = pages.get('imageHeight')
+        context['issue_url'] = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'localidentifier': issue.localidentifier,
+        })
+        if not issue.is_published:
+            context['ticket'] = issue.prepublication_ticket
+        return context
+
+
+class IssuePageView(
+        ContentAccessCheckMixin,
+        PrepublicationTokenRequiredMixin,
+        FedoraFileDatastreamView):
+    """
+    Display a page from an issue.
+    """
+    model = Issue
+    content_type = 'image/jpeg'
+    fedora_object_class = PageDigitalObject
+    datastream_name = 'image'
+
+    def get_object(self):
+        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+    def get_fedora_object_pid(self):
+        issue = self.get_object()
+        return '{}.p{}'.format(issue.pid, self.kwargs['page'])
+
+    def get(self, request, *args, **kwargs):
+        issue = self.get_object()
+        # If the user does not have access to the issue, we only grant access to the 5 first pages.
+        if issue.is_published and not self.content_access_granted and int(kwargs['page']) > 5:
+            return redirect(static('img/bookreader/restriction.jpg'))
+        return super().get(request, *args, **kwargs)
 
 
 class BaseArticleDetailView(

@@ -18,6 +18,7 @@
 // 2. Vendors
 @import
   '~akkordion/dist/akkordion.css',
+  '~bookreader/BookReader/BookReader.css',
   '~hint.css/hint.base.css',
   '~select2/dist/css/select2',
   'vendor/magnific-popup/magnific-popup.scss',
@@ -99,6 +100,7 @@
   'pages/public/brand-assets',
   'pages/public/homepage',
   'pages/public/issue-detail',
+  'pages/public/issue-reader',
   'pages/public/journal-authors-list',
   'pages/public/journal-detail',
   'pages/public/journal-list-disciplines',

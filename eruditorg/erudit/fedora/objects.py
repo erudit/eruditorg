@@ -116,3 +116,9 @@ class MediaDigitalObject(models.DigitalObject):
 
     CONTENT_MODELS = [MODEL_PID_PREFIX + 'mediaCModel', ]
     content = models.FileDatastream('CONTENT', 'CONTENT')
+
+
+class PageDigitalObject(models.DigitalObject):
+    """ Fedora object of a Page """
+    CONTENT_MODELS = [MODEL_PID_PREFIX + 'pageCModel', ]
+    image = models.FileDatastream('IMAGE', 'Image', defaults={'mimetype': 'image/jpeg'})
