@@ -4,6 +4,7 @@ import pytest
 import unittest.mock
 
 from bs4 import BeautifulSoup
+from django.http import Http404
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
@@ -15,7 +16,8 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Issue
 from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import JournalDetailView, IssueDetailView, ArticleDetailView, \
-    GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView, JournalStatisticsView
+    GoogleScholarSubscribersView, GoogleScholarSubscriberJournalsView, JournalStatisticsView, \
+    IssueReaderView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.utils import generate_casa_token
 
@@ -379,6 +381,111 @@ class TestIssueDetailSummary:
         html = Client().get(url).content.decode()
         # Check that authors' suffixes are not displayed on the issue detail view.
         assert '<p class="bib-record__authors col-sm-9">\n      Mélissa Beaudoin, Stéphane Potvin, Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, André Ngamini-Ngui et Alexandre Dumais\n    </p>' in html
+
+    @pytest.mark.parametrize('journal_type', [
+        ('S'),
+        ('C'),
+    ])
+    @pytest.mark.parametrize('is_published', [
+        (True),
+        (False),
+    ])
+    def test_issue_reader_url_in_context_for_cultural_journal_issues(self, journal_type, is_published):
+        issue = IssueFactory(
+            is_published=is_published,
+            year='2000',
+            localidentifier='issue',
+            journal__code='journal',
+            journal__type_code=journal_type,
+        )
+        issue.is_prepublication_ticket_valid = unittest.mock.MagicMock()
+        view = IssueDetailView()
+        view.object = issue
+        view.request = unittest.mock.MagicMock()
+        context = view.get_context_data()
+        if journal_type == 'C':
+            assert context['reader_url'] == '/fr/revues/journal/2000-issue/feuilletage/'
+            if not is_published:
+                assert context['ticket'] == issue.prepublication_ticket
+        else:
+            assert 'reader_url' not in context
+
+
+class TestIssueReaderView:
+
+    @pytest.mark.parametrize('journal_type', [
+        ('S'),
+        ('C'),
+    ])
+    @pytest.mark.parametrize('is_published', [
+        (True),
+        (False),
+    ])
+    def test_get_context_data(self, journal_type, is_published):
+        issue = IssueFactory(
+            is_published=is_published,
+            year='2000',
+            localidentifier='issue',
+            journal__code='journal',
+            journal__type_code=journal_type,
+        )
+        issue.is_prepublication_ticket_valid = unittest.mock.MagicMock()
+        view = IssueReaderView()
+        view.object = issue
+        view.get_object = unittest.mock.MagicMock(return_value=issue)
+        view.request = unittest.mock.MagicMock()
+        view.kwargs = unittest.mock.MagicMock()
+        if journal_type == 'C':
+            context = view.get_context_data()
+            assert context['num_leafs'] == '80'
+            assert context['page_width'] == '1350'
+            assert context['page_height'] == '1800'
+            assert context['issue_url'] == '/fr/revues/journal/2000-issue/'
+            if not is_published:
+                assert context['ticket'] == issue.prepublication_ticket
+        else:
+            with pytest.raises(Http404):
+                context = view.get_context_data()
+
+
+class TestIssuePageView:
+
+    @pytest.mark.parametrize('page, open_access, is_published, ticket, expected_status_code, expected_redirection', [
+        # All pages should be accessible for open access published issues.
+        ('1', True, True, False, 200, ''),
+        ('6', True, True, False, 200, ''),
+        # Only the 5 first pages should be accessible for embargoed published issues.
+        ('1', False, True, False, 200, ''),
+        ('6', False, True, False, 302, '/static/img/bookreader/restriction.jpg'),
+        # All pages should be accessible for unpublished issues when a prepublication ticket is provided.
+        ('1', True, False, True, 200, ''),
+        ('6', True, False, True, 200, ''),
+        ('1', False, False, True, 200, ''),
+        ('6', False, False, True, 200, ''),
+        # No pages should be accessible for unpublished issues when no prepublication ticket is provided.
+        ('1', True, False, False, 302, '/fr/revues/journal/'),
+        ('6', True, False, False, 302, '/fr/revues/journal/'),
+        ('1', False, False, False, 302, '/fr/revues/journal/'),
+        ('6', False, False, False, 302, '/fr/revues/journal/'),
+    ])
+    def test_issue_page_view(self, page, open_access, is_published, ticket, expected_status_code, expected_redirection):
+        issue = IssueFactory(
+            is_published=is_published,
+            journal__open_access=open_access,
+            journal__code='journal',
+        )
+        url = reverse('public:journal:issue_page', kwargs={
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'localidentifier': issue.localidentifier,
+            'page': page,
+        })
+        response = Client().get(url, {
+            'ticket': issue.prepublication_ticket if ticket else '',
+        })
+        assert response.status_code == expected_status_code
+        if expected_redirection:
+            assert response.url == expected_redirection
 
 
 class TestArticleDetailView:
