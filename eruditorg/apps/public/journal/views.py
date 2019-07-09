@@ -597,17 +597,6 @@ class BaseArticleDetailView(
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
 
         try:
-            abstracts = self.object.erudit_object.get_abstracts(html=True)
-            keywords = self.object.erudit_object.get_keywords(html=True)
-            # Remove keywords already associated with an abstract of the same language.
-            other_keywords = keywords.copy()
-            for abstract in abstracts:
-                if abstract['lang'] in other_keywords.keys():
-                    other_keywords.pop(abstract['lang'])
-            # Abstracts and keywords with HTML.
-            context['html_abstracts'] = abstracts
-            context['html_keywords'] = keywords
-            context['html_other_keywords'] = other_keywords
             # Abstracts and keywords without HTML for metatags.
             context['meta_abstracts'] = self.object.erudit_object.get_abstracts(html=False)
             context['meta_keywords'] = self.object.erudit_object.get_keywords(html=False)
