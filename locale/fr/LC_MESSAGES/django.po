@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 10:22-0400\n"
+"POT-Creation-Date: 2019-07-09 10:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1551,7 +1551,7 @@ msgstr ""
 
 #: apps/userspace/reporting/forms.py:13 apps/userspace/reporting/forms.py:24
 #: core/authorization/models.py:28 erudit/models/journal.py:101
-#: erudit/models/journal.py:1507
+#: erudit/models/journal.py:1514
 #: templates/public/journal/journal_list_per_names.html:127
 msgid "Type"
 msgstr ""
@@ -1603,7 +1603,7 @@ msgstr ""
 #: apps/userspace/reporting/views.py:181 apps/userspace/reporting/views.py:206
 #: core/editor/models.py:33 core/subscription/models.py:263
 #: erudit/models/journal.py:210 erudit/models/journal.py:363
-#: erudit/models/journal.py:1478
+#: erudit/models/journal.py:1485
 #: templates/public/journal/journal_list_per_names.html:126
 msgid "Revue"
 msgstr ""
@@ -1751,7 +1751,7 @@ msgstr ""
 
 #: core/authorization/models.py:25 core/editor/models.py:62
 #: core/editor/models.py:213 core/subscription/abstract_models.py:12
-#: erudit/models/journal.py:1488
+#: erudit/models/journal.py:1495
 msgid "Date de modification"
 msgstr ""
 
@@ -2408,7 +2408,7 @@ msgstr ""
 msgid "Aucun titre"
 msgstr ""
 
-#: erudit/models/journal.py:1355 erudit/models/journal.py:1404
+#: erudit/models/journal.py:1355 erudit/models/journal.py:1411
 #: templates/public/citations/list.html:159
 #: templates/public/citations/list.html:176
 #: templates/public/search/results.html:316
@@ -2416,7 +2416,7 @@ msgstr ""
 msgid "«&nbsp;"
 msgstr ""
 
-#: erudit/models/journal.py:1358 erudit/models/journal.py:1406
+#: erudit/models/journal.py:1358 erudit/models/journal.py:1413
 #: templates/public/citations/list.html:159
 #: templates/public/citations/list.html:176
 #: templates/public/search/results.html:316
@@ -2430,7 +2430,11 @@ msgstr ""
 msgid "p."
 msgstr ""
 
-#: erudit/models/journal.py:1412 templates/public/citations/list.html:178
+#: erudit/models/journal.py:1379
+msgid "Compte rendu de"
+msgstr ""
+
+#: erudit/models/journal.py:1419 templates/public/citations/list.html:178
 #: templates/public/search/results.html:336
 #: templates/userspace/journal/editor/form.html:29
 #: templates/userspace/journal/editor/form.html:39
@@ -2439,83 +2443,83 @@ msgstr ""
 msgid "n<sup>o</sup>"
 msgstr ""
 
-#: erudit/models/journal.py:1429
+#: erudit/models/journal.py:1436
 msgid "Journal"
 msgstr ""
 
-#: erudit/models/journal.py:1433
+#: erudit/models/journal.py:1440
 msgid "Prénom et nom OU nom de l’organisation"
 msgstr ""
 
-#: erudit/models/journal.py:1436
+#: erudit/models/journal.py:1443
 msgid "Adresse courriel pour demandes générales"
 msgstr ""
 
-#: erudit/models/journal.py:1439
+#: erudit/models/journal.py:1446
 msgid "Adresse courriel pour abonnements individuels"
 msgstr ""
 
-#: erudit/models/journal.py:1441
+#: erudit/models/journal.py:1448
 msgid "Numéro de téléphone"
 msgstr ""
 
-#: erudit/models/journal.py:1444
+#: erudit/models/journal.py:1451
 msgid "Fréquence de publication (numéros par année)"
 msgstr ""
 
-#: erudit/models/journal.py:1448
+#: erudit/models/journal.py:1455
 msgid "Langues de publication"
 msgstr ""
 
-#: erudit/models/journal.py:1452
+#: erudit/models/journal.py:1459
 msgid "Politique anti-plagiat ou d’éthique"
 msgstr ""
 
-#: erudit/models/journal.py:1455
+#: erudit/models/journal.py:1462
 msgid "Instructions pour les auteurs"
 msgstr ""
 
-#: erudit/models/journal.py:1459
+#: erudit/models/journal.py:1466
 msgid "Simple aveugle"
 msgstr ""
 
-#: erudit/models/journal.py:1460
+#: erudit/models/journal.py:1467
 msgid "Double aveugle"
 msgstr ""
 
-#: erudit/models/journal.py:1461
+#: erudit/models/journal.py:1468
 msgid "Ouverte"
 msgstr ""
 
-#: erudit/models/journal.py:1464
+#: erudit/models/journal.py:1471
 msgid "Type de processus d’évaluation par les pairs"
 msgstr ""
 
-#: erudit/models/journal.py:1467
+#: erudit/models/journal.py:1474
 msgid "Facebook"
 msgstr ""
 
-#: erudit/models/journal.py:1469
+#: erudit/models/journal.py:1476
 msgid "Afficher votre fil d’activités Facebook ?"
 msgstr ""
 
-#: erudit/models/journal.py:1471
+#: erudit/models/journal.py:1478
 msgid "Twitter"
 msgstr ""
 
-#: erudit/models/journal.py:1473
+#: erudit/models/journal.py:1480
 msgid "Afficher votre fil d’activités Twitter ?"
 msgstr ""
 
-#: erudit/models/journal.py:1475
+#: erudit/models/journal.py:1482
 msgid "Site Web officiel"
 msgstr ""
 
-#: erudit/models/journal.py:1480
+#: erudit/models/journal.py:1487
 msgid "Politiques de la revue"
 msgstr ""
 
-#: erudit/models/journal.py:1484 templates/base.html:378
+#: erudit/models/journal.py:1491 templates/base.html:378
 #: templates/userspace/journal/partials/menu.html:52
 #: templates/userspace/journal/subscription/base.html:7
 #: templates/userspace/journal/subscription/base.html:11
@@ -2523,42 +2527,42 @@ msgstr ""
 msgid "Abonnements"
 msgstr ""
 
-#: erudit/models/journal.py:1485
+#: erudit/models/journal.py:1492
 msgid "Équipe"
 msgstr ""
 
-#: erudit/models/journal.py:1486 templates/public/journal/journal_base.html:245
+#: erudit/models/journal.py:1493 templates/public/journal/journal_base.html:245
 #: templates/public/journal/journal_detail.html:161
 #: templates/userspace/journal/information/journalinformation_update.html:43
 msgid "Coordonnées"
 msgstr ""
 
-#: erudit/models/journal.py:1487 templates/public/20_years.html:389
+#: erudit/models/journal.py:1494 templates/public/20_years.html:389
 #: templates/public/journal/journal_base.html:279
 msgid "Partenaires"
 msgstr ""
 
-#: erudit/models/journal.py:1497
+#: erudit/models/journal.py:1504
 msgid "Information de revue"
 msgstr ""
 
-#: erudit/models/journal.py:1498
+#: erudit/models/journal.py:1505
 msgid "Informations de revue"
 msgstr ""
 
-#: erudit/models/journal.py:1509 templates/public/journal/journal_base.html:131
+#: erudit/models/journal.py:1516 templates/public/journal/journal_base.html:131
 msgid "Direction"
 msgstr ""
 
-#: erudit/models/journal.py:1510 templates/public/journal/journal_base.html:138
+#: erudit/models/journal.py:1517 templates/public/journal/journal_base.html:138
 msgid "Rédaction"
 msgstr ""
 
-#: erudit/models/journal.py:1513
+#: erudit/models/journal.py:1520
 msgid "Prénom et nom"
 msgstr ""
 
-#: erudit/models/journal.py:1515
+#: erudit/models/journal.py:1522
 msgid "Rôle"
 msgstr ""
 
