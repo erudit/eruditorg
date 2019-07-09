@@ -87,6 +87,26 @@ class TestJournalDetailView:
         html = Client().get(url).content.decode()
         assert '<dt>Disponible dans Érudit depuis</dt>\n          <dd>2015</dd>' in html
 
+    @pytest.mark.parametrize('subtitle', [
+        ('bar'),
+        (''),
+        (None),
+    ])
+    def test_journal_with_no_issue_title_and_subtitle_display(self, subtitle):
+        journal = JournalFactory(
+            name='foo',
+            subtitle=subtitle,
+        )
+        url = reverse('public:journal:journal_detail', kwargs={
+            'code': journal.code,
+        })
+        html = Client().get(url).content.decode()
+        assert '<span class="journal-title">foo</span>' in html
+        if subtitle:
+            assert '<span class="journal-subtitle">bar</span>' in html
+        else:
+            assert '<span class="journal-subtitle">None</span>' not in html
+
 
 class TestJournalAuthorsListView:
 
