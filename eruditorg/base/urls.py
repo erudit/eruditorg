@@ -49,10 +49,6 @@ urlpatterns += i18n_patterns(
     url(r'^' + settings.ADMIN_URL, admin.site.urls),
     url(r'^upload/', include((resumable_uploads_urls.urlpatterns, "resumable_uploads",))),
 
-    # The PDF viewer exposes a PDF.js template
-    url(r'^pdf-viewer\.html$',
-        TemplateView.as_view(template_name='pdf_viewer.html'), name='pdf-viewer'),
-
     # Apps
     url(_(r'^espace-utilisateur/'), include('apps.userspace.urls')),
     url(r'^webservices/', include('apps.webservices.urls')),

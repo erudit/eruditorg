@@ -144,43 +144,6 @@ gulp.task('build-iconfont', function(){
     .pipe(gulp.dest(font_dir + '/erudicon/'));
 });
 
-gulp.task('build-pdfjs-css', function() {
-  return gulp.src([
-        sass_dir + '/pages/pdf_viewer.scss',
-        bower_dir + '/pdfjs-build/generic/web/viewer.css',
-      ])
-    .pipe(sass())
-    .on('error', sass.logError)
-    .pipe(concat('pdf-viewer.css'))
-    .pipe(PROD_ENV ? minifyCSS() : gutil.noop())
-    .pipe(gulp.dest(build_dir + '/css'));
-});
-gulp.task('build-pdfjs-js', function() {
-  return gulp.src([
-        bower_dir + '/pdfjs-build/generic/web/l10n.js',
-        bower_dir + '/pdfjs-build/generic/build/pdf.js',
-        bower_dir + '/pdfjs-build/generic/web/debugger.js',
-        bower_dir + '/pdfjs-build/generic/web/viewer.js',
-      ])
-    .pipe(concat('pdf-viewer.js'))
-    .pipe(PROD_ENV ? uglify() : gutil.noop())
-    .pipe(gulp.dest(build_dir + '/js'));
-});
-gulp.task('build-pdfjs-locale', function() {
-  return gulp.src(bower_dir + '/pdfjs-build/generic/web/locale/**/*')
-    .pipe(gulp.dest(build_dir + '/locale/pdf-viewer'));
-});
-gulp.task('build-pdfjs-images', function() {
-  return gulp.src(bower_dir + '/pdfjs-build/generic/web/images/**/*')
-    .pipe(gulp.dest(build_dir + '/css/images'));
-});
-gulp.task('build-pdfjs-worker', function() {
-  return gulp.src(bower_dir + '/pdfjs-build/generic/build/pdf.worker.js')
-    .pipe(gulp.dest(build_dir + '/js'));
-});
-gulp.task('build-pdfjs', [
-  'build-pdfjs-css', 'build-pdfjs-js', 'build-pdfjs-locale', 'build-pdfjs-images', 'build-pdfjs-worker', ]);
-
 gulp.task('build-sprite', function () {
   let spriteData = gulp.src(img_dir + '/sprite/*.png').pipe(spritesmith({
     imgName: '../img/sprite.png',
@@ -205,7 +168,7 @@ gulp.task('build-sprite', function () {
  */
 
 gulp.task('build', [
-  'build-modernizr', 'build-iconfont', 'build-pdfjs',
+  'build-modernizr', 'build-iconfont',
   'build-webpack-assets',
 ]);
 
@@ -265,7 +228,7 @@ gulp.task('watch', function() {
   livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
 
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch(sass_dir + '/**/*.scss', ['build-modernizr', 'build-pdfjs-css', 'build-webpack-assets', ]);
+  gulp.watch(sass_dir + '/**/*.scss', ['build-modernizr', 'build-webpack-assets', ]);
   // watch any js file /js directory, ** is for recursive mode
   gulp.watch(js_dir + '/**/*.js', ['build-webpack-assets', ]);
   // watch any svg file /iconfont directory, ** is for recursive mode
