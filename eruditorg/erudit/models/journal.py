@@ -1374,10 +1374,17 @@ class Article(FedoraMixin):
 
     @cached_property
     def cite_string_apa(self):
+        if self.type == self.ARTICLE_REPORT:
+            title = '{prefix} [{title}]'.format(**{
+                'prefix': _('Compte rendu de'),
+                'title': self.html_title,
+            })
+        else:
+            title = self.html_title
         cite_string = '{authors} ({year}). {title}{period} <em>{journal}</em>,'.format(**{
             'authors': self.get_formatted_authors_apa(),
             'year': self.issue.year,
-            'title': self.html_title,
+            'title': title,
             'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
             'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
         })

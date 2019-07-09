@@ -676,6 +676,10 @@ class TestArticle:
         assert article.cite_string_apa == 'Bégin, L. (2019). [Article sans titre]. <em>Inter</em>, 39–39.'
         assert article.cite_string_chicago == 'Bégin, Lise «&nbsp;[Article sans titre]&nbsp;». <em>Inter</em> (2019)&nbsp;: 39–39.'
 
+    def test_cite_string_apa_with_article_report(self):
+        article = ArticleFactory(type=Article.ARTICLE_REPORT)
+        assert article.cite_string_apa == 'Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. <em>Inter</em>. https://doi.org/10.7202/009255ar'
+
 
 def test_journaltype_can_return_embargo_duration_in_days():
     journal_type = JournalTypeFactory.create(code='S')
