@@ -341,7 +341,6 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         return context
 
 
-@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
@@ -942,7 +941,6 @@ class ArticleRawPdfFirstPageView(
         response.content = get_pdf_first_page(content)
 
 
-@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     """
     Returns an image file embedded in the INFOIMG datastream.
