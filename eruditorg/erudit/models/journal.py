@@ -602,8 +602,7 @@ class Issue(FedoraMixin, FedoraDated):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
         # elegant way to generalize that code. This mechanism will probably change soon anyway.
 
-        content = get_cached_datastream_content(self.fedora_object, 'summary')
-        summary_tree = content.node
+        summary_tree = et.fromstring(self.fedora_object.xml_content)
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
