@@ -481,8 +481,7 @@ class Issue(FedoraMixin, FedoraDated):
         if not self.is_in_fedora:
             return False
 
-        fedora_journal = self.journal.fedora_object
-        publications_tree = et.fromstring(fedora_journal.publications.content.serialize())
+        publications_tree = et.fromstring(self.journal.fedora_object.xml_content)
         xml_issue_nodes = publications_tree.findall('.//numero')
 
         for issue_node in xml_issue_nodes:
@@ -964,7 +963,7 @@ class Article(FedoraMixin):
         )
 
     def get_summary_node(self):
-        summary_tree = self.issue.fedora_object.summary.content.node
+        summary_tree = et.fromstring(self.issue.fedora_object.xml_content)
         xpath = './/article[@idproprio="{}"]'.format(self.localidentifier)
         return summary_tree.find(xpath)
 
