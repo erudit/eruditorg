@@ -1,27 +1,24 @@
-# -*- coding: utf-8 -*-
+import pytest
 
 from django.urls import resolve
 from django.urls import reverse
 from django.template import Context
 from django.template.base import Template
 from django.test import RequestFactory
-from django.test import TestCase
 
 
-class TestTransCurrentUrlTag(TestCase):
-    def setUp(self):
-        super(TestTransCurrentUrlTag, self).setUp()
-        self.factory = RequestFactory()
-        self.loadstatement = '{% load base_urls_tags %}'
+class TestTransCurrentUrlTag:
 
-    def test_can_translate_a_given_url_in_another_language(self):
-        # Setup
+    @pytest.mark.parametrize('data, expected_url', (
+        ({}, '/en/journals/'),
+        ({'foo': 'bar'}, '/en/journals/?foo=bar'),
+    ))
+    def test_can_translate_a_given_url_in_another_language(self, data, expected_url):
+        factory = RequestFactory()
         url = reverse('public:journal:journal_list')
-        request = self.factory.get(url)
+        request = factory.get(url, data=data)
         request.resolver_match = resolve(url)
-        t = Template(self.loadstatement + '{% trans_current_url "en" %}')
-        c = Context({'request': request})
-        # Run
-        rendered = t.render(c)
-        # Check
-        self.assertEqual(rendered, '/en/journals/')
+        template = Template('{% load base_urls_tags %}{% trans_current_url "en" %}')
+        context = Context({'request': request})
+        rendered = template.render(context)
+        assert rendered == expected_url
