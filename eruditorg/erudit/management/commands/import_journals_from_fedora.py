@@ -2,6 +2,7 @@ import datetime as dt
 import structlog
 import re
 
+from django.core.cache import caches
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.encoding import smart_str
@@ -20,6 +21,7 @@ from ...models import Collection
 from ...models import Issue
 from ...models import Journal
 
+cache = caches['fedora']
 logger = structlog.getLogger(__name__)
 
 
@@ -421,6 +423,7 @@ class Command(BaseCommand):
 
         journal.fedora_updated = fedora_journal.modified
         journal.save()
+        cache.delete(journal.localidentifier)
 
         if journal_created:
             logger.info(
@@ -498,6 +501,7 @@ class Command(BaseCommand):
         journal_erudit_object = journal.get_erudit_object(use_cache=False)
         issue.is_published = issue_pid in journal_erudit_object.get_published_issues_pids()
         issue.save()
+        cache.delete(issue.localidentifier)
 
         # STEP 4: patches the journal associated with the issue
         # --

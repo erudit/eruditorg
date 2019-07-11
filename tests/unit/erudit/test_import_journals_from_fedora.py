@@ -46,3 +46,22 @@ def test_import_journals_from_fedora(mock_cache, kwargs):
         issue_1.localidentifier,
         issue_3.localidentifier,
     ]
+
+
+@unittest.mock.patch('erudit.management.commands.import_journals_from_fedora.cache')
+@pytest.mark.parametrize('kwargs, expected_count', [
+    # There should be 2 delete cache calls, one for the journal and one for the issue.
+    ({'pid': 'erudit:erudit.journal_test'}, 2),
+    # There should be 1 delete cache call, for the issue.
+    ({'issue_pid': 'erudit:erudit.journal_test.issue_test'}, 1),
+])
+def test_import_journals_from_fedora_delete_cache(mock_cache, kwargs, expected_count):
+    issue = IssueFactory(
+        journal__localidentifier='journal_test',
+        localidentifier='issue_test',
+        is_published=False,
+        add_to_fedora_journal=True,
+    )
+    call_command("import_journals_from_fedora", *[], **kwargs)
+    assert mock_cache.delete.call_count == expected_count
+
