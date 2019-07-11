@@ -64,7 +64,7 @@
 {# The article's localidentifier is used as a primary key for the cache key. #}
 {# The in_citation_list, content_access_granted and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The article's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_article_detail" article.localidentifier in_citation_list content_access_granted LANGUAGE_CODE fedora_updated %}
+{% cache cache_timeout "public_article_detail" article.localidentifier in_citation_list content_access_granted LANGUAGE_CODE 'v1' %}
 <main
     class="container"
     id="article-{{ article.localidentifier }}"

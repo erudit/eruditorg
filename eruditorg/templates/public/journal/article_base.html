@@ -11,7 +11,7 @@
 {# The article's localidentifier is used as a primary key for the cache key. #}
 {# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
 {# The article's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_article_base_metatags" article.localidentifier LANGUAGE_CODE fedora_updated %}
+{% cache cache_timeout "public_article_base_metatags" article.localidentifier LANGUAGE_CODE 'v1' %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="article">
@@ -105,7 +105,7 @@
 {# The article's localidentifier is used as a primary key for the cache key. #}
 {# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
 {# The article's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_article_base_structured_data" article.localidentifier LANGUAGE_CODE fedora_updated %}
+{% cache cache_timeout "public_article_base_structured_data" article.localidentifier LANGUAGE_CODE 'v1' %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
 {% endblock structured_data %}
