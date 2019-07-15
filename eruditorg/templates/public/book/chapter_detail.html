@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
-<meta property="og:description" content="{% trans 'Un chapitre du livre' %} Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)">
+<meta property="og:description" content="{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
