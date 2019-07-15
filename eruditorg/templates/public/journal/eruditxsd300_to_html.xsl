@@ -1012,7 +1012,7 @@
         <p class="no"><xsl:apply-templates select="no"/></p>
         <div class="legende"><xsl:apply-templates select="legende/*"/></div>
       </div>
-      <xsl:apply-templates select="figure">
+      <xsl:apply-templates select="tableau | figure">
         <xsl:with-param name="mode" select="$mode"/>
       </xsl:apply-templates>
     </div>
@@ -1048,7 +1048,7 @@
           <xsl:apply-templates select="tabtexte | objetmedia"/>
         </div>
         <div class="figure-legende-notes-source">
-          <xsl:if test="name(..) != 'grfigure' and name(..) != 'grtableau'">
+          <xsl:if test="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim">
             <div class="figure-legende">
               <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
             </div>

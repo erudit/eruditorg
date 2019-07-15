@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1061713ar" typeart="article" lang="fr" ordseq="7" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1061713ar</idpublic><pagination>
+            <ppage>63</ppage>
+            <dpage>74</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="documentation0784" lang="fr"><titrerev>Documentation et bibliothèques</titrerev><titrerevabr>documentation</titrerevabr><idissn>0315-2340</idissn><idissnnum>2291-8949</idissnnum><directeur sexe="masculin"><fonction lang="fr">Directeur</fonction><nompers><prenom>Réjean</prenom><nomfamille>Savard</nomfamille></nompers></directeur></revue><numero id="documentation04722"><volume>64</volume><nonumero>3</nonumero><pub><periode>Juillet</periode><periode>Septembre</periode><annee>2018</annee></pub><pubnum><date typedate="publication">2019-06-25</date></pubnum><grtheme id="th1"><theme>Soixante-quinze ans de vie associative du milieu documentaire francophone</theme></grtheme></numero><editeur><nomorg>Association pour l'avancement des sciences et des techniques de la documentation (ASTED)</nomorg></editeur><prod><nomorg>Association pour l'avancement des sciences et des techniques de la documentation (ASTED)</nomorg></prod><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Association pour l'avancement des sciences et des techniques de la documentation (ASTED)</nomorg>, 2018</droitsauteur></admin><liminaire><grtitre><surtitre>Soixante-quinze ans de vie associative du milieu documentaire francophone</surtitre>
+                <titre>L’Association des bibliothèques publiques du Québec (ABPQ) : un acteur indissociable du développement des bibliothèques publiques du Québec</titre>
+                <titreparal lang="en"><marquage typemarq="italique">The Association des bibliothèques publiques du Québec (ABPQ) : a key player in the Development of Public Libraries in Québec</marquage></titreparal>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Denis</prenom><nomfamille>Boisvert</nomfamille></nompers><affiliation><alinea>Directeur (retraité), Bibliothèque de l’Université du Québec à Rimouski</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>Le but du présent article est de mettre en perspective l’implication de l’Association des bibliothèques publiques du Québec (ABPQ) dans le développement des bibliothèques publiques du Québec depuis sa création en 1984. À partir d’une approche thématique, retracer le parcours de cette association vouée à la promotion des bibliothèques publiques permettra de démontrer son rôle au cours des 30 dernières années. L’accent sera mis sur les principaux enjeux et défis auxquels elle a dû faire face pour en arriver à être reconnue à titre de catalyseur du développement des bibliothèques publiques du Québec. Les dispositifs mis de l’avant par les acteurs de l’ABPQ impliqués dans une dynamique de contestation culturelle, sans oublier les principaux résultats obtenus, feront aussi l’objet de cet article.</alinea></resume><resume typeresume="resume" lang="en"><alinea><marquage typemarq="italique">The purpose of this article is to describe the involvement of the Association des bibliothèques publiques du Québec (ABPQ) with regards to the development of public libraries in Québec since its creation in 1984. Using a thematic approach, the author outlines the history of this association dedicated to the promotion of public libraries, thus highlighting its role over the past 30 years. An emphasis will be placed on the principal concerns and challenges faced by the association in order to be recognised as an important stakeholder in the development of public libraries in Québec. The actions undertaken by the members of the ABPQ, sometimes militant, as well as the results will also be discussed in this article.</marquage></alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><titre>Introduction</titre><para id="pa1"><no>1</no>
+        <alinea>Au moment de la création de l’ABPQ, rappelons que la pensée gestionnaire à l’égard
+          du développement des Bibliothèques publiques du Québec (BPQ) était en pleine effervescence
+          à la suite de l’adoption du Plan Vaugeois<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> mis de l’avant
+          en 1980. Ce plan visait notamment la création de nouvelles bibliothèques, l’embauche de
+          bibliothécaires professionnels, la mise à niveau des espaces, une augmentation du nombre
+          de bibliothèques à l’échelle du Québec, une majoration des dépenses par personne jugées
+          insuffisantes et un rehaussement des collections (Laforce 2008). Des mesures qui ont été
+          considérées à l’époque comme un véritable coup de fouet de nature à faire des BPQ un
+          acteur principal pour favoriser l’accessibilité à la culture dans le cadre de l’adoption
+          par le ministère de la Culture (MAC) d’une nouvelle politique du livre et de la lecture
+          qui sera mise en vigueur en 1981. Un exposé des enjeux et des défis auxquels l’Association
+          a toujours été confrontée depuis sa création permettra au lecteur de mieux comprendre la
+          raison d’être d’un tel regroupement associatif voué à la promotion des BPA.</alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>C’est en décrivant sa mission, ses valeurs et en présentant les nombreux dispositifs
+          déployés par l’ABPQ depuis 35 ans que l’on comprendra mieux le rôle joué par cette
+          association dans le développement d’un véritable réseau de bibliothèques publiques au
+          Québec. Les principales réalisations de l’Association à titre d’acteur social du
+          changement seront mises en valeur dans le cadre d’un processus de politisation de la
+          culture à la suite de la création du ministère de la Culture (MAC) en 1961.</alinea>
+      </para><section2 id="s2n1"><no>1.
+				1</no><titre>Le milieu des bibliothèques publiques du Québec : quelques éléments de
+        définitions</titre><para id="pa3"><no>3</no>
+        <alinea>Mentionnons que trois types de bibliothèques font l’objet d’un encadrement
+          législatif de la part du ministère de la Culture et des Communications (MCC). La loi du
+          MCC (chapitre M-17) détermine les fonctions et les pouvoirs des Bibliothèques publiques
+          autonomes (BPA), ceux des Centres régionaux de services aux bibliothèques publiques
+          (CRSBP) et de Bibliothèque et Archives nationales du Québec (BAnQ). Cette loi indique
+          clairement que les bibliothèques publiques autonomes relèvent des municipalités à qui
+          appartiennent la responsabilité d’établir les règles de fonctionnement et de gestion. Ce
+          cadre législatif souligne que le ou la ministre doit consulter les municipalités et les
+          milieux des bibliothèques et du livre pour définir leurs besoins et établir des moyens
+          visant à soutenir l’établissement de bibliothèques publiques et le développement de leurs
+          activités.</alinea>
+      </para><para id="pa4"><no>4</no>
+        <alinea>L’ABPQ est une association qui représente uniquement les intérêts des BPA. Par
+          conséquent, pour les fins de cet article portant sur les impacts du rôle de l’ABPQ sur
+          l’évolution des bibliothèques publiques, les interventions des deux autres types de
+          bibliothèques ne seront pas prises en compte. Bibliothèque et Archives nationales du
+          Québec est une société d’État vouée à l’acquisition, à la conservation et à la diffusion
+          du patrimoine documentaire publié, archivistique et filmique. Cette institution nationale
+          assure en outre la gestion des programmes d’aide financière en matière d’archives et
+          assume la responsabilité du dépôt légal des documents publiés et des films. Les Centres
+          régionaux de services aux bibliothèques publiques (CRSBP), quant à eux, desservent des
+          bibliothèques affiliées rattachées à des municipalités de moins de 5 000 habitants qui
+          misent principalement sur des bénévoles pour assurer leur fonctionnement. Au Québec, on
+          retrouve 11 centres régionaux de services aux bibliothèques publiques (aussi connus sous
+          le nom de <marquage typemarq="souligne">Réseau BIBLIO</marquage>). Les CRSBP ont le mandat
+          d’offrir des services, des ressources, des formations et une infrastructure technologique
+          aux bibliothèques affiliées de leur territoire. Ce faisant, ils favorisent
+          l’établissement, le maintien et le développement des bibliothèques dans les municipalités
+          moins populeuses<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>.</alinea>
+      </para></section2><section2 id="s2n2"><no>1.
+				2</no><titre>À propos de l’ABPQ</titre><para id="pa5"><no>5</no>
+        <alinea>L’ABPQ a été fondée le 26 avril 1984 à Anjou. Elle était connue à cette époque sous
+          l’appellation Association des directeurs de bibliothèques publiques du Québec (ADIBIPUQ).
+          Notons ici qu’en 1995, pour éviter d’être avant tout perçue comme un regroupement de
+          directeurs de bibliothèques ou d’officiers municipaux voués à la défense d’intérêts
+          professionnels, l’Association change de nom pour devenir les Bibliothèques publiques du
+          Québec (BPQ) et adopte une nouvelle facture visuelle. En 2012, l’Association modifie à
+          nouveau son nom et devient alors l’Association des bibliothèques publiques du Québec
+          (ABPQ). Au moment de sa fondation en 1984, ses objectifs étaient alors de regrouper les
+          directeurs des bibliothèques publiques du Québec, de favoriser la mise en commun des
+          expertises, de concerter les efforts des directeurs à la poursuite des objectifs communs
+          et de promouvoir efficacement les intérêts des bibliothèques publiques auprès des divers
+          intervenants du milieu. L’ABPQ représente 165 municipalités et corporations membres, pour
+          un total de plus de 305 bibliothèques desservies, couvrant ainsi plus de 80 % de la
+          population québécoise. L’ABPQ regroupe les acteurs en position d’autorité oeuvrant dans
+          les BPA du Québec dans le but d’en assurer leur développement, leur positionnement
+          stratégique et leur rayonnement. Cette association fait la promotion de ses services
+          auprès de la population. Par sa présence au sein de plusieurs instances, elle s’assure
+          d’une bonne compréhension du rôle de la bibliothèque dans une société moderne. Pour ce
+          faire, elle sensibilise les acteurs des différents ordres gouvernementaux à l’importance
+          de la présence d’un service de bibliothèque publique qui donne au citoyen un accès
+          démocratique au savoir, à la connaissance et à la culture.</alinea>
+      </para></section2><section2 id="s2n3"><no>1.
+				3</no><titre>La raison d’être de l’ABPQ : rôles et enjeux</titre><para id="pa6"><no>6</no>
+        <alinea>Le rôle des associations comme l’ABPQ dans le développement d’un service offert à
+          des collectivités locales ne peut être compris sans faire référence à l’implication des
+          acteurs du milieu (Moussaouim &amp; Megherbi 2014). Depuis sa création, l’ABPQ a joué un
+          rôle d’acteur social de premier plan dans le processus de développement des BPA. Ses
+          interventions se sont multipliées afin de promouvoir les intérêts de ses membres à titre
+          d’interlocutrice privilégiée des BPA auprès des pouvoirs publics suivants : le MCC qui a
+          la responsabilité de consulter les municipalités et les milieux des bibliothèques, ainsi
+          que les administrations municipales qui doivent déterminer les règles de fonctionnement et
+          de gestion de leurs bibliothèques publiques. Mais pourquoi est-il aussi important pour la
+          société québécoise que le développement d’un service public comme celui des BPA soit en
+          partie soutenu par une association qui se porte à la défense des intérêts de ses membres ?
+          Pour le comprendre, il s’avère nécessaire de mettre en perspective les relations entre la
+          mission des BPA et ses activités en tenant compte des enjeux qui sont susceptibles d’en
+          freiner l’évolution. Cette considération nous permettra de cadrer la mission et les
+          interventions de l’ABPQ à partir d’une dynamique d’acteurs impliqués dans un processus de
+          contestations culturelles interpellant les pouvoirs publics, tel qu’évoqué par Schaller
+          (2007). Ce phénomène de contestations culturelles caractérise le milieu des bibliothèques
+          depuis l’adoption de l’Acte donnant le pouvoir aux corporations de cité, ville et village
+          d’aider au maintien de bibliothèques publiques, une loi adoptée par le gouvernement
+          Mercier en 1890. Nous savons que, en raison de convictions religieuses principalement,
+          cette loi a été critiquée de manière virulente par le clergé et par les conservateurs
+          provinciaux de l’époque qui, en prenant le pouvoir en 1892, ont tôt fait de couper les
+          subventions prévues par cette législation<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>.</alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Le problème majeur entourant l’évolution des bibliothèques publiques du Québec
+          demeure depuis cette époque celui de la reconnaissance formelle par les pouvoirs publics
+          de son importance pour une société démocratique basée sur les valeurs suivantes : la
+          liberté intellectuelle, l’accès à la connaissance, l’information et l’autoapprentissage
+          des citoyens. Ces valeurs sont celles que défend le Manifeste de l’UNESCO pour la
+          bibliothèque publique qui proclame sa confiance envers les bibliothèques publiques en tant
+          que forces vives au service de l’éducation, de la culture et de l’information, et en tant
+          qu’instruments essentiels du développement de la paix et du progrès spirituel par son
+          action sur l’esprit des hommes et des femmes<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi>. Au cours
+          des dernières années, dans le cadre de la révolution numérique et de l’émergence des
+          médias sociaux, le fondement des BPQ a à nouveau fait l’objet de questionnements à propos
+          de sa pertinence dans l’espace public en raison de la dématérialisation des collections
+          qu’elles abritent au moment où les ressources informationnelles sont de plus en plus
+          accessibles en ligne en tout temps et en tout lieu.</alinea>
+      </para><para id="pa8"><no>8</no>
+        <alinea>Étant donné que le mode de financement des BPA repose principalement sur
+          l’investissement public, l’ABPQ est naturellement appelée à se porter constamment à la
+          défense des intérêts de ses membres, surtout aux moments où les gouvernements en place
+          cherchent à adopter de nouvelles mesures destinées à soutenir le développement des BPA à
+          l’aide de différents programmes offerts aux municipalités.</alinea>
+      </para><para id="pa9"><no>9</no>
+        <alinea>Le tableau suivant illustre les principaux enjeux auxquels sont toujours confrontées
+          les bibliothèques publiques québécoises<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi> :</alinea>
+        <tableau id="ta1">
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="tableau" xlink:type="simple"></image>
+            <texte>Des développements rapides et presque continuels dans les technologies de
+              l’information ;Des bibliothèques publiques offrant un niveau de service nettement
+              inférieur à celles des autres provinces canadiennes ;Une disparité dans
+              l’accessibilité aux services de lecture publique ;L’émergence de nouveaux rôles devant
+              être assumés par les bibliothèques publiques locales comme : le soutien informationnel
+              au perfectionnement des compétences, l’accès et l’initiation aux technologies de
+              l’information, l’appui à l’insertion des communautés locales à l’économie globale
+              basée sur la société du savoir ;Une pression pour une prestation pertinente et
+              efficace du service de bibliothèques publiques ;Une disparité qui s’élargit de plus en
+              plus entre les bibliothèques qui peuvent se tenir à jour face aux changements et
+              celles qui sont incapables de le faire ;La poursuite des restructurations et des
+              fusions de différentes municipalités, causant une diminution du nombre de petites
+              bibliothèques ;La sensibilisation du milieu municipal au développement
+              de sa bibliothèque ;Les pressions croissantes exercées pour définir encore plus
+              précisément le rôle de la bibliothèque publique par rapport aux autres fournisseurs
+              d’information ;Des usagers plus exigeants avec des besoins de plus en plus
+              complexes ;Une main-d’oeuvre professionnelle qualifiée en nombre insuffisant ;Le
+              maintien des services actuels, tout en en introduisant de nouveaux.</texte>
+          </objetmedia>
+        </tableau>
+      </para><para id="pa10"><no>10</no>
+        <alinea>C’est donc dans ce contexte que l’ABPQ a toujours été appelée à jouer un rôle
+          stratégique à titre d’acteur social dans le processus d’évolution d’un service public de
+          bibliothèques soumis à plusieurs formes de contestations culturelles depuis leur
+          implantation au sein de la société québécoise à la fin du XIX<exposant>e</exposant>
+          siècle.</alinea>
+      </para></section2></section1><section1 id="s1n2"><no>2</no><titre>L’émergence de l’ABPQ : aspects historiques et contextuels</titre><para id="pa11"><no>11</no>
+        <alinea>Au moment de sa création en 1984, plusieurs membres fondateurs de l’ADIBIPUQ étaient
+          déjà membres d’associations professionnelles générales comme l’Association des
+          bibliothécaires du Québec-Library Association (ABQLA) et l’Association pour l’avancement
+          des sciences et des techniques de la documentation (ASTED), qui était dotée jusqu’au début
+          des années 1980 d’une section des bibliothèques publiques (Lajeunesse 2008). Plusieurs de
+          ces membres étaient actifs au sein des regroupements régionaux existants. Lajeunesse
+          rappelle que les directeurs des bibliothèques publiques du Québec se sont dotés en 1984 de
+          leur propre association pour assurer une meilleure représentation de leurs intérêts auprès
+          des instances gouvernementales et pour promouvoir le développement de la lecture publique.
+          De plus, cet auteur mentionne que la mission de l’ABPQ au moment de sa fondation en 1984
+          consistait à regrouper les directeurs des bibliothèques publiques du Québec, à favoriser
+          la mise en commun des expertises, à concerter les efforts des directeurs à la poursuite
+          des objectifs et à promouvoir efficacement les intérêts des bibliothèques publiques auprès
+          des divers intervenants du milieu.</alinea>
+      </para><para id="pa12"><no>12</no>
+        <alinea>Par ailleurs, il importe de souligner le rôle qu’a joué la Conférence des directeurs
+          des bibliothèques de l’île de Montréal (CDPBIM) au moment des étapes précédant
+          l’incorporation de l’ADIBIPUQ. En 1983, la CDPBIM a réalisé une vaste consultation auprès
+          de tous les responsables de bibliothèques publiques du Québec, sans oublier les
+          regroupements régionaux. Cette consultation a donné lieu à la mise sur pied d’un comité
+          provisoire en octobre 1983. Ce comité s’est vu confier la responsabilité de définir les
+          modalités entourant la création d’une nouvelle association regroupant les bibliothèques
+          publiques du Québec. Les responsables des bibliothèques publiques du Québec réunis à Anjou
+          le 4 juin 1984 lors d’une assemblée générale spéciale se sont prononcés majoritairement en
+          faveur de la création d’une nouvelle association après avoir discuté des orientations et
+          des fondements juridiques de cette nouvelle entité, tels que présentés par les membres du
+          comité provisoire. Le premier conseil d’administration était composé des membres
+          suivants : Marie-Louise Simon, présidente, Michèle Lamoureux, vice-présidente, Guy
+          Desjardins, secrétaire-trésorier, Denis Boyer, Florian Dubois, Pierre L’Hérault et Yves
+          Ouimet, observateurs.</alinea>
+      </para></section1><section1 id="s1n3"><no>3</no><titre>Le rôle des regroupements régionaux dans l’émergence de l’ABPQ</titre><para id="pa13"><no>13</no>
+        <alinea>Dans un article de la revue <marquage typemarq="italique">Documentation et
+          bibliothèques</marquage> entièrement consacrée aux bibliothèques publiques du Québec,
+          Boisvert (1993) souligne l’importance des Regroupements régionaux à titre de pilier de la
+          création de l’ADIBIPUQ en 1984. L’auteur évoque le fait que chaque regroupement cherche à
+          favoriser les intérêts des bibliothèques publiques du territoire en réalisant des
+          activités de promotion et de concertation des services offerts par les municipalités. Le
+          dynamisme de ces regroupements aura permis de réaliser des activités conjointes
+          d’envergure et de démontrer les avantages du partage des ressources et de la mutualisation
+          des services. Les réalisations des regroupements auront servi principalement a permis de
+          développer de manière exemplaire le sens de l’entraide et de la coopération au sein des
+          bibliothèques situées en région.</alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>En complément d’information par rapport à l’importance des regroupements régionaux
+          dans cette dynamique de la vie associative, il est à noter qu’un comité du regroupement
+          des régions a été créé lors de l’assemblée générale annuelle de l’ADIBIPUQ en 1992. Ce
+          comité a eu pour effet de favoriser une plus grande concertation entre l’ABPQ et les
+          regroupements régionaux. Au moment de la création de l’Association en 1984, quatre
+          regroupements régionaux existaient déjà formellement : Montréal (1977-2003),
+          Laval-Laurentides-Lanaudière (1977), Outaouais (1980), Saguenay–Lac-Saint-Jean (1981). Par
+          la suite, sept autres regroupements seront fondés : Abitibi-Témiscamingue (1985),
+          Côte-Nord (1987), Mauricie–Bois-Francs (1985), Montérégie (1985), Capitale
+          nationale-Chaudière-Appalaches (1984), Estrie (1990), Bas-Saint-Laurent (1986).</alinea>
+      </para></section1><section1 id="s1n4"><no>4</no><titre>Des vides à combler</titre><para id="pa15"><no>15</no>
+        <alinea>La création de l’ADIBIPUQ est venue combler un vide engendré par le fait que la
+          structure organisationnelle de l’ASTED du début des années 1980 ne répondait plus aux
+          besoins de représentation auprès des pouvoirs publics et ni aux attentes des responsables
+          de bibliothèques publiques du Québec, qui étaient alors regroupés au sein de la seule
+          instance associative vouée à la défense de leurs intérêts, celle de la section des
+          bibliothèques publiques de l’ASTED.</alinea>
+      </para><para id="pa16"><no>16</no>
+        <alinea>La création de l’ADIBIPUQ aura permis par ailleurs de combler un vide engendré par
+          le démantèlement de deux services relevant du MCC et voués au développement des BPQ : le
+          Service des bibliothèques et la Direction des bibliothèques publiques (Laflamme &amp;
+          Moreau 1993).</alinea>
+      </para></section1><section1 id="s1n5"><no>5</no><titre>Un courant de pensée propice à l’émergence de l’ABPQ</titre><para id="pa17"><no>17</no>
+        <alinea>La mission de l’ABPQ s’est réalisée selon une trajectoire inscrite dans un processus
+          de décentralisation du pouvoir entre l’État central, les autres ordres de gouvernement,
+          les municipalités, les milieux professionnels et associatifs et les citoyens. Cette
+          dynamique d’acteurs qui a pris forme à partir des années 1970 a évolué par la suite sous
+          l’effet du modèle de la démocratie culturelle qui lui a succédé au début des années 1990.
+          L’adoption des politiques culturelles depuis la création du MAC en 1960 se caractérise par
+          la décentralisation de la culture au sein de la société québécoise. C’est dans ce contexte
+          que l’ADIBIPUQ a vu le jour en 1984. Cet environnement aura favorisé une nouvelle
+          distribution des pouvoirs au bénéfice des collectivités locales appelées à définir la
+          vision de développement de leurs bibliothèques publiques. Les systèmes de soutien à la
+          culture passent alors de plus en plus par tout un réseau d’organismes-conseils et
+          d’agences autonomes qui ont été appelés à collaborer étroitement avec le milieu associatif
+          plus près des citoyens et dont la force d’organisation était reconnue (Santerre 1999).
+          L’État accepte de plus en plus que les responsabilités en matière d’adoption de politiques
+          et de programmes culturels soient partagées et inspirées par le modèle de la démocratie
+          culturelle qui repose sur des matrices cognitives et normatives, des croyances communes
+          aux acteurs publics, fruits d’interactions sociales (Surel 2000).</alinea>
+      </para><para id="pa18"><no>18</no>
+        <alinea>Ces mouvements de décentralisation des pouvoirs et de démocratisation de la culture
+          ont donc permis aux associations comme l’ABPQ de jouer un rôle actif dans l’adoption de
+          politiques culturelles au Québec, et plus particulièrement dans l’adoption des programmes
+          d’aide au soutien et au développement des BPA. En annexe, le tableau intitulé « Les
+          actions de l’ABPQ de 1985 à 2017 » illustre la manière dont l’ABPQ a pris place dans ce
+          mouvement de décentralisation des pouvoirs au profit des bibliothèques desservant des
+          collectivités locales.</alinea>
+      </para><para id="pa19"><no>19</no>
+        <alinea>La production d’idées et leurs mises en application à l’aide de programmes de
+          soutien de la part du MCC ont pris forme dans le cadre de forums, de colloques, de dépôts
+          de mémoires et de publications d’études. Ces lieux d’échanges et de diffusion des
+          préoccupations des membres de l’ABPQ s’inscrivaient parfaitement dans une dynamique
+          d’acteurs évoluant dans des interactions sociales.</alinea>
+      </para></section1><section1 id="s1n6"><no>6</no><titre>L’approche de l’ABPQ</titre><para id="pa20"><no>20</no>
+        <alinea>Essentiellement, l’ABPQ depuis sa création a adopté une approche pragmatique axée
+          sur la résolution de problèmes communs qui aura permis d’obtenir des succès remarquables
+          en matière de démocratisation de la culture. Pour ce faire, tous les acteurs impliqués au
+          sein de l’ABPQ depuis 1984 ont développé une relation d’interdépendance reposant sur
+          l’adoption d’un cadre commun de référence à caractère évolutif avec la capacité de trouver
+          des solutions pour assurer le développement d’un véritable réseau de BPQ. Les
+          préoccupations de l’ABPQ ont toujours été en phase avec la réalité de ses membres et des
+          citoyens desservis (Lachapelle 2010). L’importance pour les acteurs impliqués dans un
+          cadre collaboratif ou coopératif d’adopter un cadre commun de référence ou de normes
+          reconnues par tous, d’établir un consensus au sein de l’organisation sur les objectifs
+          poursuivis et de fusionner les contributions individuelles dans la réalisation des
+          activités a été soulignée (Piquet 2009).</alinea>
+      </para><para id="pa21"><no>21</no>
+        <alinea>« Que nous le voulions ou non, nous ne saurions imaginer le développement efficace
+          et cohérent d’un réseau de bibliothèques publiques à l’échelle du Québec, sans une
+          coopération consentie volontairement ou imposée à chacune d’entre elles<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi>. »</alinea>
+      </para></section1><section1 id="s1n7"><no>7</no><titre>La mission de L’ABPQ : un cadre évolutif</titre><para id="pa22"><no>22</no>
+        <alinea>La mission de l’ABPQ a évolué au cours des années, bien qu’aujourd’hui ses
+          fondements demeurent les mêmes que ceux adoptés par les membres fondateurs en 1984. Au
+          moment de sa création, l’ADIBIPUQ regroupait des directeurs de bibliothèques municipales
+          dites autonomes et des administrateurs des bibliothèques centrales de prêt (BCP) nommées
+          quelques années plus tard Centres régionaux de services aux bibliothèques publiques
+          (CRSBP). Ces derniers se sont dotés en 1985 d’une structure de coopération, le
+          Regroupement des bibliothèques centrales de prêt, faisant en sorte qu’à partir de ce
+          moment, les administrateurs des BCP ont cessé d’être représentés par l’ADIBIPUQ afin
+          d’assurer le développement structuré de leur propre réseau.</alinea>
+      </para><para id="pa23"><no>23</no>
+        <alinea>Dès le départ, la principale préoccupation des membres de l’ADIBIPUQ était de créer
+          une table de concertation de niveau national regroupant toutes les bibliothèques publiques
+          du Québec de manière à exercer un leadership reconnu. Cette concertation aura permis de
+          promouvoir les intérêts des BPA auprès des divers paliers de gouvernement et d’assurer le
+          développement harmonieux des services offerts sur l’ensemble du territoire
+          québécois.</alinea>
+      </para><para id="pa24"><no>24</no>
+        <alinea>La nécessité d’actualiser la mission de l’Association a toujours représenté une
+          préoccupation de la part des membres afin d’adapter sa finalité à l’évolution de la
+          société et des besoins des citoyens desservis. La mission s’est par conséquent élargie
+          progressivement à de nouvelles dimensions tout en respectant le Manifeste de
+          l’UNESCO<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi> sur la bibliothèque publique principalement axé
+          sur les principes de l’accessibilité. Ainsi, au fil des ans, de nouvelles voix se sont
+          fait entendre en vue d’intégrer à la mission de l’association des dimensions autres que
+          celles touchant la notion de loisir et de divertissement. Progressivement, l’Association a
+          donc intégré dans son discours de nouveaux concepts comme ceux de la culture, de
+          l’éducation, du soutien aux personnes souffrant de problèmes particuliers, des
+          transformations engendrées par les technologies numériques, du marketing, de la
+          littératie, de l’alphabétisation, de l’intégration des nouveaux arrivants, de la lutte
+          contre la fracture numérique, et depuis peu, celui de la « bibliothèque troisième
+          lieu ».</alinea>
+      </para></section1><section1 id="s1n8"><no>8</no><titre>Des interventions, des réalisations et des représentations de l’ABPQ ayant favorisé
+        l’évolution des BPA</titre><para id="pa25"><no>25</no>
+        <alinea>Les interventions de l’ABPQ se sont multipliées au cours des années. Le tableau
+          présenté en annexe regroupe les activités et les réalisations de l’ABPQ selon un parcours
+          thématique établi à partir des pistes d’actions suivantes : représentations, tenue de
+          forums et de colloques, promotion et mise en valeur des services ainsi que les programmes
+          offerts aux membres. Les actions sont présentées par ordre chronologique à l’intérieur de
+          chacun de ces grands thèmes.</alinea>
+      </para><para id="pa26"><no>26</no>
+        <alinea>L’ABPQ a rédigé, dans le cadre de ses activités et représentations, différents
+          documents, études, rapports, mémoires et un périodique (la revue <marquage typemarq="italique">Défi</marquage>) servant à orienter sa vision et ses prises de
+          position. Comme le prévoit le cadre juridique du MCC, ces interventions étaient
+          principalement destinées à définir les besoins de l’association en matière d’adoption de
+          programmes gouvernementaux visant à soutenir l’établissement de bibliothèques publiques et
+          le développement de leurs activités dans le cadre de processus de consultation auxquels
+          doit se livrer ce ministère auprès des milieux des bibliothèques et du livre.</alinea>
+      </para></section1><section1 id="s1n9"><no>9</no><titre>De nombreuses représentations établies dans un cadre collaboratif</titre><para id="pa27"><no>27</no>
+        <alinea>Comme il est mentionné dans son <marquage typemarq="italique">Plan stratégique
+          2012-2017</marquage>, l’ABPQ, par sa présence au sein de plusieurs instances, s’assure
+          d’une bonne compréhension du rôle de la bibliothèque dans une société moderne. À cette
+          fin, elle sensibilise les acteurs des différents ordres gouvernementaux à l’importance de
+          la présence d’un service de bibliothèque qui donne au citoyen un accès démocratique au
+          savoir, à la connaissance et à la culture. Voici donc un aperçu des principales
+          représentations auprès de diverses instances avec qui l’ABPQ collabore
+          étroitement :</alinea>
+        <encadre id="en1" type="1">
+          <section1 id="s1n10">
+            <alinea><marquage typemarq="gras">Groupe de travail des bibliothèques
+              publiques</marquage> qui regroupe des représentants de BAnQ, du Réseau BIBLIO, de
+              l’association Les Bibliothèques publiques du Québec et du MCCCF. Cette instance est
+              issue d’une recommandation des actes du colloque L’avenir des bibliothèques publiques
+              du Québec tenu le 20 avril 2007. Le Groupe de travail analyse plus finement les
+              dossiers concernant les bibliothèques publiques et adresse à la Table permanente de
+              concertation des bibliothèques ses recommandations. Les BPQ sont représentées sur ce
+              comité par la présidente et la vice-présidente. </alinea>
+          </section1>
+        </encadre>
+        <encadre id="en2" type="1">
+          <section1 id="s1n11">
+            <alinea><marquage typemarq="gras">Table de concertation interprofessionnelle du milieu
+              du livre.</marquage> Cette table regroupe des représentants des différentes
+              associations de la chaîne du livre : auteurs, éditeurs, distributeurs, libraires et
+              bibliothèques publiques, qui y sont représentées par BPQ et Réseau BIBLIO. La SODEC y
+              joue un rôle-conseil. Les différents acteurs de la chaîne du livre se sont concertés
+              au sein de cette table afin de faire une recommandation commune pour le prix équilibré
+              du livre. Par ailleurs, cette table suit de près les développements légaux sur le
+              Projet de loi C-32, aussi appelé <marquage typemarq="italique">Loi sur la
+              modernisation du droit d’auteur</marquage>. La mise en place de la chaîne du livre
+              numérique au Québec a été l’objet de nombreuses discussions, menant à l’élaboration de
+              plateformes pour les éditeurs, les libraires et les bibliothèques.</alinea>
+          </section1>
+        </encadre>
+        <encadre id="en3" type="1">
+          <section1 id="s1n12">
+            <alinea><marquage typemarq="gras">Table de l’Association des directeurs généraux des
+              municipalités du Québec (ADGMQ).</marquage> Selon les dossiers à traiter, cette table
+              invite tous les présidents des associations du milieu municipal à partager leurs
+              préoccupations en lien avec leurs mandats respectifs. À la demande des participants,
+              l’ADGMQ a organisé une rencontre avec les sous-ministres du ministère des Affaires
+              municipales, des Régions et de l’Occupation du territoire (MAMROT).</alinea>
+          </section1>
+        </encadre>
+        <encadre id="en4" type="1">
+          <section1 id="s1n13">
+            <alinea><marquage typemarq="gras">Observatoire de la culture et des communications du
+              Québec (OCCQ) – Comité consultatif sur le livre, la littérature et les
+              bibliothèques.</marquage> Les BPQ participent aux activités du Comité consultatif sur
+              le livre, la littérature et les bibliothèques de l’OCCQ. Quelques retombées à noter :
+              le bulletin <marquage typemarq="italique">Statistiques en bref</marquage> a été
+              remplacé par le bulletin <marquage typemarq="italique">Optique Culture</marquage>. Le
+              Forum sur la diversité culturelle à l’ère du numérique a été organisé à la Grande
+              Bibliothèque le 25 octobre 2010. Les BPQ y étaient représentées par la présidente et
+              la directrice générale. L’ABPQ a demandé à ce que des données sur la présence du livre
+              numérique en bibliothèques soient comptabilisées.</alinea>
+          </section1>
+        </encadre>
+      </para></section1><section1 id="s1n14"><no>14</no><titre>Une autre source de fierté pour l’ABPQ : l’établissement d’une merveilleuse complicité
+        entre bibliothécaires et architectes</titre><para id="pa28"><no>28</no>
+        <alinea>Dans un numéro spécial de la revue <marquage typemarq="italique">Documentation et
+          bibliothèques<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi></marquage> paru en 2014 et entièrement
+          consacré à cette merveilleuse complicité entre les architectes et les bibliothécaires,
+          nous retrouvons des données fort intéressantes sur l’impact des efforts accomplis par les
+          acteurs de l’ABPQ impliqués dans la métamorphose des bibliothèques publiques du Québec
+          depuis 1980. La mise à niveau de ces espaces dédiés aux bibliothèques publiques a
+          nécessité des investissements majeurs de la part des administrations provinciales et
+          municipales. Un rattrapage qui mérite très certainement d’être souligné. Mentionnons que
+          les éditeurs de la revue <marquage typemarq="italique">Documentation et
+          bibliothèques</marquage> ont souligné l’importance de la contribution de la revue
+          <marquage typemarq="italique">Défi</marquage> en lien avec des projets de rénovation,
+          d’agrandissement et de construction de bibliothèques publiques autonomes. Deux numéros
+          spéciaux de <marquage typemarq="italique">Défi</marquage> et des articles portant sur ce
+          sujet ont été publiés entre 1989 et 1996.</alinea>
+      </para><section2 id="s2n4"><no>14.
+				1</no><titre>Évolution des facteurs de croissance des BPA entre 1985 et 2015 : 30 ans de croissance
+        remarquable</titre><para id="pa29"><no>29</no>
+        <alinea>Les indicateurs pour lesquels on remarque une progression notable entre 1985 et 2015
+          sont les suivants :</alinea>
+        <listenonord signe="disque">
+          <elemliste>
+            <alinea>Une croissance de 54,2 % de la population desservie faisant en sorte que 84,2 %
+              de celle-ci était desservie en 2015 par une BPA ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Le nombre de livres par habitant se situait à 2,60 en 2015 alors qu’il n’était
+              qu’à 1,8 en 1985. Un retard considérable a ainsi été comblé ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Le nombre de ressources électroniques a littéralement explosé entre 2007 et
+              2015. Ces ressources sont diversifiées et certaines ont supplanté des documents sous
+              forme de support papier comme les publications en série imprimées ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Après avoir connu une augmentation de 82,5 % entre 1985 et 2015, le nombre
+              d’usagers a légèrement fléchi entre 2007 et 2015, en baisse de 3 %. Cependant, le
+              nombre d’entrées à la bibliothèque a, quant à lui, connu une croissance de 26 %, un
+              indicateur de la popularité de ces architectures de la connaissance auprès des
+              citoyens qui fréquentent de plus en plus ces espaces pour accéder aux diverses sources
+              du savoir offertes gratuitement sur place ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Les données précisant le nombre d’employés (ETC) permettent de constater une
+              forte augmentation qui est de l’ordre de 161 %. Le nombre de bibliothécaires
+              enregistre une hausse importante de 110 %. Celle-ci n’est toutefois pas encore
+              suffisante pour atteindre la norme du 1 bibliothécaire par tranche de 10 000
+              habitants, une norme reconnue et atteinte dans la majorité des provinces
+              canadiennes ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Les prêts de documents entre 1985 et 2015 ont fortement augmenté, soit une
+              hausse de 124 %, tandis que ceux enregistrés entre 2007 et 2015 ont connu une
+              croissance beaucoup moins marquée sans doute sous l’effet des visites virtuelles et de
+              l’accès à distance aux nombreuses ressources électroniques offertes depuis le milieu
+              des années 1990 qui ont quant à elles bondi de 267 % (phénomène similaire à la
+              tendance observée dans le milieu des bibliothèques de l’enseignement supérieur au
+              Québec). Par ailleurs, les demandes de PEB connaissent une forte croissance en
+              pourcentage, traduisant ainsi une pratique axée sur le partage des ressources et la
+              mutualisation des services ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea> Le nombre d’activités d’animation et de participants a plus que doublé entre
+              2007 et 2015. Les activités d’animation offertes en 2015 ont rejoint 1 317 354
+              participants. La programmation de ces activités d’animation s’inscrit parfaitement
+              dans la mission des BPA comme l’illustre le Service des bibliothèques de la ville de
+              Montréal : « Maillon clé de la chaîne de transmission des savoirs, les bibliothèques
+              n’ont de cesse de promouvoir la lecture par l’entremise de programmes d’animation pour
+              tous les âges. Les programmes d’alphabétisation, les clubs de lecture, l’aide aux
+              devoirs ne sont que quelques-unes de ces activités qui vous sont offertes. Les
+              bibliothèques organisent également des expositions, des conférences et des rencontres
+              de toutes sortes<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi> » ; </alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Les contributions municipales, principale source de revenus pour les BPA, ont
+              augmenté de 478 % au cours des 30 dernières années. Les subventions régulières en
+              provenance du MCC, destinées principalement à soutenir le développement des
+              collections, enregistrent une hausse modérée de 35 % entre 1985 et 2015. Quant aux
+              autres sources de revenus, correspondant à la tarification, aux pénalités, aux
+              locations de best-sellers et autres, elles ont bondi de 622 % entre 1985 et 2015.
+              Concernant la tarification, il s’avère important de mentionner qu’en 2017, elle est
+              devenue une exception puisque le MCC a fait de la gratuité un critère d’admissibilité
+              à son programme de soutien au développement des collections. Les dépenses consacrées
+              au personnel représentant tout près de 60 % des dépenses totales des BPA ont augmenté
+              de 379 % entre 1985 et 2015, comparativement à 44 % entre 2007 et 2015 ;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea> La hausse des dépenses totales de fonctionnement est de 333 % en 30 ans. Le
+              niveau des dépenses publiques par habitant a considérablement augmenté au Québec
+              depuis le début des années 1980<marquage typemarq="italique">. </marquage>Nous pouvons
+              ici évoquer une situation de rattrapage par rapport aux normes établies et aux niveaux
+              de développement observés dans les autres provinces canadiennes : une étude commandée
+              en 1985 par l’Association des directeurs de bibliothèques publiques du Québec a permis
+              de constater que, sur la majorité des points analysés, le Québec occupait
+              l’avant-dernier rang au Canada par rapport au développement des bibliothèques
+              publiques<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi>. Il ne faut pas perdre de vue le fait que
+              le nombre de bibliothèques municipales autonomes au Québec est passé d’une vingtaine
+              en 1960 à 156 en 1992<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi> ; </alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Nous constatons que les municipalités québécoises, desservant tous les types de
+              bibliothèques, ont consacré des sommes très importantes en matière de dépenses
+              d’investissements dédiés à la réalisation de projets de rénovation, d’agrandissement
+              ou de construction de bibliothèques entre 2007 et 2015 :</alinea>
+            <alinea>
+              <objetmedia flot="ligne">
+                <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2104523n.jpg" dimx="233" dimy="259" id="im2" typeimage="forme" xlink:type="simple"></image>
+                <texte>200710,1 M$200821,2 M$200934,5 M$201033,8 M$201133,0 M$201272,4 M$201363,6
+                  M$201454,3 M$201540,1 M$</texte>
+              </objetmedia>
+            </alinea>
+          </elemliste>
+        </listenonord>
+      </para><para id="pa30"><no>30</no>
+        <alinea>Selon les dernières données disponibles, les dépenses totales consacrées aux BPA
+          sont de l’ordre de 294,2 M $, soit une hausse de 333 % entre 1985 et 2015. Depuis 30 ans,
+          nous remarquons qu’une part considérable de la croissance des dépenses de fonctionnement
+          des bibliothèques publiques autonomes du Québec résulte d’une augmentation significative
+          des dépenses réalisées par les municipalités.</alinea>
+      </para></section2></section1><section1 id="s1n15"><no>15</no><titre>Conclusion</titre><para id="pa31"><no>31</no>
+        <alinea>Après avoir souligné les aspects historiques de l’évolution de l’ABPQ, présenté les
+          actions et les interventions en lien avec la mission de cette association, ainsi que les
+          principaux indicateurs de croissance ayant marqué l’évolution des BPA depuis 35 ans, il
+          convient de reconnaître que l’ABPQ a joué un rôle important dans la détermination des
+          politiques publiques qui ont permis un accroissement significatif des dépenses de
+          fonctionnement des BPQ depuis le début des années 1980. Il faut donner à l’APBQ le crédit
+          de son implication et de ses engagements dans les formes discursives de reconnaissance
+          institutionnelle à l’endroit des BPQ que l’on entend aujourd’hui :</alinea>
+        <bloccitation>
+          <alinea><marquage typemarq="italique">Plus que jamais, notre société a besoin de mettre la
+            population en contact avec les véhicules du savoir. Cela est non seulement essentiel au
+            bien-être de la population, mais c’est primordial pour la santé économique et
+            intellectuelle de la communauté dans son ensemble. Par le livre et la lecture, nos
+            concitoyens s’ouvrent sur le monde, enrichissent leur imaginaire, et s’habilitent à une
+            participation active au développement du Québec. Situées sur la ligne de front du savoir
+            et de la démocratisation de la culture, nos bibliothèques se positionnent donc comme des
+            établissements de premier plan, accessibles pratiquement partout sur le
+            territoire.</marquage></alinea>
+          <source>Lévesque 2007, 3</source>
+        </bloccitation>
+      </para><para id="pa32"><no>32</no>
+        <alinea>L’ABPQ a joué un rôle catalyseur dans le développement des bibliothèques publiques
+          du Québec qu’elle représente en apportant des idées de changement et en amorçant des
+          mouvements de transformation à partir d’une véritable structure collaborative impliquant
+          des acteurs des 11 regroupements régionaux de bibliothèques publiques du Québec. Sa
+          contribution au développement d’un réseau solidement établi dans toutes les régions du
+          Québec se veut exemplaire. Au fil des ans, cette association est devenue un interlocuteur
+          de premier niveau concernant les actions souvent novatrices à entreprendre en vue
+          d’assurer le développement des services d’accès à la lecture et à l’information sous ses
+          toutes ses formes en tenant compte de l’évolution des besoins des sociétés à desservir, et
+          cela à l’échelle du Québec.</alinea>
+      </para><para id="pa33"><no>33</no>
+        <alinea>Finalement, le plus grand mérite de l’ABPQ depuis sa création aura été d’assurer
+          l’émergence et le maintien d’un réseau de bibliothèques publiques autonomes en constante
+          évolution, permettant aujourd’hui à ses membres, regroupant 305 bibliothèques, d’offrir à
+          leurs citoyens des services diversifiés répondant à des normes reconnues. Cet apport au
+          développement des bibliothèques publiques sous l’angle de l’innovation s’est déroulé dans
+          le cadre d’un processus de contestations culturelles dans lequel l’association a fort bien
+          réussi à tirer son épingle du jeu en respectant les principes de base du travail
+          collaboratif, du partage des expertises, de la mutualisation des ressources et de la
+          coopération à l’échelle d’un aussi vaste territoire à desservir. Cette réussite repose
+          aussi sur le travail acharné de ces bâtisseurs de bibliothèques qui ont toujours fait
+          preuve de conviction pour en arriver à établir la crédibilité d’une association ayant pour
+          mission de donner aux citoyens du Québec un véritable accès démocratique au savoir sous
+          toutes ses formes.</alinea>
+      </para></section1></corps><partiesann lang="fr"><grannexe><annexe id="an1"><titre>Les actions regroupées dans ce tableau proviennent des trois sources suivantes : site
+          Web de l’ABPQ, ses rapports annuels<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi> et l’ouvrage de
+          Florian Dubois intitulé <marquage typemarq="italique">De l’ADIBIPUQ aux BPQ… 20 ans de
+          défis</marquage><renvoi id="re1no13" idref="no13" typeref="note">13</renvoi></titre><section1 id="s1n16"><no>16</no><grtableau id="gt1">
+            <tableau id="ta2">
+              <legende lang="fr">
+                <listeord numeration="decimal">
+                  <elemliste>
+                    <alinea>Ces recommandations du rapport ont donné lieu à l’adoption des
+                      programmes suivants par le MAC : Aide financière de base aux bibliothèques
+                      autonomes, Programme d’aide financière pour l’achat de volumes, Aide aux
+                      Bibliothèques centrales de prêt, Aide à l’informatisation des bibliothèques,
+                      Aide à la coopération et aux projets spéciaux, Aide financière à la création
+                      de bibliothèques publiques autonomes, Aide à la construction et à la
+                      restauration de bibliothèques</alinea>
+                  </elemliste>
+                </listeord>
+              </legende>
+              <objetmedia flot="bloc">
+                <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="tableau" xlink:type="simple"></image>
+                <texte>Les représentations politiques sous forme de mémoires déposés dans le cadre
+                  de commissions d’études ou de consultations ministérielles mises sur pied par le
+                  gouvernement du QuébecDépôts de mémoires auprès de diverses commissions d’études
+                  ou parlementaires et d’organismes publics :La Commission d’étude sur les
+                  municipalités créée par l’Union des municipalités du Québec en 1985 et présidée
+                  par Jacques Parizeau (1986) ;La Commission d’études sur les bibliothèques
+                  publiques du Québec (1987)1 ;La Commission parlementaire de la culture (1991) ;Le
+                  projet de la Grande bibliothèque du Québec (1997) ;Du Sommet sur la lecture et le
+                  livre présidé par le premier ministre Lucien Bouchard (1998) au terme duquel le
+                  ministère de la Culture et des Communications s’engage à soutenir l’ABPQ pour la
+                  coordination nationale de la programmation des activités de la semaine des
+                  bibliothèques. Une subvention de 80 000 $ est versée à l’Association à cette fin,
+                  de plus le MCC s’engage à injecter 50 M $ spécifiquement dédiés au développement
+                  des collections pour les BPQ ;La Commission parlementaire sur le Projet de loi 170
+                  - La réorganisation municipale : des enjeux de taille pour le réseau des
+                  bibliothèques publiques du Québec (2000) ;BPQ, Présence du numérique dans les
+                  bibliothèques publiques québécoises-des conditions gagnantes - Position des
+                  Bibliothèques publiques du Québec, Mémoire présenté au ministère de la Culture,
+                  des Communications et de la Condition féminine du Québec (MCCCF), 2010 ;Dépôt d’un
+                  mémoire intitulé La bibliothèque publique au service de la société du savoir et
+                  des citoyens auprès de l’Union des municipalités dans le cadre du lancement de son
+                  livre blanc L’avenir a un lieu (2012) ;Dans le cadre de la consultation publique
+                  sur la réussite éducative, dépôt du mémoire intitulé Les bibliothèques publiques
+                  au coeur de la réussite éducative du Québec (2016).Rencontres, prises de position
+                  ou consultationsAvec la ministre de la Culture et des Communications Diane Lemieux
+                  portant sur les nouveaux programmes de subvention, la Semaine des bibliothèques,
+                  l’informatisation des bibliothèques et le traitement documentaire (2003) ;Deux
+                  membres du conseil d’administration de l’ABPQ participent au colloque « Els futurs
+                  de la biblioteca publica » tenu à Barcelone grâce à une subvention du MCC
+                  (2010) ;Participation à la Commission parlementaire sur la réglementation du prix
+                  de vente au public des livres neufs, imprimés et numériques ; positionnement de
+                  l’ABPQ en faveur d’un prix réglementé (2013) ;Envoi d’une lettre par le président
+                  de l’ABPQ aux quatre chefs de partis politiques du Québec leur demandant de
+                  prendre position à l’égard d’une loi encadrant les BPA (2014) ;Renouvellement de
+                  la Politique culturelle du Québec, participation au processus de consultation
+                  (2016).</texte>
+              </objetmedia>
+            </tableau>
+            <tableau id="ta3">
+              <legende lang="fr">
+                <listeord numeration="decimal" compteur="2">
+                  <elemliste>
+                    <alinea>L’Association joua un rôle stratégique de premier plan dans
+                      l’implantation d’Internet dans les BPQ au milieu des années 1990 comme nous le
+                      rappelle le président de l’époque Jean Payeur : « Devenus des interlocuteurs
+                      privilégiés du ministère de la Culture et des Communications, les BPQ furent
+                      mises à contribution dans les deux phases du Fonds de l’autoroute
+                      de l’information (FAI), afin d’élaborer le contenu des programmes. C’est
+                      notamment grâce au FAI que la majorité des bibliothèques publiques du Québec
+                      entrèrent de plain-pied dans l’univers d’Internet et que la norme Z39.50
+                      s’imposa graduellement comme passerelle entre les différents catalogues »
+                      Dubois (1995), p. 85.</alinea>
+                  </elemliste>
+                  <elemliste>
+                    <alinea>Soutenu activement par le ministère de la Culture, des Communications et
+                      de la Condition féminine et par Bibliothèque et Archives nationales du Québec,
+                      ce colloque, auquel plus de 150 personnes participent, témoigne clairement de
+                      la volonté des intervenants du milieu d’établir une vision commune de
+                      développement pour les années à venir. Les conclusions de ce colloque sont
+                      disponibles dans les Actes du colloque : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="http://www.banq.qc.ca/documents/services/services_aux_bibliotheques/ColloqueBP2007-04/colloqueBP_Acte_v6-07-11-02-3.pdf">www.banq.qc.ca/documents/services/services_aux_bibliotheques/ColloqueBP2007-04/colloqueBP_Acte_v6-07-11-02-3.pdf</liensimple>.</alinea>
+                  </elemliste>
+                </listeord>
+              </legende>
+              <objetmedia flot="bloc">
+                <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="tableau" xlink:type="simple"></image>
+                <texte>Tenue de forums, de colloques et représentations lors d’activités organisées
+                  par des acteurs des milieux culturel et municipal1er Forum tenu à Mirabel sur le
+                  thème « Le faire faire », avec la participation de la ministre de la Culture Lise
+                  Bacon (1986) ;Présence de l’Association au Congrès de l’UMQ (1987) ;2e Forum tenu
+                  à Saint-Hyacinthe avec la participation de la ministre Lise Bacon. Le thème « La
+                  bibliothèque municipale… un service de diffusion municipale », les sous-thèmes
+                  traités : nouvelles sources de financement, principe de la gratuité, les
+                  contributions municipales. À noter qu’une subvention de 65 000 $ sera accordée à
+                  l’Association pour réaliser une étude sur l’informatisation des BPQ (1989) ;3e
+                  Forum tenu à Laval portant sur « Les bibliothèques publiques et le virage
+                  culturel » (1991) ;4e Forum tenu à Rouyn-Noranda et ayant pour thème « Regard sur
+                  l’an 2000 ». L’Association remet les premiers prix Eureka qui visent à récompenser
+                  l’excellence des projets des bibliothèques publiques (1993) ;5e Forum tenu à
+                  Québec qui porte sur le thème « La coopération, une autoroute de développement2 »
+                  (1995). En 1997, une subvention de 7 M $ sera accordée par le MCC afin d’assurer
+                  l’implantation d’Internet dans le réseau des BPQ ;Colloque d’orientation sur les
+                  BPA à Québec ayant pour thèmes la mission et le repositionnement des BPA, les
+                  usagers et les services à offrir, la coopération et le partage des ressources, les
+                  nouvelles technologies de l’information, le financement ;6e Forum des BPQ tenu à
+                  Shawinigan ayant pour thème « Le défi du XXIe siècle pour les bibliothèques,
+                  clientèles, employé(e)s et convivialité », conférencière Lise Bissonnette
+                  (2000) ;Organisation et participation au colloque sur la médiation de la lecture
+                  auprès des jeunes en collaboration avec les organismes suivants : APSDS, SPST,
+                  ANEL, Communication-jeunesse et BNQ (2001) ;Participation au colloque « Lire la
+                  science » organisé par la Société pour la promotion de la science et de la
+                  technologie (SPST), (2004) ;Participation au 18e colloque annuel « Les Arts et la
+                  Ville » tenu à Gatineau. Un atelier portait sur : « Les bibliothèques publiques du
+                  XXI– siècle : vers une révolution des services et de l’environnement »
+                  (1995) ;Participation au congrès de l’ADGMQ ayant pour thème : « La bibliothèque
+                  grande inconnue du milieu municipal… un positionnement stratégique de service
+                  citoyen » (1996) ;Les Bibliothèques publiques du Québec organisent conjointement
+                  avec le Réseau BIBLIO du Québec le Colloque sur l’avenir des bibliothèques
+                  publiques du Québec. Soutien du ministère de la Culture, des Communications et de
+                  la Condition féminine et par BAnQ. Les conclusions de ce colloque sont disponibles
+                  dans les Actes du colloque3 (2007) ;L’ABPQ se joint à six autres associations pour
+                  donner naissance au Congrès des milieux documentaires du Québec. Une collaboration
+                  qui durera sept ans (2009) ;L’ABPQ, en collaboration avec la ville de Montréal,
+                  organise en 2015 le premier « Rendez-vous des bibliothèques publiques du Québec »,
+                  un évènement de formation dédié aux BPA. La 4e édition aura lieu en 2018 ;Dans le
+                  cadre de la rencontre annuelle avec la Table des officiers municipaux du Québec,
+                  les associations présentes ont eu droit à une présentation de l’Union des
+                  municipalités du Québec sur son Livre blanc municipal et son projet de Charte des
+                  municipalités. Le président a expliqué le rôle et les quatre missions-clés de la
+                  bibliothèque publique (éducation, alphabétisation, culture et information) et a
+                  dénoncé le fait que de ces quatre piliers, seul l’aspect culturel était intégré
+                  dans le projet de charte des municipalités, qu’il était donc anormal que seulement
+                  le quart de la mission de BPQ ne soit reconnu par les municipalités québécoises
+                  (2014) ;Participation au congrès annuel de l’Association québécoise du loisir
+                  municipal, présentation du rôle et de la mission de la bibliothèque publique du
+                  XXIe siècle, au-delà du livre (2014).</texte>
+              </objetmedia>
+            </tableau>
+            <tableau id="ta4">
+              <legende lang="fr">
+                <listeord numeration="decimal" compteur="4">
+                  <elemliste>
+                    <alinea>« Ce film nous a tous émus, nous, convertis des bibliothèques publiques.
+                      Mais le plus important, c’est que ce film ait aussi ému la ministre, qui nous
+                      a spontanément proposé son aide afin de faire reconnaître le rôle de la
+                      bibliothèque publique non seulement au sein de la société, mais aussi auprès
+                      des municipalités et des différents ministères, dont celui de l’Éducation ».
+                      Mot du président, Rapport annuel 2014-2015.</alinea>
+                  </elemliste>
+                  <elemliste>
+                    <alinea>En 2014, le ministre de la Culture et des Communications, Maka Kotto,
+                      annonce des investissements dans le cadre du lancement de la Stratégie
+                      culturelle numérique du Québec. L’aide exceptionnelle dévoilée par le
+                      ministère viendra directement soutenir les bibliothèques publiques autonomes
+                      dans le développement de leurs collections de livres numériques.</alinea>
+                  </elemliste>
+                  <elemliste>
+                    <alinea>« Biblio-Aidants » est une initiative des bibliothèques de Charlemagne,
+                      L’Assomption et Repentigny. L’ABPQ remercie ces trois villes de lui avoir
+                      permis d’étendre le programme à l’ensemble du Québec en lui cédant leurs
+                      droits d’auteur.</alinea>
+                  </elemliste>
+                  <elemliste>
+                    <alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:type="simple" xlink:href="http://bibliojeux.ca/index.php">bibliojeux.ca/index.php</liensimple>.</alinea>
+                  </elemliste>
+                </listeord>
+              </legende>
+              <objetmedia flot="bloc">
+                <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="tableau" xlink:type="simple"></image>
+                <texte>Promotions et mise en valeur des services offerts par les BPACréation du prix
+                  d’excellence Eureka en 1993. Ce prix visait à reconnaître l’excellence dans le
+                  domaine des bibliothèques publiques. Il avait pour but d’honorer les bibliothèques
+                  dont les initiatives et le travail soutenu méritaient d’être soulignés à l’échelle
+                  nationale. Ce concours a pris fin en 2000. D’autres prix ont été créés par
+                  l’Association au cours des années en vue de souligner les initiatives et le
+                  travail de ses membres dont : Prix performances, Prix partenaire Réal Messier,
+                  Prix innovation, Prix personnalité ;La semaine des bibliothèques. La première
+                  édition a été lancée en 1999. Une subvention de 80 000 $ a été accordée par le MCC
+                  en soutien à cette activité, en 2005, lancement de la campagne « Suivez le
+                  courant », avec la remise de sacs recyclables aux usagers. Cette initiative sera
+                  primée par l’IFLA et la ministre de la Culture Line Beauchamp présentera ce sac
+                  aux membres de l’Assemblée nationale du Québec. Lors du lancement de la Semaine
+                  des bibliothèques publiques, visionnement en avant-première et en présence de la
+                  ministre de la Culture et des Communications du Québec, Hélène David, du film de
+                  la réalisatrice Martine Forand portant sur le rôle social des bibliothèques
+                  publiques : « Le 3e lieu : les bibliothèques publiques4 » (2014) ;Mise sur pied du
+                  programme « Une naissance, un livre », une initiative du regroupement des
+                  bibliothèques de la région Capitale nationale-Chaudière-Appalaches qui devient
+                  provinciale, 35 000 trousses sont alors distribuées partout au Québec
+                  (2001-2002) ;Publication d’un tiré à part sur les BPQ par L’Association nationale
+                  des éditeurs du livre (ANEL), (2004) ;De 2006 à 2010, l’ABPQ transmet aux écoles
+                  une invitation à inclure sur la liste du matériel scolaire carte de la
+                  bibliothèque publique de leur localité. Cette action s’inscrivait dans les suivis
+                  du Colloque sur le livre et la lecture (2008) ;La revue URBA de l’UMQ présente un
+                  dossier spécial sur les enjeux et les défis des bibliothèques publiques du Québec
+                  (mars 2007) ;Le magazine Savoir de la Fédération des Commissions scolaires du
+                  Québec (FCSQ) publie un article sur les bibliothèques scolaires et publiques,
+                  deux maillons essentiels pour former les lecteurs pour la vie (2008) ;En présence
+                  de l’ABPQ, dépôt de « La Déclaration des bibliothèques québécoises » à l’Assemblée
+                  nationale par le ministre de la Culture et des Communications Luc Fortin dans le
+                  cadre de la Semaine des bibliothèques publiques (2016) ;Dans la foulée de la
+                  Déclaration des bibliothèques québécoises, la Table permanente de concertation des
+                  bibliothèques québécoises a lancé la campagne « Ma bibliothèque, j’y vais ! », qui
+                  vise notamment à stimuler l’engouement des Québécois pour leurs bibliothèques
+                  (2016).Services et programmes offerts aux membres Création d’une direction
+                  générale (2009) ;À la suite d’une réflexion concernant son mandat de diffusion et
+                  de conservation soumis à de profonds changements avec, entre autres, l’émergence
+                  du livre dématérialisé, l’Association participe à la création de la plateforme
+                  PRETNUMERIQUE.CA qui a comme objectif de permettre aux bibliothèques publiques
+                  d’offrir un service de prêt de livres numériques. Cette plateforme sera incorporée
+                  au sein de l’organisme sans but lucratif BIBLIOPRESTO.CA qui aura comme mandat de
+                  gérer l’ensemble des services numériques et en ligne offerts par les bibliothèques
+                  publiques (2009-2010)5 ;Participation au comité de gestion du consortium
+                  d’acquisition de ressources électroniques du Québec (CAREQ) qui est formé d’un
+                  représentant de la ville de Montréal, du Réseau BIBLIO du Québec, de BAnQ et de
+                  deux représentants des BPQ (2010) ;Mise sur pied du projet-pilote « Référence
+                  virtuelle coopérative ». Onze bibliothèques membres de l’ABPQ, ainsi que BAnQ,
+                  prendront part à ce projet-pilote (2012-2013) ;Le programme « Biblio-Aidants » est
+                  un service d’information à l’intention des proches aidants. Plus de 580
+                  bibliothèques à travers le Québec participent à cette initiative. Biblio-Aidants
+                  comprend une série de 15 cahiers thématiques qui renseignent les proches aidants
+                  sur les maladies et les sujets auxquels ils sont confrontés. Chaque cahier
+                  présente une liste d’organismes, une sélection de sites Web pertinents et des
+                  suggestions de lecture et de films6 (2016) ;Le programme « Biblio-jeux » offre des
+                  activités de stimulation du langage pour les tout-petits et leur famille7
+                  (2016) ;Le programme « Générations@branchées » est un service destiné aux
+                  personnes éprouvant des difficultés avec les ordinateurs et leurs différents
+                  programmes. Lors d’une séance d’environ une heure, on jumelle un adolescent
+                  bénévole, à l’aise en informatique, à un adulte souhaitant s’initier
+                  à l’informatique ou obtenir de l’aide personnalisée pour accomplir certaines
+                  tâches informatiques précises telles que la création d’un compte courriel ou le
+                  téléchargement de photographies (2017).</texte>
+              </objetmedia>
+            </tableau>
+          </grtableau></section1></annexe></grannexe><grnotebio><notebio id="nb1" idrefs="au1" lang="fr"><alinea><marquage typemarq="gras">Denis BOISVERT</marquage> (Canada) a été directeur de la bibliothèque municipale de Rivière-du-Loup de 1980 à 1984, puis de celle de Saint-Hyacinthe de 1984 à 2002. Au cours de cette période, il a été impliqué sans le milieu associatif à titre de rédacteur de la revue <marquage typemarq="italique">Défi</marquage>, de président de l’Association des bibliothèques publiques du Québec de 1997 à 2001 et de président de l’ASTED de 2006 à 2007. De 2002 à 2017, il a oeuvré dans le milieu universitaire à titre de directeur du Service de la bibliothèque de l’Université du Québec à Rimouski (UQAR).</alinea></notebio></grnotebio><grbiblio><biblio><refbiblio id="rb1">Laforce, G. 2008. Les politiques du livre et de la lecture au Québec, de 1963 à 1989 : le fondement scientifique de la pensée gestionnaire de l’État à l’endroit de la diffusion et de l’accessibilité du livre. <marquage typemarq="italique">Bulletin d’histoire politique</marquage> 17 (1).</refbiblio>
+<refbiblio id="rb2">Moussaoui, K. &amp; K. A. Megherbi. 2014. Rôle des associations dans le développement local. <marquage typemarq="italique">ATPS</marquage> (6) : 13-24.</refbiblio>
+<refbiblio id="rb3">Schaller, J.-J. 2007. Un lieu apprenant : de l’habitus à l’historicité de l’action. <marquage typemarq="italique">O.S.P. L’orientation professionnelle</marquage> 36 (1) : 83-93. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="http://journals.openedition.org/osp/1317" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">journals.openedition.org/osp/1317</liensimple>.</refbiblio>
+<refbiblio id="rb4">Lajeunesse, M. 2008. Les associations professionnelles en sciences de l’information au Québec. <marquage typemarq="italique">Documentation et bibliothèques</marquage> 54 (2) : 82-83.</refbiblio>
+<refbiblio id="rb5">Boisvert, D. 1993. Spécificité des bibliothèques publiques du Québec. <marquage typemarq="italique">Documentation et bibliothèques</marquage> Octobre-novembre.</refbiblio>
+<refbiblio id="rb6">Laflamme, M. &amp; N. Moreau. 1993. La coopération entre bibliothèques. In <marquage typemarq="italique">Les bibliothèques publiques en France : points de comparaison avec le Québec</marquage>, sous la direction de Réjean Savard. École de bibliothéconomie et des sciences de l’information, Université de Montréal, 59-69.</refbiblio>
+<refbiblio id="rb7">Santerre, L. 1999. <marquage typemarq="italique">De la démocratisation de la culture à la démocratie culturelle : Rapport d’étude, Direction de l’action stratégique</marquage>, de la recherche et de la statistique, ministère de la Culture et des Communications.</refbiblio>
+<refbiblio id="rb8">Lachapelle, L. 2009-2010. <marquage typemarq="italique">Mot de la directrice générale, Rapport annuel</marquage>.</refbiblio>
+<refbiblio id="rb9">Piquet, A. 2009. <marquage typemarq="italique">Guide pratique du travail collaboratif : Théories, méthodes, et outils au service de la collaboration</marquage>. Brest, France : Telecom Bretagne.</refbiblio>
+<refbiblio id="rb10">Lévesque F. 2007. L’avenir des bibliothèques publiques du Québec, MCCCF. In <marquage typemarq="italique">Actes du colloque tenu le 20 avril 2007 à la Grande Bibliothèque</marquage>.</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Denis Vaugeois a été nommé ministre des Affaires culturelles en 1978 et a été
+          l’artisan de l’adoption de la <marquage typemarq="italique">Loi sur le développement des
+          entreprises québécoises dans le domaine du livre</marquage> (Loi 51). Une Loi qui demeure
+          toujours en vigueur aujourd’hui et qui oblige les bibliothèques publiques à acheter leurs
+          livres auprès de librairies québécoises agréées.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:type="simple" xlink:href="http://www.mcc.gouv.qc.ca/index.php?id=4375">www.mcc.gouv.qc.ca/index.php?id=4375</liensimple>.</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Corporation des bibliothécaires professionnels du Québec, Projet de loi sur les
+          bibliothèques publiques au Québec : mémoire au Conseil des ministres du Québec, avril
+          2006.</alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:type="simple" xlink:href="http://www.abpq.ca/fr/salle-de-presse/publications/manifeste-de-lunesco-sur-la-bibliotheque-publique">www.abpq.ca/fr/salle-de-presse/publications/manifeste-de-lunesco-sur-la-bibliotheque-publique</liensimple>.</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:type="simple" xlink:href="http://cbpq.qc.ca/sujet-projet-de-loi-sur-les-bibliotheques-publiques- au-quebec-avril-2006">cbpq.qc.ca/sujet-projet-de-loi-sur-les-bibliotheques-publiques-au-quebec-avril-2006</liensimple>.</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>Mémoire déposé par la ville de Drummondville auprès de la Commission d’études sur
+          les bibliothèques publiques. </alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:type="simple" xlink:href="http://cbpq.qc.ca/sujet-projet-de-loi-sur-les-bibliotheques-publiques- au-quebec-avril-2006">www.abpq.ca/fr/salle-de-presse/publications/manifeste-de-lunesco-sur-la-bibliotheque-publique</liensimple>.</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea><marquage typemarq="italique">Bibliothèques et architecture</marquage>, sous la
+          direction de Guylaine Beaudry et Yvon-André Lacroix, <marquage typemarq="italique">Documentation et bibliothèques</marquage>, avril-septembre 2014.</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>Bibliothèques, ville de Montréal, Programmes d’animation : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:type="simple" xlink:href="http://ville.montreal.qc.ca/portal/page?_pageid=4276%2C5556188&amp;_dad=portal&amp;_schema=PORTAL">http://ville.montreal.qc.ca/portal/page?_pageid=4276%2C5556188&amp;_dad=portal&amp;_schema=PORTAL</liensimple></alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea>Alain Gendron, Les bibliothèques publiques du Québec : Où en sommes-nous ? <marquage typemarq="italique">Québec français</marquage>, Numéro 78, été 1990, p. 96.</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea>Gilbert Gagnon et Rosaire Garon, <marquage typemarq="italique">Le rendement des
+          bibliothèques publiques autonomes : éléments d’explications, ministère de la Culture et
+          des Communications</marquage>, 1995, 38 p.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea>ABPQ, Rapports annuels, 2010 à 2016 <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:type="simple" xlink:href="http://www.abpq.ca/fr/rapports-annuels">www.abpq.ca/fr/rapports-annuels</liensimple>.</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea><marquage typemarq="italique">De l’ADIBIPUQ aux BPQ - 20 ans de beaux défis : les
+          Bibliothèques publiques du Québec,</marquage> sous la responsabilité de Florian Dubois,
+          BPQ, 2004, 119 p. </alinea>
+      </note>
+    </grnote></partiesann></article>

@@ -693,6 +693,40 @@ class TestArticleDetailView:
         assert '<figure class="figure" id="fi1"><figcaption></figcaption><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
         assert '<figure class="figure" id="fi2"><figcaption></figcaption><div class="figure-wrapper">\n<div class="figure-object"><a href="/fr/revues/journal/2000-issue/article/media/" class="lightbox objetmedia" title=""><img src="/fr/revues/journal/2000-issue/article/media/" alt="" class="img-responsive"></a></div>\n<div class="figure-legende-notes-source"><cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p></figure>' in html
 
+    def test_table_groups_display(self):
+        article = ArticleFactory(
+            from_fixture='1061713ar',
+            localidentifier='article',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        grtableau = dom.find_all('div', {'class': 'grtableau'})[0]
+        figures = grtableau.find_all('figure')
+        # Check that the table group is displayed.
+        assert grtableau.attrs.get('id') == 'gt1'
+        # Check that the tables are displayed inside the table group.
+        assert figures[0].attrs.get('id') == 'ta2'
+        assert figures[1].attrs.get('id') == 'ta3'
+        assert figures[2].attrs.get('id') == 'ta4'
+        # Check that the table images are displayed inside the tables.
+        assert len(figures[0].find_all('img', {'class': 'img-responsive'})) == 1
+        assert len(figures[1].find_all('img', {'class': 'img-responsive'})) == 1
+        assert len(figures[2].find_all('img', {'class': 'img-responsive'})) == 1
+        # Check that the table legends are displayed inside the tables.
+        assert len(figures[0].find_all('p', {'class': 'alinea'})) == 1
+        assert len(figures[1].find_all('p', {'class': 'alinea'})) == 2
+        assert len(figures[2].find_all('p', {'class': 'alinea'})) == 4
+
     def test_figure_back_arrow_is_displayed_when_theres_no_number_or_title(self):
         article = ArticleFactory(
             from_fixture='1031003ar',
