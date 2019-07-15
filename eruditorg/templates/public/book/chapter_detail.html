@@ -3,13 +3,13 @@
 
 {% block title %}{{ chapter.title|striptags }}{% endblock title %}
 
-{% block meta_description %}{% trans "Consultez" %} Rimbaud et l’incantation au second degré, {% trans "un chapitre du livre" %} Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle).{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Rimbaud et l’incantation au second degré">
+<meta property="og:title" content="{{ chapter.title|striptags }} – Érudit">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
@@ -19,10 +19,10 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="Rimbaud et l’incantation au second degré – Érudit">
+<meta name="twitter:title" content="{{ chapter.title|striptags }} – Érudit">
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
 <meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
-<meta name="twitter:description" content="{% trans 'Un chapitre du livre' %} Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)">
+<meta name="twitter:description" content="{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -50,14 +50,14 @@
     "position": 3,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}",
-      "name": "Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)"
+      "name": "{{ book.title|striptags }}"
     }
   },{
     "@type": "ListItem",
     "position": 4,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=chapter.id %}",
-      "name": "Rimbaud et l’incantation au second degré"
+      "name": "{{ chapter.title|striptags }}"
     }
   }]
 }
