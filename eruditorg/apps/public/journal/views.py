@@ -647,13 +647,12 @@ class BaseArticleDetailView(
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
         shouldcache = obj.issue.is_published
-        # If the issue is published, the template should be cached forever (None = forever).
-        # If the issue is not published, the template should not be cached (0 = never).
-        # It's OK to cache the published issue templates forever because we are using the issue's
-        # updated time from Fedora as the cache version.
-        context['cache_timeout'] = settings.FOREVER_TTL if shouldcache else settings.NEVER_TTL
-        # Issue's update time from Fedora to use as the cache version.
-        context['fedora_updated'] = obj.fedora_object.modified
+        # If the issue is published, the template should be cached for one day.
+        # If the issue is not published, the template should not be cached.
+        # Unlike issues & journals, we cannot cache articles' templates forever because we risk
+        # invalidating the cached template before the cached Fedora object and thus use an
+        # out-of-date Fedora object.
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
         # media URL and then remove the media_localid part to get the prefix only.
