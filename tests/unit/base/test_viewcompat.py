@@ -1,4 +1,6 @@
 from typing import (
+    Dict,
+    List,
     Tuple,
     Optional,
     cast,
@@ -10,6 +12,7 @@ from django.test import Client
 from django.urls import reverse
 
 from apps.public.journal.views_compat import get_fedora_ids_from_url_kwargs
+from apps.public.search.forms import SearchForm
 from erudit.fedora import repository
 from erudit.solr.models import SolrData
 from erudit.test.factories import IssueFactory, ArticleFactory
@@ -18,31 +21,25 @@ from erudit.test.factories import JournalFactory
 pytestmark = pytest.mark.django_db
 
 
-def test_can_redirect_to_retro_for_unknown_urls():
+def test_404s_for_unknown_urls():
     url = '/fr/test/unknown'
     response = Client().get(url)
-    assert response.status_code == 301
+    assert response.status_code == 404
 
 
-@pytest.mark.django_db
-class TestCanRedirectToRetro:
-    def test_can_redirect_to_retro_for_unknown_urls(self):
-        # Setup
-        url = '/fr/test/unknown'
-        # Run
-        response = Client().get(url)
-        # Check
-        assert response.status_code == 301
 
-    @pytest.mark.parametrize('url', [
-        "/recherche/index.html",
-        "/client/login.jsp",
-        "/client/login.jsp?lang=en",
-        "/these/liste.html",
-        "/rss.xml",
-    ])
-    def test_legacy_urls_return_are_redirected_with_http_301(self, url):
-        assert Client().get(url).status_code == 301
+@pytest.mark.parametrize('url, expected_redirect_chain', [
+    ('/recherche/index.html', [('/fr/recherche/avancee/', 301)]),
+    ('/client/login.jsp', [('/fr/compte/connexion/', 301)]),
+    ('/client/login.jsp?lang=en', [('/en/account/login/', 301)]),
+    ('/these/liste.html', [('/fr/theses/', 301)]),
+    ('/rss.xml', [('/fr/rss.xml', 301)]),
+])
+def test_legacy_urls_are_redirected_with_http_301(url, expected_redirect_chain, monkeypatch):
+    monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData(''))
+    response = Client().get(url, follow=True)
+    assert response.redirect_chain == expected_redirect_chain
+    assert response.status_code == 200
 
 
 def test_can_handle_legacy_journal_year_number_pattern():
@@ -113,6 +110,14 @@ class FakeSolrData:
     # noinspection PyUnusedLocal
     def get_fedora_ids(self, localidentifier: str) -> Optional[Tuple[str, str, str]]:
         return self.fedora_ids
+
+    # noinspection PyUnusedLocal
+    def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
+        return {
+            'disciplines': [],
+            'languages': [],
+            'journals': [],
+        }
 
 
 @pytest.mark.django_db

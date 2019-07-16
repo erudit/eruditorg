@@ -585,14 +585,14 @@ class TestIssueDetailView:
         resp = Client().get(url, {'ticket': issue.prepublication_ticket})
         assert "thisismyoldtitle" in resp.content.decode('utf-8')
 
-
-    def test_can_return_301_when_issue_doesnt_exist(self):
-        issue = IssueFactory.create(
-            date_published=dt.datetime.now(), localidentifier='test')
+    def test_can_return_404_when_issue_doesnt_exist(self):
+        issue = IssueFactory(
+            localidentifier='test',
+        )
         issue.localidentifier = 'fail'
         url = issue_detail_url(issue)
         response = Client().get(url)
-        assert response.status_code == 301
+        assert response.status_code == 404
 
     @pytest.mark.parametrize('publication_allowed', (True, False))
     def test_publication_allowed_article(self, publication_allowed):
@@ -2087,7 +2087,7 @@ class TestArticleRawPdfView:
             journal_id, issue_slug, issue_id, article_id
         ))
         response = Client().get(url)
-        assert response.status_code == 302
+        assert response.status_code == 404
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(subprocess, 'check_call')
@@ -2332,8 +2332,6 @@ class TestLegacyUrlsRedirection:
 
 class TestArticleFallbackRedirection:
 
-    FALLBACK_URL = settings.FALLBACK_BASE_URL
-
     @pytest.fixture(params=itertools.product(
         [{'code': 'nonexistent'}],
         [
@@ -2420,21 +2418,17 @@ class TestArticleFallbackRedirection:
         url = request.param[1]
         return reverse(url, kwargs=kwargs)
 
-    def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self, journal_url):
-        response = Client().get(journal_url)
-        redirect_url = response.url
-        assert self.FALLBACK_URL in redirect_url
+    def test_legacy_url_for_nonexistent_journals_404s(self, journal_url):
+        response = Client().get(journal_url, follow=True)
+        assert response.status_code == 404
 
-    def test_legacy_url_for_nonexistent_issues_redirect_to_fallback_website(self, issue_url):
-        response = Client().get(issue_url)
-        redirect_url = response.url
-        assert self.FALLBACK_URL in redirect_url
+    def test_legacy_url_for_nonexistent_issues_404s(self, issue_url):
+        response = Client().get(issue_url, follow=True)
+        assert response.status_code == 404
 
-    def test_legacy_url_for_nonexistent_article_redirect_to_fallback_website(self, article_url):
-        response = Client().get(article_url)
-        redirect_url = response.url
-        assert self.FALLBACK_URL in redirect_url
-
+    def test_legacy_url_for_nonexistent_articles_404s(self, article_url):
+        response = Client().get(article_url, follow=True)
+        assert response.status_code == 404
 
 class TestArticleXmlView:
     def test_can_retrieve_xml_of_existing_articles(self):
