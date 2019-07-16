@@ -90,11 +90,22 @@ def get_journal_authors_dict(journal_code, first_letter, article_type):
     client = get_client()
     authorname_queries = ' OR '.join('{}*'.format(letter) for letter in relevant_letters)
     query = 'RevueAbr:{} AuteurNP_fac:({})'.format(journal_code, authorname_queries)
+    fl = [
+        'ID',
+        'AuteurNP_fac',
+        'Annee',
+        'URLDocument',
+        'Titre_fr',
+        'Titre_en',
+        'Titre_es',
+        'Titre_defaut',
+        'TitreRefBiblio_aff',
+    ]
     if article_type:
         query += ' TypeArticle_fac:"{}"'.format(article_type)
     args = {
         'q': query,
-        'fl': 'ID,AuteurNP_fac,Annee,URLDocument,Titre_fr,Titre_en,Titre_defaut,TitreRefBiblio_aff',
+        'fl': ','.join(fl),
         'rows': '99999',
         'facet.limit': '0',
 
