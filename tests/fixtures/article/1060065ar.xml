@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1060065ar" typeart="article" lang="en" ordseq="8"><admin><infoarticle><idpublic scheme="doi">10.7202/1060065ar</idpublic><pagination>
+            <ppage>91</ppage>
+            <dpage>102</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="mi115" lang="fr en es"><titrerev>Management international</titrerev><titrerevparal lang="en">International Management</titrerevparal><titrerevparal lang="es">Gestiòn Internacional</titrerevparal><titrerevabr>mi</titrerevabr><idissn>1206-1697</idissn><idissnnum>1918-9222</idissnnum><redacteurchef typerc="regulier" sexe="masculin"><nompers><prenom>Patrick</prenom><nomfamille>Cohendet</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><nompers><prenom>Bachir</prenom><nomfamille>Mazouz</nomfamille></nompers></redacteurchef></revue><numero id="mi04620"><volume>23</volume><nonumero>1</nonumero><pub><periode>Automne</periode><annee>2018</annee></pub><pubnum><date typedate="publication">2019-06-04</date></pubnum></numero><editeur><nomorg>HEC Montréal</nomorg></editeur><editeur><nomorg>Université Paris Dauphine</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Management international / International Management / Gestión Internacional</nomorg>, 2018</droitsauteur></admin><liminaire><grtitre>
+                <titre>The Hidden Dimension of Happy Cultural Cooperation</titre>
+                <titreparal lang="fr">La dimension cachée d’une coopération culturelle heureuse</titreparal><titreparal lang="es">La dimensión escondida de una cooperación cultural exitosa</titreparal>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Emmanuelle</prenom><nomfamille>Sauvage</nomfamille></nompers><affiliation><alinea><marquage typemarq="italique">Bordeaux University School of Management (IAE)</marquage></alinea></affiliation><affiliation><alinea><marquage typemarq="italique">IRGO, IAE Bordeaux</marquage></alinea></affiliation><affiliation><alinea><marquage typemarq="italique">Gestion et Société, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://cerebe.org" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">cerebe.org</liensimple></marquage></alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="en"><alinea>Cross-cultural management research usually postulates that mutual expectations must be clearly assessed and that it is necessary for people from different cultural areas to share a common vision in order to efficiently collaborate. This research examines the link between intercultural understanding and relational efficiency by studying a “happy” and successful Franco-Latino-American case. It challenges the above-mentioned postulate and reveals that relational efficiency relies upon compatible positive understandings of a same situation rather than upon similar understandings, hence the notion of <marquage typemarq="italique">productive misunderstandings</marquage>.</alinea></resume><resume typeresume="resume" lang="fr"><alinea>Les travaux en management interculturel postulent habituellement qu’en contexte interculturel, les attentes réciproques des acteurs doivent être explicitement mises au jour et qu’une vision commune partagée est impérative si on veut garantir une collaboration efficace. Cette recherche s’intéresse au lien entre compréhension interculturelle et efficacité relationnelle par le biais d’une étude de cas mettant en évidence une rencontre franco-latino-américaine heureuse et efficace. Elle questionne le postulat initial et montre que l’efficacité relationnelle interculturelle repose davantage sur la compatibilité de lectures positives d’une même situation que sur des lectures identiques, générant ainsi la notion de <marquage typemarq="italique">malentendus productifs</marquage>.</alinea></resume><resume typeresume="resume" lang="es"><alinea>La investigación sobre la gestión intercultural suele postular que las expectativas de cada uno de los actores involucrados en estos entornos deben ser claramente evaluadas, y que una visión homogénea es vital para garantizar una colaboración eficiente. Esta investigación analiza el vínculo entre el entendimiento intercultural y la eficiencia relacional a través del estudio de un caso empírico afortunado y exitoso entre franceses y latinoamericanos, cuestionando el postulado inicial y mostrando que la eficiencia relacional intercultural se basa en la compatibilidad de las lecturas positivas hechas sobre una misma situación más que en lecturas idénticas, creando así el concepto de <marquage typemarq="italique">malentendidos productivos</marquage>.</alinea></resume><grmotcle lang="en"><motcle>International cooperation</motcle><motcle>intercultural communication</motcle><motcle>Franco-Latino-American relationship</motcle><motcle>Cross-cultural management</motcle><motcle>underlying meanings</motcle><motcle>productive misunderstandings</motcle><motcle>divergent-understandings</motcle></grmotcle><grmotcle lang="fr"><motcle>Coopération internationale</motcle><motcle>communication interculturelle</motcle><motcle>relation Franco-Latino-Américaine</motcle><motcle>management interculturel</motcle><motcle>significations sous-jacentes</motcle><motcle>malentendus productifs</motcle><motcle>entendus divergents</motcle></grmotcle><grmotcle lang="es"><motcle>Cooperación internacional</motcle><motcle>comunicación intercultural</motcle><motcle>relación franco-latinoamericana</motcle><motcle>gestión intercultural</motcle><motcle>significados subyacentes</motcle><motcle>malentendidos productivos</motcle><motcle><marquage typemarq="italique">entendidos divergentes</marquage></motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no>
+        <alinea>Research in cross-cultural management usually postulates that mutual expectations
+          must be clearly assessed and consequently claims that it is necessary to efficiently
+          communicate in order to understand each other, this understanding being a prerequisite for
+          efficient collective action. Hence, if we look at a successful multicultural organization,
+          we should find - following the dominant literature in both Cross Cultural Management
+          (CCM<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi>) and communication - clear mutual understanding. We
+          focused on a case of a <marquage typemarq="italique">happy</marquage> cross-cultural
+          encounter, where actors work in a successful company that is performing well in its market
+          and is financially prosperous. The business skills of some are coupled by the creativity
+          of others hence leading to a balanced and satisfactory situation claimed by all<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi> and confirmed by economic results<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>. This case is considered to be a salient empirical support to question mutual
+          understanding. The central research question is therefore quite simple: <marquage typemarq="italique">does a happy cultural cooperation necessarily mean that actors share a
+          mutual understanding?</marquage> In other words, <marquage typemarq="italique">to what
+          extent</marquage> <marquage typemarq="italique">do</marquage> <marquage typemarq="italique">multicultural people involved in successful cooperation understand
+          each other?</marquage></alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>Thinking that mutual understanding is shared while it is not the case is not new for
+          research in other disciplines such as communication or socio-linguistics. Still, what we
+          propose to do here is to cross these approaches with CCM research since theories from the
+          field usually explain that misunderstandings lead to inefficiency. In the literature,
+          cases of successfully managed multiculturalism say that organizations manage to overcome
+          cultural differences either thanks to local reinterpretations of management practices that
+          take indigenous frameworks of meaning into consideration, or to clever organizational
+          strategy. For example, in Barmeyer’s case study<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi>, a
+          well-balanced power relation between the French and the Germans enables the company to
+          perform well. We make it clear that the object of the present article is not to wonder why
+          things work. Rather we wish to demonstrate how far, in this given case, actors from
+          different cultural groups are ignorant of the divergent interpretations they respectively
+          give to a similar situation, and how illusive mutual understanding might be enough to
+          efficiently coordinate operations in a cross-cultural environment.</alinea>
+      </para><para id="pa3"><no>3</no>
+        <alinea>This article is organized as follows: Firstly, we present a literature review on
+          cross-cultural management, intercultural communication and language studies, three fields
+          focusing mainly on understanding human interactions and communication efficiency, either
+          from a cultural or a linguistic perspective. Secondly, we describe a qualitative case
+          study, presenting the context as well as the methods regarding data collection and data
+          analysis. The main findings of our empirical work are then presented. We will see that
+          identical language can in reality refer to very distinct meanings. The article ends with a
+          discussion of the results, presents some limitations and recommendations and eventually a
+          conclusion that formulates two contributions to the field. First, this article contributes
+          to providing practical insight to enhance cross-cultural cooperation by arguing that
+          successful management in a cross-cultural environment does not necessarily involve
+          cross-cultural understanding: cross-cultural managerial success lies upon compatible
+          positive understandings of a similar situation rather than upon similar visions, hence
+          developing the notion of harmless - sometimes even<marquage typemarq="italique">
+          productive – misunderstandings</marquage>, this latter term rather being called “<marquage typemarq="italique">divergent-understandings”</marquage>. Secondly, it also aims to
+          enhance the understanding of cross-cultural interactions. It claims that in multicultural
+          contexts, whatever the organizational and operational efficiency, linguistic similarities
+          coupled by what are assumed identical identities cannot be taken as a proof of mutual
+          understanding. Differences in understandings may exist without the actors realizing it.
+          Simultaneously, these differences are not necessarily synonymous with failure; rather they
+          can generate fruitful international collaboration. The goal is not to encourage the
+          dismissal of cross-cultural awareness among multicultural team members, but rather to
+          incite managers to be wise, curious, and creative.</alinea>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>Literature review: Cultural diversity and interactional processes</titre><para id="pa4"><no>4</no>
+        <alinea>Daily business life offers many examples of more or less problematic cross-cultural
+          cooperation. Research in CCM usually refers to dominant theories that stipulate that
+          cultural diversity within companies is sometimes considered as a source of richness – if
+          well-managed (Chevrier, 2008, 2011a, 2011b; Chevrier &amp; Segal, 2011; Barmeyer &amp;
+          Mayrhofer, 2002), but more generally, it usually generates difficulties, weak performance,
+          misunderstandings, not to mention cultural frictions (Shenkar, 2012; Shenkar, Luo &amp;
+          Yeheskel, 2008) or conflicts (Shenkar &amp; Zeira, 1992; Sarangi, 1994). Until recently,
+          <marquage typemarq="italique">“the usual way of dealing with those cultural differences is
+          precisely to ignore them and to leave actors manage with them“ </marquage>(Chevrier,
+          2008). Today, things are changing and a great number of companies not only rely uniquely
+          upon the innate ability of individuals to adapt to situations and upon their tolerance for
+          uncomfortable situations. As regards to cross-cultural management, the dominant thought
+          claims that cultural diversity must be taken into account (Chanlat, Davel &amp; Dupuis,
+          2013). One particular approach, developed by Philippe d’Iribarne, insists that it must be
+          done considering culture as a logic that generates a specific framework of meaning which
+          provides an interpretation grid to individuals that enables them to give sense to others’
+          actions as well as their own (d’Iribarne, 1989, 2008; d’Iribarne &amp; al, 1998).
+          D’Iribarne’s research, based on an anthropological definition of culture (Geertz, 1973),
+          shows the embeddedness of those cultural logics, deeply-rooted in people’s mindsets and
+          that remain stable over time. Cultural logic may, however, appear under different guises
+          and be embodied differently throughout time. Other scholars establish a supposed logical
+          link between understanding the other and efficient cooperation (Kostova, 2010; Brannen
+          &amp; Salk, 2000; Søderberg &amp; Holden, 2002). In all cases, tolerance is prescribed.
+          The question here is to better understand the <marquage typemarq="italique">“other”</marquage> in order to reduce conflicts and potential misunderstandings whilst
+          simultaneously enhancing cooperation. Intercultural business communication and
+          sociolinguistics also study how to understand the other to improve interaction. They
+          mainly consider interaction processes through linguistic aspects. A deep concern is
+          dedicated to possible misunderstandings, thus validating the need <marquage typemarq="italique">“to detect possible cultural interferences…to avoid
+          misunderstandings”</marquage> (Gumperz, 2003). The blame is often placed on language,
+          hence the need to master the fluency of at least the international reference language –
+          namely English (usually English as a Lingua Franca, ELF<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi>)
+          – which has been scrutinized by educational systems as well as practitioners. Some
+          scholars show that cross-language communication requires specific skills and attitudes
+          (Holden, 2002) and that the ability to use a specific language system is not enough to
+          evaluate communication and interactional skills (Marschan-Piekkari &amp; Charles, 2002).
+          Other studies highlight the need to include interactionist aspects (Fracchiolla, 2009), as
+          well as contextual ones (Gallois &amp;<marquage typemarq="italique"> al</marquage>, 1988).
+          The core concern is clearly to try to decode the situation in such a way that actors will
+          adapt the corresponding attitude, language and strategy. When the literature mentions
+          possible differences in meaning-attribution the main focus remains on the potential harm
+          generated by conflictual meanings such as the dangers of ELF (Tréguer-Felten, 2009, 2013).
+          Very few authors deal with the potential harmless effect on the communication process
+          (Louÿs &amp; Sauvage, 2014). Yet, in our case, the interviewees claim to understand each
+          other, declare a similarity in identity and in practices, and do not mention any
+          linguistic difficulties. Therefore, the research design has been drawn on open exploration
+          of reasons that may account for the observed unexpected success of multicultural
+          cooperation. </alinea>
+      </para><tableau id="ta1">
+        <no><marquage typemarq="majuscule">Table 1</marquage></no>
+        <legende lang="en">
+          <titre>Synthetic table on literature</titre>
+          <sstitre>Success or failure in cross cultural contexts</sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="tableau" xlink:type="simple"></image>
+          <texte>Research claims that: Dynamics outcomeAuthor(s)’s referenceIf well managed,
+            cultural diversity can be a source of richnesssuccessChevrier, 2008, 2011a, 2011b;
+            Chevrier &amp; Segal, 2011; Barmeyer &amp; Mayrhofer, 2002Cultural diversity usually
+            leads to difficulties, weak performance, misunderstandings, cultural
+            frictionsdifficulties, failure, distance, frictions, conflictsShenkar, 2012; Shenkar
+            &amp; Zeira, 1992; Shenkar, Luo &amp; Yeheskel 2008; Sarangi, 1994Cultural diversity
+            must be taken into account and learning about the other is a prerequisitesuccessChanlat,
+            Davel &amp; Dupuis, 2013Misunderstandings in multicultural contextsfailureGumperz,
+            2003understanding the other in multicultural environmentssuccessKostova, 2010; Brannen
+            &amp; Salk, 2000; Søderberg &amp; Holden, 2002Differences in meanings attributions
+            regarding languagedifficulties, misunderstandings leading to problematic
+            situationsCharles, 2006; Treguer-Felten, 2009, 2013Using a single language system is not
+            enough in multicultural situationdifficultiesMarschan-Piekkari &amp; Charles,
+            2002</texte>
+        </objetmedia>
+      </tableau></section1><section1 id="s1n3"><no>3</no><titre>Methodology</titre><para id="pa5"><no>5</no>
+        <alinea>Since our counterintuitive research question, “<marquage typemarq="italique">Does a
+          happy cultural cooperation necessarily mean that actors share a mutual
+          understanding?”</marquage> - extended to: “<marquage typemarq="italique">To what extent do
+          people from different cultural background involved in a successful multicultural
+          cooperation mutually understand each other?” -</marquage> had more to do with analyzing
+          than understanding, we found it relevant to base this research on a qualitative approach,
+          and more specifically an interpretive one. In fact, the deep analysis of the underlying
+          meanings of some selected words, made with a cultural comparison perspective, led us to
+          favor d’Iribarne’s ethnographical case study approach (1989, 1996, and 2011). The
+          qualitative empirical research has then been carried out as an exemplary case study (Yin,
+          2003), from which a theoretical hypothesis can be illustrated and developed (Eisenhardt,
+          1989). Following d’Iribarne’s theory on the traces left by culture and his associated
+          method to unveil them, we used the verbatim transcriptions to study a series of “clues”
+          about the meanings associated to a given word or notion. We took an in-depth look at the
+          references implicitly referred to by interviewees when using a word. This means that
+          beyond and besides an apparent meaning attached to a word, we compared the categories
+          mobilized when using this very word: to what image or notion they were associating it with
+          or linking it to, what they actually meant and what sorts of description they were making
+          of their definition and conception of this very word. By doing so, we could draw a sort of
+          stable reference system of meaning, studying the links people establish between a notion
+          and the references they associated to it. This is known as the <marquage typemarq="italique">“chain of significance”</marquage>.</alinea>
+      </para></section1><section1 id="s1n4"><no>4</no><titre>A case study</titre><section2 id="s2n1"><no>4.
+				1</no><titre><marquage typemarq="petitecap">Context</marquage></titre><para id="pa6"><no>6</no>
+        <alinea><marquage typemarq="italique">GoodScen</marquage><marquage typemarq="italique">t</marquage><renvoi id="re1no6" idref="no6" typeref="note">6</renvoi> is a company from the fragrance sector
+          based close to Miami. Created in 1991, it is of Peruvian origin (it was originally a
+          business unit of a Peruvian company and was then outsourced through the acquisition of a
+          fragrance factory). Of average size (around 100 employees in 2008, 50 in the offices, 50
+          at the production factory), <marquage typemarq="italique">GoodScent</marquage> creates,
+          develops and sells essence oils and fragrance components for the perfume &amp; fragrance
+          industry. The market concerned is the Northern American market. This successful company’s
+          turnover raised US$ 49, 2 million for 2012, displaying astonishing business growth (see
+          Figures 1 &amp; 2 <marquage typemarq="italique">infra</marquage>).</alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>As far as the social dynamics are concerned, the company presents a case of
+          particularly dense cultural diversity. Besides three French perfumers, it has more than
+          twenty different nationalities among which a great majority is Latino-American - 90% of
+          the employees, from management to staff, one third from Columbia, one third from Peru, the
+          remaining third being composed of varied Latino-American persons – from Costa-Rica,
+          Venezuela, Ecuador and Brazil. Not a single American, neither in terms of nationality nor
+          of origin, in its ranks. The remaining 10% includes one person from Belgium and two from
+          Switzerland. The organizational pattern shows a very specific functional distribution (see
+          Figure 3 <marquage typemarq="italique">infra</marquage>): all of the three perfumers
+          constitute the top management (one of them being the Chief Executive Officer - CEO<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi>), and each of the strategic functions such as Marketing, Sales,
+          Communication and Product Development are led by Latino-Americans.</alinea>
+      </para><para id="pa8"><no>8</no>
+        <alinea>The working languages are English and Spanish. The three French mainly use English
+          as a daily working idiom and speak only in French when speaking with one another. Some of
+          them speak a little bit of Spanish with some Latino-Americans. The managerial philosophy –
+          as explained by the CEO - relies on <marquage typemarq="italique">“personal
+          autonomy”</marquage>, <marquage typemarq="italique">“on the individual’s awareness about
+          knowing what has to be done and how – [I] let everybody completely free”, </marquage>and
+          eventually<marquage typemarq="italique"> “on a duty the company has towards its people to
+          increase their competences and to give back to them”</marquage>. Intercultural
+          understanding problems coupled with those of classical management could have caused a deep
+          obstacle to cooperation, but the situation is nothing like that: business results have
+          been done well for twenty years<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi> and the social internal
+          balance also seems to be particularly satisfying, with less than 1% in staff turnover per
+          year. Of course, as mentioned previously, good results should not only be attributed to
+          the satisfying relational managerial interactions<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi>. For
+          example, we could add the <marquage typemarq="italique">French Touch</marquage> dimension
+          that is highly valued in the perfume industry and which grants <marquage typemarq="italique">GoodScent</marquage> French perfumers with a welcome professional
+          legitimacy. Furthermore, everybody declares their satisfaction of working there, and
+          celebrates an <marquage typemarq="italique">“unusual and exceptional”</marquage>
+          atmosphere, as almost all the respondents told us (<marquage typemarq="italique">“aquí
+          pasa algo bien especial”</marquage><renvoi id="re1no10" idref="no10" typeref="note">10</renvoi>).</alinea>
+      </para><figure id="fi1">
+        <no><marquage typemarq="majuscule">FIGURE 1</marquage></no>
+        <legende lang="en">
+          <titre><marquage typemarq="italique">Goodscent</marquage> turnover‘s evolution from 1991
+            to 2010</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><figure id="fi2">
+        <no><marquage typemarq="majuscule">FIGURE 2</marquage></no>
+        <legende lang="en">
+          <titre><marquage typemarq="italique">Goodscent</marquage> sales global volume evolution
+            (in tons) from 1991 to 2010</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><figure id="fi3">
+        <no><marquage typemarq="majuscule">FIGURE 3</marquage></no>
+        <legende lang="en">
+          <titre><marquage typemarq="italique">Goodscent</marquage> organizational chart (at the
+            time of the study)</titre>
+          <sstitre>(Department or function followed by the nationality of the manager)</sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa9"><no>9</no>
+        <alinea>We will only focus on the managerial and interactional perspective, since all the
+          actors claim that they are efficient thanks to a clearly identified mutual understanding.
+          We purposefully chose a successful situation, where neither classical cross-cultural
+          issues nor ones linked to multilingualism were mentioned, and where actors collectively
+          declared their satisfaction. This situation that can be considered free-from disturbance
+          allowed the research to exclusively focus on interactionist issues and analyses of
+          sense-making processes.</alinea>
+      </para></section2><section2 id="s2n2"><no>4.
+				2</no><titre><marquage typemarq="petitecap">Data collection and items focused
+        on</marquage></titre><section3 id="s3n1"><no>4.
+				2.
+				1</no><titre>Data Collection</titre><para id="pa10"><no>10</no>
+        <alinea>In line with established qualitative research protocol, we chose to focus on
+          purposeful sampling (Patton, 1990). The field research was conducted between June 2007 and
+          August 2008 in the Miami area, both at the offices (26 interviews) and at the production
+          factory (4 interviews). The corpus is thus composed of 30 semi-directed interviews that
+          were led with the three French senior managers/perfumers-creators (including the CEO),
+          with Latino-American managers (Marketing - Sales Development – Strategy - Product
+          Development – R&amp;D) and finally Latino-American workers from the offices and from the
+          plant (see Tables 2<marquage typemarq="petitecap">a</marquage> and 2<marquage typemarq="petitecap">b</marquage> <marquage typemarq="italique">infra</marquage> for
+          details). All of these interviews were recorded and supplemented with field notes and
+          participant observation carried out on several occasions during meetings or informal talks
+          throughout the same period of time (Patton, 1990; Yin, 2003). Likewise, the interviews
+          were transcribed verbatim and kept in their original language (no translation was
+          processed)<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi>.</alinea>
+      </para><grtableau id="gt1">
+        <no><marquage typemarq="majuscule">TABLES 2A AND 2B</marquage></no>
+        <legende lang="en">
+          <titre>Overview of participants ‘cultural profile and language used during the
+            interviews</titre>
+        </legende>
+        <tableau id="ta2">
+          <no>2A</no>
+          <legende lang="en">
+            <titre>Interviews done at the offices (26)</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="tableau" xlink:type="simple"></image>
+            <texte>Country of originNumber of IntervieweesLanguage used for the
+              interviewFrenchEnglishSpanishFrance3300Peru6024Colombia10073Venezuela1010Ecuador3012Costa
+              Rica1010Brazil2020Total263149</texte>
+          </objetmedia>
+        </tableau>
+        <tableau id="ta3">
+          <no>2B</no>
+          <legende lang="en">
+            <titre>Interviews done at the factory (4)</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im6" typeimage="tableau" xlink:type="simple"></image>
+            <texte>Country of originNumber of IntervieweesLanguage used for the
+              interviewFrenchEnglishSpanishFrance0000Peru2002Colombia2002Venezuela0000Ecuador0000Costa
+              Rica0000Brazil0000Total4004</texte>
+          </objetmedia>
+        </tableau>
+      </grtableau><para id="pa11"><no>11</no>
+        <alinea>The interviews were conducted either through company or factory visits and lasted
+          between 45 minutes to one hour and a half. All of them were recorded using a protocol of
+          open-ended questions. The language used was left to the choice of the participants in
+          order to preserve the original language and to avoid – or reduce - linguistic problems, in
+          particular those generated by ELF (Treguer-Felten, 2009, 2013). Still, it is interesting
+          to notice that not all the Latino-Americans chose Spanish, although it was their native
+          language, as Figure<marquage typemarq="petitecap"> 4</marquage> shows: 60% chose to
+          express themselves in Spanish, 30% in English. A closer look made us observe that those in
+          charge of strategic functions all made the choice of English, operational staff tending to
+          choose Spanish. During data collection, the multilingual ability of the researcher emerged
+          as a facilitating factor, giving the possibility for interviewees to switch from one
+          language to another when needed, depending on the linguistic skills of each respondent,
+          namely the level of fluency, the scope of his/her lexical knowledge, or whenever they were
+          hesitant to use such or such a word in a given language (Spanish or English) and opted for
+          the other language (this concept is described in literature as <marquage typemarq="italique">“code-switching”</marquage>). Language never emerged from the
+          interviews as a barrier to internal-communication flows; the possible reasons for this
+          apparent ease in daily communication are multiple, such as the corporate structure itself
+          and its national origin, its geographical location, the number of nationalities involved
+          and the daily use of several languages and the interplay of various languages according to
+          the different cultural interactions. Subsequent analyses of the case narratives revealed
+          that for the Latino-American sample the corresponding meanings remained unchanged whatever
+          the language they were using.</alinea>
+      </para><figure id="fi4">
+        <no><marquage typemarq="majuscule">FIGURE 4</marquage></no>
+        <legende lang="en">
+          <titre>Languages used in the interviews</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im7" typeimage="figure" xlink:type="simple"></image>
+          <texte>Latino-Americans using English(30%)French(10%)Latino-Americans using
+            Spanish(60%)</texte>
+        </objetmedia>
+      </figure></section3><section3 id="s3n2"><no>4.
+				2.
+				2</no><titre>Items focused on</titre><para id="pa12"><no>12</no>
+        <alinea>Mutual understanding, we were told by the company’s members, was based on commonly
+          shared concepts and values and voiced the same way with similar words. In a nutshell,
+          actors were claiming that in <marquage typemarq="italique">GoodScent</marquage>,
+          relationships between people from different cultural backgrounds were easy thanks to clear
+          communication due to shared visions of things, common vocabulary and practices. As a
+          consequence, they were communicating well with an apparent absence of need to really
+          explain things, as if the obviousness of this proximity was preventing them from needing
+          (and thus wanting) to be more explicit about underlying meanings. Nearly all the
+          participants used words or expressions (in their chosen respective language) such as
+          <marquage typemarq="italique">“we are alike”</marquage>, <marquage typemarq="italique">“similar”</marquage>, <marquage typemarq="italique">“we are the same”</marquage>, and
+          <marquage typemarq="italique">“we think the same”</marquage>. With an unequal frequency,
+          not only interviewees were claiming that they were identical in saying, no matter the
+          multilinguistic aspect, but also in doing, thus illustrating – according to them - a
+          shared vision of <marquage typemarq="italique">managerial practices</marquage>. Hence,
+          along with the observation of the use of identical words, the material revealed an
+          apparent shared vision of the governance. This was confirmed by the observations made
+          during many stays within the company: people in <marquage typemarq="italique">GoodScent</marquage> declared being satisfied and in tune with the management, and so
+          they seemed to be, from what we were able to witness. Among the plethoric references to
+          this so-called similar vision of how this good communication was embodied and in the name
+          of what actors were claiming to be identical, two elements in particular were drawn to our
+          attention, since their recurrence in all the interviews regardless of the cultural origin
+          of the interviewees was really abundant: <marquage typemarq="italique">the
+          openness</marquage> and <marquage typemarq="italique">the feeling of belonging to a
+          family.</marquage> The terms <marquage typemarq="italique">“openness”</marquage> or
+          <marquage typemarq="italique">“being open”</marquage> (we do not include synonyms nor
+          circumlocutions) occur more than twenty times in the thirty interviews (even though some
+          interviewees might have used it several times in an interview), and the reference to
+          <marquage typemarq="italique">“being a family”</marquage> was found in twenty-height of
+          them. We applied the above-described abductive method to all the interviews; we then
+          compared all the interviews from a similar cultural area (Latino-America interviews on the
+          one side, French ones on the other) in order to see if common implicit references and
+          conceptions were being identified within a same group. We then cross-examined those
+          references between the two “cultural” groups. This method enabled us to reveal our
+          questioning in a proper and relevant way, given that what was looked at was the meaning
+          people were giving to some ideas or notions (and their respective implicit conceptual
+          background) in order to assess the supposed declared understanding they were
+          sharing.</alinea>
+      </para><para id="pa13"><no>13</no>
+        <alinea>Although the use of these two words should not – and cannot – on their own solely
+          justify the “open communication” encountered in the company (other factors surely
+          influence why people do communicate well, such as the good results of the company, maybe
+          an identical professional background or experience, interpersonal acquaintances…), in this
+          paper we decided to focus on them since the underlying references the analysis of the
+          material brought to light show real differences between the two cultural groups,
+          differences actors do not seem to be aware of.</alinea>
+      </para></section3></section2></section1><section1 id="s1n5"><no>5</no><titre>Findings: Illusive beliefs in mutual understandings</titre><section2 id="s2n3"><no>5.
+				1</no><titre><marquage typemarq="petitecap">Identical in saying</marquage></titre><para id="pa14"><no>14</no>
+        <alinea>Beyond the apparent obviousness of similar meaning of the notions mentioned,
+          analyzing the data unveiled different realities associated to a same word, different
+          practices yet related to a same discourse. Both cultural groups promote the notion of
+          <marquage typemarq="italique">“openness”</marquage>, but the cross-cultural analysis shows
+          that is not embodied the same way in respective universes. Hence, what seems crucial to
+          know is whether this situation can still lead to compatible practices, or if the
+          Latino-American employees will perceive as a proof of openness practices that are governed
+          by another register for the French.</alinea>
+      </para><section3 id="s3n3"><no>5.
+				1.
+				1</no><titre>Openness for the Latino-Americans</titre><para id="pa15"><no>15</no>
+        <alinea>The following extract from an interview with the sales manager - from Venezuela - is
+          relevant: </alinea>
+        <verbatim typeverb="motpourmot">
+          <bloc>
+            <ligne><marquage typemarq="italique">Okay, here, I can tell you that it’s very open. I
+              could go down the line and pretty much tell you a good idea of everybody’s personal
+              life – we’re all very open you know everybody, everybody here knows my life, knows my
+              baby boy. I know everybody’s husband, everybody’s wife here. We’re pretty much open to
+              talk about personal life. And one thing that is very true is that you bring up the
+              personal aspect, people stop what they’re doing and they listen. It’s almost like
+              saying “okay, the personal life is much more important than your professional
+              life.</marquage></ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa16"><no>16</no>
+        <alinea>According to him, knowing the family composition is presented as one of the most
+          relevant factors of how openness is embodied (<marquage typemarq="italique">it’s very
+          open…a good idea of</marquage> <marquage typemarq="italique">everybody’s personal
+          life</marquage>). The idea is not only to be able to talk about family members but also to
+          know them personally (<marquage typemarq="italique">we’re all very open you know
+          everybody, everybody here knows my life, knows my baby boy. I know everybody’s husband,
+          everybody’s wife here</marquage>). Being able to talk about one’s family and sharing
+          private information is highly associated to a positive environment, synonym of well-being: </alinea>
+        <verbatim typeverb="motpourmot">
+          <bloc>
+            <ligne><marquage typemarq="italique">The personal life is, has a high level of
+              importance, he says. I would say even slightly more than the professional. Now, to
+              have a good personal life, you have to have a good professional life. I mean, although
+              money is not everything in the world, you need it to live. You know, you can only make
+              your money through your professional life, so it kind of goes together. But there is
+              an appreciation and an understanding that the personal life is very
+              important.</marquage></ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa17"><no>17</no>
+        <alinea>This last sentence leads us to think that he compares what he knows about other
+          working environments to <marquage typemarq="italique">GoodScent</marquage>’s one. He
+          appreciates the possibility of talking about family topics without restraint and admits
+          that this option, not specific to this company, still remains very different from what can
+          be observed in other organizations (<marquage typemarq="italique">there is an appreciation
+          and an understanding that the personal life is very important</marquage>). In his mind,
+          the French seem to share the same vision regarding the importance of private life – not to
+          say its primacy – above the professional one (<marquage typemarq="italique">the personal
+          life is, has a high level of importance, I would say even slightly more than the
+          professional</marquage>) which he considers as a sign of openness too. A Peruvian
+          assistant also mentions this notion of openness very clearly: <marquage typemarq="italique">“Hemos visto una apertura grandísima”</marquage> <renvoi id="re1no12" idref="no12" typeref="note">12</renvoi>, she says, talking about a specific moment where she found
+          herself in a middle of French guests, invited by her French manager to a private and
+          family reception. She goes on: <marquage typemarq="italique">”Empezando porque aunque si
+          no hablan español tratan de hablar de ciertas cositas. Si tú no hablas francés, tú tratas
+          de que te entiendan en tu pequeño inglés y así sucesivamente</marquage><renvoi id="re1no13" idref="no13" typeref="note">13</renvoi>. In her mind, a proof of openness (<marquage typemarq="italique">hemos visto una</marquage> <marquage typemarq="italique">apertura</marquage> <marquage typemarq="italique">grandísima</marquage>) is reflected by
+          the will of the French to relate to her beyond the linguistic barrier (<marquage typemarq="italique">porque aunque si no hablan español</marquage><renvoi id="re1no14" idref="no14" typeref="note">14</renvoi>). According to her, the slightest effort is relevant of the will of the
+          French to interact (<marquage typemarq="italique">use of the verb “tratar”, to
+          try</marquage>) and is enough for her to qualify it as a sign of openness. Another
+          interview from a Colombian worker reveals that for her, the openness is measured according
+          to someone’s relational ability, capacity of multiplying interactions. Talking about
+          mundane topics (<marquage typemarq="italique">ciertas cositas</marquage><renvoi id="re1no15" idref="no15" typeref="note">15</renvoi>) does not belittle the positive analysis she makes of the
+          situation, and it constitutes a sign of openness for her.</alinea>
+      </para><para id="pa18"><no>18</no>
+        <alinea>We would like to underline the fact that these conceptions were identically-found
+          among the Latino-Americans’ interviews no matter what language they were expressing
+          themselves in and no matter their profile. This observation echoes research outcomes about
+          the use of a <marquage typemarq="italique">Lingua Franca</marquage>, in particular
+          Tréguer-Felten’ s work, which claims the invisible footprint culture leaves on language is
+          independent from the language in which one speaks (Tréguer-Felten, 2009a, 2009b, 2013).
+          Other scholars mention that it is also independent from the degree of fluency people have
+          in diverse languages (Louhiala-Salminen &amp; Charles, 2006). It also echoes the fact that
+          even though it seems impossible to directly associate someone’s understanding to his/her
+          cultural background, in the current case, the results clearly show a convergence as far as
+          the items studied are concerned, not only between a same cultural group but also between
+          the different Latino-American cultures represented. Of course, this does not mean that all
+          the Latino-Americans could be considered as a single entity and that no divergence could
+          be met neither among people from a single cultural group nor from the various
+          Latino-American cultures.</alinea>
+      </para></section3><section3 id="s3n4"><no>5.
+				1.
+				2</no><titre>Openness for the French</titre><para id="pa19"><no>19</no>
+        <alinea>Throughout the material, the French understanding of <marquage typemarq="italique">openness</marquage> evokes a different interpretation. A perfumer tells us: </alinea>
+        <verbatim typeverb="motpourmot">
+          <bloc>
+            <ligne><marquage typemarq="italique">Because here we work that way, in GoodScent, it’s a
+              team work, we share everything, we share all the ideas and everything is open, we
+              talk.</marquage></ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa20"><no>20</no>
+        <alinea>For him, <marquage typemarq="italique">openness</marquage> is to be understood on an
+          intellectual pattern of discussion and translates the ability to exchange about ideas and
+          to converse. Likewise, the CEO insists on the need to always have “<marquage typemarq="italique">a very open communication”</marquage><renvoi id="re1no16" idref="no16" typeref="note">16</renvoi>: </alinea>
+        <verbatim typeverb="motpourmot">
+          <bloc>
+            <ligne><marquage typemarq="italique">That is why it is important to have a very open and
+              very simple communication between us, it makes it possible for someone to say to
+              someone else: “I am sorry, but it is really bad”; We must be able to say that to one
+              another, and not get upset about it, because if one does, then the person will never
+              be able to say “I am sorry, but I find this really bad” again, it’s better if it is
+              said between us rather than the client says it. In that case, indeed, communication is
+              important, one must be able to express himself.</marquage></ligne>
+          </bloc>
+        </verbatim>
+      </para><para id="pa21"><no>21</no>
+        <alinea>Here again, communication is considered as a way to exchange views, especially
+          contradictory ones (<marquage typemarq="italique">I am sorry, but it is really
+          bad</marquage>), about which you should not get upset about since they are supposed to
+          enable the improvement of a situation (<marquage typemarq="italique">and not get upset
+          about it</marquage>): they are fully part of the French decision-making process or to
+          anticipate a potential business failure <marquage typemarq="italique">(better be said
+          between us rather than in front of the client</marquage>). These statements reflect two
+          important elements; on the one hand, the fact that the openness is intimately linked to
+          the notion of word exchange and debate of ideas (<marquage typemarq="italique">one must be
+          able to express himself</marquage>). On the other, this intellectual interaction is
+          supposed to be aimed at operational objectives, helping the company to maintain a
+          strategic position from an industrial and professional point of view thanks to
+          cross-fertilization of ideas. From all three interviews, no reference is made to the
+          possible evocation of personal topics or family subjects. Not once did the French
+          perfumers associate the notion of <marquage typemarq="italique">“being open”</marquage> to
+          the fact of meeting colleagues outside the working context or sharing family celebrations
+          with them.</alinea>
+      </para><para id="pa22"><no>22</no>
+        <alinea>Even if these findings are identically met among these three French perfumers, we
+          can legitimately wonder if they are to be considered as a general rule for the French, not
+          only <marquage typemarq="italique">GoodScent</marquage>’s perfumers. They are indeed
+          consistent with other research on the French culture, and we can perfectly identify the
+          French framework of meaning identified by d’Iribarne (d’Iribarne, 1989,) as well the
+          centrality of the debate in the French decision-making process highlighted by other
+          scholars as well (d’Iribarne, 1998; Chevrier, 2011b; Segal, 2009).</alinea>
+      </para></section3></section2><section2 id="s2n4"><no>5.
+				2</no><titre><marquage typemarq="petitecap">A cross-cultural analysis</marquage></titre><para id="pa23"><no>23</no>
+        <alinea>Actors collectively reaffirm their will to share good communication and the
+          importance attributed to the notion of openness. But if for the Latino-American employees
+          being open means <marquage typemarq="italique">going towards</marquage> <marquage typemarq="italique">the other</marquage> from a relational and affective perspective, for
+          the French it means discussing, exchanging ideas, which fundamentally implies an
+          intellectual scope. Admittedly, in both cases interactive dynamics with the others are
+          observed. We still clearly identify the French preference for a more abstract dimension,
+          based on rationalization, whereas the Latino-Americans have a more instinctive and
+          emotional understanding, and use an affect-based inter-relational process. If the latter
+          feel that the French and they are alike, it is mainly due to the fact that the openness
+          they refer to may be mistaken for an attitude that could be called courtesy. The
+          interpretative process is based on a several-layer process: on external signs (gestures,
+          mimics, words, attitudes), on people’s implicit framework of meanings, and on contextual
+          elements. In fact, in the present case, the match between Latino-Americans’ expectations
+          and French behavior lay upon a crossed understanding. The register the French mobilize
+          without their knowledge is not led by the notion of openness, but rather a social pattern
+          as well as a respect of etiquette (how to <marquage typemarq="italique">behave
+          well</marquage> in such or such circumstances, meaning adequately with a given context).
+          Since mutual readings made by each other are positive, divergent interpretations remain
+          both unnoticed and harmless.</alinea>
+      </para><para id="pa24"><no>24</no>
+        <alinea>A similar analysis-process has been carried out regarding the notion of <marquage typemarq="italique">family</marquage><renvoi id="re1no17" idref="no17" typeref="note">17</renvoi>. The findings also
+          show divergent meaning attribution when the Latino-Americans use the term and when the
+          three French perfumers use it. The underlying references show the Latino-Americans
+          conceive the family as an entity led by affective motivations, and illustrates a will to
+          protect the other members and to share all the important moments together (mention of
+          celebrations of personal events such as birthdays, weddings, weekend-end parties…),
+          whereas the French consider the family rather as a system, a social group whose members
+          are supposed to share a common interest as a group and work closely (<marquage typemarq="italique">“what I mean by family is that it really is a team work, everybody
+          works very close to one another…it is important for us to have this structure, small but
+          very tight” </marquage>says a French perfumer<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi>), and
+          where dialogue and talking generate understanding and therefore efficiency. So the
+          prevalence of the group over each individual who composes this very group seems to be more
+          important and, additionally, no references to affective bonds or common festive
+          celebrations were found. Again, although we can only refer to the three French perfumers
+          interviewed in this research, these findings are fully consistent with other research made
+          regarding French culture (d’Iribarne, 1989; Chevrier, 2011b; Segal, 2009)</alinea>
+      </para></section2><section2 id="s2n5"><no>5.
+				3</no><titre><marquage typemarq="petitecap">Identical in doing: a shared vision of a
+        “good power”</marquage></titre><para id="pa25"><no>25</no>
+        <alinea>The interviews showed that the Latino-Americans’ underlying representation of a
+          <marquage typemarq="italique">“good boss”</marquage> presents someone who ensures the
+          growth of the individual, as this Peruvian assistant tells us<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi>: “<marquage typemarq="italique">and then comes a moment when little by little
+          you grow, you grow abundantly, because you do not stay limited to what you are, but you
+          see a super big environment…</marquage> <marquage typemarq="italique">this person does not
+          stay up there, she gets down to you, and she does not remain down: she helps you lifting
+          up</marquage>”, or as a Venezuelan manager says<renvoi id="re1no20" idref="no20" typeref="note">20</renvoi>:
+          <marquage typemarq="italique">“they were willing to train somebody…I didn’t have any
+          experience in the fragrance industry…it’s so comfortable in a way to learn a
+          métier</marquage><renvoi id="re1no21" idref="no21" typeref="note">21</renvoi><marquage typemarq="italique">, a trade
+          from French perfumers”</marquage>. The relationship is based on the emotions and on the
+          will of “sharing” all the crucial moments of life <marquage typemarq="italique">(“si
+          estamos en una fiesta…dejamos este protocolo …es “oh mi amigo, mi amiga”</marquage><renvoi id="re1no22" idref="no22" typeref="note">22</renvoi>). The relationship seems to be based on creating emotions,
+          regardless of whether they are generated by professional or personal contexts. Their
+          implicit underlying representation of a “good power”, associated to their fear of a “bad
+          power”, seems to be articulated around two strategic factors. First, the demand for
+          personalized relationships is strong <marquage typemarq="italique">(“son millares de cosas
+          muy personales que salen de todo ese trabajo professional”</marquage><renvoi id="re1no23" idref="no23" typeref="note">23</renvoi>, <marquage typemarq="italique">“llega un momento en que ya es
+          parte de uno”</marquage><renvoi id="re1no24" idref="no24" typeref="note">24</renvoi>). Secondly, they really are
+          afraid of bosses who instil fear: <marquage typemarq="italique">“Al principio està ese
+          temor y ese ver…al jefe francés muy alto…”</marquage><renvoi id="re1no25" idref="no25" typeref="note">25</renvoi>,
+          that is, to their mind, those who appear as inhuman persons since they do not take the
+          emotional dimension into consideration, and do not contribute to personal development.
+          Therefore, the “good boss” is the one who can, on the one hand, demonstrate an ability to
+          be mindful of others and to care about them, and that can include an affective dimension,
+          and on the other hand, ensures the personal and professional evolution of the employee.
+          These findings are consistent with previous research in Mexico and the use of the metaphor
+          of <marquage typemarq="italique">little ants</marquage><renvoi id="re1no26" idref="no26" typeref="note">26</renvoi>
+          whose individual growth helps to grow together (d’Iribarne, 2003, 2007). This double
+          expectation seems to be well fulfilled by the way the French consider the development of
+          professional skills. As a matter of fact, the Latino-American search for a relational
+          scope is meeting the French will to implement a pedagogical approach aiming at “helping”
+          the individual. This posture enables the French managers to value the role of mentor they
+          play, posture already found in other research results on French Management and French
+          culture (Segal, 2009). The skill-enhancement process is experienced positively by all the
+          actors even though the meaning given to it varies according to the cultural universe. The
+          connection between the two imaginaries is done naturally and without the actors being
+          aware of it, the Latino-American expectations meeting the French logic of intellectual
+          emancipation. These results are consistent with previous research made both on the French
+          (d’Iribarne, 1989) and on some Southern-American situations where the need for a
+          relational dimension between partners is demonstrated (d’Iribarne, 2003; Amado, Faucheux
+          &amp; Laurent, 1991) or where some behavior, though possibly considered as shocking for
+          western eyes due to what is seen as regressive, are the key to successful organizational
+          dynamics (Joly, 2004).</alinea>
+      </para><tableau id="ta4">
+        <no><marquage typemarq="majuscule">TABLE 3</marquage></no>
+        <legende lang="en">
+          <titre>Differences in perceptions between the French and the Latino-Americans in this case
+            study</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im8" typeimage="tableau" xlink:type="simple"></image>
+          <texte>Notion mentionedFrench PerceptionLatino-American PerceptionOpennessAbstract
+            dimensionOpenness of the mind (spiritual dimension, world of ideas)An appetite for
+            discoveries of new ideas and/or territories (geographically distant)Exposure to new
+            environments that enhance knowledge and general cultureCognitive perspectiveAbility to
+            exchange ideas and to discussAbility to accept critics, as opposed to being
+            narrow-mindedInteracting with the other from a relational and affective
+            perspectiveSharing social momentsKnowing about one’s private life (ex. Family
+            topics)Wanting to be strongly tied to newly-met peopleAbility to develop emotional bonds
+            and to share emotion-based moments both within and outside the professional
+            contextfamilySystemic conceptionAnthropological approach, a group made of several
+            individuals; the individual comes firstSize (small)Commitment due to a sense of duty and
+            honor: the individual helps the group because it has to be like that (honor
+            preserved)Biological conception (including real blood ties)The individual exists through
+            the group, the group comes firstSize (large)Commitment due to a principle of
+            unconditional help and mutual assistance, both unquestioned: the individual helps the
+            group because he cares for it and nurtures feelings about its members.Analytical
+            perspectiveIntellect-oriented interpretationAffect-oriented interpretation</texte>
+        </objetmedia>
+      </tableau></section2><section2 id="s2n6"><no>5.
+				4</no><titre><marquage typemarq="petitecap">A hidden phenomenon of adjustment or “productive
+        misunderstandings”</marquage></titre><para id="pa26"><no>26</no>
+        <alinea>Findings show that in this multicultural situation, actors do not really understand
+          each other as far as they think they do, and yet, they are being efficient and cooperate
+          successfully. In this very case, happy cultural cooperation does not mean that the
+          protagonists share a mutual understanding. This result challenges the commonly met
+          postulate in CCM that claims that mutual understanding is a prerequisite for collective
+          efficiency in cross-cultural contexts. The main outcome of the study is that illusive
+          beliefs in mutual understandings might not be harmful to the efficiency of operations
+          coordination in cross-cultural contexts. This phenomenon could then, we suggest, be
+          qualified as <marquage typemarq="italique">“productive
+          misunderstandings”</marquage>.</alinea>
+      </para></section2></section1><section1 id="s1n6"><no>6</no><titre>Discussion, limitations &amp; recommendations</titre><section2 id="s2n7"><no>6.
+				1</no><titre><marquage typemarq="petitecap">Discussion</marquage></titre><para id="pa27"><no>27</no>
+        <alinea>The findings may contravene research in CCM, which tends to claim that mutual
+          understanding is a prerequisite for efficient collective action (Brannen &amp; Salk, 2000;
+          Søderberg &amp; Holden, 2002). In our case, the invisible adjustment actors make remains
+          hidden and unknown. It relies on compatible divergent understandings. Focusing on the
+          concept of understanding leads us to clarify the notion of misunderstanding. Most of the
+          time, a misunderstanding is defined through its negativity: the fact of not understanding
+          well suggests that communication has not been established the way it should have been,
+          that there is a need for clarification in order to get things back on track.
+          Misunderstanding is by nature a distorted communication. The case study presented in this
+          research raises the possibility of another definition of misunderstanding, closer to
+          <marquage typemarq="italique">divergent understandings</marquage>. We are not dealing with
+          incorrect understandings but rather with divergent meaning attributions. One author
+          specifically found some evidence of this in research released in 2009 (Starck, 2009). He
+          claims that “<marquage typemarq="italique">the misunderstandings that [he has] in mind lie
+          most frequently in conflicting attributions that actors are making. These can be
+          conflicting attributions about persons […], but as frequently they can be discrepant
+          attributions about objects, artifacts, concepts, or other entities that populate our
+          social worlds”</marquage><renvoi id="re1no27" idref="no27" typeref="note">27</renvoi>. From there he then developed
+          the concept of <marquage typemarq="italique">heterarchy</marquage>, which can be defined
+          as follows: <marquage typemarq="italique">“Heterarchy represents an organizational form of
+          distributed intelligence in which units are laterally accountable according to diverse
+          principles of evaluation </marquage>[…]. <marquage typemarq="italique">Posed most
+          polemically: there are circumstances in which coordination takes place not despite but
+          because of misunderstandings”</marquage><renvoi id="re1no28" idref="no28" typeref="note">28</renvoi>. This concept
+          seemed relevant to us as the observations made in the case presented were showing
+          non-conflictual misunderstandings. Research conducted in intercultural communication also
+          mentions possible misunderstandings (Demorgon, 1989; Hall &amp; Hall; 1990), but only
+          refers to their negative aspect. Besides, they rather focus on languages and social
+          interaction dynamics. They tend to show that the language barrier is usually not dealt
+          with efficiently, and most studies focus on the cost this language dimension has for the
+          companies. Understanding the language use in building interrelations within international
+          contexts is critical, but developing a design to create cooperation should not be limited
+          to that perspective only. The findings of this case confirm much research on intercultural
+          communication that claims that it is a complex mechanism (Gumperz, 2003) and that
+          companies should take a closer look at the consequences entailed by working in
+          multicultural/multilingual environments (Cohen &amp; Kassis-Henderson, 2012). In line with
+          some research on language, this case shows that the linguistic dimension should not be
+          reduced to its communicative function, far from it. But our case, actors do not mention
+          any linguistic barrier, nor do they mention any communication issues as the literature
+          frequently reports (Charles, 2006). Other research in CCM claims that individuals in
+          cross-cultural contexts develop some hybridity (Brannen and Salk, 2002) and our case can
+          certainly be included in that perspective, even though the adjustment made here does not
+          stem from a conscious and volunteer process from the actors, but is implicit and
+          subconscious. Likewise, the concept of co-constructed <marquage typemarq="italique">negotiated meaning</marquage> brought to light by some scholars (Primecz, Romani and
+          Sackmann, 2011) refers to conscious-led dynamics, which is not the case in <marquage typemarq="italique">GoodScent</marquage>.</alinea>
+      </para></section2><section2 id="s2n8"><no>6.
+				2</no><titre><marquage typemarq="petitecap">Limitations</marquage></titre><para id="pa28"><no>28</no>
+        <alinea>As with all research work this study presents some limitations, and a series of
+          questions can be raised. Can this phenomenon be valid in any cross-cultural encounter, or
+          does it require specific circumstances or characteristics? Do the working nationalities
+          involved have to do with it? Does the company’s location have an impact? The present case,
+          as previously mentioned, takes place in a favorable context, particularly regarding the
+          market and the period concerned, not to mention the sector. The question that naturally
+          arises is the following one: assuming a change in context – meaning a less satisfactory
+          situation, such as a drop in sales or losses of market share – when would these <marquage typemarq="italique">misunderstandings</marquage> (or <marquage typemarq="italique">divergent understandings</marquage> as we may call them) become problematic? The case
+          revealed this hidden phenomenon of invisible and hidden mutual adjustment, which combines
+          politeness with fortuitous acquiescence well. Still, this internal delicate balance
+          remains very fragile and may constitute a weakness, all the more because none of the
+          protagonists are aware of it. This may also refer to the single-loop collective
+          organizational learning process (Argyris &amp; Schön, 1978) and results might be rather
+          different in a more complex context. Besides, the functional structure and the general
+          organization should be mentioned, since this model could possibly not be found in
+          situations where role attribution is not displayed in such a precise nationality-oriented
+          way. Lastly, another aspect to be mentioned is that the given case occurs in Miami, and
+          all the actors involved are migrants. This may create a sort of <marquage typemarq="italique">migrant posture</marquage>, and may also have an impact on reducing
+          cooperation barriers. From then on, we might consider an additional hypothesis to explain
+          the successful outcome: since everyone is a migrant, it may create a community of
+          otherness-based dynamics. Further research on all these aspects is required to identify
+          the context characteristics which may enable this phenomenon to take place.</alinea>
+      </para></section2><section2 id="s2n9"><no>6.
+				3</no><titre><marquage typemarq="petitecap">Recommendations</marquage></titre><para id="pa29"><no>29</no>
+        <alinea><marquage typemarq="italique">Productive misunderstandings</marquage>, or <marquage typemarq="italique">divergent-understandings</marquage>, may not be harmful to cross
+          cultural cooperation, but it seems both uncertain and hazardous to bet on this spontaneous
+          double mechanism of positive and compatible understandings, regardless of the cultures
+          involved and the operations concerned. Of course, in the case of a successful
+          cross-cultural interaction situation, disclosing the hidden mechanism that enables people
+          to efficiently coordinate operations might seem useless not to say risky, as disclosing it
+          may endanger the cooperation. But in less happy situations, or when planning and
+          organizing cross-cultural encounters, taking a look at what lies under people’s
+          representations, ideas or conceptions might be of great help. Bringing the underlying
+          meaning of an understanding and the notion of “intercultural competence” is being
+          developed both by scholars (Barmeyer, 2012; Faust, 2015) and practitioners, but is rather
+          focusing on the cultural dimension and associated to expected behavior rather than on the
+          linguistic dimension. Intercultural competence is usually viewed as an individual skill
+          and dealt with in a decontextualized way whereas a contextualized interactionist
+          perspective is required. We suggest this very intercultural competence should intertwine
+          language, frameworks of references people mobilize to make things meaningful to them, and
+          the given elements of a precise and unique situation in terms of market, sector, location
+          etc. Warning management about the illusion of mutual understanding is to be considered as
+          a serious option too, the advice being to question apparent understanding and not taking
+          it for granted just because of similar sayings or similar doings. It may seem wise to make
+          sure the dynamics imposed by cross cultural cooperation are optimized.</alinea>
+      </para></section2></section1><section1 id="s1n7"><no>7</no><titre>Conclusion – two main contributions to the field</titre><para id="pa30"><no>30</no>
+        <alinea>The objective of this qualitative study of a multicultural Franco-Latino-American
+          fragrance company is to shed light on the deep mechanisms that are implemented by actors
+          without their realizing it, thus illustrating - beyond a so-called mutual understanding –
+          that the real reasons for which they actually have a quality and efficient cooperation
+          differ from the representation they have of it. It may be called a misunderstanding; In
+          fact we speak in favor of a prefix that does not intrinsically refer to a negative
+          dimension or to a form of wrongness, but just to a different meaning attribution.
+          Therefore, when dealing with multicultural contexts or situations, and more specifically
+          when operation coordination is concerned, the compatibility of different visions and
+          understandings should rather be clearly addressed. Divergent meanings might not always
+          necessarily be considered as antagonistic and unproductive regarding collective action
+          efficiency.</alinea>
+      </para><para id="pa31"><no>31</no>
+        <alinea>As a conclusion, this article illustrates the fact that - unlike the implicit
+          fundamentals of CCM research based on the required alignment of practices and the supposed
+          universal dimension of management tools pretend - successful management in a cross
+          cultural environment does not necessarily involve cross-cultural understanding (see
+          Table<marquage typemarq="petitecap"> 1</marquage> <marquage typemarq="italique">supra</marquage>). Protagonists are collectively in some illusion about their complete
+          mutual understanding. The case shows that on some points at least, they do not understand
+          one another as far as they claim they do. The way each actor sees the other and decodes a
+          situation has remained unchanged. It is the unexpected combination of positive readings of
+          the situation within each cultural reference system on the one hand and with one another
+          on the other hand, that generates the claimed satisfaction and well-being. Harmony is
+          real, but for different reasons than the individuals imagine. Through individual
+          reinterpretation, generated by each culture’s own reading grid, some subconscious and
+          unexpected combinations can emerge, without people realizing.</alinea>
+      </para><para id="pa32"><no>32</no>
+        <alinea>Findings from this atypical case give new orientations for the constructive and
+          productive understanding of intercultural situations, enabling organizations to develop an
+          adapted, contextualized and efficient approach to cultural management: we claim that even
+          in the absence of difficulties or conflicts, multicultural organizations should still
+          consider success with care and concern. A wisdom-driven attitude would then consist in
+          being aware of the potential fragility of a balanced internal context. A sudden change at
+          a macro or micro level could ruin the organization’s supposed established inter-unit
+          relational success, leaving the actors all the more surprised that they are in the true
+          belief of getting along well with their managers thanks to a deeply-rooted
+          closeness.</alinea>
+      </para></section1></corps><partiesann lang="en"><grnotebio><notebio id="nb1" idrefs="au1" lang="en"><alinea><marquage typemarq="gras">Emmanuelle Sauvage</marquage> currently is a lecturer in International Management at Bordeaux University School of management. She holds a PhD in International Management, a Master degree in Translation and Interpretation and a Spanish Law degree. After a first professional activity within the UN, which led her to developed a great interest for the understanding of intercultural synergies, she joined the Academia. Her main focus is related to cross-cultural encounters and the dynamics of human interaction within international environments. She is also interested in the linguistic dimension of those encounters and in the hidden prints left by culture on language.</alinea></notebio></grnotebio><grbiblio><biblio><refbiblio id="rb1"><marquage typemarq="petitecap">Amado</marquage>, G.; <marquage typemarq="petitecap">Faucheux</marquage>, C.; <marquage typemarq="petitecap">Laurent</marquage>, A. (1991). <marquage typemarq="italique">Ethnomanagement: A Latin Provocation</marquage>, International Studies of Management and Organization, M.E Sharpe.</refbiblio>
+<refbiblio id="rb2"><marquage typemarq="petitecap">Argyris</marquage>, C.; <marquage typemarq="petitecap">Schön</marquage>, D. (1978). <marquage typemarq="italique">Organizational Learning: A Theory of Action Perspective</marquage>, Addison-Wesley, Reading, MA.</refbiblio>
+<refbiblio id="rb3"><marquage typemarq="petitecap">Barmeyer</marquage>, C., (2016). “Intercultural tandems of binational pairs as a supporting factor of negotiated culture in a French-German organization: a case analysis of Alleo” - Atlas Afmi 6th Conference, “Sustainable internationalization and political instabilities” - Nice, June 6-8, 2016</refbiblio>
+<refbiblio id="rb4"><marquage typemarq="petitecap">Barmeyer</marquage>, C.; <marquage typemarq="petitecap">Mayrhofer</marquage>, U. (2002). « Le management interculturel: facteur de réussite des fusions-acquisitions internationales ? », <marquage typemarq="italique">Gérer &amp; Comprendre</marquage>, Annales des Mines, N° 70.</refbiblio>
+<refbiblio id="rb5"><marquage typemarq="petitecap">Bartlett</marquage>, C.A.; <marquage typemarq="petitecap">Ghoshal</marquage>, S. (1989). <marquage typemarq="italique">Managing Across Borders. The Transnational Solution</marquage>, Hutchinson.</refbiblio>
+<refbiblio id="rb6"><marquage typemarq="petitecap">Brannen</marquage>, M-Y; <marquage typemarq="petitecap">Salk</marquage>, J. E, (2000). “National culture, networks, and individual influence in a multinational management team, <marquage typemarq="italique">Academy of Management Journal</marquage>, Vol. 43, N° 2, p. 191-202.</refbiblio>
+<refbiblio id="rb7"><marquage typemarq="petitecap">Chanlat</marquage>, J-F.; <marquage typemarq="petitecap">Davel</marquage>, E.; <marquage typemarq="petitecap">Dupuis</marquage>, J-P. (sous la dir) (2013). <marquage typemarq="italique">Cross-cultural management. </marquage><marquage typemarq="italique">Culture and Management Across the World</marquage>, Routledge, London, New York, 296 p.</refbiblio>
+<refbiblio id="rb8"><marquage typemarq="petitecap">Charles</marquage>, M. (2006). “Language matters in Global Communication”, <marquage typemarq="italique">Journal of Business Communication</marquage>, N° 44, p. 260-282.</refbiblio>
+<refbiblio id="rb9"><marquage typemarq="petitecap">Chevrier</marquage>, S. (2000). <marquage typemarq="italique">Le management des équipes interculturelles</marquage>, Paris, Puf.</refbiblio>
+<refbiblio id="rb10"><marquage typemarq="petitecap">Chevrier</marquage>, S. (2008). <marquage typemarq="italique">La gestion d’équipes multiculturelles</marquage>, dans Davel, E. Dupuis, J.-P., Chanlat, J-F – Gestion en contexte interculturel. Approches, problématiques, pratiques et pongées. PUL – Teluq, 2008.</refbiblio>
+<refbiblio id="rb11"><marquage typemarq="petitecap">Chevrier</marquage>, S. (2011a). « Gestion de la diversité dans une entreprise de nettoyage », dans Karjalainen, H. et Soparnot R. (sous la direction de), <marquage typemarq="italique">Cas en Management Interculturel</marquage>, Ems éditions, <marquage typemarq="italique">Gérer des équipes internationales,</marquage> Presse Universitaire de Laval Québec, p. 131-145.</refbiblio>
+<refbiblio id="rb12"><marquage typemarq="petitecap">Chevrier</marquage>, S. (2011b). “Exploring the culture context in Franco-Vietnamese development project: using an interpretative approach to improve the cooperation process”, in Primecz, H., Sackmann, S <marquage typemarq="italique">et al</marquage>., Romani L. (Dir), <marquage typemarq="italique">Cross-cultural Management in Practice: Culture and Negotiated Meanings</marquage>, Edward Elgar, Cheltenham, p. 41-52.</refbiblio>
+<refbiblio id="rb13"><marquage typemarq="petitecap">Cohen</marquage>, L.; <marquage typemarq="petitecap">Kassis-Henderson</marquage>, J. (2012/5). “Language use in establishing rapport and building relations: implications for international teams and management education”, <marquage typemarq="italique">Management &amp; Avenir</marquage>, N° 55, p. 185-207.</refbiblio>
+<refbiblio id="rb14"><marquage typemarq="petitecap">De Heredia-Deprez</marquage>, C. (1990). « Intercompréhension et malentendus. Étude d’interactions entre étrangers et autochtones », dans F. François (éd.) <marquage typemarq="italique">La communication inégale. Heurs et malheurs de l’interaction verbale</marquage>, Neuchâtel-Paris, Delachaux et Niestlé, p. 213-238.</refbiblio>
+<refbiblio id="rb15"><marquage typemarq="petitecap">Demorgon</marquage>, J. (1989). <marquage typemarq="italique">L’exploration interculturelle. Pour une pédagogie internationale</marquage>, Paris, Armand Colin.</refbiblio>
+<refbiblio id="rb16"><marquage typemarq="petitecap">Demorgon</marquage>, J.; <marquage typemarq="petitecap">Lipiansky</marquage>, E.-M. (Dir.) (1999). <marquage typemarq="italique">Guide de l’interculturel en formation</marquage>, Paris, Retz.</refbiblio>
+<refbiblio id="rb17"><marquage typemarq="petitecap">Eisenhardt</marquage>, K. (1989). “Building theories from case study research”. <marquage typemarq="italique">Academy of Management Review</marquage>, 14, p. 532-550.</refbiblio>
+<refbiblio id="rb18"><marquage typemarq="petitecap">Faust</marquage>, C. (2015). <marquage typemarq="italique">Représentations et gestion des compétences culturelles – Le cas Renault</marquage>. Thèse de doctorat, Université Paris Est.</refbiblio>
+<refbiblio id="rb19"><marquage typemarq="petitecap">Fracchiolla</marquage>, B. (2009). « Anthropologie de la communication et construction collaborative du sens en interaction. La communication interculturelle autour d’objets improbables », in <marquage typemarq="italique">Construction du sens et acquisition de la signification linguistique dans l’interaction</marquage>, dir: Galatanu O. Peter Lang, Bruxelles, p. 253-265.</refbiblio>
+<refbiblio id="rb20"><marquage typemarq="petitecap">Gallois</marquage>, C.; <marquage typemarq="petitecap">Franklyn-Stokes</marquage> A.; <marquage typemarq="petitecap">Giles</marquage>, H. and <marquage typemarq="petitecap">Coupland</marquage>, N. (1988). « Communication accommodation in intercultural encounters », in Y. Kim and W.-B. Gudykunst (eds) <marquage typemarq="italique">Theories in Intercultural Communication</marquage>, Newbury Park CA, Sage, p. 157-85.</refbiblio>
+<refbiblio id="rb21"><marquage typemarq="petitecap">Geertz</marquage>, C. (1973). <marquage typemarq="italique">The Interpretation of Cultures</marquage>, Basic Books.</refbiblio>
+<refbiblio id="rb22"><marquage typemarq="petitecap">Ghoshal</marquage>, S.; <marquage typemarq="petitecap">Bartlett</marquage>, C.A. (1995). “Changing the role of top management: beyond structure to processes”. <marquage typemarq="italique">Harvard Business Review</marquage>, (January–February), p. 86-96.</refbiblio>
+<refbiblio id="rb23"><marquage typemarq="petitecap">Gumperz</marquage>, J.J. (1982). <marquage typemarq="italique">Discourse Strategies: Studies in Interactional Sociolinguistics</marquage>, Cambridge University Press.</refbiblio>
+<refbiblio id="rb24"><marquage typemarq="petitecap">Gumperz</marquage>, J.J.; T. <marquage typemarq="petitecap">Jupp</marquage>; C. <marquage typemarq="petitecap">Roberts</marquage>, (1979). Crosstalk. <marquage typemarq="italique">A Study of Cross Cultural Communication</marquage>. Background material and notes for the BBC film, Southall, National Centre for Industrial Language Training.</refbiblio>
+<refbiblio id="rb25"><marquage typemarq="petitecap">Hall</marquage>, E. T.; <marquage typemarq="petitecap">Hall</marquage>, M. R. (1990). <marquage typemarq="italique">Understanding Cultural Differences</marquage>, Yarmouth, Intercultural Press.</refbiblio>
+<refbiblio id="rb26"><marquage typemarq="petitecap">Holden</marquage>, N. (2002). <marquage typemarq="italique">Cross-cultural management: a knowledge management perspective</marquage>, Harlow: Financial Times Prentice Hall.</refbiblio>
+<refbiblio id="rb27"><marquage typemarq="petitecap">Iribarne</marquage> (d’), Ph. (1989). <marquage typemarq="italique">La logique de l’honneur</marquage>, Seuil, Paris. (Réédition coll. Poche en 2000).</refbiblio>
+<refbiblio id="rb28"><marquage typemarq="petitecap">Iribarne</marquage> (d’), Ph. (1996). “The Usefulness of an Ethnographic Approach to the International Comparison of Organizations”, <marquage typemarq="italique">International Studies of Management and Organization</marquage>, White Plains, winter, Vol. <marquage typemarq="italique">26</marquage>, n°4, p. 30-47.</refbiblio>
+<refbiblio id="rb29"><marquage typemarq="petitecap">Iribarne</marquage> (d’), Ph.; Henry, A (2007). <marquage typemarq="italique">Successful companies in the developing world – Managing in synergy with cultures</marquage>, AFD- “Growing together in Mexico”, pp.37-64; Original title: <marquage typemarq="italique">Le Tiers-Monde qui réussit. </marquage><marquage typemarq="italique">Nouveaux modèles</marquage>, (d’Iribarne, Philippe) 2003-Paris, O. Jacob.</refbiblio>
+<refbiblio id="rb30"><marquage typemarq="petitecap">Iribarne</marquage> (d’), Ph. (2008). <marquage typemarq="italique">Penser la diversité du monde</marquage>, Seuil, Paris.</refbiblio>
+<refbiblio id="rb31"><marquage typemarq="petitecap">Iribarne</marquage>, (d’), Ph. (2011). “How to use ethnographical case studies to decipher national culture”, in R. Piekkari et C. Welch, <marquage typemarq="italique">Rethinking the case study in international business and management research</marquage>, Edward Elgar Publishing, p. 453-473.</refbiblio>
+<refbiblio id="rb32"><marquage typemarq="petitecap">Joly</marquage>, A. (2004). <marquage typemarq="italique">Fiefs et entreprises en Amérique latine</marquage>, Presses de l’université Laval.</refbiblio>
+<refbiblio id="rb33"><marquage typemarq="petitecap">Kostova</marquage>, T. (2010). “How distance affects the behavior and performance of multinational companies”, <marquage typemarq="italique">Academy of Management Annual Meeting, </marquage>August 6-11, Montreal, Canada.</refbiblio>
+<refbiblio id="rb34"><marquage typemarq="petitecap">Louhiala-Salminen</marquage>, L.; <marquage typemarq="petitecap">Charles</marquage>, M. (2006). “English as the Lingua franca of International Business Communication: Whose English? What English?” <marquage typemarq="italique">Intercultural and International Business Communication</marquage>. Bern: Peter Lang, p. 27-54.</refbiblio>
+<refbiblio id="rb35"><marquage typemarq="petitecap">Louÿs</marquage>, G.; <marquage typemarq="petitecap">Sauvage</marquage>, E. (2014). <marquage typemarq="italique">De la singularité dans la communication interculturelle: approches transdisciplinaires</marquage>, L’Harmattan.</refbiblio>
+<refbiblio id="rb36"><marquage typemarq="petitecap">Marschan</marquage>, R.; <marquage typemarq="petitecap">Welch</marquage>, D.; <marquage typemarq="petitecap">Welch</marquage>, L. (1997). “Language: the forgotten factor on Multinational Management”, <marquage typemarq="italique">European Management J</marquage><marquage typemarq="italique">ournal</marquage>, Vol. 15, N° 5, p. 591-598.</refbiblio>
+<refbiblio id="rb37"><marquage typemarq="petitecap">Marschan-Piekkari</marquage>, R.; <marquage typemarq="petitecap">Welch</marquage>, D.; <marquage typemarq="petitecap">Welch</marquage>, L. (1999). “In the shadow: the impact of language on structure, power and communication in the multinational”, <marquage typemarq="italique">International Business Review</marquage>, N° 8, p. 421-440.</refbiblio>
+<refbiblio id="rb38"><marquage typemarq="petitecap">Patton</marquage>, M. (1990). <marquage typemarq="italique">Qualitative evaluation and research methods </marquage>(2<exposant>nd</exposant> Ed.). Beverly Hills, CA: Sage Publications.</refbiblio>
+<refbiblio id="rb39"><marquage typemarq="petitecap">Primecz</marquage>, H.; <marquage typemarq="petitecap">Romani</marquage>, L.; <marquage typemarq="petitecap">Sackmann</marquage>, S. (2011). <marquage typemarq="italique">Cross-Cultural Management in Practice-Culture and Negotiated Meanings</marquage>, Edward Elgar, Cheltenham, U.K, Northampton, MA, USA.</refbiblio>
+<refbiblio id="rb40"><marquage typemarq="petitecap">Sackmann</marquage>, S.; <marquage typemarq="petitecap">Philips</marquage>, M. (2004). “Contextual Influences on Culture Research: shifting Assumptions for New Workplace Realities”, <marquage typemarq="italique">International Journal of Cross-Cultural management</marquage>, Vol. 4 (3), p. 371-392.</refbiblio>
+<refbiblio id="rb41"><marquage typemarq="petitecap">Sarangi</marquage>, S. (1994). “Intercultural or not? Beyond celebration of cultural differences in miscommunication analysis”, <marquage typemarq="italique">Pragmatics </marquage>4(3): p. 409-427.</refbiblio>
+<refbiblio id="rb42"><marquage typemarq="petitecap">Segal</marquage>, J.-P. (2009). <marquage typemarq="italique">Efficaces ensemble, un défi français</marquage>. Seuil. Paris.</refbiblio>
+<refbiblio id="rb43"><marquage typemarq="petitecap">Segal</marquage>, J.-P. (2011). « La coordination des équipes multiculturelles au sein des firmes multinationales: des acteurs en quête de modes d’emploi » (avec Sylvie Chevrier). R<marquage typemarq="italique">evue Française de Gestion. </marquage>Avril /3 (212) p. 145-156.</refbiblio>
+<refbiblio id="rb44"><marquage typemarq="petitecap">Segal</marquage>, J.-P.; <marquage typemarq="petitecap">Chevrier</marquage>, S. (2006). <marquage typemarq="italique">Compétences interculturelles et développement international</marquage>, rapport de recherche, Institut des métiers de France Télécom, juillet.</refbiblio>
+<refbiblio id="rb45"><marquage typemarq="petitecap">Shenkar</marquage>, O (2012). “Cultural distance revisited: Towards a more rigorous conceptualization and measurement of cultural differences.” <marquage typemarq="italique">Journal of International Business Studies</marquage>, Vol. 43, N° 1 (January 2012), p. 1-11.</refbiblio>
+<refbiblio id="rb46"><marquage typemarq="petitecap">Shenkar</marquage>, O.; <marquage typemarq="petitecap">Zeira</marquage>, Y. (1992). “Role conflict and role ambiguity of chief executive officers in international joint ventures”. <marquage typemarq="italique">Journal of International Business Studies</marquage>, 23(1): p. 55-75.</refbiblio>
+<refbiblio id="rb47"><marquage typemarq="petitecap">Shenkar</marquage>, O.; Luo, Y.; <marquage typemarq="petitecap">Yeheskel</marquage>, O. (2008). “From “distance” to “friction”: substituting metaphors and redirecting intercultural research.” <marquage typemarq="italique">Academy of Management Review</marquage>, <marquage typemarq="italique">33</marquage>(4), p. 905-923.</refbiblio>
+<refbiblio id="rb48"><marquage typemarq="petitecap">Søderberg</marquage>, A.-M.; <marquage typemarq="petitecap">Holden</marquage>, N. (2002). “Rethinking Cross Cultural Management in a Globalizing Business World”, <marquage typemarq="italique">International Journal of Cross Cultural Management</marquage>. 2 (1), p. 103-121.</refbiblio>
+<refbiblio id="rb49"><marquage typemarq="petitecap">Starck</marquage>, D. (2009). <marquage typemarq="italique">The sense of dissonance – Accounts of worth in economic life</marquage>, Princeton University Press.</refbiblio>
+<refbiblio id="rb50"><marquage typemarq="petitecap">Tréguer-Felten</marquage>, G. (2009a). “« Le leurre de l’anglais <marquage typemarq="italique">lingua franca</marquage>. Une étude comparative de documents professionnels produits en anglais par des locuteurs chinois, français et nord-américains », Thèse de doctorat en Sciences du langage, Paris, Université Paris 3- Sorbonne nouvelle.</refbiblio>
+<refbiblio id="rb51"><marquage typemarq="petitecap">Tréguer-Felten</marquage>, G. (2009b). « Comment évaluer l’impact de la lingua franca en milieu professionnel ? » <marquage typemarq="italique">Les Cahiers de l’APLIUT, XXVIII</marquage>, p. 14-26.</refbiblio>
+<refbiblio id="rb52"><marquage typemarq="petitecap">Tréguer</marquage>-<marquage typemarq="petitecap">Felten</marquage>, G. (2013). “Can a lingua franca bridge the communication gap between corporations set in different cultures?” in Kecskes, I. et Romero-Trillo, J., eds., <marquage typemarq="italique">Research Trends in Intercultural Pragmatics</marquage><marquage typemarq="gras">,</marquage> Amsterdam, Mouton de Gruyter. 2013, p. 263-282.</refbiblio>
+<refbiblio id="rb53"><marquage typemarq="petitecap">Usunier</marquage>, J.-C. (1999). “The use of language in investigating conceptual equivalence in cross-cultural research”, in <marquage typemarq="italique">Seventh Cross-Cultural Consumer and Business Studies Research Conference</marquage>, M. Scott (ed.), Cancun, Mexico.</refbiblio>
+<refbiblio id="rb54"><marquage typemarq="petitecap">Usunier</marquage>, J.-C. (2006 [1998]). <marquage typemarq="italique">International &amp; Cross-Cultural Management Research</marquage>, Sage. Publications Ltd., London, U.K.; Thousand Oaks (Ca), USA; New Delhi, India.</refbiblio>
+<refbiblio id="rb55"><marquage typemarq="petitecap">Yin</marquage>, R. (2003 [1994]). <marquage typemarq="italique">Case study research: design and methods</marquage> (3rd Ed.). Beverly Hills, CA: Sage Publications.</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Will be used under the acronym form in the rest of the text.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>Still, this does not mean that the company is 100% free from problems, but they
+          remain minor and are overcome quite easily, as mentioned in the interviews. In all cases,
+          they are not said to be associated to misunderstandings.</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>See Figures 1&amp;2 <marquage typemarq="italique">infra</marquage> for
+          details.</alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>“Intercultural tandems of binational pairs as a supporting factor of negotiated
+          culture in a French-German organization: a case analysis of Alleo” (Atlas-Afmi Conference,
+          2016)</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>Used under the acronym form in the rest of the text.</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>For confidentiality reasons, the name of the company has been changed.</alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>Used under the acronym form in the rest of the text.</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>We make it clear that the market is not Latino-American (neither on the Northern
+          American nor on the South American territory, the company’s approach is not linked to
+          ethnical-oriented strategy) but only dedicated to Northern America including Canada, so
+          the hypothesis of an adequacy to local market made easier by the cultural proximity of the
+          company’s members is excluded.</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>One example of a less satisfying episode overcome thanks to those “fortunate”
+          misunderstandings confirms that the latter really play a part in the reasons of success.
+        </alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea><marquage typemarq="italique">There is something very special going on
+          here”</marquage>. Peruvian worker, 2007.</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea>In the current document, all the translations mentioned in footnotes have been made
+          by the author.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea><marquage typemarq="italique">“We saw a great openness”.</marquage></alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea><marquage typemarq="italique">“It starts with the fact that even though they do not
+          speak Spanish, they may try to talk about certain things. If you do not speak French, you
+          try to make them understand you with your little English and then and so
+          on”</marquage></alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea><marquage typemarq="italique">“because even if they do not speak
+          Spanish”</marquage></alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea>“<marquage typemarq="italique">some little things</marquage>”</alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea>The following extract was originally in French</alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>For space reason, we could not develop the analysis process thoroughfully in the
+          present paper, hence the synthetic presentation in Table 3. The extensive analysis is
+          presented in a doctoral work.</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea>Originally in French. French perfumer, 2008.</alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea>Originally in Spanish</alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea>In English</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea>This expression is in French in the original verbatim.</alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>“<marquage typemarq="italique">if we are at a party, we forget about this
+          protocol…it is “hey my friend”</marquage>, Peruvian assistant, 2007</alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea><marquage typemarq="italique">“there are thousands of very personal things that go
+          beyond this professional environment”</marquage>, Peruvian assistant, 2007</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea><marquage typemarq="italique">“there comes a moment when she is part of
+          you”</marquage>, Colombian worker, 2007</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea><marquage typemarq="italique">“at the beginning there was this fear… of this French
+          boss out of reach… but she comes and day after day I tell myself, this lady also has got a
+          home, she has her children, her problems…and at a certain moment she is part of your
+          family”,</marquage> Peruvian assistant, 2007</alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea><marquage typemarq="italique">“hormigitas”</marquage> is the word used in the
+          Mexican research.</alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>Stark, 2009, p. 192</alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea>Id.</alinea>
+      </note>
+    </grnote></partiesann><partiesann lang="fr"><grnotebio><notebio id="nb2" idrefs="au1" lang="fr"><alinea><marquage typemarq="gras">Emmanuelle Sauvage</marquage> est actuellement Maître de Conférences en Management international à l’IAE de Bordeaux. Elle détient un doctorat en Management international, un master en Interprétation et traduction ainsi qu’une maîtrise de droit espagnol. Après une première vie professionnelle passée au sein des Nation Unies, qui l’a amenée à s’intéresser aux dynamiques interculturelles, elle a rejoint le monde académique. Ses recherches portent principalement sur les rencontres interculturelles et les dynamiques interactionnelles humaines en contexte international. Elle s’intéresse également à la dimension linguistique de ces rencontres et aux empreintes invisibles laissées par la culture sur le langage.</alinea></notebio></grnotebio></partiesann><partiesann lang="es"><grnotebio><notebio id="nb3" idrefs="au1" lang="es"><alinea><marquage typemarq="gras">Emmanuelle Sauvage</marquage> es profesora en Administración Internacional en la Escuela Universitaria de Negocios de Burdeos. Realizó estudios doctorales en Gestión Internacional, cuenta con una maestría en interpretación y traducción y una maestría en derecho español. En su primera experiencia profesional dentro de las Naciones Unidas se originó su interés en el entendimiento de las dinámicas interculturales, el cual la llevó a incorporarse en el mundo académico. Su investigación se ha centrado en los encuentros interculturales y en las dinámicas de interacción humana en el entorno internacional. Adicionalmente realiza estudios sobre la dimensión lingüística de estos encuentros, así como en las huellas invisibles de la cultura sobre el idioma. </alinea></notebio></grnotebio></partiesann></article>

@@ -175,11 +175,12 @@ export default {
         open: function() {
           var figure = $(this.currItem.el).closest('.figure, .tableau')
           var grfigure = figure.closest('.grfigure, .grtableau')
+          var grfigure_caption = grfigure.find('.grfigure-caption')
 
           // Figure group numbers.
-          var grfigure_number = grfigure.find('.no')
+          var grfigure_number = grfigure_caption.find('.no')
           // Figure group caption.
-          var grfigure_caption = grfigure.find('div.legende')
+          var grfigure_legend = grfigure_caption.find('div.legende')
           // Figure number.
           var figure_number = figure.find('.no')
           // Figure caption.
@@ -195,7 +196,7 @@ export default {
           // Put the figure number(s) and caption(s) above the figure.
           $(this.content).find('.mfp-top-bar .mfp-title').prepend(
             grfigure_number.clone(),
-            grfigure_caption.clone(),
+            grfigure_legend.clone(),
             figure_number.clone(),
             figure_caption.clone(),
           );

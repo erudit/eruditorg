@@ -727,6 +727,34 @@ class TestArticleDetailView:
         assert len(figures[1].find_all('p', {'class': 'alinea'})) == 2
         assert len(figures[2].find_all('p', {'class': 'alinea'})) == 4
 
+    def test_table_groups_display_with_table_no(self):
+        article = ArticleFactory(
+            from_fixture='1060065ar',
+            localidentifier='article',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        grtableau = dom.find_all('div', {'class': 'grtableau'})[0]
+        figures = grtableau.find_all('figure')
+        # Check that the table group is displayed.
+        assert grtableau.attrs.get('id') == 'gt1'
+        # Check that the tables are displayed inside the table group.
+        assert figures[0].attrs.get('id') == 'ta2'
+        assert figures[1].attrs.get('id') == 'ta3'
+        # Check that the table numbers are displayed.
+        assert figures[0].find_all('p', {'class': 'no'})[0].text == '2A'
+        assert figures[1].find_all('p', {'class': 'no'})[0].text == '2B'
+
     def test_figure_back_arrow_is_displayed_when_theres_no_number_or_title(self):
         article = ArticleFactory(
             from_fixture='1031003ar',

@@ -1037,9 +1037,9 @@
           <xsl:if test="$mode = 'liste'">
             <p class="allertexte"><a href="#{@id}">|^</a></p>
           </xsl:if>
-          <xsl:if test="no">
-            <p class="no"><xsl:apply-templates select="no"/></p>
-          </xsl:if>
+        </xsl:if>
+        <xsl:if test="no">
+          <p class="no"><xsl:apply-templates select="no"/></p>
         </xsl:if>
         <xsl:apply-templates select="legende/titre | legende/sstitre"/>
       </figcaption>
