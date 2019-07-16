@@ -25,7 +25,13 @@ def trans_current_url(context, langcode):
             ':'.join([resolver_match.namespace, resolver_match.url_name]),
             args=args, kwargs=kwargs)
 
-    return i18n_url
+    if request.GET:
+        return '{url}?{params}'.format(**{
+            'url': i18n_url,
+            'params': request.GET.urlencode(),
+        })
+    else:
+        return i18n_url
 
 
 @register.simple_tag(takes_context=True)
