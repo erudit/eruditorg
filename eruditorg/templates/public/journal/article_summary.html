@@ -75,9 +75,9 @@
 {# If the issue is published, the article summary will be cached forever (TTL = None) or until the cache content version change. #}
 {# If the issue is not published, the article summary will not be cached (TTL = 0). #}
 {# The article's localidentifier is used as a primary key for the cache key. #}
-{# The in_citation_list and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
+{# The in_citation_list, article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The article's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_article_summary" article.localidentifier in_citation_list LANGUAGE_CODE 'v1' %}
+{% cache cache_timeout "public_article_summary" article.localidentifier in_citation_list article.issue.is_published LANGUAGE_CODE 'v1' %}
 <main
     id="article-{{ article.localidentifier }}"
     class="container"
