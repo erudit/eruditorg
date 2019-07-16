@@ -9,9 +9,9 @@
 {# If the issue is published, the article metatags will be cached forever (TTL = None) or until the cache content version change. #}
 {# If the issue is not published, the article metatags will not be cached (TTL = 0). #}
 {# The article's localidentifier is used as a primary key for the cache key. #}
-{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The article's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_article_base_metatags" article.localidentifier LANGUAGE_CODE 'v1' %}
+{% cache cache_timeout "public_article_base_metatags" article.localidentifier article.issue.is_published LANGUAGE_CODE 'v1' %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="article">
@@ -103,9 +103,9 @@
 {# If the issue is published, the article structured data will be cached forever (TTL = None) or until the cache content version change. #}
 {# If the issue is not published, the article structured data will not be cached (TTL = 0). #}
 {# The article's localidentifier is used as a primary key for the cache key. #}
-{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The article's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_article_base_structured_data" article.localidentifier LANGUAGE_CODE 'v1' %}
+{% cache cache_timeout "public_article_base_structured_data" article.localidentifier article.issue.is_published LANGUAGE_CODE 'v1' %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
 {% endblock structured_data %}
