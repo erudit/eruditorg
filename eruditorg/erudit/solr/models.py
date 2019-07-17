@@ -99,7 +99,12 @@ class SolrDocument:
     @property
     def title(self):
         TITLE_ATTRS = [
-            'Titre_fr', 'Titre_en', 'Titre_defaut', 'TitreRefBiblio_aff']
+            'Titre_fr',
+            'Titre_en',
+            'Titre_es',
+            'Titre_defaut',
+            'TitreRefBiblio_aff',
+        ]
         for attrname in TITLE_ATTRS:
             if attrname in self.solr_data:
                 return self.solr_data[attrname]
