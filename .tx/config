@@ -7,3 +7,9 @@ source_file = locale/fr/LC_MESSAGES/django.po
 source_lang = fr
 type = PO
 
+[eruditorg.eruditorg_js]
+file_filter = locale/<lang>/LC_MESSAGES/djangojs.po
+source_file = locale/fr/LC_MESSAGES/djangojs.po
+source_lang = fr
+type = PO
+
