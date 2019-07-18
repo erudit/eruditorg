@@ -77,7 +77,7 @@ class TestRestrictionsByJournalView:
             assert child.tag in ('embargo_date', 'embargo_duration', 'issues')
 
         embargo_date = journal.date_embargo_begins.strftime('%Y-%m-%d')
-        embargo_duration = str(journal.embargo_in_months)
+        embargo_duration = '365'
         assert root.find('embargo_date').text == embargo_date
         assert root.find('embargo_duration').text == embargo_duration
 
