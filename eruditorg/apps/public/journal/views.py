@@ -587,7 +587,7 @@ class IssueReaderView(
         return context
 
 
-class IssuePageView(
+class IssueReaderPageView(
         ContentAccessCheckMixin,
         PrepublicationTokenRequiredMixin,
         FedoraFileDatastreamView):

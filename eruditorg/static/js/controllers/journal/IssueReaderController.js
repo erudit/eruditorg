@@ -21,7 +21,7 @@ export default {
         return body.data("page-height");
       },
       getPageURI: function(index, reduce, rotate) {
-        return body.data("book-url") + (index + 1).toString() + '.jpg' + body.data("ticket");
+        return body.data("book-url") + gettext('feuilletage/') + (index + 1).toString() + '.jpg' + body.data("ticket");
       },
       bookUrl: body.data("book-url") + body.data("ticket"),
       bookUrlText: gettext("Retour au sommaire"),

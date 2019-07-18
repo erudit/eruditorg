@@ -448,7 +448,7 @@ class TestIssueReaderView:
                 context = view.get_context_data()
 
 
-class TestIssuePageView:
+class TestIssueReaderPageView:
 
     @pytest.mark.parametrize('page, open_access, is_published, ticket, expected_status_code, expected_redirection', [
         # All pages should be accessible for open access published issues.
@@ -468,13 +468,13 @@ class TestIssuePageView:
         ('1', False, False, False, 302, '/fr/revues/journal/'),
         ('6', False, False, False, 302, '/fr/revues/journal/'),
     ])
-    def test_issue_page_view(self, page, open_access, is_published, ticket, expected_status_code, expected_redirection):
+    def test_issue_reader_page_view(self, page, open_access, is_published, ticket, expected_status_code, expected_redirection):
         issue = IssueFactory(
             is_published=is_published,
             journal__open_access=open_access,
             journal__code='journal',
         )
-        url = reverse('public:journal:issue_page', kwargs={
+        url = reverse('public:journal:issue_reader_page', kwargs={
             'journal_code': issue.journal.code,
             'issue_slug': issue.volume_slug,
             'localidentifier': issue.localidentifier,
