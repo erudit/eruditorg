@@ -465,7 +465,7 @@ class IssueDetailView(
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
         # If this is a cultural journal, we need the URL for the issue reader.
-        if self.object.journal.type.code == 'C':
+        if self.object.journal.is_cultural():
             context['reader_url'] = reverse('public:journal:issue_reader', kwargs={
                 'journal_code': self.object.journal.code,
                 'issue_slug': self.object.volume_slug,
@@ -570,7 +570,7 @@ class IssueReaderView(
         context = super().get_context_data(**kwargs)
         issue = self.get_object()
         # Raise 404 if journal is not cultural.
-        if issue.journal.type.code != 'C':
+        if not issue.journal.is_cultural():
             raise Http404()
         pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
         pages = et.fromstring(pages_ds.content.serialize())
