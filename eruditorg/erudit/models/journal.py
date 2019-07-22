@@ -467,28 +467,6 @@ class Issue(FedoraMixin, FedoraDated):
     is_published = models.BooleanField(default=False, verbose_name=_('Est publié'))
     """ Defines if an issue is published """
 
-    def is_published_in_fedora(self):
-        """ Query Fedora to get the publication status of this ``Issue``
-
-        A ``Issue`` object is considered to be published if it's in the ``publications``
-        datastream of its ``Journal``.
-
-        .. warning:: This method is costly as it performs two lookups in Fedora to return its
-          results
-
-        :return: ``True`` if the ``Issue`` is published in Fedora
-        """
-        if not self.is_in_fedora:
-            return False
-
-        publications_tree = et.fromstring(self.journal.fedora_object.xml_content)
-        xml_issue_nodes = publications_tree.findall('.//numero')
-
-        for issue_node in xml_issue_nodes:
-            if self.localidentifier in issue_node.get('pid'):
-                return True
-        return False
-
     localidentifier = models.CharField(
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
