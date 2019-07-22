@@ -41,6 +41,7 @@
     "akkordion": "0.2.4",
     "hint.css": "2.2.0",
     "clipboard.js": "~0.2.0",
-    "scrollspy": "~0.1.2"
+    "scrollspy": "~0.1.2",
+    "bookreader": "git://github.com/internetarchive/bookreader#4.2.2"
   }
 }

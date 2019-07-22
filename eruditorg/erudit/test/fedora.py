@@ -69,6 +69,17 @@ FAKE_ISSUE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 </objectDatastreams>
 """ # noqa
 
+FAKE_PAGE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
+<objectDatastreams
+    xmlns="http://www.fedora.info/definitions/1/0/access/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/ http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
+    pid="{pid}"
+    baseURL="http://fakeurl/">
+<datastream dsid="IMAGE" label="IMAGE" mimeType="image/jpeg" />
+</objectDatastreams>
+""" # noqa
+
 FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <objectDatastreams
     xmlns="http://www.fedora.info/definitions/1/0/access/"
@@ -249,7 +260,13 @@ class FakeAPI(ApiFacade):
             pid, datastream, subselection = m.groups()
             prefix, subpid = pid.split(':')
             pidelems = subpid.split('.')
-            if len(pidelems) == 4:  # article
+            if len(pidelems) == 4 and re.match('^p[0-9]+$', pidelems[3]):  # page
+                if not subselection:  # we want a datastream list
+                    result = FAKE_PAGE_DATASTREAM_LIST.format(pid=pid).encode()
+                elif subselection == '/IMAGE/content':
+                    with open('./tests/fixtures/page/{}.jpg'.format(pidelems[3]), 'rb') as page:
+                        result = page.read()
+            elif len(pidelems) == 4:  # article
                 article_xml = self.get_article_xml(pid)
                 if not article_xml:
                     # return empty response

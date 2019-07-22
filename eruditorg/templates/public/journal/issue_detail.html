@@ -140,7 +140,7 @@
       {% endif %}
     </h1>
     {% if reader_url%}
-    <p><a href="{{ reader_url }}" class="btn btn-secondary">{% trans 'Feuilleter ce numéro' %}</a></p>
+    <p><a href="{{ reader_url }}{% if not issue.is_published and ticket %}?ticket={{ ticket }}{% endif %}" class="btn btn-secondary">{% trans 'Feuilleter ce numéro' %}</a></p>
     {% endif %}
     {% if notegens %}
     <div class="row">

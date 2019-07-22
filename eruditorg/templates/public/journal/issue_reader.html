@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal.name|safe }} – Érudit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/app.css' %}"/>
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/app.js' %}"></script>
+    <style>html, body, #issue-reader { width: 100%; height: 100%; margin: 0; padding: 0; }</style>
+  </head>
+  <body
+    data-controller="public:journal:issue_reader"
+    data-num-leafs="{{ num_leafs }}"
+    data-page-width="{{ page_width }}"
+    data-page-height="{{ page_height }}"
+    data-book-url="{{ issue_url }}"
+    data-ticket="{% if not issue.is_published and ticket %}?ticket={{ ticket }}{% endif %}"
+    data-images-base-url="{% static 'img/bookreader/' %}"
+  >
+    <div id="issue-reader"></div>
+  </body>
+</html>
