@@ -375,35 +375,31 @@
 
       <div class="full-article {% if article.processing == 'C' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
         {% if only_display != 'biblio' %}
-        {% if html_abstracts or html_other_keywords %}
-        <!-- abstract -->
+        <!-- abstracts & keywords -->
+        <xsl:if test="//resume | //grmotcle">
           <section id="resume" role="complementary" class="article-section grresume">
             <h2 class="sr-only">{% trans 'Résumés' %}</h2>
-            {% if html_abstracts %}
-            {% for abstract in html_abstracts %}
-              {% if abstract.type == "paral" %}
-              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.paral %}
-              {% elif abstract.type == "equivalent" %}
-              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.equivalent %}
-              {% elif abstract.type == "main" %}
-              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.main %}
-              {% endif %}
-            {% endfor %}
-            {% endif %}
-            {% if html_other_keywords %}
-            {% for lang, keywords in html_other_keywords.items %}
-            <div class="keywords">
-              <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}</strong></p>
-              <ul>
-                {% for k in keywords %}
-                <li class="keyword">{{ k|safe }}{% if not forloop.last %}, {% endif %}</li>
-                {% endfor %}
-              </ul>
-            </div>
-            {% endfor %}
-            {% endif %}
+            <xsl:for-each select="//resume">
+              <!-- if the abstract is the main one, make sure it appears first -->
+              <xsl:sort select="number(contains(/article/@lang, @lang)) * -1"/>
+              <xsl:call-template name="resume"/>
+            </xsl:for-each>
+            <!-- other keywords -->
+            <xsl:for-each select="//grmotcle">
+              <xsl:variable name="lang" select="@lang"/>
+              <xsl:choose>
+                <xsl:when test="//resume[@lang = $lang]">
+                  <!-- do nothing -->
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:call-template name="motscles">
+                    <xsl:with-param name="lang" select="@lang"/>
+                  </xsl:call-template>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:for-each>
           </section>
-        {% endif %}
+        </xsl:if>
         {% endif %}
 
         {% if content_access_granted and not only_display and article.publication_allowed %}
@@ -2281,6 +2277,86 @@
         <xsl:apply-templates select="."/>
       </xsl:for-each>
     </div>
+  </xsl:template>
+
+  <!-- abstracts -->
+  <xsl:template name="resume">
+    <!-- abstract wrapper -->
+    <xsl:element name="section">
+      <xsl:attribute name="id">
+        <xsl:value-of select="concat('resume-', @lang)"/>
+      </xsl:attribute>
+      <xsl:attribute name="class">
+        <xsl:text>resume</xsl:text>
+      </xsl:attribute>
+
+      <!-- abstract title -->
+      <xsl:element name="h3">
+        <xsl:choose>
+          <xsl:when test="title">
+            <xsl:value-of select="title"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:choose>
+              <xsl:when test="@lang = 'fr'">Résumé</xsl:when>
+              <xsl:when test="@lang = 'en'">Abstract</xsl:when>
+              <xsl:when test="@lang = 'es'">Resumen</xsl:when>
+              <xsl:when test="@lang = 'de'">Zusammenfassung</xsl:when>
+              <xsl:when test="@lang = 'pt'">Resumo</xsl:when>
+            </xsl:choose>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:element>
+
+      <!-- abstract content -->
+      <xsl:apply-templates select="."/>
+
+      <!-- keywords -->
+      <xsl:call-template name="motscles">
+        <xsl:with-param name="lang" select="@lang"/>
+      </xsl:call-template>
+
+    </xsl:element>
+  </xsl:template>
+
+  <!-- keywords -->
+  <xsl:template name="motscles">
+    <xsl:param name="lang"/>
+    <xsl:for-each select="//grmotcle[@lang = $lang]">
+
+      <!-- keywords wrapper -->
+      <xsl:element name="div">
+        <xsl:attribute name="class">
+          <xsl:text>keywords</xsl:text>
+        </xsl:attribute>
+
+        <!-- keywords label -->
+        <xsl:element name="p">
+          <xsl:element name="strong">
+            <xsl:choose>
+              <xsl:when test="@lang = 'fr'">Mots-clés&#160;:</xsl:when>
+              <xsl:when test="@lang = 'en'">Keywords:</xsl:when>
+              <xsl:when test="@lang = 'es'">Palabras clave:</xsl:when>
+              <xsl:when test="@lang = 'de'">Stichworte:</xsl:when>
+              <xsl:when test="@lang = 'pt'">Palavras chaves:</xsl:when>
+            </xsl:choose>
+          </xsl:element>
+        </xsl:element>
+
+        <!-- keywords list -->
+        <xsl:element name="ul">
+          <xsl:for-each select="motcle">
+            <xsl:element name="li">
+              <xsl:attribute name="class">
+                <xsl:text>keyword</xsl:text>
+              </xsl:attribute>
+              <xsl:apply-templates select="."/><xsl:if test="position() != last()">, </xsl:if>
+            </xsl:element>
+          </xsl:for-each>
+        </xsl:element>
+
+      </xsl:element>
+    </xsl:for-each>
   </xsl:template>
 
 </xsl:stylesheet>

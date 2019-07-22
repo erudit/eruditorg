@@ -963,6 +963,35 @@ class TestArticleDetailView:
         assert sections[0].attrs['id'] == 'merci'
         assert sections[1].attrs['id'] == 'grnote'
 
+    def test_abstracts_and_keywords(self):
+        article = ArticleFactory()
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé français'}])
+            wrapper.set_abstracts([{'lang': 'en', 'content': 'English abstract'}])
+            wrapper.add_keywords('es', ['Palabra clave en español'])
+            wrapper.add_keywords('fr', ['Mot-clé français'])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        grresume = dom.find_all('section', {'class': 'grresume'})[0]
+        resumes = grresume.find_all('section', {'class': 'resume'})
+        keywords = grresume.find_all('div', {'class': 'keywords'})
+        # Make sure the main abstract (English) appears first, even though it's in second position in the XML.
+        assert resumes[0].decode() == '<section class="resume" id="resume-en"><h3>Abstract</h3>\n<p class="alinea"><em>English abstract</em></p></section>'
+        # Make sure the French keywords appear in the French abstract section.
+        assert resumes[1].decode() == '<section class="resume" id="resume-fr"><h3>Résumé</h3>\n<p class="alinea"><em>Résumé français</em></p>\n<div class="keywords">\n<p><strong>Mots-clés :</strong></p>\n<ul><li class="keyword">Mot-clé français</li></ul>\n</div></section>'
+        # Make sure the French keywords appear first since there is no English keywords and no Spanish abstract.
+        assert keywords[0].decode() == '<div class="keywords">\n<p><strong>Mots-clés :</strong></p>\n<ul><li class="keyword">Mot-clé français</li></ul>\n</div>'
+        # Make sure the Spanish keywords are displayed even though there is no Spanish abstract.
+        assert keywords[1].decode() == '<div class="keywords">\n<p><strong>Palabras clave:</strong></p>\n<ul><li class="keyword">Palabra clave en español</li></ul>\n</div>'
+
+        assert True
+
 
 @unittest.mock.patch.object(
     Issue,
