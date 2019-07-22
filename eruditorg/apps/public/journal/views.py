@@ -341,7 +341,6 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         return context
 
 
-@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
@@ -862,15 +861,6 @@ class ArticleFormatDownloadView(
     def handle_no_permission(self):
         return redirect('public:journal:article_detail', **self.kwargs)
 
-    def get_datastream_content(self, fedora_object):
-        obj = self.get_content()
-        if obj.issue.is_published:
-            return super(ArticleFormatDownloadView, self).get_datastream_content(
-                fedora_object, use_cache=True)
-        else:
-            return super(ArticleFormatDownloadView, self).get_datastream_content(
-                fedora_object, use_cache=False)
-
 
 class ArticleXmlView(ArticleFormatDownloadView):
     content_type = 'application/xml'
@@ -879,8 +869,8 @@ class ArticleXmlView(ArticleFormatDownloadView):
     raise_exception = True
     tracking_view_type = 'xml'
 
-    def write_datastream_content(self, response, content):
-        response.write(content.serialize())
+    def get_datastream_content(self, fedora_object):
+        return fedora_object.xml_content
 
 
 class ArticleRawPdfView(ArticleFormatDownloadView):
@@ -892,6 +882,15 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     fedora_object_class = ArticleDigitalObject
     raise_exception = True
     tracking_view_type = 'pdf'
+
+    def get_datastream_content(self, fedora_object):
+        obj = self.get_content()
+        if obj.issue.is_published:
+            return super(ArticleFormatDownloadView, self).get_datastream_content(
+                fedora_object, use_cache=True)
+        else:
+            return super(ArticleFormatDownloadView, self).get_datastream_content(
+                fedora_object, use_cache=False)
 
     def write_datastream_content(self, response, content):
         coverpage = get_coverpage(self.get_object())
@@ -942,7 +941,6 @@ class ArticleRawPdfFirstPageView(
         response.content = get_pdf_first_page(content)
 
 
-@method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     """
     Returns an image file embedded in the INFOIMG datastream.
