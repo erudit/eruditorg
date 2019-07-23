@@ -93,8 +93,9 @@ class RestrictionsByJournalView(View):
                 journal_element = E.journal(
                     E.embargo_date(journal.date_embargo_begins.strftime('%Y-%m-%d')),
                     E.embargo_duration(
-                        str(journal.embargo_in_months),
-                        unit='month'
+                        str(int(journal.embargo_in_months * 30 +
+                                (journal.embargo_in_months / 12) * 5)),
+                        unit='day'
                     ),
                     issues_elements,
                     code=journal.code,
