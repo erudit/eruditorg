@@ -93,9 +93,9 @@
 {# If the issue is published, the issue detail will be cached forever (TTL = None) or until the cache content version change. #}
 {# If the issue is not published, the issue detail will not be cached (TTL = 0). #}
 {# The issue's localidentifier is used as a primary key for the cache key. #}
-{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The content_access_granted and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The issue's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_issue_detail" issue.localidentifier LANGUAGE_CODE issue.fedora_updated %}
+{% cache cache_timeout "public_issue_detail" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
 {# Issue summary #}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header">
@@ -213,9 +213,9 @@
 {% block inner_footer %}
 {# The issue detail will be cached forever (TTL = None) or until the cache content version change. #}
 {# The issue's localidentifier is used as a primary key for the cache key. #}
-{# The LANGUAGE_CODE argument is used to generate the cache key hash. #}
+{# The content_access_granted and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The issue's update time from Fedora is used as the cache content version. #}
-{% cache FOREVER_TTL "public_issue_detail_back_issues" issue.localidentifier LANGUAGE_CODE issue.fedora_updated %}
+{% cache FOREVER_TTL "public_issue_detail_back_issues" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">
