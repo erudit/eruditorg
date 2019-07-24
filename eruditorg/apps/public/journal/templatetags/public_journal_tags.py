@@ -46,3 +46,8 @@ def join_author_list(author_list):
         contributors=", ".join(str(author) for author in author_list),
         last_author=last_author
     )
+
+
+@register.filter
+def get_class(value):
+    return value.__class__.__name__

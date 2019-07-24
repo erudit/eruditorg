@@ -133,10 +133,6 @@ class Article(SolrDocument):
     def journal_type(self):
         return 'S'
 
-    @property
-    def model_instance(self):
-        return get_model_instance(self.solr_data)
-
 
 class Thesis(SolrDocument):
     def can_cite(self):

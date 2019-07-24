@@ -28,7 +28,7 @@
         <div class="col-md-8">
           <h1>{% trans "Résultats de recherche" %}</h1>
           <div class="main-header__intro">
-            {% if documents %}
+            {% if results.results %}
             <p>
               {% blocktrans trimmed count counter=results.pagination.count %}
               <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
@@ -47,7 +47,7 @@
             <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
           </div>
         </div>
-        {% if documents %}
+        {% if results.results %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
             <a href="#" id="id_save_search" class="btn btn-secondary">{% trans "Sauvegarder ces résultats" %}</a>
             {% url 'public:search:advanced_search' as advanced_search %}
@@ -64,7 +64,7 @@
   <section class="main-content">
     <div class="container">
       <div class="row">
-      {% if documents %}
+      {% if results.results %}
         {# Filter form #}
         <form action="{% url 'public:search:results' %}" id="id-search" class="result-search-form" method="get">
           <aside class="col-md-3">
@@ -155,7 +155,7 @@
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
             {% csrf_token %}
-            {% for document in documents %}
+            {% for document in results.results %}
             <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.localidentifier }}" {% if document.localidentifier in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
@@ -274,7 +274,7 @@
                   {% endif %}
                   {% if document.can_cite %}
                   <li>
-                    <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ document.localidentifier }}">
+                    <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ document.localidentifier|slugify }}">
                       <i class="icon ion-ios-quote toolbox-cite"></i>
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
@@ -303,7 +303,7 @@
                 {# Modal window #}
                 <div class="hidden">
                   {% if document.can_cite %}
-                    {% with article=document.model_instance %}
+                    {% with article=document %}
                       {% include "public/journal/partials/article_citation_modal_content.html" %}
                     {% endwith %}
                   {% endif %} {# document.can_cite #}
