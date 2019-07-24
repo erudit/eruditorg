@@ -291,7 +291,6 @@ DATABASE_ROUTERS = [
 
 CACHES = {
     'default': env.cache("CACHE_URL"),
-    'fedora': env.cache("CACHE_URL"),
     'files': env.cache("CACHE_URL"),
 }
 NEVER_TTL = 0               # Do not cache

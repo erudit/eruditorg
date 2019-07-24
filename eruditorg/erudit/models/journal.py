@@ -8,7 +8,6 @@ import re
 
 from lxml import etree as et
 
-from django.core.cache import caches
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -47,7 +46,6 @@ from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 
 from .core import Collection, Language
 
-cache = caches['fedora']
 logger = structlog.get_logger(__name__)
 
 

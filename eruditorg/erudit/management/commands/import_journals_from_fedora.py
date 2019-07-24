@@ -21,7 +21,7 @@ from ...models import Collection
 from ...models import Issue
 from ...models import Journal
 
-cache = caches['fedora']
+cache = caches['default']
 logger = structlog.getLogger(__name__)
 
 

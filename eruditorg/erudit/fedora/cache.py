@@ -6,7 +6,7 @@ from django.core.cache import caches
 
 from ..conf import settings as erudit_settings
 
-cache = caches['fedora']
+cache = caches['default']
 
 
 def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT):
