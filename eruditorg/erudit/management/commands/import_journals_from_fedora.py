@@ -360,7 +360,6 @@ class Command(BaseCommand):
 
         # STEP 2: creates or updates the journal object
         # --
-
         oaiset_info_tree = remove_xml_namespaces(
             et.fromstring(fedora_journal.oaiset_info.content.serialize())) \
             if fedora_journal.oaiset_info.exists else None
@@ -375,31 +374,29 @@ class Command(BaseCommand):
 
         # Fetches the Journal instance... or creates a new one
         journal_localidentifier = localidentifier_from_pid(journal_pid)
+        xml_issue = publications_tree.xpath(
+            './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
         try:
             journal = Journal.objects.get(localidentifier=journal_localidentifier)
         except Journal.DoesNotExist:
-            journal = Journal()
-            journal.localidentifier = journal_localidentifier
-            journal.collection = collection
-            journal.fedora_created = fedora_journal.created
-            journal.name = xml_name.text if xml_name is not None else None
+            code = xml_issue[0].get('revAbr') if xml_issue is not None else None
+            code = code if code else re.sub(r'\d', '', journal_localidentifier)
+            # If there is no journal with the localidentifier, try getting it by code.
+            # We can safely assume that code is unique for new journal.
+            try:
+                journal = Journal.objects.get(code=code)
+            except Journal.DoesNotExist:
+                journal = Journal()
+            finally:
+                journal.localidentifier = journal_localidentifier
+                journal.code = code
+                journal.collection = collection
+                journal.fedora_created = fedora_journal.created
+                journal.name = xml_name.text if xml_name is not None else None
 
-        xml_issue = publications_tree.xpath(
-            './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
         journal_erudit_object = journal.get_erudit_object(use_cache=False)
         journal.first_publication_year = journal_erudit_object.first_publication_year
         journal.last_publication_year = journal_erudit_object.last_publication_year
-
-        # Some journals share the same code in the Fedora repository so we have to ensure that our
-        # journal instances' codes are not duplicated!
-        if not journal.id:
-            code_base = xml_issue[0].get('revAbr') if xml_issue is not None else None
-            code_base = code_base if code_base else re.sub(r'\d', '', journal_localidentifier)
-            code_ext = 1
-            journal.code = code_base
-            while Journal.objects.filter(code=journal.code).exists():
-                journal.code = code_base + str(code_ext)
-                code_ext += 1
 
         issues = xml_issue = publications_tree.xpath('.//numero')
         current_journal_localid_found = False

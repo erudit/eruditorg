@@ -13,6 +13,7 @@ from erudit.test.solr import FakeSolrClient
 import erudit.fedora.repository
 import erudit.fedora.modelmixins
 import erudit.fedora.utils
+import erudit.management.commands.import_journals_from_fedora
 
 
 @pytest.fixture(autouse=True)
@@ -25,7 +26,6 @@ def clear_cache():
 def mock_fedora_api(monkeypatch):
     def shouldnt_call(*args, **kwargs):
         raise AssertionError('Never supposed to be called')
-
     monkeypatch.setattr(erudit.fedora.repository.repo.api, '_make_request', shouldnt_call)
     mocked_api = FakeAPI()
     monkeypatch.setattr(erudit.fedora.repository.repo.api, 'get', mocked_api.get)
@@ -33,6 +33,7 @@ def mock_fedora_api(monkeypatch):
     monkeypatch.setattr(erudit.fedora.repository, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.modelmixins, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.utils, 'api', mocked_api)
+    monkeypatch.setattr(erudit.management.commands.import_journals_from_fedora, 'api', mocked_api)
 
 
 @pytest.fixture(autouse=True)

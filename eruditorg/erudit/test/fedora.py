@@ -113,6 +113,7 @@ class FakeAPI(ApiFacade):
     def __init__(self):
         super().__init__(self.BASE_URL, 'username', 'password')
         self._content_map = {}
+        self._datastream_map = {}
         self._articles_with_pdf = set()
         self._query_results = {
             'series': set(),
@@ -174,6 +175,11 @@ class FakeAPI(ApiFacade):
             self._content_map[pid] = None
         if with_pdf:
             self._articles_with_pdf.add(pid)
+
+    def register_datastream(self, pid, datastream_id, datastream_content):
+        if pid not in self._datastream_map.keys():
+            self._datastream_map[pid] = {}
+        self._datastream_map[pid][datastream_id] = datastream_content
 
     register_publication = register_pid
     register_article = register_pid
@@ -312,6 +318,11 @@ class FakeAPI(ApiFacade):
                     ).encode()
                 elif not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
+
+                elif pid in self._datastream_map.keys() and \
+                        subselection in self._datastream_map[pid].keys():
+                    result = self._datastream_map[pid][subselection]
+
                 elif subselection in subselections:
                     result = self.get_journal_xml(pid) or b''
         if result is not None:
