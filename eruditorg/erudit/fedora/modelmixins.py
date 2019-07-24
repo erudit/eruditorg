@@ -12,7 +12,7 @@ from ..conf import settings as erudit_settings
 from .repository import api
 
 logger = structlog.getLogger(__name__)
-cache = caches['fedora']
+cache = caches['default']
 
 
 class FedoraMixin:

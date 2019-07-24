@@ -543,6 +543,7 @@ class TestIssueDetailView:
         resp = Client().get(url, {'ticket': issue.prepublication_ticket})
         assert "thisismynewtitle" in resp.content.decode('utf-8')
 
+    @override_settings(CACHES=settings.LOCMEM_CACHES)
     def test_article_items_are_cached_for_published_issues(self):
         issue = IssueFactory(is_published=True)
         article = ArticleFactory(issue=issue, title="thisismyoldtitle")
@@ -567,7 +568,6 @@ class TestIssueDetailView:
 
 
 class TestArticleDetailView:
-    @override_settings(CACHES=settings.NO_CACHES)
     def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
         # The goal of this test is to verify that out erudit article mechanism doesn't crash for
         # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
