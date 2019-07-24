@@ -4,11 +4,31 @@ from bs4 import BeautifulSoup
 from django.test import Client
 from django.urls import reverse
 
-from erudit.test.factories import ArticleFactory, SolrDocumentFactory
+from erudit.test.factories import ArticleFactory, SolrDocumentFactory, ThesisFactory
 
 
 @pytest.mark.django_db
 class TestSearchResultsView:
+
+    def test_search_results_can_cite_thesis(self, solr_client):
+        thesis = ThesisFactory()
+
+        doc = SolrDocumentFactory(
+            title="Thèse",
+            type='Thèses',
+            year="1999",
+            language='fr',
+        )
+        solr_client.add_document(doc)
+        url = reverse('public:search:results')
+        response = Client().get(url, data={
+            'basic_search_term': '*',
+            'publication_types': 'Thèses',
+        })
+        html = response.content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        results = dom.find('ol', {'class': 'results'})
+        assert len(results.find_all('li', {'class': 'result'})) == 1
 
     def test_search_results_citation_modal(self, solr_client):
         # Article in Fedora, citation tools should be displayed.
