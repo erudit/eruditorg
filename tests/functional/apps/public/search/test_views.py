@@ -46,9 +46,6 @@ class TestEruditSearchResultsView:
         results = response.context['results']
         assert results['pagination']['count'] == 1
 
-    # This NO_CACHES override is needed because otherwise the cache.set() call tries to picke our
-    # mock erudit object and crashes.
-    @override_settings(CACHES=settings.NO_CACHES)
     def test_fedora_issue_with_external_url_yield_no_pdf_link(self):
         # When an fedora issue has an external_url (for example, RECMA. see #1651), we don't want
         # any of its articles to yield a PDF link.
