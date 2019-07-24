@@ -148,7 +148,9 @@
   <ul class="nav-tabs" role="tablist">
     {% if journal_info.about %}<li role="presentation" id="journal-info-about-li"><a href="#journal-info-about" onclick="window.location.hash='#journal-info-about';return false;" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
 
+    {% nocache %}
     {% if issues %}<li role="presentation" id="back-issues-li"><a href="#back-issues" onclick="window.location.hash='#back-issues';return false;" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
+    {% endnocache %}
 
     {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation" id="journal-info-editorial_policy-li"><a href="#journal-info-editorial_policy" onclick="window.location.hash='#journal-info-editorial_policy';return false;" role="tab" data-toggle="tab">{% trans "Politique éditoriale et éthique" %}</a></li>{% endif %}
 
