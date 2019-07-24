@@ -53,10 +53,9 @@ IssueReader.prototype.getInitialMode = function(params) {
 IssueReader.prototype.initNavbar = function() {
   this.refs.$BRnav = $(
     "<div class=\"BRnav BRnavDesktop\">"
-    +"  <div class=\"BRnavpos\">"
+    +"  <div class=\"BRnavpos desktop-only\">"
     +"    <div class=\"BRpager\"></div>"
-    +"    <div class=\"BRnavline\">"
-    +"    </div>"
+    +"    <div class=\"BRnavline\"></div>"
     +"  </div>"
     +"  <div class=\"BRpage\">"
     +     "<span class=\"BRcurrentpage\"></span>"
@@ -64,8 +63,8 @@ IssueReader.prototype.initNavbar = function() {
     +     "<button class=\"BRicon book_right js-tooltip\"></button>"
     +     "<button class=\"BRicon onepg js-tooltip\"></button>"
     +     "<button class=\"BRicon twopg js-tooltip\"></button>"
-    +     "<button class=\"BRicon zoom_out desktop-only js-tooltip\"></button>"
-    +     "<button class=\"BRicon zoom_in desktop-only js-tooltip\"></button>"
+    +     "<button class=\"BRicon zoom_out js-tooltip\"></button>"
+    +     "<button class=\"BRicon zoom_in js-tooltip\"></button>"
     +"  </div>"
     +"</div>"
   );
