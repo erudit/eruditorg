@@ -1,6 +1,7 @@
 import io
 import datetime
 import re
+import structlog
 
 from bs4 import BeautifulSoup, Tag
 from django.urls import reverse
@@ -20,6 +21,7 @@ from urllib.parse import urlparse
 from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
+log = structlog.getLogger(__name__)
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
 
@@ -59,6 +61,19 @@ addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
 
 def get_coverpage(article):
     pdf_buffer = io.BytesIO()
+
+    title = article.title
+    authors = article.get_formatted_authors_without_suffixes()
+
+    try:
+        title.encode('pdfdoc')
+        authors.encode('pdfdoc')
+    except (ValueError, UnicodeEncodeError):
+        log.warn(
+            'coverpage_encoding_error',
+            article_localidentifier=article.localidentifier
+        )
+
     template = SimpleDocTemplate(
         pdf_buffer,
         # Letter size: 612 points by 792 points
@@ -67,8 +82,8 @@ def get_coverpage(article):
         leftMargin=30,
         topMargin=30,
         bottomMargin=18,
-        title=article.html_title,
-        author=article.get_formatted_authors_without_suffixes(),
+        title=title.encode('pdfdoc', errors="replace"),
+        author=authors.encode('pdfdoc', errors="replace"),
         creator='Érudit',
         subject='',
     )
