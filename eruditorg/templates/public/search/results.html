@@ -28,7 +28,7 @@
         <div class="col-md-8">
           <h1>{% trans "Résultats de recherche" %}</h1>
           <div class="main-header__intro">
-            {% if documents %}
+            {% if results.results %}
             <p>
               {% blocktrans trimmed count counter=results.pagination.count %}
               <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
@@ -47,7 +47,7 @@
             <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
           </div>
         </div>
-        {% if documents %}
+        {% if results.results %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
             <a href="#" id="id_save_search" class="btn btn-secondary">{% trans "Sauvegarder ces résultats" %}</a>
             {% url 'public:search:advanced_search' as advanced_search %}
@@ -64,7 +64,7 @@
   <section class="main-content">
     <div class="container">
       <div class="row">
-      {% if documents %}
+      {% if results.results %}
         {# Filter form #}
         <form action="{% url 'public:search:results' %}" id="id-search" class="result-search-form" method="get">
           <aside class="col-md-3">
@@ -155,7 +155,7 @@
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
             {% csrf_token %}
-            {% for document in documents %}
+            {% for document in results.results %}
             <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.localidentifier }}" {% if document.localidentifier in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
@@ -274,7 +274,7 @@
                   {% endif %}
                   {% if document.can_cite %}
                   <li>
-                    <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ forloop.counter }}">
+                    <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ document.localidentifier|slugify }}">
                       <i class="icon ion-ios-quote toolbox-cite"></i>
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
@@ -303,67 +303,9 @@
                 {# Modal window #}
                 <div class="hidden">
                   {% if document.can_cite %}
-                  <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                    <p class="modal-header">{% trans "Outils de citation" %}</p>
-                    <div class="modal-body">
-
-                      {% if document.document_type == 'article' %}
-                      {% with article=document %}
-                      <dl class="cite-modal--style-list">
-                        <dt>MLA</dt>
-                        <dd id="id_cite_mla_{{ forloop.counter }}" class="cite-mla">
-                          {{ article.get_formatted_authors_mla }}
-                          {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
-                          <em>{{ article.series_display }}</em>,
-                          {{ article.publication_year|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
-                        </dd>
-
-                        <dt>APA</dt>
-                        <dd id="id_cite_apa_{{ forloop.counter }}" class="cite-apa">
-                          {{ article.get_formatted_authors_apa }}
-                          ({{ article.issue_published }}).
-                          {{ article.title|safe }}
-                          <em>{{ article.series_display }}</em>,
-                          {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
-                          {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
-                        </dd>
-
-                        <dt>Chicago</dt>
-                        <dd id="id_cite_chicago_{{ forloop.counter }}" class="cite-chicago">
-                          {{ article.get_formatted_authors_chicago }}
-                          {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
-                          <em>{{ article.series_display }}</em>
-                          {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
-                          ({{ article.issue_published }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
-                        </dd>
-                      </dl>
-                      <hr/>
-                      {% endwith %}
-                      {% endif  %}
-
-                      <p>{% trans "Exporter la notice de ce document" %}</p>
-                      <div class="row">
-                        <p class="col-xs-4">
-                          <a href="{{ document.cite_ris_url }}" class="btn btn-secondary cite-export">
-                            <span class="show cite-export-title">RIS</span>
-                          </a>
-                          <br/><br/>EndNote, Papers, Reference Manager, RefWorks, Zotero
-                        </p>
-                        <p class="col-xs-4">
-                          <a href="{{ document.cite_enw_url }}" class="btn btn-secondary cite-export">
-                            <span class="show cite-export-title">ENW</span>
-                          </a>
-                          <br/><br/>EndNote {% trans '(version X9.1 et +)' %}, Zotero
-                        </p>
-                        <p class="col-xs-4">
-                          <a href="{{ document.cite_bib_url }}" class="btn btn-secondary cite-export">
-                            <span class="show cite-export-title">BIB</span>
-                          </a>
-                          <br/><br/>BibTeX, JabRef, Mendeley, Zotero
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                    {% with article=document %}
+                      {% include "public/journal/partials/article_citation_modal_content.html" %}
+                    {% endwith %}
                   {% endif %} {# document.can_cite #}
                 </div>
               </div>

@@ -1,8 +1,9 @@
 {% load i18n public_journal_tags %}
 
-<div id="id_cite_modal_{{ article.localidentifier }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+<div id="id_cite_modal_{{ article.localidentifier|slugify }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
   <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
   <div class="modal-body">
+    {% if article|get_class == 'Article' %}
     <h3>{% trans "Citer cet article" %}</h3>
     <dl class="cite-modal--style-list">
       <dt><strong>MLA</strong></dt>
@@ -20,27 +21,28 @@
         {{ article.cite_string_chicago|safe }}
       </dd>
     </dl>
-
     <hr />
-    <h3>{% trans "Exporter la notice de ce document" %}</h3>
+    {% endif %}
+
+    <h3>{% trans "Exporter la notice de ce article" %}</h3>
     <div class="row">
       <p class="col-xs-4">
-        <a href="{% url 'public:journal:article_citation_ris' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-secondary cite-export">
+        <a href="{{ article.cite_ris_url }}" class="btn btn-secondary cite-export">
           <span class="show cite-export-title">RIS</span>
         </a>
-        <br/><br/>EndNote, Papers, Reference Manager, RefWorks, Zotero
+        <br><br>EndNote, Papers, Reference Manager, RefWorks, Zotero
       </p>
       <p class="col-xs-4">
-        <a href="{% url 'public:journal:article_citation_enw' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-secondary cite-export">
+        <a href="{{ article.cite_enw_url }}" class="btn btn-secondary cite-export">
           <span class="show cite-export-title">ENW</span>
         </a>
-        <br/><br/>EndNote {% trans '(version X9.1 et +)' %}, Zotero
+        <br><br>EndNote {% trans '(version X9.1 et +)' %}, Zotero
       </p>
       <p class="col-xs-4">
-        <a href="{% url 'public:journal:article_citation_bib' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-secondary cite-export">
+        <a href="{{ article.cite_bib_url }}" class="btn btn-secondary cite-export">
           <span class="show cite-export-title">BIB</span>
         </a>
-        <br/><br/>BibTeX, JabRef, Mendeley, Zotero
+        <br><br>BibTeX, JabRef, Mendeley, Zotero
       </p>
     </div>
   </div>

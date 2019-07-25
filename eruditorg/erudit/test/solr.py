@@ -21,11 +21,14 @@ SOLR2DOC = {
     'TexteComplet': 'title',
     'Corpus_fac': 'type',
     'TypeArticle_fac': 'article_type',
+    'TitreCollection_fac': 'collection',
     'RevueAbr': 'journal_code',
     'AnneePublication': 'year',
     'DateAjoutErudit': 'date_added',
     'Fonds_fac': 'collection',
     'Editeur': 'collection',
+    'Annee': 'year',
+    'Langue': 'language',
 }
 
 
@@ -39,7 +42,7 @@ class SolrDocument:
         self.solr_attrs = solr_attrs
         OPTIONAL_ARGS = [
             'article_type', 'journal_code', 'collection', 'year', 'date_added', 'repository',
-            'issue_localidentifier']
+            'issue_localidentifier', 'language']
         for attr in OPTIONAL_ARGS:
             val = kwargs.get(attr)
             if isinstance(val, int):
