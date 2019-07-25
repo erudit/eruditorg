@@ -29,8 +29,7 @@ from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
 from rules.contrib.views import PermissionRequiredMixin
-from PyPDF2 import PdfFileReader
-from PyPDF2.utils import PdfReadError
+import pikepdf
 from lxml import etree as et
 
 from erudit.fedora.objects import ArticleDigitalObject
@@ -714,19 +713,13 @@ class BaseArticleDetailView(
             context['article'] = article
 
         if article.fedora_object.pdf.exists:
-            try:
-                pdf = PdfFileReader(article.fedora_object.pdf.content, strict=False)
-                context['pdf_exists'] = True
-                context['pdf_num_pages'] = pdf.getNumPages()
-                context['can_display_first_pdf_page'] = (
-                    context['pdf_exists'] and
-                    context['pdf_num_pages'] > 1
-                )
-            except PdfReadError as e:
-                logger.warning(
-                    'PdfReadError: {}'.format(str(e)),
-                    localidentifier=article.localidentifier,
-                )
+            pdf = pikepdf.open(article.fedora_object.pdf.content)
+            context['pdf_exists'] = True
+            context['pdf_num_pages'] = len(pdf.pages)
+            context['can_display_first_pdf_page'] = (
+                context['pdf_exists'] and
+                context['pdf_num_pages'] > 1
+            )
 
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
