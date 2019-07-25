@@ -67,10 +67,6 @@ def get_coverpage(article):
         leftMargin=30,
         topMargin=30,
         bottomMargin=18,
-        title=article.html_title,
-        author=article.get_formatted_authors_without_suffixes(),
-        creator='Érudit',
-        subject='',
     )
     language = get_language()
 
