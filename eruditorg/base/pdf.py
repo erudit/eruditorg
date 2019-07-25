@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
-from io import BytesIO
-import pikepdf
+import tempfile
+import subprocess
 import mimetypes
 
 from weasyprint.urls import default_url_fetcher
@@ -19,24 +19,42 @@ def add_coverpage_to_pdf(coverpage, content):
     """ Add the coverpage to the PDF
 
     Return the resulting PDF bytes """
-    output = BytesIO()
-    coverpage_pdf = pikepdf.open(coverpage)
-    content_pdf = pikepdf.open(content)
-    coverpage_pdf.pages.extend(content_pdf.pages)
-    coverpage_pdf.save(output)
-    output.seek(0)
-    return output.read()
+
+    with tempfile.NamedTemporaryFile() as f1:
+        with tempfile.NamedTemporaryFile() as f2:
+            with tempfile.NamedTemporaryFile() as f3:
+                coverpage.seek(0)
+                content.seek(0)
+                f1.write(coverpage.read())
+                f2.write(content.read())
+
+                subprocess.check_call(
+                    [
+                        'qpdf', '--empty', '--pages', f1.name,
+                        '1-z', f2.name, '1-z', '--', f3.name
+                    ]
+                )
+
+                return f3.read()
 
 
 def get_pdf_first_page(content):
     """ Return the first page of the PDF
     """
-    output = BytesIO()
-    pdf = pikepdf.open(content)
-    del pdf.pages[1:]
-    pdf.save(output)
-    output.seek(0)
-    return output.read()
+
+    with tempfile.NamedTemporaryFile() as f1:
+        with tempfile.NamedTemporaryFile() as f2:
+            content.seek(0)
+            f1.write(content.read())
+
+            subprocess.check_call(
+                [
+                    'qpdf', '--empty', '--pages', f1.name,
+                    '1-1', '--', f2.name
+                ]
+            )
+
+            return f2.read()
 
 
 def local_url_fetcher(url):
