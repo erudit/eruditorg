@@ -1,6 +1,7 @@
 import io
 import datetime
 import re
+import sentry_sdk
 import structlog
 
 from bs4 import BeautifulSoup, Tag
@@ -62,8 +63,12 @@ addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
 def get_coverpage(article):
     pdf_buffer = io.BytesIO()
 
-    title = article.title
+    # Remove UTF-8 non-breaking spaces to reduce encoding warnings.
+    title = article.title.replace('\xa0', ' ')
     authors = article.get_formatted_authors_without_suffixes()
+
+    with sentry_sdk.configure_scope() as scope:
+        scope.fingerprint = ['coverpage_encoding_error']
 
     try:
         title.encode('pdfdoc')
