@@ -153,6 +153,7 @@ export default {
       closeBtnInside: false,
       fixedContentPos: true,
       mainClass: 'mfp-no-margins mfp-with-zoom',
+      prependTo: $('.full-article'),
       image: {
         verticalFit: false,
         titleSrc: false,
