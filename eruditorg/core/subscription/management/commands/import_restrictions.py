@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+import sentry_sdk
 import structlog
 
 import datetime as dt
@@ -321,6 +320,8 @@ class Command(BaseCommand):
 
         # gets or creates a JournalAccessSubscription instance
         # --
+        with sentry_sdk.configure_scope() as scope:
+            scope.fingerprint = ['Journal.DoesNotExist']
 
         try:
             journal_code = restriction_journal.titrerevabr.lower()
