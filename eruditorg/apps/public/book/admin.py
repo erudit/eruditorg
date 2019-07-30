@@ -5,8 +5,22 @@ from django.utils.translation import gettext as _
 
 class BookAdmin(admin.ModelAdmin):
 
-    list_display = ('title', 'year', 'authors', 'collection', 'is_published')
-    list_filter = ('collection', 'is_open_access', 'is_published')
+    list_display = (
+        'title',
+        'year',
+        'authors',
+        'collection',
+        'slug',
+        'publisher',
+        'isbn',
+        'digital_isbn',
+        'is_published',
+    )
+    list_filter = (
+        'collection',
+        'is_open_access',
+        'is_published',
+    )
 
     fieldsets = [
         (None, {
