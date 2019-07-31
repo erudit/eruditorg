@@ -1,0 +1,125 @@
+
+<numeros>
+  <originator app="Tournesol 0.5.4" date="2019-07-31" username="p0986952"></originator>
+  <revue>
+    <gratuites>
+      <gratuite pid="erudit:erudit.recma0448" revue="recma" valeur="false"></gratuite>
+    </gratuites>
+    <notes>
+      <note langue="fr" pid="erudit:erudit.recma0448" revue="recma">Cette revue a cessé de publier ses numéros sur Érudit depuis 2016, vous pouvez consulter les numéros subséquents sur <liensimple href="https://www.cairn.info/revue-recma.htm">Cairn</liensimple>
+      </note>
+    </notes>
+  </revue>
+  <liste>
+    <decennie dannee="2017" pannee="2011">
+      <annee valeur="2017">
+        <numero annee="2017" autrenumero="" nonumero="345" periode="Juillet" pid="erudit:erudit.recma0448.recma03165" revAbr="recma" type="reg" url="recma/2017/v/n345" volume=""></numero>
+        <numero annee="2017" autrenumero="" nonumero="344" periode="Avril" pid="erudit:erudit.recma0448.recma03038" revAbr="recma" type="reg" url="recma/2017/v/n344" volume=""></numero>
+        <numero annee="2017" autrenumero="" nonumero="343" periode="Janvier" pid="erudit:erudit.recma0448.recma02913" revAbr="recma" type="reg" url="recma/2017/v/n343" volume=""></numero>
+      </annee>
+      <annee valeur="2016">
+        <numero annee="2016" autrenumero="" nonumero="342" periode="Octobre" pid="erudit:erudit.recma0448.recma02828" revAbr="recma" type="reg" url="recma/2016/v/n342" volume=""></numero>
+        <numero annee="2016" autrenumero="" nonumero="341" periode="Juillet" pid="erudit:erudit.recma0448.recma02662" revAbr="recma" type="reg" url="recma/2016/v/n341" volume=""></numero>
+        <numero annee="2016" autrenumero="" nonumero="340" periode="Avril" pid="erudit:erudit.recma0448.recma02659" revAbr="recma" type="reg" url="recma/2016/v/n340" volume=""></numero>
+        <numero annee="2016" autrenumero="" nonumero="339" periode="Janvier" pid="erudit:erudit.recma0448.recma02407" revAbr="recma" type="reg" url="recma/2016/v/n339" volume=""></numero>
+      </annee>
+      <annee valeur="2015">
+        <numero annee="2015" autrenumero="" nonumero="338" periode="Octobre" pid="erudit:erudit.recma0448.recma02157" revAbr="recma" type="reg" url="recma/2015/v/n338" volume=""></numero>
+        <numero annee="2015" autrenumero="" nonumero="337" periode="Juillet" pid="erudit:erudit.recma0448.recma02017" revAbr="recma" type="reg" url="recma/2015/v/n337" volume=""></numero>
+        <numero annee="2015" autrenumero="" nonumero="336" periode="Avril" pid="erudit:erudit.recma0448.recma01831" revAbr="recma" type="reg" url="recma/2015/v/n336" volume=""></numero>
+        <numero annee="2015" autrenumero="" nonumero="335" periode="Janvier" pid="erudit:erudit.recma0448.recma01695" revAbr="recma" type="reg" url="recma/2015/v/n335" volume=""></numero>
+      </annee>
+      <annee valeur="2014">
+        <numero annee="2014" autrenumero="" nonumero="334" periode="Octobre" pid="erudit:erudit.recma0448.recma01584" revAbr="recma" type="reg" url="recma/2014/v/n334" volume=""></numero>
+        <numero annee="2014" autrenumero="" nonumero="333" periode="Juillet" pid="erudit:erudit.recma0448.recma01483" revAbr="recma" type="reg" url="recma/2014/v/n333" volume=""></numero>
+        <numero annee="2014" autrenumero="" nonumero="332" periode="Avril" pid="erudit:erudit.recma0448.recma01376" revAbr="recma" type="reg" url="recma/2014/v/n332" volume=""></numero>
+        <numero annee="2014" autrenumero="" nonumero="331" periode="Janvier" pid="erudit:erudit.recma0448.recma01239" revAbr="recma" type="reg" url="recma/2014/v/n331" volume=""></numero>
+      </annee>
+      <annee valeur="2013">
+        <numero annee="2013" autrenumero="" nonumero="330" periode="Octobre" pid="erudit:erudit.recma0448.recma0901" revAbr="recma" type="reg" url="recma/2013/v/n330" volume=""></numero>
+        <numero annee="2013" autrenumero="" nonumero="329" periode="Juillet" pid="erudit:erudit.recma0448.recma0776" revAbr="recma" type="reg" url="recma/2013/v/n329" volume=""></numero>
+        <numero annee="2013" autrenumero="" nonumero="328" periode="Avril" pid="erudit:erudit.recma0448.recma0564" revAbr="recma" type="reg" url="recma/2013/v/n328" volume=""></numero>
+        <numero annee="2013" autrenumero="" nonumero="327" periode="Janvier" pid="erudit:erudit.recma0448.recma0537" revAbr="recma" type="reg" url="recma/2013/v/n327" volume=""></numero>
+      </annee>
+      <annee valeur="2012">
+        <numero annee="2012" autrenumero="" nonumero="326" periode="Octobre" pid="erudit:erudit.recma0448.recma0683" revAbr="recma" type="reg" url="recma/2012/v/n326" volume=""></numero>
+        <numero annee="2012" autrenumero="" nonumero="325" periode="Juillet" pid="erudit:erudit.recma0448.recma0740" revAbr="recma" type="reg" url="recma/2012/v/n325" volume=""></numero>
+        <numero annee="2012" autrenumero="" nonumero="324" periode="Avril" pid="erudit:erudit.recma0448.recma0768" revAbr="recma" type="reg" url="recma/2012/v/n324" volume=""></numero>
+        <numero annee="2012" autrenumero="" nonumero="323" periode="Janvier" pid="erudit:erudit.recma0448.recma0813" revAbr="recma" type="reg" url="recma/2012/v/n323" volume=""></numero>
+      </annee>
+      <annee valeur="2011">
+        <numero annee="2011" autrenumero="" nonumero="322" periode="Octobre" pid="erudit:erudit.recma0448.recma01019" revAbr="recma" type="reg" url="recma/2011/v/n322" volume=""></numero>
+        <numero annee="2011" autrenumero="" nonumero="321" periode="Juillet" pid="erudit:erudit.recma0448.recma01033" revAbr="recma" type="reg" url="recma/2011/v/n321" volume=""></numero>
+        <numero annee="2011" autrenumero="" nonumero="320" periode="Avril" pid="erudit:erudit.recma0448.recma01038" revAbr="recma" type="reg" url="recma/2011/v/n320" volume=""></numero>
+        <numero annee="2011" autrenumero="" nonumero="319" periode="Janvier" pid="erudit:erudit.recma0448.recma01029" revAbr="recma" type="reg" url="recma/2011/v/n319" volume=""></numero>
+      </annee>
+    </decennie>
+    <decennie dannee="2010" pannee="2001">
+      <annee valeur="2010">
+        <numero annee="2010" autrenumero="" nonumero="318" periode="Octobre" pid="erudit:erudit.recma0448.recma01032" revAbr="recma" type="reg" url="recma/2010/v/n318" volume=""></numero>
+        <numero annee="2010" autrenumero="" nonumero="317" periode="Août" pid="erudit:erudit.recma0448.recma01036" revAbr="recma" type="reg" url="recma/2010/v/n317" volume=""></numero>
+        <numero annee="2010" autrenumero="" nonumero="316" periode="Mai" pid="erudit:erudit.recma0448.recma01037" revAbr="recma" type="reg" url="recma/2010/v/n316" volume=""></numero>
+        <numero annee="2010" autrenumero="" nonumero="315" periode="Février" pid="erudit:erudit.recma0448.recma01042" revAbr="recma" type="reg" url="recma/2010/v/n315" volume=""></numero>
+      </annee>
+      <annee valeur="2009">
+        <numero annee="2009" autrenumero="" nonumero="314" periode="Octobre" pid="erudit:erudit.recma0448.recma01044" revAbr="recma" type="reg" url="recma/2009/v/n314" volume=""></numero>
+        <numero annee="2009" autrenumero="" nonumero="313" periode="Juillet" pid="erudit:erudit.recma0448.recma01039" revAbr="recma" type="reg" url="recma/2009/v/n313" volume=""></numero>
+        <numero annee="2009" autrenumero="" nonumero="312" periode="Mai" pid="erudit:erudit.recma0448.recma01040" revAbr="recma" type="reg" url="recma/2009/v/n312" volume=""></numero>
+        <numero annee="2009" autrenumero="" nonumero="311" periode="Février" pid="erudit:erudit.recma0448.recma01135" revAbr="recma" type="reg" url="recma/2009/v/n311" volume=""></numero>
+      </annee>
+      <annee valeur="2008">
+        <numero annee="2008" autrenumero="" nonumero="310" periode="Octobre" pid="erudit:erudit.recma0448.recma01052" revAbr="recma" type="reg" url="recma/2008/v/n310" volume=""></numero>
+        <numero annee="2008" autrenumero="" nonumero="309" periode="Juillet" pid="erudit:erudit.recma0448.recma01054" revAbr="recma" type="reg" url="recma/2008/v/n309" volume=""></numero>
+        <numero annee="2008" autrenumero="" nonumero="308" periode="Mai" pid="erudit:erudit.recma0448.recma01058" revAbr="recma" type="reg" url="recma/2008/v/n308" volume=""></numero>
+        <numero annee="2008" autrenumero="" nonumero="307" periode="Février" pid="erudit:erudit.recma0448.recma01060" revAbr="recma" type="reg" url="recma/2008/v/n307" volume=""></numero>
+      </annee>
+      <annee valeur="2007">
+        <numero annee="2007" autrenumero="" nonumero="306" periode="Octobre" pid="erudit:erudit.recma0448.recma01066" revAbr="recma" type="reg" url="recma/2007/v/n306" volume=""></numero>
+        <numero annee="2007" autrenumero="" nonumero="305" periode="Juillet" pid="erudit:erudit.recma0448.recma01087" revAbr="recma" type="reg" url="recma/2007/v/n305" volume=""></numero>
+        <numero annee="2007" autrenumero="" nonumero="304" periode="Mai" pid="erudit:erudit.recma0448.recma01090" revAbr="recma" type="reg" url="recma/2007/v/n304" volume=""></numero>
+        <numero annee="2007" autrenumero="" nonumero="303" periode="Mars" pid="erudit:erudit.recma0448.recma01093" revAbr="recma" type="reg" url="recma/2007/v/n303" volume=""></numero>
+      </annee>
+      <annee valeur="2006">
+        <numero annee="2006" autrenumero="" nonumero="302" periode="Novembre" pid="erudit:erudit.recma0448.recma01094" revAbr="recma" type="reg" url="recma/2006/v/n302" volume=""></numero>
+        <numero annee="2006" autrenumero="" nonumero="301" periode="Juillet" pid="erudit:erudit.recma0448.recma01095" revAbr="recma" type="reg" url="recma/2006/v/n301" volume=""></numero>
+        <numero annee="2006" autrenumero="" nonumero="300" periode="Mai" pid="erudit:erudit.recma0448.recma01107" revAbr="recma" type="reg" url="recma/2006/v/n300" volume=""></numero>
+        <numero annee="2006" autrenumero="" nonumero="299" periode="Février" pid="erudit:erudit.recma0448.recma01109" revAbr="recma" type="reg" url="recma/2006/v/n299" volume=""></numero>
+      </annee>
+      <annee valeur="2005">
+        <numero annee="2005" autrenumero="" nonumero="298" periode="Novembre" pid="erudit:erudit.recma0448.recma01110" revAbr="recma" type="reg" url="recma/2005/v/n298" volume=""></numero>
+        <numero annee="2005" autrenumero="" nonumero="297" periode="Juillet" pid="erudit:erudit.recma0448.recma01111" revAbr="recma" type="reg" url="recma/2005/v/n297" volume=""></numero>
+        <numero annee="2005" autrenumero="" nonumero="296" periode="Mai" pid="erudit:erudit.recma0448.recma01112" revAbr="recma" type="reg" url="recma/2005/v/n296" volume=""></numero>
+        <numero annee="2005" autrenumero="" nonumero="295" periode="Février" pid="erudit:erudit.recma0448.recma01113" revAbr="recma" type="reg" url="recma/2005/v/n295" volume=""></numero>
+      </annee>
+      <annee valeur="2004">
+        <numero annee="2004" autrenumero="" nonumero="294" periode="Novembre" pid="erudit:erudit.recma0448.recma01122" revAbr="recma" type="reg" url="recma/2004/v/n294" volume=""></numero>
+        <numero annee="2004" autrenumero="" nonumero="293" periode="Juillet" pid="erudit:erudit.recma0448.recma01127" revAbr="recma" type="reg" url="recma/2004/v/n293" volume=""></numero>
+        <numero annee="2004" autrenumero="" nonumero="292" periode="Mai" pid="erudit:erudit.recma0448.recma01128" revAbr="recma" type="reg" url="recma/2004/v/n292" volume=""></numero>
+        <numero annee="2004" autrenumero="" nonumero="291" periode="Février" pid="erudit:erudit.recma0448.recma01129" revAbr="recma" type="reg" url="recma/2004/v/n291" volume=""></numero>
+      </annee>
+      <annee valeur="2003">
+        <numero annee="2003" autrenumero="" nonumero="290" periode="Novembre" pid="erudit:erudit.recma0448.recma01132" revAbr="recma" type="reg" url="recma/2003/v/n290" volume=""></numero>
+        <numero annee="2003" autrenumero="" nonumero="289" periode="Juillet" pid="erudit:erudit.recma0448.recma01134" revAbr="recma" type="reg" url="recma/2003/v/n289" volume=""></numero>
+        <numero annee="2003" autrenumero="" nonumero="288" periode="Avril" pid="erudit:erudit.recma0448.recma01136" revAbr="recma" type="reg" url="recma/2003/v/n288" volume=""></numero>
+        <numero annee="2003" autrenumero="" nonumero="287" periode="Février" pid="erudit:erudit.recma0448.recma01138" revAbr="recma" type="reg" url="recma/2003/v/n287" volume=""></numero>
+      </annee>
+      <annee valeur="2002">
+        <numero annee="2002" autrenumero="" nonumero="286" periode="Novembre" pid="erudit:erudit.recma0448.recma01140" revAbr="recma" type="reg" url="recma/2002/v/n286" volume=""></numero>
+        <numero annee="2002" autrenumero="" nonumero="285" periode="Juillet" pid="erudit:erudit.recma0448.recma01141" revAbr="recma" type="reg" url="recma/2002/v/n285" volume=""></numero>
+        <numero annee="2002" autrenumero="" nonumero="284" periode="Mai" pid="erudit:erudit.recma0448.recma01143" revAbr="recma" type="reg" url="recma/2002/v/n284" volume=""></numero>
+        <numero annee="2002" autrenumero="" nonumero="283" periode="Février" pid="erudit:erudit.recma0448.recma01189" revAbr="recma" type="reg" url="recma/2002/v/n283" volume=""></numero>
+      </annee>
+      <annee valeur="2001">
+        <numero annee="2001" autrenumero="" nonumero="282" periode="Novembre" pid="erudit:erudit.recma0448.recma01231" revAbr="recma" type="reg" url="recma/2001/v/n282" volume=""></numero>
+        <numero annee="2001" autrenumero="" nonumero="281" periode="Juillet" pid="erudit:erudit.recma0448.recma01304" revAbr="recma" type="reg" url="recma/2001/v/n281" volume=""></numero>
+        <numero annee="2001" autrenumero="" nonumero="280" periode="Avril" pid="erudit:erudit.recma0448.recma01258" revAbr="recma" type="reg" url="recma/2001/v/n280" volume=""></numero>
+        <numero annee="2001" autrenumero="" nonumero="279" periode="Janvier" pid="erudit:erudit.recma0448.recma01270" revAbr="recma" type="reg" url="recma/2001/v/n279" volume=""></numero>
+      </annee>
+    </decennie>
+    <decennie dannee="2000" pannee="2000">
+      <annee valeur="2000">
+        <numero annee="2000" autrenumero="" nonumero="278" periode="Octobre" pid="erudit:erudit.recma0448.recma01281" revAbr="recma" type="reg" url="recma/2000/v/n278" volume=""></numero>
+      </annee>
+    </decennie>
+  </liste>
+</numeros>

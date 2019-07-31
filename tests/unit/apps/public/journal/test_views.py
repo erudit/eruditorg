@@ -109,6 +109,18 @@ class TestJournalDetailView:
         else:
             assert '<span class="journal-subtitle">None</span>' not in html
 
+    def test_journal_note_with_html_link(self):
+        issue = IssueFactory()
+        repository.api.set_xml_for_pid(
+            issue.journal.get_full_identifier(),
+            open('tests/fixtures/journal/recma0448.xml', 'rb').read(),
+        )
+        url = reverse('public:journal:journal_detail', kwargs={
+            'code': issue.journal.code,
+        })
+        html = Client().get(url).content.decode()
+        assert 'Cette revue a cessé de publier ses numéros sur Érudit depuis 2016, vous pouvez consulter les numéros subséquents sur <a href="https://www.cairn.info/revue-recma.htm">Cairn</a>' in html
+
 
 class TestJournalAuthorsListView:
 

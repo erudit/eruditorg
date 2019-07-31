@@ -200,7 +200,7 @@
       {% for note in notes %}
       <div class="alert alert-info">
         <p><i class="icon ion-ios-information-circle alert-info-icon"></i>
-          {{ note }}
+          {{ note|safe }}
         </p>
       </div>
       {% endfor %}
