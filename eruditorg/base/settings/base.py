@@ -32,6 +32,11 @@ env = environ.Env(
     RESTRICTION_DATABASE_URL=(str, 'mysql://root@localhost/restriction'),
 
     CACHE_URL=(str, 'locmemcache://'),
+    FILEBASED_CACHE_DIRECTORY=(str, '/tmp'),
+    FILEBASED_CACHE_TIMEOUT=(int, 300),
+    FILEBASED_CACHE_SHARDS=(int, 8),
+    FILEBASED_CACHE_DATABASE_TIMEOUT=(float, 0.01),
+    FILEBASED_CACHE_SIZE_LIMIT=(int, 8),
     ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT=(int, 3600),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(int, 25),
@@ -291,7 +296,16 @@ DATABASE_ROUTERS = [
 
 CACHES = {
     'default': env.cache("CACHE_URL"),
-    'files': env.cache("CACHE_URL"),
+    'files': {
+        'BACKEND': 'diskcache.DjangoCache',
+        'LOCATION': env('FILEBASED_CACHE_DIRECTORY'),
+        'TIMEOUT': env('FILEBASED_CACHE_TIMEOUT'),  # TTL of cached content
+        'SHARDS': env('FILEBASED_CACHE_SHARDS'),
+        'DATABASE_TIMEOUT': env('FILEBASED_CACHE_DATABASE_TIMEOUT'),  # Timeout for database access
+        'OPTIONS': {
+            'size_limit': env('FILEBASED_CACHE_SIZE_LIMIT'),
+        },
+    },
 }
 NEVER_TTL = 0               # Do not cache
 SHORT_TTL = 60 * 60         # Cache for 1 hour
