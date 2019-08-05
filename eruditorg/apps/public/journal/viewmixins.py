@@ -57,7 +57,9 @@ class ContentAccessCheckMixin:
         :meth:`get_object<django:django.views.generic.detail.SingleObjectMixin.get_object>` method
         will be used. But subclasses can override this to control the way the content is retrieved.
         """
-        return self.object if hasattr(self, 'object') else self.get_object()
+        if hasattr(self, 'object') and self.object is not None:
+            return self.object
+        return self.get_object()
 
     def _get_subscriptions_kwargs_for_content(self):
         content = self.get_content()
@@ -128,6 +130,8 @@ class ContentAccessCheckMixin:
 class SingleArticleMixin:
 
     def __init__(self):
+        # TODO: make this a private instance variable
+        # if this is only used for caching, it should not be accessible directly.
         self.object = None
 
     def get_object(self, queryset=None):
