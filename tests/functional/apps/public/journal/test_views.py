@@ -568,7 +568,11 @@ class TestIssueDetailView:
 
 
 class TestArticleDetailView:
-    def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
+
+    @pytest.mark.parametrize('method', [
+        'get', 'options'
+    ])
+    def test_can_render_erudit_articles(self, monkeypatch, eruditarticle, method):
         # The goal of this test is to verify that out erudit article mechanism doesn't crash for
         # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
         # argument here is a parametrization argument which causes this test to run for each
@@ -580,7 +584,7 @@ class TestArticleDetailView:
             journal=journal, date_published=dt.datetime.now(), localidentifier='test_issue')
         article = ArticleFactory.create(issue=issue, localidentifier='test_article')
         url = article_detail_url(article)
-        response = Client().get(url)
+        response = getattr(Client(), method)(url)
         assert response.status_code == 200
 
     @pytest.mark.parametrize("is_published,has_ticket,expected_code", [
