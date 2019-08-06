@@ -67,3 +67,5 @@ django_prometheus>=1.0.15
 reportlab>=3.5.15
 colorama>=0.4.1
 django-adv-cache-tag>=1.1.0
+
+counter_r5_elasticsearch==0.1
