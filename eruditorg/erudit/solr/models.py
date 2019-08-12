@@ -1,3 +1,11 @@
+import functools
+from typing import (
+    List,
+    Any,
+    Dict,
+    Callable,
+)
+
 from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import ugettext as _
@@ -238,3 +246,24 @@ def get_solr_data_from_id(solr_id):
     elif results.hits > 1:
         raise ValueError("Multiple Solr objects found")
     return results.docs[0]
+
+
+def get_all_solr_results(
+    search_function: Callable[..., pysolr.Results], page_size: int
+) -> List[Dict[str, Any]]:
+    docs = []
+    current = 0
+    while True:
+        results = search_function(start=current, rows=page_size)
+        if not results.docs:
+            break
+        current += page_size
+        docs.extend(results.docs)
+    return docs
+
+
+def get_all_journal_articles(journal_code: str) -> List[Article]:
+    q = f'RevueAbr:"{journal_code}"'
+    search_function = functools.partial(client.search, q=q, facet='false')
+    all_docs = get_all_solr_results(search_function, 500)
+    return [Article(doc) for doc in all_docs]

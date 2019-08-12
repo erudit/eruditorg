@@ -3,6 +3,11 @@ from itertools import groupby
 from operator import attrgetter
 from string import ascii_uppercase
 import io
+from typing import (
+    Iterable,
+    List,
+)
+
 import pysolr
 import random
 import structlog
@@ -42,7 +47,11 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
-from erudit.solr.models import get_fedora_ids
+from erudit.solr.models import (
+    get_fedora_ids,
+    get_all_journal_articles,
+    Article as SolrArticle,
+)
 from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
@@ -637,6 +646,19 @@ class IssueXmlView(
         return fedora_object.xml_content
 
 
+def pick_related_article_candidates(
+    current_article: Article, all_journal_articles: Iterable[SolrArticle]
+) -> List[Article]:
+    candidates = []
+    for solr_article in all_journal_articles:
+        if (
+            solr_article.article_type == "article" and
+            solr_article.localidentifier != current_article.localidentifier
+        ):
+            candidates.append(solr_article)
+    return candidates
+
+
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin,
         FallbackObjectViewMixin,
@@ -687,9 +709,15 @@ class BaseArticleDetailView(
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
-        # return 4 randomly
-        random.shuffle(issue_articles)
-        context['related_articles'] = issue_articles[:4]
+        all_journal_articles = get_all_journal_articles(issue.journal.code)
+        related_candidates = pick_related_article_candidates(current_article, all_journal_articles)
+        # return 4 randomly — at most
+        number_of_related = min(4, len(related_candidates))
+        related_solr_articles = random.sample(related_candidates, k=number_of_related)
+        # calls to Article.from_solr_object are expensive, so create only selected articles
+        related_articles = [Article.from_solr_object(candidate)
+                            for candidate in related_solr_articles]
+        context['related_articles'] = related_articles
 
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
