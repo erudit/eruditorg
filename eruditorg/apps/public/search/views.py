@@ -2,7 +2,6 @@ import logging
 
 import copy
 import urllib.parse as urlparse
-from functools import reduce
 
 from django.urls import reverse
 from django.http import HttpResponseRedirect, QueryDict
@@ -172,18 +171,10 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         except PaginationOutOfBoundsException:
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
 
-        # This is a specific case in order to remove some sub-strings from the localidentifiers
-        # at hand. This is a bit ugly but we are limited here by the predefined Solr document IDs.
-        # For example the IDs are prefixed by "unb:" for UNB articles... But UNB localidentifiers
-        # should not be stored with "unb:" into the database.
-        drop_keywords = ['unb:', ]
-        for document in documents:
-            document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
-
-        documents = list(map(get_model_instance, documents))
+        solr_objects = [get_model_instance(document) for document in documents]
         results = {
             'pagination': pagination_info,
-            'results': documents,
+            'results': solr_objects,
             'aggregations': aggregations_dict,
         }
 

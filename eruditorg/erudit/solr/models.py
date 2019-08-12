@@ -13,7 +13,7 @@ client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 class SolrDocument:
     def __init__(self, solr_data):
-        self.localidentifier = solr_data['ID']
+        self.localidentifier = solr_data['ID'].replace('unb:', '')
         self.corpus = solr_data.get('Corpus_fac')
         self.solr_data = solr_data
 
@@ -131,6 +131,7 @@ class Article(SolrDocument):
 
     @property
     def journal_type(self):
+        # TODO: check this, why is this always 'S' ?
         return 'S'
 
 
