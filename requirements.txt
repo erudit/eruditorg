@@ -17,7 +17,6 @@ certifi==2019.6.16        # via requests, sentry-sdk
 cffi==1.12.3              # via cairocffi, weasyprint
 chardet==3.0.4
 colorama==0.4.1
-counter_r5_elasticsearch==0.1
 cssselect2==0.2.1         # via cairosvg, weasyprint
 cssselect==1.0.3          # via lxml
 defusedxml==0.6.0         # via cairosvg
@@ -41,7 +40,6 @@ django-taggit==1.1.0
 django-waffle==0.17.0
 django-widget-tweaks==1.4.5
 django==2.0.13
-elasticsearch==7.0.2      # via counter-r5-elasticsearch
 et-xmlfile==1.0.1         # via openpyxl
 feedparser==5.2.1
 html2text==2018.1.9
@@ -65,7 +63,7 @@ pyparsing==2.4.0          # via rdflib
 pyphen==0.9.5             # via weasyprint
 pysocks==1.7.0            # via requests
 pysolr==3.8.1
-python-dateutil==2.8.0    # via counter-r5-elasticsearch, influxdb
+python-dateutil==2.8.0    # via influxdb
 python-stdnum==1.11       # via django-isbn-field
 pytz==2019.1              # via babel, django, influxdb
 rdflib==4.2.2
