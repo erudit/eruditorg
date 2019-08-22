@@ -1,13 +1,17 @@
-# -*- coding: utf-8 -*-
+import reversion
 
 from ckeditor.widgets import CKEditorWidget
 from django import forms
+from django.conf import settings
 from django.db.models import ManyToManyField
 from django.forms.models import fields_for_model
 from django.utils.translation import gettext as _
 from django.forms import inlineformset_factory
+from reversion_compare.mixins import CompareMixin
 
+from core.email import Email
 from erudit.models import JournalInformation, Contributor
+from erudit.admin.journal import JOURNAL_INFORMATION_COMPARE_EXCLUDE
 
 
 class JournalInformationForm(forms.ModelForm):
@@ -32,6 +36,7 @@ class JournalInformationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.language_code = kwargs.pop('language_code')
+        self.request = kwargs.pop('request')
         super().__init__(*args, **kwargs)
 
         # Fetches proper labels for for translatable fields: this is necessary
@@ -109,9 +114,44 @@ class JournalInformationForm(forms.ModelForm):
             else:
                 setattr(obj, fname, self.cleaned_data[fname])
 
-        if commit:
-            obj.save()
+        if commit and self.changed_data:
+            with reversion.create_revision():
+                obj.save()
+                changed_field_labels = [
+                    str(self.fields[field_name].label)
+                    for field_name in self.changed_data
+                ]
+                reversion.set_user(self.request.user)
+                reversion.set_comment('Champ(s) modifié(s) : {}'.format(
+                    ', '.join(changed_field_labels),
+                ))
+            self.send_revision_email(obj)
         return obj
+
+    def send_revision_email(self, obj):
+        queryset = reversion.models.Version.objects.get_for_object(obj)
+        if queryset.count() > 1:
+            current_version = queryset[0]
+            previous_version = queryset[1]
+            compare_mixin = CompareMixin()
+            compare_data, _ = compare_mixin.compare(obj, previous_version, current_version)
+            compare_data = [
+                data for data in compare_data
+                if data['field'].name not in JOURNAL_INFORMATION_COMPARE_EXCLUDE
+            ]
+            email = Email(
+                recipient=settings.PUBLISHER_EMAIL,
+                html_template='emails/information/journal_information_new_revision_content.html',
+                subject_template='emails/information/journal_information_new_revision_subject.html',
+                extra_context={
+                    'journal': obj.journal,
+                    'compare_data': compare_data,
+                    'current_revision': current_version.revision,
+                    'request': self.request,
+                },
+                tag='www-journal-information-new-revision',
+            )
+            email.send()
 
 
 ContributorInlineFormset = inlineformset_factory(

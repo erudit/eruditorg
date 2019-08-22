@@ -4,11 +4,28 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 from django import forms
+from reversion_compare.admin import CompareVersionAdmin
 
 from ..models import Issue
 from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
+
+
+JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
+    # Exclude the translated base fields (ie. about) because the translation fields (ie. about_fr)
+    # are already displayed.
+    'about',
+    'contact',
+    'editorial_policy',
+    'instruction_for_authors',
+    'partners',
+    'publishing_ethics',
+    'subscriptions',
+    'team',
+    # Exclude the auto_now date field.
+    'updated',
+]
 
 
 class JournalDisciplineInline(admin.TabularInline):
@@ -120,8 +137,8 @@ class IssueAdmin(admin.ModelAdmin):
         return self.readonly_fields + ('is_published',)
 
 
-class JournalInformationAdmin(TranslationAdmin):
-    pass
+class JournalInformationAdmin(CompareVersionAdmin, TranslationAdmin):
+    compare_exclude = JOURNAL_INFORMATION_COMPARE_EXCLUDE
 
 
 class JournalTypeAdmin(TranslationAdmin):
