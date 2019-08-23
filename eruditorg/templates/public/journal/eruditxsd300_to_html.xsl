@@ -184,7 +184,7 @@
         <!-- journal metadata -->
         <div class="col-sm-6 doc-head__metadata">
           <p>
-            {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
+            {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/><xsl:if test="../article/@typeart = 'compterendu'">*</xsl:if> de la revue{% endblocktrans %}
             <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
             {# Peer review seal #}
             {% if article.issue.journal.type.code == 'S' and article.erudit_object.get_article_type == 'article' %}
@@ -205,6 +205,9 @@
           <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
           {% endif %}
           <xsl:apply-templates select="admin/droitsauteur"/>
+          <xsl:if test="../article/@typeart = 'compterendu'">
+            <p><small>* {% trans "Cet article est le compte-rendu d'un autre ouvrage tel qu'un livre ou un film. L'ouvrage original discuté ici n'est pas disponible sur cette plateforme." %}</small></p>
+          </xsl:if>
         </div>
       </div>
     </header>

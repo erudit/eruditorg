@@ -1109,7 +1109,26 @@ class TestArticleDetailView:
         # Make sure the Spanish keywords are displayed even though there is no Spanish abstract.
         assert keywords[1].decode() == '<div class="keywords">\n<p><strong>Palabras clave:</strong></p>\n<ul><li class="keyword">Palabra clave en español</li></ul>\n</div>'
 
-        assert True
+    @pytest.mark.parametrize('article_type, expected_string', (
+        ('compterendu', 'Un compte rendu* de la revue'),
+        ('article', 'Un article de la revue'),
+    ))
+    def test_review_article_explanatory_note(self, article_type, expected_string):
+        article = ArticleFactory(type=article_type)
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        div = dom.find_all('div', {'class': 'doc-head__metadata'})[1]
+        assert expected_string in div.decode()
+        if article_type == 'compterendu':
+            assert '* Cet article est le compte-rendu d\'un autre ouvrage' in div.decode()
+        else:
+            assert '* Cet article est le compte-rendu d\'un autre ouvrage' not in div.decode()
 
 
 @unittest.mock.patch.object(
