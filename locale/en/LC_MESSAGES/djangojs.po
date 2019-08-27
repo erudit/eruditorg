@@ -2,23 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Maxime Turcotte <maxime.turcotte@erudit.org>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-22 13:27-0400\n"
+"POT-Creation-Date: 2019-08-27 08:24-0400\n"
 "PO-Revision-Date: 2019-07-17 14:52+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2019\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: static/js/controllers/citations/SavedCitationListController.js:12
@@ -57,8 +57,7 @@ msgstr "Some of your files have not been uploaded. Do you want to continue?"
 
 #: static/js/controllers/editor/FormController.js:25
 msgid ""
-"Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr "
-"?"
+"Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"
 msgstr "Some of your files are not completely uploaded. Are you sure?"
 
 #: static/js/controllers/journal/IssueReaderController.js:18
@@ -73,27 +72,27 @@ msgstr "Back to summary"
 msgid "Résultats sauvegardés !"
 msgstr "Search results saved!"
 
-#: static/js/modules/IssueReader.js:136
+#: static/js/modules/IssueReader.js:135
 msgid "Page précédente"
 msgstr "Previous page"
 
-#: static/js/modules/IssueReader.js:137
+#: static/js/modules/IssueReader.js:136
 msgid "Page suivante"
 msgstr "Next page"
 
-#: static/js/modules/IssueReader.js:138
+#: static/js/modules/IssueReader.js:137
 msgid "Une page"
 msgstr "One page"
 
-#: static/js/modules/IssueReader.js:139
+#: static/js/modules/IssueReader.js:138
 msgid "Deux pages"
 msgstr "Two pages"
 
-#: static/js/modules/IssueReader.js:140
+#: static/js/modules/IssueReader.js:139
 msgid "Zoom avant"
 msgstr "Zoom in"
 
-#: static/js/modules/IssueReader.js:141
+#: static/js/modules/IssueReader.js:140
 msgid "Zoom arrière"
 msgstr "Zoom out"
 

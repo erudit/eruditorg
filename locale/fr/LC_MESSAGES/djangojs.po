@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-22 13:27-0400\n"
+"POT-Creation-Date: 2019-08-27 08:24-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,27 +69,27 @@ msgstr ""
 msgid "Résultats sauvegardés !"
 msgstr ""
 
-#: static/js/modules/IssueReader.js:136
+#: static/js/modules/IssueReader.js:135
 msgid "Page précédente"
 msgstr ""
 
-#: static/js/modules/IssueReader.js:137
+#: static/js/modules/IssueReader.js:136
 msgid "Page suivante"
 msgstr ""
 
-#: static/js/modules/IssueReader.js:138
+#: static/js/modules/IssueReader.js:137
 msgid "Une page"
 msgstr ""
 
-#: static/js/modules/IssueReader.js:139
+#: static/js/modules/IssueReader.js:138
 msgid "Deux pages"
 msgstr ""
 
-#: static/js/modules/IssueReader.js:140
+#: static/js/modules/IssueReader.js:139
 msgid "Zoom avant"
 msgstr ""
 
-#: static/js/modules/IssueReader.js:141
+#: static/js/modules/IssueReader.js:140
 msgid "Zoom arrière"
 msgstr ""
 
