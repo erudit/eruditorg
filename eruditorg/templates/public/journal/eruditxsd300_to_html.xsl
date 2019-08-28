@@ -728,7 +728,11 @@
     </li>
   </xsl:template>
 
-  <xsl:template match="renvoi | liensimple" mode="toc-heading">
+  <xsl:template match="liensimple" mode="toc-heading">
+    <xsl:apply-templates/>
+  </xsl:template>
+
+  <xsl:template match="renvoi" mode="toc-heading">
     <!-- do not display anything -->
   </xsl:template>
 
@@ -736,22 +740,22 @@
     <xsl:choose>
       <xsl:when test="@typemarq='gras'">
         <strong>
-          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]" mode="toc-heading"/>
         </strong>
       </xsl:when>
       <xsl:when test="@typemarq='italique'">
         <em>
-          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]" mode="toc-heading"/>
         </em>
       </xsl:when>
       <xsl:when test="@typemarq='taillep'">
         <small>
-          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]" mode="toc-heading"/>
         </small>
       </xsl:when>
       <xsl:otherwise>
         <span class="{@typemarq}">
-          <xsl:apply-templates select="node()[not(self::renvoi)]"/>
+          <xsl:apply-templates select="node()[not(self::renvoi)]" mode="toc-heading"/>
         </span>
       </xsl:otherwise>
     </xsl:choose>
