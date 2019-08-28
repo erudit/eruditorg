@@ -1,0 +1,9 @@
+{% load i18n %}
+{% with user=current_revision.user.username date=current_revision.date_created|date:"d-m-Y" time=current_revision.date_created|date:"H:i" %}
+<p>{% blocktrans %}Modification faite par <strong>{{ user }}</strong> le <strong>{{ date }}</strong> à <strong>{{ time }}</strong>.{% endblocktrans %}</p>
+{% endwith %}
+<p>https://{{ request.get_host }}{% url 'userspace:journal:information:update' journal_pk=journal.pk %}</p>
+{% for data in compare_data %}
+<h3>{{ data.field.verbose_name|safe }}</h3>
+{{ data.diff|safe }}
+{% endfor %}

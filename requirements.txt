@@ -36,6 +36,8 @@ django-polymorphic==2.0.3
 django-post-office==3.2.1
 django-prometheus==1.0.15
 django-redis==4.9.1
+django-reversion-compare==0.8.6
+django-reversion==3.0.4
 django-taggit==1.1.0
 django-waffle==0.17.0
 django-widget-tweaks==1.4.5
