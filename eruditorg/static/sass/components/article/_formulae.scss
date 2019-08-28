@@ -5,21 +5,11 @@
  .equation {
    padding: 0.75em 0;
 
-   &:first-child {
-     padding-bottom: 0;
-     margin-bottom: 0;
-     border: 0;
-   }
-
    p,
    .no {
     margin: 0;
     font-size: 14px;
     @include font-styles(mono);
-  }
-
-  & > p {
-    display: inline-block;
   }
 
   .no {
