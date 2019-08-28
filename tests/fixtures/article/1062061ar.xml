@@ -1,0 +1,1365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1062061ar" typeart="article" lang="fr" ordseq="4" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1062061ar</idpublic><pagination>
+            <ppage>27</ppage>
+            <dpage>59</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="theologi19" lang="fr"><titrerev>Théologiques</titrerev><titrerevabr>theologi</titrerevabr><idissn>1188-7109</idissn><idissnnum>1492-1413</idissnnum><directeur sexe="feminin"><fonction lang="fr">Directrice</fonction><nompers><prenom>Denise</prenom><nomfamille>Couture</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><fonction lang="fr">Rédacteur invité</fonction><nompers><prenom>Éric</prenom><nomfamille>Bellavance</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><fonction lang="fr">Rédacteur invité</fonction><nompers><prenom>Vivek</prenom><nomfamille>Venkatesh</nomfamille></nompers></redacteurchef></revue><numero id="theologi04756"><volume>26</volume><nonumero>1</nonumero><pub><annee>2018</annee></pub><pubnum><date typedate="publication">2019-07-10</date></pubnum><grtheme id="th1"><theme>Dire et/ou maudire Dieu par la musique</theme><themeparal lang="en">Praising and/or Cursing God Through Music</themeparal></grtheme></numero><editeur><nomorg>Faculté de théologie et de sciences des religions, Université de Montréal</nomorg></editeur><prod><nomorg>Les Presses de l'Université de Montréal</nomorg></prod><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Théologiques</nomorg>, 2019</droitsauteur></admin><liminaire><grtitre><surtitre>Thème</surtitre>
+                <titre>Dire un Dieu de vie devant la mort</titre>
+                <sstitre>Trois prises de parole : Johannes Brahms, Igor Stravinsky, Frank Martin</sstitre>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>François</prenom><nomfamille>Vouga</nomfamille></nompers><affiliation><alinea>Nouveau Testament, Kirchliche Hochschule Wuppertal (Allemagne)</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>La multiplication des « Requiems » dans la modernité occidentale constitue un phénomène paradoxal dans notre monde apparemment dominé par l’athéisme et l’agnosticisme. L’auteur a choisi trois oeuvres — <marquage typemarq="italique">Un Requiem allemand</marquage> de Brahms (1861-1869), le <marquage typemarq="italique">Requiem </marquage>de Frank Martin (1971-1973) et les <marquage typemarq="italique">Requiem Canticles</marquage> d’Igor Stravinsky (1965-1966). Il se propose de situer chacune dans son contexte intellectuel puis d’en décrire l’architecture afin d’en donner une interprétation théologique. Pour fonder celle-ci, l’argumentation analyse chacun des « Requiems » et met en évidence la réflexion théologique, explicitement présente dans les écrits de Stravinsky et dans la correspondance de Frank Martin, qui a accompagné leur travail de composition. La pensée propre à chaque musicien et la conscience d’une responsabilité d’ordre spirituel et intellectuel déterminent les solutions esthétiques adoptées. Elles permettent de comprendre la transformation que chacun opère du genre musical du requiem pour transmettre une espérance universelle à une humanité sécularisée.</alinea></resume><resume typeresume="resume" lang="en"><alinea><marquage typemarq="italique">The multiplication of “Requiems” in Western modernity appears as a paradoxical phenomenon in a world that is apparently ruled by atheism and agnosticism. The author has chosen three works – </marquage>A German Requiem <marquage typemarq="italique">by Brahms (1861-1869), the </marquage>Requiem <marquage typemarq="italique">by Franck Martin (1971-1973), and the </marquage>Requiem Canticles <marquage typemarq="italique">by Igor Stravinsky (1965-1966). He replaces each of them in their intellectual context and describes their architecture in order to bring out a theological interpretation. Particularly, he analyses each </marquage>Requiem <marquage typemarq="italique">and highlights the theological reflections that are explicitly part of Stravinsky’s writings and of Franck Martin’s letters, reflections that supported their compositions. The esthetical solutions they adopted were determined by their own way of thinking, as well as a sense of responsibility of spiritual and intellectual order. These allow us to understand how each of the composers have transformed the requiem musical genre to share a universal hope to a secularized humanity.</marquage></alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><titre>1. La question théologique</titre><para id="pa1"><no>1</no>
+				<alinea>Peut-être pourrait-on s’interroger sur le faisceau de paradoxes qu’implique
+					le curieux phénomène de la multiplication des « Requiems » dans la modernité
+					occidentale. On comprend que la mort se présente comme une question universelle,
+					comme la question existentielle majeure. Malgré quelques tentatives de suggérer
+					le contraire, on comprend aussi que la réponse, si tant est que l’on puisse en
+					donner une, ne viendra pas des progrès de la technique. D’ailleurs, le succès
+					des arts médicaux à repousser les limites se révèle ambivalent : devenir plus
+					vieux, oui, mais dans quel état et pour quelle vie ? On comprend donc le recours
+					aux ressources classiques de l’histoire de l’art, de la musique et de la
+					littérature en particulier, pour se confronter aux énigmes de la finitude, du
+					sens de la vie et de la destination de sa fin.</alinea>
+			</para><para id="pa2"><no>2</no>
+				<alinea>Mais avec quels textes de référence entrer en dialogue pour donner sens et
+					éclairer le présent de manière crédible ? Où trouver appui pour une quête
+					critique de signification permettant de fonder les convictions ? Dans une
+					culture et dans des mondes intellectuels dominés par l’agnosticisme et par la
+					sécularisation, il est étonnant que, loin de perdre en attrait, la liturgie
+					catholique de requiem, et en particulier son élément traditionnellement central,
+					le poème médiéval du Dies Irae, résiste fort bien au scepticisme religieux et
+					aux effondrements de la chrétienté. L’étonnement vient de ce que les images du
+					Dieu de colère dont on implore miséricorde, qui en forment la charpente, et la
+					rhétorique de la peur du jugement et de la condamnation qui en découle, heurtent
+					de plein fouet l’esprit éclairé des lumières et de la modernité. Or, on doit
+					constater que ce texte-là précisément apparaît comme un carrefour central de la
+					réflexion de l’Occident moderne devant la mort, indépendamment de toute
+					appartenance confessionnelle et de toutes croyances. Massivement sorti de son
+					cadre ecclésial depuis Gossec, Berlioz, Verdi ou Dvorak, ouvertement laïcisé —
+					qu’on pense par exemple au <marquage typemarq="italique">Requiem</marquage> de
+					Ligeti —, il permet de formuler individuellement et publiquement la double
+					vocation existentielle de l’accomplissement de la vie et du deuil, c’est-à-dire,
+					de part et d’autre, de la prise de congé imposée par la séparation de la mort,
+					et de la présenter devant la question ultime d’une Transcendance qui juge,
+					pardonne et libère.</alinea>
+			</para><section2 id="s2n1"><no>1.
+				1</no><titre><marquage typemarq="italique">Dies Irae : le texte de la
+				séquence</marquage></titre><para id="pa3"><no>3</no>
+				<alinea>Dies Irae, strophes 1-6 : le jour de colère<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105807n.jpg" dimx="619" dimy="200" id="im1" typeimage="forme" xlink:type="simple"></image>
+						<texte>1. Jour de la colère, ce jour terrible réduira le monde en cendres,
+							comme l’ont prédit David et la Sybille.2. Quelle terreur, quand le juge
+							viendra pour juger sévèrement toutes choses !3. Le son terrible de la
+							trompette pénétrant jusque dans la région des sépulcres rassemblera tous
+							les êtres devant le trône.4. La mort et la nature seront saisies de
+							stupeur quand la créature ressuscitera pour répondre à son juge.5. Alors
+							sera apporté le livre dans lequel sont inscrites toutes les actions
+							d’après lesquelles le monde sera jugé.6. Quand siégera le juge, tout ce
+							qui est caché sera dévoilé et aucun péché ne restera impuni.</texte>
+					</objetmedia>
+				</alinea>
+			</para><para id="pa4"><no>4</no>
+				<alinea>Dies Irae, strophes 7-17 : la prière de l’individu devant son Juge</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105808n.jpg" dimx="620" dimy="389" id="im2" typeimage="forme" xlink:type="simple"></image>
+						<texte>7. Que dirai-je alors, moi pécheur misérable ?Quel défenseur
+							implorerai-je,alors que le juste à peine sera sans inquiétude ?8. Roi
+							dont la majesté est redoutable,toi qui sauves gratuitement les
+							élus,source de toute grâce, sauve-moi !9. Jésus miséricordieux,
+							souviens-toique c’est pour moi que tu es venu,ne m’abandonne pas en ce
+							jour terrible.10. Pour me chercher, tu as souffert la fatigue,pour me
+							racheter, tu as souffert la croix.Que tant de souffrances ne soient pas
+							en vain ![11. Toi qui juges avec justice,fais-moi don de ta grâceavant
+							le jour de la rétribution].12. Je gémis de mes péchéset je rougis de mes
+							transgressions :ô Dieu exauce ma requête, pardonne-moi.13. Toi qui as
+							pardonné à Marie,qui as exaucé le brigand,tu m’as aussi donné
+							l’espérance.14. Mes prières ne sont pas dignes de ta grâce,mais toi,
+							Dieu de bonté, faisque je ne sois pas livré aux flammes éternelles.15.
+							Reçois-moi parmi tes brebis,loin des réprouvés,place-moi à ta droite.16.
+							Tandis que les maudits seront condamnéset livrés aux flammes
+							ardentes,appelle-moi avec les élus.17. Je t’implore, le coeur
+							brisé,humble et prosterné dans la poussière ;assiste-moi dans mes
+							derniers moments.</texte>
+					</objetmedia>
+				</alinea>
+			</para><para id="pa5"><no>5</no>
+				<alinea>Dies Irae, dernière strophe : la prière pour les défunts</alinea>
+				<bloccitation>
+					<verbatim typeverb="poeme">
+						<bloc>
+							<ligne>Jour de larme, </ligne>
+							<ligne>jour où les coupables se réveilleront</ligne>
+							<ligne>pour entendre leur jugement,</ligne>
+							<ligne>alors, ô Dieu, pardonne-leur et leur donne le repos.</ligne>
+							<ligne>Jésus, accorde-leur le repos.</ligne>
+						</bloc>
+					</verbatim>
+				</bloccitation>
+			</para></section2></section1><section1 id="s1n2"><no>2</no><titre>2. Quel Dieu invoquer devant la mort ?</titre><para id="pa6"><no>6</no>
+				<alinea>On peut évidemment s’interroger sur les raisons de l’attirance que ce poème
+					exerce jusqu’à aujourd’hui dans l’histoire de la musique. Se presse la question
+					théologique, qui n’a échappé ni à Brahms, ni à Frank Martin, ni à Stravinsky,
+					qui lui ont chacun apporté, dans leur requiem, la réflexion d’une réponse
+					originale : à quel Dieu et à quelle Transcendance entend-on se remettre devant
+					la mort ?</alinea>
+			</para><para id="pa7"><no>7</no>
+				<alinea>Visiblement, l’Être suprême de Jean-Jacques Rousseau, dont l’existence fut
+					ensuite décrétée le 7 mai 1794 par la Convention, n’y suffit pas. La généralité
+					d’un consensus de la raison, jugé indispensable à la fondation politique d’un
+					contrat social respectueux des droits de l’homme, s’avère sans doute inapte à
+					recueillir les confessions personnelles, face à la mort, d’une recherche de sens
+					et de pardon devant la manifestation ultime de l’imperfection et de la finitude.
+					Inversement, on aurait pu s’attendre à ce que les sept sentences tirées du
+					<marquage typemarq="italique">Livre de la prière commune</marquage> anglican
+					(1552), qui servirent de base à Morley, Gibbons ou Purcell, offrent à
+					l’imaginaire de l’Occident moderne une alternative existentielle aux scènes
+					apocalyptiques du Dies Irae et du Libera me. Mais précisément, elles s’adressent
+					avec confiance à un Dieu de résurrection et de vie et elles formulent une prière
+					croyante qui, explicitement, engage la conviction et l’espérance de ceux qui les
+					prononcent et les chantent : l’usage de l’ordre pour la sépulture des morts dont
+					elles sont tirées est destiné à un office « qui ne doit point se dire pour ceux
+					qui meurent sans avoir été baptisés, ni pour les excommuniés, ni pour ceux qui
+					se sont détruits de leurs propres mains<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi> ».
+					C’est dire aussi qu’elles présupposent l’adhésion de leurs destinataires à une
+					communion de foi et qu’elles ne peuvent satisfaire des artistes soucieux
+					d’adresser leur réflexion à l’auditoire universel.</alinea>
+			</para><para id="pa8"><no>8</no>
+				<alinea>L’avantage de la débauche d’images mises à disposition par la liturgie de
+					requiem réside au contraire dans sa potentielle universalité. Ayant, comme
+					centre dramatique, le Dies Irae qu’y a probablement introduit Thomas de Celano
+					(vers 1190 – vers 1260), en adaptant un poème plus ancien à son nouveau
+					contexte, elles se proposent à la libre fantaisie des compositeurs. Car elles
+					tendent, pour le scepticisme tant agnostique que croyant, à relever de la
+					fiction. Elles construisent en effet un scénario de désolation, de terreur et de
+					désespoir qui correspondait certes, bien que sans doute partiellement, à une
+					certaine perception de la réalité à l’époque des Croisades, mais elles
+					véhiculent une image de Dieu qui a mal résisté à la pensée critique moderne et
+					contemporaine. Relevant donc d’une fiction symbolique et littéraire, elles se
+					déploient comme une représentation théâtrale dans laquelle il devient d’autant
+					plus facile de réfléchir ses angoisses et ses questions qu’on peut les y
+					projeter librement. Il n’est donc qu’apparemment paradoxal, je pense, qu’elles
+					prennent souvent, depuis le romantisme déjà, des dimensions à proprement parler
+					spectaculaires, alors qu’aussi bien des musiciens concevant leur composition
+					pour l’usage de la liturgie (Fauré, Duruflé, Desenclos) que le concile Vatican
+					II ont fait disparaître le Dies Irae de la messe des défunts.</alinea>
+			</para><para id="pa9"><no>9</no>
+				<alinea>La responsabilité qu’ont prise Brahms, Stravinsky et Martin, chacun sur la
+					base de ses convictions et d’une réflexion théologique qui leur est propre, a
+					consisté à réinvestir le genre et la forme du requiem de manière à trouver un
+					langage universel crédible qui soit susceptible de dire un Dieu d’espérance
+					devant la mort. Ils ne sont évidemment pas les seuls. Ils présentent cependant
+					l’intérêt de produire trois propositions très différentes, originales et
+					argumentées.</alinea>
+			</para></section1><section1 id="s1n3"><no>3</no><titre>3. Trois tentatives de transmettre l’espérance à l’universalité de
+				l’humanité</titre><para id="pa10"><no>10</no>
+				<alinea>De trois manières différentes et dans des contextes culturels divers,
+					Brahms, Stravinsky et Martin prennent l’initiative de recréer le genre musical
+					du requiem pour formuler, chacun à leur manière, une espérance pour l’humanité
+					qui, tout à la fois, s’enracine dans une tradition confessionnelle et entend la
+					reformuler pour un auditoire universel.</alinea>
+			</para><para id="pa11"><no>11</no>
+				<alinea>Dans une oeuvre de relative jeunesse, Johannes Brahms prend la liberté de
+					composer un « Requiem allemand » ; Brahms entend par-là un requiem luthérien,
+					auquel il donne la forme libre et originale d’une grande cantate de certitude
+					confiante. Il prend congé de la liturgie des morts et, à partir d’une
+					familiarité évidente avec l’Ancien et le Nouveau Testament, constitue un
+					florilège de textes bibliques qui lui permettent de recadrer la parole de
+					l’Église sur la mort et sur la vie. Les <marquage typemarq="italique">Requiem
+					Canticles</marquage> d’Igor Stravinsky se présentent comme l’aboutissement d’une
+					réflexion de critique théologique de la religion. Celle-ci trouve son point de
+					départ dans l’événement d’une conversion personnelle et esthétique dont il rend
+					compte lui-même. Elle ré-enracine sa poétique musicale dans une confluence de la
+					tradition catholique et de l’orthodoxie russe, et elle la rapproche, sur le
+					fond, de l’austérité de la théologie dialectique réformée de Karl Barth. Quant
+					au <marquage typemarq="italique">Requiem</marquage> de Frank Martin, il adopte
+					lui aussi une voie paradoxale en suivant fidèlement la liturgie catholique, mais
+					en en modifiant radicalement le propos par la mise en intrigue de la musique.
+					Sur le texte d’une prière pour les morts, il édifie une réflexion existentielle,
+					à la lumière de l’espérance de Pâques, sur la situation de l’individu confronté
+					au compagnonnage et à l’échéance de la mort.</alinea>
+			</para><para id="pa12"><no>12</no>
+				<alinea>Je me propose de situer les trois oeuvres dans leur contexte intellectuel
+					puis d’en décrire l’architecture et le propos afin d’en proposer une
+					interprétation théologique et de mettre en valeur le travail de théologiens des
+					trois compositeurs.</alinea>
+			</para></section1><section1 id="s1n4"><no>4</no><titre>4. Johannes Brahms (1833-1897), un <marquage typemarq="italique">Requiem
+				allemand</marquage> (1861-1869)</titre><section2 id="s2n2"><no>4.
+				1</no><titre><marquage typemarq="italique">4.1 Le recadrage théologique du genre par la
+				forme</marquage></titre><para id="pa13"><no>13</no>
+				<alinea>Comme l’indique déjà le titre programmatique donné à son oratorio, qui
+					quitte toute forme liturgique, Brahms adopte à bien des égards une solution
+					radicale. Il entend certes composer une oeuvre qui remplit la fonction d’un
+					requiem, celle d’une méditation devant la mort et d’une consolation dans le
+					deuil. Il conserve d’ailleurs le terme de requiem. Mais il n’écrit pas à
+					proprement parler un requiem, une prière d’intercession pour les défunts — et
+					pour les vivants quand ils seront morts, comme le faisaient Michael Haydn ou
+					Mozart. Il entreprend tout autre chose. Car il ne s’intéresse pas au sort des
+					trépassés, mais à la vie spirituelle des vivants, ici et maintenant. Il propose
+					à l’auditoire universel de ses auditeurs, pour leur édification dans le temps
+					présent, une prédication de l’espérance évangélique et une confession de la
+					confiance croyante devant la mort.</alinea>
+			</para><para id="pa14"><no>14</no>
+				<alinea>Rendant compte du changement de perspective, Brahms ajoute l’adjectif
+					« allemand » à la désignation de son oeuvre par le terme conventionnel de
+					requiem. La précision n’est pas d’ordre national, mais à la fois confessionnel,
+					théologique et littéraire. « Allemand » ne signifie en effet rien d’autre, dans
+					son esprit, que « protestant » ou « luthérien ». Brahms invente dans le
+					« Requiem allemand » une alternative non catholique, au sens institutionnel du
+					terme, au genre du requiem.</alinea>
+			</para><para id="pa15"><no>15</no>
+				<alinea>Pour ce faire, Brahms renonce à la base littéraire traditionnelle de
+					l’ordinaire liturgique de la messe pour les défunts de l’Église romaine. Il
+					prend au contraire la peine de composer, sous la forme d’une mosaïque de versets
+					bibliques isolés, un livret original qui construit avec force son propre
+					scénario dramatique. Il puise sa matière littéraire dans les évangiles (les
+					béatitudes selon l’évangile de Matthieu et les discours d’adieu de l’évangile de
+					Jean), dans les épîtres (première épître de Paul aux Corinthiens, épître de
+					Jacques et première épître de Pierre), dans l’Apocalypse de Jean et dans
+					l’Ancien Testament (Psaumes, le livre du prophète Esaïe et le Siracide<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>). Les éléments cités demeurent reconnaissables. Chacun
+					comprend que Brahms recourt au texte biblique comme référence classique de
+					l’Occident. Les fragments ainsi découpés et rassemblés sont cependant intégrés
+					dans la cohérence d’une nouvelle architecture. Fondé sur la reconnaissance
+					culturelle de leur autorité et sur leur évidence propre, le <marquage typemarq="italique">Requiem allemand</marquage> construit une argumentation
+					poétique et musicale qui invite à un parcours de réflexion confiante sur le sens
+					de la vie et de la réconciliation avec la finitude de l’existence humaine (voir
+					tableau 1).</alinea>
+			</para><tableau id="ta1">
+				<no>Tableau 1</no>
+				<legende lang="fr">
+					<titre>Brahms, Un requiem allemand – architecture</titre>
+				</legende>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="tableau" xlink:type="simple"></image>
+					<texte>IV. Soprano + Choeur Comme sont aimables tes demeures, Dieu
+						Tout-Puissant!III. Bariton + Choeur Seigneur, apprends-moi Qu’il doit y
+						avoir une fin pour moi J’espère en toi Les justes sont dans la main de
+						DieuII. Car toute chair est comme l’herbe, soyez dès lors patients. Car
+						toute chair est comme l’herbe, mais la Parole demeure éternellement Joie et
+						allégresse les saisirontI. Bienheureux ceux qui sont dans la peine car ils
+						seront consolésV. Soprano + Choeur Vous êtes maintenant dans la tristesse,
+						mais je vais vous revoir J’ai eu peu de temps de peine et de travail pour
+						trouver une grande consolation Je veux vous consolerVI. Bariton + Choeur
+						Nous n’avons pas ici de cité permanente, Mais nous en recherchons une
+						future. Je vous dis un secret: Car la trompette sonnera, et les morts
+						ressusciteront incorruptibles, et nous serons transformés. La mort a été
+						engloutie dans la victoireVII. Bienheureux les morts mourant dans le
+						Seigneur Ils se reposent de leur travail car leurs oeuvres les
+						suivent.</texte>
+				</objetmedia>
+			</tableau></section2><section2 id="s2n3"><no>4.
+				2</no><titre><marquage typemarq="italique">4.2 La genèse d’une
+				architecture</marquage></titre><para id="pa16"><no>16</no>
+				<alinea>Le <marquage typemarq="italique">Requiem allemand</marquage> apparaît comme
+					l’un des premiers grands chefs d’oeuvre de Brahms.</alinea>
+			</para><para id="pa17"><no>17</no>
+				<alinea>Sa conception a occupé le compositeur pendant plusieurs années et sa
+					composition s’est effectuée en plusieurs étapes.</alinea>
+			</para><para id="pa18"><no>18</no>
+				<alinea>Les premiers projets datent de 1861. Brahms a 28 ans. Les trois premières
+					parties ont été créées à Vienne en 1867 :</alinea>
+				<listeord numeration="decimal">
+					<elemliste>
+						<alinea>Bienheureux ceux qui sont dans la peine, car ils seront
+							consolés.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Toute chair est comme l’herbe, mais la parole du Seigneur dure
+							éternellement, et joie et allégresse saisiront les rachetés.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Apprends-moi, Seigneur, que la vie à une fin et un but. J’espère en
+							toi : les âmes des justes sont dans la main de Dieu.</alinea>
+					</elemliste>
+				</listeord>
+			</para><para id="pa19"><no>19</no>
+				<alinea>Une seconde version a été créée à Brême en 1868. Elle comprend les quatre
+					premières et les deux dernières parties actuelles :</alinea>
+				<listeord numeration="decimal" compteur="4">
+					<elemliste>
+						<alinea>Comme sont aimables tes demeures, Dieu tout puissant !</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Nous n’avons pas ici de cité permanente, mais tous nous serons
+							transformés.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Bienheureux ceux qui meurent dans le Seigneur, qu’ils se
+							reposent !</alinea>
+					</elemliste>
+				</listeord>
+			</para><para id="pa20"><no>20</no>
+				<alinea>Quant à la version définitive, jouée pour la première fois à Leipzig en
+					1869, elle complète l’oeuvre d’une déclaration d’intentions qui ajoute un
+					soprano solo au choeur, à l’orchestre et au baryton solo (parties 3 et 6) et qui
+					établit désormais l’affirmation de confiance de la quatrième partie comme centre
+					architectural et comme clé de voûte de l’ensemble :</alinea>
+				<alinea><marquage typemarq="gras">Vous êtes maintenant dans la tristesse, mais je
+					veux vous consoler.</marquage></alinea>
+			</para></section2><section2 id="s2n4"><no>4.
+				3</no><titre><marquage typemarq="italique">4.3 Le Texte</marquage></titre><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105810n.jpg" dimx="620" dimy="271" id="im4" typeimage="forme" xlink:type="simple"></image>
+					<texte>I.VII.A. Bienheureux ceux qui sont dans la peine,Car ils seront consolés
+						(Mt 5,4).A. Bienheureux sont les morts qui meurent dans le Seigneur dès
+						maintenant (Apoc 14,13).B. Ceux qui sèment dans les larmes,récolteront dans
+						la joie.Ils s’en vont en pleurantet portent la précieuse semence.Ils
+						reviennent dans la joieet apportent leurs gerbes (Ps 126,5-6).B. Oui
+						l’esprit dit :qu’ils se reposent de leur travail ;car leurs oeuvres les
+						accompagnent.A. Bienheureux ceux qui sont dans la peine,Car ils seront
+						consolés (Mt 5,4).A. Bienheureux sont les morts qui meurent dans le Seigneur
+						dès maintenant (Apoc 14,13).</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105811n.jpg" dimx="620" dimy="147" id="im5" typeimage="forme" xlink:type="simple"></image>
+					<texte>II.A. Car toute chair est comme l’herbeet toute la splendeur de
+						l’hommecomme les fleurs des champs. L’herbe est desséchéeet les fleurs ont
+						péri (1 Pi 1,24). A. Car toute chair est comme l’herbeet toute la splendeur
+						de l’hommecomme les fleurs des champs.L’herbe est desséchéeet les fleurs ont
+						péri (1 Pi 1,24).</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105812n.jpg" dimx="620" dimy="179" id="im6" typeimage="forme" xlink:type="simple"></image>
+					<texte>B. Soyez dès lors patients,jusqu’à l’avènement du Seigneur.Voyez, un
+						laboureur attendLe précieux fruit de la terre,et il attend
+						patiemmentd’accueillir la pluie du matin,d’accueillir la pluie du soir.Soyez
+						donc patients (Jc 5,7).C. Mais la parole du Seigneur demeure,demeure pour
+						l’éternité (1Pi 1,25).Les rachetés du Seigneur vont reveniret viendront vers
+						Sion avec joie ;une joie éternelle sera au-dessus de leur tête,joie et
+						allégresse les saisiront,et douleur et soupirs devront disparaître(Es
+						35,10).</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105813n.jpg" dimx="620" dimy="346" id="im7" typeimage="forme" xlink:type="simple"></image>
+					<texte>III.Bariton Solo + ChoeurA. Seigneur, Seigneur, apprends-moiqu’il doit y
+						avoir une fin pour moi,et que ma vie a un but,et que je dois m’en
+						aller.Bariton Solo + ChoeurA. Seigneur, Seigneur, apprends-moiqu’il doit y
+						avoir une fin pour moi,et que ma vie a un but,et que je dois m’en
+						aller.Bariton Solo + ChoeurB. Vois,mes jours sont un empan devant toi,et ma
+						vie est comme rien devant toi.Bariton Solo + ChoeurC. Hélas, tous les hommes
+						sont comme un rien,même s’ils vivent solidement.Ils vont et viennent comme
+						une ombreet créent beaucoup d’agitation ;Ils amassent et ne savent pas,Qui
+						ramassera.</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105814n.jpg" dimx="620" dimy="131" id="im8" typeimage="forme" xlink:type="simple"></image>
+					<texte>Bariton Solo + ChoeurD. Alors, Seigneur, de quoi dois-je me
+						consoler ?J’espère en toi (Ps 39,5-8).E. Les âmes des justes sont dans la
+						main de Dieu,et aucun tourment ne les atteint (Sg 3,1).</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105815n.jpg" dimx="620" dimy="189" id="im9" typeimage="forme" xlink:type="simple"></image>
+					<texte>IV.Comme sont aimables tes demeures, Dieu Tout-puissant ! (Ps 84,2)Mon
+						âme désire ardemment et soupire après les parvis du Seigneur ;mon corps et
+						mon âme trouvent leur joie dans le Dieu vivant (Ps 84,3).Comme sont aimables
+						tes demeures, Dieu Tout-puissant ! (Ps 84,2)Bienheureux ceux qui habitent
+						dans ta maison,ils te louent sans cesse (Ps 84,5)Comme sont aimables tes
+						demeures, Dieu Tout-puissant ! (Ps 84,2)</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105816n.jpg" dimx="620" dimy="386" id="im10" typeimage="forme" xlink:type="simple"></image>
+					<texte>V.SopranoChoeurA. Vous êtes maintenant dans la tristesse,mais je vais
+						vous revoir,et votre coeur se réjouiraet votre joie,personne ne vous
+						l’enlèvera (Jn 16,22).Je veux vous consoler,Comme celui que sa mère
+						console(Es 66,13).B. Regardez-moi :J’ai eu peu de temps, de peine et de
+						travail,Pour trouver une grande consolation (Sir 51,27).Je veux vous
+						consoler,Comme celui que sa mère console(Es 66,13).A. Vous êtes maintenant
+						dans la tristesse,mais je vais vous revoir,et votre coeur se réjouiraet
+						votre joie,personne ne vous l’enlèvera (Jn 16,22).Je veux vous
+						consoler,Comme celui que sa mère console(Es 66,13).</texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105817n.jpg" dimx="620" dimy="475" id="im11" typeimage="forme" xlink:type="simple"></image>
+					<texte>VI.Choeur Bariton Bariton + ChoeurCar nous n’avons pas ici de cité
+						permanente,mais nous en recherchons une future (He 13,14).Voici, je vous
+						révèle un secret :nous ne mourrons pas tous,mais tous nous serons
+						transformés ;et cela soudainement,en un clin d’oeil,au temps de la trompette
+						finale.Car la trompette sonnera,et les morts ressusciteront,
+						incorruptibles,et nous serons transformés (1 Co 15,51-52).Alors s’accomplira
+						la parolequi est écrite :« La mort a été engloutie dans la victoire.Mort, où
+						est ton aiguillon ?Enfer, où est ta victoire ? » (1 Co 15,54b-55)Seigneur,
+						tu es digne de recevoir louange et honneur et puissance,car tu as créé
+						toutes choses,et par ta volonté elles ont reçu l’être et sont créées (Ap
+						4,11).</texte>
+				</objetmedia>
+			</alinea></section2><section2 id="s2n5"><no>4.
+				4</no><titre><marquage typemarq="italique">4.4 Dire la confiance et l’espérance devant la
+				mort</marquage></titre><para id="pa21"><no>21</no>
+				<alinea>La structure théologique qui résulte de la composition littéraire et
+					musicale du <marquage typemarq="italique">Requiem allemand</marquage> s’impose
+					avec une clarté singulière :</alinea>
+				<alinea><marquage typemarq="gras">I.</marquage></alinea>
+				<alinea>Le cadre littéraire et théologique est posé dans les deux béatitudes
+					proclamées — et chaque fois répétées — en ouverture et en conclusion de
+					l’oratorio (parties 1 et 7). Le langage (« bienheureux ») est celui de l’annonce
+					d’une bonne nouvelle destinée à l’universalité de l’humanité : l’Évangile et le
+					visionnaire de l’Apocalypse, par la voix de l’orchestre et du choeur, témoignent
+					d’un accomplissement ultime qui tout à la fois constitue l’horizon de la vie
+					humaine et lui donne sens : les peines et les larmes ne sont pas vaines, mais
+					elles porteront leur fruit. Le repos ne fait pas l’objet d’une demande, mais
+					d’une certitude : il est promis par une transcendance de l’Esprit. Le thème
+					central de ce requiem n’est donc pas celui du salut éternel, mais de la
+					proclamation du bonheur comme vérité ultime et comme destination véritable de
+					l’existence humaine. Brahms présente et conclut son oeuvre comme la proclamation
+					du bonheur promis à l’humanité.</alinea>
+				<alinea><marquage typemarq="gras">II.</marquage></alinea>
+				<alinea>La Transcendance, évoquée indirectement dans les béatitudes, devient
+					l’interlocuteur direct de la confession centrale, clé de voûte sur l’engagement
+					existentiel de laquelle repose l’ensemble de l’argumentation
+					(partie 4) :</alinea>
+				<bloccitation>
+					<verbatim typeverb="poeme">
+						<bloc>
+							<ligne>Comme sont aimables tes demeures, Dieu Tout-puissant ! (Ps
+								84,2)</ligne>
+							<ligne>Mon âme désire ardemment et soupire après les parvis du
+								Seigneur ;</ligne>
+							<ligne>mon corps et mon âme trouvent leur joie dans le Dieu vivant (Ps
+								84,3).</ligne>
+						</bloc>
+					</verbatim>
+				</bloccitation>
+				<alinea>Au langage de la promesse répond celui de la reconnaissance. Mais qui parle
+					donc ? Qui est le « je » auquel appartiennent le corps et l’âme qui partagent
+					leur joie ? Le choeur et l’orchestre, de nouveau, se font porte-parole du poète
+					et du compositeur qui, en prêtant les voix et les instruments aux vers du
+					Psaume, font retentir sa parole. Face à l’auditoire universel, le « je » rend
+					ainsi compte d’une conviction qui n’engage l’auditeur que dans la stricte mesure
+					où il en fait le témoin d’une joie qu’il invite à partager. La prédication se
+					poursuit dans la béatitude qu’elle enchaîne :</alinea>
+				<bloccitation>
+					<verbatim typeverb="poeme">
+						<bloc>
+							<ligne>Bienheureux ceux qui habitent dans ta maison,</ligne>
+							<ligne>ils te louent sans cesse (Ps 84,5)</ligne>
+						</bloc>
+					</verbatim>
+				</bloccitation>
+				<alinea><marquage typemarq="gras">III.</marquage></alinea>
+				<alinea>La couronne qui entoure cette confession centrale (parties 2-3 et 5-6) s’en
+					tient aussi bien à cette théologie évangélique qu’à cette éthique universaliste
+					de la communication. Brahms conserve son rôle d’un prédicateur non religieux
+					d’une bonne nouvelle, tirée des Écritures, d’espérance, de confiance et de joie.
+					Évidemment, il est inutile de chercher dans le <marquage typemarq="italique">Requiem allemand</marquage> quelque équivalent que ce soit au Dies Irae. Le
+					rapprochement que l’on tente parfois, en désespoir de cause, avec la mise en
+					scène, dialoguée entre le choeur et le baryton, de l’annonce de la
+					transformation finale (partie 6), est un pur contresens. L’essentiel de cet
+					épisode apocalyptique reprend à son compte l’annonce, par l’apôtre, d’un
+					achèvement de la création du monde dans la re-création universelle des vivants
+					et des morts. La longue explication qui, tant dans l’architecture du <marquage typemarq="italique">Requiem allemand </marquage>que dans la première épître aux
+					Corinthiens, donne corps à l’espérance croyante, est à ma connaissance un des
+					seuls passages des lettres de Paul à avoir été mis en musique<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi>. Elle concrétise la double promesse qui précède
+					(partie 5), celle du Jésus des discours d’adieu de l’évangile de Jean, qui
+					annonce par la voix du soprano la fin des temps de tristesse et la joie des
+					retrouvailles, et celle du choeur qui l’interprète comme la perspective d’une
+					consolation.</alinea>
+			</para><para id="pa22"><no>22</no>
+				<alinea>À ce second versant de la couronne (parties 5 et 6), Brahms confère donc le
+					caractère d’une prédication donnant la parole au Jésus de l’Évangile et à
+					l’apôtre de la réconciliation universelle. Le premier versant présente un
+					caractère plus réflexif : le choeur prend tout d’abord acte, comme constat d’un
+					état de fait, de la finitude humaine, puis il en instruit la question en
+					appelant ses auditeurs (« vous ») à la patience et en y opposant l’éternité
+					d’une Transcendance qui promet la joie. On remarquera l’enchaînement
+					particulièrement imaginatif créé par Brahms, qui donne la seconde citation comme
+					contenu à la première (partie 2, C) :</alinea>
+				<bloccitation>
+					<verbatim typeverb="poeme">
+						<bloc>
+							<ligne>Mais la parole du Seigneur demeure pour l’éternité (1Pi
+								1,25) :</ligne>
+							<ligne>les rachetés du Seigneur vont revenir et viendront vers Sion avec
+								joie ;</ligne>
+							<ligne>une joie éternelle sera au-dessus de leur tête,</ligne>
+							<ligne>joie et allégresse les saisiront,</ligne>
+							<ligne>et douleur et soupirs devront disparaître (Es 35,10).</ligne>
+						</bloc>
+					</verbatim>
+				</bloccitation>
+			</para><para id="pa23"><no>23</no>
+				<alinea>Puis, en alternance, le ténor et le choeur font suivre sous la forme d’une
+					prière une méditation cherchant le sens de la finitude de l’existence dans la
+					découverte du sens de l’histoire personnelle. La Transcendance y joue un double
+					rôle. Celui, dans un premier temps, d’un vis-à-vis du dialogue avec lui-même du
+					sujet individualisé par le ténor et universalisé par le choeur. Puis celui,
+					ensuite, d’une Providence dans la main de laquelle il peut s’en remettre avec
+					joie.</alinea>
+			</para><para id="pa24"><no>24</no>
+				<alinea>Au paradoxe du succès des requiem dans la modernité sécularisée, Brahms
+					oppose à bien des égards, en somme, un contre-paradoxe : à la rhétorique de la
+					crainte, il oppose une prédication de l’espérance et un appel à la joie. Son
+					Dieu n’est pas celui de la colère et du Jugement, auprès duquel le pécheur vient
+					quémander miséricorde. Il est la Transcendance face à laquelle le sujet entre en
+					débat sur sa propre finitude. Il est le Créateur, celui qu’il présente, selon sa
+					propre conviction, comme la Providence qui destine l’universalité de l’humanité
+					à l’accomplissement de la joie, qui tient les justes dans sa main, et au nom de
+					laquelle, par la voix du soprano, du ténor et du choeur, les promesses du Jésus
+					ressuscité de l’Évangile et des apôtres appellent les vivants à la confiance. Le
+					<marquage typemarq="italique">Requiem allemand</marquage> n’est pas une prière
+					pour les défunts, mais une joyeuse invitation adressée, sur la foi de
+					l’Écriture, à l’auditoire universel de l’humanité tout entière.</alinea>
+			</para></section2></section1><section1 id="s1n5"><no>5</no><titre>5. Frank Martin (1890-1974), Requiem (1971-1973)</titre><section2 id="s2n6"><no>5.
+				1</no><titre><marquage typemarq="italique">5.1 Le Requiem comme réponse à une vocation : la
+				réconciliation avec la mort</marquage></titre><para id="pa25"><no>25</no>
+				<alinea>Brahms remplaçait le texte liturgique par un livret de sa propre
+					composition, ajoutant le commentaire d’un adjectif au titre de <marquage typemarq="italique">Requiem</marquage>. Frank Martin adopte, lui aussi, une
+					solution radicale, en suivant scrupuleusement le texte, certes, mais dans une
+					perspective et selon une lecture qui le reconfigurent. Le rôle prééminent que
+					jouent individuellement le ténor solo, le soprano puis les quatre solistes dès
+					l’entrée et dans l’ensemble de l’<marquage typemarq="italique">introitus</marquage> (« Seigneur, donne-leur le repos éternel, et que la
+					lumière éternelle brille sur eux ! »), devant un choeur réduit à une toile de
+					fond, n’est pas seulement inhabituel. Il annonce de façon programmatique la
+					singularité de l’approche. La cohérence d’une logique très précise domine
+					l’architecture de l’oeuvre, qui fait ressortir les dimensions personnelles et
+					intimes du parcours, confère une intensité particulière à l’attente ardente du
+					repos et de la paix dans l’Agnus dei réservé à l’alto solo et à l’orgue, et
+					conduit à la lumière éclatante de certitude du <marquage typemarq="italique">Lux
+					aeterna</marquage> :</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105818n.jpg" dimx="620" dimy="111" id="im12" typeimage="forme" xlink:type="simple"></image>
+						<texte>Traduction de Frank MartinRequiem aeternam dona eis, DomineEt lux
+							perpetua luceat eisQuia pius es.Seigneur, donne-leur le repos éternelet
+							que ta lumière éternelle brille sur euxCar tu es Amour.</texte>
+					</objetmedia>
+				</alinea>
+				<alinea>« Aucun autre Requiem du répertoire ne se termine avec cette foi
+					inébranlable et affirmative » (Perroux 2001, 123).</alinea>
+			</para><para id="pa26"><no>26</no>
+				<alinea>Le thème central du <marquage typemarq="italique">Requiem
+					allemand</marquage> de Brahms était, en plein romantisme, celui de la promesse
+					d’un accomplissement dans la joie et de l’espérance face à la mort. Celui qui
+					domine un siècle plus tard le <marquage typemarq="italique">Requiem
+					</marquage>de Frank Martin est, sur la base d’une semblable confiance, tout
+					aussi personnelle, le thème de la réconciliation avec la mort. Présent dans
+					l’ensemble de son oeuvre, sous des aspects divers, il s’impose avec une
+					concentration particulière dans les compositions de ses dernières
+					années :</alinea>
+				<listenonord signe="tiret">
+					<elemliste>
+						<alinea>1969-1971 : <marquage typemarq="italique">Po</marquage>èmes<marquage typemarq="italique"> de la Mort</marquage> (François Villon) pour ténor,
+							baryton, basse et 3 guitares électriques ;</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>1971-1972 : <marquage typemarq="italique">Requiem </marquage>;</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>1973 : <marquage typemarq="italique">Polyptique</marquage>, Six
+							images de la Passion du Christ pour violon et 2 orchestres à
+							cordes ;</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>1974 : <marquage typemarq="italique">Et la vie l’emporta</marquage>
+							(Maurice Zundel, Martin Luther, Pseudo Fra Angelico), cantate de chambre
+							pour alto, baryton et ensemble vocal et instrumental.</alinea>
+					</elemliste>
+				</listenonord>
+			</para><para id="pa27"><no>27</no>
+				<alinea>C’est d’ailleurs dans l’esprit de cette familiarité imposée et acceptée avec
+					la mort, mais aussi et tout autant de la nécessité intérieure d’en rendre
+					compte, qu’il explique la genèse et le sens du <marquage typemarq="italique">Requiem</marquage> :</alinea>
+				<bloccitation>
+					<alinea>Depuis de longues années je savais que je devais un jour écrire un
+						Requiem. C’était une sorte de conviction intime, mais rien ne me disait
+						quand ni comment ce vague pressentiment prendrait forme pour se réaliser. Il
+						y a quatre ou cinq ans que mon ami J-Claude Piguet y avait attaché de plus
+						près ma pensée, me mettant en quelque sorte sur la conscience d’avoir à
+						l’écrire. Mais là encore de graves résistances intérieures se
+						manifestaient : je ne me sentais pas mûr pour une tâche pareille. Mais
+						l’idée travaillait en moi et j’imaginais diverses formes possibles, des
+						formes parfois aberrantes et quelque peu apparentées à cet essai scabreux
+						dont j’eus un jour la partition sous les yeux : un Requiem avec orchestre de
+						jazz. Et puis, un jour, je m’y suis mis, non pas que je me sentisse mûr pour
+						cela. Est-on jamais mûr pour une tâche pareille ? Mais en janvier 1971 je
+						fis un voyage en Méditerranée où j’eus l’occasion de contempler, dans la
+						solitude, à Venise l’église de Saint-Marc, à Palerme la basilique de
+						Monreale et près de Naples les temples de Paestum. Ces trois monuments, qui
+						expriment le sentiment de l’adoration de façon si accomplie, éveillèrent en
+						moi le désir d’édifier à mon tour, selon mes pauvres moyens, un temple dédié
+						à l’adoration<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi>.</alinea>
+				</bloccitation>
+				<bloccitation>
+					<alinea>Ce que j’ai tenté d’exprimer ici c’est la claire volonté d’accepter la
+						mort, de faire la paix avec elle, de la voir pleinement dans tout ce qu’elle
+						comporte d’angoisse, physique et morale, en nous mettant face à face avec ce
+						qu’a été notre vie, si peu digne de ce qu’elle aurait pu être, si pleine de
+						faiblesses et de défaillances ; mais aussi de la considérer avec la pleine
+						confiance du pardon, attendant d’elle le véritable repos, le repos éternel.
+						Ce que j’ai tenté de signifier ici, ce n’est pas l’image de la description
+						de ce repos, mais l’ardente prière de l’obtenir par grâce. Ce texte
+						liturgique qui dans sa richesse évoque tour à tour l’attente du repos, la
+						supplication, l’adoration pure ou les angoisses du jugement dernier, je m’y
+						suis identifié pleinement malgré tout ce qui peut, intellectuellement
+						parlant, nous le rendre étranger. Ces images issues du Moyen-Âge parlaient
+						directement à ma pensée la plus profonde. Cette pensée, aucun langage ne
+						peut l’exprimer clairement, mais c’est elle, cette pensée de la mort, que
+						j’ai tenté de mettre dans ma musique. Puisse-t-elle apporter à quelques-uns,
+						ce sentiment de confiance et de paix qui m’a animé au cours de ce
+						travail<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi>.</alinea>
+				</bloccitation>
+			</para><para id="pa28"><no>28</no>
+				<alinea>Comme chez Brahms, mais sans abandonner le texte liturgique traditionnel de
+					la messe pour les défunts et ses images médiévales, Frank Martin, par la
+					relecture qu’en opère la composition musicale, en recadre le genre. De
+					l’Intercession de l’Église pour les trépassés, il tire une méditation
+					universellement humaine invitant les vivants à réintégrer la mort et leur propre
+					finitude comme une dimension positive de leur histoire personnelle :</alinea>
+				<bloccitation>
+					<alinea>Je crois que, dans notre époque, qui considère la mort comme une ennemie
+						qu’il faut combattre par tous les moyens et qu’on voudrait au fond supprimer
+						(si possible !) cela a été pour beaucoup une sorte de révélation de trouver
+						quelqu’un qui l’admet, qui la considère comme le grand repos, comme un fait
+						positif ; quelqu’un aussi qui peut exprimer dans la musique cette sorte de
+						paix avec la mort<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi>.</alinea>
+				</bloccitation>
+			</para></section2><section2 id="s2n7"><no>5.
+				2</no><titre><marquage typemarq="italique">5.2 Le recadrage du texte liturgique par sa
+				recomposition musicale</marquage></titre><para id="pa29"><no>29</no>
+				<alinea>Sa correspondance le montre : songeant à écrire un requiem, Frank Martin ne
+					semble pas l’avoir imaginé autrement que sur la base de l’ordinaire latin. Mais
+					on comprend aussi que, dans son esprit, en suivre scrupuleusement le texte
+					signifiait nécessairement entrer dans un travail d’interprétation intersubjectif
+					prenant la forme d’un dialogue entre les images et le sens que leur donnait sa
+					lecture.</alinea>
+			</para><para id="pa30"><no>30</no>
+				<alinea>La rencontre comportait ses propres difficultés, clairement
+					envisagées :</alinea>
+				<bloccitation>
+					<alinea>[…] le Requiem ? Il faudrait un bouquin aussi gros que celui d’Ansermet,
+						pour répondre à cette question-là.</alinea>
+					<alinea>J’y pense et j’y repense. Comme je vous l’avais dit, c’est un vieux rêve
+						de toute ma vie d’écrire un Requiem sur mes vieux jours. Et puis, en
+						m’approchant, je bute sur deux obstacles d’inégale grosseur. Le premier,
+						c’est que c’est du latin. Or, vous savez que j’écris ma musique vocale aussi
+						près que possible de la langue parlée, et si je connais bien le rythme
+						théorique de cette langue, je ne l’ai pas entendu parlé. Cela me gêne parce
+						que je ne trouve pas les finesses expressives d’une langue courante. Je
+						serais obligé de les inventer, ce qui est tout autre chose.</alinea>
+					<alinea>L’autre obstacle est plus grave. J’aime m’approcher des sentiments, ou
+						des pensées fondamentales, des archétypes, comme dit Jung ; ou, comme le dit
+						Koestler dans son bouquin intitulé : Euréka, j’aime que l’Éternité regarde
+						un moment à la fenêtre du temps. Mais ces moments-là j’aime les approcher au
+						travers de quelque chose d’humain. Dans un Requiem, dès le premier mot on
+						est en plein archétype. C’est un saut à pieds joints dans l’autre monde, en
+						pleine Éternité, en pleine lumière éternelle. Comment faire ?</alinea>
+					<alinea>Tout cela me tracasse, car j’ai l’impression que ce serait une lâcheté
+						d’abandonner l’idée, « il grand rifiuto » qui avait mené je ne sais plus qui
+						droit aux enfers<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi>.</alinea>
+				</bloccitation>
+			</para><para id="pa31"><no>31</no>
+				<alinea>La solution logiquement trouvée et adoptée par Frank Martin, qui va
+					déterminer l’entière conception de l’oeuvre, réside dans une interprétation
+					existentiale qui démythologise les représentations apocalyptiques. Celle-ci lui
+					permet de détacher le déroulement du rituel de son environnement confessionnel,
+					et de mettre en musique le parcours qu’il ordonne entre les archétypes religieux
+					comme la possibilité offerte d’un long dialogue critique avec lui-même,
+					libérateur et apaisant pour l’individu, placé face à sa propre
+					histoire :</alinea>
+				<bloccitation>
+					<alinea>[…] Nous avons tous, tant que nous sommes, le sentiment profond que nous
+						devons être jugés. Nous nous sentons responsables de nos actes, coupables ou
+						non. Et nous mesurons que l’épreuve est purifiante, nous le sentons bien :
+						elle nous apparaît comme une justice qui nous permet de réparer nos
+						faiblesses. La vie trop facile que nous menons actuellement crée des
+						névroses parce que les gens conservent bien, plus ou moins inconsciemment,
+						le sentiment qu’ils seront jugés — sentiment inhérent à tout homme normal —
+						mais ils n’assument pas leurs fautes, de sorte qu’ils en restent chargés et
+						ne peuvent ainsi en être libérés.</alinea>
+					<alinea>Oui, le Dies irae exprime admirablement ce fait. À chaque instant, il
+						revient à la miséricorde. Il y a des images d’une beauté incroyable comme,
+						par exemple, « quaerens me sedisti lassus » — pour me chercher tu as
+						souffert la fatigue —. Après tout le déchaînement initial qui dépeint le
+						jugement universel, tout d’un coup une simple phrase « quid sum, miser, tunc
+						dicturus ? » — que dirais-je alors, moi pécheur misérable ? — nous ramène
+						sur nous-mêmes. J’avoue qu’en composant ce Dies irae, je l’ai vécu avec une
+						intensité extraordinaire<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi>.</alinea>
+				</bloccitation>
+			</para></section2><section2 id="s2n8"><no>5.
+				3</no><titre><marquage typemarq="italique">5.3 Le Dies Irae, face à face universel de
+				l’individu avec lui-même</marquage></titre><para id="pa32"><no>32</no>
+				<alinea>Cette clé de lecture explique la répartition des voix et, en particulier, la
+					signification singulière de celles, individuelles, des solistes, dans l’ensemble
+					de l’oeuvre et dans le Dies Irae en particulier. Ce sont elles qui incarnent la
+					quête existentielle de repos et de paix qui constitue le centre de gravité de la
+					prière.</alinea>
+			</para><para id="pa33"><no>33</no>
+				<alinea>Les strophes dans lesquelles interviennent le choeur et l’orchestre,
+					représentations apocalyptiques du jour de la colère, de la désolation et du
+					jugement, leur servent de récit-cadre (voir Tableau 2).</alinea>
+			</para><tableau id="ta2">
+				<no>Tableau 2</no>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im13" typeimage="tableau" xlink:type="simple"></image>
+					<texte>Dies irae, dies illa, Solvet saeclum in favilla: Teste David cum Sibylla.
+						Quantus tremor est futurus, Quando Judex est venturus, Cuncta stricte
+						discussurus! Tuba mirum spargens sonum Per sepulchra regionum Coget omnes
+						ante thronum. Mors stupebit et natura, Cum resurget creatura, Judicanti
+						responsura. Liber scriptus proferetur, In quo totum continetur, Unde mundus
+						judicetur. Judex ergo cum sedebit Quidquid latet, apparebit: Nil inultum
+						remanebit. Jour de la colère, ce jour terrible réduira le monde en centres,
+						comme l’ont prédit David et la Sybille. Quelle terreur, quand le juge
+						viendra pour juger sévèrement toutes choses! Le son terrible de la trompette
+						pénétrant jusque dans la région des sépulcres rassemblera tous les êtres
+						devant le trône. La mort et la nature seront saisies de stupeur quand la
+						créature ressuscitera pour répondre à son juge. Alors sera apporté le livre
+						dans lequel sont inscrites toutes les actions d’après lesquelles le monde
+						sera jugé. Quand siégera le juge, tout ce qui est caché sera dévoilé et
+						aucun péché ne restera impuni.Que dirai-je alors, moi pécheur misérable?
+						Quel défenseur implorerai-je, alors que le juste à peine sera sans
+						inquiétude? Roi dont la majesté est redoutable, toi qui sauves gratuitement
+						les élus, source de toute grâce, sauve-moi! Jésus miséricordieux,
+						souviens-toi que c’est pour moi que tu es venu, ne m’abandonne pas en ce
+						jour terrible. Pour me chercher, tu as souffert la fatigue, pour me
+						racheter, tu as souffert la croix. Que tant de souffrances ne soient pas en
+						vain! so viel Mühe sei nicht vergeblich,BASSO Quid sum miser tunc dicturus?
+						Quem patronem rogaturus, Cum vix justus sit securus? Rex tremendae
+						majestatis, Qui salvandos salvas gratis, Salva me, fons pietatis. TENORE
+						Recordare Jesu pie, Quod sum causa tuae viae: Ne me perdas illa die.
+						Quaerens me, sedisti lassus: Redemisti crucem passus: Tantus labor non sit
+						cassus:Juste judex ultionis Donum fac remissionis Ante diem rationis. Toi
+						qui juges avec justice, fais-moi don de ta grâce avant le jour de la
+						rétribution.22.4.1971: «Par ailleurs, je travaille à la partie centrale du
+						Dies Irae, où cela devient plus personnel, plus intime qu’au début».CHOEUR 4
+						SO LI</texte>
+				</objetmedia>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im14" typeimage="tableau" xlink:type="simple"></image>
+					<texte>CORO: SOPRANI + ALTI Qui Mariam absolvisti, Et latronem exaudisti, Mihi
+						quoque spem dedisti. Toi qui a pardonné à Marie, qui a exaucé le brigand, tu
+						m’as aussi donné l’espérance. 4 SOLI Preces meae non sunt dignae Sed tu
+						bonus fac benigne Ne perenni cremer igne. Inter oves locum praesta, Et ab
+						haedis me sequestra, Statuens in parte dextra. Mes prières ne sont pas
+						dignes de ta grâce, mais toi, Dieu de bonté, fais que je ne sois pas livré
+						aux flammes éternelles. Reçois-moi parmi tes brebis, loin des réprouvés,
+						place-moi à ta droite. TUTTI Confutatis maledictis, Flammis acribus
+						addictis, Voca me cum benedictis. Oro supplex et acclinis Cor contritum
+						quasi cinis Gere curam mei finis. SOLI = CORO Lacrimosa dies illa, Qua
+						resurget ex favilla, Judicandus homo reus: Huic ergo parce Deus. Tandis que
+						les maudits seront condamnés et livrés aux flammes ardentes, appelle-moi
+						avec les élus. Je t’implore, le coeur brisé, humble et prosterné dans la
+						poussière; assiste-moi dans mes derniers moments. Jour de larme, jour où les
+						coupables se réveilleront pour entendre leur jugement,ALTO Ingemisco,
+						tamquam reus: Culpa rubet vultus meus: Supplicanti parce Deus. Je gémis de
+						mes péchés et je rougis de mes transgressions: ô Dieu exauce ma requête,
+						pardonne-moi.Pie Jesu Domine, dona eis requiem. Amen 4 SOLI Amen. alors, ô
+						Dieu, pardonne-leur et leur donne le repos.</texte>
+				</objetmedia>
+			</tableau><para id="pa34"><no>34</no>
+				<alinea>Le récit est collectif, porté dramatiquement par le choeur et
+					l’orchestre :</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105821n.jpg" dimx="619" dimy="462" id="im15" typeimage="forme" xlink:type="simple"></image>
+						<texte>CHOEURDies irae, dies illa, Solvet saeclum in favilla : Teste David
+							cum Sibylla.Quantus tremor est futurus, Quando Judex est venturus,
+							Cuncta stricte discussurus !Tuba mirum spargens sonum Per sepulchra
+							regionum Coget omnes ante thronum.Mors stupebit et natura, Cum resurget
+							creatura, Judicanti responsura.Liber scriptus proferetur, In quo totum
+							continetur, Unde mundus judicetur.Judex ergo cum sedebit Quidquid latet,
+							apparebit : Nil inultum remanebit.Jour de la colère, ce jour
+							terribleréduira le monde en cendres,comme l’ont prédit David et la
+							Sybille.Quelle terreur,quand le juge viendrapour juger sévèrement toutes
+							choses !Le son terrible de la trompette pénétrantjusque dans la région
+							des sépulcresrassemblera tous les êtres devant le trône.La mort et la
+							nature seront saisies de stupeurquand la créature ressusciterapour
+							répondre à son juge.Alors sera apporté le livredans lequel sont
+							inscrites toutes les actionsd’après lesquelles le monde sera jugé.Quand
+							siégera le juge,tout ce qui est caché sera dévoiléet aucun péché ne
+							restera impuni.</texte>
+					</objetmedia>
+				</alinea>
+			</para><para id="pa35"><no>35</no>
+				<alinea>Puis, de la mise en scène des images de la colère et du jugement, placées
+					comme le décor sur lequel l’âme humaine puisse projetter ses angoisses et sur le
+					fond duquel elle puisse jouer ses questions et ses doutes, l’oeuvre revient à la
+					dimension individuelle qui, depuis le début, en constitue la trame. Comme
+					c’était dès le commencement, dans l’<marquage typemarq="italique">introitus</marquage>, la prédominance est rendue aux solistes.</alinea>
+			</para><para id="pa36"><no>36</no>
+				<alinea>Frank Martin rend lui-même compte du passage : « Par ailleurs, écrit-il en
+					cours de composition, je travaille ferme à la partie centrale du Dies Irae, où
+					cela devient plus personnel, plus intime qu’au début<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi> ».</alinea>
+			</para><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105822n.jpg" dimx="621" dimy="158" id="im16" typeimage="forme" xlink:type="simple"></image>
+					<texte>BASSOQuid sum miser tunc dicturus ? Quem patronem rogaturus, Cum vix
+						justus sit secures ?Rex tremendae majestatis, Qui salvandos salvas
+						gratis,Salva me, fons pietatis.Que dirai-je alors, moi pécheur
+						misérable ?Quel défenseur implorerai-je,alors que le juste à peine sera sans
+						inquiétude ?Roi dont la majesté est redoutable,toi qui sauves gratuitement
+						les élus,source de toute grâce, sauve-moi ! </texte>
+				</objetmedia>
+			</alinea><alinea>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105823n.jpg" dimx="621" dimy="576" id="im17" typeimage="forme" xlink:type="simple"></image>
+					<texte>TENORERecordare Jesu pie, Quod sum causa tuae viae : Ne me perdas illa
+						die.Quaerens me, sedisti lassus : Redemisti crucem passus : Jésus
+						miséricordieux, souviens-toique c’est pour moi que tu es venu,ne m’abandonne
+						pas en ce jour terrible.Pour me chercher, tu as souffert la fatigue,pour me
+						racheter, tu as souffert la croix. CHOEURJuste judex ultionisDonum fac
+						remissionisAnte diem rationis. Toi qui juges avec justice,fais-moi don de ta
+						grâceavant le jour de la rétribution.ALTOIngemisco, tamquam reus : Culpa
+						rubet vultus meus : Supplicanti parce Deus.Je gémis de mes péchéset je
+						rougis de mes transgressions :ô Dieu exauce ma requête, pardonne-moi.CORO :
+						SOPRANI + ALTIQui Mariam absolvisti, Et latronem exaudisti, Mihi quoque spem
+						dedisti.Toi qui as pardonné à Marie,qui as exaucé le brigand,tu m’as aussi
+						donné l’espérance.4 SOLIPreces meae non sunt dignaeSed tu bonus fac
+						benigneNe perenni cremer igne. Inter oves locum praesta, Et ab haedis me
+						sequestra, Statuens in parte dextra.Mes prières ne sont pas dignes de ta
+						grâce,mais toi, Dieu de bonté, faisque je ne sois pas livré aux flammes
+						éternelles. Reçois-moi parmi tes brebis,loin des réprouvés,place-moi à ta
+						droite.</texte>
+				</objetmedia>
+			</alinea><para id="pa37"><no>37</no>
+				<alinea>Le choeur reprend alors la parole pour fermer le cadre, mais ce sont les
+					quatre solistes qui, concluant par l’Amen final, réintroduisent la dimension
+					individuelle et existentielle, qui a le dernier mot :</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105824n.jpg" dimx="620" dimy="252" id="im18" typeimage="forme" xlink:type="simple"></image>
+						<texte>SOLI + CHOEURConfutatis maledictis, Flammis acribus addictis, Voca me
+							cum benedictis.Oro supplex et acclinis Cor contritum quasi cinis Gere
+							curam mei finis.Tandis que les maudits seront condamnéset livrés aux
+							flammes ardentes,appelle-moi avec les élus.Je t’implore, le coeur
+							brisé,humble et prosterné dans la poussière ;assiste-moi dans mes
+							derniers moments.SOLI = CHOEURLacrimosa dies illa, Qua resurget ex
+							favilla, Judicandus homo reus : Jour de larme,jour où les coupables se
+							réveillerontpour entendre leur jugement,</texte>
+					</objetmedia>
+				</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105825n.jpg" dimx="620" dimy="126" id="im19" typeimage="forme" xlink:type="simple"></image>
+						<texte>CHOEURPie Jesu Domine, dona eis requiem. Amenalors, ô Dieu,
+							pardonne-leur et leur donne le repos. Amen.4 SOLIAmen.</texte>
+					</objetmedia>
+				</alinea>
+			</para></section2><section2 id="s2n9"><no>5.
+				4</no><titre><marquage typemarq="italique">5.4 Dire la confiance devant la mort comme attente
+				du repos et de la paix</marquage></titre><para id="pa38"><no>38</no>
+				<alinea>Au fond, demande-t-on à Frank Martin, ce <marquage typemarq="italique">Requiem</marquage> est un acte de foi ?</alinea>
+				<bloccitation>
+					<alinea>Exactement, répond-il. Je n’ai pas du tout conçu ce Requiem sous un
+						angle purement esthétique. Bien entendu, un artiste ne peut exclure
+						complètement l’esthétique, élément indispensable, car c’est entre l’éthique
+						et l’esthétique que se produit l’oeuvre d’art : il faut qu’une éthique
+						trouve une esthétique appropriée et inversement que l’esthétique s’adapte à
+						une pensée éthique. Cependant le Requiem se veut d’abord un acte de foi dans
+						la mesure où, sans être réellement croyant, je possède tout de même une
+						véritable foi.</alinea>
+					<source>Buffat 1973, 2</source>
+				</bloccitation>
+			</para><para id="pa39"><no>39</no>
+				<alinea>Le contre-paradoxe que constitue ce <marquage typemarq="italique">Requiem</marquage> s’exprime précisément dans la radicalité d’une relecture qui
+					ne succombe pas à la tentation du « grand rifiuto » ni n’élude les défis posés
+					par le langage médiéval de la rhétorique de la crainte, mais qui s’en saisit à
+					bras le corps et, par la composition musicale, en retourne le propos. Ce que
+					Brahms a réalisé en changeant de texte et en mettant en musique un autre texte —
+					ce que Frank Martin fera ensuite, après avoir écrit le <marquage typemarq="italique">Requiem</marquage>, dans son oeuvre ultime, la cantate au
+					titre programmatique « Et la vie l’emporta » — Frank Martin l’a fait en
+					recadrant le texte de la tradition. On comprend que, autant d’un point de vue
+					éthique que d’un point de vue esthétique, ce <marquage typemarq="italique">Requiem</marquage> est exactement un acte de foi dans la mesure où il
+					transforme cet héritage traditionnel du christianisme occidental, se le
+					réapproprie, dégagé de tout cadre institutionnel au nom de sa propre conviction,
+					et il nous le rend comme parole libératrice, adressée à l’auditoire universel,
+					de certitude, de confiance et de paix.</alinea>
+			</para><para id="pa40"><no>40</no>
+				<alinea>Le Dieu du jugement a fait place à celui de la grâce. L’angoisse et l’effroi
+					devant la mort, l’inquiétude religieuse devant le sort incertain des trépassés
+					ont fait place à une confiance et à une paix fondamentale qui, dans une
+					certitude tranquille, ont trouvé la liberté d’une réconciliation avec la mort,
+					devenue espérance de repos et de lumière.</alinea>
+			</para></section2></section1><section1 id="s1n6"><no>6</no><titre>6. Igor Stravinsky (1882-1971), <marquage typemarq="italique">Requiem
+				Canticles</marquage> (1965-1966)</titre><section2 id="s2n10"><no>6.
+				1</no><titre><marquage typemarq="italique">6.1 La liturgie comme critique de la
+				religion</marquage></titre><para id="pa41"><no>41</no>
+				<alinea>Stravinsky adopte, lui aussi, une solution radicale, mais contraire aussi
+					bien à celle de Brahms qu’à celle de Frank Martin. Dans la destination de son
+					oeuvre, d’abord : comme sa <marquage typemarq="italique">Messe</marquage> de
+					1948, Stravinsky conçoit son requiem de manière à ce qu’il puisse être utilisé
+					pour l’usage liturgique. Il devait être chanté peu après sa création pour les
+					funérailles du physicien Robert Oppenheimer, à sa demande, puis il le fut pour
+					celles du compositeur lui-même. Dans ses dimensions ensuite : alors que, selon
+					la partition, l’exécution de la Messe ne devait durer que 17 minutes, celle du
+					Requiem se réduit, prélude, interlude et postlude instrumentaux compris, à moins
+					d’un quart d’heure. Stravinsky en parla comme d’un requiem de poche. Puis,
+					évidemment, dans son rapport au texte : Stravinsky compose lui-même sa liturgie
+					en ne conservant que six fragments de l’ordinaire de la messe pour les défunts,
+					qu’il organise formellement en deux blocs de trois, séparés par un interlude. Le
+					tout, encadré par un prélude et un postlude, est agencé selon une parfaite
+					symétrie :</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105826n.jpg" dimx="590" dimy="134" id="im20" typeimage="forme" xlink:type="simple"></image>
+						<texte>A. PRÉLUDE pour cordes B. Fragment de l’INTROITUS : EXAUDI  C.
+							Fragments du DIES IRAE :   C. – DIES IRAE  C. – TUBA MIRUM pour Bass    
+							    A’. POSTLUDE pour percussions   B’. LIBERA ME en entier  C’.
+							Fragments du DIES IRAE :  C’. – REX TREMENDAE  C’. – LACRYMOSA pour
+							ContraltoD. INTERLUDE pour bois</texte>
+					</objetmedia>
+				</alinea>
+			</para><tableau id="ta3">
+				<no>Tableau 3</no>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im21" typeimage="tableau" xlink:type="simple"></image>
+					<texte>PRELUDE [pour cordes][fragment de : INTROIT : REQUIEM AETERNAM]EXAUDI
+						orationem meam, ad te omnis caro veniet.Écoute ma prière,toute chair viendra
+						à toi.[fragment de : DIES IRAE]DIES IRAE, dies illa, Solvet saeclum in
+						favilla : Teste David cum Sibylla.Quantus tremor est futurus, Quando Judex
+						est venturus, Cuncta stricte discussurus ! TUBA MIRUM spargens sonum BASSE
+						Per sepulchra regionum Coget omnes ante thronum.Jour de colère, ce jour-làIl
+						réduira le monde en cendres,David l’atteste, et la Sybille.Quelle terreur à
+						venir,Quand le juge apparaître,Pour tout examiner !La trompette répandant un
+						son étonnantParmi les sépulcres de tous paysRassemblera tous devant le
+						Trône.INTERLUDE [pour bois][fragment de : DIES IRAE]REX TREMENDAE
+						majestatis, Qui salvandos salvas gratis,Salva me, fons pietatis.LACRIMOSA
+						dies illa,  CONTRALTO Qua resurget ex favilla, Judicandus homo reus : Huic
+						ergo parce Deus.Pie Jesu Domine, dona eis requiem. Amen.Roi de terrible
+						majesté,qui sauves gratuitement ceux qui doivent être sauvéssauve-moi,
+						source de piété.Jour de larmes, ce jour-là,où ressuscitera de la
+						poussièrepour le Jugement, l’homme coupable :épargne-le, ô Dieu !Bon
+						Seigneur Jésus, donne-leur le repos. Amen.LIBERA MELIBERA ME, Domine, de
+						morte aeterna, in die illa tremenda : Quando coeli movendi sunt et terra :
+						Dum veneris judicare saeculum per ignem. Tremens factus sum ego, et timeo
+						dum discussio venerit, atque ventura ira. Libera me, Domine, de morte
+						aeterna. Quando coeli movendi sunt et terra. Dies illa, dies irae,
+						calamitatis et miseriae,dies magna et amara valde. Libera me,
+						Domine.Délivre-moi, Seigneur, de la mort éternelle,en ce jour terriblequand
+						le ciel et la terre seront ébranlés,quand tu viendras juger le monde par le
+						feu. Voici que je tremble et que j’ai peurdevant l’examen qui vient et la
+						colère qui  doit venir.Libère-moi, Seigneur, de la mort éternelle,quand le
+						ciel et la terre seront ébranlés,ce jour-là, jour de colère, de calamité et
+						 de misère,jour grandiose et très amerDélivre-moi, Seigneur.POSTLUDE [pour
+						percussions]</texte>
+				</objetmedia>
+			</tableau><para id="pa42"><no>42</no>
+				<alinea>La recherche formelle est évidente. Elle découle de convictions esthétiques
+					auxquelles Stravinsky a donné un fondement explicitement théologique ; la
+					conversion stylistique qu’a opérée Stravinsky au début des années 1920, marquée
+					par la recherche de tenue et par l’importance croissante, dans son activité
+					créatrice, de compositions à caractère liturgique ou biblique<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi>, trouve son explication dans une critique théologique
+					de la religion, parallèle à celle de Karl Barth et, plus tard, de
+					Bonhoeffer<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi>.</alinea>
+				<bloccitation>
+					<alinea>À toute époque d’anarchie où l’homme, ayant perdu le sens et le goût de
+						l’ontologie s’effraie de lui-même et de son destin, on voit toujours
+						paraître une de ces gnoses qui servent de religion à ceux qui n’en ont plus
+						[…] Ainsi de la musique impudiquement considérée comme une jouissance
+						purement sensuelle, on est passé, sans transition aux obscures fadaises de
+						l’Art-religion, avec sa ferblanterie héroïque, avec son arsenal mystique et
+						guerrier et son vocabulaire frotté de religion frelatée.</alinea>
+					<source>Stravinsky 2000, 102</source>
+				</bloccitation>
+			</para></section2><section2 id="s2n11"><no>6.
+				2</no><titre><marquage typemarq="italique">6.2 Une éthique de la
+				communication</marquage></titre><para id="pa43"><no>43</no>
+				<alinea>Cette décision théologique, fondée sur des motifs de foi et de conscience,
+					explique ou tout au moins va de pair avec l’esprit de distanciation formelle et
+					d’ascèse qui domine l’oeuvre de Stravinsky, passée la période expressionniste
+					des grands ballets. Ce souci, qui s’exprimait déjà dans la conception de la
+					<marquage typemarq="italique">Symphonie de Psaumes</marquage>, écrite à la
+					gloire de Dieu sur la traduction de la Vulgate et qui se chantera toujours en
+					latin, se retrouve dans la <marquage typemarq="italique">Messe</marquage>, sobre
+					enluminure du texte sacré<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi>, puis dans
+					l’ensemble des oeuvres bibliques et liturgiques de la période sérielle et,
+					finalement, dans les <marquage typemarq="italique">Requiem Canticles</marquage>.
+					L’ensemble du requiem se base sur deux séries et on comprend bien que la
+					sobriété délibérée n’est pas un jeu, mais qu’elle résulte de la compréhension
+					que le compositeur a de lui-même et de son travail. Ayant accepté la commande
+					d’écrire un requiem, Stravinsky entend s’en tenir à la fonction de mettre en
+					valeur, dans sa lettre, la pérennité du texte sacré. L’énoncé musical évite dès
+					lors tout épanchement émotionnel qui interférerait avec la parole du texte
+					lui-même. Il adopte la forme hiératique d’une déclamation syllabique destinée à
+					ordonner la pensée dans le temps :</alinea>
+				<bloccitation>
+					<alinea>La musique est le seul domaine où l’homme réalise le présent. Par
+						l’imperfection de sa nature, l’homme est voué à subir l’écoulement du temps
+						— de ses catégories de passé et d’avenir — sans jamais pouvoir rendre
+						réelle, donc stable, celle de présent.</alinea>
+					<alinea>Le phénomène de la musique nous est donné à la seule fin d’instituer un
+						ordre dans les choses, y compris et surtout un ordre entre l’homme et le
+						temps. Pour être réalisé, il exige donc nécessairement et uniquement une
+						construction. La construction faite, l’ordre atteint, tout est dit. Il
+						serait vain d’y chercher ou d’en attendre autre chose. C’est précisément
+						cette construction, cet ordre atteint qui produit en nous une émotion d’un
+						caractère tout à fait spécial, qui n’a rien de commun avec nos sensations
+						courantes et nos réactions dues à des impressions de la vie quotidienne. On
+						ne saurait mieux préciser la sensation produite par la musique qu’en
+						l’identifiant avec celle que provoque en nous la contemplation du jeu des
+						formes architecturales.</alinea>
+					<source>Stravinsky 1962, 63-64</source>
+				</bloccitation>
+			</para><para id="pa44"><no>44</no>
+				<alinea>Les sources d’inspiration sont évidentes et, quels que soient les
+					intermédiaires avec lesquels Stravinsky s’est trouvé en dialogue, la méditation
+					de saint Augustin sur le temps dans le livre 11 des <marquage typemarq="italique">Confessions </marquage>s’y retrouve immédiatement audible.
+					Réaliser le présent ne signifie rien d’autre, pour l’un comme pour l’autre,
+					qu’ordonner le temps humain à la présence de l’éternité — Stravinsky parlera
+					d’ontologie et dira : de l’Être.</alinea>
+			</para></section2><section2 id="s2n12"><no>6.
+				3</no><titre><marquage typemarq="italique">6.3 Le requiem de poche</marquage></titre><para id="pa45"><no>45</no>
+				<alinea>Soucieux de contenir sa messe de requiem dans des dimensions compatibles
+					avec un usage liturgique — le même réalisme ne règne pas sur l’instrumentation
+					—, Stravinsky sélectionne dans le texte liturgique quelques éléments qui lui
+					paraissent essentiels. On peut observer que les fragments retenus correspondent
+					à une logique précise, et qu’ils coïncident presque parfaitement avec les
+					passages que Frank Martin, dans l’interprétation existentiale et
+					individualisante qu’il proposait du texte, avait laissés au second
+					plan.</alinea>
+			</para><para id="pa46"><no>46</no>
+				<alinea>Il en résulte une architecture originale, totalement différente, certes,
+					mais, dans son extrême concentration, cohérente et entièrement lisible : deux
+					parties vocales de prière ecclésiale encadrent les quatre parties qui, tirées de
+					la séquence du Dies Irae, évoquent la double perspective de l’échéance de la
+					mort et du jugement :</alinea>
+				<bloccitation>
+					<verbatim typeverb="forme">
+						<bloc>
+							<ligne>EXAUDI : écoute ma prière, toute chair viendra à toi</ligne>
+							<ligne><espaceh dim="0.5ex"/>DIES IRAE : jour de colère qui réduira le
+								monde en cendres</ligne>
+							<ligne><espaceh dim="0.5ex"/>TUBA MIRUM : la trompette rassemblera tous
+								devant le Trône</ligne>
+							<ligne><espaceh dim="0.5ex"/>REX TREMENDAE : Roi terrible de majesté,
+								sauve-moi !</ligne>
+							<ligne><espaceh dim="0.5ex"/>LACRYMOSA : lors de la résurrection en vue
+								du Jugement, donne le repos !</ligne>
+							<ligne>LIBERA ME : délivre-moi, Seigneur, de la mort éternelle.</ligne>
+						</bloc>
+					</verbatim>
+				</bloccitation>
+			</para><para id="pa47"><no>47</no>
+				<alinea>On remarquera tout d’abord que, malgré sa volonté de ne faire que mettre en
+					valeur le texte sacré, Stravinsky en modifie fondamentalement la fonction. Pas
+					plus que ceux de Brahms et de Frank Martin, son requiem ne se présente en effet
+					comme une prière pour les défunts. Stravinsky écarte la requête qui sert de
+					cadre et de thème principal au texte liturgique, et qui d’ailleurs lui donne son
+					titre de requiem, « Requiem aeternam dona eis, Domine », « Seigneur, donne-leur
+					le repos éternel », pour centrer l’attention de la prière sur « je », lui-même
+					représenté par le choeur qui la prononce : « Écoute ma prière ! ».</alinea>
+			</para><para id="pa48"><no>48</no>
+				<alinea>L’<marquage typemarq="italique">introïtus</marquage> se concentre sur un
+					appel à l’exaucement adressé à Celui vers lequel se retrouvera, en fin de
+					parcours, toute l’humanité, et se limite à cet appel. Le thème n’est, pas plus
+					que pour Brahms ou pour Frank Martin, le salut des trépassés. Il devient, dans
+					la réécriture de Stravinsky, l’invocation confiante que l’individu adresse, se
+					retrouvant, à la fin de sa vie, face à l’échéance de sa mort, avec la communion
+					des croyants, à celui qu’il ne nomme pas, mais qu’il confesse comme son dernier
+					recours. Contrairement à ce qu’effectuait le recadrage opéré par
+					l’individualisation des voix dans le requiem de Frank Martin, la prière
+					qu’adresse le « je » n’est en effet pas une méditation personnelle d’une
+					réconciliation avec la mort, mais la prière de la communauté ecclésiale qui
+					l’entoure et dans laquelle il s’incorpore :</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105828n.jpg" dimx="620" dimy="52" id="im22" typeimage="forme" xlink:type="simple"></image>
+						<texte>EXAUDI orationem meam, ad te omnis caro veniet.Écoute ma prière,toute
+							chair viendra à toi.</texte>
+					</objetmedia>
+				</alinea>
+			</para><para id="pa49"><no>49</no>
+				<alinea>Cette double volonté de recadrer la messe pour les défunts en un appel du
+					« je », priant à sa propre délivrance et, en même temps, d’affirmer le caractère
+					communautaire et ecclésial de la prière, trouve sa confirmation, d’une part,
+					dans le choix du Libera me comme dernier fragment retenu pour conclure la prière
+					liturgique et, d’autre part, dans sa mise en scène. La superposition du chant
+					des quatre solistes, venus du choeur, et de la déclamation du même texte par le
+					reste du choeur, devenu l’assemblée, installe directement l’oeuvre, comme
+					liturgie, sur les bancs d’église. Stravinsky, non sans humour, parle de « la
+					prière paroissiale qui accompagne comme un murmure de fond le Libera me », et
+					qui pourrait rappeler le bruit des aliénés de Marat / Sade<renvoi id="re1no14" idref="no14" typeref="note">14</renvoi>. Les <marquage typemarq="italique">Requiem Canticles</marquage>
+					concluent comme ils ont commencé : la demande qu’ils présentent ne concerne pas
+					le salut des trépassés, mais celui des vivants, du « je » de l’Église
+					rassemblée :</alinea>
+				<alinea>
+					<objetmedia flot="bloc">
+						<image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="forme pleine grandeur" xlink:href="2105829n.jpg" dimx="619" dimy="305" id="im23" typeimage="forme" xlink:type="simple"></image>
+						<texte>LIBERA ME, Domine, de morte aeterna, in die illa tremenda : Quando
+							coeli movendi sunt et terra : Dum veneris judicare saeculum per
+							ignem.Tremens factus sum ego, et timeo dum discussio venerit, atque
+							ventura ira. Libera me, Domine, de morte aeterna. Quando coeli movendi
+							sunt et terra. Dies illa, dies irae, calamitatis et miseriae,dies magna
+							et amara valde. Libera me, Domine.Délivre-moi, Seigneur, de la mort
+							éternelle,en ce jour terriblequand le ciel et la terre seront
+							ébranlés,quand tu viendras juger le monde par le feu.Voici que je
+							tremble et que j’ai peurdevant l’examen qui vient et la colère  qui doit
+							venir.Libère-moi, Seigneur, de la mort éternelle,quand le ciel et la
+							terre seront ébranlés,ce jour-là, jour de colère, de calamité et  de
+							misère,jour grandiose et très amerDélivre-moi, Seigneur.</texte>
+					</objetmedia>
+				</alinea>
+			</para><para id="pa50"><no>50</no>
+				<alinea>L’évocation de la désolation du jour de la colère, de la trompette annonçant
+					le Jugement et des larmes de l’humanité implorant la miséricorde remplissent la
+					fonction très précise de situer la prière face aux questions que pose l’échéance
+					de la mort : la réalisation musicale des quatre fragments tirés du Dies Irae
+					évite tout débordement et respecte la tenue formelle recherchée par
+					Stravinsky :</alinea>
+				<bloccitation>
+					<alinea>La nécessité d’une contrainte, d’une tenue délibérément acceptée prend
+						sa source dans les profondeurs de notre nature même et se rapporte non
+						seulement aux choses d’art, mais à toutes les manifestations conscientes de
+						l’activité humaine. C’est le besoin d’un ordre sans lequel rien ne se fait
+						et avec la disparition duquel tout se désagrège. Or tout ordre réclame une
+						contrainte. Mais on aurait tort d’y voir une entrave à la liberté. Au
+						contraire, la tenue, la contrainte contribuent à son épanouissement et ne
+						font qu’empêcher la liberté de devenir carrément licence. De même, en
+						empruntant une forme toute faite et déjà consacrée, l’artiste créateur ne se
+						trouve nullement restreint dans la manifestation de sa personnalité. Bien
+						plus, celle-ci se dégage davantage et gagne encore plus de relief quand elle
+						se meut dans un cadre conventionnel et déterminé.</alinea>
+					<source>Stravinsky 1962, 142-143</source>
+				</bloccitation>
+			</para></section2><section2 id="s2n13"><no>6.
+				4</no><titre><marquage typemarq="italique">6.4 Dire la prière d’un croyant devant sa
+				mort</marquage></titre><para id="pa51"><no>51</no>
+				<alinea>Aux étudiants de l’université Harvard devant lesquels il prononce en 1939
+					les leçons de sa <marquage typemarq="italique">Poétique musicale</marquage>,
+					Stravinsky présente sa création comme le fruit de sa conscience et de sa foi. La
+					musique lui apparaît comme un élément de communion avec le prochain — et avec
+					l’Être. Les <marquage typemarq="italique">Requiem Canticles
+					</marquage>s’imposent, dans cette perspective, comme une ultime prise de parole
+					dans laquelle s’incarnent les paradoxes théologiques et esthétiques d’une
+					conviction :</alinea>
+				<listenonord signe="tiret">
+					<elemliste>
+						<alinea>Infiniment respectueux du texte liturgique qu’il met en musique, il
+							le détourne de sa fonction pour se l’approprier et, à strictement
+							parler, pour en faire sa chose : la prière d’intercession de l’Église
+							pour le salut des trépassés devient la quête de délivrance d’un homme
+							confronté à l’échéance de la mort et aux questions existentielles
+							qu’elle pose.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Inversement, un créateur qui manifeste avec force et conviction son
+							individualité entend se faire le porte-parole de la communion ecclésiale
+							et le gardien de ses textes sacrés, du patrimoine spirituel de
+							l’occident chrétien.</alinea>
+					</elemliste>
+				</listenonord>
+			</para><para id="pa52"><no>52</no>
+				<alinea>Peut-être paraîtra-t-il utile de citer ici quelques lignes de l’essai que
+					Théodore Stravinsky a consacré à la spiritualité de son père. Les formulations
+					sont plus directes que celles des déclarations publiques de Stravinsky lui-même.
+					Stravinsky a cependant reconnu, dans une préface de la publication, s’y trouver
+					intimement compris :</alinea>
+				<bloccitation>
+					<alinea>Par nature, Stravinsky est un être éminemment croyant. Toute implicite
+						dans sa jeunesse, sa foi a trouvé, au temps de sa maturité, son
+						explicitation toute naturelle dans le credo chrétien de
+						Nicée-Constantinople, car Stravinsky est issu d’une famille orthodoxe
+						[…]</alinea>
+					<alinea>Un croyant est avant tout un homme pour qui une Vérité extérieure à lui
+						existe, nécessaire, indépendante de son moi qu’il refuse de diviniser en le
+						mettant à la place de cette Vérité : un homme qui refuse de considérer comme
+						équivalents l’Être et le néant. Le monde « moderne » a apostasié […] Il nie
+						ou ignore totalement la Vérité substantielle, l’Être ; Par conséquent, il ne
+						sait plus, ne peut plus adorer ni prier […] Stravinsky, lui, croit fermement
+						et n’a pas besoin de violenter sa nature profonde pour adorer et pour prier
+						[…]. Son attitude en matière d’art est nettement religieuse — métaphysique,
+						ontologique (non sentimentale, ni intellectuelle) — bref, une attitude de
+						croyant. En ce sens, Stravinsky est le plus antimoderne des compositeurs
+						contemporains.</alinea>
+					<source>T. Stravinsky 1980, 44-46</source>
+				</bloccitation>
+			</para></section2></section1><section1 id="s1n7"><no>7</no><titre>7. Pour ne pas conclure : dire un Dieu de vie devant la mort</titre><para id="pa53"><no>53</no>
+				<alinea>De tous les genres musicaux hérités de l’histoire de la chrétienté
+					occidentale et de ses différentes traditions confessionnelles et liturgiques, le
+					requiem paraît être celui qui s’est le mieux adapté à l’environnement culturel
+					de sociétés sécularisées ou laïques. Le plus souvent sans grande adaptation de
+					son livret, l’ordinaire catholique de la messe des morts, il est passé de la
+					célébration religieuse à la salle de concert, se mettant au service des
+					commémorations et des manifestes politiques les plus divers et prenant par la
+					même occasion l’ampleur de dimensions nouvelles.</alinea>
+			</para><para id="pa54"><no>54</no>
+				<alinea>Le paradoxe n’est sans doute qu’apparent : l’humanité reste désarmée devant
+					la mort — et devant ses morts, et la pensée agnostique moderne n’a guère trouvé
+					de langage alternatif à l’imaginaire symbolique médiéval pour accompagner ses
+					angoisses, ses espérances et ses doutes devant la mort. Dans cette situation, il
+					m’a semblé intéressant de rendre compte de la manière dont trois compositeurs de
+					traditions différentes — un luthérien, un réformé et un orthodoxe converti au
+					catholicisme — avaient recadré le genre du requiem pour en faire une parole
+					d’espérance croyante pour l’universalité de l’humanité : comment dire Dieu par
+					la musique<renvoi id="re1no15" idref="no15" typeref="note">15</renvoi>.</alinea>
+			</para><para id="pa55"><no>55</no>
+				<alinea>Le plus grand dénominateur commun des trois requiem de Brahms, de Stravinsky
+					et de Frank Martin ne réside pas dans la réponse qu’ils donnent à la question,
+					mais dans le défi qu’ils relèvent, chacun à sa manière : à quel Dieu et à quelle
+					Transcendance s’en remettre devant la mort, et comment, face au deuil, dans le
+					compagnonnage imposé et accepté avec la mort ou devant la présence de l’échéance
+					proche de la mort, transmettre par leur art une parole d’espérance et de paix ?
+					Les réponses que donnent leurs compositions sont d’ordre esthétique. Mais les
+					différentes solutions esthétiques, littéraires et musicales qu’ils adoptent
+					découlent d’une réflexion critique d’ordre théologique : quel sens y a-t-il à
+					invoquer Dieu devant la mort, devant quelle Transcendance se placer et pour quoi
+					faire ? Ce sont d’ailleurs les convictions délibérément et explicitement
+					théologiques qui prennent forme dans leurs créations artistiques et qui
+					s’expriment dans leurs prises de parole qui leur confèrent leur véracité. Les
+					trois requiem de Brahms, de Frank Martin et de Stravinsky proposent trois
+					contributions de théologiens laïcs qui recadrent la liturgie de la messe pour
+					les morts en une prière ou en une prédication des vivants pour les
+					vivants.</alinea>
+			</para></section1></corps><partiesann lang="fr"><grnotebio><notebio id="nb1" idrefs="au1" lang="fr"><alinea>François Vouga est professeur émérite de Nouveau Testament à la Kirchliche Hochschule Wuppertal / Bethel. Il prépare actuellement un commentaire sur la <marquage typemarq="italique">Première épître de Pierre</marquage> et deux essais sur la poétique théologique de l’Évangile de Marc. Il a récemment publié, en collaboration avec Henri Hofer et André Jantet : (2016) <marquage typemarq="italique">Dieu sans religion. Les origines laïques du christianisme</marquage>, Genève, Labor et Fides et (2018) « Apports du protestantisme à la musique – apports de la musique à la pensée protestante », <marquage typemarq="italique">Foi &amp; Vie</marquage>, 1, février, p. 14-26.</alinea></notebio></grnotebio><grbiblio><biblio><refbiblio id="rb1"><marquage typemarq="petitecap">Boucourechliev</marquage>, A. (1982), <marquage typemarq="italique">Igor Stravinsky</marquage>, Paris, Fayard.</refbiblio><refbiblio id="rb2"><marquage typemarq="petitecap">Buffat</marquage>, D. (1973), « Frank Martin nous dit… Une interview exclusive sur la création de son “Requiem” », <marquage typemarq="italique">Revue Musicale de Suisse Romande</marquage>, 26/3, p. 2 et 4.</refbiblio><refbiblio id="rb3"><marquage typemarq="petitecap">Felix,</marquage> F., J.-C. <marquage typemarq="petitecap">Piguet</marquage> et M. <marquage typemarq="petitecap">Martin</marquage> (2001), dir., <marquage typemarq="italique">Correspondance Frank Martin</marquage> <marquage typemarq="italique">- J.-Claude Piguet (1965-1974)</marquage>, Genève, Georg.</refbiblio><refbiblio id="rb4"><marquage typemarq="petitecap">Martin, M.</marquage> (1984), dir., <marquage typemarq="italique">À propos de… Commentaires de Frank Martin sur ses oeuvres</marquage>, Langages, Neuchâtel, La Baconnière.</refbiblio><refbiblio id="rb5"><marquage typemarq="petitecap">Perroux</marquage>, A. (2001), <marquage typemarq="italique">Frank Martin ou L’insatiable quête</marquage>, Genève, Éditions Papillon.</refbiblio><refbiblio id="rb6"><marquage typemarq="petitecap">Société Frank Martin</marquage> (1984), <marquage typemarq="italique">Frank Martin 1890-1974. L’univers d’un compositeur. Catalogue de l’Exposition commémorant le dixième anniversaire de la mort de Frank Martin</marquage>, Lausanne.</refbiblio><refbiblio id="rb7"><marquage typemarq="petitecap">Stravinsky</marquage>, I. (1962) [1935], <marquage typemarq="italique">Chroniques de ma vie</marquage>, Paris, Denoël et Gonthier (Bibliothèque Médiations).</refbiblio><refbiblio id="rb8">S<marquage typemarq="petitecap">travinsky</marquage>, I. (1952), <marquage typemarq="italique">Poétique musicale, nouvelle édition revue et augmentée</marquage>, Paris, Le Bon Plaisir (Amour de la musique), p. 41-42 ; réédition critique : I. <marquage typemarq="petitecap">Strawinsky</marquage> (2000), <marquage typemarq="italique">Poétique musicale sous forme de six leçons</marquage>, Paris, Flammarion (Harmoniques).</refbiblio><refbiblio id="rb9"><marquage typemarq="petitecap">Stravinsky</marquage>, T. (1980) [1948], <marquage typemarq="italique">Le message d’Igor Stravinsky</marquage>, Lausanne, Éditions de l’Aire.</refbiblio><refbiblio id="rb10"><marquage typemarq="petitecap">Sulzer, P.</marquage> (1988), dir., <marquage typemarq="italique">Frank Martin. Lettres à Victor Desarzens. Témoignages de collaboration et d’amitié entre le compositeur et son interprète</marquage>, Lausanne, L’Âge d’homme.</refbiblio><refbiblio id="rb11"><marquage typemarq="petitecap">Vouga</marquage>, F. (1983), <marquage typemarq="italique">R</marquage>é<marquage typemarq="italique">sonances th</marquage>éologiques<marquage typemarq="italique"> de la musique, Bach - Beethoven - Stravinsky - Mozart - Verdi - Britten</marquage>, Genève, Labor et Fides (L’Évangile dans la vie 9).</refbiblio></biblio></grbiblio><grnote>
+			<note id="no1">
+				<no>1</no>
+				<alinea>Traduction du programme de la création du Requiem de Frank Martin, Lausanne,
+					le 4 mai 1973.</alinea>
+			</note>
+			<note id="no2">
+				<no>2</no>
+				<alinea>Texte tiré du <marquage typemarq="italique">Livre de la prière
+					commune</marquage>, l’ordre pour la sépulture des morts, traduction par l’Église
+					d’Angleterre du <marquage typemarq="italique">Book of Common Prayer</marquage>,
+					Londres 1662 :</alinea>
+				<listeord numeration="decimal">
+					<elemliste>
+						<alinea>Je suis la résurrection et la vie, dit le Seigneur ; celui qui croit
+							en moi, quand même il serait mort, vivra. Et quiconque vit et croit en
+							moi, ne mourra jamais.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Je sais que mon Rédempteur est vivant, et qu’il demeurera le dernier
+							sur la terre. Et lorsque après ma peau, ce corps aura été rongé, dans ma
+							chair, je verrai Dieu ; je le verrai moi-même, et mes yeux le verront,
+							et non pas un autre.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Nous n’avons rien apporté au monde ; et il est évident que nous n’en
+							pouvons rien emporter. Le Seigneur avait donné, le Seigneur a ôté ; que
+							le Nom du Seigneur soit béni !</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>L’homme né de la femme est de courte durée, et il est rassasié de
+							peines. Il s’épanouit comme une fleur, puis il se fane ; il s’enfuit
+							comme une ombre qui ne s’arrête point.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Au milieu de la vie nous sommes dans la mort : auprès de qui
+							chercherons-nous du secours, si ce n’est auprès de toi, ô Seigneur, qui
+							es justement irrité à cause de nos péchés ? Néanmoins, ô Seigneur, Dieu
+							très-saint, ô Seigneur très-puissant, ô saint et très-miséricordieux
+							Sauveur, ne nous livre point aux amères douleurs de la mort
+							éternelle.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Tu connais, Seigneur, les secrets de nos coeurs ; ne ferme point les
+							oreilles de ta miséricorde à notre prière ; mais pardonne-nous, Seigneur
+							très-saint, ô Dieu très-puissant, ô saint et miséricordieux Sauveur ;
+							toi, très-juste Juge éternel, ne permets point qu’à notre dernière
+							heure, si grandes que soient les angoisses de la mort, nous nous
+							détachions de toi.</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>J’entendis une voix du ciel qui me disait : Écris : Bienheureux sont
+							les morts qui dorénavant meurent dans le Seigneur ! Oui, dit l’Esprit,
+							car ils se reposent de leurs travaux.</alinea>
+					</elemliste>
+				</listeord>
+			</note>
+			<note id="no3">
+				<no>3</no>
+				<alinea>On remarquera au passage, typiques de l’héritage protestant :</alinea>
+				<listeord numeration="decimal">
+					<elemliste>
+						<alinea>La familiarité du compositeur avec sa Bible ;</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>Le principe herméneutique luthérien du <marquage typemarq="italique">sola scriptura</marquage> comme <marquage typemarq="italique">scriptura
+							sui interpres</marquage> ;</alinea>
+					</elemliste>
+					<elemliste>
+						<alinea>La conception réformée d’un canon biblique comprenant le Nouveau et
+							l’Ancien Testament comme un corpus unitaire. </alinea>
+					</elemliste>
+				</listeord>
+			</note>
+			<note id="no4">
+				<no>4</no>
+				<alinea>Autre exception singulière : Igor Stravinsky (1961), <marquage typemarq="italique">A Sermon, a Narrative and a Prayer</marquage>, première
+					partie.</alinea>
+			</note>
+			<note id="no5">
+				<no>5</no>
+				<alinea>« À propos du “Requiem” par Frank Martin », programme de la création,
+					Lausanne, le 4 mai 1973, repris dans Martin (1984, 158).</alinea>
+			</note>
+			<note id="no6">
+				<no>6</no>
+				<alinea>« A propos du Requiem », dans Martin (1984, 159-160).</alinea>
+			</note>
+			<note id="no7">
+				<no>7</no>
+				<alinea>Lettre à Jan-Frank Martin [fils de Frank Martin], 14.5.1973 (Société Frank
+					Martin 1984, 137).</alinea>
+			</note>
+			<note id="no8">
+				<no>8</no>
+				<alinea>Lettre à Jean-Claude Piguet, 23. 1. 1968, publiée dans Felix, Piguet et
+					Martin (2001, 17).</alinea>
+			</note>
+			<note id="no9">
+				<no>9</no>
+				<alinea>Zodiaque 103, La Pierre-qui-vire (1975, 12-13), cité dans : Société Frank
+					Martin (1984, 137).</alinea>
+			</note>
+			<note id="no10">
+				<no>10</no>
+				<alinea>Lettre à Victor Desarzens, 22 avril 1971, publiée dans Sulzer (1988,
+					56).</alinea>
+			</note>
+			<note id="no11">
+				<no>11</no>
+				<alinea><marquage typemarq="italique">Pater Noster</marquage> (1926) ; <marquage typemarq="italique">Symphonie de Psaumes</marquage> (1930) ; <marquage typemarq="italique">Credo</marquage> (1932) ; <marquage typemarq="italique">Ave
+					Maria</marquage> (1934) ; <marquage typemarq="italique">Babel</marquage>
+					(1944) ; <marquage typemarq="italique">Messe </marquage>(1948) ; <marquage typemarq="italique">Canticum sacrum ad honorem Marci Nominis</marquage> (1956) ;
+					<marquage typemarq="italique">Threni id es lamentationes Jeremiae
+					prophetae</marquage> (1958) ; <marquage typemarq="italique">A Sermon, a
+					Narrative and a Prayer</marquage> (1961) ; <marquage typemarq="italique">The
+					Flood</marquage> (1962) ; <marquage typemarq="italique">Abraham and
+					Isaak</marquage> (1963) ; <marquage typemarq="italique">Introïtus T. S. Eliot in
+					memoriam </marquage>(1965) ; <marquage typemarq="italique">Requiem
+					Canticles</marquage> (1965-1966).</alinea>
+			</note>
+			<note id="no12">
+				<no>12</no>
+				<alinea>Dans <marquage typemarq="italique">Chroniques de ma vie</marquage> (Igor
+					Stravinsky, 1962, p. 48-50), Stravinsky fait un récit haut en couleur du
+					scandale causé en lui par la confusion wagnérienne entre art et
+					religion.</alinea>
+			</note>
+			<note id="no13">
+				<no>13</no>
+				<alinea>« Ma Messe […] est liturgique et presque sans ornements. En mettant le Credo
+					en musique, j’ai voulu seulement préserver le texte, d’une manière particulière.
+					On compose une Marche pour aider les hommes à marcher ; ainsi, avec mon Credo,
+					j’espère fournir une aide pour le texte. Le Credo est le mouvement le plus long.
+					Il y a beaucoup à croire ». Déclaration citée dans Boucourechliev (1982,
+					293).</alinea>
+			</note>
+			<note id="no14">
+				<no>14</no>
+				<alinea>Allusion à Peter Weiss (1963), <marquage typemarq="italique">Die Verfolgung
+					und Ermordung Jean Paul Marats dargestellt durch die Schauspielgruppe des
+					Hospizes zu Charenton unter Anleitung des Herrn de Sade</marquage>, traduction
+					française de Jean Baudrillard : (1965), <marquage typemarq="italique">La
+					Pers</marquage>écution<marquage typemarq="italique"> et l’Assassinat de
+					Jean-Paul Marat représent</marquage>és<marquage typemarq="italique"> par le
+					groupe théâtral de l’hospice de Charenton sous la direction de Monsieur de
+					Sade</marquage>.</alinea>
+			</note>
+			<note id="no15">
+				<no>15</no>
+				<alinea>Je n’ai pas repris l’analyse du <marquage typemarq="italique">War
+					Requiem</marquage> de Benjamin Britten, qui aurait certainement eu sa place,
+					originale, ici, puisque je lui avais consacré un chapitre dans Vouga
+					(1983).</alinea>
+			</note>
+		</grnote></partiesann></article>

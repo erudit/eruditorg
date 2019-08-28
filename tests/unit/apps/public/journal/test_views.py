@@ -1131,6 +1131,24 @@ class TestArticleDetailView:
         else:
             assert note not in div.decode()
 
+    def test_verbatim_poeme_lines(self):
+        article = ArticleFactory(
+            from_fixture='1062061ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        poeme = dom.find('blockquote', {'class': 'verbatim poeme'})
+        # Check that poems lines are displayed in <p>.
+        assert poeme.decode() == '<blockquote class="verbatim poeme">\n<p class="ligne">Jour de larme, </p>\n<p class="ligne">jour où les coupables se réveilleront</p>\n<p class="ligne">pour entendre leur jugement,</p>\n<p class="ligne">alors, ô Dieu, pardonne-leur et leur donne le repos.</p>\n<p class="ligne">Jésus, accorde-leur le repos.</p>\n</blockquote>'
+
+
 
 @unittest.mock.patch.object(
     Issue,

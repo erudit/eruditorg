@@ -969,7 +969,14 @@
   <!-- blockquotes, dedications, epigraphs, verbatims -->
   <xsl:template match="bloccitation | dedicace | epigraphe | verbatim">
     <blockquote class="{name()} {@typeverb}">
-      <xsl:apply-templates/>
+      <xsl:choose>
+        <xsl:when test="@typeverb = 'poeme'">
+          <xsl:apply-templates mode="poeme"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates/>
+        </xsl:otherwise>
+      </xsl:choose>
     </blockquote>
   </xsl:template>
 
@@ -988,6 +995,10 @@
   <xsl:template match="bloc/ligne">
     <xsl:apply-templates/>
     <br/>
+  </xsl:template>
+
+  <xsl:template match="bloc/ligne" mode="poeme">
+    <p class="ligne"><xsl:apply-templates/></p>
   </xsl:template>
 
   <!-- groups of figures & tables -->
