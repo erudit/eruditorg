@@ -187,6 +187,8 @@ export default {
           // Figure caption.
           var figure_caption = figure.find('.legende')
 
+          // Figure group bottom caption.
+          var grfigure_bottom_legende = grfigure.find('div.grfigure-legende')
           // Figure bottom caption.
           var figure_bottom_legende = figure.find('div.figure-legende')
           // Figure notes.
@@ -207,6 +209,7 @@ export default {
             figure_bottom_legende.clone(),
             figure_notes.clone(),
             figure_source.clone(),
+            grfigure_bottom_legende.clone(),
           );
 
           // Make sure the caption is not out of the window for big figures.
