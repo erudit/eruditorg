@@ -293,4 +293,11 @@ $article-toolbar-width: 80px;
     margin-right: 5px;
   }
 
+  sup.special {
+    left: 0.25em;
+  }
+  sub.special {
+    left: -0.25em;
+  }
+
 }
