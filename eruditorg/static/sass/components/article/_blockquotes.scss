@@ -69,7 +69,12 @@ blockquote {
 
     &.motpourmot {}
 
-    &.poeme {}
+    &.poeme {
+      .ligne {
+        margin: 0 0 0 30px;
+        text-indent: -30px;
+      }
+    }
 
   }
 
