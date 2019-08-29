@@ -500,6 +500,38 @@ class TestIssueReaderPageView:
             assert response.url == expected_redirection
 
 
+class TestIssueXmlView:
+
+    @pytest.mark.parametrize('ticket', [
+        True, False,
+    ])
+    @pytest.mark.parametrize('is_published', [
+        True, False,
+    ])
+    def test_issue_reader_page_view(self, is_published, ticket):
+        issue = IssueFactory(
+            is_published=is_published,
+            journal__code='journal',
+        )
+        url = reverse('public:journal:issue_raw_xml', kwargs={
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'localidentifier': issue.localidentifier,
+        })
+        response = Client().get(url, {
+            'ticket': issue.prepublication_ticket if ticket else '',
+        }, follow=True)
+        # The Issue XML view should be accessible if the issue is published or if a prepublication
+        # ticket is provided.
+        if is_published or ticket:
+            with open('./tests/fixtures/issue/minimal.xml', mode='r') as xml:
+                assert response.content.decode() in xml.read()
+        # The Issue XML view should redirect to the journal detail view if the issue is not
+        # published and a prepublication ticket is not provided.
+        else:
+            assert response.redirect_chain == [('/fr/revues/journal/', 302)]
+
+
 class TestArticleDetailView:
 
     @unittest.mock.patch('erudit.fedora.cache.cache')

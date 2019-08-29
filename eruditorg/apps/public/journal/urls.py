@@ -32,6 +32,9 @@ journal_urlpatterns = ([
             url(r'^(?P<page>[\d]+).jpg$', views.IssueReaderPageView.as_view(), name='issue_reader_page'),  # noqa
         ])),
     ])),
+    url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<localidentifier>[\w-]+)'), include([  # noqa
+        url(r'^\.xml$', views.IssueXmlView.as_view(), name="issue_raw_xml"),
+    ])),
 
     # Article URLs
     url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)/'), include([  # noqa
