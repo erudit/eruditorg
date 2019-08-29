@@ -613,6 +613,23 @@ class IssueReaderPageView(
         return super().get(request, *args, **kwargs)
 
 
+class IssueXmlView(
+        ContentAccessCheckMixin,
+        PrepublicationTokenRequiredMixin,
+        FedoraFileDatastreamView,
+        DetailView):
+    """ Displays an Issue raw XML. """
+    content_type = 'application/xml'
+    datastream_name = 'summary'
+    fedora_object_class = PublicationDigitalObject
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+    def get_datastream_content(self, fedora_object):
+        return fedora_object.xml_content
+
+
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin,
         FallbackObjectViewMixin,
