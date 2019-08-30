@@ -1020,11 +1020,14 @@
           <p class="allertexte"><a href="#{@id}">|^</a></p>
         </xsl:if>
         <p class="no"><xsl:apply-templates select="no"/></p>
-        <div class="legende"><xsl:apply-templates select="legende/*"/></div>
+        <div class="legende"><xsl:apply-templates select="legende/titre | legende/sstitre"/></div>
       </div>
       <xsl:apply-templates select="tableau | figure">
         <xsl:with-param name="mode" select="$mode"/>
       </xsl:apply-templates>
+      <div class="grfigure-legende">
+        <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
+      </div>
     </div>
   </xsl:template>
 
