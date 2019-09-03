@@ -242,6 +242,8 @@ class JournalDetailView(
 
         # We need a localidentifier for the journal detail template cache key so we should not cache
         # the template if we don't have one.
+        # We cannot cache journals' templates forever because we use issues' metadata to build them
+        # and we cannot know when an issue has been modified.
         shouldcache = self.journal.localidentifier is not None
         context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
@@ -692,9 +694,8 @@ class BaseArticleDetailView(
         shouldcache = obj.issue.is_published
         # If the issue is published, the template should be cached for one day.
         # If the issue is not published, the template should not be cached.
-        # Unlike issues & journals, we cannot cache articles' templates forever because we risk
-        # invalidating the cached template before the cached Fedora object and thus use an
-        # out-of-date Fedora object.
+        # We cannot cache articles' templates forever because we risk invalidating the cached
+        # template before the cached Fedora object and thus use an out-of-date Fedora object.
         context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid

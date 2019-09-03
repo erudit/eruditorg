@@ -25,8 +25,8 @@
   <div class="row">
     {# Main content #}
     {% block inner_main %}{% endblock inner_main %}
-    {# If the meta info issue is published, the journal's metadata will be cached forever (TTL = None) or until the cache content version change. #}
-    {# If the meta info issue is not published, the journal's metadata will not be cached (TTL = 0). #}
+    {# If the meta info issue is published, the journal's metadata will be cached for one day or until the cache content version change. #}
+    {# If the meta info issue is not published, the journal's metadata will not be cached. #}
     {# The meta info issue's localidentifier is used as a primary key for the cache key. #}
     {# The directors_cache_key, editors_cache_key and the LANGUAGE_CODE arguments are use to generate the cache key hash. #}
     {# The meta info issue's update time from Fedora is used as the cache content version. #}

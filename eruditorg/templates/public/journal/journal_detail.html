@@ -61,7 +61,7 @@
 {% block body_id %}journal_detail{% endblock body_id %}
 {% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
 {% block inner_main %}
-{# The journal detail will be cached forever (TTL = None) or until the cache content version change. #}
+{# The journal detail will be cached forever or until the cache content version change. #}
 {# The journal's code is used as a primary key for the cache key. #}
 {# The content_access_granted and LANGUAGE_CODE arguments are use to generate the cache key hash. #}
 {# The journal info's update time is used as the cache content version. #}
