@@ -3,13 +3,11 @@ from math import ceil
 
 from django.contrib import sitemaps
 from django.urls import reverse
+from django.utils.functional import cached_property
 
 from erudit.models import Issue
 from erudit.models import Journal
-from erudit.solr.models import (
-    get_all_articles,
-    get_total_number_of_articles,
-)
+from erudit.solr.models import get_all_articles
 
 
 class JournalSitemap(sitemaps.Sitemap):  # pragma: no cover
@@ -58,8 +56,7 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
 
     @property
     def paginator(self):
-        items = self.items()
-        hits = self.hits()
+        results = self.results
 
         class FakePaginator:
             per_page = self.limit
@@ -68,22 +65,22 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
             def page(number):
 
                 class FakePage:
-                    object_list = items
+                    object_list = results['items']
 
                 return FakePage()
 
             @property
             def num_pages(self):
-                return int(ceil(hits / float(self.per_page)))
+                return int(ceil(results['hits'] / float(self.per_page)))
 
         return FakePaginator()
 
-    def items(self):
+    @cached_property
+    def results(self):
         return get_all_articles(self.limit, getattr(self, 'page', 1))
 
-    @staticmethod
-    def hits():
-        return get_total_number_of_articles()
+    def items(self):
+        return self.results['items']
 
     @staticmethod
     def lastmod(obj):

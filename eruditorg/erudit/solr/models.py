@@ -206,23 +206,28 @@ def get_all_articles(rows, page):
     }
     solr_results = client.search(**args)
 
+    # Fetch all results' issues in one query to avoid one query per result.
+    issue_ids = {doc['NumeroID'] for doc in solr_results.docs}
+    issue_qs = erudit_models.Issue.objects.filter(
+        localidentifier__in=issue_ids,
+    ).select_related('journal')
+    issues = {issue.localidentifier: issue for issue in issue_qs}
+
     def get(solr_data):
         solr_doc = SolrDocument(solr_data)
         if solr_doc.document_type != 'article':
             return None
-        try:
-            return erudit_models.Article.from_solr_object(Article(solr_data))
-        except erudit_models.Article.DoesNotExist:
-            print("Warning: Article {} from Solr does not exist in Fedora!".format(solr_data['ID']))
-            return None
+        return erudit_models.Article(
+            issues.get(solr_data['NumeroID']),
+            solr_doc.localidentifier,
+            solr_doc,
+        )
 
     result = (get(d) for d in solr_results.docs)
-    return [a for a in result if a is not None]
-
-
-def get_total_number_of_articles():
-    query = 'Fonds_fac:Érudit Corpus_fac:Article'
-    return client.search(query).hits
+    return {
+        'hits': solr_results.hits,
+        'items': [a for a in result if a is not None]
+    }
 
 
 def get_solr_data_from_id(solr_id):
