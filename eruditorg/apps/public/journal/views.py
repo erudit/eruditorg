@@ -240,6 +240,11 @@ class JournalDetailView(
         # when a new issue is published (or unpublished).
         context['issues_cache_key'] = qs_cache_key(self.object.published_issues)
 
+        # We need a localidentifier for the journal detail template cache key so we should not cache
+        # the template if we don't have one.
+        shouldcache = self.journal.localidentifier is not None
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
+
         return context
 
 
