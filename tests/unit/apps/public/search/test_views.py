@@ -1,10 +1,20 @@
+from typing import List
+
 import pytest
 
 from bs4 import BeautifulSoup
 from django.test import Client
 from django.urls import reverse
 
+from apps.public.journal.viewmixins import SolrDataMixin
+from erudit.solr.models import Article
 from erudit.test.factories import ArticleFactory, SolrDocumentFactory, ThesisFactory
+
+
+class FakeSolrData:
+    # noinspection PyMethodMayBeStatic,PyUnusedLocal
+    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
+        return []
 
 
 @pytest.mark.django_db
@@ -50,7 +60,9 @@ class TestSearchResultsView:
         # The search result which is not in fedora should not display the citation tools.
         assert results.find('a', {'data-modal-id': '#id_cite_modal_bar'}) is None
 
-    def test_search_results_citation_modal_is_the_same_as_the_article_detail(self):
+    def test_search_results_citation_modal_is_the_same_as_the_article_detail(self, monkeypatch):
+        monkeypatch.setattr(SolrDataMixin, 'solr_data', FakeSolrData())
+
         article = ArticleFactory(localidentifier='foo', title='foo')
 
         url = reverse('public:search:results')

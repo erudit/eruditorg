@@ -9,7 +9,10 @@ from django.utils.translation import get_language, gettext as _
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
-from erudit.solr.models import get_fedora_ids
+from erudit.solr.models import (
+    SolrData,
+    get_solr_data,
+)
 
 from core.metrics.metric import metric
 
@@ -127,7 +130,13 @@ class ContentAccessCheckMixin:
         return self.request.subscriptions.provides_access_to(**kwargs)
 
 
-class SingleArticleMixin:
+class SolrDataMixin:
+    @property
+    def solr_data(self) -> SolrData:
+        return get_solr_data()
+
+
+class SingleArticleMixin(SolrDataMixin):
 
     def __init__(self):
         # TODO: make this a private instance variable
@@ -144,7 +153,7 @@ class SingleArticleMixin:
         issue_localid = self.kwargs.get('issue_localid')
         localidentifier = self.kwargs.get('localid')
         if not (journal_code and issue_localid):
-            fedora_ids = get_fedora_ids(localidentifier)
+            fedora_ids = self.solr_data.get_fedora_ids(localidentifier)
             if fedora_ids is None:
                 raise Http404()
             journal_code, issue_localid, localidentifier = fedora_ids

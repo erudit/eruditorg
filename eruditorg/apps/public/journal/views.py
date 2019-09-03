@@ -47,11 +47,8 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
-from erudit.solr.models import (
-    get_fedora_ids,
-    get_all_journal_articles,
-    Article as SolrArticle,
-)
+from erudit.solr.models import Article as SolrArticle
+
 from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
@@ -61,7 +58,10 @@ from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectV
 
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
-from .viewmixins import ContentAccessCheckMixin
+from .viewmixins import (
+    ContentAccessCheckMixin,
+    SolrDataMixin,
+)
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 from .viewmixins import SingleArticleWithScholarMetadataMixin
@@ -709,7 +709,7 @@ class BaseArticleDetailView(
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
-        all_journal_articles = get_all_journal_articles(issue.journal.code)
+        all_journal_articles = self.solr_data.get_all_journal_articles(issue.journal.code)
         related_candidates = pick_related_article_candidates(current_article, all_journal_articles)
         # return 4 randomly — at most
         number_of_related = min(4, len(related_candidates))
@@ -853,11 +853,11 @@ class ArticleBiblioView(BaseArticleDetailView):
         return self._render_xml_contents(only_display='biblio')
 
 
-class IdEruditArticleRedirectView(RedirectView):
+class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
     pattern_name = 'public:journal:article_detail'
 
     def get_redirect_url(self, *args, **kwargs):
-        fedora_ids = get_fedora_ids(kwargs['localid'])
+        fedora_ids = self.solr_data.get_fedora_ids(kwargs['localid'])
         if not fedora_ids:
             raise Http404()
         article = Article.from_fedora_ids(*fedora_ids)

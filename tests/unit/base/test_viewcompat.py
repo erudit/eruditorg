@@ -1,3 +1,8 @@
+from typing import (
+    Tuple,
+    Optional,
+    cast,
+)
 from unittest import mock
 
 import pytest
@@ -6,6 +11,7 @@ from django.urls import reverse
 
 from apps.public.journal.views_compat import get_fedora_ids_from_url_kwargs
 from erudit.fedora import repository
+from erudit.solr.models import SolrData
 from erudit.test.factories import IssueFactory, ArticleFactory
 from erudit.test.factories import JournalFactory
 
@@ -100,48 +106,61 @@ def test_will_propagate_prepublication_ticket_received_in_querystring_for_articl
     assert resp.status_code == 200
 
 
+class FakeSolrData:
+    def __init__(self, fedora_ids):
+        self.fedora_ids = fedora_ids
+
+    # noinspection PyUnusedLocal
+    def get_fedora_ids(self, localidentifier: str) -> Optional[Tuple[str, str, str]]:
+        return self.fedora_ids
+
+
 @pytest.mark.django_db
 class TestGetArticleFromUrlKwargs:
     def test_returns_none_when_no_localid(self):
-        assert get_fedora_ids_from_url_kwargs({}) is None
+        solr_data = cast(SolrData, FakeSolrData(('jc_solr', 'issue_id', 'article_id')))
+        assert get_fedora_ids_from_url_kwargs(solr_data, {}) is None
 
     def test_returns_ids_when_issue_id_provided(self):
-        fedora_ids = get_fedora_ids_from_url_kwargs({'journal_code': 'jc',
-                                                     'issue_localid': 'issue_id',
-                                                     'localid': 'article_id'})
+        solr_data = cast(SolrData, FakeSolrData(('jc_solr', 'issue_id', 'article_id')))
+        fedora_ids = get_fedora_ids_from_url_kwargs(solr_data, {'journal_code': 'jc',
+                                                                'issue_localid': 'issue_id',
+                                                                'localid': 'article_id'})
         assert fedora_ids == ('jc', 'issue_id', 'article_id')
 
     def test_returns_none_when_no_issue_for_year_volume_number(self):
+        solr_data = cast(SolrData, FakeSolrData(None))
         with mock.patch('apps.public.journal.views_compat.get_pids') as mock_get_pids:
             mock_get_pids.return_value = []
-            fedora_ids = get_fedora_ids_from_url_kwargs({'journal_code': 'jc',
-                                                         'year': '2018',
-                                                         'v': '2',
-                                                         'issue_number': '1',
-                                                         'localid': 'article_id'})
+            fedora_ids = get_fedora_ids_from_url_kwargs(solr_data, {'journal_code': 'jc',
+                                                                    'year': '2018',
+                                                                    'v': '2',
+                                                                    'issue_number': '1',
+                                                                    'localid': 'article_id'})
             # since we do not find the issue in the db, and it's not in fake solr
             # nor in fake fedora, the funciton should return none
             assert fedora_ids is None
 
     def test_returns_ids_when_issue_found_for_year_volume_number(self):
+        solr_data = cast(SolrData, FakeSolrData(('jc_solr', 'issue_id', 'article_id')))
         journal = JournalFactory(code='jc')
         IssueFactory(journal=journal, year='2018', volume='2', number='1',
                      localidentifier='issue_id')
-        fedora_ids = get_fedora_ids_from_url_kwargs({'journal_code': 'jc',
-                                                     'year': '2018',
-                                                     'v': '2',
-                                                     'issue_number': '1',
-                                                     'localid': 'article_id'})
+        fedora_ids = get_fedora_ids_from_url_kwargs(solr_data, {'journal_code': 'jc',
+                                                                'year': '2018',
+                                                                'v': '2',
+                                                                'issue_number': '1',
+                                                                'localid': 'article_id'})
         assert fedora_ids == ('jc', 'issue_id', 'article_id')
 
     def test_returns_ids_when_found_in_solr(self):
-        with mock.patch('apps.public.journal.views_compat.get_fedora_ids') as mock_get_fedora_ids:
-            mock_get_fedora_ids.return_value = ('jc', 'issue_id', 'article_id')
-            fedora_ids = get_fedora_ids_from_url_kwargs({'localid': 'article_id'})
-            assert fedora_ids == ('jc', 'issue_id', 'article_id')
+        solr_data = cast(SolrData, FakeSolrData(('jc_solr', 'issue_id', 'article_id')))
+        fedora_ids = get_fedora_ids_from_url_kwargs(solr_data, {'localid': 'article_id'})
+        assert fedora_ids == ('jc_solr', 'issue_id', 'article_id')
 
     def test_returns_ids_when_not_found_in_solr_but_found_in_fedora(self):
+        solr_data = cast(SolrData, FakeSolrData(None))
         with mock.patch('apps.public.journal.views_compat.get_pids') as mock_get_pids:
             mock_get_pids.return_value = ['erudit:erudit.jc.issueid.000666ar']
-            fedora_ids = get_fedora_ids_from_url_kwargs({'localid': '000666ar'})
+            fedora_ids = get_fedora_ids_from_url_kwargs(solr_data, {'localid': '000666ar'})
             assert fedora_ids == ('jc', 'issueid', '000666ar')
