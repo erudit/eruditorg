@@ -46,7 +46,7 @@ class Command(BaseCommand):
             return
 
         total_seconds = int((end - start).total_seconds())
-        articles = get_all_articles(rows=10**6, page=1)
+        articles = get_all_articles(rows=10**6, page=1)['items']
 
         # Generates metrics
         for i in range(number):
