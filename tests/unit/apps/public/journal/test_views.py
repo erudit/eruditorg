@@ -1199,6 +1199,24 @@ class TestArticleDetailView:
         assert grfigure_caption.decode() == '<div class="grfigure-caption">\n<p class="no">Figure 1</p>\n<div class="legende"></div>\n</div>'
         assert grfigure_legende.decode() == '<div class="grfigure-legende">\n<p class="alinea"><sup>a</sup> Hommes et femmes des générations enquêtées       (1930-1950 résidant en Île-de-France en 1999) et leurs parents.</p>\n<p class="alinea"><sup>b</sup> L’interprétation de cette figure se fait par       exemple de la manière suivante : Parmi les Ego hommes de profession       « indépendants », 44 % ont déclaré que la profession principale de leur père       était indépendant, 22,5 % ouvrier, 11,9 % cadre, etc. L’origine « père       indépendant » est nettement surreprésentée chez les Ego hommes indépendants.       C’est aussi l’origine la plus fréquente pour les Ego femmes indépendantes       (31,5 %), suivie par un père cadre (28,7 %).</p>\n</div>'
 
+    def test_no_liensimple_in_toc_heading(self):
+        article = ArticleFactory(
+            from_fixture='1062434ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        li = dom.find('li', {'class': 'article-toc--body'}).find('ul').find_all('li')
+        # Check that liensimple nodes are not displayed as links in TOC headings.
+        assert li[1].decode() == '<li><a href="#s1n4">«\xa0D’une vaine dispute – La Musique plaisir de l’esprit ou jouissance sensuelle\xa0» par         Charles Koechlin, (<em><span class="souligne">La Revue musicale,           1921</span></em>)</a></li>'
+        assert li[2].decode() == '<li><a href="#s1n6">« Réponse à quelques objections » par Désiré Pâque (<em><span class="souligne">La Revue musicale,           1935</span></em>)</a></li>'
+
 
 @unittest.mock.patch.object(
     Issue,
