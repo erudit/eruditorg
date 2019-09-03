@@ -240,6 +240,13 @@ class JournalDetailView(
         # when a new issue is published (or unpublished).
         context['issues_cache_key'] = qs_cache_key(self.object.published_issues)
 
+        # We need a localidentifier for the journal detail template cache key so we should not cache
+        # the template if we don't have one.
+        # We cannot cache journals' templates forever because we use issues' metadata to build them
+        # and we cannot know when an issue has been modified.
+        shouldcache = self.journal.localidentifier is not None
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
+
         return context
 
 
@@ -434,11 +441,11 @@ class IssueDetailView(
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
         context['journal'] = self.object.journal
-        # If the issue is published, the template should be cached forever (None = forever).
-        # If the issue is not published, the template should not be cached (0 = never).
-        # It's OK to cache the published issue templates forever because we are using the issue's
-        # updated time from Fedora as the cache version.
-        context['cache_timeout'] = settings.FOREVER_TTL if shouldcache else settings.NEVER_TTL
+        # If the issue is published, the template should be cached for one day.
+        # If the issue is not published, the template should not be cached.
+        # We cannot cache issues' templates forever because we use articles' metadata to build them
+        # and we cannot know when an article has been modified.
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         try:
             context['journal_info'] = self.object.journal.information
@@ -687,9 +694,8 @@ class BaseArticleDetailView(
         shouldcache = obj.issue.is_published
         # If the issue is published, the template should be cached for one day.
         # If the issue is not published, the template should not be cached.
-        # Unlike issues & journals, we cannot cache articles' templates forever because we risk
-        # invalidating the cached template before the cached Fedora object and thus use an
-        # out-of-date Fedora object.
+        # We cannot cache articles' templates forever because we risk invalidating the cached
+        # template before the cached Fedora object and thus use an out-of-date Fedora object.
         context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid

@@ -6,11 +6,10 @@
 {% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal.name|safe article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
-{# If the issue is published, the article metatags will be cached forever (TTL = None) or until the cache content version change. #}
-{# If the issue is not published, the article metatags will not be cached (TTL = 0). #}
+{# If the issue is published, the article metatags will be cached for one day. #}
+{# If the issue is not published, the article metatags will not be cached. #}
 {# The article's localidentifier is used as a primary key for the cache key. #}
 {# The article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
-{# The article's update time from Fedora is used as the cache content version. #}
 {% cache cache_timeout "public_article_base_metatags" article.localidentifier article.issue.is_published LANGUAGE_CODE 'v1' %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
@@ -100,11 +99,10 @@
 
 {% block structured_data %}
 {{ block.super }}
-{# If the issue is published, the article structured data will be cached forever (TTL = None) or until the cache content version change. #}
-{# If the issue is not published, the article structured data will not be cached (TTL = 0). #}
+{# If the issue is published, the article structured data will be cached for one day. #}
+{# If the issue is not published, the article structured data will not be cached. #}
 {# The article's localidentifier is used as a primary key for the cache key. #}
 {# The article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
-{# The article's update time from Fedora is used as the cache content version. #}
 {% cache cache_timeout "public_article_base_structured_data" article.localidentifier article.issue.is_published LANGUAGE_CODE 'v1' %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
