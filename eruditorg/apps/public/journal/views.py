@@ -434,11 +434,11 @@ class IssueDetailView(
         shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
         context['journal'] = self.object.journal
-        # If the issue is published, the template should be cached forever (None = forever).
-        # If the issue is not published, the template should not be cached (0 = never).
-        # It's OK to cache the published issue templates forever because we are using the issue's
-        # updated time from Fedora as the cache version.
-        context['cache_timeout'] = settings.FOREVER_TTL if shouldcache else settings.NEVER_TTL
+        # If the issue is published, the template should be cached for one day.
+        # If the issue is not published, the template should not be cached.
+        # We cannot cache issues' templates forever because we use articles' metadata to build them
+        # and we cannot know when an article has been modified.
+        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         try:
             context['journal_info'] = self.object.journal.information
