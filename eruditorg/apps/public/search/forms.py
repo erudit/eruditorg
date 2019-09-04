@@ -7,7 +7,8 @@ from django import forms
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _, pgettext
 
-from erudit.models import Discipline, Journal, Collection
+from erudit.models import Discipline, Collection
+from erudit.solr.models import get_solr_data, SolrData
 from erudit.utils import locale_aware_sort
 
 from apps.public.search import legacy
@@ -229,6 +230,10 @@ class SearchForm(forms.Form):
 
     journals = forms.MultipleChoiceField(label=_('Revues'), required=False)
 
+    @property
+    def solr_data(self) -> SolrData:
+        return get_solr_data()
+
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
 
@@ -239,8 +244,11 @@ class SearchForm(forms.Form):
 
         disciplines = locale_aware_sort(Discipline.objects.all(), keyfunc=attrgetter('name'))
         self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in disciplines]
-        journals = locale_aware_sort(Journal.objects.all().only('name'), keyfunc=attrgetter('name'))
-        self.fields['journals'].choices = [(j.name, j.name) for j in journals]
+        facets = self.solr_data.get_search_form_facets()
+        self.fields['journals'].choices = locale_aware_sort(
+            facets['journals'],
+            lambda x: x[1],
+        )
 
     def clean(self):
         cleaned_data = super(SearchForm, self).clean()

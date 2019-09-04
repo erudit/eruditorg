@@ -273,6 +273,27 @@ class SolrData:
         all_docs = get_all_solr_results(search_function, 500)
         return [Article(doc) for doc in all_docs]
 
+    def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
+        params = {
+            'fq': [
+                'Corpus_fac:(Article OR Culturel)',
+                'Fonds_fac:(Érudit OR UNB OR Persée)',
+            ],
+            'facet.field': [
+                'RevueID',
+                'TitreCollection_fac',
+            ],
+            'facet.pivot': 'RevueID,TitreCollection_fac',
+            'facet.limit': '-1',
+            'rows': '0',
+        }
+        results = self.client.search('*:*', **params)
+        journals = results.facets['facet_pivot']['RevueID,TitreCollection_fac']
+        return {
+            # List of tuples of journal IDs and journal names.
+            'journals': [(j['value'], j['pivot'][0]['value']) for j in journals],
+        }
+
 
 def get_solr_data() -> SolrData:
     return SolrData(pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT))
