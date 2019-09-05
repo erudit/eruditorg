@@ -1,3 +1,13 @@
+import functools
+from typing import (
+    List,
+    Any,
+    Dict,
+    Callable,
+    Tuple,
+    Optional,
+)
+
 from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import ugettext as _
@@ -13,7 +23,7 @@ client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 class SolrDocument:
     def __init__(self, solr_data):
-        self.localidentifier = solr_data['ID']
+        self.localidentifier = solr_data['ID'].replace('unb:', '')
         self.corpus = solr_data.get('Corpus_fac')
         self.solr_data = solr_data
 
@@ -131,6 +141,7 @@ class Article(SolrDocument):
 
     @property
     def journal_type(self):
+        # TODO: check this, why is this always 'S' ?
         return 'S'
 
 
@@ -181,21 +192,6 @@ def get_model_instance(solr_data):
         return SolrDocument(solr_data)
 
 
-def get_fedora_ids(localidentifier):
-    query = 'ID:{}'.format(localidentifier)
-    args = {
-        'q': query,
-        'facet.limit': '0',
-        'fl': 'ID,NumeroID,RevueID',
-    }
-    solr_results = client.search(**args)
-    if solr_results.hits:
-        doc = solr_results.docs[0]
-        return (doc['RevueID'], doc['NumeroID'], doc['ID'])
-    else:
-        return None
-
-
 def get_all_articles(rows, page):
     query = 'Fonds_fac:Érudit Corpus_fac:Article'
     args = {
@@ -237,3 +233,46 @@ def get_solr_data_from_id(solr_id):
     elif results.hits > 1:
         raise ValueError("Multiple Solr objects found")
     return results.docs[0]
+
+
+def get_all_solr_results(
+    search_function: Callable[..., pysolr.Results], page_size: int
+) -> List[Dict[str, Any]]:
+    docs = []
+    current = 0
+    while True:
+        results = search_function(start=current, rows=page_size)
+        if not results.docs:
+            break
+        current += page_size
+        docs.extend(results.docs)
+    return docs
+
+
+class SolrData:
+    def __init__(self, solr_client: pysolr.Solr):
+        self.client = solr_client
+
+    def get_fedora_ids(self, localidentifier) -> Optional[Tuple[str, str, str]]:
+        query = 'ID:{}'.format(localidentifier)
+        args = {
+            'q': query,
+            'facet.limit': '0',
+            'fl': 'ID,NumeroID,RevueID',
+        }
+        solr_results = self.client.search(**args)
+        if solr_results.hits:
+            doc = solr_results.docs[0]
+            return doc['RevueID'], doc['NumeroID'], doc['ID']
+        else:
+            return None
+
+    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
+        q = f'RevueAbr:"{journal_code}"'
+        search_function = functools.partial(self.client.search, q=q, facet='false')
+        all_docs = get_all_solr_results(search_function, 500)
+        return [Article(doc) for doc in all_docs]
+
+
+def get_solr_data() -> SolrData:
+    return SolrData(pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT))

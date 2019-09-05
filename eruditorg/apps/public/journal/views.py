@@ -3,6 +3,11 @@ from itertools import groupby
 from operator import attrgetter
 from string import ascii_uppercase
 import io
+from typing import (
+    Iterable,
+    List,
+)
+
 import pysolr
 import random
 import structlog
@@ -42,7 +47,8 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
-from erudit.solr.models import get_fedora_ids
+from erudit.solr.models import Article as SolrArticle
+
 from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
@@ -52,7 +58,10 @@ from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectV
 
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
-from .viewmixins import ContentAccessCheckMixin
+from .viewmixins import (
+    ContentAccessCheckMixin,
+    SolrDataMixin,
+)
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 from .viewmixins import SingleArticleWithScholarMetadataMixin
@@ -637,6 +646,19 @@ class IssueXmlView(
         return fedora_object.xml_content
 
 
+def pick_related_article_candidates(
+    current_article: Article, all_journal_articles: Iterable[SolrArticle]
+) -> List[Article]:
+    candidates = []
+    for solr_article in all_journal_articles:
+        if (
+            solr_article.article_type == "article" and
+            solr_article.localidentifier != current_article.localidentifier
+        ):
+            candidates.append(solr_article)
+    return candidates
+
+
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin,
         FallbackObjectViewMixin,
@@ -662,19 +684,21 @@ class BaseArticleDetailView(
             pass
 
         # Get all article from associated Issue
-        obj = context.get(self.context_object_name)
-        related_articles = list(obj.issue.get_articles_from_fedora())
+        current_article = context.get(self.context_object_name)
+        issue = current_article.issue
+        issue_articles = list(issue.get_articles_from_fedora())
 
         # Pick the previous article and the next article
         try:
-            if obj in related_articles:
-                obj_index = related_articles.index(obj)
+            if current_article in issue_articles:
+                obj_index = issue_articles.index(current_article)
             else:
-                obj_index = len(related_articles)
-            previous_article = related_articles[obj_index - 1] if obj_index > 0 else None
-            next_article = related_articles[obj_index + 1] \
-                if obj_index + 1 < len(related_articles) \
+                obj_index = len(issue_articles)
+            previous_article = issue_articles[obj_index - 1] if obj_index > 0 else None
+            next_article = issue_articles[obj_index + 1] \
+                if obj_index + 1 < len(issue_articles) \
                 else None
+        # TODO: explain why we catch AttributeError and raise only if not DEBUG
         except AttributeError:  # pragma: no cover
             # Passes the error if we are in DEBUG mode
             if not settings.DEBUG:
@@ -685,13 +709,19 @@ class BaseArticleDetailView(
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
-        # return 4 randomly
-        random.shuffle(related_articles)
-        context['related_articles'] = related_articles[:4]
+        all_journal_articles = self.solr_data.get_all_journal_articles(issue.journal.code)
+        related_candidates = pick_related_article_candidates(current_article, all_journal_articles)
+        # return 4 randomly — at most
+        number_of_related = min(4, len(related_candidates))
+        related_solr_articles = random.sample(related_candidates, k=number_of_related)
+        # calls to Article.from_solr_object are expensive, so create only selected articles
+        related_articles = [Article.from_solr_object(candidate)
+                            for candidate in related_solr_articles]
+        context['related_articles'] = related_articles
 
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
-        shouldcache = obj.issue.is_published
+        shouldcache = issue.is_published
         # If the issue is published, the template should be cached for one day.
         # If the issue is not published, the template should not be cached.
         # We cannot cache articles' templates forever because we risk invalidating the cached
@@ -701,22 +731,22 @@ class BaseArticleDetailView(
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
         # media URL and then remove the media_localid part to get the prefix only.
         url = reverse('public:journal:article_media', kwargs={
-            'journal_code': obj.issue.journal.code,
-            'issue_slug': obj.issue.volume_slug,
-            'issue_localid': obj.issue.localidentifier,
-            'localid': obj.localidentifier,
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'issue_localid': issue.localidentifier,
+            'localid': current_article.localidentifier,
             'media_localid': 'x',  # that last 'x' will be removed.
         })
         context['media_url_prefix'] = url[:-1]
 
         # Journal title, in all languages if the journal in multilingual.
-        context['journal_title'] = obj.issue.erudit_object.get_journal_title(
+        context['journal_title'] = issue.erudit_object.get_journal_title(
             formatted=True,
             subtitles=False,
         )
 
-        if not obj.issue.is_published:
-            context['ticket'] = obj.issue.prepublication_ticket
+        if not issue.is_published:
+            context['ticket'] = issue.prepublication_ticket
 
         return context
 
@@ -823,11 +853,11 @@ class ArticleBiblioView(BaseArticleDetailView):
         return self._render_xml_contents(only_display='biblio')
 
 
-class IdEruditArticleRedirectView(RedirectView):
+class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
     pattern_name = 'public:journal:article_detail'
 
     def get_redirect_url(self, *args, **kwargs):
-        fedora_ids = get_fedora_ids(kwargs['localid'])
+        fedora_ids = self.solr_data.get_fedora_ids(kwargs['localid'])
         if not fedora_ids:
             raise Http404()
         article = Article.from_fedora_ids(*fedora_ids)

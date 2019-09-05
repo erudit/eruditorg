@@ -12,8 +12,11 @@ from erudit.fedora.utils import get_pids
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
-from erudit.solr.models import get_fedora_ids
-from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
+from erudit.solr.models import SolrData
+from .viewmixins import (
+    RedirectExceptionsToFallbackWebsiteMixin,
+    SolrDataMixin,
+)
 from base.viewmixins import ActivateLegacyLanguageViewMixin
 
 
@@ -153,7 +156,7 @@ class IssueDetailRedirectView(
 
 class ArticleDetailRedirectView(
     ActivateLegacyLanguageViewMixin, RedirectExceptionsToFallbackWebsiteMixin,
-    RedirectView
+    RedirectView, SolrDataMixin,
 ):
     pattern_name = 'public:journal:article_detail'
     permanent = True
@@ -166,7 +169,7 @@ class ArticleDetailRedirectView(
         if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'pdf':
             self.pattern_name = 'public:journal:article_raw_pdf'
 
-        article_fedora_ids = get_fedora_ids_from_url_kwargs(kwargs)
+        article_fedora_ids = get_fedora_ids_from_url_kwargs(self.solr_data, kwargs)
         if article_fedora_ids is None:
             raise Http404
         else:
@@ -199,7 +202,9 @@ def get_issue_from_year_volume_number(journal_code: str, year: str, volume: str,
         return None
 
 
-def get_fedora_ids_from_url_kwargs(kwargs: dict) -> Optional[Tuple[str, str, str]]:
+def get_fedora_ids_from_url_kwargs(
+    solr_data: SolrData, kwargs: dict
+) -> Optional[Tuple[str, str, str]]:
     journal_code = kwargs.get('journal_code')
     issue_localid = kwargs.get('issue_localid')
     article_localid = kwargs.get('localid')
@@ -218,7 +223,7 @@ def get_fedora_ids_from_url_kwargs(kwargs: dict) -> Optional[Tuple[str, str, str
     if not issue_localid:
         # We only have the article_localid, ex: iderudit URLs
         # we try with solr first, it's cheaper than searching in fedora
-        ids = get_fedora_ids(article_localid)
+        ids = solr_data.get_fedora_ids(article_localid)
         if ids is not None:
             journal_code, issue_localid, _ = ids
         else:
