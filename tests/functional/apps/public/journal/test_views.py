@@ -1076,28 +1076,37 @@ class TestArticleDetailView:
             'localid': article.localidentifier,
         })
         html = Client().get(url).content.decode()
-        # Check that the source is displayed under both figures 1 & 2 which are in the same
-        # figure group.
-        assert '<figure class="figure" id="fi1"><figcaption></figcaption>' \
-               '<div class="figure-wrapper">\n<div class="figure-object">' \
-               '<a href="/fr/revues/journal/2000-issue/article/media/" ' \
-               'class="lightbox objetmedia" title="">' \
-               '<img src="/fr/revues/journal/2000-issue/article/media/" alt="" ' \
-               'class="img-responsive"></a></div>\n<div class="figure-legende-notes-source">' \
-               '<cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, ' \
-               'Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n' \
-               '<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p>' \
-               '</figure>' in html
-        assert '<figure class="figure" id="fi2"><figcaption></figcaption><div ' \
-               'class="figure-wrapper">\n<div class="figure-object">' \
-               '<a href="/fr/revues/journal/2000-issue/article/media/" ' \
-               'class="lightbox objetmedia" title="">' \
-               '<img src="/fr/revues/journal/2000-issue/article/media/" alt="" ' \
-               'class="img-responsive"></a></div>\n<div class="figure-legende-notes-source">' \
-               '<cite class="source">Avec l’aimable autorisation de l’artiste et kamel mennour, ' \
-               'Paris/London. © <em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div>\n' \
-               '<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste des figures</a></p>' \
-               '</figure>' in html
+        dom = BeautifulSoup(html, 'html.parser')
+        grfigure = dom.find('div', {'class': 'grfigure', 'id': 'gf1'})
+
+        # Check that the source is displayed under both figures 1 & 2 which are in the same figure group.
+        fi1 = grfigure.find('figure', {'id': 'fi1'})
+        fi2 = grfigure.find('figure', {'id': 'fi2'})
+        assert fi1.decode() == '<figure class="figure" id="fi1"><figcaption></figcaption>' \
+                               '<div class="figure-wrapper">\n<div class="figure-object">' \
+                               '<a class="lightbox objetmedia" ' \
+                               'href="/fr/revues/journal/2000-issue/article/media/" title="">' \
+                               '<img alt="" class="img-responsive" ' \
+                               'src="/fr/revues/journal/2000-issue/article/media/"/></a></div>\n' \
+                               '<div class="figure-legende-notes-source">' \
+                               '<cite class="source">Avec l’aimable autorisation de l’artiste et ' \
+                               'kamel mennour, Paris/London. ©\xa0' \
+                               '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
+        assert fi2.decode() == '<figure class="figure" id="fi2"><figcaption></figcaption>' \
+                               '<div class="figure-wrapper">\n<div class="figure-object">' \
+                               '<a class="lightbox objetmedia" ' \
+                               'href="/fr/revues/journal/2000-issue/article/media/" title="">' \
+                               '<img alt="" class="img-responsive" ' \
+                               'src="/fr/revues/journal/2000-issue/article/media/"/></a></div>\n' \
+                               '<div class="figure-legende-notes-source">' \
+                               '<cite class="source">Avec l’aimable autorisation de l’artiste et ' \
+                               'kamel mennour, Paris/London. ©\xa0' \
+                               '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
+
+        # Check that the figure list link is displayed.
+        voirliste = grfigure.find('p', {'class': 'voirliste'})
+        assert voirliste.decode() == '<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste ' \
+                                     'des figures</a></p>'
 
     def test_table_groups_display(self):
         article = ArticleFactory(
