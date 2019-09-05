@@ -331,6 +331,18 @@ class TestJournalDetailView:
         assert b'<li role="presentation" id="journal-info-about-li"' not in content
         assert b'<section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about"' not in content
 
+    @pytest.mark.parametrize('charges_apc', (True, False))
+    def test_journal_detail_has_no_apc_mention_if_it_charges_apc(self, charges_apc):
+        journal = JournalFactory(charges_apc=charges_apc)
+        url = journal_detail_url(journal)
+        response = self.client.get(url)
+        content = response.content
+
+        if not charges_apc:
+            assert b'Frais de publication' in content
+        else:
+            assert b'Frais de publication' not in content
+
 
 class TestJournalAuthorsListView:
     def test_provides_only_authors_for_the_first_available_letter_by_default(self):

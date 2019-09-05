@@ -154,6 +154,12 @@ class Journal(FedoraMixin, FedoraDated):
     external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
     """ External URL of the home page of the Journal """
 
+    charges_apc = models.BooleanField(
+        default=False,
+        verbose_name=_("Frais de publication (APC)"),
+        help_text=_("Cocher si la revue facture des frais de publication (APC) aux auteurs")
+    )
+
     redirect_to_external_url = models.BooleanField(
         default=False,
         verbose_name=_("Rediriger vers l'URL externe"),
