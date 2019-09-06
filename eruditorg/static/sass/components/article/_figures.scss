@@ -9,11 +9,6 @@
   .figure, .tableau {
     padding: 0;
     border-top: none;
-
-    &:not(:last-child) .voirliste {
-      display: none;
-    }
-
   }
 
   .legende {
@@ -52,11 +47,6 @@
     }
 
   }
-
-  .voirliste {
-    margin: 0.75em 0;
-    text-align: right;
-  }
 }
 
 .grfigure, .grtableau, .figure, .tableau {
@@ -64,6 +54,11 @@
     margin-bottom: 0;
     font-size: 14px;
     @include font-styles('sans');
+  }
+
+  .voirliste {
+    margin: 0.75em 0;
+    text-align: right;
   }
 }
 

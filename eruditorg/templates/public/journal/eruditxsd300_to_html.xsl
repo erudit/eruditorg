@@ -1032,6 +1032,11 @@
       <div class="grfigure-legende">
         <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
       </div>
+      <xsl:if test="not($mode)">
+        <p class="voirliste">
+          <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::grfigure">figures</xsl:if><xsl:if test="self::grtableau">tableaux</xsl:if>{% endblocktrans %}</a>
+        </p>
+      </xsl:if>
     </div>
   </xsl:template>
 
@@ -1074,9 +1079,9 @@
           <xsl:apply-templates select="source | ancestor::grfigure/source"/>
         </div>
       </div>
-      <xsl:if test="not($mode)">
+      <xsl:if test="not($mode) and name(..) != 'grfigure' and name(..) != 'grtableau'">
         <p class="voirliste">
-          <a href="#li{@id | ancestor::grfigure/@id | ancestor::grtableau/@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
+          <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
         </p>
       </xsl:if>
     </figure>
