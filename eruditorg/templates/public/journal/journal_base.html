@@ -110,9 +110,10 @@
             </span>
             {% if journal.information.peer_review_process %}({{ journal.information.get_peer_review_process_display }}){% endif %}</dd>
           </dd>
-
+          {% if not journal.charges_apc %}
           <dt>{% trans "Frais de publication (<em>APC</em>)" %}</dt>
           <dd>{% trans "Non" %}</dd>
+          {% endif %}
           {% endif %}
 
           <dt>{% trans "Politique d'accès" %}</dt>

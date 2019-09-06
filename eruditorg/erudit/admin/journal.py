@@ -68,7 +68,7 @@ class JournalAdmin(admin.ModelAdmin):
         }),
         (None, {
             'fields': (
-                ('open_access', 'paper'),
+                ('open_access', 'charges_apc', 'paper'),
                 ('first_publication_year', 'last_publication_year'),
             ),
         }),
