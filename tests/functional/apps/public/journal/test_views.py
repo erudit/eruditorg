@@ -1514,6 +1514,29 @@ class TestArticleDetailView:
                                             '(31,5 %), suivie par un père cadre (28,7 %).</p>\n' \
                                             '</div>'
 
+    def test_no_liensimple_in_toc_heading(self):
+        article = ArticleFactory(
+            from_fixture='1062434ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        li = dom.find('li', {'class': 'article-toc--body'}).find('ul').find_all('li')
+        # Check that liensimple nodes are not displayed as links in TOC headings.
+        assert li[1].decode() == '<li><a href="#s1n4">«\xa0D’une vaine dispute – La Musique ' \
+                                 'plaisir de l’esprit ou jouissance sensuelle\xa0» par         ' \
+                                 'Charles Koechlin, (<em><span class="souligne">La Revue ' \
+                                 'musicale,           1921</span></em>)</a></li>'
+        assert li[2].decode() == '<li><a href="#s1n6">« Réponse à quelques objections » par ' \
+                                 'Désiré Pâque (<em><span class="souligne">La Revue ' \
+                                 'musicale,           1935</span></em>)</a></li>'
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
