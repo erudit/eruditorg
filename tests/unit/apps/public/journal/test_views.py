@@ -1,6 +1,5 @@
 import datetime as dt
 import os
-from typing import List
 
 import pytest
 import unittest.mock
@@ -11,13 +10,13 @@ from django.urls import reverse
 
 from apps.public.journal.viewmixins import SolrDataMixin
 from base.test.factories import UserFactory
-from erudit.solr.models import Article
 from erudit.test.factories import ArticleFactory, IssueFactory, JournalFactory, \
     JournalInformationFactory, ContributorFactory
 from erudit.fedora import repository
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Issue
 from erudit.test.domchange import SectionTitle
+from erudit.test.solr import FakeSolrData
 from apps.public.journal.views import (
     JournalDetailView,
     IssueDetailView,
@@ -539,12 +538,6 @@ class TestIssueXmlView:
         # published and a prepublication ticket is not provided.
         else:
             assert response.redirect_chain == [('/fr/revues/journal/', 302)]
-
-
-class FakeSolrData:
-    # noinspection PyMethodMayBeStatic,PyUnusedLocal
-    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
-        return []
 
 
 @unittest.mock.patch.object(

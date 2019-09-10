@@ -1,11 +1,15 @@
 from collections import Counter
 from itertools import chain
 from operator import attrgetter
+from typing import List
+
 
 from luqum.tree import (
     SearchField, Group, AndOperation, OrOperation, UnknownOperation, FieldGroup, Plus
 )
 from luqum.parser import parser
+
+from erudit.solr.models import Article
 
 # This fake solr client doesn't try to re-implement solr query parser. It expects a very specific
 # list of queries and return results according to its very basic database.
@@ -308,3 +312,10 @@ class FakeSolrClient:
 
         print("Unexpected query {} {}".format(q, repr(pq)))
         return FakeSolrResults()
+
+
+class FakeSolrData:
+
+    # noinspection PyMethodMayBeStatic,PyUnusedLocal
+    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
+        return []
