@@ -280,6 +280,7 @@ class SolrData:
                 'Fonds_fac:(Érudit OR UNB OR Persée)',
             ],
             'facet.field': [
+                'Discipline_fac',
                 'RevueID',
                 'TitreCollection_fac',
             ],
@@ -288,8 +289,10 @@ class SolrData:
             'rows': '0',
         }
         results = self.client.search('*:*', **params)
+        disciplines = results.facets['facet_fields']['Discipline_fac'][::2]
         journals = results.facets['facet_pivot']['RevueID,TitreCollection_fac']
         return {
+            'disciplines': [(d, d) for d in disciplines if d],
             # List of tuples of journal IDs and journal names.
             'journals': [(j['value'], j['pivot'][0]['value']) for j in journals],
         }

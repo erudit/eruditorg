@@ -1,13 +1,12 @@
 import datetime as dt
 import structlog
 import re
-from operator import attrgetter
 
 from django import forms
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _, pgettext
 
-from erudit.models import Discipline, Collection
+from erudit.models import Collection
 from erudit.solr.models import get_solr_data, SolrData
 from erudit.utils import locale_aware_sort
 
@@ -242,9 +241,11 @@ class SearchForm(forms.Form):
                      'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
 
-        disciplines = locale_aware_sort(Discipline.objects.all(), keyfunc=attrgetter('name'))
-        self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in disciplines]
         facets = self.solr_data.get_search_form_facets()
+        self.fields['disciplines'].choices = locale_aware_sort(
+            facets['disciplines'],
+            lambda x: x[1],
+        )
         self.fields['journals'].choices = locale_aware_sort(
             facets['journals'],
             lambda x: x[1],

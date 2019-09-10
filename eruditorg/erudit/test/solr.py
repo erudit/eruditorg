@@ -325,5 +325,6 @@ class FakeSolrData:
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
         return {
+            'disciplines': [],
             'journals': [],
         }
