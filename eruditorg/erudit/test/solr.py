@@ -326,5 +326,6 @@ class FakeSolrData:
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
         return {
             'disciplines': [],
+            'languages': [],
             'journals': [],
         }
