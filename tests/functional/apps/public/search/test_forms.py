@@ -1,6 +1,7 @@
 import pytest
 
 from erudit.test.factories import CollectionFactory
+from erudit.test.solr import FakeSolrData
 from apps.public.search.forms import ResultsFilterForm
 from apps.public.search.forms import SearchForm
 
@@ -8,6 +9,11 @@ pytestmark = pytest.mark.django_db
 
 
 class TestSearchForm:
+
+    @pytest.fixture(autouse=True)
+    def search_form_solr_data(self, monkeypatch):
+        monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData())
+
     def test_cannot_validate_a_search_without_a_main_query(self):
         form_data = {}
         form = SearchForm(data=form_data)

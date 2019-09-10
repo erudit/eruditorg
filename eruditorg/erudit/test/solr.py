@@ -1,8 +1,7 @@
 from collections import Counter
 from itertools import chain
 from operator import attrgetter
-from typing import List
-
+from typing import Dict, List, Tuple
 
 from luqum.tree import (
     SearchField, Group, AndOperation, OrOperation, UnknownOperation, FieldGroup, Plus
@@ -315,7 +314,16 @@ class FakeSolrClient:
 
 
 class FakeSolrData:
+    """
+    Let's keep these methods empty and override them in tests when needed.
+    """
 
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
     def get_all_journal_articles(self, journal_code: str) -> List[Article]:
         return []
+
+    # noinspection PyMethodMayBeStatic,PyUnusedLocal
+    def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
+        return {
+            'journals': [],
+        }

@@ -12,8 +12,10 @@ import pytest
 from base.test.testcases import Client, extract_post_args
 from erudit.fedora import repository
 from erudit.test.factories import ArticleFactory, IssueFactory, SolrDocumentFactory
+from erudit.test.solr import FakeSolrData
 
 from apps.public.search.saved_searches import SavedSearchList
+from apps.public.search.forms import SearchForm
 from apps.public.search.views import AdvancedSearchView
 from apps.public.search.views import SavedSearchAddView
 from apps.public.search.views import SavedSearchRemoveView
@@ -23,6 +25,11 @@ pytestmark = pytest.mark.django_db
 
 
 class TestEruditSearchResultsView:
+
+    @pytest.fixture(autouse=True)
+    def search_form_solr_data(self, monkeypatch):
+        monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData())
+
     def test_can_return_erudit_documents(self):
         issue = IssueFactory.create(date_published=now())
         localidentifiers = []
@@ -97,6 +104,11 @@ class TestEruditSearchResultsView:
 
 
 class TestAdvancedSearchView:
+
+    @pytest.fixture(autouse=True)
+    def search_form_solr_data(self, monkeypatch):
+        monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData())
+
     def test_can_insert_the_saved_searches_into_the_context(self):
         url = reverse('public:search:advanced_search')
         request = RequestFactory().get(url)
@@ -123,6 +135,11 @@ class TestAdvancedSearchView:
 
 
 class TestSearchResultsView:
+
+    @pytest.fixture(autouse=True)
+    def search_form_solr_data(self, monkeypatch):
+        monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData())
+
     def test_redirects_to_the_advanced_search_form_if_no_parameters_are_present(self):
         url = reverse('public:search:results')
         response = Client().get(url, follow=True)
