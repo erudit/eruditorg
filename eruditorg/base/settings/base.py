@@ -351,6 +351,7 @@ TECH_EMAIL = 'tech@erudit.org'
 PUBLISHER_EMAIL = 'edition@erudit.org'
 COMMUNICATION_EMAIL = 'media@erudit.org'
 SUBSCRIPTION_EMAIL = 'client@erudit.org'
+ACCOUNT_EMAIL = 'comptes@erudit.org'
 
 # Internationalisation
 # -----------------------------------------------------------------------------

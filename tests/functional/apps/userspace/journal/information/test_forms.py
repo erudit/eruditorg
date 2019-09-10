@@ -94,8 +94,8 @@ class TestJournalInformationForm:
         info = form.save()
         now = datetime.datetime.now()
         email = Email.objects.first()
-        # Check that a notification email has been sent to edition@erudit.org.
-        assert email.to == [settings.PUBLISHER_EMAIL]
+        # Check that a notification email has been sent to comptes@erudit.org.
+        assert email.to == [settings.ACCOUNT_EMAIL]
         # Check that the email subject contains the name of the journal.
         assert email.subject == '[Érudit] Nouvelle révision d\'une page "À propos" [Foobar]'
         # Check that the email message contains the diff between the previous revision and the new

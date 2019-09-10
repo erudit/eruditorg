@@ -140,7 +140,7 @@ class JournalInformationForm(forms.ModelForm):
                 if data['field'].name not in JOURNAL_INFORMATION_COMPARE_EXCLUDE
             ]
             email = Email(
-                recipient=settings.PUBLISHER_EMAIL,
+                recipient=settings.ACCOUNT_EMAIL,
                 html_template='emails/information/journal_information_new_revision_content.html',
                 subject_template='emails/information/journal_information_new_revision_subject.html',
                 extra_context={
