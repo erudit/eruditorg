@@ -648,7 +648,7 @@ class IssueXmlView(
 
 def pick_related_article_candidates(
     current_article: Article, all_journal_articles: Iterable[SolrArticle]
-) -> List[Article]:
+) -> List[SolrArticle]:
     candidates = []
     for solr_article in all_journal_articles:
         if (
@@ -712,11 +712,17 @@ class BaseArticleDetailView(
         all_journal_articles = self.solr_data.get_all_journal_articles(issue.journal.code)
         related_candidates = pick_related_article_candidates(current_article, all_journal_articles)
         # return 4 randomly — at most
-        number_of_related = min(4, len(related_candidates))
-        related_solr_articles = random.sample(related_candidates, k=number_of_related)
+        random.shuffle(related_candidates)
+        related_articles = []
         # calls to Article.from_solr_object are expensive, so create only selected articles
-        related_articles = [Article.from_solr_object(candidate)
-                            for candidate in related_solr_articles]
+        for candidate in related_candidates:
+            if len(related_articles) == 4:
+                break
+            try:
+                related_articles.append(Article.from_solr_object(candidate))
+            except Article.DoesNotExist:
+                # This might happen for UNB articles with ID mismatch between Solr & Fedora.
+                pass
         context['related_articles'] = related_articles
 
         # don't cache anything when the issue is unpublished. That means that we're still working

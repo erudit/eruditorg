@@ -35,6 +35,7 @@ from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
 from erudit.fedora import repository
+from erudit.solr.models import Article as SolrArticle
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -1536,6 +1537,60 @@ class TestArticleDetailView:
         assert li[2].decode() == '<li><a href="#s1n6">« Réponse à quelques objections » par ' \
                                  'Désiré Pâque (<em><span class="souligne">La Revue ' \
                                  'musicale,           1935</span></em>)</a></li>'
+
+    def test_related_articles(self, monkeypatch):
+        # Mock return value for get_all_journal_articles().
+        all_journal_articles = [
+            # 5 articles from which we will choose 4 randomly.
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article1'}),
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article2'}),
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article3'}),
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article4'}),
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article5'}),
+            # The current article. Should not appear in related articles.
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'current_article'}),
+            # An article from an issue that is not in Fedora. Should not appear in related articles.
+            SolrArticle({'RevueID': 'journal', 'NumeroID': 'not_in_fedora', 'ID': 'not_in_fedora'}),
+        ]
+        # Patch get_all_journal_articles() so it returns our mocked return value.
+        monkeypatch.setattr(
+            FakeSolrData,
+            'get_all_journal_articles',
+            unittest.mock.Mock(
+                return_value=all_journal_articles,
+            ),
+        )
+        # Create an issue.
+        issue = IssueFactory(
+            journal__localidentifier='journal',
+            journal__code='journal',
+            localidentifier='issue',
+            year='2019',
+        )
+        # Create all articles from all_journal_articles that have the same issue ID as our issue.
+        for article in all_journal_articles:
+            if article.solr_data['NumeroID'] == issue.localidentifier:
+                ArticleFactory(
+                    issue=issue,
+                    localidentifier=article.localidentifier,
+                )
+        # Get the response.
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': 'journal',
+            'issue_slug': '2019',
+            'issue_localid': 'issue',
+            'localid': 'current_article',
+        })
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, 'html.parser')
+        footer = dom.find('footer', {'class': 'container'})
+        # There should only be 4 related articles.
+        assert len(footer.find_all('article')) == 4
+        # The current article should not be in the related articles.
+        assert 'current_article' not in footer.decode()
+        # An article with no issue should not be in related articles.
+        assert 'not_in_fedora' not in footer.decode()
 
 
 class TestArticleRawPdfView:
