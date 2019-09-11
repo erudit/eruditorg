@@ -21,6 +21,38 @@ from erudit.templatetags.model_formatters import person_list
 client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 
+LANGUAGE_LABELS = {
+    'ar': _('Arabe'),
+    'ca': _('Catalan'),
+    'en': _('Anglais'),
+    'es': _('Espagnol'),
+    'de': _('Allemand'),
+    'el': _('Grec moderne'),
+    'fr': _('Français'),
+    'grc': _('Grec ancien'),
+    'he': _('Hébreu'),
+    'hr': _('Bosniaque'),
+    'ht': _('Créole haïtien'),
+    'id': _('Indonésien'),
+    'iro': _('Langues iroquoiennes'),
+    'it': _('Italien'),
+    'ja': _('Japonais'),
+    'ko': _('Coréen'),
+    'la': _('Latin'),
+    'nl': _('Néerlandais'),
+    'oc': _('Occitan'),
+    'pl': _('Polonais'),
+    'pt': _('Portugais'),
+    'qu': _('Kichwa'),
+    'ro': _('Roumain'),
+    'tr': _('Espéranto'),
+    'ru': _('Russe'),
+    'uk': _('Ukrainien'),
+    'uz': _('Ouszbek'),
+    'zh': _('Chinois'),
+}
+
+
 class SolrDocument:
     def __init__(self, solr_data):
         self.localidentifier = solr_data['ID'].replace('unb:', '')
@@ -272,6 +304,35 @@ class SolrData:
         search_function = functools.partial(self.client.search, q=q, facet='false')
         all_docs = get_all_solr_results(search_function, 500)
         return [Article(doc) for doc in all_docs]
+
+    def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
+        params = {
+            'fq': [
+                'Corpus_fac:(Article OR Culturel)',
+                'Fonds_fac:(Érudit OR UNB OR Persée)',
+            ],
+            'facet.field': [
+                'Discipline_fac',
+                'Langue',
+                'RevueID',
+                'TitreCollection_fac',
+            ],
+            # Facet pivot is used to group journal IDs with corresponding journals names.
+            'facet.pivot': 'RevueID,TitreCollection_fac',
+            'facet.limit': '-1',
+            'rows': '0',
+        }
+        results = self.client.search('*:*', **params)
+        disciplines = results.facets['facet_fields']['Discipline_fac'][::2]
+        languages = results.facets['facet_fields']['Langue'][::2]
+        journals = results.facets['facet_pivot']['RevueID,TitreCollection_fac']
+        return {
+            'disciplines': [(d, d) for d in disciplines if d],
+            # List of tuples of language codes and language labels.
+            'languages': [(l, LANGUAGE_LABELS.get(l)) for l in languages if l in LANGUAGE_LABELS],
+            # List of tuples of journal IDs and journal names.
+            'journals': [(j['value'], j['pivot'][0]['value']) for j in journals],
+        }
 
 
 def get_solr_data() -> SolrData:

@@ -1,13 +1,13 @@
 import datetime as dt
 import structlog
 import re
-from operator import attrgetter
 
 from django import forms
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _, pgettext
 
-from erudit.models import Discipline, Journal, Collection
+from erudit.models import Collection
+from erudit.solr.models import get_solr_data, LANGUAGE_LABELS, SolrData
 from erudit.utils import locale_aware_sort
 
 from apps.public.search import legacy
@@ -86,34 +86,6 @@ ARTICLE_TYPES_CHOICES = (
     ('Note', pgettext("Article Note", "Note")),
 )
 
-language_label_correspondence = {
-    'ar': _('Arabe'),
-    'ca': _('Catalan'),
-    'en': _('Anglais'),
-    'es': _('Espagnol'),
-    'de': _('Allemand'),
-    'el': _('Grec moderne'),
-    'fr': _('Français'),
-    'he': _('Hébreu'),
-    'hr': _('Bosniaque'),
-    'ht': _('Créole haïtien'),
-    'id': _('Indonésien'),
-    'iro': _('Langues iroquoiennes'),
-    'it': _('Italien'),
-    'ja': _('Japonais'),
-    'ko': _('Coréen'),
-    'la': _('Latin'),
-    'nl': _('Néerlandais'),
-    'oc': _('Occitan'),
-    'pl': _('Polonais'),
-    'pt': _('Portugais'),
-    'qu': _('Kichwa'),
-    'ro': _('Roumain'),
-    'tr': _('Espéranto'),
-    'ru': _('Russe'),
-    'zh': _('Chinois'),
-}
-
 
 def get_years_range(
         year_start=1900, year_end=(dt.date.today().year + 1), reverse=False, add_empty_choice=False,
@@ -136,7 +108,7 @@ def build_language_filter_choices(filter_languages=None):
     for v, c in filter_languages:
         try:
             assert re.match(r'^[a-zA-Z]+$', v)
-            language_name = language_label_correspondence[v]
+            language_name = LANGUAGE_LABELS[v]
         except AssertionError:  # pragma: no cover
             continue
         except KeyError:
@@ -218,16 +190,13 @@ class SearchForm(forms.Form):
             "Ces filtres s’appliquent aux articles savants uniquement."
         ))
 
-    languages = forms.MultipleChoiceField(
-        label=_('Langues'),
-        choices=list(locale_aware_sort(
-            language_label_correspondence.items(),
-            keyfunc=lambda pair: force_text(pair[1]))),
-        required=False)
-
     disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
-
+    languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
     journals = forms.MultipleChoiceField(label=_('Revues'), required=False)
+
+    @property
+    def solr_data(self) -> SolrData:
+        return get_solr_data()
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
@@ -237,10 +206,19 @@ class SearchForm(forms.Form):
                      'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
 
-        disciplines = locale_aware_sort(Discipline.objects.all(), keyfunc=attrgetter('name'))
-        self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in disciplines]
-        journals = locale_aware_sort(Journal.objects.all().only('name'), keyfunc=attrgetter('name'))
-        self.fields['journals'].choices = [(j.name, j.name) for j in journals]
+        facets = self.solr_data.get_search_form_facets()
+        self.fields['disciplines'].choices = locale_aware_sort(
+            facets['disciplines'],
+            lambda x: x[1],
+        )
+        self.fields['languages'].choices = locale_aware_sort(
+            facets['languages'],
+            lambda x: force_text(x[1]),
+        )
+        self.fields['journals'].choices = locale_aware_sort(
+            facets['journals'],
+            lambda x: x[1],
+        )
 
     def clean(self):
         cleaned_data = super(SearchForm, self).clean()

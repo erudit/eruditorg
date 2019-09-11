@@ -1,5 +1,3 @@
-from typing import List
-
 import pytest
 
 from bs4 import BeautifulSoup
@@ -7,18 +5,17 @@ from django.test import Client
 from django.urls import reverse
 
 from apps.public.journal.viewmixins import SolrDataMixin
-from erudit.solr.models import Article
+from apps.public.search.forms import SearchForm
 from erudit.test.factories import ArticleFactory, SolrDocumentFactory, ThesisFactory
-
-
-class FakeSolrData:
-    # noinspection PyMethodMayBeStatic,PyUnusedLocal
-    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
-        return []
+from erudit.test.solr import FakeSolrData
 
 
 @pytest.mark.django_db
 class TestSearchResultsView:
+
+    @pytest.fixture(autouse=True)
+    def search_form_solr_data(self, monkeypatch):
+        monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData())
 
     def test_search_results_can_cite_thesis(self, solr_client):
         thesis = ThesisFactory()

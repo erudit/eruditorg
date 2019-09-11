@@ -61,10 +61,10 @@ def get_search_elements(queryparams, form=None):
         'OR': _('OU'),
         'NOT': _('SAUF'),
     }
+    if not form:
+        form = SearchForm()
 
     search_elements = []
-
-    # Query terms
 
     def elements(t, f, o):
         f = fields_correspondence.get(f, f)
@@ -77,6 +77,7 @@ def get_search_elements(queryparams, form=None):
                     else ' {op} ({field} : {term})'.format(op=o, field=f, term=t)),
         }
 
+    # Query terms
     q1_term = params.get('basic_search_term', '*')
     q1_field = params.get('basic_search_field', 'all')
     q1_operator = None
@@ -92,7 +93,6 @@ def get_search_elements(queryparams, form=None):
     o_, o = 'AND', operator_correspondence['AND']
 
     # Publication range
-
     pub_year_start = params.get('pub_year_start', None)
     pub_year_end = params.get('pub_year_end', None)
     if pub_year_start and pub_year_end:
@@ -109,13 +109,26 @@ def get_search_elements(queryparams, form=None):
             'term': pub_year_end, 'field': 'pub_year_end', 'operator': o_,
             'str': _(" {op} (Publié jusqu'à {end})").format(op=o, end=pub_year_end), })
 
-    # Other fields
+    # Journals
+    journal_codes = params.getlist('journals', None)
+    if journal_codes is not None:
+        journals = [j[1] for j in form.fields['journals'].choices if j[0] in journal_codes]
+        if journals:
+            search_elements.append({
+                'term': str(journals),
+                'field': form.fields['journals'].label,
+                'operator': o_,
+                'str': ' {op} ({field} : {term})'.format(
+                    op=o,
+                    field=form.fields['journals'].label,
+                    term=str(journals),
+                ),
+            })
 
-    if not form:
-        form = SearchForm()
+    # Other fields
     for k, v in params.items():
         if not k.startswith('advanced_search_') and not k.startswith('basic_search_') \
-                and not k.startswith('pub_year') and k in form.fields and v:
+                and not k.startswith('pub_year') and k != 'journals' and k in form.fields and v:
             f = form.fields[k].label
             t = params.getlist(k)
             t = t[0] if len(t) == 1 else str(t)

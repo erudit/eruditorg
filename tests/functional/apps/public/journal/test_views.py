@@ -1,5 +1,3 @@
-from typing import List
-
 from bs4 import BeautifulSoup
 from lxml import etree as et
 
@@ -31,6 +29,7 @@ from erudit.test.factories import EmbargoedIssueFactory
 from erudit.test.factories import OpenAccessIssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
+from erudit.test.solr import FakeSolrData
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -582,12 +581,6 @@ class TestIssueDetailView:
         url = issue_detail_url(issue)
         response = Client().get(url)
         assert response.status_code == 301
-
-
-class FakeSolrData:
-    # noinspection PyMethodMayBeStatic,PyUnusedLocal
-    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
-        return []
 
 
 class TestArticleDetailView:
