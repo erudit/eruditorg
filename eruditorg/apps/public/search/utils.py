@@ -109,26 +109,32 @@ def get_search_elements(queryparams, form=None):
             'term': pub_year_end, 'field': 'pub_year_end', 'operator': o_,
             'str': _(" {op} (Publié jusqu'à {end})").format(op=o, end=pub_year_end), })
 
-    # Journals
-    journal_codes = params.getlist('journals', None)
-    if journal_codes is not None:
-        journals = [j[1] for j in form.fields['journals'].choices if j[0] in journal_codes]
-        if journals:
-            search_elements.append({
-                'term': str(journals),
-                'field': form.fields['journals'].label,
-                'operator': o_,
-                'str': ' {op} ({field} : {term})'.format(
-                    op=o,
-                    field=form.fields['journals'].label,
-                    term=str(journals),
-                ),
-            })
+    # Languages & journals
+    # Those fields use codes and we need to find the corresponding labels from the field choices.
+    code_to_label_fields = ['languages', 'journals']
+    for field_name in code_to_label_fields:
+        codes = params.getlist(field_name, None)
+        if codes is None:
+            continue
+        labels = [l[1] for l in form.fields[field_name].choices if l[0] in codes]
+        if not labels:
+            continue
+        search_elements.append({
+            'term': str(labels),
+            'field': form.fields[field_name].label,
+            'operator': o_,
+            'str': ' {op} ({field} : {term})'.format(
+                op=o,
+                field=form.fields[field_name].label,
+                term=str(labels),
+            ),
+        })
 
     # Other fields
     for k, v in params.items():
         if not k.startswith('advanced_search_') and not k.startswith('basic_search_') \
-                and not k.startswith('pub_year') and k != 'journals' and k in form.fields and v:
+                and not k.startswith('pub_year') and k not in code_to_label_fields \
+                and k in form.fields and v:
             f = form.fields[k].label
             t = params.getlist(k)
             t = t[0] if len(t) == 1 else str(t)
