@@ -164,7 +164,11 @@
 
   <div class="form-group text-right">
     {% if not object.is_submitted and not object.archived and not object.is_validated %}
-    <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
+    {% if object.pk %}
+      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% trans "Annuler" %}</a>
+    {% else %}
+      <a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}" class="btn">{% trans "Annuler" %}</a>
+    {% endif %}
     <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
     {% endif %}
   </div>
