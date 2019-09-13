@@ -96,8 +96,6 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         initial_files = self.instance.last_files_version.submissions.all() \
             .values_list('id', flat=True)
         self.fields['submissions'].initial = ','.join(map(str, initial_files))
-        self.fields['submissions'].widget.template_name = \
-            'userspace/journal/editor/resumable_uploads_widget.html'
 
     def save(self, commit=True):
         submissions = self.cleaned_data.pop('submissions', '')
