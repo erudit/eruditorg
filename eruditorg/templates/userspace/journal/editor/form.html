@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  {% if object.pk and not object.is_submitted and not object.archived and not object.is_validated %}
+  {% if object.pk and not object.archived and not object.is_validated %}
   <h2>{% trans "Fichier" %}</h2>
   {{ form.submissions }}
   {% endif %}
@@ -105,7 +105,7 @@
   <hr>
 
   <div class="form-group text-right">
-    {% if not object.is_submitted and not object.archived and not object.is_validated %}
+    {% if not object.archived and not object.is_validated %}
     {% if object.pk %}
       <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% trans "Annuler" %}</a>
     {% else %}

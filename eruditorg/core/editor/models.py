@@ -120,7 +120,7 @@ class IssueSubmission(models.Model):
     def is_validated(self):
         return self.status == self.VALID
 
-    @transition(field=status, source=[DRAFT, NEEDS_CORRECTIONS], target=SUBMITTED,
+    @transition(field=status, source=[DRAFT, SUBMITTED, NEEDS_CORRECTIONS], target=SUBMITTED,
                 permission=lambda instance, user: False)
     def submit(self):
         """

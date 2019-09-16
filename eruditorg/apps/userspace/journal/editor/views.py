@@ -141,12 +141,19 @@ class IssueSubmissionUpdate(
     def get_title(self):
         return _("Modifier un dépôt de numéros")
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        # If we edit an issue submission when it's in needs review, we need to create a new version
+        # So that the previous version is kept in the history.
+        if obj.is_submitted:
+            obj.save_version()
+        return obj
+
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
 
         obj = self.get_object()
-        if obj.status in (
-                IssueSubmission.VALID, IssueSubmission.SUBMITTED):
+        if obj.is_validated:
             form.disable_form()
 
         form.fields['submissions'].widget.set_model_reference(
