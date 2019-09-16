@@ -35,3 +35,8 @@ class SubscriptionInformationUpdateView(
         return reverse(
             'userspace:library:subscription_information:update',
             args=(self.current_organisation.pk, ))
+
+    def get_context_data(self, **kwargs):
+        context = super(SubscriptionInformationUpdateView, self).get_context_data(**kwargs)
+        context['section_aside'] = True
+        return context

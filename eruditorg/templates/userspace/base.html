@@ -17,12 +17,14 @@
     <header>
       <h1>{% block section_title %}{% endblock %}</h1>
       <div class="row">
-        <div class="col-md-7 section-intro">
+        <div class="col-md-{% if section_aside %}7{% else %}12{% endif %} section-intro">
           {% block section_intro %}{% endblock %}
         </div>
+        {% if section_aside %}
         <div class="col-md-4 section-aside">
           {% block section_aside %}{% endblock %}
         </div>
+        {% endif %}
       </div>
     </header>
 
