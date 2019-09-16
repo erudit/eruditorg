@@ -17,14 +17,9 @@
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <h2>{% trans "Informations du numéro" %}</h2>
   </div>
-  {% if not issue.is_validated %}
-  <div class="col-md-4 text-right">
-    <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-secondary">{% trans "Modifier" %}</a>
-  </div>
-  {% endif %}
 </div>
 
 {# Issue submission metadata #}
@@ -50,16 +45,16 @@
 
 <hr>
 
-{# Submit / delete buttons #}
 <div class="form-group text-right">
+  {# Delete & Edit buttons #}
   {% if can_manage_issuesubmission and not issue.is_validated %}
   <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk issue.pk %}" class="btn">{% trans "Supprimer" %}</a>
+  <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary">{% trans "Modifier" %}</a>
   {% endif %}
+  {# Approve & Refuse buttons #}
   {% for t in transitions %}
   <a
-  {% if t.name == 'submit' %}
-  href="{% url 'userspace:journal:editor:transition_submit' scope_current_journal.pk issue.pk %}"
-  {% elif t.name == 'approve' %}
+  {% if t.name == 'approve' %}
   href="{% url 'userspace:journal:editor:transition_approve' scope_current_journal.pk issue.pk %}"
   {% elif t.name == 'refuse' %}
   href="{% url 'userspace:journal:editor:transition_refuse' scope_current_journal.pk issue.pk %}"

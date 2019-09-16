@@ -121,9 +121,7 @@ class IssueSubmission(models.Model):
         return self.status == self.VALID
 
     @transition(field=status, source=[DRAFT, NEEDS_CORRECTIONS], target=SUBMITTED,
-                permission=lambda instance, user: user.has_perm(
-                    'editor.manage_issuesubmission'),
-                custom=dict(verbose_name=("Soumettre")))
+                permission=lambda instance, user: False)
     def submit(self):
         """
         Send issue for review
