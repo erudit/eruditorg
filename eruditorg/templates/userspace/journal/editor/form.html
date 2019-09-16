@@ -141,7 +141,6 @@
             <p>
               {% trans "Fichiers&nbsp;:" %}
               {% for f in track.files_version.submissions.all %}
-              allô
                 {% if f.is_complete %}
                   <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>
                 {% else %}
