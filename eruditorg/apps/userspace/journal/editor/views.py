@@ -6,7 +6,6 @@ from urllib.parse import quote
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
-from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.utils.formats import date_format
@@ -270,27 +269,6 @@ class IssueSubmissionTransitionView(
         if self.use_comment_form:
             context['comment_form'] = IssueSubmissionTransitionCommentForm()
         return context
-
-
-class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
-    question = _("Vous êtes sur le point de soumettre les fichiers\
-    à l'équipe de production. Une fois envoyés, vous ne pourrez plus les modifier.\
-    Voulez-vous poursuivre?")
-    permission_required = 'editor.manage_issuesubmission'
-    success_message = _('Les fichiers ont été transmis avec succès')
-    template_name = 'userspace/journal/editor/issuesubmission_submit.html'
-    transition_name = 'submit'
-
-    def get_context_data(self, **kwargs):
-        context = super(IssueSubmissionSubmitView, self).get_context_data(**kwargs)
-        context['incomplete_files'] = self.object.last_files_version.submissions \
-            .exclude(filesize=F('uploadsize'))
-        return context
-
-    def get_permission_object(self):
-        # All the users who have the 'review_issuesubmission' authorization should be allowed to
-        # review all journals.
-        return self.get_object().journal
 
 
 class IssueSubmissionApproveView(IssueSubmissionTransitionView):

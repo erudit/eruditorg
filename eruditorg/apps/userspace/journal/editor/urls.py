@@ -12,8 +12,6 @@ urlpatterns = [
     url(_(r'^numero/(?P<pk>[0-9]+)/edition/$'),
         views.IssueSubmissionUpdate.as_view(), name='update'),
 
-    url(_(r'^numero/(?P<pk>[0-9]+)/soumettre/$'),
-        views.IssueSubmissionSubmitView.as_view(), name='transition_submit'),
     url(_(r'^numero/(?P<pk>[0-9]+)/approuver/$'),
         views.IssueSubmissionApproveView.as_view(), name='transition_approve'),
     url(_(r'^numero/(?P<pk>[0-9]+)/refuser/$'),

@@ -380,44 +380,6 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         self.assertTrue("pixel%2C%20" in response.url)
 
 
-class TestIssueSubmissionSubmitView(BaseEditorTestCase):
-    def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
-        # Setup
-        user = UserFactory()
-
-        client = Client(logged_user=user)
-        url = reverse('userspace:journal:editor:transition_submit',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        # Run
-        response = client.post(url)
-
-        # Check
-        self.assertEqual(response.status_code, 403)
-
-    def test_can_submit_an_issue_submission(self):
-        # Setup
-        user = UserFactory()
-        self.journal.members.add(user)
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal),
-            object_id=self.journal.id,
-            user=user,
-            authorization_codename=AC.can_manage_issuesubmission.codename)
-
-        client = Client(logged_user=user)
-        url = reverse('userspace:journal:editor:transition_submit', args=(
-            self.journal.pk, self.issue_submission.pk, ))
-
-        # Run
-        response = client.post(url)
-
-        # Check
-        self.assertEqual(response.status_code, 302)
-        self.issue_submission.refresh_from_db()
-        self.assertEqual(self.issue_submission.status, IssueSubmission.SUBMITTED)
-
-
 class TestIssueSubmissionApproveView(BaseEditorTestCase):
     def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
         # Setup
