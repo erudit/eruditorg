@@ -21,7 +21,6 @@ from resumable_uploads.models import ResumableFile
 
 from base.viewmixins import MenuItemMixin
 from core.editor.models import IssueSubmission
-from core.metrics.metric import metric
 from core.editor.utils import get_archive_date
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
@@ -109,13 +108,6 @@ class IssueSubmissionCreate(
         messages.success(self.request, _('La demande a été créée avec succès'))
         return reverse(
             'userspace:journal:editor:update', args=(self.current_journal.pk, self.object.pk, ))
-
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        metric(
-            'erudit__issuesubmission__create',
-            author_id=self.request.user.id, submission_id=form.instance.id)
-        return result
 
 
 class IssueSubmissionUpdate(
@@ -232,13 +224,6 @@ class IssueSubmissionTransitionView(
                 track.save()
         else:
             comment = None
-
-        # Capture a metric when the status changes
-        if self.object.status != old_status:
-            metric(
-                'erudit__issuesubmission__change_status',
-                tags={'old_status': old_status, 'new_status': self.object.status},
-                author_id=self.request.user.id, submission_id=self.object.id)
 
         logger.info(
             'editor.issuesubmission.update',

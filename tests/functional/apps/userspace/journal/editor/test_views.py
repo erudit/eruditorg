@@ -11,7 +11,6 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.test import RequestFactory
-from influxdb import InfluxDBClient
 from lxml import etree
 from resumable_uploads.models import ResumableFile
 
@@ -223,53 +222,6 @@ class TestIssueSubmissionView:
 
         assert user_contacts == form_contacts
 
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_when_a_submission_is_created(
-            self, mock_write_points, mock_list_db, mock_create_db, user_can_edit_journal):
-        # Setup
-        user, journal = user_can_edit_journal
-        test_points = []
-        mock_write_points.side_effect = test_points.extend
-
-        post_data = {
-            'journal': journal.pk,
-            'year': '2015',
-            'volume': '2',
-            'number': '2',
-            'contact': user.pk,
-            'comment': 'lorem ipsum dolor sit amet',
-        }
-
-        request = RequestFactory().post(
-            reverse('userspace:journal:editor:add', args=(journal.pk, )), post_data)
-        request.user = user
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
-        MessageMiddleware().process_request(request)
-        view = IssueSubmissionCreate(request=request, journal_pk=journal.pk)
-        view.current_journal = journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        assert len(test_points) == 1
-        issuesubmission = IssueSubmission.objects.last()
-        assert test_points == [
-            {
-                'tags': {},
-                'fields': {
-                    'author_id': user.pk,
-                    'submission_id': issuesubmission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__create',
-            }
-        ]
-
     def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self, user_can_edit_journal):
         # Setup
         user, journal = user_can_edit_journal
@@ -420,48 +372,6 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         self.issue_submission.refresh_from_db()
         self.assertEqual(self.issue_submission.status, IssueSubmission.VALID)
 
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_on_status_change(
-            self, mock_write_points, mock_list_db, mock_create_db):
-        test_points = []
-        mock_write_points.side_effect = test_points.extend
-
-        self.issue_submission.submit()
-        self.issue_submission.save()
-
-        url = reverse('userspace:journal:editor:transition_approve',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        request = RequestFactory().post(url)
-        request.user = self.user
-        SessionMiddleware().process_request(request)
-        MessageMiddleware().process_request(request)
-        request.session.save()
-
-        view = IssueSubmissionApproveView(request=request, journal_pk=self.journal.pk)
-        view.request = request
-        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
-        view.current_journal = self.journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        self.assertEqual(len(test_points), 1)
-        self.assertEqual(
-            test_points,
-            [{
-                'tags': {'old_status': 'S', 'new_status': 'V'},
-                'fields': {
-                    'author_id': self.user.pk,
-                    'submission_id': self.issue_submission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__change_status',
-            }])
-
     def test_sends_a_notification_email(self):
         # Setup
         u = UserFactory(is_superuser=True)
@@ -543,48 +453,6 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         self.assertEqual(self.issue_submission.files_versions.count(), 2)
         track = self.issue_submission.last_status_track
         self.assertEqual(track.comment, 'This is a comment!')
-
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_on_status_change(
-            self, mock_write_points, mock_list_db, mock_create_db):
-        test_points = []
-        mock_write_points.side_effect = test_points.extend
-
-        self.issue_submission.submit()
-        self.issue_submission.save()
-
-        url = reverse('userspace:journal:editor:transition_refuse',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        request = RequestFactory().post(url)
-        request.user = self.user
-        SessionMiddleware().process_request(request)
-        MessageMiddleware().process_request(request)
-        request.session.save()
-
-        view = IssueSubmissionRefuseView(request=request, journal_pk=self.journal.pk)
-        view.request = request
-        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
-        view.current_journal = self.journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        self.assertEqual(len(test_points), 1)
-        self.assertEqual(
-            test_points,
-            [{
-                'tags': {'old_status': 'S', 'new_status': 'D'},
-                'fields': {
-                    'author_id': self.user.pk,
-                    'submission_id': self.issue_submission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__change_status',
-            }])
 
     def test_sends_a_notification_email(self):
         # Setup
