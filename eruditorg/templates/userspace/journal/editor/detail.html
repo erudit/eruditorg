@@ -50,65 +50,6 @@
 
 <hr>
 
-{# Issue submission history #}
-{% if status_tracks %}
-<h2>{% trans "Historique" %}</h2>
-<div class="table">
-  <ul class="table-header">
-    <li class="row">
-      <span class="col-sm-2">{% trans "Date" %}</span>
-      <span class="col-sm-5">{% trans "Statut" %}</span>
-      <span class="col-sm-5">{% trans "Commentaires" %}</span>
-    </li>
-  </ul>
-  <ul class="table-body">
-    {% for track in status_tracks reversed %}
-    <li class="row table-row-wrapper">
-      <div class="clearfix table-row">
-        <div class="col-sm-2">
-          {% blocktrans trimmed with date=track.created|date:"SHORT_DATE_FORMAT" time=track.created|date:"H:i" %}
-          {{ date }}<br> {{ time }}
-          {% endblocktrans %}
-        </div>
-        <div class="col-sm-5">
-          <p>
-            <strong>{{ track.get_status_display }}</strong>.<br><br>
-            {% if track.files_version and track.files_version.submissions.exists %}
-            {% trans "Fichiers&nbsp;:" %}
-            {% endif %}
-          </p>
-
-          {% if track.files_version and track.files_version.submissions.exists %}
-          <ul class="unstyled">
-          {% for f in track.files_version.submissions.all %}
-            {% if f.is_complete %}
-              <li>
-                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">
-                  {{ f.get_filename }}&nbsp;&nbsp;<i class="icon ion-cloud-download"></i></span>
-                </a>
-              </li>
-            {% else %}
-              <li>
-                {{ f.get_filename }} ({% trans "partiellement téléversé" %})
-              </li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-          {% endif %}
-        </div>
-
-        <div class="col-sm-5">
-          {% if track.comment %}
-          <p><em>{{ track.comment }}</em></p>
-          {% endif %}
-        </div>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-{% endif %}
-
 {# Submit / delete buttons #}
 <div class="form-group text-right">
   {% if can_manage_issuesubmission and not issue.is_validated %}
@@ -126,4 +67,9 @@
   class="btn btn-primary">{{ t.custom.verbose_name }}</a>
   {% endfor %}
 </div>
+
+{# Issue submission history #}
+{% if status_tracks %}
+{% include "userspace/journal/editor/partials/issue_submission_status_tracks.html" %}
+{% endif %}
 {% endblock content_main %}

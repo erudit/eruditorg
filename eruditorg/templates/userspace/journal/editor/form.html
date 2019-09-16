@@ -104,56 +104,6 @@
 
   <hr>
 
-  {% if status_tracks %}
-  <h2>{% trans "Historique" %}</h2>
-  <div class="submissions{% if form.submissions.errors %} error{% endif %}">
-    <ul class="submissions-header">
-      <li class="row">
-        <span class="col-sm-2">{% trans "Date" %}</span>
-        <span class="col-sm-5">{% trans "Statut" %}</span>
-        <span class="col-sm-5">{% trans "Commentaires" %}</span>
-      </li>
-    </ul>
-    <ul class="submissions-list">
-      {% for track in status_tracks reversed %}
-      <li class="row submissions-item">
-        <div class="clearfix submissions-content">
-          <div class="col-sm-2">
-            {% blocktrans trimmed with date=track.created|date:"SHORT_DATE_FORMAT" time=track.created|date:"H:i" %}
-            {{ date }}<br> {{ time }}
-            {% endblocktrans %}
-          </div>
-          <div class="col-sm-5">
-            <p>
-              {{ track.get_status_display }}
-            </p>
-
-            {% if track.files_version and track.files_version.submissions.exists %}
-            <p>
-              {% trans "Fichiers&nbsp;:" %}
-              {% for f in track.files_version.submissions.all %}
-                {% if f.is_complete %}
-                  <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>
-                {% else %}
-                  {{ f.get_filename }} ({% trans "partiellement téléversé" %})
-                {% endif %}
-              {% endfor %}
-            </p>
-            {% endif %}
-          </div>
-
-          <div class="col-sm-5">
-            {% if track.comment %}
-            <p>{{ track.comment }}</p>
-            {% endif %}
-          </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
-
   <div class="form-group text-right">
     {% if not object.is_submitted and not object.archived and not object.is_validated %}
     {% if object.pk %}
@@ -164,5 +114,10 @@
     <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
     {% endif %}
   </div>
+
+  {# Issue submission history #}
+  {% if status_tracks %}
+  {% include "userspace/journal/editor/partials/issue_submission_status_tracks.html" %}
+  {% endif %}
 </form>
 {% endblock content_main %}
