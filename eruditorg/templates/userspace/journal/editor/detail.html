@@ -20,7 +20,7 @@
   <div class="col-md-8">
     <h2>{% trans "Informations du numéro" %}</h2>
   </div>
-  {% if issue.is_draft %}
+  {% if not issue.is_validated %}
   <div class="col-md-4 text-right">
     <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-secondary">{% trans "Modifier" %}</a>
   </div>
@@ -32,13 +32,7 @@
   <dt class="col-sm-3">{% trans "Statut" %}</dt>
   <dd class="col-sm-9">
     <span class="status-indicator-{% if issue.status == 'D' or issue.status == 'C' %}error{% elif issue.status == 'S' %}warning{% elif issue.status == 'V' %}success{% endif %}"></span>
-    {% if issue.status == 'D' %}
-      {% trans "Numéro" %} {{ issue.get_status_display|lower }}
-    {% elif issue.status == 'C' %}
-      {% trans "À corriger" %}
-    {% else %}
-      {{ issue.get_status_display }}
-    {% endif %}
+    {{ issue.get_status_display }}
   </dd>
   <dt class="col-sm-3">{% trans "Année" %}</dt>
   <dd class="col-sm-9">{{ issue.year }}</dd>
@@ -78,16 +72,7 @@
         </div>
         <div class="col-sm-5">
           <p>
-            {% if track.status == "D" %}
-              {% trans "Corrections demandées" as status_prefix %}
-            {% elif track.status == "S" %}
-              {% trans "Soumis" as status_prefix %}
-            {% elif track.status == "V" %}
-              {% trans "Validé" as status_prefix %}
-            {% endif %}
-            {% with prefix=status_prefix %}
-            <strong>{{ prefix }}</strong>.<br><br>
-            {% endwith %}
+            <strong>{{ track.get_status_display }}</strong>.<br><br>
             {% if track.files_version and track.files_version.submissions.exists %}
             {% trans "Fichiers&nbsp;:" %}
             {% endif %}
@@ -126,7 +111,7 @@
 
 {# Submit / delete buttons #}
 <div class="form-group text-right">
-  {% if can_manage_issuesubmission and issue.is_draft %}
+  {% if can_manage_issuesubmission and not issue.is_validated %}
   <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk issue.pk %}" class="btn">{% trans "Supprimer" %}</a>
   {% endif %}
   {% for t in transitions %}

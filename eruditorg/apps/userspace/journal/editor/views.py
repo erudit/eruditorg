@@ -3,7 +3,6 @@ import datetime as dt
 import structlog
 from urllib.parse import quote
 
-from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
@@ -182,12 +181,7 @@ class IssueSubmissionUpdate(
             'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
 
     def has_permission(self):
-        issue_submission = self.get_object()
-        if not issue_submission.is_draft:
-            raise PermissionDenied
-
         obj = self.get_permission_object()
-
         return (
             self.request.user.has_perm('editor.manage_issuesubmission', obj) or
             self.request.user.has_perm('editor.review_issuesubmission')
@@ -350,8 +344,10 @@ class IssueSubmissionDeleteView(
         return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
 
     def has_permission(self):
-        obj = self.get_object()
-        return self.request.user.has_perm('editor.manage_issuesubmission') and obj.is_draft
+        issue_submission = self.get_object()
+        if issue_submission.is_validated:
+            return False
+        return self.request.user.has_perm('editor.manage_issuesubmission')
 
 
 class IssueSubmissionAttachmentView(

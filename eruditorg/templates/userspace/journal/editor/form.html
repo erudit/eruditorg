@@ -125,16 +125,7 @@
           </div>
           <div class="col-sm-5">
             <p>
-              {% if track.status == "D" %}
-                {% trans "Corrections demandées" as status_prefix %}
-              {% elif track.status == "S" %}
-                {% trans "Soumis" as status_prefix %}
-              {% elif track.status == "V" %}
-                {% trans "Validé" as status_prefix %}
-              {% endif %}
-              {% with prefix=status_prefix %}
-              {{ prefix }}
-              {% endwith %}
+              {{ track.get_status_display }}
             </p>
 
             {% if track.files_version and track.files_version.submissions.exists %}

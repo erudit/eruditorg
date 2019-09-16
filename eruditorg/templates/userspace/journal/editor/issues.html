@@ -41,19 +41,17 @@
   </ul>
   <ul class="table-body">
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-    {% with issue_submission.get_status_code_display as status %}
     <li class="row table-row-wrapper">
       <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
          class="clearfix table-row">
         <span class="col-sm-4">{{ issue_submission }}</span>
         <span class="col-sm-4">{{ issue_submission.date_created|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-4">
-          <span class="status-indicator-{% if status == 'D' or status == 'C' %}error{% elif status == 'S' %}warning{% elif status == 'V' %}success{% endif %}"></span>
+          <span class="status-indicator-{% if issue_submission.status == 'D' or issue_submission.status == 'C' %}error{% elif issue_submission.status == 'S' %}warning{% elif issue_submission.status == 'V' %}success{% endif %}"></span>
           {{ issue_submission.get_status_display }}
         </span>
       </a>
     </li>
-    {% endwith %}
     {% endfor %}
   </ul>
 </div>

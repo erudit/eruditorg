@@ -60,7 +60,7 @@ def send_notification_email_after_issue_submission_approval(
 @receiver(userspace_post_transition)
 def send_notification_email_after_issue_submission_refusal(
         sender, issue_submission, transition_name, request, **kwargs):
-    if not issue_submission.is_draft:
+    if not issue_submission.is_draft and not issue_submission.needs_corrections:
         return
     extra_context = {'issue': issue_submission, 'journal': issue_submission.journal}
     emails = [issue_submission.contact.email, ]
