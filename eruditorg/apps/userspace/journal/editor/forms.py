@@ -98,6 +98,9 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
     def save(self, commit=True):
         submissions = self.cleaned_data.pop('submissions', '')
         instance = super(IssueSubmissionUploadForm, self).save(commit)
+        # Automatically submit the submission when a new upload is saved.
+        instance.submit()
+        instance.save()
 
         # Saves the resumable files associated to the submission
         if commit:
