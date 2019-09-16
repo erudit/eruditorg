@@ -16,7 +16,13 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Cet espace vous permet d’envoyer vos fichiers de production et de vérifier leur statut&nbsp;: <em>non soumis</em>, <em>en attente de validation</em>, <em>à corriger</em> ou <em>validé et publié</em>.</p>
+<p>Cet espace vous permet d’envoyer vos fichiers de production et de vérifier leur statut&nbsp;:</p>
+<ul class="unstyled">
+  <li><span class="status-indicator-error"></span>Brouillon</li>
+  <li><span class="status-indicator-warning"></span>En attente de validation</li>
+  <li><span class="status-indicator-error"></span>À corriger</li>
+  <li><span class="status-indicator-success"></span>Validé</li>
+</ul>
 {% endblocktrans %}
 {% endblock section_intro %}
 
