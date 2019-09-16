@@ -43,6 +43,7 @@
 {% endblock %}
 
 {% block section_intro %}
+{% if object.pk %}
 <p>{% trans "Afin de réduire les délais de production de vos numéros et ainsi réduire les coûts qui y sont reliés, ne pas oublier de&nbsp;:" %}</p>
 <ol>
   <li>{% trans "Incorporer les polices des fichiers PDF;" %}</li>
@@ -58,6 +59,7 @@
   <li>{% trans "Baliser les liens et les courriels dans les affiliations, le corps du texte et les références bibliographiques;" %}</li>
   <li>{% trans "Lier les appels de notes aux notes de bas de page." %}</li>
 </ul>
+{% endif %}
 {% endblock section_intro %}
 
 
