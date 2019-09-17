@@ -670,8 +670,6 @@ class BaseArticleDetailView(
     context_object_name = 'article'
     model = Article
     tracking_view_type = 'html'
-    # Used to only display the abstracts or the bibliography.
-    only_display = False
 
     def get_context_data(self, **kwargs):
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
@@ -756,21 +754,17 @@ class BaseArticleDetailView(
         if not issue.is_published:
             context['ticket'] = issue.prepublication_ticket
 
-        context['rendered_xml_content'] = self.render_xml_content(
-            context,
-            only_display=self.only_display,
-        )
-
         return context
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
         return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
 
-    def render_xml_content(self, context, only_display=False):
+    def _render_xml_contents(self, only_display=False):
         """ Renders the given article instance as HTML. """
 
         article = self.get_object()
+        context = self.get_context_data()
         erudit_object = article.get_erudit_object()
         context['is_of_type_roc'] = erudit_object.is_of_type_roc
         context['only_display'] = only_display
@@ -841,13 +835,18 @@ class ArticleDetailView(BaseArticleDetailView):
                 'article_li': obj.localidentifier
             }
 
+    def render_xml_contents(self):
+        return self._render_xml_contents()
+
 
 class ArticleSummaryView(BaseArticleDetailView):
     """
     Displays the summary of an Article instance.
     """
     template_name = 'public/journal/article_summary.html'
-    only_display = 'summary'
+
+    def render_xml_contents(self):
+        return self._render_xml_contents(only_display='summary')
 
 
 class ArticleBiblioView(BaseArticleDetailView):
@@ -855,7 +854,9 @@ class ArticleBiblioView(BaseArticleDetailView):
     Displays the bibliography of an Article instance.
     """
     template_name = 'public/journal/article_biblio.html'
-    only_display = 'biblio'
+
+    def render_xml_contents(self):
+        return self._render_xml_contents(only_display='biblio')
 
 
 class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
