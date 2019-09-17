@@ -576,9 +576,10 @@ class TestRenderArticleTemplateTag:
         view.request = unittest.mock.MagicMock()
         view.object = article
         view.get_object = unittest.mock.MagicMock(return_value=article)
+        context = view.get_context_data()
 
         # Run the XSL transformation.
-        return view.render_xml_contents()
+        return view.render_xml_content(context)
 
     def test_can_transform_article_xml_to_html(
             self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
