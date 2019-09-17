@@ -83,7 +83,7 @@
     data-document-id="{{ article.solr_id }}"
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
   >
-  {{ view.render_xml_contents }}
+  {{ rendered_xml_content }}
 </main>
 
 {% include "public/journal/partials/article_footer.html" %}
