@@ -8,6 +8,7 @@ from typing import (
     List,
 )
 
+import functools
 import pysolr
 import random
 import structlog
@@ -756,8 +757,9 @@ class BaseArticleDetailView(
         if not issue.is_published:
             context['ticket'] = issue.prepublication_ticket
 
-        context['rendered_xml_content'] = self.render_xml_content(
-            context,
+        context['render_xml_content'] = functools.partial(
+            self.render_xml_content,
+            context=context,
             only_display=self.only_display,
         )
 
