@@ -8,6 +8,7 @@ import unittest.mock
 import subprocess
 import itertools
 from hashlib import md5
+from unittest.mock import PropertyMock
 
 from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
@@ -689,6 +690,43 @@ class TestArticleDetailView:
             'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
             'issue_localid': issue.localidentifier, 'localid': article_localidentifier})
         response = Client().get(url)
+        assert response.status_code == 200
+
+    @unittest.mock.patch('pikepdf.open')
+    @unittest.mock.patch('eulfedora.models.FileDatastreamObject._get_content')
+    @pytest.mark.parametrize('content_access_granted,has_abstracts,should_fetch_pdf', (
+        (True, True, False),
+        (True, False, False),
+        (False, True, False),
+        (False, False, True)
+    ))
+    def test_do_not_fetch_pdfs_if_not_necessary(
+        self, mock_pikepdf, mock_content, content_access_granted, has_abstracts, should_fetch_pdf
+    ):
+        """ Test that the PDF is only fetched on ArticleDetailView when the the user is not subscribed
+        and the article has no abstract
+        """
+        article = ArticleFactory(with_pdf=True)
+        client = Client()
+
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé français'}])
+        if content_access_granted:
+            subscription = JournalAccessSubscriptionFactory(
+                pk=1,
+                user__password='password',
+                post__valid=True,
+                post__journals=[article.issue.journal],
+            )
+            client.login(username=subscription.user.username, password="password")
+
+        url = article_detail_url(article)
+        response = client.get(url)
+        if should_fetch_pdf:
+            assert mock_content.call_count == 1
+        else:
+            assert mock_content.call_count == 0
         assert response.status_code == 200
 
     def test_querystring_doesnt_mess_media_urls(self):
