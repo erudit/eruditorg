@@ -582,8 +582,13 @@ class Issue(FedoraMixin, FedoraDated):
     def get_articles_from_fedora(self):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
         # elegant way to generalize that code. This mechanism will probably change soon anyway.
-
-        summary_tree = et.fromstring(self.fedora_object.xml_content)
+        if self._should_use_cache():
+            summary_tree = et.fromstring(
+                get_cached_datastream_content(
+                    self.fedora_object, 'summary').serialize()
+            )
+        else:
+            summary_tree = et.fromstring(self.fedora_object.xml_content)
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:

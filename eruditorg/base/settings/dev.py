@@ -41,6 +41,7 @@ if ACTIVATE_DEBUG_TOOLBAR:
         'debug_toolbar.panels.cache.CachePanel',
         'debug_toolbar.panels.signals.SignalsPanel',
         'debug_toolbar.panels.logging.LoggingPanel',
+        'eulfedora.debug_panel.FedoraPanel',
     )
 
     MIDDLEWARE += (
