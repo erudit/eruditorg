@@ -33,3 +33,11 @@ def test_external_journal_issues_and_articles_are_not_in_sitemaps():
     assert external_article.issue.journal.code not in JournalSitemap().items()
     assert external_article.issue.localidentifier not in IssueSitemap().items()
     assert external_article.localidentifier not in ArticleSitemap().items()
+
+def test_article_with_non_existing_issue_does_not_raise_exception():
+    # RECMA articles hosted on Cairn are indexed in our Solr with the Érudit collection but we don't
+    # have the corresponding issues in our database.
+    article = ArticleFactory()
+    no_issue_article = ArticleFactory()
+    no_issue_article.issue.delete()
+    assert ArticleSitemap().items() == [article]

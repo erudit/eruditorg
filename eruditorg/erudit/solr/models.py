@@ -245,8 +245,11 @@ def get_all_articles(rows, page):
         solr_doc = SolrDocument(solr_data)
         if solr_doc.document_type != 'article':
             return None
+        issue = issues.get(solr_data['NumeroID'])
+        if issue is None:
+            return None
         return erudit_models.Article(
-            issues.get(solr_data['NumeroID']),
+            issue,
             solr_doc.localidentifier,
             solr_doc,
         )
