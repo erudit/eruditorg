@@ -176,6 +176,16 @@ class Article(SolrDocument):
         # TODO: check this, why is this always 'S' ?
         return 'S'
 
+    @property
+    def journal_url(self):
+        code = self.solr_data['RevueAbr']
+        if self.solr_data['Fonds_fac'] == 'Persée':
+            code = 'persee' + code
+        journal = erudit_models.Journal.objects.get(code=code)
+        if journal.external_url:
+            return journal.external_url
+        return reverse('public:journal:journal_detail', args=(journal.code, ))
+
 
 class Thesis(SolrDocument):
     def can_cite(self):
