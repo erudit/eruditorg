@@ -173,7 +173,22 @@ class IssueSubmissionUpdate(
         return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
-        logger.debug('update', **self.get_context_info())
+        # Log this new version.
+        old_status_track = self.object.status_tracks.order_by('-created')[1]
+        logger.info(
+            'editor.issuesubmission.update',
+            old_status=old_status_track.status,
+            new_status=self.object.status,
+            url=self.object.get_absolute_url(),
+            **self.get_context_info()
+        )
+        # Send a signal in order to notify the update of the issue submission's status
+        userspace_post_transition.send(
+            sender=self,
+            issue_submission=self.get_object(),
+            transition_name='submit',
+            request=self.request,
+        )
         messages.success(self.request, _('La demande a été enregistrée avec succès'))
         return reverse(
             'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
