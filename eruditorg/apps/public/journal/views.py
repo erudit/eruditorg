@@ -712,22 +712,6 @@ class BaseArticleDetailView(
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
-        all_journal_articles = self.solr_data.get_all_journal_articles(issue.journal.code)
-        related_candidates = pick_related_article_candidates(current_article, all_journal_articles)
-        # return 4 randomly — at most
-        random.shuffle(related_candidates)
-        related_articles = []
-        # calls to Article.from_solr_object are expensive, so create only selected articles
-        for candidate in related_candidates:
-            if len(related_articles) == 4:
-                break
-            try:
-                related_articles.append(Article.from_solr_object(candidate))
-            except Article.DoesNotExist:
-                # This might happen for UNB articles with ID mismatch between Solr & Fedora.
-                pass
-        context['related_articles'] = related_articles
-
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
         shouldcache = issue.is_published
@@ -762,8 +746,29 @@ class BaseArticleDetailView(
             context=context,
             only_display=self.only_display,
         )
+        context['related_articles'] = functools.partial(
+            self.get_related_articles,
+            current_article=current_article,
+        )
 
         return context
+
+    def get_related_articles(self, current_article):
+        articles = self.solr_data.get_all_journal_articles(current_article.issue.journal.code)
+        related_candidates = pick_related_article_candidates(current_article, articles)
+        # return 4 randomly — at most
+        random.shuffle(related_candidates)
+        related_articles = []
+        # calls to Article.from_solr_object are expensive, so create only selected articles
+        for candidate in related_candidates:
+            if len(related_articles) == 4:
+                break
+            try:
+                related_articles.append(Article.from_solr_object(candidate))
+            except Article.DoesNotExist:
+                # This might happen for UNB articles with ID mismatch between Solr & Fedora.
+                pass
+        return related_articles
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
