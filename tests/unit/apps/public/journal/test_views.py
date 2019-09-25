@@ -702,8 +702,8 @@ class TestRenderArticleTemplateTag:
 
 class TestGoogleScholarSubscribersView:
 
-    @pytest.mark.parametrize('valid, expired, google_scholar_opt_out, expected_subscribers', [
-        (True, False, False, {
+    @pytest.mark.parametrize('google_scholar_opt_out, expected_subscribers', [
+        (False, {
             1: {
                 'institution': 'foo',
                 'ip_ranges': [
@@ -711,14 +711,11 @@ class TestGoogleScholarSubscribersView:
                 ],
             },
         }),
-        (False, True, False, {}),
-        (True, False, True, {}),
+        (True, {}),
     ])
-    def test_google_scholar_subscribers(self, valid, expired, google_scholar_opt_out, expected_subscribers):
+    def test_google_scholar_subscribers(self, google_scholar_opt_out, expected_subscribers):
         JournalAccessSubscriptionFactory(
             pk=1,
-            post__valid=valid,
-            post__expired=expired,
             post__ip_start='0.0.0.0',
             post__ip_end='255.255.255.255',
             organisation__name='foo',
@@ -731,19 +728,16 @@ class TestGoogleScholarSubscribersView:
 
 class TestGoogleScholarSubscriberJournalsView:
 
-    @pytest.mark.parametrize('valid, expired, google_scholar_opt_out, subscription_id, expected_journal_ids', [
-        (False, True, False, '1', []),
-        (True, False, False, '1', ['journal_1']),
-        (True, False, False, '', ['journal_1', 'journal_2']),
-        (True, False, True, '1', []),
+    @pytest.mark.parametrize('google_scholar_opt_out, subscription_id, expected_journal_ids', [
+        (False, '1', ['journal_1']),
+        (False, '', ['journal_1', 'journal_2']),
+        (True, '1', []),
     ])
-    def test_google_scholar_subscriber_journals(self, valid, expired, google_scholar_opt_out, subscription_id, expected_journal_ids):
+    def test_google_scholar_subscriber_journals(self, google_scholar_opt_out, subscription_id, expected_journal_ids):
         journal_1 = JournalFactory(localidentifier='journal_1')
         journal_2 = JournalFactory(localidentifier='journal_2')
         JournalAccessSubscriptionFactory(
             pk=1,
-            post__valid=valid,
-            post__expired=expired,
             post__journals=[journal_1],
             organisation__google_scholar_opt_out=google_scholar_opt_out,
         )
