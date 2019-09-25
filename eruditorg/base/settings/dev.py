@@ -44,6 +44,6 @@ if ACTIVATE_DEBUG_TOOLBAR:
         'eulfedora.debug_panel.FedoraPanel',
     )
 
-    MIDDLEWARE += (
+    MIDDLEWARE = (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
+    ) + MIDDLEWARE
