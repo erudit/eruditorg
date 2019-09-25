@@ -3,7 +3,6 @@
 import structlog
 import re
 
-import datetime as dt
 from urllib.parse import urlparse
 
 from django.db import models
@@ -82,11 +81,9 @@ class JournalAccessSubscriptionValidManager(models.Manager):
 
         To be valid, an institutional subscription needs a valid JournalAccessSubscriptionPeriod.
         """
-        nowd = dt.datetime.now().date()
         institutional = Q(
             organisation__isnull=False,
-            journalaccesssubscriptionperiod__start__lte=nowd,
-            journalaccesssubscriptionperiod__end__gte=nowd)
+        )
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
         return qs.filter(institutional).prefetch_related('journals')
 
@@ -95,11 +92,9 @@ class JournalAccessSubscriptionValidManager(models.Manager):
 
         To be valid, an individual subscription needs a valid JournalManagementSubscriptionPeriod.
         That's because we let the journal manage validity themselves. """
-        nowd = dt.datetime.now().date()
         individual = Q(
             organisation__isnull=True,
-            journal_management_subscription__period__start__lte=nowd,
-            journal_management_subscription__period__end__gte=nowd)
+        )
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
         return qs.filter(individual).prefetch_related('journals')
 

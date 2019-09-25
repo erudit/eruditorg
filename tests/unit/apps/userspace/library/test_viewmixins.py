@@ -108,7 +108,6 @@ class TestOrganisationScopeMixin:
         organisation = OrganisationFactory()
         organisation.members.add(self.user)
         organisation.save()
-        JournalAccessSubscriptionFactory(organisation=organisation)
 
         # Run
         response = my_view(request, organisation_pk=organisation.pk)
