@@ -26,9 +26,9 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         # Run
         _handle_issuesubmission_files_removal()
         # Check
-        self.assertFalse(ResumableFile.objects.count())
+        assert not ResumableFile.objects.count()
         self.issue_submission.refresh_from_db()
-        self.assertTrue(self.issue_submission.archived)
+        assert self.issue_submission.archived
 
     def test_sends_an_email_to_notify_the_production_team_5_days_before_removal(self):
         # Setup
@@ -46,9 +46,9 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         # Run
         _handle_issuesubmission_files_removal()
         # Check
-        self.assertEqual(ResumableFile.objects.count(), 1)
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].to[0], self.user.email)
+        assert ResumableFile.objects.count() == 1
+        assert len(mail.outbox) == 1
+        assert mail.outbox[0].to[0] == self.user.email
 
     def test_do_not_send_an_email_if_the_production_team_group_does_not_exist(self):
         # Setup
@@ -63,8 +63,8 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         # Run
         _handle_issuesubmission_files_removal()
         # Check
-        self.assertEqual(ResumableFile.objects.count(), 1)
-        self.assertFalse(len(mail.outbox))
+        assert ResumableFile.objects.count() == 1
+        assert not len(mail.outbox)
 
     def test_do_not_send_an_email_if_the_production_team_is_empty(self):
         # Setup
@@ -81,5 +81,5 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         # Run
         _handle_issuesubmission_files_removal()
         # Check
-        self.assertEqual(ResumableFile.objects.count(), 1)
-        self.assertFalse(len(mail.outbox))
+        assert ResumableFile.objects.count() == 1
+        assert not len(mail.outbox)

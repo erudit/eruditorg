@@ -253,7 +253,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         # Run
         response = client.get(url, follow=False)
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_be_browsed_by_users_who_can_manage_issue_submissions(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
@@ -275,7 +275,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
         # we're redirected to the attachment path in the media folder
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
 
     def test_can_be_browsed_by_users_who_can_review_issue_submissions(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
@@ -293,7 +293,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
 
     def test_filename_special_characters_are_urlencoded(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel#.png'), mode='rb') as f:
@@ -311,7 +311,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
-        self.assertTrue("pixel%23" in response.url)
+        assert "pixel%23" in response.url
 
     def test_filename_spaces_are_not_urlencoded(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel, .png'), mode='rb') as f:
@@ -329,7 +329,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
-        self.assertTrue("pixel%2C%20" in response.url)
+        assert "pixel%2C%20" in response.url
 
 
 class TestIssueSubmissionApproveView(BaseEditorTestCase):
@@ -351,7 +351,7 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_approve_an_issue_submission(self):
         # Setup
@@ -368,9 +368,9 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
         self.issue_submission.refresh_from_db()
-        self.assertEqual(self.issue_submission.status, IssueSubmission.VALID)
+        assert self.issue_submission.status == IssueSubmission.VALID
 
     def test_sends_a_notification_email(self):
         # Setup
@@ -414,7 +414,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_refuse_an_issue_submission(self):
         # Setup
@@ -431,8 +431,8 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.issue_submission.files_versions.count(), 2)
+        assert response.status_code == 302
+        assert self.issue_submission.files_versions.count() == 2
 
     def test_can_refuse_an_issue_submission_with_a_comment(self):
         # Setup
@@ -449,10 +449,10 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         response = client.post(url, {'comment': 'This is a comment!'})
 
         # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.issue_submission.files_versions.count(), 2)
+        assert response.status_code == 302
+        assert self.issue_submission.files_versions.count() == 2
         track = self.issue_submission.last_status_track
-        self.assertEqual(track.comment, 'This is a comment!')
+        assert track.comment == 'This is a comment!'
 
     def test_sends_a_notification_email(self):
         # Setup
@@ -505,5 +505,5 @@ class TestIssueSubmissionDeleteView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
         assert deleted_pk not in IssueSubmission.objects.values_list('pk', flat=True)
