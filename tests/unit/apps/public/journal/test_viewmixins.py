@@ -134,7 +134,8 @@ class TestContentAccessCheckMixin:
         JournalAccessSubscriptionFactory.create(
             user=authenticated_request.user,
             journals=[article.issue.journal],
-            post__valid=True
+            post__valid=True,
+            organisation=None,
         )
 
         middleware.process_request(authenticated_request)
@@ -229,7 +230,8 @@ class TestContentAccessCheckMixin:
         individual_subscription = JournalAccessSubscriptionFactory(
             journals=[other_article.issue.journal],
             user=authenticated_request.user,
-            post__valid=True
+            post__valid=True,
+            organisation=None,
         )
 
         parameters = authenticated_request.META.copy()

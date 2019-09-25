@@ -718,6 +718,7 @@ class TestArticleDetailView:
                 user__password='password',
                 post__valid=True,
                 post__journals=[article.issue.journal],
+                organisation=None, # TODO implement IndividualJournalAccessSubscriptionFactory
             )
             client.login(username=subscription.user.username, password="password")
 

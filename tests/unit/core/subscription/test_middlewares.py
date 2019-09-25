@@ -54,7 +54,8 @@ class TestSubscriptionMiddleware:
         subscription = JournalAccessSubscriptionFactory.create(
             user=request.user,
             journals=[journal],
-            post__valid=True
+            post__valid=True,
+            organisation=None
         )
 
         middleware = SubscriptionMiddleware()
@@ -94,7 +95,8 @@ class TestSubscriptionMiddleware:
         subscriptions = JournalAccessSubscriptionFactory.create_batch(
             2,
             post__valid=True,
-            user=request.user
+            user=request.user,
+            organisation=None
         )
 
         middleware = SubscriptionMiddleware()

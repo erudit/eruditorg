@@ -51,21 +51,23 @@ class SubscriptionMiddleware(MiddlewareMixin):
             ip = request.META.get('HTTP_CLIENT_IP', ip)
 
         request.subscriptions = UserSubscriptions()
-        subscription = JournalAccessSubscription.valid_objects.get_for_ip_address(ip)\
+        subscription = JournalAccessSubscription.\
+            valid_objects.institutional().get_for_ip_address(ip)\
             .select_related('organisation').first()
         if subscription:
             request.subscriptions.add_subscription(subscription)
 
         # Tries to determine if the subscriber is refered by a subscribed organisation
         referer = self._get_user_referer_for_subscription(request)
-        subscription = JournalAccessSubscription.valid_objects.get_for_referer(referer)
+        subscription = JournalAccessSubscription.\
+            valid_objects.institutional().get_for_referer(referer)
         if subscription:
             request.subscriptions.add_subscription(subscription)
             request.session['HTTP_REFERER'] = referer
 
         # Tries to determine if the user has an individual account
         if request.user.is_authenticated:
-            for subscription in JournalAccessSubscription.valid_objects.select_related(
+            for subscription in JournalAccessSubscription.valid_objects.individual().select_related(
                 'sponsor', 'organisation'
             ).filter(user=request.user):
                 request.subscriptions.add_subscription(subscription)
