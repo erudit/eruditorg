@@ -57,8 +57,8 @@ class TestIssueSubmissionDetailView:
         # Check
         assert response.status_code == 200
         assert len(response.context['status_tracks']) == 2
-        assert response.context['status_tracks'][0].status == 'S'
-        assert response.context['status_tracks'][1].status == 'D'
+        assert response.context['status_tracks'][0].status == IssueSubmission.SUBMITTED
+        assert response.context['status_tracks'][1].status == IssueSubmission.NEEDS_CORRECTIONS
 
 
 @pytest.mark.django_db
@@ -222,7 +222,7 @@ class TestIssueSubmissionView:
 
         assert user_contacts == form_contacts
 
-    def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self, user_can_edit_journal):
+    def test_can_update_an_issue_submission_even_if_it_is_submitted(self, user_can_edit_journal):
         # Setup
         user, journal = user_can_edit_journal
         issue_submission = IssueSubmissionFactory(journal=journal)
@@ -235,7 +235,7 @@ class TestIssueSubmissionView:
         # Run
         response = client.get(url)
         # Check
-        assert response.status_code == 403
+        assert response.status_code == 200
 
 
 class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
@@ -472,7 +472,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         # Check
         assert response.status_code == 302
         self.issue_submission.refresh_from_db()
-        assert self.issue_submission.status == IssueSubmission.DRAFT
+        assert self.issue_submission.status == IssueSubmission.NEEDS_CORRECTIONS
         assert len(mail.outbox) == 1
         assert mail.outbox[0].to[0] == u.email
 
