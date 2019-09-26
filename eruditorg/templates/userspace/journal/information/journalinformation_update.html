@@ -37,8 +37,10 @@
   {% endfor %}
   {% endif %}
 
-  <h2>{% trans "Informations générales" %}</h2>
   {% with field_template="userspace/journal/information/partials/info_single_field.html" %}
+  <section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "Informations générales" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
   <fieldset>
     <legend>{% trans "Coordonnées" %}</legend>
     <div class="row">
@@ -65,8 +67,14 @@
       {% include field_template with field=form.website_url type="url" autocomplete="url" icon="ion-ios-world-outline" only %}
     </div>
   </fieldset>
+  </div>
+  </section>
 
-  <h2>{% trans "Gestion de la revue" %}</h2>
+  <hr />
+
+  <section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "Gestion de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
   <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
     {{ formset.management_form }}
     <legend>{% trans "Rôles de direction et de rédaction" %}</legend>
@@ -108,8 +116,9 @@
     <div class="row">
       {% include field_template with field=form.frequency col_xs=12 col_sm=6 col_md=6 only %}
     </div>
-    <hr/>
   </fieldset>
+  </div>
+  </section>
 
   {% endwith %}
 
@@ -117,8 +126,11 @@
     <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Sauvegarder' %}</button>
   </div>
 
-  <h2>{% trans "À propos de la revue" %}</h2>
+  <hr />
 
+  <section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "À propos de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
   <ul class="tabs">
     {% for langcode, langname in LANGUAGES %}
     <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
@@ -137,16 +149,23 @@
   <hr>
 
   {% for field in form.get_textbox_fields %}
-  <fieldset id="{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
-    <legend>{{ field.label }}</legend>
+  <fieldset id="{{ field.html_name }}" class="akkordion {% if field.errors %}has-error"{% endif %} data-akkordion-single="true">
+    <h3 class="akkordion-title">{{ field.label }}<i class="icon ion-ios-arrow-down caret"></i></h3>
+    <div class="akkordion-content">
     {% if field.help_text %}
     {{ field.help_text|safe }}
     {% endif %}
     {{ field|add_class:'form-control' }}
     {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+    </div>
   </fieldset>
   {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
+  </div>
+  </section>
+
+  <hr />
+
   <div class="text-right">
     <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Sauvegarder' %}</button>
   </div>
