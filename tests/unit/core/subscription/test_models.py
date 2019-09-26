@@ -82,9 +82,9 @@ class TestUserSubscriptions:
 class TestInstitutionReferer:
 
     def _subscribe_referer(self, referer=None):
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
+        subscription = JournalAccessSubscriptionFactory(post__valid=True)
         institution_referer = InstitutionRefererFactory(
-            subscription=valid_period.subscription,
+            subscription=subscription,
             referer=referer
         )
         return institution_referer

@@ -718,6 +718,7 @@ class TestGoogleScholarSubscribersView:
             pk=1,
             post__ip_start='0.0.0.0',
             post__ip_end='255.255.255.255',
+            post__valid=True,
             organisation__name='foo',
             organisation__google_scholar_opt_out=google_scholar_opt_out,
         )

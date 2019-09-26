@@ -44,6 +44,9 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
 
         if kwargs.get('valid', False):
             ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
+            journal = JournalFactory()
+            obj.journals.add(journal)
+            obj.save()
         if kwargs.get('referers', None):
             for referer in kwargs.get('referers'):
                 InstitutionRefererFactory(

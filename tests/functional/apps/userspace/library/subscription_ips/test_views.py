@@ -65,7 +65,7 @@ class TestInstitutionIPAddressRangeCreateView(TestCase):
         self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
-        self.subscription = JournalAccessSubscriptionFactory.create(valid=True, organisation=self.organisation)
+        self.subscription = JournalAccessSubscriptionFactory.create(post__valid=True, organisation=self.organisation)
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_subscriptions_ips(self):
         # Setup

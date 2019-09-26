@@ -25,11 +25,14 @@ class TestSubscriptionMiddleware:
         now_dt = dt.datetime.now()
         organisation = OrganisationFactory.create()
         subscription = JournalAccessSubscriptionFactory(
-            organisation=organisation)
+            organisation=organisation,
+            post__valid=True
+        )
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8)
+        )
         InstitutionIPAddressRangeFactory.create(
             subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
