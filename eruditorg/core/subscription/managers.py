@@ -83,6 +83,7 @@ class JournalAccessSubscriptionValidManager(models.Manager):
         """
         institutional = Q(
             organisation__isnull=False,
+            journals__isnull=False,
         )
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
         return qs.filter(institutional).prefetch_related('journals')
