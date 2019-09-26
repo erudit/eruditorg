@@ -1001,6 +1001,10 @@
     <br/>
   </xsl:template>
 
+  <xsl:template match="bloc" mode="poeme">
+    <div class="bloc"><xsl:apply-templates mode="poeme"/></div>
+  </xsl:template>
+
   <xsl:template match="bloc/ligne" mode="poeme">
     <p class="ligne"><xsl:apply-templates/></p>
   </xsl:template>

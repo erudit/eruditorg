@@ -1505,12 +1505,12 @@ class TestArticleDetailView:
         dom = BeautifulSoup(html, 'html.parser')
         poeme = dom.find('blockquote', {'class': 'verbatim poeme'})
         # Check that poems lines are displayed in <p>.
-        assert poeme.decode() == '<blockquote class="verbatim poeme">\n<p class="ligne">Jour de ' \
-                                 'larme, </p>\n<p class="ligne">jour où les coupables se ' \
-                                 'réveilleront</p>\n<p class="ligne">pour entendre leur jugement,' \
-                                 '</p>\n<p class="ligne">alors, ô Dieu, pardonne-leur et leur ' \
-                                 'donne le repos.</p>\n<p class="ligne">Jésus, accorde-leur le ' \
-                                 'repos.</p>\n</blockquote>'
+        assert poeme.decode() == '<blockquote class="verbatim poeme">\n<div class="bloc">\n<p ' \
+                                 'class="ligne">Jour de larme, </p>\n<p class="ligne">jour où ' \
+                                 'les coupables se réveilleront</p>\n<p class="ligne">pour ' \
+                                 'entendre leur jugement,</p>\n<p class="ligne">alors, ô Dieu, ' \
+                                 'pardonne-leur et leur donne le repos.</p>\n<p class="ligne">' \
+                                 'Jésus, accorde-leur le repos.</p>\n</div>\n</blockquote>'
 
     def test_grfigure_caption_position(self):
         article = ArticleFactory(
