@@ -39,85 +39,85 @@
 
   {% with field_template="userspace/journal/information/partials/info_single_field.html" %}
   <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Informations générales" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
-  <div class="akkordion-content">
-  <fieldset>
-    <legend>{% trans "Coordonnées" %}</legend>
-    <div class="row">
-      <p class="col-sm-9">
-        {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
-      </p>
-      {% include field_template with field=form.organisation_name only %}
-      {% include field_template with field=form.phone type="tel" autocomplete="tel" only %}
-      {% include field_template with field=form.email type="email" autocomplete="email" only %}
-      {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
+    <h2 class="akkordion-title">{% trans "Informations générales" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <div class="akkordion-content">
+      <fieldset>
+        <legend>{% trans "Coordonnées" %}</legend>
+        <div class="row">
+          <p class="col-sm-9">
+            {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
+          </p>
+          {% include field_template with field=form.organisation_name only %}
+          {% include field_template with field=form.phone type="tel" autocomplete="tel" only %}
+          {% include field_template with field=form.email type="email" autocomplete="email" only %}
+          {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
+        </div>
+      </fieldset>
+      <hr/>
+      <fieldset>
+        <legend>{% trans "Liens" %}</legend>
+        <div class="row">
+          <p class="col-sm-9">
+            {% blocktrans %}
+            Les informations saisies seront disponibles publiquement, dans la page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.
+            {% endblocktrans %}
+          </p>
+          {% include field_template with field=form.facebook_url type="url" autocomplete="url" icon="ion-social-facebook" only %}
+          {% include field_template with field=form.twitter_url type="url" autocomplete="url" icon="ion-social-twitter" only %}
+          {% include field_template with field=form.website_url type="url" autocomplete="url" icon="ion-ios-world-outline" only %}
+        </div>
+      </fieldset>
     </div>
-  </fieldset>
-  <hr/>
-  <fieldset>
-    <legend>{% trans "Liens" %}</legend>
-    <div class="row">
-      <p class="col-sm-9">
-        {% blocktrans %}
-        Les informations saisies seront disponibles publiquement, dans la page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.
-        {% endblocktrans %}
-      </p>
-      {% include field_template with field=form.facebook_url type="url" autocomplete="url" icon="ion-social-facebook" only %}
-      {% include field_template with field=form.twitter_url type="url" autocomplete="url" icon="ion-social-twitter" only %}
-      {% include field_template with field=form.website_url type="url" autocomplete="url" icon="ion-ios-world-outline" only %}
-    </div>
-  </fieldset>
-  </div>
   </section>
 
   <hr />
 
   <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Gestion de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
-  <div class="akkordion-content">
-  <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
-    {{ formset.management_form }}
-    <legend>{% trans "Rôles de direction et de rédaction" %}</legend>
-    <div class="row">
-      <p class="col-sm-9">
-        {% blocktrans %}
-        Mettez à jour les contributeurs principaux et personnes responsables de la direction et de la rédaction de la revue. Vous pouvez saisir un rôle ou un titre pour chaque personne, par exemple&nbsp;: <em>Rédactrice en chef</em>, <em>Coordonnatrice à la rédaction</em>, <em>Coordonnateur éditorial</em>, <em>Directeur adjoint</em>.
-        {% endblocktrans %}
-      </p>
+    <h2 class="akkordion-title">{% trans "Gestion de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <div class="akkordion-content">
+      <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
+        {{ formset.management_form }}
+        <legend>{% trans "Rôles de direction et de rédaction" %}</legend>
+        <div class="row">
+          <p class="col-sm-9">
+            {% blocktrans %}
+            Mettez à jour les contributeurs principaux et personnes responsables de la direction et de la rédaction de la revue. Vous pouvez saisir un rôle ou un titre pour chaque personne, par exemple&nbsp;: <em>Rédactrice en chef</em>, <em>Coordonnatrice à la rédaction</em>, <em>Coordonnateur éditorial</em>, <em>Directeur adjoint</em>.
+            {% endblocktrans %}
+          </p>
+        </div>
+        {% for line in formset %}
+        <div class="row" class="contributor" id="contributor-{{ forloop.counter0 }}" data-object="{{ forloop.counter0 }}">
+          {{ line.id }}
+          {{ line.journal_information }}
+          {% include field_template with field=line.type col_xs=12 col_sm=12 col_md=3 only %}
+          {% include field_template with field=line.name col_xs=5 col_sm=4 col_md=4 only %}
+          {% include field_template with field=line.role col_xs=5 col_sm=4 col_md=4 only %}
+          <div class="col-xs-2 col-sm-4 col-md-1 form-group">
+            <button type="button" data-object="{{ forloop.counter0 }}" data-action="delete">
+              <i class="icon ion-ios-close" style="font-size: 40px; line-height: 110px;"></i>
+            </button>
+          </div>
+        </div>
+        {% endfor %}
+        <button type="button" class="btn btn-secondary" id="button-add-contributor">{% trans "Ajouter un contributeur" %}</button>
+      </fieldset>
+      <hr/>
+      <fieldset>
+        <legend>{% trans "Administration et légal" %}</legend>
+        <div class="row">
+          <p class="col-sm-9">
+            {% blocktrans %}
+            Saisissez ici les informations liées à l’administration, l’aspect légal et le processus de publication de votre revue.
+            {% endblocktrans %}
+          </p>
+          {% include field_template with select_field=form.peer_review_process  col_xs=12 col_sm=6 col_md=6 only %}
+          {% include field_template with select_field=form.languages col_xs=12 col_sm=6 col_md=6 only %}
+        </div>
+        <div class="row">
+          {% include field_template with field=form.frequency col_xs=12 col_sm=6 col_md=6 only %}
+        </div>
+      </fieldset>
     </div>
-    {% for line in formset %}
-    <div class="row" class="contributor" id="contributor-{{ forloop.counter0 }}" data-object="{{ forloop.counter0 }}">
-      {{ line.id }}
-      {{ line.journal_information }}
-      {% include field_template with field=line.type col_xs=12 col_sm=12 col_md=3 only %}
-      {% include field_template with field=line.name col_xs=5 col_sm=4 col_md=4 only %}
-      {% include field_template with field=line.role col_xs=5 col_sm=4 col_md=4 only %}
-      <div class="col-xs-2 col-sm-4 col-md-1 form-group">
-        <button type="button" data-object="{{ forloop.counter0 }}" data-action="delete">
-          <i class="icon ion-ios-close" style="font-size: 40px; line-height: 110px;"></i>
-        </button>
-      </div>
-    </div>
-    {% endfor %}
-    <button type="button" class="btn btn-secondary" id="button-add-contributor">{% trans "Ajouter un contributeur" %}</button>
-  </fieldset>
-  <hr/>
-  <fieldset>
-    <legend>{% trans "Administration et légal" %}</legend>
-    <div class="row">
-      <p class="col-sm-9">
-        {% blocktrans %}
-        Saisissez ici les informations liées à l’administration, l’aspect légal et le processus de publication de votre revue.
-        {% endblocktrans %}
-      </p>
-      {% include field_template with select_field=form.peer_review_process  col_xs=12 col_sm=6 col_md=6 only %}
-      {% include field_template with select_field=form.languages col_xs=12 col_sm=6 col_md=6 only %}
-    </div>
-    <div class="row">
-      {% include field_template with field=form.frequency col_xs=12 col_sm=6 col_md=6 only %}
-    </div>
-  </fieldset>
-  </div>
   </section>
 
   {% endwith %}
@@ -125,34 +125,34 @@
   <hr />
 
   <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "À propos de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
-  <div class="akkordion-content">
-  <ul class="tabs">
-    {% for langcode, langname in LANGUAGES %}
-    <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
-      <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ langcode }}">{{ langname }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-
-  <p>{% trans "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:" %}</p>
-
-  <hr>
-
-  {% for field in form.get_textbox_fields %}
-  <fieldset id="{{ field.html_name }}" class="akkordion {% if field.errors %}has-error"{% endif %} data-akkordion-single="true">
-    <h3 class="akkordion-title">{{ field.label }}<i class="icon ion-ios-arrow-down caret"></i></h3>
+    <h2 class="akkordion-title">{% trans "À propos de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
     <div class="akkordion-content">
-    {% if field.help_text %}
-    {{ field.help_text|safe }}
-    {% endif %}
-    {{ field|add_class:'form-control' }}
-    {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      <ul class="tabs">
+        {% for langcode, langname in LANGUAGES %}
+        <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
+          <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ langcode }}">{{ langname }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <p>{% trans "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:" %}</p>
+
+      <hr>
+
+      {% for field in form.get_textbox_fields %}
+      <fieldset id="{{ field.html_name }}" class="akkordion {% if field.errors %}has-error"{% endif %} data-akkordion-single="true">
+        <h3 class="akkordion-title">{{ field.label }}<i class="icon ion-ios-arrow-down caret"></i></h3>
+        <div class="akkordion-content">
+          {% if field.help_text %}
+          {{ field.help_text|safe }}
+          {% endif %}
+          {{ field|add_class:'form-control' }}
+          {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+      </fieldset>
+      {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
     </div>
-  </fieldset>
-  {% if not forloop.last %}<hr>{% endif %}
-  {% endfor %}
-  </div>
   </section>
 
   <hr />
