@@ -81,12 +81,9 @@ class JournalAccessSubscriptionValidManager(models.Manager):
 
         To be valid, an institutional subscription needs a valid JournalAccessSubscriptionPeriod.
         """
-        institutional = Q(
-            organisation__isnull=False,
-            journals__isnull=False,
-        )
+        institutional = Q(organisation__isnull=True) | Q(journals__isnull=True)
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
-        return qs.filter(institutional).prefetch_related('journals')
+        return qs.exclude(institutional).prefetch_related('journals')
 
     def individual(self):
         """ Returns all the valid individual JournalAccessSubscription instances.
