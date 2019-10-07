@@ -11,6 +11,7 @@ from typing import (
 from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import ugettext as _
+from django.core.cache import caches
 import pysolr
 
 from core.solrq.query import solr_escape
@@ -19,6 +20,8 @@ from erudit.templatetags.model_formatters import person_list
 
 # This is the object that will be used to query the Solr index.
 client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
+
+cache = caches['default']
 
 
 LANGUAGE_LABELS = {
@@ -319,23 +322,26 @@ class SolrData:
         return [Article(doc) for doc in all_docs]
 
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
-        params = {
-            'fq': [
-                'Corpus_fac:(Article OR Culturel)',
-                'Fonds_fac:(Érudit OR UNB OR Persée)',
-            ],
-            'facet.field': [
-                'Discipline_fac',
-                'Langue',
-                'RevueID',
-                'TitreCollection_fac',
-            ],
-            # Facet pivot is used to group journal IDs with corresponding journals names.
-            'facet.pivot': 'RevueID,TitreCollection_fac',
-            'facet.limit': '-1',
-            'rows': '0',
-        }
-        results = self.client.search('*:*', **params)
+        results = cache.get('advanced_search_form_solr_facets')
+        if results is None:
+            params = {
+                'fq': [
+                    'Corpus_fac:(Article OR Culturel)',
+                    'Fonds_fac:(Érudit OR UNB OR Persée)',
+                ],
+                'facet.field': [
+                    'Discipline_fac',
+                    'Langue',
+                    'RevueID',
+                    'TitreCollection_fac',
+                ],
+                # Facet pivot is used to group journal IDs with corresponding journals names.
+                'facet.pivot': 'RevueID,TitreCollection_fac',
+                'facet.limit': '-1',
+                'rows': '0',
+            }
+            results = self.client.search('*:*', **params)
+            cache.set('advanced_search_form_solr_facets', results)
         disciplines = results.facets['facet_fields']['Discipline_fac'][::2]
         languages = results.facets['facet_fields']['Langue'][::2]
         journals = results.facets['facet_pivot']['RevueID,TitreCollection_fac']
