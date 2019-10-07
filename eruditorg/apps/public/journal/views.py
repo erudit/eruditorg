@@ -33,6 +33,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
+from django.db.models import Prefetch
 
 from rules.contrib.views import PermissionRequiredMixin
 import pikepdf
@@ -54,7 +55,7 @@ from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
 from core.metrics.metric import metric
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.models import JournalAccessSubscription, InstitutionIPAddressRange
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
 from .forms import JournalListFilterForm
@@ -1050,13 +1051,20 @@ class GoogleScholarSubscribersView(TemplateView):
         context['subscribers'] = {}
         subscriptions = JournalAccessSubscription.valid_objects.institutional().exclude(
             organisation__google_scholar_opt_out=True,
+        ).prefetch_related(
+            'organisation',
+            Prefetch(
+                'institutionipaddressrange_set',
+                queryset=InstitutionIPAddressRange.objects.order_by('ip_start'),
+                to_attr='ip_ranges',
+            ),
         )
         for subscription in subscriptions:
             context['subscribers'][subscription.id] = {
                 'institution': subscription.organisation.name,
                 'ip_ranges': [
                     [ip_range.ip_start, ip_range.ip_end] for ip_range in
-                    subscription.institutionipaddressrange_set.order_by('ip_start').all()
+                    subscription.ip_ranges
                 ],
             }
         return context
