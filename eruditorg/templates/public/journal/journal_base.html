@@ -75,7 +75,7 @@
                 <label for="journal-search">{% trans "Rechercher dans la revue" %}</label>
                 <div class="input-group">
                   <input type="search" class="form-control" name="basic_search_term" id="journal-search" placeholder="{% trans "Recherchez par mot-clé…" %}">
-                  <input type="hidden" name="journals" value="{{ journal.name }}">
+                  <input type="hidden" name="journals" value="{{ journal.solr_code }}">
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-secondary">
                       <span class="sr-only">{% trans 'Rechercher' %}</span>

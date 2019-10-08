@@ -245,7 +245,7 @@ class SolrFilter:
 
         # Applies the journals filter
         if journals:
-            sqs = self._filter_solr_multiple(sqs, 'RevueID', journals, safe=True)
+            sqs = self._filter_solr_multiple(sqs, 'RevueAbr', journals, safe=True)
 
         # STEP 3: applies the results filters
         # --
