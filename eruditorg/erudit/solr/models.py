@@ -332,11 +332,11 @@ class SolrData:
                 'facet.field': [
                     'Discipline_fac',
                     'Langue',
-                    'RevueID',
+                    'RevueAbr',
                     'TitreCollection_fac',
                 ],
                 # Facet pivot is used to group journal IDs with corresponding journals names.
-                'facet.pivot': 'RevueID,TitreCollection_fac',
+                'facet.pivot': 'RevueAbr,TitreCollection_fac',
                 'facet.limit': '-1',
                 'rows': '0',
             }
@@ -344,7 +344,7 @@ class SolrData:
             cache.set('advanced_search_form_solr_facets', results)
         disciplines = results.facets['facet_fields']['Discipline_fac'][::2]
         languages = results.facets['facet_fields']['Langue'][::2]
-        journals = results.facets['facet_pivot']['RevueID,TitreCollection_fac']
+        journals = results.facets['facet_pivot']['RevueAbr,TitreCollection_fac']
         return {
             'disciplines': [(d, d) for d in disciplines if d],
             # List of tuples of language codes and language labels.

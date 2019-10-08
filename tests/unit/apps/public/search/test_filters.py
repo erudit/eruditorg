@@ -208,7 +208,7 @@ class TestEruditDocumentSolrFilter(TestCase):
 
         self.assertEqual(
             filt_1.sqs._fq,
-            '((RevueID:"Arborescences"))')
+            '((RevueAbr:"Arborescences"))')
 
         self.assertEqual(
             filt_2.sqs._q,
