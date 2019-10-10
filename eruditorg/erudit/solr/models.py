@@ -341,7 +341,7 @@ class SolrData:
                 'rows': '0',
             }
             results = self.client.search('*:*', **params)
-            cache.set('advanced_search_form_solr_facets', results)
+            cache.set('advanced_search_form_solr_facets', results, settings.LONG_TTL)
         disciplines = results.facets['facet_fields']['Discipline_fac'][::2]
         languages = results.facets['facet_fields']['Langue'][::2]
         journals = results.facets['facet_pivot']['RevueAbr,TitreCollection_fac']
