@@ -993,6 +993,35 @@ class TestArticleDetailView:
         # Minimal treatment articles should not display PDF first page when displaying references.
         assert html.count('<object id="pdf-viewer"') == display_pdf_first_page
 
+    @pytest.mark.parametrize('publication_allowed', (
+        True,
+        False,
+    ))
+    @pytest.mark.parametrize('url_name', (
+        ('public:journal:article_summary'),
+        ('public:journal:article_detail'),
+    ))
+    def test_publication_allowed_text_display(self, url_name, publication_allowed):
+        article = ArticleFactory(
+            publication_allowed=publication_allowed,
+            issue__journal__open_access=True,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        div = dom.find('div', {'class': 'full-article'})
+        if publication_allowed:
+            assert 'In October 1800 the poet, travel-writer and polemicist Robert Southey was in ' \
+                   'Portugal.' in div.decode()
+        else:
+            assert 'In October 1800 the poet, travel-writer and polemicist Robert Southey was in ' \
+                   'Portugal.' not in div.decode()
+
     def test_article_detail_marquage_in_toc_nav(self):
         issue = IssueFactory(
             journal__code='journal',

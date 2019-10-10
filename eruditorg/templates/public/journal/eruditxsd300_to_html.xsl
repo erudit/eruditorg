@@ -241,7 +241,7 @@
               </li>
             </xsl:if>
             {% endif %}
-            {% if article.processing == 'M' and article.localidentifier %}
+            {% if article.processing == 'M' and article.localidentifier and article.publication_allowed %}
             <li>
               <a href="#pdf-viewer" id="pdf-viewer-menu-link">{% trans 'Texte intégral (PDF)' %}</a>
               <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" id="pdf-download-menu-link" target="_blank">{% trans 'Texte intégral (PDF)' %}</a>
@@ -405,7 +405,9 @@
         </xsl:if>
         {% endif %}
 
-        {% if content_access_granted and not only_display and article.publication_allowed %}
+        {% if not article.publication_allowed %}
+          {# Do nothong. #}
+        {% elif content_access_granted and not only_display %}
           {% if article.processing == 'C' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
