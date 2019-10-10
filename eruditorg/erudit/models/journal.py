@@ -596,6 +596,31 @@ class Issue(FedoraMixin, FedoraDated):
             except Article.DoesNotExist:
                 pass
 
+    def get_previous_and_next_articles(self, current_article_localidentifier):
+        articles = {
+            'previous_article': None,
+            'next_article': None,
+        }
+        summary_tree = et.fromstring(self.fedora_object.xml_content)
+        current_article = summary_tree.find(
+            f'article[@idproprio="{current_article_localidentifier}"]'
+        )
+        if current_article is None:
+            return articles
+        articles['previous_article'] = current_article.getprevious()
+        articles['next_article'] = current_article.getnext()
+        for key, article in articles.items():
+            if article is None or article.tag != "article":
+                articles[key] = None
+                continue
+            try:
+                articles[key] = Article.from_issue_and_localidentifier(
+                    self, article.get('idproprio')
+                )
+            except Article.DoesNotExist:
+                articles[key] = None
+        return articles
+
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """

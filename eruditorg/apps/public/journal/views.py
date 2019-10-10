@@ -690,26 +690,9 @@ class BaseArticleDetailView(
         # Get all article from associated Issue
         current_article = context.get(self.context_object_name)
         issue = current_article.issue
-        issue_articles = list(issue.get_articles_from_fedora())
 
         # Pick the previous article and the next article
-        try:
-            if current_article in issue_articles:
-                obj_index = issue_articles.index(current_article)
-            else:
-                obj_index = len(issue_articles)
-            previous_article = issue_articles[obj_index - 1] if obj_index > 0 else None
-            next_article = issue_articles[obj_index + 1] \
-                if obj_index + 1 < len(issue_articles) \
-                else None
-        # TODO: explain why we catch AttributeError and raise only if not DEBUG
-        except AttributeError:  # pragma: no cover
-            # Passes the error if we are in DEBUG mode
-            if not settings.DEBUG:
-                raise
-        else:
-            context['previous_article'] = previous_article
-            context['next_article'] = next_article
+        context.update(issue.get_previous_and_next_articles(current_article.localidentifier))
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
