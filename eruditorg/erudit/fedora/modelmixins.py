@@ -70,7 +70,7 @@ class FedoraMixin:
             self._fedora_object = self.fedora_model(api, self.pid)
         return self._fedora_object
 
-    @property
+    @cached_property
     def fedora_object(self):
         return self.get_fedora_object()
 
@@ -138,7 +138,7 @@ class FedoraMixin:
         except RequestFailed:
             return False
 
-    @property
+    @cached_property
     def erudit_object(self):
         if not self.fedora_is_loaded():
             self._erudit_object = self.get_erudit_object()
