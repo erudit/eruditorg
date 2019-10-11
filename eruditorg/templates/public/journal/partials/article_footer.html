@@ -1,10 +1,11 @@
 {% load i18n public_journal_tags %}
 
-{% if related_articles %}
+{% with articles=related_articles %}
+{% if articles %}
 <footer class="container">
   <h2>{% trans "Autres articles de cette revue" %}</h2>
   <div class="row">
-    {% for related_article in related_articles %}
+    {% for related_article in articles %}
     <article class="col-sm-6 col-md-3">
       <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}" class="card">
         <h3 class="card__title">{{ related_article|format_article_html_title }}</h3>
@@ -20,3 +21,4 @@
 
 </footer>
 {% endif %}
+{% endwith %}
