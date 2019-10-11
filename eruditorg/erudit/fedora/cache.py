@@ -2,12 +2,10 @@
 
 import random
 
-from django.core.cache import caches
+from django.core.cache import caches, cache
 
 from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
-
-cache = caches['default']
 
 
 def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT):

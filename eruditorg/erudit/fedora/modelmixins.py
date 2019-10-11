@@ -1,7 +1,7 @@
 import structlog
 
 from django.conf import settings
-from django.core.cache import caches
+from django.core.cache import cache
 from django.utils.functional import cached_property
 
 from sentry_sdk import configure_scope
@@ -12,7 +12,6 @@ from ..conf import settings as erudit_settings
 from .repository import api
 
 logger = structlog.getLogger(__name__)
-cache = caches['default']
 
 
 class FedoraMixin:
