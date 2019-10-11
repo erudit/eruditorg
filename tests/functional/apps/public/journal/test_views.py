@@ -584,6 +584,26 @@ class TestIssueDetailView:
         response = Client().get(url)
         assert response.status_code == 301
 
+    @pytest.mark.parametrize('publication_allowed', (True, False))
+    def test_publication_allowed_article(self, publication_allowed):
+        issue = IssueFactory(journal__open_access=True)
+        article = ArticleFactory(issue=issue, publication_allowed=publication_allowed)
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'localidentifier': issue.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        toolbox = dom.find('ul', {'class': 'toolbox'})
+        summary_link = dom.find('p', {'class': 'bib-record__record-link'})
+        if publication_allowed:
+            assert toolbox
+            assert summary_link
+        else:
+            assert not toolbox
+            assert not summary_link
+
 
 class TestArticleDetailView:
 
@@ -993,11 +1013,9 @@ class TestArticleDetailView:
         # Minimal treatment articles should not display PDF first page when displaying references.
         assert html.count('<object id="pdf-viewer"') == display_pdf_first_page
 
-    @pytest.mark.parametrize('publication_allowed', (
-        True,
-        False,
-    ))
+    @pytest.mark.parametrize('publication_allowed', (True, False))
     @pytest.mark.parametrize('url_name', (
+        ('public:journal:article_biblio'),
         ('public:journal:article_summary'),
         ('public:journal:article_detail'),
     ))
@@ -1014,13 +1032,20 @@ class TestArticleDetailView:
         })
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
-        div = dom.find('div', {'class': 'full-article'})
         if publication_allowed:
-            assert 'In October 1800 the poet, travel-writer and polemicist Robert Southey was in ' \
-                   'Portugal.' in div.decode()
+            assert 'Plan de l’article' in dom.decode()
+            assert 'Boîte à outils' in dom.decode()
+            if url_name != 'public:journal:article_detail':
+                assert 'Lire le texte intégral' in dom.decode()
+            if url_name != 'public:journal:article_biblio':
+                assert 'In October 1800 the poet, travel-writer and polemicist Robert Southey ' \
+                       'was in Portugal.' in dom.decode()
         else:
+            assert 'Plan de l’article' not in dom.decode()
+            assert 'Boîte à outils' not in dom.decode()
+            assert 'Lire le texte intégral' not in dom.decode()
             assert 'In October 1800 the poet, travel-writer and polemicist Robert Southey was in ' \
-                   'Portugal.' not in div.decode()
+                   'Portugal.' not in dom.decode()
 
     def test_article_detail_marquage_in_toc_nav(self):
         issue = IssueFactory(
