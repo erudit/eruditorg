@@ -141,7 +141,7 @@
             </div>
             {% endif %}
           </a>
-          {% if only_display %}
+          {% if only_display and article.publication_allowed %}
           <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
         </div>
@@ -219,6 +219,7 @@
 
       <xsl:if test="//corps">
         <!-- article outline -->
+        {% if article.publication_allowed %}
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
@@ -324,8 +325,10 @@
           {% include "public/partials/subscription_sponsor_badge.html" %}
           {% endnocache %}
         </nav>
+        {% endif %}
 
         <!-- toolbox -->
+        {% if article.publication_allowed %}
         <aside class="pull-right toolbox-wrapper">
           <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
           {% spaceless %}
@@ -374,8 +377,10 @@
           </ul>
           {% endspaceless %}
         </aside>
+        {% endif %}
       </xsl:if>
 
+      {% if article.publication_allowed %}
       <div class="full-article {% if article.processing == 'C' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
         {% if only_display != 'biblio' %}
         <!-- abstracts & keywords -->
@@ -405,9 +410,7 @@
         </xsl:if>
         {% endif %}
 
-        {% if not article.publication_allowed %}
-          {# Do nothong. #}
-        {% elif content_access_granted and not only_display %}
+        {% if content_access_granted and not only_display %}
           {% if article.processing == 'C' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
@@ -462,6 +465,7 @@
         {% endif %}
 
       </div>
+      {% endif %}
     </div>
 
   </xsl:template>

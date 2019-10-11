@@ -1,11 +1,12 @@
 {% load i18n model_formatters public_journal_tags waffle_tags %}
 
 <li class="bib-record{% if not article.publication_allowed %} article-restricted{% endif %}">
+  {% if article.publication_allowed %}
   <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
     {% spaceless %}
+    {% switch "maintenance" %}
+    {% else %}
     <li>
-      {% switch "maintenance" %}
-      {% else %}
       <a class="tool-btn" href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.localidentifier }}">
         <i class="icon ion-ios-bookmark toolbox-save"></i>
       </a>
@@ -24,7 +25,7 @@
       </a>
     </li>
     {% endif %}
-    {% if article.processing == 'C' and article.publication_allowed %}
+    {% if article.processing == 'C' %}
     <li>
       <a class="tool-btn" href="{{ article.get_absolute_url }}{% if ticket %}?ticket={{ticket}}{% endif %}" {% if article.is_external %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
         <span class="toolbox-html">HTML</span>
@@ -33,6 +34,7 @@
     {% endif %}
     {% endspaceless %}
   </ul>
+  {% endif %}
   <h6 class="bib-record__title">
     {% if not article.publication_allowed %}
     <span class="hint--top-right hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}">
@@ -60,13 +62,13 @@
       {% endif %}
       {% endwith %}
     </p>
+    {% if issue.journal.collection.code == 'erudit' and article.publication_allowed %}
     <p class="bib-record__record-link col-sm-3 pull-right">
-      {% if issue.journal.collection.code == 'erudit' %}
       <a href="{% url 'public:journal:article_summary' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}" title="{% blocktrans %}Voir la notice{% endblocktrans %}">
         {% trans "Notice" %}
       </a>
-      {% endif %}
     </p>
+    {% endif %}
     {% if article.html_abstracts %}
     <div class="bib-record__abstract col-xs-9">
       <div class="affiliations akkordion" data-akkordion-single="true">
