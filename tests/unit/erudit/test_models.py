@@ -459,6 +459,24 @@ class TestIssue:
         )
         assert issue.licenses == expected_licenses
 
+    def test_get_previous_and_next_articles(self):
+        issue = IssueFactory()
+        article_1 = ArticleFactory(issue=issue)
+        article_2 = ArticleFactory(issue=issue)
+        article_3 = ArticleFactory(issue=issue)
+        assert issue.get_previous_and_next_articles(article_1.localidentifier) == {
+            'previous_article': None,
+            'next_article': article_2,
+        }
+        assert issue.get_previous_and_next_articles(article_2.localidentifier) == {
+            'previous_article': article_1,
+            'next_article': article_3,
+        }
+        assert issue.get_previous_and_next_articles(article_3.localidentifier) == {
+            'previous_article': article_2,
+            'next_article': None,
+        }
+
 
 class TestArticle:
     def test_properties(self):
