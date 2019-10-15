@@ -25,7 +25,6 @@ from apps.public.journal.views import (
     GoogleScholarSubscriberJournalsView,
     JournalStatisticsView,
     IssueReaderView,
-    pick_related_article_candidates,
 )
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 
@@ -763,11 +762,3 @@ class TestJournalStatisticsView:
             is_superuser=is_superuser,
         )
         assert view.has_permission() == has_permission
-
-
-def test_pick_related_article_candidates():
-    current_article = ArticleFactory(type='article')
-    issue_articles = [current_article, ArticleFactory(type='article'),
-                      ArticleFactory(type='compterendu')]
-    candidates = pick_related_article_candidates(current_article, issue_articles)
-    assert candidates == [issue_articles[1]]

@@ -1625,47 +1625,44 @@ class TestArticleDetailView:
                                  'musicale,           1935</span></em>)</a></li>'
 
     def test_related_articles(self, monkeypatch):
-        # Mock return value for get_all_journal_articles().
-        all_journal_articles = [
-            # 5 articles from which we will choose 4 randomly.
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article1'}),
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article2'}),
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article3'}),
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article4'}),
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'article5'}),
-            # The current article. Should not appear in related articles.
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'issue', 'ID': 'current_article'}),
-            # An article from an issue that is not in Fedora. Should not appear in related articles.
-            SolrArticle({'RevueID': 'journal', 'NumeroID': 'not_in_fedora', 'ID': 'not_in_fedora'}),
-        ]
-        # Patch get_all_journal_articles() so it returns our mocked return value.
+        journal = JournalFactory()
+        article_1 = ArticleFactory(issue__journal=journal)
+        article_2 = ArticleFactory(issue__journal=journal)
+        article_3 = ArticleFactory(issue__journal=journal)
+        article_4 = ArticleFactory(issue__journal=journal)
+        # Mock return value for get_journal_related_articles().
+        journal_related_articles = []
+        for article in [article_1, article_2, article_3, article_4]:
+            journal_related_articles.append(SolrArticle({
+                'RevueID': article.issue.journal.localidentifier,
+                'NumeroID': article.issue.localidentifier,
+                'ID': article.localidentifier,
+            }))
+        # Simulate a Solr result with an issue that is not in Fedora.
+        journal_related_articles.append(SolrArticle({
+            'RevueID': journal.localidentifier,
+            'NumeroID': 'not_in_fedora',
+            'ID': 'not_in_fedora',
+        }))
+        # Patch get_journal_related_articles() so it returns our mocked return value.
         monkeypatch.setattr(
             FakeSolrData,
-            'get_all_journal_articles',
+            'get_journal_related_articles',
             unittest.mock.Mock(
-                return_value=all_journal_articles,
+                return_value=journal_related_articles,
             ),
         )
-        # Create an issue.
-        issue = IssueFactory(
-            journal__localidentifier='journal',
-            journal__code='journal',
-            localidentifier='issue',
-            year='2019',
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(
+            issue__journal=journal,
+            localidentifier='current_article',
         )
-        # Create all articles from all_journal_articles that have the same issue ID as our issue.
-        for article in all_journal_articles:
-            if article.solr_data['NumeroID'] == issue.localidentifier:
-                ArticleFactory(
-                    issue=issue,
-                    localidentifier=article.localidentifier,
-                )
         # Get the response.
         url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': 'journal',
-            'issue_slug': '2019',
-            'issue_localid': 'issue',
-            'localid': 'current_article',
+            'journal_code': current_article.issue.journal.code,
+            'issue_slug': current_article.issue.volume_slug,
+            'issue_localid': current_article.issue.localidentifier,
+            'localid': current_article.localidentifier,
         })
         html = Client().get(url).content
         # Get the HTML.

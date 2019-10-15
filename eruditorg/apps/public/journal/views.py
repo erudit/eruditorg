@@ -3,10 +3,7 @@ from itertools import groupby
 from operator import attrgetter
 from string import ascii_uppercase
 import io
-from typing import (
-    Iterable,
-    List,
-)
+from typing import List
 
 import functools
 import pysolr
@@ -49,7 +46,6 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
-from erudit.solr.models import Article as SolrArticle
 
 from erudit.utils import locale_aware_sort, qs_cache_key
 
@@ -648,19 +644,6 @@ class IssueXmlView(
         return fedora_object.xml_content
 
 
-def pick_related_article_candidates(
-    current_article: Article, all_journal_articles: Iterable[SolrArticle]
-) -> List[SolrArticle]:
-    candidates = []
-    for solr_article in all_journal_articles:
-        if (
-            solr_article.article_type == "article" and
-            solr_article.localidentifier != current_article.localidentifier
-        ):
-            candidates.append(solr_article)
-    return candidates
-
-
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin,
         FallbackObjectViewMixin,
@@ -737,9 +720,10 @@ class BaseArticleDetailView(
 
         return context
 
-    def get_related_articles(self, current_article):
-        articles = self.solr_data.get_all_journal_articles(current_article.issue.journal.code)
-        related_candidates = pick_related_article_candidates(current_article, articles)
+    def get_related_articles(self, current_article: Article) -> List[Article]:
+        related_candidates = self.solr_data.get_journal_related_articles(
+            current_article.issue.journal.code, current_article.localidentifier,
+        )
         # return 4 randomly — at most
         random.shuffle(related_candidates)
         related_articles = []
