@@ -1013,6 +1013,30 @@ class TestArticleDetailView:
         # Minimal treatment articles should not display PDF first page when displaying references.
         assert html.count('<object id="pdf-viewer"') == display_pdf_first_page
 
+    @pytest.mark.parametrize('open_access', (True, False))
+    @pytest.mark.parametrize('url_name', (
+        ('public:journal:article_biblio'),
+        ('public:journal:article_summary'),
+        ('public:journal:article_detail'),
+    ))
+    def test_display_citation_fulltext_world_readable_metatag_only_for_open_access_articles(
+        self, url_name, open_access
+    ):
+        article = ArticleFactory(issue__journal__open_access=open_access)
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # The citation_fulltext_world_readable metatag should only be displayed for open access
+        # articles. Otherwise, some Google Scholar services won't work (eg. CASA).
+        if open_access:
+            assert '<meta name="citation_fulltext_world_readable" content="" />' in html
+        else:
+            assert '<meta name="citation_fulltext_world_readable" content="" />' not in html
+
     @pytest.mark.parametrize('publication_allowed', (True, False))
     @pytest.mark.parametrize('url_name', (
         ('public:journal:article_biblio'),
