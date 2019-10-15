@@ -35,7 +35,7 @@
 
 {% block section_title %}
 {% if object.pk %}
-  {% trans 'Modifier le numéro&nbsp;:' %}<br>
+  {% trans 'Dépôt du numéro&nbsp;:' %}<br>
   {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n<sup>o</sup>" %} {{ object.number }}
 {% else %}
   {% trans "Déposer des fichiers de production" %}
