@@ -11,7 +11,7 @@ from typing import (
 from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import ugettext as _
-from django.core.cache import caches
+from django.core.cache import cache
 import pysolr
 
 from core.solrq.query import solr_escape
@@ -20,8 +20,6 @@ from erudit.templatetags.model_formatters import person_list
 
 # This is the object that will be used to query the Solr index.
 client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
-
-cache = caches['default']
 
 
 LANGUAGE_LABELS = {

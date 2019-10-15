@@ -1,7 +1,7 @@
 import structlog
 
 from django.conf import settings
-from django.core.cache import caches
+from django.core.cache import cache
 from django.utils.functional import cached_property
 
 from sentry_sdk import configure_scope
@@ -12,7 +12,6 @@ from ..conf import settings as erudit_settings
 from .repository import api
 
 logger = structlog.getLogger(__name__)
-cache = caches['default']
 
 
 class FedoraMixin:
@@ -70,7 +69,7 @@ class FedoraMixin:
             self._fedora_object = self.fedora_model(api, self.pid)
         return self._fedora_object
 
-    @property
+    @cached_property
     def fedora_object(self):
         return self.get_fedora_object()
 
@@ -138,7 +137,7 @@ class FedoraMixin:
         except RequestFailed:
             return False
 
-    @property
+    @cached_property
     def erudit_object(self):
         if not self.fedora_is_loaded():
             self._erudit_object = self.get_erudit_object()

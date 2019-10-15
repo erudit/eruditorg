@@ -2,7 +2,7 @@ import datetime as dt
 import structlog
 import re
 
-from django.core.cache import caches
+from django.core.cache import cache
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.encoding import smart_str
@@ -21,7 +21,6 @@ from ...models import Collection
 from ...models import Issue
 from ...models import Journal
 
-cache = caches['default']
 logger = structlog.getLogger(__name__)
 
 

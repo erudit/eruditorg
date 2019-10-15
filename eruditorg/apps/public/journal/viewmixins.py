@@ -172,9 +172,9 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
         article = self.get_object()
         context['citation_title_metadata'] = article.title if article.title \
             else _('[Article sans titre]')
-        context['citation_journal_title_metadata'] = article.get_erudit_object()\
+        context['citation_journal_title_metadata'] = article.erudit_object\
             .get_formatted_journal_title()
-        context['citation_references'] = article.get_erudit_object()\
+        context['citation_references'] = article.erudit_object\
             .get_references(html=False)
         return context
 

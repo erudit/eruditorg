@@ -762,8 +762,7 @@ class BaseArticleDetailView(
         """ Renders the given article instance as HTML. """
 
         article = self.get_object()
-        erudit_object = article.get_erudit_object()
-        context['is_of_type_roc'] = erudit_object.is_of_type_roc
+        context['is_of_type_roc'] = article.erudit_object.is_of_type_roc
         context['only_display'] = only_display
         if 'article' not in context:
             context['article'] = article
@@ -787,7 +786,7 @@ class BaseArticleDetailView(
         # Performs the XSLT transformation
         lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
         html_transform = et.XSLT(lxsl)
-        html_content = html_transform(erudit_object._dom)
+        html_content = html_transform(article.erudit_object._dom)
 
         # Combine unicode characters (like "a") followed by a unicode combining character (like "˘")
         # by the unicode pre-combined version (like ă).
