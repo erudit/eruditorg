@@ -1,9 +1,6 @@
-import functools
 from typing import (
     List,
-    Any,
     Dict,
-    Callable,
     Tuple,
     Optional,
 )
@@ -281,20 +278,6 @@ def get_solr_data_from_id(solr_id):
     return results.docs[0]
 
 
-def get_all_solr_results(
-    search_function: Callable[..., pysolr.Results], page_size: int
-) -> List[Dict[str, Any]]:
-    docs = []
-    current = 0
-    while True:
-        results = search_function(start=current, rows=page_size)
-        if not results.docs:
-            break
-        current += page_size
-        docs.extend(results.docs)
-    return docs
-
-
 class SolrData:
     def __init__(self, solr_client: pysolr.Solr):
         self.client = solr_client
@@ -313,11 +296,20 @@ class SolrData:
         else:
             return None
 
-    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
-        q = f'RevueAbr:"{journal_code}"'
-        search_function = functools.partial(self.client.search, q=q, facet='false')
-        all_docs = get_all_solr_results(search_function, 500)
-        return [Article(doc) for doc in all_docs]
+    def get_journal_related_articles(
+        self, journal_code: str, current_article_localidentifier: str
+    ) -> List[Article]:
+        params = {
+            'fq': [
+                f'RevueAbr:"{journal_code}"',
+                f"-ID:{current_article_localidentifier}",
+                "Corpus_fac:Article",
+            ],
+            'facet': 'false',
+            'rows': 500,
+        }
+        results = self.client.search("*:*", **params)
+        return [Article(doc) for doc in results.docs]
 
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
         results = cache.get('advanced_search_form_solr_facets')

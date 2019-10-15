@@ -319,7 +319,9 @@ class FakeSolrData:
     """
 
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
-    def get_all_journal_articles(self, journal_code: str) -> List[Article]:
+    def get_journal_related_articles(
+        self, journal_code: str, current_article_localidentifier: str
+    ) -> List[Article]:
         return []
 
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
