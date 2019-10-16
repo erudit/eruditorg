@@ -306,12 +306,9 @@
           {% else %}
           {% if article.issue.is_published %}
           <!-- promotional campaign -->
-          <aside class="campaign">
-            <h2 class="sr-only">{% trans 'Érudit célèbre ses 20 ans!' %}</h2>
-            <a href="{% url "public:20_years" %}" target="_blank" class="campaign-sidebar">
-            <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}"></div>
-            </a>
-          </aside>
+          {% nocache %}
+          {% include "public/journal/partials/article_active_campaign.html" %}
+          {% endnocache %}
           {% endif %}
           {% endswitch %}
           {% if content_access_granted and subscription_type == 'individual' %}
