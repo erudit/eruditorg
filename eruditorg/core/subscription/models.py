@@ -222,7 +222,9 @@ class InstitutionIPAddressRange(models.Model):
         JournalAccessSubscription, verbose_name=_('Abonnement aux revues'),
         on_delete=models.CASCADE)
     ip_start = models.GenericIPAddressField(verbose_name=_('Adresse IP de début'))
+    ip_start_int = models.BigIntegerField(db_index=True, verbose_name=_("Adresse IP de début"))
     ip_end = models.GenericIPAddressField(verbose_name=_('Adresse IP de fin'))
+    ip_end_int = models.BigIntegerField(db_index=True, verbose_name=_("Adresse IP de fin"))
 
     class Meta:
         verbose_name = _('Plage d’adresses IP d’institution')
@@ -247,6 +249,11 @@ class InstitutionIPAddressRange(models.Model):
         if start > end:
             raise ValidationError(_(
                 'L’adresse IP de début doit être inférieure à l’adresse IP de fin'))
+
+    def save(self, *args, **kwargs):
+        self.ip_start_int = int(ipaddress.ip_address(self.ip_start))
+        self.ip_end_int = int(ipaddress.ip_address(self.ip_end))
+        return super().save(*args, **kwargs)
 
     @property
     def ip_addresses(self):
