@@ -179,6 +179,7 @@ class IssueSubmissionUpdate(
             'editor.issuesubmission.update',
             old_status=old_status_track.status,
             new_status=self.object.status,
+            comment=self.object.last_status_track.comment,
             url=self.object.get_absolute_url(),
             **self.get_context_info()
         )

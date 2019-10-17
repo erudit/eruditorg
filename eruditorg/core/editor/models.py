@@ -70,7 +70,7 @@ class IssueSubmission(models.Model):
     )
 
     comment = models.TextField(
-        verbose_name=_("Commentaires"),
+        verbose_name=_("Commentaires sur le numéro"),
         blank=True, null=True
     )
 

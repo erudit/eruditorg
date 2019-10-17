@@ -65,7 +65,7 @@
 
 {% block content_main %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-<form class="row form-vertical" method="post">{% csrf_token %}
+<form class="row form-vertical submission-form" method="post">{% csrf_token %}
   {% if form.errors %}
   <div class="row">
     <div class="col-xs-12">
@@ -100,6 +100,8 @@
   {% if object.pk and not object.archived and not object.is_validated %}
   <h2>{% trans "Fichier" %}</h2>
   {{ form.submissions }}
+  <label for="{{ form.file_comment.name }}">{{ form.file_comment.label }}</label>
+  {{ form.file_comment }}
   {% endif %}
 
   <hr>

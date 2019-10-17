@@ -86,6 +86,11 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
             'auto_upload': True,
         },
     )
+    file_comment = forms.CharField(
+        label=_('Commentaires sur le fichier'),
+        required=False,
+        widget=forms.Textarea,
+    )
 
     def __init__(self, *args, **kwargs):
         super(IssueSubmissionUploadForm, self).__init__(*args, **kwargs)
@@ -115,6 +120,11 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
                         pass
                     else:
                         fversion.submissions.add(rfile)
+
+            # Saves the comment associated with the submission
+            status_track = instance.last_status_track
+            status_track.comment = self.cleaned_data.get('file_comment')
+            status_track.save()
 
         return instance
 
