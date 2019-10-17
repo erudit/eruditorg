@@ -2,11 +2,11 @@
 
 import structlog
 import re
+import ipaddress
 
 from urllib.parse import urlparse
 
 from django.db import models
-from django.conf import settings
 from django.db.models import Q
 
 logger = structlog.getLogger(__name__)
@@ -15,30 +15,11 @@ logger = structlog.getLogger(__name__)
 class JournalAccessSubscriptionQueryset(models.QuerySet):
     def get_for_ip_address(self, ip_address):
         """ Return all the subscriptions for the given ip address """
-        from .models import InstitutionIPAddressRange
-        database_engine = settings.DATABASES[self.db]['ENGINE']
-
-        if 'mysql' in database_engine:
-            ip_range = InstitutionIPAddressRange.objects.extra(
-                where={
-                    "inet_aton(ip_start) <= inet_aton('{}') AND inet_aton(ip_end) >= inet_aton('{}')".format(  # noqa
-                        ip_address,
-                        ip_address
-                    )
-                }
-            )
-
-            return self.filter(institutionipaddressrange__in=ip_range).distinct()
-
-        if 'psycopg2' not in database_engine:
-            logger.warning(
-                "db.query",
-                msg="Doing string comparison on IP addresses. The results may not be accurate."
-            )
+        ip_int = int(ipaddress.ip_address(ip_address))
 
         return self.filter(
-            institutionipaddressrange__ip_start__lte=ip_address,
-            institutionipaddressrange__ip_end__gte=ip_address).distinct()
+            institutionipaddressrange__ip_start_int__lte=ip_int,
+            institutionipaddressrange__ip_end_int__gte=ip_int).distinct()
 
     def get_for_referer(self, referer):
         """ Return all the subscriptions for the given referer """
