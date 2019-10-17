@@ -30,6 +30,14 @@ class TestIssueSubmission:
         assert not issue_1.is_submitted
         assert issue_2.is_submitted
 
+    def test_knows_if_it_needs_corrections(self):
+        issue_1 = IssueSubmissionFactory()
+        issue_2 = IssueSubmissionFactory()
+        issue_1.submit()
+        issue_1.refuse()
+        assert issue_1.needs_corrections
+        assert not issue_2.needs_corrections
+
     def test_knows_if_it_is_validated(self):
         issue_1 = IssueSubmissionFactory.create()
         issue_2 = IssueSubmissionFactory.create()

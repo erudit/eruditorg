@@ -30,6 +30,11 @@ class InstitutionIPAddressRangeListView(
         qs = super(InstitutionIPAddressRangeListView, self).get_queryset()
         return qs.filter(subscription__organisation=self.current_organisation).order_by('pk')
 
+    def get_context_data(self, **kwargs):
+        context = super(InstitutionIPAddressRangeListView, self).get_context_data(**kwargs)
+        context['section_aside'] = True
+        return context
+
 
 class InstitutionIPAddressRangeCreateView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin, CreateView):

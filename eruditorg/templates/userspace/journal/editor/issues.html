@@ -16,7 +16,13 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Cet espace vous permet d’envoyer vos fichiers de production et de vérifier leur statut&nbsp;: <em>non soumis</em>, <em>en attente de validation</em>, <em>à corriger</em> ou <em>validé et publié</em>.</p>
+<p>Cet espace vous permet d’envoyer vos fichiers de production et de vérifier leur statut&nbsp;:</p>
+<ul class="unstyled">
+  <li><span class="status-indicator-error"></span>Brouillon</li>
+  <li><span class="status-indicator-warning"></span>En attente de validation</li>
+  <li><span class="status-indicator-error"></span>À corriger</li>
+  <li><span class="status-indicator-success"></span>Validé</li>
+</ul>
 {% endblocktrans %}
 {% endblock section_intro %}
 
@@ -41,19 +47,17 @@
   </ul>
   <ul class="table-body">
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-    {% with issue_submission.get_status_code_display as status %}
     <li class="row table-row-wrapper">
       <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
          class="clearfix table-row">
         <span class="col-sm-4">{{ issue_submission }}</span>
         <span class="col-sm-4">{{ issue_submission.date_created|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-4">
-          <span class="status-indicator-{% if status == 'D' or status == 'C' %}error{% elif status == 'S' %}warning{% elif status == 'V' %}success{% endif %}"></span>
+          <span class="status-indicator-{% if issue_submission.status == 'D' or issue_submission.status == 'C' %}error{% elif issue_submission.status == 'S' %}warning{% elif issue_submission.status == 'V' %}success{% endif %}"></span>
           {{ issue_submission.get_status_display }}
         </span>
       </a>
     </li>
-    {% endwith %}
     {% endfor %}
   </ul>
 </div>

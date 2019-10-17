@@ -11,7 +11,6 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.test import RequestFactory
-from influxdb import InfluxDBClient
 from lxml import etree
 from resumable_uploads.models import ResumableFile
 
@@ -58,8 +57,8 @@ class TestIssueSubmissionDetailView:
         # Check
         assert response.status_code == 200
         assert len(response.context['status_tracks']) == 2
-        assert response.context['status_tracks'][0].status == 'S'
-        assert response.context['status_tracks'][1].status == 'D'
+        assert response.context['status_tracks'][0].status == IssueSubmission.SUBMITTED
+        assert response.context['status_tracks'][1].status == IssueSubmission.NEEDS_CORRECTIONS
 
 
 @pytest.mark.django_db
@@ -223,54 +222,7 @@ class TestIssueSubmissionView:
 
         assert user_contacts == form_contacts
 
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_when_a_submission_is_created(
-            self, mock_write_points, mock_list_db, mock_create_db, user_can_edit_journal):
-        # Setup
-        user, journal = user_can_edit_journal
-        test_points = []
-        mock_write_points.side_effect = test_points.extend
-
-        post_data = {
-            'journal': journal.pk,
-            'year': '2015',
-            'volume': '2',
-            'number': '2',
-            'contact': user.pk,
-            'comment': 'lorem ipsum dolor sit amet',
-        }
-
-        request = RequestFactory().post(
-            reverse('userspace:journal:editor:add', args=(journal.pk, )), post_data)
-        request.user = user
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
-        MessageMiddleware().process_request(request)
-        view = IssueSubmissionCreate(request=request, journal_pk=journal.pk)
-        view.current_journal = journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        assert len(test_points) == 1
-        issuesubmission = IssueSubmission.objects.last()
-        assert test_points == [
-            {
-                'tags': {},
-                'fields': {
-                    'author_id': user.pk,
-                    'submission_id': issuesubmission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__create',
-            }
-        ]
-
-    def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self, user_can_edit_journal):
+    def test_can_update_an_issue_submission_even_if_it_is_submitted(self, user_can_edit_journal):
         # Setup
         user, journal = user_can_edit_journal
         issue_submission = IssueSubmissionFactory(journal=journal)
@@ -283,7 +235,7 @@ class TestIssueSubmissionView:
         # Run
         response = client.get(url)
         # Check
-        assert response.status_code == 403
+        assert response.status_code == 200
 
 
 class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
@@ -301,7 +253,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         # Run
         response = client.get(url, follow=False)
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_be_browsed_by_users_who_can_manage_issue_submissions(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
@@ -323,7 +275,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
         # we're redirected to the attachment path in the media folder
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
 
     def test_can_be_browsed_by_users_who_can_review_issue_submissions(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
@@ -341,7 +293,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
 
     def test_filename_special_characters_are_urlencoded(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel#.png'), mode='rb') as f:
@@ -359,7 +311,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
-        self.assertTrue("pixel%23" in response.url)
+        assert "pixel%23" in response.url
 
     def test_filename_spaces_are_not_urlencoded(self):
         with open(os.path.join(FIXTURE_ROOT, 'pixel, .png'), mode='rb') as f:
@@ -377,45 +329,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         response = client.get(url)
-        self.assertTrue("pixel%2C%20" in response.url)
-
-
-class TestIssueSubmissionSubmitView(BaseEditorTestCase):
-    def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
-        # Setup
-        user = UserFactory()
-
-        client = Client(logged_user=user)
-        url = reverse('userspace:journal:editor:transition_submit',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        # Run
-        response = client.post(url)
-
-        # Check
-        self.assertEqual(response.status_code, 403)
-
-    def test_can_submit_an_issue_submission(self):
-        # Setup
-        user = UserFactory()
-        self.journal.members.add(user)
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal),
-            object_id=self.journal.id,
-            user=user,
-            authorization_codename=AC.can_manage_issuesubmission.codename)
-
-        client = Client(logged_user=user)
-        url = reverse('userspace:journal:editor:transition_submit', args=(
-            self.journal.pk, self.issue_submission.pk, ))
-
-        # Run
-        response = client.post(url)
-
-        # Check
-        self.assertEqual(response.status_code, 302)
-        self.issue_submission.refresh_from_db()
-        self.assertEqual(self.issue_submission.status, IssueSubmission.SUBMITTED)
+        assert "pixel%2C%20" in response.url
 
 
 class TestIssueSubmissionApproveView(BaseEditorTestCase):
@@ -437,7 +351,7 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_approve_an_issue_submission(self):
         # Setup
@@ -454,51 +368,9 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
         self.issue_submission.refresh_from_db()
-        self.assertEqual(self.issue_submission.status, IssueSubmission.VALID)
-
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_on_status_change(
-            self, mock_write_points, mock_list_db, mock_create_db):
-        test_points = []
-        mock_write_points.side_effect = test_points.extend
-
-        self.issue_submission.submit()
-        self.issue_submission.save()
-
-        url = reverse('userspace:journal:editor:transition_approve',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        request = RequestFactory().post(url)
-        request.user = self.user
-        SessionMiddleware().process_request(request)
-        MessageMiddleware().process_request(request)
-        request.session.save()
-
-        view = IssueSubmissionApproveView(request=request, journal_pk=self.journal.pk)
-        view.request = request
-        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
-        view.current_journal = self.journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        self.assertEqual(len(test_points), 1)
-        self.assertEqual(
-            test_points,
-            [{
-                'tags': {'old_status': 'S', 'new_status': 'V'},
-                'fields': {
-                    'author_id': self.user.pk,
-                    'submission_id': self.issue_submission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__change_status',
-            }])
+        assert self.issue_submission.status == IssueSubmission.VALID
 
     def test_sends_a_notification_email(self):
         # Setup
@@ -542,7 +414,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_refuse_an_issue_submission(self):
         # Setup
@@ -559,8 +431,8 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.issue_submission.files_versions.count(), 2)
+        assert response.status_code == 302
+        assert self.issue_submission.files_versions.count() == 2
 
     def test_can_refuse_an_issue_submission_with_a_comment(self):
         # Setup
@@ -577,52 +449,10 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         response = client.post(url, {'comment': 'This is a comment!'})
 
         # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.issue_submission.files_versions.count(), 2)
+        assert response.status_code == 302
+        assert self.issue_submission.files_versions.count() == 2
         track = self.issue_submission.last_status_track
-        self.assertEqual(track.comment, 'This is a comment!')
-
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_on_status_change(
-            self, mock_write_points, mock_list_db, mock_create_db):
-        test_points = []
-        mock_write_points.side_effect = test_points.extend
-
-        self.issue_submission.submit()
-        self.issue_submission.save()
-
-        url = reverse('userspace:journal:editor:transition_refuse',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        request = RequestFactory().post(url)
-        request.user = self.user
-        SessionMiddleware().process_request(request)
-        MessageMiddleware().process_request(request)
-        request.session.save()
-
-        view = IssueSubmissionRefuseView(request=request, journal_pk=self.journal.pk)
-        view.request = request
-        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
-        view.current_journal = self.journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        self.assertEqual(len(test_points), 1)
-        self.assertEqual(
-            test_points,
-            [{
-                'tags': {'old_status': 'S', 'new_status': 'D'},
-                'fields': {
-                    'author_id': self.user.pk,
-                    'submission_id': self.issue_submission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__change_status',
-            }])
+        assert track.comment == 'This is a comment!'
 
     def test_sends_a_notification_email(self):
         # Setup
@@ -642,7 +472,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         # Check
         assert response.status_code == 302
         self.issue_submission.refresh_from_db()
-        assert self.issue_submission.status == IssueSubmission.DRAFT
+        assert self.issue_submission.status == IssueSubmission.NEEDS_CORRECTIONS
         assert len(mail.outbox) == 1
         assert mail.outbox[0].to[0] == u.email
 
@@ -675,5 +505,5 @@ class TestIssueSubmissionDeleteView(BaseEditorTestCase):
         response = client.post(url)
 
         # Check
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
         assert deleted_pk not in IssueSubmission.objects.values_list('pk', flat=True)

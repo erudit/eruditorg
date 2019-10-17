@@ -66,6 +66,7 @@ class StatsLandingView(
             context['counter_jr1goa_form'] = self.counter_jr1goa_form(
                 organisation=self.current_organisation
             )
+        context['section_aside'] = True
         return context
 
     def get_requested_report(self):

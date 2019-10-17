@@ -23,6 +23,7 @@ class IssueSubmission(models.Model):
     STATUS_CHOICES = (
         (DRAFT, _("Brouillon")),
         (SUBMITTED, _("En attente de validation")),
+        (NEEDS_CORRECTIONS, _("À corriger")),
         (VALID, _("Validé")),
     )
 
@@ -69,7 +70,7 @@ class IssueSubmission(models.Model):
     )
 
     comment = models.TextField(
-        verbose_name=_("Commentaires"),
+        verbose_name=_("Commentaires sur le numéro"),
         blank=True, null=True
     )
 
@@ -112,13 +113,15 @@ class IssueSubmission(models.Model):
         return self.status == self.SUBMITTED
 
     @property
+    def needs_corrections(self):
+        return self.status == self.NEEDS_CORRECTIONS
+
+    @property
     def is_validated(self):
         return self.status == self.VALID
 
-    @transition(field=status, source=DRAFT, target=SUBMITTED,
-                permission=lambda instance, user: user.has_perm(
-                    'editor.manage_issuesubmission'),
-                custom=dict(verbose_name=("Soumettre")))
+    @transition(field=status, source=[DRAFT, SUBMITTED, NEEDS_CORRECTIONS], target=SUBMITTED,
+                permission=lambda instance, user: False)
     def submit(self):
         """
         Send issue for review
@@ -137,7 +140,7 @@ class IssueSubmission(models.Model):
         """
         pass
 
-    @transition(field=status, source=SUBMITTED, target=DRAFT,
+    @transition(field=status, source=SUBMITTED, target=NEEDS_CORRECTIONS,
                 permission=lambda instance, user: user.has_perm(
                     'editor.review_issuesubmission'),
                 custom=dict(verbose_name=_("Demander des corrections")))
@@ -166,20 +169,9 @@ class IssueSubmission(models.Model):
     def last_status_track(self):
         return self.status_tracks.order_by('-created').first()
 
-    def get_status_code_display(self):
-        if self.status != self.DRAFT:
-            return self.status
-        if self.last_status_track is None:
-            return self.status
-        return self.NEEDS_CORRECTIONS
-
     def get_status_display(self):
         status_choices_dict = dict(self.STATUS_CHOICES)
-        if self.status != self.DRAFT:
-            return status_choices_dict[self.status]
-        elif self.status == self.DRAFT and self.last_status_track is None:
-            return _('Non soumis')
-        return _('À corriger')
+        return status_choices_dict[self.status]
 
 
 class IssueSubmissionStatusTrack(models.Model):
@@ -202,6 +194,10 @@ class IssueSubmissionStatusTrack(models.Model):
         ordering = ['created', ]
         verbose_name = _("Changement de statut d'un envoi de numéro")
         verbose_name_plural = _("Changements de statut d'envois de numéro")
+
+    def get_status_display(self):
+        status_choices_dict = dict(self.issue_submission.STATUS_CHOICES)
+        return status_choices_dict[self.status]
 
 
 class IssueSubmissionFilesVersion(models.Model):

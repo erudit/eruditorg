@@ -11,16 +11,16 @@ class TestRegisterStatusTrackReceiver(BaseEditorTestCase):
         # Run & check
         self.issue_submission.submit()
         tracks = IssueSubmissionStatusTrack.objects.filter(issue_submission=self.issue_submission)
-        self.assertEqual(tracks.count(), 1)
-        self.assertEqual(tracks.first().status, IssueSubmission.SUBMITTED)
+        assert tracks.count() == 1
+        assert tracks.first().status == IssueSubmission.SUBMITTED
 
     def test_associates_the_latest_files_version_on_submit(self):
         # Run & check
         self.issue_submission.submit()
         tracks = IssueSubmissionStatusTrack.objects.filter(issue_submission=self.issue_submission)
-        self.assertEqual(tracks.count(), 1)
-        self.assertEqual(tracks.first().status, IssueSubmission.SUBMITTED)
+        assert tracks.count() == 1
+        assert tracks.first().status == IssueSubmission.SUBMITTED
         files_versions = IssueSubmissionFilesVersion.objects.filter(
             issue_submission=self.issue_submission)
-        self.assertEqual(files_versions.count(), 1)
-        self.assertEqual(tracks.first().files_version, files_versions.first())
+        assert files_versions.count() == 1
+        assert tracks.first().files_version == files_versions.first()

@@ -1,7 +1,9 @@
+import pytest
+
 from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase
 
 from base.test.factories import UserFactory
+from base.test.testcases import Client
 from erudit.test.factories import JournalFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
@@ -10,9 +12,11 @@ from core.authorization.models import Authorization
 from ..models import IssueSubmission
 
 
-class BaseEditorTestCase(TestCase):
+@pytest.mark.django_db
+class BaseEditorTestCase:
 
-    def setUp(self):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.user = UserFactory()
 
         # Add a journal with a member
@@ -31,3 +35,6 @@ class BaseEditorTestCase(TestCase):
             user=self.user,
             object_id=self.journal.id,
             authorization_codename=AC.can_manage_issuesubmission.codename)
+
+        # We need to be logged in for all the tests
+        self.client = Client(logged_user=self.user)

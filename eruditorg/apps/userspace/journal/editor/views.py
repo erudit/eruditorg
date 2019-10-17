@@ -3,11 +3,9 @@ import datetime as dt
 import structlog
 from urllib.parse import quote
 
-from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
-from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.utils.formats import date_format
@@ -23,7 +21,6 @@ from resumable_uploads.models import ResumableFile
 
 from base.viewmixins import MenuItemMixin
 from core.editor.models import IssueSubmission
-from core.metrics.metric import metric
 from core.editor.utils import get_archive_date
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
@@ -112,13 +109,6 @@ class IssueSubmissionCreate(
         return reverse(
             'userspace:journal:editor:update', args=(self.current_journal.pk, self.object.pk, ))
 
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        metric(
-            'erudit__issuesubmission__create',
-            author_id=self.request.user.id, submission_id=form.instance.id)
-        return result
-
 
 class IssueSubmissionUpdate(
         IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
@@ -143,12 +133,19 @@ class IssueSubmissionUpdate(
     def get_title(self):
         return _("Modifier un dépôt de numéros")
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        # If we edit an issue submission when it's in needs review, we need to create a new version
+        # So that the previous version is kept in the history.
+        if obj.is_submitted:
+            obj.save_version()
+        return obj
+
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
 
         obj = self.get_object()
-        if obj.status in (
-                IssueSubmission.VALID, IssueSubmission.SUBMITTED):
+        if obj.is_validated:
             form.disable_form()
 
         form.fields['submissions'].widget.set_model_reference(
@@ -176,18 +173,29 @@ class IssueSubmissionUpdate(
         return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
-        logger.debug('update', **self.get_context_info())
+        # Log this new version.
+        old_status_track = self.object.status_tracks.order_by('-created')[1]
+        logger.info(
+            'editor.issuesubmission.update',
+            old_status=old_status_track.status,
+            new_status=self.object.status,
+            comment=self.object.last_status_track.comment,
+            url=self.object.get_absolute_url(),
+            **self.get_context_info()
+        )
+        # Send a signal in order to notify the update of the issue submission's status
+        userspace_post_transition.send(
+            sender=self,
+            issue_submission=self.get_object(),
+            transition_name='submit',
+            request=self.request,
+        )
         messages.success(self.request, _('La demande a été enregistrée avec succès'))
         return reverse(
             'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
 
     def has_permission(self):
-        issue_submission = self.get_object()
-        if not issue_submission.is_draft:
-            raise PermissionDenied
-
         obj = self.get_permission_object()
-
         return (
             self.request.user.has_perm('editor.manage_issuesubmission', obj) or
             self.request.user.has_perm('editor.review_issuesubmission')
@@ -233,13 +241,6 @@ class IssueSubmissionTransitionView(
         else:
             comment = None
 
-        # Capture a metric when the status changes
-        if self.object.status != old_status:
-            metric(
-                'erudit__issuesubmission__change_status',
-                tags={'old_status': old_status, 'new_status': self.object.status},
-                author_id=self.request.user.id, submission_id=self.object.id)
-
         logger.info(
             'editor.issuesubmission.update',
             old_status=old_status,
@@ -276,27 +277,6 @@ class IssueSubmissionTransitionView(
         if self.use_comment_form:
             context['comment_form'] = IssueSubmissionTransitionCommentForm()
         return context
-
-
-class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
-    question = _("Vous êtes sur le point de soumettre les fichiers\
-    à l'équipe de production. Une fois envoyés, vous ne pourrez plus les modifier.\
-    Voulez-vous poursuivre?")
-    permission_required = 'editor.manage_issuesubmission'
-    success_message = _('Les fichiers ont été transmis avec succès')
-    template_name = 'userspace/journal/editor/issuesubmission_submit.html'
-    transition_name = 'submit'
-
-    def get_context_data(self, **kwargs):
-        context = super(IssueSubmissionSubmitView, self).get_context_data(**kwargs)
-        context['incomplete_files'] = self.object.last_files_version.submissions \
-            .exclude(filesize=F('uploadsize'))
-        return context
-
-    def get_permission_object(self):
-        # All the users who have the 'review_issuesubmission' authorization should be allowed to
-        # review all journals.
-        return self.get_object().journal
 
 
 class IssueSubmissionApproveView(IssueSubmissionTransitionView):
@@ -350,8 +330,10 @@ class IssueSubmissionDeleteView(
         return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
 
     def has_permission(self):
-        obj = self.get_object()
-        return self.request.user.has_perm('editor.manage_issuesubmission') and obj.is_draft
+        issue_submission = self.get_object()
+        if issue_submission.is_validated:
+            return False
+        return self.request.user.has_perm('editor.manage_issuesubmission')
 
 
 class IssueSubmissionAttachmentView(

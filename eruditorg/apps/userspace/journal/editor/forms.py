@@ -81,12 +81,15 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         path='uploads',
         label=_("Fichier"),
         options={
-            "max_file_size": '15000mb',
-            "max_file_count": 1,
-            "drop_element": 'drop_element',
-            "container": 'drop_element',
-            "browse_button": 'pickfiles'
+            'max_file_size': '3000mb',
+            'multi_selection': False,
+            'auto_upload': True,
         },
+    )
+    file_comment = forms.CharField(
+        label=_('Commentaires sur le fichier'),
+        required=False,
+        widget=forms.Textarea,
     )
 
     def __init__(self, *args, **kwargs):
@@ -96,12 +99,13 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         initial_files = self.instance.last_files_version.submissions.all() \
             .values_list('id', flat=True)
         self.fields['submissions'].initial = ','.join(map(str, initial_files))
-        self.fields['submissions'].widget.template_name = \
-            'userspace/journal/editor/resumable_uploads_widget.html'
 
     def save(self, commit=True):
         submissions = self.cleaned_data.pop('submissions', '')
         instance = super(IssueSubmissionUploadForm, self).save(commit)
+        # Automatically submit the submission when a new upload is saved.
+        instance.submit()
+        instance.save()
 
         # Saves the resumable files associated to the submission
         if commit:
@@ -116,6 +120,11 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
                         pass
                     else:
                         fversion.submissions.add(rfile)
+
+            # Saves the comment associated with the submission
+            status_track = instance.last_status_track
+            status_track.comment = self.cleaned_data.get('file_comment')
+            status_track.save()
 
         return instance
 

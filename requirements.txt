@@ -5,7 +5,7 @@
 #    pip-compile --output-file=requirements.txt requirements.in
 #
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
-git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.7#egg=django-resumable-uploads
+git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.9#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
 git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.59#egg=liberuditarticle
