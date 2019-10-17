@@ -53,6 +53,7 @@ from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
 from core.metrics.metric import metric
 from core.subscription.models import JournalAccessSubscription, InstitutionIPAddressRange
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
+from apps.public.campaign.models import Campaign
 
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
@@ -717,6 +718,7 @@ class BaseArticleDetailView(
             self.get_related_articles,
             current_article=current_article,
         )
+        context['active_campaign'] = Campaign.objects.active_campaign()
 
         return context
 

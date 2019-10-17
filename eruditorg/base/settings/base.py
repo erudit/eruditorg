@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'base',
     'erudit',
     'apps.public.book',
+    'apps.public.campaign',
     'apps.public.citations',
     'apps.public.journal',
     'apps.public.search',

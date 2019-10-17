@@ -25,23 +25,7 @@ $peach:       #FFE7B0;
 
 // Article detail sidebar image
 .campaign-sidebar {
-  display: block;
-  background-position: top;
-  background-repeat: no-repeat;
-  overflow-y: hidden;
-  height: 450px;
-  margin-bottom: 1em;
-  background-size: 268px;
-  background-image: url('../img/banners/promo_onepager-01_fr.png');
-
-  &.en {
-    background-image: url('../img/banners/promo_onepager-01_en.png');
-  }
-
-  img {
-    display: none;
-  }
-
+  border: 1px solid #ccc;
 }
 
 @media print {

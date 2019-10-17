@@ -1,0 +1,7 @@
+{% if active_campaign %}
+<aside class="campaign-sidebar">
+  <a href="{{ active_campaign.url|safe }}" target="_blank">
+    <img src="{{ active_campaign.image.url }}" title="{{ active_campaign.title }}" alt="{{ active_campaign.alt }}" />
+  </a>
+</aside>
+{% endif %}
