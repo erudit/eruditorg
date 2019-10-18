@@ -130,7 +130,7 @@ RAVEN_DSN = env('RAVEN_DSN')
 if RAVEN_DSN:
     sentry_logging = LoggingIntegration(
         level=logging.INFO,  # Capture info and above as breadcrumbs
-        event_level=logging.WARNING  # Send errors as events
+        event_level=logging.ERROR  # Send errors as events
     )
     sentry_sdk.init(
         dsn=RAVEN_DSN,
