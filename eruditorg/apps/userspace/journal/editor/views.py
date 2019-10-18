@@ -174,10 +174,11 @@ class IssueSubmissionUpdate(
 
     def get_success_url(self):
         # Log this new version.
-        old_status_track = self.object.status_tracks.order_by('-created')[1]
+        status_tracks = self.object.status_tracks.order_by('-created')
+        old_status = status_tracks[1].status if status_tracks.count() > 1 else IssueSubmission.DRAFT
         logger.info(
             'editor.issuesubmission.update',
-            old_status=old_status_track.status,
+            old_status=old_status,
             new_status=self.object.status,
             comment=self.object.last_status_track.comment,
             url=self.object.get_absolute_url(),
