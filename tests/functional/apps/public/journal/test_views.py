@@ -4,6 +4,7 @@ from lxml import etree as et
 import datetime as dt
 import io
 import os
+import pikepdf
 import unittest.mock
 import subprocess
 import itertools
@@ -1707,6 +1708,43 @@ class TestArticleDetailView:
         assert 'current_article' not in footer.decode()
         # An article with no issue should not be in related articles.
         assert 'not_in_fedora' not in footer.decode()
+
+    @pytest.mark.parametrize('with_pdf, pages, has_abstracts, open_access, expected_result', (
+        # If there's no PDF, there's no need to include `can_display_first_pdf_page` in the context.
+        (False, [], False, True, False),
+        # If the article has abstracts, there's no need to include `can_display_first_pdf_page` in
+        # the context.
+        (True, [1, 2], True, True, False),
+        # If content access is granted, `can_display_first_pdf_page` should always be True.
+        (True, [1], False, True, True),
+        (True, [1, 2], False, True, True),
+        # If content access is not granted, `can_display_first_pdf_page` should only be True if the
+        # PDF has more than one page.
+        (True, [1], False, False, False),
+        (True, [1, 2], False, False, True),
+    ))
+    def test_can_display_first_pdf_page(
+        self, with_pdf, pages, has_abstracts, open_access, expected_result, monkeypatch,
+    ):
+        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        article = ArticleFactory(
+            issue__journal__open_access=open_access,
+            with_pdf=with_pdf,
+        )
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        if not with_pdf or has_abstracts:
+            assert 'can_display_first_pdf_page' not in response.context.keys()
+        else:
+            assert response.context['can_display_first_pdf_page'] == expected_result
 
 
 class TestArticleRawPdfView:
