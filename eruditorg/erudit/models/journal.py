@@ -239,7 +239,7 @@ class Journal(FedoraMixin, FedoraDated):
     def get_titles(self):
         current_issue = self.current_issue
         if not self.is_in_fedora or not current_issue:
-            titles = {'main': self.name}
+            titles = {'main': {'title': self.name}}
         else:
 
             titles = current_issue.erudit_object.get_journal_title()

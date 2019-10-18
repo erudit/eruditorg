@@ -219,6 +219,15 @@ class TestJournalListView:
         response = self.client.get(url, data={'disciplines': ['d2', 'd3']})
         assert set(response.context['journals']) == {j1, j2, j3}
 
+    def test_new_journal_titles_are_not_uppercased(self):
+        journal = JournalFactory(is_new=True, name='Enjeux et société')
+        url = reverse('public:journal:journal_list')
+        html = self.client.get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        journals_list = dom.find('div', {'class': 'journals-list'})
+        assert 'Enjeux et société' in journals_list.decode()
+        assert 'Enjeux Et Société' not in journals_list.decode()
+
 
 class TestJournalDetailView:
 
