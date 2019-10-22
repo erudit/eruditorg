@@ -4,6 +4,7 @@ from lxml import etree as et
 import datetime as dt
 import io
 import os
+import pikepdf
 import unittest.mock
 import subprocess
 import itertools
@@ -1707,6 +1708,276 @@ class TestArticleDetailView:
         assert 'current_article' not in footer.decode()
         # An article with no issue should not be in related articles.
         assert 'not_in_fedora' not in footer.decode()
+
+    @pytest.mark.parametrize('with_pdf, pages, has_abstracts, open_access, expected_result', (
+        # If there's no PDF, there's no need to include `can_display_first_pdf_page` in the context.
+        (False, [], False, True, False),
+        # If the article has abstracts, there's no need to include `can_display_first_pdf_page` in
+        # the context.
+        (True, [1, 2], True, True, False),
+        # If content access is granted, `can_display_first_pdf_page` should always be True.
+        (True, [1], False, True, True),
+        (True, [1, 2], False, True, True),
+        # If content access is not granted, `can_display_first_pdf_page` should only be True if the
+        # PDF has more than one page.
+        (True, [1], False, False, False),
+        (True, [1, 2], False, False, True),
+    ))
+    def test_can_display_first_pdf_page(
+        self, with_pdf, pages, has_abstracts, open_access, expected_result, monkeypatch,
+    ):
+        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        article = ArticleFactory(
+            issue__journal__open_access=open_access,
+            with_pdf=with_pdf,
+        )
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        if not with_pdf or has_abstracts:
+            assert 'can_display_first_pdf_page' not in response.context.keys()
+        else:
+            assert response.context['can_display_first_pdf_page'] == expected_result
+
+    @pytest.mark.parametrize('open_access', (True, False))
+    @pytest.mark.parametrize('url_name', (
+        'public:journal:article_detail',
+        'public:journal:article_summary',
+    ))
+    def test_complete_processing_article_with_abstracts(self, url_name, open_access):
+        article = ArticleFactory(
+            from_fixture='1058611ar',
+            issue__journal__open_access=open_access,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        full_article = dom.find('div', {'class': 'full-article'})
+        # Abstracts should be displayed in all cases.
+        assert full_article.find_all('section', {'id': 'resume'})
+        # The article body should only be displayed on detail page if content access is granted.
+        if open_access and url_name == 'public:journal:article_detail':
+            assert full_article.find_all('section', {'id': 'corps'})
+        else:
+            assert not full_article.find_all('section', {'id': 'corps'})
+        # PDF, PDF first page or 600 first words should never be displayed because we have complete
+        # processing with abstracts.
+        assert not full_article.find_all('section', {'id': 'pdf'})
+        assert not full_article.find_all('section', {'id': 'first-pdf-page'})
+        assert not full_article.find_all('section', {'id': 'first-600-words'})
+
+    @pytest.mark.parametrize('open_access', (True, False))
+    @pytest.mark.parametrize('url_name', (
+        'public:journal:article_detail',
+        'public:journal:article_summary',
+    ))
+    def test_complete_processing_article_without_abstracts(self, url_name, open_access):
+        article = ArticleFactory(
+            from_fixture='1005860ar',
+            issue__journal__open_access=open_access,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        full_article = dom.find('div', {'class': 'full-article'})
+        # Abstracts should not be displayed because we have none.
+        assert not full_article.find_all('section', {'id': 'resume'})
+        # The article body should only be displayed on detail page if content access is granted.
+        if open_access and url_name == 'public:journal:article_detail':
+            assert full_article.find_all('section', {'id': 'corps'})
+        else:
+            assert not full_article.find_all('section', {'id': 'corps'})
+        # The first 600 words should only be displayed on summary page or if content access is not
+        # granted.
+        if not open_access or url_name == 'public:journal:article_summary':
+            assert full_article.find_all('section', {'id': 'first-600-words'})
+        else:
+            assert not full_article.find_all('section', {'id': 'first-600-words'})
+        # PDF or PDF first page should never be displayed because we have complete processing.
+        assert not full_article.find_all('section', {'id': 'pdf'})
+        assert not full_article.find_all('section', {'id': 'first-pdf-page'})
+
+    @pytest.mark.parametrize('open_access', (True, False))
+    @pytest.mark.parametrize('url_name', (
+        'public:journal:article_detail',
+        'public:journal:article_summary',
+    ))
+    def test_minimal_processing_article_with_abstracts(self, url_name, open_access):
+        article = ArticleFactory(
+            from_fixture='602354ar',
+            issue__journal__open_access=open_access,
+            with_pdf=True,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        full_article = dom.find('div', {'class': 'full-article'})
+        # Abstracts should be displayed in all cases.
+        assert full_article.find_all('section', {'id': 'resume'})
+        # The article PDF should only be displayed on detail page if content access is granted.
+        if open_access and url_name == 'public:journal:article_detail':
+            assert full_article.find_all('section', {'id': 'pdf'})
+        else:
+            assert not full_article.find_all('section', {'id': 'pdf'})
+        # Article body, 600 first words or PDF first page should never be displayed because we have
+        # minimal processing with abstracts.
+        assert not full_article.find_all('section', {'id': 'corps'})
+        assert not full_article.find_all('section', {'id': 'first-600-words'})
+        assert not full_article.find_all('section', {'id': 'first-pdf-page'})
+
+    @pytest.mark.parametrize('open_access', (True, False))
+    @pytest.mark.parametrize('url_name', (
+        'public:journal:article_detail',
+        'public:journal:article_summary',
+    ))
+    @pytest.mark.parametrize('pages', ([1], [1, 2]))
+    def test_minimal_processing_article_without_abstracts(self, pages, url_name, open_access):
+        article = ArticleFactory(
+            from_fixture='1056823ar',
+            issue__journal__open_access=open_access,
+            with_pdf=True,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        full_article = dom.find('div', {'class': 'full-article'})
+        # Abstracts should not be displayed because we have none.
+        assert not full_article.find_all('section', {'id': 'resume'})
+        # The article PDF should only be displayed on detail page if content access is granted.
+        if open_access and url_name == 'public:journal:article_detail':
+            assert full_article.find_all('section', {'id': 'pdf'})
+        else:
+            assert not full_article.find_all('section', {'id': 'pdf'})
+        # The article PDF first page should only be displayed on summary page or if content access
+        # is not granted.
+        if not open_access or url_name == 'public:journal:article_summary':
+            assert full_article.find_all('section', {'id': 'first-pdf-page'})
+        else:
+            assert not full_article.find_all('section', {'id': 'first-pdf-page'})
+        # Article body or 600 first words should never be displayed because we have minimal
+        # processing.
+        assert not full_article.find_all('section', {'id': 'corps'})
+        assert not full_article.find_all('section', {'id': 'first-600-words'})
+
+    @pytest.mark.parametrize('open_access', (True, False))
+    @pytest.mark.parametrize('url_name', (
+        'public:journal:article_detail',
+        'public:journal:article_summary',
+    ))
+    def test_minimal_processing_article_without_abstracts_and_with_only_one_page(
+        self, url_name, open_access, monkeypatch
+    ):
+        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', [1])
+        article = ArticleFactory(
+            from_fixture='1056823ar',
+            issue__journal__open_access=open_access,
+            with_pdf=True,
+        )
+        url = reverse(url_name, kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        full_article = dom.find('div', {'class': 'full-article'})
+        # Abstracts should not be displayed because we have none.
+        assert not full_article.find_all('section', {'id': 'resume'})
+        # The article PDF should only be displayed on detail page if content access is granted.
+        if open_access and url_name == 'public:journal:article_detail':
+            assert full_article.find_all('section', {'id': 'pdf'})
+        else:
+            assert not full_article.find_all('section', {'id': 'pdf'})
+        # The article PDF first page should only be displayed on summary page if content access is
+        # granted because the PDF has only one page.
+        if open_access and url_name == 'public:journal:article_summary':
+            assert full_article.find_all('section', {'id': 'first-pdf-page'})
+        else:
+            assert not full_article.find_all('section', {'id': 'first-pdf-page'})
+        # Article body or 600 first words should never be displayed because we have minimal
+        # processing.
+        assert not full_article.find_all('section', {'id': 'corps'})
+        assert not full_article.find_all('section', {'id': 'first-600-words'})
+
+    @pytest.mark.parametrize('has_abstracts, expected_alert', (
+        (True, 'Seul le résumé sera affiché.'),
+        (False, 'Seuls les 600 premiers mots du texte seront affichés.'),
+    ))
+    def test_complete_processing_article_content_access_not_granted_alert(
+        self, has_abstracts, expected_alert,
+    ):
+        article = ArticleFactory(issue__journal__open_access=False)
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        assert expected_alert in html
+
+    @pytest.mark.parametrize('has_abstracts, pages, expected_alert', (
+        (True, [1, 2], 'Seul le résumé sera affiché.'),
+        (True, [1], 'Seul le résumé sera affiché.'),
+        (False, [1, 2], 'Seule la première page du PDF sera affichée.'),
+        (False, [1], 'Seule la première page du PDF sera affichée.'),
+    ))
+    def test_minimal_processing_article_content_access_not_granted_alert(
+        self, has_abstracts, pages, expected_alert, monkeypatch,
+    ):
+        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        article = ArticleFactory(
+            from_fixture='1056823ar',
+            issue__journal__open_access=False,
+            with_pdf=True,
+        )
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # The expected alert should only be displayed if there's abstracts or if the PDF has more
+        # than one page.
+        if has_abstracts or len(pages) > 1:
+            assert expected_alert in html
+        else:
+            assert expected_alert not in html
 
 
 class TestArticleRawPdfView:

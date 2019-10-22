@@ -753,16 +753,14 @@ class BaseArticleDetailView(
         if 'article' not in context:
             context['article'] = article
 
-        if article.fedora_object.pdf.exists:
+        context['pdf_exists'] = article.fedora_object.pdf.exists
 
-            context['pdf_exists'] = True
-            if not context['content_access_granted'] and not article.abstracts:
+        if context['pdf_exists'] and not article.abstracts:
+            if context['content_access_granted']:
+                context['can_display_first_pdf_page'] = True
+            else:
                 pdf = pikepdf.open(article.fedora_object.pdf.content)
-                context['pdf_num_pages'] = len(pdf.pages)
-                context['can_display_first_pdf_page'] = (
-                    context['pdf_exists'] and
-                    context['pdf_num_pages'] > 1
-                )
+                context['can_display_first_pdf_page'] = len(pdf.pages) > 1
 
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
