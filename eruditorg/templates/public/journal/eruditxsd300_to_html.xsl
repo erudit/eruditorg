@@ -415,19 +415,23 @@
             <xsl:apply-templates select="//corps"/>
           </section>
           {% elif article.localidentifier %}
-          <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
-          <div id="pdf-download" class="text-center alert-warning">
-            <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% trans 'Télécharger' %}</a></p>
-          </div>
+          <section id="pdf">
+            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
+            <div id="pdf-download" class="text-center alert-warning">
+              <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% trans 'Télécharger' %}</a></p>
+            </div>
+          </section>
           {% endif %}
-        {% elif article.abstracts or only_display == 'biblio' %}
-          {# Do nothong. #}
-        {% elif not article.abstracts and can_display_first_pdf_page %}
-        <p>
-          <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
-        </p>
-        {% elif article.issue.journal.is_scientific %}
-          {{ article.html_body|safe|truncatewords_html:600 }}
+        {% elif not article.abstracts and only_display != 'biblio' %}
+          {% if article.processing == 'C' %}
+          <section id="first-600-words">
+            {{ article.html_body|safe|truncatewords_html:600 }}
+          </section>
+          {% elif can_display_first_pdf_page %}
+          <section id="first-pdf-page">
+            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
+          </section>
+          {% endif %}
         {% endif %}
 
 
