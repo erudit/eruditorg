@@ -1927,6 +1927,58 @@ class TestArticleDetailView:
         assert not full_article.find_all('section', {'id': 'corps'})
         assert not full_article.find_all('section', {'id': 'first-600-words'})
 
+    @pytest.mark.parametrize('has_abstracts, expected_alert', (
+        (True, 'Seul le résumé sera affiché.'),
+        (False, 'Seuls les 600 premiers mots du texte seront affichés.'),
+    ))
+    def test_complete_processing_article_content_access_not_granted_alert(
+        self, has_abstracts, expected_alert,
+    ):
+        article = ArticleFactory(issue__journal__open_access=False)
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        assert expected_alert in html
+
+    @pytest.mark.parametrize('has_abstracts, pages, expected_alert', (
+        (True, [1, 2], 'Seul le résumé sera affiché.'),
+        (True, [1], 'Seul le résumé sera affiché.'),
+        (False, [1, 2], 'Seule la première page du PDF sera affichée.'),
+        (False, [1], 'Seule la première page du PDF sera affichée.'),
+    ))
+    def test_minimal_processing_article_content_access_not_granted_alert(
+        self, has_abstracts, pages, expected_alert, monkeypatch,
+    ):
+        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        article = ArticleFactory(
+            from_fixture='1056823ar',
+            issue__journal__open_access=False,
+            with_pdf=True,
+        )
+        if has_abstracts:
+            with repository.api.open_article(article.pid) as wrapper:
+                wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # The expected alert should only be displayed if there's abstracts or if the PDF has more
+        # than one page.
+        if has_abstracts or len(pages) > 1:
+            assert expected_alert in html
+        else:
+            assert expected_alert not in html
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')

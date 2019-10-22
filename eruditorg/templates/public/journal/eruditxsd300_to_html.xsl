@@ -103,15 +103,15 @@
                     {% endblocktrans %}
                   {% endif %}
                   <strong>
-                    {% if not article.abstracts and can_display_first_pdf_page %}
-                    <br/><br/>
-                    {% trans "Seule la première page du PDF sera affichée." %}
-                    {% elif article.abstracts %}
+                    {% if article.abstracts %}
                     <br/><br/>
                     {% trans "Seul le résumé sera affiché." %}
-                    {% elif article.issue.journal.is_scientific %}
+                    {% elif article.processing == 'C' %}
                     <br/><br/>
                     {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
+                    {% elif can_display_first_pdf_page %}
+                    <br/><br/>
+                    {% trans "Seule la première page du PDF sera affichée." %}
                     {% endif %}
                   </strong>
                 </p>
