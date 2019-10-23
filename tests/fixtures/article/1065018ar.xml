@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1065018ar" typeart="article" lang="en" ordseq="8" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1065018ar</idpublic></infoarticle><revue id="im118" lang="fr en"><titrerev>Intermédialités</titrerev><sstitrerev>Histoire et théorie des arts, des lettres et des techniques</sstitrerev><titrerevparal lang="en">Intermediality</titrerevparal><sstitrerevparal lang="en">History and Theory of the Arts, Literature and Technologies</sstitrerevparal><titrerevabr>im</titrerevabr><idissnnum>1920-3136</idissnnum><directeur sexe="feminin"><fonction lang="fr">Directrice</fonction><nompers><prenom>Marion</prenom><nomfamille>Froger</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Vincent</prenom><nomfamille>Bouchard</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Ira</prenom><nomfamille>Wagman</nomfamille></nompers></redacteurchef></revue><numero id="im04907"><nonumero>33</nonumero><pub><periode>Printemps</periode><annee>2019</annee></pub><pubnum><date typedate="publication">2019-10-16</date></pubnum><grtheme id="th1"><theme>restituer (le temps)</theme><themeparal lang="en">rendering (time)</themeparal></grtheme></numero><editeur><nomorg>Revue intermédialités (Presses de l’Université de Montréal)</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Revue Intermédialités</nomorg>, 2019</droitsauteur></admin><liminaire><grtitre><surtitre>Articles</surtitre>
+                <titre>Volume-Image: The Future as Memory in Thierry Kuntzel’s Video Installation <marquage typemarq="italique">The Waves </marquage>(2003)<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Anaïs</prenom><nomfamille>Nony</nomfamille></nompers><affiliation><alinea>SARChI Chair in Social Change, University of Fort Hare</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="en"><alinea>Video-objects are often discussed in terms of their ability to reflect upon the speed of our narcissistic culture, but less acknowledged is video’s agency to perform electronic events outside of human experience. This article engages in scholarship interested in the space of video operations where lived and imagined, real and virtual phenomena are experienced at the threshold of perception. Bringing into this conversation a discussion of <marquage typemarq="italique">The Waves</marquage> (2003), an interactive installation by video pioneer and media critic Thierry Kuntzel, the article moves away from the time/movement nexus grounded in a filmic understanding of the image to position video-memory as the emergence of a volume of time. Different from the time-image and movement-image of cinema, the volume-image of video defines a mode of engaging with multiple temporalities within the continuum of the video itself. Constituted progressively through layers of ever-changing signal processes, the volume-image of video technology is an open field, a transductive zone where multiple intensities create new representational rhythms, which disrupt the durational model of time so often attached to human experience.</alinea></resume><resume typeresume="resume" lang="fr"><alinea>L’objet vidéo est souvent analysé pour sa capacité critique en rapport avec la vitesse de notre culture narcissique et moins souvent pour sa capacité à produire des événements éléctroniques qui échappent à l’expérience humaine. Cet article considère les travaux scientifiques qui s’intéressent à l’espace où s’inscrivent les opérations vidéo, un espace où les phénomènes vécus et imaginaires, réels et virtuels existent au seuil de la perception. Étudiant l’oeuvre <marquage typemarq="italique">The Waves</marquage> (2003) du pionnier de l’art vidéo en France et critique des médias Thierry Kuntzel (1951–2007), je m’éloigne du paradigme filmique qui comprend le temps et le mouvement comme catégories de l’expérience et pose le volume des opérations vidéos comme l’émergence d’une nouvelle forme de mémoire. Différente de l’image-temps et de l’image-mouvement du cinéma, l’image-volume de la vidéo définit un mode d’engagement avec des temporalités multiples au sein même du continuum de l’opération vidéo. Constituée progressivement par couches successives de signaux électroniques, l’image-volume de la vidéo est un champ ouvert, une zone transductive où de multiples intensités créent de nouveaux rythmes représentationnels. Ces derniers font brèche le model du temps si souvent calibré sur l’expérience humaine.</alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><epigraphe>
+        <alinea>Layout, perception, return nearly the almost same, wash, backwash, impossible time:
+          <marquage typemarq="italique">The Wave </marquage>is a homage to Virginia Woolf (to her
+          book with that title), to her writing, to her invention of time, to her as a person—a life
+          lives on the verge of drowning (which is how she ended), between terror and
+          ecstasy.<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi></alinea>
+      </epigraphe><para id="pa1"><no>1</no><alinea>Historically situated between the cinematographic and the digital, video images inform us about the temporal constituency of media objects. Specifically, analog technology creates images via an electron beam scanning a field of microtemporal processes and signals.<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi> As art historian Ina Blom puts it, “[I]n the case of video, changing speed was no longer a question of mechanically accelerating or decelerating a stable material like celluloid: no materials are ‘put in motion,’ there are only electronic events.”<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi> While in cinema we need to split the screen to see the unfolding of multiple temporalities, the videographic images, more often than not, “literally come out of the screen.”<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi> To grasp the electronic events produced by video images requires to think in terms of flux, processes, passages, contamination,<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi> but also in terms of the technical modes of existence of the moving image.<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi> Important in this regard, is the time technology of analog video that produces affordances that no longer need to be adjusted to the human sense of time. This idea, Blom explains, is linked to the fact that the microtemporal level of video events is embedded in video’s agency regarding its viewing subject. Following a media archaeology approach inspired by the German media school of thought,<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi> Blom thinks through analog videos as a “memory technology” and locates the performative power of video “to displace historiography.”<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi> Blom moves away from thinking about video as a performative tool used by artists and focuses on the technical affordances of video itself, what she calls “video’s acts of technical individuation,” namely, the “autobiographical operations of video.”<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi> She proposes an engagement with the “microtemporal affordances”<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi> of video technology from within “the perspective of a non-human agency.”<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi> To approach “video-time signatures”<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi> differently, and specifically, to question how video technology presents itself as a form of agency rather than an instrument performed by an artist,<renvoi id="re1no14" idref="no14" typeref="note">14</renvoi> is to reassess the model of time that is applied to image-making technology. This specificity of video technology and the possibility that video modulates signaletic speeds outside of the realm of human sensory perception is the point of departure adopted in this article for rethinking memory in relation to video images. Specifically, I will focus on the world of operationality of video objects, which captures and creates information in a manner that does not necessarily require a viewing subject as the latter no longer dictates the modality for media images to appear in movement. I share with several theorists the hypothesis that video-time signatures are the products of a temporal modulation that is imperceptible and yet drastically shapes the sensory modalities of apprehending the world. Media scholars, including Boris Groys, Katherine N. Hayles, and Mark B. N. Hansen, have pointed to the “submedial” field where new media operate, a field that is not only unreachable, but “feeds-forward” into our environment by changing the modalities of apprehending the milieu in which we live.<renvoi id="re1no15" idref="no15" typeref="note">15</renvoi> By operating in a threshold invisible to the human gaze, video-time signatures are producing information before this information gets to be recognized as such by individuals, challenging the linear conception of time in relation to technically produced images as well as our understanding of memory in relation to video images. </alinea></para><para id="pa2"><no>2</no><alinea>For philosophers of technique, memory and technology are intrinsically linked to one another. The becoming-present of the past through technical means is grounded in an understanding of the prosthetic dimension of memory as inscribed in technical objects, such as a notepad or a photograph. Much of this approach resides in a definition of technique as the grammatization of time, suggesting that in each technical object resides a code that captures and determines temporalities to produce specific relation to memory. In that context, cinema is mainly seen as a technique to make the past present and, through this operation, to synchronize, in the flow of time, a certain story/reading of history.<renvoi id="re1no16" idref="no16" typeref="note">16</renvoi> In <marquage typemarq="italique">New Philosophy for New Media</marquage>, Hansen points out to the too narrow concept of technology <marquage typemarq="italique">as </marquage>memory in relation to Bernard Stiegler’s account of cinema. For Hansen, the matter is not so much how moving image objects “function by opening perception to memory,” but how they broaden the “very threshold of perception itself, by enlarging the now of perceptual consciousness.”<renvoi id="re1no17" idref="no17" typeref="note">17</renvoi> Interestingly, while Hansen opened up a new critique of media objects in relation to embodiment and memory, his understanding of moving images relies on a durational modality that still conceives of time and space as fundamental categories of experience.<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi> While much attention has been paid to the relation between media technology and how video images produce a newly engendered realm of sensory perception, the model of moving images used to develop a critique of new media images still relies on a filmic reevaluation of movement and time inherited from a philosophy of the moving image (as seen in the work of Gilles Deleuze) and a philosophy of technique (as seen in the work of Jacques Derrida and Bernard Stiegler<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi>). For Deleuze, such reevaluation started from the assumption that time ceased to be the measurement of movement. In his two tomes on cinema, Deleuze draws a parallel between a revolution that took place in philosophy (where movement became subordinate to time, as analyzed by Bergson) and the evolution of cinema after World War II. In the context of modern cinema, the emergence of a new kind of cinematographic and mental image found its roots in the crisis of both the “action-image” and the American Dream, illustrated by Italian neorealism (around 1948) and the French New Wave (around 1958). For Deleuze, the images were linked by “false continuity and irrational cuts,” outlining that the “present” is no longer understood as the image, but as what the “image represents.”<renvoi id="re1no20" idref="no20" typeref="note">20</renvoi> This approach to time and movement completely relied on the viewing subject of cinema, whose positionality was central in determining the time signatures of cinematography.</alinea></para><para id="pa3"><no>3</no><alinea>The present article moves away from the time/movement nexus grounded in a filmic understanding of the image to think of video-time signatures as the emergence of a volume of time. Different from the time-image and movement-image of cinema, the volume-image of video defines a mode of engaging with multiple temporalities within the continuum of the video itself. Constituted progressively through layers of ever-changing signal processes, the volume-image of video technology is an open field, a transductive zone where multiple intensities can appear and disappear to create a new form of representational rhythm. As such, video-time is not the time-image of the post-World War II cinema as it has been produced and understood in the West.<renvoi id="re1no21" idref="no21" typeref="note">21</renvoi> Even though, as Yvonne Spielmann points out, video inherits the time-flow of television and its more than criticized hegemonic narrative, as tackled by experimental media artists such as Joan Jonas, Nam June Paik, and Bruce Nauman, video-time stands closer to a critique of informational technology and its broadcasting culture than the cinematographic and mental image developed in post-World War II cinema.<renvoi id="re1no22" idref="no22" typeref="note">22</renvoi> Because video-time signatures are not necessarily calibrated to the human sense of time, video images produce temporalities that are not grounded in the <marquage typemarq="italique">a priori </marquage>categories of space and time. These categories, as Mieke Bal puts it, finally “explode.”<renvoi id="re1no23" idref="no23" typeref="note">23</renvoi> In video, time and space become synthesis to create a (re)presentational system in volume where the viewer navigates the liminal space of various perceptive zones. This volume-image is a “synthesis in gestation,” to borrow art historian Anne-Marie Duguet’s formulation, where “concept and percept” can function as propaedeutic.<renvoi id="re1no24" idref="no24" typeref="note">24</renvoi> In video-time, channels, flow, and distributive networks are at the core of the creation of an image as volume in the late twentieth century, a volume that modulates between past, present, and future through newly engendered modes of moving image existence. </alinea></para><para id="pa4"><no>4</no><alinea>Drawing on the work of the often-neglected French video pioneer and film theorist Thierry Kuntzel, I propose to look at video images as creating a volume of time in which the durational quality of memory, perception, and futurity can be questioned anew. I take Kuntzel’s notion of “videogram”<renvoi id="re1no25" idref="no25" typeref="note">25</renvoi> to rethink our relation to prosthetic support in the twenty-first century where most of the media objects we handle restructure modes of psychic and collective existence according to new sets of indeterminacy.<renvoi id="re1no26" idref="no26" typeref="note">26</renvoi> The videogram defines the screen as a “zone of contact”<renvoi id="re1no27" idref="no27" typeref="note">27</renvoi> and reveals the creation of multilayered temporalities that disrupt the so-called understanding of moving image devices as synchronous and static prosthetic media. For Kuntzel: “The videogram becomes a volume: images placed one on top of the other—a memory volume.”<renvoi id="re1no28" idref="no28" typeref="note">28</renvoi> While prosthetic memory can be understood as dead storage waiting to be reactivated by human interaction, focusing on video images allows to think of memory as depth in movement, as having a regenerative character of its own, and as an “agency,” to borrow Blom’s central concept. Following a Simondonian approach to moving image objects, I start the reevaluation of human reality inscribed in technical reality through the work of memory performed in video-time and build on the association between video and memory to reveal the emergence of a volume-image where memory is being produced in contact with the video-object. This contact takes place in a processual and open-ended environment exemplary of our video culture (live, feed, Instagram story, etc.) where the volume of video images is continuously circulating and being performed within and beyond the realm of human experience. Through the work of memory and memory at work in video in particular, the concept of volume-image reevaluates the modulation of time that takes place between culture and technique in twenty-first-century media. Finally, this article investigates the relation between culture and video-technique as producing new forms of memory-image where past, present, and future shape the volume of time in new representational rhythms.</alinea></para></section1><section1 id="s1n2"><no>2</no><titre>Video-Memory </titre><objet id="ob1" typeobj="video">
+        <no>Fig. 1</no>
+        <legende lang="en">
+          <alinea><marquage typemarq="italique">The Waves</marquage>, Thierry Kuntzel, 2003. Extract
+            from <marquage typemarq="italique">L’eau</marquage>, documentary by Jean-Yves Jouannais
+            broadcast on Arté (2013). The images of Thierry Kuntzel’s <marquage typemarq="italique">The Waves</marquage> were shot at La compagnie (Marseille, France) during the
+            exhibition <marquage typemarq="italique">Thierry Kuntzel - THE WAVES.</marquage>
+            <marquage typemarq="italique">Au-delà du face-à-face, la béance de l’autre</marquage>.
+            October 15th, 2004–December 15th, 2004.</alinea>
+        </legende>
+  <objetmedia flot="bloc">
+        <video xmlns:xlink="http://www.w3.org/1999/xlink" id="vi1" xlink:type="simple" xlink:actuate="onRequest" xlink:href="1065018arv001.mpeg" dimx="640px" dimy="362px" taille="49,2Mo" typemime="video/mpeg" desc="Durée : 10:47 min."></video>
+      </objetmedia>
+        <source>Courtesy of La compagnie</source>
+</objet><para id="pa5"><no>5</no><alinea>The culminating moment in Thierry Kuntzel’s practice of video art in relation to memory is his interactive video installation <marquage typemarq="italique">The Waves </marquage>from 2003.<renvoi id="re1no29" idref="no29" typeref="note">29</renvoi> <marquage typemarq="italique">The Waves</marquage> is a retro-projection of a 16/9 video (colour, sound) on a 4 x 5 metre screen placed 10 cm above the ground. With the help of a computer and a sensor placed behind the screen, the video presents waves crashing that change according to the distance of the visitor from the sensor. The speed of the sound depends on the video and the colour of the image depends on the visitor’s position, becoming black and white when the visitor is very close to the screen. The continuous movement of the waves invents a modality through which to connect with the spectator who anticipates the return of the wave while maintaining a subtle distance from the screen so that the audiovisual movement can be preserved. Dedicated to Virginia Woolf’s invention of time,<renvoi id="re1no30" idref="no30" typeref="note">30</renvoi> Kuntzel’s video installation <marquage typemarq="italique">The Waves </marquage>creates a relational “zone of contact”<renvoi id="re1no31" idref="no31" typeref="note">31</renvoi> between the screen and the viewer. In it, the presence of the audience reduces motion within the work and functions as an interruption of the video-object, preventing its viewers from fully accessing the domain of experience to which the video pertains. </alinea></para><para id="pa6"><no>6</no><alinea>When the viewer of <marquage typemarq="italique">The Waves </marquage>interrupts the flow of visual and sonic components of the video-object, it creates a postcard type of image that is a suspended representation of what was once an ongoing movement of atmospheric modulation. The “becoming postcard of the image” is an expression used by Kuntzel in an interview conducted by Jean-Yves Jouannais. Kuntzel explained that he was interested in seeing, through the “becoming postcard of the image,” the transformation of a moving, sonic, and colourful image of the ocean into a black and white, muted, and fixed representation.<renvoi id="re1no32" idref="no32" typeref="note">32</renvoi> Caused by the presence of the viewer in the installation, the frozen black and white image is the result of a reduction of potential of what was once an ongoing vital and elemental movement. In Kuntzel’s video installation, the becoming postcard of the image questions the becoming moving image of memory as produced by the encounter between the media object and its audience. Here, we are not dealing with the externalization of a memory onto a technical object; on the contrary, the installation shows the modulation of time produced in contact with the video-object. Furthermore, this relational encounter is based on the assumption that the medium performs better, perhaps even more optimally, when nobody is around. It is as if Kuntzel’s video images were performing not so much for a viewer, but for the environment itself, creating an atmospheric and elemental—rather than representational—space of sensory perception.</alinea></para><para id="pa7"><no>7</no><alinea><marquage typemarq="italique">The Waves</marquage> challenges assumptions about spectatorship, revealing the “submedial” space in which video-images operate, a space where the audience no longer defines the sense of time.<renvoi id="re1no33" idref="no33" typeref="note">33</renvoi> While art historian Claire Bishop defines an installation—as opposed to an exhibition—as a work that requires the presence of spectators to complete it, I read <marquage typemarq="italique">The</marquage> <marquage typemarq="italique">Waves</marquage> as precisely the metacritique of this idea: the spectator is not only completing, but modulating the media experience.<renvoi id="re1no34" idref="no34" typeref="note">34</renvoi> The viewer’s presence is relational to the screen, it functions within the installation by modulating the “zone of contact”<renvoi id="re1no35" idref="no35" typeref="note">35</renvoi>that, in turn, modifies the unfolding of sounds and images of the video presented. This particular approach to video leads to a conceptualization of media as a mode of producing a domain of experience that is both relational and yet cannot be fully accessed by the person who encounters it. In this case, the impossibility of experiencing the entirety of the object (the moving image stops and becomes black and white when the spectator comes too close) is not a question of scale, such as the climate, the stock market, or earlier forms of total art, but rather a question of operational agency. The operational agency of the video in Kuntzel’s installation allows us to think about our own media object as fully operating below and beyond our senses, in a realm no longer dictated by the human sense of time. What matters is not so much the positioning of the spectator’s experience through a unilateral encounter with a single screen that makes the past present through prosthetic means, but how video images constitute a relational media experience that takes place in the volume of time. </alinea></para><para id="pa8"><no>8</no><alinea>Two correlated elements of the video installation assume particular significance for my argument concerning the operational agency of video-objects. First, <marquage typemarq="italique">The Waves </marquage>constitutes what is called a relational environment where the media object offers its audience a form of interactive relationality in time and space. Here, the media object encapsulates a performative materiality that cannot be fully accessed by the viewer, creating temporalities that are not calibrated to the human sense of time. Second, <marquage typemarq="italique">The Waves </marquage>constitutes what is called an open-ended environment.<renvoi id="re1no36" idref="no36" typeref="note">36</renvoi> The open-ended quality of the installation allows the audience to choose the length of time they spend with the art form. The audience encounters the video as already performing and leaves the installation while the work is still running. This double structure (relational and open-ended) mimics to a certain extent social media platforms. Users engage with platforms such as Twitter, Facebook, Instagram as already performing and leave them while the platforms are still running, creating the so-called FoMO effect (Fear of Missing Out) that hooks the users who cannot possibly grasp the entirety of the media experience. In the case of <marquage typemarq="italique">The Wave</marquage>, the encounter with the screen takes place in a more intimate “zone of contact” than social media platforms. And yet, the installation operates both <marquage typemarq="italique">prior to </marquage>and <marquage typemarq="italique">following</marquage> the presence of the audience, much like massive relational platforms of media technology: neither seems to need an audience to perform fully and perform beyond the realm of the media object, as experienced by the user/audience. </alinea></para><para id="pa9"><no>9</no><alinea>Together, the open-ended environment and the relational aspect of <marquage typemarq="italique">The Waves</marquage> position video installation art as a useful context for thinking about memory formation in today’s increasingly video-based world. The experience of spatialized time-based objects—namely, objects made of time and displayed in a representational setting—grants a heightened access to the temporal dynamics at stake in our contemporary surroundings where video images modulate multiple senses of time, including non-human ones. The interaction between moving bodies and moving images can be approached both from the point of view of the temporal plurality that is constitutive of modernity, as Mary Ann Doane puts it,<renvoi id="re1no37" idref="no37" typeref="note">37</renvoi> but also from the point of view of a specific, not entirely cinematic form of temporal operations that shape the volume of time. Indeed, rather than being <marquage typemarq="italique">positioned</marquage>, the viewing subject of video installation art is constantly <marquage typemarq="italique">negotiating</marquage> time and space according to an ongoing moving media object that exceeds the realm of its perception. This spatio-temporal negotiation on the part of the viewer demands that we contemplate memory formation from a moving-image point of view. The time-based apparatus of such an environmental network implies a shift in our understanding of memory as image-consciousness to memory as moving-image consciousness. This moving-image consciousness, in its relation to the world and to itself, not only functions like a movie (with montage, cuts, and flashbacks; or processes of condensation and displacement), but like a multiplication of fleeting and blending split-screens that no longer need us in order to perform at their fullest. It is from this newly engendered sensory framework of media experience that memory formation should be reevaluated in today’s environment. </alinea></para></section1><section1 id="s1n3"><no>3</no><titre>Volume-Image </titre><para id="pa10"><no>10</no><alinea>By steering away from the cinematic form of representation, Kuntzel’s work radicalizes the image displayed on screen and opens up a space of visual intensities. The representational space of the installation becomes the critical stage<renvoi id="re1no38" idref="no38" typeref="note">38</renvoi> from which moving images can be questioned, repositioned, and extended to include the multilayered intensities constitutive of the volume-image. As film theorist Raymond Bellour suggests, what matters is not so much how video is not cinema, but rather how video renews the conditions of the cinema-image.<renvoi id="re1no39" idref="no39" typeref="note">39</renvoi> The central operation of video-time is the modulation of light to create diverse temporal speeds. In Kuntzel’s <marquage typemarq="italique">The Waves</marquage>, the screen becomes the visual field onto which processes of remembrance and disappearance are explored in volume. While the filmic time/movement image relied on a prosthetic definition of memory, the volume-image of video posits that memory is performing in relation to multiple temporalities. In his work, Kuntzel makes the unfolding and modulation of time the vector through which to negotiate new forms of emergence of visual intensities. At the heart of these intensities, memory becomes a matter of fluctuation and surfacing. Here, the notion of technique understood as that which grammatizes time<renvoi id="re1no40" idref="no40" typeref="note">40</renvoi> is expanded to take into account the volume of time as that which simultaneously modulates various temporalities. </alinea></para><para id="pa11"><no>11</no><alinea>The volume-image of video produces a temporal movement that encapsulates different temporalities operating simultaneously. These temporalities are understood as a volume of intensities that is being negotiated through the viewer’s interaction with the media object that operates both below and beyond human sensory-motor capacity. Video-time signatures take processes, such as condensation and displacement, repetition and modification of forms, outside of the narrative constraint and its temporal unity to experiment with multilayered temporalities within the single unit of the video tape. The video screen creates intensities of light and depth and becomes a surface to make visible the unfolding of time. This understanding of the screen as a surface is central to the volume-image of video. As media theorist Giuliana Bruno points out in her meditation on the layers of depth unfolding on screens, the surface is a “generative and defining aspect of the aesthetics of modernity.”<renvoi id="re1no41" idref="no41" typeref="note">41</renvoi> From the surface of media emerges “a non-linear sense of time and layers of temporal density.”<renvoi id="re1no42" idref="no42" typeref="note">42</renvoi> Because the modulation of time is the main operation that appears on screen, the emergence of a volume-image in video technology has consequences on our understanding of memory. Memory is no longer conceived as a stable trace that emerges from the past to inhabit the present of an experience. On the contrary, in video-time, memory becomes a matter of light, a trace that can be erased and traced again, where appearance and disappearance constitute the pulse and the rhythm of the video-image. Video-time morphs the screen into a surface where memory is seen at work in a volume. Important to Kuntzel’s media aesthetics is his attempt to manifest images as if they were emerging out of the video-object itself:</alinea>
+        <bloccitation>
+          <alinea>Unlike projection-cinema, the picture comes as if from the interior, from the back
+            of the screen—from the “canvas,” from the blank space—to materialize the “depth” of the
+            block, infinite depth, language-image volume, from which each utterance, each particular
+            image seems to spring, to rise up (surface of the screen, skin, contact zone, my eye
+            against this skin: <marquage typemarq="souligne">gaze</marquage>).<renvoi id="re1no43" idref="no43" typeref="note">43</renvoi> </alinea>
+        </bloccitation>
+        <alinea>The surface of the video-screen allows to see time as a volume from where to
+          interrogate the emergence of images in relation to technically produced time and movement.
+          To address the emergence of a new kind of memory at work in electronically produced
+          technology, Kuntzel refers to the video screen as a “videogram” with which he writes with
+          light. In her essay “Entre, dessus/dessous, à peine, imperceptiblement…” Anne-Marie Duguet
+          has distilled the process of writing with light central to Kuntzel’s videogram, and its
+          consequences on memory: </alinea>
+        <bloccitation>
+          <alinea>“Ce n’est pas d’un quelconque projet de moderniste de planéité dont relève cet
+            écran palimpseste, mais d'une analogie avec l’”écran de la mémoire”, zone d’affleurement
+            d'évènements psychiques, plan de frayage. […] La surface électronique est en outre
+            toujours disponible pour de nouvelles inscriptions à la manière de ce bloc-notes magique
+            auquel Freud compare le fonctionnement de l’appareil psychique.”<renvoi id="re1no44" idref="no44" typeref="note">44</renvoi></alinea>
+        </bloccitation>
+        <alinea>Duguet thus underlines a fundamental aspect of Kuntzel’s video work: the
+          palimpsestic quality of Kuntzel’s video screen recalls the particular functioning of
+          “screen memory,” or “screen memories” as titled by Sigmund Freud,<renvoi id="re1no45" idref="no45" typeref="note">45</renvoi> a process through which a memory functions to hide a mental, usually
+          unconscious, content. Central to these mechanisms of screen memories is the replacement of
+          a psychic content by a memory-image that is exempt from the important and shocking
+          elements tied to the original event. However, and while Kuntzel did refer to a Freudian
+          understanding of memory as analogous to both psychic and filmic apparatuses, I aim to show
+          that his videograms, and his installation <marquage typemarq="italique">The Waves
+          </marquage>in particular, push us to reevaluate our understanding of time and the layering
+          processes of memory at play in video images. </alinea></para></section1><section1 id="s1n4"><no>4</no><titre>Moving-Image-Memory</titre><para id="pa12"><no>12</no><alinea>In an article titled “A Note upon the Filmic Apparatus” published in 1976, Kuntzel pointed out that Freud’s discussion of the mind’s perceptive system and its <marquage typemarq="italique">mnesic</marquage> functions misses an important characteristic of the mental apparatus in its analogy with the writing tablet.<renvoi id="re1no46" idref="no46" typeref="note">46</renvoi> Freud did not take into account the fact that movement is central to both the perceptive and retentional systems. Famously commented on by Freud in “A Note on the ‘Mystic Writing Pad’” from 1925, the writing pad is a device made of two distinct layers: brown wax and transparent paper. With this writing tablet one can write, erase, and write again. Freud saw in the device a fruitful combination of two <marquage typemarq="italique">mnesic</marquage> systems: one that receives (input) and one that retains (storage). The interesting aspect of the tablet is that it allows one to have both an “unlimited receptive capacity”—one can write infinitely on the same sheet—and a “retention of permanent traces”—all writing traces are permanently inscribed in the wax of the writing pad.<renvoi id="re1no47" idref="no47" typeref="note">47</renvoi> Freud compared the paper cover with the system of Perception-Consciousness and its protective shield, the wax slab with the unconscious behind it, and the appearance and disappearance of the writing with the flickering-up and passing-away of consciousness in the process of perception.<renvoi id="re1no48" idref="no48" typeref="note">48</renvoi> At stake here is a process of selection, organization, and classification that is tied to making memory relevant for consciousness.<renvoi id="re1no49" idref="no49" typeref="note">49</renvoi> </alinea></para><para id="pa13"><no>13</no><alinea>However, three major aspects of the analogy between the writing tablet and the mental apparatus do not apply. First, in Freud’s explanation, it seems like the tablet accidentally retains all the traces. The traces left on the wax have no function for the apparatus of the writing pad, which is not the case with memory in its relation to consciousness. Freud did not grasp the imaginative function of recollection in shaping the process of retention. Second, old traces cannot emerge from the wax onto the writing pad, which is the case in the functioning of memory where memories can suddenly emerge from the unconscious to consciousness. The plasticity of the function of recollection in relation to consciousness is essential if one is to address the movement-memory nexus central to experience of the sensible. Lastly, the model of the writing pad lacks movement. While writing itself implies movement, the retention of these written traces is motionless on the writing pad. By contrast, the mental apparatus is made of temporal layers that fluctuate thus creating a metastable psychic environment that does not match the static model of inscription implied by Freud’s writing pad. </alinea></para><para id="pa14"><no>14</no><alinea>Kuntzel replaces Freud’s model of the writing pad with the filmic apparatus and sees the latter as an improvement as it allows two moving mechanisms to perfectly mirror each other: the mechanism of perception and the mechanism of inscription. Kuntzel draws on Freud’s analogy, but extends it to think the movement-memory nexus in terms of image projection. For him it is precisely the functioning of the cinematic machinery that accounts for the functioning of the psychic apparatus.<renvoi id="re1no50" idref="no50" typeref="note">50</renvoi> Kuntzel sees the connection between the filmic apparatus and the psychic one as operating as follows: “the screen serving as the covering sheet” and the “celluloid, as the wax.”<renvoi id="re1no51" idref="no51" typeref="note">51</renvoi> Still relying on the Freudian analogy, Kuntzel proposes a theoretical reconsideration of the cinema-image as built on the same model of the mental apparatus, both perceptive and retentional. This model permits one to think of the processes of condensation and displacement, central to the imagery of the unconscious for Freud, as analogous to the movement of the filmic apparatus. For Kuntzel the functioning of the unconscious and the film-work are analogous to the same moving image machinery.<renvoi id="re1no52" idref="no52" typeref="note">52</renvoi> </alinea></para></section1><section1 id="s1n5"><no>5</no><titre>Video-Work </titre><para id="pa15"><no>15</no><alinea>Kuntzel’s optical choice in favour of the film apparatus does not, however, stop at the level of the theoretical analogy. In his video practices, Kuntzel pushes the correlations between the mental and technical apparatus further to inscribe the volume of time as a central characteristic of the psychic functioning of image-making. By experimenting with video as a device to write with light in the volume of the image, Kuntzel collapses the division between the screen and the celluloid to reveal the depth/colour/shape of time. To him, video itself is “regarded as the very materialization of the block.”<renvoi id="re1no53" idref="no53" typeref="note">53</renvoi> While in cinema there is the possibility to detach “a picture from the tape strip, to select a piece of the film,” in video, as Kuntzel points out, “the picture is invisible on the tape, it appears only on the screen.”<renvoi id="re1no54" idref="no54" typeref="note">54</renvoi> The screen of video does not distinguish between that which is projected and that which is retained in the image; on the contrary, it assembles the multiplicities of temporal intensities to create the volume of video-time. Time becomes flow, images become variation of intensities, and traces appear to create the volume of time. For Kuntzel, the thick and opaque surface of the video screen allows for the analogy between mental apparatus and technical device to be completed: the video as an apparatus of trace formation becomes the operational tool to experiment with mechanisms of inscription, projection, and perception along with mechanisms of memory formation such as input, output, and storage. For Kuntzel, the video-object accounts for the functioning of the system of the unconscious, the memory formation tied in it, and its relation to the system of Perception-Consciousness. Preoccupied by the mental machinery of image production, Kuntzel’s video work explores the screen as a “zone” from which the system of Perception-Consciousness is made visible. As previously mentioned, the video is a “zone of contact” where forms, such as lights, colours, and shapes, manifest themselves onto the surface of the screen. Important to Kuntzel’s media aesthetics is his attempt to manifest images as if they were emerging out of the video-object itself, in video-time, to express what Kuntzel calls “the mad desire to make light visible.”<renvoi id="re1no55" idref="no55" typeref="note">55</renvoi> The unfolding of lights and the passing of time gives shape to the volume of video and creates a zone where memory traces can be in contact to rewrite the relation between culture and technique. Central to the media experience in Kuntzel’s work is an internal movement—the brush of time, the beam of light—that pertains to the image. The images on screen are given an internal movement, a dynamic one, that is the result of the assemblage of different time patterns. The space between culture and technique is a memory-volume where <marquage typemarq="italique">mnesic</marquage> traces are in movement. This movement takes place in a “zone of contact” where the video-object creates the volume of video-time.</alinea></para><para id="pa16"><no>16</no><alinea>Kuntzel’s work thus raises the question of memory formation—a process of perception/reception and inscription/storage—from the point of view of the conditions that allow for the experience of memory to emerge and to unfold in the realm of the technical. By creating an emerging world of trace formation, the screen suggests the volume of images and its perception by the viewer. Through the appearance and disappearance of lighting traces, the surface of the screen is analogous to the surface of consciousness where memory and the passing of images cannot be separated from one another. What emerges and what remains, what appears and disappears constitutes a mental volume explored in video-time. The flow of mental content, whether conscious or unconscious, is a volume made of different patterns of time creating a flow that is analogous to the machinery of the moving image as produced by the video-object. The surface of the screen, taken as a block of persistent malleability and motility, allows Kuntzel to question the work of memory and the memory at work in video. It engages in a reflection concerning which traces are retained from the traces that have been induced, experienced, and erased. It is within this fluctuating work of the trace found in Kuntzel’s videogram that an economy of <marquage typemarq="italique">différance</marquage> is found in video-time. In his essay “Freud ou la scène de l’écriture,” Derrida locates the economy of <marquage typemarq="italique">différance</marquage> in the body of the writing trace. For Derrida, Freud’s psychographic metaphor of the writing pad has theoretical value inasmuch as it allows for thinking about the economy of <marquage typemarq="italique">différance</marquage> as constitutive of memory, and memory as the constitutive essence of the psyche.<renvoi id="re1no56" idref="no56" typeref="note">56</renvoi> The trace is the condition of <marquage typemarq="italique">différance</marquage> understood as that which stands as invisible and unreachable, spawning in-between moments of impression. In this sense, and along Kuntzel’s interest in the genesis of images, time is an <marquage typemarq="italique">a priori </marquage>trace before it unfolds as a determination. Made of light, and more precisely of lighting signals, the electronic images in Kuntzel’s work produce fluctuations on the screen that recall the functioning of the psychic apparatus as a machinery of trace production. “Pure time flow” says Kuntzel’s video, “pure temporalisation” says Derrida’s essay. In between these two stands the need to update Freud’s reference to a writing machine. Derrida sees in Freud’s text on the <marquage typemarq="italique">Wunderblock</marquage> [the mystic writing pad] an opportunity to account for the work of the psyche as a work of spacing layers. A topography of traces, a map of spawning touches: the writing device is a stage onto which the psychic milieu gives shape to its untouchable, unreachable <marquage typemarq="italique">mnesic</marquage> traces. It is within this “lithography from before the words” that Derrida inscribes the work of <marquage typemarq="italique">différance</marquage> that conditions the spacing of time.<renvoi id="re1no57" idref="no57" typeref="note">57</renvoi> Writing within writing, writing before the words: for Derrida the poet is one who invents his own grammar. For Kuntzel, the poet has become an image technician who writes in the volume of time.<renvoi id="re1no58" idref="no58" typeref="note">58</renvoi> I see in Kuntzel’s videograms the invention of a memory-volume where traces exceed the realm of human perception. Image from before the image, flows of intensities tint the surface to give time its malleable force, its fluctuating strength emerging out of the screen. There is no simple translation at work in the image, only modalities of transductive forces shape the realm of the emergence of the image as a composition of temporal intensities.</alinea></para></section1><section1 id="s1n6"><no>6</no><titre><marquage typemarq="italique">Mnesic</marquage>-world</titre><para id="pa17"><no>17</no><alinea>The cultural layers inscribed between human and technical objects are the determining factors that condition and dictate the retention/recollection process grounded in technical objects. Technique is paired with a cultural relation that drastically changes the way one handles a technical object to retain, transform, and transmit information. As Gilbert Simondon puts it, “Culture et technique ne peuvent être complémentaires l'une de l'autre dans une position statique ; elles ne peuvent le devenir que grâce à un procédé cinématique de basculement et d'inversion selon un régime dont l'appropriation à chaque problème est peut-être la tâche la plus haute que puisse se proposer l'effort de la philosophie.”<renvoi id="re1no59" idref="no59" typeref="note">59</renvoi> In <marquage typemarq="italique">The Waves</marquage>, Kuntzel builds upon his early experimentations—the screen as a machinery of trace inscriptions<marquage typemarq="italique">—</marquage>to explore the newly engendered space between technique and culture where new memory traces get to be formed. To engage critically the notion of memory today, we need to account for temporal operations that are being performed beyond or below our sensory-motor perception. Doing so allows us to question the operational agency of electronic events. In today’s new media world, we are dealing with an open-ended media environment in which media objects have a material agency of their own. With independent agency, these objects not only generate sensory experience, but call into question new ways of using technical memory, as seen in the collection and use of data by third parties. The operational agency of new media objects allows us, on the one hand, to question how the technoscape of media objects actually operates at the level of memory formation. On the other hand, the relational aspect of such an environment requires us to think of the user as a disruptive force in relation to an operative media performance. Extending this connection between the video work and our environment, I would like to address the predatory dimension of data extraction and memory externalization, as exemplified by the instrumentalization of data in today’s political economy. The ongoing expansion of a global network of digital memory is not only fed by the constant uploading of data by individuals onto clouds and social networks. Digital platforms are produced precisely through the extraction of data from a realm of sensory experience that we cannot access, before information can be registered as information by the user. Furthermore, it is in the lack of access to the data that are being extracted from our daily life that the political stake of memory formation and knowledge formation resides today. Much attention has been paid to the question of privacy and security in the use and misuse of such data by third parties—an important problem that remains unsolved. Data-mining processes that operate below our sensory capacities drastically remodel our ability to perceive, retain, and recollect information, and it is from this framework that artificial intelligence and knowledge formation need to be evaluated today, a framework in which the human no longer stands as a main reference. </alinea></para><para id="pa18"><no>18</no><alinea>Kuntzel’s video work not only makes visible the electronically produced conditions that allow an individual to experience time as always in flight, but also anticipates the new connections between individuals and media environments that are shaping our lives today. By experimenting with computer-generated imagery, Kuntzel’s later work foresees the dynamic connection that is being created between media objects and psychic and collective entities. The spectrum of possibilities granted by the video image accounts for a definition of memory outside the opposition between remembering and forgetting, beyond the human sense of durational time. The relation between video and the psychic apparatus is tied to a transductive and operational rather than a representative image deployed in video-time. This video-work is an electric medium that permits one to think of the spectral quality of <marquage typemarq="italique">mnesic</marquage> traces as resonances. These <marquage typemarq="italique">mnesic</marquage> traces are made of flux and are metastable to the extent that they continually evolve in space and time while constituting a video-milieu of associated responses between perception, recollection, and inscription. The video screen operates as a visual spectrum onto which different patterns of time oscillate in a continuum that urges one to conceptualize the <marquage typemarq="italique">mnesic </marquage>system from the point of view of various modalities of moving presences. The volume-image of video-time suggests, rather than represents, such various modalities by making visible the appearance/emergence of the trace as well as its potential disappearance/erasure in the presence of the viewer. In today’s digital society, where behaviours are shaped by new and addictive technologies, we need to reassess our ability to anticipate technological changes to come. I see these reassessments taking place in the art world, but also in the classroom where new ways of relating to memory, knowledge, and experience need to be fostered. It is in this proliferating digital environment, where machines interact with other machines, that a performative theory of operational agency and memory displacement assumes its most urgent value. </alinea></para></section1></corps><partiesann lang="en"><grnotebio><notebio id="nb1" idrefs="au1" lang="en"><alinea>Anaïs Nony is Postdoctoral Fellow at the University of Fort Hare, South Africa. She specializes in the twentieth- and twenty-first-century genealogy of media art in the Francophone world and her research explores the role of new media technologies in shaping transcultural exchanges in and outside the West. She is co-editor of the peer-reviewed and quadrilingual journal <marquage typemarq="italique">La Deleuziana. </marquage>Her work has been published in <marquage typemarq="italique">Cultural Critique</marquage>, <marquage typemarq="italique">Philosophy Today</marquage>, <marquage typemarq="italique">The Moving Image</marquage>, <marquage typemarq="italique">Parallax</marquage>, <marquage typemarq="italique">French Review</marquage>, and <marquage typemarq="italique">Africultures</marquage>, among others.</alinea></notebio></grnotebio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>I acknowledge the Govan Mbeki Research and Development Centre of the University of
+          Fort Hare for the SARCHi Chair postdoctoral research fellowship award that facilitated the
+          writing of the present article. All credit for DHET purposes for this article is
+          attributed to the SARChI Chair in Social Change at the University of Fort Hare. I also
+          want to thank Jane Blocker, Mark B. N. Hansen, Rita Kompelmakher, John Mowitt, Charlotte
+          Taubel, Ashley Scarlett, Erika Weiberg, and Chanelle Dupuis. Special thanks to the
+          editorial team at <marquage typemarq="italique">Intermediality</marquage> for their
+          dedicated work and support.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>See the archive section in Kuntzel’s dvd-rom, <marquage typemarq="italique">Title
+          TK</marquage>, Dijon, Les presses du réel/Musée des Beaux-Arts de Nantes,
+          coll. “Anarchive,” 2006. </alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>As a frequency response technology that stores continuous waves of red, blue, and
+          green intensities, analog video was first developed for live broadcasting on mechanical
+          television. In 1967, the introduction to the market of the Portapak, a self-contained
+          video tape recording system, allowed artists, activists, and journalists to shoot and
+          record in streets, factories, and the intimate sphere of families. </alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>Ina Blom, <marquage typemarq="italique">The Autobiography of Video. The Life and
+          Times of a Memory Technology</marquage>, Berlin, Sternberg Press, 2016, p. 102.</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>Christine Van Assche, “De l’apport du vidéographique,” in Raymond Bellour, Catherine
+          David, and Christine Van Assche (eds.), <marquage typemarq="italique">Passages de
+          l’image</marquage>, Paris, Éditions du Centre Pompidou, 1990, p. 71.</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>Raymond Bellour, “La double hélice,” in <marquage typemarq="italique">ibid.</marquage>, p. 37–56.</alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea><marquage typemarq="italique">Du mode d’existence des objets techniques</marquage>
+          [<marquage typemarq="italique">On the Mode of Existence of Technical Objects</marquage>]
+          is a book by Gilbert Simondon in which the philosopher develops, as early as 1958, a
+          different conceptual framework for thinking about the existence of technical objects in
+          relation to culture, society, and what he calls psychic and collective beings. Simondon
+          grounds an ethics of technicity where objects are distinguished from tools and
+          instruments. Gilbert Simondon, <marquage typemarq="italique">Du mode d’existence des
+          objets techniques</marquage>, Paris, Aubier, coll. “Philosophie,” 2012 [1958].</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>Friedrich Kittler, Siegfried Zielinski, and Wolfgang Ernst emphasize the
+          time-critical dimensions of modern media technologies. See Friedrich Kittler, <marquage typemarq="italique">Gramophone, Film, Typewriter</marquage>, transl. from German by
+          Geoffroy Winthrop and Michael Wutz, Palo Alto, California, Stanford University Press,
+          1999, available online at: <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="https://archive.org/details/WritingScienceFriedrichKittlerGramophoneFilmTypewriterStanfordUniversityPress1999/page/n4">https://archive.org/details/WritingScienceFriedrichKittlerGramophoneFilmTypewriterStanfordUniversityPress1999/page/n4</liensimple>
+          (accessed 8 June 2019); Siegfried Zielinski, <marquage typemarq="italique">Deep Time of
+          the Media: Toward an Archaeology of Hearing and Seeing by Technical Means</marquage>,
+          Cambridge, Massachusetts, MIT Press, 2006; Wolfgang Ernst, <marquage typemarq="italique">Digital Memory and the Archive</marquage>, Minneapolis, Minnesota, University of
+          Minnesota Press, 2013.</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>Blom, 2016<marquage typemarq="italique">, </marquage>p. 12.</alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 21.</alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 25.</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 26.</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 99.</alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 24.</alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea>See Boris Groys, <marquage typemarq="italique">Under Suspicion: A Phenomenology of
+          Media</marquage>, transl. from German by Carsten Strathausen, New York, Columbia
+          University Press, 2012; Katherine N. Hayles, <marquage typemarq="italique">How We Became
+          Posthuman: Virtual Bodies in Cybernetics, Literature, and Informatics</marquage>, Chicago,
+          University of Chicago Press, 2008 [1999]; Mark B. N. Hansen, <marquage typemarq="italique">Feed-Forward: On the Future of the Twenty-First-Century Media</marquage>, Chicago,
+          University of Chicago Press, 2014. </alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea>Bernard Stiegler, <marquage typemarq="italique">Technics and Time 3. Cinematic Time
+          and the Question of Malaise</marquage>, transl. from French by Stephen Barker, Stanford,
+          California, Stanford University Press, 2010 [2001].</alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>Mark B. N. Hansen, <marquage typemarq="italique">New Philosophy for New
+          Media</marquage>, Cambridge, Massachusetts, MIT Press, 2004, p. 258.</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea>Mark B. N. Hansen’s notions of time, temporality, and experience are grounded in a
+          Bergsonian understanding of matter, duration, and memory. See Henri Bergson, <marquage typemarq="italique">Matière et mémoire</marquage>, Paris, Presses Universitaires de
+          France, 1965 [1896]. </alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea>Jacques Derrida, <marquage typemarq="italique">L’écriture et la
+          différence</marquage>, Paris, Éditions du Seuil, 1967; Jacques Derrida and Bernard
+          Stiegler, <marquage typemarq="italique">Echographies de la télévision</marquage>, Paris,
+          Galilée, coll. “Débats,” 1996; Bernard Stiegler, <marquage typemarq="italique">La
+          technique et le temps 3. Le temps du cinéma et la question du mal-être</marquage>, Paris,
+          Galilée, coll. “La Philosophie en effet,” 2001.</alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea>Gilles Deleuze, “Preface to the English Translation,”<marquage typemarq="italique">
+          Cinema 2. </marquage><marquage typemarq="italique">The Time-Image</marquage>, transl. from
+          French by Hugh Tomlinson and Robert Galeta, Minneapolis, Minnesota, University of
+          Minnesota Press, 1989, p. 3.</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>.</alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>Yvonne Spielmann, <marquage typemarq="italique">Video: The Reflexive
+          Medium</marquage>, transl. from German by Anja Well and Stan Jone, Cambridge,
+          Massachusetts, MIT Press, 2008.</alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea>Mieke Bal, <marquage typemarq="italique">Thinking in Film. The Politics of Video
+          Installation According to Eija-Liisa Ahtila</marquage>, London, Bloomsburry, 2013,
+          p. 105.</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea>Anne-Marie Duguet, <marquage typemarq="italique">Déjouer l’image : créations
+          électroniques et numériques</marquage>, Paris, Jacqueline Chambon, coll. “Critiques
+          d’art,” 2001, p. 20–23.</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea>Developed in Kuntzel, 2006. </alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea>See Antoinette Rouvroy and Thomas Berns, “Gouvernementalité algorithmique et
+          perspectives d’émancipation,” <marquage typemarq="italique">Réseaux</marquage>, vol. 1,
+          no. 177, 2013, p. 163-196, available online at: <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:type="simple" xlink:href="https://www.cairn.info/revue-reseaux-2013-1-page-163.htm">https://www.cairn.info/revue-reseaux-2013-1-page-163.htm</liensimple> (accessed 8
+          June 2019).</alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>Kuntzel, 2006, p. 483.</alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage>., archive section of the
+          dvd-rom.</alinea>
+      </note>
+      <note id="no29">
+        <no>29</no>
+        <alinea>In 2002, Thierry Kuntzel created a 4 min 30 sec video (colour, sound) titled
+          <marquage typemarq="italique">W (THE WAVES / THE YEARS)</marquage>, which constitutes the
+          first iteration of his installation <marquage typemarq="italique">The</marquage> <marquage typemarq="italique">Waves.</marquage></alinea>
+      </note>
+      <note id="no30">
+        <no>30</no>
+        <alinea>“Layout, perception, return nearly the almost same, wash, backwash, impossible time:
+          <marquage typemarq="italique">The Waves </marquage>is a hommage to Virginia Woolf (to her
+          book with that title), to her writing, to her invention of time, to her as a person—a life
+          lived on the verge of drowning (which is how she ended), between terror and ecstasy”
+          (Kuntzel, 2006, archive section of the dvd-rom). See also Virginia Woolf, <marquage typemarq="italique">The Waves</marquage>, London, Hogarth Press, 1925.</alinea>
+      </note>
+      <note id="no31">
+        <no>31</no>
+        <alinea>Kuntzel, 2006, p. 483.</alinea>
+      </note>
+      <note id="no32">
+        <no>32</no>
+        <alinea>Thierry Kuntzel in an interview by Jean-Yves Jouannais in the documentary <marquage typemarq="italique">L’Eau</marquage>, made by Jouannais for Arté channel. An excerpt is
+          available on Vimeo (2013): <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:type="simple" xlink:href="https://vimeo.com/58473589">https://vimeo.com/58473589</liensimple> (accessed
+          8 June 2019). </alinea>
+      </note>
+      <note id="no33">
+        <no>33</no>
+        <alinea>On the notion of the submedial, see Groys, 2012, p. 17–80.</alinea>
+      </note>
+      <note id="no34">
+        <no>34</no>
+        <alinea>Claire Bishop, <marquage typemarq="italique">Installation Art: A Critical
+          History</marquage>, New York, Routledge, 2005. </alinea>
+      </note>
+      <note id="no35">
+        <no>35</no>
+        <alinea>Kuntzel, 2006, p. 483.</alinea>
+      </note>
+      <note id="no36">
+        <no>36</no>
+        <alinea>Kate Mondloch, <marquage typemarq="italique">Screens: Viewing Media Installation
+          Art</marquage>, Minneapolis, Minnesota, University of Minnesota Press, 2010,
+          p. 43.</alinea>
+      </note>
+      <note id="no37">
+        <no>37</no>
+        <alinea>Mary Ann Doane, <marquage typemarq="italique">The Emergence of Cinematic Time:
+          Modernity, Contingency, the Archive</marquage>, Cambridge, Massachusetts, Harvard
+          University Press, 2002.</alinea>
+      </note>
+      <note id="no38">
+        <no>38</no>
+        <alinea>The idea of the theatricality of video art is brilliantly developed by Mathilde
+          Roman in <marquage typemarq="italique">On Stage: The Theatrical Dimension of Video
+          Image</marquage>, transl. from French by Charles Penwarden, Bristol, UK, Intellect,
+          2016.</alinea>
+      </note>
+      <note id="no39">
+        <no>39</no>
+        <alinea>Raymond Bellour, <marquage typemarq="italique">Between-the-Images</marquage>,
+          Zurich, JRP-Ringier/Dijon, Les Presses du réel, 2013, p. 172.</alinea>
+      </note>
+      <note id="no40">
+        <no>40</no>
+        <alinea>Derrida, 1967; Stiegler, 2001.</alinea>
+      </note>
+      <note id="no41">
+        <no>41</no>
+        <alinea>“Here the surface is considered a generative and defining aspect of the aesthetics
+          of modernity, and reconsidered as an element of mediatic transformation as we observe a
+          ‘resurfacing’ taking place on the contemporary screen” (Giuliana Bruno, <marquage typemarq="italique">Surface: Matters of Aesthetics, Materiality, and Media</marquage>,
+          Chicago, Chicago University Press, 2014, p. 55). </alinea>
+      </note>
+      <note id="no42">
+        <no>42</no>
+        <alinea><marquage typemarq="italique"> Ibid</marquage>., p. 116.</alinea>
+      </note>
+      <note id="no43">
+        <no>43</no>
+        <alinea>Kuntzel, 2006, p. 483.</alinea>
+      </note>
+      <note id="no44">
+        <no>44</no>
+        <alinea>It is not a random project of modern flatness that this palimpsestic screen raises,
+          but an analogy with “screen memory,” a zone of outcrop made of psychic events, a spawning
+          view. […] Additionally, the electronic surface is always available for new inscriptions in
+          a writing-pad fashion similar to the one that is compared to the functioning of the
+          psychic apparatus by Freud” Duguet, 2001, p. 64–65. Translation Charlotte Taubel.</alinea>
+      </note>
+      <note id="no45">
+        <no>45</no>
+        <alinea>Sigmund Freud, “Screen Memories,” in James Strachey (ed.), <marquage typemarq="italique">The Standard Edition of the Complete Psychological Works of Sigmund
+          Freud (SE)</marquage>, London, Hogarth Press, 1953–1974, t. 3, p. 301–322.</alinea>
+      </note>
+      <note id="no46">
+        <no>46</no>
+        <alinea>Thierry Kuntzel, “A Note upon the Filmic Apparatus,” <marquage typemarq="italique">Quaterly Review of Film Study</marquage>, vol. 1, no. 3, August 1976, p. 266–71.</alinea>
+      </note>
+      <note id="no47">
+        <no>47</no>
+        <alinea>Sigmund Freud, “A Note on the ‘Mystic Writing Pad’,” <marquage typemarq="italique">General Psychological Theory</marquage>, Chapter XIII, 1925, available online at:
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:type="simple" xlink:href="http://cscs.res.in/dataarchive/textfiles/textfile.2009-04-28.9188053100">http://cscs.res.in/dataarchive/textfiles/textfile.2009-04-28.9188053100</liensimple>
+          (accessed 8 June 2019). Freud contrasts the new at the time device of the writing pad with
+          more traditional <marquage typemarq="italique">mnesic</marquage> techniques. Simple notes
+          in writing, often used to enhance memory function, require their users to know where they
+          are deposited, in order to be reproduced in an exact and unaltered way. Questioning
+          processes of retrieval is particularly relevant when such “simple notes in writing” are
+          accessed through locked technological devices. Along these lines, any computer user can
+          remember the experience of facing the screen of their computer and having forgotten their
+          password, thereby being prevented from accessing their content (emails, photos, bank
+          information). In such cases, the screens act as gatekeepers to stored information and
+          require users to adjust to new processes of retrieval that are implemented in the device
+          itself.</alinea>
+      </note>
+      <note id="no48">
+        <no>48</no>
+        <alinea><marquage typemarq="italique">Ibid.</marquage>, p. 211.</alinea>
+      </note>
+      <note id="no49">
+        <no>49</no>
+        <alinea>Similar to the perceptive apparatus of the mind, the writing pad is composed of an
+          external layer that filters the stimuli coming in—this function is performed by the
+          transparent sheet—and of an internal layer that retains the stimuli—this function is
+          performed by the wax. However, contrary to the system of Perception-Consciousness as
+          developed by Freud, “which receives perceptions but retains no permanent trace of them” at
+          the level of consciousness, the writing pad has the capacity to leave permanent traces on
+          the wax. The wax itself becomes the central characteristic of the writing pad in its
+          analogy with the unconscious. The top sheet represents the infinite possibilities of
+          perception and the wax represents the place where retained traces are kept after being
+          cleared from consciousness. <marquage typemarq="italique">Ibid.</marquage>,
+          p. 208.</alinea>
+      </note>
+      <note id="no50">
+        <no>50</no>
+        <alinea>Kuntzel distanced himself from cinema’s narrative-representative patterns and
+          cinema’s capacity to represent our mental abstractions. Kuntzel, 2006, p. 471.</alinea>
+      </note>
+      <note id="no51">
+        <no>51</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 473.</alinea>
+      </note>
+      <note id="no52">
+        <no>52</no>
+        <alinea>Thomas Elsaesser, “Freud and the Technical Media. The Enduring Magic of the
+          Wunderblock,” in Erkki Huhtamo and Jussi Parikka (eds.), <marquage typemarq="italique">Media Archaeology</marquage>, Berkeley, California, University of California Press, 2011,
+          p. 95–115. In his article, Thomas Elsaesser points out the necessity of rethinking Freud’s
+          legacy with respect to technical media. While Elsaesser’s article provides one of the rare
+          accounts of the relation between technical media and Freud’s theory of the psyche as an
+          optical machinery of trace inscription, unfortunately, the article does not engage
+          Kuntzel’s numerous articles on the relation between the film-work and the dream-work.
+          Furthermore, it does not address how the medium of video provides a useful tool to
+          reevaluate the Freudian framework of memory in its analogy to technical devices. </alinea>
+      </note>
+      <note id="no53">
+        <no>53</no>
+        <alinea>Kuntzel, 2006, p. 486.</alinea>
+      </note>
+      <note id="no54">
+        <no>54</no>
+        <alinea><marquage typemarq="italique">Ibid</marquage>., p. 495.</alinea>
+      </note>
+      <note id="no55">
+        <no>55</no>
+        <alinea><marquage typemarq="italique">Ibid., </marquage>p. 468.</alinea>
+      </note>
+      <note id="no56">
+        <no>56</no>
+        <alinea>Derrida, 1967, p. 299.</alinea>
+      </note>
+      <note id="no57">
+        <no>57</no>
+        <alinea><marquage typemarq="italique">Ibid., </marquage>p. 307.</alinea>
+      </note>
+      <note id="no58">
+        <no>58</no>
+        <alinea>I borrow the notion of “image technician” from Spielmann, 2008, p. 73.</alinea>
+      </note>
+      <note id="no59">
+        <no>59</no>
+        <alinea>“Culture and technique cannot be complementary in a static position; they may only
+          become so through a cinematic process of tilting and inversion under a regime whose
+          appropriation to each issue is perhaps the most important task that philosophy’s effort
+          could propose to attend to.” Gilbert Simondon, “Culture et Technique” in <marquage typemarq="italique">Sur la Technique (1953–1983)</marquage>, Paris, Presses Universitaires
+          de France, 2014, p. 329. Translation: Charlotte Taubel.</alinea>
+      </note>
+    </grnote></partiesann></article>

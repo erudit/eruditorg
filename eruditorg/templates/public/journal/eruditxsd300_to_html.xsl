@@ -1377,6 +1377,7 @@
       <xsl:apply-templates select="legende/sstitre"/>
       <xsl:apply-templates select="objetmedia/audio | objetmedia/video"/>
       <xsl:apply-templates select="legende/node()[not(self::titre)][not(self::sstitre)]"/>
+      <xsl:apply-templates select="source"/>
     </div>
   </xsl:template>
 
