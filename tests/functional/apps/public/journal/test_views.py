@@ -1979,6 +1979,34 @@ class TestArticleDetailView:
         else:
             assert expected_alert not in html
 
+    @pytest.mark.parametrize('fixture, section_id, expected_title', (
+        # Articles without specified titles in the XML, default values should be used.
+        ('1054008ar', 'grnotebio', 'Note biographique'),
+        ('1054008ar', 'grnote', 'Notes'),
+        ('1059303ar', 'merci', 'Remerciements'),
+        # Articles with specified titles in the XML.
+        ('009676ar', 'grnotebio', 'Collaboratrice'),
+        ('009381ar', 'grnote', 'Notas'),
+        ('1040250ar', 'merci', 'Remerciements et financement'),
+    ))
+    def test_article_annex_section_titles(self, fixture, section_id, expected_title):
+        article = ArticleFactory(
+            from_fixture=fixture,
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        article_toc = dom.find('nav', {'class': 'article-table-of-contents'})
+        section = dom.find('section', {'id': section_id})
+        assert article_toc.find('a', {'href': '#' + section_id}).text == expected_title
+        assert section.find('h2').text == expected_title
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
