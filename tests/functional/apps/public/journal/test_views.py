@@ -2007,6 +2007,22 @@ class TestArticleDetailView:
         assert article_toc.find('a', {'href': '#' + section_id}).text == expected_title
         assert section.find('h2').text == expected_title
 
+    def test_media_object_source(self):
+        article = ArticleFactory(
+            from_fixture='1065018ar',
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        media_object = dom.find('div', {'class': 'media'})
+        assert media_object.find('cite', {'class': 'source'}).text == 'Courtesy of La compagnie'
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
