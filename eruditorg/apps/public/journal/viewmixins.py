@@ -262,12 +262,12 @@ class ContributorsMixin:
             for director in issue.erudit_object.get_directors():
                 contributors['directors'].append({
                     'name': director.format_name(),
-                    'role': director.role.get(language, director.role.get('fr')),
+                    'role': director.role.get(language),
                 })
             for editor in issue.erudit_object.get_editors():
                 contributors['editors'].append({
                     'name': editor.format_name(),
-                    'role': editor.role.get(language, editor.role.get('fr')),
+                    'role': editor.role.get(language),
                 })
 
         return contributors

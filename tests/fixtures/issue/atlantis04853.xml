@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="p1164268" date="2019-09-17" app="Tournesol 0.5.4"/>
+<copyright>
+	<year>2018</year>
+<contribution>
+<artificialperson>
+	<name>Mount Saint Vincent University</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="en">Copyright Holder</label>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="es">Todos los derechos reservados</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2018">
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/atlantis/2018/v39/n2</url>
+  <nbarticle>10</nbarticle>
+  <revue id="atlantis012" lang="en fr">
+    <titrerev>Atlantis</titrerev>
+    <sstitrerev>Critical Studies in Gender, Culture &amp; Social Justice</sstitrerev>
+    <titrerevparal lang="fr">Atlantis</titrerevparal>
+    <sstitrerevparal lang="fr">Études critiques sur le genre, la culture, et la justice</sstitrerevparal>
+    <titrerevabr>atlantis</titrerevabr>
+    <idissnnum>1715-0698</idissnnum>
+    <directeur sexe="feminin">
+      <fonction lang="en">Managing Editor</fonction>
+      <nompers>
+        <prenom>Katherine</prenom>
+        <nomfamille>Barrett</nomfamille>
+      </nompers>
+      <key>managingeditor</key>
+    </directeur>
+    <redacteurchef sexe="feminin" typerc="regulier">
+      <fonction lang="en">Editor-in-Chief</fonction>
+      <nompers>
+        <prenom>Gayle</prenom>
+        <nomfamille>MacDonald</nomfamille>
+      </nompers>
+      <key>editorinchief</key>
+    </redacteurchef>
+  </revue>
+  <numero id="atlantis04853">
+    <volume>39</volume>
+    <nonumero>2</nonumero>
+    <pub>
+      <annee>2018</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2019-09-11</date>
+    </pubnum>
+  </numero>
+  <editeur>
+    <nomorg>Mount Saint Vincent University</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>All Rights Reserved © <nomorg>Mount Saint Vincent University</nomorg>, 2018</droitsauteur>
+</infosommaire>
+<article doi="10.7202/1064069ar" idproprio="1064069ar" lang="en"
+  ordseq="1" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="854" unite="ko">/revue/atlantis/2018/v39/n2/1064069ar.pdf</urlpdf>
+  <pagination>
+    <ppage>1</ppage>
+    <dpage>22</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Research</surtitre>
+              <titre>In Defense of Safe Spaces: A Phenomenological Account</titre>
+            
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+                
+    <prenom>Jina</prenom>
+                
+                
+    <nomfamille>Fast</nomfamille>
+                
+   </nompers>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+            <alinea>The notion of “safe space” is one example of a theoretical and pedagogical
+                resource grounded in studies of marginalized experiences that has recently undergone
+                backlash in dominant culture and the academy. In this essay, I offer a defense of
+                safe spaces using the theoretical resources of phenomenology and offer suggestions
+                for moving past the dichotomy of safe versus unsafe space. I argue that safe space
+                should be understood not as static and acontextual, as truly “safe” or “unsafe,” but
+                through the relational work of cultivating such spaces. Furthermore, far from
+                restricting dialogue in the classroom, safe spaces encourage dialogue through
+                requiring students to utilize critical thinking in their exchanges and through
+                supporting marginalized students whose positions and humanity often fail to be
+                recognized in dominant spaces.</alinea>
+        
+ </resume><grmotcle lang="en">
+            
+            <motcle>pedagogy</motcle>
+            <motcle>gendered spaces</motcle>
+            <motcle>phenomenology</motcle>
+        </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1064070ar" idproprio="1064070ar" lang="en"
+  ordseq="2" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="687" unite="ko">/revue/atlantis/2018/v39/n2/1064070ar.pdf</urlpdf>
+  <pagination>
+    <ppage>23</ppage>
+    <dpage>39</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Research</surtitre>
+              <titre>Affective Engagements in the Classroom: An Autoethnography of Exits and
+                Openings</titre>
+            
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+                
+    <prenom>Maggie</prenom>
+                
+                
+    <nomfamille>FitzGerald</nomfamille>
+                
+   </nompers>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+                
+    <prenom>Lauren</prenom>
+                
+                
+    <nomfamille>Montgomery</nomfamille>
+                
+   </nompers>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+            <alinea>We provide an autoethnography of gendered encounters in a graduate seminar.
+                We use an affective lens to argue that these encounters stem from "more than" just
+                individual sexism. We also use affect to identify how these encounters related to
+                both exits from and openings for knowledge production in the classroom.</alinea>
+        
+ </resume><grmotcle lang="en">
+            
+            <motcle>affect</motcle>
+            <motcle>autoethnography</motcle>
+            <motcle>post-secondary education</motcle>
+            <motcle>knowledge production</motcle>
+            <motcle>graduate school</motcle>
+        </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1064071ar" idproprio="1064071ar" lang="en"
+  ordseq="3" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="4,5" unite="mo">/revue/atlantis/2018/v39/n2/1064071ar.pdf</urlpdf>
+  <pagination>
+    <ppage>40</ppage>
+    <dpage>56</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Research</surtitre>
+              <titre>Legal Solutions to Street Sexual Harassment in the #MeToo Era</titre>
+            
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+                
+    <prenom>Denise</prenom>
+                
+                
+    <nomfamille>Brunsdon</nomfamille>
+                
+   </nompers>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+            <alinea>Street sexual harassment is the unwelcome commoditization of women’s bodies by fellow citizen-strangers. This harm is under-recognized by traditional, Anglocentric common law. This paper begins by discussing the #MeToo wave, in particular by suggesting that it is a re-branded version of the feminist movement that is helpful but not sufficient to address street sexual harassment. Second, the paper outlines how street sexual harassment harms women. Third, some contextual analysis of why governments and legal systems have been slow to address street sexual harassment are provided. Fourth, the paper assesses the various areas of the law that may be used to curb street sexual harassment. Finally, this paper canvasses the ways other governments have taken action against street sexual harassment. Ultimately, this paper argues that the lack of protection of the basic civil right to use the public sphere free of sexual harassment is a failure of the Canadian justice system, and a criminal response remains essential. Other methods of legal regulation are inadequate without the social condemnation that criminal law carries.</alinea>
+        
+ </resume><grmotcle lang="en">
+            
+            <motcle>street sexual harassment</motcle>
+            <motcle>#MeToo</motcle>
+            <motcle>street harassment</motcle>
+            <motcle>catcalling</motcle>
+            <motcle>law</motcle>
+            <motcle>sexism</motcle>
+            <motcle>feminism</motcle>
+            <motcle>Canada</motcle>
+            <motcle>United States</motcle>
+            <motcle>criminal</motcle>
+            <motcle>critical legal studies</motcle>
+            <motcle>legislation</motcle>
+        </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1064072ar" idproprio="1064072ar" lang="en"
+  ordseq="4" qualtraitement="minimal" typeart="autre">
+  <urlpdf taille="388" unite="ko">/revue/atlantis/2018/v39/n2/1064072ar.pdf</urlpdf>
+  <pagination>
+    <ppage>57</ppage>
+    <dpage>60</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Special Section</surtitre>
+                  <titre>Editorial</titre>
+                <sstitre>Reflections on the Hypatia Controversy: Philosophical Methods and Social Justice</sstitre>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Alison</prenom>
+    <nomfamille>Suen</nomfamille>
+   </nompers>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Chloë</prenom>
+    <nomfamille>Taylor</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1064073ar" idproprio="1064073ar" lang="fr"
+  ordseq="5" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="613" unite="ko">/revue/atlantis/2018/v39/n2/1064073ar.pdf</urlpdf>
+  <pagination>
+    <ppage>61</ppage>
+    <dpage>73</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Special Section</surtitre>
+              <titre>The Benefits and Burdens of Engaging in Argumentation: Trans*feminist Reflections
+                on Tuvel’s “In Defense of Transracialism”</titre>
+            
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+                
+    <prenom>Stephanie</prenom>
+                
+                
+    <nomfamille>Kapusta</nomfamille>
+                
+   </nompers>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+            <alinea>After considering some ways of assessing argumentation, I present an ethical
+                assessment of Tuvel's argument in her article “In Defense of Transracialism.” My
+                claim is that some transgender women engaging with Tuvel are exposed to certain
+                kinds of injustice associated with argumentational work, namely, disproportionate
+                burdens and risk of psychological harm.</alinea>
+        
+ </resume><grmotcle lang="en">
+            
+            <motcle>argumentation</motcle>
+            <motcle>argumentational injustice</motcle>
+            <motcle>transgender</motcle>
+            <motcle>Rebecca Tuvel</motcle>
+            <motcle>misgendering</motcle>
+        </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1064074ar" idproprio="1064074ar" lang="en"
+  ordseq="6" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="597" unite="ko">/revue/atlantis/2018/v39/n2/1064074ar.pdf</urlpdf>
+  <pagination>
+    <ppage>74</ppage>
+    <dpage>85</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Special Section</surtitre>
+              <titre>Disciplinary Matters in the <marquage typemarq="italique">Hypatia</marquage> Controversy</titre>
+            
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+                
+    <prenom>Namrata</prenom>
+                
+                
+    <nomfamille>Mitra</nomfamille>
+                
+   </nompers>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+            <alinea>The problem that was thrown up during the <marquage typemarq="italique">Hypatia</marquage> controversy is a
+                systemic one. I argue that objections to Tuvel's essay regarding its exclusion of
+                perspectives from marginalized points of view should be re-framed as a disciplinary
+                wide issue. I show some ways in which the universal applicability and vantage point
+                often assumed in canonical writings in philosophy, specifically on history and
+                personal identity, emerge from specific contexts and points of view. I demonstrate
+                what is at stake in recognizing the particularity of these contexts. I find that the
+                false dichotomy between seemingly interested “Social justice” scholarship and
+                disinterested inquiries into truth, which I hold perpetuates the disciplinary
+                conditions that produced the <marquage typemarq="italique">Hypatia</marquage> controversy.</alinea>
+        
+ </resume><grmotcle lang="en">
+            
+            <motcle><marquage typemarq="italique">Hypatia</marquage> controversy</motcle>
+            <motcle>Rebecca Tuvel</motcle>
+            <motcle>social justice</motcle>
+        </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1064075ar" idproprio="1064075ar" lang="en"
+  ordseq="7" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="609" unite="ko">/revue/atlantis/2018/v39/n2/1064075ar.pdf</urlpdf>
+  <pagination>
+    <ppage>86</ppage>
+    <dpage>98</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Special Section</surtitre>
+              <titre>Allegories of Gender: Transgender Autology versus Transracialism</titre>
+            
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Aniruddha</prenom>
+    <nomfamille>Dutta</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+            <alinea>This article explores how race and gender become distinguished from each                other in contemporary scholarly and activist debates on the comparison between                transracialism and transgender identities. The article argues that                transracial-transgender distinctions often reinforce divides between autological                (self-determined) and genealogical (inherited) aspects of subjectivity and obscure                the constitution of this division through modern technologies of power.</alinea>
+        
+ </resume><grmotcle lang="en">
+            
+            <motcle>transracialism</motcle>
+            <motcle>gender identity</motcle>
+            <motcle>autology</motcle>
+        </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1064076ar" idproprio="1064076ar" lang="en"
+  ordseq="8" qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="350" unite="ko">/revue/atlantis/2018/v39/n2/1064076ar.pdf</urlpdf>
+  <pagination>
+    <ppage>99</ppage>
+    <dpage>101</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Conversation</surtitre>
+              <titre>Book Review</titre>
+            
+                <trefbiblio>
+Renate Klein. 2017. <marquage typemarq="italique">Surrogacy: A Human Rights Violation</marquage>. Victoria, Australia: Spinifex Press</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+                
+    <prenom>Sri</prenom>
+                
+                
+    <nomfamille>Craven</nomfamille>
+                
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1064077ar" idproprio="1064077ar" lang="en"
+  ordseq="9" qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="332" unite="ko">/revue/atlantis/2018/v39/n2/1064077ar.pdf</urlpdf>
+  <pagination>
+    <ppage>102</ppage>
+    <dpage>103</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Conversation</surtitre>
+                  <titre>Book Note</titre>
+                    <trefbiblio>
+Allison Hargreaves. 2017. <marquage typemarq="italique">Violence Against Indigenous Women: Literature, Activism, Resistance, Waterloo</marquage>: Wilfrid Laurier University Press</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Christine</prenom>
+    <nomfamille>Lorre-Johnston</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1064078ar" idproprio="1064078ar" lang="en"
+  ordseq="10" qualtraitement="minimal" typeart="autre">
+  <urlpdf taille="318" unite="ko">/revue/atlantis/2018/v39/n2/1064078ar.pdf</urlpdf>
+  <pagination>
+    <ppage>104</ppage>
+    <dpage>105</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Creation</surtitre>
+                  <titre>Gathering</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Lorri</prenom><autreprenom>Neilsen</autreprenom>
+    <nomfamille>Glenn</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+</sommaire>

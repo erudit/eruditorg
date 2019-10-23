@@ -3,6 +3,7 @@ import unittest.mock
 
 from django.http import Http404
 from django.test import RequestFactory
+from django.test.utils import override_settings
 from django.views.generic import DetailView
 
 from erudit.test.factories import (
@@ -378,3 +379,32 @@ class TestContributorsMixin:
             issue=issue if use_issue else None,
         )
         assert contributors == expected_contributors
+
+    @pytest.mark.parametrize('fixture, language, expected_contributors', (
+        ('atlantis04853', 'fr', {
+            'directors': [{'name': 'Katherine Barrett', 'role': None}],
+            'editors': [{'name': 'Gayle MacDonald', 'role': None}],
+        }),
+        ('atlantis04853', 'en', {
+            'directors': [{'name': 'Katherine Barrett', 'role': 'Managing Editor'}],
+            'editors': [{'name': 'Gayle MacDonald', 'role': 'Editor-in-Chief'}],
+
+        }),
+        ('images1102374', 'fr', {
+            'directors': [{'name': 'Claude Racine', 'role': None}],
+            'editors': [{'name': 'Marie-Claude Loiselle', 'role': 'Rédactrice en chef'}],
+        }),
+        ('images1102374', 'en', {
+            'directors': [{'name': 'Claude Racine', 'role': None}],
+            'editors': [{'name': 'Marie-Claude Loiselle', 'role': None}],
+        }),
+    ))
+    def test_do_not_display_wrong_language_roles(self, fixture, language, expected_contributors):
+        issue = IssueFactory()
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open('tests/fixtures/issue/{}.xml'.format(fixture), 'rb').read(),
+        )
+        mixin = ContributorsMixin()
+        with override_settings(LANGUAGE_CODE=language):
+            assert mixin.get_contributors(issue=issue) == expected_contributors
