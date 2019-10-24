@@ -4,6 +4,7 @@ import pytest
 from lxml import etree
 from django.urls import reverse
 from django.test import Client
+from erudit.models import JournalType
 from erudit.test.factories import JournalFactory, IssueFactory, EmbargoedIssueFactory, NonEmbargoedIssueFactory
 
 pytestmark = pytest.mark.django_db
@@ -42,6 +43,24 @@ class TestRestrictionsView:
         elem = root[0].find('embargoed_issues')
         assert len(elem[:]) == 1
         assert elem[0].attrib['localidentifier'] == issue.localidentifier
+
+    def test_embargo_duration(self):
+        journal_scientific = JournalFactory.create(type_code=JournalType.CODE_SCIENTIFIC)
+        journal_cultural = JournalFactory.create(type_code=JournalType.CODE_CULTURAL)
+        embargoed_issue_scientific = EmbargoedIssueFactory(journal=journal_scientific)
+        embargoed_issue_cultural = EmbargoedIssueFactory(journal=journal_cultural)
+
+        url = reverse('webservices:restrictions')
+        response = Client().get(url)
+        root = etree.fromstring(response.content.decode())
+
+        assert root[0].find('embargo_duration').attrib['unit'] == 'day'
+
+        embargo_duration_scientific = root.find(f"journal[@code='{journal_scientific.code}']/embargo_duration").text
+        embargo_duration_cultural = root.find(f"journal[@code='{journal_cultural.code}']/embargo_duration").text
+
+        assert embargo_duration_scientific == '365'
+        assert embargo_duration_cultural == '1095'
 
 
 class TestRestrictionsByJournalView:
