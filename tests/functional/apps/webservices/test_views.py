@@ -4,7 +4,7 @@ import pytest
 from lxml import etree
 from django.urls import reverse
 from django.test import Client
-from erudit.test.factories import IssueFactory, EmbargoedIssueFactory, NonEmbargoedIssueFactory
+from erudit.test.factories import JournalFactory, IssueFactory, EmbargoedIssueFactory, NonEmbargoedIssueFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -121,3 +121,31 @@ class TestRestrictionsByJournalView:
         assert issues_element[5].attrib['localidentifier'] == issue_openAccess_3.localidentifier
         assert issues_element[6].attrib['localidentifier'] == issue_openAccess_2.localidentifier
         assert issues_element[7].attrib['localidentifier'] == issue_openAccess_1.localidentifier
+
+    def test_that_journal_does_not_exist(self):
+        url = reverse('webservices:restrictionsByJournal',
+                      kwargs={'journal_code': 'undefined'})
+        response = Client().get(url)
+        root = etree.fromstring(response.content.decode())
+        assert root.tag == 'error'
+
+    def test_that_journal_without_issues(self):
+        journal_without_issues = JournalFactory.create()
+        url = reverse('webservices:restrictionsByJournal',
+                      kwargs={'journal_code': str(journal_without_issues.localidentifier)})
+        response = Client().get(url)
+        root = etree.fromstring(response.content.decode())
+        assert root.tag == 'journal'
+        assert root.attrib['localidentifier'] == journal_without_issues.localidentifier
+
+        issues_element = root.find('issues')
+        assert issues_element.attrib['count'] == '0'
+        assert issues_element.attrib['embargoed_count'] == '0'
+        assert issues_element.attrib['whitelisted_count'] == '0'
+        assert issues_element.find('issue') is None
+
+        journal_without_issues.localidentifier = None
+        journal_without_issues.save()
+        response = Client().get(url)
+        root = etree.fromstring(response.content.decode())
+        assert root.tag == 'error'

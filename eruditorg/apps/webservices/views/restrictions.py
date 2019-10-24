@@ -68,6 +68,7 @@ class RestrictionsByJournalView(View):
                     embargoed_issues.append(issue.localidentifier)
                 if issue.force_free_access:
                     whitelisted_issues.append(issue.localidentifier)
+
             issues_elements = E.issues(
                 *[E.issue(
                     E.number(str(x.number)),
@@ -86,7 +87,7 @@ class RestrictionsByJournalView(View):
                 journal_element = E.journal(
                     issues_elements,
                     code=journal.code,
-                    localidentifier=journal.localidentifier,
+                    localidentifier=str(journal.localidentifier or ''),
                     embargoed=str(not journal.open_access)
                 )
             else:
@@ -99,10 +100,9 @@ class RestrictionsByJournalView(View):
                     ),
                     issues_elements,
                     code=journal.code,
-                    localidentifier=journal.localidentifier,
+                    localidentifier=str(journal.localidentifier or ''),
                     embargoed=str(not journal.open_access)
                 )
-
             return journal_element
 
         journal = Journal.objects.filter(
@@ -110,5 +110,10 @@ class RestrictionsByJournalView(View):
             collection__is_main_collection=True,
             active=True
         )
-        root = get_journal_elem(*journal)
+
+        if journal.exists():
+            root = get_journal_elem(*journal)
+        else:
+            root = E.error(journal_code + "This journal does not exist or is not yet configured")
+
         return HttpResponse(etree.tostring(root), content_type='text/xml')
