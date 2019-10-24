@@ -20,7 +20,7 @@
           {% endblocktrans %}
         </div>
         <div class="col-sm-5">
-          <p><strong>{{ track.get_status_display }}</strong>.</p>
+          <p><span class="status-indicator-{% if track.status == 'C' %}error{% elif track.status == 'S' %}warning{% elif track.status == 'V' %}success{% endif %}"></span><strong>{{ track.get_status_display }}</strong>.</p>
 
           {% if track.files_version and track.files_version.submissions.exists %}
           {% trans "Fichier&nbsp;:" %}
