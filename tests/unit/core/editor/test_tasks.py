@@ -15,14 +15,16 @@ from core.editor.test.factories import ProductionTeamFactory
 
 
 class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
-    def test_is_able_to_remove_files_from_approved_issue_submissions_after_30_days(self):
+    def test_is_able_to_remove_files_from_approved_issue_submissions_after_90_days(self):
         # Setup
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.submit()
         self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
-        self.issue_submission.date_modified = tz.now() - dt.timedelta(days=30)
+        self.issue_submission.date_modified = tz.now() - dt.timedelta(
+            days=editor_settings.ARCHIVAL_DAY_OFFSET
+        )
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
@@ -42,7 +44,9 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.submit()
         self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
-        self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
+        self.issue_submission.date_modified = tz.now() - dt.timedelta(
+            days=editor_settings.ARCHIVAL_DAY_OFFSET - 5
+        )
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
@@ -59,7 +63,9 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.submit()
         self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
-        self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
+        self.issue_submission.date_modified = tz.now() - dt.timedelta(
+            days=editor_settings.ARCHIVAL_DAY_OFFSET - 5
+        )
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
@@ -77,7 +83,9 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.submit()
         self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
-        self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
+        self.issue_submission.date_modified = tz.now() - dt.timedelta(
+            days=editor_settings.ARCHIVAL_DAY_OFFSET - 5
+        )
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
