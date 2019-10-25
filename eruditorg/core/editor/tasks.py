@@ -34,38 +34,42 @@ def _get_production_team_emails():
     return emails
 
 
-def _handle_issuesubmission_files_removal():
-    # First, fetches the issue submissions whose files must be deleted.
+def _handle_issue_submission_archival_and_files_deletion():
+    # First, get issue submissions ready for archival and whose files must be deleted.
     for issue in IssueSubmission.objects.ready_for_archival():
         for fversion in issue.files_versions.all():
             [rf.delete() for rf in fversion.submissions.all()]
         issue.archived = True
         issue.save()
 
-    # Fetches the production team group
-    production_team = get_production_team_group()
-    if production_team is None:
-        logger.error(
-            "email.error", msg="Cannot send issue submission removal notification email. There is NO production team"  # noqa
-        )
+    # Get production team emails.
+    emails = _get_production_team_emails()
+    if emails is None:
         return
 
-    # Now fetches the issue submissions that will soon be deleted. The production team must be
-    # informed that the deletion will occur in a few days.
-    issue_submissions_to_email = IssueSubmission.objects.eminent_archival()
-    if issue_submissions_to_email.exists():
-        emails = production_team.user_set.values_list('email', flat=True)
-        if not emails:
-            return
+    # Now get issue submissions that will be archived eminently. The production team must be
+    # informed that their files will be deleted in five days.
+    issues = IssueSubmission.objects.eminent_archival()
+    if not issues.exists():
+        return
 
-        email = Email(
-            list(emails),
-            html_template='emails/editor/issue_files_deletion_content.html',
-            subject_template='emails/editor/issue_files_deletion_subject.html',
-            extra_context={'issue_submissions': issue_submissions_to_email},
-            tag=EMAIL_TAG
+    # Group issues by journal.
+    eminent_archival_issues = {
+        journal_name: list(issues) for journal_name, issues in groupby(
+            issues,
+            attrgetter('journal.name'),
         )
-        email.send()
+    }
+
+    # Send the email.
+    email = Email(
+        list(emails),
+        html_template='emails/editor/issue_files_deletion_content.html',
+        subject_template='emails/editor/issue_files_deletion_subject.html',
+        extra_context={'issue_submissions': eminent_archival_issues},
+        tag=EMAIL_TAG
+    )
+    email.send()
 
 
 def _handle_issue_submission_action_needed():

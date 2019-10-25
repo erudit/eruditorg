@@ -7,7 +7,7 @@ from resumable_uploads.models import ResumableFile
 
 from core.editor.conf import settings as editor_settings
 from core.editor.tasks import (
-    _handle_issuesubmission_files_removal,
+    _handle_issue_submission_archival_and_files_deletion,
     _handle_issue_submission_action_needed,
 )
 from core.editor.test import BaseEditorTestCase
@@ -28,7 +28,7 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
-        _handle_issuesubmission_files_removal()
+        _handle_issue_submission_archival_and_files_deletion()
         # Check
         assert not ResumableFile.objects.count()
         self.issue_submission.refresh_from_db()
@@ -50,7 +50,7 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
-        _handle_issuesubmission_files_removal()
+        _handle_issue_submission_archival_and_files_deletion()
         # Check
         assert ResumableFile.objects.count() == 1
         assert len(mail.outbox) == 1
@@ -69,7 +69,7 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
-        _handle_issuesubmission_files_removal()
+        _handle_issue_submission_archival_and_files_deletion()
         # Check
         assert ResumableFile.objects.count() == 1
         assert not len(mail.outbox)
@@ -89,7 +89,7 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.issue_submission.save()
         self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
-        _handle_issuesubmission_files_removal()
+        _handle_issue_submission_archival_and_files_deletion()
         # Check
         assert ResumableFile.objects.count() == 1
         assert not len(mail.outbox)

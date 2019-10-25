@@ -9,8 +9,14 @@
 <p>{% trans "Bonjour," %}</p>
 <p>{% trans "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:" %}</p>
 <ul>
-{% for issue in issue_submissions %}
-  <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
+{% for journal_name, issues in issue_submissions.items %}
+  <li>{{ journal_name }}
+  <ul>
+  {% for issue in issues %}
+    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
+  {% endfor %}
+  </ul>
+  </li>
 {% endfor %}
 </ul>
 <p>{% trans "Assurez-vous d’en avoir une copie." %}</p>
