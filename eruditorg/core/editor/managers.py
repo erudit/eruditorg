@@ -36,3 +36,11 @@ class IssueSubmissionManager(models.Manager):
                 editor_settings.ARCHIVE_DAY_OFFSET
             )
         )
+
+    def action_needed(self):
+        """ Return issue submissions that are in need review/corrections for more than 2 weeks. """
+        action_needed_dt = tz.now() - dt.timedelta(days=editor_settings.ACTION_NEEDED_DAY_OFFSET)
+        return self.get_queryset().filter(
+            status__in=["S", "C"],
+            date_modified__lt=action_needed_dt,
+        )
