@@ -1393,7 +1393,8 @@
   <xsl:template match="objetmedia/video">
     <xsl:variable name="videohref" select="@*[local-name()='href']"/>
     <xsl:variable name="nomVid" select="substring-before($videohref, '.')"/>
-    <div class="embed-responsive embed-responsive-4by3">
+    <xsl:variable name="padding-bottom" select="format-number(translate(@dimy, 'px', '') div translate(@dimx, 'px', '') * 100, '#.###')"/>
+    <div class="embed-responsive" style="padding-bottom: {$padding-bottom}%">
       <video class="embed-responsive-item" id="{@id}" preload="metadata" controls="controls">
         <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4" />
         <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
