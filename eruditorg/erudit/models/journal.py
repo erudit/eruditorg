@@ -678,26 +678,15 @@ class Issue(FedoraMixin, FedoraDated):
         :returns: ``True`` if the issue is external"""
         if bool(self.external_url):
             return True
-        try:
-            first_article = next(
-                article for article in self.get_articles_from_fedora()
-                if article.publication_allowed
-            )
-        except StopIteration:
-            pass
-        else:
-            summary_node = first_article.get_summary_node()
-            if summary_node is not None:
-                urlpdf = summary_node.find('urlpdf')
-                urlhtml = summary_node.find('urlhtml')
-                external_pdf = urlpdf is not None and urlpdf.text \
-                    and bool(urlparse(urlpdf.text).netloc)
-                external_html = urlhtml is not None and urlhtml.text \
-                    and bool(urlparse(urlhtml.text).netloc)
-                return external_pdf or external_html
-            else:
-                logger.warning("Article not in issue summary", localidentifier=self.localidentifier)
-        return False
+        summary_tree = et.fromstring(self.fedora_object.xml_content)
+        articles = summary_tree.xpath("article[not(accessible) or accessible != 'non']")
+        if not articles:
+            return False
+        urlpdf = articles[0].find('urlpdf')
+        urlhtml = articles[0].find('urlhtml')
+        external_pdf = urlpdf is not None and urlpdf.text and bool(urlparse(urlpdf.text).netloc)
+        external_html = urlhtml is not None and urlhtml.text and bool(urlparse(urlhtml.text).netloc)
+        return external_pdf or external_html
 
     @property
     @catch_and_log

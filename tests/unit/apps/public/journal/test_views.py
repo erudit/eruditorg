@@ -336,9 +336,8 @@ class TestIssueDetailSummary:
         # journal. No cache.get() should be called for the issue or the articles.
         (False, 1),
         # When an issue is published, cache.get() should be called once for the journal, once for
-        # the issue and once for each article. There's an extra cache.get() call on the first
-        # article from the is_external() method on the issue, hance the 4 expected count.
-        (True, 4),
+        # the issue and once for each article.
+        (True, 3),
     ])
     def test_issue_caching(self, mock_cache, is_published, expected_count):
         mock_cache.get.return_value = None
