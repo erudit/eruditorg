@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from django.conf import settings
-
-
-MAIN_PRODUCTION_TEAM_IDENTIFIER = getattr(
-    settings, 'EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER', 'main')
-
-
 # Number of days after which validated issue submissions will be archived and their files will be
 # deleted.
 ARCHIVAL_DAY_OFFSET = 90

@@ -104,7 +104,7 @@ class TestJournalScopeMixin:
 
         user = UserFactory.create()
         group = GroupFactory.create(name='Production team')
-        production_team = ProductionTeamFactory.create(group=group, identifier='main')
+        production_team = ProductionTeamFactory.create(group=group)
 
         user.groups.add(group)
 

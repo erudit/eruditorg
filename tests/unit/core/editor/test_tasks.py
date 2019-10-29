@@ -37,7 +37,7 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
     def test_sends_an_email_to_notify_the_production_team_5_days_before_removal(self):
         # Setup
         group = Group.objects.create(name='Production team')
-        ProductionTeamFactory.create(group=group, identifier='main')
+        ProductionTeamFactory.create(group=group)
         self.user.groups.add(group)
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
@@ -77,7 +77,7 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
     def test_do_not_send_an_email_if_the_production_team_is_empty(self):
         # Setup
         group = Group.objects.create(name='Production team')
-        ProductionTeamFactory.create(group=group, identifier='main')
+        ProductionTeamFactory.create(group=group)
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.submit()
@@ -99,7 +99,7 @@ class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
     def test_email_production_team_about_action_needed_needs_review_issue_submissions(self):
         # Setup
         group = Group.objects.create(name='Production team')
-        ProductionTeamFactory.create(group=group, identifier='main')
+        ProductionTeamFactory.create(group=group)
         self.user.groups.add(group)
         self.issue_submission.submit()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
@@ -117,7 +117,7 @@ class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
     def test_email_production_team_about_action_needed_needs_corrections_issue_submissions(self):
         # Setup
         group = Group.objects.create(name='Production team')
-        ProductionTeamFactory.create(group=group, identifier='main')
+        ProductionTeamFactory.create(group=group)
         self.user.groups.add(group)
         self.issue_submission.submit()
         self.issue_submission.refuse()
@@ -150,7 +150,7 @@ class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
     def test_do_not_send_an_email_if_the_production_team_is_empty(self):
         # Setup
         group = Group.objects.create(name='Production team')
-        ProductionTeamFactory.create(group=group, identifier='main')
+        ProductionTeamFactory.create(group=group)
         self.issue_submission.submit()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(

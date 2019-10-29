@@ -11,3 +11,4 @@ class EditorConfig(AppConfig):
 
     def ready(self):
         from . import receivers  # noqa
+        from . import checks  # noqa

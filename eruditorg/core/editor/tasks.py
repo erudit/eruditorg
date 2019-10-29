@@ -4,34 +4,10 @@ from operator import attrgetter
 
 from core.email import Email
 
-from .models import IssueSubmission
-from .shortcuts import get_production_team_group
+from .models import IssueSubmission, ProductionTeam
 from .apps import EMAIL_TAG
 
 logger = structlog.getLogger(__name__)
-
-
-def _get_production_team_emails():
-    # Get the production team group.
-    production_team = get_production_team_group()
-    if production_team is None:
-        logger.error(
-            "email.error",
-            msg="Cannot send action needed issue submissions notification email. "
-                "There is no production team",
-        )
-        return
-
-    # Get production team emails.
-    emails = production_team.user_set.values_list('email', flat=True)
-    if emails is None:
-        logger.error(
-            "email.error",
-            msg="Cannot send action needed issue submissions notification email. "
-                "The production team is empty.",
-        )
-        return
-    return emails
 
 
 def _handle_issue_submission_archival_and_files_deletion():
@@ -43,7 +19,7 @@ def _handle_issue_submission_archival_and_files_deletion():
         issue.save()
 
     # Get production team emails.
-    emails = _get_production_team_emails()
+    emails = ProductionTeam.emails()
     if emails is None:
         return
 
@@ -74,7 +50,7 @@ def _handle_issue_submission_archival_and_files_deletion():
 
 def _handle_issue_submission_action_needed():
     # Get production team emails.
-    emails = _get_production_team_emails()
+    emails = ProductionTeam.emails()
     if emails is None:
         return
 
