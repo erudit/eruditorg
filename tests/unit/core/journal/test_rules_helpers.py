@@ -36,9 +36,7 @@ class TestGetEditableJournals:
         assert list(get_editable_journals(user)) == [journal]
 
     def test_a_production_team_member_can_edit_the_teams_journals(self):
-        production_team = ProductionTeamFactory(
-            group=GroupFactory(),
-        )
+        production_team = ProductionTeamFactory()
 
         production_team.journals.add(JournalFactory())
         production_team.save()
@@ -54,9 +52,7 @@ class TestGetEditableJournals:
 
     def test_a_production_team_member_can_edit_the_teams_journals_and_its_journals(self):
 
-        production_team = ProductionTeamFactory(
-            group=GroupFactory(),
-        )
+        production_team = ProductionTeamFactory()
 
         production_team.journals.add(JournalFactory())
         production_team.save()

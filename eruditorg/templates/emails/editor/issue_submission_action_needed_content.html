@@ -2,14 +2,16 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Suppression de fichiers déposés" %}
+{% trans "Numéros sans activité depuis plus de deux semaines" %}
 {% endblock subject %}
 
 {% block content %}
 <p>{% trans "Bonjour," %}</p>
-<p>{% trans "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:" %}</p>
+<p>{% trans "Les numéros suivants n'ont pas eu d'activité depuis plus de deux semaines&nbsp;:" %}</p>
+{% if submitted %}
+<p><strong>{% trans "En attente de validation" %}</strong></p>
 <ul>
-{% for journal_name, issues in issue_submissions.items %}
+{% for journal_name, issues in submitted.items %}
   <li>{{ journal_name }}
   <ul>
   {% for issue in issues %}
@@ -19,7 +21,21 @@
   </li>
 {% endfor %}
 </ul>
-<p>{% trans "Assurez-vous d’en avoir une copie." %}</p>
+{% endif %}
+{% if needs_corrections %}
+<p><strong>{% trans "À corriger" %}</strong></p>
+<ul>
+{% for journal_name, issues in needs_corrections.items %}
+  <li>{{ journal_name }}
+  <ul>
+  {% for issue in issues %}
+    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
+  {% endfor %}
+  </ul>
+  </li>
+{% endfor %}
+</ul>
+{% endif %}
 {% endblock content %}
 
 {% block cta %}

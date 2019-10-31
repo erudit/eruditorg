@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-
 from django.db.models import Q
 
 from erudit.models import Journal
 from erudit.models import Organisation
-from core.editor.shortcuts import is_production_team_member, get_production_team_journals
 
 
 def get_editable_journals(user):
@@ -13,10 +10,13 @@ def get_editable_journals(user):
     if user.is_superuser or user.is_staff:
         return Journal.managed_objects.all()
 
-    if is_production_team_member(user):
-        production_team_journals = get_production_team_journals(user)
+    # Check if the given user is a member of a production team group.
+    production_team_group = user.groups.filter(productionteam__isnull=False)
+    if production_team_group.exists():
+        # Get the journals for which the user is a member or the journals of the production team.
         return Journal.objects.filter(
-            Q(members=user) | Q(id__in=production_team_journals)
+            Q(members=user) |
+            Q(productionteam__group__in=production_team_group)
         )
 
     # TODO: add proper permissions checks

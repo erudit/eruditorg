@@ -45,6 +45,14 @@ class ProductionTeamAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'group', )
     filter_horizontal = ('journals', )
 
+    def has_add_permission(self, request):
+        # There must be only one production team, we should not be able to add more.
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        # There must be a production team, we should not be able to delete it.
+        return False
+
 
 admin.site.register(IssueSubmission, IssueSubmissionAdmin)
 admin.site.register(IssueSubmissionFilesVersion, IssueSubmissionFilesVersionAdmin)
