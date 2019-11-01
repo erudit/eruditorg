@@ -48,26 +48,13 @@ AVAILABILITY_CHOICES = (
 
 
 def get_funds_choices():
+    db_keys = ['erudit', 'unb', 'persee']
+    solr_keys = ['Érudit', 'UNB', 'Persée']
 
-    collections = {
-        c.code: c.name
-        for c in Collection.objects.all().only('code', 'name')
-    }
+    collections = Collection.objects.filter(code__in=db_keys).order_by('id').values_list('name')
+    collections = zip(solr_keys, map(lambda x: x[0], collections))
 
-    def get(fundid):
-        try:
-            return collections[fundid]
-        except KeyError:
-            # Something is deeply wrong...
-            logger.error('search.form.missing_collection', id=fundid)
-            return ''
-
-    return (
-        ('Érudit', get('erudit')),
-        ('UNB', get('unb')),
-        ('Persée', get('persee')),
-        ('FRQ', _('Fonds de Recherche du Québec')),
-    )
+    return list(collections) + [('FRQ', _('Fonds de Recherche du Québec'))]
 
 
 PUB_TYPES_CHOICES = (
