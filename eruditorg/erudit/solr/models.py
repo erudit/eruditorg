@@ -176,10 +176,10 @@ class Article(SolrDocument):
 
     @property
     def journal_url(self):
-        code = self.solr_data['RevueAbr']
+        localidentifier = self.solr_data['RevueID']
         if self.solr_data['Fonds_fac'] == 'Persée':
-            code = 'persee' + code
-        journal = erudit_models.Journal.objects.get(code=code)
+            localidentifier = 'persee' + localidentifier
+        journal = erudit_models.Journal.legacy_objects.get_by_id(localidentifier)
         if journal.external_url:
             return journal.external_url
         return reverse('public:journal:journal_detail', args=(journal.code, ))
