@@ -524,7 +524,10 @@ class Issue(FedoraMixin, FedoraDated):
         if not localidentifier:
             raise Issue.DoesNotExist()
         try:
-            return Issue.objects.get(localidentifier=localidentifier)
+            return Issue.objects.select_related(
+                'journal__collection',
+                'journal__type',
+            ).get(localidentifier=localidentifier)
         except Issue.DoesNotExist:
             try:
                 journal = Journal.legacy_objects.get_by_id(journal_code)
