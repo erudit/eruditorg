@@ -15,7 +15,7 @@
   <li>{{ journal_name }}
   <ul>
   {% for issue in issues %}
-    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
+    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:detail' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
   {% endfor %}
   </ul>
   </li>
@@ -29,7 +29,7 @@
   <li>{{ journal_name }}
   <ul>
   {% for issue in issues %}
-    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
+    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:detail' journal_pk=issue.journal.pk pk=issue.pk %}" style="color:#ff4242; text-decoration:underline;">{{ issue }}</a></li>
   {% endfor %}
   </ul>
   </li>
