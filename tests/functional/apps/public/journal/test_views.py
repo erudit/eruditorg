@@ -229,6 +229,14 @@ class TestJournalListView:
         assert 'Enjeux et société' in journals_list.decode()
         assert 'Enjeux Et Société' not in journals_list.decode()
 
+    def test_journal_year_of_addition_is_displayed(self):
+        journal = JournalFactory(is_new=True, year_of_addition='2020')
+        url = reverse('public:journal:journal_list')
+        html = self.client.get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        journals_list = dom.find('div', {'class': 'journals-list'})
+        assert '(nouveauté 2020)' in journals_list.decode()
+
 
 class TestJournalDetailView:
 
