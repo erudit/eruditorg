@@ -227,11 +227,13 @@
                 <em>{% trans "Retour au début" %}</em>
               </a>
             </li>
+            {% if display_abstracts %}
             <xsl:if test="//resume">
               <li>
                 <a href="#resume">{% trans "Résumé" %}</a>
               </li>
             </xsl:if>
+            {% endif %}
             {% if content_access_granted and display_full_article %}
             <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
               <li class="article-toc--body">
@@ -278,7 +280,7 @@
                 </li>
               </xsl:if>
               {% endif %}
-              {% if not is_of_type_roc %}
+              {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
               <xsl:if test="grbiblio">
                 <li>
                   <a href="#grbiblio">
@@ -1927,7 +1929,7 @@
       {% if content_access_granted and display_full_article %}
       <xsl:apply-templates select="grnote"/>
       {% endif %}
-      {% if not is_of_type_roc or display_biblio %}
+      {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
       <xsl:apply-templates select="grbiblio"/>
       {% endif %}
     </section>
