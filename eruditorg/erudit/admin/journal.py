@@ -72,7 +72,8 @@ class JournalAdmin(admin.ModelAdmin):
     search_fields = ('code', 'name', 'issn_print', 'issn_web', 'external_url', )
     list_display = ('__str__', 'code', 'type', 'open_access', 'external_url', 'active', )
     list_display_links = ('__str__', 'code', )
-    list_filter = ('collection', 'type', 'paper', 'open_access', 'active', )
+    list_filter = ('collection', 'type', 'paper', 'open_access', 'active', 'is_new',
+                   'year_of_addition', )
     filter_horizontal = ('members', )
 
     fieldsets = [

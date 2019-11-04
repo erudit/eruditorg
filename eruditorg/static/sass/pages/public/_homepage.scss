@@ -143,6 +143,7 @@
     background-color: $midnight-blue;
     color: #fff;
     border-bottom: 1px solid $midnight-blue;
+    clear: both;
 
     p {
       line-height: 1;
@@ -156,7 +157,7 @@
 
   .home-issues__title {
     margin-bottom: 2.5vh;
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .home-issues__list {
@@ -199,6 +200,58 @@
   }
 
   .home-issues__btn {
+    margin-top: 2.5vh;
+    border: 1px solid #fff;
+
+    &:hover, &:focus, &:active {
+      background-color: #fff;
+      color: $midnight-blue;
+    }
+  }
+
+  /* New journals */
+  .home-journals {
+    padding-top: 50px;
+    background-color: $midnight-blue;
+    color: #fff;
+    border-bottom: 1px solid $midnight-blue;
+    clear: both;
+
+    p {
+      line-height: 1;
+      font-size: 14px;
+    }
+
+    a {
+      color: #fff;
+    }
+  }
+
+  .home-journals__title {
+    margin-bottom: 2.5vh;
+    font-size: 24px;
+  }
+
+  .home-journals__list {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .home-journals__item {
+    width: 21.75em;
+    margin-right: 2em;
+  }
+
+  .home-journals__name {
+    font-size: 14px;
+    line-height: 1.25;
+    display: block;
+    text-decoration: underline;
+  }
+
+  .home-journals__btn {
     margin-top: 2.5vh;
     border: 1px solid #fff;
 
