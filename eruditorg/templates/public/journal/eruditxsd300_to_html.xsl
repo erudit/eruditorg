@@ -227,6 +227,16 @@
                 <em>{% trans "Retour au début" %}</em>
               </a>
             </li>
+            {% if content_access_granted and not display_full_toc %}
+            <!-- Do not display complete TOC link if we do not have more than 1 level of sections. -->
+            <xsl:if test="//section2/titre[not(@traitementparticulier='oui')]">
+              <li>
+                <a href="{% url 'public:journal:article_toc' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
+                  <em>{% trans "Plan complet de l'article" %}</em>
+                </a>
+              </li>
+            </xsl:if>
+            {% endif %}
             {% if display_abstracts %}
             <xsl:if test="//resume">
               <li>
@@ -464,6 +474,14 @@
             </xsl:for-each>
           </section>
         </xsl:if>
+        {% endif %}
+
+        {% if content_access_granted and display_full_toc %}
+        <section id="article-toc--full">
+          <ul class="unstyled">
+            <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+          </ul>
+        </section>
         {% endif %}
 
       </div>
@@ -732,6 +750,65 @@
     <li>
       <a href="#{../@id}">
         <xsl:apply-templates mode="toc-heading"/>
+      </a>
+    </li>
+  </xsl:template>
+
+  <!--*** ARTICLE FULL TOC ***-->
+  <xsl:template match="section1/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h2><xsl:apply-templates mode="toc-heading"/></h2>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section2/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section2/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h3><xsl:apply-templates mode="toc-heading"/></h3>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section3/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section3/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h4><xsl:apply-templates mode="toc-heading"/></h4>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section4/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section4/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h5><xsl:apply-templates mode="toc-heading"/></h5>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section5/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section5/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h6><xsl:apply-templates mode="toc-heading"/></h6>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section6/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section6/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h6 class="h7"><xsl:apply-templates mode="toc-heading"/></h6>
       </a>
     </li>
   </xsl:template>

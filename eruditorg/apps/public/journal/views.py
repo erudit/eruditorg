@@ -669,6 +669,7 @@ class BaseArticleDetailView(
     display_full_article = True
     display_abstracts = True
     display_biblio = True
+    display_full_toc = False
 
     def get_context_data(self, **kwargs):
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
@@ -677,6 +678,7 @@ class BaseArticleDetailView(
         context['display_full_article'] = self.display_full_article
         context['display_abstracts'] = self.display_abstracts
         context['display_biblio'] = self.display_biblio
+        context['display_full_toc'] = self.display_full_toc
 
         try:
             # Abstracts and keywords without HTML for metatags.
@@ -849,6 +851,18 @@ class ArticleBiblioView(BaseArticleDetailView):
     page_title_suffix = _('Bibliographie')
     display_full_article = False
     display_abstracts = False
+
+
+class ArticleTocView(BaseArticleDetailView):
+    """
+    Displays the table of content of an Article instance.
+    """
+    template_name = 'public/journal/article_toc.html'
+    page_title_suffix = _('Plan complet de l\'article')
+    display_full_article = False
+    display_abstracts = False
+    display_biblio = False
+    display_full_toc = True
 
 
 class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):

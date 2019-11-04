@@ -146,7 +146,8 @@ $article-toolbar-width: 80px;
       '../../components/article/insets-examples',
       '../../components/article/lists',
       '../../components/article/notes',
-      '../../components/article/tables';
+      '../../components/article/tables',
+      '../../components/article/toc';
 
     // Import article appendix components
     @import
