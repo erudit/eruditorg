@@ -54,14 +54,20 @@ class TestHomeView:
         assert response.status_code == 200
         assert len(response.context['latest_news']) == 0
 
-    def test_embeds_the_latest_journals_into_the_context(self):
+    def test_embeds_the_upcoming_year_new_journals_into_the_context(self):
         # Setup
-        JournalFactory.create()
+        old_journal = JournalFactory()
+        current_year_new_journal = JournalFactory(is_new=True)
+        upcoming_year_new_journal = JournalFactory(is_new=True, year_of_addition='2020')
         url = reverse('public:home')
         # Run
         response = Client().get(url)
         # Check
         assert response.status_code == 200
+        assert list(response.context['new_journals']) == [{
+            'code': upcoming_year_new_journal.code,
+            'name': upcoming_year_new_journal.name,
+        }]
 
     def test_sitemaps(self):
         journal = JournalFactory()
