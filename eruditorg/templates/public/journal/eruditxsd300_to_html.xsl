@@ -1923,10 +1923,8 @@
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
       {% if content_access_granted and display_full_article %}
       <xsl:apply-templates select="grannexe"/>
-      {% endif %}
       <xsl:apply-templates select="merci"/>
       <xsl:apply-templates select="grnotebio"/>
-      {% if content_access_granted and display_full_article %}
       <xsl:apply-templates select="grnote"/>
       {% endif %}
       {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
