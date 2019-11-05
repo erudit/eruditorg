@@ -20,8 +20,6 @@ public_urlpatterns = ([
     url(_(r'^livres/'), include('apps.public.book.urls', namespace='book')),
     url(_(r'^identite/$'), TemplateView.as_view(template_name='public/brand_assets.html'),
         name='brand_assets'),
-    url(_(r'^20ans/$'), TemplateView.as_view(template_name='public/20_years.html'),
-        name='20_years'),
 
     # The journal URLs are at the end of the list because some of them are catchalls.
     url(r'^', include(journal_urlpatterns)),
