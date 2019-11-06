@@ -257,4 +257,4 @@ class ProductionTeam(models.Model):
         emails = production_team.group.user_set.values_list('email', flat=True)
         if emails is None:
             logger.error("email.error", msg="The production team is empty.")
-        return emails
+        return list(emails)
