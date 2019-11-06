@@ -114,8 +114,31 @@
         </li>
         {% endfor %}
       </ul>
+      {% if not new_journals %}
       <p>
         <a href="{% url 'public:journal:journal_list' %}" class="btn home-issues__btn">{% trans "Voir toutes les revues" %}</a>
+      </p>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {# New journals #}
+  {% if new_journals %}
+  <section class="home-journals">
+    <div class="container">
+      <h2 class="home-journals__title">{% trans "Nouvelles revues" %}</h2>
+      <ul class="home-journals__list">
+        {% for journal in new_journals %}
+        <li class="home-journals__item">
+          <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.name }}">
+            <span class="home-journals__name">{{ journal.name }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      <p>
+        <a href="{% url 'public:journal:journal_list' %}" class="btn home-journals__btn">{% trans "Voir toutes les revues" %}</a>
       </p>
     </div>
   </section>

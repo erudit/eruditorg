@@ -189,6 +189,13 @@ class Journal(FedoraMixin, FedoraDated):
         help_text=_("Cocher si cette revue est nouvelle sur la plateforme d'Érudit.")
     )
 
+    year_of_addition = models.PositiveIntegerField(
+        verbose_name=_('Année de nouveauté'),
+        blank=True,
+        null=True,
+        help_text=_("Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit.")
+    )
+
     disciplines = models.ManyToManyField('Discipline', related_name='journals')
     """ The disciplines associated with the journal. """
 

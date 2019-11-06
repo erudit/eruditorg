@@ -1,6 +1,9 @@
 from django.contrib import admin
+from django.contrib.admin.widgets import AdminIntegerFieldWidget
+from django.core.validators import MaxValueValidator, MinValueValidator
 from modeltranslation.admin import TranslationAdmin
 from django.urls import reverse
+from django.utils import timezone as tz
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 from django import forms
@@ -36,6 +39,24 @@ class JournalForm(forms.ModelForm):
     fields = 'all'
     model = Journal
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Limit `year_of_addition` field values to the current year and the next two years.
+        now = tz.now()
+        min_year = now.year
+        max_year = min_year + 2
+        self.fields['year_of_addition'].validators = [
+            MinValueValidator(min_year),
+            MaxValueValidator(max_year),
+        ]
+        self.fields['year_of_addition'].widget = AdminIntegerFieldWidget(
+            attrs={
+                'min': min_year,
+                'max': max_year,
+            },
+        )
+
     def clean(self):
         # In Django < 2.0, CharField stores empty values as empty strings, causing
         # a unicity constraint error when multiple objects have an empty value for
@@ -51,7 +72,8 @@ class JournalAdmin(admin.ModelAdmin):
     search_fields = ('code', 'name', 'issn_print', 'issn_web', 'external_url', )
     list_display = ('__str__', 'code', 'type', 'open_access', 'external_url', 'active', )
     list_display_links = ('__str__', 'code', )
-    list_filter = ('collection', 'type', 'paper', 'open_access', 'active', )
+    list_filter = ('collection', 'type', 'paper', 'open_access', 'active', 'is_new',
+                   'year_of_addition', )
     filter_horizontal = ('members', )
 
     fieldsets = [
@@ -60,7 +82,7 @@ class JournalAdmin(admin.ModelAdmin):
                 ('collection', 'type',),
                 ('code', 'localidentifier',),
                 ('name', 'subtitle',),
-                ('is_new',),
+                ('is_new', 'year_of_addition'),
                 ('previous_journal', 'next_journal', ),
                 ('issn_print', 'issn_web', ),
                 ('external_url', 'redirect_to_external_url'),

@@ -140,7 +140,7 @@
               <div class="row">
                 <div class="col-sm-6 journal-title">
                   {% with journal.get_titles as titles %}
-                  <span class="journal-name">{{ titles.main.title}}{% if journal.is_new %} <span class="new-journal-tag">{% trans '(nouveauté)' %}</span>{% endif %}</span>
+                  <span class="journal-name">{{ titles.main.title}}{% if journal.is_new %} <span class="new-journal-tag">({% trans 'nouveauté' %}{% if journal.year_of_addition %}{% blocktrans with year=journal.year_of_addition %} {{ year }}{% endblocktrans %}{% endif %})</span>{% endif %}</span>
                   {% if titles.main.subtitle %}
                   <span class="journal-subtitle">{{ titles.main.subtitle }}</span>
                   {% endif %}

@@ -37,7 +37,13 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         # Includes the latest issues
-        context['new_journals'] = Journal.objects.filter(is_new=True)
+        context['new_journals'] = Journal.objects.values(
+            'code',
+            'name',
+        ).filter(
+            is_new=True,
+            year_of_addition__isnull=False,
+        )
         context['latest_issues'] = Issue.internal_objects.filter(
             date_published__isnull=False, is_published=True) \
             .prefetch_related('journal__collection', 'journal__disciplines') \
