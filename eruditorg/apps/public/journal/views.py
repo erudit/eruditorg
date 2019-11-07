@@ -65,6 +65,7 @@ from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
+from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from .viewmixins import PrepublicationTokenRequiredMixin
 from .viewmixins import ContributorsMixin
 
@@ -185,11 +186,8 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 
 
 class JournalDetailView(
-        SingleJournalMixin,
-        ContentAccessCheckMixin,
-        ContributorsMixin,
-        DetailView,
-):
+        RedirectExceptionsToFallbackWebsiteMixin, SingleJournalMixin,
+        ContentAccessCheckMixin, ContributorsMixin, DetailView):
     """
     Displays a journal.
     """
@@ -648,13 +646,13 @@ class IssueXmlView(
 
 
 class BaseArticleDetailView(
+        RedirectExceptionsToFallbackWebsiteMixin,
         FallbackObjectViewMixin,
         ContentAccessCheckMixin,
         SingleArticleWithScholarMetadataMixin,
         ArticleViewMetricCaptureMixin,
         PrepublicationTokenRequiredMixin,
-        DetailView,
-):
+        DetailView):
     context_object_name = 'article'
     model = Article
     tracking_view_type = 'html'
@@ -892,12 +890,9 @@ class ArticleBibCitationView(BaseArticleCitationView):
 
 
 class ArticleFormatDownloadView(
-        ArticleViewMetricCaptureMixin,
-        ContentAccessCheckMixin,
-        PermissionRequiredMixin,
-        SingleArticleMixin,
-        FedoraFileDatastreamView,
-):
+        RedirectExceptionsToFallbackWebsiteMixin, ArticleViewMetricCaptureMixin,
+        ContentAccessCheckMixin, PermissionRequiredMixin, SingleArticleMixin,
+        FedoraFileDatastreamView):
 
     def get_content(self):
         return self.get_object()

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Q
 from django.urls import reverse
 from django.http import Http404
@@ -14,6 +15,17 @@ from erudit.solr.models import (
 )
 
 from core.metrics.metric import metric
+
+
+class RedirectExceptionsToFallbackWebsiteMixin:
+    """ Mixin that redirects all exceptions to the fallback website """
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except Http404:
+            return HttpResponseRedirect(
+                settings.FALLBACK_BASE_URL + self.request.path.strip('/')
+            )
 
 
 class SingleJournalMixin:

@@ -226,7 +226,7 @@ MIDDLEWARE = (
     'core.subscription.middleware.SubscriptionMiddleware',
     'core.citations.middleware.SavedCitationListMiddleware',
     'waffle.middleware.WaffleMiddleware',
-    'base.middleware.LogHttp404Middleware',
+    'base.middleware.RedirectToFallbackMiddleware',
     'base.middleware.PolyglotLocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
 )

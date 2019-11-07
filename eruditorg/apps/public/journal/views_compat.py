@@ -13,13 +13,16 @@ from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
 from erudit.solr.models import SolrData
-from .viewmixins import SolrDataMixin
+from .viewmixins import (
+    RedirectExceptionsToFallbackWebsiteMixin,
+    SolrDataMixin,
+)
 from base.viewmixins import ActivateLegacyLanguageViewMixin
 
 
 class JournalDetailCheckRedirectView(
-    RedirectView,
-    ActivateLegacyLanguageViewMixin,
+    RedirectExceptionsToFallbackWebsiteMixin, RedirectView,
+    ActivateLegacyLanguageViewMixin
 ):
     permanent = True
 
@@ -39,8 +42,7 @@ class JournalDetailCheckRedirectView(
 
 
 class IssueDetailRedirectView(
-    RedirectView,
-    ActivateLegacyLanguageViewMixin,
+    RedirectExceptionsToFallbackWebsiteMixin, RedirectView, ActivateLegacyLanguageViewMixin
 ):
     pattern_name = 'public:journal:issue_detail'
     permanent = True
@@ -153,9 +155,8 @@ class IssueDetailRedirectView(
 
 
 class ArticleDetailRedirectView(
-    ActivateLegacyLanguageViewMixin,
-    RedirectView,
-    SolrDataMixin,
+    ActivateLegacyLanguageViewMixin, RedirectExceptionsToFallbackWebsiteMixin,
+    RedirectView, SolrDataMixin,
 ):
     pattern_name = 'public:journal:article_detail'
     permanent = True
