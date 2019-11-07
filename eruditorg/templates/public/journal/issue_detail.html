@@ -231,7 +231,7 @@
       {% if published_issue != issue %}
       <article class="col-xs-6 col-sm-3">
         <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="card">
-          {% if issue.has_coverpage %}
+          {% if published_issue.has_coverpage %}
           <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" alt="{% trans 'Couverture représentant ' %}{% if published_issue.title %}{% trans 'la thématique ' %}{{ published_issue.title|safe }}{% else %}{% trans 'le ' %}{{ published_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
           {% endif %}
           <h5 class="card__title">
