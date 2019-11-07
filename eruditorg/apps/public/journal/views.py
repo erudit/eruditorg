@@ -455,6 +455,15 @@ class IssueDetailView(
         # and we cannot know when an article has been modified.
         context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
+        # Back issues should be ordered by year, volume & number, and should not include current one
+        context['back_issues'] = context['journal'].published_issues.order_by(
+            '-year',
+            '-volume',
+            '-number',
+        ).exclude(
+            localidentifier=self.object.localidentifier,
+        )[:4]
+
         try:
             context['journal_info'] = self.object.journal.information
         except ObjectDoesNotExist:

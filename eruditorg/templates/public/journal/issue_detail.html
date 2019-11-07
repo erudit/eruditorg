@@ -215,35 +215,35 @@
 {# The issue's localidentifier is used as a primary key for the cache key. #}
 {# The content_access_granted and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The issue's update time from Fedora is used as the cache content version. #}
-{% cache FOREVER_TTL "public_issue_detail_back_issues" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
+{% cache cache_timeout "public_issue_detail_back_issues" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
+{% if back_issues %}
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">
       <h3>
         {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
         <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues">
-          <small>({{ journal.published_issues|length }} {% trans 'numéros' %})</small>
+          <small>({{ back_issues|length }} {% trans 'numéros' %})</small>
         </a>
       </h3>
     </header>
     <div class="row">
-      {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
-      {% if published_issue != issue %}
+      {% for back_issue in back_issues %}
       <article class="col-xs-6 col-sm-3">
-        <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="card">
-          {% if published_issue.has_coverpage %}
-          <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" alt="{% trans 'Couverture représentant ' %}{% if published_issue.title %}{% trans 'la thématique ' %}{{ published_issue.title|safe }}{% else %}{% trans 'le ' %}{{ published_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
+        <a href="{% url 'public:journal:issue_detail' back_issue.journal.code back_issue.volume_slug back_issue.localidentifier %}" class="card">
+          {% if back_issue.has_coverpage %}
+          <img src="{% url 'public:journal:issue_coverpage' back_issue.journal.code back_issue.volume_slug back_issue.localidentifier %}" alt="{% trans 'Couverture représentant ' %}{% if back_issue.title %}{% trans 'la thématique ' %}{{ back_issue.title|safe }}{% else %}{% trans 'le ' %}{{ back_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
           {% endif %}
           <h5 class="card__title">
-            <span>{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-            {% if published_issue.html_title %}<br><span><strong>{{ published_issue.html_title|safe }}</strong></span>{% endif %}
+            <span>{% with title=back_issue.volume_title %}{{ title }}{% endwith %}</span>
+            {% if back_issue.html_title %}<br><span><strong>{{ back_issue.html_title|safe }}</strong></span>{% endif %}
           </h5>
         </a>
       </article>
-      {% endif %}
       {% endfor %}
     </ul>
   </div>
 </section>
+{% endif %}
 {% endcache %}
 {% endblock inner_footer %}
