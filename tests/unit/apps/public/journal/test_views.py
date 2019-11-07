@@ -428,6 +428,21 @@ class TestIssueDetailSummary:
         else:
             assert 'reader_url' not in context
 
+    def test_issue_detail_back_issues(self):
+        journal = JournalFactory()
+        issue_1 = IssueFactory(journal=journal, year='2019', volume='1', number='1')
+        issue_2 = IssueFactory(journal=journal, year='2019', volume='1', number='2')
+        issue_3 = IssueFactory(journal=journal, year='2019', volume='2', number='1')
+        issue_4 = IssueFactory(journal=journal, year='2019', volume='2', number='2')
+        issue_5 = IssueFactory(journal=journal, year='2019', volume='3', number='1')
+        issue_6 = IssueFactory(journal=journal, year='2019', volume='3', number='2')
+        view = IssueDetailView()
+        view.request = unittest.mock.MagicMock()
+        view.object = issue_6
+        context = view.get_context_data()
+        # Back issues should be ordered by year, volume & number, and should not include current one
+        assert list(context['back_issues']) == [issue_5, issue_4, issue_3, issue_2]
+
 
 class TestIssueReaderView:
 
