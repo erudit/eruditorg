@@ -1283,7 +1283,9 @@
                         <tbody>
                           <tr>
                             <td class="mcnImageContent" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;" valign="top">
-                              <a href="{% trans 'https://www.erudit.org/fr/20ans/' %}" title="{% trans 'Érudit célèbre ses 20 ans ! Découvrez notre histoire.' %}" target="_blank"><img align="center" alt="" class="mcnImage" src="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ site.domain }}{% if LANGUAGE_CODE == 'fr' %}{% static 'img/email/banniere_20_ans-fr.png' %}{% else %}{% static 'img/email/banniere_20_ans-en.png' %}{% endif %}" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" width="600"></a>
+                              <a href="https://www.erudit.org/" target="_blank">
+                                <img align="center" alt="" class="mcnImage" src="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ site.domain }}{% static 'img/email/logotype-600x150.png' %}" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" width="600">
+                              </a>
                             </td>
                           </tr>
                           <tr>
