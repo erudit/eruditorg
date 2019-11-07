@@ -234,11 +234,13 @@
 
         </dl>
 
+        {% if journal.has_logo %}
         <div>
           <a href="{% url 'public:journal:journal_detail' journal.code %}">
             <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
           </a>
         </div>
+        {% endif %}
       </section>
 
       {% if journal_info.email or journal_info.subscription_email or journal_info.phone %}

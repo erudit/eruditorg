@@ -168,6 +168,19 @@ class TestJournal:
         issue_3 = IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
         assert journal.first_issue_published_on_erudit.date_published == dt.date(2015, 1, 1)
 
+    @pytest.mark.parametrize('logo, expected_has_logo', [
+        ('logo.png', True),
+        ('logo_empty.png', False),
+    ])
+    def test_knows_if_it_has_a_logo(self, logo, expected_has_logo):
+        journal = JournalFactory()
+        repository.api.register_datastream(
+            journal.get_full_identifier(),
+            '/LOGO/content',
+            open(settings.MEDIA_ROOT + '/' + logo, 'rb').read(),
+        )
+        assert journal.has_logo == expected_has_logo
+
 
 class TestIssue:
     def test_can_return_the_associated_eulfedora_model(self):
