@@ -62,6 +62,10 @@ journal_url_patterns = ([
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_authors_list', permanent=True),
         name="legacy_journal_authors"),
+    url(r'^revue/(?P<code>[\w-]+)/rss\.xml$',
+        journal_views_compat.JournalDetailCheckRedirectView.as_view(
+            pattern_name='public:journal:journal_articles_rss', permanent=True),
+        name="legacy_journal_rss"),
     url(r'^culture/(?P<code>[\w-]+)/?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_detail', permanent=True),
