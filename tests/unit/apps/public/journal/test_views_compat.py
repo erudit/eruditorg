@@ -5,10 +5,28 @@ import unittest.mock
 from django.http import Http404
 
 from erudit.test.factories import JournalFactory, IssueFactory
-from apps.public.journal.views_compat import IssueDetailRedirectView
+from apps.public.journal.views_compat import IssueDetailRedirectView, JournalDetailCheckRedirectView
 
 
 pytestmark = pytest.mark.django_db
+
+
+class TestJournalDetailRedirectView:
+
+    @pytest.mark.parametrize('pattern_name, expected_url', [
+        ('public:journal:journal_detail', '/fr/revues/journal/'),
+        ('public:journal:journal_authors_list', '/fr/revues/journal/auteurs/'),
+        ('public:journal:journal_articles_rss', '/fr/revues/journal/rss.xml'),
+    ])
+    def test_get_redirect_url(self, pattern_name, expected_url):
+        issue = IssueFactory(journal__code='journal')
+        view = JournalDetailCheckRedirectView()
+        view.request = unittest.mock.MagicMock()
+        view.pattern_name = pattern_name
+        assert view.get_redirect_url(code=issue.journal.code) == expected_url
+        # Check that a wrong journal code returns a 404.
+        with pytest.raises(Http404):
+            view.get_redirect_url(code='foo')
 
 
 class TestIssueDetailRedirectView:
