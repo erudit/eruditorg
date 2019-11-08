@@ -45,11 +45,6 @@
   {# SEARCH #}
   <header class="home-header">
     <div class="container">
-      <h2 class="home-header__title">
-        <a href="{% url 'public:20_years' %}" title="{% trans 'Aller vers la page du 20e anniversaire d’Érudit' %}">
-          {% trans "Érudit <br/>célèbre <br/>ses 20 ans&nbsp;!" %}
-        </a>
-      </h2>
       <div class="row">
         <section class="col-sm-8 col-md-6 home-search">
           <h3 class="sr-only">{% trans "Effectuer une recherche simple" %}</h3>
@@ -143,26 +138,6 @@
     </div>
   </section>
   {% endif %}
-
-  {# BANNER / AD SPACE #}
-  <section class="home-banner">
-    <div class="container">
-      <h2 class="sr-only">{% trans "Annonce" %}</h2>
-      <div class="row home-banner__content">
-        <div class="col-xs-12 col-sm-6 col-md-8 home-banner__img">
-          <a href="{% url 'public:20_years' %}" target="_blank" title="{% trans 'Voir la page sur les 20 ans d’Érudit' %}">
-            <div id="campaign-banner" class="campaign-banner" alt="{% trans 'Illustration du 20e anniversaire' %}"></div>
-          </a>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <h3 class="home-banner__title"><a href="{% url 'public:20_years' %}" target="_blank">{% trans 'Érudit célèbre ses 20&nbsp;ans&nbsp;!' %}</a></h3>
-          <p class="home-banner__desc">{% blocktrans %}Pour cette occasion, nous vous invitons à mieux nous connaître.{% endblocktrans %}</p>
-          <p>-> <a href="{% url 'public:20_years' %}" class="home-banner__link" target="_blank">{% trans '20 ans d’Érudit' %}</a></p>
-        </div>
-      </div>
-      <hr/>
-    </div>
-  </section>
 
   {% switch "maintenance" %}
   {% else %}

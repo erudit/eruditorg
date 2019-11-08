@@ -81,7 +81,7 @@
 
   /* Search tool */
   .home-search {
-    margin: 10vh 0;
+    margin: 240px 0 60px 0;
     color: #fff;
 
     a {
@@ -262,7 +262,7 @@
   }
 
   /* General pale-background section styles */
-  .home-banner, .home-news, .home-about {
+  .home-news, .home-about {
     p a {
       color: $dark-grey;
     }
@@ -278,8 +278,9 @@
 
   }
 
-  /* Banner */
-  .home-banner {
+  /* News */
+  .home-news {
+    padding-bottom: 5vh;
     background-color: $light-grey;
 
     &:before {
@@ -290,31 +291,6 @@
       content: " ";
       display: block;
     }
-  }
-
-  .home-banner__content {
-    margin: 10vh 0;
-  }
-
-  .home-banner__title a {
-    font-size: 36px;
-    color: #000;
-  }
-
-  .home-banner__desc {
-    margin-top: 2.5vh;
-    font-size: 18px;
-  }
-
-  .home-banner__link {
-    margin-top: 5vh;
-    font-size: 24px;
-  }
-
-  /* News */
-  .home-news {
-    padding-bottom: 5vh;
-    background-color: $light-grey;
   }
 
   .home-news__list {
