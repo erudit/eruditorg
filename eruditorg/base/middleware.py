@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+import structlog
 
 from django.urls import translate_url
 from django.utils import translation
@@ -8,8 +8,10 @@ import datetime as dt
 
 from django.utils.translation import get_language
 from django.utils.translation import LANGUAGE_SESSION_KEY
-from django.http import HttpResponsePermanentRedirect
 from django.conf import settings
+
+
+logger = structlog.get_logger(__name__)
 
 
 # Originally comes from: https://github.com/divio/django-cms/blob/develop/cms/middleware/language.py
@@ -53,29 +55,8 @@ class PolyglotLocaleMiddleware(LocaleMiddleware):
         return response
 
 
-class RedirectToFallbackMiddleware(MiddlewareMixin):
-
-    DO_NOT_REDIRECT_NAMESPACES = {
-        'userspace',
-        'citations',
-        'book',
-    }
-
-    def should_redirect(self, request):
-        """ A request should be redirected if the resolver does not
-        matched a namespace listed in DO_NOT_REDIRECT_NAMESPACES """
-        if not request.resolver_match:
-            return True
-
-        namespaces = set(request.resolver_match.namespaces)
-        return len(namespaces & self.DO_NOT_REDIRECT_NAMESPACES) == 0
-
+class LogHttp404Middleware(MiddlewareMixin):
     def process_response(self, request, response):
-
-        if response.status_code == 404 and self.should_redirect(request):
-            if request.path[0:4] == '/fr/' or request.path[0:4] == '/en/':
-                retro_path = "{}{}".format(settings.FALLBACK_BASE_URL, request.path[3:])
-            else:
-                retro_path = "{}{}".format(settings.FALLBACK_BASE_URL, request.path)
-            return HttpResponsePermanentRedirect(retro_path, )
+        if response.status_code == 404:
+            logger.warn('http_404', path=request.path)
         return response
