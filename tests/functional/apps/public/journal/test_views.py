@@ -22,7 +22,7 @@ import pytest
 
 from apps.public.journal.viewmixins import SolrDataMixin
 from core.subscription.test.utils import generate_casa_token
-from erudit.models import JournalType, Issue, Article
+from erudit.models import JournalType, Issue, Article, Journal
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
@@ -351,7 +351,8 @@ class TestJournalDetailView:
         assert b'<section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about"' not in content
 
     @pytest.mark.parametrize('charges_apc', (True, False))
-    def test_journal_detail_has_no_apc_mention_if_it_charges_apc(self, charges_apc):
+    def test_journal_detail_has_no_apc_mention_if_it_charges_apc(self, charges_apc, monkeypatch):
+        monkeypatch.setattr(Journal, 'has_logo', unittest.mock.MagicMock(return_value=False))
         journal = JournalFactory(charges_apc=charges_apc)
         url = journal_detail_url(journal)
         response = self.client.get(url)

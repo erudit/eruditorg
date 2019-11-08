@@ -1,4 +1,3 @@
-import copy
 import datetime as dt
 import dateutil.relativedelta as dr
 from hashlib import md5
@@ -8,7 +7,6 @@ import re
 
 from lxml import etree as et
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
@@ -21,9 +19,6 @@ from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
-from eulfedora.util import RequestFailed
-from PIL import Image
-from requests.exceptions import ConnectionError
 from urllib.parse import urlparse
 
 from ..abstract_models import FedoraDated
@@ -367,6 +362,11 @@ class Journal(FedoraMixin, FedoraDated):
         """ Helper method that returns True if this journal is a scientific journal """
         return self.type.code == JournalType.CODE_CULTURAL
 
+    @cached_property
+    def has_logo(self):
+        """ Returns a boolean indicating if the considered journal has a logo. """
+        return self.has_non_empty_image_datastream('logo')
+
 
 class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal. """
@@ -634,25 +634,7 @@ class Issue(FedoraMixin, FedoraDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
-        if self.fedora_object is None:
-            return False
-        try:
-            content = get_cached_datastream_content(self.fedora_object, 'coverpage')
-        except (RequestFailed, ConnectionError):  # pragma: no cover
-            if settings.DEBUG:
-                return False
-            raise
-
-        if not content:
-            return False
-
-        # Checks the content of the image in order to detect if it contains only one single color.
-        im = Image.open(copy.copy(content))
-        extrema = im.convert('L').getextrema()
-        empty_coverpage = (extrema == (0, 0)) or (extrema == (255, 255))
-        im.close()
-
-        return not empty_coverpage
+        return self.has_non_empty_image_datastream('coverpage')
 
     @property
     def prepublication_ticket(self):
