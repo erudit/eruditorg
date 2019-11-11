@@ -24,7 +24,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.encoding import force_bytes
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
-from django.utils.translation import get_language
+from django.utils.translation import get_language, gettext as _
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -665,11 +665,18 @@ class BaseArticleDetailView(
     context_object_name = 'article'
     model = Article
     tracking_view_type = 'html'
-    # Used to only display the abstracts or the bibliography.
-    only_display = False
+    page_title_suffix = None
+    display_full_article = True
+    display_abstracts = True
+    display_biblio = True
 
     def get_context_data(self, **kwargs):
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
+
+        context['page_title_suffix'] = self.page_title_suffix
+        context['display_full_article'] = self.display_full_article
+        context['display_abstracts'] = self.display_abstracts
+        context['display_biblio'] = self.display_biblio
 
         try:
             # Abstracts and keywords without HTML for metatags.
@@ -721,7 +728,6 @@ class BaseArticleDetailView(
         context['render_xml_content'] = functools.partial(
             self.render_xml_content,
             context=context,
-            only_display=self.only_display,
         )
         context['related_articles'] = functools.partial(
             self.get_related_articles,
@@ -753,12 +759,11 @@ class BaseArticleDetailView(
     def dispatch(self, *args, **kwargs):
         return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
 
-    def render_xml_content(self, context, only_display=False):
+    def render_xml_content(self, context):
         """ Renders the given article instance as HTML. """
 
         article = self.get_object()
         context['is_of_type_roc'] = article.erudit_object.is_of_type_roc
-        context['only_display'] = only_display
         if 'article' not in context:
             context['article'] = article
 
@@ -832,7 +837,8 @@ class ArticleSummaryView(BaseArticleDetailView):
     Displays the summary of an Article instance.
     """
     template_name = 'public/journal/article_summary.html'
-    only_display = 'summary'
+    page_title_suffix = _('Notice')
+    display_full_article = False
 
 
 class ArticleBiblioView(BaseArticleDetailView):
@@ -840,7 +846,9 @@ class ArticleBiblioView(BaseArticleDetailView):
     Displays the bibliography of an Article instance.
     """
     template_name = 'public/journal/article_biblio.html'
-    only_display = 'biblio'
+    page_title_suffix = _('Bibliographie')
+    display_full_article = False
+    display_abstracts = False
 
 
 class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
