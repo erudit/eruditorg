@@ -246,9 +246,12 @@ class JournalDetailView(
             issue=current_issue,
         )
 
-        # Generate a cache key based on the list of published issues so that the cache is not used
-        # when a new issue is published (or unpublished).
-        context['issues_cache_key'] = qs_cache_key(self.object.published_issues)
+        # Generate a cache key based on the forced free access issues queryset so that the cache is
+        # invalidated when the queryset changes.
+        free_access_issues = self.object.published_issues.order_by('pk').filter(
+            force_free_access=True,
+        )
+        context['free_access_cache_key'] = qs_cache_key(free_access_issues)
 
         # We need a localidentifier for the journal detail template cache key so we should not cache
         # the template if we don't have one.
