@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django import template
 from django.urls import reverse
+from django.urls.exceptions import NoReverseMatch
 
 from base.context_managers import switch_language
 
@@ -21,17 +20,22 @@ def trans_current_url(context, langcode):
     args = resolver_match.args
     kwargs = resolver_match.kwargs.copy()
     with switch_language(langcode):
-        i18n_url = reverse(
-            ':'.join([resolver_match.namespace, resolver_match.url_name]),
-            args=args, kwargs=kwargs)
-
-    if request.GET:
-        return '{url}?{params}'.format(**{
-            'url': i18n_url,
-            'params': request.GET.urlencode(),
-        })
-    else:
-        return i18n_url
+        try:
+            i18n_url = reverse(
+                ':'.join([resolver_match.namespace, resolver_match.url_name]),
+                args=args,
+                kwargs=kwargs,
+            )
+            if request.GET:
+                return '{url}?{params}'.format(**{
+                    'url': i18n_url,
+                    'params': request.GET.urlencode(),
+                })
+            else:
+                return i18n_url
+        except NoReverseMatch:
+            # Some URLs don't support i18n, don't translate, keep as-is
+            return request.get_full_path()
 
 
 @register.simple_tag(takes_context=True)
