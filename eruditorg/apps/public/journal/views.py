@@ -24,7 +24,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.encoding import force_bytes
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
-from django.utils.translation import get_language, gettext as _
+from django.utils.translation import get_language, gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -860,7 +860,7 @@ class ArticleTocView(BaseArticleDetailView):
     Displays the table of content of an Article instance.
     """
     template_name = 'public/journal/article_toc.html'
-    page_title_suffix = _('Plan complet de l\'article')
+    page_title_suffix = _('Plan complet de l’article')
     display_full_article = False
     display_abstracts = False
     display_biblio = False

@@ -232,7 +232,7 @@
             <xsl:if test="//section2/titre[not(@traitementparticulier='oui')]">
               <li>
                 <a href="{% url 'public:journal:article_toc' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
-                  <em>{% trans "Plan complet de l'article" %}</em>
+                  <em>{% trans "Plan complet de l’article" %}</em>
                 </a>
               </li>
             </xsl:if>
