@@ -1,0 +1,90 @@
+{% extends "public/journal/article_base.html" %}
+{% load adv_cache i18n public_journal_tags staticfiles %}
+
+{% block title %}{% trans "Plan de l'article." %} {{ block.super }}{% endblock title %}
+
+{% block meta_description %}{% trans "Plan de l'article." %} {{ block.super }}{% endblock meta_description %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
+      "name": "{% trans 'Revues' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}",
+      "name": "{{ article.issue.journal.name }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 4,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}",
+      "name": "{{ article.issue.volume_title_with_pages }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 5,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
+      "name": "{{ article|format_article_html_title }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 6,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_toc' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
+      "name": "{% trans 'Plan de l\'article' %}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li>
+  <a href="{% url 'public:journal:article_toc' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{% trans "Plan de l'article" %}</a>
+</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+{% csrf_token %}
+{# If the issue is published, the article toc will be cached for one day. #}
+{# If the issue is not published, the article toc will not be cached. #}
+{# The article's localidentifier is used as a primary key for the cache key. #}
+{# The in_citation_list, article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
+{% cache cache_timeout "public_article_toc" article.localidentifier in_citation_list article.issue.is_published LANGUAGE_CODE 'v1' %}
+<main
+    id="article-{{ article.localidentifier }}"
+    class="container"
+    data-document-id="{{ article.solr_id }}"
+    {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
+  >
+  {{ render_xml_content }}
+</main>
+
+{% include "public/journal/partials/article_footer.html" %}
+
+<div class="hidden">
+  {% include "public/journal/partials/article_citation_modal_content.html" %}
+</div>
+{% endcache %}
+{% endblock content %}

@@ -60,8 +60,7 @@
             <xsl:apply-templates select="liminaire/grtitre/titre | liminaire/grtitre/sstitre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/titreparal | liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
-            {% if only_display == 'summary' %}<span><em>[{% trans 'Notice' %}]</em></span>{% endif %}
-            {% if only_display == 'biblio' %}<span><em>[{% trans 'Bibliographie' %}]</em></span>{% endif %}
+            {% if page_title_suffix %}<span><em>[{{ page_title_suffix }}]</em></span>{% endif %}
           </h1>
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur doc-head__authors">
@@ -79,7 +78,7 @@
           <div class="row">
             <div class="col-sm-8">
               <xsl:apply-templates select="liminaire/notegen"/>
-              {% if not content_access_granted and not only_display %}
+              {% if not content_access_granted and display_full_article %}
               <div class="alert">
                 <p>
                   {% blocktrans trimmed with code=article.issue.journal.code %}
@@ -141,7 +140,7 @@
             </div>
             {% endif %}
           </a>
-          {% if only_display and article.publication_allowed %}
+          {% if not display_full_article and article.publication_allowed %}
           <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
         </div>
@@ -228,12 +227,24 @@
                 <em>{% trans "Retour au début" %}</em>
               </a>
             </li>
+            {% if content_access_granted and not display_full_toc %}
+            <!-- Do not display complete TOC link if we do not have more than 1 level of sections. -->
+            <xsl:if test="//section2/titre[not(@traitementparticulier='oui')]">
+              <li>
+                <a href="{% url 'public:journal:article_toc' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
+                  <em>{% trans "Plan complet de l'article" %}</em>
+                </a>
+              </li>
+            </xsl:if>
+            {% endif %}
+            {% if display_abstracts %}
             <xsl:if test="//resume">
               <li>
                 <a href="#resume">{% trans "Résumé" %}</a>
               </li>
             </xsl:if>
-            {% if content_access_granted and not only_display %}
+            {% endif %}
+            {% if content_access_granted and display_full_article %}
             <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
               <li class="article-toc--body">
                 <ul class="unstyled">
@@ -249,7 +260,7 @@
             </li>
             {% endif %}
             <xsl:for-each select="partiesann[1]">
-              {% if content_access_granted and not only_display %}
+              {% if content_access_granted and display_full_article %}
               <xsl:if test="grannexe">
                 <li>
                   <a href="#grannexe">
@@ -279,7 +290,7 @@
                 </li>
               </xsl:if>
               {% endif %}
-              {% if not is_of_type_roc %}
+              {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
               <xsl:if test="grbiblio">
                 <li>
                   <a href="#grbiblio">
@@ -289,7 +300,7 @@
               </xsl:if>
               {% endif %}
             </xsl:for-each>
-            {% if content_access_granted and not only_display %}
+            {% if content_access_granted and display_full_article %}
             <xsl:if test="//figure">
               <li>
                 <a href="#figures">{% trans "Liste des figures" %}</a>
@@ -379,7 +390,7 @@
 
       {% if article.publication_allowed %}
       <div class="full-article {% if article.processing == 'C' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
-        {% if only_display != 'biblio' %}
+        {% if display_abstracts %}
         <!-- abstracts & keywords -->
         <xsl:if test="//resume | //grmotcle">
           <section id="resume" role="complementary" class="article-section grresume">
@@ -407,7 +418,7 @@
         </xsl:if>
         {% endif %}
 
-        {% if content_access_granted and not only_display %}
+        {% if content_access_granted and display_full_article %}
           {% if article.processing == 'C' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
@@ -422,7 +433,7 @@
             </div>
           </section>
           {% endif %}
-        {% elif not article.abstracts and only_display != 'biblio' %}
+        {% elif not article.abstracts and display_abstracts %}
           {% if article.processing == 'C' %}
           <section id="first-600-words">
             {{ article.html_body|safe|truncatewords_html:600 }}
@@ -441,7 +452,7 @@
         </div>
 
         <!-- lists of tables & figures -->
-        {% if content_access_granted and not only_display %}
+        {% if content_access_granted and display_full_article %}
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
@@ -463,6 +474,14 @@
             </xsl:for-each>
           </section>
         </xsl:if>
+        {% endif %}
+
+        {% if content_access_granted and display_full_toc %}
+        <section id="article-toc--full">
+          <ul class="unstyled">
+            <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+          </ul>
+        </section>
         {% endif %}
 
       </div>
@@ -731,6 +750,65 @@
     <li>
       <a href="#{../@id}">
         <xsl:apply-templates mode="toc-heading"/>
+      </a>
+    </li>
+  </xsl:template>
+
+  <!--*** ARTICLE FULL TOC ***-->
+  <xsl:template match="section1/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h2><xsl:apply-templates mode="toc-heading"/></h2>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section2/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section2/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h3><xsl:apply-templates mode="toc-heading"/></h3>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section3/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section3/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h4><xsl:apply-templates mode="toc-heading"/></h4>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section4/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section4/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h5><xsl:apply-templates mode="toc-heading"/></h5>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section5/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section5/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h6><xsl:apply-templates mode="toc-heading"/></h6>
+      </a>
+      <ul class="unstyled">
+        <xsl:apply-templates select="../section6/titre[not(@traitementparticulier='oui')]" mode="toc-full"/>
+      </ul>
+    </li>
+  </xsl:template>
+  <xsl:template match="section6/titre[not(@traitementparticulier='oui')]" mode="toc-full">
+    <li>
+      <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}#{../@id}">
+        <h6 class="h7"><xsl:apply-templates mode="toc-heading"/></h6>
       </a>
     </li>
   </xsl:template>
@@ -1920,15 +1998,13 @@
   <xsl:template match="partiesann">
     <section class="{name()} col-xs-12">
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
-      {% if content_access_granted and not only_display %}
+      {% if content_access_granted and display_full_article %}
       <xsl:apply-templates select="grannexe"/>
-      {% endif %}
       <xsl:apply-templates select="merci"/>
       <xsl:apply-templates select="grnotebio"/>
-      {% if content_access_granted and not only_display %}
       <xsl:apply-templates select="grnote"/>
       {% endif %}
-      {% if not is_of_type_roc or only_display == 'biblio' %}
+      {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
       <xsl:apply-templates select="grbiblio"/>
       {% endif %}
     </section>

@@ -1013,6 +1013,9 @@ class TestArticleDetailView:
         ('public:journal:article_biblio', '1058447ar', 1, 0),
         ('public:journal:article_summary', '1058447ar', 0, 1),
         ('public:journal:article_detail', '1058447ar', 0, 1),
+        # Bibliography should not be displayed on TOC page.
+        ('public:journal:article_toc', '009256ar', 0, 0),
+        ('public:journal:article_toc', '1058447ar', 0, 0),
     ))
     def test_biblio_references_display(self, url_name, fixture, display_biblio,
                                        display_pdf_first_page):
@@ -1037,6 +1040,7 @@ class TestArticleDetailView:
         ('public:journal:article_biblio'),
         ('public:journal:article_summary'),
         ('public:journal:article_detail'),
+        ('public:journal:article_toc'),
     ))
     def test_display_citation_fulltext_world_readable_metatag_only_for_open_access_articles(
         self, url_name, open_access
@@ -1061,6 +1065,7 @@ class TestArticleDetailView:
         ('public:journal:article_biblio'),
         ('public:journal:article_summary'),
         ('public:journal:article_detail'),
+        ('public:journal:article_toc'),
     ))
     def test_publication_allowed_text_display(self, url_name, publication_allowed):
         article = ArticleFactory(
@@ -1080,7 +1085,7 @@ class TestArticleDetailView:
             assert 'Boîte à outils' in dom.decode()
             if url_name != 'public:journal:article_detail':
                 assert 'Lire le texte intégral' in dom.decode()
-            if url_name != 'public:journal:article_biblio':
+            if url_name not in ['public:journal:article_biblio', 'public:journal:article_toc']:
                 assert 'In October 1800 the poet, travel-writer and polemicist Robert Southey ' \
                        'was in Portugal.' in dom.decode()
         else:
@@ -2047,6 +2052,77 @@ class TestArticleDetailView:
         dom = BeautifulSoup(html, 'html.parser')
         media_object = dom.find('div', {'class': 'embed-responsive'})
         assert media_object.get('style') == 'padding-bottom: 56.563%'
+
+    @pytest.mark.parametrize('fixture, expected_link', (
+        # No section level.
+        ('1018860ar', False),
+        # Only one section level.
+        ('009255ar', False),
+        # Two section levels.
+        ('1054008ar', True),
+        # Three section levels.
+        ('1062105ar', True),
+    ))
+    def test_complete_toc_link_displayed_on_article_detail(self, fixture, expected_link):
+        article = ArticleFactory(
+            from_fixture=fixture,
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        if expected_link:
+            assert '<em>Plan complet de l\'article</em>' in html
+        else:
+            assert '<em>Plan complet de l\'article</em>' not in html
+
+    @pytest.mark.parametrize('fixture, expected_section_titles', (
+        ('1054008ar', [
+            '<h2>Suspension du verbe</h2>',
+            '<h2>Une éthique de l’action</h2>',
+            '<h3>1– Nécessité de limiter l’action.</h3>',
+            '<h3>2– Nécessité de simplifier, c’est-à-dire de réduire à l’essentiel.</h3>',
+            '<h3>3– Nécessité (pour l’homme) de se transformer.</h3>',
+            '<h2>Une «\xa0poéthique\xa0»</h2>',
+            '<h2>L’en avant de la parole</h2>',
+        ]),
+        ('1062105ar', [
+            '<h2><span class="majuscule">Introduction</span></h2>',
+            '<h2><span class="majuscule">1. La mesure de la mobilitÉ sociale en France et     '
+            'au QuÉbec</span></h2>',
+            '<h2><span class="majuscule">2. MÉthodes</span></h2>',
+            '<h3>2.1 Présentation des deux enquêtes et des variables professionnelles     '
+            'sélectionnées</h3>',
+            '<h3>2.2 Les codages effectués pour mesurer les transmissions     '
+             'professionnelles</h3>',
+            '<h4><em>2.2.1 Genre et niveau de     compétences</em></h4>',
+            '<h4><em>2.2.2 Catégories     socioprofessionnelles</em></h4>',
+            '<h2><span class="majuscule">3. Évolution de la structure socioprofessionnelle     '
+            'des emplois et transmissions professionnelles au sein des     lignÉes</span></h2>',
+            '<h3>3.1 Répartition des positions socioprofessionnelles dans les lignées des     '
+            'générations enquêtées</h3>',
+            '<h3>3.2 Transmissions professionnelles dans les lignées</h3>',
+            '<h2><span class="majuscule">Conclusion</span></h2>',
+        ]),
+    ))
+    def test_article_toc_view(self, fixture, expected_section_titles):
+        article = ArticleFactory(
+            from_fixture=fixture,
+            issue__journal__open_access=True,
+        )
+        url = reverse('public:journal:article_toc', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        for section_title in expected_section_titles:
+            assert section_title in html
 
 
 class TestArticleRawPdfView:
