@@ -33,11 +33,7 @@ class JournalDetailCheckRedirectView(
             journal = Journal.legacy_objects.get_by_id_or_404(
                 kwargs['code']
             )
-            return reverse(
-                'public:journal:journal_detail', args=[
-                    journal.code,
-                ]
-            ) if journal.current_issue else reverse(self.pattern_name, args=[journal.code])
+            return reverse(self.pattern_name, args=[journal.code])
         raise Http404
 
 
