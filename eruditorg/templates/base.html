@@ -399,11 +399,7 @@
                 <ul class="unstyled footer-nav--publication-types">
                   <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
                   <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
-                  {% flag "BOOKS" %}
                   <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
-                  {% else %}
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans "Livres et actes" %}</a></li>
-                  {% endflag %}
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="{% trans 'https://www.erudit.org/public/documents/Guide_recherche.pdf' %}" target="_blank">{% trans "Aide" %}</a></li>
                   <li class="disabled">{% trans "Plan du site" %}</li>
