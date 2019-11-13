@@ -2076,9 +2076,9 @@ class TestArticleDetailView:
         })
         html = Client().get(url).content.decode()
         if expected_link:
-            assert '<em>Plan complet de l\'article</em>' in html
+            assert '<em>Plan complet de l’article</em>' in html
         else:
-            assert '<em>Plan complet de l\'article</em>' not in html
+            assert '<em>Plan complet de l’article</em>' not in html
 
     @pytest.mark.parametrize('fixture, expected_section_titles', (
         ('1054008ar', [
