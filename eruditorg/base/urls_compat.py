@@ -18,7 +18,7 @@ thesis_url_patterns = ([
         pattern_name='public:thesis:home',
         permanent=True
     )),
-    url(r'^index\.html?$', RedirectRetroUrls.as_view(
+    url(r'^index.html?$', RedirectRetroUrls.as_view(
         pattern_name='public:thesis:home',
         permanent=True
     )),
@@ -42,11 +42,7 @@ public_url_patterns = [
 
 search_url_patterns = ([
     url(r'^index\.html?$',
-        RedirectRetroUrls.as_view(pattern_name='public:search:advanced_search', permanent=True)),
-    url(r'^(?P<code>[\w-]+)/?$',
-        journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
-        name="legacy_journal_search"),
+        RedirectRetroUrls.as_view(pattern_name='public:search:advanced_search', permanent=True))
 ], 'legacy_search')
 
 # Journal legacy patterns
@@ -58,14 +54,14 @@ journal_url_patterns = ([
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_detail', permanent=True),
         name="legacy_journal_detail"),
+    url(r'^revue/(?P<code>[\w-]+)/index\.html?$',
+        journal_views_compat.JournalDetailCheckRedirectView.as_view(
+            pattern_name='public:journal:journal_detail', permanent=True),
+        name="legacy_journal_detail_index"),
     url(r'^revue/(?P<code>[\w-]+)/auteurs\.html?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_authors_list', permanent=True),
         name="legacy_journal_authors"),
-    url(r'^revue/(?P<code>[\w-]+)/\w+\.html?$',
-        journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
-        name="legacy_journal_detail_index"),
     url(r'^revue/(?P<code>[\w-]+)/rss\.xml$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_articles_rss', permanent=True),
@@ -74,18 +70,18 @@ journal_url_patterns = ([
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_detail', permanent=True),
         name="legacy_journal_detail_culture"),
+    url(r'^culture/(?P<code>[\w-]+)/index.html?$',
+        journal_views_compat.JournalDetailCheckRedirectView.as_view(
+            pattern_name='public:journal:journal_detail', permanent=True),
+        name="legacy_journal_detail_culture_index"),
     url(r'^culture/(?P<code>[\w-]+)/auteurs\.html?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_authors_list', permanent=True),
         name="legacy_journal_authors_culture"),
-    url(r'^culture/(?P<code>[\w-]+)/\w+\.html?$',
-        journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
-        name="legacy_journal_detail_culture_index"),
     url(r'^culture/(?P<code>[\w-]+)/rss\.xml$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
             pattern_name='public:journal:journal_articles_rss', permanent=True),
-        name="legacy_journal_rss_culture"),
+        name="legacy_journal_rss"),
 
     # Issue
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/?$',  # noqa
@@ -145,20 +141,14 @@ urlpatterns = [
         permanent=True
     )),
     url(r'^(?:(?P<lang>[\w-]{2})/)?', include([
-        url(r'^index\.html?$', RedirectRetroUrls.as_view(pattern_name='public:home',
+        url(r'^index.html?$', RedirectRetroUrls.as_view(pattern_name='public:home',
                                                         permanent=True)),
         url(r'^revue/?$', RedirectRetroUrls.as_view(
             pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals'),
-        url(r'^revue/index\.html?$', RedirectRetroUrls.as_view(
-            pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals_index'),
+            permanent=True)),
         url(r'^culture/?$', RedirectRetroUrls.as_view(
             pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals_culture'),
-        url(r'^culture/index\.html?$', RedirectRetroUrls.as_view(
-            pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals_culture_index'),
+            permanent=True)),
         url(r'^abonnement/login\.jsp$',
             RedirectRetroUrls.as_view(pattern_name='login', permanent=True)),
         url(r'^abonnement/oublierPassword\.jsp$',

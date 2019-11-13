@@ -1,7 +1,6 @@
 import pytest
 
-from django.urls import reverse, resolve
-from django.urls.exceptions import Resolver404
+from django.urls import reverse
 
 
 @pytest.mark.django_db
@@ -149,43 +148,3 @@ class TestLegacyJournalUrlPatterns:
             format_id,
         ])
         assert url == expected_url
-
-    @pytest.mark.parametrize('url, expected_url_name', [
-        # legacy_journals
-        ('/revue/', 'legacy_journals'),
-        # legacy_journals_index
-        ('/revue/index.html', 'legacy_journals_index'),
-        # legacy_journals
-        ('/culture/', 'legacy_journals_culture'),
-        # legacy_journals_index
-        ('/culture/index.html', 'legacy_journals_culture_index'),
-        # legacy_journal_search
-        ('/recherche/journal_code/', 'legacy_journal_search'),
-        # legacy_journal_detail
-        ('/revue/journal_code/', 'legacy_journal_detail'),
-        # legacy_journal_authors
-        ('/revue/journal_code/auteurs.html', 'legacy_journal_authors'),
-        # legacy_journal_detail_index
-        ('/revue/journal_code/index.html', 'legacy_journal_detail_index'),
-        ('/revue/journal_code/apropos.html', 'legacy_journal_detail_index'),
-        ('/revue/journal_code/thematique.html', 'legacy_journal_detail_index'),
-        # legacy_journal_rss
-        ('/revue/journal_code/rss.xml', 'legacy_journal_rss'),
-        # legacy_journal_detail_culture
-        ('/culture/journal_code/', 'legacy_journal_detail_culture'),
-        # legacy_journal_authors_culture
-        ('/culture/journal_code/auteurs.html', 'legacy_journal_authors_culture'),
-        # legacy_journal_detail_culture_index
-        ('/culture/journal_code/index.html', 'legacy_journal_detail_culture_index'),
-        ('/culture/journal_code/apropos.html', 'legacy_journal_detail_culture_index'),
-        ('/culture/journal_code/thematique.html', 'legacy_journal_detail_culture_index'),
-        # legacy_journal_rss_culture
-        ('/culture/journal_code/rss.xml', 'legacy_journal_rss_culture'),
-    ])
-    def test_resolve_journal_urls_compat(self, url, expected_url_name):
-        if expected_url_name:
-            resolver = resolve(url)
-            assert resolver.url_name == expected_url_name
-        else:
-            with pytest.raises(Resolver404):
-                resolver = resolve(url)
