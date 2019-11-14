@@ -2124,6 +2124,24 @@ class TestArticleDetailView:
         for section_title in expected_section_titles:
             assert section_title in html
 
+    @pytest.mark.parametrize('mock_is_external, mock_url, expected_status_code', [
+        (False, None, 200),
+        (True, 'http://www.example.com', 301),
+    ])
+    def test_get_external_issues_are_redirected(self, mock_is_external, mock_url, expected_status_code, monkeypatch):
+        monkeypatch.setattr(Article, 'is_external', mock_is_external)
+        monkeypatch.setattr(Article, 'url', mock_url)
+        article = ArticleFactory()
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        response = Client().get(url)
+        assert response.status_code == expected_status_code
+        if mock_url:
+            assert response.url == mock_url
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')

@@ -17,6 +17,7 @@ from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import Http404
+from django.http.response import HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.utils.decorators import method_decorator
@@ -675,6 +676,14 @@ class BaseArticleDetailView(
     display_abstracts = True
     display_biblio = True
     display_full_toc = False
+
+    def get(self, request, *args, **kwargs):
+        obj = self.get_object()
+        # If for some reason we try to access an external article, we should be redirected to the
+        # external URL.
+        if obj.is_external:
+            return HttpResponsePermanentRedirect(obj.url)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
