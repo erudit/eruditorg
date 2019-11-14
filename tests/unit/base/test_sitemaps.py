@@ -2,7 +2,7 @@ import pytest
 
 from base.sitemaps import JournalSitemap, IssueSitemap, ArticleSitemap
 
-from erudit.test.factories import ArticleFactory, IssueFactory
+from erudit.test.factories import ArticleFactory, IssueFactory, JournalTypeFactory
 
 
 pytestmark = pytest.mark.django_db
@@ -41,3 +41,8 @@ def test_article_with_non_existing_issue_does_not_raise_exception():
     no_issue_article = ArticleFactory()
     no_issue_article.issue.delete()
     assert ArticleSitemap().items() == [article]
+
+def test_scientific_and_cultural_articles_are_in_sitemap():
+    scientific_article = ArticleFactory(issue__journal__type=JournalTypeFactory(code='S'))
+    cultural_article = ArticleFactory(issue__journal__type=JournalTypeFactory(code='C'))
+    assert ArticleSitemap().items() == [scientific_article, cultural_article]

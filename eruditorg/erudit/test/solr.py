@@ -4,7 +4,14 @@ from operator import attrgetter
 from typing import Dict, List, Tuple
 
 from luqum.tree import (
-    SearchField, Group, AndOperation, OrOperation, UnknownOperation, FieldGroup, Plus
+    AndOperation,
+    BaseOperation,
+    FieldGroup,
+    Group,
+    OrOperation,
+    Plus,
+    SearchField,
+    UnknownOperation,
 )
 from luqum.parser import parser
 
@@ -160,7 +167,7 @@ def extract_pq_searchvals(pq):
     result = {}
     for child in pq.children:
         result.update(extract_pq_searchvals(child))
-    if isinstance(pq, SearchField):
+    if isinstance(pq, SearchField) and not isinstance(pq.expr, BaseOperation):
         result[pq.name] = unescape(pq.expr.value)
     return result
 
