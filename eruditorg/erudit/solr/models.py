@@ -233,10 +233,10 @@ def get_model_instance(solr_data):
 
 
 def get_all_articles(rows, page):
-    query = 'Fonds_fac:Érudit Corpus_fac:Article'
+    query = 'Fonds_fac:Érudit Corpus_fac:(Article OR Culturel)'
     args = {
         'q': query,
-        'facet.limit': '0',
+        'facet': 'false',
         'rows': str(rows),
         'start': str((page - 1) * rows),
     }
