@@ -54,29 +54,9 @@
 
     <br><br>
 
-    <h3>{% trans "Format KBART" %}</h3>
+    <h3>{% trans "KBART 2014" %}</h3>
     <section>
-      <form method="post">
-        {% csrf_token %}
-        <fieldset>
-          <div class="row">
-            <div class="col-sm-4">
-              <label for="id_collection">{{ form.collection.label }}</label>
-              {{ form.collection }}
-            </div>
-            <div class="col-sm-4">
-              <label for="id_typeRevue">{{ form.typeRevue.label }}</label>
-              {{ form.typeRevue }}
-            </div>
-            <div class="col-sm-4">
-              <label for="id_access">{{ form.access.label }}</label>
-              {{ form.access }}
-            </div>
-          </div>
-          <input type="hidden" name="version" value="2009" />
-        </fieldset>
-        <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
-      </form>
+      <!-- TODO -->
     </section>
   </div>
 </section>
