@@ -55,62 +55,29 @@
     <br><br>
 
     <h3>{% trans "Format KBART" %}</h3>
-    {% flag "KBART2014" %}
-    <ul class="tabs" role="tablist">
-      <li role="presentation" class="tabs__item tabs__item_active"><a href="#2009" aria-controls="2009" role="tab" data-toggle="tab">{% trans "2009" %}</a></li>
-      <li role="presentation" class="tabs__item"><a href="#2014" aria-controls="2014" role="tab" data-toggle="tab">{% trans "2014" %}</a></li>
-    </ul>
-    {% endflag %}
-    <div class="tab-content">
-      <section role="tabpanel" class="tab-pane active" id="2009">
-        <form method="post">
-          {% csrf_token %}
-          <fieldset>
-            <div class="row">
-              <div class="col-sm-4">
-                <label for="id_collection">{{ form.collection.label }}</label>
-                {{ form.collection }}
-              </div>
-              <div class="col-sm-4">
-                <label for="id_typeRevue">{{ form.typeRevue.label }}</label>
-                {{ form.typeRevue }}
-              </div>
-              <div class="col-sm-4">
-                <label for="id_access">{{ form.access.label }}</label>
-                {{ form.access }}
-              </div>
+    <section>
+      <form method="post">
+        {% csrf_token %}
+        <fieldset>
+          <div class="row">
+            <div class="col-sm-4">
+              <label for="id_collection">{{ form.collection.label }}</label>
+              {{ form.collection }}
             </div>
-            <input type="hidden" name="version" value="2009" />
-          </fieldset>
-          <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
-        </form>
-      </section>
-      {% flag "KBART2014" %}
-      <section role="tabpanel" class="tab-pane" id="2014">
-        <form method="post">
-          {% csrf_token %}
-          <fieldset>
-            <div class="row">
-              <div class="col-sm-4">
-                <label for="id_collection">{{ form.collection.label }}</label>
-                {{ form.collection }}
-              </div>
-              <div class="col-sm-4">
-                <label for="id_typeRevue">{{ form.typeRevue.label }}</label>
-                {{ form.typeRevue }}
-              </div>
-              <div class="col-sm-4">
-                <label for="id_access">{{ form.access.label }}</label>
-                {{ form.access }}
-              </div>
+            <div class="col-sm-4">
+              <label for="id_typeRevue">{{ form.typeRevue.label }}</label>
+              {{ form.typeRevue }}
             </div>
-            <input type="hidden" name="version" value="2014" />
-          </fieldset>
-          <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
-        </form>
-      </section>
-      {% endflag %}
-    </div>
+            <div class="col-sm-4">
+              <label for="id_access">{{ form.access.label }}</label>
+              {{ form.access }}
+            </div>
+          </div>
+          <input type="hidden" name="version" value="2009" />
+        </fieldset>
+        <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
+      </form>
+    </section>
   </div>
 </section>
 {% endblock content_main %}
