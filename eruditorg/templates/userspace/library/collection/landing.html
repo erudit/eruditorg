@@ -14,7 +14,7 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Vous trouverez dans cette section différents outils de gestion de collections telles que les notices MARC et les listes de titres dynamiques conformes aux recommandations OCLC ou KBART.</p>
+<p>Vous trouverez dans cette section différents outils de gestion de collections telles que les notices MARC et les listes de titres dynamiques conformes aux recommandations KBART.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
@@ -48,23 +48,11 @@
   <div class="akkordion-content">
   <div class="row">
     <div class="col-md-7">
-      <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit, et sont conformes aux recommandations OCLC ou KBART." %}</p>
+      <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit, et sont conformes aux recommandations KBART." %}</p>
     </div>
   </div>
 
   <br><br>
-
-  <h3>{% trans "Format OCLC" %}</h3>
-  <div class="row">
-    <p class="col-md-2">
-      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' format='txt' %}">TXT</a>
-    </p>
-    <p class="col-md-2">
-      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' format='csv' %}">CSV</a>
-    </p>
-  </div>
-
-  <br><br><br>
 
   <h3>{% trans "Format KBART" %}</h3>
   {% flag "KBART2014" %}

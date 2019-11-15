@@ -14,12 +14,6 @@ from ...generic_apps.authorization.views import AuthorizationUserView as BaseAut
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 from .forms import KBARTForm
 
-ERUDIT_OCLC_BACKEND_URL = getattr(
-    settings,
-    "ERUDIT_OCLC_BACKEND_URL",
-    "http://oclc-backend.local"
-)
-
 
 ERUDIT_KBART_BACKEND_URL = getattr(
     settings,
@@ -70,30 +64,6 @@ class CollectionView(
 
         response['Content-Disposition'] = 'attachment; filename="{filename}.txt"'.format(
             filename=filename,
-        )
-
-        return response
-
-
-class CollectionOclcView(
-        OrganisationScopePermissionRequiredMixin, BaseAuthorizationUserView):
-    permission_required = 'library.has_access_to_dashboard'
-
-    def get(self, request, *args, **kwargs):
-        file_format = kwargs.get('format') or 'txt'
-        params = {'type': 'service', 'serviceName': 'oclc', 'dataFormat': file_format}
-        report_url = ERUDIT_OCLC_BACKEND_URL
-
-        report = requests.get(report_url, params=params)
-        filename = "oclc"
-
-        response = HttpResponse(
-            report, content_type="application/{file_format}".format(file_format=file_format)
-        )
-
-        response['Content-Disposition'] = 'attachment; filename="{filename}.{file_format}"'.format(
-            filename=filename,
-            file_format=file_format
         )
 
         return response
