@@ -19,8 +19,9 @@
 {% endblock section_intro %}
 
 {% block content_main %}
-<section>
-  <h2>{% trans "Notices MARC" %}</h2>
+<section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "Notices MARC" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
   <div class="row">
     <div class="col-md-7">
       <p>{% trans "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou anglais) et UNIMARC." %}</p>
@@ -37,12 +38,14 @@
       <a class="btn btn-secondary" href="https://retro.erudit.org/documentation/zoneClient/unimarc.xml">UNIMARC</a>
     </p>
   </div>
+  </div>
 </section>
 
-<br><br><br>
+<hr />
 
-<section>
-  <h2>{% trans "Listes des titres dynamiques" %}</h2>
+<section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "Listes des titres dynamiques" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
   <div class="row">
     <div class="col-md-7">
       <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit, et sont conformes aux recommandations OCLC ou KBART." %}</p>
@@ -119,6 +122,7 @@
       </form>
     </section>
     {% endflag %}
+  </div>
   </div>
 </section>
 {% endblock content_main %}
