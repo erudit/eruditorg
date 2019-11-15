@@ -227,16 +227,6 @@
                 <em>{% trans "Retour au début" %}</em>
               </a>
             </li>
-            {% if content_access_granted and not display_full_toc %}
-            <!-- Do not display complete TOC link if we do not have more than 1 level of sections. -->
-            <xsl:if test="//section2/titre[not(@traitementparticulier='oui')]">
-              <li>
-                <a href="{% url 'public:journal:article_toc' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
-                  <em>{% trans "Plan complet de l’article" %}</em>
-                </a>
-              </li>
-            </xsl:if>
-            {% endif %}
             {% if display_abstracts %}
             <xsl:if test="//resume">
               <li>

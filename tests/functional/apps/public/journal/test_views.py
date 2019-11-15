@@ -2053,33 +2053,6 @@ class TestArticleDetailView:
         media_object = dom.find('div', {'class': 'embed-responsive'})
         assert media_object.get('style') == 'padding-bottom: 56.563%'
 
-    @pytest.mark.parametrize('fixture, expected_link', (
-        # No section level.
-        ('1018860ar', False),
-        # Only one section level.
-        ('009255ar', False),
-        # Two section levels.
-        ('1054008ar', True),
-        # Three section levels.
-        ('1062105ar', True),
-    ))
-    def test_complete_toc_link_displayed_on_article_detail(self, fixture, expected_link):
-        article = ArticleFactory(
-            from_fixture=fixture,
-            issue__journal__open_access=True,
-        )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
-        html = Client().get(url).content.decode()
-        if expected_link:
-            assert '<em>Plan complet de l’article</em>' in html
-        else:
-            assert '<em>Plan complet de l’article</em>' not in html
-
     @pytest.mark.parametrize('fixture, expected_section_titles', (
         ('1054008ar', [
             '<h2>Suspension du verbe</h2>',
