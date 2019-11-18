@@ -55,8 +55,18 @@
     <br><br>
 
     <h3>{% trans "KBART 2014" %}</h3>
+    <br />
     <section>
-      <!-- TODO -->
+      {% if baskets %}
+      <ul>
+      <li><a href="{{ kbart_2014_backend_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues" %} - {% now 'Y' %}</a></li>
+      {% for basket in baskets.values %}
+        <li><a href="{{ kbart_2014_backend_url }}?year={% now 'Y' %}&type={{ basket.title_for_kbart }}">{{ basket.title }}</a></li>
+      {% endfor %}
+      </ul>
+      {% else %}
+        <p><em>{% trans "Non disponble" %}</em></p>
+      {% endif %}
     </section>
   </div>
 </section>
