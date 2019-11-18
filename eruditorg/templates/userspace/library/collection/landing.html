@@ -59,9 +59,9 @@
     <section>
       {% if baskets %}
       <ul>
-      <li><a href="{{ kbart_2014_backend_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues" %} - {% now 'Y' %}</a></li>
+      <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues" %} - {% now 'Y' %}</a></li>
       {% for basket in baskets.values %}
-        <li><a href="{{ kbart_2014_backend_url }}?year={% now 'Y' %}&type={{ basket.title_for_kbart }}">{{ basket.title }}</a></li>
+        <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type={{ basket.title_for_kbart }}">{{ basket.title }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
