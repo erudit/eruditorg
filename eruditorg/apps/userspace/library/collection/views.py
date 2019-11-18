@@ -8,13 +8,6 @@ from base.viewmixins import MenuItemMixin
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 
-ERUDIT_KBART_2014_BACKEND_URL = getattr(
-    settings,
-    "ERUDIT_KBART_2014_BACKEND_URL",
-    "http://kbart-backend.local"
-)
-
-
 class CollectionView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
     menu_library = 'collection'
