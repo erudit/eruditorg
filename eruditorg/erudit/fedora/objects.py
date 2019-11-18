@@ -39,6 +39,8 @@ class PublicationDigitalObject(models.DigitalObject):
     summary = models.XmlDatastream('SUMMARY', 'Summary', XmlObject)
     coverpage = models.FileDatastream(
         'COVERPAGE', 'Coverpage', defaults={'mimetype': 'image/jpeg', })
+    coverpage_hd = models.FileDatastream(
+        'COVERPAGE_HD', 'Coverpage HD', defaults={'mimetype': 'image/jpeg', })
     pages = models.XmlDatastream('PAGES', 'Pages', XmlObject)
 
     @property

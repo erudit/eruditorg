@@ -27,6 +27,7 @@ journal_urlpatterns = ([
     url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<localidentifier>[\w-]+)/'), include([  # noqa
         url(r'^$', views.IssueDetailView.as_view(), name='issue_detail'),
         url(_(r'^logo\.jpg$'), views.IssueRawCoverpageView.as_view(), name='issue_coverpage'),
+        url(_(r'^coverpage-hd\.jpg$'), views.IssueRawCoverpageHDView.as_view(), name='issue_coverpage_hd'),  # noqa
         url(_(r'^feuilletage/'), include([
             url(r'^$', views.IssueReaderView.as_view(), name='issue_reader'),
             url(r'^(?P<page>[\d]+).jpg$', views.IssueReaderPageView.as_view(), name='issue_reader_page'),  # noqa

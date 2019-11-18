@@ -581,6 +581,19 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
 
 
+class IssueRawCoverpageHDView(FedoraFileDatastreamView):
+    """
+    Returns the image file associated with an Issue instance.
+    """
+    content_type = 'image/jpeg'
+    datastream_name = 'coverpage_hd'
+    fedora_object_class = PublicationDigitalObject
+    model = Issue
+
+    def get_object(self):
+        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+
 class IssueReaderView(
         ContentAccessCheckMixin,
         PrepublicationTokenRequiredMixin,
