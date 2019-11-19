@@ -103,6 +103,32 @@ journal_url_patterns = ([
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_culture_index"),
 
+    # Issue coverpage
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/coverpage\.jpg?$',  # noqa
+        journal_views_compat.IssueDetailRedirectView.as_view(
+            pattern_name="public:journal:issue_coverpage",
+        ), name="legacy_issue_coverpage"),
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/coverpageHD\.jpg?$',  # noqa
+        journal_views_compat.IssueDetailRedirectView.as_view(
+            pattern_name="public:journal:issue_coverpage_hd",
+        ), name="legacy_issue_coverpage_hd"),
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/coverpage\.jpg?$',  # noqa
+        journal_views_compat.IssueDetailRedirectView.as_view(
+            pattern_name="public:journal:issue_coverpage",
+        ), name="legacy_issue_coverpage_culture_year_volume"),
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/coverpageHD\.jpg?$',  # noqa
+        journal_views_compat.IssueDetailRedirectView.as_view(
+            pattern_name="public:journal:issue_coverpage_hd",
+        ), name="legacy_issue_coverpage_hd_culture_year_volume"),
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/coverpage\.jpg?$',
+        journal_views_compat.IssueDetailRedirectView.as_view(
+            pattern_name="public:journal:issue_coverpage",
+        ), name="legacy_issue_coverpage_culture"),
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/coverpageHD\.jpg?$',
+        journal_views_compat.IssueDetailRedirectView.as_view(
+            pattern_name="public:journal:issue_coverpage_hd",
+        ), name="legacy_issue_coverpage_hd_culture"),
+
     # Article
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]*)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),

@@ -187,3 +187,21 @@ class TestLegacyJournalUrlPatterns:
         else:
             with pytest.raises(Resolver404):
                 resolver = resolve(url)
+
+    @pytest.mark.parametrize('url, expected_url_name', [
+        ('/revue/journal_code/2000/v1/n1/coverpage.jpg', 'legacy_issue_coverpage'),
+        ('/revue/journal_code/2000/v1/n1/coverpageHD.jpg', 'legacy_issue_coverpage_hd'),
+        ('/culture/journal_code/2000/v1/issue_id/coverpage.jpg',
+            'legacy_issue_coverpage_culture_year_volume'),
+        ('/culture/journal_code/2000/v1/issue_id/coverpageHD.jpg',
+            'legacy_issue_coverpage_hd_culture_year_volume'),
+        ('/culture/journal_code/issue_id/coverpage.jpg', 'legacy_issue_coverpage_culture'),
+        ('/culture/journal_code/issue_id/coverpageHD.jpg', 'legacy_issue_coverpage_hd_culture'),
+    ])
+    def test_resolve_issue_coverpage_urls_compat(self, url, expected_url_name):
+        if expected_url_name:
+            resolver = resolve(url)
+            assert resolver.url_name == expected_url_name
+        else:
+            with pytest.raises(Resolver404):
+                resolver = resolve(url)
