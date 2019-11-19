@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 12:12-0500\n"
+"POT-Creation-Date: 2019-11-19 11:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -221,16 +221,16 @@ msgstr ""
 msgid "Livres"
 msgstr ""
 
-#: apps/public/book/urls.py:13
+#: apps/public/book/urls.py:9
 msgid "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/$"
 msgstr ""
 
-#: apps/public/book/urls.py:16
+#: apps/public/book/urls.py:11
 msgid ""
 "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)/$"
 msgstr ""
 
-#: apps/public/book/urls.py:18
+#: apps/public/book/urls.py:13
 msgid ""
 "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)\\."
 "pdf$"
@@ -353,7 +353,7 @@ msgstr ""
 #: apps/public/journal/templatetags/public_journal_tags.py:17
 #: apps/public/journal/templatetags/public_journal_tags.py:26
 #: apps/public/journal/viewmixins.py:162 erudit/models/journal.py:1137
-#: templates/public/journal/eruditxsd300_to_html.xsl:536
+#: templates/public/journal/eruditxsd300_to_html.xsl:526
 msgid "[Article sans titre]"
 msgstr ""
 
@@ -393,7 +393,7 @@ msgid "Découvrir la revue"
 msgstr ""
 
 #: apps/public/journal/coverpage.py:358
-#: templates/public/journal/eruditxsd300_to_html.xsl:373
+#: templates/public/journal/eruditxsd300_to_html.xsl:363
 #: templates/public/journal/partials/article_citation_modal_content.html:7
 #: templates/public/search/results.html:279
 msgid "Citer cet article"
@@ -438,8 +438,7 @@ msgstr ""
 msgid "Syndication d'Érudit"
 msgstr ""
 
-#: apps/public/journal/forms.py:8 apps/userspace/library/collection/forms.py:27
-#: erudit/models/journal.py:137
+#: apps/public/journal/forms.py:8 erudit/models/journal.py:137
 msgid "Libre accès"
 msgstr ""
 
@@ -511,7 +510,7 @@ msgstr ""
 msgid "^revues/(?P<code>[\\w-]+)/"
 msgstr ""
 
-#: apps/public/journal/urls.py:21 apps/public/journal/urls.py:29
+#: apps/public/journal/urls.py:21
 msgid "^logo\\.jpg$"
 msgstr ""
 
@@ -525,95 +524,84 @@ msgid ""
 "P<localidentifier>[\\w-]+)/"
 msgstr ""
 
+#: apps/public/journal/urls.py:29
+msgid "^coverpage\\.jpg$"
+msgstr ""
+
 #: apps/public/journal/urls.py:30
+msgid "^coverpage-hd\\.jpg$"
+msgstr ""
+
+#: apps/public/journal/urls.py:31
 msgid "^feuilletage/"
 msgstr ""
 
-#: apps/public/journal/urls.py:35
+#: apps/public/journal/urls.py:36
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<localidentifier>[\\w-]+)"
 msgstr ""
 
-#: apps/public/journal/urls.py:40
+#: apps/public/journal/urls.py:41
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
 msgstr ""
 
-#: apps/public/journal/urls.py:42
+#: apps/public/journal/urls.py:43
 msgid "^resume/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:43
+#: apps/public/journal/urls.py:44
 msgid "^biblio/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:44
+#: apps/public/journal/urls.py:45
 msgid "^plan/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:45
+#: apps/public/journal/urls.py:46
 msgid "^media/(?P<media_localid>[\\.\\w-]+)$"
 msgstr ""
 
-#: apps/public/journal/urls.py:46
+#: apps/public/journal/urls.py:47
 msgid "^premierepage\\.pdf$"
 msgstr ""
 
-#: apps/public/journal/urls.py:48
+#: apps/public/journal/urls.py:49
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
 msgstr ""
 
-#: apps/public/journal/urls.py:50
-msgid "\\.xml"
-msgstr ""
-
-#: apps/public/journal/urls.py:52
-msgid "\\.pdf"
-msgstr ""
-
-#: apps/public/journal/urls.py:54
-msgid "\\.enw"
-msgstr ""
-
-#: apps/public/journal/urls.py:55
-msgid "\\.ris"
-msgstr ""
-
-#: apps/public/journal/urls.py:56
-msgid "\\.bib"
-msgstr ""
-
-#: apps/public/journal/urls.py:62
+#: apps/public/journal/urls.py:61
 msgid "^redirection/"
 msgstr ""
 
-#: apps/public/journal/urls.py:63
+#: apps/public/journal/urls.py:62
 msgid "^revue/(?P<code>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:65
+#: apps/public/journal/urls.py:64
 msgid "^numero/(?P<localidentifier>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/journal/views.py:844
+#: apps/public/journal/views.py:869
 #: templates/public/journal/partials/issue_detail_article_item.html:68
 msgid "Notice"
 msgstr ""
 
-#: apps/public/journal/views.py:853 apps/public/search/forms.py:33
+#: apps/public/journal/views.py:878 apps/public/search/forms.py:33
 #: templates/public/journal/article_biblio.html:54
 #: templates/public/journal/article_biblio.html:64
-#: templates/public/journal/eruditxsd300_to_html.xsl:913
-#: templates/public/journal/eruditxsd300_to_html.xsl:2171
+#: templates/public/journal/eruditxsd300_to_html.xsl:903
+#: templates/public/journal/eruditxsd300_to_html.xsl:2161
 msgid "Bibliographie"
 msgstr ""
 
-#: apps/public/journal/views.py:863
-#: templates/public/journal/eruditxsd300_to_html.xsl:235
+#: apps/public/journal/views.py:888
+#: templates/public/journal/article_toc.html:54
+#: templates/public/journal/article_toc.html:64
 msgid "Plan complet de l’article"
 msgstr ""
 
@@ -713,7 +701,7 @@ msgid "Thèses et mémoires"
 msgstr ""
 
 #: apps/public/search/forms.py:66 templates/base.html:174
-#: templates/base.html:407 templates/public/home.html:70
+#: templates/base.html:403 templates/public/home.html:70
 msgid "Rapports de recherche"
 msgstr ""
 
@@ -757,7 +745,7 @@ msgid "Dans Érudit depuis"
 msgstr ""
 
 #: apps/public/search/forms.py:154 apps/public/search/forms.py:238
-#: apps/userspace/library/collection/forms.py:36 erudit/models/core.py:93
+#: erudit/models/core.py:93
 #: templates/public/journal/journal_list_per_names.html:128
 msgid "Fonds"
 msgstr ""
@@ -1392,40 +1380,6 @@ msgstr ""
 msgid "^redevances/telecharger/$"
 msgstr ""
 
-#: apps/userspace/library/collection/forms.py:8
-#: apps/userspace/library/collection/forms.py:14
-#: apps/userspace/library/collection/forms.py:26
-msgid "Tout"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:15
-msgid "Savantes"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:16
-msgid "Culturelles"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:28
-msgid "Sous commercialisation"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:29
-msgid "Abandon de publication numérique"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:40
-msgid "Type de revues"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:44
-msgid "Mode d’accès"
-msgstr ""
-
-#: apps/userspace/library/collection/forms.py:48
-msgid "Version"
-msgstr ""
-
 #: apps/userspace/library/members/forms.py:29
 msgid "Une proposition existe déjà pour cette adresse courriel"
 msgstr ""
@@ -1544,7 +1498,7 @@ msgid "Année"
 msgstr ""
 
 #: apps/userspace/reporting/forms.py:26 templates/base.html:210
-#: templates/base.html:417
+#: templates/base.html:413
 msgid "Érudit"
 msgstr ""
 
@@ -2396,7 +2350,7 @@ msgid "&nbsp;»"
 msgstr ""
 
 #: erudit/models/journal.py:1357 templates/public/citations/list.html:160
-#: templates/public/journal/eruditxsd300_to_html.xsl:712
+#: templates/public/journal/eruditxsd300_to_html.xsl:702
 msgid "p."
 msgstr ""
 
@@ -2536,7 +2490,7 @@ msgid "Rôle"
 msgstr ""
 
 #: erudit/models/utils.py:15
-#: templates/public/journal/eruditxsd300_to_html.xsl:591
+#: templates/public/journal/eruditxsd300_to_html.xsl:581
 #: templates/public/journal/partials/article_footer.html:14
 msgid "et"
 msgstr ""
@@ -2682,7 +2636,7 @@ msgstr ""
 msgid "Aller à l’accueil"
 msgstr ""
 
-#: templates/base.html:129 templates/base.html:453
+#: templates/base.html:129 templates/base.html:449
 #: templates/base_email.html:898 templates/public/brand_assets.html:134
 msgid "Logo d’Érudit"
 msgstr ""
@@ -2715,7 +2669,7 @@ msgstr ""
 msgid "Index des livres et actes"
 msgstr ""
 
-#: templates/base.html:169 templates/base.html:403 templates/base.html:405
+#: templates/base.html:169 templates/base.html:402
 #: templates/public/book/book_detail.html:46
 #: templates/public/book/book_detail.html:65
 #: templates/public/book/chapter_detail.html:46
@@ -2777,39 +2731,39 @@ msgstr ""
 msgid "Déconnexion"
 msgstr ""
 
-#: templates/base.html:207 templates/base.html:210 templates/base.html:417
+#: templates/base.html:207 templates/base.html:210 templates/base.html:413
 msgid "À propos d’Érudit"
 msgstr ""
 
-#: templates/base.html:213 templates/base.html:420
+#: templates/base.html:213 templates/base.html:416
 msgid "À propos de la Coalition Publi.ca"
 msgstr ""
 
-#: templates/base.html:213 templates/base.html:420
+#: templates/base.html:213 templates/base.html:416
 msgid "Coalition Publi.ca"
 msgstr ""
 
-#: templates/base.html:216 templates/base.html:423
+#: templates/base.html:216 templates/base.html:419
 msgid "À propos du projet CO.SHS"
 msgstr ""
 
-#: templates/base.html:216 templates/base.html:423
+#: templates/base.html:216 templates/base.html:419
 msgid "CO.SHS"
 msgstr ""
 
-#: templates/base.html:219 templates/base.html:426
+#: templates/base.html:219 templates/base.html:422
 msgid "À propos de nos partenariats"
 msgstr ""
 
-#: templates/base.html:219 templates/base.html:426
+#: templates/base.html:219 templates/base.html:422
 msgid "Partenariat"
 msgstr ""
 
-#: templates/base.html:222 templates/base.html:429
+#: templates/base.html:222 templates/base.html:425
 msgid "Consulter le rapport annuel"
 msgstr ""
 
-#: templates/base.html:222 templates/base.html:429
+#: templates/base.html:222 templates/base.html:425
 msgid "Rapport annuel"
 msgstr ""
 
@@ -2889,67 +2843,67 @@ msgstr ""
 msgid "Logo et identité"
 msgstr ""
 
-#: templates/base.html:408
+#: templates/base.html:404
 msgid "https://www.erudit.org/public/documents/Guide_recherche.pdf"
 msgstr ""
 
-#: templates/base.html:408
+#: templates/base.html:404
 msgid "Aide"
 msgstr ""
 
-#: templates/base.html:409
+#: templates/base.html:405
 msgid "Plan du site"
 msgstr ""
 
-#: templates/base.html:410
+#: templates/base.html:406
 msgid "Nous contacter"
 msgstr ""
 
-#: templates/base.html:432
+#: templates/base.html:428
 msgid "Consulter Salons"
 msgstr ""
 
-#: templates/base.html:432
+#: templates/base.html:428
 msgid "Salons"
 msgstr ""
 
-#: templates/base.html:435
+#: templates/base.html:431
 msgid "Jamais trop érudit"
 msgstr ""
 
-#: templates/base.html:454
+#: templates/base.html:450
 msgid "Cultivez votre savoir."
 msgstr ""
 
-#: templates/base.html:461
+#: templates/base.html:457
 msgid "Consortium Érudit"
 msgstr ""
 
-#: templates/base.html:465
+#: templates/base.html:461
 msgid "https://www.iubenda.com/privacy-policy/79766356"
 msgstr ""
 
-#: templates/base.html:465
+#: templates/base.html:461
 msgid "Politique de confidentialité"
 msgstr ""
 
-#: templates/base.html:468 templates/base.html:544
+#: templates/base.html:464 templates/base.html:540
 msgid "https://www.iubenda.com/privacy-policy/79766356/cookie-policy"
 msgstr ""
 
-#: templates/base.html:468
+#: templates/base.html:464
 msgid "Politique relative aux cookies"
 msgstr ""
 
-#: templates/base.html:473 templates/public/journal/journal_base.html:297
+#: templates/base.html:469 templates/public/journal/journal_base.html:297
 msgid "Politique et licence d’utilisation"
 msgstr ""
 
-#: templates/base.html:480
+#: templates/base.html:476
 msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
-#: templates/base.html:541
+#: templates/base.html:537
 msgid ""
 "erudit.org  utilise des cookies (« témoins de connexion ») à des fins de "
 "statistiques et d’amélioration de l’expérience utilisateur. Ces données sont "
@@ -2957,11 +2911,11 @@ msgid ""
 "cookies, que vous pourrez désactiver en tout temps dans votre fureteur web."
 msgstr ""
 
-#: templates/base.html:542
+#: templates/base.html:538
 msgid "J’ai compris"
 msgstr ""
 
-#: templates/base.html:543 templates/public/home.html:176
+#: templates/base.html:539 templates/public/home.html:176
 msgid "En savoir plus"
 msgstr ""
 
@@ -4580,7 +4534,7 @@ msgstr ""
 
 #: templates/public/citations/list.html:104
 #: templates/public/citations/list.html:216
-#: templates/public/journal/eruditxsd300_to_html.xsl:358
+#: templates/public/journal/eruditxsd300_to_html.xsl:348
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:150
 #: templates/public/search/results.html:271
@@ -4603,8 +4557,8 @@ msgstr ""
 
 #: templates/public/citations/list.html:116
 #: templates/public/citations/list.html:226
-#: templates/public/journal/eruditxsd300_to_html.xsl:366
-#: templates/public/journal/eruditxsd300_to_html.xsl:432
+#: templates/public/journal/eruditxsd300_to_html.xsl:356
+#: templates/public/journal/eruditxsd300_to_html.xsl:422
 #: templates/public/journal/partials/issue_detail_article_item.html:22
 #: templates/public/search/results.html:288
 #: templates/userspace/library/stats/landing.html:116
@@ -4831,13 +4785,7 @@ msgstr ""
 
 #: templates/public/journal/article_toc.html:4
 #: templates/public/journal/article_toc.html:6
-msgid "Plan de l’article."
-msgstr ""
-
-#: templates/public/journal/article_toc.html:54
-#: templates/public/journal/article_toc.html:64
-#: templates/public/journal/eruditxsd300_to_html.xsl:223
-msgid "Plan de l’article"
+msgid "Plan complet de l’article."
 msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:72
@@ -4959,83 +4907,87 @@ msgid ""
 msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:207
-#: templates/public/journal/eruditxsd300_to_html.xsl:327
+#: templates/public/journal/eruditxsd300_to_html.xsl:317
 #: templates/public/journal/journal_base.html:293
 msgid "Vous êtes abonné à cette revue."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:223
+msgid "Plan de l’article"
 msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:227
 msgid "Retour au début"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:243
+#: templates/public/journal/eruditxsd300_to_html.xsl:233
 #: templates/public/journal/partials/issue_detail_article_item.html:75
 msgid "Résumé"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:258
-#: templates/public/journal/eruditxsd300_to_html.xsl:259
+#: templates/public/journal/eruditxsd300_to_html.xsl:248
+#: templates/public/journal/eruditxsd300_to_html.xsl:249
 msgid "Texte intégral (PDF)"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:306
-#: templates/public/journal/eruditxsd300_to_html.xsl:458
+#: templates/public/journal/eruditxsd300_to_html.xsl:296
+#: templates/public/journal/eruditxsd300_to_html.xsl:448
 msgid "Liste des figures"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:311
-#: templates/public/journal/eruditxsd300_to_html.xsl:469
+#: templates/public/journal/eruditxsd300_to_html.xsl:301
+#: templates/public/journal/eruditxsd300_to_html.xsl:459
 msgid "Liste des tableaux"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:341
+#: templates/public/journal/eruditxsd300_to_html.xsl:331
 msgid "Boîte à outils"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:345
+#: templates/public/journal/eruditxsd300_to_html.xsl:335
 msgid "Retourner en haut de la page"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:354
+#: templates/public/journal/eruditxsd300_to_html.xsl:344
 #: templates/public/journal/partials/issue_detail_article_item.html:10
 #: templates/public/search/results.html:267
 #: templates/userspace/journal/information/journalinformation_update.html:161
 msgid "Sauvegarder"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:382
+#: templates/public/journal/eruditxsd300_to_html.xsl:372
 msgid "Partager"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:397
+#: templates/public/journal/eruditxsd300_to_html.xsl:387
 msgid "Résumés"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:425
+#: templates/public/journal/eruditxsd300_to_html.xsl:415
 msgid "Corps de l’article"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:432
+#: templates/public/journal/eruditxsd300_to_html.xsl:422
 msgid "Veuillez télécharger l’article en PDF pour le lire."
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:517
+#: templates/public/journal/eruditxsd300_to_html.xsl:507
 msgid "Un article"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:518
+#: templates/public/journal/eruditxsd300_to_html.xsl:508
 msgid "Un compte rendu"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:519
+#: templates/public/journal/eruditxsd300_to_html.xsl:509
 msgid "Une note"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:520
+#: templates/public/journal/eruditxsd300_to_html.xsl:510
 msgid "Un document"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:653
+#: templates/public/journal/eruditxsd300_to_html.xsl:643
 msgid ""
 "\n"
 "        --> Voir l’<a href=\"{@href}\"><strong>erratum</strong></a> "
@@ -5043,87 +4995,87 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:682
+#: templates/public/journal/eruditxsd300_to_html.xsl:672
 msgid ">Volume&#160;"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:690
+#: templates/public/journal/eruditxsd300_to_html.xsl:680
 msgid "Numéro&#160;"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:853
-#: templates/public/journal/eruditxsd300_to_html.xsl:866
-#: templates/public/journal/eruditxsd300_to_html.xsl:955
-#: templates/public/journal/eruditxsd300_to_html.xsl:968
-#: templates/public/journal/eruditxsd300_to_html.xsl:981
-#: templates/public/journal/eruditxsd300_to_html.xsl:994
-#: templates/public/journal/eruditxsd300_to_html.xsl:1008
-#: templates/public/journal/eruditxsd300_to_html.xsl:2264
-#: templates/public/journal/eruditxsd300_to_html.xsl:2277
+#: templates/public/journal/eruditxsd300_to_html.xsl:843
+#: templates/public/journal/eruditxsd300_to_html.xsl:856
+#: templates/public/journal/eruditxsd300_to_html.xsl:945
+#: templates/public/journal/eruditxsd300_to_html.xsl:958
+#: templates/public/journal/eruditxsd300_to_html.xsl:971
+#: templates/public/journal/eruditxsd300_to_html.xsl:984
+#: templates/public/journal/eruditxsd300_to_html.xsl:998
+#: templates/public/journal/eruditxsd300_to_html.xsl:2254
+#: templates/public/journal/eruditxsd300_to_html.xsl:2267
 msgid "special"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:881
+#: templates/public/journal/eruditxsd300_to_html.xsl:871
 msgid "Annexe"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:882
+#: templates/public/journal/eruditxsd300_to_html.xsl:872
 msgid "Annexes"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:890
+#: templates/public/journal/eruditxsd300_to_html.xsl:880
 msgid "Note biographique"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:891
+#: templates/public/journal/eruditxsd300_to_html.xsl:881
 msgid "Notes biographiques"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:899
+#: templates/public/journal/eruditxsd300_to_html.xsl:889
 msgid "Note"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:900
+#: templates/public/journal/eruditxsd300_to_html.xsl:890
 msgid "Notes"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:908
+#: templates/public/journal/eruditxsd300_to_html.xsl:898
 msgid "Remerciements"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:914
+#: templates/public/journal/eruditxsd300_to_html.xsl:904
 msgid "Bibliographies"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1126
+#: templates/public/journal/eruditxsd300_to_html.xsl:1116
 msgid ""
 "-> Voir la liste des <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if "
 "test=\"self::grtableau\">tableaux</xsl:if>"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1173
+#: templates/public/journal/eruditxsd300_to_html.xsl:1163
 msgid ""
 "-> Voir la liste des <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if "
 "test=\"self::tableau\">tableaux</xsl:if>"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1467
+#: templates/public/journal/eruditxsd300_to_html.xsl:1457
 msgid ""
 "Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
 "jour."
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1478
+#: templates/public/journal/eruditxsd300_to_html.xsl:1468
 msgid ""
 "Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
 "jour."
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2000
+#: templates/public/journal/eruditxsd300_to_html.xsl:1990
 msgid "Parties annexes"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2307
+#: templates/public/journal/eruditxsd300_to_html.xsl:2297
 msgid "alias"
 msgstr ""
 
@@ -6793,44 +6745,36 @@ msgid ""
 "\n"
 "<p>Vous trouverez dans cette section différents outils de gestion de "
 "collections telles que les notices MARC et les listes de titres dynamiques "
-"conformes aux recommandations OCLC ou KBART.</p>\n"
+"conformes aux recommandations KBART.</p>\n"
 msgstr ""
 
 #: templates/userspace/library/collection/landing.html:23
 msgid "Notices MARC"
 msgstr ""
 
-#: templates/userspace/library/collection/landing.html:26
+#: templates/userspace/library/collection/landing.html:27
 msgid ""
 "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou "
 "anglais) et UNIMARC."
 msgstr ""
 
-#: templates/userspace/library/collection/landing.html:45
-msgid "Listes des titres dynamiques"
+#: templates/userspace/library/collection/landing.html:47
+msgid "Listes des titres dynamiques KBART"
 msgstr ""
 
-#: templates/userspace/library/collection/landing.html:48
+#: templates/userspace/library/collection/landing.html:51
 msgid ""
 "Les listes de titres dynamiques exposent les métadonnées décrivant l’état "
-"des collections sur la plateforme Érudit, et sont conformes aux "
-"recommandations OCLC ou KBART."
+"des collections sur la plateforme Érudit et sont conformes aux "
+"recommandations KBART."
 msgstr ""
 
-#: templates/userspace/library/collection/landing.html:54
-msgid "Format OCLC"
+#: templates/userspace/library/collection/landing.html:60
+msgid "Toutes les revues / All Journals"
 msgstr ""
 
 #: templates/userspace/library/collection/landing.html:66
-msgid "Format KBART"
-msgstr ""
-
-#: templates/userspace/library/collection/landing.html:69
-msgid "2009"
-msgstr ""
-
-#: templates/userspace/library/collection/landing.html:70
-msgid "2014"
+msgid "Non disponble"
 msgstr ""
 
 #: templates/userspace/library/connection/landing.html:7

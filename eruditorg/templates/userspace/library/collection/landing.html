@@ -44,22 +44,20 @@
 <hr />
 
 <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Listes des titres dynamiques" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <h2 class="akkordion-title">{% trans "Listes des titres dynamiques KBART" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
     <div class="row">
       <div class="col-md-7">
-        <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit, et sont conformes aux recommandations KBART." %}</p>
+        <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit et sont conformes aux recommandations KBART." %}</p>
       </div>
     </div>
 
-    <br><br>
+    <br>
 
-    <h3>{% trans "KBART 2014" %}</h3>
-    <br />
     <section>
       {% if baskets %}
       <ul>
-      <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues" %} - {% now 'Y' %}</a></li>
+      <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues / All Journals" %} - {% now 'Y' %}</a></li>
       {% for basket in baskets.values %}
         <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type={{ basket.title_for_kbart }}">{{ basket.title }}</a></li>
       {% endfor %}
