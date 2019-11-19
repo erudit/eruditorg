@@ -30,6 +30,7 @@ class CollectionView(
             return context
         response = requests.get(
             settings.ABONNEMENTS_BASKETS_BACKEND_URL + str(datetime.datetime.now().year),
+            timeout=5,
         )
         if response.status_code == 200:
             context['baskets'] = json.loads(response.content.decode())
@@ -49,6 +50,7 @@ class Kbart2014FileDownloadView(LoginRequiredMixin, OrganisationScopePermissionR
             return HttpResponseNotFound
         response = requests.get(
             settings.KBART_2014_BACKEND_URL + '?{}'.format(urllib.parse.urlencode(request.GET)),
+            timeout=120,
         )
         if response.status_code == 200:
             new_response = HttpResponse(response.content)
