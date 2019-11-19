@@ -14,111 +14,60 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Vous trouverez dans cette section différents outils de gestion de collections telles que les notices MARC et les listes de titres dynamiques conformes aux recommandations OCLC ou KBART.</p>
+<p>Vous trouverez dans cette section différents outils de gestion de collections telles que les notices MARC et les listes de titres dynamiques conformes aux recommandations KBART.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
 {% block content_main %}
-<section>
-  <h2>{% trans "Notices MARC" %}</h2>
-  <div class="row">
-    <div class="col-md-7">
-      <p>{% trans "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou anglais) et UNIMARC." %}</p>
+<section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "Notices MARC" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
+    <div class="row">
+      <div class="col-md-7">
+        <p>{% trans "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou anglais) et UNIMARC." %}</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <p class="col-md-4">
-      <a class="btn btn-secondary" href="https://retro.erudit.org/documentation/zoneClient/Erudit_pes_francais_2019_05_210.mrc">MARC 21 (FR)</a>
-    </p>
-    <p class="col-md-4">
-      <a class="btn btn-secondary" href="https://retro.erudit.org/documentation/zoneClient/Erudit_pes_English_2019_05_210.mrc">MARC 21 (EN)</a>
-    </p>
-    <p class="col-md-4">
-      <a class="btn btn-secondary" href="https://retro.erudit.org/documentation/zoneClient/unimarc.xml">UNIMARC</a>
-    </p>
+    <div class="row">
+      <p class="col-md-4">
+        <a class="btn btn-secondary" href="https://www.erudit.org/documentation/zoneClient/Erudit_pes_francais_2019_05_210.mrc">MARC 21 (FR)</a>
+      </p>
+      <p class="col-md-4">
+        <a class="btn btn-secondary" href="https://www.erudit.org/documentation/zoneClient/Erudit_pes_English_2019_05_210.mrc">MARC 21 (EN)</a>
+      </p>
+      <p class="col-md-4">
+        <a class="btn btn-secondary" href="https://www.erudit.org/documentation/zoneClient/unimarc.xml">UNIMARC</a>
+      </p>
+    </div>
   </div>
 </section>
 
-<br><br><br>
+<hr />
 
-<section>
-  <h2>{% trans "Listes des titres dynamiques" %}</h2>
-  <div class="row">
-    <div class="col-md-7">
-      <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit, et sont conformes aux recommandations OCLC ou KBART." %}</p>
+<section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "Listes des titres dynamiques" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
+    <div class="row">
+      <div class="col-md-7">
+        <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit, et sont conformes aux recommandations KBART." %}</p>
+      </div>
     </div>
-  </div>
 
-  <br><br>
+    <br><br>
 
-  <h3>{% trans "Format OCLC" %}</h3>
-  <div class="row">
-    <p class="col-md-2">
-      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' format='txt' %}">TXT</a>
-    </p>
-    <p class="col-md-2">
-      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' format='csv' %}">CSV</a>
-    </p>
-  </div>
-
-  <br><br><br>
-
-  <h3>{% trans "Format KBART" %}</h3>
-  {% flag "KBART2014" %}
-  <ul class="tabs" role="tablist">
-    <li role="presentation" class="tabs__item tabs__item_active"><a href="#2009" aria-controls="2009" role="tab" data-toggle="tab">{% trans "2009" %}</a></li>
-    <li role="presentation" class="tabs__item"><a href="#2014" aria-controls="2014" role="tab" data-toggle="tab">{% trans "2014" %}</a></li>
-  </ul>
-  {% endflag %}
-  <div class="tab-content">
-    <section role="tabpanel" class="tab-pane active" id="2009">
-      <form method="post">
-        {% csrf_token %}
-        <fieldset>
-          <div class="row">
-            <div class="col-sm-4">
-              <label for="id_collection">{{ form.collection.label }}</label>
-              {{ form.collection }}
-            </div>
-            <div class="col-sm-4">
-              <label for="id_typeRevue">{{ form.typeRevue.label }}</label>
-              {{ form.typeRevue }}
-            </div>
-            <div class="col-sm-4">
-              <label for="id_access">{{ form.access.label }}</label>
-              {{ form.access }}
-            </div>
-          </div>
-          <input type="hidden" name="version" value="2009" />
-        </fieldset>
-        <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
-      </form>
+    <h3>{% trans "KBART 2014" %}</h3>
+    <br />
+    <section>
+      {% if baskets %}
+      <ul>
+      <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues" %} - {% now 'Y' %}</a></li>
+      {% for basket in baskets.values %}
+        <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type={{ basket.title_for_kbart }}">{{ basket.title }}</a></li>
+      {% endfor %}
+      </ul>
+      {% else %}
+        <p><em>{% trans "Non disponble" %}</em></p>
+      {% endif %}
     </section>
-    {% flag "KBART2014" %}
-    <section role="tabpanel" class="tab-pane" id="2014">
-      <form method="post">
-        {% csrf_token %}
-        <fieldset>
-          <div class="row">
-            <div class="col-sm-4">
-              <label for="id_collection">{{ form.collection.label }}</label>
-              {{ form.collection }}
-            </div>
-            <div class="col-sm-4">
-              <label for="id_typeRevue">{{ form.typeRevue.label }}</label>
-              {{ form.typeRevue }}
-            </div>
-            <div class="col-sm-4">
-              <label for="id_access">{{ form.access.label }}</label>
-              {{ form.access }}
-            </div>
-          </div>
-          <input type="hidden" name="version" value="2014" />
-        </fieldset>
-        <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
-      </form>
-    </section>
-    {% endflag %}
   </div>
 </section>
 {% endblock content_main %}

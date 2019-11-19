@@ -8,5 +8,5 @@ app_name = "collection"
 
 urlpatterns = [
     url(r'^$', views.CollectionView.as_view(), name='landing'),
-    url(r'oclc/(?P<format>\w+)', views.CollectionOclcView.as_view(), name='oclc')
+    url(r'^kbart2014/$', views.Kbart2014FileDownloadView.as_view(), name='kbart2014_download'),
 ]
