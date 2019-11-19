@@ -1,9 +1,0 @@
-<definitions xmlns:tns="DummyService"
-             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             name="DummyService"
-             targetNamespace="DummyService"
-             xmlns="http://schemas.xmlsoap.org/wsdl/">
-   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
-</definitions>
