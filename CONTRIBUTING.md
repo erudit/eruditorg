@@ -22,6 +22,7 @@
 * Does the coding style conform to the guidelines? Are there any flake8 errors?
 * Is the test suite passing?
 * Is the code exempt of spurious print / console.log statements?
+* Do HTTP requests to internal services have explicite timeout set ?
 
 ## Git
 
