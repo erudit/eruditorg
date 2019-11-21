@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+  <header>header info</header>
+  {% for listeip in listeips.values %}
+  {% for ip in listeip.ips %}
+  <listeip>
+    <abonne>{{ listeip.abonne }}</abonne>
+    <ip>{{ ip }}</ip>
+  </listeip>
+  {% endfor %}
+  {% endfor %}
+  <footer>footer info</footer>
+</page>
+

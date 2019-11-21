@@ -16,6 +16,7 @@ from . import sitemaps
 from . import urls_compat
 from apps.public.urls import public_urlpatterns
 from apps.public.journal.urls import google_scholar_urlpatterns
+from apps.webservices.views import CrknIpUnbView
 
 sitemaps_dict = {
     'journal': sitemaps.JournalSitemap,
@@ -33,6 +34,8 @@ urlpatterns = [
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
     # Google Scholar URLs
     url(r'^scholar/', include(google_scholar_urlpatterns)),
+    # CRKN ipunb service.
+    url(r'^ws/crkn/ipunb.xml', CrknIpUnbView.as_view(), name='crkn_ipunb'),
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 ]
