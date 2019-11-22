@@ -2408,6 +2408,7 @@
               <xsl:when test="@lang = 'es'">Resumen</xsl:when>
               <xsl:when test="@lang = 'de'">Zusammenfassung</xsl:when>
               <xsl:when test="@lang = 'pt'">Resumo</xsl:when>
+              <xsl:when test="@lang = 'it'">Riassunto</xsl:when>
             </xsl:choose>
           </xsl:otherwise>
         </xsl:choose>
@@ -2444,6 +2445,7 @@
               <xsl:when test="@lang = 'es'">Palabras clave:</xsl:when>
               <xsl:when test="@lang = 'de'">Stichworte:</xsl:when>
               <xsl:when test="@lang = 'pt'">Palavras chaves:</xsl:when>
+              <xsl:when test="@lang = 'it'">Parole chiave</xsl:when>
             </xsl:choose>
           </xsl:element>
         </xsl:element>
