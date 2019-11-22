@@ -164,14 +164,12 @@ INSTALLED_APPS = (
     'apps.userspace.library.members',
     'apps.userspace.library.stats',
     'apps.userspace.library.subscription_ips',
-    'apps.userspace.reporting',
     'core.authorization',
     'core.accounts',
     'core.citations',
     'core.editor',
     'core.journal',
     'core.metrics',
-    'core.reporting',
     'core.subscription',
 
     # Third-party apps
