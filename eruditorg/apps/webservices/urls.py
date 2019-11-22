@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from .views.restrictions import RestrictionsView, RestrictionsByJournalView
+from .views import RestrictionsView, RestrictionsByJournalView
 
 app_name = "webservices"
 

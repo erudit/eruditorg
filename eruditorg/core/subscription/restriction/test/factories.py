@@ -3,7 +3,7 @@ import random
 import factory
 import factory.fuzzy
 
-from ..models import Abonne, Revue, Revueabonne, Ipabonne
+from ..models import Abonne, Revue, Revueabonne, Ipabonne, Adressesip
 
 
 class IpabonneFactory(factory.django.DjangoModelFactory):
@@ -40,3 +40,11 @@ class RevueabonneFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Revueabonne
+
+
+class AdressesipFactory(factory.django.DjangoModelFactory):
+
+    adresseipid = factory.Sequence(lambda n: int(n))
+
+    class Meta:
+        model = Adressesip

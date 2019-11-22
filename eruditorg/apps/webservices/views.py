@@ -8,8 +8,9 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 
+from core.subscription.restriction.models import Abonne, Adressesip, Revue, Revueabonne
 from erudit.models import Journal
 
 
@@ -117,3 +118,56 @@ class RestrictionsByJournalView(View):
             root = E.error(journal_code + "This journal does not exist or is not yet configured")
 
         return HttpResponse(etree.tostring(root), content_type='text/xml')
+
+
+class CrknIpUnbView(TemplateView):
+    content_type = 'text/xml'
+    template_name = 'webservices/crkn_ipunb.xml'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['listeips'] = {}
+
+        # Get all UNB journals codes from the `eruditorg` database to avoid hardcoding them in the
+        # next query. We need to do this because there is no concept of collection in the
+        # `restriction` database.
+        journals_codes = Journal.objects.filter(
+            collection__code='unb',
+        ).values_list('code', flat=True)
+
+        # Get all UNB journals IDs from the `restriction` database to filter subscribers in the next
+        # query. We need to do this because there is no foreign keys in the `restriction` database
+        # so we can't use Django's field lookups.
+        journals_ids = Revue.objects.filter(
+            titrerevabr__in=list(journals_codes),
+        ).values('revueid')
+
+        # Get all UNB journals subscribers IDs for the current year from the `restriction` database
+        # to filter IP addresses and subscribers in the next two queries. We need to do this
+        # because there is no foreign keys in the `restriction` database so we can't use Django's
+        # field lookups.
+        subscribers_id = Revueabonne.objects.filter(
+            revueid__in=journals_ids,
+            anneeabonnement=dt.datetime.now().year,
+        ).values('abonneid')
+
+        # Get all UNB journals subscribers from the `restriction` database.
+        subscribers = Abonne.objects.filter(
+            abonneid__in=subscribers_id,
+        ).order_by('abonne').values('abonneid', 'abonne')
+
+        # Get all UNB journals subscribers IP addresses from the `restriction` database.
+        ip_addresses = Adressesip.objects.filter(
+            abonneid__in=subscribers_id,
+        ).order_by('ip').values('abonneid', 'ip')
+
+        # Add the subscribers names and IP addresses to the `listeips` dict to send to the template.
+        for subscriber in subscribers:
+            context['listeips'][subscriber['abonneid']] = {
+                'abonne': subscriber['abonne'],
+                'ips': [],
+            }
+        for ip_address in ip_addresses:
+            context['listeips'][ip_address['abonneid']]['ips'].append(ip_address['ip'])
+
+        return context
