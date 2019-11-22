@@ -1082,7 +1082,7 @@ class Article(FedoraMixin):
         return None
 
     def cite_url(self, type):
-        return reverse('public:journal:article_citation_{}'.format(type), kwargs={
+        return reverse('public:journal:article_{}'.format(type), kwargs={
             'journal_code': self.issue.journal.code,
             'issue_slug': self.issue.volume_slug,
             'issue_localid': self.issue.localidentifier,
