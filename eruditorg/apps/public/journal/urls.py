@@ -45,14 +45,17 @@ journal_urlpatterns = ([
         url(_(r'^plan/$'), views.ArticleTocView.as_view(), name='article_toc'),
         url(_(r'^media/(?P<media_localid>[\.\w-]+)$'), views.ArticleMediaView.as_view(), name='article_media'),  # noqa
         url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
+        url(r'^citation\.enw$', views.ArticleEnwCitationView.as_view(), name='article_citation_enw'),  # noqa
+        url(r'^citation\.ris$', views.ArticleRisCitationView.as_view(), name='article_citation_ris'),  # noqa
+        url(r'^citation\.bib$', views.ArticleBibCitationView.as_view(), name='article_citation_bib'),  # noqa
     ])),
     url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)'), include([  # noqa
         url(r'^\.html$', views_compat.ArticleDetailRedirectView.as_view()),
         url(r'^\.xml$', views.ArticleXmlView.as_view(), name="article_raw_xml"),
         url(r'^\.pdf$', views.ArticleRawPdfView.as_view(), name="article_raw_pdf"),
-        url(r'^\.enw$', views.ArticleEnwCitationView.as_view(), name='article_citation_enw'),
-        url(r'^\.ris$', views.ArticleRisCitationView.as_view(), name='article_citation_ris'),
-        url(r'^\.bib$', views.ArticleBibCitationView.as_view(), name='article_citation_bib'),
+        url(r'^\.enw$', views.ArticleEnwCitationView.as_view(), name='article_enw'),
+        url(r'^\.ris$', views.ArticleRisCitationView.as_view(), name='article_ris'),
+        url(r'^\.bib$', views.ArticleBibCitationView.as_view(), name='article_bib'),
     ])),
     url(r'^iderudit/(?P<localid>[\w-]+)/$',
         views.IdEruditArticleRedirectView.as_view(), name='iderudit_article_detail'),
