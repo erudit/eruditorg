@@ -64,10 +64,9 @@ class TestHomeView:
         response = Client().get(url)
         # Check
         assert response.status_code == 200
-        assert list(response.context['new_journals']) == [{
-            'code': upcoming_year_new_journal.code,
-            'name': upcoming_year_new_journal.name,
-        }]
+        assert old_journal not in response.context['new_journals']
+        assert current_year_new_journal not in response.context['new_journals']
+        assert upcoming_year_new_journal in response.context['new_journals']
 
     def test_sitemaps(self):
         journal = JournalFactory()
