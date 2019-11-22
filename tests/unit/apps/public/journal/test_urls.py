@@ -16,15 +16,18 @@ class TestJournalUrlPatterns:
         ('/fr/revues/journal/2020-issue/article/foo.pdf', False),
         ('/fr/revues/journal/2020-issue/article.pdffoo', False),
         # Article citation ENW.
-        ('/fr/revues/journal/2020-issue/article.enw', 'article_citation_enw'),
+        ('/fr/revues/journal/2020-issue/article/citation.enw', 'article_citation_enw'),
+        ('/fr/revues/journal/2020-issue/article.enw', 'article_enw'),
         ('/fr/revues/journal/2020-issue/article/foo.enw', False),
         ('/fr/revues/journal/2020-issue/article.enwfoo', False),
         # Article citation RIS.
-        ('/fr/revues/journal/2020-issue/article.ris', 'article_citation_ris'),
+        ('/fr/revues/journal/2020-issue/article/citation.ris', 'article_citation_ris'),
+        ('/fr/revues/journal/2020-issue/article.ris', 'article_ris'),
         ('/fr/revues/journal/2020-issue/article/foo.ris', False),
         ('/fr/revues/journal/2020-issue/article.risfoo', False),
         # Article citation BIB.
-        ('/fr/revues/journal/2020-issue/article.bib', 'article_citation_bib'),
+        ('/fr/revues/journal/2020-issue/article/citation.bib', 'article_citation_bib'),
+        ('/fr/revues/journal/2020-issue/article.bib', 'article_bib'),
         ('/fr/revues/journal/2020-issue/article/foo.bib', False),
         ('/fr/revues/journal/2020-issue/article.bibfoo', False),
     ])
