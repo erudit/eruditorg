@@ -3,6 +3,7 @@
 import random
 
 from django.core.cache import caches, cache
+from django.utils.translation import get_language
 
 from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
@@ -31,7 +32,8 @@ def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_
         if not self.localidentifier:
             return method(self, *args, **kwargs)
 
-        key = "fedora_result-{localidentifier}-{method_name}".format(
+        key = "fedora_result-{lang}-{localidentifier}-{method_name}".format(
+            lang=get_language(),
             localidentifier=self.localidentifier,
             method_name=method.__name__
         )
