@@ -193,7 +193,7 @@ def get_issue_from_year_volume_number(journal_code: str, year: str, volume: str,
                                  year=year,
                                  volume=volume,
                                  number=number)
-    except Issue.DoesNotExist:
+    except (Issue.DoesNotExist, MultipleObjectsReturned):
         return None
 
 

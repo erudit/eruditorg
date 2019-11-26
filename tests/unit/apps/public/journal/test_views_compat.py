@@ -4,8 +4,12 @@ import unittest.mock
 
 from django.http import Http404
 
-from erudit.test.factories import JournalFactory, IssueFactory
-from apps.public.journal.views_compat import IssueDetailRedirectView, JournalDetailCheckRedirectView
+from erudit.test.factories import JournalFactory, IssueFactory, ArticleFactory
+from apps.public.journal.views_compat import (
+    ArticleDetailRedirectView,
+    IssueDetailRedirectView,
+    JournalDetailCheckRedirectView,
+)
 
 
 pytestmark = pytest.mark.django_db
@@ -269,3 +273,44 @@ class TestIssueDetailRedirectView:
         else:
             with pytest.raises(Http404):
                 view.get_redirect_url(journal_code='journal-1', n=number)
+
+
+class TestArticleDetailRedirectView:
+
+    def test_multiple_issues(self):
+        journal = JournalFactory(code='journal')
+        issue_1 = IssueFactory(
+            journal=journal,
+            localidentifier='issue-1',
+            year='2000',
+            volume='1',
+            number='2',
+        )
+        issue_2 = IssueFactory(
+            journal=journal,
+            localidentifier='issue-2',
+            year='2000',
+            volume='1',
+            number='2',
+        )
+        article_1 = ArticleFactory(issue=issue_1, localidentifier='article-1')
+        article_2 = ArticleFactory(issue=issue_2, localidentifier='article-2')
+
+        view = ArticleDetailRedirectView()
+        view.request = unittest.mock.MagicMock()
+        view.request.GET = {}
+
+        assert view.get_redirect_url(
+            journal_code=article_1.issue.journal.code,
+            year=article_1.issue.year,
+            v=article_1.issue.volume,
+            issue_number=article_1.issue.number,
+            localid=article_1.localidentifier,
+        ) == '/fr/revues/journal/2000-v1-n2-issue-1/article-1/'
+        assert view.get_redirect_url(
+            journal_code=article_2.issue.journal.code,
+            year=article_2.issue.year,
+            v=article_2.issue.volume,
+            issue_number=article_2.issue.number,
+            localid=article_2.localidentifier,
+        ) == '/fr/revues/journal/2000-v1-n2-issue-2/article-2/'
