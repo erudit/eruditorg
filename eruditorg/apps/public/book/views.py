@@ -24,7 +24,7 @@ from erudit.utils import qs_cache_key
 class BookListView(ListView):
 
     template_name = "public/book/home.html"
-    queryset = Book.objects.all().published().top_level().order_by('pk')
+    queryset = Book.objects.all().published().top_level().order_by('-year', 'title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
