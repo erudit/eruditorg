@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import View, TemplateView
 
-from core.subscription.restriction.models import Abonne, Adressesip, Revue, Revueabonne
+from core.subscription.restriction.models import Abonne, Adressesip, Revueabonne
 from erudit.models import Journal
 
 
@@ -128,26 +128,12 @@ class CrknIpUnbView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['listeips'] = {}
 
-        # Get all UNB journals codes from the `eruditorg` database to avoid hardcoding them in the
-        # next query. We need to do this because there is no concept of collection in the
-        # `restriction` database.
-        journals_codes = Journal.objects.filter(
-            collection__code='unb',
-        ).values_list('code', flat=True)
-
-        # Get all UNB journals IDs from the `restriction` database to filter subscribers in the next
-        # query. We need to do this because there is no foreign keys in the `restriction` database
-        # so we can't use Django's field lookups.
-        journals_ids = Revue.objects.filter(
-            titrerevabr__in=list(journals_codes),
-        ).values('revueid')
-
         # Get all UNB journals subscribers IDs for the current year from the `restriction` database
         # to filter IP addresses and subscribers in the next two queries. We need to do this
         # because there is no foreign keys in the `restriction` database so we can't use Django's
         # field lookups.
         subscribers_id = Revueabonne.objects.filter(
-            revueid__in=journals_ids,
+            revueid__in=['53', '55', '54', '59', '60', '62', '63', '64', '67', '75', '76', '100'],
             anneeabonnement=dt.datetime.now().year,
         ).values('abonneid')
 
