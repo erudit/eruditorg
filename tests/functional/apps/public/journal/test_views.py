@@ -623,6 +623,35 @@ class TestIssueDetailView:
             assert not toolbox
             assert not summary_link
 
+    @override_settings(CACHES=settings.LOCMEM_CACHES)
+    @pytest.mark.parametrize('language_code, expected_link', (
+        ('fr', '<a class="tool-btn" href="/fr/revues/journal/2000-issue/article.pdf" '
+               'target="_blank" title="Télécharger">'),
+        ('en', '<a class="tool-btn" href="/en/journals/journal/2000-issue/article.pdf" '
+               'target="_blank" title="Download">'),
+    ))
+    def test_article_pdf_url_is_cache_with_the_right_language(
+        self, language_code, expected_link, monkeypatch,
+    ):
+        monkeypatch.setattr(Journal, 'has_logo', unittest.mock.MagicMock(return_value=False))
+        article = ArticleFactory(
+            issue__journal__code='journal',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            localidentifier='article',
+            with_pdf=True,
+        )
+        with override_settings(LANGUAGE_CODE=language_code):
+            url = reverse('public:journal:issue_detail', kwargs={
+                'journal_code': article.issue.journal.code,
+                'issue_slug': article.issue.volume_slug,
+                'localidentifier': article.issue.localidentifier,
+            })
+            html = Client().get(url).content.decode()
+            dom = BeautifulSoup(html, 'html.parser')
+            toolbox = dom.find('ul', {'class': 'toolbox'})
+            assert expected_link in toolbox.decode()
+
 
 class TestArticleDetailView:
 
