@@ -118,8 +118,8 @@
 
   {# New journals #}
   {% nocache %}
-  {% if new_journals %}
   <section class="home-journals">
+    {% if new_journals %}
     <div class="container">
       <h2>{% trans "Nouvelles revues" %}</h2>
       <ul>
@@ -135,8 +135,8 @@
         {% endfor %}
       </ul>
     </div>
+    {% endif %}
   </section>
-  {% endif %}
   {% endnocache %}
 
   {% switch "maintenance" %}
