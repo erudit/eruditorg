@@ -211,53 +211,53 @@
 
   /* New journals */
   .home-journals {
-    padding-top: 50px;
-    background-color: $midnight-blue;
-    color: #fff;
-    border-bottom: 1px solid $midnight-blue;
+    padding-bottom: 6em;
+    background-color: $light-grey;
+    color: #000;
     clear: both;
 
-    p {
-      line-height: 1;
-      font-size: 14px;
+    &:before {
+      margin-top: -5px;
+      background: url('../img/homepage/bg-2.png') no-repeat left top;
+      background-size: cover;
+      min-height: 238px;
+      content: " ";
+      display: block;
     }
 
-    a {
-      color: #fff;
+    h2 {
+      margin: 1em 0;
     }
-  }
 
-  .home-journals__title {
-    margin-bottom: 2.5vh;
-    font-size: 24px;
-  }
+    ul {
+      margin: 0;
+      list-style: none;
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
 
-  .home-journals__list {
-    margin: 0;
-    list-style: none;
-    display: flex;
-    flex-flow: row wrap;
-  }
+      li {
+        width: 270px;
+        margin: 0 15px 15px 0;
 
-  .home-journals__item {
-    width: 21.75em;
-    margin-right: 2em;
-  }
+        p {
+          line-height: 1;
+          font-size: 14px;
 
-  .home-journals__name {
-    font-size: 14px;
-    line-height: 1.25;
-    display: block;
-    text-decoration: underline;
-  }
+          small {
+            font-size: 12px;
+          }
 
-  .home-journals__btn {
-    margin-top: 2.5vh;
-    border: 1px solid #fff;
+          a {
+            color: $dark-grey;
+            border-bottom: 1px dotted $dark-grey;
 
-    &:hover, &:focus, &:active {
-      background-color: #fff;
-      color: $midnight-blue;
+            &:hover, &:focus, &:active {
+              border-bottom: 1px solid $dark-grey;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -282,15 +282,6 @@
   .home-news {
     padding-bottom: 5vh;
     background-color: $light-grey;
-
-    &:before {
-      margin-top: -5px;
-      background: url('../img/homepage/bg-2.png') no-repeat left top;
-      background-size: cover;
-      min-height: 238px;
-      content: " ";
-      display: block;
-    }
   }
 
   .home-news__list {

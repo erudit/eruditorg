@@ -36,14 +36,16 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
 
-        # Includes the latest issues
-        context['new_journals'] = Journal.objects.values(
-            'code',
-            'name',
+        # Includes the latest journals
+        context['new_journals'] = Journal.objects.prefetch_related(
+            'disciplines',
+            'information',
         ).filter(
             is_new=True,
             year_of_addition__isnull=False,
-        )
+        ).order_by('?')
+
+        # Includes the latest issues
         context['latest_issues'] = Issue.internal_objects.filter(
             date_published__isnull=False, is_published=True) \
             .prefetch_related('journal__collection', 'journal__disciplines') \

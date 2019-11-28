@@ -109,35 +109,33 @@
         </li>
         {% endfor %}
       </ul>
-      {% if not new_journals %}
       <p>
         <a href="{% url 'public:journal:journal_list' %}" class="btn home-issues__btn">{% trans "Voir toutes les revues" %}</a>
       </p>
-      {% endif %}
     </div>
   </section>
   {% endif %}
 
   {# New journals #}
-  {% if new_journals %}
   <section class="home-journals">
+    {% if new_journals %}
     <div class="container">
-      <h2 class="home-journals__title">{% trans "Nouvelles revues" %}</h2>
-      <ul class="home-journals__list">
+      <h2>{% trans "Nouvelles revues" %}</h2>
+      <ul>
         {% for journal in new_journals %}
-        <li class="home-journals__item">
-          <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.name }}">
-            <span class="home-journals__name">{{ journal.name }}</span>
-          </a>
+        <li>
+          <h3>{{ journal.name }}</h3>
+          <p><small>{{ journal.disciplines.all|join:", " }}</small></p>
+          {% if journal.information.about %}
+          <p>{{ journal.information.about|striptags|safe|truncatewords:25 }}</p>
+          {% endif %}
+          <p><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.name }}">{% trans "En savoir plus" %}</a></p>
         </li>
         {% endfor %}
       </ul>
-      <p>
-        <a href="{% url 'public:journal:journal_list' %}" class="btn home-journals__btn">{% trans "Voir toutes les revues" %}</a>
-      </p>
     </div>
+    {% endif %}
   </section>
-  {% endif %}
 
   {% switch "maintenance" %}
   {% else %}
@@ -145,7 +143,7 @@
   {% if latest_news %}
   <section class="home-news">
     <div class="container home-news__content">
-      <h2>{% trans "Nouvelles" %}</h2>
+      <h2>{% trans "Actualités" %}</h2>
 
       <ul class="row home-news__list">
         {% for entry in latest_news %}
