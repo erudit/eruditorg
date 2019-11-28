@@ -71,3 +71,33 @@ ol {
   }
 
 }
+
+.multicolonne {
+  clear: both;
+  overflow: hidden;
+
+  [class^="nbcol"] {
+    float: left;
+  }
+
+  .nbcol1 {
+    width: 100%;
+  }
+
+  .nbcol2 {
+    width: 50%;
+  }
+
+  .nbcol3 {
+    width: 33%;
+  }
+
+  .nbcol4 {
+    width: 25%;
+  }
+
+  .nbvol5 {
+    width: 20%;
+  }
+
+}
