@@ -13,5 +13,4 @@ urlpatterns = [
 
     url(_(r'^revue/'), include('apps.userspace.journal.urls')),
     url(_(r'^bibliotheque/'), include('apps.userspace.library.urls')),
-    url(_(r'^reporting/'), include('apps.userspace.reporting.urls')),
 ]
