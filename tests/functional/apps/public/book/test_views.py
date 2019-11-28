@@ -9,7 +9,7 @@ from apps.public.book.models import (
     short_slug,
 )
 
-from apps.public.book.test.factories import BookFactory
+from apps.public.book.test.factories import BookFactory, BookCollectionFactory
 
 from waffle.models import Flag
 
@@ -62,7 +62,7 @@ def test_book_view_returns_404_when_book_is_not_published(client):
 def test_home_view_does_not_list_unpublished_books(client):
     book = BookFactory(is_published=False)
     response = client.get(reverse('public:book:home'))
-    assert book.slug not in response.content.decode('utf-8')
+    assert book.title not in response.content.decode('utf-8')
     assert response.status_code == 200
 
 
@@ -101,3 +101,10 @@ def test_short_slug_cuts_over_80_chars():
 
 def test_short_slug_includes_isbn():
     assert short_slug('abc', 'def') == 'abc--def'
+
+@pytest.mark.django_db
+def test_collection_anchor_is_displayed_using_slugs(client):
+    BookCollectionFactory(slug='book-collection-1')
+    response = client.get(reverse('public:book:home'))
+    html = response.content.decode()
+    assert '<a id="book-collection-1" class="invisible"></a>' in html
