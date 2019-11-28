@@ -117,7 +117,6 @@
   {% endif %}
 
   {# New journals #}
-  {% nocache %}
   <section class="home-journals">
     {% if new_journals %}
     <div class="container">
@@ -137,7 +136,6 @@
     </div>
     {% endif %}
   </section>
-  {% endnocache %}
 
   {% switch "maintenance" %}
   {% else %}
