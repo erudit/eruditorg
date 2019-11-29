@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 08:16-0500\n"
+"POT-Creation-Date: 2019-11-29 08:34-0500\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2019\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -2928,7 +2928,8 @@ msgstr ""
 msgid "J’ai compris"
 msgstr "Got it!"
 
-#: templates/base.html:539 templates/public/home.html:176
+#: templates/base.html:539 templates/public/home.html:132
+#: templates/public/home.html:174
 msgid "En savoir plus"
 msgstr "For more information"
 
@@ -4652,28 +4653,28 @@ msgstr "Logo for the journal %(journal_name)s"
 msgid "De la revue"
 msgstr "In the journal"
 
-#: templates/public/home.html:114 templates/public/home.html:136
+#: templates/public/home.html:113
 msgid "Voir toutes les revues"
 msgstr "All journals"
 
-#: templates/public/home.html:125
+#: templates/public/home.html:123
 msgid "Nouvelles revues"
 msgstr "New journals"
 
-#: templates/public/home.html:148
-msgid "Nouvelles"
-msgstr "News"
+#: templates/public/home.html:146
+msgid "Actualités"
+msgstr "Érudit News"
 
-#: templates/public/home.html:156
+#: templates/public/home.html:154
 #: templates/public/thesis/collection_list_base.html:96
 msgid "Lire la suite"
 msgstr "Read more"
 
-#: templates/public/home.html:162
+#: templates/public/home.html:160
 msgid "Toutes les nouvelles d'Érudit"
 msgstr "See all the news"
 
-#: templates/public/home.html:176
+#: templates/public/home.html:174
 msgid ""
 "Érudit offre l'accès à de nombreuses collections de documents en sciences "
 "humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de "
@@ -4683,68 +4684,68 @@ msgstr ""
 "and humanities: journals, books and proceedings, theses, and research "
 "reports."
 
-#: templates/public/home.html:181 templates/public/home.html:183
+#: templates/public/home.html:179 templates/public/home.html:181
 msgid "https://apropos.erudit.org/fr/bibliotheques/"
 msgstr "https://apropos.erudit.org/en/libraries/"
 
-#: templates/public/home.html:181
+#: templates/public/home.html:179
 msgid "Bibliothécaires"
 msgstr "Librarians"
 
-#: templates/public/home.html:182
+#: templates/public/home.html:180
 msgid ""
 "Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers."
 msgstr "Provide high-quality content to your patrons."
 
-#: templates/public/home.html:183
+#: templates/public/home.html:181
 msgid "Abonnez-vous"
 msgstr "Subscribe"
 
-#: templates/public/home.html:186 templates/public/home.html:188
+#: templates/public/home.html:184 templates/public/home.html:186
 msgid "https://apropos.erudit.org/fr/editeurs/"
 msgstr "https://apropos.erudit.org/en/publishers/"
 
-#: templates/public/home.html:186
+#: templates/public/home.html:184
 msgid "Éditeurs"
 msgstr "Publishers"
 
-#: templates/public/home.html:187
+#: templates/public/home.html:185
 msgid "Diffusez votre revue en format numérique partout dans le monde."
 msgstr "Make your journal accessible worldwide."
 
-#: templates/public/home.html:188
+#: templates/public/home.html:186
 msgid "Publiez avec nous"
 msgstr "Publish with us"
 
-#: templates/public/home.html:191 templates/public/home.html:193
+#: templates/public/home.html:189 templates/public/home.html:191
 msgid "https://apropos.erudit.org/fr/chercheurs/"
 msgstr "https://apropos.erudit.org/en/researchers/"
 
-#: templates/public/home.html:191
+#: templates/public/home.html:189
 msgid "Chercheurs"
 msgstr "Researchers"
 
-#: templates/public/home.html:192
+#: templates/public/home.html:190
 msgid "Accédez à des services adaptés à l’exploitation de corpus."
 msgstr "Access services tailored for document exploitation."
 
-#: templates/public/home.html:193
+#: templates/public/home.html:191
 msgid "Explorez nos données"
 msgstr "Explore our data"
 
-#: templates/public/home.html:196 templates/public/home.html:198
+#: templates/public/home.html:194 templates/public/home.html:196
 msgid "https://apropos.erudit.org/fr/usagers/"
 msgstr "https://apropos.erudit.org/en/users/"
 
-#: templates/public/home.html:196
+#: templates/public/home.html:194
 msgid "Utilisateurs"
 msgstr "Users"
 
-#: templates/public/home.html:197
+#: templates/public/home.html:195
 msgid "Trouvez les ressources et données pertinentes pour vos recherches."
 msgstr "Find the right sources and data for your research."
 
-#: templates/public/home.html:198
+#: templates/public/home.html:196
 msgid "Repérez des articles"
 msgstr "Find articles"
 

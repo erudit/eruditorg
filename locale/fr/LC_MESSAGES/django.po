@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 08:16-0500\n"
+"POT-Creation-Date: 2019-11-29 08:34-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2869,7 +2869,8 @@ msgstr ""
 msgid "J’ai compris"
 msgstr ""
 
-#: templates/base.html:539 templates/public/home.html:176
+#: templates/base.html:539 templates/public/home.html:132
+#: templates/public/home.html:174
 msgid "En savoir plus"
 msgstr ""
 
@@ -4602,96 +4603,96 @@ msgstr ""
 msgid "De la revue"
 msgstr ""
 
-#: templates/public/home.html:114 templates/public/home.html:136
+#: templates/public/home.html:113
 msgid "Voir toutes les revues"
 msgstr ""
 
-#: templates/public/home.html:125
+#: templates/public/home.html:123
 msgid "Nouvelles revues"
 msgstr ""
 
-#: templates/public/home.html:148
-msgid "Nouvelles"
+#: templates/public/home.html:146
+msgid "Actualités"
 msgstr ""
 
-#: templates/public/home.html:156
+#: templates/public/home.html:154
 #: templates/public/thesis/collection_list_base.html:96
 msgid "Lire la suite"
 msgstr ""
 
-#: templates/public/home.html:162
+#: templates/public/home.html:160
 msgid "Toutes les nouvelles d'Érudit"
 msgstr ""
 
-#: templates/public/home.html:176
+#: templates/public/home.html:174
 msgid ""
 "Érudit offre l'accès à de nombreuses collections de documents en sciences "
 "humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de "
 "recherche."
 msgstr ""
 
-#: templates/public/home.html:181 templates/public/home.html:183
+#: templates/public/home.html:179 templates/public/home.html:181
 msgid "https://apropos.erudit.org/fr/bibliotheques/"
 msgstr ""
 
-#: templates/public/home.html:181
+#: templates/public/home.html:179
 msgid "Bibliothécaires"
 msgstr ""
 
-#: templates/public/home.html:182
+#: templates/public/home.html:180
 msgid ""
 "Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers."
 msgstr ""
 
-#: templates/public/home.html:183
+#: templates/public/home.html:181
 msgid "Abonnez-vous"
 msgstr ""
 
-#: templates/public/home.html:186 templates/public/home.html:188
+#: templates/public/home.html:184 templates/public/home.html:186
 msgid "https://apropos.erudit.org/fr/editeurs/"
 msgstr ""
 
-#: templates/public/home.html:186
+#: templates/public/home.html:184
 msgid "Éditeurs"
 msgstr ""
 
-#: templates/public/home.html:187
+#: templates/public/home.html:185
 msgid "Diffusez votre revue en format numérique partout dans le monde."
 msgstr ""
 
-#: templates/public/home.html:188
+#: templates/public/home.html:186
 msgid "Publiez avec nous"
 msgstr ""
 
-#: templates/public/home.html:191 templates/public/home.html:193
+#: templates/public/home.html:189 templates/public/home.html:191
 msgid "https://apropos.erudit.org/fr/chercheurs/"
 msgstr ""
 
-#: templates/public/home.html:191
+#: templates/public/home.html:189
 msgid "Chercheurs"
 msgstr ""
 
-#: templates/public/home.html:192
+#: templates/public/home.html:190
 msgid "Accédez à des services adaptés à l’exploitation de corpus."
 msgstr ""
 
-#: templates/public/home.html:193
+#: templates/public/home.html:191
 msgid "Explorez nos données"
 msgstr ""
 
-#: templates/public/home.html:196 templates/public/home.html:198
+#: templates/public/home.html:194 templates/public/home.html:196
 msgid "https://apropos.erudit.org/fr/usagers/"
 msgstr ""
 
-#: templates/public/home.html:196
+#: templates/public/home.html:194
 msgid "Utilisateurs"
 msgstr ""
 
-#: templates/public/home.html:197
+#: templates/public/home.html:195
 msgid "Trouvez les ressources et données pertinentes pour vos recherches."
 msgstr ""
 
-#: templates/public/home.html:198
+#: templates/public/home.html:196
 msgid "Repérez des articles"
 msgstr ""
 
