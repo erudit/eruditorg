@@ -237,7 +237,8 @@
       -webkit-overflow-scrolling: touch;
 
       li {
-        width: 270px;
+        min-width: 270px;
+        max-width: 270px;
         margin: 0 15px 15px 0;
 
         p {
