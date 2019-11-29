@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 15:05-0500\n"
+"POT-Creation-Date: 2019-11-29 08:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,6 @@ msgid "Livre"
 msgstr ""
 
 #: apps/public/book/models.py:57 apps/public/search/forms.py:65
-#: apps/userspace/reporting/forms.py:17
 msgid "Actes"
 msgstr ""
 
@@ -217,7 +216,6 @@ msgid "Est publié ?"
 msgstr ""
 
 #: apps/public/book/models.py:175 apps/public/search/forms.py:64
-#: apps/userspace/reporting/forms.py:19
 msgid "Livres"
 msgstr ""
 
@@ -568,21 +566,21 @@ msgstr ""
 msgid "^premierepage\\.pdf$"
 msgstr ""
 
-#: apps/public/journal/urls.py:49
+#: apps/public/journal/urls.py:52
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
 msgstr ""
 
-#: apps/public/journal/urls.py:61
+#: apps/public/journal/urls.py:64
 msgid "^redirection/"
 msgstr ""
 
-#: apps/public/journal/urls.py:62
+#: apps/public/journal/urls.py:65
 msgid "^revue/(?P<code>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:64
+#: apps/public/journal/urls.py:67
 msgid "^numero/(?P<localidentifier>[\\w-]+)/$"
 msgstr ""
 
@@ -633,7 +631,7 @@ msgstr ""
 msgid "Titre, résumé, mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:30 apps/userspace/reporting/forms.py:10
+#: apps/public/search/forms.py:30
 msgid "Auteur"
 msgstr ""
 
@@ -705,8 +703,7 @@ msgstr ""
 msgid "Rapports de recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:70 apps/userspace/reporting/forms.py:15
-#: erudit/models/journal.py:898
+#: apps/public/search/forms.py:70 erudit/models/journal.py:898
 msgid "Article"
 msgstr ""
 
@@ -1463,82 +1460,6 @@ msgstr ""
 msgid "^collection/"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:11
-msgid "Code revue"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:13 apps/userspace/reporting/forms.py:24
-#: core/authorization/models.py:28 erudit/models/journal.py:94
-#: erudit/models/journal.py:1505
-#: templates/public/journal/journal_list_per_names.html:127
-msgid "Type"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:16 erudit/models/journal.py:54
-msgid "Culturel"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:18
-msgid "Thèses"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:20
-#: templates/userspace/journal/partials/menu.html:30
-msgid "Dépôt"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:22 apps/userspace/reporting/views.py:181
-#: core/editor/models.py:43 erudit/models/journal.py:416
-#: templates/userspace/journal/editor/detail.html:32
-#: templates/userspace/library/stats/landing.html:78
-#: templates/userspace/library/stats/landing.html:96
-#: templates/userspace/library/stats/landing.html:160
-#: templates/userspace/library/stats/landing.html:178
-msgid "Année"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:26 templates/base.html:210
-#: templates/base.html:413
-msgid "Érudit"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:27
-msgid "UNB"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:28
-msgid "Persée"
-msgstr ""
-
-#: apps/userspace/reporting/urls.py:12
-msgid "^csv/numero/$"
-msgstr ""
-
-#: apps/userspace/reporting/urls.py:13
-msgid "^csv/journal/$"
-msgstr ""
-
-#: apps/userspace/reporting/views.py:181 apps/userspace/reporting/views.py:206
-#: core/editor/models.py:37 core/subscription/models.py:270
-#: erudit/models/journal.py:216 erudit/models/journal.py:374
-#: erudit/models/journal.py:1476
-#: templates/public/journal/journal_list_per_names.html:126
-msgid "Revue"
-msgstr ""
-
-#: apps/userspace/reporting/views.py:181 core/editor/models.py:54
-#: erudit/models/journal.py:430 erudit/models/journal.py:494
-#: templates/userspace/journal/editor/detail.html:38
-#: templates/userspace/journal/editor/issues.html:43
-msgid "Numéro"
-msgstr ""
-
-#: apps/userspace/reporting/views.py:181 apps/userspace/reporting/views.py:206
-#: templates/public/journal/journal_statistics.html:3
-#: templates/public/journal/journal_statistics.html:11
-msgid "Nombre d'articles"
-msgstr ""
-
 #: apps/userspace/urls.py:14
 msgid "^revue/"
 msgstr ""
@@ -1547,11 +1468,7 @@ msgstr ""
 msgid "^bibliotheque/"
 msgstr ""
 
-#: apps/userspace/urls.py:16
-msgid "^reporting/"
-msgstr ""
-
-#: base/urls.py:53
+#: base/urls.py:56
 msgid "^espace-utilisateur/"
 msgstr ""
 
@@ -1672,6 +1589,12 @@ msgstr ""
 msgid "Date de modification"
 msgstr ""
 
+#: core/authorization/models.py:28 erudit/models/journal.py:94
+#: erudit/models/journal.py:1505
+#: templates/public/journal/journal_list_per_names.html:127
+msgid "Type"
+msgstr ""
+
 #: core/authorization/models.py:41 core/editor/models.py:223
 msgid "Groupe"
 msgstr ""
@@ -1714,10 +1637,33 @@ msgstr ""
 msgid "Validé"
 msgstr ""
 
+#: core/editor/models.py:37 core/subscription/models.py:270
+#: erudit/models/journal.py:216 erudit/models/journal.py:374
+#: erudit/models/journal.py:1476
+#: templates/public/journal/journal_list_per_names.html:126
+msgid "Revue"
+msgstr ""
+
+#: core/editor/models.py:43 erudit/models/journal.py:416
+#: templates/userspace/journal/editor/detail.html:32
+#: templates/userspace/library/stats/landing.html:78
+#: templates/userspace/library/stats/landing.html:96
+#: templates/userspace/library/stats/landing.html:160
+#: templates/userspace/library/stats/landing.html:178
+msgid "Année"
+msgstr ""
+
 #: core/editor/models.py:48 erudit/models/journal.py:427
 #: templates/public/search/results.html:210
 #: templates/userspace/journal/editor/detail.html:35
 msgid "Volume"
+msgstr ""
+
+#: core/editor/models.py:54 erudit/models/journal.py:430
+#: erudit/models/journal.py:494
+#: templates/userspace/journal/editor/detail.html:38
+#: templates/userspace/journal/editor/issues.html:43
+msgid "Numéro"
 msgstr ""
 
 #: core/editor/models.py:60
@@ -2147,6 +2093,10 @@ msgstr ""
 
 #: erudit/models/core.py:126
 msgid "Dépôts institutionnels"
+msgstr ""
+
+#: erudit/models/journal.py:54
+msgid "Culturel"
 msgstr ""
 
 #: erudit/models/journal.py:55
@@ -2733,6 +2683,10 @@ msgstr ""
 
 #: templates/base.html:207 templates/base.html:210 templates/base.html:413
 msgid "À propos d’Érudit"
+msgstr ""
+
+#: templates/base.html:210 templates/base.html:413
+msgid "Érudit"
 msgstr ""
 
 #: templates/base.html:213 templates/base.html:416
@@ -5605,6 +5559,11 @@ msgstr ""
 msgid "Retourner à la liste complète des revues."
 msgstr ""
 
+#: templates/public/journal/journal_statistics.html:3
+#: templates/public/journal/journal_statistics.html:11
+msgid "Nombre d'articles"
+msgstr ""
+
 #: templates/public/journal/journal_statistics.html:22
 msgid "Par revue"
 msgstr ""
@@ -6049,7 +6008,6 @@ msgstr ""
 #: templates/userspace/library/members/member_create.html:49
 #: templates/userspace/library/subscription_information/update.html:52
 #: templates/userspace/library/subscription_ips/ipaddressrange_create.html:42
-#: templates/userspace/reporting/home.html:53
 msgid "Valider"
 msgstr ""
 
@@ -6465,6 +6423,10 @@ msgid ""
 "section&nbsp;:"
 msgstr ""
 
+#: templates/userspace/journal/partials/menu.html:30
+msgid "Dépôt"
+msgstr ""
+
 #: templates/userspace/journal/partials/menu.html:38
 msgid "Redevances"
 msgstr ""
@@ -6766,7 +6728,7 @@ msgstr ""
 msgid ""
 "Les listes de titres dynamiques exposent les métadonnées décrivant l’état "
 "des collections sur la plateforme Érudit et sont conformes aux "
-"recommandations KBART."
+"recommandations KBART (NISO RP-9-2014)."
 msgstr ""
 
 #: templates/userspace/library/collection/landing.html:60
@@ -7247,61 +7209,3 @@ msgstr ""
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:66
 msgid "Supprimer cette plage d’adresses IP"
 msgstr ""
-
-#: templates/userspace/reporting/home.html:5
-msgid "Reporting"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:60
-msgid "CSV / Numéro"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:63
-msgid "CSV / Revue"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:74
-#, python-format
-msgid ""
-"\n"
-"                %(counter)s article trouvé.\n"
-"              "
-msgid_plural ""
-"\n"
-"                %(counter)s articles trouvés.\n"
-"              "
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/userspace/reporting/home.html:82
-msgid "Répartition par année:"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:86
-msgid "Répartition par revue:"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:90
-msgid "Répartition par numéro:"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:94
-msgid "Répartition par auteur:"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:98
-msgid "Répartition par type:"
-msgstr ""
-
-#: templates/userspace/reporting/home.html:103
-#, python-format
-msgid ""
-"\n"
-"            Le corpus comporte %(counter)s article.\n"
-"          "
-msgid_plural ""
-"\n"
-"            Le corpus comporte %(counter)s articles.\n"
-"          "
-msgstr[0] ""
-msgstr[1] ""
