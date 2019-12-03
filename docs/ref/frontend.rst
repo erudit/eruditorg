@@ -21,13 +21,7 @@ Configuration de Gulp
 
     npm install
 
-2. Installer les dépendances frontend au moyen de ``bower`` :
-
-::
-
-    bower install
-
-3. Configurer l'environnement Gulp
+2. Configurer l'environnement Gulp
 
 À partir du fichier fourni dans le dépôt
 

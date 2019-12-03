@@ -1,4 +1,4 @@
-//import '!!script!sticky-kit/jquery.sticky-kit.min';
+//import '!!script-loader!sticky-kit/dist/sticky-kit.min';
 
 export default {
 

@@ -1,5 +1,3 @@
-import Select2 from 'select2/dist/js/select2.full';
-
 export class JournalInformationFormController {
   init() {
     $('#id_languages').select2();

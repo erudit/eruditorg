@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/app.css' %}"/>
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/app.js' %}"></script>
     <style>html, body, #issue-reader { width: 100%; height: 100%; margin: 0; padding: 0; }</style>
   </head>

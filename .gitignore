@@ -19,7 +19,6 @@ npm-debug.log
 npm-debug.log.*
 .coverage
 /node_modules
-/bower_components
 Vagrantfile
 /vagrant_data
 .vagrant
@@ -43,15 +42,12 @@ docs/_build
 /eruditorg/static/vendor/**/spec
 /eruditorg/static/vendor/**/doc
 /eruditorg/static/vendor/**/docs
-/eruditorg/static/vendor/**/.bowerrc
 /eruditorg/static/vendor/**/.gitignore
 /eruditorg/static/vendor/**/.npmignore
 /eruditorg/static/vendor/**/.jshintignore
 /eruditorg/static/vendor/**/.jshintrc
 /eruditorg/static/vendor/**/composer.json
 /eruditorg/static/vendor/**/*.nuspec
-/eruditorg/static/vendor/**/bower.json
-/eruditorg/static/vendor/**/.bower.json
 /eruditorg/static/vendor/**/gruntfile.js
 /eruditorg/static/vendor/**/gulpfile.js
 /eruditorg/static/vendor/**/index.js

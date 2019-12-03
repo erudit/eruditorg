@@ -1,10 +1,13 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Forces the evaluation of jQuery and some other related code in the global context
-import '!!script!akkordion/dist/akkordion.min.js';
-import '!!script!jquery/dist/jquery.min';
-import '!!script!bootstrap-sass/assets/javascripts/bootstrap.min';
-import '!!script!inline-svg/dist/inlineSVG.min';
+import '!!script-loader!akkordion/dist/akkordion.min';
+import '!!script-loader!bootstrap-sass/assets/javascripts/bootstrap.min';
+import '!!script-loader!inline-svg/dist/inlineSVG.min';
+
+import '!!script-loader!magnific-popup/dist/jquery.magnific-popup.min';
+import '!!script-loader!sticky-kit/dist/sticky-kit.min';
+import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill.promise';
 
 import controllers from './controllers';
 import modules from './modules';

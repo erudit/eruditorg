@@ -1,10 +1,10 @@
-import "!!script!bookreader/BookReader/jquery-ui-1.12.0.min.js";
-import "!!script!bookreader/BookReader/jquery.browser.min.js";
-import "!!script!bookreader/BookReader/dragscrollable-br.js";
-import "!!script!bookreader/BookReader/jquery.colorbox-min.js";
-import "!!script!bookreader/BookReader/jquery.bt.min.js";
-import "!!script!bookreader/BookReader/BookReader.js";
-import "!!script!bookreader/BookReader/plugins/plugin.url.js";
+import "!!script-loader!bookreader/BookReader/jquery-ui-1.12.0.min.js";
+import "!!script-loader!bookreader/BookReader/jquery.browser.min.js";
+import "!!script-loader!bookreader/BookReader/dragscrollable-br.js";
+import "!!script-loader!bookreader/BookReader/jquery.colorbox-min.js";
+import "!!script-loader!bookreader/BookReader/jquery.bt.min.js";
+import "!!script-loader!bookreader/BookReader/BookReader.js";
+import "!!script-loader!bookreader/BookReader/plugins/plugin.url.js";
 
 
 function IssueReader(options) {
@@ -20,7 +20,7 @@ IssueReader.prototype = Object.create(BookReader.prototype);
  * view the reader from a mobile and in two pages mode when we view the reader
  * from a desktop.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  *
  * @param {object} params
  * @return {number} the mode
@@ -46,7 +46,7 @@ IssueReader.prototype.getInitialMode = function(params) {
  * This method is overridden to remove unwanted elements from the bottom
  * navigation bar.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  *
  * @return {jqueryElement}
  */
@@ -102,7 +102,7 @@ IssueReader.prototype.initNavbar = function() {
  *
  * This method is overridden to remove unwanted elements from the top toolbar.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  *
  * @return {jqueryElement}
  */
@@ -128,7 +128,7 @@ BookReader.prototype.buildToolbarElement = function() {
  *
  * This method is overridden to make the strings translatable.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  */
 BookReader.prototype.initUIStrings = function() {
   var titles = {

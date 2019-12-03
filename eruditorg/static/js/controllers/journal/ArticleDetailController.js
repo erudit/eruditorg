@@ -1,16 +1,12 @@
-import '!!script!sticky-kit/jquery.sticky-kit.min';
-import '!!script!clipboard.js/clipboard.min';
-import '!!script!scrollspy/build/scrollspy';
+import Scrollspy from 'scrollspy-js/src/js/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
 import SavedCitationList from '../../modules/SavedCitationList';
 import Toolbox from '../../modules/Toolbox';
-import '!!script!magnific-popup/dist/jquery.magnific-popup.min';
 
 export default {
 
   init: function() {
     this.article                = $('#article_detail');
-    this.sticky_header_height   = 0;
     this.toolbox                = new Toolbox( this.article );
 
     // Initializes the citation list
@@ -27,29 +23,22 @@ export default {
 
   sticky_elements : function () {
 
-    var $sticky_header         = this.article.find('.article-header-sticky'),
-        $sticky_elements       = this.article.find('.article-table-of-contents, .toolbox-wrapper'),
+    var $sticky_elements       = this.article.find('.article-table-of-contents, .toolbox-wrapper'),
         transform             = getPrefix('transform');
-
-    // save sticky header height
-    this.sticky_header_height = $sticky_header.outerHeight() - 20;
-
 
     // sticky elements
     $sticky_elements
-      .css('padding-bottom', this.sticky_header_height)
+      .css('padding-bottom', 20)
       .stick_in_parent({offset_top: 20})
       .first()
       .on("sticky_kit:stick", (e) => {
         setTimeout(function(){
-          $sticky_elements.css(transform, 'translate(0, ' + this.sticky_header_height+'px)');
-          $sticky_header.css(transform, 'translate(-50%, 0%)');
+          $sticky_elements.css(transform, 'translate(0, 0)');
         }, 0);
       })
       .on("sticky_kit:unstick", (e) => {
         setTimeout(function(){
           $sticky_elements.css(transform, 'translate(0, 0)');
-          $sticky_header.css(transform, 'translate(-50%, -100%)');
         }, 0);
       });
   },
@@ -64,7 +53,7 @@ export default {
       var target = $(e.currentTarget).attr('href').replace('#', '');
       if( !target ) return false;
 
-      $('html, body').animate( { scrollTop: this.article.find('#'+target).offset().top - this.sticky_header_height - 30 }, 750 );
+      $('html, body').animate( { scrollTop: this.article.find('#'+target).offset().top - 10 }, 750 );
       return false;
     });
   },
@@ -76,7 +65,7 @@ export default {
         e.stopPropagation();
       }
 
-      clipboard.copy( $(e.currentTarget).attr('href') ).then(
+      clipboard.writeText( $(e.currentTarget).attr('href') ).then(
         () => {
           $(e.currentTarget).addClass('success');
           setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
