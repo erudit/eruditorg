@@ -49,6 +49,16 @@ var webpackConfig = {
 
   mode: PROD_ENV ? "production" : "development",
 
+  entry: {
+    app: [
+      js_dir + '/app.js',
+      sass_dir + '/app.scss',
+    ],
+    issue_reader: [
+      js_dir + '/issue_reader.js',
+      sass_dir + '/issue_reader.scss',
+    ],
+  },
   output: {
     filename: 'js/[name].js',
   },
@@ -109,7 +119,7 @@ var webpackConfig = {
 /* Task to build our JS and CSS applications. */
 gulp.task('build-webpack-assets', function () {
   return gulp.src([
-        js_dir + '/app.js', sass_dir + '/app.scss',
+        js_dir + '/*.js', sass_dir + '/*.scss',
       ])
     .pipe(named())
     .pipe(webpackStream(webpackConfig))
@@ -205,7 +215,14 @@ gulp.task('webpack-dev-server', function(callback) {
   devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
     app: [
-      js_dir + '/app.js', sass_dir + '/app.scss',
+      js_dir + '/app.js',
+      sass_dir + '/app.scss',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+    ],
+    issue_reader: [
+      js_dir + '/issue_reader.js',
+      sass_dir + '/issue_reader.scss',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
     ],
