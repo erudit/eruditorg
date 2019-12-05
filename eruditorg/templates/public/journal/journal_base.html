@@ -177,8 +177,10 @@
           </dd>
           {% endif %}
 
+          {% if journal.publication_period %}
           <dt>{% trans "Période de publication" %}</dt>
           <dd>{{ journal.publication_period }}</dd>
+          {% endif %}
 
           {% if journal.first_issue_published_on_erudit %}
           <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
