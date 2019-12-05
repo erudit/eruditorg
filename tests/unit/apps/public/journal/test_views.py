@@ -129,6 +129,22 @@ class TestJournalDetailView:
         html = Client().get(url).content.decode()
         assert 'Cette revue a cessé de publier ses numéros sur Érudit depuis 2016, vous pouvez consulter les numéros subséquents sur <a href="https://www.cairn.info/revue-recma.htm">Cairn</a>' in html
 
+    @pytest.mark.parametrize('with_issue, expected_cache_key', [
+        (False, 'journal_code'),
+        (True, 'issue_localidentifier'),
+    ])
+    def test_journal_base_cache_key(self, with_issue, expected_cache_key):
+        journal = JournalFactory(code='journal_code')
+        if with_issue:
+            issue = IssueFactory(journal=journal, localidentifier='issue_localidentifier')
+        view = JournalDetailView()
+        view.object = journal
+        view.journal = journal
+        view.request = unittest.mock.MagicMock()
+        view.kwargs = unittest.mock.MagicMock()
+        context = view.get_context_data()
+        assert context['primary_cache_key'] == expected_cache_key
+
 
 class TestJournalAuthorsListView:
 

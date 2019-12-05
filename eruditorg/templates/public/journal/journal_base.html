@@ -30,7 +30,7 @@
     {# The meta info issue's localidentifier is used as a primary key for the cache key. #}
     {# The directors_cache_key, editors_cache_key and the LANGUAGE_CODE arguments are use to generate the cache key hash. #}
     {# The meta info issue's update time from Fedora is used as the cache content version. #}
-    {% cache cache_timeout "public_journal_base_journal_meta" meta_info_issue.localidentifier directors_cache_key editors_cache_key LANGUAGE_CODE meta_info_issue.fedora_updated %}
+    {% cache cache_timeout "public_journal_base_journal_meta" primary_cache_key directors_cache_key editors_cache_key LANGUAGE_CODE meta_info_issue.fedora_updated %}
     {# Journal information sidebar #}
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
       <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>
