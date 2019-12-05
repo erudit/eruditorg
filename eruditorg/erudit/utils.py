@@ -10,13 +10,13 @@ logger = logging.getLogger(__name__)
 
 # Mind your order! Longer stopwords should come first to avoid shorter ones applying first.
 # (example: "Les" has to come before "Le").
-FR_STOPWORDS = [r"les\s", r"le\s", r"la\s", r"l'", r"l’"]
-RE_FR_STOPPREFIXES = re.compile(r'^({})'.format('|'.join(FR_STOPWORDS)), re.IGNORECASE)
+STOPWORDS = [r"the\s", r"les\s", r"le\s", r"la\s", r"l'", r"l’"]
+RE_STOPPREFIXES = re.compile(r'^({})'.format('|'.join(STOPWORDS)), re.IGNORECASE)
 
 
 def strip_stopwords_prefix(name, lang='fr'):
     if lang == 'fr':
-        name = RE_FR_STOPPREFIXES.sub('', name)
+        name = RE_STOPPREFIXES.sub('', name)
     return name
 
 
