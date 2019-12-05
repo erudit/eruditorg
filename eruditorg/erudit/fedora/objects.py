@@ -3,11 +3,13 @@
 from collections import OrderedDict
 
 import lxml.etree as et
+from lxml.etree import XMLSyntaxError
 
 from eulfedora import models
 from eulfedora.rdfns import oai as oains
 from eulxml.xmlmap import XmlObject
 
+from sentry_sdk import configure_scope
 
 MODEL_PID_PREFIX = 'info:fedora/erudit-model:'
 
@@ -89,10 +91,15 @@ class ArticleDigitalObject(models.DigitalObject):
         .. _ÉruditArticle 2.0: http://www.erudit.org/xsd/article/2.0.0/doc/
         .. _liberuditarticle: http://www.github.com/erudit/liberuditarticle/
         """
-        if 'ERUDITXSD300' in self.ds_list:
-            return self.erudit_xsd300.content.serialize()
-        elif 'ERUDITXSD201' in self.ds_list:
-            return self.erudit_xsd201.content.serialize()
+        try:
+            if 'ERUDITXSD300' in self.ds_list:
+                return self.erudit_xsd300.content.serialize()
+            elif 'ERUDITXSD201' in self.ds_list:
+                return self.erudit_xsd201.content.serialize()
+        except XMLSyntaxError:
+            with configure_scope() as scope:
+                scope.set_extra("article_pid", self.pid)
+                raise
 
     @property
     def infoimg_dict(self):
