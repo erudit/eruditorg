@@ -14,8 +14,8 @@ def test_locale_aware_sort():
 @needs_fr_ca
 def test_locale_aware_sort_stopwords():
     # Names beginning with an article are ignored
-    NAMES = ["L'hiver", "Poutine", "La souris", "l’apostrophe"]
-    EXPECTED = ["l’apostrophe", "L'hiver", "Poutine", "La souris"]
+    NAMES = ["L'hiver", "Poutine", "La souris", "l’apostrophe", "The international"]
+    EXPECTED = ["l’apostrophe", "L'hiver", "The international", "Poutine", "La souris"]
     assert locale_aware_sort(NAMES) == EXPECTED
 
 
