@@ -1,4 +1,4 @@
-import { LoginFormValidation } from "../modules/Login";
+import { LoginFormValidation } from "../../modules/Login";
 
 export default {
 

@@ -1,7 +1,7 @@
 import Scrollspy from 'scrollspy-js/src/js/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
-import SavedCitationList from '../../modules/SavedCitationList';
-import Toolbox from '../../modules/Toolbox';
+import SavedCitationList from '../../../modules/SavedCitationList';
+import Toolbox from '../../../modules/Toolbox';
 
 export default {
 

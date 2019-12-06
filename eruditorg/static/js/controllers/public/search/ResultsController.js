@@ -1,5 +1,5 @@
-import SavedCitationList from '../../modules/SavedCitationList';
-import Toolbox from '../../modules/Toolbox';
+import SavedCitationList from '../../../modules/SavedCitationList';
+import Toolbox from '../../../modules/Toolbox';
 
 
 export default {

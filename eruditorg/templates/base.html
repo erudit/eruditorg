@@ -92,11 +92,7 @@
     </script>
     {% endblock structured_data %}
 
-    {% block stylesheets %}
-    {% if not WEBPACK_DEV_SERVER_URL %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}" />
-    {% endif %}
-    {% endblock stylesheets %}
+    {% block stylesheets %}{% endblock stylesheets %}
 
     <script>
       var LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
@@ -545,7 +541,7 @@
 
     {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/app.js' %}"></script>
+    <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/public-userspace.js' %}"></script>
     {% endblock scripts %}
 
     {% block footerscript %}{% endblock footerscript %}

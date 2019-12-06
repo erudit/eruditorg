@@ -50,14 +50,27 @@ var webpackConfig = {
   mode: PROD_ENV ? "production" : "development",
 
   entry: {
-    app: [
-      js_dir + '/app.js',
-      sass_dir + '/app.scss',
+    public: [
+      js_dir + '/public.js',
+      sass_dir + '/public.scss',
+    ],
+    userspace: [
+      js_dir + '/userspace.js',
+      sass_dir + '/userspace.scss',
     ],
     issue_reader: [
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
     ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      name: function (module, chunks, cacheGroupKey) {
+        return chunks.map((item) => item.name).join('-');
+      },
+    },
   },
   output: {
     filename: 'js/[name].js',
@@ -104,8 +117,7 @@ var webpackConfig = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-        filename: 'css/[name].css',
-        chunkFilename: 'css/[id].css',
+      filename: 'css/[name].css',
     })
   ],
 };
@@ -214,9 +226,15 @@ gulp.task('webpack-dev-server', function(callback) {
   devWebpackConfig.mode = 'development';
   devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
-    app: [
-      js_dir + '/app.js',
-      sass_dir + '/app.scss',
+    public: [
+      js_dir + '/public.js',
+      sass_dir + '/public.scss',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+    ],
+    userspace: [
+      js_dir + '/userspace.js',
+      sass_dir + '/userspace.scss',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
     ],
