@@ -233,6 +233,8 @@ class JournalDetailView(
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
             context['meta_info_issue'] = current_issue
+            # If we have a current issue, use its localidentifier for the cache key.
+            context['primary_cache_key'] = current_issue.localidentifier
         else:
             # If the journal does not have any issue yet, simulate one so the cache template tag
             # does have something to use to generate the cache key.
@@ -240,6 +242,8 @@ class JournalDetailView(
                 'localidentifier': None,
                 'fedora_updated': None,
             }
+            # If we don't have a current issue, use the journal code for the cache key.
+            context['primary_cache_key'] = self.journal.code
 
         # Directors & editors.
         context['contributors'] = self.get_contributors(
@@ -253,13 +257,6 @@ class JournalDetailView(
             force_free_access=True,
         )
         context['free_access_cache_key'] = qs_cache_key(free_access_issues)
-
-        # We need a localidentifier for the journal detail template cache key so we should not cache
-        # the template if we don't have one.
-        # We cannot cache journals' templates forever because we use issues' metadata to build them
-        # and we cannot know when an issue has been modified.
-        shouldcache = self.journal.localidentifier is not None
-        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         return context
 
@@ -333,6 +330,8 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['cache_timeout'] = settings.LONG_TTL
         if context['current_issue'] is not None:
             context['meta_info_issue'] = context['current_issue']
+            # If we have a current issue, use its localidentifier for the cache key.
+            context['primary_cache_key'] = context['current_issue'].localidentifier
         else:
             # If the journal does not have any issue yet, simulate one so the cache template tag
             # does have something to use to generate the cache key.
@@ -340,6 +339,8 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
                 'localidentifier': None,
                 'fedora_updated': None,
             }
+            # If we don't have a current issue, use the journal code for the cache key.
+            context['primary_cache_key'] = self.journal.code
 
         # Fetches the JournalInformation instance associated to the current journal
         try:
@@ -460,6 +461,9 @@ class IssueDetailView(
         # We cannot cache issues' templates forever because we use articles' metadata to build them
         # and we cannot know when an article has been modified.
         context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
+
+        # Use the issue localidentifier for the cache key.
+        context['primary_cache_key'] = self.object.localidentifier
 
         # Back issues should be ordered by year, volume & number, and should not include current one
         context['back_issues'] = context['journal'].published_issues.order_by(
