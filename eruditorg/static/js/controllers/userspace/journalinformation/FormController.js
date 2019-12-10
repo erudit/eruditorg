@@ -5,22 +5,6 @@ export class JournalInformationFormController {
     this.set_formset_state();
   }
 
-  dump_fieldset() {
-    var rows = $(this.contributor_fieldset).children('div[class="row"][id]');
-    var instance = this;
-
-    $(rows).each(function(row) {
-      console.log("===")
-      console.log("row:" + row);
-      var inputs = $(instance.get_inputs($(rows)[row]));
-      inputs.each(function(input_index) {
-        var input = inputs[input_index];
-        console.log($(input).attr('id'), $(input).val());
-      });
-    });
-
-  }
-
   set_formset_state() {
     /*
      * Sets the state of the form in a declarative way
@@ -79,14 +63,12 @@ export class JournalInformationFormController {
     var new_row = $(last_row).clone();
     this.clear_inputs(new_row);
     $(last_row).after(new_row);
-    //this.dump_fieldset();
   }
 
   delete_contributor(row) {
     var name = $(row).find('[id$="name"]').val();
     var confirm = window.confirm("Êtes-vous certain de vouloir retirer " + name + " de la liste des collaborateurs?");
     var url = $(this.contributor_fieldset).data('form-url');
-    console.log(url);
     if (confirm) {
       var row_in_bd = false;
       var contributor_id = $(row).find('[id$="id"]').val();
@@ -111,8 +93,6 @@ export class JournalInformationFormController {
       } else {
         $(row).remove();
       }
-
-      //this.dump_fieldset();
     }
   }
 
