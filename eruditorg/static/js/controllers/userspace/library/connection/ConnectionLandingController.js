@@ -1,4 +1,4 @@
-import '!!script!clipboard.js/clipboard.min';
+import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill';
 
 export default {
 
@@ -16,7 +16,7 @@ export default {
         e.stopPropagation();
       }
 
-      clipboard.copy( $(e.currentTarget).attr('data-clipboard-text') ).then(
+      clipboard.writeText( $(e.currentTarget).attr('data-clipboard-text') ).then(
         () => {
           $(e.currentTarget).addClass('success');
           setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);

@@ -17,11 +17,10 @@
 
 // 2. Vendors
 @import
-  '~akkordion/dist/akkordion.css',
-  '~bookreader/BookReader/BookReader.css',
-  '~hint.css/hint.base.css',
-  '~select2/dist/css/select2',
-  'vendor/magnific-popup/magnific-popup.scss',
+  '~akkordion/dist/akkordion',
+  '~hint.css/hint.base.min',
+  '~select2/dist/css/select2.min',
+  'vendor/magnific-popup/magnific-popup',
   'vendor/normalize';
 
 // 3. Base stuff (do not sort in alphabetical order)
@@ -93,29 +92,6 @@
 
 // 6. Page-specific styles
 @import
-  'pages/public/account-settings',
-  'pages/public/advanced-search',
-  'pages/public/article-detail',
-  'pages/public/book-home',
-  'pages/public/brand-assets',
-  'pages/public/homepage',
-  'pages/public/issue-detail',
-  'pages/public/journal-authors-list',
-  'pages/public/journal-detail',
-  'pages/public/journal-list-disciplines',
-  'pages/public/journal-list-names',
-  'pages/public/saved-citations-list',
-  'pages/public/search-results',
-  'pages/public/thesis-collection-home',
-  'pages/public/thesis-collection-list',
-  'pages/public/thesis-home',
-  'pages/public/twenty-years',
-  'pages/userspace/authorizations',
-  'pages/userspace/home',
-  'pages/userspace/issuesubmission',
-  'pages/userspace/members',
-  'pages/userspace/royalty-reports',
-  'pages/userspace/subscription-ips',
   'pages/error-pages',
   'pages/individual-subscription',
   'pages/login';

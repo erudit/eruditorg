@@ -1,7 +1,5 @@
-import '!!script!jquery.validation/dist/jquery.validate.min';
-import '!!script!jquery.validation/src/localization/messages_fr';
-import '!!script!magnific-popup/dist/jquery.magnific-popup.min';
-
+import '!!script-loader!jquery-validation/dist/jquery.validate.min';
+import '!!script-loader!jquery-validation/dist/localization/messages_fr';
 // form ID
 export const formSelector = "form#id-login-form";
 

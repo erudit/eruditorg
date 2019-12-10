@@ -1,0 +1,28 @@
+// -----------------------------------------------------------------------------
+// Import partials
+// Always sort partials in alphabetical order, except for base directory
+// -----------------------------------------------------------------------------
+
+@charset 'UTF-8';
+
+// 1. Base
+@import 'base';
+
+// 2. Configuration and helpers
+@import
+  'utils/colours',
+  'utils/erudicon',
+  'utils/font-styles',
+  'utils/functions',
+  'utils/mixins',
+  'utils/sprite',
+  'utils/variables';
+
+// 3. Page-specific styles
+@import
+  'pages/userspace/authorizations',
+  'pages/userspace/home',
+  'pages/userspace/issuesubmission',
+  'pages/userspace/members',
+  'pages/userspace/royalty-reports',
+  'pages/userspace/subscription-ips';

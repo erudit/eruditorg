@@ -1,16 +1,38 @@
-image: python:3.6
-
 variables:
   GIT_SUBMODULE_STRATEGY: normal
+  NPM_AUDIT_IGNORE: ""
 
-before_script:
-  # https://gitlab.com/gitlab-org/gitlab-ce/issues/14983#note_4637913
-  - apt-get update >/dev/null
-  - apt-get install -y locales >/dev/null
-  - echo "fr_CA.UTF-8 UTF-8" >> /etc/locale.gen
-  - locale-gen
-  - pip install tox
+python-unittest:
+  stage: test
+  image: python:3.6
+  before_script:
+   # https://gitlab.com/gitlab-org/gitlab-ce/issues/14983#note_4637913
+   - apt-get update >/dev/null
+   - apt-get install -y locales >/dev/null
+   - echo "fr_CA.UTF-8 UTF-8" >> /etc/locale.gen
+   - locale-gen
+   - pip install tox
+  script:
+    - tox -e py36
 
-test:
-  script: 
-  - tox
+python-flake8:
+  stage: test
+  image: python:3.6
+  before_script:
+   - pip install tox
+  script:
+   - tox -e flake8
+
+python-safety:
+  stage: test
+  image: python:3.6
+  before_script:
+   - pip install tox
+  script:
+   - tox -e safety
+
+npm-audit:
+  stage: test
+  image: node:latest
+  script:
+    - "! npm audit --parseable | grep -v -E $NPM_AUDIT_IGNORE"

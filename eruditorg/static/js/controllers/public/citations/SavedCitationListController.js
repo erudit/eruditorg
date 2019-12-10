@@ -1,4 +1,4 @@
-import CiteModal from '../../modules/Cite';
+import CiteModal from '../../../modules/Cite';
 
 export default {
   init() {

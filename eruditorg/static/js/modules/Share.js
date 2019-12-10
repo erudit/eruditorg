@@ -1,6 +1,3 @@
-import '!!script!jquery.validation/dist/jquery.validate.min';
-import '!!script!jquery.validation/src/localization/messages_fr';
-import '!!script!magnific-popup/dist/jquery.magnific-popup.min';
 import SharingUtils from '../core/SharingUtils';
 
 class ShareModal {

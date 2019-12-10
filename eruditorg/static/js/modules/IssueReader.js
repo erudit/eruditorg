@@ -1,10 +1,8 @@
-import "!!script!bookreader/BookReader/jquery-ui-1.12.0.min.js";
-import "!!script!bookreader/BookReader/jquery.browser.min.js";
-import "!!script!bookreader/BookReader/dragscrollable-br.js";
-import "!!script!bookreader/BookReader/jquery.colorbox-min.js";
-import "!!script!bookreader/BookReader/jquery.bt.min.js";
-import "!!script!bookreader/BookReader/BookReader.js";
-import "!!script!bookreader/BookReader/plugins/plugin.url.js";
+import "!!script-loader!bookreader/BookReader/jquery-ui-1.12.0.min.js";
+import "!!script-loader!bookreader/BookReader/dragscrollable-br.js";
+import "!!script-loader!bookreader/BookReader/jquery.bt.min.js";
+import "!!script-loader!bookreader/BookReader/BookReader.js";
+import "!!script-loader!bookreader/BookReader/plugins/plugin.url.js";
 
 
 function IssueReader(options) {
@@ -20,7 +18,7 @@ IssueReader.prototype = Object.create(BookReader.prototype);
  * view the reader from a mobile and in two pages mode when we view the reader
  * from a desktop.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  *
  * @param {object} params
  * @return {number} the mode
@@ -46,11 +44,12 @@ IssueReader.prototype.getInitialMode = function(params) {
  * This method is overridden to remove unwanted elements from the bottom
  * navigation bar.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  *
  * @return {jqueryElement}
  */
 IssueReader.prototype.initNavbar = function() {
+  this.refs.$BRfooter = $("<div class=\"BRfooter\"></div>");
   this.refs.$BRnav = $(
     "<div class=\"BRnav BRnavDesktop\">"
     +"  <div class=\"BRnavpos desktop-only\">"
@@ -68,7 +67,8 @@ IssueReader.prototype.initNavbar = function() {
     +"  </div>"
     +"</div>"
   );
-  this.refs.$br.append(this.refs.$BRnav);
+  this.refs.$BRfooter.append(this.refs.$BRnav);
+  this.refs.$br.append(this.refs.$BRfooter);
 
   // Page slider events.
   var self = this;
@@ -98,15 +98,29 @@ IssueReader.prototype.initNavbar = function() {
 };
 
 /**
+ * Initializes the toolbar (top)
+ *
+ * This method is overridden to remove unwanted usage of colorbox.
+ *
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
+ *
+ * @param {string} mode
+ * @param {string} ui
+ */
+IssueReader.prototype.initToolbar = function(mode, ui) {
+  this.refs.$br.append(this.buildToolbarElement());
+};
+
+/**
  * This method builds the html for the toolbar.
  *
  * This method is overridden to remove unwanted elements from the top toolbar.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  *
  * @return {jqueryElement}
  */
-BookReader.prototype.buildToolbarElement = function() {
+IssueReader.prototype.buildToolbarElement = function() {
   this.refs.$BRtoolbar = $(
     "<div class=\"BRtoolbar header\">"
     + "<div class=\"BRtoolbarbuttons\">"
@@ -128,9 +142,9 @@ BookReader.prototype.buildToolbarElement = function() {
  *
  * This method is overridden to make the strings translatable.
  *
- * See bower_components/bookreader/BookReader/BookReader.js for the original.
+ * See node_modules/bookreader/BookReader/BookReader.js for the original.
  */
-BookReader.prototype.initUIStrings = function() {
+IssueReader.prototype.initUIStrings = function() {
   var titles = {
     ".book_left": gettext("Page précédente"),
     ".book_right": gettext("Page suivante"),

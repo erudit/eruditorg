@@ -1,6 +1,6 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import gulp from 'gulp';
 import concat from 'gulp-concat';
 import consolidate from 'gulp-consolidate';
@@ -8,7 +8,7 @@ import env from 'gulp-env';
 import iconfont from 'gulp-iconfont';
 import livereload from 'gulp-livereload';
 import merge from 'merge-stream';
-import minifyCSS from 'gulp-minify-css';
+import minifyCSS from 'gulp-clean-css';
 import modernizr from 'gulp-modernizr';
 import rename from 'gulp-rename';
 import sass from 'gulp-sass';
@@ -33,7 +33,6 @@ const PROD_ENV = gutil.env.production;
 
 /* DIRS */
 var build_dir = PROD_ENV ? static_dir + 'build' : static_dir + 'build_dev';
-var bower_dir = root_dir + 'bower_components';
 var sass_dir = static_dir + 'sass';
 var js_dir = static_dir + 'js';
 var img_dir = static_dir + 'img';
@@ -46,19 +45,65 @@ var iconfont_dir = static_dir + 'iconfont';
  * ~~~~~~~~~~~~~~~~~~~~~
  */
 
-let extractCSS = new ExtractTextPlugin('css/[name].css', { allChunks: true });
 var webpackConfig = {
+
+  mode: PROD_ENV ? "production" : "development",
+
+  entry: {
+    public: [
+      js_dir + '/public.js',
+      sass_dir + '/public.scss',
+    ],
+    userspace: [
+      js_dir + '/userspace.js',
+      sass_dir + '/userspace.scss',
+    ],
+    issue_reader: [
+      js_dir + '/issue_reader.js',
+      sass_dir + '/issue_reader.scss',
+    ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      name: function (module, chunks, cacheGroupKey) {
+        return chunks.map((item) => item.name).join('-');
+      },
+    },
+  },
   output: {
     filename: 'js/[name].js',
   },
   resolve: {
-    modulesDirectories: ['node_modules', bower_dir],
-    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json', 'scss'],
+    modules: ['node_modules'],
+    extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.json', 'scss'],
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.scss$/i, loader: extractCSS.extract(['css','sass'], { publicPath: '../'}) },
+    rules: [
+      {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ["@babel/preset-env"],
+                plugins: ["@babel/plugin-proposal-function-bind"]
+              }
+          },
+      },
+      {
+          test:  /\.(sa|sc|c)ss$/,
+          use: [
+              {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: { allChunks: true, publicPath: '../'},
+              },
+
+              'css-loader',
+              'sass-loader',
+          ]
+      },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.txt$/, loader: 'raw-loader' },
       { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'url-loader?limit=10000' },
@@ -71,12 +116,9 @@ var webpackConfig = {
     'jquery': 'jQuery'
   },
   plugins: [
-    extractCSS,
-    ...(PROD_ENV ? [
-      new webpack.optimize.UglifyJsPlugin({
-        compress: { warnings: false }
-      })
-    ] : []),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+    })
   ],
 };
 
@@ -89,7 +131,7 @@ var webpackConfig = {
 /* Task to build our JS and CSS applications. */
 gulp.task('build-webpack-assets', function () {
   return gulp.src([
-        js_dir + '/app.js', sass_dir + '/app.scss',
+        js_dir + '/*.js', sass_dir + '/*.scss',
       ])
     .pipe(named())
     .pipe(webpackStream(webpackConfig))
@@ -167,10 +209,10 @@ gulp.task('build-sprite', function () {
  * ~~~~~~~~~~~~
  */
 
-gulp.task('build', [
+gulp.task('build', gulp.parallel(
   'build-modernizr', 'build-iconfont',
   'build-webpack-assets',
-]);
+));
 
 
 /*
@@ -181,23 +223,49 @@ gulp.task('build', [
 gulp.task('webpack-dev-server', function(callback) {
   var devWebpackConfig = Object.create(webpackConfig);
   devWebpackConfig.devtool = 'eval';
-  devWebpackConfig.debug = true;
+  devWebpackConfig.mode = 'development';
   devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
-    app: [
-      js_dir + '/app.js', sass_dir + '/app.scss',
+    public: [
+      js_dir + '/public.js',
+      sass_dir + '/public.scss',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+    ],
+    userspace: [
+      js_dir + '/userspace.js',
+      sass_dir + '/userspace.scss',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+    ],
+    issue_reader: [
+      js_dir + '/issue_reader.js',
+      sass_dir + '/issue_reader.scss',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
     ],
   };
   devWebpackConfig.module = {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.scss$/i, loaders: ['style', 'css', 'sass', ] },
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.txt$/, loader: 'raw-loader' },
-      { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'url-loader?limit=10000' },
-      { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' },
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-proposal-function-bind"],
+          },
+        },
+      },
+      {
+        test:  /\.(sa|sc|c)ss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {test: /\.json$/, loader: 'json-loader'},
+      {test: /\.txt$/, loader: 'raw-loader'},
+      {test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'url-loader?limit=10000'},
+      {test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader'},
     ],
   };
   devWebpackConfig.output = {
@@ -208,6 +276,12 @@ gulp.task('webpack-dev-server', function(callback) {
   devWebpackConfig.plugins = [
     new webpack.HotModuleReplacementPlugin(),
   ];
+  devWebpackConfig.resolve = {
+    modules: ['node_modules'],
+  };
+  devWebpackConfig.externals = {
+    'jquery': 'jQuery',
+  };
 
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(devWebpackConfig), {
@@ -228,11 +302,11 @@ gulp.task('watch', function() {
   livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
 
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch(sass_dir + '/**/*.scss', ['build-modernizr', 'build-webpack-assets', ]);
+  gulp.watch(sass_dir + '/**/*.scss', gulp.parallel('build-modernizr', 'build-webpack-assets'));
   // watch any js file /js directory, ** is for recursive mode
-  gulp.watch(js_dir + '/**/*.js', ['build-webpack-assets', ]);
+  gulp.watch(js_dir + '/**/*.js', gulp.parallel('build-webpack-assets'));
   // watch any svg file /iconfont directory, ** is for recursive mode
-  gulp.watch(iconfont_dir + '/**/*.svg', ['iconfont']);
+  gulp.watch(iconfont_dir + '/**/*.svg', gulp.parallel('build-iconfont'));
 
   /* Trigger a live reload on any Django template changes */
   gulp.watch([templates_dirs + '/**/*.html', templates_dirs + '**/*.xsl']).on('change', livereload.changed);

@@ -1,26 +1,8 @@
-import Select2 from 'select2/dist/js/select2.full';
-
 export class JournalInformationFormController {
   init() {
     $('#id_languages').select2();
     this.contributor_fieldset = $('fieldset[name="contributors"]');
     this.set_formset_state();
-  }
-
-  dump_fieldset() {
-    var rows = $(this.contributor_fieldset).children('div[class="row"][id]');
-    var instance = this;
-
-    $(rows).each(function(row) {
-      console.log("===")
-      console.log("row:" + row);
-      var inputs = $(instance.get_inputs($(rows)[row]));
-      inputs.each(function(input_index) {
-        var input = inputs[input_index];
-        console.log($(input).attr('id'), $(input).val());
-      });
-    });
-
   }
 
   set_formset_state() {
@@ -30,13 +12,15 @@ export class JournalInformationFormController {
     var instance = this;
 
     // add click handlers on add button
-    $('#button-add-contributor').off("click").on("click", function() {
+    $('#button-add-contributor').off("click").on("click", function(e) {
+      e.stopPropagation()
       instance.add_contributor();
       instance.set_formset_state();
     });
 
     // add click handlers to delete buttons
-    $("button[data-action='delete']").off("click").on("click",function() {
+    $("button[data-action='delete']").off("click").on("click",function(e) {
+      e.stopPropagation()
       var row_id = $(this).parent().parent().data('object');
       instance.delete_contributor($("div[data-object='" + row_id + "']"));
       instance.set_formset_state();
@@ -81,14 +65,12 @@ export class JournalInformationFormController {
     var new_row = $(last_row).clone();
     this.clear_inputs(new_row);
     $(last_row).after(new_row);
-    //this.dump_fieldset();
   }
 
   delete_contributor(row) {
     var name = $(row).find('[id$="name"]').val();
     var confirm = window.confirm("Êtes-vous certain de vouloir retirer " + name + " de la liste des collaborateurs?");
     var url = $(this.contributor_fieldset).data('form-url');
-    console.log(url);
     if (confirm) {
       var row_in_bd = false;
       var contributor_id = $(row).find('[id$="id"]').val();
@@ -113,8 +95,6 @@ export class JournalInformationFormController {
       } else {
         $(row).remove();
       }
-
-      //this.dump_fieldset();
     }
   }
 

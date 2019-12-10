@@ -1,5 +1,3 @@
-import '!!script!inline-svg/dist/inlineSVG.min';
-
 class Figures {
 
   constructor() {
