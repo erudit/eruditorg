@@ -19,6 +19,7 @@ chardet==3.0.4
 colorama==0.4.1
 cssselect2==0.2.1         # via cairosvg
 cssselect==1.1.0          # via lxml
+dataclasses==0.7          # via pydantic
 defusedxml==0.6.0         # via cairosvg
 django-admin-rangefilter==0.3.12
 django-adv-cache-tag==1.1.2
@@ -59,6 +60,7 @@ ply==3.11
 prometheus-client==0.7.1  # via django-prometheus
 pycparser==2.19           # via cffi
 pycryptodome==3.9.0
+pydantic==1.2
 pyparsing==2.4.2          # via rdflib
 pypdf2==1.26.0
 pysocks==1.7.0            # via requests
