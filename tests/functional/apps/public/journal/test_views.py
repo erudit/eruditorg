@@ -2145,6 +2145,14 @@ class TestArticleDetailView:
         if mock_url:
             assert response.url == mock_url
 
+    def test_marquage_in_affiliations(self):
+        article = ArticleFactory(from_fixture='1066010ar')
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<li class="auteur-affiliation"><p><strong>Benoit\n      Vaillancourt</strong><br>' \
+               '<span class="petitecap">C</span><span class="petitecap">élat</span>' \
+               '<span class="petitecap">, Ipac, </span>Université Laval</p></li>' in html
+
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
