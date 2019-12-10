@@ -12,13 +12,15 @@ export class JournalInformationFormController {
     var instance = this;
 
     // add click handlers on add button
-    $('#button-add-contributor').off("click").on("click", function() {
+    $('#button-add-contributor').off("click").on("click", function(e) {
+      e.stopPropagation()
       instance.add_contributor();
       instance.set_formset_state();
     });
 
     // add click handlers to delete buttons
-    $("button[data-action='delete']").off("click").on("click",function() {
+    $("button[data-action='delete']").off("click").on("click",function(e) {
+      e.stopPropagation()
       var row_id = $(this).parent().parent().data('object');
       instance.delete_contributor($("div[data-object='" + row_id + "']"));
       instance.set_formset_state();
