@@ -64,10 +64,12 @@ def issue_detail_url(issue):
 
 
 def article_detail_url(article):
-    issue = article.issue
     return reverse('public:journal:article_detail', kwargs={
-        'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
-        'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
+        'journal_code': article.issue.journal.code,
+        'issue_slug': article.issue.volume_slug,
+        'issue_localid': article.issue.localidentifier,
+        'localid': article.localidentifier,
+    })
 
 
 def article_raw_pdf_url(article):
@@ -882,12 +884,7 @@ class TestArticleDetailView:
             issue__year='2000',
             issue__journal__code='journal',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         html = response.content.decode()
         assert '<a href="/fr/revues/journal/2000-issue/article/">Jean-Guy Desjardins, Traité de ' \
@@ -895,12 +892,7 @@ class TestArticleDetailView:
 
     def test_keywords_html_tags(self):
         article = ArticleFactory(from_fixture='1055883ar')
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         html = response.content.decode()
         # Check that HTML tags are displayed in the body.
@@ -923,12 +915,7 @@ class TestArticleDetailView:
             issue__journal__code='journal',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url, {
             'ticket': article.issue.prepublication_ticket if not article.issue.is_published else '',
         })
@@ -1143,12 +1130,7 @@ class TestArticleDetailView:
             localidentifier='next_article',
             issue=issue,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         html = response.content.decode()
         # Check that TOC navigation titles include converted marquage.
@@ -1165,12 +1147,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1056389ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         html = response.content.decode()
         assert '<span class="surtitre">Cahier commémoratif : ' \
@@ -1180,12 +1157,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1058368ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         html = response.content.decode()
         assert '<span class="titre">Les Parcs Nationaux de Roumanie : considérations sur les ' \
@@ -1202,12 +1174,7 @@ class TestArticleDetailView:
             issue__journal__code='journal',
             issue__journal__name='Revue',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that "[Article sans titre]" is displayed in the header title.
         assert '<title>[Article sans titre] – Revue – Érudit</title>' in html
@@ -1221,12 +1188,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1058611ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that authors' suffixes are not displayed on the the author list under the article
         # title.
@@ -1245,12 +1207,7 @@ class TestArticleDetailView:
             issue__journal__code='journal',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         grfigure = dom.find('div', {'class': 'grfigure', 'id': 'gf1'})
@@ -1293,12 +1250,7 @@ class TestArticleDetailView:
             issue__journal__code='journal',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         grtableau = dom.find_all('div', {'class': 'grtableau'})[0]
@@ -1327,12 +1279,7 @@ class TestArticleDetailView:
             issue__journal__code='journal',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         grtableau = dom.find_all('div', {'class': 'grtableau'})[0]
@@ -1351,12 +1298,7 @@ class TestArticleDetailView:
             from_fixture='1031003ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that the arrow to go back to the figure is present event if there's no figure
         # number or caption.
@@ -1372,12 +1314,7 @@ class TestArticleDetailView:
             issue__journal__code='journal',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that the figure numbers are displayed in the figure list for figure groups.
         assert '<div class="grfigure" id="ligf1">\n<div class="grfigure-caption">\n' \
@@ -1389,12 +1326,7 @@ class TestArticleDetailView:
             from_fixture='1060169ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that figure group caption and the figure captions are displayed.
         assert '<div class="grfigure-caption">\n<p class="allertexte"><a href="#gf1">|^</a></p>\n' \
@@ -1410,12 +1342,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1059303ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that paral titles are displayed in the article header.
         assert '<span class="titreparal">Détection d’ADN d’<em>Ophiostoma ulmi</em> ' \
@@ -1430,12 +1357,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1059571ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that more information akkordion is displayed for author with suffix and
         # no affiliation.
@@ -1452,12 +1374,7 @@ class TestArticleDetailView:
             localidentifier='article',
             issue=issue,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that the journal name is displayed in French and English (Relations industrielles
         # / Industrial Relations).
@@ -1514,12 +1431,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1009368ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that extra space around DOIs is stripped.
         assert '<meta name="citation_doi" content="https://doi.org/10.7202/1009368ar" />' in html
@@ -1529,12 +1441,7 @@ class TestArticleDetailView:
         article = ArticleFactory(
             from_fixture='1059577ar',
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Pre-combined character is present (ă = ă)
         assert '<em>Studii de lingvistică</em>' in html
@@ -1546,12 +1453,7 @@ class TestArticleDetailView:
             from_fixture='1060048ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         partiesann = dom.find_all('section', {'class': 'partiesann'})[0]
@@ -1567,12 +1469,7 @@ class TestArticleDetailView:
             wrapper.set_abstracts([{'lang': 'en', 'content': 'English abstract'}])
             wrapper.add_keywords('es', ['Palabra clave en español'])
             wrapper.add_keywords('fr', ['Mot-clé français'])
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         grresume = dom.find_all('section', {'class': 'grresume'})[0]
@@ -1604,12 +1501,7 @@ class TestArticleDetailView:
     ))
     def test_review_article_explanatory_note(self, article_type, expected_string):
         article = ArticleFactory(type=article_type)
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         div = dom.find_all('div', {'class': 'doc-head__metadata'})[1]
@@ -1626,12 +1518,7 @@ class TestArticleDetailView:
             from_fixture='1062061ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         poeme = dom.find('blockquote', {'class': 'verbatim poeme'})
@@ -1648,12 +1535,7 @@ class TestArticleDetailView:
             from_fixture='1062105ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         grfigure = dom.find('div', {'id': 'gf1'})
@@ -1683,12 +1565,7 @@ class TestArticleDetailView:
             from_fixture='1062434ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         li = dom.find('li', {'class': 'article-toc--body'}).find('ul').find_all('li')
@@ -1735,12 +1612,7 @@ class TestArticleDetailView:
             localidentifier='current_article',
         )
         # Get the response.
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': current_article.issue.journal.code,
-            'issue_slug': current_article.issue.volume_slug,
-            'issue_localid': current_article.issue.localidentifier,
-            'localid': current_article.localidentifier,
-        })
+        url = article_detail_url(current_article)
         html = Client().get(url).content
         # Get the HTML.
         dom = BeautifulSoup(html, 'html.parser')
@@ -1777,12 +1649,7 @@ class TestArticleDetailView:
         if has_abstracts:
             with repository.api.open_article(article.pid) as wrapper:
                 wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         if not with_pdf or has_abstracts:
             assert 'can_display_first_pdf_page' not in response.context.keys()
@@ -1981,12 +1848,7 @@ class TestArticleDetailView:
         if has_abstracts:
             with repository.api.open_article(article.pid) as wrapper:
                 wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         assert expected_alert in html
 
@@ -2008,12 +1870,7 @@ class TestArticleDetailView:
         if has_abstracts:
             with repository.api.open_article(article.pid) as wrapper:
                 wrapper.set_abstracts([{'lang': 'fr', 'content': 'Résumé'}])
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # The expected alert should only be displayed if there's abstracts or if the PDF has more
         # than one page.
@@ -2037,12 +1894,7 @@ class TestArticleDetailView:
             from_fixture=fixture,
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         article_toc = dom.find('nav', {'class': 'article-table-of-contents'})
@@ -2055,12 +1907,7 @@ class TestArticleDetailView:
             from_fixture='1065018ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         media_object = dom.find('div', {'class': 'media'})
@@ -2071,12 +1918,7 @@ class TestArticleDetailView:
             from_fixture='1065018ar',
             issue__journal__open_access=True,
         )
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, 'html.parser')
         media_object = dom.find('div', {'class': 'embed-responsive'})
@@ -2134,12 +1976,7 @@ class TestArticleDetailView:
         monkeypatch.setattr(Article, 'is_external', mock_is_external)
         monkeypatch.setattr(Article, 'url', mock_url)
         article = ArticleFactory()
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': article.issue.journal.code,
-            'issue_slug': article.issue.volume_slug,
-            'issue_localid': article.issue.localidentifier,
-            'localid': article.localidentifier,
-        })
+        url = article_detail_url(article)
         response = Client().get(url)
         assert response.status_code == expected_status_code
         if mock_url:
@@ -2237,7 +2074,7 @@ class TestArticleRawPdfView:
         issue = IssueFactory.create(
             journal=journal, year=dt.datetime.now().year, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
-        journal_id = journal.localidentifier
+        journal_code = journal.code
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = article_raw_pdf_url(article)
@@ -2247,20 +2084,18 @@ class TestArticleRawPdfView:
         request.subscriptions = UserSubscriptions()
 
         response = ArticleRawPdfView.as_view()(
-            request, journal_code=journal_id, issue_slug=issue.volume_slug,
+            request, journal_code=journal_code, issue_slug=issue.volume_slug,
             issue_localid=issue_id, localid=article_id)
 
         assert isinstance(response, HttpResponseRedirect)
-        assert response.url == reverse('public:journal:article_detail', args=(
-            journal_id, issue.volume_slug, issue_id, article_id
-        ))
+        assert response.url == article_detail_url(article)
 
     def test_cannot_be_accessed_if_the_publication_of_the_article_is_not_allowed_by_its_authors(self):  # noqa
         journal = JournalFactory(open_access=False)
         issue = IssueFactory.create(
             journal=journal, year=2010, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue, publication_allowed=False)
-        journal_id = journal.localidentifier
+        journal_code = journal.code
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = article_raw_pdf_url(article)
@@ -2268,13 +2103,11 @@ class TestArticleRawPdfView:
         request.user = AnonymousUser()
 
         response = ArticleRawPdfView.as_view()(
-            request, journal_code=journal_id, issue_slug=issue.volume_slug,
+            request, journal_code=journal_code, issue_slug=issue.volume_slug,
             issue_localid=issue_id, localid=article_id)
 
         assert isinstance(response, HttpResponseRedirect)
-        assert response.url == reverse('public:journal:article_detail', args=(
-            journal_id, issue.volume_slug, issue_id, article_id
-        ))
+        assert response.url == article_detail_url(article)
 
 
 class TestLegacyUrlsRedirection:
@@ -2361,24 +2194,14 @@ class TestLegacyUrlsRedirection:
 
         resp = Client().get(url)
 
-        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
-            journal_code=article.issue.journal.code,
-            issue_slug=article.issue.volume_slug,
-            issue_localid=article.issue.localidentifier,
-            localid=article.localidentifier
-        ))
+        assert resp.url == article_detail_url(article)
         assert "/fr/" in resp.url
         assert resp.status_code == 301
 
         deactivate_all()
         resp = Client().get(url + "?lang=en")
 
-        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
-            journal_code=article.issue.journal.code,
-            issue_slug=article.issue.volume_slug,
-            issue_localid=article.issue.localidentifier,
-            localid=article.localidentifier
-        ))
+        assert resp.url == article_detail_url(article)
         assert "/en/" in resp.url
         assert resp.status_code == 301
 
@@ -2391,12 +2214,7 @@ class TestLegacyUrlsRedirection:
         deactivate_all()
         resp = Client().get(url)
 
-        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
-            journal_code=article.issue.journal.code,
-            issue_slug=article.issue.volume_slug,
-            issue_localid=article.issue.localidentifier,
-            localid=article.localidentifier
-        ))
+        assert resp.url == article_detail_url(article)
 
         assert "/en/" in resp.url
         assert resp.status_code == 301
