@@ -6,7 +6,6 @@ import ArticleDetailController from './journal/ArticleDetailController';
 import IssueDetailController from './journal/IssueDetailController';
 import JournalListController from './journal/JournalListController';
 import JournalDetailController from './journal/JournalDetailController';
-import CollectionListController from './thesis/CollectionListController';
 import SavedCitationListController from './citations/SavedCitationListController';
 
 const controllers = {
@@ -18,7 +17,6 @@ const controllers = {
   'public:journal:issue_detail': IssueDetailController,
   'public:journal:journal_list': JournalListController,
   'public:journal:journal_detail': JournalDetailController,
-  'public:thesis:collection_list': CollectionListController,
   'public:citations:list': SavedCitationListController,
 };
 
