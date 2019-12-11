@@ -1,5 +1,3 @@
-import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill';
-
 export default {
 
   init: function() {
