@@ -34,7 +34,6 @@ from django.views.generic import TemplateView
 from django.db.models import Prefetch
 
 from rules.contrib.views import PermissionRequiredMixin
-import pikepdf
 from lxml import etree as et
 
 from erudit.fedora.objects import ArticleDigitalObject
@@ -800,14 +799,13 @@ class BaseArticleDetailView(
         if 'article' not in context:
             context['article'] = article
 
-        context['pdf_exists'] = article.fedora_object.pdf.exists
+        context['pdf_exists'] = article.has_pdf
 
         if context['pdf_exists'] and not article.abstracts:
             if context['content_access_granted']:
                 context['can_display_first_pdf_page'] = True
             else:
-                pdf = pikepdf.open(article.fedora_object.pdf.content)
-                context['can_display_first_pdf_page'] = len(pdf.pages) > 1
+                context['can_display_first_pdf_page'] = article.can_display_first_pdf_page
 
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
@@ -1050,7 +1048,7 @@ class ArticleRawPdfFirstPageView(
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return obj.publication_allowed
+        return obj.publication_allowed and obj.can_display_first_pdf_page
 
     def write_datastream_content(self, response, content):
         response.content = get_pdf_first_page(content)

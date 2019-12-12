@@ -3,6 +3,7 @@ import dateutil.relativedelta as dr
 from hashlib import md5
 from functools import wraps
 import structlog
+import pikepdf
 import re
 
 from lxml import etree as et
@@ -1066,7 +1067,7 @@ class Article(FedoraMixin):
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
             return None
-        if self.fedora_object and self.fedora_object.pdf.exists:
+        if self.has_pdf:
             return reverse('public:journal:article_raw_pdf', kwargs={
                 'journal_code': self.issue.journal.code,
                 'issue_slug': self.issue.volume_slug,
@@ -1210,9 +1211,17 @@ class Article(FedoraMixin):
         section_titles = self.erudit_object.get_section_titles(level=3)
         return section_titles['paral'].values()
 
-    @property
+    @cached_property
     def has_pdf(self):
-        return self.fedora_object.pdf.exists()
+        return self.fedora_object is not None and self.fedora_object.pdf.exists
+
+    @cached_property
+    def can_display_first_pdf_page(self):
+        if self.has_pdf:
+            pdf = pikepdf.open(self.fedora_object.pdf.content)
+            return len(pdf.pages) > 1
+        else:
+            return False
 
     @property
     @catch_and_log

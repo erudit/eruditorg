@@ -12,6 +12,7 @@ from hashlib import md5
 from unittest.mock import PropertyMock
 
 from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
@@ -2041,7 +2042,13 @@ class TestArticleRawPdfView:
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(subprocess, 'check_call')
-    def test_can_retrieve_the_firstpage_pdf_of_existing_articles(self, mock_check_call, mock_pdf):
+    @pytest.mark.parametrize('pages, expected_exception', [
+        ([], True),
+        ([1], True),
+        ([1, 2], False),
+    ])
+    def test_can_retrieve_the_firstpage_pdf_of_existing_articles(self, mock_check_call, mock_pdf, pages, expected_exception, monkeypatch):
+        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
@@ -2061,12 +2068,19 @@ class TestArticleRawPdfView:
         request.user = AnonymousUser()
         request.subscriptions = UserSubscriptions()
 
-        response = ArticleRawPdfFirstPageView.as_view()(
-            request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
-            localid=article_id)
+        # Raise exception if PDF has less than 2 pages.
+        if expected_exception:
+            with pytest.raises(PermissionDenied):
+                response = ArticleRawPdfFirstPageView.as_view()(
+                    request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
+                    localid=article_id)
+        else:
+            response = ArticleRawPdfFirstPageView.as_view()(
+                request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
+                localid=article_id)
 
-        assert response.status_code == 200
-        assert response['Content-Type'] == 'application/pdf'
+            assert response.status_code == 200
+            assert response['Content-Type'] == 'application/pdf'
 
 
     def test_cannot_be_accessed_if_the_article_is_not_in_open_access(self):
