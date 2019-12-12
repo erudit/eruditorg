@@ -83,29 +83,6 @@ class SubscriptionMiddleware(MiddlewareMixin):
             except JournalAccessSubscription.DoesNotExist:
                 pass
 
-    def process_response(self, request, response):
-        active_subscription = request.subscriptions.active_subscription
-
-        referer = self._get_user_referer_for_subscription(request)
-
-        if active_subscription and active_subscription.referers.filter(referer=referer):
-            referer = active_subscription.referers.first()
-            logger.info('{url} {method} {path} {protocol} - {client_port} - {client_ip} "{user_agent}" "{referer_url}" {code} {size} {referer_access}'.format(  # noqa
-                url=request.get_raw_uri(),
-                method=request.META.get('REQUEST_METHOD'),
-                path=request.path,
-                protocol=request.META.get('SERVER_PROTOCOL'),
-                client_port="",
-                client_ip=request.META.get('REMOTE_ADDR'),
-                user_agent=request.META.get('HTTP_USER_AGENT'),
-                referer_url=request.META.get('HTTP_REFERER'),
-                code=response.status_code,
-                size="",
-                referer_access=referer.referer
-            ))
-
-        return response
-
     def casa_authorize(self, key: str, token: str, user_ip: str) -> Union[str, bool]:
         """
         Check if the user is authorized to see the full text article.
