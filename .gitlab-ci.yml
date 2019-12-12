@@ -35,4 +35,5 @@ npm-audit:
   stage: test
   image: node:latest
   script:
-    - "! npm audit --parseable | grep -v -E $NPM_AUDIT_IGNORE"
+    - npm audit
+    #- "! npm audit --parseable | grep -v -E $NPM_AUDIT_IGNORE"
