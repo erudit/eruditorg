@@ -2016,6 +2016,7 @@ class TestArticleRawPdfView:
         url = article_raw_pdf_url(article)
         request = RequestFactory().get(url)
         request.user = AnonymousUser()
+        request.session = {}
         request.subscriptions = UserSubscriptions()
 
         response = ArticleRawPdfView.as_view()(
@@ -2066,6 +2067,7 @@ class TestArticleRawPdfView:
         url = article_raw_pdf_url(article)
         request = RequestFactory().get(url)
         request.user = AnonymousUser()
+        request.session = {}
         request.subscriptions = UserSubscriptions()
 
         # Raise exception if PDF has less than 2 pages.
@@ -2095,6 +2097,7 @@ class TestArticleRawPdfView:
 
         request = RequestFactory().get(url)
         request.user = AnonymousUser()
+        request.session = {}
         request.subscriptions = UserSubscriptions()
 
         response = ArticleRawPdfView.as_view()(
@@ -2115,6 +2118,8 @@ class TestArticleRawPdfView:
         url = article_raw_pdf_url(article)
         request = RequestFactory().get(url)
         request.user = AnonymousUser()
+        request.session = {}
+        request.subscriptions = UserSubscriptions()
 
         response = ArticleRawPdfView.as_view()(
             request, journal_code=journal_code, issue_slug=issue.volume_slug,

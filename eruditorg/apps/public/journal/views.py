@@ -55,18 +55,20 @@ from core.subscription.models import JournalAccessSubscription, InstitutionIPAdd
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 from apps.public.campaign.models import Campaign
 
+from .article_access_log import AccessType
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
 from .viewmixins import (
+    ArticleAccessLogMixin,
+    ArticleViewMetricCaptureMixin,
     ContentAccessCheckMixin,
+    ContributorsMixin,
+    PrepublicationTokenRequiredMixin,
+    SingleArticleMixin,
+    SingleArticleWithScholarMetadataMixin,
+    SingleJournalMixin,
     SolrDataMixin,
 )
-from .viewmixins import ArticleViewMetricCaptureMixin
-from .viewmixins import SingleArticleMixin
-from .viewmixins import SingleArticleWithScholarMetadataMixin
-from .viewmixins import SingleJournalMixin
-from .viewmixins import PrepublicationTokenRequiredMixin
-from .viewmixins import ContributorsMixin
 
 from . import solr
 
@@ -677,12 +679,13 @@ class IssueXmlView(
 
 
 class BaseArticleDetailView(
-        FallbackObjectViewMixin,
-        ContentAccessCheckMixin,
-        SingleArticleWithScholarMetadataMixin,
-        ArticleViewMetricCaptureMixin,
-        PrepublicationTokenRequiredMixin,
-        DetailView,
+    ArticleAccessLogMixin,
+    FallbackObjectViewMixin,
+    ContentAccessCheckMixin,
+    SingleArticleWithScholarMetadataMixin,
+    ArticleViewMetricCaptureMixin,
+    PrepublicationTokenRequiredMixin,
+    DetailView,
 ):
     context_object_name = 'article'
     model = Article
@@ -862,6 +865,26 @@ class ArticleDetailView(BaseArticleDetailView):
                 'article_li': obj.localidentifier
             }
 
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        if self.is_access_granted:
+            if article.processing == Article.PROCESSING_FULL:
+                return AccessType.html_full_view
+            else:
+                return AccessType.html_full_view_pdf_embedded
+        else:
+            if article.processing == Article.PROCESSING_FULL:
+                return AccessType.html_preview
+            else:
+                return AccessType.html_preview_pdf_embedded
+
+    @property
+    def is_access_granted(self) -> bool:
+        return self.content_access_granted
+
 
 class ArticleSummaryView(BaseArticleDetailView):
     """
@@ -870,6 +893,20 @@ class ArticleSummaryView(BaseArticleDetailView):
     template_name = 'public/journal/article_summary.html'
     page_title_suffix = _('Notice')
     display_full_article = False
+
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        if article.processing == Article.PROCESSING_FULL:
+            return AccessType.html_preview
+        else:
+            return AccessType.html_preview_pdf_embedded
+
+    @property
+    def is_access_granted(self) -> bool:
+        return True
 
 
 class ArticleBiblioView(BaseArticleDetailView):
@@ -880,6 +917,17 @@ class ArticleBiblioView(BaseArticleDetailView):
     page_title_suffix = _('Bibliographie')
     display_full_article = False
     display_abstracts = False
+
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        return AccessType.html_biblio
+
+    @property
+    def is_access_granted(self) -> bool:
+        return True
 
 
 class ArticleTocView(BaseArticleDetailView):
@@ -892,6 +940,17 @@ class ArticleTocView(BaseArticleDetailView):
     display_abstracts = False
     display_biblio = False
     display_full_toc = True
+
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        return AccessType.html_toc
+
+    @property
+    def is_access_granted(self) -> bool:
+        return True
 
 
 class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
@@ -950,11 +1009,12 @@ class ArticleBibCitationView(BaseArticleCitationView):
 
 
 class ArticleFormatDownloadView(
-        ArticleViewMetricCaptureMixin,
-        ContentAccessCheckMixin,
-        PermissionRequiredMixin,
-        SingleArticleMixin,
-        FedoraFileDatastreamView,
+    ArticleAccessLogMixin,
+    ArticleViewMetricCaptureMixin,
+    ContentAccessCheckMixin,
+    PermissionRequiredMixin,
+    SingleArticleMixin,
+    FedoraFileDatastreamView,
 ):
 
     def get_content(self):
@@ -984,6 +1044,17 @@ class ArticleXmlView(ArticleFormatDownloadView):
 
     def get_datastream_content(self, fedora_object):
         return fedora_object.xml_content
+
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        return AccessType.xml_full_view
+
+    @property
+    def is_access_granted(self) -> bool:
+        return self.content_access_granted
 
 
 class ArticleRawPdfView(ArticleFormatDownloadView):
@@ -1016,9 +1087,26 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
                 self.kwargs['localid'])
         return response
 
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        if "embed" in self.request.GET:
+            return AccessType.pdf_full_view_embedded
+        else:
+            return AccessType.pdf_full_view
+
+    @property
+    def is_access_granted(self) -> bool:
+        return self.content_access_granted
+
 
 class ArticleRawPdfFirstPageView(
-    PermissionRequiredMixin, SingleArticleMixin, FedoraFileDatastreamView
+    ArticleAccessLogMixin,
+    PermissionRequiredMixin,
+    SingleArticleMixin,
+    FedoraFileDatastreamView,
 ):
     """
     Returns the PDF file associated with an article.
@@ -1052,6 +1140,21 @@ class ArticleRawPdfFirstPageView(
 
     def write_datastream_content(self, response, content):
         response.content = get_pdf_first_page(content)
+
+    @property
+    def access_type(self) -> AccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return AccessType.content_not_available
+        if "embed" in self.request.GET:
+            return AccessType.pdf_preview_embedded
+        else:
+            return AccessType.pdf_preview
+
+    @property
+    def is_access_granted(self) -> bool:
+        article = self.get_object()
+        return article.can_display_first_pdf_page
 
 
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
