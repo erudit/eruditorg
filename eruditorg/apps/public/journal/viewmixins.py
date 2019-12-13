@@ -1,3 +1,6 @@
+import structlog
+
+from datetime import datetime
 from django.db.models import Q
 from django.urls import reverse
 from django.http import Http404
@@ -14,6 +17,13 @@ from erudit.solr.models import (
 )
 
 from core.metrics.metric import metric
+from .article_access_log import (
+    ArticleAccessLog,
+    AccessType,
+)
+
+
+logger = structlog.get_logger(__name__)
 
 
 class SingleJournalMixin:
@@ -259,3 +269,65 @@ class ContributorsMixin:
                 })
 
         return contributors
+
+
+class ArticleAccessLogMixin:
+
+    def dispatch(self, request, *args, **kwargs):
+        article = self.get_object()
+        issue = article.issue
+        journal = issue.journal
+
+        if not issue.is_published:
+            return super().dispatch(request, *args, **kwargs)
+
+        active_subscripion = request.subscriptions.active_subscription
+        if active_subscripion:
+            subscriber_id = active_subscripion.organisation_id
+            subscriber_journals = active_subscripion.get_journals()
+        else:
+            subscriber_id = None
+            subscriber_journals = []
+
+        username = request.user.username if request.user else ""
+
+        article_access_log = ArticleAccessLog(
+            # apache
+            timestamp=datetime.now(),
+            accessed_uri=request.get_raw_uri(),
+            ip=request.META.get("REMOTE_ADDR", ""),
+            protocol=request.META.get("SERVER_PROTOCOL", ""),
+            user_agent=request.META.get("HTTP_USER_AGENT", ""),
+            referer=request.META.get("HTTP_REFERER", ""),
+            subscriber_referer=request.session.get("HTTP_REFERER", ""),
+
+            # article info
+            article_id=article.localidentifier,
+            article_full_pid=article.get_full_identifier(),
+
+            # subscription info
+            subscriber_id=subscriber_id,
+            is_subscribed_to_journal=journal in subscriber_journals,
+
+            # access info
+            access_type=self.access_type,
+            is_access_granted=self.is_access_granted,
+            is_issue_embargoed=issue.embargoed,
+            is_journal_open_access=journal.open_access,
+
+            # user info
+            session_key="",  # TODO
+            username=username or "",
+        )
+
+        logger.info("Article access", json=article_access_log.json())
+
+        return super().dispatch(request, *args, **kwargs)
+
+    @property
+    def access_type(self) -> AccessType:
+        raise NotImplementedError
+
+    @property
+    def is_access_granted(self) -> bool:
+        raise NotImplementedError
