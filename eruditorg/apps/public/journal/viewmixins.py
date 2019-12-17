@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
+from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.translation import get_language, gettext as _
 
@@ -274,6 +275,8 @@ class ContributorsMixin:
 class ArticleAccessLogMixin:
 
     def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+
         article = self.get_object()
         issue = article.issue
         journal = issue.journal
@@ -288,6 +291,12 @@ class ArticleAccessLogMixin:
         else:
             subscriber_id = None
             subscriber_journals = []
+
+        if "article_access_log_session_key" in request.COOKIES:
+            session_key = request.COOKIES["article_access_log_session_key"]
+        else:
+            session_key = get_random_string()
+            response.set_cookie("article_access_log_session_key", session_key, max_age=3600)
 
         username = request.user.username if request.user else ""
 
@@ -316,13 +325,13 @@ class ArticleAccessLogMixin:
             is_journal_open_access=journal.open_access,
 
             # user info
-            session_key="",  # TODO
+            session_key=session_key,
             username=username or "",
         )
 
         logger.info("Article access", json=article_access_log.json())
 
-        return super().dispatch(request, *args, **kwargs)
+        return response
 
     @property
     def access_type(self) -> AccessType:

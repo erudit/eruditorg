@@ -448,6 +448,7 @@ class TestArticleAccessLogMixin:
             HTTP_REFERER="https://duckduckgo.com/",
         ).get("/myview")
         request.session = {"HTTP_REFERER": "https://www.umontreal.ca/"}
+        request.COOKIES["article_access_log_session_key"] = "foo"
         request.subscriptions = UserSubscriptions()
         request.user = AnonymousUser()
         if active_subscription:
@@ -481,7 +482,7 @@ class TestArticleAccessLogMixin:
                 is_access_granted=True,
                 is_issue_embargoed=article.issue.embargoed,
                 is_journal_open_access=article.issue.journal.open_access,
-                session_key="",
+                session_key="foo",
                 username="",
             )
             assert article_access_log == expected_article_access_log
