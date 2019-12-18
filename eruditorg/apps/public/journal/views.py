@@ -865,8 +865,7 @@ class ArticleDetailView(BaseArticleDetailView):
                 'article_li': obj.localidentifier
             }
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
@@ -890,8 +889,7 @@ class ArticleSummaryView(BaseArticleDetailView):
     page_title_suffix = _('Notice')
     display_full_article = False
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
@@ -910,8 +908,7 @@ class ArticleBiblioView(BaseArticleDetailView):
     display_full_article = False
     display_abstracts = False
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
@@ -929,8 +926,7 @@ class ArticleTocView(BaseArticleDetailView):
     display_biblio = False
     display_full_toc = True
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
@@ -1029,8 +1025,7 @@ class ArticleXmlView(ArticleFormatDownloadView):
     def get_datastream_content(self, fedora_object):
         return fedora_object.xml_content
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
@@ -1067,8 +1062,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
                 self.kwargs['localid'])
         return response
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
@@ -1118,8 +1112,7 @@ class ArticleRawPdfFirstPageView(
     def write_datastream_content(self, response, content):
         response.content = get_pdf_first_page(content)
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available

@@ -816,8 +816,13 @@ class TestArticleDetailView:
             (True, False, Article.PROCESSING_MINIMAL, ArticleAccessType.html_preview_pdf_embedded),
         ),
     )
-    def test_access_type(
-        self, publication_allowed, content_access_granted, processing, expected_access_type, monkeypatch,
+    def test_get_access_type(
+        self,
+        publication_allowed,
+        content_access_granted,
+        processing,
+        expected_access_type,
+        monkeypatch,
     ):
         monkeypatch.setattr(ArticleDetailView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
@@ -825,7 +830,7 @@ class TestArticleDetailView:
         monkeypatch.setattr(ArticleDetailView, "content_access_granted", content_access_granted)
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         monkeypatch.setattr(Article, "processing", processing)
-        assert ArticleDetailView().access_type == expected_access_type
+        assert ArticleDetailView().get_access_type() == expected_access_type
 
 
 class TestArticleSummaryView:
@@ -835,13 +840,15 @@ class TestArticleSummaryView:
         (True, Article.PROCESSING_FULL, ArticleAccessType.html_preview),
         (True, Article.PROCESSING_MINIMAL, ArticleAccessType.html_preview_pdf_embedded),
     ))
-    def test_access_type(self, publication_allowed, processing, expected_access_type, monkeypatch):
+    def test_get_access_type(
+        self, publication_allowed, processing, expected_access_type, monkeypatch,
+    ):
         monkeypatch.setattr(ArticleSummaryView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         monkeypatch.setattr(Article, "processing", processing)
-        assert ArticleSummaryView().access_type == expected_access_type
+        assert ArticleSummaryView().get_access_type() == expected_access_type
 
 
 class TestArticleBiblioView:
@@ -849,12 +856,12 @@ class TestArticleBiblioView:
         (False, ArticleAccessType.content_not_available),
         (True, ArticleAccessType.html_biblio),
     ))
-    def test_access_type(self, publication_allowed, expected_access_type, monkeypatch):
+    def test_get_access_type(self, publication_allowed, expected_access_type, monkeypatch):
         monkeypatch.setattr(ArticleBiblioView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
-        assert ArticleBiblioView().access_type == expected_access_type
+        assert ArticleBiblioView().get_access_type() == expected_access_type
 
 
 class TestArticleTocView:
@@ -862,12 +869,12 @@ class TestArticleTocView:
         (False, ArticleAccessType.content_not_available),
         (True, ArticleAccessType.html_toc),
     ))
-    def test_access_type(self, publication_allowed, expected_access_type, monkeypatch):
+    def test_get_access_type(self, publication_allowed, expected_access_type, monkeypatch):
         monkeypatch.setattr(ArticleTocView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
-        assert ArticleTocView().access_type == expected_access_type
+        assert ArticleTocView().get_access_type() == expected_access_type
 
 
 class TestArticleXmlView:
@@ -875,12 +882,12 @@ class TestArticleXmlView:
         (False, ArticleAccessType.content_not_available),
         (True, ArticleAccessType.xml_full_view),
     ))
-    def test_access_type(self, publication_allowed, expected_access_type, monkeypatch):
+    def test_get_access_type(self, publication_allowed, expected_access_type, monkeypatch):
         monkeypatch.setattr(ArticleXmlView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
-        assert ArticleXmlView().access_type == expected_access_type
+        assert ArticleXmlView().get_access_type() == expected_access_type
 
 
 class TestArticleRawPdfView:
@@ -890,7 +897,7 @@ class TestArticleRawPdfView:
         (True, {}, ArticleAccessType.pdf_full_view),
         (True, {"embed": ""}, ArticleAccessType.pdf_full_view_embedded),
     ))
-    def test_access_type(self, publication_allowed, data, expected_access_type, monkeypatch):
+    def test_get_access_type(self, publication_allowed, data, expected_access_type, monkeypatch):
         monkeypatch.setattr(ArticleRawPdfView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
@@ -898,7 +905,7 @@ class TestArticleRawPdfView:
         view = ArticleRawPdfView()
         view.request = RequestFactory()
         view.request.GET = data
-        assert view.access_type == expected_access_type
+        assert view.get_access_type() == expected_access_type
 
 
 class TestArticleRawPdfFirstPageView:
@@ -908,7 +915,7 @@ class TestArticleRawPdfFirstPageView:
         (True, {}, ArticleAccessType.pdf_preview),
         (True, {"embed": ""}, ArticleAccessType.pdf_preview_embedded),
     ))
-    def test_access_type(self, publication_allowed, data, expected_access_type, monkeypatch):
+    def test_get_access_type(self, publication_allowed, data, expected_access_type, monkeypatch):
         monkeypatch.setattr(ArticleRawPdfFirstPageView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
@@ -916,4 +923,4 @@ class TestArticleRawPdfFirstPageView:
         view = ArticleRawPdfFirstPageView()
         view.request = RequestFactory()
         view.request.GET = data
-        assert view.access_type == expected_access_type
+        assert view.get_access_type() == expected_access_type

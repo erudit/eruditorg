@@ -433,8 +433,7 @@ class TestArticleAccessLogMixin:
             def get_object(self):
                 return article
 
-            @property
-            def access_type(self):
+            def get_access_type(self):
                 return ArticleAccessType.html_full_view
 
             @property

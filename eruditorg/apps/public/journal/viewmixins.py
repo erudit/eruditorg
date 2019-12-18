@@ -319,7 +319,7 @@ class ArticleAccessLogMixin:
             is_subscribed_to_journal=is_subscribed_to_journal,
 
             # access info
-            access_type=self.access_type,
+            access_type=self.get_access_type(),
             content_access_granted=self.content_access_granted,
             is_issue_embargoed=issue.embargoed,
             is_journal_open_access=journal.open_access,
@@ -333,6 +333,5 @@ class ArticleAccessLogMixin:
 
         return response
 
-    @property
-    def access_type(self) -> ArticleAccessType:
+    def get_access_type(self) -> ArticleAccessType:
         raise NotImplementedError
