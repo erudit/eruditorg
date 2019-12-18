@@ -2447,3 +2447,37 @@ def test_article_citation_doesnt_html_escape(export_type):
     content = response.content.decode()
     assert title in content
 
+
+@pytest.mark.parametrize("view_name", (
+    "article_detail",
+    "article_summary",
+    "article_biblio",
+    "article_toc",
+))
+def test_no_html_in_structured_data(view_name):
+    article = ArticleFactory(
+        from_fixture="038686ar",
+        localidentifier="article",
+        issue__localidentifier="issue",
+        issue__year="2019",
+        issue__journal__code="journal",
+    )
+    url = reverse(f"public:journal:{view_name}", kwargs={
+        "journal_code": article.issue.journal.code,
+        "issue_slug": article.issue.volume_slug,
+        "issue_localid": article.issue.localidentifier,
+        "localid": article.localidentifier,
+    })
+    response = Client().get(url)
+    content = response.content.decode()
+    expected = '{\n    ' \
+        '"@type": "ListItem",\n    ' \
+        '"position": 5,\n    ' \
+        '"item": {\n      ' \
+            '"@id": "http://example.com/fr/revues/journal/2019-issue/article/",\n      ' \
+            '"name": "Constantin, François (dir.), Les biens publics mondiaux. ' \
+                     'Un mythe légitimateur pour l’action collective\xa0?, ' \
+                     'coll. Logiques politiques, Paris, L’Harmattan, 2002, 385\xa0p."\n    ' \
+        '}\n  ' \
+    '}'
+    assert expected in content
