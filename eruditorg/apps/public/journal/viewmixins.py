@@ -284,13 +284,13 @@ class ArticleAccessLogMixin:
         if not issue.is_published:
             return super().dispatch(request, *args, **kwargs)
 
-        active_subscripion = request.subscriptions.active_subscription
-        if active_subscripion:
-            subscriber_id = active_subscripion.organisation_id
-            subscriber_journals = active_subscripion.get_journals()
+        active_subscription = request.subscriptions.active_subscription
+        if active_subscription:
+            subscriber_id = active_subscription.organisation_id
+            is_subscribed_to_journal = active_subscription.provides_access_to(journal=journal)
         else:
             subscriber_id = None
-            subscriber_journals = []
+            is_subscribed_to_journal = False
 
         if "article_access_log_session_key" in request.COOKIES:
             session_key = request.COOKIES["article_access_log_session_key"]
@@ -316,7 +316,7 @@ class ArticleAccessLogMixin:
 
             # subscription info
             subscriber_id=subscriber_id,
-            is_subscribed_to_journal=journal in subscriber_journals,
+            is_subscribed_to_journal=is_subscribed_to_journal,
 
             # access info
             access_type=self.access_type,
