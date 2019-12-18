@@ -13,7 +13,7 @@ from erudit.test.factories import (
 from erudit.models import Article
 
 from apps.public.journal.article_access_log import (
-    AccessType,
+    ArticleAccessType,
     ArticleAccessLog,
 )
 from apps.public.journal.viewmixins import (
@@ -435,7 +435,7 @@ class TestArticleAccessLogMixin:
 
             @property
             def access_type(self):
-                return AccessType.html_full_view
+                return ArticleAccessType.html_full_view
 
             @property
             def is_access_granted(self):

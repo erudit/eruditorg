@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-class AccessType(Enum):
+class ArticleAccessType(Enum):
     # html
     html_preview = "html_preview"
     html_full_view = "html_full_view"
@@ -47,7 +47,7 @@ class ArticleAccessLog(BaseModel):
     is_subscribed_to_journal: bool
 
     # access info
-    access_type: AccessType
+    access_type: ArticleAccessType
     is_access_granted: bool
     is_issue_embargoed: bool
     is_journal_open_access: bool

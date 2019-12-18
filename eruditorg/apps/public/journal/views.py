@@ -55,7 +55,7 @@ from core.subscription.models import JournalAccessSubscription, InstitutionIPAdd
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 from apps.public.campaign.models import Campaign
 
-from .article_access_log import AccessType
+from .article_access_log import ArticleAccessType
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
 from .viewmixins import (
@@ -866,20 +866,20 @@ class ArticleDetailView(BaseArticleDetailView):
             }
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
+            return ArticleAccessType.content_not_available
         if self.is_access_granted:
             if article.processing == Article.PROCESSING_FULL:
-                return AccessType.html_full_view
+                return ArticleAccessType.html_full_view
             else:
-                return AccessType.html_full_view_pdf_embedded
+                return ArticleAccessType.html_full_view_pdf_embedded
         else:
             if article.processing == Article.PROCESSING_FULL:
-                return AccessType.html_preview
+                return ArticleAccessType.html_preview
             else:
-                return AccessType.html_preview_pdf_embedded
+                return ArticleAccessType.html_preview_pdf_embedded
 
     @property
     def is_access_granted(self) -> bool:
@@ -895,14 +895,14 @@ class ArticleSummaryView(BaseArticleDetailView):
     display_full_article = False
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
+            return ArticleAccessType.content_not_available
         if article.processing == Article.PROCESSING_FULL:
-            return AccessType.html_preview
+            return ArticleAccessType.html_preview
         else:
-            return AccessType.html_preview_pdf_embedded
+            return ArticleAccessType.html_preview_pdf_embedded
 
     @property
     def is_access_granted(self) -> bool:
@@ -919,11 +919,11 @@ class ArticleBiblioView(BaseArticleDetailView):
     display_abstracts = False
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
-        return AccessType.html_biblio
+            return ArticleAccessType.content_not_available
+        return ArticleAccessType.html_biblio
 
     @property
     def is_access_granted(self) -> bool:
@@ -942,11 +942,11 @@ class ArticleTocView(BaseArticleDetailView):
     display_full_toc = True
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
-        return AccessType.html_toc
+            return ArticleAccessType.content_not_available
+        return ArticleAccessType.html_toc
 
     @property
     def is_access_granted(self) -> bool:
@@ -1046,11 +1046,11 @@ class ArticleXmlView(ArticleFormatDownloadView):
         return fedora_object.xml_content
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
-        return AccessType.xml_full_view
+            return ArticleAccessType.content_not_available
+        return ArticleAccessType.xml_full_view
 
     @property
     def is_access_granted(self) -> bool:
@@ -1088,14 +1088,14 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         return response
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
+            return ArticleAccessType.content_not_available
         if "embed" in self.request.GET:
-            return AccessType.pdf_full_view_embedded
+            return ArticleAccessType.pdf_full_view_embedded
         else:
-            return AccessType.pdf_full_view
+            return ArticleAccessType.pdf_full_view
 
     @property
     def is_access_granted(self) -> bool:
@@ -1142,14 +1142,14 @@ class ArticleRawPdfFirstPageView(
         response.content = get_pdf_first_page(content)
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         article = self.get_object()
         if not article.publication_allowed:
-            return AccessType.content_not_available
+            return ArticleAccessType.content_not_available
         if "embed" in self.request.GET:
-            return AccessType.pdf_preview_embedded
+            return ArticleAccessType.pdf_preview_embedded
         else:
-            return AccessType.pdf_preview
+            return ArticleAccessType.pdf_preview
 
     @property
     def is_access_granted(self) -> bool:

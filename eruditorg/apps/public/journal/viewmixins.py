@@ -20,7 +20,7 @@ from erudit.solr.models import (
 from core.metrics.metric import metric
 from .article_access_log import (
     ArticleAccessLog,
-    AccessType,
+    ArticleAccessType,
 )
 
 
@@ -334,7 +334,7 @@ class ArticleAccessLogMixin:
         return response
 
     @property
-    def access_type(self) -> AccessType:
+    def access_type(self) -> ArticleAccessType:
         raise NotImplementedError
 
     @property
