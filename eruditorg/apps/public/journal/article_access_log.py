@@ -48,7 +48,7 @@ class ArticleAccessLog(BaseModel):
 
     # access info
     access_type: ArticleAccessType
-    is_access_granted: bool
+    content_access_granted: bool
     is_issue_embargoed: bool
     is_journal_open_access: bool
 

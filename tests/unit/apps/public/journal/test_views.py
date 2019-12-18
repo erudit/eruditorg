@@ -804,7 +804,7 @@ class TestJournalStatisticsView:
 
 class TestArticleDetailView:
     @pytest.mark.parametrize(
-        "publication_allowed, is_access_granted, processing, expected_access_type",
+        "publication_allowed, content_access_granted, processing, expected_access_type",
         (
             (False, True, Article.PROCESSING_FULL, ArticleAccessType.content_not_available),
             (False, True, Article.PROCESSING_MINIMAL, ArticleAccessType.content_not_available),
@@ -817,25 +817,15 @@ class TestArticleDetailView:
         ),
     )
     def test_access_type(
-        self, publication_allowed, is_access_granted, processing, expected_access_type, monkeypatch,
+        self, publication_allowed, content_access_granted, processing, expected_access_type, monkeypatch,
     ):
         monkeypatch.setattr(ArticleDetailView, "get_object", unittest.mock.MagicMock(
            return_value=ArticleFactory(),
         ))
-        monkeypatch.setattr(ArticleDetailView, "is_access_granted", is_access_granted)
+        monkeypatch.setattr(ArticleDetailView, "content_access_granted", content_access_granted)
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         monkeypatch.setattr(Article, "processing", processing)
         assert ArticleDetailView().access_type == expected_access_type
-
-    @pytest.mark.parametrize("content_access_granted, expected_is_access_granted", (
-        (True, True),
-        (False, False),
-    ))
-    def test_is_access_granted(
-        self, content_access_granted, expected_is_access_granted, monkeypatch,
-    ):
-        monkeypatch.setattr(ArticleDetailView, "content_access_granted", content_access_granted)
-        assert ArticleDetailView().is_access_granted == expected_is_access_granted
 
 
 class TestArticleSummaryView:
@@ -853,9 +843,6 @@ class TestArticleSummaryView:
         monkeypatch.setattr(Article, "processing", processing)
         assert ArticleSummaryView().access_type == expected_access_type
 
-    def test_is_access_granted(self):
-        assert ArticleSummaryView().is_access_granted
-
 
 class TestArticleBiblioView:
     @pytest.mark.parametrize("publication_allowed, expected_access_type", (
@@ -868,9 +855,6 @@ class TestArticleBiblioView:
         ))
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         assert ArticleBiblioView().access_type == expected_access_type
-
-    def test_is_access_granted(self):
-        assert ArticleBiblioView().is_access_granted
 
 
 class TestArticleTocView:
@@ -885,9 +869,6 @@ class TestArticleTocView:
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         assert ArticleTocView().access_type == expected_access_type
 
-    def test_is_access_granted(self):
-        assert ArticleTocView().is_access_granted
-
 
 class TestArticleXmlView:
     @pytest.mark.parametrize("publication_allowed, expected_access_type", (
@@ -900,16 +881,6 @@ class TestArticleXmlView:
         ))
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         assert ArticleXmlView().access_type == expected_access_type
-
-    @pytest.mark.parametrize("content_access_granted, expected_is_access_granted", (
-        (True, True),
-        (False, False),
-    ))
-    def test_is_access_granted(
-        self, content_access_granted, expected_is_access_granted, monkeypatch,
-    ):
-        monkeypatch.setattr(ArticleXmlView, "content_access_granted", content_access_granted)
-        assert ArticleXmlView().is_access_granted == expected_is_access_granted
 
 
 class TestArticleRawPdfView:
@@ -929,16 +900,6 @@ class TestArticleRawPdfView:
         view.request.GET = data
         assert view.access_type == expected_access_type
 
-    @pytest.mark.parametrize("content_access_granted, expected_is_access_granted", (
-        (True, True),
-        (False, False),
-    ))
-    def test_is_access_granted(
-        self, content_access_granted, expected_is_access_granted, monkeypatch,
-    ):
-        monkeypatch.setattr(ArticleRawPdfView, "content_access_granted", content_access_granted)
-        assert ArticleRawPdfView().is_access_granted == expected_is_access_granted
-
 
 class TestArticleRawPdfFirstPageView:
     @pytest.mark.parametrize("publication_allowed, data, expected_access_type", (
@@ -956,16 +917,3 @@ class TestArticleRawPdfFirstPageView:
         view.request = RequestFactory()
         view.request.GET = data
         assert view.access_type == expected_access_type
-
-    @pytest.mark.parametrize("can_display_first_pdf_page, expected_is_access_granted", (
-        (True, True),
-        (False, False),
-    ))
-    def test_is_access_granted(
-        self, can_display_first_pdf_page, expected_is_access_granted, monkeypatch,
-    ):
-        monkeypatch.setattr(ArticleRawPdfFirstPageView, "get_object", unittest.mock.MagicMock(
-           return_value=ArticleFactory(),
-        ))
-        monkeypatch.setattr(Article, "can_display_first_pdf_page", can_display_first_pdf_page)
-        assert ArticleRawPdfFirstPageView().is_access_granted == expected_is_access_granted

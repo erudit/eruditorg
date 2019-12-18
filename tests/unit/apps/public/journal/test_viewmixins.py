@@ -438,7 +438,7 @@ class TestArticleAccessLogMixin:
                 return ArticleAccessType.html_full_view
 
             @property
-            def is_access_granted(self):
+            def content_access_granted(self):
                 return True
 
         request = RequestFactory(
@@ -479,7 +479,7 @@ class TestArticleAccessLogMixin:
                 subscriber_id=subscription.id if active_subscription else None,
                 is_subscribed_to_journal=active_subscription,
                 access_type="html_full_view",
-                is_access_granted=True,
+                content_access_granted=True,
                 is_issue_embargoed=article.issue.embargoed,
                 is_journal_open_access=article.issue.journal.open_access,
                 session_key="foo",

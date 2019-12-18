@@ -320,7 +320,7 @@ class ArticleAccessLogMixin:
 
             # access info
             access_type=self.access_type,
-            is_access_granted=self.is_access_granted,
+            content_access_granted=self.content_access_granted,
             is_issue_embargoed=issue.embargoed,
             is_journal_open_access=journal.open_access,
 
@@ -335,8 +335,4 @@ class ArticleAccessLogMixin:
 
     @property
     def access_type(self) -> ArticleAccessType:
-        raise NotImplementedError
-
-    @property
-    def is_access_granted(self) -> bool:
         raise NotImplementedError

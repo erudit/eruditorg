@@ -870,7 +870,7 @@ class ArticleDetailView(BaseArticleDetailView):
         article = self.get_object()
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
-        if self.is_access_granted:
+        if self.content_access_granted:
             if article.processing == Article.PROCESSING_FULL:
                 return ArticleAccessType.html_full_view
             else:
@@ -880,10 +880,6 @@ class ArticleDetailView(BaseArticleDetailView):
                 return ArticleAccessType.html_preview
             else:
                 return ArticleAccessType.html_preview_pdf_embedded
-
-    @property
-    def is_access_granted(self) -> bool:
-        return self.content_access_granted
 
 
 class ArticleSummaryView(BaseArticleDetailView):
@@ -904,10 +900,6 @@ class ArticleSummaryView(BaseArticleDetailView):
         else:
             return ArticleAccessType.html_preview_pdf_embedded
 
-    @property
-    def is_access_granted(self) -> bool:
-        return True
-
 
 class ArticleBiblioView(BaseArticleDetailView):
     """
@@ -924,10 +916,6 @@ class ArticleBiblioView(BaseArticleDetailView):
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
         return ArticleAccessType.html_biblio
-
-    @property
-    def is_access_granted(self) -> bool:
-        return True
 
 
 class ArticleTocView(BaseArticleDetailView):
@@ -947,10 +935,6 @@ class ArticleTocView(BaseArticleDetailView):
         if not article.publication_allowed:
             return ArticleAccessType.content_not_available
         return ArticleAccessType.html_toc
-
-    @property
-    def is_access_granted(self) -> bool:
-        return True
 
 
 class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
@@ -1052,10 +1036,6 @@ class ArticleXmlView(ArticleFormatDownloadView):
             return ArticleAccessType.content_not_available
         return ArticleAccessType.xml_full_view
 
-    @property
-    def is_access_granted(self) -> bool:
-        return self.content_access_granted
-
 
 class ArticleRawPdfView(ArticleFormatDownloadView):
     """
@@ -1097,13 +1077,10 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         else:
             return ArticleAccessType.pdf_full_view
 
-    @property
-    def is_access_granted(self) -> bool:
-        return self.content_access_granted
-
 
 class ArticleRawPdfFirstPageView(
     ArticleAccessLogMixin,
+    ContentAccessCheckMixin,
     PermissionRequiredMixin,
     SingleArticleMixin,
     FedoraFileDatastreamView,
@@ -1150,11 +1127,6 @@ class ArticleRawPdfFirstPageView(
             return ArticleAccessType.pdf_preview_embedded
         else:
             return ArticleAccessType.pdf_preview
-
-    @property
-    def is_access_granted(self) -> bool:
-        article = self.get_object()
-        return article.can_display_first_pdf_page
 
 
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
