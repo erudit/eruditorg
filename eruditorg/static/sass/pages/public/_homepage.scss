@@ -164,8 +164,19 @@
     margin: 0;
     list-style: none;
     display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      height: 7px;
+      border-radius: 4px;
+      background-color: $mid-grey;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: $dark-grey;
+    }
   }
 
   .home-issues__item {
@@ -233,8 +244,20 @@
       margin: 0;
       list-style: none;
       display: flex;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow-x: scroll;
+
+      &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        height: 7px;
+        border-radius: 4px;
+        background-color: $mid-grey;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: $dark-grey;
+      }
+
 
       li {
         min-width: 270px;
