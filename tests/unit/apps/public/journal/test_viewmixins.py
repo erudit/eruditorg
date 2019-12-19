@@ -463,7 +463,7 @@ class TestArticleAccessLogMixin:
         if not is_published:
             mock_logger.info.assert_not_called()
         else:
-            article_access_log = ArticleAccessLog.parse_raw(mock_logger.info.call_args[1]["json"])
+            article_access_log = ArticleAccessLog.parse_obj(mock_logger.info.call_args[1]["json"])
             expected_article_access_log = ArticleAccessLog(
                 version="1",
                 timestamp=article_access_log.timestamp,

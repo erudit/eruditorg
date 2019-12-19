@@ -25,6 +25,9 @@ class ArticleAccessType(Enum):
     # content not available
     content_not_available = "content_not_available"
 
+    def __repr__(self):
+        return self.value
+
 
 class ArticleAccessLog(BaseModel):
     version: str = "1"

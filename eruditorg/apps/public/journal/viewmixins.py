@@ -1,3 +1,4 @@
+import json
 import string
 import structlog
 
@@ -333,7 +334,7 @@ class ArticleAccessLogMixin:
             username=username or "",
         )
 
-        logger.info("article_access", json=article_access_log.json())
+        logger.info("article_access", json=json.loads(article_access_log.json()))
 
         return response
 
