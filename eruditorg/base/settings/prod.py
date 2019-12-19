@@ -191,11 +191,11 @@ LOGGING = {
             'filename': DJANGO_LOG_DIRECTORY + '/import_individual_subscriptions.log',
             'formatter': 'structlog',
         },
-        'referer': {
+        'article_access': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'when': 'midnight',
-            'filename': DJANGO_LOG_DIRECTORY + '/www.erudit.org.referer.log',
+            'filename': DJANGO_LOG_DIRECTORY + '/www.erudit.org.article_access.log',
             'formatter': 'verbose',
         },
         'fedora_file': {
@@ -215,6 +215,11 @@ LOGGING = {
         'django.db.backends': {
             'level': 'ERROR',
             'handlers': ['console'],
+            'propagate': False,
+        },
+        'apps.public.journal.viewmixins': {
+            'level': 'INFO',
+            'handlers': ['article_access', ],
             'propagate': False,
         },
         'apps.userspace.journal.editor.views': {
@@ -239,7 +244,7 @@ LOGGING = {
         },
         'core.subscription.middleware': {
             'level': 'INFO',
-            'handlers': ['referer', 'console', ],
+            'handlers': ['console', ],
             'propagate': False,
         },
         'erudit.fedora': {
