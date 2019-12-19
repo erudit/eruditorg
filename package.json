@@ -2,7 +2,7 @@
   "private": true,
   "dependencies": {
     "akkordion": "git://github.com/TrySound/akkordion.git#0.2.4",
-    "bookreader": "git://github.com/internetarchive/bookreader.git#2633d88ba095c05e907666bcb25e3451e91ac57a",
+    "bookreader": "git://github.com/internetarchive/bookreader.git#v4.5.0",
     "bootstrap-sass": "^3.4.1",
     "clipboard-polyfill": "^2.8.6",
     "get-prefix": "^1.0.0",
