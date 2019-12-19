@@ -1,3 +1,5 @@
+import json
+import string
 import structlog
 
 from datetime import datetime
@@ -8,6 +10,7 @@ from django.http.response import HttpResponseRedirect
 from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.translation import get_language, gettext as _
+from ipware import get_client_ip
 
 from erudit.models import Article
 from erudit.models import Issue
@@ -295,16 +298,18 @@ class ArticleAccessLogMixin:
         if "article_access_log_session_key" in request.COOKIES:
             session_key = request.COOKIES["article_access_log_session_key"]
         else:
-            session_key = get_random_string()
+            # Generate a 32 characters session key with lowercase letters and digits.
+            session_key = get_random_string(32, string.ascii_lowercase + string.digits)
             response.set_cookie("article_access_log_session_key", session_key, max_age=3600)
 
         username = request.user.username if request.user else ""
 
+        client_ip, _ = get_client_ip(request, proxy_order='right-most')
         article_access_log = ArticleAccessLog(
             # apache
             timestamp=datetime.now(),
             accessed_uri=request.get_raw_uri(),
-            ip=request.META.get("REMOTE_ADDR", ""),
+            ip=client_ip,
             protocol=request.META.get("SERVER_PROTOCOL", ""),
             user_agent=request.META.get("HTTP_USER_AGENT", ""),
             referer=request.META.get("HTTP_REFERER", ""),
@@ -329,7 +334,7 @@ class ArticleAccessLogMixin:
             username=username or "",
         )
 
-        logger.info("Article access", json=article_access_log.json())
+        logger.info("article_access", json=json.loads(article_access_log.json()))
 
         return response
 
