@@ -44,7 +44,7 @@
     "position": 5,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
-      "name": "{{ article|format_article_html_title }}"
+      "name": "{{ citation_title_metadata }}"
     }
   },{
     "@type": "ListItem",
