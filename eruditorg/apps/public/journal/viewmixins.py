@@ -8,6 +8,7 @@ from django.http.response import HttpResponseRedirect
 from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.translation import get_language, gettext as _
+from ipware import get_client_ip
 
 from erudit.models import Article
 from erudit.models import Issue
@@ -300,11 +301,12 @@ class ArticleAccessLogMixin:
 
         username = request.user.username if request.user else ""
 
+        client_ip, _ = get_client_ip(request, proxy_order='right-most')
         article_access_log = ArticleAccessLog(
             # apache
             timestamp=datetime.now(),
             accessed_uri=request.get_raw_uri(),
-            ip=request.META.get("REMOTE_ADDR", ""),
+            ip=client_ip,
             protocol=request.META.get("SERVER_PROTOCOL", ""),
             user_agent=request.META.get("HTTP_USER_AGENT", ""),
             referer=request.META.get("HTTP_REFERER", ""),

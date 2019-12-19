@@ -441,7 +441,7 @@ class TestArticleAccessLogMixin:
                 return True
 
         request = RequestFactory(
-            REMOTE_ADDR="0.0.0.0",
+            HTTP_X_FORWARDED_FOR="0.0.0.0",
             SERVER_PROTOCOL="HTTP/1.1",
             HTTP_USER_AGENT="Mozilla/5.0",
             HTTP_REFERER="https://duckduckgo.com/",
