@@ -1,3 +1,4 @@
+import string
 import structlog
 
 from datetime import datetime
@@ -296,7 +297,8 @@ class ArticleAccessLogMixin:
         if "article_access_log_session_key" in request.COOKIES:
             session_key = request.COOKIES["article_access_log_session_key"]
         else:
-            session_key = get_random_string()
+            # Generate a 32 characters session key with lowercase letters and digits.
+            session_key = get_random_string(32, string.ascii_lowercase + string.digits)
             response.set_cookie("article_access_log_session_key", session_key, max_age=3600)
 
         username = request.user.username if request.user else ""
@@ -331,7 +333,7 @@ class ArticleAccessLogMixin:
             username=username or "",
         )
 
-        logger.info("Article access", json=article_access_log.json())
+        logger.info("article_access", json=article_access_log.json())
 
         return response
 
