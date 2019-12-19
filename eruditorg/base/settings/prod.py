@@ -198,6 +198,13 @@ LOGGING = {
             'filename': DJANGO_LOG_DIRECTORY + '/www.erudit.org.article_access.log',
             'formatter': 'verbose',
         },
+        'referer': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'when': 'midnight',
+            'filename': DJANGO_LOG_DIRECTORY + '/www.erudit.org.referer.log',
+            'formatter': 'verbose',
+        },
         'fedora_file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -244,7 +251,7 @@ LOGGING = {
         },
         'core.subscription.middleware': {
             'level': 'INFO',
-            'handlers': ['console', ],
+            'handlers': ['referer', 'console', ],
             'propagate': False,
         },
         'erudit.fedora': {

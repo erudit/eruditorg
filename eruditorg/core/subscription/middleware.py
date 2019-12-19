@@ -1,3 +1,4 @@
+import logging
 import redis
 import structlog
 
@@ -15,7 +16,8 @@ from core.subscription.models import UserSubscriptions
 from django.conf import settings
 from django.utils.deprecation import MiddlewareMixin
 
-logger = structlog.getLogger(__name__)
+logger = logging.getLogger(__name__)
+structlogger = structlog.getLogger(__name__)
 
 
 class SubscriptionMiddleware(MiddlewareMixin):
@@ -81,6 +83,29 @@ class SubscriptionMiddleware(MiddlewareMixin):
             except JournalAccessSubscription.DoesNotExist:
                 pass
 
+    def process_response(self, request, response):
+        active_subscription = request.subscriptions.active_subscription
+
+        referer = self._get_user_referer_for_subscription(request)
+
+        if active_subscription and active_subscription.referers.filter(referer=referer):
+            referer = active_subscription.referers.first()
+            logger.info('{url} {method} {path} {protocol} - {client_port} - {client_ip} "{user_agent}" "{referer_url}" {code} {size} {referer_access}'.format(  # noqa
+                url=request.get_raw_uri(),
+                method=request.META.get('REQUEST_METHOD'),
+                path=request.path,
+                protocol=request.META.get('SERVER_PROTOCOL'),
+                client_port="",
+                client_ip=request.META.get('REMOTE_ADDR'),
+                user_agent=request.META.get('HTTP_USER_AGENT'),
+                referer_url=request.META.get('HTTP_REFERER'),
+                code=response.status_code,
+                size="",
+                referer_access=referer.referer
+            ))
+
+        return response
+
     def casa_authorize(self, key: str, token: str, user_ip: str) -> Union[str, bool]:
         """
         Check if the user is authorized to see the full text article.
@@ -101,7 +126,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
         components = token.split(':')
         if len(components) != 2:
             # Badly formed token.
-            logger.info(
+            structlogger.info(
                 'CASA',
                 msg='Badly formed token.',
                 token=token,
@@ -121,7 +146,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
             data = cipher.decrypt_and_verify(payload[:-16], payload[-16:])
         except ValueError:
             # Either the message has been modified or it didn’t come from Google Scholar.
-            logger.info(
+            structlogger.info(
                 'CASA',
                 msg='Decryption failed.',
                 token=token,
@@ -132,7 +157,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
         # Allow up to three times to handle user clicking on a search result a few times
         # (e.g., comparing figures in a few papers etc).
         if self._nonce_count(nonce) > 3:
-            logger.info(
+            structlogger.info(
                 'CASA',
                 msg='Token used more than 3 times.',
                 token=token,
@@ -143,7 +168,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
         fields = data.decode().split(':')
         if len(fields) < 3:
             # Badly formatted payload.
-            logger.info(
+            structlogger.info(
                 'CASA',
                 msg='Badly formed payload.',
                 token=token,
@@ -155,7 +180,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
         timestamp = fields[0]
         if int(datetime.now().timestamp() * 1e6) - int(timestamp) > 60 * 60 * 1e6:
             # Token is too old and is no longer valid.
-            logger.info(
+            structlogger.info(
                 'CASA',
                 msg='Token is older than 1 hour.',
                 time_now=datetime.now().isoformat(),
@@ -169,7 +194,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
         ip_subnet = unquote(fields[2])
         if ip_address(user_ip) not in ip_network(ip_subnet):
             # User IP is outside the IP subnet the token is valid for.
-            logger.info(
+            structlogger.info(
                 'CASA',
                 msg='IP address not in subnet.',
                 ip_subnet=ip_subnet,
@@ -180,7 +205,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
 
         # The subscriber_id field is URL-escaped in the token. It needs to be unescaped before use.
         subscriber_id = unquote(fields[1])
-        logger.info(
+        structlogger.info(
             'CASA',
             msg='Successful authorization.',
             subscriber_id=subscriber_id,

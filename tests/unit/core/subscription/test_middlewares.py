@@ -161,6 +161,61 @@ class TestSubscriptionMiddleware:
 
         assert request.subscriptions._subscriptions == []
 
+    @unittest.mock.patch('core.subscription.middleware.logger')
+    def test_subscription_middleware_log_requests_in_case_of_referer(self, mock_log):
+        request = RequestFactory().get('/revues/shortname/issue/article.html')
+        request.user = AnonymousUser()
+        request.session = dict()
+        request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
+
+        article = EmbargoedArticleFactory()
+
+        JournalAccessSubscriptionFactory(
+            journals=[article.issue.journal],
+            post__valid=True,
+            post__referers=['http://www.umontreal.ca']
+        )
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+
+        request.subscriptions.set_active_subscription_for(article=article)
+        assert mock_log.info.call_count == 0
+        middleware.process_response(request, HttpResponse())
+        assert mock_log.info.call_count == 1
+
+        log_args = mock_log.info.call_args[0][0]
+        assert len(log_args) - (len(request.META['HTTP_REFERER']) + log_args.rindex(request.META['HTTP_REFERER'])) == 0
+
+        request = get_anonymous_request()
+        request.META['HTTP_REFERER'] = 'http://www.no-referer.ca'
+
+        middleware.process_request(request)
+        middleware.process_response(request, HttpResponse())
+        assert mock_log.info.call_count == 1
+
+    @unittest.mock.patch('core.subscription.middleware.logger')
+    def test_do_not_log_requests_in_case_of_ip_address_and_referer(self, mock_log):
+        article = EmbargoedArticleFactory()
+
+        # Create a subscription that has both an ip address range and a referer
+        ip_subscription = JournalAccessSubscriptionFactory(
+            journals=[article.issue.journal],
+            post__valid=True,
+            post__ip_start='1.1.1.1', post__ip_end='1.1.1.1',
+            post__referers=['http://umontreal.ca']
+        )
+
+        request = get_anonymous_request()
+        request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+        assert mock_log.info.call_count == 0
+        request.subscriptions.set_active_subscription_for(article=article)
+        middleware.process_response(request, HttpResponse())
+        assert mock_log.info.call_count == 0
+
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
         # Setup
         request = get_anonymous_request()
