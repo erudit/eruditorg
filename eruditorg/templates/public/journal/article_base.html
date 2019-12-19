@@ -85,7 +85,7 @@
 {% if article.processing == 'C' %}
 <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% endif %}
-{% if article.fedora_object.pdf.exists %}
+{% if article.has_pdf %}
 <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% endif %}
 {% for lang, keywords in meta_keywords.items %}

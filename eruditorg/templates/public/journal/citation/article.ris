@@ -17,7 +17,7 @@ LA  - {{ article.language|upper }}
 AB  - {{ abstract.content }}{% endfor %}{% endif %}{% endspaceless %}
 {% if article.doi %}DO  - https://doi.org/{{ article.doi }}{% endif %}
 UR  - https://id.erudit.org/iderudit/{{ article.localidentifier }}
-{% if article.fedora_object.pdf.exists %}L1  - https://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}
+{% if article.has_pdf %}L1  - https://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}
 DP  - Érudit: www.erudit.org
 DB  - Érudit
 ER  -

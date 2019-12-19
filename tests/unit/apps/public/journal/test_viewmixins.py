@@ -1,20 +1,28 @@
 import pytest
 import unittest.mock
 
+from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
 from django.test import RequestFactory
 from django.test.utils import override_settings
-from django.views.generic import DetailView
+from django.views.generic import DetailView, View
 
 from erudit.test.factories import (
     ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory, EmbargoedIssueFactory
 )
 from erudit.models import Article
 
-from apps.public.journal.viewmixins import ContentAccessCheckMixin
-from apps.public.journal.viewmixins import SingleArticleMixin
-from apps.public.journal.viewmixins import SingleJournalMixin
-from apps.public.journal.viewmixins import ContributorsMixin
+from apps.public.journal.article_access_log import (
+    ArticleAccessType,
+    ArticleAccessLog,
+)
+from apps.public.journal.viewmixins import (
+    ArticleAccessLogMixin,
+    ContentAccessCheckMixin,
+    ContributorsMixin,
+    SingleArticleMixin,
+    SingleJournalMixin,
+)
 from apps.public.journal.views import ArticleRawPdfView, ArticleXmlView
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.middleware import SubscriptionMiddleware
@@ -408,3 +416,72 @@ class TestContributorsMixin:
         mixin = ContributorsMixin()
         with override_settings(LANGUAGE_CODE=language):
             assert mixin.get_contributors(issue=issue) == expected_contributors
+
+
+class TestArticleAccessLogMixin:
+    @pytest.mark.parametrize("active_subscription", (
+        (True), (False),
+    ))
+    @pytest.mark.parametrize("is_published", (
+        (True), (False),
+    ))
+    @unittest.mock.patch("apps.public.journal.viewmixins.logger")
+    def test_article_access_log(self, mock_logger, is_published, active_subscription, monkeypatch):
+        article = ArticleFactory(issue__is_published=is_published)
+
+        class MyView(ArticleAccessLogMixin, View):
+            def get_object(self):
+                return article
+
+            def get_access_type(self):
+                return ArticleAccessType.html_full_view
+
+            @property
+            def content_access_granted(self):
+                return True
+
+        request = RequestFactory(
+            REMOTE_ADDR="0.0.0.0",
+            SERVER_PROTOCOL="HTTP/1.1",
+            HTTP_USER_AGENT="Mozilla/5.0",
+            HTTP_REFERER="https://duckduckgo.com/",
+        ).get("/myview")
+        request.session = {"HTTP_REFERER": "https://www.umontreal.ca/"}
+        request.COOKIES["article_access_log_session_key"] = "foo"
+        request.subscriptions = UserSubscriptions()
+        request.user = AnonymousUser()
+        if active_subscription:
+            subscription = JournalAccessSubscriptionFactory(
+                journals=[article.issue.journal],
+                post__valid=True,
+            )
+            request.subscriptions.add_subscription(subscription)
+
+        view = MyView()
+        view.dispatch(request)
+
+        if not is_published:
+            mock_logger.info.assert_not_called()
+        else:
+            article_access_log = ArticleAccessLog.parse_raw(mock_logger.info.call_args[1]["json"])
+            expected_article_access_log = ArticleAccessLog(
+                version="1",
+                timestamp=article_access_log.timestamp,
+                accessed_uri="http://testserver/myview",
+                ip="0.0.0.0",
+                protocol="HTTP/1.1",
+                user_agent="Mozilla/5.0",
+                referer="https://duckduckgo.com/",
+                subscriber_referer="https://www.umontreal.ca/",
+                article_id=article.localidentifier,
+                article_full_pid=article.get_full_identifier(),
+                subscriber_id=subscription.id if active_subscription else None,
+                is_subscribed_to_journal=active_subscription,
+                access_type="html_full_view",
+                content_access_granted=True,
+                is_issue_embargoed=article.issue.embargoed,
+                is_journal_open_access=article.issue.journal.open_access,
+                session_key="foo",
+                username="",
+            )
+            assert article_access_log == expected_article_access_log

@@ -1,7 +1,11 @@
+import structlog
+
+from datetime import datetime
 from django.db.models import Q
 from django.urls import reverse
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
+from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.translation import get_language, gettext as _
 
@@ -14,6 +18,13 @@ from erudit.solr.models import (
 )
 
 from core.metrics.metric import metric
+from .article_access_log import (
+    ArticleAccessLog,
+    ArticleAccessType,
+)
+
+
+logger = structlog.get_logger(__name__)
 
 
 class SingleJournalMixin:
@@ -259,3 +270,68 @@ class ContributorsMixin:
                 })
 
         return contributors
+
+
+class ArticleAccessLogMixin:
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+
+        article = self.get_object()
+        issue = article.issue
+        journal = issue.journal
+
+        if not issue.is_published:
+            return super().dispatch(request, *args, **kwargs)
+
+        active_subscription = request.subscriptions.active_subscription
+        if active_subscription:
+            subscriber_id = active_subscription.organisation_id
+            is_subscribed_to_journal = active_subscription.provides_access_to(journal=journal)
+        else:
+            subscriber_id = None
+            is_subscribed_to_journal = False
+
+        if "article_access_log_session_key" in request.COOKIES:
+            session_key = request.COOKIES["article_access_log_session_key"]
+        else:
+            session_key = get_random_string()
+            response.set_cookie("article_access_log_session_key", session_key, max_age=3600)
+
+        username = request.user.username if request.user else ""
+
+        article_access_log = ArticleAccessLog(
+            # apache
+            timestamp=datetime.now(),
+            accessed_uri=request.get_raw_uri(),
+            ip=request.META.get("REMOTE_ADDR", ""),
+            protocol=request.META.get("SERVER_PROTOCOL", ""),
+            user_agent=request.META.get("HTTP_USER_AGENT", ""),
+            referer=request.META.get("HTTP_REFERER", ""),
+            subscriber_referer=request.session.get("HTTP_REFERER", ""),
+
+            # article info
+            article_id=article.localidentifier,
+            article_full_pid=article.get_full_identifier(),
+
+            # subscription info
+            subscriber_id=subscriber_id,
+            is_subscribed_to_journal=is_subscribed_to_journal,
+
+            # access info
+            access_type=self.get_access_type(),
+            content_access_granted=self.content_access_granted,
+            is_issue_embargoed=issue.embargoed,
+            is_journal_open_access=journal.open_access,
+
+            # user info
+            session_key=session_key,
+            username=username or "",
+        )
+
+        logger.info("Article access", json=article_access_log.json())
+
+        return response
+
+    def get_access_type(self) -> ArticleAccessType:
+        raise NotImplementedError

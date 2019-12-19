@@ -34,7 +34,6 @@ from django.views.generic import TemplateView
 from django.db.models import Prefetch
 
 from rules.contrib.views import PermissionRequiredMixin
-import pikepdf
 from lxml import etree as et
 
 from erudit.fedora.objects import ArticleDigitalObject
@@ -56,18 +55,20 @@ from core.subscription.models import JournalAccessSubscription, InstitutionIPAdd
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 from apps.public.campaign.models import Campaign
 
+from .article_access_log import ArticleAccessType
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
 from .viewmixins import (
+    ArticleAccessLogMixin,
+    ArticleViewMetricCaptureMixin,
     ContentAccessCheckMixin,
+    ContributorsMixin,
+    PrepublicationTokenRequiredMixin,
+    SingleArticleMixin,
+    SingleArticleWithScholarMetadataMixin,
+    SingleJournalMixin,
     SolrDataMixin,
 )
-from .viewmixins import ArticleViewMetricCaptureMixin
-from .viewmixins import SingleArticleMixin
-from .viewmixins import SingleArticleWithScholarMetadataMixin
-from .viewmixins import SingleJournalMixin
-from .viewmixins import PrepublicationTokenRequiredMixin
-from .viewmixins import ContributorsMixin
 
 from . import solr
 
@@ -678,12 +679,13 @@ class IssueXmlView(
 
 
 class BaseArticleDetailView(
-        FallbackObjectViewMixin,
-        ContentAccessCheckMixin,
-        SingleArticleWithScholarMetadataMixin,
-        ArticleViewMetricCaptureMixin,
-        PrepublicationTokenRequiredMixin,
-        DetailView,
+    ArticleAccessLogMixin,
+    FallbackObjectViewMixin,
+    ContentAccessCheckMixin,
+    SingleArticleWithScholarMetadataMixin,
+    ArticleViewMetricCaptureMixin,
+    PrepublicationTokenRequiredMixin,
+    DetailView,
 ):
     context_object_name = 'article'
     model = Article
@@ -800,14 +802,13 @@ class BaseArticleDetailView(
         if 'article' not in context:
             context['article'] = article
 
-        context['pdf_exists'] = article.fedora_object.pdf.exists
+        context['pdf_exists'] = article.has_pdf
 
         if context['pdf_exists'] and not article.abstracts:
             if context['content_access_granted']:
                 context['can_display_first_pdf_page'] = True
             else:
-                pdf = pikepdf.open(article.fedora_object.pdf.content)
-                context['can_display_first_pdf_page'] = len(pdf.pages) > 1
+                context['can_display_first_pdf_page'] = article.can_display_first_pdf_page
 
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
@@ -864,6 +865,21 @@ class ArticleDetailView(BaseArticleDetailView):
                 'article_li': obj.localidentifier
             }
 
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        if self.content_access_granted:
+            if article.processing == Article.PROCESSING_FULL:
+                return ArticleAccessType.html_full_view
+            else:
+                return ArticleAccessType.html_full_view_pdf_embedded
+        else:
+            if article.processing == Article.PROCESSING_FULL:
+                return ArticleAccessType.html_preview
+            else:
+                return ArticleAccessType.html_preview_pdf_embedded
+
 
 class ArticleSummaryView(BaseArticleDetailView):
     """
@@ -872,6 +888,15 @@ class ArticleSummaryView(BaseArticleDetailView):
     template_name = 'public/journal/article_summary.html'
     page_title_suffix = _('Notice')
     display_full_article = False
+
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        if article.processing == Article.PROCESSING_FULL:
+            return ArticleAccessType.html_preview
+        else:
+            return ArticleAccessType.html_preview_pdf_embedded
 
 
 class ArticleBiblioView(BaseArticleDetailView):
@@ -882,6 +907,12 @@ class ArticleBiblioView(BaseArticleDetailView):
     page_title_suffix = _('Bibliographie')
     display_full_article = False
     display_abstracts = False
+
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        return ArticleAccessType.html_biblio
 
 
 class ArticleTocView(BaseArticleDetailView):
@@ -894,6 +925,12 @@ class ArticleTocView(BaseArticleDetailView):
     display_abstracts = False
     display_biblio = False
     display_full_toc = True
+
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        return ArticleAccessType.html_toc
 
 
 class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
@@ -952,11 +989,12 @@ class ArticleBibCitationView(BaseArticleCitationView):
 
 
 class ArticleFormatDownloadView(
-        ArticleViewMetricCaptureMixin,
-        ContentAccessCheckMixin,
-        PermissionRequiredMixin,
-        SingleArticleMixin,
-        FedoraFileDatastreamView,
+    ArticleAccessLogMixin,
+    ArticleViewMetricCaptureMixin,
+    ContentAccessCheckMixin,
+    PermissionRequiredMixin,
+    SingleArticleMixin,
+    FedoraFileDatastreamView,
 ):
 
     def get_content(self):
@@ -986,6 +1024,12 @@ class ArticleXmlView(ArticleFormatDownloadView):
 
     def get_datastream_content(self, fedora_object):
         return fedora_object.xml_content
+
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        return ArticleAccessType.xml_full_view
 
 
 class ArticleRawPdfView(ArticleFormatDownloadView):
@@ -1018,9 +1062,22 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
                 self.kwargs['localid'])
         return response
 
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        if "embed" in self.request.GET:
+            return ArticleAccessType.pdf_full_view_embedded
+        else:
+            return ArticleAccessType.pdf_full_view
+
 
 class ArticleRawPdfFirstPageView(
-    PermissionRequiredMixin, SingleArticleMixin, FedoraFileDatastreamView
+    ArticleAccessLogMixin,
+    ContentAccessCheckMixin,
+    PermissionRequiredMixin,
+    SingleArticleMixin,
+    FedoraFileDatastreamView,
 ):
     """
     Returns the PDF file associated with an article.
@@ -1050,10 +1107,19 @@ class ArticleRawPdfFirstPageView(
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return obj.publication_allowed
+        return obj.publication_allowed and obj.can_display_first_pdf_page
 
     def write_datastream_content(self, response, content):
         response.content = get_pdf_first_page(content)
+
+    def get_access_type(self) -> ArticleAccessType:
+        article = self.get_object()
+        if not article.publication_allowed:
+            return ArticleAccessType.content_not_available
+        if "embed" in self.request.GET:
+            return ArticleAccessType.pdf_preview_embedded
+        else:
+            return ArticleAccessType.pdf_preview
 
 
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
