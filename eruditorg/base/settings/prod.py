@@ -193,10 +193,9 @@ LOGGING = {
         },
         'article_access': {
             'level': 'DEBUG',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'when': 'midnight',
+            'class': 'logging.handlers.WatchedFileHandler',
             'filename': DJANGO_LOG_DIRECTORY + '/www.erudit.org.article_access.log',
-            'formatter': 'verbose',
+            'formatter': 'structlog',
         },
         'referer': {
             'level': 'DEBUG',
