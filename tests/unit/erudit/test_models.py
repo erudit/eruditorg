@@ -536,35 +536,6 @@ class TestArticle:
         assert article2.embargoed
         assert article3.embargoed
 
-    # After January 1st, 2020, this test will fail and should be removed, along with the exception
-    # in the embargoed() method in the Issue() model. See GitLab issue #2271.
-    def test_2017_recma_issues_are_embargoed_until_2020_01_01(self):
-        journal = JournalFactory(code='recma')
-        issue_1 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-01-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        issue_2 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-04-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        issue_3 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-07-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        issue_4 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-10-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        assert issue_1.embargoed
-        assert issue_2.embargoed
-        assert issue_3.embargoed
-        assert issue_4.embargoed
-
     def test_get_from_fedora_ids_can_return_ephemeral_issues(self):
         issue = IssueFactory()
         ephemeral_pid = '{}.dummy123'.format(issue.get_full_identifier())

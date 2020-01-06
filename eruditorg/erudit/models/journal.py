@@ -788,11 +788,6 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def embargoed(self):
         """ Returns a boolean indicating if the issue is embargoed. """
-        # Embargo exception for 2017 RECMA issues. This should be removed after January 1st, 2020.
-        # See GitLab issue #2271.
-        if self.journal.code == 'recma' and self.year == 2017:
-            return dt.datetime.now().date() < dt.datetime.strptime('2020-01-01', '%Y-%m-%d').date()
-
         if not self.is_published:
             # Technically, we're not "embargoed", we're not published at all! If we're asking
             # whether an unpublished issue is embargoed, something wen't wrong. Let's go with the
