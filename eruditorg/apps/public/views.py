@@ -4,6 +4,7 @@ import datetime as dt
 import structlog
 import time
 
+from collections import defaultdict
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import translation
@@ -46,10 +47,33 @@ class HomeView(TemplateView):
         ).order_by('?')
 
         # Includes the latest issues
-        context['latest_issues'] = Issue.internal_objects.filter(
-            date_published__isnull=False, is_published=True) \
-            .prefetch_related('journal__collection', 'journal__disciplines') \
-            .select_related('journal').order_by('-date_published', 'journal_id')[:20]
+        latest_issues = Issue.internal_objects.prefetch_related(
+            'journal__collection',
+            'journal__disciplines',
+        ).select_related(
+            'journal',
+        ).filter(
+            date_published__gte=dt.datetime.now() - dt.timedelta(days=60),
+            is_published=True,
+        ).order_by('-date_published', 'journal_id')
+
+        issues = defaultdict(list)
+        for issue in latest_issues:
+            # If the issue's year is at least two years older than the issue's published date, we
+            # can assume it's a retrospective issue and we should group it with other retrospective
+            # issues from the same journal.
+            if issue.year < issue.date_published.year - 1:
+                issues[issue.journal.localidentifier].append(issue)
+            # If the issue's year is the same or one year older than the issue's published date, we
+            # can assume it's a current issue and we should not group it with other issues from the
+            # same journal.
+            else:
+                issues[issue.localidentifier].append(issue)
+            # Limit latest issues to 20.
+            if len(issues) >= 20:
+                break
+        # Cast the defaultdict to a dict because Django templates can't iterate on a defaultdict.
+        context['latest_issues'] = dict(issues)
 
         # Includes the 'apropos' news ; note that this is a temporary behavior as
         # these news will likely be included in the new Érudit website in the future.

@@ -84,7 +84,29 @@
     <div class="container">
       <h2 class="home-issues__title">{% trans "Derniers numéros" %}</h2>
       <ul class="home-issues__list">
-        {% for issue in latest_issues %}
+        {% for issues in latest_issues.values %}
+        {% with issue=issues.0 %}
+        {# Grouped retrospective issues #}
+        {% if issues|length > 1 %}
+        <li class="home-issues__item">
+          <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
+          {% if issue.journal.has_logo %}
+          <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }}">
+            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
+          </a>
+          {% endif %}
+          <h3>
+            <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }}">
+              <span class="home-issues__theme">{% blocktrans with count=issues|length %}{{ count }} numéros rétrospectifs{% endblocktrans %}</span>
+            </a>
+            <br/>
+            <div class="home-issues__journal">
+              {% trans "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal.name }}</a>
+            </div>
+          </h3>
+        </li>
+        {# Non-grouped current issues #}
+        {% else %}
         <li class="home-issues__item">
           <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
           {% if issue.has_coverpage %}
@@ -107,6 +129,8 @@
             </div>
           </h3>
         </li>
+        {% endif %}
+        {% endwith %}
         {% endfor %}
       </ul>
       <p>

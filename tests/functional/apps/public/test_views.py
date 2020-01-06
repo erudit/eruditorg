@@ -28,7 +28,10 @@ class TestHomeView:
         response = Client().get(url)
         # Check
         assert response.status_code == 200
-        assert list(response.context['latest_issues']) == [issue_2, issue_1, ]
+        assert response.context['latest_issues'] == {
+            issue_2.localidentifier: [issue_2],
+            issue_1.localidentifier: [issue_1],
+        }
 
     @unittest.mock.patch("apps.public.views.rss_parse")
     def test_embeds_the_latest_news_into_the_context(self, mock_content):
