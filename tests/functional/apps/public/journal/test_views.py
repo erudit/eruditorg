@@ -1366,7 +1366,7 @@ class TestArticleDetailView:
                '<strong>Guy\n      Sylvestre, o.c.</strong></p></li></ul>' in html
 
     def test_journal_multilingual_titles_in_citations(self):
-        issue = IssueFactory()
+        issue = IssueFactory(year="2019")
         repository.api.set_publication_xml(
             issue.get_full_identifier(),
             open('tests/fixtures/issue/ri04376.xml', 'rb').read(),

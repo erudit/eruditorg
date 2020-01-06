@@ -536,35 +536,6 @@ class TestArticle:
         assert article2.embargoed
         assert article3.embargoed
 
-    # After January 1st, 2020, this test will fail and should be removed, along with the exception
-    # in the embargoed() method in the Issue() model. See GitLab issue #2271.
-    def test_2017_recma_issues_are_embargoed_until_2020_01_01(self):
-        journal = JournalFactory(code='recma')
-        issue_1 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-01-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        issue_2 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-04-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        issue_3 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-07-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        issue_4 = IssueFactory(
-            year=2017,
-            date_published=dt.datetime.strptime('2017-10-01', '%Y-%m-%d').date(),
-            journal=journal,
-        )
-        assert issue_1.embargoed
-        assert issue_2.embargoed
-        assert issue_3.embargoed
-        assert issue_4.embargoed
-
     def test_get_from_fedora_ids_can_return_ephemeral_issues(self):
         issue = IssueFactory()
         ephemeral_pid = '{}.dummy123'.format(issue.get_full_identifier())
@@ -702,13 +673,13 @@ class TestArticle:
         assert article.publisher_name == expected_publisher_name
 
     def test_cite_strings_with_untitled_article(self):
-        article = ArticleFactory(from_fixture='47130ac')
+        article = ArticleFactory(from_fixture='47130ac', issue__year='2019')
         assert article.cite_string_mla == 'Bégin, Lise. «&nbsp;[Article sans titre].&nbsp;» <em>Inter</em>, numéro 110, supplément, hiver 2012, p.&nbsp;39–39.'
         assert article.cite_string_apa == 'Bégin, L. (2019). [Article sans titre]. <em>Inter</em>, 39–39.'
         assert article.cite_string_chicago == 'Bégin, Lise «&nbsp;[Article sans titre]&nbsp;». <em>Inter</em> (2019)&nbsp;: 39–39.'
 
     def test_cite_string_apa_with_article_report(self):
-        article = ArticleFactory(type=Article.ARTICLE_REPORT)
+        article = ArticleFactory(type=Article.ARTICLE_REPORT, issue__year='2019')
         assert article.cite_string_apa == 'Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. <em>Inter</em>. https://doi.org/10.7202/009255ar'
 
 

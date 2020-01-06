@@ -1,3 +1,4 @@
+import datetime
 import pytest
 
 from django.core.management import call_command
@@ -141,7 +142,7 @@ def test_import_deletions():
     sub1 = RevueabonneFactory.create(
         abonneid=abonne1.abonneid,
         revueid=revue1.revueid,
-        anneeabonnement=2019)
+        anneeabonnement=datetime.datetime.now().year)
 
     assert JournalAccessSubscriptionPeriod.objects.count() == 0
     call_command("import_restrictions", *[], **{})
