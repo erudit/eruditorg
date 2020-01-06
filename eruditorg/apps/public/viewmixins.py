@@ -18,11 +18,14 @@ class FallbackBaseViewMixin:
         context = super().get_context_data(**kwargs)
         fallback_url = self.get_fallback_url()
         if fallback_url:
+            querystring_dict = self.get_fallback_querystring_dict()
+            if 'ticket' not in querystring_dict:
+                return context
             if not fallback_url.startswith('http'):
                 fallback_url = settings.FALLBACK_BASE_URL + fallback_url
             context['fallback_url'] = "{fallback_url}?{querystring}".format(
                 fallback_url=fallback_url,
-                querystring=urlencode(self.get_fallback_querystring_dict())
+                querystring=urlencode(querystring_dict)
             )
 
         return context

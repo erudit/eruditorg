@@ -401,7 +401,7 @@ class IssueDetailView(
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
         obj = self.get_object()
-        if obj.prepublication_ticket:
+        if not obj.is_published:
             querystring_dict['ticket'] = obj.prepublication_ticket
         return querystring_dict
 
@@ -837,7 +837,7 @@ class ArticleDetailView(BaseArticleDetailView):
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
         obj = self.get_object()
-        if obj.prepublication_ticket:
+        if not obj.issue.is_published:
             querystring_dict['ticket'] = obj.issue.prepublication_ticket
         return querystring_dict
 
