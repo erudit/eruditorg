@@ -14,7 +14,6 @@ from django.utils.translation import gettext
 from erudit.solr.models import get_model_instance
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
-from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin
 
 from . import filters, legacy
 from .forms import ResultsFilterForm
@@ -27,7 +26,7 @@ from .utils import get_search_elements, GET_as_dict
 logger = logging.getLogger(__name__)
 
 
-class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
+class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
 
     form_class = SearchForm
@@ -35,7 +34,6 @@ class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Fo
         "get",
     ]
     template_name = "public/search/advanced_search.html"
-    fallback_url = "/recherche/"
 
     def get(self, request, *args, **kwargs):
         form = self.get_form()
@@ -77,7 +75,7 @@ class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Fo
         return kwargs
 
 
-class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, ContextMixin, View):
+class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
     """ Display the results associated with a search for Érudit documents. """
 
     filter_form_class = ResultsFilterForm
@@ -87,7 +85,6 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
     options_form_class = ResultsOptionsForm
     search_form_class = SearchForm
     template_name = "public/search/results.html"
-    fallback_url = "/recherche/"
 
     def __init__(self):
         super().__init__()
