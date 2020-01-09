@@ -30,7 +30,8 @@ class CollectionRedirectView(
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
         url = super().get_redirect_url()
-        collection = BookCollection.objects.get(path__endswith=kwargs['path'])
+        path = 'livre/{}'.format(kwargs['collection'])
+        collection = BookCollection.objects.get(path=path)
         return '{}#{}'.format(url, collection.slug)
 
 
@@ -42,7 +43,8 @@ class BookRedirectView(
 
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
-        book = Book.objects.get(path__endswith=kwargs['path'])
+        path = 'livre/{}/{}'.format(kwargs['collection'], kwargs['book'])
+        book = Book.objects.get(path=path)
         return reverse('public:book:book_detail', kwargs={'collection_slug': book.collection.slug,
                                                           'slug': book.slug})
 
@@ -52,7 +54,8 @@ class ChapterRedirectView(ActivateLegacyLanguageViewMixin, RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
-        book = Book.objects.get(path__endswith=kwargs['path'])
+        path = 'livre/{}/{}'.format(kwargs['collection'], kwargs['book'])
+        book = Book.objects.get(path=path)
         return reverse('public:book:chapter_detail', kwargs={
             'collection_slug': book.collection.slug,
             'slug': book.slug,

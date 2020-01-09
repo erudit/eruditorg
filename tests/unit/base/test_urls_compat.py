@@ -220,6 +220,9 @@ class TestLegacyBookUrlPatterns:
         ('/livre/hors-collection/index.htm', 'legacy_collection_home'),
         ('/livre/hors-collection/2000-1/index.htm', 'legacy_book'),
         ('/livre/hors-collection/2000-1/chapter', 'legacy_chapter'),
+
+        # Support trailling slash for chapters
+        ('/livre/collection/2000/chapter/', 'legacy_chapter'),
     ])
     def test_resolve_legacy_book_urls(self, url, expected_url_name):
         resolver = resolve(url)
