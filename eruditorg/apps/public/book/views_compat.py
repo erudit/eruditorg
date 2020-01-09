@@ -45,3 +45,16 @@ class BookRedirectView(
         book = Book.objects.get(path__endswith=kwargs['path'])
         return reverse('public:book:book_detail', kwargs={'collection_slug': book.collection.slug,
                                                           'slug': book.slug})
+
+
+class ChapterRedirectView(ActivateLegacyLanguageViewMixin, RedirectView):
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.activate_legacy_language(*args, **kwargs)
+        book = Book.objects.get(path__endswith=kwargs['path'])
+        return reverse('public:book:chapter_detail', kwargs={
+            'collection_slug': book.collection.slug,
+            'slug': book.slug,
+            'chapter_id': kwargs['chapter_id'],
+        })

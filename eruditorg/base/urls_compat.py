@@ -155,6 +155,8 @@ book_url_patterns = ([
         name='legacy_collection_home'),
     url(r'^(?P<path>[\w/]+)/index\.htm$', book_views_compat.BookRedirectView.as_view(),
         name='legacy_book'),
+    url(r'^(?P<path>[\w/]+)/(?P<chapter_id>\w+)$', book_views_compat.ChapterRedirectView.as_view(),
+        name='legacy_chapter'),
 ], 'legacy_book')
 
 
