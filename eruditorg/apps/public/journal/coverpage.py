@@ -271,9 +271,7 @@ def get_coverpage(article):
         left_column.append(Paragraph(
             '{label} <link href="{url}" color="#ff4242">{url}</link>'.format(
                 label=_('DOI&nbsp;:'),
-                url='https://doi.org/{path}'.format(
-                    path=article.doi
-                )
+                url=article.url_doi,
             ),
             styles['normal'],
         ))

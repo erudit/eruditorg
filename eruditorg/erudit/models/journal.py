@@ -1271,8 +1271,14 @@ class Article(FedoraMixin):
 
     @cached_property
     @catch_and_log
-    def doi(self):
-        return self.erudit_object.doi
+    def url_doi(self):
+        doi = self.erudit_object.doi
+        if doi is None:
+            return None
+        elif urlparse(doi).netloc:
+            return doi
+        else:
+            return f'https://doi.org/{doi}'
 
     @property
     def authors_display(self):
@@ -1364,7 +1370,7 @@ class Article(FedoraMixin):
         else:
             cite_string += '.'
         if self.doi:
-            cite_string += ' https://doi.org/{}'.format(self.doi)
+            cite_string += ' {}'.format(self.url_doi)
         return cite_string
 
     @cached_property
@@ -1396,7 +1402,7 @@ class Article(FedoraMixin):
         else:
             cite_string += '.'
         if self.doi:
-            cite_string += ' https://doi.org/{}'.format(self.doi)
+            cite_string += ' {}'.format(self.url_doi)
         return cite_string
 
     @cached_property
@@ -1420,7 +1426,7 @@ class Article(FedoraMixin):
         else:
             cite_string += '.'
         if self.doi:
-            cite_string += ' https://doi.org/{}'.format(self.doi)
+            cite_string += ' {}'.format(self.url_doi)
         return cite_string
 
 

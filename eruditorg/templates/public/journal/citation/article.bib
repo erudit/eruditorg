@@ -8,5 +8,5 @@
   {% if article.first_page and article.last_page %}pages="{{ article.first_page }}--{{ article.last_page }}",{% endif %}
   year="{{ article.issue.year }}",
   publisher="{{ article.publisher_name|safe }}",
-  {% if article.doi %}doi="https://doi.org/{{ article.doi }}"{% endif %}
+  {% if article.url_doi %}doi="{{ article.url_doi }}"{% endif %}
 }

@@ -8,6 +8,7 @@ from django.conf import settings
 from django.test import override_settings
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
+from eruditarticle.objects import EruditArticle
 
 from erudit.models import Issue, Article
 from erudit.fedora.objects import JournalDigitalObject
@@ -681,6 +682,15 @@ class TestArticle:
     def test_cite_string_apa_with_article_report(self):
         article = ArticleFactory(type=Article.ARTICLE_REPORT, issue__year='2019')
         assert article.cite_string_apa == 'Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. <em>Inter</em>. https://doi.org/10.7202/009255ar'
+
+    @pytest.mark.parametrize('doi, expected_url_doi', (
+        ('10.7202/009255ar', 'https://doi.org/10.7202/009255ar'),
+        ('https://doi.org/10.7202/009255ar', 'https://doi.org/10.7202/009255ar'),
+    ))
+    def test_url_doi(self, doi, expected_url_doi, monkeypatch):
+        monkeypatch.setattr(EruditArticle, 'doi', doi)
+        article = ArticleFactory()
+        assert article.url_doi == expected_url_doi
 
 
 def test_journaltype_can_return_embargo_duration_in_days():
