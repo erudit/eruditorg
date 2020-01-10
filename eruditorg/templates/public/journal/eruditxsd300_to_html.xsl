@@ -5,7 +5,6 @@
   <!--=========== VARIABLES & PARAMETERS ===========-->
   <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
   <xsl:variable name="iderudit" select="article/@idproprio"/>
-  <xsl:variable name="doi" select="normalize-space(article/admin/infoarticle/idpublic[@scheme = 'doi'])"/>
   <xsl:variable name="typeudoc">
     <xsl:choose>
       <xsl:when test="article/@typeart='article'">
@@ -164,18 +163,18 @@
               </span>
             </dd>
 
-            <xsl:if test="$doi">
+            {% if article.url_doi %}
               <dt>DOI</dt>
               <dd>
                 <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
-                  <a href="{$doiStart}{$doi}" class="clipboard-data">
-                    <xsl:value-of select="$doiStart"/><xsl:value-of select="$doi"/>
+                  <a href="{{ article.url_doi }}" class="clipboard-data">
+                    {{ article.url_doi }}
                     <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                     <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                   </a>
                 </span>
               </dd>
-            </xsl:if>
+            {% endif %}
           </dl>
           </p>
         </div>

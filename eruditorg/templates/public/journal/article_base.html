@@ -81,7 +81,7 @@
 {% endif %}
 <meta name="citation_publication_date" content="{{ article.issue.year }}" />
 <meta name="citation_publisher" content="{{ article.publisher_name }}" />
-{% if article.doi %}<meta name="citation_doi" content="https://doi.org/{{ article.doi }}" />{% endif %}
+{% if article.doi %}<meta name="citation_doi" content="{{ article.url_doi }}" />{% endif %}
 {% if article.processing == 'C' %}
 <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% endif %}
