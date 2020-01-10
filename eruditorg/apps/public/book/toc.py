@@ -132,13 +132,9 @@ def read_toc(book_path: Path) -> TableOfContents:
 
 
 def find_chapter_xml(book_path: Path, chapter_id: str) -> XMLElement:
-    xml_glob_pattern = '{}.xml'.format(chapter_id)
-    glob_patterns = ['{}', 'Fiches_xml/{}', '../../fiches_solr/{}']
-    for glob_pattern in glob_patterns:
-        subpath_match = book_path.glob(glob_pattern.format(xml_glob_pattern))
-        try:
-            xml_path = next(subpath_match)
-        except StopIteration:
-            continue
-        return get_xml_from_file(xml_path)
-    raise Exception('XML for chapter {} not found !'.format(chapter_id))
+    subpath_match = book_path.glob(f"Fiches_xml/{chapter_id}.xml")
+    try:
+        xml_path = next(subpath_match)
+    except StopIteration:
+        raise Exception(f"XML for chapter {chapter_id} not found !")
+    return get_xml_from_file(xml_path)

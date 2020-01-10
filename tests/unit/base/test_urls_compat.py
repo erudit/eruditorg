@@ -205,3 +205,25 @@ class TestLegacyJournalUrlPatterns:
         else:
             with pytest.raises(Resolver404):
                 resolver = resolve(url)
+
+
+@pytest.mark.django_db
+class TestLegacyBookUrlPatterns:
+
+    @pytest.mark.parametrize('url, expected_url_name', [
+        ('/livre/', 'legacy_books_home'),
+        ('/livre/collection/index.htm', 'legacy_collection_home'),
+        ('/livre/collection/2000/index.htm', 'legacy_book'),
+        ('/livre/collection/2000/chapter', 'legacy_chapter'),
+
+        # Support `-` in paths
+        ('/livre/hors-collection/index.htm', 'legacy_collection_home'),
+        ('/livre/hors-collection/2000-1/index.htm', 'legacy_book'),
+        ('/livre/hors-collection/2000-1/chapter', 'legacy_chapter'),
+
+        # Support trailling slash for chapters
+        ('/livre/collection/2000/chapter/', 'legacy_chapter'),
+    ])
+    def test_resolve_legacy_book_urls(self, url, expected_url_name):
+        resolver = resolve(url)
+        assert resolver.url_name == expected_url_name

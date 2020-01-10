@@ -1,3 +1,5 @@
+import pytest
+
 from pathlib import Path
 from apps.public.book.toc import find_chapter_xml, read_toc
 
@@ -5,19 +7,17 @@ from apps.public.book.toc import find_chapter_xml, read_toc
 FIXTURE_ROOT = Path(__file__).parent / 'fixtures'
 
 
-def test_can_find_chapter_xml_when_located_in_book_subdirectory():
-    chapter_xml = find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', '000274li')
-    assert chapter_xml.find('doc/field[@name="ID"]').text == '000274li'
-
-
-def test_can_find_chapter_xml_when_located_in_solr_directory():
-    chapter_xml = find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', '000275li')
-    assert chapter_xml.find('doc/field[@name="ID"]').text == '000275li'
-
-
-def test_can_find_chapter_xml_when_located_in_book_directory():
-    chapter_xml = find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', '000276li')
-    assert chapter_xml.find('doc/field[@name="ID"]').text == '000276li'
+@pytest.mark.parametrize('fixture, exception', (
+    ('000274li', False),
+    ('non-existent-id', True),
+))
+def test_can_find_chapter_xml(fixture, exception):
+    if not exception:
+        chapter_xml = find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', fixture)
+        assert chapter_xml.find('doc/field[@name="ID"]').text == '000274li'
+    else:
+        with pytest.raises(Exception):
+            find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', fixture)
 
 
 def test_can_create_book_toc_entry():
