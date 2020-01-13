@@ -1991,6 +1991,29 @@ class TestArticleDetailView:
                '<span class="petitecap">C</span><span class="petitecap">élat</span>' \
                '<span class="petitecap">, Ipac, </span>Université Laval</p></li>' in html
 
+    @pytest.mark.parametrize('fixture, expected_link', (
+        # `https://` should be added to URLs that starts with `www`.
+        ('1038424ar', '<a href="https://www.inspq.qc.ca/pdf/publications/1177_RelGazSchisteSante' \
+                      '%20PubRapPreliminaire.pdf" id="ls3" target="_blank">www.inspq.qc.ca/pdf/' \
+                      'publications/1177_RelGazSchisteSante PubRapPreliminaire.pdf</a>'),
+        # `https://` should not be added to email addresses.
+        ('1038424ar', '<a href="mailto:yenny.vega.cardenas@umontreal.ca" id="ls1" ' \
+                      'target="_blank">yenny.vega.cardenas@umontreal.ca</a>'),
+        # Complete URLs should not be altered.
+        ('1038424ar', '<a href="http://www.nytimes.com/2014/12/18/nyregion/cuomo-to-ban-fracking-' \
+                      'in-new-york-state-citing-health-risks.html?_r=0" id="ls4" target="_blank">' \
+                      'http://www.nytimes.com/2014/12/18/nyregion/cuomo-to-ban-fracking-' \
+                      'in-new-york-state-citing-health-risks.html?_r=0</a>'),
+        # Links to `http://www.erudit.org` should not have target="_blank".
+        ('009256ar', '<a href="http://www.erudit.org/revue/ron/1998/v/n9" id="ls1">' \
+                     'http://www.erudit.org/revue/ron/1998/v/n9</a>'),
+    ))
+    def test_liensimple_urls(self, fixture, expected_link):
+        article = ArticleFactory(from_fixture=fixture)
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert expected_link in html
+
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')

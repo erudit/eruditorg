@@ -2275,7 +2275,16 @@
   <xsl:template match="liensimple">
     <xsl:element name="a">
       <xsl:attribute name="href">
-        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+        <xsl:variable name="href" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+        <xsl:choose>
+          <!-- Add protocol if it's missing from the URL -->
+          <xsl:when test="starts-with($href, 'www')">
+            <xsl:value-of select="concat('https://', $href)"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$href"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:attribute>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>
