@@ -56,7 +56,8 @@ class ChapterRedirectView(ActivateLegacyLanguageViewMixin, RedirectView):
         self.activate_legacy_language(*args, **kwargs)
         path = 'livre/{}/{}'.format(kwargs['collection'], kwargs['book'])
         book = Book.objects.get(path=path)
-        return reverse('public:book:chapter_detail', kwargs={
+        view_name = 'chapter_pdf' if 'pdf' in kwargs else 'chapter_detail'
+        return reverse(f'public:book:{view_name}', kwargs={
             'collection_slug': book.collection.slug,
             'slug': book.slug,
             'chapter_id': kwargs['chapter_id'],

@@ -223,6 +223,9 @@ class TestLegacyBookUrlPatterns:
 
         # Support trailling slash for chapters
         ('/livre/collection/2000/chapter/', 'legacy_chapter'),
+
+        # Support legacy PDF URLs
+        ('/livre/collection/2000/chapter.pdf', 'legacy_chapter_pdf'),
     ])
     def test_resolve_legacy_book_urls(self, url, expected_url_name):
         resolver = resolve(url)

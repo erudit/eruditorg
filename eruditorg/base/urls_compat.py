@@ -157,6 +157,8 @@ book_url_patterns = ([
         name='legacy_book'),
     url(r'^(?P<collection>[\w-]+)/(?P<book>[\w-]+)/(?P<chapter_id>\w+)/?$', book_views_compat.ChapterRedirectView.as_view(),  # noqa
         name='legacy_chapter'),
+    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w-]+)/(?P<chapter_id>\w+)\.(?P<pdf>pdf)$', book_views_compat.ChapterRedirectView.as_view(),  # noqa
+        name='legacy_chapter_pdf'),
 ], 'legacy_book')
 
 
