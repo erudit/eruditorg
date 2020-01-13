@@ -153,11 +153,11 @@ book_url_patterns = ([
         name='legacy_books_home'),
     url(r'^(?P<collection>[\w-]+)/index\.htm$', book_views_compat.CollectionRedirectView.as_view(),
         name='legacy_collection_home'),
-    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w-]+)/index\.htm$', book_views_compat.BookRedirectView.as_view(),  # noqa
+    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w/-]+)/index\.htm$', book_views_compat.BookRedirectView.as_view(),  # noqa
         name='legacy_book'),
-    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w-]+)/(?P<chapter_id>\w+)/?$', book_views_compat.ChapterRedirectView.as_view(),  # noqa
+    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w/-]+)/(?P<chapter_id>\w+)/?$', book_views_compat.ChapterRedirectView.as_view(),  # noqa
         name='legacy_chapter'),
-    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w-]+)/(?P<chapter_id>\w+)\.(?P<pdf>pdf)$', book_views_compat.ChapterRedirectView.as_view(),  # noqa
+    url(r'^(?P<collection>[\w-]+)/(?P<book>[\w/-]+)/(?P<chapter_id>\w+)\.(?P<pdf>pdf)$', book_views_compat.ChapterRedirectView.as_view(),  # noqa
         name='legacy_chapter_pdf'),
 ], 'legacy_book')
 

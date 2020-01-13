@@ -226,6 +226,11 @@ class TestLegacyBookUrlPatterns:
 
         # Support legacy PDF URLs
         ('/livre/collection/2000/chapter.pdf', 'legacy_chapter_pdf'),
+
+        # Support extra slash in book paths (ie. boismenu sub-books)
+        ('/livre/collection/2000/1/index.htm', 'legacy_book'),
+        ('/livre/collection/2000/1/chapter/', 'legacy_chapter'),
+        ('/livre/collection/2000/1/chapter.pdf', 'legacy_chapter_pdf'),
     ])
     def test_resolve_legacy_book_urls(self, url, expected_url_name):
         resolver = resolve(url)
