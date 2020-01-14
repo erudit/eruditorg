@@ -6,7 +6,6 @@ class Commons {
 
   init() {
     this.scrollToTop();
-    this.randomImage();
   }
 
   /*
@@ -24,18 +23,6 @@ class Commons {
      return false;
    });
  };
-
-   /*
-   * Display random campaign image
-   */
-   randomImage() {
-
-     var x = Math.floor(Math.random() * 5) + 1;
-
-     $('#campaign-banner, #campaign-sidebar').addClass('image' + x);
-
-   }
-
 }
 
 export default Commons;
