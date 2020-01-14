@@ -8,26 +8,8 @@ class Nav {
   }
 
   init() {
-    this.subNavs();
     this.stickyHeader();
     this.searchBar();
-  }
-
-  /*
-   * Sub-navs
-   */
-  subNavs() {
-    $("[data-sub-nav]").on('click', function(event) {
-      event.preventDefault();
-
-      var $this   = $(this),
-          $target = $( $this.data('sub-nav') );
-
-      if ( $target.eq(0) ) {
-        $this.toggleClass('selected');
-        $target.toggleClass('visible');
-      }
-    });
   }
 
   /*
