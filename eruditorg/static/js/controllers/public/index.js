@@ -1,4 +1,3 @@
-import HomeController from './HomeController';
 import LoginController from './LoginController';
 import AdvancedSearchController from './search/AdvancedSearchController';
 import ResultsController from './search/ResultsController';
@@ -9,7 +8,6 @@ import JournalDetailController from './journal/JournalDetailController';
 import SavedCitationListController from './citations/SavedCitationListController';
 
 const controllers = {
-  'public:home': HomeController,
   'public:login': LoginController,
   'public:search:advanced-search': AdvancedSearchController,
   'public:search:results': ResultsController,
