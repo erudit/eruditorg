@@ -6,16 +6,10 @@ export default {
     function checkUploads(ev) {
       if (quitConfirm) { return; }
 
-      var filesAddedCount = $('#id_submissions').data('files-added');
       var filesUploadingCount = $('#id_submissions').data('files-uploading');
-      if (!filesAddedCount && !filesUploadingCount) {
+      if (!filesUploadingCount) {
         quitConfirm = true;
         return;
-      }
-
-      if(filesAddedCount) {
-        var r = confirm(gettext("Certains de vos fichiers n'ont pas étés téléversés. Voulez-vous poursuivre l'enregistrement ?"));
-        if (r == true) { quitConfirm = true; }
       }
 
       if(filesUploadingCount) {
