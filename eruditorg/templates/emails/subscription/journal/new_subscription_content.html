@@ -10,10 +10,16 @@ Abonnement / Subscription
 <p>
   L'éditeur de <strong>{{ token.content_object.journal.name }}</strong> vous envoie un abonnement à sa revue sur erudit.org. Veuillez cliquer sur le lien suivant pour l'accepter.
 </p>
+<p>
+  Vous avez jusqu'au <strong>{{ token.expiration_date|date:"SHORT_DATETIME_FORMAT" }}</strong> pour accepter l'abonnement.
+</p>
 <hr>
 <p>Hi,</p>
 <p>
   The publisher of <strong>{{ token.content_object.journal.name }}</strong> is sending you a subscription to their journal on erudit.org. Click the following link to accept it.
+</p>
+<p>
+  You have until <strong>{{ token.expiration_date|date:"SHORT_DATETIME_FORMAT" }}</strong> to accept the subscription.
 </p>
 {% endblock content %}
 
