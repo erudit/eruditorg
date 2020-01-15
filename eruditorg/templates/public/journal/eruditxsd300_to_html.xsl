@@ -424,8 +424,10 @@
           {% endif %}
         {% elif not article.abstracts and display_abstracts %}
           {% if article.processing == 'C' %}
-          <section id="first-600-words">
+          <section id="first-600-words" class="corps">
+            <p class="alinea">
             {{ article.html_body|safe|truncatewords_html:600 }}
+            </p>
           </section>
           {% elif can_display_first_pdf_page %}
           <section id="first-pdf-page">
