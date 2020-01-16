@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if repository.logo %}
-<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ repository.logo.url }}">
+<meta property="og:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
 <meta property="og:description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ repository }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
 
@@ -23,7 +23,7 @@
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
 {% if repository.logo %}
-<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ repository.logo.url }}">
+<meta name="twitter:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ repository.name }}">
 <meta name="twitter:description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ repository }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
