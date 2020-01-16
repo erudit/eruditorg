@@ -12,7 +12,7 @@
 <meta property="og:title" content="{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle|safe }}{% endif %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
+<meta property="og:image" content="https://{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
 <meta property="og:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 
 <!-- Twitter -->
@@ -21,7 +21,7 @@
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle|safe }}{% endif %} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.name|safe }}">
-<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
+<meta name="twitter:image" content="https://{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
 <meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 {% endblock meta_tags %}
 
