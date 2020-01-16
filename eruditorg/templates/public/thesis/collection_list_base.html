@@ -35,7 +35,6 @@
 
 {% block body_class %}{{ block.super }} thesis_collection_list{% endblock body_class %}
 {% block body_id %}thesis_collection_list{% endblock body_id %}
-{% block data_controller %}public:thesis:collection_list{% endblock data_controller %}
 
 {% block breadcrumb %}
 {{ block.super }}
@@ -105,12 +104,6 @@
             </div>
             {% endif %}
           </div>
-          {% if thesis.description or thesis.keywords.all %}
-          <div class="col-xs-1 text-right">
-            <a href="#" class="thesis-extend"><i class="icon ion-add"></i></a>
-            <a href="#" class="thesis-reduce"><i class="icon ion-remove"></i></a>
-          </div>
-          {% endif %}
         </li>
       {% endfor %}
       </ul>
