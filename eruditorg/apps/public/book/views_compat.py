@@ -1,3 +1,6 @@
+import structlog
+
+from django.http import Http404
 from django.urls import reverse
 from django.views.generic import RedirectView
 
@@ -6,6 +9,9 @@ from apps.public.book.models import (
     Book,
 )
 from base.viewmixins import ActivateLegacyLanguageViewMixin
+
+
+logger = structlog.getLogger(__name__)
 
 
 class BooksHomeRedirectView(
@@ -44,7 +50,11 @@ class BookRedirectView(
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
         path = 'livre/{}/{}'.format(kwargs['collection'], kwargs['book'])
-        book = Book.objects.get(path=path)
+        try:
+            book = Book.objects.get(path=path)
+        except Book.DoesNotExist:
+            logger.warning('Book matching query does not exist.', path=path)
+            raise Http404
         return reverse('public:book:book_detail', kwargs={'collection_slug': book.collection.slug,
                                                           'slug': book.slug})
 
@@ -55,7 +65,11 @@ class ChapterRedirectView(ActivateLegacyLanguageViewMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
         path = 'livre/{}/{}'.format(kwargs['collection'], kwargs['book'])
-        book = Book.objects.get(path=path)
+        try:
+            book = Book.objects.get(path=path)
+        except Book.DoesNotExist:
+            logger.warning('Book matching query does not exist.', path=path)
+            raise Http404
         view_name = 'chapter_pdf' if 'pdf' in kwargs else 'chapter_detail'
         return reverse(f'public:book:{view_name}', kwargs={
             'collection_slug': book.collection.slug,
