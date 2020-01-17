@@ -7,7 +7,7 @@
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
-<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{% blocktrans with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
@@ -20,7 +20,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
-<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
 {% if repository.logo %}
 <meta name="twitter:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
