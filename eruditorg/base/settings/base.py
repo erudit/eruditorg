@@ -171,6 +171,7 @@ INSTALLED_APPS = (
     'core.journal',
     'core.metrics',
     'core.subscription',
+    'erudit.cache',
 
     # Third-party apps
     'modeltranslation',
