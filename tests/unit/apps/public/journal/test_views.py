@@ -92,8 +92,7 @@ class TestJournalDetailView:
         assert 'Isabelle Richer (Rédactrice adjointe)' not in html
         assert 'Foo (Bar)' in html
 
-    def test_available_since_when_issues_are_not_produced_in_the_same_order_as_their_published_date(self, monkeypatch):
-        monkeypatch.setattr(Journal, 'has_logo', unittest.mock.MagicMock(return_value=False))
+    def test_available_since_when_issues_are_not_produced_in_the_same_order_as_their_published_date(self):
         journal = JournalFactory()
         issue_1 = IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
         issue_2 = IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))

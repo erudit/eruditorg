@@ -269,7 +269,6 @@ class TestJournalDetailView:
         assert response_2.context['journal_info'] == {'updated': None}
 
     def test_can_display_when_issues_have_a_space_in_their_number(self, monkeypatch):
-        monkeypatch.setattr(Issue, 'has_coverpage', unittest.mock.Mock(return_value=True))
         monkeypatch.setattr(Issue, 'erudit_object', unittest.mock.MagicMock())
         issue = IssueFactory(number='2 bis')
         url_1 = journal_detail_url(issue.journal)
@@ -354,8 +353,7 @@ class TestJournalDetailView:
         assert b'<section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about"' not in content
 
     @pytest.mark.parametrize('charges_apc', (True, False))
-    def test_journal_detail_has_no_apc_mention_if_it_charges_apc(self, charges_apc, monkeypatch):
-        monkeypatch.setattr(Journal, 'has_logo', unittest.mock.MagicMock(return_value=False))
+    def test_journal_detail_has_no_apc_mention_if_it_charges_apc(self, charges_apc):
         journal = JournalFactory(charges_apc=charges_apc)
         url = journal_detail_url(journal)
         response = self.client.get(url)
@@ -634,9 +632,8 @@ class TestIssueDetailView:
                'target="_blank" title="Download">'),
     ))
     def test_article_pdf_url_is_cache_with_the_right_language(
-        self, language_code, expected_link, monkeypatch,
+        self, language_code, expected_link,
     ):
-        monkeypatch.setattr(Journal, 'has_logo', unittest.mock.MagicMock(return_value=False))
         article = ArticleFactory(
             issue__journal__code='journal',
             issue__year='2000',

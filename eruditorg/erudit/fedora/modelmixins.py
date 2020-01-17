@@ -157,7 +157,11 @@ class FedoraMixin:
         if self.fedora_object is None:
             return False
 
-        content = get_cached_datastream_content(self.fedora_object, datastream_name)
+        try:
+            content = get_cached_datastream_content(self.fedora_object, datastream_name)
+        except RequestFailed:
+            return False
+
         if not content:
             return False
 

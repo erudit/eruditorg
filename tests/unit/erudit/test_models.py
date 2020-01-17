@@ -172,14 +172,16 @@ class TestJournal:
     @pytest.mark.parametrize('logo, expected_has_logo', [
         ('logo.png', True),
         ('logo_empty.png', False),
+        (False, False),
     ])
     def test_knows_if_it_has_a_logo(self, logo, expected_has_logo):
         journal = JournalFactory()
-        repository.api.register_datastream(
-            journal.get_full_identifier(),
-            '/LOGO/content',
-            open(settings.MEDIA_ROOT + '/' + logo, 'rb').read(),
-        )
+        if logo:
+            repository.api.register_datastream(
+                journal.get_full_identifier(),
+                '/LOGO/content',
+                open(settings.MEDIA_ROOT + '/' + logo, 'rb').read(),
+            )
         assert journal.has_logo == expected_has_logo
 
 
