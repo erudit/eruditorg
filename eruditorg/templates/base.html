@@ -57,7 +57,7 @@
     {% endif %}
     {% block meta_tags %}
     <!-- Facebook / Open Graph -->
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Érudit">
     <meta property="og:locale" content="{{ language_code }}_CA">
@@ -68,7 +68,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@eruditorg">
     <meta name="twitter:title" content="{% trans 'Cultivez votre savoir' %}">
-    <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
     <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
     <meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
     <meta name="twitter:description" content="{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}">
