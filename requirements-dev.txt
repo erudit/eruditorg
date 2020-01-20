@@ -8,7 +8,7 @@ ipython>=4.0.0
 pip-tools
 
 # Testing
-pytest>=3.1.1,!=4.2.0
+pytest>=5.3.2,!=5.3.3
 pytest-cov>=1.8
 pytest-django>=2.8
 pytest-xdist>=1.15.0
