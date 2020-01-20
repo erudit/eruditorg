@@ -184,6 +184,23 @@ class Article(SolrDocument):
             return journal.external_url
         return reverse('public:journal:journal_detail', args=(journal.code, ))
 
+    @property
+    def issue_url(self):
+        try:
+            issue = erudit_models.Issue.from_fedora_ids(
+                self.solr_data['RevueID'],
+                self.solr_data['NumeroID'],
+            )
+        except erudit_models.Issue.DoesNotExist:
+            return None
+        if issue.external_url:
+            return issue.external_url
+        return reverse('public:journal:issue_detail', args=(
+            issue.journal.code,
+            issue.volume_slug,
+            issue.localidentifier,
+        ))
+
 
 class Thesis(SolrDocument):
     def can_cite(self):

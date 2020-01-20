@@ -214,15 +214,27 @@
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
-                    {% if document.document_type == 'article' %}<a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.publication_year|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
+                    {% if document.document_type == 'article' %}
+                    {% if document.issue_url %}
+                    <a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">
+                      {{ document.publication_year|safe }}
+                    </a>
+                    {% else %}
+                    {{ document.publication_year|safe }}
+                    {% endif %}
+                    {% endif %}
                   </p>
                   {# issue theme or department for a thesis #}
                   {% if document.document_type == 'article' %}
                   {% if document.issue_title %}
                   <p class="col-xs-12 issue-theme">
+                    {% if document.issue_url %}
                     <a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
                       {{ document.issue_title|safe }}
                     </a>
+                    {% else %}
+                    {{ document.issue_title|safe }}
+                    {% endif %}
                   </p>
                   {% endif %}
                   {% endif %}
