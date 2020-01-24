@@ -33,6 +33,12 @@ class InstitutionIPAddressRangeAdmin(admin.ModelAdmin):
     search_fields = ('subscription__organisation__name',)
     form = InstitutionIPAddressRangeForm
 
+    fieldsets = [
+        (None, {
+            'fields': (('subscription',), ('ip_start',), ('ip_end',),),
+        }),
+    ]
+
 
 class SubscriptionTypeListFilter(admin.SimpleListFilter):
     title = _("Type d'abonnement")
