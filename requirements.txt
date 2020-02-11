@@ -4,11 +4,11 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
-git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.9#egg=django-resumable-uploads
-git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
-git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.64#egg=liberuditarticle
+-e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
+-e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.9#egg=django-resumable-uploads
+-e git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
+-e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
+-e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.64#egg=liberuditarticle
 babel==2.3.4
 beautifulsoup4==4.6.1
 cairocffi==1.0.2
@@ -19,7 +19,6 @@ chardet==3.0.4
 colorama==0.4.1
 cssselect2==0.2.1         # via cairosvg
 cssselect==1.1.0          # via lxml
-dataclasses==0.7          # via pydantic
 defusedxml==0.6.0         # via cairosvg
 django-admin-rangefilter==0.3.12
 django-adv-cache-tag==1.1.2
@@ -41,7 +40,7 @@ django-reversion==3.0.4
 django-taggit==1.1.0
 django-waffle==0.17.0
 django-widget-tweaks==1.4.5
-django==2.0.13
+django==2.2.9
 et-xmlfile==1.0.1         # via openpyxl
 feedparser==5.2.1
 html2text==2019.8.11
@@ -78,13 +77,13 @@ rules==2.1
 sentry-sdk==0.11.1
 sickle==0.6.4
 simplejson==3.16.0
-six==1.12.0               # via django-isbn-field, html5lib, influxdb, isodate, python-dateutil, structlog
+six==1.12.0               # via django-isbn-field, influxdb, isodate, python-dateutil, structlog
 sqlparse==0.3.0
 structlog==19.1.0
 suds-py3==1.3.3.0
 tinycss2==1.0.2
 urllib3==1.25.3           # via requests, sentry-sdk
-webencodings==0.5.1       # via html5lib, tinycss2
+webencodings==0.5.1       # via tinycss2
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==41.2.0        # via cairocffi, tinycss2
+# setuptools
