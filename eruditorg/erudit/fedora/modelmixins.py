@@ -12,6 +12,7 @@ from requests.exceptions import ConnectionError
 from .cache import get_cached_datastream_content
 from ..conf import settings as erudit_settings
 from .repository import api
+from erudit.cache import cache_set
 
 logger = structlog.getLogger(__name__)
 
@@ -121,9 +122,12 @@ class FedoraMixin:
         else:
             # Stores the XML content of the object for further use
             if self._should_use_cache() and use_cache:
-                cache.set(
-                    fedora_xml_content_key, fedora_xml_content,
-                    self.fedora_xml_content_cache_timeout
+                cache_set(
+                    cache,
+                    fedora_xml_content_key,
+                    fedora_xml_content,
+                    self.fedora_xml_content_cache_timeout,
+                    localidentifiers=[self.localidentifier],
                 )
 
         return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
