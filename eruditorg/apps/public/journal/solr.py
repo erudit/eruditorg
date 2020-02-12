@@ -125,7 +125,9 @@ def get_journal_authors_dict(journal_code, first_letter, article_type):
             if author[:1] in relevant_letters:
                 contributors = list(authors)
                 contributors.remove(author)
-                result[author].append(dict(article_dict, contributors=contributors))
+                article_dict['author'] = author
+                # Slugify the dict keys to avoid duplicate author entries.
+                result[slugify(author)].append(dict(article_dict, contributors=contributors))
     for articles in result.values():
         articles.sort(key=itemgetter('year'), reverse=True)
     result = OrderedDict((k, v) for (k, v) in sorted(result.items()))
