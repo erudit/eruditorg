@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from collections import OrderedDict
 from lxml import etree as et
 
 import datetime as dt
@@ -493,6 +494,42 @@ class TestJournalAuthorsListView:
         response = Client().get(url)
 
         assert response.context['view'].has_multiple_article_types == expected
+
+    def test_no_duplicate_authors_with_lowercase_and_uppercase_names(self):
+        issue = IssueFactory(journal__code='journal')
+        ArticleFactory.create(issue=issue, localidentifier='article1', authors=['FOO, BAR'])
+        ArticleFactory.create(issue=issue, localidentifier='article2', authors=['FOO, Bar'])
+        ArticleFactory.create(issue=issue, localidentifier='article3', authors=['Foo, Bar'])
+
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': 'journal'})
+        response = Client().get(url)
+
+        assert response.context['authors_dicts'] == OrderedDict({
+            'foo-bar': [
+                {
+                    'author': 'FOO, BAR',
+                    'contributors': [],
+                    'id': 'article1',
+                    'title': 'Robert Southey, Writing and Romanticism',
+                    'url': None,
+                    'year': '2',
+                }, {
+                    'author': 'FOO, Bar',
+                    'contributors': [],
+                    'id': 'article2',
+                    'title': 'Robert Southey, Writing and Romanticism',
+                    'url': None,
+                    'year': '2',
+                }, {
+                    'author': 'Foo, Bar',
+                    'contributors': [],
+                    'id': 'article3',
+                    'title': 'Robert Southey, Writing and Romanticism',
+                    'url': None,
+                    'year': '2',
+                },
+            ],
+        })
 
 
 class TestIssueDetailView:

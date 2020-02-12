@@ -113,9 +113,9 @@
     </nav>
     <ul class="authors">
       <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
-      {% for author, articles in authors_dicts.items %}
+      {% for articles in authors_dicts.values %}
         <li class="author-group">
-          <h3 class="author-name">{{ author }}</h3>
+          <h3 class="author-name">{{ articles.0.author }}</h3>
           <ul class="author-articles">
             {% for article in articles %}
               <li class="author-article">
