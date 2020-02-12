@@ -722,6 +722,11 @@ class TestRenderArticleTemplateTag:
         # There should be an hyphen between multiple months and no coma between month and year.
         assert '<p class="refpapier"><span class="volumaison"><span class="nonumero">Numéro 179</span>, Janvier–Avril 2018</span>, p. 1–2</p>' in ret
 
+    def test_volumaison_with_multiple_numbers(self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
+        ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1067490ar.xml')
+        # There should be an hyphen between multiple numbers and a coma between numbers and period.
+        assert '<p class="refpapier"><span class="volumaison"><span class="volume">Volume\xa028</span>, <span class="nonumero">Numéro\xa02–3</span>, Printemps 2018</span>, p.\xa07–9' in ret
+
     def test_separator_between_sections_in_different_languages(self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
         ret = self.mock_article_detail_view(mock_has_coverpage, mock_ds, mock_xsd300, mock_eo, '1046558ar.xml')
         # There should not be a separator before the first section.
