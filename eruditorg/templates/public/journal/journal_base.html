@@ -1,5 +1,5 @@
 {% extends "public/base.html" %}
-{% load erudit_cache_tag i18n model_formatters waffle_tags %}
+{% load adv_cache i18n model_formatters waffle_tags %}
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>

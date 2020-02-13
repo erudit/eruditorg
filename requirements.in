@@ -4,7 +4,6 @@ Django>=2.0,<2.1
 -e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 -e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
 -e git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
-redis-key-tagging>=0.0,<1.0
 
 # pip-compile can't detect transitive dependencies from git dependecies. We have to list them
 # ourselves
@@ -56,7 +55,7 @@ Babel>=2.3.4,<2.4
 openpyxl>=2.3.5,<2.4
 requests[socks]>=2.19
 django-waffle>=0.16.0
-django-redis>=4.9.0,<4.11
+django-redis>=4.9.0,<4.10
 suds-py3>=1.3.3
 tinycss2>=1.0.2
 beautifulsoup4==4.6.1
