@@ -672,7 +672,7 @@
 
   <xsl:template match="numero/volume">
     <span class="{name()}">
-      <xsl:text{% blocktrans %}>Volume&#160;{% endblocktrans %}</xsl:text>
+      <xsl:text>{% blocktrans %}Volume&#160;{% endblocktrans %}</xsl:text>
       <xsl:value-of select="."/>
     </span>
   </xsl:template>

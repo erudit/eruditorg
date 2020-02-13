@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-29 08:34-0500\n"
+"POT-Creation-Date: 2020-02-13 10:21-0500\n"
 "PO-Revision-Date: 2019-07-17 14:52+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2019\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -21,85 +21,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: static/js/controllers/citations/SavedCitationListController.js:12
+#: static/js/controllers/public/citations/SavedCitationListController.js:12
 msgid "%(count)s document sélectionné"
 msgid_plural "%(count)s documents sélectionnés"
 msgstr[0] "%(count)s document selected"
 msgstr[1] "%(count)s documents selected"
 
-#: static/js/controllers/citations/SavedCitationListController.js:32
+#: static/js/controllers/public/citations/SavedCitationListController.js:32
 msgid "%(count)s article savant"
 msgid_plural "%(count)s articles savants"
 msgstr[0] "%(count)s scholary article"
 msgstr[1] "%(count)s scholary articles"
 
-#: static/js/controllers/citations/SavedCitationListController.js:34
+#: static/js/controllers/public/citations/SavedCitationListController.js:34
 msgid "%(count)s article culturel"
 msgid_plural "%(count)s articles culturels"
 msgstr[0] "%(count)s cultural article"
 msgstr[1] "%(count)s cultural articles"
 
-#: static/js/controllers/citations/SavedCitationListController.js:36
+#: static/js/controllers/public/citations/SavedCitationListController.js:36
 msgid "%(count)s thèse"
 msgid_plural "%(count)s thèses"
 msgstr[0] "%(count)s thesis"
 msgstr[1] "%(count)s theses"
 
-#: static/js/controllers/citations/SavedCitationListController.js:103
+#: static/js/controllers/public/citations/SavedCitationListController.js:103
 msgid "Voulez-vous vraiment supprimer votre sélection ?"
 msgstr "Are you sure you want to delete your selection?"
 
-#: static/js/controllers/editor/FormController.js:20
-msgid ""
-"Certains de vos fichiers n'ont pas étés téléversés. Voulez-vous poursuivre "
-"l'enregistrement ?"
-msgstr "Some of your files have not been uploaded. Do you want to continue?"
+#: static/js/controllers/public/search/ResultsController.js:24
+msgid "Résultats sauvegardés !"
+msgstr "Search results saved!"
 
-#: static/js/controllers/editor/FormController.js:25
+#: static/js/controllers/userspace/editor/FormController.js:16
 msgid ""
 "Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"
 msgstr "Some of your files are not completely uploaded. Are you sure?"
 
-#: static/js/controllers/journal/IssueReaderController.js:18
+#: static/js/issue_reader.js:17
 msgid "feuilletage/"
 msgstr "browse/"
 
-#: static/js/controllers/journal/IssueReaderController.js:21
+#: static/js/issue_reader.js:20
 msgid "Retour au sommaire"
 msgstr "Back to summary"
 
-#: static/js/controllers/search/ResultsController.js:24
-msgid "Résultats sauvegardés !"
-msgstr "Search results saved!"
-
-#: static/js/modules/IssueReader.js:135
+#: static/js/modules/IssueReader.js:149
 msgid "Page précédente"
 msgstr "Previous page"
 
-#: static/js/modules/IssueReader.js:136
+#: static/js/modules/IssueReader.js:150
 msgid "Page suivante"
 msgstr "Next page"
 
-#: static/js/modules/IssueReader.js:137
+#: static/js/modules/IssueReader.js:151
 msgid "Une page"
 msgstr "One page"
 
-#: static/js/modules/IssueReader.js:138
+#: static/js/modules/IssueReader.js:152
 msgid "Deux pages"
 msgstr "Two pages"
 
-#: static/js/modules/IssueReader.js:139
+#: static/js/modules/IssueReader.js:153
 msgid "Zoom avant"
 msgstr "Zoom in"
 
-#: static/js/modules/IssueReader.js:140
+#: static/js/modules/IssueReader.js:154
 msgid "Zoom arrière"
 msgstr "Zoom out"
 
-#: static/js/modules/Share.js:30
+#: static/js/modules/Share.js:27
 msgid "Partager ce document"
 msgstr "Share this document"
 
-#: static/js/modules/Share.js:34
+#: static/js/modules/Share.js:31
 msgid "Courriel"
 msgstr "Email"
