@@ -7,7 +7,6 @@ from django.utils.translation import get_language
 
 from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
-from erudit.cache import cache_set
 
 
 def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT):
@@ -44,13 +43,7 @@ def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_
         if not val:
             duration_deviation = random.randint(-(duration // 4), duration // 4)
             val = method(self, *args, **kwargs)
-            cache_set(
-                cache,
-                key,
-                val,
-                duration + duration_deviation,
-                localidentifiers=[self.localidentifier],
-            )
+            cache.set(key, val, duration + duration_deviation)
         return val
     return wrapper
 
@@ -80,12 +73,10 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
         pass
     else:
         # Puts the content of the file in the file-based cache!
-        cache_set(
-            cache,
+        cache.set(
             content_key,
             serializer(content),
-            erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT,
-            localidentifiers=[fedora_object.pid.rsplit('.', 1).pop()],
+            erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT
         )
 
     return content

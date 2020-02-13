@@ -259,13 +259,6 @@ class JournalDetailView(
         )
         context['free_access_cache_key'] = qs_cache_key(free_access_issues)
 
-        # A list of Fedora objects' localidentifiers to which this view's templates cache keys will
-        # be associated. For each localidentifiers in this list, EruditCache will add this view's
-        # templates cache keys to a Redis tag with `tag:<localidentifier>` as the tag key.
-        context['cache_localidentifiers'] = [
-            self.object.localidentifier,
-        ] + [issue.localidentifier for issue in issues]
-
         return context
 
 
@@ -529,14 +522,6 @@ class IssueDetailView(
         context['directors_cache_key'] = None
         context['editors_cache_key'] = None
 
-        # A list of Fedora objects' localidentifiers to which this view's templates cache keys will
-        # be associated. For each localidentifiers in this list, EruditCache will add this view's
-        # templates cache keys to a Redis tag with `tag:<localidentifier>` as the tag key.
-        context['cache_localidentifiers'] = [
-            self.object.journal.localidentifier,
-            self.object.localidentifier,
-        ] + [article.localidentifier for article in articles]
-
         return context
 
     def generate_sections_tree(self, articles, title=None, title_paral=None, level=0):
@@ -742,8 +727,7 @@ class BaseArticleDetailView(
         issue = current_article.issue
 
         # Pick the previous article and the next article
-        previous_next = issue.get_previous_and_next_articles(current_article.localidentifier)
-        context.update(previous_next)
+        context.update(issue.get_previous_and_next_articles(current_article.localidentifier))
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
@@ -785,15 +769,6 @@ class BaseArticleDetailView(
             current_article=current_article,
         )
         context['active_campaign'] = Campaign.objects.active_campaign()
-
-        # A list of Fedora objects' localidentifiers to which this view's templates cache keys will
-        # be associated. For each localidentifiers in this list, EruditCache will add this view's
-        # templates cache keys to a Redis tag with `tag:<localidentifier>` as the tag key.
-        context['cache_localidentifiers'] = [
-            current_article.issue.journal.localidentifier,
-            current_article.issue.localidentifier,
-            current_article.localidentifier,
-        ] + [article.localidentifier for article in previous_next.values() if article is not None]
 
         return context
 

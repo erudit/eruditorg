@@ -1,5 +1,5 @@
 {% extends "public/base.html" %}
-{% load erudit_cache_tag i18n public_journal_tags staticfiles %}
+{% load adv_cache i18n public_journal_tags staticfiles %}
 
 {% block title %}{{ citation_title_metadata|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
 
