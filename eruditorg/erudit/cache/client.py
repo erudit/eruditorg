@@ -18,8 +18,9 @@ class EruditCacheClient(DefaultClient):
         localidentifiers=[],
     ):
         redis = get_redis_connection()
-        # Pass `localidentifiers` to our cache client only if we are using RedisKeyTagging.
-        if isinstance(redis, RedisKeyTagging) and localidentifiers:
+        # Pass tags to our cache client only if we are using RedisKeyTagging, if we have a positive
+        # or a `None` timeout, and if we have localidentifiers.
+        if isinstance(redis, RedisKeyTagging) and (timeout is None or timeout > 0) and localidentifiers:
             return redis.set(
                 self.make_key(key, version=version),
                 self.encode(value),
