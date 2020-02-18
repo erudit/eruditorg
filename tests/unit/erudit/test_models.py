@@ -623,6 +623,13 @@ class TestArticle:
         article = ArticleFactory(publication_allowed=False, with_pdf=True)
         assert article.pdf_url is None
 
+    @pytest.mark.parametrize('is_published', (True, False))
+    @unittest.mock.patch('erudit.fedora.cache.cache_set')
+    def test_pdf_url_is_not_cached_if_issue_is_not_published(self, mock_cache_set, is_published):
+        article = ArticleFactory(issue__is_published=is_published, pdf_url='http://example.com')
+        assert article.pdf_url == 'http://example.com'
+        assert mock_cache_set.call_count == int(is_published)
+
     def test_abstracts(self):
         article = ArticleFactory(abstracts=[
             {'content': 'Resume', 'lang': 'fr'},

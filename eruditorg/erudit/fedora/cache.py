@@ -30,7 +30,7 @@ def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_
     """
     def wrapper(self, *args, **kwargs):
 
-        if not self.localidentifier:
+        if not self.localidentifier or (hasattr(self, 'issue') and not self.issue.is_published):
             return method(self, *args, **kwargs)
 
         key = "fedora_result-{lang}-{localidentifier}-{method_name}".format(
