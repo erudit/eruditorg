@@ -600,6 +600,11 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
 
+    def get_datastream_content(self, fedora_object, use_cache=True):
+        issue = self.get_object()
+        use_cache = issue.is_published
+        return super().get_datastream_content(fedora_object, use_cache)
+
 
 class IssueRawCoverpageHDView(FedoraFileDatastreamView):
     """
@@ -612,6 +617,11 @@ class IssueRawCoverpageHDView(FedoraFileDatastreamView):
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+    def get_datastream_content(self, fedora_object, use_cache=True):
+        issue = self.get_object()
+        use_cache = issue.is_published
+        return super().get_datastream_content(fedora_object, use_cache)
 
 
 class IssueReaderView(
@@ -674,6 +684,11 @@ class IssueReaderPageView(
         if issue.is_published and not self.content_access_granted and int(kwargs['page']) > 5:
             return redirect(static('img/bookreader/restriction.jpg'))
         return super().get(request, *args, **kwargs)
+
+    def get_datastream_content(self, fedora_object, use_cache=True):
+        issue = self.get_object()
+        use_cache = issue.is_published
+        return super().get_datastream_content(fedora_object, use_cache)
 
 
 class IssueXmlView(
@@ -1161,6 +1176,11 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
 
     def get_content_type(self, fedora_object):
         return str(fedora_object.content.mimetype)
+
+    def get_datastream_content(self, fedora_object, use_cache=True):
+        article = self.get_object()
+        use_cache = article.issue.is_published
+        return super().get_datastream_content(fedora_object, use_cache)
 
 
 @method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
