@@ -42,7 +42,7 @@ django-taggit==1.1.0
 django-waffle==0.17.0
 django-widget-tweaks==1.4.5
 django==2.0.13
-redis-key-tagging==0.0.2
+redis-key-tagging==0.0.3
 et-xmlfile==1.0.1         # via openpyxl
 feedparser==5.2.1
 html2text==2019.8.11

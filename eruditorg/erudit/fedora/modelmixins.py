@@ -127,7 +127,7 @@ class FedoraMixin:
                     fedora_xml_content_key,
                     fedora_xml_content,
                     self.fedora_xml_content_cache_timeout,
-                    localidentifiers=[self.localidentifier],
+                    pids=[self.pid],
                 )
 
         return self.erudit_class(fedora_xml_content) if fedora_xml_content else None

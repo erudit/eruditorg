@@ -15,7 +15,7 @@ class TestEruditCacheClient:
 
     @pytest.mark.parametrize("redis", (Mock(), MockRedisKeyTagging()))
     @pytest.mark.parametrize("timeout", (0, 10, -1, None))
-    @pytest.mark.parametrize("localidentifiers", ([], ["tag"]))
+    @pytest.mark.parametrize("pids", ([], ["tag"]))
     @patch("erudit.cache.client.get_redis_connection")
     @patch("erudit.cache.client.EruditCacheClient.make_key")
     @patch("erudit.cache.client.EruditCacheClient.encode")
@@ -30,14 +30,14 @@ class TestEruditCacheClient:
         mock_get_redis_connection,
         redis,
         timeout,
-        localidentifiers,
+        pids,
     ):
         mock_get_redis_connection.return_value = redis
         cache = EruditCacheClient()
-        result = cache.set("key", "value", timeout, localidentifiers=localidentifiers)
+        result = cache.set("key", "value", timeout, pids=pids)
         # Only use redis_key_tagging if our Redis connection is a RedisKeyTagging instance, if we
-        # have a positive or a `None` timeout, and if we have localidentifiers. Otherwise, use django_redis.
-        if isinstance(redis, RedisKeyTagging) and (timeout is None or timeout > 0) and localidentifiers:
+        # have a positive or a `None` timeout, and if we have pids. Otherwise, use django_redis.
+        if isinstance(redis, RedisKeyTagging) and (timeout is None or timeout > 0) and pids:
             assert result == "redis_key_tagging was used"
         else:
             assert result == "django_redis was used"

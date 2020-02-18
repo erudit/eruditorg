@@ -259,12 +259,12 @@ class JournalDetailView(
         )
         context['free_access_cache_key'] = qs_cache_key(free_access_issues)
 
-        # A list of Fedora objects' localidentifiers to which this view's templates cache keys will
-        # be associated. For each localidentifiers in this list, EruditCache will add this view's
-        # templates cache keys to a Redis tag with `tag:<localidentifier>` as the tag key.
-        context['cache_localidentifiers'] = [
-            self.object.localidentifier,
-        ] + [issue.localidentifier for issue in issues]
+        # A list of Fedora objects' pids to which this view's templates cache keys will
+        # be associated. For each pid in this list, EruditCache will add this view's
+        # templates cache keys to a Redis tag with `tag:<pid>` as the tag key.
+        context['cache_pids'] = [
+            self.object.pid,
+        ] + [issue.pid for issue in issues]
 
         return context
 
@@ -529,13 +529,13 @@ class IssueDetailView(
         context['directors_cache_key'] = None
         context['editors_cache_key'] = None
 
-        # A list of Fedora objects' localidentifiers to which this view's templates cache keys will
-        # be associated. For each localidentifiers in this list, EruditCache will add this view's
-        # templates cache keys to a Redis tag with `tag:<localidentifier>` as the tag key.
-        context['cache_localidentifiers'] = [
-            self.object.journal.localidentifier,
-            self.object.localidentifier,
-        ] + [article.localidentifier for article in articles]
+        # A list of Fedora objects' pids to which this view's templates cache keys will
+        # be associated. For each pid in this list, EruditCache will add this view's
+        # templates cache keys to a Redis tag with `tag:<pid>` as the tag key.
+        context['cache_pids'] = [
+            self.object.journal.pid,
+            self.object.pid,
+        ] + [article.pid for article in articles]
 
         return context
 
@@ -786,14 +786,14 @@ class BaseArticleDetailView(
         )
         context['active_campaign'] = Campaign.objects.active_campaign()
 
-        # A list of Fedora objects' localidentifiers to which this view's templates cache keys will
-        # be associated. For each localidentifiers in this list, EruditCache will add this view's
-        # templates cache keys to a Redis tag with `tag:<localidentifier>` as the tag key.
-        context['cache_localidentifiers'] = [
-            current_article.issue.journal.localidentifier,
-            current_article.issue.localidentifier,
-            current_article.localidentifier,
-        ] + [article.localidentifier for article in previous_next.values() if article is not None]
+        # A list of Fedora objects' pids to which this view's templates cache keys will
+        # be associated. For each pid in this list, EruditCache will add this view's
+        # templates cache keys to a Redis tag with `tag:<pid>` as the tag key.
+        context['cache_pids'] = [
+            current_article.issue.journal.pid,
+            current_article.issue.pid,
+            current_article.pid,
+        ] + [article.pid for article in previous_next.values() if article is not None]
 
         return context
 

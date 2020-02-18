@@ -49,7 +49,7 @@ def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_
                 key,
                 val,
                 duration + duration_deviation,
-                localidentifiers=[self.localidentifier],
+                pids=[self.pid],
             )
         return val
     return wrapper
@@ -85,7 +85,7 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
             content_key,
             serializer(content),
             erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT,
-            localidentifiers=[fedora_object.pid.rsplit('.', 1).pop()],
+            pids=[fedora_object.pid],
         )
 
     return content
