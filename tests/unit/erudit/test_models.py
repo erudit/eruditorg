@@ -349,6 +349,22 @@ class TestIssue:
 
         assert not issue.has_coverpage
 
+    @pytest.mark.parametrize('is_published', (True, False))
+    @unittest.mock.patch('erudit.fedora.modelmixins.get_cached_datastream_content')
+    def test_has_coverpage_do_not_use_cache_for_unpublished_issue(
+        self, mock_get_cached_datastream_content, is_published,
+    ):
+        with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
+            issue = IssueFactory(is_published=is_published)
+            fedora_object = unittest.mock.MagicMock()
+            fedora_object.pid = issue.pid
+            fedora_object.coverpage = unittest.mock.MagicMock()
+            fedora_object.coverpage.content = io.BytesIO(f.read())
+            issue.get_fedora_object = unittest.mock.MagicMock(return_value=fedora_object)
+            mock_get_cached_datastream_content.return_value = fedora_object.coverpage.content
+        assert issue.has_coverpage
+        assert mock_get_cached_datastream_content.call_count == int(is_published)
+
     def test_can_return_a_slug_that_can_be_used_in_urls(self):
         issue_1 = IssueFactory.create(
             year=2015, volume='4', number='1', localidentifier='i1')
