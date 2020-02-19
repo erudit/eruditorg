@@ -32,6 +32,10 @@ from apps.public.journal.views import (
     GoogleScholarSubscriberJournalsView,
     JournalStatisticsView,
     IssueReaderView,
+    IssueReaderPageView,
+    IssueRawCoverpageView,
+    IssueRawCoverpageHDView,
+    ArticleMediaView,
 )
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 
@@ -543,6 +547,37 @@ class TestIssueReaderPageView:
         if expected_redirection:
             assert response.url == expected_redirection
 
+    @pytest.mark.parametrize('is_published', (True, False))
+    @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
+    def test_do_not_cache_unpublished_issue_pages(self, mock_get_cached_datastream_content, is_published):
+        issue = IssueFactory(localidentifier='issue', is_published=is_published)
+        view = IssueReaderPageView()
+        view.kwargs = {'localidentifier': issue.localidentifier}
+        view.get_datastream_content(unittest.mock.MagicMock())
+        assert mock_get_cached_datastream_content.call_count == int(is_published)
+
+
+class TestIssueRawCoverpageView:
+    @pytest.mark.parametrize('is_published', (True, False))
+    @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
+    def test_do_not_cache_unpublished_issue_coverpages(self, mock_get_cached_datastream_content, is_published):
+        issue = IssueFactory(localidentifier='issue', is_published=is_published)
+        view = IssueRawCoverpageView()
+        view.kwargs = {'localidentifier': issue.localidentifier}
+        view.get_datastream_content(unittest.mock.MagicMock())
+        assert mock_get_cached_datastream_content.call_count == int(is_published)
+
+
+class TestIssueRawCoverpageHDView:
+    @pytest.mark.parametrize('is_published', (True, False))
+    @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
+    def test_do_not_cache_unpublished_issue_coverpages_hd(self, mock_get_cached_datastream_content, is_published):
+        issue = IssueFactory(localidentifier='issue', is_published=is_published)
+        view = IssueRawCoverpageHDView()
+        view.kwargs = {'localidentifier': issue.localidentifier}
+        view.get_datastream_content(unittest.mock.MagicMock())
+        assert mock_get_cached_datastream_content.call_count == int(is_published)
+
 
 class TestIssueXmlView:
 
@@ -928,3 +963,24 @@ class TestArticleRawPdfFirstPageView:
         view.request = RequestFactory()
         view.request.GET = data
         assert view.get_access_type() == expected_access_type
+
+
+class TestArticleMediaView:
+    @pytest.mark.parametrize('is_published', (True, False))
+    @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
+    def test_do_not_cache_unpublished_issue_article_medias(self, mock_get_cached_datastream_content, is_published):
+        article = ArticleFactory(
+            localidentifier='article',
+            issue__is_published=is_published,
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+        )
+        view = ArticleMediaView()
+        view.kwargs = {
+            'localidentifier': article.localidentifier,
+            'issue_localid': article.issue.localidentifier,
+            'journal_code': article.issue.journal.code,
+        }
+        view.get_object = unittest.mock.MagicMock(return_value=article)
+        view.get_datastream_content(unittest.mock.MagicMock())
+        assert mock_get_cached_datastream_content.call_count == int(is_published)
