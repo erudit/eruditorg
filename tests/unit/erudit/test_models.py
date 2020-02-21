@@ -20,6 +20,7 @@ from erudit.test.factories import (
     JournalFactory,
     JournalTypeFactory,
     CollectionFactory,
+    JournalInformationFactory,
 )
 
 
@@ -183,6 +184,12 @@ class TestJournal:
                 open(settings.MEDIA_ROOT + '/' + logo, 'rb').read(),
             )
         assert journal.has_logo == expected_has_logo
+
+    def test_save_journal_information_on_journal_save(self):
+        journal_information = JournalInformationFactory()
+        updated = journal_information.updated
+        journal_information.journal.save()
+        assert updated < journal_information.updated
 
 
 class TestIssue:

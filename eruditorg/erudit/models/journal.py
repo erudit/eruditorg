@@ -221,6 +221,12 @@ class Journal(FedoraMixin, FedoraDated):
     def __str__(self):
         return '{:s} [{:s}]'.format(self.name, self.code)
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        # Save this journal's information to invalidate the journal's detail page template.
+        if hasattr(self, 'information'):
+            self.information.save()
+        super().save(force_insert=False, force_update=False, using=None, update_fields=None)
+
     def get_full_identifier(self):
         if not self.localidentifier or not self.collection.localidentifier:
             return None
