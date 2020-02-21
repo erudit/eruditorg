@@ -1,5 +1,6 @@
 import pytest
 
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from redis_key_tagging.client import RedisKeyTagging
 from unittest.mock import Mock, patch
 
@@ -14,7 +15,7 @@ class MockRedisKeyTagging(RedisKeyTagging):
 class TestEruditCacheClient:
 
     @pytest.mark.parametrize("redis", (Mock(), MockRedisKeyTagging()))
-    @pytest.mark.parametrize("timeout", (0, 10, -1, None, object()))
+    @pytest.mark.parametrize("timeout", (0, 10, -1, None, DEFAULT_TIMEOUT))
     @pytest.mark.parametrize("pids", ([], ["tag"]))
     @patch("erudit.cache.client.get_redis_connection")
     @patch("erudit.cache.client.EruditCacheClient.make_key")
@@ -37,7 +38,7 @@ class TestEruditCacheClient:
         result = cache.set("key", "value", timeout, pids=pids)
         # Django's default timeout is an object and should be replaced by our own default timeout,
         # as we do in `EruditCacheClient`.
-        timeout = 10 if isinstance(timeout, object) else timeout
+        timeout = 10 if timeout == DEFAULT_TIMEOUT else timeout
         # Only use redis_key_tagging if our Redis connection is a RedisKeyTagging instance, if we
         # have a positive or a `None` timeout, and if we have pids. Otherwise, use django_redis.
         if isinstance(redis, RedisKeyTagging) and (timeout is None or timeout > 0) and pids:
