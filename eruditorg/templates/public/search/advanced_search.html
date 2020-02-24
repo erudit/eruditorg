@@ -158,7 +158,7 @@
           <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
           <td>{{ search.results_count }}</td>
           <td><a href="#" class="remove-search">x</td>
-          <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}">--></a></td>
+          <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}"><span class="arrow arrow-bar is-right"></span></a></td>
         </tr>
         {% endfor %}
       </tbody>

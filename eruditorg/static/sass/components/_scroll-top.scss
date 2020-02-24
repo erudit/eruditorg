@@ -3,11 +3,10 @@
  */
 
 .scroll-top {
-  color: $dark-grey;
+  @include arrowColor($dark-grey);
 
   &:hover, &:active, &:focus, &:active:focus {
-    color: $coral-red;
-    text-decoration: none;
+    @include arrowColor($coral-red);
   }
 
 }

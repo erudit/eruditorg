@@ -84,7 +84,7 @@
     <div class="container">
       <ul class="row alternating-row__list">
         <li class="col-xs-6 col-sm-3 col-md-2 alternating-row__list-item">
-          <h3 class="alternating-row__list-title"><strong>{{ collection|safe }} ({{ collection.books.all|length }} {% trans 'titres' %})&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}">|^</a></strong></h3>
+          <h3 class="alternating-row__list-title"><strong>{{ collection|safe }} ({{ collection.books.all|length }} {% trans 'titres' %})&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a></strong></h3>
         </li>
         {% for book in collection.books.all %}
         <li class="col-xs-6 col-sm-3 col-md-2 alternating-row__list-item">

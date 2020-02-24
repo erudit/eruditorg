@@ -1103,7 +1103,7 @@
     <div class="{name()}" id="{$id}">
       <div class="grfigure-caption">
         <xsl:if test="$mode = 'liste'">
-          <p class="allertexte"><a href="#{@id}">|^</a></p>
+          <p class="allertexte"><a href="#{@id}"><span class="arrow arrow-bar is-top"></span></a></p>
         </xsl:if>
         <p class="no"><xsl:apply-templates select="no"/></p>
         <div class="legende"><xsl:apply-templates select="legende/titre | legende/sstitre"/></div>
@@ -1139,7 +1139,7 @@
       <figcaption>
         <xsl:if test="name(..) != 'grfigure' and name(..) != 'grtableau'">
           <xsl:if test="$mode = 'liste'">
-            <p class="allertexte"><a href="#{@id}">|^</a></p>
+            <p class="allertexte"><a href="#{@id}"><span class="arrow arrow-bar is-top"></span></a></p>
           </xsl:if>
         </xsl:if>
         <xsl:if test="no">

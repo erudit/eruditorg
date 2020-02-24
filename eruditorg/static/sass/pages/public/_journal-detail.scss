@@ -59,8 +59,18 @@
   * Back issues section
   */
 
-  #back-issues h2 {
-    font-size: 1em;
+  #back-issues {
+    h2 {
+      font-size: 1em;
+    }
+
+    .arrow {
+      @include arrowColor(black);
+
+      &:hover, &:active, &:focus, &:active:focus {
+        @include arrowColor($dark-grey);
+      }
+    }
   }
 
   .year-list, .issue-list {

@@ -39,6 +39,16 @@
 
 	}
 
+    .arrow {
+      margin: 2px 2px 4px 2px;
+      @include arrow(12px, 2px, 2px, 18px);
+      @include arrowColor($dark-grey);
+
+      &:hover, &:active, &:focus, &:active:focus {
+        @include arrowColor($coral-red);
+      }
+    }
+
   .card {
     font-size: 14px;
   }

@@ -20,17 +20,6 @@
   display: block;
   text-align: right;
   color: $dark-grey;
-
-  .toc-nav__arrow {
-    margin-right: -11px;
-  }
-
-}
-
-.toc-nav__arrow {
-  color: $coral-red;
-  display: block;
-  @include font-styles('sans-medium');
 }
 
 .toc-nav__title {

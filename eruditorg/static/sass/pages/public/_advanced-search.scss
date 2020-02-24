@@ -160,6 +160,14 @@
 
     }
 
+    .arrow {
+      @include arrowColor(black);
+
+      &:hover, &:active, &:focus, &:active:focus {
+        @include arrowColor($coral-red);
+      }
+    }
+
     tr {
       border-bottom: 1px solid $mid-grey;
     }
