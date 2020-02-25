@@ -219,8 +219,10 @@ class JournalDetailView(
             context['editors_cache_key'] = None
 
         # Notes
-        context['notes'] = self.journal.erudit_object.get_notes(html=True).get(get_language(), []) \
-            if self.journal.is_in_fedora else []
+        context['notes'] = self.journal.erudit_object.get_notes(
+            html=True,
+            journal_pid=self.journal.pid,
+        ).get(get_language(), []) if self.journal.is_in_fedora else []
 
         # Fetches the published issues and the latest issue associated with the current journal
         issues = [
