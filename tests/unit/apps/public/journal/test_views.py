@@ -59,8 +59,8 @@ class TestJournalDetailView:
         view.journal = JournalFactory(
             localidentifier=localidentifier,
             notes=[
-                {'langue': 'fr', 'content': 'foobar'},
-                {'langue': 'en', 'content': 'foobaz'}
+                {'langue': 'fr', 'content': 'foobar', 'pid': f'erudit:erudit.{localidentifier}'},
+                {'langue': 'en', 'content': 'foobaz', 'pid': f'erudit:erudit.{localidentifier}'}
             ],
         )
         with override_settings(LANGUAGE_CODE=language):
@@ -128,7 +128,7 @@ class TestJournalDetailView:
             assert '<span class="journal-subtitle">None</span>' not in html
 
     def test_journal_note_with_html_link(self):
-        issue = IssueFactory()
+        issue = IssueFactory(journal__localidentifier='recma0448')
         repository.api.set_xml_for_pid(
             issue.journal.get_full_identifier(),
             open('tests/fixtures/journal/recma0448.xml', 'rb').read(),

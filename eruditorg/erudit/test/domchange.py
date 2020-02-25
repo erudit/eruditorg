@@ -147,6 +147,7 @@ class EruditJournalDomChanger(BaseDomChanger):
             subelem = E.note(
                 note['content'],
                 langue=note['langue'],
+                pid=note['pid'],
             )
             elem.append(subelem)
         self.root.find('.//revue').append(elem)

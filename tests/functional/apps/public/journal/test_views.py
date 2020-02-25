@@ -365,6 +365,32 @@ class TestJournalDetailView:
         else:
             assert b'Frais de publication' not in content
 
+    @pytest.mark.parametrize('localidentifier', ('journal', 'previous_journal'))
+    def test_journal_notes_with_previous_journal(self, localidentifier):
+        journal = JournalFactory(
+            localidentifier=localidentifier,
+            notes=[
+                {
+                    'pid': 'erudit:erudit.journal',
+                    'langue': 'fr',
+                    'content': 'Note pour journal',
+                },
+                {
+                    'pid': 'erudit:erudit.previous_journal',
+                    'langue': 'fr',
+                    'content': 'Note pour previous_journal',
+                },
+            ],
+        )
+        IssueFactory(journal=journal)
+        html = self.client.get(journal_detail_url(journal)).content.decode()
+        if localidentifier == 'journal':
+            assert 'Note pour journal' in html
+            assert 'Note pour previous_journal' not in html
+        elif localidentifier == 'previous_journal':
+            assert 'Note pour journal' not in html
+            assert 'Note pour previous_journal' in html
+
 
 class TestJournalAuthorsListView:
     def test_provides_only_authors_for_the_first_available_letter_by_default(self):
