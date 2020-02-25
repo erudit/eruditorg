@@ -137,14 +137,14 @@
     <div class="hidden-xs col-sm-4">
       {% if previous_chapter %}
       <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=previous_chapter.id %}" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}">
-        <span class="toc-nav__arrow"><---</span>
+        <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
         <h4 class="toc-nav__title">
           {{ previous_chapter.title|striptags }}
         </h4>
       </a>
       {% else %}
       <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__prev" title="{% trans 'Aller à la table des matières' %}">
-        <span class="toc-nav__arrow"><---</span>
+        <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
         <h4 class="toc-nav__title">
           <em>{% trans '[Début de l’ouvrage] <br>Retour à la table des matières' %}</em>
         </h4>
@@ -155,14 +155,14 @@
     <div class="hidden-xs col-sm-offset-4 col-sm-4">
       {% if next_chapter %}
       <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=next_chapter.id %}" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}">
-        <span class="toc-nav__arrow">---></span>
+        <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
         <h4 class="toc-nav__title">
           {{ next_chapter.title|striptags }}
         </h4>
       </a>
       {% else %}
       <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__next" title="{% trans 'Aller à la table des matières' %}">
-        <span class="toc-nav__arrow">---></span>
+        <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
         <h4 class="toc-nav__title">
           <em>{% trans '[Fin de l’ouvrage] <br>Retour à la table des matières' %}</em>
         </h4>

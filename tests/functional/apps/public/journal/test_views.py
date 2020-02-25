@@ -1196,11 +1196,13 @@ class TestArticleDetailView:
         html = response.content.decode()
         # Check that TOC navigation titles include converted marquage.
         assert '<a href="/fr/revues/journal/2000-issue/prev_article/" class="toc-nav__prev" ' \
-               'title="Article précédent"><span class="toc-nav__arrow">&lt;--</span>' \
+               'title="Article précédent"><span class="toc-nav__arrow">' \
+               '<span class="arrow arrow-bar is-left"></span></span>' \
                '<h4 class="toc-nav__title">\n        L’action et le verbe dans ' \
                '<em>Feuillets d’Hypnos</em>\n</h4></a>' in html
         assert '<a href="/fr/revues/journal/2000-issue/next_article/" class="toc-nav__next" ' \
-               'title="Article suivant"><span class="toc-nav__arrow">--&gt;</span><h4 ' \
+               'title="Article suivant"><span class="toc-nav__arrow">' \
+               '<span class="arrow arrow-bar is-right"></span></span><h4 ' \
                'class="toc-nav__title">\n        L’action et le verbe dans ' \
                '<em>Feuillets d’Hypnos</em>\n</h4></a>' in html
 
@@ -1364,7 +1366,8 @@ class TestArticleDetailView:
         # Check that the arrow to go back to the figure is present event if there's no figure
         # number or caption.
         assert '<figure class="tableau" id="lita7"><figcaption><p class="allertexte">' \
-               '<a href="#ta7">|^</a></p></figcaption>' in html
+               '<a href="#ta7"><span class="arrow arrow-bar is-top"></span></a></p>' \
+               '</figcaption>' in html
 
     def test_figure_groups_numbers_display_in_figure_list(self):
         article = ArticleFactory(
@@ -1379,8 +1382,8 @@ class TestArticleDetailView:
         html = Client().get(url).content.decode()
         # Check that the figure numbers are displayed in the figure list for figure groups.
         assert '<div class="grfigure" id="ligf1">\n<div class="grfigure-caption">\n' \
-               '<p class="allertexte"><a href="#gf1">|^</a></p>\n' \
-               '<p class="no">Figures 1 - 2</p>' in html
+               '<p class="allertexte"><a href="#gf1"><span class="arrow arrow-bar is-top"></span>' \
+               '</a></p>\n<p class="no">Figures 1 - 2</p>' in html
 
     def test_figcaption_display_for_figure_groups_and_figures(self):
         article = ArticleFactory(
@@ -1390,7 +1393,8 @@ class TestArticleDetailView:
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that figure group caption and the figure captions are displayed.
-        assert '<div class="grfigure-caption">\n<p class="allertexte"><a href="#gf1">|^</a></p>\n' \
+        assert '<div class="grfigure-caption">\n<p class="allertexte"><a href="#gf1">' \
+               '<span class="arrow arrow-bar is-top"></span></a></p>\n' \
                '<p class="no">Figure 1</p>\n<div class="legende"><p class="legende">' \
                '<strong class="titre">RMF frequencies in German data</strong>' \
                '</p></div>\n</div>' in html

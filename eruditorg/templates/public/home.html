@@ -63,10 +63,10 @@
           </form>
           <div class="row">
             <div class="col-xs-6">
-              <a href="{% url 'public:journal:journal_list' %}"><strong>--> {% trans "Revues" %}</strong></a><br/>
-              <a href="{% url 'public:book:home' %}"><strong>--> {% trans "Livres et actes" %}</strong></a><br/>
-              <a href="{% url 'public:thesis:home' %}"><strong>--> {% trans "Thèses et mémoires" %}</strong></a><br/>
-              <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}"><strong>--> {% trans "Rapports de recherche" %}</strong></a>
+              <a href="{% url 'public:journal:journal_list' %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Revues" %}</strong></a><br/>
+              <a href="{% url 'public:book:home' %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Livres et actes" %}</strong></a><br/>
+              <a href="{% url 'public:thesis:home' %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Thèses et mémoires" %}</strong></a><br/>
+              <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Rapports de recherche" %}</strong></a>
             </div>
             <div class="col-xs-6 text-right">
               <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>

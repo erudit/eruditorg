@@ -163,4 +163,8 @@
       margin-bottom: 5vh;
     }
   }
+
+  .arrow {
+    @include arrowColor(black);
+  }
 }
