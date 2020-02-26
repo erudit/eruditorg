@@ -1,7 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
 {% load erudit_cache_tag i18n model_formatters staticfiles %}
 
-{% block title %}{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle }}{% endif %}{% endblock title %}
+{% block title %}{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle }}{% endif %}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}{% endblock meta_description %}
 
@@ -9,7 +9,7 @@
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle|safe }}{% endif %}">
+<meta property="og:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="https://{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
@@ -19,8 +19,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle|safe }}{% endif %} – Érudit">
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.name|safe }}">
+<meta name="twitter:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %} – Érudit">
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ main_title.title|safe }}">
 <meta name="twitter:image" content="https://{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
 <meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 {% endblock meta_tags %}
@@ -50,7 +50,7 @@
     "position": 3,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' journal.code %}",
-      "name": "{{ journal.name }}"
+      "name": "{{ main_title.title }}"
     }
   }]
 }
@@ -73,11 +73,9 @@
       <div class="row">
         <h1>
           <div class="col-xs-10 col-sm-9">
-            <span class="journal-title">{% if main_title %}{{ main_title.title }}{% else %}{{ journal.name }}{% endif %}</span>
+            <span class="journal-title">{{ main_title.title }}</span>
             {% if main_title.subtitle %}
             <span class="journal-subtitle">{{ main_title.subtitle }}</span>
-            {% elif journal.subtitle %}
-            <span class="journal-subtitle">{{ journal.subtitle }}</span>
             {% endif %}
             {% for title in paral_titles %}
             {% if title.title != main_title.title %}

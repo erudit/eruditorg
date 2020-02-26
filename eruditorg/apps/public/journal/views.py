@@ -239,6 +239,13 @@ class JournalDetailView(
         else:
             # If the journal does not have any issue yet, simulate one so the cache template tag
             # does have something to use to generate the cache key.
+            context['main_title'] = dict(
+                title=self.object.name,
+                subtitle=self.object.subtitle,
+            )
+
+            context['paral_titles'] = []
+
             context['meta_info_issue'] = {
                 'localidentifier': None,
                 'fedora_updated': None,
