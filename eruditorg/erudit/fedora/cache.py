@@ -2,6 +2,7 @@
 
 import random
 
+from django.conf import settings
 from django.core.cache import caches, cache
 from django.utils.translation import get_language
 
@@ -10,7 +11,7 @@ from ..conf import settings as erudit_settings
 from erudit.cache import cache_set
 
 
-def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT):
+def cache_fedora_result(method, duration=settings.LONG_TTL):
     """ Cache the result of a method called on a FedoraMixin object
 
     Assumes that the method is bound to a FedoraMixin object, or at least that the object has a
@@ -84,7 +85,7 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
             cache,
             content_key,
             serializer(content),
-            erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT,
+            settings.FEDORA_CACHE_TIMEOUT,
             pids=[fedora_object.pid],
         )
 

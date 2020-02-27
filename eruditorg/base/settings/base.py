@@ -36,7 +36,7 @@ env = environ.Env(
     RESTRICTION_DATABASE_URL=(str, 'mysql://root@localhost/restriction'),
 
     CACHE_URL=(str, 'locmemcache://'),
-    ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT=(int, 3600),
+    FEDORA_CACHE_TIMEOUT=(str, None),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(int, 25),
     EMAIL_HOST_USER=(str, None),
@@ -337,7 +337,13 @@ ADV_CACHE_VERSIONING = True
 # Compress the cache content with zlib.
 ADV_CACHE_COMPRESS = True
 
-ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT = env("ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT")
+FEDORA_CACHE_TIMEOUT = env("FEDORA_CACHE_TIMEOUT")
+# Make sure that if we get an empty string from environment variables we parse it as None.
+# A None value for the Redis TTL means that keys will never expire.
+if FEDORA_CACHE_TIMEOUT is None or FEDORA_CACHE_TIMEOUT == "":
+    FEDORA_CACHE_TIMEOUT = None
+else:
+    FEDORA_CACHE_TIMEOUT = int(FEDORA_CACHE_TIMEOUT)
 
 # Emails
 # -----------------------------------------------------------------------------

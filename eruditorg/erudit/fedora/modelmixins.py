@@ -10,7 +10,6 @@ from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
 from .cache import get_cached_datastream_content
-from ..conf import settings as erudit_settings
 from .repository import api
 from erudit.cache import cache_set
 
@@ -22,8 +21,6 @@ class FedoraMixin:
     The FedoraMixin defines a common way to associate Django models and its
     instances to eulfedora's models and Erudit's objects'
     """
-    fedora_xml_content_cache_timeout = erudit_settings.FEDORA_XML_CONTENT_CACHE_TIMEOUT
-
     def get_full_identifier(self):
         """
         Returns the full identifier of the considered object. By default the FedoraMixin
@@ -126,7 +123,7 @@ class FedoraMixin:
                     cache,
                     fedora_xml_content_key,
                     fedora_xml_content,
-                    self.fedora_xml_content_cache_timeout,
+                    settings.FEDORA_CACHE_TIMEOUT,
                     pids=[self.pid],
                 )
 
