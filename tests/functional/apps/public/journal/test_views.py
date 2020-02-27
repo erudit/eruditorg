@@ -252,6 +252,11 @@ class TestJournalDetailView:
         self.user.set_password('notsecret')
         self.user.save()
 
+    def test_main_title_is_always_in_context(self):
+        journal = JournalFactory()
+        response = self.client.get(journal_detail_url(journal))
+        assert 'main_title' in response.context.keys()
+
     def test_can_embed_the_journal_information_in_the_context_if_available(self):
         # Setup
         journal_info = JournalInformationFactory(journal=JournalFactory())
