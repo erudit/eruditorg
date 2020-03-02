@@ -25,4 +25,9 @@
 .toc-nav__title {
   font-size: 1em;
   line-height: 1.35;
+
+  a {
+    display: inline;
+    color: $dark-grey;
+  }
 }
