@@ -12,7 +12,7 @@ from reportlab.lib import colors
 from reportlab.lib.fonts import addMapping
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import StyleSheet1, ParagraphStyle
-from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.pdfdoc import PDFString
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDocTemplate, Spacer
@@ -25,35 +25,37 @@ from erudit.fedora.cache import get_cached_datastream_content
 log = structlog.getLogger(__name__)
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
+FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
 
-# Fonts.
-FONTS_DIR = STATIC_ROOT + '/fonts/Spectral'
-pdfmetrics.registerFont(TTFont('Spectral', FONTS_DIR + '/Spectral-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Bold', FONTS_DIR + '/Spectral-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Italic', FONTS_DIR + '/Spectral-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-BoldItalic', FONTS_DIR + '/Spectral-BoldItalic.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC', FONTS_DIR + '/SpectralSC-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + '/SpectralSC-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + '/SpectralSC-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + '/SpectralSC-BoldItalic.ttf'))
-pdfmetrics.registerFontFamily(
-    'Spectral',
-    normal='Spectral',
-    bold='Spectral-Bold',
-    italic='Spectral-Italic',
-    boldItalic='Spectral-BoldItalic',
+# NotoSerif font
+registerFont(TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf'))
+registerFont(TTFont('NotoSerif-Bold', FONTS_DIR + '/Noto/NotoSerif-Bold.ttf'))
+registerFont(TTFont('NotoSerif-Italic', FONTS_DIR + '/Noto/NotoSerif-Italic.ttf'))
+registerFont(TTFont('NotoSerif-BoldItalic', FONTS_DIR + '/Noto/NotoSerif-BoldItalic.ttf'))
+registerFontFamily(
+    'NotoSerif',
+    normal='NotoSerif',
+    bold='NotoSerif-Bold',
+    italic='NotoSerif-Italic',
+    boldItalic='NotoSerif-BoldItalic',
 )
-pdfmetrics.registerFontFamily(
+addMapping('NotoSerif', 0, 0, 'NotoSerif')
+addMapping('NotoSerif-Bold', 1, 0, 'NotoSerif Bold')
+addMapping('NotoSerif-Italic', 0, 1, 'NotoSerif Italic')
+addMapping('NotoSerif-BoldItalic', 1, 1, 'NotoSerif Bold Italic')
+
+# SpectralSC font (small caps)
+registerFont(TTFont('SpectralSC', FONTS_DIR + '/Spectral/SpectralSC-Regular.ttf'))
+registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + '/Spectral/SpectralSC-Bold.ttf'))
+registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + '/Spectral/SpectralSC-Italic.ttf'))
+registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + '/Spectral/SpectralSC-BoldItalic.ttf'))
+registerFontFamily(
     'SpectralSC',
     normal='SpectralSC',
     bold='SpectralSC-Bold',
     italic='SpectralSC-Italic',
     boldItalic='SpectralSC-BoldItalic',
 )
-addMapping('Spectral', 0, 0, 'Spectral')
-addMapping('Spectral-Bold', 1, 0, 'Spectral Bold')
-addMapping('Spectral-Italic', 0, 1, 'Spectral Italic')
-addMapping('Spectral-BoldItalic', 1, 1, 'Spectral Bold Italic')
 addMapping('SpectralSC', 0, 0, 'SpectralSC')
 addMapping('SpectralSC-Bold', 1, 0, 'SpectralSC Bold')
 addMapping('SpectralSC-Italic', 0, 1, 'SpectralSC Italic')
@@ -497,24 +499,24 @@ def get_stylesheet():
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(
         name='normal',
-        fontName='Spectral',
+        fontName='NotoSerif',
         fontSize=8,
         leading=10,
     ))
     stylesheet.add(ParagraphStyle(
         name='bold',
         parent=stylesheet['normal'],
-        fontName='Spectral-Bold',
+        fontName='NotoSerif-Bold',
     ))
     stylesheet.add(ParagraphStyle(
         name='italic',
         parent=stylesheet['normal'],
-        fontName='Spectral-Italic',
+        fontName='NotoSerif-Italic',
     ))
     stylesheet.add(ParagraphStyle(
-        name='blod_italic',
+        name='bold_italic',
         parent=stylesheet['normal'],
-        fontName='Spectral-BoldItalic',
+        fontName='NotoSerif-BoldItalic',
     ))
     stylesheet.add(ParagraphStyle(
         name='h1',
