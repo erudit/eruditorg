@@ -1,7 +1,6 @@
 import io
 import datetime
 import re
-import sentry_sdk
 import structlog
 
 from bs4 import BeautifulSoup, Tag
@@ -14,6 +13,7 @@ from reportlab.lib.fonts import addMapping
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import StyleSheet1, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.pdfdoc import PDFString
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDocTemplate, Spacer
 from reportlab.platypus.tables import Table, TableStyle
@@ -63,22 +63,6 @@ addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
 def get_coverpage(article):
     pdf_buffer = io.BytesIO()
 
-    # Remove UTF-8 non-breaking spaces to reduce encoding warnings.
-    title = article.title.replace('\xa0', ' ')
-    authors = article.get_formatted_authors_without_suffixes()
-
-    with sentry_sdk.configure_scope() as scope:
-        scope.fingerprint = ['coverpage_encoding_error']
-
-    try:
-        title.encode('pdfdoc')
-        authors.encode('pdfdoc')
-    except (ValueError, UnicodeEncodeError):
-        log.warn(
-            'coverpage_encoding_error',
-            article_localidentifier=article.localidentifier
-        )
-
     template = SimpleDocTemplate(
         pdf_buffer,
         # Letter size: 612 points by 792 points
@@ -87,8 +71,8 @@ def get_coverpage(article):
         leftMargin=30,
         topMargin=30,
         bottomMargin=18,
-        title=title.encode('pdfdoc', errors="replace"),
-        author=authors.encode('pdfdoc', errors="replace"),
+        title=PDFString(article.title, enc='raw'),
+        author=PDFString(article.get_formatted_authors_without_suffixes(), enc='raw'),
         creator='Érudit',
         subject='',
     )
