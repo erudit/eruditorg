@@ -27,6 +27,13 @@ log = structlog.getLogger(__name__)
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
 FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
 
+# Mapping between language codes and font names for chinese, japanese and korean.
+CJK_FONT_NAMES = {
+    'zh': 'NotoSerifCJKsc',
+    'ja': 'NotoSerifCJKjp',
+    'ko': 'NotoSerifCJKkr',
+}
+
 # NotoSerif font
 registerFont(TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf'))
 registerFont(TTFont('NotoSerif-Bold', FONTS_DIR + '/Noto/NotoSerif-Bold.ttf'))
@@ -61,6 +68,24 @@ addMapping('SpectralSC-Bold', 1, 0, 'SpectralSC Bold')
 addMapping('SpectralSC-Italic', 0, 1, 'SpectralSC Italic')
 addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
 
+# NotoSerifCJK font (chinese, japanese, korean)
+for font_name in CJK_FONT_NAMES.values():
+    registerFont(TTFont(font_name, FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
+    registerFont(TTFont(f'{font_name}-Bold', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
+    registerFont(TTFont(f'{font_name}-Italic', FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
+    registerFont(TTFont(f'{font_name}-BoldItalic', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
+    registerFontFamily(
+        font_name,
+        normal=font_name,
+        bold=f'{font_name}-Bold',
+        italic=f'{font_name}-Italic',
+        boldItalic=f'{font_name}-BoldItalic',
+    )
+    addMapping(font_name, 0, 0, font_name)
+    addMapping(f'{font_name}-Bold', 1, 0, f'{font_name} Bold')
+    addMapping(f'{font_name}-Italic', 0, 1, f'{font_name} Italic')
+    addMapping(f'{font_name}-BoldItalic', 1, 1, f'{font_name} Bold Italic')
+
 
 def get_coverpage(article):
     pdf_buffer = io.BytesIO()
@@ -90,7 +115,7 @@ def get_coverpage(article):
     extra_large_spacer = Spacer(0.25, 20)
 
     # Text styles.
-    styles = get_stylesheet()
+    styles = get_stylesheet(article.erudit_object.language)
 
     # Text.
     story = []
@@ -495,28 +520,29 @@ def get_coverpage(article):
     return pdf_buffer
 
 
-def get_stylesheet():
+def get_stylesheet(language):
+    font_name = CJK_FONT_NAMES.get(language, 'NotoSerif')
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(
         name='normal',
-        fontName='NotoSerif',
+        fontName=font_name,
         fontSize=8,
         leading=10,
     ))
     stylesheet.add(ParagraphStyle(
         name='bold',
         parent=stylesheet['normal'],
-        fontName='NotoSerif-Bold',
+        fontName=f'{font_name}-Bold',
     ))
     stylesheet.add(ParagraphStyle(
         name='italic',
         parent=stylesheet['normal'],
-        fontName='NotoSerif-Italic',
+        fontName=f'{font_name}-Italic',
     ))
     stylesheet.add(ParagraphStyle(
         name='bold_italic',
         parent=stylesheet['normal'],
-        fontName='NotoSerif-BoldItalic',
+        fontName=f'{font_name}-BoldItalic',
     ))
     stylesheet.add(ParagraphStyle(
         name='h1',
