@@ -1,5 +1,5 @@
-import io
 import datetime
+import io
 import re
 import structlog
 
@@ -19,6 +19,7 @@ from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDo
 from reportlab.platypus.tables import Table, TableStyle
 from urllib.parse import urlparse
 
+from apps.public.journal.emojis import EMOJIS_REGEX
 from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
@@ -67,6 +68,11 @@ addMapping('SpectralSC', 0, 0, 'SpectralSC')
 addMapping('SpectralSC-Bold', 1, 0, 'SpectralSC Bold')
 addMapping('SpectralSC-Italic', 0, 1, 'SpectralSC Italic')
 addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
+
+# Symbola font (emojis)
+registerFont(TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf'))
+registerFontFamily('Symbola', normal='Symbola')
+addMapping('Symbola', 0, 0, 'Symbola')
 
 # NotoSerifCJK font (chinese, japanese, korean)
 for font_name in CJK_FONT_NAMES.values():
@@ -607,7 +613,7 @@ def clean(text, small_caps_font='SpectralSC'):
     for node in soup.find_all('span', attrs={'class': 'majuscule'}):
         del node['class']
         node.replace_with(node.text.upper())
-    # Change the font of <span class="petitecap'> nodes.
+    # Change the font of <span class="petitecap"> nodes.
     for node in soup.find_all('span', attrs={'class': 'petitecap'}):
         del node['class']
         node['fontName'] = small_caps_font
@@ -617,7 +623,14 @@ def clean(text, small_caps_font='SpectralSC'):
     # Remove all other classes we can't transform.
     for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
         del node['class']
-    return str(soup)
+    text = str(soup)
+    emojis = re.findall(EMOJIS_REGEX, text)
+    if emojis:
+        for emoji in emojis:
+            text = text.replace(emoji, f'<span fontName="Symbola">{emoji}</span>')
+        # Remove unicode variation selectors, they are not supported by our font.
+        text = re.sub(r'[\uFE00-\uFE0F]', '', text)
+    return text
 
 
 class Line(Flowable):
