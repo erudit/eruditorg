@@ -1,7 +1,6 @@
-import io
 import datetime
+import io
 import re
-import sentry_sdk
 import structlog
 
 from bs4 import BeautifulSoup, Tag
@@ -13,71 +12,89 @@ from reportlab.lib import colors
 from reportlab.lib.fonts import addMapping
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import StyleSheet1, ParagraphStyle
-from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
+from reportlab.pdfbase.pdfdoc import PDFString
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDocTemplate, Spacer
 from reportlab.platypus.tables import Table, TableStyle
 from urllib.parse import urlparse
 
+from apps.public.journal.emojis import EMOJIS_REGEX
 from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
 log = structlog.getLogger(__name__)
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
+FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
 
-# Fonts.
-FONTS_DIR = STATIC_ROOT + '/fonts/Spectral'
-pdfmetrics.registerFont(TTFont('Spectral', FONTS_DIR + '/Spectral-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Bold', FONTS_DIR + '/Spectral-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Italic', FONTS_DIR + '/Spectral-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-BoldItalic', FONTS_DIR + '/Spectral-BoldItalic.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC', FONTS_DIR + '/SpectralSC-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + '/SpectralSC-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + '/SpectralSC-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + '/SpectralSC-BoldItalic.ttf'))
-pdfmetrics.registerFontFamily(
-    'Spectral',
-    normal='Spectral',
-    bold='Spectral-Bold',
-    italic='Spectral-Italic',
-    boldItalic='Spectral-BoldItalic',
+# Mapping between language codes and font names for chinese, japanese and korean.
+CJK_FONT_NAMES = {
+    'zh': 'NotoSerifCJKsc',
+    'ja': 'NotoSerifCJKjp',
+    'ko': 'NotoSerifCJKkr',
+}
+
+# NotoSerif font
+registerFont(TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf'))
+registerFont(TTFont('NotoSerif-Bold', FONTS_DIR + '/Noto/NotoSerif-Bold.ttf'))
+registerFont(TTFont('NotoSerif-Italic', FONTS_DIR + '/Noto/NotoSerif-Italic.ttf'))
+registerFont(TTFont('NotoSerif-BoldItalic', FONTS_DIR + '/Noto/NotoSerif-BoldItalic.ttf'))
+registerFontFamily(
+    'NotoSerif',
+    normal='NotoSerif',
+    bold='NotoSerif-Bold',
+    italic='NotoSerif-Italic',
+    boldItalic='NotoSerif-BoldItalic',
 )
-pdfmetrics.registerFontFamily(
+addMapping('NotoSerif', 0, 0, 'NotoSerif')
+addMapping('NotoSerif-Bold', 1, 0, 'NotoSerif Bold')
+addMapping('NotoSerif-Italic', 0, 1, 'NotoSerif Italic')
+addMapping('NotoSerif-BoldItalic', 1, 1, 'NotoSerif Bold Italic')
+
+# SpectralSC font (small caps)
+registerFont(TTFont('SpectralSC', FONTS_DIR + '/Spectral/SpectralSC-Regular.ttf'))
+registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + '/Spectral/SpectralSC-Bold.ttf'))
+registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + '/Spectral/SpectralSC-Italic.ttf'))
+registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + '/Spectral/SpectralSC-BoldItalic.ttf'))
+registerFontFamily(
     'SpectralSC',
     normal='SpectralSC',
     bold='SpectralSC-Bold',
     italic='SpectralSC-Italic',
     boldItalic='SpectralSC-BoldItalic',
 )
-addMapping('Spectral', 0, 0, 'Spectral')
-addMapping('Spectral-Bold', 1, 0, 'Spectral Bold')
-addMapping('Spectral-Italic', 0, 1, 'Spectral Italic')
-addMapping('Spectral-BoldItalic', 1, 1, 'Spectral Bold Italic')
 addMapping('SpectralSC', 0, 0, 'SpectralSC')
 addMapping('SpectralSC-Bold', 1, 0, 'SpectralSC Bold')
 addMapping('SpectralSC-Italic', 0, 1, 'SpectralSC Italic')
 addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
 
+# Symbola font (emojis)
+registerFont(TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf'))
+registerFontFamily('Symbola', normal='Symbola')
+addMapping('Symbola', 0, 0, 'Symbola')
+
+# NotoSerifCJK font (chinese, japanese, korean)
+for font_name in CJK_FONT_NAMES.values():
+    registerFont(TTFont(font_name, FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
+    registerFont(TTFont(f'{font_name}-Bold', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
+    registerFont(TTFont(f'{font_name}-Italic', FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
+    registerFont(TTFont(f'{font_name}-BoldItalic', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
+    registerFontFamily(
+        font_name,
+        normal=font_name,
+        bold=f'{font_name}-Bold',
+        italic=f'{font_name}-Italic',
+        boldItalic=f'{font_name}-BoldItalic',
+    )
+    addMapping(font_name, 0, 0, font_name)
+    addMapping(f'{font_name}-Bold', 1, 0, f'{font_name} Bold')
+    addMapping(f'{font_name}-Italic', 0, 1, f'{font_name} Italic')
+    addMapping(f'{font_name}-BoldItalic', 1, 1, f'{font_name} Bold Italic')
+
 
 def get_coverpage(article):
     pdf_buffer = io.BytesIO()
-
-    # Remove UTF-8 non-breaking spaces to reduce encoding warnings.
-    title = article.title.replace('\xa0', ' ')
-    authors = article.get_formatted_authors_without_suffixes()
-
-    with sentry_sdk.configure_scope() as scope:
-        scope.fingerprint = ['coverpage_encoding_error']
-
-    try:
-        title.encode('pdfdoc')
-        authors.encode('pdfdoc')
-    except (ValueError, UnicodeEncodeError):
-        log.warn(
-            'coverpage_encoding_error',
-            article_localidentifier=article.localidentifier
-        )
 
     template = SimpleDocTemplate(
         pdf_buffer,
@@ -87,8 +104,8 @@ def get_coverpage(article):
         leftMargin=30,
         topMargin=30,
         bottomMargin=18,
-        title=title.encode('pdfdoc', errors="replace"),
-        author=authors.encode('pdfdoc', errors="replace"),
+        title=PDFString(article.title, enc='raw'),
+        author=PDFString(article.get_formatted_authors_without_suffixes(), enc='raw'),
         creator='Érudit',
         subject='',
     )
@@ -104,7 +121,7 @@ def get_coverpage(article):
     extra_large_spacer = Spacer(0.25, 20)
 
     # Text styles.
-    styles = get_stylesheet()
+    styles = get_stylesheet(article.erudit_object.language)
 
     # Text.
     story = []
@@ -509,28 +526,29 @@ def get_coverpage(article):
     return pdf_buffer
 
 
-def get_stylesheet():
+def get_stylesheet(language):
+    font_name = CJK_FONT_NAMES.get(language, 'NotoSerif')
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(
         name='normal',
-        fontName='Spectral',
+        fontName=font_name,
         fontSize=8,
         leading=10,
     ))
     stylesheet.add(ParagraphStyle(
         name='bold',
         parent=stylesheet['normal'],
-        fontName='Spectral-Bold',
+        fontName=f'{font_name}-Bold',
     ))
     stylesheet.add(ParagraphStyle(
         name='italic',
         parent=stylesheet['normal'],
-        fontName='Spectral-Italic',
+        fontName=f'{font_name}-Italic',
     ))
     stylesheet.add(ParagraphStyle(
-        name='blod_italic',
+        name='bold_italic',
         parent=stylesheet['normal'],
-        fontName='Spectral-BoldItalic',
+        fontName=f'{font_name}-BoldItalic',
     ))
     stylesheet.add(ParagraphStyle(
         name='h1',
@@ -595,7 +613,7 @@ def clean(text, small_caps_font='SpectralSC'):
     for node in soup.find_all('span', attrs={'class': 'majuscule'}):
         del node['class']
         node.replace_with(node.text.upper())
-    # Change the font of <span class="petitecap'> nodes.
+    # Change the font of <span class="petitecap"> nodes.
     for node in soup.find_all('span', attrs={'class': 'petitecap'}):
         del node['class']
         node['fontName'] = small_caps_font
@@ -605,7 +623,14 @@ def clean(text, small_caps_font='SpectralSC'):
     # Remove all other classes we can't transform.
     for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
         del node['class']
-    return str(soup)
+    text = str(soup)
+    emojis = re.findall(EMOJIS_REGEX, text)
+    if emojis:
+        for emoji in emojis:
+            text = text.replace(emoji, f'<span fontName="Symbola">{emoji}</span>')
+        # Remove unicode variation selectors, they are not supported by our font.
+        text = re.sub(r'[\uFE00-\uFE0F]', '', text)
+    return text
 
 
 class Line(Flowable):
