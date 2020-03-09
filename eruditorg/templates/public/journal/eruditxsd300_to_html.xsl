@@ -1473,6 +1473,8 @@
     </div>
   </xsl:template>
 
+  <!-- Strip white spaces around objetmedia to avoid unwanted spaces around inline images. -->
+  <xsl:strip-space elements="objetmedia"/>
   <xsl:template match="objetmedia/image">
     <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
