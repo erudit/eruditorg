@@ -2083,6 +2083,27 @@ class TestArticleDetailView:
         html = Client().get(url).content.decode()
         assert expected_link in html
 
+    def test_no_white_spaces_around_objetmedia(self):
+        article = ArticleFactory(
+            from_fixture='1067517ar',
+            localidentifier='article',
+            issue__year='2020',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        # No unwanted extra spaces in addition of wanted non-breaking spaces inside quotes.
+        assert '«\xa0<img src="/fr/revues/journal/2020-issue/article/media/2127962n.jpg" ' \
+               'id="im10" alt="forme: forme pleine grandeur">\xa0U+1F469 woman\xa0»,' in html
+        # No unwanted extra spaces inside parentheses.
+        assert '(<img src="/fr/revues/journal/2020-issue/article/media/2127980n.jpg" ' \
+               'id="im34" alt="forme: forme pleine grandeur">)' in html
+        # No unwanted extra spaces after hashtag.
+        assert '#<img src="/fr/revues/journal/2020-issue/article/media/2127981n.jpg" ' \
+               'id="im35" alt="forme: forme pleine grandeur">' in html
+
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
