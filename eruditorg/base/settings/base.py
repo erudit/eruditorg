@@ -15,12 +15,15 @@ ROOT_DIR = BASE_DIR.parents[2]
 
 env = environ.Env(
     DEBUG=(bool, False),
+    ACTIVATE_DEBUG_TOOLBAR=(bool, False),
     EXPOSE_OPENMETRICS=(bool, False),
     SENTRY_ENVIRONMENT=(str, 'default'),
     SECRET_KEY=(str, None),
     ADMIN_URL=(str, 'admin/'),
     FALLBACK_BASE_URL=(str, 'http://retro.erudit.org/'),
     ALLOWED_HOSTS=(list, []),
+    USE_DOCKER=(str, "no"),
+    INTERNAL_IPS=(list, ['127.0.0.1']),
     STATIC_ROOT=(str, str(ROOT_DIR / 'static')),
     MEDIA_ROOT=(str, str(ROOT_DIR / 'media')),
     STATIC_URL=(str, '/static/'),
@@ -100,7 +103,14 @@ environ.Env.read_env(str(ROOT_DIR / '.env'))
 # -----------------------------------------------------------------------------
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = env('INTERNAL_IPS')
+
+if env("USE_DOCKER") == "yes":
+    import socket
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
+
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 ADMIN_URL = env('ADMIN_URL')
