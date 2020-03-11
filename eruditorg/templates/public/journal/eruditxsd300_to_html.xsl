@@ -2042,7 +2042,7 @@
   <xsl:template match="annexe">
     <div id="{@id}" class="article-section-content" role="complementary">
       <xsl:if test="no or titre">
-        <h4 class="titreann">
+        <h3 class="titreann">
           <xsl:if test="titre and no">
             <xsl:apply-templates select="no"/>
             <xsl:text>. </xsl:text>
@@ -2053,7 +2053,7 @@
           <xsl:if test="no and not(titre)">
             <xsl:apply-templates select="no"/>
           </xsl:if>
-        </h4>
+        </h3>
       </xsl:if>
       <xsl:apply-templates select="section1"/>
       <xsl:apply-templates select="noteann"/>
