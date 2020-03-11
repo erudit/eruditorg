@@ -50,9 +50,7 @@ blockquote {
     padding: 0;
     margin: 1.5em 0 1.5em 2.5em;
 
-    p,
-    .source,
-    + .source {
+    p {
       @include font-styles('sans');
     }
 
@@ -103,4 +101,5 @@ blockquote {
   color: $dark-grey;
   font-size: 14px;
   margin-top: 0.75em;
+  @include font-styles('sans');
 }
