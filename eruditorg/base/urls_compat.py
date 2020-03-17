@@ -12,17 +12,11 @@ from apps.public.book import views_compat as book_views_compat
 
 thesis_url_patterns = ([
     url(r'^$', RedirectRetroUrls.as_view(
-        pattern_name='public:thesis:home',
-        permanent=True)),
+        pattern_name='public:thesis:home')),
     url(r'^liste.html?$', RedirectRetroUrls.as_view(
-        pattern_name='public:thesis:home',
-        permanent=True
-    )),
+        pattern_name='public:thesis:home')),
     url(r'^index\.html?$', RedirectRetroUrls.as_view(
-        pattern_name='public:thesis:home',
-        permanent=True
-    )),
-
+        pattern_name='public:thesis:home')),
 ], 'legacy_thesis')
 
 # Public legacy patterns
@@ -30,11 +24,11 @@ thesis_url_patterns = ([
 
 public_url_patterns = [
     url(r'^client/login.jsp$',
-        RedirectRetroUrls.as_view(pattern_name='public:auth:login', permanent=True)),
+        RedirectRetroUrls.as_view(pattern_name='public:auth:login')),
     url(r'^client/getNewPassword.jsp$',
-        RedirectRetroUrls.as_view(pattern_name='public:auth:password_reset', permanent=True)),
+        RedirectRetroUrls.as_view(pattern_name='public:auth:password_reset')),
     url(r'^client/updatePassword.jsp$',
-        RedirectRetroUrls.as_view(pattern_name='public:auth:password_reset', permanent=True)),
+        RedirectRetroUrls.as_view(pattern_name='public:auth:password_change')),
 ]
 
 # Search legacy patterns
@@ -42,7 +36,7 @@ public_url_patterns = [
 
 search_url_patterns = ([
     url(r'^index\.html?$',
-        RedirectRetroUrls.as_view(pattern_name='public:search:advanced_search', permanent=True))
+        RedirectRetroUrls.as_view(pattern_name='public:search:advanced_search'))
 ], 'legacy_search')
 
 # Journal legacy patterns
@@ -52,35 +46,35 @@ journal_url_patterns = ([
     # Journal
     url(r'^revue/(?P<code>[\w-]+)/?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
+            pattern_name='public:journal:journal_detail'),
         name="legacy_journal_detail"),
     url(r'^revue/(?P<code>[\w-]+)/auteurs\.html?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_authors_list', permanent=True),
+            pattern_name='public:journal:journal_authors_list'),
         name="legacy_journal_authors"),
     url(r'^revue/(?P<code>[\w-]+)/\w+\.html?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
+            pattern_name='public:journal:journal_detail'),
         name="legacy_journal_detail_index"),
     url(r'^revue/(?P<code>[\w-]+)/rss\.xml$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_articles_rss', permanent=True),
+            pattern_name='public:journal:journal_articles_rss'),
         name="legacy_journal_rss"),
     url(r'^culture/(?P<code>[\w-]+)/?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
+            pattern_name='public:journal:journal_detail'),
         name="legacy_journal_detail_culture"),
     url(r'^culture/(?P<code>[\w-]+)/auteurs\.html?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_authors_list', permanent=True),
+            pattern_name='public:journal:journal_authors_list'),
         name="legacy_journal_authors_culture"),
     url(r'^culture/(?P<code>[\w-]+)/\w+\.html?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_detail', permanent=True),
+            pattern_name='public:journal:journal_detail'),
         name="legacy_journal_detail_culture_index"),
     url(r'^culture/(?P<code>[\w-]+)/rss\.xml$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
-            pattern_name='public:journal:journal_articles_rss', permanent=True),
+            pattern_name='public:journal:journal_articles_rss'),
         name="legacy_journal_rss_culture"),
 
     # Issue
@@ -168,29 +162,23 @@ book_url_patterns = ([
 urlpatterns = [
     url(r'^rss.xml$', RedirectRetroUrls.as_view(
         pattern_name="public:journal:latest_issues_rss",
-        permanent=True
     )),
     url(r'^(?:(?P<lang>[\w-]{2})/)?', include([
-        url(r'^index\.html?$', RedirectRetroUrls.as_view(pattern_name='public:home',
-                                                         permanent=True)),
+        url(r'^index\.html?$', RedirectRetroUrls.as_view(pattern_name='public:home')),
         url(r'^revue/?$', RedirectRetroUrls.as_view(
-            pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals'),
+            pattern_name='public:journal:journal_list'), name='legacy_journals'),
         url(r'^revue/index\.html?$', RedirectRetroUrls.as_view(
-            pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals_index'),
+            pattern_name='public:journal:journal_list'), name='legacy_journals_index'),
         url(r'^culture/?$', RedirectRetroUrls.as_view(
-            pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals_culture'),
+            pattern_name='public:journal:journal_list'), name='legacy_journals_culture'),
         url(r'^culture/index\.html?$', RedirectRetroUrls.as_view(
-            pattern_name='public:journal:journal_list',
-            permanent=True), name='legacy_journals_culture_index'),
+            pattern_name='public:journal:journal_list'), name='legacy_journals_culture_index'),
         url(r'^abonnement/login\.jsp$',
-            RedirectRetroUrls.as_view(pattern_name='login', permanent=True)),
+            RedirectRetroUrls.as_view(pattern_name='public:auth:login')),
         url(r'^abonnement/oublierPassword\.jsp$',
-            RedirectRetroUrls.as_view(pattern_name='password_reset', permanent=True)),
+            RedirectRetroUrls.as_view(pattern_name='public:auth:password_reset')),
         url(r'^abonnement/modifierPassword\.jsp$',
-            RedirectRetroUrls.as_view(pattern_name='password_change', permanent=True)),
+            RedirectRetroUrls.as_view(pattern_name='public:auth:password_change')),
 
         url(r'^recherche/', include(search_url_patterns)),
         url(r'^these/', include(thesis_url_patterns)),

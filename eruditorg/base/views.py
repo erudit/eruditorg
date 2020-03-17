@@ -23,6 +23,8 @@ class DummyView(View):
 
 class RedirectRetroUrls(RedirectView, ActivateLegacyLanguageViewMixin):
 
+    permanent = True
+
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
         return reverse(self.pattern_name)

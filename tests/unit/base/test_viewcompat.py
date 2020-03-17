@@ -29,11 +29,28 @@ def test_404s_for_unknown_urls():
 
 
 @pytest.mark.parametrize('url, expected_redirect_chain', [
-    ('/recherche/index.html', [('/fr/recherche/avancee/', 301)]),
-    ('/client/login.jsp', [('/fr/compte/connexion/', 301)]),
-    ('/client/login.jsp?lang=en', [('/en/account/login/', 301)]),
+    ('/these/', [('/fr/theses/', 301)]),
     ('/these/liste.html', [('/fr/theses/', 301)]),
+    ('/these/index.html', [('/fr/theses/', 301)]),
+    ('/client/login.jsp', [('/fr/compte/connexion/', 301)]),
+    ('/client/getNewPassword.jsp', [('/fr/compte/mot-de-passe/reinitialisation/', 301)]),
+    ('/client/updatePassword.jsp', [
+        ('/fr/compte/mot-de-passe/', 301),
+        ('/fr/compte/connexion/?next=/fr/compte/mot-de-passe/', 302),
+    ]),
+    ('/recherche/index.html', [('/fr/recherche/avancee/', 301)]),
     ('/rss.xml', [('/fr/rss.xml', 301)]),
+    ('/fr/index.html', [('/fr/', 301)]),
+    ('/fr/revue/', [('/fr/revues/', 301)]),
+    ('/fr/revue/index.html', [('/fr/revues/', 301)]),
+    ('/fr/culture/', [('/fr/revues/', 301)]),
+    ('/fr/culture/index.html', [('/fr/revues/', 301)]),
+    ('/fr/abonnement/login.jsp', [('/fr/compte/connexion/', 301)]),
+    ('/fr/abonnement/oublierPassword.jsp', [('/fr/compte/mot-de-passe/reinitialisation/', 301)]),
+    ('/fr/abonnement/modifierPassword.jsp', [
+        ('/fr/compte/mot-de-passe/', 301),
+        ('/fr/compte/connexion/?next=/fr/compte/mot-de-passe/', 302),
+    ]),
 ])
 def test_legacy_urls_are_redirected_with_http_301(url, expected_redirect_chain, monkeypatch):
     monkeypatch.setattr(SearchForm, 'solr_data', FakeSolrData(''))
