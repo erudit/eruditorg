@@ -1,6 +1,6 @@
 variables:
   GIT_SUBMODULE_STRATEGY: normal
-  NPM_AUDIT_IGNORE: ""
+  NPM_AUDIT_IGNORE: "1179"
 
 python-unittest:
   stage: test
@@ -35,8 +35,8 @@ npm-audit:
   stage: test
   image: node:latest
   script:
-    - npm audit
-    #- "! npm audit --parseable | grep -v -E $NPM_AUDIT_IGNORE"
+    #- npm audit
+    - "! npm audit --parseable | grep -v -E $NPM_AUDIT_IGNORE"
 
 npm-build:
   stage: test
