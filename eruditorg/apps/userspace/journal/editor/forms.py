@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+from django.conf import settings
 from django.utils.translation import gettext as _
 from resumable_uploads.forms import PlUploadFormField
 from resumable_uploads.models import ResumableFile
@@ -78,7 +79,7 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         )
 
     submissions = PlUploadFormField(
-        path='uploads',
+        path=settings.UPLOAD_ROOT,
         label=_("Fichier"),
         options={
             'max_file_size': '3000mb',

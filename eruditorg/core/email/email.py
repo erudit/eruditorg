@@ -3,7 +3,7 @@
 from django.contrib.sites.models import Site
 from django.template.loader import render_to_string
 from django.utils import translation
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 import html2text
 from post_office import mail
 
@@ -34,7 +34,7 @@ class Email:
             self.context.update(extra_context)
 
             self.subject = self._render_template(subject_template).strip() if subject_template \
-                else force_text(subject)
+                else force_str(subject)
             self.html_message = self._render_template(html_template)
             self.text_message = self._render_template(text_template) if text_template \
                 else html2text.html2text(self.html_message)

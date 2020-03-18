@@ -954,7 +954,7 @@ class TestArticleDetailView:
         response = Client().get(url)
         html = response.content.decode()
         assert '<a href="/fr/revues/journal/2000-issue/article/">Jean-Guy Desjardins, Traité de ' \
-               'l’évaluation foncière, Montréal, Wilson &amp; Lafleur ...</a>' in html
+               'l’évaluation foncière, Montréal, Wilson &amp; Lafleur …</a>' in html
 
     def test_keywords_html_tags(self):
         article = ArticleFactory(from_fixture='1055883ar')

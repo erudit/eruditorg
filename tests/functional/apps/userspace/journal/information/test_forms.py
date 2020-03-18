@@ -3,6 +3,7 @@ import json
 import pytest
 import reversion
 
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.test import RequestFactory, override_settings
 from post_office.models import Email
@@ -100,16 +101,10 @@ class TestJournalInformationForm:
         assert email.subject == '[Érudit] Nouvelle révision d\'une page "À propos" [Foobar]'
         # Check that the email message contains the diff between the previous revision and the new
         # revision and that it does not include excluded fields (translations & updated).
-        assert email.html_message == f"""
-
-<p>Modification faite par <strong>Dougie</strong> le <strong>{now.strftime('%d-%m-%Y')}</strong> à <strong>{now.strftime('%H:%M')}</strong>.</p>
-
-<p>https://www.erudit.org/fr/espace-utilisateur/revue/123/informations/</p>
-
-<h3>Revue [fr]</h3>
-<pre class="highlight">
-<del>- Premier test</del>
-<ins>+ Deuxième test</ins>
-</pre>
-
-"""
+        html = BeautifulSoup(email.html_message, 'html.parser')
+        del_tags = html.find_all('del')
+        ins_tags = html.find_all('ins')
+        assert len(del_tags) == 1
+        assert len(ins_tags) == 1
+        assert del_tags[0].decode() == '<del>- Premier test</del>'
+        assert ins_tags[0].decode() == '<ins>+ Deuxième test</ins>'

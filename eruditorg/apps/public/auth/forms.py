@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationFo
 from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from core.email import Email
 
 

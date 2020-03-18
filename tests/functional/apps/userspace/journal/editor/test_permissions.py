@@ -12,9 +12,11 @@ from core.editor.test.factories import IssueSubmissionFactory
 pytestmark = pytest.mark.django_db
 
 
-@pytest.mark.parametrize('permissions,code', (
-    ([AC.can_manage_issuesubmission.codename], 200),
-    ([], 302)
+@pytest.mark.parametrize('permissions,logged_in,code', (
+    ([AC.can_manage_issuesubmission.codename], True, 200),
+    ([AC.can_manage_issuesubmission.codename], False, 302),
+    ([], True, 403),
+    ([], False, 302),
 ))
 @pytest.mark.parametrize('view,use_issue_submission_args', (
     ('userspace:journal:editor:issues', False),
@@ -23,11 +25,11 @@ pytestmark = pytest.mark.django_db
 ))
 class TestViews:
 
-    def test_userspace_journal_permissions(self, permissions, code, view, use_issue_submission_args):
+    def test_userspace_journal_permissions(self, permissions, logged_in, code, view, use_issue_submission_args):
         user_granted = UserFactory()
         journal = JournalFactory()
         journal.members.add(user_granted)
-        client = Client(logged_user=user_granted)
+        client = Client(logged_user=user_granted) if logged_in else Client()
 
         for permission in permissions:
             ct = ContentType.objects.get(app_label="erudit", model="journal")

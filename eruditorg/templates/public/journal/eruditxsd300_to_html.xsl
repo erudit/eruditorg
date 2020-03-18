@@ -1,4 +1,4 @@
-{% load adv_cache i18n public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
+{% load adv_cache i18n public_journal_tags static waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
 

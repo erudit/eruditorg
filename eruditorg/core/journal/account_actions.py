@@ -3,7 +3,7 @@
 from account_actions.action_base import AccountActionBase
 from account_actions.action_pool import actions
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from core.email import Email
 

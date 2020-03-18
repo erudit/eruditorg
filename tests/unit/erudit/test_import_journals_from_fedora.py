@@ -5,7 +5,7 @@ import unittest
 from django.core.management import call_command
 from erudit.fedora import repository
 
-from erudit.test.factories import IssueFactory, CollectionFactory
+from erudit.test.factories import IssueFactory, CollectionFactory, JournalTypeFactory
 from erudit.models import Journal
 
 
@@ -52,6 +52,7 @@ def test_import_journals_from_fedora(mock_cache, kwargs):
 
 
 def test_import_nonexisting_journal_creates_code():
+    JournalTypeFactory(id=2)
     CollectionFactory(code='erudit')
 
     repository.api.register_pid('erudit:erudit.bc1000004')

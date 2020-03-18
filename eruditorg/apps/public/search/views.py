@@ -9,7 +9,7 @@ from django.views.generic import View
 from django.views.generic.base import ContextMixin
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 
 from erudit.solr.models import get_model_instance
 from base.http import JsonAckResponse
@@ -225,7 +225,7 @@ class SavedSearchAddView(View):
             assert parsed_qstring
             results_count = int(results_count)
         except (AssertionError, ValueError):
-            return JsonErrorResponse(ugettext("Querystring incorrecte"))
+            return JsonErrorResponse(gettext("Querystring incorrecte"))
 
         # Inserts the search into the saved searches set
         searches = SavedSearchList(request)
@@ -244,7 +244,7 @@ class SavedSearchRemoveView(View):
         try:
             searches.remove(uuid)
         except ValueError:
-            return JsonErrorResponse(ugettext("Cette recherche n'est pas sauvegardée"))
+            return JsonErrorResponse(gettext("Cette recherche n'est pas sauvegardée"))
 
         searches.save()
         return JsonAckResponse()

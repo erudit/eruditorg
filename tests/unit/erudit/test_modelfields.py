@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files import File
-from django.utils.six import BytesIO
+from io import BytesIO
 from PIL import Image
 import pytest
 

@@ -1,6 +1,6 @@
 from account_actions.models import AccountActionToken
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.models import JournalAccessSubscription

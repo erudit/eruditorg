@@ -58,5 +58,5 @@ class PolyglotLocaleMiddleware(LocaleMiddleware):
 class LogHttp404Middleware(MiddlewareMixin):
     def process_response(self, request, response):
         if response.status_code == 404:
-            logger.warn('http_404', path=request.path)
+            logger.warning('http_404', path=request.path)
         return response
