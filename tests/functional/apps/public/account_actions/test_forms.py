@@ -57,7 +57,7 @@ class TestAccountActionRegisterForm(TestCase):
             username='test@example.com', password='not_secret', email='test@exampe.com')
         token = AccountActionTokenFactory.create(email='test@exampe.com')
         form_data = {
-            'username': faker.simple_profile().get('email'),
+            'username': faker.simple_profile().get('mail'),
             'email': 'test@exampe.com',
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
@@ -74,7 +74,7 @@ class TestAccountActionRegisterForm(TestCase):
         # Setup
         token = AccountActionTokenFactory.create()
         form_data = {
-            'username': faker.simple_profile().get('email'),
+            'username': faker.simple_profile().get('mail'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
@@ -97,7 +97,7 @@ class TestAccountActionRegisterForm(TestCase):
         actions.register(TestAction)
         token = AccountActionTokenFactory.create(action='test-consumed')
         form_data = {
-            'username': faker.simple_profile().get('email'),
+            'username': faker.simple_profile().get('mail'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),

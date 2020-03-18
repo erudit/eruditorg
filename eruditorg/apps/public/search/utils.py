@@ -1,5 +1,5 @@
-from django.utils.translation import ugettext_lazy as _
-from django.utils.six.moves.urllib import parse as urlparse
+from django.utils.translation import gettext_lazy as _
+from urllib import parse as urlparse
 
 from .conf import settings as search_settings
 from .forms import ADVANCED_SEARCH_FIELDS

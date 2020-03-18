@@ -12,7 +12,7 @@ import structlog
 import unicodedata
 
 from django.conf import settings
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse

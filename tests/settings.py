@@ -52,6 +52,7 @@ RESTRICTION_MODELS_ARE_MANAGED = True
 MANAGED_COLLECTIONS = ('erudit',)
 
 MEDIA_ROOT = os.path.join(TEST_ROOT, '_testdata/media/')
+UPLOAD_ROOT = MEDIA_ROOT
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 

@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.core.validators import EmailValidator
 from django.http import HttpResponseRedirect, HttpResponse
-from django.utils.translation import ugettext as _, ngettext
+from django.utils.translation import gettext as _, ngettext
 from django.views.generic import CreateView, DeleteView, ListView, View, TemplateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin

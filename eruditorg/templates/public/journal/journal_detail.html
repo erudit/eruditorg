@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load erudit_cache_tag i18n model_formatters staticfiles %}
+{% load erudit_cache_tag i18n model_formatters static %}
 
 {% block title %}{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle }}{% endif %}{% endblock title %}
 

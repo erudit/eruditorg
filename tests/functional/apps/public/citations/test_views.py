@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.test import RequestFactory
 import pytest
 
@@ -181,7 +181,7 @@ class TestSavedCitationRemoveView:
         view = SavedCitationRemoveView.as_view()
         response = view(request)
         assert response.status_code == 200
-        assert 'error' in json.loads(force_text(response.content))
+        assert 'error' in json.loads(force_str(response.content))
 
 
 class TestSavedCitationBatchRemoveView:

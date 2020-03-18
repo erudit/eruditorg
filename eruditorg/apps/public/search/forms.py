@@ -3,8 +3,8 @@ import structlog
 import re
 
 from django import forms
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _, pgettext
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _, pgettext
 
 from erudit.models import Collection
 from erudit.solr.models import get_solr_data, LANGUAGE_LABELS, SolrData
@@ -200,7 +200,7 @@ class SearchForm(forms.Form):
         )
         self.fields['languages'].choices = locale_aware_sort(
             facets['languages'],
-            lambda x: force_text(x[1]),
+            lambda x: force_str(x[1]),
         )
         self.fields['journals'].choices = locale_aware_sort(
             facets['journals'],

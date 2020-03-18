@@ -1,8 +1,8 @@
 import collections
 
 from django.http import Http404
-from django.utils.translation import ugettext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import View
@@ -101,7 +101,7 @@ class SavedCitationRemoveView(MetricCaptureMixin, View):
             request.saved_citations.remove(solr_id)
             request.saved_citations.save()
         except KeyError:
-            return JsonErrorResponse(ugettext("Ce document n'est pas présent dans les notices"))
+            return JsonErrorResponse(gettext("Ce document n'est pas présent dans les notices"))
         return JsonAckResponse(removed_document_id=solr_id)
 
 

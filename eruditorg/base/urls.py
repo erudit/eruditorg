@@ -4,7 +4,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
 from django.views.i18n import JavaScriptCatalog

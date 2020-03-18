@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from erudit.models import Journal
 from .models import InstitutionIPAddressRange

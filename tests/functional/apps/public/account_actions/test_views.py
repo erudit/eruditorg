@@ -58,7 +58,7 @@ class TestAccountActionRegisterView(TestCase):
         token = AccountActionTokenFactory.create(action='test-register')
 
         post_data = {
-            'username': faker.simple_profile().get('email'),
+            'username': faker.simple_profile().get('mail'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
@@ -78,7 +78,7 @@ class TestAccountActionRegisterView(TestCase):
         token = AccountActionTokenFactory.create(action='test-register')
 
         post_data = {
-            'username': faker.simple_profile().get('email'),
+            'username': faker.simple_profile().get('mail'),
             'email': faker.email(),
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
