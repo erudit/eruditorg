@@ -85,6 +85,8 @@ env = environ.Env(
     REDIS_HOST=(str, None),
     REDIS_PORT=(int, None),
     REDIS_INDEX=(int, None),
+
+    SESSION_ENGINE=(str, 'django.contrib.sessions.backends.db'),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 
@@ -528,3 +530,5 @@ GOOGLE_CASA_KEY = env('GOOGLE_CASA_KEY')
 REDIS_HOST = env('REDIS_HOST')
 REDIS_PORT = env('REDIS_PORT')
 REDIS_INDEX = env('REDIS_INDEX')
+
+SESSION_ENGINE = env('SESSION_ENGINE')
