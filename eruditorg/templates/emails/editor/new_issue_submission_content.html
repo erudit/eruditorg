@@ -14,7 +14,7 @@
 
 {% block cta %}
 {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
-{% trans "Consulter le numéro" as cta_text %}
+{% trans "Consulter les fichiers déposés" as cta_text %}
 {% with cta_url="http://"|add:site.domain|add:issue_url cta_text=cta_text %}
 {{ block.super }}
 {% endwith %}
