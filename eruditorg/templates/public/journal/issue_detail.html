@@ -121,6 +121,10 @@
         <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement.' %}">
           <i class="icon ion-ios-lock"></i>
         </span>
+        {% elif issue.embargoed and issue.journal.special_open_access_opt_in %}
+        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, ce numéro est temporairement disponible gratuitement.' %}">
+          <i class="erudicon erudicon-open-access" style="color: green;"></i>
+        </span>
         {% endif %}
       </span>
       {% for theme in themes %}

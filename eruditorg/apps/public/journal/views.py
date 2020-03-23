@@ -31,7 +31,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 
 from rules.contrib.views import PermissionRequiredMixin
 from lxml import etree as et
@@ -167,7 +167,11 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
         # Filter the queryset
         if self.filter_form.is_valid():
             cleaned = self.filter_form.cleaned_data
-            if cleaned['open_access']:
+            if cleaned['open_access'] and cleaned['special_open_access_opt_in']:
+                qs = qs.filter(Q(open_access=True) | Q(special_open_access_opt_in=True))
+            elif cleaned['special_open_access_opt_in']:
+                qs = qs.filter(special_open_access_opt_in=True)
+            elif cleaned['open_access']:
                 qs = qs.filter(open_access=True)
             if cleaned['is_new']:
                 qs = qs.filter(is_new=True)
