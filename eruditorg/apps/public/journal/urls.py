@@ -3,6 +3,7 @@
 from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from . import feeds
 from . import views
@@ -44,7 +45,7 @@ journal_urlpatterns = ([
         url(_(r'^biblio/$'), views.ArticleBiblioView.as_view(), name='article_biblio'),
         url(_(r'^plan/$'), views.ArticleTocView.as_view(), name='article_toc'),
         url(_(r'^media/(?P<media_localid>[\.\w-]+)$'), views.ArticleMediaView.as_view(), name='article_media'),  # noqa
-        url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
+        url(_(r'^premierepage\.pdf$'), xframe_options_exempt(views.ArticleRawPdfFirstPageView.as_view()), name='article_raw_pdf_firstpage'),  # noqa
         url(r'^citation\.enw$', views.ArticleEnwCitationView.as_view(), name='article_citation_enw'),  # noqa
         url(r'^citation\.ris$', views.ArticleRisCitationView.as_view(), name='article_citation_ris'),  # noqa
         url(r'^citation\.bib$', views.ArticleBibCitationView.as_view(), name='article_citation_bib'),  # noqa
@@ -52,7 +53,7 @@ journal_urlpatterns = ([
     url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)'), include([  # noqa
         url(r'^\.html$', views_compat.ArticleDetailRedirectView.as_view()),
         url(r'^\.xml$', views.ArticleXmlView.as_view(), name="article_raw_xml"),
-        url(r'^\.pdf$', views.ArticleRawPdfView.as_view(), name="article_raw_pdf"),
+        url(r'^\.pdf$', xframe_options_exempt(views.ArticleRawPdfView.as_view()), name="article_raw_pdf"),  # noqa
         url(r'^\.enw$', views.ArticleEnwCitationView.as_view(), name='article_enw'),
         url(r'^\.ris$', views.ArticleRisCitationView.as_view(), name='article_ris'),
         url(r'^\.bib$', views.ArticleBibCitationView.as_view(), name='article_bib'),
