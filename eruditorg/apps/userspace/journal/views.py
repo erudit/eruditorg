@@ -1,6 +1,7 @@
 import mimetypes
 import os
 
+from collections import defaultdict
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import PermissionDenied
@@ -101,14 +102,16 @@ class RoyaltiesListView(
 
     def get_royalties_reports(self):
         root_path = journal_reports_path(self.current_journal.code)
-        result = []
+        result = defaultdict(list)
         try:
             toppath = os.path.join(root_path, self.REPORT_SUBPATH)
             for root, dirs, files in os.walk(toppath):
-                for fn in files:
-                    label = root[len(toppath) + 1:].replace('/', ' - ')
-                    result.append((label, root, fn))
-            result.sort(reverse=True)
+                for filename in files:
+                    path = root[len(toppath) + 1:].split('/')
+                    year = path.pop(0)
+                    filename = ' - '.join(path + [filename])
+                    result[year].append({'root': root, 'filename': filename})
+            result = {k: v for k, v in sorted(result.items(), reverse=True)}
         except FileNotFoundError:
             pass
         return result

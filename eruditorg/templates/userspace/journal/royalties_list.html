@@ -12,11 +12,21 @@
 {% endblock %}
 
 {% block content_main %}
-    <ul>
-        {% for label, subdir, fn in view.get_royalties_reports %}
-            <li><a href="{% url 'userspace:journal:reports_download' %}?subpath={{ subdir }}/{{ fn }}">
-                <b>{{ label }}</b> - {{ fn }}
-            </a></li>
-        {% endfor %}
-    </ul>
+    {% for year, files in view.get_royalties_reports.items %}
+    <section class="akkordion" data-akkordion-single="true">
+        <h2 class="akkordion-title">{{ year }}<i class="icon ion-ios-arrow-down caret"></i></h2>
+        <div class="akkordion-content">
+            <ul>
+            {% for file in files %}
+                <li>
+                    <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
+                        {{ file.filename }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </section>
+    <hr />
+    {% endfor %}
 {% endblock content_main %}
