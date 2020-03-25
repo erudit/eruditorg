@@ -109,8 +109,8 @@ class RoyaltiesListView(
                 for filename in files:
                     path = root[len(toppath) + 1:].split('/')
                     year = path.pop(0)
-                    filename = ' - '.join(path + [filename])
-                    result[year].append({'root': root, 'filename': filename})
+                    label = ' - '.join(path + [filename])
+                    result[year].append({'root': root, 'filename': filename, 'label': label})
             result = {k: v for k, v in sorted(result.items(), reverse=True)}
         except FileNotFoundError:
             pass

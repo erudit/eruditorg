@@ -20,7 +20,7 @@
             {% for file in files %}
                 <li>
                     <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
-                        {{ file.filename }}
+                        {{ file.label }}
                     </a>
                 </li>
             {% endfor %}
