@@ -28,13 +28,6 @@ log = structlog.getLogger(__name__)
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
 FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
 
-# Mapping between language codes and font names for chinese, japanese and korean.
-CJK_FONT_NAMES = {
-    'zh': 'NotoSerifCJKsc',
-    'ja': 'NotoSerifCJKjp',
-    'ko': 'NotoSerifCJKkr',
-}
-
 # NotoSerif font
 registerFont(TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf'))
 registerFont(TTFont('NotoSerif-Bold', FONTS_DIR + '/Noto/NotoSerif-Bold.ttf'))
@@ -75,22 +68,21 @@ registerFontFamily('Symbola', normal='Symbola')
 addMapping('Symbola', 0, 0, 'Symbola')
 
 # NotoSerifCJK font (chinese, japanese, korean)
-for font_name in CJK_FONT_NAMES.values():
-    registerFont(TTFont(font_name, FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
-    registerFont(TTFont(f'{font_name}-Bold', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
-    registerFont(TTFont(f'{font_name}-Italic', FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
-    registerFont(TTFont(f'{font_name}-BoldItalic', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
-    registerFontFamily(
-        font_name,
-        normal=font_name,
-        bold=f'{font_name}-Bold',
-        italic=f'{font_name}-Italic',
-        boldItalic=f'{font_name}-BoldItalic',
-    )
-    addMapping(font_name, 0, 0, font_name)
-    addMapping(f'{font_name}-Bold', 1, 0, f'{font_name} Bold')
-    addMapping(f'{font_name}-Italic', 0, 1, f'{font_name} Italic')
-    addMapping(f'{font_name}-BoldItalic', 1, 1, f'{font_name} Bold Italic')
+registerFont(TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf'))
+registerFont(TTFont('NotoSerifCJKsc-Bold', FONTS_DIR + '/Noto/NotoSerifCJKsc-Bold.ttf'))
+registerFont(TTFont('NotoSerifCJKsc-Italic', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf'))
+registerFont(TTFont('NotoSerifCJKsc-BoldItalic', FONTS_DIR + '/Noto/NotoSerifCJKsc-Bold.ttf'))
+registerFontFamily(
+    'NotoSerifCJKsc',
+    normal='NotoSerifCJKsc',
+    bold='NotoSerifCJKsc-Bold',
+    italic='NotoSerifCJKsc-Italic',
+    boldItalic='NotoSerifCJKsc-BoldItalic',
+)
+addMapping('NotoSerifCJKsc', 0, 0, 'NotoSerifCJKsc')
+addMapping('NotoSerifCJKsc-Bold', 1, 0, 'NotoSerifCJKsc Bold')
+addMapping('NotoSerifCJKsc-Italic', 0, 1, 'NotoSerifCJKsc Italic')
+addMapping('NotoSerifCJKsc-BoldItalic', 1, 1, 'NotoSerifCJKsc Bold Italic')
 
 
 def get_coverpage(article):
@@ -527,7 +519,7 @@ def get_coverpage(article):
 
 
 def get_stylesheet(language):
-    font_name = CJK_FONT_NAMES.get(language, 'NotoSerif')
+    font_name = 'NotoSerifCJKsc' if language in ['zh', 'ja', 'ko'] else 'NotoSerif'
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(
         name='normal',
