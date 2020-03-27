@@ -181,29 +181,29 @@ def get_coverpage(article):
         ))
     if titles['main'].title:
         header.append(Paragraph(
-            clean(titles['main'].title, small_caps_font='SpectralSC-Bold'),
+            clean(titles['main'].title, font_weight='bold'),
             styles['h1'],
         ))
         if titles['main'].subtitle:
             header.append(Paragraph(
-                clean(titles['main'].subtitle, small_caps_font='SpectralSC-Bold'),
+                clean(titles['main'].subtitle, font_weight='bold'),
                 styles['h1_grey'],
             ))
         for title in titles['paral'] + titles['equivalent']:
             header.append(small_spacer)
             header.append(Paragraph(
-                clean(title.title, small_caps_font='SpectralSC-Bold'),
+                clean(title.title, font_weight='bold'),
                 styles['h1'] if title.subtitle else styles['h1_grey'],
             ))
             if title.subtitle:
                 header.append(Paragraph(
-                    clean(title.subtitle, small_caps_font='SpectralSC-Bold'),
+                    clean(title.subtitle, font_weight='bold'),
                     styles['h1_grey'],
                 ))
     for title in titles['reviewed_works']:
         header.append(small_spacer)
         header.append(Paragraph(
-            clean(title, small_caps_font='SpectralSC-Bold'),
+            clean(title, font_weight='bold'),
             styles['h1_grey'],
         ))
     header.append(large_spacer)
@@ -591,7 +591,7 @@ def get_stylesheet(language):
     return stylesheet
 
 
-def clean(text, small_caps_font='SpectralSC'):
+def clean(text, font_weight=None):
     soup = text if isinstance(text, Tag) else BeautifulSoup(text, 'html.parser')
     # Replace <span class="barre"> by <strike>
     for node in soup.find_all('span', attrs={'class': 'barre'}):
@@ -608,7 +608,7 @@ def clean(text, small_caps_font='SpectralSC'):
     # Change the font of <span class="petitecap"> nodes.
     for node in soup.find_all('span', attrs={'class': 'petitecap'}):
         del node['class']
-        node['fontName'] = small_caps_font
+        node['fontName'] = 'SpectralSC-Bold' if font_weight == 'bold' else 'SpectralSC'
     # Remove any footnotes.
     for node in soup.find_all('a', attrs={'class': 'norenvoi'}):
         node.decompose()
