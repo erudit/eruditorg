@@ -207,6 +207,11 @@ class Journal(FedoraMixin, FedoraDated):
     )
     """ The journal that precedes the current journal if any. """
 
+    special_open_access_opt_in = models.BooleanField(
+        default=False,
+        verbose_name=_("Opt-in pour un libre accès spécial durant la crise de la COVID-19"),
+    )
+
     objects = models.Manager()
     internal_objects = InternalJournalManager()
     legacy_objects = LegacyJournalManager()
