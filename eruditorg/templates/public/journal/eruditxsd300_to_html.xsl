@@ -530,7 +530,7 @@
           <xsl:apply-templates select="."/>
         </xsl:otherwise>
       </xsl:choose>
-      <xsl:if test="name() = 'titre'">
+      <xsl:if test="name() = 'titre' or name() = 'trefbiblio'">
         {% if article.issue.embargoed and article.issue.journal.special_open_access_opt_in %}
         <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cet article est temporairement disponible gratuitement.' %}">
           &#160;<i class="erudicon erudicon-open-access" style="color: green;"></i>
