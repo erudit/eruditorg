@@ -83,6 +83,11 @@ addMapping('NotoSerifCJKsc-Bold', 1, 0, 'NotoSerifCJKsc Bold')
 addMapping('NotoSerifCJKsc-Italic', 0, 1, 'NotoSerifCJKsc Italic')
 addMapping('NotoSerifCJKsc-BoldItalic', 1, 1, 'NotoSerifCJKsc Bold Italic')
 
+# Dicts of supported characters in NotoSerif, NotoSerifCJKsc & Symbola fonts.
+noto_chars = TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf').face.charWidths
+cjk_chars = TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf').face.charWidths
+symbola_chars = TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf').face.charWidths
+
 
 def get_coverpage(article):
     pdf_buffer = io.BytesIO()
@@ -615,6 +620,31 @@ def clean(text, font_weight=None):
     for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
         del node['class']
     text = str(soup)
+
+    # Remove unicode variation selectors, they are not supported by our fonts.
+    text = re.sub(r'[\uFE00-\uFE0F]', '', text)
+
+    # Check if we have unsupported characters in Noto font.
+    text_chars = {ord(c) for c in text}
+    chars_not_in_noto = text_chars.difference(set(noto_chars.keys()))
+    # If we have unsupported characters, check if they are supported by our other fonts.
+    if chars_not_in_noto:
+        for char in chars_not_in_noto:
+            if char in cjk_chars:
+                char = chr(char)
+                font_name = 'NotoSerifCJKsc-Bold' if font_weight == 'bold' else 'NotoSerifCJKsc'
+                text = text.replace(char, f'<span fontName="{font_name}">{char}</span>')
+            elif char in symbola_chars:
+                char = chr(char)
+                text = text.replace(char, f'<span fontName="Symbola">{char}</span>')
+            else:
+                # If no fonts support this character, log it.
+                log.warning(
+                    'Coverpage: Unsupported character.',
+                    character=chr(char),
+                    text=text,
+                )
+
     return text
 
 
