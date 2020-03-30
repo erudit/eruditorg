@@ -56,6 +56,13 @@
             </p>
           </xsl:if>
           <h1 class="doc-head__title">
+            {% if article.issue.embargoed and article.issue.journal.special_open_access_opt_in %}
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cet article est temporairement disponible gratuitement.' %}" style="float: right;">
+              &#160;<i class="erudicon erudicon-open-access" style="color: green;"></i>
+            </span>
+            {% endif %}
+          </h1>
+          <h1 class="doc-head__title">
             <xsl:apply-templates select="liminaire/grtitre/titre | liminaire/grtitre/sstitre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/titreparal | liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
@@ -530,13 +537,6 @@
           <xsl:apply-templates select="."/>
         </xsl:otherwise>
       </xsl:choose>
-      <xsl:if test="name() = 'titre' or name() = 'trefbiblio'">
-        {% if article.issue.embargoed and article.issue.journal.special_open_access_opt_in %}
-        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cet article est temporairement disponible gratuitement.' %}">
-          &#160;<i class="erudicon erudicon-open-access" style="color: green;"></i>
-        </span>
-        {% endif %}
-      </xsl:if>
     </span>
   </xsl:template>
 
