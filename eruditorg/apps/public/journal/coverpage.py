@@ -19,7 +19,6 @@ from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDo
 from reportlab.platypus.tables import Table, TableStyle
 from urllib.parse import urlparse
 
-from apps.public.journal.emojis import EMOJIS_REGEX
 from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
@@ -616,12 +615,6 @@ def clean(text, font_weight=None):
     for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
         del node['class']
     text = str(soup)
-    emojis = re.findall(EMOJIS_REGEX, text)
-    if emojis:
-        for emoji in emojis:
-            text = text.replace(emoji, f'<span fontName="Symbola">{emoji}</span>')
-        # Remove unicode variation selectors, they are not supported by our font.
-        text = re.sub(r'[\uFE00-\uFE0F]', '', text)
     return text
 
 
