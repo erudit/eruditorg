@@ -2104,6 +2104,16 @@ class TestArticleDetailView:
         assert '#<img src="/fr/revues/journal/2020-issue/article/media/2127981n.jpg" ' \
                'id="im35" alt="forme: forme pleine grandeur">' in html
 
+    def test_footnote_in_bibliography_title(self):
+        article = ArticleFactory(from_fixture='1068385ar')
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<h2>Bibliographie sélective<a href="#no49" id="re1no49" class="norenvoi" ' \
+               'title="La bibliographie recense exclusivement les travaux cités dans l’article. ' \
+               'En complément, la base de données des logiciels et projets (cf.\xa0note 2) ' \
+               'propose pour l’ensemble des logicie[…]">[49]</a>\n</h2>' in html
+
+
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
