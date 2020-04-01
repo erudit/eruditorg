@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1068385ar" typeart="article" lang="fr" ordseq="4" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1068385ar</idpublic><pagination>
+            <ppage>45</ppage>
+            <dpage>72</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="rmo02666" lang="fr en"><titrerev>Revue musicale OICRM</titrerev><titrerevabr>rmo</titrerevabr><idissnnum>2368-7061</idissnnum><directeur sexe="masculin"><fonction lang="fr">Directeur</fonction><nompers><prenom>Michel</prenom><nomfamille>Duschesneau</nomfamille></nompers></directeur></revue><numero id="rmo05202"><volume>6</volume><nonumero>2</nonumero><pub><annee>2020</annee></pub><pubnum><date typedate="publication">2020-03-24</date></pubnum><grtheme id="th1"><theme>Musicologie numérique. Vers de nouvelles frontières disciplinaires</theme></grtheme></numero><editeur><nomorg>Observatoire interdisciplinaire de création et recherche en musique (OICRM)</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Revue musicale OICRM</nomorg>, 2020</droitsauteur></admin><liminaire><grtitre><surtitre>Articles</surtitre>
+                <titre>Les signes musicaux et leur étude par l’informatique. Le statut épistémologique du numérique dans l’appréhension du sens et de la signification en musique</titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Christophe</prenom><nomfamille>Guillotel-Nothmann</nomfamille></nompers></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>Cet article examine les possibilités apportées par l’informatique pour l’étude d’unités sémiotiques musicales. Il dresse une cartographie des logiciels et projets d’analyse musicale assistée par ordinateur qui ont été réalisés au cours des dernières décennies, étudie différents aspects sémiotiques qui ont trait à la représentation des unités et mène sur ces bases une réflexion sur les enjeux épistémologiques, heuristiques et méthodologiques du numérique dans l’appréhension du sens et de la signification en musique.</alinea></resume><resume typeresume="resume" lang="en"><alinea>This article examines the possibilities provided by computers for the study of semiotic units in music. It maps the computer analysis software and projects that have been developed during the last decades; it studies different semiotic aspects related to the representation of musical units; on these bases, it finally reflects on the epistemological, heuristic and methodological challenges of digital approaches for investigating sense and meaning in music.</alinea></resume><grmotcle lang="fr"><motcle>analyse musicale assistée par ordinateur</motcle><motcle>épistémologie</motcle><motcle>musicologie numérique</motcle><motcle>représentation musicale</motcle><motcle>sémiotique musicale</motcle></grmotcle><grmotcle lang="en"><motcle>computer assisted music analysis</motcle><motcle>digital musicology</motcle><motcle>epistemology</motcle><motcle>music representation</motcle><motcle>music semiotics</motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><titre><marquage typemarq="petitecap">Introduction</marquage></titre><para id="pa1"><no>1</no><alinea>L’analyse musicale porte sur le sens et la signification en musique. Elle est toutefois amenée, notamment dans le cadre de démarches informatisées, à recourir à des mesures quantitatives pour appréhender son objet d’étude. L’analyse constitue à ce titre un point de cristallisation intéressant et complexe des défis épistémologiques que pose l’articulation entre quantitatif et qualitatif en sciences humaines et sociales, à commencer par la musicologie.</alinea></para><para id="pa2"><no>2</no><alinea>Cet article examine les possibilités offertes par l’informatique pour l’étude d’unités sémiotiques musicales et de leur organisation. À cette fin, il dresse une cartographie des logiciels et projets d’analyse musicale assistée par ordinateur qui ont été réalisés au cours des dernières décennies.</alinea></para><para id="pa3"><no>3</no><alinea>Ces logiciels comportent essentiellement deux données d’entrée dont le statut sémiotique diffère profondément : d’une part, la notation musicale qui repose sur une représentation symbolique des données et implique, ce faisant, une réduction des informations, de l’autre, le signal audio qui laisse le champ ouvert à une plus grande variété d’informations mais ne se prononce pas sur la pertinence sémiotique de celles-ci. Cette cartographie donne lieu, en un second temps, à une étude de différents aspects sémiotiques qui ont trait à la représentation des unités. Sur ces bases, j’entame alors une réflexion sur les enjeux épistémologiques, heuristiques et méthodologiques du numérique dans l’appréhension du sens et de la signification en musique. </alinea></para></section1><section1 id="s1n2"><no>2</no><titre><marquage typemarq="petitecap">Cartographie des logiciels et projets dédiés à
+        l’analyse</marquage></titre><para id="pa4"><no>4</no><alinea>La cartographie proposée ici ne prétend pas à l’exhaustivité. Elle fait volontairement l’impasse sur l’histoire de l’analyse musicale assistée par ordinateur et sur les nombreux projets qui jalonnent cette histoire à compter des années 1950<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi>. L’état des lieux qui va suivre recense et étudie les seuls logiciels et projets accessibles aujourd’hui ou dont la trace subsiste encore sur Internet. </alinea></para><para id="pa5"><no>5</no><alinea>L’identification de ces outils s’est effectuée à partir d’une conception spécifique de l’analyse : celle d’une activité focalisée sur l’étude des faits musicaux dans leur aspect symbolique. Plus précisément, cet article défend l’idée que l’essence de la démarche analytique consiste à décomposer et à recomposer les éléments musicaux dans l’optique d’identifier et/ou d’étudier des unités et des catégories sémiotiques et d’en exprimer les relations formelles et combinatoires (voir aussi Nattiez 1975, p. 63-128, 239-278 ; et Meeùs 1993, p. 306, 308-310). </alinea></para><para id="pa6"><no>6</no><alinea>Les outils informatiques ont été sélectionnés en raison de leur aptitude à soutenir cette activité et, selon leur ambition, à l’assumer partiellement, voire entièrement dans certains cas. Dans le cadre d’une démarche prospective toujours en cours, cette perspective a conduit, au stade actuel, à recenser environ 70 logiciels et projets reportés dans une base de données<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>. Cette dernière constitue le terrain de l’exploration entreprise à partir des questions suivantes : quel est le point de départ de la procédure analytique ? Quelles sont les unités identifiées à l’issue du processus ? Quelles sont les opérations analytiques effectuées ? Enfin, quel est le statut du logiciel dans la mise en oeuvre de ces opérations ?</alinea></para><para id="pa7"><no>7</no><alinea>Le nombre significatif de logiciels identifiés conduit immanquablement à une présentation
+          sélective. Cette sélection est liée au contexte dans lequel cette première synthèse
+          rédigée en langue française a été réalisée : la rencontre inaugurale du réseau
+          international <marquage typemarq="italique">
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="http://epistemuse.huma-num.fr/">Épistémuse</liensimple>
+          </marquage> en septembre 2018 à l’Université de Montréal<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>.
+          La thématique de cette rencontre (« Musicologies francophones : nouvelles frontières
+          disciplinaires et nouvelles technologies ») a conduit à retenir essentiellement des
+          logiciels et projets issus de la recherche francophone pour fin de discussion et de
+          présentation détaillée. Pour autant, ce choix ne remet pas en cause l’importance centrale
+          des productions issues d’autres traditions musicologiques. Sa seule motivation est de
+          mieux faire connaître, au-delà de leurs frontières géographiques et linguistiques, les
+          outils issus de la recherche francophone et la réflexion méthodologique, épistémologique
+          et sémiotique qui les caractérise en partie.</alinea></para><section2 id="s2n1"><no>2.
+				1</no><titre><marquage typemarq="italique">Contextes géographiques et
+        chronologiques</marquage></titre><para id="pa8"><no>8</no><alinea>L’animation de l’extrait vidéo 1 situe les logiciels et projets dans leurs contextes
+          géographiques et chronologiques entre 1990 et 2018. Elle montre que le développement des
+          outils suit une courbe en cloche avec un pic entre 2005 et 2010. Les institutions
+          françaises, à commencer par l’Ina-<marquage typemarq="petitecap">grm</marquage>, jouent un
+          rôle central dès le début des années 1990 dans ce développement, par exemple avec
+          l’<marquage typemarq="italique">Acousmographe</marquage><renvoi id="re1no4" idref="no4" typeref="note">4</renvoi>
+          mis à disposition en 1991. Les universités britanniques prennent, elles aussi, une part
+          active à ce développement qui débouche, au début des années 2000, sur le logiciel
+          d’analyse harmonique et contrapuntique <marquage typemarq="italique">Tonalities</marquage>
+          d’Anthony Pople<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi>. L’évolution se poursuit ensuite à
+          travers une multitude de projets dont certains – comme la boîte à outils <marquage typemarq="italique">Music21</marquage>, conçue et développée au <marquage typemarq="petitecap">mit </marquage>sous la direction scientifique de Craig Sapp<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi> – connaissent une postérité importante. Si un ralentissement de
+          la production se fait sentir à compter de 2010, celui-ci ne reflète pas nécessairement un
+          désintérêt pour l’analyse musicale assistée par ordinateur : les outils d’ores et déjà
+          disponibles font l’objet de réagencements et d’extensions afin de répondre aux
+          problématiques particulières des chercheurs individuels<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi>.
+          En outre, les nouveaux développements atteignent un haut niveau de sophistication
+          technique. C’est le cas, par exemple, de la gestion du multimédia dans le logiciel de
+          représentation musicale <marquage typemarq="italique">EAnalysis</marquage> de Pierre
+          Couprie, mis à disposition à compter de 2012<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi>.</alinea></para><para id="pa9"><no>9</no><alinea>La représentation spatio-temporelle met en évidence l’implication particulière des institutions françaises dans la production d’outils à visées analytiques. Sans aucun doute, l’Ircam – de par son rôle, ses orientations et ses missions en matière d’innovation technologique et de création musicale – joue un rôle essentiel dans ce contexte. Mais le nombre et les orientations des logiciels produits dans l’hexagone reflète aussi les spécificités de la musicologie francophone (non seulement française mais aussi québécoise et belge), notamment dans son rapport particulier à l’analyse. Il est le résultat indirect de l’influence exercée par la sémiotique et les méthodologies de la linguistique sur l’appréhension des objets musicaux, notamment à travers la mise en série des données<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi> dans le cadre de l’analyse de corpus<renvoi id="re1no10" idref="no10" typeref="note">10</renvoi>.</alinea>
+        <alinea>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:type="simple" xlink:href="http://revuemusicaleoicrm.org/wp-content/uploads/2019/11/gnothmann_vid1.mp4">
+            <objetmedia flot="ligne">
+              <image xlink:title="forme pleine grandeur" xlink:href="2132367.jpg" dimx="653" dimy="345" id="im1" typeimage="forme" xlink:type="simple"/>
+            </objetmedia>
+          </liensimple>
+        </alinea>
+        <alinea><marquage typemarq="italique">Extrait vidéo 1 : Contexte géographique et
+          chronologique de la production des outils d’aide à l’analyse.</marquage></alinea></para></section2><section2 id="s2n2"><no>2.
+				2</no><titre><marquage typemarq="italique">Données d’entrée</marquage></titre><para id="pa10"><no>10</no><alinea>La figure 1 regroupe les différents logiciels selon leurs données d’entrée : signal audio/vidéo et/ou représentations symboliques. En raison de leurs statuts sémiotiques fondamentalement différents, ces sources d’informations conditionnent en profondeur les procédures analytiques et exercent une incidence forte sur les résultats produits.</alinea></para><para id="pa11"><no>11</no><alinea>Les représentations symboliques impliquent des catégories (hauteurs, durées, indications métriques, etc.) qui servent de point de départ à l’exploration analytique, comme par exemple l’étude de <marquage typemarq="italique">patterns</marquage> mélodiques à partir des hauteurs notées. Toutefois, ces représentations impliquent nécessairement une réduction des informations, réduction qui tient d’une part à la discrétisation du continuum musical – par exemple la réduction des fréquences aux sept noms des notes de la notation occidentale – et, de l’autre, à la réduction des paramètres considérés – par exemple la perte d’informations relatives au timbre au profit d’une focalisation exclusive sur les hauteurs et les durées.</alinea></para><para id="pa12"><no>12</no><alinea>Le signal audio ou vidéo est, au contraire, complètement vierge de ces catégories et ne comporte que des données quantitatives dont le séquençage s’effectue <marquage typemarq="italique">a priori</marquage> indépendamment de considérations qualitatives. Il présente l’avantage d’une exploration d’éléments qui se seraient soustraits aux catégories symboliques, mais pose le défi considérable d’une catégorisation sémiotique effectuée <marquage typemarq="italique">a posteriori </marquage>soit par le dispositif informatique, soit par l’analyste. </alinea></para><para id="pa13"><no>13</no><alinea><marquage typemarq="italique">A priori</marquage>, le <marquage typemarq="petitecap">midi</marquage>, en tant que langage de contrôle, se situe à la charnière entre ces deux régimes : il a recours aux catégories symboliques de l’échelle chromatique pour les hauteurs tout en procédant à un codage des durées qui renonce aux unités de la notation occidentale au profit d’un dispositif <marquage typemarq="italique">on</marquage>/<marquage typemarq="italique">off</marquage>. Il reste toutefois d’essence symbolique.</alinea></para><para id="pa14"><no>14</no><alinea>Certains logiciels tentent de conjuguer différents types de données d’entrée. C’est le cas
+          par exemple d’<marquage typemarq="italique">OpenMusic</marquage>, environnement de
+          programmation graphique consacré à la composition musicale assistée par ordinateur<renvoi id="re1no11" idref="no11" typeref="note">11</renvoi>. Mais, dans la grande majorité des cas, et malgré les demandes
+          d’une partie de la communauté scientifique (voir <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:type="simple" xlink:href="http://archives.esf.org/fileadmin/Public_documents/Publications/musicology.pdf">Dahlig-Turek <marquage typemarq="italique">et al.</marquage> 2012</liensimple>, p. 18),
+          les frontières entre les types de données restent imperméables, tant les points de départ
+          sémiotiques et souvent aussi les méthodologies ainsi que les objectifs analytiques sont
+          différents, voire incompatibles.</alinea></para><para id="pa15"><no>15</no><alinea>Malgré ces différences, il me paraît important d’insister sur la nature plus complémentaire qu’antagoniste des rapports entre données acoustiques (quantitatives) et représentations symboliques (qualitatives). Le processus analytique est indissociable de la représentation symbolique : toute analyse exprime, en effet, ses résultats sous forme symbolique. Mais rien ne s’oppose à ce que la sémiose prenne son point de départ dans des données acoustiques pour accéder – telle une spirale sémiotique – à des paliers symboliques de plus en plus élevés.</alinea></para><figure id="fi1">
+        <no><marquage typemarq="italique">Figure 1</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Regroupement des logiciels selon leurs données
+            d’entrée.</marquage></alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure></section2><section2 id="s2n3"><no>2.
+				3</no><titre><marquage typemarq="italique">Catégories identifiées ou étudiées par les outils
+        informatiques</marquage></titre><para id="pa16"><no>16</no><alinea>À l’autre bout du processus analytique, il est possible d’identifier une trentaine de catégories sur lesquelles portent les logiciels et projets. Ces catégories sont reportées par ordre alphabétique dans le tableau de la figure 2. Il montre à quel point les objets d’étude et résultats censés être produits par les outils informatiques sont variés et hétérogènes. Les unités et catégories relèvent tantôt de niveaux de complexité bas – par exemple les durées –, tantôt élevés – par exemple, les <marquage typemarq="italique">patterns</marquage> contrapuntiques. Elles touchent la microstructure – par exemples les attaques –, la mesostructure – par exemple les <marquage typemarq="italique">patterns</marquage> mélodiques – ou la macrostructure – par exemple, l’organisation formelle. Dans certains cas, elles dépassent les oeuvres individuelles et concernent l’agrégation d’oeuvres. Les unités et catégories peuvent être très spécifiques, comme par exemple l’identification de <marquage typemarq="italique">patterns</marquage> dissonants, ou hautement génériques et concerner toute unité et toute catégorie identifiées par l’analyste. Enfin, elles peuvent être fortement sémiotisées, comme c’est le cas pour les cadences, ou ne pas nécessairement l’être selon les répertoires, comme il en va pour le timbre.</alinea></para><para id="pa17"><no>17</no><alinea>Cet état de fait explique pourquoi les critères du timbre et des nuances n’ont pas été spécifiquement pris en compte dans cette étude consacrée au statut du numérique dans l’appréhension du sens et de la signification. Au stade actuel, l’appréhension informatisée de ces critères reste essentiellement axée sur l’analyse acoustique à l’aide de descripteurs audio ou de filtrages sonores. Si ces approches quantitatives sont indiscutablement en mesure d’apporter des éléments de réponses à des questions qualitatives sur le timbre et les nuances, elles ne permettent pas de se prononcer directement sur le statut de ces critères en tant que catégories sémiotiques.</alinea></para><figure id="fi2">
+        <no><marquage typemarq="italique">Figure 2</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Unités et catégories identifiées ou étudiées par les
+            outils informatiques.</marquage></alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa18"><no>18</no><alinea>Les catégories identifiées dans la figure 2 s’organisent dès lors qu’elles sont mises en rapport avec les logiciels et, indirectement, avec leurs données d’entrée. C’est le cas dans l’animation de l’extrait vidéo 2 qui associe les programmes informatiques, représentés par des cercles bleus, aux unités identifiées ou étudiées, représentées par les rectangles aux contours rouges. Si ce graphe, dans sa globalité, n’est pas plus clair étant donné la foule de données et de relations représentées, il permet d’identifier six sous-ensembles qu’il s’agit d’explorer séparément à présent.</alinea>
+        <alinea>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:type="simple" xlink:href="http://revuemusicaleoicrm.org/wp-content/uploads/2019/11/gnothmann_vid2.mp4">
+            <objetmedia flot="ligne">
+              <image xlink:title="forme pleine grandeur" xlink:href="2132370.jpg" dimx="592" dimy="341" id="im4" typeimage="forme" xlink:type="simple"/>
+            </objetmedia>
+          </liensimple>
+        </alinea>
+        <alinea><marquage typemarq="italique">Extrait vidéo 2 : Outils informatiques et
+          catégories.</marquage></alinea></para><para id="pa19"><no>19</no><alinea>Le premier groupe, très important, concentre des logiciels qui débouchent sur une extraction d’unités et de catégories majoritairement élémentaires, comme les pulsations, les durées, les tempos ou les attaques. C’est le cas, par exemple, du logiciel <marquage typemarq="italique">Aubio</marquage> développé à la Queen Mary University de Londres par Paul Brossier en 2003<renvoi id="re1no12" idref="no12" typeref="note">12</renvoi>, ou encore de la <marquage typemarq="italique">Midi-Toolbox</marquage> conçue par Petri Toiviainen et Tuomas Eerola<renvoi id="re1no13" idref="no13" typeref="note">13</renvoi>.</alinea></para><para id="pa20"><no>20</no><alinea>Un deuxième ensemble rassemble des projets focalisés en grande partie sur l’identification
+          d’échelles, de modes, ou encore de <marquage typemarq="italique">patterns</marquage>
+          mélodiques, rythmiques ou contrapuntiques. Ces projets peuvent avoir une portée
+          ethnomusicologique, comme le logiciel <marquage typemarq="italique">Music22</marquage>
+          d’Anas Ghrab<renvoi id="re1no14" idref="no14" typeref="note">14</renvoi>, nommé en référence à la boîte à outils
+          <marquage typemarq="italique">Music21</marquage> (voir précédemment) et ayant pour
+          ambition d’analyser la musique modale à partir d’enregistrements sonores en exploitant les
+          outils du <marquage typemarq="italique">Music Information Retrieval</marquage> (<marquage typemarq="petitecap">mir)<renvoi id="re1no15" idref="no15" typeref="note">15</renvoi></marquage>. Il en va de même
+          aussi pour le logiciel <marquage typemarq="italique">Monika</marquage><renvoi id="re1no16" idref="no16" typeref="note">16</renvoi>, conçu et écrit par Nicolas Meeùs en réaction à une recherche
+          doctorale menée à l’Université Paris-Sorbonne aux débuts des années 2000 (voir
+          Stern 2002). Bon nombre de ces projets portent sur des répertoires médiévaux ou
+          renaissants, par exemple la bibliothèque de partitions<marquage typemarq="italique">
+          Carnet de notes</marquage>, conçue par Alice Tacaille à l’Institut de Recherche en
+          Musicologie (IReMus)<renvoi id="re1no17" idref="no17" typeref="note">17</renvoi> ou le projet <marquage typemarq="italique">Citations. The Renaissance Imitation Mass </marquage>mis en oeuvre au
+          Centre d’Études Supérieures de la Renaissance (<marquage typemarq="petitecap">cesr</marquage>) et au Haverford College par David Fiala et Richard Freedman<renvoi id="re1no18" idref="no18" typeref="note">18</renvoi>.</alinea></para><para id="pa21"><no>21</no><alinea>Un autre ensemble d’outils, de proportion beaucoup plus restreinte, rassemble les projets qui implémentent des théories génératives. Ces logiciels, comme par exemple <marquage typemarq="italique"><marquage typemarq="petitecap">gttm</marquage></marquage><marquage typemarq="italique"> Analysis Tool </marquage>développé à l’Université de Kyoto<renvoi id="re1no19" idref="no19" typeref="note">19</renvoi>, visent à cerner l’articulation hiérarchisée des structures musicales en faisant le lien entre élaboration de surface et structure profonde.</alinea></para><para id="pa22"><no>22</no><alinea>Le groupe suivant porte de manière ciblée sur l’analyse harmonique. Il s’agit d’identifier
+          des accords, des progressions harmoniques, des modulations et des centres tonals. C’est le
+          cas par exemple du projet <marquage typemarq="italique">Polyphonic Music Information
+          Retrieval </marquage>(<marquage typemarq="italique">Poly</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">mir</marquage></marquage>)<renvoi id="re1no20" idref="no20" typeref="note">20</renvoi>, en cours d’implémentation dans la bibliothèque de partitions
+          <marquage typemarq="italique"><marquage typemarq="petitecap">neuma</marquage></marquage><renvoi id="re1no21" idref="no21" typeref="note">21</renvoi>. </alinea></para><para id="pa23"><no>23</no><alinea>Un cinquième groupe, aux visées et aux approches très différentes des précédents, est axé sur l’agrégation de corpus similaires. Il s’agit, par exemple dans la <marquage typemarq="italique">Music Analysis Toolbox </marquage>développée en 2004 au Österreichisches Forschungsinstitut für Artificial Intelligence (<marquage typemarq="petitecap">ofai ; </marquage>« Institut autrichien de recherche sur l’intelligence artificielle »), de proposer des mesures de similarité des oeuvres dans l’optique d’effectuer des classifications automatiques au sein de vastes collections<renvoi id="re1no22" idref="no22" typeref="note">22</renvoi>.</alinea></para><para id="pa24"><no>24</no><alinea>Le dernier groupe, quant à lui, se distingue par son caractère générique. Sans limiter leur
+          champ d’investigation à une catégorie particulière, les logiciels représentés ici offrent
+          un cadre propice à l’annotation soit de la partition, comme <marquage typemarq="italique">iAnalyse</marquage><renvoi id="re1no23" idref="no23" typeref="note">23</renvoi>, soit du signal audio-vidéo, comme
+          le permettent l’<marquage typemarq="italique">Acousmographe</marquage> ou <marquage typemarq="italique">EAnalyis</marquage>. Ceci ne veut pas dire que des catégories
+          préétablies ne puissent pas être retenues : <marquage typemarq="italique">EAnalysis</marquage> propose, notamment, une annotation à partir des unités sémiotiques
+          temporelles (<marquage typemarq="petitecap">ust</marquage>)<renvoi id="re1no24" idref="no24" typeref="note">24</renvoi>. Mais ces catégories constituent autant de grilles de lecture facultatives et
+          alternatives. Elles sont susceptibles de guider l’analystes dans ses choix et ses
+          annotations, mais ne s’imposent pas à lui et ne font pas l’objet d’une
+          automatisation.</alinea>
+        <alinea>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:type="simple" xlink:href="http://revuemusicaleoicrm.org/wp-content/uploads/2019/11/gnothmann_vid3.mp4">
+            <objetmedia flot="ligne">
+              <image xlink:title="forme pleine grandeur" xlink:href="2132371.jpg" dimx="586" dimy="355" id="im5" typeimage="forme" xlink:type="simple"/>
+            </objetmedia>
+          </liensimple>
+        </alinea>
+        <alinea><marquage typemarq="italique">Extrait vidéo 3 : Données d’entrée, catégories
+          analytiques et répertoires.</marquage></alinea></para><para id="pa25"><no>25</no><alinea>Un examen global des six groupes apporte des conclusions supplémentaires mises en évidence dans l’animation de l’extrait vidéo 3. La première concerne le rapport entre les données d’entrée et les résultats. D’une part, les groupes 1, 5 et 6 – à savoir l’extraction d’unités élémentaires, l’agrégation de collections similaires et l’annotation analytique – font majoritairement usage de données d’entrée audio-vidéo (en jaune dans l’animation). D’autre part, les groupes 2, 3 et 4 – constitués de logiciels relatifs à l’analyse des <marquage typemarq="italique">patterns</marquage>, à l’analyse harmonique et aux théories génératives – se situent, quant à eux, du côté des données symboliques (en bleu). Ces catégories ne sont possibles, en effet, qu’à partir de descriptions sémiotiques des données, parce que les logiciels qui les produisent opèrent de bout en bout sur des éléments sémiotiques. </alinea></para><para id="pa26"><no>26</no><alinea>Il est à noter par ailleurs que les regroupements et les procédures analytiques qui s’y rattachent reflètent des répertoires distincts. Le groupe 6, qui comporte des logiciels génériques, englobe l’ensemble des répertoires avec un focus particulier sur les répertoires électroacoustiques. Les groupes 1 et 5 touchent de manière très large la musique occidentale tonale avec hauteurs et durées discrétisables. Les groupes 3 et 4 sont axés sur les répertoires harmoniques pré-tonals ou tonals. Enfin, le groupe 2 concerne des répertoires plus spécifiques : la polyphonie de la Renaissance, les corpus monodiques ou encore les corpus ethnomusicologiques.</alinea></para></section2><section2 id="s2n4"><no>2.
+				4</no><titre><marquage typemarq="italique">Statut des logiciels dans le processus
+        analytique</marquage></titre><para id="pa27"><no>27</no><alinea>Un examen du statut des logiciels et projets dans le processus analytique permet d’identifier trois rôles distincts : d’une part, l’identification d’unités musicales, à savoir le processus analytique qui consiste à segmenter le continuum musical en des unités chargées de sens ; d’autre part, la représentation de ces unités, c’est-à-dire, leur manifestation sémiotique sous forme d’indices, d’icônes ou de symboles ; enfin, la génération d’unités, soit la production, par les logiciels, de fragments musicaux. Ces rôles peuvent se combiner de différentes manières (voir figure 3).</alinea></para><figure id="fi3">
+        <no><marquage typemarq="italique">Figure 3</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Statut des logiciels dans le processus
+            analytique.</marquage></alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im6" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa28"><no>28</no><alinea>Les rares outils qui assument à la fois l’identification, la représentation et la génération
+          d’unités ou de catégories, implémentent soit des grammaires génératives, comme le logiciel
+          <marquage typemarq="italique"><marquage typemarq="petitecap">legre</marquage></marquage><renvoi id="re1no25" idref="no25" typeref="note">25</renvoi>, soit ils sont
+          volontairement génériques, comme <marquage typemarq="italique">Music21</marquage>, soit
+          encore, leur ambition dépasse celui de l’analyse en faveur de la composition, comme
+          <marquage typemarq="italique">OpenMusic</marquage>. Une deuxième démarche consiste à
+          confier à la machine à la fois des tâches de représentation et de génération. Il en va
+          ainsi pour l’<marquage typemarq="italique">Acousmo- scribe</marquage> développé dans
+          l’optique double de représenter symboliquement ce qui est entendu et de générer des sons à
+          partir de ces symboles (voir <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:type="simple" xlink:href="file:///www.ems-network.org/ems09/papers/disanto.pdf">Desainte-Catherine et Di
+          Santo 2009</liensimple>).</alinea></para><para id="pa29"><no>29</no><alinea>Sans grande surprise, c’est la combinaison de l’identification et de la représentation des
+          unités qui prime et qui correspond au mode de fonctionnement des trois quarts des outils
+          identifiés, qu’il s’agisse du logiciel <marquage typemarq="italique">ASAnnotation</marquage>, pour l’analyse et l’annotation automatique ou manuelle de
+          fichiers son<renvoi id="re1no26" idref="no26" typeref="note">26</renvoi>, du <marquage typemarq="italique">Joquin
+          Project</marquage><renvoi id="re1no27" idref="no27" typeref="note">27</renvoi>, ayant pour ambition de faire
+          dialoguer le <marquage typemarq="italique">big data</marquage> et les méthodes analytiques
+          traditionnelles, ou encore du projet <marquage typemarq="italique">Texture </marquage>qui
+          tente de formaliser les textures mélodiques ou harmoniques de la musique
+          occidentale<renvoi id="re1no28" idref="no28" typeref="note">28</renvoi>.</alinea></para><para id="pa30"><no>30</no><alinea>Un nombre relativement conséquent de logiciels est focalisé toutefois sur la seule représentation des résultats, comme par exemple la <marquage typemarq="italique">Bachothèque</marquage> mise à disposition au début des années 2000 pour l’analyse de l’interprétation<renvoi id="re1no29" idref="no29" typeref="note">29</renvoi>, <marquage typemarq="italique">j</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">ust</marquage></marquage>, outil de segmentation audio pour l’identification d’unités sémiotiques temporelles<renvoi id="re1no30" idref="no30" typeref="note">30</renvoi>, ou encore <marquage typemarq="italique">EAnalysis</marquage>. Ces projets se distancient à ce titre fortement de l’idéal de l’automatisation du processus analytique qui avait nourri beaucoup d’espoirs au début de la période considérée. Tout l’enjeu réside ici dans l’apport de connaissances qui résulte, d’une part, de la désignation et de l’annotation des éléments par l’analyste et, de l’autre, de leur représentation informatique. Il est à noter enfin qu’à aucun moment les logiciels ne revendiquent le domaine de l’interprétation. Dans aucun des cas observés, l’outil informatique ne se suffit donc à lui-même pour la réalisation d’une analyse.</alinea></para></section2><section2 id="s2n5"><no>2.
+				5</no><titre><marquage typemarq="italique">Modes opératoires </marquage></titre><para id="pa31"><no>31</no><alinea>Une exploration des logiciels sous l’angle des mécanismes analytiques mis en oeuvre permet
+          d’identifier cinq modes opératoires : la segmentation, la comparaison, le comptage, la
+          recherche ou l’application de règles et la hiérarchisation<renvoi id="re1no31" idref="no31" typeref="note">31</renvoi>. Ces procédures sont combinées la plupart du temps et découlent directement
+          des unités musicales qu’il s’agit d’identifier ou d’étudier. L’histogramme de la figure 4
+          représente l’utilisation proportionnelle de chacune de ces procédures. S’il n’est pas
+          étonnant que la segmentation – centrale dans la démarche analytique – soit fréquemment
+          représentée, il est très révélateur que les procédés qui reposent sur le comptage
+          d’occurrences (par exemple de hauteurs ou de fondamentales) soient comparativement
+          importantes. Il s’agit en effet d’un mode opératoire relativement aisé à implémenter sur
+          le plan informatique. À l’opposé, les procédures de réduction et de hiérarchisation,
+          beaucoup plus complexes, sont quasiment absentes. La recherche ou l’application de règles
+          ainsi que les procédures de comparaison – qu’il s’agisse de la comparaison de deux
+          segments d’une partition ou d’une mise en regard d’une partition avec le segment audio
+          correspondant à une interprétation, par exemple dans <marquage typemarq="italique">Antescofo</marquage><renvoi id="re1no32" idref="no32" typeref="note">32</renvoi> – adoptent, quant à elles, une
+          position médiane. L’outil informatique conditionne ainsi les modes opératoires et
+          indirectement l’éventail des procédures analytiques retenues.</alinea></para><figure id="fi4">
+        <no><marquage typemarq="italique">Figure 4</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Modes opératoires des logiciels.</marquage></alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im7" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure></section2></section1><section1 id="s1n3"><no>3</no><titre><marquage typemarq="petitecap">Représentation et organisation des unités
+        analytiques</marquage></titre><para id="pa32"><no>32</no><alinea>Sans pouvoir traiter en détail la vaste question de la représentation des résultats analytiques, il est nécessaire d’aborder ici quelques-uns de leurs aspects sémiotiques.</alinea></para><section2 id="s2n6"><no>3.
+				1</no><titre><marquage typemarq="italique">Sérialisation des unités analytiques et annotation de
+        partitions</marquage></titre><para id="pa33"><no>33</no><alinea>Les résultats de la procédure analytique peuvent être sérialisés – c’est-à-dire codés sous la forme d’une suite de sous-unités – par le biais de langages de balises. Au-delà du stockage persistant des résultats, ce balisage permet de hiérarchiser les unités et de les qualifier. C’est le cas dans la figure 5 qui présente le résultat d’une analyse harmonique réalisée par <marquage typemarq="italique">Poly</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">mir</marquage></marquage>. Chaque unité de hiérarchie supérieure correspond à une collection de hauteurs, désignée par une balise &lt;pitchColl&gt; dont les attributs renseignent sur la position de la verticalité au sein de la composition (@offset) et sur la fondamentale (@root). La balise &lt;pitchColl&gt; comporte à son tour des hauteurs individuelles, désignées par la balise &lt;analysedPitch&gt; dont les attributs livrent des informations notamment sur l’accentuation, la signification contrapuntique ou encore le degré de certitude de l’analyse. </alinea></para><figure id="fi5">
+        <no><marquage typemarq="italique">Figure 5</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Analyse des hauteurs et des fondamentales dans
+            </marquage>Poly<marquage typemarq="petitecap">mir</marquage></alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im8" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+        <source><marquage typemarq="italique">Johann A. Reincken,</marquage> Hortus Musicus
+          <marquage typemarq="italique">[1688],</marquage> Sonata 1, <marquage typemarq="italique">« Adagio »</marquage></source>
+      </figure><para id="pa34"><no>34</no><alinea>Un tel balisage est par essence descriptif et orienté données : il permet de dissocier
+          l’organisation sémantico-syntaxique de la manière dont sont affichées les informations par
+          le logiciel informatique ; il est aussi d’essence connotative. Les balises s’inscrivent
+          dans un système sémiotique en prise avec le langage musical, quoique distinct de celui-ci,
+          et doivent faire l’objet d’une transformation en vue de la représentation ou de
+          l’investigation d’autres unités signifiantes (voir <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:type="simple" xlink:href="http://www.digitalhumanities.org/dh2007/dh2007.abstracts.pdf">Piez 2007</liensimple>, p. 156).</alinea></para><para id="pa35"><no>35</no><alinea>L’un des enjeux d’une telle structuration sémantico-syntaxique est de pouvoir extraire des
+          informations en vue de les comparer et de les traiter en série. Un autre apport, inhérent
+          au langage <marquage typemarq="petitecap">xml</marquage>, réside dans le partage des
+          données analytiques. Si l’édition électronique dispose à travers le Music<marquage typemarq="petitecap">xml</marquage> et la <marquage typemarq="italique">Music Encoding
+          Initiative </marquage>(<marquage typemarq="petitecap">mei</marquage>)<renvoi id="re1no33" idref="no33" typeref="note">33</renvoi> de standards communs, rien de comparable n’existe à l’heure
+          actuelle pour les données analytiques<renvoi id="re1no34" idref="no34" typeref="note">34</renvoi>. Le défi que pose
+          l’établissement d’un tel standard réside à un premier niveau dans la nécessité de créer un
+          consensus autour des concepts et du métalangage employés pour les désigner. À un second
+          niveau, les difficultés sont liées aux contraintes inhérentes au <marquage typemarq="petitecap">xml</marquage> dont la structuration spécifique n’est pas sans poser
+          problème lorsqu’il s’agit de gérer simultanément plusieurs types de hiérarchies et lorsque
+          les relations entre les unités ne peuvent être réduites à des relations parent-enfant. Le
+          modèle de données <marquage typemarq="petitecap">rdf</marquage><renvoi id="re1no35" idref="no35" typeref="note">35</renvoi> apporte une plus grande souplesse à ce niveau. Mais la modélisation – comme
+          d’ailleurs le métalangage des balises <marquage typemarq="petitecap">xml</marquage> – ne
+          doit pas faire oublier que les relations établies sont le résultat d’un processus
+          interprétatif qu’il est indispensable d’expliciter et de soumettre à une appréciation
+          critique. Plus que l’établissement de modèles et de vocabulaires contrôlés, l’enjeu
+          consiste à développer des approches qui mettent en relation ces modèles et leurs
+          vocabulaires à la fois avec les concepts auxquels ils renvoient et les personnes qui les
+          emploient (voir Sowa 2000, p. 58).</alinea></para><figure id="fi6">
+        <no><marquage typemarq="italique">Figure 6</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Antoine Brumel, </marquage>Missa pro defunctis
+            <marquage typemarq="italique">(c. 1510), « Dies Irae », mes. 40-51, annotation avec
+            </marquage><marquage typemarq="petitecap">neuma</marquage>-Poly<marquage typemarq="petitecap">mir</marquage>.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im9" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa36"><no>36</no><alinea>Le numérique offre des possibilités élargies en matière d’annotation des partitions.
+          L’approche adoptée dans <marquage typemarq="italique">iAnalyse</marquage> consiste à
+          synchroniser la partition avec le signal audio et à y apporter des annotations
+          (graphismes, textes, images). Une démarche comparable quoique distincte est adoptée dans
+          <marquage typemarq="italique">Dezrann</marquage>, développé par l’équipe Algomus<renvoi id="re1no36" idref="no36" typeref="note">36</renvoi>. La plateforme s’approprie les technologies du Web pour
+          visualiser, éditer et partager des analyses musicales à travers des ensembles d’étiquettes
+          analytiques associées à la partition et au signal audio. Si dans <marquage typemarq="italique">Dezrann</marquage>, ces étiquettes renvoient à des coordonnées de
+          l’image (voir <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:type="simple" xlink:href="https://hal.archives-ouvertes.fr/hal-01796787/document">Giraud, Groult et
+          Leguy 2018</liensimple>, p. 107), le projet <marquage typemarq="italique"><marquage typemarq="petitecap">neuma</marquage></marquage><marquage typemarq="italique">-Poly</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">mir</marquage></marquage> fait le choix d’associer directement l’information analytique à
+          l’élément musical encodé en <marquage typemarq="petitecap">mei</marquage>. Dans la
+          figure 6 sont annotés les <marquage typemarq="italique">patterns</marquage> dissonants
+          rencontrés aux mesures 40 et suivantes du « Dies Irae » de la <marquage typemarq="italique">Missa pro defunctis </marquage>(c. 1510) d’Antoine Brumel<renvoi id="re1no37" idref="no37" typeref="note">37</renvoi>. La stratégie consiste à réaliser une première analyse
+          automatisée de la partition, matérialisée par des codes couleurs (voir la légende en bas à
+          droite de la figure) et stockée dans une liste de données analytiques. Cette liste peut
+          être enrichie et corrigée par la suite. À titre d’exemple, l’analyse de <marquage typemarq="italique">ré</marquage><indice>2</indice> en tant qu’anticipation à la mesure 40
+          du <marquage typemarq="italique">bassus</marquage> a été corrigée par un analyste au
+          profit d’une note consonante. Cette annotation supplémentaire apparaît avec son
+          commentaire dans la liste de données analytiques. Elle est datée, signée et mise en regard
+          avec les autres interprétations. Une telle démarche permet l’automatisation des procédures
+          analytiques tout en gardant la main sur l’analyse. Elle permet aussi de tenir compte des
+          variantes interprétatives et des points de vue circonstanciés des analystes. À ce titre,
+          elle dégage des perspectives vers l’analyse collaborative et conduit à reconsidérer les
+          modalités de production de connaissances analytiques.</alinea></para></section2><section2 id="s2n7"><no>3.
+				2</no><titre><marquage typemarq="italique">Diagrammes musicaux</marquage></titre><para id="pa37"><no>37</no><alinea>Les résultats analytiques débouchent aussi sur des histogrammes, tableaux et diagrammes. Ces derniers s’inscrivent dans une tradition particulièrement riche dont les cercles musicaux de Johann David Heinichen, le <marquage typemarq="italique">Tonnetz</marquage> introduit par Leonhard Euler ou encore les graphes schenkériens constituent des représentants importants. Cette tradition entre en résonance avec l’intérêt de l’informatique pour le raisonnement diagrammatique.</alinea></para><para id="pa38"><no>38</no><alinea>Dans la conception triadique de Charles Sanders Peirce, le diagramme appartient, avec l’image et la métaphore, à la catégorie des signes iconiques : « <marquage typemarq="italique">But while the image represents its object through simple qualities and the metaphor represents it through a similarity found in something else, the diagram represents it through a skeleton-like sketch of relations </marquage>» (Stjernfelt 2007, p. 90). L’icône se distingue ainsi des autres types de représentations en ce que, par son observation directe, « <marquage typemarq="italique">other truths concerning its objects can be discovered than those which suffice to determine its constructions</marquage> » (Peirce 1934-58, vol. 2, p. 279).</alinea></para><para id="pa39"><no>39</no><alinea>Le logiciel <marquage typemarq="italique">HexaChord</marquage><renvoi id="re1no38" idref="no38" typeref="note">38</renvoi> permet la représentation dynamique des hauteurs d’une composition notée dans
+          l’espace diatonico-chromatique d’un<marquage typemarq="italique"> Tonnetz</marquage>. Dans
+          l’animation de l’extrait vidéo 4, cette représentation porte sur <marquage typemarq="italique">Take A Bow</marquage> du groupe de rock britannique <marquage typemarq="italique">Muse</marquage>.</alinea>
+        <alinea><marquage typemarq="italique">Extrait vidéo 4 : Muse, « Take A Bow » (extrait de
+          Black Holes and Revelations, 2006), représentation dynamique par le logiciel HexaChord.
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:type="simple" xlink:href="https://www.youtube.com/watch?v=NQ7LkWCzKxI">Voir la vidéo</liensimple>.</marquage></alinea></para><para id="pa40"><no>40</no><alinea>L’apport d’information consiste dans la l’extrait vidéo 4 à mettre en évidence un
+          cheminement harmonique rectiligne qui progresse du côté gauche vers le côté droit du
+          <marquage typemarq="italique">Tonnetz</marquage>. <marquage typemarq="italique">HexaChord</marquage> suppose à cette fin un agencement du matériau musical qui est tout
+          sauf trivial sur le plan sémiotique. Il s’agit de « pouvoir associer à une pièce les
+          propriétés musicales intrinsèques d’un espace dans lequel elle est décrite par une
+          trajectoire régulière » (Bigo 2013, p. 118). Cette association se fait par le critère de
+          « compliance » (<marquage typemarq="italique">ibid.</marquage>, p. 38-40), une mesure qui
+          vise à quantifier l’aptitude de la représentation « à révéler les propriétés d’un
+          système » (<marquage typemarq="italique">ibid.</marquage>, p. 116). Le logiciel fait ainsi
+          la triple hypothèse : a) que les trajectoires dans l’espace diatonico-chromatique
+          représentent une propriété d’un « système », b) que les trajectoires les plus
+          significatives sur le plan quantitatif sont aussi les plus signifiantes sur le plan
+          qualitatif, et enfin, c) que les cheminements signifiants puissent tous être représentés
+          par le <marquage typemarq="italique">Tonnetz </marquage>enharmonique (ici avec <marquage typemarq="italique">sol</marquage># = <marquage typemarq="italique">la</marquage>♭).</alinea></para><para id="pa41"><no>41</no><alinea>Ces présupposés ne sont pas sans impliquer certaines tensions. Dans l’exemple plus haut,
+          l’enharmonie du <marquage typemarq="italique">Tonnetz</marquage> empêche, d’un côté,
+          d’interpréter la séquence comme un passage rectiligne du côté diésant (<marquage typemarq="italique">ré</marquage>-<marquage typemarq="italique">fa</marquage>#-<marquage typemarq="italique">la</marquage>) vers le côté bémolisant (<marquage typemarq="italique">ré</marquage>♭♭<marquage typemarq="italique">-fa</marquage>♭-<marquage typemarq="italique">la</marquage>♭♭-<marquage typemarq="italique">do</marquage>♭) au
+          profit d’une organisation circulaire – le point d’arrivée (<marquage typemarq="italique">do-mi-sol-si</marquage>) étant adjacent au point de départ (<marquage typemarq="italique">ré</marquage>-<marquage typemarq="italique">fa</marquage>#-<marquage typemarq="italique">la</marquage>). Mais, de l’autre côté, l’organisation plane du <marquage typemarq="italique">Tonnetz</marquage> empêche de mettre en évidence cette circularité au
+          profit d’une représentation rectiligne matérialisée dans l’extrait vidéo 4.</alinea></para><para id="pa42"><no>42</no><alinea>Il n’y a pas lieu de remettre en cause ces présupposés dans l’absolu : c’est précisément d’eux-mêmes que découle le potentiel heuristique d’<marquage typemarq="italique">HexaChord</marquage>. Ils rappellent toutefois que les diagrammes produits par le logiciel – à l’instar de tout diagramme – sont le résultat de choix méthodologiques, d’hypothèses théoriques et de grilles de lecture interprétatives. Jusqu’à un certain degré, la dimension interprétative est favorisée par l’exploration diagrammatique rendue possible par l’environnement informatique : <marquage typemarq="italique">HexaChord</marquage> permet le réagencement du matériau et la transformation du diagramme, notamment en changeant la structure intervallique du <marquage typemarq="italique">Tonnetz.</marquage> Cette réorganisation et l’apport de connaissances qui peut en résulter constituent un trait distinctif du diagramme au sens peircien : « <marquage typemarq="italique">The transformate diagram is the eventual, rational interpretant of the transformand diagram and it has in turn the conclusion, expressed in symbolic terms, as its interpretant</marquage> » (Stjernfelt 2000, p. 372).</alinea></para><para id="pa43"><no>43</no><alinea>Les conditions sémiotiques changent du tout au tout dans le cas de la représentation du signal audio-vidéo. Dans la transcription dynamique d’« Ondes croisées » de Bernard Parmegiani, réalisée par Pierre Couprie avec le logiciel <marquage typemarq="italique">EAnalysis</marquage>, les formes géométriques impliquent une discrétisation du continuum sonore et suggèrent, notamment par leurs couleurs, des catégories sémiotiques distinctes (extrait vidéo 5).</alinea>
+        <alinea><marquage typemarq="italique">Extrait vidéo 5 : Bernard Parmegiani, « Ondes
+          croisées » (extrait de De natura sonorum, 1975), représentation dynamique par le logiciel
+          EAnaylsis. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls10" xlink:type="simple" xlink:href="https://www.youtube.com/watch?v=-GMedIlNmmw">Voir la
+          vidéo</liensimple>.</marquage></alinea></para><para id="pa44"><no>44</no><alinea>La transcription repose, ici encore, sur une relation iconique entre la forme et l’objet sonore (ou ce qu’il évoque) : les sonorités aquatiques des secondes 5-6 sont, par exemple, matérialisées par des gouttes bleues dans le graphique<renvoi id="re1no39" idref="no39" typeref="note">39</renvoi>. Cette iconicité favorise l’association de l’objet sonore à la forme « en misant sur les analogies entre le visuel et le sonore » (Couprie 2015, p. 28). Toutefois, dans le cas présent, elle ne rend pas explicite ce que les formes, en tant qu’unités sémiotiques, sont censées signifier sur le plan musical : la goutte d’eau bleue, en tant que <marquage typemarq="italique">representamen</marquage>, renvoie bien à un objet, mais ne fait pas nécessairement <marquage typemarq="italique">connaître</marquage> cet objet par le déclenchement d’un interprétant – surplus sémiotique qui permet de préciser la mise en relation. Le résultat n’est pas proprement sémiotique parce qu’il ne dit rien sur la signification des formes représentées.</alinea></para><para id="pa45"><no>45</no><alinea>Cet état de fait est lié à la difficulté de formaliser, par le biais de représentations
+          iconiques, le sens qui résulte de la structure interne de l’oeuvre. Les répétitions,
+          transformations et distinctions d’unités, qui sont génératrices de sens, transparaissent
+          en partie à travers la représentation, mais ne sont pas encryptées en elle. La goutte
+          d’eau bleue et sa réverbération caractéristique acquièrent manifestement un rôle
+          structurel en raison de leur saillance, de leur répétition et de leur transformation (voir
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls11" xlink:type="simple" xlink:href="https://hal.archives-ouvertes.fr/hal-01258381">Couprie 2010</liensimple>), mais le schéma ne se prononce pas sur le statut sémiotique de
+          ces transformations et ne formalise pas les rapports qu’entretient la goutte avec les
+          autres unités. </alinea></para><para id="pa46"><no>46</no><alinea>Si l’on considère avec Peirce qu’un <marquage typemarq="italique">representamen</marquage>
+          ne peut renvoyer à un objet d’une catégorie sémiotique supérieure (voir Peirce 1934-58,
+          vol. 1, p. 179-180), seuls des légisignes – signes conventionnels et arbitraires – sont
+          d’ailleurs susceptibles de représenter de tels relations symboliques qui se situent
+          au-delà de la morphologie des objets acoustiques. Ceci ne retire rien à la valeur
+          pédagogique et communicationnelle des représentations dynamiques produites par <marquage typemarq="italique">EAnalysis</marquage>, mais montre que cette approche iconique
+          particulière, axée sur la morphologie sonore – comme d’ailleurs celle qui gouverne les
+          unités sémiotiques temporelles et leur analyse par le logiciel <marquage typemarq="italique">j</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">ust</marquage></marquage><renvoi id="re1no40" idref="no40" typeref="note">40</renvoi> – a des
+          répercussions fortes sur la nature des significations musicales qui peuvent être investies
+          à partir des outils informatiques développés.</alinea></para><para id="pa47"><no>47</no><alinea>Certaines initiatives essayent d’articuler la représentation iconique avec une approche
+          symbolique. C’est le cas par exemple du logiciel <marquage typemarq="italique"><marquage typemarq="petitecap">tiaals</marquage></marquage>, développé à l’Université de
+          Huddersfield par <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls12" xlink:type="simple" xlink:href="http://eprints.hud.ac.uk/id/eprint/18726/1/icmc2013_clarke_dufeu_manning.pdf">Michael Clarke, Peter Manning et Frédéric Dufeu</liensimple><renvoi id="re1no41" idref="no41" typeref="note">41</renvoi>. Axé sur le point de vue de l’analyste, il distingue deux plans distincts.
+          D’une part, des objets qui annotent le sonagramme et qui entretiennent un rapport iconique
+          avec la morphologie sonore (figure 7a). D’autre part, des objets consignés dans un tableau
+          et dissociés de cette morphologie (figure 7b). Cette approche va dans le sens d’une
+          intégration de relations symboliques et d’une formalisation de ces relations.</alinea></para><para id="pa48"><no>48</no><alinea>Les représentations et tout particulièrement les diagrammes – en ce qu’ils rendent intelligible l’intangible par une traduction visuelle fondée sur l’analogie – constituent donc un outil inférentiel puissant, voire même une condition nécessaire au déclenchement de l’inférence (voir Arnheim 1969, en particulier p. 97-134). Elles acquièrent à ce titre aussi un rôle communicatif et pédagogique dont témoignent les logiciels passés en revue. Mais si ces représentations permettent de mieux visualiser certains aspects au détriment d’autres, elles ne constituent ni une interprétation ni une analyse achevée. Pour être pertinent et utile sur le plan sémiotique, un diagramme doit en effet « impliquer un symbole dont il est l’interprétant » (« <marquage typemarq="italique">involving a Symbol of which it is the Interpretant</marquage> » ; Peirce 1976, p. 31). Ceci revient à dire qu’il doit non seulement représenter plus que l’oeuvre dans sa matérialité mais qu’il doit aussi permettre d’établir un lien entre l’oeuvre et ce à quoi elle renvoie. L’enjeu consiste à s’appuyer sur cette représentation pour pousser plus avant le processus interprétatif afin de dégager d’autres niveaux de signification.</alinea></para><figure id="fi7">
+        <no><marquage typemarq="italique">Figure 7</marquage></no>
+        <legende lang="fr">
+          <alinea><marquage typemarq="italique">Logiciel</marquage> <marquage typemarq="petitecap">tiaals</marquage>, <marquage typemarq="italique">a) sonagramme interactif avec palette,
+            et b) éditeur de tableau avec palette.</marquage></alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im10" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure></section2></section1><section1 id="s1n4"><no>4</no><titre><marquage typemarq="petitecap">Enjeux épistémologiques, heuristiques et
+        méthodologiques </marquage></titre><para id="pa49"><no>49</no><alinea>Les développements qui précèdent confirment que l’analyse musicale est susceptible de s’approcher, jusqu’à un certain degré, d’objets culturels à partir d’une interrogation quantitative des objets. Aucun critère ne permet toutefois d’établir que les discrétisations du matériau musical établies sur le plan statistique soient signifiantes sur le plan sémiotique. Il est impossible, par exemple, d’être certain que l’identification des accords à partir d’un traitement automatisé, comme dans le logiciel <marquage typemarq="italique">Aubio</marquage>, soit pertinente sur le plan analytique. Ceci a deux conséquences majeures : d’une part, l’impossibilité d’interpréter des significations musicales à partir d’une perspective agnostique et sur la base des seuls instruments quantitatifs et automatisés<renvoi id="re1no42" idref="no42" typeref="note">42</renvoi> ; d’autre part, la dissociation des traces quantitatives de leurs contextes de production et de réception. Les sections qui suivent explorent les enjeux de ces deux conséquences pour l’analyse musicale assistée par ordinateur. </alinea></para><section2 id="s2n8"><no>4.
+				1</no><titre><marquage typemarq="italique">Quantité et qualité</marquage></titre><para id="pa50"><no>50</no><alinea>Depuis Wilhelm Windelband, le fossé abyssal entre quantité et qualité va de pair avec le cloisonnement des sciences de la nature et des sciences de la culture. Alors que les premières sont appelées à déduire des lois et des régularités à partir d’observations objectives, les secondes sont considérées comme idiographiques : leur champ d’action se cantonne à l’interprétation d’observations subjectives à partir d’objets d’étude uniques, singuliers et individuels (Windelband 1904, p. 10-12). Les sciences de la nature sont supposées répondre ainsi à des méthodes généralisatrices et quantitatives, alors que les sciences de la culture sont censées s’approprier des méthodes qualitatives qui visent à l’individualisation (voir Rickert 1926, p. 38-60, 78-101 et 113-126). L’informaticien et historien des humanités Rens Bod (2013, p. 37-43, 109-117, 198-210, 301-310 et 355-356) fait toutefois remarquer que des <marquage typemarq="italique">patterns</marquage> de pensée axés sur la mesure et visant à identifier des régularités ont toujours coexisté avec la réflexion qualitative en sciences humaines, y compris dans la réflexion sur la musique.</alinea></para><para id="pa51"><no>51</no><alinea>Cette coexistence acquiert une nouvelle dimension dans le contexte d’une musicologie d’essence numérique, axée sur l’appréhension des significations à partir d’un traitement quantitatif des données. L’informatique nous invite en effet à sonder, à partir d’une perspective élargie, les processus inférentiels susceptibles de déboucher sur des connaissances analytiques et musicales. Les logiciels et projets d’analyse musicale qui font l’objet de cette étude autorisent les observations suivantes à ce sujet.</alinea></para><para id="pa52"><no>52</no><alinea>Les approches rigoureusement inductives – c’est-à-dire les approches qui font des déductions générales à partir de l’analyse quantitative d’un échantillon – disent finalement peu de choses sur la signification et le statut des régularités identifiées. À titre d’exemple, l’identification automatisée de tonalités à partir de données statistiques, comme le propose notamment la <marquage typemarq="italique">Midi-Toolbox</marquage>, ne permet d’aucune manière d’expliquer de l’intérieur le fonctionnement tonal. Le raisonnement déductif qui consiste à établir une conséquence à partir de prémisses, comme c’est le cas par exemple dans l’implémentation de règles de la <marquage typemarq="petitecap">gttm</marquage>, porte ses fruits jusqu’à un certain degré. Il se heurte toutefois à deux problèmes majeurs : d’une part, la variété des situations analytiques qui doit être cernée par un nombre nécessairement fini de règles ; d’autre part, la nécessité de définir ces règles en amont et de les projeter sur les données musicales.</alinea></para><para id="pa53"><no>53</no><alinea>L’un des paradigmes fructueux qui se dégage des logiciels consiste à vérifier l’hypothèse
+          qualitative, souvent intuitive, à partir d’une exploration quantitative des données. Il
+          s’agit soit de s’appuyer sur l’informatique pour vérifier une hypothèse – vérifier, par
+          exemple, avec les logiciels <marquage typemarq="italique">Charles </marquage>ou <marquage typemarq="italique">Telos</marquage><renvoi id="re1no43" idref="no43" typeref="note">43</renvoi> que la tendance
+          directionnelle de l’harmonie s’accentue entre les <marquage typemarq="petitecap">xvi</marquage><exposant>e</exposant> et <marquage typemarq="petitecap">xviii</marquage><exposant>e</exposant> siècles –, soit d’utiliser l’informatique pour
+          générer puis explorer des hypothèses – formuler, par exemple, des hypothèses sur des
+          structures dissonantes irrégulières dans le cadre de <marquage typemarq="italique">Poly</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">mir</marquage></marquage> (voir <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls13" xlink:type="simple" xlink:href="https://hal.archives-ouvertes.fr/hal-02263255">Bottini et
+          Guillotel-Nothmann 2018</liensimple>). Ces approches qui intègrent l’abduction et qui
+          s’appuient sur un traitement sériel des données visent non seulement à infirmer ou à
+          confirmer l’hypothèse formulée, mais aussi à la nuancer et à la reformuler selon les
+          résultats obtenus. C’est notamment de cet aller-retour entre résultat et interprétation,
+          qui n’est pas sans comporter des affinités avec la spirale herméneutique, que découle le
+          pouvoir heuristique des approches informatisées.</alinea></para><para id="pa54"><no>54</no><alinea>Sous cet angle, le quantitatif et le qualitatif ne s’inscrivent pas dans une relation antagoniste et ne peuvent être assimilés respectivement à la généralisation et à l’individualisation : « Pas plus que le fréquent n’est assimilable au quantitatif, le rare ne se confond avec le qualitatif. Il n’y a pas d’opposition entre quantitatif (positiviste) et qualitatif (élitiste), mais une complémentarité : ainsi, le résultat quantitatif peut confirmer l’hypothèse qualitative » (Rastier 2013, p. 51).</alinea></para></section2><section2 id="s2n9"><no>4.
+				2</no><titre><marquage typemarq="italique">Immanence et intégration
+        contextuelle</marquage></titre><para id="pa55"><no>55</no><alinea>Le second ensemble de problèmes – la dissociation des artefacts numériques de leurs contextes de production et de réception – est étroitement lié à la question de l’immanence. L’approche computationnelle comporte en effet des affinités fortes avec la sémiotique interne. Les deux types d’analyse sont strictement immanentes et axées sur les traces matérielles considérées comme autonomes. Elles travaillent exclusivement sur des différences : tout se joue sur l’écart qui permet de différencier une observation d’une autre. À ce titre, elles portent non pas sur le sens – substance et fruit d’une contextualisation maximale par le bais d’un parcours interprétatif dynamique susceptible de transcender le texte – mais sur la signification, c’est-à-dire sur des valeurs essentiellement statiques et structurales qui relèvent de la forme et découlent de la position du signe au sein du système sémiotique<renvoi id="re1no44" idref="no44" typeref="note">44</renvoi>. Enfin, elles reposent toutes deux sur la mise en oeuvre systématique des procédures analytiques. Il en résulte souvent l’illusion que les unités sémiotiques identifiées à l’issue du processus informatique sont fondées ontologiquement : inscrites dans l’oeuvre, elles n’auraient besoin que d’être dévoilées par le biais d’une approche formelle et objective.</alinea></para><para id="pa56"><no>56</no><alinea>Mais les logiciels et projets menés en analyse informatisée confirment bien que l’identification d’unités sémiotiques repose toujours sur une lecture située et circonstanciée. Elle est le fruit d’une grille de lecture choisie en amont et d’une sélection des structures signifiantes en aval. Toute unité musicale et ce vers quoi elle renvoie sont ainsi le résultat d’un parcours interprétatif. Le signifiant n’est « ni découvert, ni inventé, mais constitué dans une interaction entre le texte et l’interprète » (Rastier 1994, p. 329).</alinea></para><para id="pa57"><no>57</no><alinea>En 1975, Jean-Jacques Nattiez proclamait la « mort de la structure » et « l’existence du
+          niveau neutre » (Nattiez 1975, p. 404-405). La tripartition apporte une réponse
+          méthodologique efficace à un pan important du problème contextuel et interprétatif. Une
+          grande partie des logiciels recensés pourrait d’ailleurs s’inscrire dans le niveau neutre,
+          parfois même en allant au-delà et en revendiquant un agnosticisme total, comme par exemple
+          <marquage typemarq="italique">Carnet de notes</marquage> ou <marquage typemarq="italique">Thema</marquage><renvoi id="re1no45" idref="no45" typeref="note">45</renvoi>. D’autres se situent résolument du
+          côté du niveau poïétique – comme <marquage typemarq="italique">Rekall</marquage>, un
+          logiciel destiné à analyser et à documenter le processus créatif<renvoi id="re1no46" idref="no46" typeref="note">46</renvoi> – ou du niveau esthésique, comme <marquage typemarq="italique"><marquage typemarq="petitecap">tiaals</marquage></marquage>. La distanciation du niveau neutre est
+          liée en partie aux répertoires analysés et aux questions de recherche posées qui, en se
+          situant souvent « au-delà des notes »<renvoi id="re1no47" idref="no47" typeref="note">47</renvoi>, impliquent de
+          fortes tensions avec la possibilité même du niveau neutre. Mais le concept de niveau
+          neutre engendre aussi certaines interrogations pour la sémiotique interne. Situé à
+          l’interface entre poïétique et esthésique, il dissocie ces deux niveaux – pourtant
+          inextricablement mêlés dans l’interprétation qui conditionne l’analyse interne – et laisse
+          ouverte la question de l’organisation structurale des signes (voir Lidov 2005, p. 88).
+          Tout en reconnaissant l’apport méthodologique de la tripartition, l’analyse musicale
+          assistée par ordinateur tend à réhabiliter le statut de certaines démarches structurales
+          par rapport à la réponse méthodologique apportée par le niveau neutre : ce n’est pas tant
+          le concept de structure qui s’avère problématique, mais bien la branche spécifiquement
+          ontologique du structuralisme, notamment parce qu’elle exclut une prise en compte des
+          contextes interprétatifs au profit d’un point de vue purement immanentiste (voir Eco 1972
+          et Rastier 2006).</alinea></para><para id="pa58"><no>58</no><alinea>Ce que nous apprennent donc les logiciels et projets passés en revue, c’est que
+          l’identification d’unités sémiotiques – et notamment l’identification de significations
+          structurales – ne peut se faire indépendamment du point de vue particulier de l’analyste.
+          Le niveau immanent ne se réduit pas à un objet matériel et objectif : il lui incombe
+          toujours une dimension psychologique et « idéelle » (<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls14" xlink:type="simple" xlink:href="http://nicolas.meeus.free.fr/NMSemio/Statut.pdf">Meeùs 2001</liensimple>,
+          p. 551). Cette dimension, concomitante à la sémiose, est le résultat du point de vue
+          nécessairement orienté et situé de l’analyste. Elle est le fruit de sa connaissance des
+          répertoires, de sa perception des oeuvres, de son étude de contextes socioculturels, de
+          ses savoirs sur les idées théoriques, philosophiques ou esthétiques contemporaines, enfin
+          de la distance qui le sépare de ces éléments et de ses jugements de valeur personnels.
+          S’il est pleinement justifié et salutaire sur le plan méthodologique d’évacuer
+          momentanément ces contextes transcendants en faveur d’une démarche focalisée sur
+          l’organisation interne de la musique, il faut garder à l’esprit que les unités sémiotiques
+          identifiées à l’issue de ce processus sont conditionnées et justifiées par les contextes.
+          D’une certaine manière, ces derniers établissent le lien entre le plan de l’expression et
+          le plan du contenu. Ils assument le rôle d’interprétant au sens peircien en ce qu’ils
+          précisent et définissent la relation entre l’objet et le <marquage typemarq="italique">representamen</marquage>. </alinea></para><para id="pa59"><no>59</no><alinea>Malgré l’obstacle que présente l’isolement des artefacts numériques – ou plus précisément à cause de cet obstacle –, la musicologie numérique favorise le développement de paradigmes de recherche qui vont dans le sens d’une articulation des structures immanentes et des contextes transcendants.</alinea></para><para id="pa60"><no>60</no><alinea>À un premier niveau, la formalisation par l’informatique force à expliciter les présupposés de l’analyste et de la procédure analytique. Il s’agit ainsi de rendre transparents les présupposés des algorithmes en prenant conscience que les interprétations sont le résultat de prises de positions qui sont tout sauf neutres. Selon ce point de vue, l’objectivité de l’analyse, s’il y en a une, se constitue par la reconnaissance critique de sa part de subjectivité.</alinea></para><para id="pa61"><no>61</no><alinea>À un deuxième niveau, l’informatique se prête à une prise en compte de contextes transcendants par le biais d’une approche intégrative proche des théories de Jacques Fontanille (2015, chapitre premier). Cette conception intégrative consiste à articuler différents paliers d’immanence et niveaux de pertinence, chaque palier distinguant un plan d’immanence (le plan du contenu) et un plan d’expérience (le plan de l’expression). Un plan d’expérience devient un plan d’immanence s’il fait apparaître la possibilité d’une fonction sémiotique, chaque palier d’immanence supposant la prise en compte d’un palier d’ordre supérieur qui est à ce stade encore transcendant. Le projet <marquage typemarq="italique">Citations</marquage> a, par exemple, pour ambition de cerner la manière dont les messes-parodie du <marquage typemarq="petitecap">xvi</marquage><exposant>e</exposant> siècle réutilisent le même matériau thématique et dialoguent entre elles par leur traitement contrapuntique particulier. L’étude systématique de ces réseaux intertextuels, rendue possible par l’informatique, fait émerger des <marquage typemarq="italique">patterns</marquage> compositionnels qui transcendent l’oeuvre et reflètent des contextes de production particuliers. Parce qu’ils contribuent simultanément à éclairer l’organisation interne des oeuvres, ces <marquage typemarq="italique">patterns</marquage> acquièrent une fonction sémiotique et sont susceptibles, à ce titre, de constituer un palier d’immanence situé au niveau du corpus. D’autres paliers qui dépassent le niveau du texte – ceux des objets, pratiques, stratégies et formes de vie – pourraient alors venir se greffer sur ce palier. L’approche informatique est donc susceptible de contribuer, au moins jusqu’à un certain degré, à l’articulation du sens et de la signification en tant que « moments différents mais complémentaires de la même fonction sémiotique » (Bordron 2011, p. 177).</alinea></para><para id="pa62"><no>62</no><alinea>À un troisième niveau enfin, l’analyse collaborative, via les technologies du Web, est
+          susceptible de conserver différentes analyses tout en faisant émerger des consensus autour
+          des interprétations. Une telle mise en regard, telle qu’elle est expérimentée notamment
+          dans <marquage typemarq="italique"><marquage typemarq="petitecap">neuma</marquage></marquage><renvoi id="re1no48" idref="no48" typeref="note">48</renvoi>, contribue, elle aussi, à
+          réintégrer le point de vue individuel (ou collectif) de l’analyste (ou des analystes) dans
+          la création de connaissances musicales. Elle débouche, dans certains cas, sur une
+          comparaison des analyses qui, par la démultiplication des angles d’attaque, est
+          susceptible de faire apparaître différents « éclats de vérité » (Nattiez 2013, p. 371).
+          Ces démarches favorisent une production de connaissances musicologiques « situées » qui
+          dérivent de pratiques collaboratives et qui bénéficient d’une répartition des tâches tout
+          en articulant les champs disciplinaires. À ce titre, elles favorisent une
+          contextualisation et une subjectivation proche de ce qu’Yves Citton (<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls15" xlink:type="simple" xlink:href="http://www.multitudes.net/humanites-numeriques-une-mediapolitique-des-savoirs-encore-a-inventer">2015</liensimple>) qualifie, à la suite de David M. Berry, de « subjectivation
+          computationnelle ». Parce qu’elles placent l’accent sur la dimension sociale de la
+          sémiose, elles jouent un rôle clef dans la constitution et l’articulation des paliers
+          d’immanence.</alinea></para></section2></section1><section1 id="s1n5"><no>5</no><titre><marquage typemarq="petitecap">Conclusions et prospectives</marquage></titre><para id="pa63"><no>63</no><alinea>En conclusion, cette cartographie des logiciels d’analyse et de leurs enjeux épistémologiques reflète un paysage numérique varié dans lequel les approches structurales, patrimoniales et socioculturelles sont en passe de se rapprocher et de se renouveler. C’est notamment le cas à travers la constitution de corpus numériques, les démarches collaboratives, la mise en réseau géographique et disciplinaire et le renouvellement des méthodes.</alinea></para><para id="pa64"><no>64</no><alinea>Parmi les nombreux défis pour l’avenir, quatre me paraissent essentiels. L’un est technique : pérenniser les données et trouver des standards communs. Si ces standards existent pour l’édition musicale, ils restent à établir pour l’analyse. L’autre défi est méthodologique et réside dans la conception d’outils globalisants, intuitifs et robustes. Les approches sont trop souvent limitées dans le temps, isolées, ou encore éloignées d’une appréhension intrinsèquement musicale de leurs objets d’étude. Le troisième est sociétal, pédagogique et gnoséologique : il s’agit de montrer que les outils et connaissances produites constituent un accès de premier plan à la connaissance des oeuvres. Enfin, le quatrième est épistémologique et consiste à retrouver le qualitatif dans les approches computationnelles en tirant parti notamment des apports de l’herméneutique et de la pragmatique. Il s’agit de développer des paradigmes de recherche qui, tout en s’appuyant sur le numérique, sont susceptibles de déboucher sur des résultats qualitatifs, situés et dotés de sens. C’est notamment cette approche qui permettrait d’articuler l’analyse interne du langage musical et l’appréhension de ses contextes et, plus généralement, de décloisonner l’analyse musicale pour lui conférer une place centrale au sein d’une musicologie d’ordre général. En raison de ses traditions et spécificités, la musicologie francophone est bien placée pour contribuer à relever ce défi et les humanités numériques constituent sans doute une belle avancée – bien que ce ne soit certainement pas la seule – pour ce renouveau.</alinea></para></section1></corps><partiesann lang="fr"><grnotebio><notebio id="nb1" idrefs="au1" lang="fr"><alinea>Christophe Guillotel-Nothmann fait des études de musicologie, de linguistique, d’orgue et d’improvisation à l’Université Paris-Sorbonne, à la Humboldt- Universität zu Berlin et au <marquage typemarq="petitecap">cnr</marquage> de Rueil-Malmaison. Entre 2007 et 2014, il est allocataire-moniteur, <marquage typemarq="petitecap">ater</marquage> puis chargé de cours à l’Université Paris-Sorbonne. Après sa thèse consacrée à la cristallisation de la syntaxe tonale, il obtient des bourses postdoctorales à la Herzog August Bibliothek Wolfenbüttel, au Max-Planck-Institut für empirische Ästhetik, Frankfurt a. M. ainsi qu’à la Royal Society of Edinburgh. Il est depuis 2018 chargé de recherche au <marquage typemarq="petitecap">cnrs</marquage>, affecté à l’IReMus (<marquage typemarq="petitecap">umr</marquage> 8223). Ses travaux portent sur la théorie et l’évolution du langage modal tonal, les modèles théoriques historiques et contemporains, la sémiotique musicale et l’épistémologie de la musicologie numérique. Il est co-rédacteur en chef de la revue <marquage typemarq="italique">Musurgia</marquage>.</alinea></notebio></grnotebio><grbiblio><biblio><titre>Bibliographie sélective<renvoi id="re1no49" idref="no49" typeref="note">49</renvoi></titre><refbiblio id="rb1">Arnheim, Rudolf (1969), <marquage typemarq="italique">Visual Thinking</marquage>, Berkeley, University of California Press.</refbiblio><refbiblio id="rb2">Baroni, Mario, Rossana Dalmonte, et Carlo Jacoboni (2003), <marquage typemarq="italique">A Computer-Aided Inquiry on Music Communication. The Rules of Music</marquage>, Lewiston/New York, The Edwin Mellen Press.</refbiblio><refbiblio id="rb3">Bent, Ian, et Anthony Pople (2001), « Analysis », <marquage typemarq="italique">Grove Music Online,</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls16" xlink:href="https://doi.org/10.1093/gmo/9781561592630.article.41862" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1093/gmo/9781561592630.article.41862</liensimple>, consulté le 5 aout 2019.</refbiblio><refbiblio id="rb4">Bigo, Louis (2013), <marquage typemarq="italique">Représentations symboliques musicales et calcul spatial</marquage>, thèse de doctorat, Université Paris-Est.</refbiblio><refbiblio id="rb5">Bod, Rens (2013), <marquage typemarq="italique">A New History of the Humanities</marquage>, Oxford, Oxford University Press.</refbiblio><refbiblio id="rb6">Bordron, Jean-François (2011), <marquage typemarq="italique">L’iconicité et ses images. Études sémiotiques</marquage>, Paris, <marquage typemarq="petitecap">puf</marquage>.</refbiblio><refbiblio id="rb7">Bottini, Thomas, et Christophe Guillotel-Nothmann (2018), « L’inférence de connaissances dans le projet <marquage typemarq="italique">Poly</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">mir</marquage></marquage>. Une approche hypothético-déductive pour l’analyse de patterns contrapuntiques complexes », Séminaire « Épistémologie de la musicologie numérique », séance du 13 avril 2018, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls17" xlink:href="https://hal.archives-ouvertes.fr/hal-02263255" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://hal.archives-ouvertes.fr/hal-02263255</liensimple>, consulté le 3 août 2019.</refbiblio><refbiblio id="rb8">Ceulemans, Anne-Emmanuelle (1996), <marquage typemarq="italique">Une approche mélodique, rythmique et harmonique de la polyphonie vers 1500. Les Kyrie de Josquin des Prez, </marquage>thèse de doctorat, Université de Louvain.</refbiblio><refbiblio id="rb9">Cathé, Philippe (2012), <marquage typemarq="italique">Synchronie et diachronie. Musique française (1870–1950) et théorie des vecteurs harmoniques</marquage>, mémoire d’habilitation à diriger des recherches, Université Paris-Sorbonne.</refbiblio><refbiblio id="rb10">Citton, Yves (2015), « Humanités numériques. Une médiapolitique des savoirs encore à inventer », <marquage typemarq="italique">Multitudes</marquage>, vol. 59, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls18" xlink:href="http://www.multitudes.net/humanites-numeriques-une-mediapolitique-des-savoirs-encore-a-inventer" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.multitudes.net/humanites-numeriques-une-mediapolitique-des-savoirs-encore-a-inventer</liensimple>, consulté le 5 août 2019.</refbiblio><refbiblio id="rb11">Clarke, Michael, Frédéric Dufeu, et Peter Manning (2013), « Introducing <marquage typemarq="italique">Ta</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">cem</marquage></marquage> and the <marquage typemarq="italique"><marquage typemarq="petitecap">tiaals </marquage></marquage>software », <marquage typemarq="petitecap">icmc</marquage> International Computer Music Conference, 11<exposant>th</exposant>-17<exposant>th</exposant> August 2013, Perth, Australie, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls19" xlink:href="http://eprints.hud.ac.uk/id/eprint/18726/1/icmc2013_clarke_dufeu_manning.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://eprints.hud.ac.uk/id/eprint/18726/1/icmc2013_clarke_dufeu_manning.pdf</liensimple>, consulté le 31 juillet 2019.</refbiblio><refbiblio id="rb12">Couprie, Pierre (2010), « Représenter l’espace », <marquage typemarq="italique">L’espace du son</marquage>, n° 3, Ohain, Musiques et recherches, p. 21-28, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls20" xlink:href="https://hal.archives-ouvertes.fr/hal-01258381" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://hal.archives-ouvertes.fr/hal-01258381</liensimple>, consulté le 28 juillet 2019.</refbiblio><refbiblio id="rb13">Couprie, Pierre (2015), <marquage typemarq="italique">L’analyse musicale et la représentation</marquage>, mémoire d’habilitation à diriger des recherches, Sorbonne Université.</refbiblio><refbiblio id="rb14">Cuthbert, Michael Scott, et Christopher Ariza, Christopher (2010), « <marquage typemarq="italique">music21</marquage>. A Toolkit for Computer-Aided Musicology and Symbolic Music Data », 11<exposant>th</exposant> International Society for Music Information Retrieval Conference (<marquage typemarq="petitecap">ismir 2010)</marquage>, p. 637-642, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls21" xlink:href="https://archives.ismir.net/ismir2010/paper/000108.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://archives.ismir.net/ismir2010/paper/000108.pdf</liensimple>, consulté le 9 juillet 2019.</refbiblio><refbiblio id="rb15">Dahlig-Turek, Ewa, <marquage typemarq="italique">et al.</marquage> (2012), <marquage typemarq="italique">Musicology (Re-) Mapped. Discussion Paper</marquage>, Standing Committee for the Humanities (<marquage typemarq="petitecap">sch</marquage>), Strasbourg, European Science Foundation, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls22" xlink:href="http://archives.esf.org/fileadmin/Public_documents/Publications/musicology.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://archives.esf.org/fileadmin/Public_documents/Publications/musicology.pdf</liensimple>, consulté le 10 juillet 2019. </refbiblio><refbiblio id="rb16">Delalande, François (2019), <marquage typemarq="italique">La musique au-delà des notes</marquage>, Rennes, <marquage typemarq="petitecap">pur</marquage>.</refbiblio><refbiblio id="rb17">Desainte-Catherine, Myriam, et Jean-Louis Di Santo (2009), « L’acousmoscribe, un éditeur de partitions acousmatiques », EMS09 – Héritage et avenir, Buenos Aires, 22-25 juin 2009, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls23" xlink:href="http://www.ems-network.org/ems09/papers/disanto.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.ems-network.org/ems09/papers/disanto.pdf</liensimple>, consulté le 11 juillet 2019.</refbiblio><refbiblio id="rb18">Eco, Umberto (1972), <marquage typemarq="italique">La structure absente</marquage>, Paris, Mercure de France.</refbiblio><refbiblio id="rb19">Fontanille, Jacques (2015), <marquage typemarq="italique">Pratiques sémiotiques, </marquage>Paris, <marquage typemarq="petitecap">puf</marquage>.</refbiblio><refbiblio id="rb20">Giraud, Mathieu, Richard Groult, et Emmanuel Leguy (2018), « <marquage typemarq="italique">Dezrann</marquage>, a Web Framework to Share Music Analysis », International Conference on Technologies for Music Notation and Representation – <marquage typemarq="petitecap">tenor</marquage>’18, p. 104-110, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls24" xlink:href="https://hal.archives-ouvertes.fr/hal-01796787/document" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://hal.archives-ouvertes.fr/hal-01796787/document</liensimple>, consulté le 31 juillet 2019.</refbiblio><refbiblio id="rb21">Guillotel-Nothmann, Christophe (2017), <marquage typemarq="italique">Asymétrie conditionnelle et asymétrie spontanée des progressions harmoniques. Le rôle des dissonances dans la cristallisation de la syntaxe harmonique tonale (c. 1530-1745)</marquage>, Norderstedt, PubliQation – Academic Publishing.</refbiblio><refbiblio id="rb22">Hautbois, Xavier (2010), « Les Unités Sémiotiques Temporelles. De la sémiotique musicale vers une sémiotique générale du temps dans les arts », <marquage typemarq="italique">Musimédiane</marquage>, vol. V, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls25" xlink:href="http://www.musimediane.com/5hautbois/" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.musimediane.com/5hautbois/</liensimple>, consulté le 29 juillet 2019.</refbiblio><refbiblio id="rb23">Lidov, David (2005), <marquage typemarq="italique">Is Language a Music? Writings on Musical Form and Signification</marquage>, Bloomington, Indiana University Press. </refbiblio><refbiblio id="rb24">McCulloch, Peter (2015), « <marquage typemarq="italique">Thema</marquage>. A Music Notation Software Package with Integrated and Automatic Data Collection », First International Conference on Technologies for Music Notation and Representation – <marquage typemarq="petitecap">tenor</marquage>’15, Paris, 28-30 mai 2015, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls26" xlink:href="http://tenor2015.tenor-conference.org/papers/23-McCulloch-Thema.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://tenor2015.tenor-conference.org/papers/23-McCulloch-Thema.pdf</liensimple>, consulté le 12 août 2019.</refbiblio><refbiblio id="rb25">Meeùs, Nicolas (1993), « A Semiotic Approach to Music », <marquage typemarq="italique">Contemporary Music Review</marquage>, vol. 9, p. 305-310.</refbiblio><refbiblio id="rb26">Meeùs, Nicolas (2001), « Le statut sémiologique de l’analyse musicale », <marquage typemarq="italique">Analyse et création musicales. </marquage>Actes du Troisième Congrès Européen d’Analyse Musicale, Montpellier 1995, Paris, L’Harmattan, p. 549-562, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls27" xlink:href="http://nicolas.meeus.free.fr/NMSemio/Statut.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://nicolas.meeus.free.fr/NMSemio/Statut.pdf</liensimple>, consultée le 5 août 2019].</refbiblio><refbiblio id="rb27">Meeùs, Nicolas (2003), « Vecteurs harmoniques », <marquage typemarq="italique">Musurgia</marquage>, vol. X, n<exposant>o</exposant> 3-4, p. 7-34.</refbiblio><refbiblio id="rb28">Molinié, Georges, et Alain Viala (1993), <marquage typemarq="italique">Approches de la réception. Sémiostylistique et sociopolitique de Le Clézio</marquage>, Paris, <marquage typemarq="petitecap">puf</marquage>.</refbiblio><refbiblio id="rb29">Nattiez, Jean-Jacques (1975), <marquage typemarq="italique">Fondements d’une sémiologie de la musique</marquage>, Paris, Union générale d’éditions.</refbiblio><refbiblio id="rb30">Nattiez, Jean-Jacques (1985), « The Concepts of Plot and Seriation Process in Music Analysis », <marquage typemarq="italique">Music Analysis</marquage>, vol  4, n<exposant>o</exposant> 1-2, p. 107-118.</refbiblio><refbiblio id="rb31">Nattiez, Jean-Jacques (2013), <marquage typemarq="italique">Analyses et interprétations de la musique. La mélodie du berger dans le Tristan et Isolde de Richard Wagner</marquage>, Paris, Vrin.</refbiblio><refbiblio id="rb32">Patuzzo, Emilio (2017), « Diagrams as Heuristic Tools. A Semiotic Investigation to Provide a Theoretical Model for the Design of Diagrams », International and Interdisciplinary Conference <marquage typemarq="petitecap">immagini</marquage>? Image and Imagination between Representation, Communication, Education and Psychology, Brixen, Italie, 27-28 novembre 2017,<marquage typemarq="italique"> Proceedings</marquage> 1, 958, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls28" xlink:href="https://www.mdpi.com/2504-3900/1/9/958" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.mdpi.com/2504-3900/1/9/958</liensimple>, consulté le 16 juillet 2019.</refbiblio><refbiblio id="rb33">Peirce, Charles Sanders (1934-58), <marquage typemarq="italique">Collected Papers of Charles Sanders Peirce</marquage>, préparé par Charles Hartshorne, Paul Weiss et Arthur W. Burks, vol. I-VIII, Cambridge, Harvard University Press.</refbiblio><refbiblio id="rb34">Peirce, Charles Sanders (1976), <marquage typemarq="italique">The New Elements of Mathematics</marquage>, préparé par Carolyn Eisele, The Hague, Mouton, vol. 4.</refbiblio><refbiblio id="rb35">Piez, Wendell (2007), « Form and Format. Towards a Semiotics of Digital Text Encoding », <marquage typemarq="italique">Digital Humanities 2007. The 19</marquage><exposant><marquage typemarq="italique">th</marquage></exposant><marquage typemarq="italique"> International Conference of the Association for Computers and the Humanities, and the Association for Literary and Linguistic Computing, University of Illinois, Urbana-Champaign, June 4-June 8, 2007</marquage>, actes du colloque, p. 153-157, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls29" xlink:href="http://www.digitalhumanities.org/dh2007/dh2007.abstracts.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.digitalhumanities.org/dh2007/dh2007.abstracts.pdf</liensimple>, consulté le 15 juillet 2019. </refbiblio><refbiblio id="rb36">Rastier, François (1994), « Sur l’immanentisme en sémantique », <marquage typemarq="italique">Cahiers de linguistique française</marquage>, vol. 15, p. 325-335.</refbiblio><refbiblio id="rb37">Rastier, François (1999), « Dalla significazione al senso. Per una semiotica senza ontologia », dans Pierluigi Basso et Lucia Corrain (dir.), <marquage typemarq="italique">Eloquio del senso</marquage>, Milan, Costa &amp; Nolan, pp. 213-240 ; traduction française, « De la signification au sens. Pour une sémiotique sans ontologie », <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls30" xlink:href="http://www.revue-texto.net/Inedits/Rastier/Rastier_Semiotique-ontologie.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.revue-texto.net/Inedits/Rastier/Rastier_Semiotique-ontologie.html</liensimple>, consultée le 17 août 2019.</refbiblio><refbiblio id="rb38">Rastier, François (2006), « La structure en question », <marquage typemarq="italique">Janus - Quaderni del Circolo Glossematico</marquage>, Vicence, Terra Ferma, p. 93-104.</refbiblio><refbiblio id="rb39">Rastier, François (2011), <marquage typemarq="italique">La </marquage><marquage typemarq="italique">mesure</marquage><marquage typemarq="italique"> et </marquage><marquage typemarq="italique">le</marquage><marquage typemarq="italique"> grain. Sémantique </marquage><marquage typemarq="italique">de</marquage><marquage typemarq="italique"> corpus</marquage>, Paris, Honoré Champion. </refbiblio><refbiblio id="rb40">Rickert, Heinrich (1926), <marquage typemarq="italique">Kulturwissenschaft und Naturwissenschaft</marquage>, Tübingen, Mohr.</refbiblio><refbiblio id="rb41">Rix, Emmanuell, et Marcel Formosa (dir.) (2008), <marquage typemarq="italique">Vers une sémiotique générale du temps dans les arts. Actes du colloque « Les unités sémiotiques temporelles (</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">ust</marquage></marquage><marquage typemarq="italique">), nouvel outil d’analyse musicale, théories et applications »</marquage>, [Sampzon], Delatour ; Paris, Ircam-Centre Pompidou.</refbiblio><refbiblio id="rb42">Schüler, Nico (2014), <marquage typemarq="italique">Computer-Assisted Music Analysis (1950s-1970s). Essays and Bibliographies</marquage>, Frankfurt am Main, Peter Lang.</refbiblio><refbiblio id="rb43">Sowa, John F. (2000), « Ontology, Metadata, and Semiotics », dans Bernhard Ganter et Guy W. Mineau (dir.), <marquage typemarq="italique">Conceptual Structures. Logical, Linguistic, and Computational Issues</marquage>, Berlin/New York, Springer p. 55-81.</refbiblio><refbiblio id="rb44">Stern, Monika (2002), <marquage typemarq="italique">Les femmes, les nattes et la musique sur l’île de Pentecôte (Vanuatu)</marquage>, thèse de doctorat, Université Paris-Sorbonne.</refbiblio><refbiblio id="rb45">Stjernfelt, Frederik (2000), « Diagrams as Centerpiece of a Peircean Epistemology », <marquage typemarq="italique">Transactions of the Charles S. Peirce Society</marquage>, vol. 36, n<exposant>o</exposant> 3, p. 357-384</refbiblio><refbiblio id="rb46">Stjernfelt, Frederik (2007), <marquage typemarq="italique">Diagrammatology. An Investigation on the Borderlines of Phenomenology, Ontology and Semiotics</marquage>, Dordrecht, Springer.</refbiblio><refbiblio id="rb47">Windelband, Wilhelm (1904), <marquage typemarq="italique">Geschichte und Naturwissenschaft</marquage>, Strassburg, Heitz.</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Pour une étude historique des logiciels d’analyse musicale assistée par ordinateur,
+          voir Schüler 2014 ainsi que la bibliographie proposée dans cet ouvrage.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>La base de données est disponible à partir de cette adresse : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls31" xlink:type="simple" xlink:href="http://www.iremus.cnrs.fr/en/programme-de-recherche/analyse-musicale-assistee-par-ordinateur">http://www.iremus.cnrs.fr/en/programme-de-recherche/analyse-musicale-assistee-par-ordinateur</liensimple>
+          (consultée le 6 août 2019).</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Le programme détaillé de la première rencontre du réseau <marquage typemarq="italique">Épistémuse</marquage> est accessible à partir de la page
+          suivante :<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls32" xlink:type="simple" xlink:href=" http://epistemuse.huma-num.fr/2018/09/14/rencontres-epistemuse-premiere-session-montreal-20-et-21-septembre-2018/">
+          http://epistemuse.huma-num.fr/2018/09/14/rencontres-epistemuse-premiere-session-montreal-20-et-21-septembre-2018/</liensimple>
+          (consultée le 24 octobre 2019). </alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>Sur l’<marquage typemarq="italique">Acousmographe</marquage>, voir : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls33" xlink:type="simple" xlink:href="https://inagrm.com/fr/showcase/news/203/lacousmographe">https://inagrm.com/fr/showcase/news/203/lacousmographe</liensimple> (consulté le
+          29 octobre 2019).</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>Le projet, initialement basé à l’Université de Nottingham, est à présent archivé à
+          l’Université de Huddersfield et accessible à partir de la page suivante : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls34" xlink:type="simple" xlink:href="https://research.hud.ac.uk/tonalities/">https://research.hud.ac.uk/tonalities/</liensimple> (consultée le 9 juillet 2019).
+        </alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>Voir le site Internet dédié au projet, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls35" xlink:type="simple" xlink:href="https://web.mit.edu/music21/">https://web.mit.edu/music21/</liensimple>
+          (consulté le 9 juillet 2019).</alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>La boîte à outils <marquage typemarq="italique">Music21</marquage> bénéficie à titre
+          d’exemple d’extensions spécifiques, notamment pour l’analyse de la <marquage typemarq="italique">musica ficta</marquage>. Voir <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls36" xlink:type="simple" xlink:href="https://archives.ismir.net/ismir2010/paper/000108.pdf">Cuthbert et
+          Ariza 2010</liensimple>, p. 641-642. </alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>Le logiciel <marquage typemarq="italique">EAnalysis</marquage> est disponible sur le
+          site de Pierre Couprie, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls37" xlink:type="simple" xlink:href="http://logiciels.pierrecouprie.fr/?page_id=402">http://logiciels.pierrecouprie.fr/?page_id=402</liensimple> (consulté le 9 juillet
+          2019).</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>En référence au concept de <marquage typemarq="italique">stylistique
+          sérielle</marquage> de Georges Molinié (voir Molinié et Viala 1993, p. 43-46), l’approche
+          sérielle tire ses conclusions d’ensembles d’oeuvres auxquels est appliquée, par itération,
+          la même procédure. Ainsi, dans le contexte de la comparaison de différentes analyses de
+          l’accord de <marquage typemarq="italique">Tristan</marquage>, Jean-Jacques Nattiez définit
+          la mise en série comme l'intégration contextuelle de phénomènes artistiques ou
+          linguistiques dans une série de phénomènes comparables, afin de leur donner un sens
+          plausible (Nattiez 1985, p. 110).</alinea>
+      </note>
+      <note id="no10">
+        <no>10</no>
+        <alinea>Voir à ce sujet le travail pionnier réalisé, dès les années 1990, par
+          Anne-Emmanuelle Ceulemans (1996) dans le cadre de son analyse assistée par ordinateur des
+          Kyrie de Josquin Desprez. </alinea>
+      </note>
+      <note id="no11">
+        <no>11</no>
+        <alinea>Le logiciel ainsi que sa documentation complète sont disponibles sur les pages du
+          site de l’Ircam, dédiées au projet : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls38" xlink:type="simple" xlink:href="http://repmus.ircam.fr/openmusic/home">http://repmus.ircam.fr/openmusic/home</liensimple> (consultées le 10 juillet
+          2019).</alinea>
+      </note>
+      <note id="no12">
+        <no>12</no>
+        <alinea>L’outil <marquage typemarq="italique">Aubio</marquage> et sa documentation sont
+          accessibles à partir du site Internet dédié au projet,<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls39" xlink:type="simple" xlink:href=" https://aubio.org/"> https://aubio.org/</liensimple> (consulté le 10 juillet
+          2019).</alinea>
+      </note>
+      <note id="no13">
+        <no>13</no>
+        <alinea>La boîte à outils et sa documentation sont accessibles à partir de la page dédiée au
+          projet sur le site de l’Université de Jyväskylä, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls40" xlink:type="simple" xlink:href="https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/miditoolbox">https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/miditoolbox</liensimple>
+          (consultée le 10 juillet 2019).</alinea>
+      </note>
+      <note id="no14">
+        <no>14</no>
+        <alinea>Le progiciel <marquage typemarq="italique">Music22</marquage>, écrit en Python, est
+          disponible sur le site d’Anas Ghrab à l’adresse suivante : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls41" xlink:type="simple" xlink:href="http://anas.ghrab.tn/fr/analyse/">http://anas.ghrab.tn/fr/analyse/</liensimple> (consulté le 10 juillet 2019). </alinea>
+      </note>
+      <note id="no15">
+        <no>15</no>
+        <alinea>Au sujet du <marquage typemarq="petitecap">mir</marquage>, voir notamment la page de
+          la International Society for Music Information Retrieval (<marquage typemarq="petitecap">ismir</marquage> ; <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls42" xlink:type="simple" xlink:href="https://ismir.net/">https://ismir.net/</liensimple>, consultée le 10 juillet 2019) et notamment les actes de
+          ses conférences annuelles depuis 2000. </alinea>
+      </note>
+      <note id="no16">
+        <no>16</no>
+        <alinea>Le logiciel <marquage typemarq="italique">Monika</marquage> écrit en <marquage typemarq="petitecap">vba</marquage> pour Excel est disponible sur le site de Nicolas Meeùs
+          à l’adresse suivante : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls43" xlink:type="simple" xlink:href="http://nicolas.meeus.free.fr/Monika.html">http://nicolas.meeus.free.fr/Monika.html</liensimple> (consultée le 10 juillet
+          2019).</alinea>
+      </note>
+      <note id="no17">
+        <no>17</no>
+        <alinea>La bibliothèque de partitions <marquage typemarq="italique">Carnet de
+          notes</marquage> – dont le développement et l’alimentation ont commencé au sein de
+          l’équipe d’accueil Patrimoines et langages musicaux de l’Université Paris-Sorbonne et se
+          poursuivent actuellement au sein de l’Institut de Recherche en Musicologie – s’approprie
+          une partie des fonctionnalités proposées par le logiciel <marquage typemarq="italique">Monika</marquage> (voir note précédente). La bibliothèque est disponible à cette
+          adresse :<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls44" xlink:type="simple" xlink:href="  http://carnetdenotes.paris-sorbonne.fr/index.php">
+          http://carnetdenotes.paris-sorbonne.fr/index.php</liensimple> (consultée le 10 juillet
+          2019).</alinea>
+      </note>
+      <note id="no18">
+        <no>18</no>
+        <alinea>Le projet est accessible à partir de la page suivante : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls45" xlink:type="simple" xlink:href="https://ricercar.crim.cesr.univ-tours.fr/presentation">https://ricercar.crim.cesr.univ-tours.fr/presentation</liensimple> (consultée le
+          11 juillet 2019).</alinea>
+      </note>
+      <note id="no19">
+        <no>19</no>
+        <alinea>Le <marquage typemarq="italique">GTTM-Analyzer</marquage> peut être téléchargé à
+          partir du site dédié au projet : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls46" xlink:type="simple" xlink:href="http://gttm.jp/gttm/analyzer/">http://gttm.jp/gttm/analyzer/</liensimple>
+          (consulté le 11 juillet 2019). </alinea>
+      </note>
+      <note id="no20">
+        <no>20</no>
+        <alinea>Le projet <marquage typemarq="italique">Poly</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">mir</marquage></marquage>, ancré à l’IReMus, propose des
+          routines d’analyse harmonique et contrapuntique dans l’optique de mettre en oeuvre la
+          théorie des vecteurs harmoniques de Nicolas Meeùs (2003).</alinea>
+      </note>
+      <note id="no21">
+        <no>21</no>
+        <alinea>La bibliothèque de partitions <marquage typemarq="italique"><marquage typemarq="petitecap">neuma</marquage></marquage>, développée et alimentée en collaboration
+          entre le <marquage typemarq="petitecap">cnam</marquage> (responsable technique Philippe
+          Rigaux) et l’IReMus (direction scientifique Cécile Davy-Rigaux) est consultable ici :
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls47" xlink:type="simple" xlink:href="http://neuma.huma-num.fr/">http://neuma.huma-num.fr/</liensimple> (consulté le 11 juillet 2019).</alinea>
+      </note>
+      <note id="no22">
+        <no>22</no>
+        <alinea>La boîte à outils ainsi que sa documentation peuvent être téléchargées à de
+          l’adresse suivante : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls48" xlink:type="simple" xlink:href="http://www.pampalk.at/ma/">http://www.pampalk.at/ma/</liensimple> (consultée
+          le 11 juillet 2019). </alinea>
+      </note>
+      <note id="no23">
+        <no>23</no>
+        <alinea>Le logiciel, développé par Pierre Couprie, permet de synchroniser les pages d’une
+          partition sur un fichier audio ou vidéo. Il est disponible à partir de la page suivante :
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls49" xlink:type="simple" xlink:href="http://logiciels.pierrecouprie.fr/?page_id=672">http://logiciels.pierrecouprie.fr/?page_id=672</liensimple> (consultée le 11 juillet
+          2019).</alinea>
+      </note>
+      <note id="no24">
+        <no>24</no>
+        <alinea>Sur les <marquage typemarq="petitecap">ust</marquage>, développés entre 1991 et 1996
+          par l’équipe du laboratoire <marquage typemarq="petitecap">mim</marquage> sous la
+          direction de François Delalande, voir en particulier Rix et Formosa 2008. Voir aussi la
+          note 40.</alinea>
+      </note>
+      <note id="no25">
+        <no>25</no>
+        <alinea>Le logiciel, conçu par Mario Baroni, Rossana Dalmonte et Carlo Jacoboni, avait pour
+          ambition de produire des oeuvres dans le style de Giovanni Legrenzi à partir d’une
+          grammaire générative. Une description méthodologique et théorique de ce travail de longue
+          haleine, effectué sur 30 ans, est donnée dans Baroni, Dalmonte et Jacobini 2003, en
+          particulier aux p. 99-272.</alinea>
+      </note>
+      <note id="no26">
+        <no>26</no>
+        <alinea>Le logiciel peut être téléchargé à partir de sa page dédiée sur le site de l’Ircam :
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls50" xlink:type="simple" xlink:href="http://recherche.ircam.fr/anasyn/ASAnnotation/">http://recherche.ircam.fr/anasyn/ASAnnotation/</liensimple> (consultée le 11 juillet
+          2019).</alinea>
+      </note>
+      <note id="no27">
+        <no>27</no>
+        <alinea>Le <marquage typemarq="italique">Josquin Project</marquage>, ancré à la Stanford
+          University et fédéré par Jesse Rodin et Craig Sapp, est accessible à partir du site dédié
+          au projet : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls51" xlink:type="simple" xlink:href="http://josquin.stanford.edu/about/">http://josquin.stanford.edu/about/</liensimple> (consulté le 11 juillet 2019).</alinea>
+      </note>
+      <note id="no28">
+        <no>28</no>
+        <alinea>Le projet <marquage typemarq="italique">Texture</marquage>, développé par l’équipe
+          Algomus basée à Lille, peut être consulté ici :<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls52" xlink:type="simple" xlink:href=" http://www.algomus.fr/texture/index.html">
+          http://www.algomus.fr/texture/index.html</liensimple> (consulté le 11 juillet
+          2019).</alinea>
+      </note>
+      <note id="no29">
+        <no>29</no>
+        <alinea>Un descriptif détaillé de la <marquage typemarq="italique">Bachothèque
+          </marquage>ainsi qu’une maquette interactive sont disponibles sur le site de l’Ircam à
+          cette adresse : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls53" xlink:type="simple" xlink:href="http://apm.ircam.fr/subproject/5/">http://apm.ircam.fr/subproject/5/</liensimple> (consultée le 11 juillet 2019). </alinea>
+      </note>
+      <note id="no30">
+        <no>30</no>
+        <alinea>Le logiciel <marquage typemarq="italique">j</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">ust</marquage></marquage>, développé à l’Ircam, est
+          disponible ici : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls54" xlink:type="simple" xlink:href="http://apm.ircam.fr/page/jUST/">http://apm.ircam.fr/page/jUST/</liensimple>
+          (consulté le 11 juillet 2019).</alinea>
+      </note>
+      <note id="no31">
+        <no>31</no>
+        <alinea>Une comparaison de ces modes opératoires avec ceux identifiés dans l’article
+          « <marquage typemarq="italique">Analysis</marquage> » du <marquage typemarq="italique">New
+          Grove</marquage> (<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls55" xlink:type="simple" xlink:href="https://doi.org/10.1093/gmo/9781561592630.article.41862">Bent et
+          Pople 2001</liensimple>, section I.3)<marquage typemarq="italique"> –</marquage> à savoir
+          a) la réduction, b) la comparaison, c) la segmentation, d) l’identification de règles
+          syntaxiques, e) le comptage d’occurrences et f) l’identification et l’interprétation
+          d’éléments expressifs, d’images et de symboles – montre que, sans surprise, la dernière
+          catégorie (f) est entièrement absente des processus opératoires informatiques. </alinea>
+      </note>
+      <note id="no32">
+        <no>32</no>
+        <alinea><marquage typemarq="italique">Antescofo </marquage>et son application <marquage typemarq="italique">Metronaut </marquage>sont disponibles à cette adresse : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls56" xlink:type="simple" xlink:href="https://www.antescofo.com/">https://www.antescofo.com/</liensimple> (consultée le 24 octobre 2019). Si <marquage typemarq="italique">Antescofo</marquage> procède à l’alignement de la partition et du
+          signal audio, il ne traite pas la question du point de vue analytique et sémiotique,
+          raison pour laquelle ce logiciel ne figure pas dans la base de données mentionnée en note
+          2. </alinea>
+      </note>
+      <note id="no33">
+        <no>33</no>
+        <alinea>Le Music<marquage typemarq="petitecap">xml</marquage> est un format propriétaire
+          développé par <marquage typemarq="italique">Recordare </marquage>pour l’échange de
+          partitions musicales entre des éditeurs commerciaux de partitions, notamment <marquage typemarq="italique">Sibelius</marquage> et <marquage typemarq="italique">Finale </marquage>: <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls57" xlink:type="simple" xlink:href="https://www.musicxml.com/">https://www.musicxml.com/</liensimple> (consulté le
+          6 août 2019). La <marquage typemarq="petitecap">mei</marquage>, quant à elle, est promue
+          par la communauté scientifique avec l’objectif de produire un système d’encodage de
+          partitions qui corresponde aux standards philologiques actuels. Elle se situe à ce titre
+          dans le sillage de la <marquage typemarq="italique">Text Encoding
+          Initiative </marquage>(<marquage typemarq="petitecap">tei</marquage>)<marquage typemarq="petitecap"> </marquage>: <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls58" xlink:type="simple" xlink:href="https://music-encoding.org/">https://music-encoding.org/</liensimple>
+          (consulté le 6 août 2019).</alinea>
+      </note>
+      <note id="no34">
+        <no>34</no>
+        <alinea>Au stade actuel, les possibilités offertes par la <marquage typemarq="petitecap">mei</marquage> pour le stockage d’informations analytiques restent fortement limitées.
+          Voir les indications livrées à ce sujet dans la section « 10. Analysis Markup and
+          Harmonies » de la documentation en ligne disponible ici : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls59" xlink:type="simple" xlink:href="https://music-encoding.org/guidelines/v4/content/analysisharm.html">https://music-encoding.org/guidelines/v4/content/analysisharm.html</liensimple>
+          (consultée le 5 août 2019).</alinea>
+      </note>
+      <note id="no35">
+        <no>35</no>
+        <alinea>Le Resource Description Framework (<marquage typemarq="petitecap">rdf</marquage>)
+          est un modèle de graphe qui décrit de façon formelle les ressources du Web et leurs
+          métadonnées.</alinea>
+      </note>
+      <note id="no36">
+        <no>36</no>
+        <alinea>La version actuelle de la plateforme <marquage typemarq="italique">open
+          source</marquage> <marquage typemarq="italique">Dezrann</marquage> est accessible à cette
+          adresse : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls60" xlink:type="simple" xlink:href="http://www.dezrann.net/">http://www.dezrann.net/</liensimple> (consultée le 31 juillet 2019).</alinea>
+      </note>
+      <note id="no37">
+        <no>37</no>
+        <alinea>La transcription <marquage typemarq="petitecap">xml</marquage>-<marquage typemarq="petitecap">mei</marquage> de l’oeuvre est disponible dans la bibliothèque
+          <marquage typemarq="italique"><marquage typemarq="petitecap">neuma</marquage></marquage> à
+          l’adresse suivante : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls61" xlink:type="simple" xlink:href="http://neuma.huma-num.fr/home/opus/brumel:Brumel_missa/">http://neuma.huma-num.fr/home/opus/brumel:Brumel_missa/</liensimple> (consultée le
+          24 octobre 2019). L’étiquetage analytique s’effectue à partir du menu « Analytic
+          Concepts » en haut à droite dans l’interface.</alinea>
+      </note>
+      <note id="no38">
+        <no>38</no>
+        <alinea>Le logiciel ainsi que sa documentation sont accessibles sur le site de Louis Bigo :
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls62" xlink:type="simple" xlink:href="http://louisbigo.com/hexachord">http://louisbigo.com/hexachord</liensimple> (consulté le 16 juillet 2019).</alinea>
+      </note>
+      <note id="no39">
+        <no>39</no>
+        <alinea>Une description détaillée des conventions de représentation est proposée dans
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls63" xlink:type="simple" xlink:href="https://hal.archives-ouvertes.fr/hal-01258381">Couprie 2010</liensimple>. </alinea>
+      </note>
+      <note id="no40">
+        <no>40</no>
+        <alinea>Les <marquage typemarq="petitecap">ust</marquage> ont pour objectif de « prendre en
+          compte le son dans un contexte temporel et signifiant » (Hautbois 2010, chapitre 2). Au
+          nombre de 19, elles visent à identifier des catégories sémiotiques à partir de critères
+          morphologiques et sémantiques, par exemple « Par vague », « Qui tourne »,
+          « Obsessionnel », etc. Le logiciel <marquage typemarq="italique">j</marquage><marquage typemarq="italique"><marquage typemarq="petitecap">ust</marquage></marquage>, développé à
+          l’Ircam en 2008, permet de segmenter le signal sonore et d’assigner des <marquage typemarq="petitecap">ust</marquage> à ces segments. Voir note 30 au sujet du logiciel et
+          de sa documentation. Voir aussi la note 24.</alinea>
+      </note>
+      <note id="no41">
+        <no>41</no>
+        <alinea>Une version bêta du logiciel est disponible à cette adresse : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls64" xlink:type="simple" xlink:href="https://research.hud.ac.uk/institutes-centres/tacem/downloads/">https://research.hud.ac.uk/institutes-centres/tacem/downloads/</liensimple> (consultée le
+          31 juillet 2019).</alinea>
+      </note>
+      <note id="no42">
+        <no>42</no>
+        <alinea>La section « Modes opératoires » de la première partie de cet article a d’ailleurs
+          montré que la dimension interprétative est totalement absente des modes opératoires
+          informatisés.</alinea>
+      </note>
+      <note id="no43">
+        <no>43</no>
+        <alinea>Les logiciels <marquage typemarq="italique">Charles </marquage>et <marquage typemarq="italique">Telos</marquage> s’appuient sur la théorie des vecteurs harmoniques de
+          Nicolas Meeùs. <marquage typemarq="italique">Charles</marquage> facilite la saisie des
+          vecteurs et automatise le traitement statistique des accords. <marquage typemarq="italique">Telos</marquage> propose des procédures analytiques complémentaires
+          qui portent sur la morphologie des accords, le traitement contrapuntique des dissonances
+          et l'occurrence de fondamentales. Voir Cathé 2012 et Guillotel-Nothmann 2017.</alinea>
+      </note>
+      <note id="no44">
+        <no>44</no>
+        <alinea>Sur les concepts de sens et de signification tels qu’ils sont employés ici, voir
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls65" xlink:type="simple" xlink:href="http://www.revue-texto.net/Inedits/Rastier/Rastier_Semiotique-ontologie.html">Rastier 1999</liensimple> et Bordron 2011, p. 177-198.</alinea>
+      </note>
+      <note id="no45">
+        <no>45</no>
+        <alinea>Le logiciel <marquage typemarq="italique">Thema</marquage> est décrit dans
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls66" xlink:type="simple" xlink:href="http://tenor2015.tenor-conference.org/papers/23-McCulloch-Thema.pdf">McCulloch 2015</liensimple>.</alinea>
+      </note>
+      <note id="no46">
+        <no>46</no>
+        <alinea>Le logiciel <marquage typemarq="italique">Rekall</marquage>, développé à
+          l’Université de Valenciennes autour de Clarisse Bardiot, vise à documenter et à analyser
+          les processus de création ainsi qu’à faciliter la reprise des oeuvres. Il est
+          téléchargeable et documenté à cette adresse : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls67" xlink:type="simple" xlink:href="http://www.rekall.fr/">http://www.rekall.fr/</liensimple> (consultée le
+          12 août 2019). </alinea>
+      </note>
+      <note id="no47">
+        <no>47</no>
+        <alinea>L’ouvrage de François Delalande (2019), qui n’a pas pu être consulté au moment de la
+          rédaction de cet article, se situe vraisemblablement au coeur de cette problématique.
+        </alinea>
+      </note>
+      <note id="no48">
+        <no>48</no>
+        <alinea>Voir la section « Sérialisation des unités analytiques et annotation de partitions »
+          de la deuxième partie de cet article.</alinea>
+      </note>
+      <note id="no49">
+        <no>49</no>
+        <alinea>La bibliographie recense exclusivement les travaux cités dans l’article. En
+          complément, la base de données des logiciels et projets (cf. note 2) propose pour
+          l’ensemble des logiciels et projets recensés des liens vers les documentations et vers la
+          littérature analytique, lorsque celles-ci sont disponibles.</alinea>
+      </note>
+    </grnote></partiesann></article>

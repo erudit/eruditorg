@@ -2167,7 +2167,7 @@
     <h2>
       <xsl:choose>
         <xsl:when test="titre">
-          <xsl:value-of select="titre"/>
+          <xsl:apply-templates select="titre"/>
         </xsl:when>
         <xsl:otherwise>
           {% trans 'Bibliographie' %}
