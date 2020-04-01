@@ -19,7 +19,6 @@ from reportlab.platypus import Flowable, Image, KeepInFrame, Paragraph, SimpleDo
 from reportlab.platypus.tables import Table, TableStyle
 from urllib.parse import urlparse
 
-from apps.public.journal.emojis import EMOJIS_REGEX
 from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
@@ -27,13 +26,6 @@ log = structlog.getLogger(__name__)
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
 FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
-
-# Mapping between language codes and font names for chinese, japanese and korean.
-CJK_FONT_NAMES = {
-    'zh': 'NotoSerifCJKsc',
-    'ja': 'NotoSerifCJKjp',
-    'ko': 'NotoSerifCJKkr',
-}
 
 # NotoSerif font
 registerFont(TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf'))
@@ -75,22 +67,26 @@ registerFontFamily('Symbola', normal='Symbola')
 addMapping('Symbola', 0, 0, 'Symbola')
 
 # NotoSerifCJK font (chinese, japanese, korean)
-for font_name in CJK_FONT_NAMES.values():
-    registerFont(TTFont(font_name, FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
-    registerFont(TTFont(f'{font_name}-Bold', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
-    registerFont(TTFont(f'{font_name}-Italic', FONTS_DIR + f'/Noto/{font_name}-Regular.ttf'))
-    registerFont(TTFont(f'{font_name}-BoldItalic', FONTS_DIR + f'/Noto/{font_name}-Bold.ttf'))
-    registerFontFamily(
-        font_name,
-        normal=font_name,
-        bold=f'{font_name}-Bold',
-        italic=f'{font_name}-Italic',
-        boldItalic=f'{font_name}-BoldItalic',
-    )
-    addMapping(font_name, 0, 0, font_name)
-    addMapping(f'{font_name}-Bold', 1, 0, f'{font_name} Bold')
-    addMapping(f'{font_name}-Italic', 0, 1, f'{font_name} Italic')
-    addMapping(f'{font_name}-BoldItalic', 1, 1, f'{font_name} Bold Italic')
+registerFont(TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf'))
+registerFont(TTFont('NotoSerifCJKsc-Bold', FONTS_DIR + '/Noto/NotoSerifCJKsc-Bold.ttf'))
+registerFont(TTFont('NotoSerifCJKsc-Italic', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf'))
+registerFont(TTFont('NotoSerifCJKsc-BoldItalic', FONTS_DIR + '/Noto/NotoSerifCJKsc-Bold.ttf'))
+registerFontFamily(
+    'NotoSerifCJKsc',
+    normal='NotoSerifCJKsc',
+    bold='NotoSerifCJKsc-Bold',
+    italic='NotoSerifCJKsc-Italic',
+    boldItalic='NotoSerifCJKsc-BoldItalic',
+)
+addMapping('NotoSerifCJKsc', 0, 0, 'NotoSerifCJKsc')
+addMapping('NotoSerifCJKsc-Bold', 1, 0, 'NotoSerifCJKsc Bold')
+addMapping('NotoSerifCJKsc-Italic', 0, 1, 'NotoSerifCJKsc Italic')
+addMapping('NotoSerifCJKsc-BoldItalic', 1, 1, 'NotoSerifCJKsc Bold Italic')
+
+# Dicts of supported characters in NotoSerif, NotoSerifCJKsc & Symbola fonts.
+noto_chars = TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf').face.charWidths
+cjk_chars = TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf').face.charWidths
+symbola_chars = TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf').face.charWidths
 
 
 def get_coverpage(article):
@@ -189,29 +185,29 @@ def get_coverpage(article):
         ))
     if titles['main'].title:
         header.append(Paragraph(
-            clean(titles['main'].title, small_caps_font='SpectralSC-Bold'),
+            clean(titles['main'].title, font_weight='bold'),
             styles['h1'],
         ))
         if titles['main'].subtitle:
             header.append(Paragraph(
-                clean(titles['main'].subtitle, small_caps_font='SpectralSC-Bold'),
+                clean(titles['main'].subtitle, font_weight='bold'),
                 styles['h1_grey'],
             ))
         for title in titles['paral'] + titles['equivalent']:
             header.append(small_spacer)
             header.append(Paragraph(
-                clean(title.title, small_caps_font='SpectralSC-Bold'),
+                clean(title.title, font_weight='bold'),
                 styles['h1'] if title.subtitle else styles['h1_grey'],
             ))
             if title.subtitle:
                 header.append(Paragraph(
-                    clean(title.subtitle, small_caps_font='SpectralSC-Bold'),
+                    clean(title.subtitle, font_weight='bold'),
                     styles['h1_grey'],
                 ))
     for title in titles['reviewed_works']:
         header.append(small_spacer)
         header.append(Paragraph(
-            clean(title, small_caps_font='SpectralSC-Bold'),
+            clean(title, font_weight='bold'),
             styles['h1_grey'],
         ))
     header.append(large_spacer)
@@ -527,7 +523,7 @@ def get_coverpage(article):
 
 
 def get_stylesheet(language):
-    font_name = CJK_FONT_NAMES.get(language, 'NotoSerif')
+    font_name = 'NotoSerifCJKsc' if language in ['zh', 'ja', 'ko'] else 'NotoSerif'
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(
         name='normal',
@@ -599,7 +595,7 @@ def get_stylesheet(language):
     return stylesheet
 
 
-def clean(text, small_caps_font='SpectralSC'):
+def clean(text, font_weight=None):
     soup = text if isinstance(text, Tag) else BeautifulSoup(text, 'html.parser')
     # Replace <span class="barre"> by <strike>
     for node in soup.find_all('span', attrs={'class': 'barre'}):
@@ -616,7 +612,7 @@ def clean(text, small_caps_font='SpectralSC'):
     # Change the font of <span class="petitecap"> nodes.
     for node in soup.find_all('span', attrs={'class': 'petitecap'}):
         del node['class']
-        node['fontName'] = small_caps_font
+        node['fontName'] = 'SpectralSC-Bold' if font_weight == 'bold' else 'SpectralSC'
     # Remove any footnotes.
     for node in soup.find_all('a', attrs={'class': 'norenvoi'}):
         node.decompose()
@@ -624,12 +620,31 @@ def clean(text, small_caps_font='SpectralSC'):
     for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
         del node['class']
     text = str(soup)
-    emojis = re.findall(EMOJIS_REGEX, text)
-    if emojis:
-        for emoji in emojis:
-            text = text.replace(emoji, f'<span fontName="Symbola">{emoji}</span>')
-        # Remove unicode variation selectors, they are not supported by our font.
-        text = re.sub(r'[\uFE00-\uFE0F]', '', text)
+
+    # Remove unicode variation selectors, they are not supported by our fonts.
+    text = re.sub(r'[\uFE00-\uFE0F]', '', text)
+
+    # Check if we have unsupported characters in Noto font.
+    text_chars = {ord(c) for c in text}
+    chars_not_in_noto = text_chars.difference(set(noto_chars.keys()))
+    # If we have unsupported characters, check if they are supported by our other fonts.
+    if chars_not_in_noto:
+        for char in chars_not_in_noto:
+            if char in cjk_chars:
+                char = chr(char)
+                font_name = 'NotoSerifCJKsc-Bold' if font_weight == 'bold' else 'NotoSerifCJKsc'
+                text = text.replace(char, f'<span fontName="{font_name}">{char}</span>')
+            elif char in symbola_chars:
+                char = chr(char)
+                text = text.replace(char, f'<span fontName="Symbola">{char}</span>')
+            else:
+                # If no fonts support this character, log it.
+                log.warning(
+                    'Coverpage: Unsupported character.',
+                    character=chr(char),
+                    text=text,
+                )
+
     return text
 
 
