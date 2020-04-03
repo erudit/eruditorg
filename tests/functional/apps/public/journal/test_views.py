@@ -241,6 +241,31 @@ class TestJournalListView:
         journals_list = dom.find('div', {'class': 'journals-list'})
         assert '(nouveauté 2020)' in journals_list.decode()
 
+    @pytest.mark.parametrize('logo, expected_logo_display', [
+        ('logo.png', True),
+        ('logo_empty.png', False),
+        (False, False),
+    ])
+    def test_do_not_display_non_existent_journal_logo_on_list_per_disciplines(
+        self, logo, expected_logo_display,
+    ):
+        journal = JournalFactory.create_with_issue(code='journal', name='Journal')
+        journal.disciplines.add(DisciplineFactory())
+        if logo:
+            repository.api.register_datastream(
+                journal.get_full_identifier(),
+                '/LOGO/content',
+                open(settings.MEDIA_ROOT + '/' + logo, 'rb').read(),
+            )
+        url = reverse('public:journal:journal_list')
+        html = self.client.get(url, {'sorting': 'disciplines'}).content.decode()
+        logo = '<img src="/fr/revues/journal/logo.jpg" alt="Logo pour Journal" ' \
+               'class="img-responsive card__figure" />'
+        if expected_logo_display:
+            assert logo in html
+        else:
+            assert logo not in html
+
 
 class TestJournalDetailView:
 

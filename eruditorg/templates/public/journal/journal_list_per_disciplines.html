@@ -130,7 +130,7 @@
             </span>
             {% endif %}
 
-            {% if journal.is_in_fedora %}
+            {% if journal.is_in_fedora and journal.has_logo %}
             <div class="row">
               <div class="col-xs-4 pull-right">
                 <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive card__figure" />
