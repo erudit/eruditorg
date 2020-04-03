@@ -24,6 +24,7 @@ env = environ.Env(
     STATIC_ROOT=(str, str(ROOT_DIR / 'static')),
     MEDIA_ROOT=(str, str(ROOT_DIR / 'media')),
     STATIC_URL=(str, '/static/'),
+    FEDORA_ASSETS_EXTERNAL_URL=(str, None),
     MEDIA_URL=(str, '/media/'),
     UPLOAD_ROOT=(str, str(ROOT_DIR / 'media' / 'uploads')),
     MANAGED_COLLECTIONS=(list, ['erudit', 'unb']),
@@ -109,6 +110,7 @@ MEDIA_ROOT = env('MEDIA_ROOT')
 UPLOAD_ROOT = env('UPLOAD_ROOT')
 STATIC_URL = env('STATIC_URL')
 MEDIA_URL = env('MEDIA_URL')
+FEDORA_ASSETS_EXTERNAL_URL = env('FEDORA_ASSETS_EXTERNAL_URL')
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 

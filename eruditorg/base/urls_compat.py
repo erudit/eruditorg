@@ -100,7 +100,7 @@ journal_url_patterns = ([
     # Issue coverpage
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/coverpage\.jpg?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(
-            pattern_name="public:journal:issue_coverpage",
+            pattern_name="issue_coverpage_cdn",
         ), name="legacy_issue_coverpage"),
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/coverpageHD\.jpg?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(
@@ -108,7 +108,7 @@ journal_url_patterns = ([
         ), name="legacy_issue_coverpage_hd"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/coverpage\.jpg?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(
-            pattern_name="public:journal:issue_coverpage",
+            pattern_name="issue_coverpage_cdn",
         ), name="legacy_issue_coverpage_culture_year_volume"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/coverpageHD\.jpg?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(
@@ -116,7 +116,7 @@ journal_url_patterns = ([
         ), name="legacy_issue_coverpage_hd_culture_year_volume"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/coverpage\.jpg?$',
         journal_views_compat.IssueDetailRedirectView.as_view(
-            pattern_name="public:journal:issue_coverpage",
+            pattern_name="issue_coverpage_cdn",
         ), name="legacy_issue_coverpage_culture"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/coverpageHD\.jpg?$',
         journal_views_compat.IssueDetailRedirectView.as_view(

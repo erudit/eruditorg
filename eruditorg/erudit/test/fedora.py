@@ -305,6 +305,12 @@ class FakeAPI(ApiFacade):
                 elif subselection == '/PAGES/content':
                     with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
                         result = xml.read()
+                elif subselection == '/COVERPAGE/history':
+                    with open('./tests/fixtures/issue/datastream/coverpage/history', 'rb') as xml:  # noqa
+                        result = xml.read()
+                elif subselection == '/COVERPAGE/content':
+                    with open('./tests/fixtures/issue/datastream/coverpage/CONTENT', 'rb') as coverpage:  # noqa
+                        result = coverpage.read()
             elif len(pidelems) == 2:  # journal
                 subselections = [
                     '/PUBLICATIONS/content',
