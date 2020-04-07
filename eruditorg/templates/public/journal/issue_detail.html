@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load erudit_cache_tag i18n model_formatters static %}
+{% load public_journal_tags erudit_cache_tag i18n model_formatters static %}
 
 {% block title %}{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal.name|safe }}{% endblock title %}
 
@@ -11,7 +11,7 @@
 <meta property="og:title" content="{% if issue.title %}{{ issue.title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-<meta property="og:image" content="https://{{ request.get_host }}{% if issue.has_coverpage %}{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
+<meta property="og:image" content="https://{{ request.get_host }}{% if issue.has_coverpage %}{% issue_coverpage_url issue %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
 <meta property="og:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 
 <!-- Twitter -->
@@ -20,7 +20,7 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{% if issue.title %}{{ issue.title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% if issue.has_coverpage %}{% trans 'Couverture pour ce numéro de la revue' %}{% else %}{% trans 'Logo pour' %}{% endif %} {{ journal.name|safe }}">
-<meta name="twitter:image" content="https://{{ request.get_host }}{% if issue.has_coverpage %}{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
+<meta name="twitter:image" content="https://{{ request.get_host }}{% if issue.has_coverpage %}{% issue_coverpage_url issue %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
 <meta name="twitter:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 {% if not issue.is_published %}
 <meta name="robots" content="noindex">
@@ -202,7 +202,7 @@
   <p>{% trans "Diffusion numérique" %} : {{ issue.date_published }}</p>
   {% if issue.has_coverpage %}
   <div>
-    <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.title %}{{ issue.title|safe }}, {% endif %}
+    <img src="{% issue_coverpage_url issue %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.title %}{{ issue.title|safe }}, {% endif %}
       {{ issue.volume_title_with_pages }} {{ journal.name }}" />
   </div>
   {% endif %}
@@ -236,7 +236,7 @@
       <article class="col-xs-6 col-sm-3">
         <a href="{% url 'public:journal:issue_detail' back_issue.journal.code back_issue.volume_slug back_issue.localidentifier %}" class="card">
           {% if back_issue.has_coverpage %}
-          <img src="{% url 'public:journal:issue_coverpage' back_issue.journal.code back_issue.volume_slug back_issue.localidentifier %}" alt="{% trans 'Couverture représentant ' %}{% if back_issue.title %}{% trans 'la thématique ' %}{{ back_issue.title|safe }}{% else %}{% trans 'le ' %}{{ back_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
+          <img src="{% issue_coverpage_url back_issue %}" alt="{% trans 'Couverture représentant ' %}{% if back_issue.title %}{% trans 'la thématique ' %}{{ back_issue.title|safe }}{% else %}{% trans 'le ' %}{{ back_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
           {% endif %}
           <h5 class="card__title">
             <span>{% with title=back_issue.volume_title %}{{ title }}{% endwith %}</span>

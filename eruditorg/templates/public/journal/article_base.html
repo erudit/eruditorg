@@ -17,7 +17,7 @@
 <meta property="og:title" content="{{ citation_title_metadata }} – {{ article.issue.journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-<meta property="og:image" content="https://{{ request.get_host }}{% if article.issue.has_coverpage %}{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' article.issue.journal.code %}{% endif %}">
+<meta property="og:image" content="https://{{ request.get_host }}{% if article.issue.has_coverpage %}{% issue_coverpage_url article.issue %}{% else %}{% url 'public:journal:journal_logo' article.issue.journal.code %}{% endif %}">
 <meta property="og:description" content="{% blocktrans with journal=article.issue.journal.name|safe %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
 
 <!-- Twitter -->
@@ -26,7 +26,7 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{{ citation_title_metadata }} – {{ article.issue.journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ article.issue.journal.name|safe }}">
-<meta name="twitter:image" content="https://{{ request.get_host }}{% if article.issue.has_coverpage %}{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' article.issue.journal.code %}{% endif %}">
+<meta name="twitter:image" content="https://{{ request.get_host }}{% if article.issue.has_coverpage %}{% issue_coverpage_url article.issue %}{% else %}{% url 'public:journal:journal_logo' article.issue.journal.code %}{% endif %}">
 <meta name="twitter:description" content="{% blocktrans with journal=article.issue.journal.name|safe %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
 {% if not article.issue.is_published %}
 <meta name="robots" content="noindex">

@@ -16,6 +16,7 @@ from . import sitemaps
 from . import urls_compat
 from apps.public.urls import public_urlpatterns
 from apps.public.journal.urls import google_scholar_urlpatterns
+from apps.public.journal.views import IssueRawCoverpageView
 from apps.webservices.views import CrknIpUnbView
 
 sitemaps_dict = {
@@ -36,6 +37,11 @@ urlpatterns = [
     url(r'^scholar/', include(google_scholar_urlpatterns)),
     # CRKN ipunb service.
     url(r'^ws/crkn/ipunb.xml', CrknIpUnbView.as_view(), name='crkn_ipunb'),
+
+    url(
+        _(r'^couverture/(?P<localidentifier>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg'),
+        IssueRawCoverpageView.as_view(), name="issue_coverpage_cdn"
+    ),
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 ]
