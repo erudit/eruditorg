@@ -32,7 +32,15 @@ class JournalInformationForm(forms.ModelForm):
 
     class Meta:
         model = JournalInformation
-        fields = []
+        fields = [
+            'organisation_name', 'email', 'subscription_email', 'languages', 'phone',
+            'facebook_url', 'facebook_enable_feed', 'frequency', 'twitter_url',
+            'twitter_enable_feed', 'website_url', 'peer_review_process',
+            'about_fr', 'team_fr', 'editorial_policy_fr', 'publishing_ethics_fr',
+            'instruction_for_authors_fr', 'subscriptions_fr', 'partners_fr', 'contact_fr',
+            'about_en', 'team_en', 'editorial_policy_en', 'publishing_ethics_en',
+            'instruction_for_authors_en', 'subscriptions_en', 'partners_en', 'contact_en',
+        ]
 
     def __init__(self, *args, **kwargs):
         self.language_code = kwargs.pop('language_code')
@@ -59,12 +67,9 @@ class JournalInformationForm(forms.ModelForm):
             )
         )
 
-        self.fields.update(
-            fields_for_model(
-                self.Meta.model,
-                fields=self.non_i18n_field_names,
-            )
-        )
+        # Remove translatable fields not in the selected language.
+        langcode = 'en' if self.language_code == 'fr' else 'fr'
+        [self.fields.pop(f'{field_name}_{langcode}') for field_name in self.i18n_field_bases]
 
     @property
     def i18n_field_names(self):

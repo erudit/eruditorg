@@ -4,6 +4,7 @@ import pytest
 import reversion
 
 from bs4 import BeautifulSoup
+from ckeditor.widgets import CKEditorWidget
 from django.conf import settings
 from django.test import RequestFactory, override_settings
 from post_office.models import Email
@@ -108,3 +109,45 @@ class TestJournalInformationForm:
         assert len(ins_tags) == 1
         assert del_tags[0].decode() == '<del>- Premier test</del>'
         assert ins_tags[0].decode() == '<ins>+ Deuxième test</ins>'
+
+    @pytest.mark.parametrize('language_code', (
+        'fr', 'en',
+    ))
+    def test_i18n_fields_initial_data(self, language_code):
+        initial_data = {
+            'about_en': 'This is a test',
+            'about_fr': 'Ceci est un test',
+        }
+        info = JournalInformationFactory(**initial_data)
+        request = RequestFactory().request()
+        request.user = UserFactory()
+        form = JournalInformationForm(
+            {},
+            instance=info,
+            language_code=language_code,
+            request=request,
+        )
+        # Check that our initial data is a subset of the form's initial data.
+        assert initial_data.items() <= form.initial.items()
+
+    @pytest.mark.parametrize('language_code', (
+        'fr', 'en',
+    ))
+    def test_i18n_fields_initialization(self, language_code):
+        request = RequestFactory().request()
+        request.user = UserFactory()
+        form = JournalInformationForm(language_code=language_code, request=request)
+        for field in form.i18n_field_bases:
+            field_name = f'{field}_{language_code}'
+            # Check that current language fields are present in the form.
+            assert field_name in form.fields
+            # Check that other language fields are not present in the form.
+            other_language_code = 'fr' if language_code == 'en' else 'en'
+            assert f'{field}_{other_language_code}' not in form.fields
+            # Check that i18n fields labels do not contain the language code (eg. "Team [en]").
+            assert f'[{language_code}]' not in form.fields[field_name].label
+            # Check that i18n fields use the CKEditor widget.
+            assert isinstance(form.fields[field_name].widget, CKEditorWidget)
+            # Check that i18n fields have a help text (except "contact").
+            if field_name != f'contact_{language_code}':
+                assert form.fields[field_name].help_text != ''
