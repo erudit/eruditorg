@@ -328,7 +328,9 @@ class FakeAPI(ApiFacade):
                 elif pid in self._datastream_map.keys() and \
                         subselection in self._datastream_map[pid].keys():
                     result = self._datastream_map[pid][subselection]
-
+                elif subselection == '/LOGO/history':
+                    with open('./tests/fixtures/issue/datastream/coverpage/history', 'rb') as xml:  # noqa
+                        result = xml.read()
                 elif subselection in subselections:
                     result = self.get_journal_xml(pid) or b''
         if result is not None:

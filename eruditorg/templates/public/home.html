@@ -91,7 +91,7 @@
           <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
           {% if issue.journal.has_logo %}
           <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }}">
-            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
+            <img src="{% journal_logo_url issue.journal %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
           </a>
           {% endif %}
           <h3>
@@ -114,7 +114,7 @@
           </a>
           {% else %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
+            <img src="{% journal_logo_url issue.journal %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
           </a>
           {% endif %}
           <h3>

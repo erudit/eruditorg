@@ -17,7 +17,7 @@ from . import sitemaps
 from . import urls_compat
 from apps.public.urls import public_urlpatterns
 from apps.public.journal.urls import google_scholar_urlpatterns
-from apps.public.journal.views import IssueRawCoverpageView
+from apps.public.journal.views import IssueRawCoverpageView, JournalRawLogoView
 from apps.webservices.views import CrknIpUnbView
 
 sitemaps_dict = {
@@ -25,6 +25,7 @@ sitemaps_dict = {
     'issue': sitemaps.IssueSitemap,
     'article': sitemaps.ArticleSitemap,
 }
+
 
 urlpatterns = [
     url(r'^index\.html$', RedirectView.as_view(pattern_name="public:home")),
@@ -43,6 +44,11 @@ urlpatterns = [
         _(r'^couverture/(?P<localidentifier>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg'),
         vary_on_headers("accept-encoding")(IssueRawCoverpageView.as_view()), name="issue_coverpage_cdn"  # noqa
     ),
+    url(
+        _(r'^logo/(?P<code>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg'),
+        JournalRawLogoView.as_view(), name="journal_logo_cdn"
+    ),
+
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 ]
