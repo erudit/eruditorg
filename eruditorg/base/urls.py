@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 from django.views.generic import TemplateView
 from django.views.i18n import JavaScriptCatalog
 from django_js_reverse import views as js_reverse_views
@@ -40,7 +41,7 @@ urlpatterns = [
 
     url(
         _(r'^couverture/(?P<localidentifier>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg'),
-        IssueRawCoverpageView.as_view(), name="issue_coverpage_cdn"
+        vary_on_headers("accept-encoding")(IssueRawCoverpageView.as_view()), name="issue_coverpage_cdn"  # noqa
     ),
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
