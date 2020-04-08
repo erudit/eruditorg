@@ -1,7 +1,17 @@
 {% if active_campaign %}
 <aside class="campaign-sidebar">
   <a href="{{ active_campaign.url|safe }}" target="_blank">
-    <img src="{{ active_campaign.image.url }}" title="{{ active_campaign.title }}" alt="{{ active_campaign.alt }}" />
+    <!-- The image's src is a transparant grey pixel placeholder. -->
+    <img
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII="
+      data-srcset="{{ active_campaign.image.url }} {{ active_campaign.image.width }}w"
+      data-aspectratio="{{ active_campaign.image.width }}/{{ active_campaign.image.height }}"
+      width="{{ active_campaign.image.width }}"
+      height="{{ active_campaign.image.height }}"
+      class="lazyload"
+      title="{{ active_campaign.title }}"
+      alt="{{ active_campaign.alt }}"
+    />
   </a>
 </aside>
 {% endif %}

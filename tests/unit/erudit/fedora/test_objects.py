@@ -105,4 +105,8 @@ class TestArticleDigitalObject(TestCase):
         )
         article = ArticleDigitalObject(api, 'test')
         # Run & check
-        self.assertEqual(article.infoimg_dict, {'im1': {'plgr': 'bar.jpg'}})
+        self.assertEqual(article.infoimg_dict, {'im1': {
+            'plgr': 'bar.jpg',
+            'width': '1',
+            'height': '1',
+        }})
