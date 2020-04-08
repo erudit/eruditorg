@@ -28,6 +28,8 @@
   <v:variables>
     {% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
     <v:variable n="plgr-{{ imid }}" value="{{ infoimg.plgr }}" />
+    <v:variable n="width-{{ imid }}" value="{{ infoimg.width }}" />
+    <v:variable n="height-{{ imid }}" value="{{ infoimg.height }}" />
     {% endfor %}
   </v:variables>
   <xsl:variable name="vars" select="document('')//v:variables/v:variable" />
@@ -1179,9 +1181,22 @@
   <!-- media tables -->
   <xsl:template match="figure/objetmedia|tableau/objetmedia">
     <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
+    <xsl:variable name="imgPlGrWidth" select="concat('width-', image/@id)"/>
+    <xsl:variable name="imgPlGrHeight" select="concat('height-', image/@id)"/>
     <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
+    <xsl:variable name="imgWidth" select="$vars[@n = $imgPlGrWidth]/@value"/>
+    <xsl:variable name="imgHeight" select="$vars[@n = $imgPlGrHeight]/@value"/>
     <a href="{{ media_url_prefix }}{$imgPlGr}" class="lightbox {name()}"  title="{normalize-space(../legende/titre)}">
-      <img src="{{ media_url_prefix }}{$imgPlGr}" alt="{normalize-space(../legende/titre)}" class="img-responsive"/>
+      <!-- The image's src is a transparant grey pixel placeholder. -->
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII="
+        data-srcset="{{ media_url_prefix }}{$imgPlGr} {$imgWidth}w"
+        data-aspectratio="{$imgWidth}/{$imgHeight}"
+        width="{$imgWidth}"
+        height="{$imgHeight}"
+        class="lazyload img-responsive"
+        alt="{normalize-space(../legende/titre)}"
+      />
     </a>
   </xsl:template>
 
@@ -1486,8 +1501,24 @@
     <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:element name="img">
+      <!-- The image's src is a transparant grey pixel placeholder. -->
       <xsl:attribute name="src">
-        <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/>
+        <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=</xsl:text>
+      </xsl:attribute>
+      <xsl:attribute name="data-srcset">
+        <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/><xsl:text> </xsl:text><xsl:value-of select="@dimx"/><xsl:text>w</xsl:text>
+      </xsl:attribute>
+      <xsl:attribute name="data-aspectratio">
+        <xsl:value-of select="@dimx div @dimy"/>
+      </xsl:attribute>
+      <xsl:attribute name="width">
+        <xsl:value-of select="@dimx"/>
+      </xsl:attribute>
+      <xsl:attribute name="height">
+        <xsl:value-of select="@dimy"/>
+      </xsl:attribute>
+      <xsl:attribute name="class">
+        <xsl:text>lazyload</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>

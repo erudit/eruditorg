@@ -110,11 +110,15 @@ class ArticleDigitalObject(models.DigitalObject):
         infoimg_dict = OrderedDict()
         for im_tree in infoimg_tree.findall('im'):
             plgr_node = im_tree.find('imPlGr//nomImg')
+            dimx_node = im_tree.find('imPlGr//dimx')
+            dimy_node = im_tree.find('imPlGr//dimy')
             if plgr_node is None:
                 continue
             infoimg_dict.update({
                 im_tree.get('id'): {
                     'plgr': plgr_node.text,
+                    'width': dimx_node.text if dimx_node is not None else '',
+                    'height': dimy_node.text if dimy_node is not None else '',
                 },
             })
         return infoimg_dict

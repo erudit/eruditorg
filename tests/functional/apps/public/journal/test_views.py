@@ -1306,28 +1306,28 @@ class TestArticleDetailView:
         grfigure = dom.find('div', {'class': 'grfigure', 'id': 'gf1'})
 
         # Check that the source is displayed under both figures 1 & 2 which are in the same figure group.
-        fi1 = grfigure.find('figure', {'id': 'fi1'})
-        fi2 = grfigure.find('figure', {'id': 'fi2'})
-        assert fi1.decode() == '<figure class="figure" id="fi1"><figcaption></figcaption>' \
-                               '<div class="figure-wrapper">\n<div class="figure-object">' \
-                               '<a class="lightbox objetmedia" ' \
-                               'href="/fr/revues/journal/2000-issue/article/media/" title="">' \
-                               '<img alt="" class="img-responsive" ' \
-                               'src="/fr/revues/journal/2000-issue/article/media/"/></a></div>\n' \
-                               '<div class="figure-legende-notes-source">' \
-                               '<cite class="source">Avec l’aimable autorisation de l’artiste et ' \
-                               'kamel mennour, Paris/London. ©\xa0' \
-                               '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
-        assert fi2.decode() == '<figure class="figure" id="fi2"><figcaption></figcaption>' \
-                               '<div class="figure-wrapper">\n<div class="figure-object">' \
-                               '<a class="lightbox objetmedia" ' \
-                               'href="/fr/revues/journal/2000-issue/article/media/" title="">' \
-                               '<img alt="" class="img-responsive" ' \
-                               'src="/fr/revues/journal/2000-issue/article/media/"/></a></div>\n' \
-                               '<div class="figure-legende-notes-source">' \
-                               '<cite class="source">Avec l’aimable autorisation de l’artiste et ' \
-                               'kamel mennour, Paris/London. ©\xa0' \
-                               '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
+        fi1 = grfigure.find('figure', {'id': 'fi1'}).decode()
+        fi2 = grfigure.find('figure', {'id': 'fi2'}).decode()
+        assert fi1 == '<figure class="figure" id="fi1"><figcaption></figcaption><div ' \
+                      'class="figure-wrapper">\n<div class="figure-object"><a class="lightbox ' \
+                      'objetmedia" href="/fr/revues/journal/2000-issue/article/media/" title="">' \
+                      '<img alt="" class="lazyload img-responsive" data-aspectratio="/" ' \
+                      'data-srcset="/fr/revues/journal/2000-issue/article/media/ w" height="" ' \
+                      'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAA' \
+                      'AC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" width=""/></a></div>\n' \
+                      '<div class="figure-legende-notes-source"><cite class="source">Avec ' \
+                      'l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © ' \
+                      '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
+        assert fi2 == '<figure class="figure" id="fi2"><figcaption></figcaption><div ' \
+                      'class="figure-wrapper">\n<div class="figure-object"><a class="lightbox ' \
+                      'objetmedia" href="/fr/revues/journal/2000-issue/article/media/" title="">' \
+                      '<img alt="" class="lazyload img-responsive" data-aspectratio="/" ' \
+                      'data-srcset="/fr/revues/journal/2000-issue/article/media/ w" height="" ' \
+                      'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAA' \
+                      'AC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" width=""/></a></div>\n' \
+                      '<div class="figure-legende-notes-source"><cite class="source">Avec ' \
+                      'l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © ' \
+                      '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
 
         # Check that the figure list link is displayed.
         voirliste = grfigure.find('p', {'class': 'voirliste'})
@@ -2120,13 +2120,22 @@ class TestArticleDetailView:
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # No unwanted extra spaces in addition of wanted non-breaking spaces inside quotes.
-        assert '«\xa0<img src="/fr/revues/journal/2020-issue/article/media/2127962n.jpg" ' \
-               'id="im10" alt="forme: forme pleine grandeur">\xa0U+1F469 woman\xa0»,' in html
+        assert '«\xa0<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwC' \
+               'AAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" ' \
+               'data-srcset="/fr/revues/journal/2020-issue/article/media/2127962n.jpg 16w" ' \
+               'data-aspectratio="0.941176470588235" width="16" height="17" class="lazyload" ' \
+               'id="im10" alt="forme: forme pleine grandeur">\xa0U+1F469 woman\xa0»' in html
         # No unwanted extra spaces inside parentheses.
-        assert '(<img src="/fr/revues/journal/2020-issue/article/media/2127980n.jpg" ' \
+        assert '(<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAA' \
+               'C0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" ' \
+               'data-srcset="/fr/revues/journal/2020-issue/article/media/2127980n.jpg 17w" ' \
+               'data-aspectratio="1.307692307692308" width="17" height="13" class="lazyload" ' \
                'id="im34" alt="forme: forme pleine grandeur">)' in html
         # No unwanted extra spaces after hashtag.
-        assert '#<img src="/fr/revues/journal/2020-issue/article/media/2127981n.jpg" ' \
+        assert '#<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAA' \
+               'C0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" ' \
+               'data-srcset="/fr/revues/journal/2020-issue/article/media/2127981n.jpg 32w" ' \
+               'data-aspectratio="1.684210526315789" width="32" height="19" class="lazyload" ' \
                'id="im35" alt="forme: forme pleine grandeur">' in html
 
     def test_footnote_in_bibliography_title(self):
