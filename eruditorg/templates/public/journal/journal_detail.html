@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load erudit_cache_tag i18n model_formatters static %}
+{% load erudit_cache_tag i18n model_formatters static public_journal_tags %}
 
 {% block title %}{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle }}{% endif %}{% endblock title %}
 
@@ -12,7 +12,7 @@
 <meta property="og:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-<meta property="og:image" content="https://{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
+<meta property="og:image" content="{% journal_logo_url journal %}">
 <meta property="og:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 
 <!-- Twitter -->
@@ -21,7 +21,7 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ main_title.title|safe }}">
-<meta name="twitter:image" content="https://{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
+<meta name="twitter:image" content="{% journal_logo_url journal %}">
 <meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 {% endblock meta_tags %}
 

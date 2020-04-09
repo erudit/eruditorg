@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
-from erudit.models import Issue
+from erudit.models import Issue, Journal
 
 register = template.Library()
 
@@ -49,6 +49,29 @@ def issue_coverpage_url(issue: Issue) -> str:
     last_modified_date = datetime.strftime(coverpage.last_modified(), "%Y%m%d%H%M%S")
     assets_path = reverse("issue_coverpage_cdn", args=(
         issue.localidentifier, last_modified_date)
+    )
+    if settings.FEDORA_ASSETS_EXTERNAL_URL:
+        return settings.FEDORA_ASSETS_EXTERNAL_URL + assets_path
+    return assets_path
+
+
+@register.simple_tag
+def journal_logo_url(journal: Journal) -> str:
+    """ Return a cacheable url of the journal's logo
+
+    The timestamp of the logo's last modified date is used to make the results permanently
+    cacheable.
+
+    If FEDORA_ASSETS_EXTERNAL_URL is defined in the settings, an absolute URL will be returned.
+    If it is not, a relative URL will be returned.
+
+    :param journal: the journal for which to return a journal logo url
+    :return: the url of the journal logo
+    """
+    logo = journal.fedora_object.logo
+    last_modified_date = datetime.strftime(logo.last_modified(), "%Y%m%d%H%M%S")
+    assets_path = reverse("journal_logo_cdn", args=(
+        journal.code, last_modified_date)
     )
     if settings.FEDORA_ASSETS_EXTERNAL_URL:
         return settings.FEDORA_ASSETS_EXTERNAL_URL + assets_path

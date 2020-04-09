@@ -239,7 +239,7 @@
         {% if journal.has_logo %}
         <div>
           <a href="{% url 'public:journal:journal_detail' journal.code %}">
-            <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
+            <img src="{% journal_logo_url journal %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
           </a>
         </div>
         {% endif %}
