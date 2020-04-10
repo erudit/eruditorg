@@ -52,7 +52,16 @@
         </p>
         {% if current_issue.has_coverpage %}
         <a href="{% url 'public:journal:issue_detail' current_issue.journal.code current_issue.volume_slug current_issue.localidentifier %}">
-          <img src="{% issue_coverpage_url current_issue %}" class="img-responsive current-issue--cover issue-cover" alt="{{ current_issue.title }}" />
+          {# The image's src is a transparent pixel placeholder. #}
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            data-srcset="{% issue_coverpage_url current_issue %} {{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}w"
+            data-aspectratio="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}/{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
+            width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
+            height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
+            alt="{{ current_issue.title }}"
+            class="lazyload img-responsive current-issue--cover issue-cover"
+          />
         </a>
         {% endif %}
         {% endif %}

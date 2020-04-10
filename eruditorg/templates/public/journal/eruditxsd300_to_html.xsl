@@ -140,7 +140,16 @@
           <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
             {% if article.issue.has_coverpage %}
             <div class="doc-head__img coverpage">
-              <img src="{% issue_coverpage_url article.issue %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
+              {# The image's src is a transparent pixel placeholder. #}
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                data-srcset="{% issue_coverpage_url article.issue %} {{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}w"
+                data-aspectratio="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}/{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
+                width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
+                height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
+                class="lazyload img-responsive"
+                alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}"
+              />
             </div>
             {% else %}
             <div class="doc-head__img logo">

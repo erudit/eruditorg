@@ -24,6 +24,10 @@ def common_settings(request):
             "WEBPACK_DEV_SERVER_URL": getattr(settings, 'WEBPACK_DEV_SERVER_URL', ''),
         })
 
+    COMMON_CONTEXT.update({
+        'ISSUE_COVERPAGE_AVERAGE_SIZE': settings.ISSUE_COVERPAGE_AVERAGE_SIZE,
+    })
+
     return COMMON_CONTEXT
 
 

@@ -534,3 +534,9 @@ REDIS_PORT = env('REDIS_PORT')
 REDIS_INDEX = env('REDIS_INDEX')
 
 SESSION_ENGINE = env('SESSION_ENGINE')
+
+# Help for lazyloading issue coverpages.
+ISSUE_COVERPAGE_AVERAGE_SIZE = {
+    'width': 135,
+    'height': 200,
+}
