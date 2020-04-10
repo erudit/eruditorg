@@ -172,14 +172,30 @@
   {% if issue.copyrights %}
     <p><small>{{ issue.copyrights|safe }}</small></p>
     {% for license in issue.licenses %}
-      <p><a href="{{ license.href }}" target="_blank"><img src="{{ license.img }}" alt="{% trans 'License' %}" /></a></p>
+      <p><a href="{{ license.href }}" target="_blank">
+        {# The image's src is a transparent pixel placeholder. #}
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+          data-src="{{ license.img }}"
+          alt="{% trans 'License' %}"
+          class="lazyload"
+        />
+      </a></p>
     {% endfor %}
   {% else %}
     {% for copyright in issue.erudit_object.droitsauteur %}
       {% if copyright.text %}
         <p><small>{{ copyright.text|safe }}</small></p>
       {% elif copyright.href and copyright.img %}
-        <p><a href="{{ copyright.href }}" target="_blank"><img src="{{ copyright.img }}" alt="{% trans 'License' %}" /></a></p>
+        <p><a href="{{ copyright.href }}" target="_blank">
+          {# The image's src is a transparent pixel placeholder. #}
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            data-src="{{ copyright.img }}"
+            alt="{% trans 'License' %}"
+            class="lazyload"
+          />
+        </a></p>
       {% endif %}
     {% endfor %}
   {% endif %}
