@@ -258,9 +258,16 @@ class TestJournalListView:
         url = reverse('public:journal:journal_list')
 
         html = self.client.get(url, {'sorting': 'disciplines'}).content.decode()
-
-        logo = '<img src="/logo/journal/20110811144159.jpg" alt="Logo pour Journal" ' \
-               'class="img-responsive card__figure" />'
+        logo = '<img\n                  ' \
+               'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQV' \
+               'R42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="\n                  ' \
+               'data-srcset="/logo/journal/20110811144159.jpg 65w"\n                  ' \
+               'data-aspectratio="65/25"\n                  ' \
+               'width="65"\n                  ' \
+               'height="25"\n                  ' \
+               'alt="Logo pour Journal"\n                  ' \
+               'class="lazyload img-responsive card__figure"\n                ' \
+               '/>'
         if expected_logo_display:
             assert logo in html
         else:

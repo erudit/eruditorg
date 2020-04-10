@@ -26,6 +26,7 @@ def common_settings(request):
 
     COMMON_CONTEXT.update({
         'ISSUE_COVERPAGE_AVERAGE_SIZE': settings.ISSUE_COVERPAGE_AVERAGE_SIZE,
+        'JOURNAL_LOGO_AVERAGE_SIZE': settings.JOURNAL_LOGO_AVERAGE_SIZE,
     })
 
     return COMMON_CONTEXT

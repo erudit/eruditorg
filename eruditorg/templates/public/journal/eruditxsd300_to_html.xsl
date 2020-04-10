@@ -153,7 +153,16 @@
             </div>
             {% else %}
             <div class="doc-head__img logo">
-              <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
+              {# The image's src is a transparent pixel placeholder. #}
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                data-srcset="{% journal_logo_url article.issue.journal %} {{ JOURNAL_LOGO_AVERAGE_SIZE.width }}w"
+                data-aspectratio="{{ JOURNAL_LOGO_AVERAGE_SIZE.width }}/{{ JOURNAL_LOGO_AVERAGE_SIZE.height }}"
+                width="{{ JOURNAL_LOGO_AVERAGE_SIZE.width }}"
+                height="{{ JOURNAL_LOGO_AVERAGE_SIZE.height }}"
+                class="lazyload img-responsive"
+                alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}"
+              />
             </div>
             {% endif %}
           </a>
