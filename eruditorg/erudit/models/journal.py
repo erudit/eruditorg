@@ -1,3 +1,4 @@
+import copy
 import datetime as dt
 import dateutil.relativedelta as dr
 from hashlib import md5
@@ -20,6 +21,8 @@ from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
+from eulfedora.util import RequestFailed
+from PIL import Image
 from urllib.parse import urlparse
 
 from ..abstract_models import FedoraDated
@@ -377,7 +380,18 @@ class Journal(FedoraMixin, FedoraDated):
     @cached_property
     def has_logo(self):
         """ Returns a boolean indicating if the considered journal has a logo. """
-        return self.has_non_empty_image_datastream('logo')
+        if self.fedora_object is None:
+            return False
+        try:
+            if self._should_use_cache():
+                content = get_cached_datastream_content(self.fedora_object, 'logo')
+            else:
+                content = getattr(self.fedora_object, 'logo').content
+        except RequestFailed:
+            return False
+        if not content:
+            return False
+        return self.fedora_object.logo.exists
 
 
 class Issue(FedoraMixin, FedoraDated):
@@ -646,7 +660,25 @@ class Issue(FedoraMixin, FedoraDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
-        return self.has_non_empty_image_datastream('coverpage')
+        if self.fedora_object is None:
+            return False
+        try:
+            if self._should_use_cache():
+                content = get_cached_datastream_content(self.fedora_object, 'coverpage')
+            else:
+                content = getattr(self.fedora_object, 'coverpage').content
+        except RequestFailed:
+            return False
+        if not content:
+            return False
+
+        # Checks the content of the image in order to detect if it contains only one single color.
+        im = Image.open(copy.copy(content))
+        extrema = im.convert('L').getextrema()
+        empty_coverpage = (extrema == (0, 0)) or (extrema == (255, 255))
+        im.close()
+
+        return not empty_coverpage
 
     @property
     def prepublication_ticket(self):
