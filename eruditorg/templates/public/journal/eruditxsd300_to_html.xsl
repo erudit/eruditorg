@@ -1187,9 +1187,9 @@
     <xsl:variable name="imgWidth" select="$vars[@n = $imgPlGrWidth]/@value"/>
     <xsl:variable name="imgHeight" select="$vars[@n = $imgPlGrHeight]/@value"/>
     <a href="{{ media_url_prefix }}{$imgPlGr}" class="lightbox {name()}"  title="{normalize-space(../legende/titre)}">
-      <!-- The image's src is a transparant grey pixel placeholder. -->
+      {# The image's src is a transparent pixel placeholder. #}
       <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII="
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
         data-srcset="{{ media_url_prefix }}{$imgPlGr} {$imgWidth}w"
         data-aspectratio="{$imgWidth}/{$imgHeight}"
         width="{$imgWidth}"
@@ -1501,9 +1501,9 @@
     <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:element name="img">
-      <!-- The image's src is a transparant grey pixel placeholder. -->
+      {# The image's src is a transparent pixel placeholder. #}
       <xsl:attribute name="src">
-        <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=</xsl:text>
+        <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="data-srcset">
         <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/><xsl:text> </xsl:text><xsl:value-of select="@dimx"/><xsl:text>w</xsl:text>

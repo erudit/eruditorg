@@ -1314,7 +1314,7 @@ class TestArticleDetailView:
                       '<img alt="" class="lazyload img-responsive" data-aspectratio="/" ' \
                       'data-srcset="/fr/revues/journal/2000-issue/article/media/ w" height="" ' \
                       'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAA' \
-                      'AC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" width=""/></a></div>\n' \
+                      'AC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width=""/></a></div>\n' \
                       '<div class="figure-legende-notes-source"><cite class="source">Avec ' \
                       'l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © ' \
                       '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
@@ -1324,7 +1324,7 @@ class TestArticleDetailView:
                       '<img alt="" class="lazyload img-responsive" data-aspectratio="/" ' \
                       'data-srcset="/fr/revues/journal/2000-issue/article/media/ w" height="" ' \
                       'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAA' \
-                      'AC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" width=""/></a></div>\n' \
+                      'AC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width=""/></a></div>\n' \
                       '<div class="figure-legende-notes-source"><cite class="source">Avec ' \
                       'l’aimable autorisation de l’artiste et kamel mennour, Paris/London. © ' \
                       '<em>ADAGP Mohamed Bourouissa</em></cite></div>\n</div></figure>'
@@ -2121,19 +2121,19 @@ class TestArticleDetailView:
         html = Client().get(url).content.decode()
         # No unwanted extra spaces in addition of wanted non-breaking spaces inside quotes.
         assert '«\xa0<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwC' \
-               'AAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" ' \
+               'AAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ' \
                'data-srcset="/fr/revues/journal/2020-issue/article/media/2127962n.jpg 16w" ' \
                'data-aspectratio="0.941176470588235" width="16" height="17" class="lazyload" ' \
                'id="im10" alt="forme: forme pleine grandeur">\xa0U+1F469 woman\xa0»' in html
         # No unwanted extra spaces inside parentheses.
         assert '(<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAA' \
-               'C0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" ' \
+               'C0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ' \
                'data-srcset="/fr/revues/journal/2020-issue/article/media/2127980n.jpg 17w" ' \
                'data-aspectratio="1.307692307692308" width="17" height="13" class="lazyload" ' \
                'id="im34" alt="forme: forme pleine grandeur">)' in html
         # No unwanted extra spaces after hashtag.
         assert '#<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAA' \
-               'C0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=" ' \
+               'C0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" ' \
                'data-srcset="/fr/revues/journal/2020-issue/article/media/2127981n.jpg 32w" ' \
                'data-aspectratio="1.684210526315789" width="32" height="19" class="lazyload" ' \
                'id="im35" alt="forme: forme pleine grandeur">' in html
