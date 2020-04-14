@@ -101,7 +101,15 @@
       </div>
       {% if book.cover %}
       <div class="col-xs-3">
-        <img src="{{ book.cover.url }}" alt="" class="img-responsive lightbox doc-head__img"/>
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+          data-srcset="{{ book.cover.url }} {{ book.cover.width }}w"
+          data-aspectratio="{{ book.cover.width }}/{{ book.cover.height }}"
+          width="{{ book.cover.width }}"
+          height="{{ book.cover.height }}"
+          class="lazyload img-responsive lightbox doc-head__img"
+          alt="{% trans 'Couverture de' %} {{ book.title }}"
+        />
       </div>
       {% endif %}
     </div>
