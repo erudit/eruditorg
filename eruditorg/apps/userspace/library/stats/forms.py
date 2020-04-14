@@ -1,6 +1,6 @@
 import datetime as dt
 from django import forms
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from apps.userspace.library.shortcuts import get_last_year_of_subscription
 
 current_year = dt.datetime.now().year
@@ -11,8 +11,20 @@ FORMAT_CHOICES = [
     ('html', 'HTML'),
 ]
 
-MONTH_CHOICES = [('', '')] + [
-    (month, _(dt.date(2000, month, 1).strftime("%B"))) for month in range(1, 13)
+MONTH_CHOICES = [
+    ('', ''),
+    (1, _('janvier')),
+    (2, _('février')),
+    (3, _('mars')),
+    (4, _('avril')),
+    (5, _('mai')),
+    (6, _('juin')),
+    (7, _('juillet')),
+    (8, _('août')),
+    (9, _('septembre')),
+    (10, _('octobre')),
+    (11, _('novembre')),
+    (12, _('décembre')),
 ]
 
 
