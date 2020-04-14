@@ -12,6 +12,10 @@ export function LoginFormValidation() {
       password: {
         required: true
       }
+    },
+    messages: {
+      username: gettext("Ce champ est obligatoire."),
+      password: gettext("Ce champ est obligatoire."),
     }
   });
 }
