@@ -140,11 +140,29 @@
           <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
             {% if article.issue.has_coverpage %}
             <div class="doc-head__img coverpage">
-              <img src="{% issue_coverpage_url article.issue %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
+              {# The image's src is a transparent pixel placeholder. #}
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                data-srcset="{% issue_coverpage_url article.issue %} {{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}w"
+                data-aspectratio="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}/{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
+                width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
+                height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
+                class="lazyload img-responsive"
+                alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}"
+              />
             </div>
             {% else %}
             <div class="doc-head__img logo">
-              <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
+              {# The image's src is a transparent pixel placeholder. #}
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                data-srcset="{% journal_logo_url article.issue.journal %} {{ JOURNAL_LOGO_AVERAGE_SIZE.width }}w"
+                data-aspectratio="{{ JOURNAL_LOGO_AVERAGE_SIZE.width }}/{{ JOURNAL_LOGO_AVERAGE_SIZE.height }}"
+                width="{{ JOURNAL_LOGO_AVERAGE_SIZE.width }}"
+                height="{{ JOURNAL_LOGO_AVERAGE_SIZE.height }}"
+                class="lazyload img-responsive"
+                alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}"
+              />
             </div>
             {% endif %}
           </a>
@@ -1187,9 +1205,9 @@
     <xsl:variable name="imgWidth" select="$vars[@n = $imgPlGrWidth]/@value"/>
     <xsl:variable name="imgHeight" select="$vars[@n = $imgPlGrHeight]/@value"/>
     <a href="{{ media_url_prefix }}{$imgPlGr}" class="lightbox {name()}"  title="{normalize-space(../legende/titre)}">
-      <!-- The image's src is a transparant grey pixel placeholder. -->
+      {# The image's src is a transparent pixel placeholder. #}
       <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII="
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
         data-srcset="{{ media_url_prefix }}{$imgPlGr} {$imgWidth}w"
         data-aspectratio="{$imgWidth}/{$imgHeight}"
         width="{$imgWidth}"
@@ -1501,9 +1519,9 @@
     <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:element name="img">
-      <!-- The image's src is a transparant grey pixel placeholder. -->
+      {# The image's src is a transparent pixel placeholder. #}
       <xsl:attribute name="src">
-        <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII=</xsl:text>
+        <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=</xsl:text>
       </xsl:attribute>
       <xsl:attribute name="data-srcset">
         <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/><xsl:text> </xsl:text><xsl:value-of select="@dimx"/><xsl:text>w</xsl:text>

@@ -102,7 +102,14 @@
             {% if book.cover %}
             <div class="row">
               <div class="col-sm-10">
-                <img src="{{ book.cover.url }}" alt="Couverture" width="75px" class="img-responsive card__figure"/>
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                  data-srcset="{{ book.cover.url }} 75w"
+                  data-aspectratio="{{ book.cover.width }}/{{ book.cover.height }}"
+                  width="75"
+                  class="lazyload img-responsive card__figure"
+                  alt="{% trans 'Couverture de' %} {{ book.title }}"
+                />
               </div>
             </div>
             {% endif %}

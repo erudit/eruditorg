@@ -144,7 +144,15 @@
       {% if book.cover %}
       <div class="sidebar-block">
         <h2>{% trans "Couverture" %}</h2>
-        <img src="{{ book.cover.url }}" alt="Couverture de {{ book.title }}" class="img-responsive"/>
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+          data-srcset="{{ book.cover.url }} {{ book.cover.width }}w"
+          data-aspectratio="{{ book.cover.width }}/{{ book.cover.height }}"
+          width="{{ book.cover.width }}"
+          height="{{ book.cover.height }}"
+          class="lazyload img-responsive"
+          alt="{% trans 'Couverture de' %} {{ book.title }}"
+        />
       </div>
       {% endif %}
 

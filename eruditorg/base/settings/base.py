@@ -534,3 +534,13 @@ REDIS_PORT = env('REDIS_PORT')
 REDIS_INDEX = env('REDIS_INDEX')
 
 SESSION_ENGINE = env('SESSION_ENGINE')
+
+# Help for lazyloading issue coverpages & journal logos.
+ISSUE_COVERPAGE_AVERAGE_SIZE = {
+    'width': 135,
+    'height': 200,
+}
+JOURNAL_LOGO_AVERAGE_SIZE = {
+    'width': 65,
+    'height': 25,
+}

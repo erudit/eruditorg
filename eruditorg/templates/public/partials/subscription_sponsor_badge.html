@@ -7,9 +7,9 @@
   <div class="text-center subscription-sponsor">
     <p>{% trans "Votre accès est offert par" %}</p>
     {% if organisation.badge %}
-      <!-- The image's src is a transparant grey pixel placeholder. -->
+      {# The image's src is a transparent pixel placeholder. #}
       <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII="
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
         data-srcset="{{ organisation.badge.url }} {{ organisation.badge.width }}w"
         data-aspectratio="{{ organisation.badge.width }}/{{ organisation.badge.height }}"
         width="{{ organisation.badge.width }}"

@@ -1,9 +1,9 @@
 {% if active_campaign %}
 <aside class="campaign-sidebar">
   <a href="{{ active_campaign.url|safe }}" target="_blank">
-    <!-- The image's src is a transparant grey pixel placeholder. -->
+    {# The image's src is a transparent pixel placeholder. #}
     <img
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8UA8AAmUBcaVexNkAAAAASUVORK5CYII="
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
       data-srcset="{{ active_campaign.image.url }} {{ active_campaign.image.width }}w"
       data-aspectratio="{{ active_campaign.image.width }}/{{ active_campaign.image.height }}"
       width="{{ active_campaign.image.width }}"

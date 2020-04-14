@@ -55,7 +55,15 @@
       <div class="col-md-2 col-md-offset-1 col-sm-3 col-xs-4">
         {% if repository.logo %}
         <span class="collection-logo">
-          <img src="{{ repository.logo.url }}" alt="{% trans 'Logo pour'%} {{ repository.name }}" class="img-responsive"/>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            data-srcset="{{ repository.logo.url }} {{ repository.logo.width }}w"
+            data-aspectratio="{{ repository.logo.width }}/{{ repository.logo.height }}"
+            width="{{ repository.logo.width }}"
+            height="{{ repository.logo.height }}"
+            class="lazyload img-responsive"
+            alt="{% trans 'Logo pour'%} {{ repository.name }}"
+          />
         </span>
         {% endif %}
       </div>

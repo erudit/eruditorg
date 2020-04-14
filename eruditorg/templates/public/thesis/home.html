@@ -87,7 +87,16 @@
         <a href="{% url 'public:thesis:collection_home' summary.repository.code %}" class="collection-link">
           {% if summary.repository.logo %}
           <span class="collection-logo">
-            <img src="{{ summary.repository.logo.url }}" alt="{% blocktrans with summary.repository.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+              data-srcset="{{ summary.repository.logo.url }} {{ summary.repository.logo.width }}w"
+              data-aspectratio="{{ summary.repository.logo.width }}/{{ summary.repository.logo.height }}"
+              width="{{ summary.repository.logo.width }}"
+              height="{{ summary.repository.logo.height }}"
+              class="lazyload img-responsive"
+              title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}"
+              alt="{% blocktrans with summary.repository.name as name %}Logo {{ name }}{% endblocktrans %}"
+            />
           </span>
           {% endif %}
         </a>
