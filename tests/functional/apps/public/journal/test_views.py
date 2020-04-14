@@ -243,6 +243,7 @@ class TestJournalListView:
 
     @pytest.mark.parametrize('logo, expected_logo_display', [
         ('logo.png', True),
+        (False, False),
     ])
     def test_do_not_display_non_existent_journal_logo_on_list_per_disciplines(
         self, logo, expected_logo_display,

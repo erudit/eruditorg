@@ -151,7 +151,7 @@
                 alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}"
               />
             </div>
-            {% else %}
+            {% elif article.issue.journal.has_logo %}
             <div class="doc-head__img logo">
               {# The image's src is a transparent pixel placeholder. #}
               <img
