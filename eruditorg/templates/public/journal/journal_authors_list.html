@@ -12,7 +12,9 @@
 <meta property="og:title" content="{% trans 'Index des auteurs' %} – {{ journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
+{% if journal.has_logo %}
 <meta property="og:image" content="https://{{ request.get_host }}{% journal_logo_url journal %}">
+{% endif %}
 <meta property="og:description" content="{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
@@ -21,7 +23,9 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{% trans 'Index des auteurs' %} – {{ journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.name|safe }}">
+{% if journal.has_logo %}
 <meta name="twitter:image" content="https://{{ request.get_host }}{% journal_logo_url journal %}">
+{% endif %}
 <meta name="twitter:description" content="{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}
 

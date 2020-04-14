@@ -12,7 +12,9 @@
 <meta property="og:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
+{% if journal.has_logo %}
 <meta property="og:image" content="{% journal_logo_url journal %}">
+{% endif %}
 <meta property="og:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 
 <!-- Twitter -->
@@ -21,7 +23,9 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ main_title.title|safe }}">
+{% if journal.has_logo %}
 <meta name="twitter:image" content="{% journal_logo_url journal %}">
+{% endif %}
 <meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 {% endblock meta_tags %}
 

@@ -112,7 +112,7 @@
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
             <img src="{% issue_coverpage_url issue %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive  home-issues__img">
           </a>
-          {% else %}
+          {% elif issue.journal.has_logo %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
             <img src="{% journal_logo_url issue.journal %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
           </a>
