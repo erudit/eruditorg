@@ -1,12 +1,15 @@
+import copy
 import structlog
 
 from django.conf import settings
 from django.core.cache import cache
 from django.utils.functional import cached_property
+from PIL import Image
 from sentry_sdk import configure_scope
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
+from .cache import get_cached_datastream_content
 from ..conf import settings as erudit_settings
 from .repository import api
 from erudit.cache import cache_set
@@ -152,3 +155,27 @@ class FedoraMixin:
 
     def fedora_is_loaded(self):
         return hasattr(self, '_erudit_object') and self._erudit_object is not None
+
+    def has_non_empty_image_datastream(self, datastream_name):
+        """ Returns True if the considered fedora object has a non empty image datastream. """
+        if self.fedora_object is None:
+            return False
+
+        try:
+            if self._should_use_cache():
+                content = get_cached_datastream_content(self.fedora_object, datastream_name)
+            else:
+                content = getattr(self.fedora_object, datastream_name).content
+        except RequestFailed:
+            return False
+
+        if not content:
+            return False
+
+        # Checks the content of the image in order to detect if it contains only one single color.
+        im = Image.open(copy.copy(content))
+        extrema = im.convert('L').getextrema()
+        empty_image = (extrema == (0, 0)) or (extrema == (255, 255))
+        im.close()
+
+        return not empty_image

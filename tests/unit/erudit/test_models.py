@@ -172,6 +172,7 @@ class TestJournal:
 
     @pytest.mark.parametrize('logo, expected_has_logo', [
         ('logo.png', True),
+        ('logo_empty.png', False),
         (False, False),
     ])
     def test_knows_if_it_has_a_logo(self, logo, expected_has_logo):
@@ -356,7 +357,7 @@ class TestIssue:
         assert not issue.has_coverpage
 
     @pytest.mark.parametrize('is_published', (True, False))
-    @unittest.mock.patch('erudit.models.journal.get_cached_datastream_content')
+    @unittest.mock.patch('erudit.fedora.modelmixins.get_cached_datastream_content')
     def test_has_coverpage_do_not_use_cache_for_unpublished_issue(
         self, mock_get_cached_datastream_content, is_published,
     ):
