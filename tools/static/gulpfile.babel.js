@@ -13,14 +13,21 @@ import modernizr from 'gulp-modernizr';
 import rename from 'gulp-rename';
 import sass from 'gulp-sass';
 import uglify from 'gulp-uglify';
-import gutil from 'gulp-util';
 import path from 'path';
 import named from 'vinyl-named';
 import spritesmith from 'gulp.spritesmith';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackStream from 'webpack-stream';
+import minimist from 'minimist';
+import through2 from 'through2';
+import PluginError from 'plugin-error';
+import log from 'fancy-log';
 
+
+var args = minimist(process.argv.slice(2), {
+  boolean: ['production']
+})
 
 /* Get env variables */
 env('.env');
@@ -29,7 +36,7 @@ env('.env');
 const root_dir = '../../';
 const static_dir = root_dir + 'eruditorg/static/';
 const templates_dirs = root_dir + 'eruditorg/templates/';
-const PROD_ENV = gutil.env.production;
+const PROD_ENV = args.production;
 
 /* DIRS */
 var build_dir = PROD_ENV ? static_dir + 'build' : static_dir + 'build_dev';
@@ -167,7 +174,7 @@ gulp.task('build-modernizr', function(){
       "prefixedCSSValue"
       ]
     }))
-    .pipe(PROD_ENV ? uglify() : gutil.noop())
+    .pipe(PROD_ENV ? uglify() : through2.obj())
     .pipe(gulp.dest(build_dir + '/js'));
 });
 
@@ -301,8 +308,8 @@ gulp.task('webpack-dev-server', function(callback) {
     inline: true,
     headers: { "Access-Control-Allow-Origin": "*" },
   }).listen(8080, 'localhost', function(err) {
-    if(err) throw new gutil.PluginError('webpack-dev-server', err);
-    gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
+    if(err) throw new PluginError('webpack-dev-server', err);
+    log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
   });
 });
 
