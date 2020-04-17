@@ -256,12 +256,7 @@
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">
-      <h3>
-        {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
-        <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues">
-          <small>({{ back_issues|length }} {% trans 'numéros' %})</small>
-        </a>
-      </h3>
+      <h3>{% trans "Anciens numéros de" %} <em>{{ journal.name }}</em></h3>
     </header>
     <div class="row">
       {% for back_issue in back_issues %}
