@@ -88,6 +88,11 @@ env = environ.Env(
     REDIS_INDEX=(int, None),
 
     SESSION_ENGINE=(str, 'django.contrib.sessions.backends.db'),
+    POST_OFFICE=({
+        'cast': {
+            'OVERRIDE_RECIPIENTS': list,
+        },
+    }, {}),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 
@@ -540,3 +545,6 @@ ISSUE_COVERPAGE_AVERAGE_SIZE = {
     'width': 135,
     'height': 200,
 }
+
+# Post Office
+POST_OFFICE = env('POST_OFFICE')
