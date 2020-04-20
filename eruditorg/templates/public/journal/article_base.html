@@ -18,9 +18,9 @@
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if article.issue.has_coverpage %}
-<meta property="og:image" content="https://{{ request.get_host }}{% issue_coverpage_url article.issue %}">
+<meta property="og:image" content="{% issue_coverpage_url article.issue %}">
 {% elif article.issue.journal.has_logo %}
-<meta property="og:image" content="https://{{ request.get_host }}{% journal_logo_url article.issue.journal %}">
+<meta property="og:image" content="{% journal_logo_url article.issue.journal %}">
 {% endif %}
 <meta property="og:description" content="{% blocktrans with journal=article.issue.journal.name|safe %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
 
@@ -31,9 +31,9 @@
 <meta name="twitter:title" content="{{ citation_title_metadata }} – {{ article.issue.journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ article.issue.journal.name|safe }}">
 {% if article.issue.has_coverpage %}
-<meta name="twitter:image" content="https://{{ request.get_host }}{% issue_coverpage_url article.issue %}">
+<meta name="twitter:image" content="{% issue_coverpage_url article.issue %}">
 {% elif article.issue.journal.has_logo %}
-<meta name="twitter:image" content="https://{{ request.get_host }}{% journal_logo_url article.issue.journal %}">
+<meta name="twitter:image" content="{% journal_logo_url article.issue.journal %}">
 {% endif %}
 <meta name="twitter:description" content="{% blocktrans with journal=article.issue.journal.name|safe %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
 {% if not article.issue.is_published %}

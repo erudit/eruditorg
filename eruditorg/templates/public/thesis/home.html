@@ -12,7 +12,7 @@
 <meta property="og:title" content="{% trans 'Thèses et mémoires' %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-<meta property="og:image" content="https://{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+<meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
 <meta property="og:description" content="{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
@@ -20,7 +20,7 @@
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
-<meta name="twitter:image" content="https://{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+<meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
 <meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
 <meta name="twitter:description" content="{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}

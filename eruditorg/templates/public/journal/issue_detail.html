@@ -12,9 +12,9 @@
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if issue.has_coverpage %}
-<meta property="og:image" content="https://{{ request.get_host }}{% issue_coverpage_url issue %}">
+<meta property="og:image" content="{% issue_coverpage_url issue %}">
 {% elif issue.journal.has_logo %}
-<meta property="og:image" content="https://{{ request.get_host }}{% journal_logo_url issue.journal %}">
+<meta property="og:image" content="{% journal_logo_url issue.journal %}">
 {% endif %}
 <meta property="og:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 
@@ -25,9 +25,9 @@
 <meta name="twitter:title" content="{% if issue.title %}{{ issue.title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% if issue.has_coverpage %}{% trans 'Couverture pour ce numéro de la revue' %}{% else %}{% trans 'Logo pour' %}{% endif %} {{ journal.name|safe }}">
 {% if issue.has_coverpage %}
-<meta name="twitter:image" content="https://{{ request.get_host }}{% issue_coverpage_url issue %}">
+<meta name="twitter:image" content="{% issue_coverpage_url issue %}">
 {% elif issue.journal.has_logo %}
-<meta name="twitter:image" content="https://{{ request.get_host }}{{% journal_logo_url issue.journal %}">
+<meta name="twitter:image" content="{% journal_logo_url issue.journal %}">
 {% endif %}
 <meta name="twitter:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 {% if not issue.is_published %}
