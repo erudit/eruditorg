@@ -61,7 +61,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Érudit">
     <meta property="og:locale" content="{{ language_code }}_CA">
-    <meta property="og:image" content="https://{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+    <meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
     <meta property="og:description" content="{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}">
 
     <!-- Twitter -->
@@ -69,7 +69,7 @@
     <meta name="twitter:site" content="@eruditorg">
     <meta name="twitter:title" content="{% trans 'Cultivez votre savoir' %}">
     <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-    <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+    <meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
     <meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
     <meta name="twitter:description" content="{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}">
     {% endblock meta_tags %}
@@ -81,7 +81,7 @@
       "@type" : "Organization",
       "name" : "Érudit",
       "url" : "{{ request.scheme }}://{{ request.site.domain }}",
-      "logo" : "{{ request.scheme }}://{{ request.site.domain }}{% static 'img/logo-erudit.png' %}",
+      "logo" : "{% static 'img/logo-erudit.png' %}",
       "sameAs" : [
         "https://www.facebook.com/%C3%89rudit-141469165320/",
         "https://twitter.com/eruditorg",
