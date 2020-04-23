@@ -37,7 +37,7 @@ ADVANCED_SEARCH_FIELDS = (
 )
 
 AVAILABILITY_CHOICES = (
-    ('', ''),
+    ('', '-'),
     ((dt.date.today() - dt.timedelta(days=1)), _('1 jour')),
     ((dt.date.today() - dt.timedelta(days=7)), _('1 semaine')),
     ((dt.date.today() - dt.timedelta(days=14)), _('2 semaines')),
@@ -76,7 +76,7 @@ ARTICLE_TYPES_CHOICES = (
 
 def get_years_range(
         year_start=1900, year_end=(dt.date.today().year + 1), reverse=False, add_empty_choice=False,
-        empty_string=''):
+        empty_string='-'):
     if not reverse:
         years_range = [(str(year), str(year)) for year in range(year_start, year_end)]
     else:

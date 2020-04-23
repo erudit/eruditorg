@@ -658,7 +658,7 @@ class TestRenderArticleTemplateTag:
 
         # Check
         assert ret is not None
-        assert ret.startswith('<div xmlns:v="variables-node" class="article-wrapper">')
+        assert ret.startswith('<div class="article-wrapper">')
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     def test_can_transform_article_xml_to_html_when_pdf_exists(

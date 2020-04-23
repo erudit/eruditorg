@@ -85,7 +85,7 @@
 
 {% block content %}
 {% cache SHORT_TTL "chapter_detail_content" chapter.id LANGUAGE_CODE %}
-<main class="container" id="article-{{ article.id }}" data-document-id="{{ article.solr_id }}" role="main">
+<main class="container" id="article-{{ article.id }}" data-document-id="{{ article.solr_id }}">
   <header class="main-header doc-head">
     <div class="row">
       <div class="col-xs-9">
@@ -183,7 +183,7 @@
     <h2 class="sr-only">{% trans 'Texte intégral en PDF' %}</h2>
     <iframe
       src="{% url 'public:book:chapter_pdf' collection_slug=book.collection.slug slug=book.slug chapter_id=chapter.id %}"
-      style="width: 100%; height: 95vh;" frameborder="0">
+      style="width: 100%; height: 95vh; border: 0;">
     </iframe>
   </section>
 

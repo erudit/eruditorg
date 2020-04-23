@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/issue_reader.css' %}"/>
-    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script src="{% url 'javascript-catalog' %}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/issue_reader.js' %}"></script>
+    <script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/issue_reader.js' %}"></script>
   </head>
   <body
     data-num-leafs="{{ num_leafs }}"

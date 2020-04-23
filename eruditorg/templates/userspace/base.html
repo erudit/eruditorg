@@ -47,5 +47,5 @@
 
 {% block scripts %}
 {{ block.super }}
-<script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/userspace.js' %}"></script>
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/userspace.js' %}"></script>
 {% endblock scripts %}

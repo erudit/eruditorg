@@ -39,7 +39,7 @@
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 {% cache LONG_TTL "public" "home" LANGUAGE_CODE "v1" %}
-<main role="main">
+<main>
   <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
   {# SEARCH #}
   <header class="home-header">
@@ -99,9 +99,9 @@
               <span class="home-issues__theme">{% blocktrans with count=issues|length %}{{ count }} numéros rétrospectifs{% endblocktrans %}</span>
             </a>
             <br/>
-            <div class="home-issues__journal">
+            <span class="home-issues__journal">
               {% trans "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal.name }}</a>
-            </div>
+            </span>
           </h3>
         </li>
         {# Non-grouped current issues #}
@@ -123,9 +123,9 @@
               {% if issue.volume_title %}<span class="home-issues__volume">{{ issue.volume_title }}</span>{% endif %}
             </a>
             <br/>
-            <div class="home-issues__journal">
+            <span class="home-issues__journal">
               {% trans "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal.name }}</a>
-            </div>
+            </span>
           </h3>
         </li>
         {% endif %}

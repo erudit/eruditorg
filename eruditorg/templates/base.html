@@ -139,7 +139,7 @@
 
         {# Hamburger menu on mobile / tablet viewports #}
         <div class="pull-right nav-menu-trigger">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-menu" aria-label="{% trans 'Basculer le menu principal' %}">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-nav" aria-label="{% trans 'Basculer le menu principal' %}">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -147,7 +147,7 @@
         </div>
 
         {# Menu items #}
-        <nav class="pull-right nav-menu" role="navigation" aria-expanded="false" aria-label="{% trans 'Menu principal' %}">
+        <nav class="pull-right nav-menu" aria-expanded="false" aria-label="{% trans 'Menu principal' %}">
           <h2 class="sr-only">{% trans 'Menu principal' %}</h2>
           <ul id="main-nav" class="navbar-nav collapse navbar-collapse nav-menu__list">
             {% block mainnav %}
@@ -340,7 +340,7 @@
     {% block footer %}
     <footer id="site-footer">
       <div class="text-center">
-        <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top"><span class="arrow arrow-bar is-top"></span><a>
+        <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top"><span class="arrow arrow-bar is-top"></span></a>
       </div>
 
       <div id="footer-nav" class="container">
@@ -511,10 +511,10 @@
     {% endblock footer %}
 
     <script src="{% static 'js/modernizr.js' %}"></script>
-    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
-    <script type="text/javascript" src="{% url 'js_reverse' %}"></script>
-    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <script src="{% url 'javascript-catalog' %}"></script>
+    <script src="{% url 'js_reverse' %}"></script>
+    <script>(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <script>(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
     <script>
     window.addEventListener("load", function(){
@@ -542,7 +542,7 @@
     {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     {% if not WEBPACK_DEV_SERVER_URL %}
-    <script type="text/javascript" src="{% static 'js/public-userspace.js' %}"></script>
+    <script src="{% static 'js/public-userspace.js' %}"></script>
     {% endif %}
     {% endblock scripts %}
 

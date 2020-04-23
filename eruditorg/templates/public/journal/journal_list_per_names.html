@@ -82,7 +82,7 @@
                 <div id="div_id_{{ filter_form.special_open_access_opt_in.html_name }}" class="checkbox">
                   {{ filter_form.special_open_access_opt_in|add_class:'form-control' }}
                   <label for="{{ filter_form.special_open_access_opt_in.auto_id }}" class="control-label">
-                    {{ filter_form.special_open_access_opt_in.label }}&nbsp;<span class="erudicon erudicon-open-access" style="color: green;"></i>
+                    {{ filter_form.special_open_access_opt_in.label }}&nbsp;<span class="erudicon erudicon-open-access" style="color: green;"></span>
                   </label>
                   {% for error in filter_form.special_open_access_opt_in.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
