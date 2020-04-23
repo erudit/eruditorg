@@ -70,13 +70,13 @@
 {# The content_access_granted and LANGUAGE_CODE arguments are use to generate the cache key hash. #}
 {# The journal info's update time is used as the cache content version. #}
 {% cache FOREVER_TTL "public_journal_detail" journal.code content_access_granted LANGUAGE_CODE journal_info.updated %}
-<main role="main" class="col-sm-8 col-md-7">
+<main class="col-sm-8 col-md-7">
   <header class="main-header row">
     <div class="col-sm-12">
       {# Title #}
       <div class="row">
         <h1>
-          <div class="col-xs-10 col-sm-9">
+          <span class="col-xs-10 col-sm-9">
             <span class="journal-title">{{ main_title.title }}</span>
             {% if main_title.subtitle %}
             <span class="journal-subtitle">{{ main_title.subtitle }}</span>
@@ -87,9 +87,9 @@
             {% endif %}
             {% if title.subtitle and title.subtitle != main_title.subtitle %}<span class="journal-subtitle">{{ title.subtitle }}</span>{% endif %}
             {% endfor %}
-          </div>
+          </span>
           {# Peer review seal & access type #}
-          <div class="col-xs-2 col-sm-3 text-right">
+          <span class="col-xs-2 col-sm-3 text-right">
             {% if journal.type.code == 'S' %}
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
@@ -104,7 +104,7 @@
               <i class="erudicon erudicon-open-access" style="color: green;"></i>&nbsp;
             </span>
             {% endif %}
-          </div>
+          </span>
         </h1>
       </div>
       <div class="main-header__intro">

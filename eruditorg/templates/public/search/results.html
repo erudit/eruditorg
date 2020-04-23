@@ -18,7 +18,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<main role="main">
+<main>
   <div id="id_search_results_metadata" data-results-count="{{ results.pagination.count }}"></div>
 
   {# Header #}
@@ -152,9 +152,9 @@
         <section id="search-results" class="col-md-8 col-md-offset-1 search-results">
           <h2 class="sr-only">{% trans "Documents repérés" %}</h2>
           {% include "public/search/partials/results_pagination.html" %}
+          {% csrf_token %}
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
-            {% csrf_token %}
             {% for document in results.results %}
             <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.localidentifier }}" {% if document.localidentifier in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">

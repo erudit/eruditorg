@@ -38,7 +38,7 @@
             <div class="col-xs-5 col-md-6 col-md-offset-1 search-term">
               <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
                 <div class="controls">
-                  <label for="id_{{ qterm_field.html_name }}">{% trans 'Mots-clés' %}</label>
+                  <label for="id_{{ form.basic_search_term.html_name }}">{% trans 'Mots-clés' %}</label>
                   {{ form.basic_search_term|add_class:'form-control' }}
                   {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>

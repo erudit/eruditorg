@@ -19,14 +19,16 @@
             {% endfor %}
           </li>
         {% endif %}
-        {% include "public/journal/partials/issue_detail_section.html" %}
         </ol>
+        {% include "public/journal/partials/issue_detail_section.html" %}
       {% endwith %}
       </div>
     </section>
   {% else %}
+    <ol class="bib-records toc__section-{{ group.level }}">
     {% for article in group.objects %}
       {% include "public/journal/partials/issue_detail_article_item.html" %}
     {% endfor %}
+    </ol>
   {% endif %}
 {% endfor %}

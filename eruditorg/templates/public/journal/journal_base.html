@@ -117,7 +117,7 @@
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
             </span>
-            {% if journal.information.peer_review_process %}({{ journal.information.get_peer_review_process_display }}){% endif %}</dd>
+            {% if journal.information.peer_review_process %}({{ journal.information.get_peer_review_process_display }}){% endif %}
           </dd>
           {% if not journal.charges_apc %}
           <dt>{% trans "Frais de publication (<em>APC</em>)" %}</dt>
@@ -212,11 +212,11 @@
             {% plural %}
             Langues
             {% endblocktrans %}
+          </dt>
 
             {% for language in journal.information.languages.all %}
             <dd>{{ language }}</dd>
             {% endfor %}
-          </dt>
           {% endif %}
 
           {% if journal.disciplines.all|length > 0 %}
@@ -266,12 +266,12 @@
         <dl>
           {% if journal_info.email %}
           <dt>{% trans "Courriel général" %}</dt>
-          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name|urlencode }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
           {% endif %}
 
           {% if journal_info.subscription_email %}
           <dt>{% trans "Pour abonnements individuels" %}</dt>
-          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
+          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal.name|urlencode }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
           {% endif %}
 
           {% if journal_info.phone %}
@@ -286,7 +286,7 @@
       <section class="sidebar-block">
         <h2>{% trans 'Sur les réseaux sociaux' %}</h2>
         {% if journal_info.twitter_url %}
-        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js"></script>
         {% endif %}
         {% if journal_info.facebook_url %}
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>

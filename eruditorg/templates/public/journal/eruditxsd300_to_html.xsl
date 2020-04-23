@@ -1,5 +1,5 @@
 {% load adv_cache i18n public_journal_tags static waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
 
   <!--=========== VARIABLES & PARAMETERS ===========-->
@@ -25,14 +25,14 @@
   <xsl:variable name="uriStart">https://id.erudit.org/iderudit/</xsl:variable>
   <xsl:variable name="doiStart">https://doi.org/</xsl:variable>
 
-  <v:variables>
+  <v:variables xmlns:v="variables-node">
     {% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
-    <v:variable n="plgr-{{ imid }}" value="{{ infoimg.plgr }}" />
-    <v:variable n="width-{{ imid }}" value="{{ infoimg.width }}" />
-    <v:variable n="height-{{ imid }}" value="{{ infoimg.height }}" />
+    <v:variable n="plgr-{{ imid }}" value="{{ infoimg.plgr }}" xmlns:v="variables-node" />
+    <v:variable n="width-{{ imid }}" value="{{ infoimg.width }}" xmlns:v="variables-node" />
+    <v:variable n="height-{{ imid }}" value="{{ infoimg.height }}" xmlns:v="variables-node" />
     {% endfor %}
   </v:variables>
-  <xsl:variable name="vars" select="document('')//v:variables/v:variable" />
+  <xsl:variable name="vars" select="document('')//v:variables/v:variable" xmlns:v="variables-node" />
 
   <!-- Savante, culturelle, ... -->
   <xsl:param name="typecoll" />
@@ -57,13 +57,13 @@
               <xsl:apply-templates select="liminaire/grtitre/surtitreparal" mode="title"/>
             </p>
           </xsl:if>
+          {% if article.issue.embargoed and article.issue.journal.special_open_access_opt_in %}
           <h1 class="doc-head__title">
-            {% if article.issue.embargoed and article.issue.journal.special_open_access_opt_in %}
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cet article est temporairement disponible gratuitement.' %}" style="float: right;">
               &#160;<i class="erudicon erudicon-open-access" style="color: green;"></i>
             </span>
-            {% endif %}
           </h1>
+          {% endif %}
           <h1 class="doc-head__title">
             <xsl:apply-templates select="liminaire/grtitre/titre | liminaire/grtitre/sstitre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/titreparal | liminaire/grtitre/sstitreparal" mode="title"/>
@@ -102,11 +102,11 @@
                   <br/><br/>
                   {% if journal_info.subscription_email or journal_info.phone %}
                     {% blocktrans trimmed with journal=article.issue.journal.name email=journal_info.subscription_email phone=journal_info.phone %}
-                    Si vous souhaitez vous abonner à titre individuel, et/ou à la version papier, nous vous invitons à communiquer directement avec l’équipe de <em>{{ journal }}</em> à l’adresse <a href="mailto:{{ email }}?subject=Abonnement%20à%20la%20revue%20{{ journal }}">{{ email }}</a> ou par téléphone au {{ phone }}.
+                    Si vous souhaitez vous abonner à titre individuel, et/ou à la version papier, nous vous invitons à communiquer directement avec l’équipe de <em>{{ journal }}</em> à l’adresse <a href="mailto:{{ email }}?subject=Abonnement%20à%20la%20revue%20{{ journal|urlencode }}">{{ email }}</a> ou par téléphone au {{ phone }}.
                     {% endblocktrans %}
                   {% else %}
                     {% blocktrans trimmed with journal=article.issue.journal.name %}
-                    Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue%20{{ journal }} – Accès aux articles">client@erudit.org</a>.
+                    Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue%20{{ journal|urlencode }}%20–%20Accès%20aux%20articles">client@erudit.org</a>.
                     {% endblocktrans %}
                   {% endif %}
                   <strong>
@@ -174,7 +174,7 @@
         <div class="col-sm-6 doc-head__metadata">
           <xsl:apply-templates select="liminaire/erratum"/>
           <xsl:apply-templates select="admin/histpapier"/>
-          <p>{% trans "Diffusion numérique&#160;" %}: {{ article.issue.date_published }}
+          <p>{% trans "Diffusion numérique&#160;" %}: {{ article.issue.date_published }}</p>
           <dl class="mono-space idpublic">
             <dt>URI</dt>
             <dd>
@@ -200,7 +200,6 @@
               </dd>
             {% endif %}
           </dl>
-          </p>
         </div>
 
         <!-- journal metadata -->
@@ -212,7 +211,7 @@
             {% if article.issue.journal.type.code == 'S' and article.erudit_object.get_article_type == 'article' %}
             <xsl:text>&#160;</xsl:text>
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-              <i class="icon ion-ios-checkmark-circle" size="small"></i>
+              <i class="icon ion-ios-checkmark-circle"></i>
             </span>
             {% endif %}
           </p>
@@ -242,7 +241,7 @@
       <xsl:if test="//corps">
         <!-- article outline -->
         {% if article.publication_allowed %}
-        <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
+        <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
             <li>
@@ -440,7 +439,7 @@
           </section>
           {% elif article.localidentifier %}
           <section id="pdf">
-            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
+            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
             <div id="pdf-download" class="text-center alert-warning">
               <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% trans 'Télécharger' %}</a></p>
             </div>
@@ -455,7 +454,7 @@
           </section>
           {% elif can_display_first_pdf_page %}
           <section id="first-pdf-page">
-            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" width="100%" height="700px"></object>
+            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
           </section>
           {% endif %}
         {% endif %}

@@ -75,7 +75,7 @@
 {% endblock breadcrumb %}
 
 {% block inner_main %}
-<main role="main" class="col-sm-8 col-md-7">
+<main class="col-sm-8 col-md-7">
   <header class="main-header row">
     <div class="col-xs-12">
       <h1>
@@ -115,8 +115,8 @@
         {% endfor %}
       </ul>
     </nav>
+    <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
     <ul class="authors">
-      <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
       {% for articles in authors_dicts.values %}
         <li class="author-group">
           <h3 class="author-name">{{ articles.0.author }}</h3>

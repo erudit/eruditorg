@@ -69,7 +69,6 @@
     id="article-{{ article.localidentifier }}"
     data-document-id="{{ article.solr_id }}"
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
-    role="main"
   >
   {{ render_xml_content }}
 </main>
