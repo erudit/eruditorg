@@ -16,7 +16,7 @@ services:
   django:
     build:
       context: ..
-      dockerfile: ./dev/django/Dockerfile
+      dockerfile: ./compose/dev/django/Dockerfile
     image: eruditorg
     stdin_open: true
     tty: true

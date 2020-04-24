@@ -23,5 +23,5 @@ RUN HTTP_PROXY="" pip install PySocks
 RUN pip install -r requirements-dev.txt && pip install gunicorn
 COPY --from=client-builder /app/eruditorg/static/build/ /opt/eruditorg/eruditorg/static/build/
 EXPOSE 8000
-WORKDIR /opt/eruditorg/eruditorg
-CMD gunicorn -b 0.0.0.0:8000 --reload wsgi
+ENV DJANGO_SETTINGS_MODULE base.settings.dev
+CMD gunicorn -b 0.0.0.0:8000 --pythonpath /opt/eruditorg/eruditorg --reload eruditorg.wsgi
