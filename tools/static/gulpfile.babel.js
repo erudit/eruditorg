@@ -26,7 +26,9 @@ import log from 'fancy-log';
 
 
 var args = minimist(process.argv.slice(2), {
-  boolean: ['production']
+  boolean: ['production'],
+  string: ['host', 'port'],
+  default: {host: 'localhost', port: '8080'}
 })
 
 /* Get env variables */
@@ -37,6 +39,7 @@ const root_dir = '../../';
 const static_dir = root_dir + 'eruditorg/static/';
 const templates_dirs = root_dir + 'eruditorg/templates/';
 const PROD_ENV = args.production;
+const WEBPACK_URL = 'http://' + args.host + ':' + args.port;
 
 /* DIRS */
 var build_dir = PROD_ENV ? static_dir + 'build' : static_dir + 'build_dev';
@@ -246,19 +249,19 @@ gulp.task('webpack-dev-server', function(callback) {
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
-      'webpack-dev-server/client?http://localhost:8080',
+      'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
     userspace: [
       js_dir + '/userspace.js',
       sass_dir + '/userspace.scss',
-      'webpack-dev-server/client?http://localhost:8080',
+      'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
     issue_reader: [
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
-      'webpack-dev-server/client?http://localhost:8080',
+      'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
   };
@@ -287,7 +290,7 @@ gulp.task('webpack-dev-server', function(callback) {
   };
   devWebpackConfig.output = {
     path: path.resolve(__dirname, static_dir),
-    publicPath: 'http://localhost:8080/static/',
+    publicPath: WEBPACK_URL + '/static/',
     filename: 'js/[name].js'
   };
   devWebpackConfig.plugins = [
@@ -307,9 +310,9 @@ gulp.task('webpack-dev-server', function(callback) {
     hot: true,
     inline: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-  }).listen(8080, 'localhost', function(err) {
+  }).listen(args.port, args.host, function(err) {
     if(err) throw new PluginError('webpack-dev-server', err);
-    log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
+    log('[webpack-dev-server]', WEBPACK_URL + '/webpack-dev-server/index.html');
   });
 });
 

@@ -96,6 +96,7 @@ env = environ.Env(
             'OVERRIDE_RECIPIENTS': list,
         },
     }, {}),
+    WEBPACK_DEV_SERVER_URL=(str, ''),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 
@@ -559,3 +560,5 @@ ISSUE_COVERPAGE_AVERAGE_SIZE = {
 
 # Post Office
 POST_OFFICE = env('POST_OFFICE')
+
+WEBPACK_DEV_SERVER_URL = env('WEBPACK_DEV_SERVER_URL')

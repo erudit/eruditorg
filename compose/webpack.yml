@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  django:
+    environment:
+      - WEBPACK_DEV_SERVER_URL=http://0.0.0.0:8282
+  webpack:
+    build:
+      context: ..
+      dockerfile: ./compose/dev/django/Dockerfile
+      target: client-builder
+    image: webpack
+    volumes:
+      - ..:/app
+    command: npm run gulp -- webpack-dev-server --host 0.0.0.0 --port 8282
+    ports:
+      - 8282:8282
