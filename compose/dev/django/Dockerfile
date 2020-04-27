@@ -18,6 +18,7 @@ RUN apt-get update && \
 COPY . /opt/eruditorg
 
 WORKDIR /opt/eruditorg
+ENV TZ=America/New_York
 
 #TODO fix gunicorn
 RUN HTTP_PROXY="" pip install PySocks
