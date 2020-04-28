@@ -73,3 +73,4 @@ arabic-reshaper>=2.0
 python-bidi>=0.4
 structlog-sentry>=1.2
 gunicorn>=20.0.0
+whitenoise>=5.0.0

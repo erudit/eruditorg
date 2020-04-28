@@ -94,6 +94,7 @@ suds-py3==1.4.1.0         # via -r requirements.in
 tinycss2==1.0.2           # via -r requirements.in, cairosvg, cssselect2
 urllib3==1.25.9           # via requests, sentry-sdk
 webencodings==0.5.1       # via cssselect2, tinycss2
+whitenoise==5.0.1         # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
