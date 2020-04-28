@@ -12,4 +12,3 @@ tox.ini
 .tox
 .env
 .git
-compose

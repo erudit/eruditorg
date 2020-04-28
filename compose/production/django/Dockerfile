@@ -21,6 +21,7 @@ WORKDIR /opt/eruditorg
 #TODO fix gunicorn
 RUN pip install -r requirements.txt && pip install gunicorn
 COPY --from=client-builder /app/eruditorg/static/build/ /opt/eruditorg/eruditorg/static/build/
+COPY ./compose/production/django/start /start
+RUN chmod +x /start
 EXPOSE 8000
-WORKDIR /opt/eruditorg/eruditorg
-CMD gunicorn -b 0.0.0.0:8000 wsgi
+CMD /start
