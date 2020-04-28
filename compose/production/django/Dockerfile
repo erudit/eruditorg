@@ -3,6 +3,7 @@ FROM node:10 as client-builder
 WORKDIR /app
 COPY package* /app/
 COPY tools/static/* /app/tools/static/
+RUN echo {} > /app/tools/static/.env
 RUN npm ci && npm cache clean --force
 COPY .babelrc /app/.babelrc
 COPY eruditorg/static /app/eruditorg/static/
