@@ -22,7 +22,7 @@ from urllib.parse import urlparse
 from erudit.models.journal import Article
 from erudit.fedora.cache import get_cached_datastream_content
 
-log = structlog.getLogger(__name__)
+logger = structlog.get_logger()
 
 STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
 FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
@@ -185,29 +185,29 @@ def get_coverpage(article):
         ))
     if titles['main'].title:
         header.append(Paragraph(
-            clean(titles['main'].title, font_weight='bold'),
+            clean(titles['main'].title, article=article, font_weight='bold'),
             styles['h1'],
         ))
         if titles['main'].subtitle:
             header.append(Paragraph(
-                clean(titles['main'].subtitle, font_weight='bold'),
+                clean(titles['main'].subtitle, article=article, font_weight='bold'),
                 styles['h1_grey'],
             ))
         for title in titles['paral'] + titles['equivalent']:
             header.append(small_spacer)
             header.append(Paragraph(
-                clean(title.title, font_weight='bold'),
+                clean(title.title, article=article, font_weight='bold'),
                 styles['h1'] if title.subtitle else styles['h1_grey'],
             ))
             if title.subtitle:
                 header.append(Paragraph(
-                    clean(title.subtitle, font_weight='bold'),
+                    clean(title.subtitle, article=article, font_weight='bold'),
                     styles['h1_grey'],
                 ))
     for title in titles['reviewed_works']:
         header.append(small_spacer)
         header.append(Paragraph(
-            clean(title, font_weight='bold'),
+            clean(title, article=article, font_weight='bold'),
             styles['h1_grey'],
         ))
     header.append(large_spacer)
@@ -258,7 +258,7 @@ def get_coverpage(article):
     if themes:
         for index, theme in enumerate(themes[0]['names']):
             left_column.append(Paragraph(
-                clean(theme),
+                clean(theme, article=article),
                 styles['normal'] if index == 0 else styles['normal_grey'],
             ))
         left_column.append(small_spacer)
@@ -379,7 +379,7 @@ def get_coverpage(article):
     ))
     left_column.append(medium_spacer)
     left_column.append(Paragraph(
-        clean(article.cite_string_apa),
+        clean(article.cite_string_apa, article=article),
         styles['small'],
     ))
 
@@ -396,7 +396,7 @@ def get_coverpage(article):
         soup = BeautifulSoup(article.html_abstract, features='html.parser')
         for paragraph in soup.find_all('p'):
             right_column.append(Paragraph(
-                clean(paragraph),
+                clean(paragraph, article=article),
                 styles['small'],
             ))
             right_column.append(small_spacer)
@@ -595,7 +595,7 @@ def get_stylesheet(language):
     return stylesheet
 
 
-def clean(text, font_weight=None):
+def clean(text, article, font_weight=None):
     soup = text if isinstance(text, Tag) else BeautifulSoup(text, 'html.parser')
     # Replace <span class="barre"> by <strike>
     for node in soup.find_all('span', attrs={'class': 'barre'}):
@@ -629,6 +629,7 @@ def clean(text, font_weight=None):
     chars_not_in_noto = text_chars.difference(set(noto_chars.keys()))
     # If we have unsupported characters, check if they are supported by our other fonts.
     if chars_not_in_noto:
+        unsupported_characters = []
         for char in chars_not_in_noto:
             if char in cjk_chars:
                 char = chr(char)
@@ -638,13 +639,16 @@ def clean(text, font_weight=None):
                 char = chr(char)
                 text = text.replace(char, f'<span fontName="Symbola">{char}</span>')
             else:
-                # If no fonts support this character, log it.
-                log.warning(
-                    'Coverpage: Unsupported character.',
-                    character=chr(char),
-                    text=text,
-                )
+                unsupported_characters.append(chr(char))
 
+        if unsupported_characters:
+            # If some characters are not supported by our fonts, log them.
+            logger.error(
+                'Coverpage: Unsupported characters.',
+                article_pid=article.get_full_identifier(),
+                unsupported_characters=unsupported_characters,
+                text=text,
+            )
     return text
 
 
