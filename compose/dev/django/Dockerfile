@@ -1,4 +1,4 @@
-FROM node:10 as client-builder
+FROM node:10-buster as client-builder
 
 WORKDIR /app
 COPY package* /app/
@@ -9,7 +9,7 @@ COPY .babelrc /app/.babelrc
 COPY eruditorg/static /app/eruditorg/static/
 RUN npm run gulp -- build --production
 
-FROM python:3.6
+FROM python:3.6-slim-buster
 
 # TODO: add amiri-fonts
 RUN apt-get update && \
