@@ -13,7 +13,8 @@ FROM python:3.6-slim-buster
 
 # TODO: add amiri-fonts
 RUN apt-get update && \
-    apt-get install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev
+    apt-get install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY . /opt/eruditorg
 

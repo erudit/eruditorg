@@ -12,15 +12,20 @@ RUN npm run gulp -- build --production
 FROM python:3.6-slim-buster
 
 # TODO: add amiri-fonts
-RUN apt-get update && \
-    apt-get install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev
+WORKDIR /opt/eruditorg
+COPY requirements.txt /opt/eruditorg/requirements.txt
+
+RUN apt update && \
+    apt install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev && \
+    pip install wheel setuptools && \
+    pip install -r requirements.txt && \
+    apt purge -y --auto-remove git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev && \
+    apt install -y libmariadb3 && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /root/.cache
 
 COPY . /opt/eruditorg
 
-WORKDIR /opt/eruditorg
-
-#TODO fix gunicorn
-RUN pip install -r requirements.txt && pip install gunicorn
 COPY --from=client-builder /app/eruditorg/static/build/ /opt/eruditorg/eruditorg/static/build/
 COPY ./compose/production/django/start /start
 RUN chmod +x /start
