@@ -84,10 +84,20 @@ addMapping('NotoSerifCJKsc-Bold', 1, 0, 'NotoSerifCJKsc Bold')
 addMapping('NotoSerifCJKsc-Italic', 0, 1, 'NotoSerifCJKsc Italic')
 addMapping('NotoSerifCJKsc-BoldItalic', 1, 1, 'NotoSerifCJKsc Bold Italic')
 
-# Dicts of supported characters in NotoSerif, NotoSerifCJKsc & Symbola fonts.
+# NotoSansCanadianAboriginal font
+registerFont(TTFont(
+    'NotoSansCanadianAboriginal', FONTS_DIR + '/Noto/NotoSansCanadianAboriginal-Regular.ttf',
+))
+registerFontFamily('NotoSansCanadianAboriginal', normal='NotoSansCanadianAboriginal')
+addMapping('NotoSansCanadianAboriginal', 0, 0, 'NotoSansCanadianAboriginal')
+
+# Dicts of supported characters in our fonts.
 noto_chars = TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf').face.charWidths
 cjk_chars = TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf').face.charWidths
 symbola_chars = TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf').face.charWidths
+aboriginal_chars = TTFont(
+    'NotoSansCanadianAboriginal', FONTS_DIR + '/Noto/NotoSansCanadianAboriginal-Regular.ttf',
+).face.charWidths
 
 
 def get_coverpage(article):
@@ -639,6 +649,12 @@ def clean(text, article, font_weight=None):
             elif char in symbola_chars:
                 char = chr(char)
                 text = text.replace(char, f'<span fontName="Symbola">{char}</span>')
+            elif char in aboriginal_chars:
+                char = chr(char)
+                text = text.replace(
+                    char,
+                    f'<span fontName="NotoSansCanadianAboriginal">{char}</span>',
+                )
             else:
                 unsupported_characters.append(chr(char))
 
