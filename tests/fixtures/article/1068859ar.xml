@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="UTF-8"?><article xmlns="http://www.erudit.org/xsd/article" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1068859ar" typeart="article" lang="fr" ordseq="5" idref="th1"><admin><infoarticle><pagination><ppage/><dpage/></pagination></infoarticle><revue lang="fr" id="communiquer04272"><titrerev>Communiquer</titrerev><sstitrerev>Revue de communication sociale et publique</sstitrerev><titrerevabr>communiquer</titrerevabr><grdescripteur lang="fr"><descripteur typedesc="discipline">Sciences humaines et sociales</descripteur></grdescripteur><idissnnum>2368-9587</idissnnum><directeur><nompers><prenom>Benoît</prenom><nomfamille>Cordelier</nomfamille></nompers></directeur></revue><numero id="communiquer05245"><pub><annee>2020</annee></pub><pubnum><date typedate="publication">2020-05-01</date></pubnum><grtheme  id="th1"><theme>La communication à l'UQAM : « 50 ans d'audace »</theme></grtheme></numero><editeur><nomorg>Communiquer</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés ©<nomorg>Communiquer</nomorg>,
+              2020</droitsauteur></admin><liminaire><grtitre><surtitre/><titre>
+                    Communication pour la santé : construction d’un champ de
+                        recherche et d’intervention
+                </titre><titreparal lang="en">
+                    Communication for Health: Construction of a Research and
+                        Intervention Field
+                </titreparal></grtitre><grauteur><auteur id="au1"><nompers><prenom>Lise</prenom><nomfamille>Renaud</nomfamille></nompers><affiliation><alinea>Professeure émérite, Département de communication sociale et publique, Fondatrice de ComSanté, Université du Québec à Montréal, Canada</alinea></affiliation></auteur></grauteur><resume lang="fr"><alinea>
+                    Dans cet article, une définition du champ de recherche et
+                        d’intervention sur la communication pour la santé est d’abord proposée. Ce
+                        champ consiste en l’étude et l’utilisation de stratégies de communications
+                        interpersonnelles, organisationnelles et médiatiques visant à informer et à
+                        influencer les décisions individuelles et collectives propices à
+                        l’amélioration de la santé. La communication pour la santé est un processus
+                        transversal et spécifique. Puis, l’examen du contexte de développement de la
+                        communication pour la santé à l’Université du Québec à Montréal (UQAM) sera
+                        présenté selon deux axes : l’état de la recherche de ce champ et les
+                        intérêts de l’UQAM, plus particulièrement ceux du Département de
+                        communication sociale et publique. Enfin, l’évolution de la recherche
+                        réalisée au Centre de recherche sur la communication et la santé (ComSanté)
+                        avec les partenaires issus des milieux de santé et médiatiques est décrite.
+                        Le modèle intégrateur du processus de l’implantation d’une norme sociale
+                        grâce aux communications est par ailleurs proposé.
+                </alinea></resume><resume lang="en"><alinea>
+                    In this article, a definition of the field of research and
+                        intervention on communication for health is proposed. This field involves
+                        the study and use of interpersonal, organizational and media communication
+                        strategies to inform and influence individual and collective decisions that
+                        improve health. Communication for health is a transversal and specific
+                        process. Then, the examination of the context of the development of
+                        communication for health at Université du Québec à Montréal (UQAM) is
+                        presented around two axes: the state of research in this field and the
+                        interests of UQAM, more particularly of the Département de communication
+                        sociale et publique. Finally, the evolution of the research conducted at the
+                        Centre de recherche sur la communication et la santé (ComSanté) with
+                        partners from the health and media sectors is described. In addition, the
+                        integrative model of the process of implementing a social standard through
+                        communications is offered.
+                </alinea></resume><grmotcle lang="fr"><motcle>communication pour la santé</motcle><motcle>média</motcle><motcle>internet</motcle><motcle>communication organisationnelle</motcle><motcle>communication interpersonnelle et interculturelle</motcle></grmotcle><grmotcle lang="en"><motcle>health communication</motcle><motcle>media</motcle><motcle>internet</motcle><motcle>organizational communication</motcle><motcle>interpersonal and intercultural communication</motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><titre>
+                    Champ de recherche et d’intervention : communication pour la
+                        santé
+                </titre><para id="pa1"><no>1</no><alinea>
+                    Depuis plus de 30 ans, les recherches alliant la communication
+                        et la santé se sont multipliées, amenant le développement d’un champ de
+                        recherche et d’intervention appelé « communication pour la santé » (
+                    <marquage typemarq="italique">Health Communication</marquage>
+                    ). 
+                    Renaud et Rico de Sotelo (2007) définissent ce champ comme
+                        l’étude et l’utilisation de stratégies de communications interpersonnelles,
+                        organisationnelles et médiatiques visant à informer et à influencer les
+                        décisions individuelles et collectives propices à l’amélioration de la
+                        santé.
+                     
+                    La communication pour la santé s’exerce dans des contextes
+                        multiples et constitue un champ vaste et morcelé, rassemblant des
+                        chercheur.se.s s’inscrivant dans des approches épistémologiques et des
+                        disciplines variées (santé publique, psychologie, sociologie, communication,
+                        études féministes, sciences politiques, etc.) (Babrow et Mattson, 2003).
+                        Elle implique plusieurs catégories d’acteurs (populations, patients,
+                        soignants, gestionnaires, etc.), se déploie dans différents contextes
+                        sociaux et culturels (foyers, hôpitaux, écoles, milieux professionnels) et
+                        se joue dans divers types d’interactions (entre personnes, groupes,
+                        organisations, sociétés) (Kreps, 2003). Ce qui caractérise la recherche en
+                        communication pour la santé est qu’elle est axée sur la résolution de
+                        problèmes (Kreps, 2011). La recherche en communication vise aussi à
+                        développer et à valider de nouveaux concepts et modèles théoriques
+                        permettant de mieux saisir la complexité des enjeux communicationnels en
+                        santé et de concevoir des interventions efficaces pour le bien-être de la
+                        population.
+                </alinea></para><para id="pa2"><no>2</no><alinea>La communication pour la santé constitue l’une
+                        des six grandes stratégies d’intervention habituellement associées à la
+                        <marquage typemarq="italique">promotion de la santé</marquage>, dont l’objet porte, de façon plus globale, sur la capacité à
+                        contribuer à l’amélioration de la santé par des activités visant le
+                        changement planifié des comportements individuels et des modifications
+                        d’environnement physique, économique et social, pour lesquels des approches
+                        multidisciplinaires alliant particulièrement des théories psychosociales à
+                        théories sociopolitiques sont interpelées (Renaud, 2020). Outre la
+                        communication, le domaine de la promotion de la santé inclut des stratégies
+                        relatives à l’éducation à la santé, au marketing social, à l’action
+                        politique (<marquage typemarq="italique">advocacy</marquage>) et au développement organisationnel (Caron-Bouchard et
+                        Renaud, 2001). La communication pour la santé est un processus
+                    transversal et spécifique qui ne peut donc pas, à lui seul, régler les problèmes
+                    sociaux liés à la santé. La communication pour la santé peut toutefois
+                    contribuer de façon importante à améliorer la santé des individus et des
+                    populations, dans la mesure où une stratégie de communication efficace peut
+                    amener les individus, les organisations et les communautés à mieux comprendre
+                    leurs besoins et à modifier leur environnement pour mieux y répondre. </alinea></para><para id="pa3"><no>3</no><alinea>
+                    Par ailleurs, en regard des autres domaines d’études et de
+                        recherche en communication, la spécificité de la communication pour la santé
+                        réside principalement dans la dimension affective et existentielle qu’elle
+                        comporte (Bontemps 
+                    <marquage typemarq="italique">et al</marquage>
+                    ., 1998), dimension liée à l’importance qu’accordent les
+                        individus à leur santé et aux maladies susceptibles de la menacer. Comme le
+                        rappellent Brashers et Babrow (1996) dans leur article « 
+                    <marquage typemarq="italique">Theorizing communication and Health</marquage>
+                     » :
+                </alinea></para><bloccitation><alinea>
+                    Communication in health and illness constitutes the most vital
+                        of human experiences. No other human phenomenon is more elemental than
+                        health and illness, none connects us more viscerally with our aspirations,
+                        or confronts us more palpably with our limitations. Moreover, given the
+                        dynamics of these elemental experiences, and especially given that they are
+                        constituted in the communicative interweaving of body, mind, and society,
+                        health communication represents among the most complex, challenging, and
+                        potentially rewarding areas for scholarly inquiry (p. 39).
+                </alinea></bloccitation><para id="pa4"><no>4</no><alinea>
+                    La communication pour la santé se distingue également par les
+                        objectifs et les publics qu’elle vise. En effet, la communication pour la
+                        santé vise non seulement à informer, mais aussi à sensibiliser les
+                        individus, les organisations et les communautés aux questions relatives à la
+                        santé. Surtout, elle devrait être interactive et participative afin
+                        d’engendrer un dialogue favorisant les changements de comportements et
+                        d’environnements qui permettront d’améliorer la santé de ces derniers et
+                        celle de la population en général. La communication pour la santé s’exerce
+                        donc dans des contextes multiples : relation patient-prestataire de
+                        services ; recherche d’information sur la santé par un individu ou un
+                        groupe ; adhésion d’un individu ou d’un groupe à un traitement ou à des
+                        recommandations spécifiques ; élaboration de campagnes de sensibilisation
+                        destinées au grand public ; communication de risques pour la santé associés
+                        à des pratiques ou à des comportements spécifiques ; diffusion dans la
+                        population d’une certaine image de la santé ; diffusion de l’information
+                        relative à l’accessibilité aux soins de santé ; etc. (Renaud, 2007, 2010.)
+                        Selon ces différents contextes, la communication pour la santé peut dès lors
+                        s’adresser à différents publics : professionnel.le.s de la santé,
+                        gestionnaires, prestataires de soins de santé, patient.e.s, grand public,
+                        professionnel.le.s des médias d’information, décideur.se.s politiques,
+                        membres d’organismes liés au milieu de la santé publique, etc.
+                </alinea></para></section1><section1 id="s1n2"><no>2</no><titre>Contexte du développement de la
+                    communication pour la santé à l’UQAM</titre><para id="pa5"><no>5</no><alinea>L’analyse du contexte du développement de la communication pour
+                    la santé à l’Université du Québec à Montréal (UQAM) repose sur deux axes :
+                    l’état de la recherche de ce champ et les préoccupations de pratique du
+                    Département de communication sociale et publique. Les publications, les centres
+                    de recherche et la vision du Département ont influencé les orientations du
+                    Centre de recherche sur la communication et la santé (ComSanté) que nous
+                    développerons dans la section 3.</alinea></para><section2 id="s2n1"><no>2.1</no><titre>État de la recherche</titre><para id="pa6"><no>6</no><alinea>Au cours des trois dernières décennies, les recherches menées
+                        en communication pour la santé ont donné lieu à de nombreux ouvrages qui ont
+                        posé les jalons de ce domaine de recherche et d’intervention, tels que Thompson <marquage typemarq="italique">et al.</marquage> (2003, 2010), avec
+                            le <marquage typemarq="italique">Handbook of Health
+                            Communication</marquage>, Piotrow <marquage typemarq="italique">et al</marquage>., (1997), avec <marquage typemarq="italique">Health Communication</marquage>, Schiavo, (2014), avec <marquage typemarq="italique">Health Communication: From Theory to Practice</marquage>, Northouse et Northouse (1997), avec<marquage typemarq="italique"> Health Communication: Strategies for
+                            Health Professionals</marquage>, Maibach et Parrott (1995),
+                            avec <marquage typemarq="italique">Designing Health
+                            Messages</marquage>, et Ray et Donohew (1990), avec <marquage typemarq="italique">Communication and Health: Systems and
+                            Applications</marquage>. Plusieurs
+                            articles scientifiques ont été publiés dans des revues spécialisées,
+                            dont le <marquage typemarq="italique">Journal o Health
+                            Communication </marquage>ou <marquage typemarq="italique">Health Communication</marquage>, le <marquage typemarq="italique">Journal of Medical Internet
+                            Research</marquage>, ainsi que sur des sites internet
+                            spécialisés comme <marquage typemarq="italique">Promosanté</marquage>, <marquage typemarq="italique">Health Communication</marquage> et <marquage typemarq="italique">Reviews of Health Promotion &amp;
+                            Education On-line.</marquage></alinea></para><para id="pa7"><no>7</no><alinea>
+                        La publication de ces ouvrages et de ces articles
+                            scientifiques découle en partie de la multiplication, au cours de ces
+                            décennies, des centres et des groupes de recherche consacrés à la
+                            promotion de la santé et à la communication. Au Québec, seul le Centre
+                            de recherche sur la communication et la santé (ComSanté) de l’UQAM,
+                            fondé en 2003, étudie spécifiquement la communication pour la santé
+                            comme axe central de recherche. Les autres groupes et centres ne mettent
+                            pas au cœur de leur démarche de recherche la communication pour la
+                            santé. Leurs recherches portent davantage sur l’éducation à la santé ou
+                            sur la promotion de la santé au Québec, au Canada ou ailleurs. Pour n’en
+                            nommer que quelques-uns :
+                    </alinea></para><listenonord signe="carre"><elemliste>
+                            <alinea>
+                                Au Québec, le Réseau de recherche en santé des
+                                    populations, créé en 2002, possède un regroupement sur les
+                                    technologies de l’information et de la communication (TIC) et la
+                                    santé 
+                                s’intéressant à l’exploration des usages et de la
+                                    création des TIC en rapport avec le domaine de la santé ;
+                            </alinea>
+                        </elemliste><elemliste>
+                            <alinea>
+                                En Ontario, l’une des cinq unités internes du 
+                                <marquage typemarq="italique">Centre for Health Promotion</marquage>
+                                 de l’Université de Toronto porte spécifiquement
+                                    sur la communication pour la santé. Le 
+                                <marquage typemarq="italique">Health Communication Unit </marquage>
+                                a en effet pour mandat d’augmenter les capacités
+                                    de la communauté et des agences de santé publique à planifier, à
+                                    gérer et à évaluer des stratégies communicationnelles en matière
+                                    de santé ;
+                            </alinea>
+                        </elemliste><elemliste>
+                            <alinea>
+                                Aux États-Unis, les centres et les groupes de
+                                    recherche sur la promotion de la santé sont nombreux, tant au
+                                    sein des universités que des agences gouvernementales et des
+                                    organismes privés. Deux d’entre eux accordent une place
+                                    importante aux recherches menées dans le domaine spécifique de
+                                    la communication pour la santé. C’est le cas du 
+                                <marquage typemarq="italique">Stanford Prevention Research
+                                    Center</marquage>
+                                 de l’Université Stanford et du 
+                                <marquage typemarq="italique">Center for Communication
+                                    Programs</marquage>
+                                 de l’Université Johns Hopkins de Baltimore, qui
+                                    sont reconnus pour leurs recherches dans le domaine de la santé
+                                    publique en matière de communication stratégique ;
+                            </alinea>
+                        </elemliste><elemliste>
+                            <alinea>À l’échelle internationale, sans être exhaustif,
+                                signalons que plusieurs organismes réalisent de la recherche autour
+                                de la promotion de la santé et intègrent la communication comme un
+                                axe de recherche et d’intervention. Plus particulièrement, ComSanté
+                                a travaillé avec Question-Santé de Belgique, Santé publique France
+                                et ComSaude du Brésil. Question-Santé est une association à but non
+                                lucratif dont la mission est de gérer le service
+                                « communication-médias » confié par la communauté française de
+                                Belgique. Santé publique France, qui a intégré l’Institut national
+                                de prévention et d’éducation à la santé, se déploie autour de
+                                l’information sur la santé basée sur des pratiques exemplaires. Pour
+                                sa part, ComSaude, fondé en 2009, est un centre de recherche et
+                                d’intervention basé à l’université de Brasilia s’intéressant
+                                spécifiquement à la recherche sur la communication médiatique et
+                                l’internet en matière de santé.</alinea>
+                        </elemliste></listenonord><para id="pa8"><no>8</no><alinea>
+                        Les publications scientifiques et les centres ont permis
+                            de démontrer que la communication pour la santé, surtout lorsqu’elle est
+                            associée à d’autres stratégies de promotion de la santé, peut avoir un
+                            impact significatif sur l’efficacité des politiques et des programmes
+                            gouvernementaux de santé publique. La communication est un processus
+                            transversal et spécifique qui repose sur une connaissance des fondements
+                            épistémologiques, théoriques et méthodologiques de la communication en
+                            général et de la communication pour la santé en particulier. Elle se
+                            fonde également sur l’examen de pratiques exemplaires et sur la capacité
+                            à transférer les caractéristiques de ces pratiques exemplaires dans
+                            l’élaboration de stratégies originales de communication
+                            interpersonnelle, organisationnelle ou médiatique qui répondent à des
+                            problématiques précises en fonction de contextes particuliers.
+                    </alinea></para></section2></section1><section1 id="s1n3"><no>3</no><titre>Intérêts de l’UQAM et du Département de
+                    communication sociale et publique</titre><para id="pa9"><no>9</no><alinea>Le développement de ComSanté est né dans un contexte de
+                    déploiement de la santé à l’UQAM d’une part et, d’autre part, des perspectives
+                    de développement du Département de communication sociale et publique valorisant
+                    la pratique et l’intervention. </alinea></para><para id="pa10"><no>10</no><alinea>Depuis trente ans, l’UQAM est considérée comme un pilier
+                    important et bien positionné dans le domaine de la santé, dans la mesure où la
+                    santé tant biologique que sociale est un axe d’enseignement et de recherche au
+                    sein de son institution, ce que démontrent les quelque deux cents cours offerts
+                    par l’UQAM dans le domaine de la santé à travers des programmes de cycles
+                    supérieurs tant en sciences humaines, qu’en arts, en communication, en sciences
+                    biologiques, chimiques et de la gestion. Pour ne nommer qu’un regroupement
+                    majeur de recherche, l’Institut Santé et société (ISS)<exposant>1</exposant>, créé en 2002,
+                        regroupe près d’une centaine de professeur.e.s dispersé.e.s dans
+                        23 départements de l’UQAM. La mission de l’ISS vise non seulement
+                        l’avancement des connaissances, mais également leur transfert vers la
+                        société par l’intermédiaire d’activités de formation et de programmes
+                        d’études, dont un doctorat en santé et société. En outre, l’ISS publie une
+                        collection d’ouvrages aux Presses de l’Université du Québec – la collection
+                        « Santé et Société<exposant>2</exposant> » – destinée à favoriser la diffusion des connaissances sur
+                        les divers sujets liés aux multiples aspects de la santé dans notre
+                        société.</alinea></para><para id="pa11"><no>11</no><alinea>Le Département de communication sociale et publique, pour sa
+                    part, s’intéresse aux pratiques et aux interventions en communication. Il met de
+                    l’avant une vision transversale et multidisciplinaire de la communication.
+                    Plusieurs professeur.e.s ont réalisé ou réalisent des recherches dans le domaine
+                    de la santé, qu’ils s’agissent de communication interpersonnelle,
+                    organisationnelle, médiatique/internet. De plus, la revue <marquage typemarq="italique">Communiquer</marquage>, fondée par le Département en 2009, a permis de publier
+                    plusieurs articles en rapport à la communication et à la santé. Enfin, lors de
+                    la création de ComSanté, deux centres de recherche collaboraient déjà avec le
+                    département : Cinbiose<exposant>3</exposant> et METISS<exposant>4</exposant>.</alinea></para><para id="pa12"><no>12</no><alinea>
+                    Issu du Groupe de recherche-action en biologie du travail créé
+                        en 1985, le Centre de recherche interdisciplinaire sur le bien-être, la
+                        santé, la société et l’environnement (Cinbiose) œuvre particulièrement dans
+                        le domaine de la santé au travail et de la santé environnementale dans une
+                        approche écosystémique. Cinbiose
+                    <exposant>5</exposant>
+                     participe à la recherche transdisciplinaire visant à intégrer
+                        de façon systématique les préoccupations en matière de santé et
+                        d’environnement à la planification du développement, aux changements à
+                        apporter aux politiques et aux incitations à l’action, grâce à de
+                        l’information d’ordre scientifique, social et politique.
+                </alinea></para><para id="pa13"><no>13</no><alinea>Fondée en 1993 et issue d’une équipe intégrée
+                        dans le Centre de recherche et de formation du CLSC Côte-des-Neiges dont la
+                        recherche portait sur les services de santé et les services sociaux de
+                        première ligne en milieu pluriethnique, METISS (Migration et ethnicité dans les interventions en
+                        santé et en services sociaux) est une équipe de recherche logée à UQAM et
+                        travaille en partenariat avec le CIUSSS du
+                        Centre-Ouest-de-l’Ile-de-Montréal. Cette équipe<exposant>6</exposant> réalise avec différents milieux de
+                        pratique des recherches portant sur les enjeux spécifiques au processus
+                        d’immigration en rapport avec les services de santé et les services
+                        sociaux.
+                </alinea></para><para id="pa14"><no>14</no><alinea>
+                    C’est dans ce contexte du développement de la recherche en
+                        santé à l’UQAM que ComSanté s’est déployé à partir de 2003. Pour ComSanté,
+                        la communication est un processus transversal, participatif. De plus, la
+                        communication est particulière et spécifique lorsqu’elle est examinée à
+                        travers la santé.
+                </alinea></para></section1><section1 id="s1n4"><no>4</no><titre>
+                    ComSanté : son évolution et ses champs de recherche
+                </titre><para id="pa15"><no>15</no><alinea>
+                    L’appellation Groupe de recherche sur les médias et la santé
+                        est le nom initial de
+                     
+                    ComSanté
+                    <exposant>7</exposant>
+                    , Centre de recherche sur la communication et la santé. Créé
+                        en 2003, ce centre a intégré plusieurs lignes de recherche, commençant
+                        d’abord par l’axe communication médiatique. Au fil des ans, il a incorporé
+                        l’axe « internet », puis les axes de la communication interpersonnelle ainsi
+                        qu’organisationnelle. Selon la philosophie et les orientations de ComSanté,
+                        la communication pour la santé est un processus transversal, participatif
+                        nécessitant des approches multidisciplinaires. De cette façon, la
+                        participation des citoyens ainsi que celle des milieux de santé et des
+                        médias sont au cœur de la démarche conceptuelle et méthodologique de ce
+                        centre.
+                </alinea></para><para id="pa16"><no>16</no><alinea>
+                    Dix ans avant la création de ComSanté (1993 à 2003), je
+                        réalisais déjà de la recherche autour des effets des médias sur la santé et,
+                        plus particulièrement, j’effectuais des évaluations des campagnes
+                        médiatiques opérées par les gouvernements et les communautés locales. Mes
+                        recherches s’intéressaient à leur conception et à leur efficacité à
+                        engendrer des changements d’attitudes et de comportement sur le plan
+                        individuel.
+                </alinea></para><para id="pa17"><no>17</no><alinea>
+                    Pour pallier au manque de circulation de connaissances, ainsi
+                        qu’à un non-dialogue entre les acteurs des milieux de la santé et ceux du
+                        milieu médiatique, j’ai obtenu une subvention du Conseil de recherches en
+                        sciences humaines du Canada (CRSH) en 2004 pour amorcer une programmation de
+                        recherche autour des médias et de leurs effets sur le processus de
+                        changement individuel et collectif et de mobilisation. Cette subvention a
+                        été capitale, car elle a permis, pendant un an, de contacter les acteurs de
+                        terrain et les chercheur.se.s intéressé.e.s par la problématisation de la
+                        communication pour la santé. Dès le départ, le partenariat avec les deux
+                        milieux (santé et média) a été partie prenante de la démarche afin qu’ils
+                        puissent générer une appropriation des résultats dans leur milieu respectif.
+                        De plus, une vingtaine de chercheur.se.s issu.e.s de diverses disciplines
+                        (communication, psychologie, sociologie, santé publique, sciences
+                        politiques, etc.) ont contribué aux questionnements et à l’analyse des
+                        diverses recherches en communication pour la santé.
+                </alinea></para><para id="pa18"><no>18</no><alinea>
+                    
+                    Depuis 2005, et ce, jusqu’à ce jour, ComSanté jouit de
+                        financements extérieurs majeurs provenant du Fonds de recherche du Québec
+                        (Santé ainsi que Société et culture) et de l’UQAM (centre institutionnel).
+                        L’intérêt de ComSanté est d’examiner la construction des normes sociales en
+                        matière de santé à travers les médias et les communications. Dans cette
+                        recherche de compréhension du processus d’influence des médias sur les
+                        normes sociales, Renaud (2007, 2010) constate que les agents de changement
+                        tels que les leaders d’opinion, les industriels et les politiciens exercent
+                        un rôle capital dans l’émergence et le renforcement de la norme et peuvent
+                        influencer l’effet des médias sur les normes sociales en matière de santé.
+                        Ces émetteurs de normes (dépositaires d’enjeux) sont nécessaires pour faire
+                        émerger et circuler les nouvelles normes et idées. Ils sont en interaction
+                        avec leurs propres organisations et sont liés à plusieurs réseaux familiaux,
+                        communautaires, etc. Ils dictent des façons de faire soit avec des médias,
+                        soit avec des communications interpersonnelles, et ce, dans un contexte
+                        culturel particulier. Les receveurs de ces messages (c’est-à-dire des
+                        groupes de personnes inscrites au travail, en famille ou en communauté)
+                        s’approprient et interprètent les normes transmises en fonction de leur
+                        contexte de vie et de leur état de santé. Il est important de noter que les
+                        médias, dont les outils électroniques (internet, dossier patient, etc.), ne
+                        constituent qu’une des forces, néanmoins importante, d’intégration de la
+                        norme.
+                </alinea></para><para id="pa19"><no>19</no><alinea>
+                    Les médias contribuent à structurer les environnements sociaux
+                        et physiques, et cela, de multiples façons. Par exemple, les entreprises de
+                        différentes échelles (du régional à l’international) déterminent la
+                        disponibilité et la demande des produits en tenant compte de l’impact des
+                        médias (plus particulièrement la publicité) et des autres activités de
+                        marketing sur le grand public. Ainsi, les médias nationaux et régionaux
+                        influencent la popularité des produits importés et manufacturés ainsi que la
+                        consommation individuelle et collective dans les divers milieux de vie
+                        (travail, école, famille, loisirs, etc.) (Kumayika, 2001).
+                     
+                    Par le choix de diverses imageries, les médias s’adressent aux
+                        désirs et aux besoins humains en attribuant au produit une certaine image
+                        ayant un attrait significatif particulier, voire séduisant. Ces messages
+                        influent sur les normes sociales, c’est-à-dire sur ce qui est collectivement
+                        acceptable et valorisé par un groupe (Cohen, Scribner et Farley, 2000 ; Opp,
+                        2001).
+                </alinea></para><para id="pa20"><no>20</no><alinea>
+                    Les médias peuvent avoir un effet sur le processus de
+                        changement individuel et collectif, et de mobilisation (Renaud, 2007, 2010).
+                        Celui-ci se manifestera de trois façons : 1) en influençant directement les
+                        croyances et les attitudes individuelles (Nunez-Smith 
+                    <marquage typemarq="italique">et al</marquage>
+                    ., 2008) ; 2) en recadrant le débat d’une perspective
+                        individuelle à une perspective sociopolitique, cela par le concours des
+                        leaders d’opinions et d’autres dirigeants sociaux clés (
+                    <marquage typemarq="italique">advocacy</marquage>
+                    ) (Seale, 2002 ; Wallack 
+                    <marquage typemarq="italique">et al</marquage>
+                    ., 1993 ; Wise, 2001) ; et 3) en modelant les normes sociales
+                        (Hornik, 2002).
+                </alinea></para><para id="pa21"><no>21</no><alinea>
+                    ComSanté fait partie de rares centres de recherche qui ont
+                        analysé le façonnement médiatique des normes sociales spécifiquement liées à
+                        la santé et au bien-être (Alcalay et Bell, 2001), notamment l’effet des
+                        prises de décision des différents agents sociaux (industriels, politiciens,
+                        leaders d’opinion, etc.) sur la transmission des messages et, à l’inverse,
+                        la façon dont les médias influencent ces agents. Ces 
+                    <marquage typemarq="italique">patterns d’influence</marquage>
+                     
+                    <marquage typemarq="italique">réciproque</marquage>
+                     (Caron-Bouchard et Renaud, 2010), leurs effets sur la nature
+                        des messages émis et reçus ainsi que sur les normes de santé ont été au cœur
+                        des recherches du centre depuis 2005. La contribution
+                     
+                    spécifique de ComSanté à la recherche est de comprendre les
+                        mécanismes médiatiques comme un des éléments façonnant les normes.
+                </alinea></para><para id="pa22"><no>22</no><alinea>
+                    À partir de 2012, pour répondre aux besoins communicationnels
+                        des partenaires et afin d’explorer les multiples facettes de la
+                        communication et santé, ComSanté a exploré trois axes de recherche : la
+                        communication médiatique (en mettant l’accent, ces dernières années, sur
+                        internet et les technologies numériques), la communication organisationnelle
+                        et la communication interpersonnelle/interculturelle, qui font l’objet d’une
+                        analyse communicationnelle transversale et participative.
+                </alinea></para><para id="pa23"><no>23</no><alinea>
+                    Les trois axes de recherche (communication médiatique,
+                        organisationnelle et interpersonnelle/interculturelle) sont des champs
+                        distincts en matière d’objets de recherche, de théories et de méthodologies.
+                        L’examen des problématiques abordées par les chercheur.se.s et les
+                        partenaires de ComSanté met toutefois en évidence des préoccupations
+                        communes qui semblent constitutives du champ de la communication pour la
+                        santé et forment des angles transversaux d’intégration des axes. Citons
+                        certains de leurs travaux.
+                </alinea></para><section2 id="s2n2"><no>4.1</no><titre>
+                        Axe communication médiatique
+                    </titre><para id="pa24"><no>24</no><alinea>
+                        La communication médiatique, axe original et encore
+                            principal de ComSanté, vise essentiellement à cerner en quoi les
+                            communications médiatiques permettent de moduler les normes sociales et,
+                            par ricochet, les comportements individuels de santé d’une collectivité.
+                            Une partie des travaux concerne l’analyse des représentations relatives
+                            aux objets de santé (représentations de l’alimentation, de l’activité
+                            physique, de la sexualité, de la santé mentale, des médicaments, etc.)
+                            qui circulent dans les médias d’actualité et de divertissement
+                            (Baillargeon 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2017 ; Marchand et Cliche, 2017 ; Niquette, Fournier et
+                            Coutant, 2020),
+                         
+                        certains adoptant une posture d’analyse critique du
+                            discours (Niquette, 2010).
+                         
+                        Afin de cerner le processus de façonnement des normes de
+                            santé, les chercheur.se.s s’intéressent aussi aux étapes de production,
+                            de circulation et de réception des informations médiatiques relatives à
+                            la santé (Bélanger-Gravel 
+                        <marquage typemarq="italique">et al.</marquage>
+                        , 2016 ; Renaud, 2007, 2010).
+                    </alinea></para><para id="pa25"><no>25</no><alinea>
+                        Avec le développement d’internet et des technologies
+                            mobiles, un nombre croissant de personnes ont recours au web pour
+                            rechercher de l’information sur la santé (Fox et Gilbert, 2015). Les
+                            médias socionumériques, notamment les réseaux sociaux
+                         
+                        (Coutant, 2016 ; Thoër, 2012), constituent des espaces de
+                            travail, d’interaction avec les pairs et les professionnel.le.s de la
+                            santé (Richard et Lussier, 2016), ou encore de divertissement, où
+                            circulent et se construisent des représentations relatives à la santé.
+                            Internet
+                         contribue aussi à la revalorisation du rôle joué par les
+                            individus dans la production de l’information liée à la santé et offre
+                            l’occasion, grâce à l’analyse des espaces d’échange en ligne, de mieux
+                            cerner l’expérience des problématiques psychosociales et de santé. 
+                        Les usages d’internet varient selon ces problématiques, le
+                            parcours de soins et les publics (âge, genre, scolarité, origine
+                            ethnique) pouvant contribuer à accroître les inégalités de santé
+                            (Renahy, 2012 ; Wyatt 
+                        <marquage typemarq="italique">et al.</marquage>
+                        , 2005). Ces facteurs de variation ont été documentés par
+                            ComSanté. Les usages de l’internet santé doivent être contextualisés
+                            (Fontaine, 2012 ; Kivits, 2012) et mis en rapport avec les autres
+                            pratiques de recherche d’information sur la santé auprès de l’entourage,
+                            des médias traditionnels et des professionnel.le.s de la santé (Richard
+                            et Lussier, 2016 ; Renaud 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2018).
+                    </alinea></para><para id="pa26"><no>26</no><alinea>
+                        Les interventions médiatiques de promotion de la santé
+                            constituent un autre volet de la communication médiatique.
+                            L’identification des critères d’efficacité des campagnes de promotion de
+                            la santé est au centre des travaux qui soulignent l’importance
+                            d’inscrire la conception, la mise en œuvre et l’évaluation des campagnes
+                            dans des cadres théoriques et de développer des modalités d’évaluation
+                            portant tant sur les processus que les résultats (Lepage 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2014 ; Lepage 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2015 ; Sauvé 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2017). De par leur popularité, 
+                        internet et les technologies mobiles sont de plus en plus
+                            mobilisés par les organisations de santé pour intervenir auprès de leurs
+                            publics cibles 
+                        (Thoër 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2015). Toutefois, les théories sur les médias
+                            traditionnels ne sont pas totalement transférables aux médias
+                            socionumériques (Renaud, 2012). Par exemple, sur internet, le processus
+                            de recherche d’information sur la santé est initié par les individus. De
+                            plus, les technologies mobiles permettent une recherche et une
+                            production d’information plus près des symptômes. Enfin, les dispositifs
+                            techniques permettent l’offre
+                         d’activités interactives et plus participatives avec des
+                            pairs et des professionnel.le.s. 
+                        Les évaluations disponibles indiquent que les effets sur
+                            la santé individuelle et la santé collective varient grandement selon
+                            les contextes et les publics (Gaudet 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2016 ; Renaud, 2012). La recherche sur les façons
+                            d’accroître l’efficacité des interventions en ligne doit être
+                            poursuivie, d’autant plus que les usages santé d’internet et les
+                            dispositifs techniques ne cessent d’évoluer. Il est ainsi nécessaire de
+                            mener de nouvelles recherches empiriques sur le sujet, dans différents
+                            contextes de santé et avec des publics diversifiés, afin de développer
+                            des cadres théoriques adaptés à l’intervention en ligne. Enfin,
+                            l’évaluation des interventions en ligne soulève des enjeux éthiques et
+                            méthodologiques spécifiques qui ont été peu analysés (Bull et McFarlane,
+                            2011), mais qui ont été examinés par ComSanté (Renaud, 2007, 2010).
+                    </alinea></para></section2><section2 id="s2n3"><no>4.2</no><titre>
+                        Axe communication organisationnelle
+                    </titre><para id="pa27"><no>27</no><alinea>
+                        Les organisations de santé et de bien-être jouent un rôle
+                            charnière dans le façonnement des normes en matière de santé, étant à la
+                            fois émettrices de normes à destination du grand public et de leur
+                            personnel et responsables de la mise en place des conditions structurant
+                            l’appropriation des normes dans leurs milieux. De plus, en tant que
+                            structures médiatrices sur le plan mésoscopique, les milieux organisés
+                            sont des territoires de diffusion et d’appropriation des connaissances
+                            et des comportements relatifs à la santé (Cherba et Vásquez, 2014 ;
+                            Gesit-Martin et Scarduzio, 2011).
+                    </alinea></para><para id="pa28"><no>28</no><alinea>
+                        Dans les trois dernières décennies, et plus
+                            particulièrement les dernières années, le milieu de la santé a subi de
+                            multiples transformations : restructuration, nouvelles démarches de
+                            gestion, nouvelles formes de normalisation, nouveaux standards, nouveaux
+                            acteurs, nouvelles maladies (Cordelier et Tine, 2010 ; Fox et Gilbert,
+                            2015 ; Vásquez, 2012).
+                         
+                        Internet et les technologies numériques sont par ailleurs 
+                        devenus incontournables pour faciliter la gestion des
+                            soins et de l’information clinique (dossier médical électronique), ainsi
+                            que les relations entre les administrations responsables de la santé et
+                            les populations. 
+                        Ces transformations affectent les réalités individuelles,
+                            organisationnelles et sociétales, nous amenant à nous interroger sur les
+                            processus communicationnels. L’axe communication organisationnelle et
+                            santé vise donc à saisir 
+                        les dynamiques communicationnelles à l’œuvre dans
+                            l’interopérabilité des systèmes de santé – le partage d’information et
+                            de savoirs dans un contexte où les soins sont assurés par différentes
+                            catégories de personnes soignantes qui relèvent parfois de plusieurs
+                            organisations et autorités administratives –, dans la coordination et la
+                            négociation du travail et dans la redéfinition de la mission de ces
+                            organisations.
+                    </alinea></para><para id="pa29"><no>29</no><alinea>Un regard centré sur la communication et
+                            l’organisation permet d’explorer les thématiques suivantes  1) la
+                        coordination, la collaboration et les normes au travail ; 2) les
+                        reconfigurations communicationnelles et organisationnelles de la santé ;
+                        3) la gouvernance et la rationalisation des organisations de santé ; et
+                        4) la numérisation des pratiques de gestion des soins et internet (Cordelier
+                        et Tine, 2010 ; Vásquez, Groleau et Brummans, 2012). </alinea></para></section2><section2 id="s2n4"><no>4.3</no><titre>
+                        Axe communication interpersonnelle/interculturelle
+                    </titre><para id="pa30"><no>30</no><alinea>
+                        L’objectif de la communication interpersonnelle pour la
+                            santé est de cerner la dynamique relationnelle dans différentes
+                            situations de communication en santé, tant dans la famille et la
+                            communauté que dans le rapport des individus avec les professionnel.le.s
+                            de la santé (Laquerre, 2015). Les travaux portant sur la relation
+                            patient/intervenant/professionnel de la santé ont porté sur les
+                            représentations différenciées que chacun apporte à la rencontre
+                            professionnelle au sujet de la santé et du bien-être, de la prévention
+                            ou encore des pratiques s’y rapportant qui façonnent la relation de
+                            soins. Ils visent aussi à identifier des stratégies pour améliorer le
+                            processus communicationnel, notamment en s’appuyant sur des modèles 
+                        qui encouragent sa participation à la décision et lui
+                            reconnaissent un droit à l’information
+                         (Richard et Lussier, 2016
+                        ). Ils soulignent aussi l’importance de tenir compte des
+                            contextes (culturel, médiatique, juridique et organisationnel) de la
+                            relation de soins (
+                        Laquerre, 2015 
+                        ; Montgomery, 2016 ; Sercia, Girard et Boucher,
+                            2018).
+                    </alinea></para><para id="pa31"><no>31</no><alinea>
+                        En effet, les facteurs culturels déterminent en partie les
+                            représentations et le sens des messages et des contextes d’interaction
+                            et peuvent désavantager les groupes ethnoculturels dans la délivrance
+                            des services de santé et l’accès aux soins. La diversification des
+                            composantes ethnoculturelles, notamment à Montréal, a rendu nécessaire
+                            et urgent de porter une attention soutenue à la culture liée à la
+                            communication et santé. En effet, le quart de la population immigrante
+                            au Québec présente un taux de littératie en santé ne lui permettant pas
+                            de s’approprier l’information santé (Richard et Lussier, 2016 ; Rootman
+                            et Gordon-El-Bihbety, 2008). De plus, le recours, par certains groupes
+                            ethnoculturels, à d’autres sources d’information sur la santé (réseaux
+                            de soutien, consultations dans le pays d’origine, médecines
+                            traditionnelles, etc.) semble influer sur leur appropriation des
+                            messages de santé véhiculés par les personnes soignantes et la santé
+                            publique (Xenocostas 
+                        <marquage typemarq="italique">et al</marquage>
+                        ., 2014). Toutefois, la façon dont les différences
+                            culturelles modulent la perception de la santé et des actions de
+                            prévention/promotion qui s’y rapportent ainsi que les normes sociales
+                            des diverses communautés ethnoculturelles sont encore peu étudiées pour
+                            ces populations (Laquerre, 2015).
+                    </alinea></para><para id="pa32"><no>32</no><alinea>
+                        Le développement des usages santé d’internet transforme
+                            aussi l’interaction entre les personnes soignantes et les personnes
+                            soignées (Thoër, 2013). 
+                        Les études sur les interactions entre les
+                            professionnel.le.s de santé et les patient.e.s informé.e.s sont peu
+                            nombreuses et surtout centrées sur la perspective des médecins (Richard
+                            et Lussier, 2016). Or ces patient.e.s informé.e.s sont appelé.e.s à se
+                            multiplier. De plus, grâce aux applications mobiles de santé, la ou le
+                            patient.e peut lui-même produire une multitude de données médicales
+                            personnelles qu’elle ou il pourra croiser et transmettre aux
+                            professionnel.le.s de la santé (Thoër, 2013 ; Thoër 
+                        <marquage typemarq="italique">et al.</marquage>
+                        , 2015)
+                        . 
+                        ComSanté a tenté de comprendre comment et à quelles étapes
+                            du parcours de soins la population recherche de l’information sur la
+                            santé en ligne, comment ces pratiques reconfigurent la communication et
+                            la relation patient/professionnel de la santé et comment internet peut
+                            être intégré à la pratique de soins pour améliorer la
+                            communication.
+                    </alinea></para></section2></section1><section1 id="s1n5"><no>5</no><titre>
+                    Contribution théorique de ComSanté
+                </titre><para id="pa33"><no>33</no><alinea>
+                    Dès le départ, ComSanté a développé ses recherches autour d’un
+                        modèle explicatif du développement de la norme par les communications
+                        médiatiques. Bien qu’imparfait, le modèle (Figure 1) a pour but de rendre
+                        compte de la présence des dimensions qui interagissent entre elles :
+                        émetteurs de normes (à gauche), acteurs-relais (médias) (au centre) et
+                        récepteurs de normes (à droite). Ce modèle amorçait une discussion avec les
+                        chercheur.se.s et les acteurs de terrain afin de cerner si la nouvelle
+                        recherche, devant se faire, cadrait ou non avec les orientations du centre.
+                        En 17 ans d’existence, le modèle a largement évolué. Nous vous présentons
+                        ici le dernier modèle qui a fait consensus auprès des partenaires et des
+                        chercheur.se.s (Renaud, 2007, 2010). Ce modèle se veut par ailleurs un
+                        modèle de communication dynamique et intégratif des axes de recherche et
+                        d’intervention.
+                </alinea></para>
+                    
+                    <figure id="fi1"><no>Figure  1</no><legende lang="fr"><titre>Modèle intégrateur : les mécanismes du façonnement des normes par la sphère médiatique</titre></legende><objetmedia flot="bloc"><image id="img-05-01.png" typeimage="figure" xlink:type="simple"/></objetmedia></figure>
+                <para id="pa34"><no>34</no><alinea>
+                    Ce modèle se veut en outre une tentative de compréhension et
+                        d’explication du processus de façonnement des normes en matière de santé,
+                        notamment par les médias et les communications entre les acteurs et les
+                        organisations, et ce, dans des contextes culturels particuliers. Il peut
+                        rendre compte de la diversité des acteurs sociaux en cause (organisations,
+                        réseaux, individus, etc.), du rôle qu’ils y jouent ainsi que de la
+                        multiplicité des relations et des interactions qui les caractérisent. Cette
+                        approche théorique traduit aussi la dynamique de l’information circulant à
+                        l’intérieur d’une organisation ou d’une organisation à l’autre, l’effet
+                        rebond de la communication et le phénomène de porosité, en plus de
+                        renseigner sur l’existence des réseaux. Il sert également à cerner la façon
+                        dont les intervenant.e.s en santé peuvent influencer le processus de
+                        façonnement de la norme à travers les médias pour atteindre les publics
+                        cibles (récepteurs de normes).
+                </alinea></para><para id="pa35"><no>35</no><alinea>
+                    Ce modèle d’analyse favorise une compréhension de la réalité
+                        complexe et sans cesse fluctuante de la norme santé dans l’environnement
+                        médiatique et du rôle des organisations en scène, et ce, dans divers
+                        contextes culturels. Ce modèle innove aussi en permettant une analyse
+                        approfondie de l’émergence de la norme à travers les interactions et le mode
+                        de communication des divers acteurs sociaux en cause et de leurs
+                        organisations et en mettant en lumière le rôle prépondérant joué par la
+                        sphère médiatique.
+                </alinea></para></section1><section1 id="s1n6"><no>6</no><titre>
+                    Recherche partenariale
+                </titre><para id="pa36"><no>36</no><alinea>
+                    ComSanté a toujours été financée par les organismes
+                        subventionnaires comme « une équipe en partenariat ». Ceci signifie que les
+                        chercheur.se.s travaillent avec et pour les acteurs de terrain (partenaires
+                        médiatiques et de santé) à la mise en commun de leurs spécialisations pour
+                        la création d’un projet en vue d’atteindre leurs buts respectifs. La
+                        recherche partenariale se réalise autour de problématiques d’ordre pratique
+                        pour produire des réponses aux besoins et aux intérêts mutuels des
+                        partenaires (Renaud, à paraître). Une grande partie des projets de recherche
+                        provient ainsi directement des questionnements des partenaires et est
+                        repositionnée sur notre modèle.
+                </alinea></para><para id="pa37"><no>37</no><alinea>
+                    De plus, la recherche partenariale appelle à l’utilisation
+                        d’une méthodologie parfois quantitative, parfois qualitative ou mixte. Cette
+                        méthodologie est adaptée à l’objet de recherche et aux interrogations des
+                        actrices et acteurs de terrain afin d’obtenir les meilleures données pour la
+                        pratique. La recherche partenariale permet d’agir collectivement en se
+                        partageant des ressources humaines, matérielles ou financières afin de
+                        développer et de maintenir une nouvelle pratique, voire de favoriser
+                        l’innovation sociale.
+                </alinea></para><para id="pa38"><no>38</no><alinea>
+                    Enfin, l’agent de mobilisation est un élément central de la
+                        recherche partenariale. Il fait le pont entre les divers univers culturel et
+                        organisationnel des partenaires médiatiques et de santé. Il offre une
+                        démarche systématique des connaissances acquises. Il met l’accent sur
+                        l’appropriation des données de recherche et l’intégration de celles-ci dans
+                        les organisations. Sur ce point, ComSanté a développé plusieurs outils de
+                        dissémination de connaissances (Elissalde, Gaudet et Renaud, 2010) : les
+                        faits saillants sont des résumés vulgarisés de résultats de recherche
+                        portant sur la santé. Ils sont d’abord destinés aux médias et à nos
+                        partenaires, mais rejoignent un public large et varié :
+                </alinea></para><listenonord signe="carre"><elemliste>
+                        <alinea>
+                            Le site internet de ComSanté (
+                            <liensimple id="ls1" xlink:href="http://www.comsante\uqam.ca" xlink:type="simple">
+                                www.comsante\uqam.ca
+                            </liensimple>
+                            ) présente les activités avec les partenaires et les
+                                publications ;
+                        </alinea>
+                    </elemliste><elemliste>
+                        <alinea>
+                            Le « portail internet et santé » se veut un espace de
+                                veille, d’échange et de partage s’adressant aux intervenant.e.s de
+                                santé ;
+                        </alinea>
+                    </elemliste><elemliste>
+                        <alinea>
+                            Le blogue 
+                            <marquage typemarq="italique">C’est malade </marquage>
+                            (
+                            <liensimple id="ls2" xlink:href="http://blogsgrms.com/cestmalade/" xlink:type="simple">
+                                <marquage typemarq="souligne">http://blogsgrms.com/cestmalade/</marquage>
+                            </liensimple>
+                            )
+                             
+                            est destiné aux professionnel.le.s des médias
+                                jeunesse, à qui il offre des informations tirées de références de
+                                qualité sous forme de textes et de témoignages d’experts, de même
+                                qu’un espace de diffusion pour les productions médiatiques ;
+                        </alinea>
+                    </elemliste><elemliste>
+                        <alinea>
+                            Un service de mentorat et d’expertise-conseil est
+                                offert à nos partenaires, qui ont sollicité notre aide pour bonifier
+                                leurs propositions d’intervention et de recherche, développer des
+                                outils d’évaluation, tester des grilles d’analyse, diffuser des
+                                connaissances auprès de l’ensemble de leurs organisations et,
+                                parfois, contribuer à faire cheminer de nouvelles visions et
+                                méthodes au sein de leur organisation.
+                        </alinea>
+                    </elemliste></listenonord></section1><section1 id="s1n7"><no>7</no><titre>
+                    Un regard rétrospectif
+                </titre><para id="pa39"><no>39</no><alinea>
+                    Les recherches menées depuis plus de 20 ans, notamment par
+                        ComSanté, ont contribué à améliorer la recherche et la pratique de la
+                        communication pour la santé, qu’il s’agisse de communication médiatique
+                        internet ou interpersonnelle, de normes sociales de santé ou d’intervention
+                        au sein des milieux organisés et interculturels. Toutefois, le champ demande
+                        à être exploré davantage : dans sa 
+                    <marquage typemarq="italique">dimension sociale</marquage>
+                    , pour tenir compte des différents contextes de vie ; dans sa 
+                    <marquage typemarq="italique">dimension technologique</marquage>
+                    , pour cerner les transformations associées au développement
+                        des usages des technologies numériques par les individus et les
+                        organisations ; et dans sa 
+                    <marquage typemarq="italique">dimension théorique</marquage>
+                    ,
+                     
+                    qui doit être explorée afin d’élaborer de nouveaux cadres
+                        permettant de mieux cerner les processus de façonnement des normes sociales,
+                        les transformations associées à la diffusion des technologies numériques en
+                        santé et de réaliser des interventions efficaces.
+                </alinea></para><para id="pa40"><no>40</no><alinea>
+                    Enfin, la recherche en communication pour la santé implique
+                        une réflexion sur le plan des 
+                    <marquage typemarq="italique">méthodologies de la recherche</marquage>
+                     et du 
+                    <marquage typemarq="italique">transfert de connaissances</marquage>
+                     afin que les données produites soient utiles aux différentes
+                        actrices et différents acteurs, et ce, pour chacun des axes de la
+                        communication et santé. De plus, les chercheur.se.s relèvent la nécessité de
+                        faire converger les axes de communication pour la santé en une recherche
+                        transversale et globale. Il y a donc actuellement place pour la 
+                    <marquage typemarq="italique">recherche interdisciplinaire</marquage>
+                     et pour des 
+                    <marquage typemarq="italique">études compréhensives et intégratives</marquage>
+                     favorisant une meilleure compréhension des processus
+                        communicationnels en matière de santé.
+                </alinea></para><para id="pa41"><no>41</no><alinea>
+                    L’impact de la recherche en communication auprès des
+                        intervenant.e.s communautaires, des producteur.trice.s médiatiques, des
+                        décideur.se.s et des gestionnaires serait d’autant plus important si un
+                        cadre de référence théorique et pratique permettant d’élaborer des
+                        stratégies de communication efficaces, basées sur des résultats de recherche
+                        fondés et éprouvés, était offert. Il s’avère donc indispensable d’ancrer les
+                        recherches en communication pour la santé dans les milieux mêmes, là où la
+                        communication se réalise, afin de favoriser une meilleure gestion, tant
+                        économique que psychosociale, en vue d’améliorer et de maintenir le
+                        bien-être individuel et collectif. ComSanté vise à relever le défi d’une
+                        collaboration réussie entre chercheur.se.s et partenaires développant de
+                        nouvelles analyses et théories susceptibles de modeler la communication pour
+                        la santé.
+                </alinea></para></section1></corps><partiesann lang="fr"><grbiblio><biblio><refbiblio id="rb1">
+                        Alcalay, R. et Bell, R. (2001). 
+                        Strategies and practices in community-based campaigns
+                            promoting nutrition and physical activity. 
+                        <marquage typemarq="italique">Social Marketing Quarterly</marquage>
+                        , 
+                        <marquage typemarq="italique">7</marquage>
+                        (4), 3–15.
+                    </refbiblio><refbiblio id="rb2">
+                        Baillargeon
+                        ,
+                         D., Coutant
+                        ,
+                         A.,
+                         
+                        Carignan
+                        ,
+                         M.-E., Dionne
+                        ,
+                         E., et Tourigny
+                        ,
+                         M. 
+                        (
+                        2017
+                        )
+                        . Confrontations et convergences éthiques entre marketing
+                            et information autour de la publicité native
+                        . 
+                        <marquage typemarq="italique">Revue Communication</marquage>
+                        <marquage typemarq="italique"> &amp; </marquage>
+                        <marquage typemarq="italique">professionnalisation</marquage>
+                        <marquage typemarq="italique">.</marquage>
+                         (
+                        5
+                        )
+                        , 28-53.
+                    </refbiblio><refbiblio id="rb3">
+                        Babrow, A. S. et Mattson, M. (2003). Theorizing About
+                            Health Communication. Dans L. Thompson, A. M. Dorsey, K. I. Miller et
+                            R. Parrott (dir.),
+                        <marquage typemarq="italique"> Handbook of Health Communication </marquage>
+                        (p. 35–62). Mahwah, NJ: Lawrence Erlbaum Associates.
+                    </refbiblio><refbiblio id="rb4">
+                        Bélanger-Gravel, A., Cutumisu, N., Gauvin, L., Lagarde, F.
+                            et Laferté, M. (2016). 
+                        Correlates of initial recall of a multimedia communication
+                            campaign to promote physical activity among tweens: the WIXX campaign. 
+                        <marquage typemarq="italique">Health Communication</marquage>
+                        ,
+                         
+                        <marquage typemarq="italique">32</marquage>
+                        (1),103–110.
+                    </refbiblio><refbiblio id="rb5">
+                        Bontemps, R., Cherbonnier, A., Mouchet, P. et Trefois, P.
+                            (1998). 
+                        <marquage typemarq="italique">Communication et Promotion de la
+                            santé</marquage>
+                        .
+                         
+                        Bruxelles, Belgique: Question Santé.
+                    </refbiblio><refbiblio id="rb6">
+                        Brashers, D. E. et Babrow, A. S. (1996). 
+                        Theorizing communication and Health. 
+                        <marquage typemarq="italique">Communication Studies</marquage>
+                        , 
+                        <marquage typemarq="italique">47</marquage>
+                        (3), 243–251.
+                    </refbiblio><refbiblio id="rb7">
+                        
+                        Bull, S. et McFarlane, M. (2011). 
+                        <marquage typemarq="italique">Technology-based health promotion</marquage>
+                        . 
+                        Los Angeles, CA: Sage Publications.
+                    </refbiblio><refbiblio id="rb8">Caron-Bouchard, M. et Renaud, L. (2001). <marquage typemarq="italique">Pour mieux réussir vos communications médiatiques en
+                            santé </marquage>(2<exposant>e</exposant> éd.)<marquage typemarq="italique">.</marquage>
+                        Montréal, Québec: Institut national de santé publique du Québec. </refbiblio><refbiblio id="rb9">Caron-Bouchard, M. et Renaud, L. (2010). Un modèle
+                        dynamique interactif écosocial pour mieux comprendre l’apport des médias
+                        dans le façonnement des normes sociales en matière de santé. Dans L. Renaud
+                        (dir.), <marquage typemarq="italique">Les médias et la santé : de l’émergence à
+                            l’appropriation des normes sociales</marquage> (p. 9-31). Québec, Québec:
+                        Presses de l’Université du Québec. </refbiblio><refbiblio id="rb10">
+                        Cherba
+                        ,
+                         M. et Vásquez
+                        ,
+                         C. 
+                        (
+                        2014
+                        )
+                        . Communication organisationnelle et santé : état de l’art
+                            et défis. 
+                        <marquage typemarq="italique">Communication et organisation</marquage>
+                        , (
+                        45
+                        )
+                        , 223-242.
+                    </refbiblio><refbiblio id="rb11">
+                        Cohen, D. A., Scribner, R. A. et Farley, T. A. (2000). 
+                        A structural model of health behavior: A pragmatic
+                            approach to explain and influence health behaviors at the population
+                            level. 
+                        <marquage typemarq="italique">Preventive Medicine</marquage>
+                        ,
+                         
+                        (30), 146–154.
+                    </refbiblio><refbiblio id="rb12">Cordelier, B. et Tine, M. A. (2010). L’intégration de
+                        l’organisation par les pratiques collaboratives. La sanction de l’individu
+                        par le collectif. Dans R. Bonnet et G. Gramaccia (dir.), <marquage typemarq="italique">Management et communication. Mutations, emprunts et
+                            résonances </marquage>(p. 207-222). Paris, France: L’Harmattan. </refbiblio><refbiblio id="rb13">
+                        Coutant
+                        ,
+                         A. 
+                        (
+                        2016
+                        )
+                        . Vu sur Facebook 
+                        ! 
+                        L’impensé des médias socionumériques. Dans P.
+                         
+                        Robert (dir), 
+                        <marquage typemarq="italique">L’impensé numérique. Tome</marquage>
+                        <marquage typemarq="italique"> </marquage>
+                        <marquage typemarq="italique">1</marquage>
+                         
+                        (p. 105-117)
+                        <marquage typemarq="italique">. </marquage>
+                        Paris, France
+                        : 
+                        Éditions des Archives contemporaines.
+                    </refbiblio><refbiblio id="rb14">
+                        Elissalde, J, Gaudet, J et Renaud, L. (2010). Circulation
+                            des connaissances : modèle et stratégies. 
+                        <marquage typemarq="italique">Revue internationale de communication
+                            sociale et publique,</marquage>
+                         (3-4), 135-149.
+                    </refbiblio><refbiblio id="rb15">
+                        Fontaine, M. (2012). 
+                        <marquage typemarq="italique">L’utilisation d’Internet au Québec en août
+                            2012 : un taux qui remonte!</marquage>
+                        . 
+                        Montréal, Québec: CEFRIO.
+                    </refbiblio><refbiblio id="rb16">
+                        Fox
+                        ,
+                         S. et Gilbert
+                        ,
+                         J. 
+                        (
+                        2015
+                        ). 
+                        Mapping Collective Sense
+                         
+                        making in Communication: The Interprofessional Patient
+                            Case Review in Acute Care Rounds. 
+                        <marquage typemarq="italique">Health Interprofessional Practice</marquage>
+                        , 
+                        <marquage typemarq="italique">2</marquage>
+                        (
+                        4
+                        ). 
+                        <liensimple id="ls3" xlink:href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=2ahUKEwiy-NbLjrnoAhVyl3IEHe5oCRsQFjABegQIBxAB&amp;url=http%3A%2F%2Fsummit.sfu.ca%2Fsystem%2Ffiles%2Firitems1%2F15361%2Fetd8846_SFox.pdf&amp;usg=AOvVaw1e_IM6ZaT7d47cPSS8QxeX" xlink:type="simple">
+                            https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=2ahUKEwiy-NbLjrnoAhVyl3IEHe5oCRsQFjABegQIBxAB&amp;url=http%3A%2F%2Fsummit.sfu.ca%2Fsystem%2Ffiles%2Firitems1%2F15361%2Fetd8846_SFox.pdf&amp;usg=AOvVaw1e_IM6ZaT7d47cPSS8QxeX
+                        </liensimple>
+                    </refbiblio><refbiblio id="rb17">Gesit-Martin, P. et Scarduzio, J.
+                            (2011). Working well: Reconsidering Health Communication at work. Dans
+                            T. Thompson, R. Parrott, et J. Nussbaum (dir.), <marquage typemarq="italique">The Routledge handbook of health
+                            communication</marquage> (2<exposant>e</exposant> éd. ; p. 117–131). New York,
+                        NY: Routledge. </refbiblio><refbiblio id="rb18">Gaudet, J. <marquage typemarq="italique">et al.</marquage> (2016).
+                        Comment évaluer des outils de mobilisation des connaissances Web 2.0 ?
+                        Réflexions conceptuelles et méthodologiques. <marquage typemarq="italique">Revue
+                            francophone de recherche sur le transfert et l’utilisation des
+                            connaissances</marquage>, <marquage typemarq="italique">1</marquage>(1). <liensimple id="ls4" xlink:href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=2ahUKEwie9MStj7noAhWbknIEHTruBW0QFjAAegQIBBAB&amp;url=http%3A%2F%2Fwww.revue-tuc.ca%2Findex.php%2Faccueil%2Farticle%2Fdownload%2F4%2F2&amp;usg=AOvVaw2uGSaMtTL_3agGSkNBcD-S" xlink:type="simple">https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=2ahUKEwie9MStj7noAhWbknIEHTruBW0QFjAAegQIBBAB&amp;url=http%3A%2F%2Fwww.revue-tuc.ca%2Findex.php%2Faccueil%2Farticle%2Fdownload%2F4%2F2&amp;usg=AOvVaw2uGSaMtTL_3agGSkNBcD-S</liensimple></refbiblio><refbiblio id="rb19">
+                        Hornik, R. C. (2002). 
+                        <marquage typemarq="italique">Public Health Communication.</marquage>
+                         
+                        Mahwah, NJ
+                        : Lawrence Erlbaum Associates.
+                    </refbiblio><refbiblio id="rb20">Kivits J. 2012. Les usages de l’Internet-santé. Dans
+                        C. Thoër et J. J. Lévy (dir.), <marquage typemarq="italique">Internet et santé :
+                            usages, acteurs et appropriations </marquage>(p. 37-56). Québec, Québec: Presses de l’Université du Québec.
+                    </refbiblio><refbiblio id="rb21">
+                        Kreps, G. (2003). Trends and Direction in Health
+                            Communication Research. 
+                        <marquage typemarq="italique">Media and Communication</marquage>
+                        , 
+                        <marquage typemarq="italique">51</marquage>
+                        (3–4), 353–365.
+                    </refbiblio><refbiblio id="rb22">
+                        Kreps, G. (2011). Translating health communication
+                            research into practice. Dans T. Thompson, R. Parrott, et J. Nussbaum
+                            (dir.), 
+                        <marquage typemarq="italique">The Routledge Handbook of Health
+                            Communication</marquage>
+                        , (2
+                        <exposant>e</exposant>
+                         éd. p. 595-609). New York, NY : Routledge.
+                    </refbiblio><refbiblio id="rb23">
+                        Kumayika, S. K. (2001). Minisymposium on obesity: Overview
+                            and some strategic considerations. 
+                        <marquage typemarq="italique">Annual Review of Public Health</marquage>
+                        , (22), 293–308. 
+                        <liensimple id="ls5" xlink:href="https://doi.org/10.1146/annurev.publhealth.22.1.293" xlink:type="simple">
+                            https://doi.org/10.1146/annurev.publhealth.22.1.293
+                        </liensimple>
+                    </refbiblio><refbiblio id="rb24">Laquerre, M.-E. (2015). <marquage typemarq="italique">Travailler en
+                            soutien à domicile dans un contexte pluriethnique.</marquage> Québec, Québec:
+                        Presse de l’Université du Québec. </refbiblio><refbiblio id="rb25">Lepage, M., Renaud, L., Champagne, F. et Rivard, M.
+                        (2014). Évaluation comparative de stratégies visant à augmenter les
+                        interventions de courte durée pour le sevrage tabagique auprès du personnel
+                        infirmier de milieux hospitaliers : résultats d’une étude expérimentale. <marquage typemarq="italique">Recherche en soins infirmiers</marquage>, (116), 57-69. </refbiblio><refbiblio id="rb26">
+                        Lepage
+                        ,
+                         M., Sauvé
+                        ,
+                         L., Plante
+                        ,
+                         P. et Renaud
+                        ,
+                         L. 
+                        (
+                        2015
+                        )
+                        . Analyse de besoins sur l’utilisation des outils Web
+                         
+                        2.0 : éléments essentiels pour la communication dans les
+                            équipes de recherche universitaire
+                        . 
+                        <marquage typemarq="italique">Nouveaux cahiers de la recherche en
+                            éducation</marquage>
+                        , 
+                        <marquage typemarq="italique">18</marquage>
+                        (
+                        1
+                        )
+                        , 87-113.
+                    </refbiblio><refbiblio id="rb27">
+                        Maibach, E. et Parrott, R. R. (1995). 
+                        <marquage typemarq="italique">Designing Health Messages</marquage>
+                        . Thousand Oaks, CA: Sage Publications.
+                    </refbiblio><refbiblio id="rb28">Marchand, J. et Cliche, H. (2017). Is Tony the Tiger that Threatening for Kids’ Health?.
+                            <marquage typemarq="italique">Conference Proceedings:
+                            International Food Marketing Research Symposium</marquage>,
+                            Dubrovnik, Croatie.
+                    </refbiblio><refbiblio id="rb29">
+                        Montgomery
+                        ,
+                         C. 
+                        (
+                        2016
+                        )
+                        . Narratives as tools in intercultural intervention with
+                            immigrant and refugee populations. Dans
+                         
+                        J. R. Graham, A. Al-Krenawi, N. Habibov
+                         
+                        (dir
+                        .), 
+                        <marquage typemarq="italique">Diversity and Social Work in Canada</marquage>
+                         
+                        (p. 220–246
+                        ). 
+                        Toronto, Ontario/Londres, Royaume-Uni: Oxford University
+                            Press.
+                    </refbiblio><refbiblio id="rb30">Niquette, M. (2010). Marketing pharmaceutique et médias
+                        sociaux : analyse critique du discours d’une page Facebook sur le TDAH. <marquage typemarq="italique">Revue internationale du médicament</marquage>, <marquage typemarq="italique">3</marquage>(1), 52-116. </refbiblio><refbiblio id="rb31">
+                        Niquette
+                        ,
+                         M., Fournier
+                        ,
+                         V. et Coutant
+                        ,
+                         A. 
+                        (
+                        2020
+                        ). 
+                        L’alimentation un phénomène communicationnel ? La place de
+                            la
+                         
+                        communication dans la construction des représentations et
+                            pratiques alimentaires
+                        . 
+                        <marquage typemarq="italique">Communiquer</marquage>
+                        <marquage typemarq="italique">. </marquage>
+                        <marquage typemarq="italique">Revue de</marquage>
+                         
+                        <marquage typemarq="italique">communication sociale et publique</marquage>
+                        ,
+                         
+                        à paraître
+                        .
+                    </refbiblio><refbiblio id="rb32">
+                        Northouse, P. G. et
+                         Northouse
+                        , L. J. (1997). 
+                        <marquage typemarq="italique">Health Communication: Strategies for
+                            Health Professionals </marquage>
+                        (3
+                        <exposant>e</exposant>
+                         éd.).
+                         
+                        Upper Saddle River, NJ
+                        : Prentice Hall.
+                    </refbiblio><refbiblio id="rb33">
+                        Nunez-Smith, M., Wolf, E., Mikiko, H. H., Emanuel, E. J et
+                            Gross, C. P. (2008). 
+                        <marquage typemarq="italique">Media + Child and Adolescent Health: A
+                            Systmatic Review</marquage>
+                        . 
+                        Récupéré de
+                         
+                        <liensimple id="ls6" xlink:href="http://ipsdweb.ipsd.org/uploads/IPPC/CSM%20Media%20Health%20Report.pdf" xlink:type="simple">
+                            <marquage typemarq="souligne">http://ipsdweb.ipsd.org/uploads/IPPC/CSM%20Media%20Health%20Report.pdf</marquage>
+                        </liensimple>
+                    </refbiblio><refbiblio id="rb34">Opp, K. (2001). How do norms emerge? An
+                            outline of a theory. Dans R. Boudon, P. Demeulanaere et R. Viale
+                        (dir.), <marquage typemarq="italique">L’explication des normes sociales
+                        </marquage>(p. 12-43). Paris, France: Presses universitaires de France. </refbiblio><refbiblio id="rb35">
+                        Piotrow, P. T., Kincaid, D. L., Rimon, J. G. et Rhinehart,
+                            W. (1997). 
+                        <marquage typemarq="italique">Health Communication: Lessons from family
+                            planning and reproductive health. </marquage>
+                        Westport, CT: Praeger.
+                    </refbiblio><refbiblio id="rb36">
+                        Ray, E. B. et Donohew, L. (1990). 
+                        <marquage typemarq="italique">Communication and Health: Systems and
+                            applications.</marquage>
+                         
+                        Hillsdale, NJ: Lawrence Erlbaum.
+                    </refbiblio><refbiblio id="rb37">Renahy, E. (2012). Les inégalités sociales face à
+                        l’Internet santé. Dans C. Thoër et J. J. Lévy (dir.), <marquage typemarq="italique">Internet et santé : usages, acteurs et appropriations </marquage>(p. 13-36).
+                        Québec, Québec: Presses de l’Université du Québec. </refbiblio><refbiblio id="rb38">
+                        Renaud, L. (dir.) (2007). 
+                        <marquage typemarq="italique">Les médias et le façonnement des normes en
+                            matière de santé</marquage>
+                        . Québec, Québec: Presses de l’Université du Québec.
+                    </refbiblio><refbiblio id="rb39">
+                        Renaud, L. (dir.). (2010). 
+                        <marquage typemarq="italique">Les médias et la santé : de l’émergence à
+                            l’appropriation des normes sociales</marquage>
+                        . Sainte-Foy, Québec: Presses de l’Université du
+                            Québec.
+                    </refbiblio><refbiblio id="rb40">Renaud, L. (2012). Internet et la promotion de la santé.
+                        Dans C. Thoër et J. J. Lévy (dir.), <marquage typemarq="italique">Internet et santé :
+                            usages, acteurs et appropriations</marquage> (p. 133-148). Québec, Québec:
+                        Presses de l’Université du Québec. </refbiblio><refbiblio id="rb41">
+                        Renaud, L. (2020). 
+                        <marquage typemarq="italique">Planifier pour mieux agir </marquage>
+                        (3
+                        <exposant>e</exposant>
+                         éd.)
+                        <marquage typemarq="italique">. </marquage>
+                        Montréal, Québec: Éditions REFIPS.
+                    </refbiblio><refbiblio id="rb42">Renaud, L. (à paraître). Recherche participative :
+                        nécessité d’une hybridation. <marquage typemarq="italique">Communiquer</marquage>. <marquage typemarq="italique">Revue de communication sociale et publique.</marquage>
+                    </refbiblio><refbiblio id="rb43">
+                        Renaud, L., Bouchard, C., Caron-Bouchard, M., Dubé, L.,
+                            Maisonneuve, D. et Mongeau, L. (2006). 
+                        A model of mechanisms underlying the influence of media on
+                            health behaviour norms. 
+                        <marquage typemarq="italique">Canadian journal of public health</marquage>
+                        , 
+                        <marquage typemarq="italique">97</marquage>
+                        (2), 149–152.
+                    </refbiblio><refbiblio id="rb44">
+                        Renaud, L, Caron-Bouchard, M., Valderrama, A., Thoer, C.,
+                            Cherba, M., Laquerre, M.-E., Des Rivières-Pigeon, C., Courcy, I
+                        <marquage typemarq="italique">. </marquage>
+                        (2018). 
+                        Analyse des besoins auprès de parents d’un enfant autiste
+                            en vue de développer une plateforme numérique leur offrant un soutien
+                            social. 
+                        <marquage typemarq="italique">Revue CNRIS</marquage>
+                        , 
+                        <marquage typemarq="italique">9</marquage>
+                        (3). Récupéré de 
+                        <liensimple id="ls7" xlink:href="https://oraprdnt.uqtr.uquebec.ca/pls/public/gscw031?owa_no_site=357&amp;owa_no_fiche=351" xlink:type="simple">
+                            <marquage typemarq="souligne">https://oraprdnt.uqtr.uquebec.ca/pls/public/gscw031?owa_no_site=357&amp;owa_no_fiche=351</marquage>
+                        </liensimple>
+                    </refbiblio><refbiblio id="rb45">Renaud, L. et Rico de Sotelo, C.
+                            (2007). Communication et santé : des paradigmes concurrents. <marquage typemarq="italique">Santé publique</marquage>, <marquage typemarq="italique">19</marquage>(1),
+                        31-38. </refbiblio><refbiblio id="rb46">Richard, C. et Lussier, M.-T. (2016). <marquage typemarq="italique">La communication professionnelle en santé.</marquage>
+                        Montréal, Québec: ERPI. </refbiblio><refbiblio id="rb47">Rootman, I. et Gordon-El-Bihbety, D.
+                            (2008). <marquage typemarq="italique">Vision d’une culture de la santé au
+                            Canada : rapport du groupe d’experts sur la littératie en matière de
+                            santé</marquage>. Ottawa, Ontario: Association canadienne de santé publique. </refbiblio><refbiblio id="rb48">
+                        Sauvé
+                        ,
+                         L., Renaud
+                        ,
+                         L.,
+                         
+                        Kaufman
+                        ,
+                         D. et Duplàa
+                        ,
+                         E. 
+                        (
+                        2017
+                        ). 
+                        A study of an educational game to improve seniors’ quality
+                            of life. 
+                        Dans 
+                        G. Costagliola, J. Uhomoibhi, S. Zvacek et B. M. McLaren
+                            (dir.), 
+                        <marquage typemarq="italique">Computer Supp</marquage>
+                        <marquage typemarq="italique">orted Education, 8</marquage>
+                        <exposant>th</exposant>
+                        <marquage typemarq="italique"> </marquage>
+                        <marquage typemarq="italique">International Conference</marquage>
+                         
+                        (
+                        p. 179–192)
+                        . 
+                        New
+                         
+                        York, NY: Springer Book
+                        .
+                    </refbiblio><refbiblio id="rb49">
+                        
+                        Schiavo, R. (2014). 
+                        <marquage typemarq="italique">Health Communication: From Theory to
+                            Practice </marquage>
+                        (2
+                        <exposant>e</exposant>
+                         éd.)
+                        <marquage typemarq="italique">.</marquage>
+                         San Francisco, CA: Jossey-Bass.
+                    </refbiblio><refbiblio id="rb50">
+                        Seale, C. (2002). 
+                        <marquage typemarq="italique">Media and Health</marquage>
+                        . 
+                        Londres, Royaume-Uni: Sage Publications
+                    </refbiblio><refbiblio id="rb51">
+                        Sercia
+                        ,
+                         P., Girard
+                        ,
+                         A., et Boucher
+                        ,
+                         V. 
+                        (
+                        2018
+                        )
+                        . La transformation des saines habitudes de vie reliées à
+                            l’obésité en contexte d’intégration sociale des immigrants récents
+                        . 
+                        <marquage typemarq="italique">Canadian Psychology/Psychologie
+                            canadienne</marquage>
+                        , 
+                        <marquage typemarq="italique">59</marquage>
+                        (2), 187-196.
+                    </refbiblio><refbiblio id="rb52">Thoër, C. (2012). Les espaces d’échange en ligne
+                        consacrés à la santé : de nouvelles médiations de l’information santé. Dans
+                        C. Thoër et J. J. Lévy (dir.), <marquage typemarq="italique">Internet et santé :
+                            usages, acteurs et appropriations</marquage> (p. 57-92). Québec, Québec:
+                        Presses de l’Université du Québec. </refbiblio><refbiblio id="rb53">Thoër, C. (2013). Internet : un facteur de transformation
+                        de la relation médecin-patient?. <marquage typemarq="italique">Communiquer. Revue de
+                            communication sociale et publique</marquage>, (10), 1-24. </refbiblio><refbiblio id="rb54">Thoër, C., Boisvert-Beauregard, S., Plamondon, M.-C. et
+                        Vrignaud, C. (2015). <marquage typemarq="italique">Le texto, une nouvelle plateforme
+                            d’intervention pour Tel-jeunes. Usages et expériences des jeunes et des
+                            intervenants </marquage>(rapport de recherche). Montréal, Québec: ComSanté. </refbiblio><refbiblio id="rb55">
+                        Thompson, T. L., Dorsey, A., Parrott, R. et Miller, K.
+                            (2003). 
+                        <marquage typemarq="italique">Handbook of Health Communication </marquage>
+                        (1
+                        <exposant>re</exposant>
+                         éd.). Mahwah, NJ: 
+                        Routledge.
+                    </refbiblio><refbiblio id="rb56">
+                        Thompson, T. L., Dorsey, A., Parrott, R. et Miller, K.
+                            (2010), 
+                        <marquage typemarq="italique">Handbook of Health Communication </marquage>
+                        (2
+                        <exposant>e</exposant>
+                         éd.). 
+                        New York, NY: Routledge.
+                    </refbiblio><refbiblio id="rb57">
+                        Vásquez
+                        ,
+                         C. 
+                        (
+                        2012
+                        )
+                        . Être ou ne pas être
+                        …
+                         sous le script ? Enjeux identitaires de l’organisation
+                            par projet. Dans
+                         
+                        B.
+                         
+                        Cordelier et G.
+                         
+                        Gramaccia (dir
+                        .), 
+                        <marquage typemarq="italique">Management par projet : identitiés
+                            incertaines</marquage>
+                         (
+                        p. 19-34). Montréal, Québec: Presses de l’Université du
+                            Québec.
+                    </refbiblio><refbiblio id="rb58">
+                        Vasquez, C., Groleau, C. &amp; Brummans, B. (2012). 
+                        Notes from the field: Organizational shadowing as framing. 
+                        <marquage typemarq="italique">Qualitative Research in Organizations and
+                            Management: An International Journal</marquage>
+                        , Vol. 7 Iss: 2 pp. 144 – 165.
+                    </refbiblio><refbiblio id="rb59">
+                        Wallack, L., Dorfman, L., Jernigan, D. et Thmeba, M.
+                            (1993). 
+                        <marquage typemarq="italique">Media Advocacy and Public Health. </marquage>
+                        Londres, Royaume-Uni: Sage Publications
+                    </refbiblio><refbiblio id="rb60">
+                        Wise, W. (2001). The Role of Advocacy in Promoting Health. 
+                        <marquage typemarq="italique">Promotion and Education</marquage>
+                        , 
+                        <marquage typemarq="italique">8</marquage>
+                        (2), 69–74.
+                    </refbiblio><refbiblio id="rb61">
+                        Wyatt, S., Henwood, F., Hart, A. et Smith, J. (2005). The
+                            digital divide, health information and everyday life. 
+                        <marquage typemarq="italique">New Media Society</marquage>
+                        , 
+                        <marquage typemarq="italique">7</marquage>
+                        (2), 199–218.
+                    </refbiblio><refbiblio id="rb62">
+                        Xenocostas
+                        ,
+                         S., Rico de Sotelo
+                        ,
+                         C., Sauvé
+                        ,
+                         L.,
+                         
+                        Vissandjee
+                        ,
+                         B. et Boisjoli
+                        ,
+                         A. 
+                        (
+                        2014
+                        ).
+                         L’interculturel au bout du fil. 
+                        <marquage typemarq="italique">Entrevues</marquage>
+                        <marquage typemarq="italique">.</marquage>
+                        <marquage typemarq="italique"> METISS et ses recherches en action</marquage>
+                        , 
+                        <marquage typemarq="italique">5</marquage>
+                        (
+                        4
+                        )
+                        , 1-4.
+                    </refbiblio></biblio></grbiblio><merci><titre/><alinea>
+                    L’auteure tient à remercier M
+                    <exposant>me</exposant>
+                     Carmen Rico de Sotelo, Ph. D., ainsi que M. Jacques Rhéaume,
+                        Ph. D., pour leurs commentaires aux diverses versions du présent
+                        article.
+                </alinea></merci></partiesann></article>

@@ -1339,6 +1339,44 @@ class TestArticleDetailView:
         assert voirliste.decode() == '<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste ' \
                                      'des figures</a></p>'
 
+    @unittest.mock.patch.object(ArticleDigitalObject, 'infoimg')
+    def test_figure_with_float_dimensions(self, mock_infoimg):
+        article = ArticleFactory(
+            from_fixture='1068859ar',
+            localidentifier='article',
+            issue__year='2000',
+            issue__localidentifier='issue',
+            issue__journal__code='journal',
+            issue__journal__open_access=True,
+        )
+
+        mock_infoimg.content = unittest.mock.MagicMock()
+        mock_infoimg.content.serialize = unittest.mock.MagicMock(
+            return_value="""
+<infoDoc>
+    <im id="img-05-01.png">
+        <imPlGr>
+            <nomImg>2135184.png</nomImg>
+            <dimx>863.0</dimx>
+            <dimy>504.0</dimy>
+            <taille>246ko</taille>
+        </imPlGr>
+    </im>
+</infoDoc>
+            """
+        )
+
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+
+        fi1 = dom.find('figure', {'id': 'fi1'}).find('img').decode()
+        assert '<img alt="Modèle intégrateur : les mécanismes du façonnement des normes par la ' \
+               'sphère médiatique" class="lazyload img-responsive" data-aspectratio="863/504" ' \
+               'data-srcset="/fr/revues/journal/2000-issue/article/media/2135184.png 863w" ' \
+               'height="504" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1H' \
+               'AwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="863"/>' == fi1
+
     def test_table_groups_display(self):
         article = ArticleFactory(
             from_fixture='1061713ar',

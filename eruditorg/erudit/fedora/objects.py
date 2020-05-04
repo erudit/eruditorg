@@ -117,8 +117,8 @@ class ArticleDigitalObject(models.DigitalObject):
             infoimg_dict.update({
                 im_tree.get('id'): {
                     'plgr': plgr_node.text,
-                    'width': dimx_node.text if dimx_node is not None else '',
-                    'height': dimy_node.text if dimy_node is not None else '',
+                    'width': str(int(float(dimx_node.text))) if dimx_node is not None else '',
+                    'height': str(int(float(dimy_node.text))) if dimy_node is not None else '',
                 },
             })
         return infoimg_dict
