@@ -1,9 +1,10 @@
 import datetime
 import io
 import re
-import sentry_sdk
 import structlog
 
+from arabic_reshaper import reshape
+from bidi.algorithm import get_display
 from bs4 import BeautifulSoup, Tag
 from django.urls import reverse
 from django.utils import formats, timezone
@@ -91,6 +92,23 @@ registerFont(TTFont(
 registerFontFamily('NotoSansCanadianAboriginal', normal='NotoSansCanadianAboriginal')
 addMapping('NotoSansCanadianAboriginal', 0, 0, 'NotoSansCanadianAboriginal')
 
+# Amiri font (arabic)
+registerFont(TTFont('Amiri', FONTS_DIR + '/Amiri/Amiri-Regular.ttf'))
+registerFont(TTFont('Amiri-Bold', FONTS_DIR + '/Amiri/Amiri-Bold.ttf'))
+registerFont(TTFont('Amiri-Italic', FONTS_DIR + '/Amiri/Amiri-Slanted.ttf'))
+registerFont(TTFont('Amiri-BoldItalic', FONTS_DIR + '/Amiri/Amiri-BoldSlanted.ttf'))
+registerFontFamily(
+    'Amiri',
+    normal='Amiri',
+    bold='Amiri-Bold',
+    italic='Amiri-Italic',
+    boldItalic='Amiri-BoldItalic',
+)
+addMapping('Amiri', 0, 0, 'Amiri')
+addMapping('Amiri-Bold', 1, 0, 'Amiri Bold')
+addMapping('Amiri-Italic', 0, 1, 'Amiri Italic')
+addMapping('Amiri-BoldItalic', 1, 1, 'Amiri Bold Italic')
+
 # Dicts of supported characters in our fonts.
 noto_chars = TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf').face.charWidths
 cjk_chars = TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf').face.charWidths
@@ -98,6 +116,7 @@ symbola_chars = TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf').face.charW
 aboriginal_chars = TTFont(
     'NotoSansCanadianAboriginal', FONTS_DIR + '/Noto/NotoSansCanadianAboriginal-Regular.ttf',
 ).face.charWidths
+arabic_chars = TTFont('Amiri', FONTS_DIR + '/Amiri/Amiri-Regular.ttf').face.charWidths
 
 
 def get_coverpage(article):
@@ -640,6 +659,7 @@ def clean(text, article, font_weight=None):
     chars_not_in_noto = text_chars.difference(set(noto_chars.keys()))
     # If we have unsupported characters, check if they are supported by our other fonts.
     if chars_not_in_noto:
+        is_arabic = False
         unsupported_characters = []
         for char in chars_not_in_noto:
             if char in cjk_chars:
@@ -655,19 +675,28 @@ def clean(text, article, font_weight=None):
                     char,
                     f'<span fontName="NotoSansCanadianAboriginal">{char}</span>',
                 )
+            elif char in arabic_chars:
+                # We can't set font on each character because the reshaping of arabic characters
+                # based on their neighbours won't work. See below where we set the Amiri font and we
+                # reshape characters and inverse display right to left when `is_arabic` is True.
+                is_arabic = True
             else:
                 unsupported_characters.append(chr(char))
 
         if unsupported_characters:
-            with sentry_sdk.configure_scope() as scope:
-                scope.fingerprint = ['Coverpage: Unsupported characters']
             # If some characters are not supported by our fonts, log them.
             logger.error(
                 'Coverpage: Unsupported characters',
                 unsupported_characters=unsupported_characters,
                 article_pid=article.get_full_identifier(),
-                text=text,
             )
+
+        # If we have arabic characters, we need to display it right to left (`get_display()`),
+        # reshape characters based on their neighbours (`reshape()`) and set the Amiri font.
+        if is_arabic:
+            font_name = 'Amiri-Bold' if font_weight == 'bold' else 'Amiri'
+            text = get_display(reshape(f'<span fontName="{font_name}">{text}</span>'))
+
     return text
 
 

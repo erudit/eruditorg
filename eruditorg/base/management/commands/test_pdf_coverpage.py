@@ -23,6 +23,7 @@ FEDORA_IDS = [
     'erudit:erudit.globe134.globe1498639.1000860ar',
     'erudit:erudit.haf18.haf700.007801ar',
     'erudit:erudit.im118.im03868.1049943ar',
+    'erudit:erudit.ltp26.ltp3628.039051ar',
     'erudit:erudit.meta15.meta05184.1068212ar',
     'erudit:erudit.meta15.meta1279.013266ar',
     'erudit:erudit.mi115.mi04103.1053682ar',
