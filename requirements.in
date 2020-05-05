@@ -69,3 +69,5 @@ django-adv-cache-tag>=1.1.0
 django-reversion>=3.0.4
 django-reversion-compare>=0.8.6
 pydantic>=1.2
+arabic-reshaper>=2.0
+python-bidi>=0.4
