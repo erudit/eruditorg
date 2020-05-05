@@ -2,6 +2,9 @@ from .base import *  # noqa
 
 import structlog
 
+from structlog_sentry import SentryJsonProcessor
+
+
 FALLBACK_BASE_URL = 'https://retro.erudit.org/'
 
 # Metrics
@@ -270,6 +273,9 @@ structlog.configure(
     logger_factory=LoggerFactory(),
     processors=[
         structlog.processors.format_exc_info,
+        structlog.stdlib.add_logger_name,
+        structlog.stdlib.add_log_level,
+        SentryJsonProcessor(level=logging.ERROR),
         structlog.processors.JSONRenderer(sort_keys=True),
     ]
 )

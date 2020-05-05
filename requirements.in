@@ -71,3 +71,4 @@ django-reversion-compare>=0.8.6
 pydantic>=1.2
 arabic-reshaper>=2.0
 python-bidi>=0.4
+structlog-sentry>=1.2

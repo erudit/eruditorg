@@ -81,11 +81,12 @@ requests-toolbelt==0.9.1  # via eulfedora
 requests[socks]==2.23.0   # via -r requirements.in, eulfedora, influxdb, pysolr, requests-toolbelt, sickle
 roman==3.2                # via liberuditarticle
 rules==2.2                # via -r requirements.in
-sentry-sdk==0.14.2        # via -r requirements.in
+sentry-sdk==0.14.3        # via -r requirements.in, structlog-sentry
 sickle==0.6.5             # via -r requirements.in
 simplejson==3.17.0        # via -r requirements.in
 six==1.14.0               # via django-isbn-field, django-modeltranslation, django-waffle, eulfedora, eulxml, influxdb, liberuditarticle, python-dateutil, structlog
 sqlparse==0.3.1           # via -r requirements.in, django
+structlog-sentry==1.2.2   # via -r requirements.in
 structlog==20.1.0         # via -r requirements.in
 suds-py3==1.4.0.0         # via -r requirements.in
 tinycss2==1.0.2           # via -r requirements.in, cairosvg, cssselect2
