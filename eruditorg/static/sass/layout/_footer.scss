@@ -12,6 +12,17 @@ footer#site-footer {
     border-color: $mid-grey;
   }
 
+  li.disabled {
+    color: $mid-grey;
+
+    a {
+      pointer-events: none;
+      cursor: default;
+      color: $mid-grey;
+    }
+
+  }
+
   /**
   * Newsletter
   */
@@ -39,17 +50,6 @@ footer#site-footer {
 
     li {
       margin-bottom: 5px;
-
-      &.disabled {
-        color: $mid-grey;
-
-        a {
-          pointer-events: none;
-          cursor: default;
-          color: $mid-grey;
-        }
-
-      }
     }
 
   }
@@ -66,7 +66,7 @@ footer#site-footer {
   .footer-legal {
     background-color: #000;
     padding-top: $margin-vertical-default;
-    padding-bottom: $margin-vertical-default;
+    padding-bottom: $margin-vertical-default/2;
     color: #fff;
 
     p, li {
@@ -98,6 +98,23 @@ footer#site-footer {
       font-size: 20px;
     }
 
+    hr {
+      margin-top: $margin-vertical-default;
+      margin-bottom: $margin-vertical-default/2;
+    }
+
+    .footer-legal--policies {
+      li {
+        &:after {
+          content: " - ";
+          padding: 0 4px;
+        }
+
+        &:last-of-type:after {
+          content: "";
+        }
+      }
+    }
   }
 
   /**
@@ -115,6 +132,33 @@ footer#site-footer {
     .newsletter-form {
       .input-group-btn{
         white-space: normal !important;
+      }
+    }
+
+    [class*='footer-nav--'] {
+      margin: 24px 0;
+    }
+
+    .footer-legal {
+      .footer-legal--socials {
+        margin-top: 24px;
+      }
+
+      .footer-legal--coalition-publica {
+        margin-top: 48px;
+      }
+
+      .footer-legal--policies {
+        margin-bottom: 12px;
+
+        li {
+          display: block;
+
+          &:after {
+            content: "";
+            padding: 0;
+          }
+        }
       }
     }
   }

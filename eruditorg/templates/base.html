@@ -342,15 +342,12 @@
       <div class="text-center">
         <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top"><span class="arrow arrow-bar is-top"></span></a>
       </div>
-
       <div id="footer-nav" class="container">
         <div class="row">
-
-          {# newsletter #}
           <div class="col-sm-6">
             <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" class="newsletter-form" name="mc-embedded-subscribe-form" target="_blank">
               <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
-              <fieldset class="col-sm-8">
+              <fieldset>
                 <label for="mce-EMAIL">{% trans "Abonnez-vous à notre infolettre&nbsp;:" %}</label>
                 <div class="input-group">
                   <div class="input-group-btn">
@@ -361,152 +358,137 @@
               </fieldset>
             </form>
           </div>
-
-          {# nav items #}
-          <div class="col-sm-6">
-
-            <div class="child-column-fit">
-
-              <div class="col-md-6">
-                <ul class="unstyled footer-nav--about">
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en/{% endif %}" target="_blank">{% trans "À propos" %}</a></li>
-                  <li><a href="{% url 'public:brand_assets' %}">{% trans "Logo et identité" %}</a></li>
-                  <li class="disabled">{% trans "Abonnements" %}</li>
-                </ul>
-              </div>
-
-              <div class="col-md-6">
-                <div class="dropdown-buttons">
-                  {% get_current_language as LANGUAGE_CODE %}
-                  {% get_available_languages as LANGUAGES %}
-                  <div class="select">{{ LANGUAGE_CODE|language_name_local|title }} <i class="icon ion-ios-arrow-down caret"></i></div>
-                  <ul>
-                    {% for language in LANGUAGES %}
-                    {% get_language_info for language.0 as lang %}
-                    <li><a href="{% trans_current_url language.0 %}" {% if language.0 != LANGUAGE_CODE %}class="btn btn-link active"{% else %}class="btn btn-link disabled"{% endif %}>{{ lang.name_local|title }}</a></li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-
-              <hr class="col-xs-12">
-
-              <div class="col-md-6">
-                <ul class="unstyled footer-nav--publication-types">
-                  <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
-                  <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
-                  <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="{% trans 'https://www.erudit.org/public/documents/Guide_recherche.pdf' %}" target="_blank">{% trans "Aide" %}</a></li>
-                  <li class="disabled">{% trans "Plan du site" %}</li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/erudit/contact/{% else %}https://apropos.erudit.org/en/erudit-en/contact/{% endif %}" target="_blank">{% trans "Nous contacter" %}</a></li>
-                </ul>
-              </div>
-
-              <div class="col-md-6">
-                <ul class="unstyled footer-nav--help">
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
-                  </li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://www.coalition-publi.ca/{% if LANGUAGE_CODE == 'fr' %}le-projet{% endif %}" target="_blank" title="{% trans 'À propos de la Coalition Publica' %}">{% trans "Coalition Publica" %}</a>
-                  </li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://co-shs.ca/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos du projet CO.SHS' %}">{% trans "CO.SHS" %}</a>
-                  </li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% trans 'À propos de nos partenariats' %}">{% trans "Partenariat" %}</a>
-                  </li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://www.erudit.org/rapport/2019/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter le rapport annuel' %}">{% trans "Rapport annuel" %}</a>
-                  </li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter Salons' %}">{% trans "Salons" %}</a>
-                  </li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-
+          <div class="col-sm-3">
+            <ul class="unstyled footer-nav--about">
+              <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
+                <a href="{% trans 'https://apropos.erudit.org/fr/' %}" target="_blank">
+                  {% trans "À propos" %}
+                </a>
+              </li>
+              <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
+                <a href="{% trans 'https://apropos.erudit.org/fr/usagers/foire-aux-questions/' %}" target="_blank">
+                  {% trans "Aide" %}
+                </a>
+              </li>
+              <li>
+                <a href="{% trans 'https://www.erudit.org/public/documents/Guide_recherche.pdf' %}" target="_blank">
+                  {% trans "Guide de recherche" %}
+                </a>
+              </li>
+              <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
+                <a href="{% trans 'https://apropos.erudit.org/fr/erudit/contact/' %}" target="_blank">
+                  {% trans "Nous contacter" %}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <ul class="unstyled footer-nav--publication-types">
+              <li>
+                <a href="{% url 'public:journal:journal_list' %}">
+                  {% trans "Revues" %}
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'public:thesis:home' %}">
+                  {% trans "Thèses et mémoires" %}
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'public:book:home' %}">
+                  {% trans "Livres et actes" %}
+                </a>
+              </li>
+              <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
+                <a href="{% trans 'https://depot.erudit.org/?locale=fr' %}" target="_blank">
+                  {% trans "Rapports de recherche" %}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
       <div class="footer-legal">
-
         <div class="container">
-
           <div class="row">
-
             <div class="col-sm-6">
               <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-white" alt="{% trans 'Logo d’Érudit' %}" />
               <span class="erudit-headline">{% trans "Cultivez votre savoir." %}</span>
             </div>
-
-            <div class="col-sm-6 child-column-fit">
-
-              <div class="col-sm-6">
-                <p>
-                  © {% now "Y" %} {% trans "Consortium Érudit" %}
-                </p>
-                <ul class="unstyled">
-                  <li>
-                    <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique de confidentialité" %}">{% trans "Politique de confidentialité" %}</a>
-                  </li>
-                  <li>
-                    <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique relative aux cookies" %}">{% trans "Politique relative aux cookies" %}</a>
-                  </li>
-                  {% switch "maintenance" %}
-                  {% else %}
-                  <li>
-                    <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
-                  </li>
-                  {% endswitch %}
-                </ul>
-              </div>
-
-              <div class="col-sm-6">
-                <p>{% trans "Suivez-nous&nbsp;:" %}</p>
-                <ul class="social-icons inline">
-                  <li>
-                    <a href="https://www.facebook.com/%C3%89rudit-141469165320/" title="Facebook">
-                      <i class="icon ion-logo-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://twitter.com/eruditorg" title="Twitter">
-                      <i class="icon ion-logo-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/erudit/" title="Github">
-                      <i class="icon ion-logo-github"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.linkedin.com/company/3628951" title="LinkedIn">
-                      <i class="icon ion-logo-linkedin"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="{% url 'public:journal:latest_issues_rss' %}" title="RSS">
-                      <i class="icon ion-logo-rss"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
+            <div class="col-sm-3 footer-legal--socials">
+              <p>{% trans "Suivez-nous&nbsp;:" %}</p>
+              <ul class="social-icons inline">
+                <li>
+                  <a href="https://www.facebook.com/%C3%89rudit-141469165320/" title="Facebook">
+                    <i class="icon ion-logo-facebook"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/eruditorg" title="Twitter">
+                    <i class="icon ion-logo-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/erudit/" title="Github">
+                    <i class="icon ion-logo-github"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/company/3628951" title="LinkedIn">
+                    <i class="icon ion-logo-linkedin"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'public:journal:latest_issues_rss' %}" title="RSS">
+                    <i class="icon ion-logo-rss"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
-
+            <div class="col-sm-3 footer-legal--coalition-publica">
+              <a href="{% trans 'https://www.coalition-publi.ca/le-projet' %}" title="Coalition Publica" target="_blank">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                  data-srcset="{% static 'img/logo-coalition-publica.png' %} 185w"
+                  data-aspectratio="185/55"
+                  width="185"
+                  height="55"
+                  class="lazyload"
+                  title="Coalition Publica"
+                  alt="Coalition Publica"
+                />
+              </a>
+            </div>
           </div>
-
+          <hr />
+          <div class="row">
+            <div class="col-sm-9">
+              <ul class="unstyled inline footer-legal--policies">
+                <li>
+                  <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique de confidentialité" %}">
+                    {% trans "Politique de confidentialité" %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique relative aux cookies" %}">
+                    {% trans "Politique relative aux cookies" %}
+                  </a>
+                </li>
+                <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
+                  <a href="{% trans 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">
+                    {% trans "Politique et licence d’utilisation" %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <p>
+                © {% now "Y" %} {% trans "Consortium Érudit" %}
+              </p>
+            </div>
+          </div>
         </div>
-
       </div>
-
     </footer>
     {% endblock footer %}
 
