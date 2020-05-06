@@ -140,14 +140,14 @@
           {% if contributors.directors %}
             <dt>{% trans "Direction" %}</dt>
             {% for director in contributors.directors %}
-              <dd>{{ director.name }}{% if director.role %} ({{ director.role }}){% endif %}</dd>
+              <dd>{{ director.name }}{% if director.role %} ({{ director.role|join:" - " }}){% endif %}</dd>
             {% endfor %}
           {% endif %}
 
           {% if contributors.editors %}
             <dt>{% trans "Rédaction" %}</dt>
             {% for editor in contributors.editors %}
-              <dd>{{ editor.name }}{% if editor.role %} ({{ editor.role }}){% endif %}</dd>
+              <dd>{{ editor.name }}{% if editor.role %} ({{ editor.role|join:" - " }}){% endif %}</dd>
             {% endfor %}
           {% endif %}
 
