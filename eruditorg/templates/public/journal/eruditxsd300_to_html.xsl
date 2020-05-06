@@ -640,6 +640,11 @@
             </xsl:if>
           </strong>
         </xsl:when>
+        <xsl:when test="self::nomorg">
+          <strong>
+            <xsl:apply-templates/>
+          </strong>
+        </xsl:when>
         <xsl:otherwise>
           <xsl:apply-templates/>
         </xsl:otherwise>
