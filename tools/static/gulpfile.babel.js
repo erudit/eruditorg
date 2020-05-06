@@ -31,9 +31,6 @@ var args = minimist(process.argv.slice(2), {
   default: {host: 'localhost', port: '8080'}
 })
 
-/* Get env variables */
-env('.env');
-
 /* Global variables */
 const root_dir = '../../';
 const static_dir = root_dir + 'eruditorg/static/';
@@ -319,7 +316,7 @@ gulp.task('webpack-dev-server', function(callback) {
 gulp.task('watch', function() {
   // start live reload server
   // host null will make it work for Vagrant
-  livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
+  livereload.listen();
 
   // watch any less file /css directory, ** is for recursive mode
   gulp.watch(sass_dir + '/**/*.scss', gulp.parallel('build-modernizr', 'build-webpack-assets'));

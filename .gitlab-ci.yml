@@ -46,7 +46,6 @@ npm-build:
   stage: test
   image: node:latest
   before_script:
-    - cp tools/static/.env.json.sample tools/static/.env.json
     - npm install
   script:
     - npm run gulp -- build --production
