@@ -1,6 +1,7 @@
 import datetime
 import io
 import re
+import sentry_sdk
 import structlog
 
 from arabic_reshaper import reshape
@@ -684,11 +685,14 @@ def clean(text, article, font_weight=None):
                 unsupported_characters.append(chr(char))
 
         if unsupported_characters:
+            article_pid = article.get_full_identifier()
+            with sentry_sdk.configure_scope() as scope:
+                scope.fingerprint = [article_pid]
             # If some characters are not supported by our fonts, log them.
             logger.error(
                 'Coverpage: Unsupported characters',
                 unsupported_characters=unsupported_characters,
-                article_pid=article.get_full_identifier(),
+                article_pid=article_pid,
             )
 
         # If we have arabic characters, we need to display it right to left (`get_display()`),
