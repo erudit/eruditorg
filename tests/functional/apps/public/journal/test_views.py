@@ -2190,6 +2190,14 @@ class TestArticleDetailView:
                'En complément, la base de données des logiciels et projets (cf.\xa0note 2) ' \
                'propose pour l’ensemble des logicie[…]">[49]</a>\n</h2>' in html
 
+    def test_organistaion_as_author_is_displayed_in_bold(self):
+        article = ArticleFactory(from_fixture='1068900ar')
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<li class="auteur-affiliation">' \
+               '<p><strong>The MAP Research Team</strong></p>' \
+               '</li>' in html
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
