@@ -354,16 +354,16 @@ class TestContributorsMixin:
             'editors': [],
         }),
         (False, True, {
-            'directors': [{'name': 'Claude Racine', 'role': None}],
-            'editors': [{'name': 'Marie-Claude Loiselle', 'role': 'Rédactrice en chef'}],
+            'directors': [{'name': 'Claude Racine', 'role': []}],
+            'editors': [{'name': 'Marie-Claude Loiselle', 'role': ['Rédactrice en chef']}],
         }),
         (True, False, {
-            'directors': [{'name': 'Foo', 'role': 'Bar'}],
-            'editors': [],
+            'directors': [{'name': 'Foo', 'role': ['Bar']}],
+            'editors': [{'name': 'Baz', 'role': []}],
         }),
         (True, True, {
-            'directors': [{'name': 'Foo', 'role': 'Bar'}],
-            'editors': [],
+            'directors': [{'name': 'Foo', 'role': ['Bar']}],
+            'editors': [{'name': 'Baz', 'role': []}],
         }),
     ))
     def test_get_contributors(self, use_journal_info, use_issue, expected_contributors):
@@ -381,6 +381,14 @@ class TestContributorsMixin:
                 journal_information=journal_info,
             )
         )
+        journal_info.editorial_leaders.add(
+            ContributorFactory(
+                type='R',
+                name='Baz',
+                role=None,
+                journal_information=journal_info,
+            )
+        )
         mixin = ContributorsMixin()
         contributors = mixin.get_contributors(
             journal_info=journal_info if use_journal_info else None,
@@ -390,21 +398,21 @@ class TestContributorsMixin:
 
     @pytest.mark.parametrize('fixture, language, expected_contributors', (
         ('atlantis04853', 'fr', {
-            'directors': [{'name': 'Katherine Barrett', 'role': None}],
-            'editors': [{'name': 'Gayle MacDonald', 'role': None}],
+            'directors': [{'name': 'Katherine Barrett', 'role': ['Managing Editor']}],
+            'editors': [{'name': 'Gayle MacDonald', 'role': ['Editor-in-Chief']}],
         }),
         ('atlantis04853', 'en', {
-            'directors': [{'name': 'Katherine Barrett', 'role': 'Managing Editor'}],
-            'editors': [{'name': 'Gayle MacDonald', 'role': 'Editor-in-Chief'}],
+            'directors': [{'name': 'Katherine Barrett', 'role': ['Managing Editor']}],
+            'editors': [{'name': 'Gayle MacDonald', 'role': ['Editor-in-Chief']}],
 
         }),
         ('images1102374', 'fr', {
-            'directors': [{'name': 'Claude Racine', 'role': None}],
-            'editors': [{'name': 'Marie-Claude Loiselle', 'role': 'Rédactrice en chef'}],
+            'directors': [{'name': 'Claude Racine', 'role': []}],
+            'editors': [{'name': 'Marie-Claude Loiselle', 'role': ['Rédactrice en chef']}],
         }),
         ('images1102374', 'en', {
-            'directors': [{'name': 'Claude Racine', 'role': None}],
-            'editors': [{'name': 'Marie-Claude Loiselle', 'role': None}],
+            'directors': [{'name': 'Claude Racine', 'role': []}],
+            'editors': [{'name': 'Marie-Claude Loiselle', 'role': ['Rédactrice en chef']}],
         }),
     ))
     def test_do_not_display_wrong_language_roles(self, fixture, language, expected_contributors):

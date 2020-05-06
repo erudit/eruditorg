@@ -9,7 +9,7 @@ from django.http import Http404
 from django.http.response import HttpResponseRedirect
 from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
-from django.utils.translation import get_language, gettext as _
+from django.utils.translation import gettext as _
 from ipware import get_client_ip
 
 from erudit.models import Article
@@ -259,26 +259,25 @@ class ContributorsMixin:
             for director in journal_info.get_directors():
                 contributors['directors'].append({
                     'name': director.name,
-                    'role': director.role,
+                    'role': [director.role] if director.role is not None else [],
                 })
             for editor in journal_info.get_editors():
                 contributors['editors'].append({
                     'name': editor.name,
-                    'role': editor.role,
+                    'role': [editor.role] if editor.role is not None else [],
                 })
 
         # Otherwise, use the contributors from the provided issue.
         elif issue is not None:
-            language = get_language()
             for director in issue.erudit_object.get_directors():
                 contributors['directors'].append({
                     'name': director.format_name(),
-                    'role': director.role.get(language),
+                    'role': list(director.role.values()),
                 })
             for editor in issue.erudit_object.get_editors():
                 contributors['editors'].append({
                     'name': editor.format_name(),
-                    'role': editor.role.get(language),
+                    'role': list(editor.role.values()),
                 })
 
         return contributors
