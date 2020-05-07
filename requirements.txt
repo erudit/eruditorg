@@ -15,11 +15,11 @@ babel==2.8.0              # via -r requirements.in
 beautifulsoup4==4.6.1     # via -r requirements.in
 cairocffi==1.1.0          # via -r requirements.in, cairosvg
 cairosvg==2.4.2           # via -r requirements.in
-certifi==2019.11.28       # via requests, sentry-sdk
+certifi==2020.4.5.1       # via requests, sentry-sdk
 cffi==1.14.0              # via cairocffi
 chardet==3.0.4            # via -r requirements.in, requests
 colorama==0.4.3           # via -r requirements.in
-cssselect2==0.2.2         # via cairosvg
+cssselect2==0.3.0         # via cairosvg
 cssselect==1.1.0          # via lxml
 dataclasses==0.7          # via pydantic
 defusedxml==0.6.0         # via cairosvg
@@ -34,64 +34,67 @@ django-ipware==2.1.0      # via -r requirements.in
 django-isbn-field==0.5.2  # via -r requirements.in
 django-js-asset==1.2.2    # via django-ckeditor
 django-js-reverse==0.9.1  # via -r requirements.in
-django-modeltranslation==0.14.4  # via -r requirements.in
+django-modeltranslation==0.15  # via -r requirements.in
 django-polymorphic==2.1.2  # via -r requirements.in
-django-post-office==3.3.1  # via -r requirements.in
+django-post-office==3.4.0  # via -r requirements.in
 django-prometheus==2.0.0  # via -r requirements.in
 django-redis==4.11.0      # via -r requirements.in
-django-reversion-compare==0.12.0  # via -r requirements.in
-django-reversion==3.0.7   # via -r requirements.in
+django-reversion-compare==0.12.2  # via -r requirements.in
+django-reversion==3.0.7   # via -r requirements.in, django-reversion-compare
 django-taggit==1.2.0      # via -r requirements.in
 django-waffle==0.20.0     # via -r requirements.in
-django-widget-tweaks==1.4.6  # via -r requirements.in
-django==3.0.4             # via -r requirements.in, django-account-actions, django-easy-pjax, django-isbn-field, django-js-reverse, django-modeltranslation, django-polymorphic, django-post-office, django-redis, django-resumable-uploads, django-reversion, django-taggit, jsonfield
+django-widget-tweaks==1.4.8  # via -r requirements.in
+django==3.0.5             # via -r requirements.in, django-account-actions, django-easy-pjax, django-isbn-field, django-js-reverse, django-modeltranslation, django-polymorphic, django-post-office, django-redis, django-resumable-uploads, django-reversion, django-reversion-compare, django-taggit, jsonfield
 et-xmlfile==1.0.1         # via openpyxl
 feedparser==5.2.1         # via -r requirements.in
 future==0.18.2            # via arabic-reshaper
+gunicorn==20.0.4          # via -r requirements.in
 html2text==2020.1.16      # via -r requirements.in
-humanfriendly==8.1        # via django-resumable-uploads
+humanfriendly==8.2        # via django-resumable-uploads
 idna==2.9                 # via requests
-influxdb==5.2.3           # via -r requirements.in
+influxdb==5.3.0           # via -r requirements.in
 isodate==0.6.0            # via rdflib
 jdcal==1.4.1              # via openpyxl
 jsonfield==3.1.0          # via django-post-office
 lxml[cssselect]==4.5.0    # via -r requirements.in, eulxml, liberuditarticle, pikepdf, sickle
+msgpack==0.6.1            # via influxdb
 mysqlclient==1.4.6        # via -r requirements.in
 openpyxl==3.0.3           # via -r requirements.in
-pikepdf==1.10.2           # via -r requirements.in
-pillow==7.0.0             # via -r requirements.in, cairosvg, reportlab
+pikepdf==1.11.1           # via -r requirements.in
+pillow==7.1.2             # via -r requirements.in, cairosvg, reportlab
 ply==3.11                 # via -r requirements.in, eulxml
 prometheus-client==0.7.1  # via django-prometheus
 pycparser==2.20           # via cffi
 pycryptodome==3.9.7       # via eulfedora
-pydantic==1.4             # via -r requirements.in
-pyparsing==2.4.6          # via rdflib
+pydantic==1.5.1           # via -r requirements.in
+pyparsing==2.4.7          # via rdflib
 pypdf2==1.26.0            # via eulfedora
 pysocks==1.7.1            # via requests
-pysolr==3.8.1             # via -r requirements.in
 python-bidi==0.4.2        # via -r requirements.in
+pysolr==3.9.0             # via -r requirements.in
 python-dateutil==2.8.1    # via eulfedora, influxdb
 python-stdnum==1.13       # via django-isbn-field
-pytz==2019.3              # via babel, django, influxdb
-rdflib==4.2.2             # via eulfedora
+pytz==2020.1              # via babel, django, influxdb
+rdflib==5.0.0             # via eulfedora
 redis-key-tagging==0.0.3  # via -r requirements.in
 redis==3.4.1              # via django-redis, redis-key-tagging
-reportlab==3.5.34         # via -r requirements.in
+reportlab==3.5.42         # via -r requirements.in
 requests-toolbelt==0.9.1  # via eulfedora
 requests[socks]==2.23.0   # via -r requirements.in, eulfedora, influxdb, pysolr, requests-toolbelt, sickle
 roman==3.2                # via liberuditarticle
 rules==2.2                # via -r requirements.in
-sentry-sdk==0.14.3        # via -r requirements.in, structlog-sentry
+sentry-sdk==0.14.3        # via -r requirements.in
 sickle==0.6.5             # via -r requirements.in
 simplejson==3.17.0        # via -r requirements.in
-six==1.14.0               # via django-isbn-field, django-modeltranslation, django-waffle, eulfedora, eulxml, influxdb, liberuditarticle, python-dateutil, structlog
+six==1.14.0               # via django-isbn-field, django-modeltranslation, django-waffle, eulfedora, eulxml, influxdb, liberuditarticle, python-dateutil, rdflib, structlog
 sqlparse==0.3.1           # via -r requirements.in, django
 structlog-sentry==1.2.2   # via -r requirements.in
 structlog==20.1.0         # via -r requirements.in
-suds-py3==1.4.0.0         # via -r requirements.in
+suds-py3==1.4.1.0         # via -r requirements.in
 tinycss2==1.0.2           # via -r requirements.in, cairosvg, cssselect2
-urllib3==1.25.8           # via requests, sentry-sdk
-webencodings==0.5.1       # via tinycss2
+urllib3==1.25.9           # via requests, sentry-sdk
+webencodings==0.5.1       # via cssselect2, tinycss2
+whitenoise==5.0.1         # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

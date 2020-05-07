@@ -1,0 +1,14 @@
+docs
+dumps
+erudit
+locale
+Makefile
+media
+node_modules
+pytest.ini
+static
+tests
+tox.ini
+.tox
+.env
+.git

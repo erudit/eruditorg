@@ -31,6 +31,7 @@ media/*
 static/*
 !static/.gitkeep
 .env
+compose/local.yml
 
 docs/_build
 

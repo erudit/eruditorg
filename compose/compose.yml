@@ -1,0 +1,29 @@
+version: '3.4'
+
+volumes:
+  logs:
+  mariadb-data:
+
+services:
+  mariadb:
+    image: mariadb
+    volumes:
+      - "mariadb-data:/var/lib/mysql"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+  redis:
+    image: redis
+  django:
+    build:
+      context: ..
+      dockerfile: ./compose/dev/django/Dockerfile
+    image: eruditorg
+    stdin_open: true
+    tty: true
+    env_file:
+      - ./dev/django/django.env
+    volumes:
+      - ..:/opt/eruditorg
+      - "logs:/var/log/eruditorg"
+    ports:
+      - "8000:8000"
