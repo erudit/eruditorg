@@ -23,10 +23,17 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache
 
-COPY . /opt/eruditorg
+RUN addgroup --system django \
+    && adduser --system --ingroup django django
 
-COPY --from=client-builder /app/eruditorg/static/build/ /opt/eruditorg/eruditorg/static/build/
+COPY . /opt/eruditorg
+RUN mkdir /static
+RUN chown django:django /opt/eruditorg -R
+RUN chown django:django /static
+COPY --from=client-builder --chown=django:django /app/eruditorg/static/build/ /opt/eruditorg/eruditorg/static/build/
 COPY ./compose/production/django/start /start
 RUN chmod +x /start
+RUN chown django /start
+USER django
 EXPOSE 8000
 CMD /start
