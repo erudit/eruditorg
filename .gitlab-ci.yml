@@ -1,10 +1,16 @@
 stages:
   - test
-  - build
+  - docker
+  - deploy-staging
+  - switch-staging
+  - deploy-production
 
 variables:
   GIT_SUBMODULE_STRATEGY: normal
   NPM_AUDIT_IGNORE: "1179"
+
+
+###############################################################################
 
 python-unittest:
   stage: test
@@ -50,12 +56,50 @@ npm-build:
   script:
     - npm run gulp -- build --production
 
-build:
-  stage: build
+################################################################################
+
+build-docker-image:
+  stage: docker
   image:
     name: gcr.io/kaniko-project/executor:debug-v0.17.1
     entrypoint: ["/busybox/sh", "-c"]
   script:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/compose/production/django/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+    - VERSION=${CI_COMMIT_TAG:-$CI_COMMIT_SHORT_SHA}
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/compose/production/django/Dockerfile --destination $CI_REGISTRY_IMAGE:$VERSION
 
+
+###############################################################################
+
+.start_ssh_agent:
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+deploy-staging:
+  extends: .start_ssh_agent
+  stage: deploy-staging
+  image: debian:buster-slim
+  when: manual
+  script:
+    - VERSION=${CI_COMMIT_TAG:-$CI_COMMIT_SHORT_SHA}
+    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -t $TEST_SERVER "$DEPLOY_COMMAND $VERSION"
+
+switch-staging:
+  extends: .start_ssh_agent
+  stage: switch-staging
+  image: debian:buster-slim
+  when: manual
+  script:
+    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -t $TEST_SERVER "$SWITCH_COMMAND"
+
+#########################################################################
+
+deploy-production:
+  stage: deploy-production
+  when: manual
+  script:
+    - echo test

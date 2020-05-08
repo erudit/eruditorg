@@ -152,6 +152,7 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'structlog'
         },
+
         'cron_console': {
             'level': 'ERROR',
             'class': 'logging.StreamHandler',
@@ -219,6 +220,14 @@ LOGGING = {
     'loggers': {
         'root': {
             'level': 'WARNING',
+            'handlers': ['console'],
+        },
+        'gunicorn.error': {
+            'level': 'INFO',
+            'handlers': ['console'],
+        },
+        'gunicorn.access': {
+            'level': 'INFO',
             'handlers': ['console'],
         },
         'django.db.backends': {
