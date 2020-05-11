@@ -78,7 +78,8 @@ class TestJournalDetailView:
         )
         html = Client().get(url).content.decode()
         assert 'Claude Racine' in html
-        assert 'Marie-Claude Loiselle (Rédactrice en chef)' in html
+        assert '<dd>Marie-Claude Loiselle (Rédactrice en chef)</dd>' in html
+        assert 'Rédaction&nbsp;:\n          \n            Marie-Claude Loiselle (Rédactrice en chef)' in html
         assert 'Foo (Bar)' not in html
 
         # There's a director in journal_info, issue's contributors should not be displayed.
@@ -94,7 +95,8 @@ class TestJournalDetailView:
         html = Client().get(url).content.decode()
         assert 'Claude Racine (Éditeur)' not in html
         assert 'Isabelle Richer (Rédactrice adjointe)' not in html
-        assert 'Foo (Bar)' in html
+        assert '<dd>Foo (Bar)</dd>' in html
+        assert 'Direction&nbsp;:\n          \n            Foo (Bar)' in html
 
     def test_available_since_when_issues_are_not_produced_in_the_same_order_as_their_published_date(self):
         journal = JournalFactory()

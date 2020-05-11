@@ -113,14 +113,14 @@
         {% if contributors.directors %}
           {% trans "Direction&nbsp;:" %}
           {% for director in contributors.directors %}
-            {{ director.name }}{% if director.role %} ({{ director.role }}){% endif %}{% if not forloop.last %}, {% endif %}
+            {{ director.name }}{% if director.role %} ({{ director.role|join:" - " }}){% endif %}{% if not forloop.last %}, {% endif %}
           {% endfor %}
         {% endif %}
         {% if contributors.directors and contributors.editors %}/{% endif %}
         {% if contributors.editors %}
           {% trans "Rédaction&nbsp;:" %}
           {% for editor in contributors.editors %}
-            {{ editor.name }}{% if editor.role %} ({{ editor.role }}){% endif %}{% if not forloop.last %}, {% endif %}
+            {{ editor.name }}{% if editor.role %} ({{ editor.role|join:" - " }}){% endif %}{% if not forloop.last %}, {% endif %}
           {% endfor %}
         {% endif %}
         </p>
