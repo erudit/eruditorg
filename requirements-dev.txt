@@ -16,5 +16,5 @@ codecov>=1.6
 factory-boy>=2.4
 Faker>=0.7.5
 tox>=1.7
-flake8>=3.5.0
+flake8>=3.8.0
 luqum>=0.7

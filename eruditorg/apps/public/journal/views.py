@@ -338,7 +338,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         letters = solr.get_journal_authors_letters(
             self.journal.solr_code, self.get_solr_article_type())
         all_letters = ascii_uppercase
-        return OrderedDict((l, l in letters) for l in all_letters)
+        return OrderedDict((letter, letter in letters) for letter in all_letters)
 
     def get_context_data(self, **kwargs):
         context = super(JournalAuthorsListView, self).get_context_data(**kwargs)

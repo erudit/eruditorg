@@ -51,7 +51,7 @@ class JournalInformationUpdateView(
 
     @property
     def selected_language(self):
-        languages = [l[0] for l in settings.LANGUAGES]
+        languages = [lang[0] for lang in settings.LANGUAGES]
         get_lang = self.request.GET.get(self.lang_get_parameter, None)
         return get_lang if get_lang in languages else get_language()
 

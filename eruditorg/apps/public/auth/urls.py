@@ -15,8 +15,7 @@ urlpatterns = [
     url(_(r'^connexion/$'),
         auth_views.LoginView.as_view(
             template_name="public/auth/login.html",
-            authentication_form=forms.AuthenticationForm
-        ),
+            authentication_form=forms.AuthenticationForm),
         name='login'),
     url(_(r'^deconnexion/$'), auth_views.LogoutView.as_view(next_page="/"), name='logout'),
     url(_(r'^bienvenue/$'), views.UserLoginLandingRedirectView.as_view(), name="landing"),
@@ -39,16 +38,13 @@ urlpatterns = [
     ), name='password_reset'),
     url(_(r'^mot-de-passe/reinitialisation/termine/$'),
         auth_views.PasswordResetDoneView.as_view(
-            template_name='public/auth/password_reset_done.html'
-        ), name='password_reset_done'),
+            template_name='public/auth/password_reset_done.html'), name='password_reset_done'),
     url(_(r'^reinitialisation/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),  # noqa
         auth_views.PasswordResetConfirmView.as_view(
             template_name='public/auth/password_reset_confirm.html',
-            success_url=reverse_lazy('public:auth:password_reset_complete')
-        ),
+            success_url=reverse_lazy('public:auth:password_reset_complete')),
         name='password_reset_confirm'),
     url(_(r'^reinitialisation/termine/$'), auth_views.PasswordResetCompleteView.as_view(
         template_name='public/auth/password_reset_complete.html'
-    ),
-    name='password_reset_complete'),
+    ), name='password_reset_complete'),
 ]
