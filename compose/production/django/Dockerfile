@@ -24,7 +24,7 @@ RUN apt update && \
     rm -rf /root/.cache
 
 RUN addgroup --system django \
-    && adduser --system --ingroup django django
+    && adduser -u 8001 --system --ingroup django django
 
 COPY . /opt/eruditorg
 RUN mkdir /static
