@@ -123,8 +123,8 @@ class Command(BaseCommand):
             ip_range_exists = InstitutionIPAddressRange.objects.filter(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end).exists()
             assert ip_range_exists, \
-                'Unable to find the IP range [{0}, {1}] associated with the ' \
-                'restriction (ID: {3})'.format(restriction_subscription.pk)
+                f'Unable to find the IP range [{ip_start}, {ip_end}] associated with the ' \
+                'restriction (ID: {restriction_subscription.pk})'
 
         restriction_subscriber_ips_set2 = Adressesip.objects.filter(
             abonneid=restriction_subscriber.pk)
@@ -133,8 +133,8 @@ class Command(BaseCommand):
             ip_range_exists = InstitutionIPAddressRange.objects.filter(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end).exists()
             assert ip_range_exists, \
-                'Unable to find the IP range [{0}, {1}] associated with the ' \
-                'restriction (ID: {3})'.format(restriction_subscription.pk)
+                f'Unable to find the IP range [{ip_start}, {ip_end}] associated with the ' \
+                'restriction (ID: {restriction_subscription.pk})'
 
         restriction_subscriber_ips_ranges = Ipabonneinterval.objects.filter(
             abonneid=restriction_subscriber.pk)
@@ -144,8 +144,8 @@ class Command(BaseCommand):
             ip_range_exists = InstitutionIPAddressRange.objects.filter(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end).exists()
             assert ip_range_exists, \
-                'Unable to find the IP range [{0}, {1}] associated with the ' \
-                'restriction (ID: {3})'.format(restriction_subscription.pk)
+                f'Unable to find the IP range [{ip_start}, {ip_end}] associated with the ' \
+                'restriction (ID: {restriction_subscription.pk})'
 
     def _get_ip_range_from_ip(self, ip):
         if '*' not in ip:

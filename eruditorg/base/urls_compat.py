@@ -126,20 +126,16 @@ journal_url_patterns = ([
     # Article
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]*)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),
-        name="legacy_article_detail",
-    ),
+        name="legacy_article_detail"),
     url(r'^iderudit/(?P<localid>[\w-]+)$',
         journal_views_compat.ArticleDetailRedirectView.as_view(),
-        name="legacy_article_id",
-    ),
+        name="legacy_article_id"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]*)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),
-        name="legacy_article_detail_culture"
-    ),
+        name="legacy_article_detail_culture"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         journal_views_compat.ArticleDetailRedirectView.as_view(),
-        name="legacy_article_detail_culture_localidentifier"
-    )
+        name="legacy_article_detail_culture_localidentifier")
 ], 'legacy_journal')
 
 book_url_patterns = ([

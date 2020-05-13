@@ -713,11 +713,7 @@ class Line(Flowable):
         self.height = height
 
     def __repr__(self):
-        return 'Line(color=%s, width=%s, height=%s)'.format(
-            self.color,
-            self.width,
-            self.height,
-        )
+        return f'Line(color={self.color}, width={self.width}, height={self.height})'
 
     def draw(self):
         self.canv.setStrokeColor(self.color)

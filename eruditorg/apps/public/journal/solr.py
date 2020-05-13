@@ -84,7 +84,9 @@ def get_journal_authors_dict(journal_code, first_letter, article_type):
     # accent.
     all_letters = get_journal_authors_letters(
         journal_code, article_type, normalized=False)
-    relevant_letters = {l for l in all_letters if _get_first_letter(l) == first_letter}
+    relevant_letters = {
+        letter for letter in all_letters if _get_first_letter(letter) == first_letter
+    }
     if not relevant_letters:
         return OrderedDict()
     client = get_client()

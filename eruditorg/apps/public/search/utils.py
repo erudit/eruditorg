@@ -116,7 +116,7 @@ def get_search_elements(queryparams, form=None):
         codes = params.getlist(field_name, None)
         if codes is None:
             continue
-        labels = [l[1] for l in form.fields[field_name].choices if l[0] in codes]
+        labels = [lang[1] for lang in form.fields[field_name].choices if lang[0] in codes]
         if not labels:
             continue
         search_elements.append({

@@ -14,7 +14,7 @@ FIXTURE_ROOT = getattr(
     op.join(op.dirname(__file__), 'fixtures')
 )
 
-SUPPORTED_LANGUAGES = [l[0] for l in settings.LANGUAGES]
+SUPPORTED_LANGUAGES = [lang[0] for lang in settings.LANGUAGES]
 
 
 class Command(BaseCommand):

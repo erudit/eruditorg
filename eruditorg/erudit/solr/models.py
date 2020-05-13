@@ -355,7 +355,9 @@ class SolrData:
         return {
             'disciplines': [(d, d) for d in disciplines if d],
             # List of tuples of language codes and language labels.
-            'languages': [(l, LANGUAGE_LABELS.get(l)) for l in languages if l in LANGUAGE_LABELS],
+            'languages': [
+                (lang, LANGUAGE_LABELS.get(lang)) for lang in languages if lang in LANGUAGE_LABELS
+            ],
             # List of tuples of journal IDs and journal names.
             'journals': [(j['value'], j['pivot'][0]['value']) for j in journals],
         }
