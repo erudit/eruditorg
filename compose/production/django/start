@@ -10,4 +10,5 @@ python /opt/eruditorg/eruditorg/manage.py collectstatic --noinput
     --pythonpath /opt/eruditorg/eruditorg \
     --access-logfile "-" \
     --error-logfile "-" \
+    --workers=4 \
     eruditorg.wsgi
