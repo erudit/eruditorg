@@ -21,6 +21,8 @@ from .forms import (
     CounterReportForm,
     StatsFormInfo,
     STATS_FORMS_INFO,
+    CounterJR1Form,
+    CounterJR1GOAForm
 )
 
 from counter_r5.generate import CounterR5Report
@@ -207,6 +209,7 @@ class StatsLandingView(
             begin_date=begin_date,
             end_date=end_date,
         )
+
         f = StringIO()
         report.write_csv(f)
         response = HttpResponse(f.getvalue(), content_type="application/csv")
