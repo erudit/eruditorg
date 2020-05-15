@@ -2,7 +2,6 @@ import datetime as dt
 import typing
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from apps.userspace.library.shortcuts import get_last_year_of_subscription
 
 current_year = dt.datetime.now().year
 
