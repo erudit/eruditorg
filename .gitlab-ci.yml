@@ -7,7 +7,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: normal
-  NPM_AUDIT_IGNORE: "1518"
+  NPM_AUDIT_IGNORE: "1486|1518"
 
 
 ###############################################################################
