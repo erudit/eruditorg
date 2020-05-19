@@ -4,6 +4,9 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
+--extra-index-url http://pypiserver.erudit.org:8088
+--trusted-host pypiserver.erudit.org
+
 -e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions  # via -r requirements.in
 -e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@master#egg=django-resumable-uploads  # via -r requirements.in
 -e git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora  # via -r requirements.in
@@ -19,7 +22,7 @@ certifi==2020.4.5.1       # via elasticsearch, requests, sentry-sdk
 cffi==1.14.0              # via cairocffi
 chardet==3.0.4            # via -r requirements.in, requests
 colorama==0.4.3           # via -r requirements.in
-counter-r5-elasticsearch==0.4  # via -r requirements.in
+counter-r5-elasticsearch==0.5  # via -r requirements.in
 cssselect2==0.3.0         # via cairosvg
 cssselect==1.1.0          # via lxml
 dataclasses==0.7          # via pydantic
