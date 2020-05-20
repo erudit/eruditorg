@@ -93,9 +93,11 @@ env = environ.Env(
     SESSION_ENGINE=(str, 'django.contrib.sessions.backends.db'),
     POST_OFFICE=({
         'cast': {
+            'BATCH_SIZE': int,
             'OVERRIDE_RECIPIENTS': list,
         },
-    }, {}),
+    }, {'BATCH_SIZE': 25}),
+
     WEBPACK_DEV_SERVER_URL=(str, ''),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
@@ -337,11 +339,6 @@ ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT = env("ERUDIT_FEDORA_XML_CONTENT_CACHE_T
 
 # Emails
 # -----------------------------------------------------------------------------
-
-POST_OFFICE = {
-    'BATCH_SIZE': 25,
-}
-
 EMAIL_BACKEND = 'post_office.EmailBackend'
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
