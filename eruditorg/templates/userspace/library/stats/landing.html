@@ -1,5 +1,5 @@
 {% extends "userspace/library/base.html" %}
-{% load i18n %}
+{% load i18n waffle_tags %}
 
 {% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
 
@@ -26,7 +26,9 @@
 
 {% block content_main %}
 {% if last_valid_subscription %}
-   {% include "userspace/library/stats/stats_forms_partial.html" with active_form=releases.R5.active_form forms=releases.R5.forms only %}
+    {% flag "CounterR5" %}
+        {% include "userspace/library/stats/stats_forms_partial.html" with active_form=releases.R5.active_form forms=releases.R5.forms only %}
+    {% endflag %}
    {% include "userspace/library/stats/stats_forms_partial.html" with active_form=releases.R4.active_form forms=releases.R4.forms only %}
 {% else %}
 <section>
