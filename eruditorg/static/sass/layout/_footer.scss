@@ -58,11 +58,6 @@ footer#site-footer {
   * bottom part
   */
 
-  .logo-white {
-    margin-bottom: 1em;
-    display: block;
-  }
-
   .footer-legal {
     background-color: #000;
     padding-top: $margin-vertical-default;
@@ -75,10 +70,19 @@ footer#site-footer {
     }
 
     svg {
-      width: 100px;
       path, rect {
         fill: #fff;
       }
+    }
+
+    .logo-erudit {
+      margin-bottom: 1em;
+      display: block;
+      width: 100px;
+    }
+
+    .logo-coalition {
+      width: 185px;
     }
 
     a {

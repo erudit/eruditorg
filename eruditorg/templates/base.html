@@ -412,7 +412,11 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-6">
-              <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-white" alt="{% trans 'Logo d’Érudit' %}" />
+              <img
+                src="{% static 'svg/logo-erudit.svg' %}"
+                class="inline-svg logo-erudit"
+                alt="{% trans 'Logo d’Érudit' %}"
+              />
               <span class="erudit-headline">{% trans "Cultivez votre savoir." %}</span>
             </div>
             <div class="col-sm-3 footer-legal--socials">
@@ -448,14 +452,9 @@
             <div class="col-sm-3 footer-legal--coalition-publica">
               <a href="{% trans 'https://www.coalition-publi.ca/le-projet' %}" title="Coalition Publica" target="_blank">
                 <img
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                  data-srcset="{% static 'img/logo-coalition-publica.png' %} 185w"
-                  data-aspectratio="185/55"
-                  width="185"
-                  height="55"
-                  class="lazyload"
-                  title="Coalition Publica"
-                  alt="Coalition Publica"
+                  src="{% static 'svg/logo-coalition.svg' %}"
+                  class="inline-svg logo-coalition"
+                  alt="{% trans 'Coalition Publica' %}"
                 />
               </a>
             </div>
