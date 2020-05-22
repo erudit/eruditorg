@@ -47,8 +47,12 @@ class JournalListFilterForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(JournalListFilterForm, self).__init__(*args, **kwargs)
 
-        journal_types = JournalType.objects.order_by('name')
-        self.fields['types'].choices = [(t.code, t.name) for t in journal_types]
+        self.fields['types'].choices = JournalType.objects.order_by(
+            'name',
+        ).values_list(
+            'code',
+            'name',
+        )
 
         self.fields['collections'].choices = Collection.journal_collections.order_by(
             'name',
@@ -57,5 +61,9 @@ class JournalListFilterForm(forms.Form):
             'name',
         )
 
-        journal_disciplines = Discipline.objects.order_by('name')
-        self.fields['disciplines'].choices = [(d.code, d.name) for d in journal_disciplines]
+        self.fields['disciplines'].choices = Discipline.objects.order_by(
+            'name',
+        ).values_list(
+            'code',
+            'name',
+        )
