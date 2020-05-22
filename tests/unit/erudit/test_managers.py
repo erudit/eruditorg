@@ -1,9 +1,15 @@
 import pytest
 
-from erudit.models import Issue
-from erudit.models import Journal
-from erudit.test.factories import IssueFactory
-from erudit.test.factories import JournalFactory
+from erudit.models import (
+    Collection,
+    Issue,
+    Journal,
+)
+from erudit.test.factories import (
+    CollectionFactory,
+    IssueFactory,
+    JournalFactory,
+)
 
 pytestmark = pytest.mark.django_db
 
@@ -62,3 +68,14 @@ class TestInternalIssueManager:
         issues = Issue.internal_objects.all()
         assert issue_1 in issues
         assert issue_2 not in issues
+
+
+class TestJournalCollectionManager:
+    def test_returns_only_collections_associated_with_journals(self):
+        collection_1 = CollectionFactory()
+        collection_2 = CollectionFactory()
+        collection_3 = CollectionFactory()
+        collection_4 = CollectionFactory()
+        journal_1 = JournalFactory(collection=collection_1)
+        journal_2 = JournalFactory(collection=collection_2)
+        assert list(Collection.journal_collections.all()) == [collection_1, collection_2]

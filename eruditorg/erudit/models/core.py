@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 
-from ..managers.core import LegacyOrganisationManager
+from ..managers.core import LegacyOrganisationManager, JournalCollectionManager
 from ..modelfields import SizeConstrainedImageField
 
 
@@ -87,6 +87,9 @@ class Collection(models.Model):
         default=False,
     )
     """ Main collections are hosted on Érudit """
+
+    objects = models.Manager()
+    journal_collections = JournalCollectionManager()
 
     class Meta:
         verbose_name = _('Fond')

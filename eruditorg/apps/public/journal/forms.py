@@ -1,7 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.utils.text import slugify
-from erudit.models import Journal, JournalType, Collection, Discipline
+from erudit.models import JournalType, Collection, Discipline
 
 
 class JournalListFilterForm(forms.Form):
@@ -51,11 +50,12 @@ class JournalListFilterForm(forms.Form):
         journal_types = JournalType.objects.order_by('name')
         self.fields['types'].choices = [(t.code, t.name) for t in journal_types]
 
-        journals = Journal.objects.select_related('collection').all()
-        journal_collections = sorted(
-            {j.collection for j in journals},
-            key=lambda c: slugify(c.name))
-        self.fields['collections'].choices = [(c.code, c.name) for c in journal_collections]
+        self.fields['collections'].choices = Collection.journal_collections.order_by(
+            'name',
+        ).values_list(
+            'code',
+            'name',
+        )
 
         journal_disciplines = Discipline.objects.order_by('name')
         self.fields['disciplines'].choices = [(d.code, d.name) for d in journal_disciplines]
