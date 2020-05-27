@@ -66,3 +66,5 @@ docs/_build
 /eruditorg/static/vendor/**/png/
 
 /eruditorg/erudit/management/commands/fixtures/
+
+.lighthouseci/
