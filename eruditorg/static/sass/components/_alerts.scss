@@ -4,6 +4,7 @@
  */
 
 .alert {
+  position: relative;
 
   p {
     border: 1px solid $mid-grey;
@@ -106,8 +107,16 @@
     }
   }
 
+  .close {
+    font-size: 43px;
+    line-height: 0;
+    position: absolute;
+    top: 16px;
+    right: 8px;
+  }
+
   p {
-    padding: 1em;
+    padding: 14px 48px 14px 14px;
     font-size: 14px;
     line-height: 1;
     margin: 0;
@@ -116,19 +125,19 @@
     border-top: 1px solid $light-grey;
   }
 
-  .site-message-debug p {
+  .site-message-debug {
     background-color: $mid-grey;
   }
-  .site-message-info p {
+  .site-message-info {
     background-color: $colour-success;
   }
-  .site-message-warning p {
+  .site-message-warning {
     background-color: $yellow;
   }
-  .site-message-error p {
+  .site-message-error {
     background-color: $colour-warning;
   }
-  .site-message-critical p {
+  .site-message-critical {
     background-color: $colour-error;
   }
 }
