@@ -284,7 +284,7 @@
     {% if site_messages %}
     <div class="site-messages public">
       {% for site_message in site_messages %}
-      <div class="alert alert-dismissible site-message-{{ site_message.level.lower }}">
+      <div id="site-message-{{ site_message.id }}" class="alert alert-dismissible site-message-{{ site_message.level.lower }}">
         <p>
           {{ site_message.message|safe }}
         </p>

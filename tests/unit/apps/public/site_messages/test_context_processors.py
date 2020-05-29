@@ -21,6 +21,6 @@ class TestSiteMessagesContextProcessors:
         request = unittest.mock.MagicMock()
         context = active_site_messages(request)
         assert [site_message for site_message in context['site_messages']] == [
-            {'level': 'DEBUG', 'message': 'message 1'},
-            {'level': 'CRITICAL', 'message': 'message 10'},
+            {'id': 1, 'level': 'DEBUG', 'message': 'message 1'},
+            {'id': 10, 'level': 'CRITICAL', 'message': 'message 10'},
         ]
