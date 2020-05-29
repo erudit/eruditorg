@@ -38,7 +38,7 @@
   <dt class="col-sm-3">{% trans "Numéro" %}</dt>
   <dd class="col-sm-9">{{ issue.number }}</dd>
   <dt class="col-sm-3">{% trans "Personne-ressource" %}</dt>
-  <dd class="col-sm-9">{{ issue.contact }}</dd>
+  <dd class="col-sm-9">{{ issue.contact.get_full_name|default:issue.contact }}</dd>
   <dt class="col-sm-3">{% trans "Commentaires" %}</dt>
   <dd class="col-sm-9">{% if issue.comment %}{{ issue.comment }}{% else %}{% trans '[Non renseigné]' %}{% endif %}</dd>
 </dl>
