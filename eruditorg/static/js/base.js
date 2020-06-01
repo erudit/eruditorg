@@ -38,6 +38,8 @@ $('.site-messages .alert').each(function() {
         return item.trim().indexOf(id) == 0;
     })) {
         $(this).hide();
+    } else {
+        $(this).show();
     }
     $(this).find('button').on('click', function() {
         document.cookie = id + '=closed; max-age=86400; path=/';
