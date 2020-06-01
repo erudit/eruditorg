@@ -19,29 +19,29 @@ class TestSiteMessageManager:
 
         # Check that all active messages are returned.
         assert [site_message for site_message in SiteMessage.objects.active()] == [
-            {'level': 'DEBUG', 'message': 'message 1'},
-            {'level': 'INFO', 'message': 'message 3'},
-            {'level': 'WARNING', 'message': 'message 5'},
-            {'level': 'ERROR', 'message': 'message 7'},
-            {'level': 'CRITICAL', 'message': 'message 10'},
+            {'id': 1, 'level': 'DEBUG', 'message': 'message 1'},
+            {'id': 3, 'level': 'INFO', 'message': 'message 3'},
+            {'id': 5, 'level': 'WARNING', 'message': 'message 5'},
+            {'id': 7, 'level': 'ERROR', 'message': 'message 7'},
+            {'id': 10, 'level': 'CRITICAL', 'message': 'message 10'},
         ]
 
         # Check that only messages for the public site are returned.
         assert [site_message for site_message in SiteMessage.objects.public()] == [
-            {'level': 'DEBUG', 'message': 'message 1'},
-            {'level': 'CRITICAL', 'message': 'message 10'},
+            {'id': 1, 'level': 'DEBUG', 'message': 'message 1'},
+            {'id': 10, 'level': 'CRITICAL', 'message': 'message 10'},
         ]
 
         # Check that only messages for the libraries dashboard are returned.
         assert [site_message for site_message in SiteMessage.objects.library()] == [
-            {'level': 'INFO', 'message': 'message 3'},
-            {'level': 'ERROR', 'message': 'message 7'},
-            {'level': 'CRITICAL', 'message': 'message 10'},
+            {'id': 3, 'level': 'INFO', 'message': 'message 3'},
+            {'id': 7, 'level': 'ERROR', 'message': 'message 7'},
+            {'id': 10, 'level': 'CRITICAL', 'message': 'message 10'},
         ]
 
         # Check that only messages for the journals dashboard are returned.
         assert [site_message for site_message in SiteMessage.objects.journal()] == [
-            {'level': 'WARNING', 'message': 'message 5'},
-            {'level': 'ERROR', 'message': 'message 7'},
-            {'level': 'CRITICAL', 'message': 'message 10'},
+            {'id': 5, 'level': 'WARNING', 'message': 'message 5'},
+            {'id': 7, 'level': 'ERROR', 'message': 'message 7'},
+            {'id': 10, 'level': 'CRITICAL', 'message': 'message 10'},
         ]

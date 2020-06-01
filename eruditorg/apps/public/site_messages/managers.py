@@ -33,7 +33,7 @@ class SiteMessageManager(Manager):
             Q(start_date__lte=now, end_date__isnull=True) |
             Q(start_date__isnull=True, end_date__gte=now) |
             Q(setting__in=true_settings)
-        ).values('message', 'level')
+        ).values('message', 'level', 'id')
 
     def public(self):
         from .models import TargetSite

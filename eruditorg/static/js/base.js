@@ -30,3 +30,16 @@ $.ajaxSetup({
   // the POST values.
   data: { csrfmiddlewaretoken: getCsrfToken() }
 });
+
+// Hide site messages if the user has closed them.
+$('.site-messages .alert').each(function() {
+    var id = $(this).attr('id');
+    if (document.cookie.split(';').some(function(item) {
+        return item.trim().indexOf(id) == 0;
+    })) {
+        $(this).hide();
+    }
+    $(this).find('button').on('click', function() {
+        document.cookie = id + '=closed; max-age=86400; path=/';
+    });
+});
