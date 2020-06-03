@@ -2,8 +2,7 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        "https://www.erudit.org/fr/",
-        // TODO: Use staging environment instead of prod and add other URLs.
+        "https://test.erudit.org/fr/",
       ],
       settings: {
         onlyCategories: [
