@@ -179,7 +179,7 @@ STATS_FORMS_INFO = [
     ),
     StatsFormInfo(
         code='counter-r5-ira1',
-        form_class=CounterR5TRJ3Form,
+        form_class=CounterR5IRA1Form,
         tab_label=_('IR_A1'),
         title=_('Journal Article Requests'),
         description=_("Nombre de requêtes réussies d’articles en texte intégral "

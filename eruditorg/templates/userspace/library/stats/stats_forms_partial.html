@@ -3,14 +3,14 @@
 
   <ul class="nav-tabs" role="tablist">
   {% for form in forms %}
-    <li role="presentation" class="{% ifequal active_form.prefix form.prefix %}active{% endifequal %}">
+    <li role="presentation" class="{% if active_form.prefix == form.prefix %}active{% endif %}">
       <a href="#{{ form.prefix }}" aria-controls="{{ form.prefix }}" role="tab" data-toggle="tab">{{ form.form_info.tab_label }} ({{ form.release }})</a></li>
   {% endfor %}
   </ul>
 
   <div class="tab-content">
   {% for form in forms %}
-    <section role="tabpanel" class="tab-pane{% ifequal active_form.prefix form.prefix %} active{% endifequal %}" id="{{ form.prefix }}">
+    <section role="tabpanel" class="tab-pane{% if active_form.prefix == form.prefix %} active{% endif %}" id="{{ form.prefix }}">
       <h2>{% trans "COUNTER" %} {{ form.form_info.counter_release }} <br> {{ form.form_info.title }}</h2>
       <div class="row">
         <div class="col-md-7">
