@@ -89,7 +89,9 @@ env = environ.Env(
     REDIS_HOST=(str, None),
     REDIS_PORT=(int, None),
     REDIS_INDEX=(int, None),
-
+    ELASTICSEARCH_STATS_INDEX=(str, "site_usage_20*"),
+    ELASTICSEARCH_STATS_HOST=(str, None),
+    ELASTICSEARCH_STATS_PORT=(str, "9200"),
     SESSION_ENGINE=(str, 'django.contrib.sessions.backends.db'),
     POST_OFFICE=({
         'cast': {
@@ -547,6 +549,11 @@ REDIS_HOST = env('REDIS_HOST')
 REDIS_PORT = env('REDIS_PORT')
 REDIS_INDEX = env('REDIS_INDEX')
 
+
+# Elasticsearch (stats)
+ELASTICSEARCH_STATS_INDEX = env('ELASTICSEARCH_STATS_INDEX')
+ELASTICSEARCH_STATS_HOST = env('ELASTICSEARCH_STATS_HOST')
+ELASTICSEARCH_STATS_PORT = env('ELASTICSEARCH_STATS_PORT')
 SESSION_ENGINE = env('SESSION_ENGINE')
 
 # Help for lazyloading issue coverpages.
