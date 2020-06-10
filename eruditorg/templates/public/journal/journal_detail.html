@@ -204,7 +204,7 @@
     {# The journal's code is used as a primary key for the cache key. #}
     {# The content_access_granted, free_access_cache_key and LANGUAGE_CODE arguments are use to generate the cache key hash. #}
     {# The journal's update time from Fedora is used as the cache content version. #}
-    {% cache cache_timeout "public_journal_detail_back_issues" journal.code content_access_granted free_access_cache_key LANGUAGE_CODE journal.fedora_updated %}
+    {% cache LONG_TTL "public_journal_detail_back_issues" journal.code content_access_granted free_access_cache_key LANGUAGE_CODE journal.fedora_updated %}
     {% if issues %}
     <section role="tabpanel" class="tab-pane" id="back-issues">
       <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>

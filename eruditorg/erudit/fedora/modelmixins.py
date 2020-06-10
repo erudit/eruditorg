@@ -44,16 +44,6 @@ class FedoraMixin:
     def fedora_model(self):
         return self.get_fedora_model()
 
-    def _should_use_cache(self):
-        """ Tells FedoraMixin to use cache or not
-
-        This method lets the child objects of ``FedoraMixin`` implement the rules by which
-        ``FedoraMixin`` will determine if the cache should be used or not.
-
-        :return: True if the cache should be used for the given object.
-        """
-        return True
-
     def get_fedora_object(self):
         """
         Returns the eulfedora's object associated with the considered Django object.
@@ -61,9 +51,6 @@ class FedoraMixin:
 
         if not self.get_full_identifier():
             return None
-
-        if not self._should_use_cache():
-            return self.fedora_model(api, self.pid)
 
         if getattr(self, '_fedora_object', None) is None:
             self._fedora_object = self.fedora_model(api, self.pid)
@@ -88,7 +75,7 @@ class FedoraMixin:
         Returns the liberuditarticle's object associated with the considered Django object.
         """
 
-        if self._should_use_cache() and use_cache:
+        if use_cache:
             fedora_xml_content_key = self.localidentifier
             fedora_xml_content = cache.get(fedora_xml_content_key, None)
         else:
@@ -118,7 +105,7 @@ class FedoraMixin:
             pass
         else:
             # Stores the XML content of the object for further use
-            if self._should_use_cache() and use_cache:
+            if use_cache:
                 cache_set(
                     cache,
                     fedora_xml_content_key,
@@ -159,10 +146,7 @@ class FedoraMixin:
             return False
 
         try:
-            if self._should_use_cache():
-                content = get_cached_datastream_content(self.fedora_object, datastream_name)
-            else:
-                content = getattr(self.fedora_object, datastream_name).content
+            content = get_cached_datastream_content(self.fedora_object, datastream_name)
         except RequestFailed:
             return False
 

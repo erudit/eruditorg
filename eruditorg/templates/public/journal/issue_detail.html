@@ -117,7 +117,7 @@
 {# The issue's localidentifier is used as a primary key for the cache key. #}
 {# The content_access_granted and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The issue's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_issue_detail" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
+{% cache LONG_TTL "public_issue_detail" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
 {# Issue summary #}
 <main class="col-sm-8 col-md-7">
   <header class="main-header">
@@ -285,7 +285,7 @@
 {# The issue's localidentifier is used as a primary key for the cache key. #}
 {# The content_access_granted and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {# The issue's update time from Fedora is used as the cache content version. #}
-{% cache cache_timeout "public_issue_detail_back_issues" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
+{% cache LONG_TTL "public_issue_detail_back_issues" issue.localidentifier content_access_granted LANGUAGE_CODE issue.fedora_updated %}
 {% if back_issues %}
 <section class="back-issues">
   <div class="container">
