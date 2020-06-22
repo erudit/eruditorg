@@ -4,7 +4,6 @@
  */
 
 .alert {
-  position: relative;
 
   p {
     border: 1px solid $mid-grey;
@@ -109,24 +108,25 @@
 
   .alert {
     display: none;
-  }
-
-  .close {
-    font-size: 43px;
-    line-height: 0;
-    position: absolute;
-    top: 16px;
-    right: 8px;
-  }
-
-  p {
-    padding: 14px 48px 14px 14px;
-    font-size: 14px;
-    line-height: 1;
-    margin: 0;
-    text-align: center;
-    border: 0;
     border-top: 1px solid $light-grey;
+
+    .close {
+      font-size: 42px;
+      line-height: 28px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    p {
+      padding: 14px;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      text-align: center;
+      border: 0;
+      width: calc(100% - 40px);
+      display: inline-block;
+    }
   }
 
   .site-message-debug {
