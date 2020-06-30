@@ -208,6 +208,7 @@ class StatsLandingView(
             es_port=settings.ELASTICSEARCH_STATS_PORT,
             begin_date=begin_date,
             end_date=end_date,
+            global_filters={"audit.is_legitimate": True}
         )
 
         f = StringIO()
