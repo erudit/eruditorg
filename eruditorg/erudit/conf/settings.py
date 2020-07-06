@@ -40,11 +40,7 @@ FEDORA_PASSWORD = getattr(settings, 'ERUDIT_FEDORA_PASSWORD', None) \
     or 'fedoraAdmin'
 
 FEDORA_PIDSPACE = getattr(settings, 'ERUDIT_FEDORA_PIDSPACE', 'erudit')
-FEDORA_XML_CONTENT_CACHE_TIMEOUT = getattr(
-    settings, 'ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT', settings.SHORT_TTL)
 FEDORA_FILEBASED_CACHE_NAME = getattr(settings, 'ERUDIT_FEDORA_FILEBASED_CACHE_NAME', 'files')
-FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT = getattr(
-    settings, 'ERUDIT_FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT', settings.SHORT_TTL)
 
 
 # The JOURNAL_PROVIDERS setting defines the sets from which the journals can be retrieved using the
