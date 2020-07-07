@@ -931,6 +931,9 @@
     </xsl:if>
     <xsl:if test="self::grbiblio">
       <xsl:choose>
+        <xsl:when test="biblio/titre and biblio/titre != ''">
+          <xsl:value-of select="biblio/titre"/>
+        </xsl:when>
         <xsl:when test="count(biblio) = 1">{% trans "Bibliographie" %}</xsl:when>
         <xsl:otherwise>{% trans "Bibliographies" %}</xsl:otherwise>
       </xsl:choose>

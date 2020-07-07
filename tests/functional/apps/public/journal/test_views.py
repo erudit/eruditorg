@@ -2022,10 +2022,12 @@ class TestArticleDetailView:
         ('1054008ar', 'grnotebio', 'Note biographique'),
         ('1054008ar', 'grnote', 'Notes'),
         ('1059303ar', 'merci', 'Remerciements'),
+        ('009676ar', 'grbiblio', 'Bibliographie'),
         # Articles with specified titles in the XML.
         ('009676ar', 'grnotebio', 'Collaboratrice'),
         ('009381ar', 'grnote', 'Notas'),
         ('1040250ar', 'merci', 'Remerciements et financement'),
+        ('1054008ar', 'grbiblio', 'Références'),
     ))
     def test_article_annex_section_titles(self, fixture, section_id, expected_title):
         article = ArticleFactory(
