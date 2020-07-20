@@ -1,6 +1,10 @@
+import csv
+
 from django.contrib import admin
-from .models import Book, BookCollection
+from django.http import HttpResponse
 from django.utils.translation import gettext as _
+
+from .models import Book, BookCollection
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -78,6 +82,7 @@ class BookAdmin(admin.ModelAdmin):
     actions = [
         'mark_as_oa',
         'remove_cover',
+        'export_as_csv'
     ]
 
     def mark_as_oa(self, request, queryset):
@@ -87,6 +92,43 @@ class BookAdmin(admin.ModelAdmin):
     def remove_cover(self, request, queryset):
         queryset.update(cover=None)
     remove_cover.short_description = _('Supprimer les couvertures')
+
+    def export_as_csv(self, request, queryset):
+        field_labels = {field.name: field.verbose_name for field in self.model._meta.fields}
+        fields = [
+            'title',
+            'subtitle',
+            'type',
+            'year',
+            'authors',
+            'collection',
+            'slug',
+            'publisher',
+            'isbn',
+            'digital_isbn',
+            'is_published',
+            'is_open_access',
+        ]
+
+        response = HttpResponse(content_type='text/csv')
+        writer = csv.writer(response)
+        writer.writerow([field_labels.get(field) for field in fields])
+
+        def get_field_value(obj, field):
+            value_map = {
+                True: _('Oui'),
+                False: _('Non'),
+                'li': _('Livre'),
+                'ac': _('Actes'),
+            }
+            value = getattr(obj, field)
+            return value_map.get(value, value)
+
+        for obj in queryset:
+            writer.writerow(get_field_value(obj, field) for field in fields)
+
+        return response
+    export_as_csv.short_description = _('Exporter les livres en CSV')
 
 
 admin.site.register(BookCollection)
