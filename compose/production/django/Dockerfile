@@ -15,7 +15,7 @@ WORKDIR /opt/eruditorg
 COPY requirements.txt /opt/eruditorg/requirements.txt
 
 RUN apt update && \
-    apt install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev && \
+    apt install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev locales && \
     pip install wheel setuptools && \
     pip install -r requirements.txt && \
     apt purge -y --auto-remove git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev && \
@@ -25,6 +25,12 @@ RUN apt update && \
 
 RUN addgroup --system django \
     && adduser -u 8001 --system --ingroup django django
+
+RUN sed -i -e 's/# fr_CA.UTF-8 UTF-8/fr_CA.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=fr_CA.UTF-8
+ENV LANG fr_CA.UTF-8
+ENV TZ=America/New_York
 
 COPY . /opt/eruditorg
 RUN mkdir /static
