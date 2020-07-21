@@ -146,10 +146,14 @@
             font-size: smaller;
           }
 
+          .journal-access span {
+            display: inline-block;
+          }
+
         }
 
         span {
-          display: inline-block;
+          display: block;
         }
 
         p {
