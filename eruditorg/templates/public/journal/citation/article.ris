@@ -3,7 +3,7 @@ ID  - {{ article.localidentifier }}
 T1  - {{ article|format_article_title|safe }}
 {% spaceless %}{% for author in article.authors %}{% if author.firstname and author.lastname %}
 A1  - {{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}A1  - {{ author.othername|safe }}{% endif %}{% endfor %}{% endspaceless %}
-JO  - {{ journal_title|safe }}
+JO  - {{ article.issue.journal_formatted_title }}
 {% if article.issue.volume %}VL  - {{ article.issue.volume }}{% endif %}
 {% if article.issue.number %}IS  - {{ article.issue.number }}{% endif %}
 {% if article.first_page %}SP  - {{ article.first_page }}{% endif %}

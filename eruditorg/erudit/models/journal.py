@@ -1382,7 +1382,7 @@ class Article(FedoraMixin):
             'title': self.html_title,
             'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
             'close': _('&nbsp;»'),
-            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+            'journal': self.issue.journal_formatted_title,
         })
         if self.issue.volume_title:
             cite_string += ' {}'.format(self.issue.volume_title.lower())
@@ -1412,7 +1412,7 @@ class Article(FedoraMixin):
             'year': self.issue.year,
             'title': title,
             'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
-            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+            'journal': self.issue.journal_formatted_title,
         })
         if self.issue.volume:
             cite_string += ' <em>{}</em>'.format(self.issue.volume)
@@ -1437,7 +1437,7 @@ class Article(FedoraMixin):
             'open': _('«&nbsp;'),
             'title': self.html_title,
             'close': _('&nbsp;»'),
-            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+            'journal': self.issue.journal_formatted_title,
         })
         if self.issue.volume:
             cite_string += ' {},'.format(self.issue.volume)
