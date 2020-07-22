@@ -506,9 +506,8 @@ class IssueDetailView(
             pass
 
         titles = self.object.erudit_object.get_journal_title()
-        main = titles.get('main')
-        context['journal_title'] = main.title
-        context['journal_subtitle'] = main.subtitle
+        context['main_title'] = titles['main']
+        context['paral_titles'] = titles['paral']
         context['journal_formatted_title'] = self.object.journal_formatted_title
 
         context['meta_info_issue'] = self.object
