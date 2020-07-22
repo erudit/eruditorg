@@ -259,6 +259,13 @@ class Journal(FedoraMixin, FedoraDated):
             titles = current_issue.erudit_object.get_journal_title()
         return titles
 
+    @property
+    def formatted_title(self):
+        if self.current_issue:
+            return self.current_issue.journal_formatted_title
+        else:
+            return self.name
+
     # Journal-related methods and properties
     # --
 
@@ -468,6 +475,13 @@ class Issue(FedoraMixin, FedoraDated):
         Will be removed in next version.
 
     The last page of the issue """
+
+    @property
+    def journal_formatted_title(self):
+        if self.is_in_fedora:
+            return self.erudit_object.get_journal_title(formatted=True, subtitles=False)
+        else:
+            return self.journal.name
 
     @property
     def last_page(self):
