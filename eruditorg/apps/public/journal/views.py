@@ -239,6 +239,7 @@ class JournalDetailView(
             titles = current_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
             context['paral_titles'] = titles['paral']
+            context['journal_formatted_title'] = current_issue.journal_formatted_title
             context['meta_info_issue'] = current_issue
             # If we have a current issue, use its localidentifier for the cache key.
             context['primary_cache_key'] = current_issue.localidentifier
@@ -251,6 +252,8 @@ class JournalDetailView(
             )
 
             context['paral_titles'] = []
+
+            context['journal_formatted_title'] = self.object.name
 
             context['meta_info_issue'] = {
                 'localidentifier': None,
@@ -353,6 +356,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
             context['meta_info_issue'] = context['current_issue']
             # If we have a current issue, use its localidentifier for the cache key.
             context['primary_cache_key'] = context['current_issue'].localidentifier
+            context['journal_formatted_title'] = context['current_issue'].journal_formatted_title
         else:
             # If the journal does not have any issue yet, simulate one so the cache template tag
             # does have something to use to generate the cache key.
@@ -362,6 +366,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
             }
             # If we don't have a current issue, use the journal code for the cache key.
             context['primary_cache_key'] = self.journal.code
+            context['journal_formatted_title'] = self.journal.name
 
         # Fetches the JournalInformation instance associated to the current journal
         try:
@@ -504,6 +509,7 @@ class IssueDetailView(
         main = titles.get('main')
         context['journal_title'] = main.title
         context['journal_subtitle'] = main.subtitle
+        context['journal_formatted_title'] = self.object.journal_formatted_title
 
         context['meta_info_issue'] = self.object
         guest_editors = self.object.erudit_object.get_redacteurchef(

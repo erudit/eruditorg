@@ -2,7 +2,7 @@
 {% load erudit_cache_tag i18n model_formatters waffle_tags public_journal_tags %}
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
-<li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
+<li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal_formatted_title }}</a></li>
 {% endblock breadcrumb %}
 
 {% block scripts %}
@@ -252,7 +252,7 @@
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
               data-src="{% journal_logo_url journal %}"
-              alt="{% trans 'Logo pour'%} {{ journal.name }}"
+              alt="{% trans 'Logo pour'%} {{ journal_formatted_title }}"
               class="lazyload img-responsive journal_logo"
             />
           </a>
@@ -266,12 +266,12 @@
         <dl>
           {% if journal_info.email %}
           <dt>{% trans "Courriel général" %}</dt>
-          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name|urlencode }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal_formatted_title|urlencode }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
           {% endif %}
 
           {% if journal_info.subscription_email %}
           <dt>{% trans "Pour abonnements individuels" %}</dt>
-          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal.name|urlencode }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
+          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal_formatted_title|urlencode }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
           {% endif %}
 
           {% if journal_info.phone %}
@@ -286,10 +286,10 @@
       <section class="sidebar-block">
         <h2>{% trans 'Sur les réseaux sociaux' %}</h2>
         {% if journal_info.twitter_url %}
-        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js"></script>
+        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal_formatted_title }}</a> <script async src="https://platform.twitter.com/widgets.js"></script>
         {% endif %}
         {% if journal_info.facebook_url %}
-        <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
+        <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal_formatted_title }}</a></blockquote></div>
         {% endif %}
       </section>
       {% endif %}
