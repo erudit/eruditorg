@@ -263,7 +263,7 @@ class TestJournalListView:
                'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQV' \
                'R42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="\n                  ' \
                'data-src="/logo/journal/20110811144159.jpg"\n                  ' \
-               'alt="Logo pour Journal"\n                  ' \
+               'alt="Logo pour Inter"\n                  ' \
                'class="lazyload img-responsive card__figure"\n                ' \
                '/>'
         if expected_logo_display:
@@ -1275,7 +1275,7 @@ class TestArticleDetailView:
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
         # Check that "[Article sans titre]" is displayed in the header title.
-        assert '<title>[Article sans titre] – Revue – Érudit</title>' in html
+        assert '<title>[Article sans titre] – Inter – Érudit</title>' in html
         # Check that "[Article sans titre]" is displayed in the body title.
         assert '<h1 class="doc-head__title"><span class="titre">[Article sans titre]</span></h1>' in html
         # Check that "[Article sans titre]" is displayed in the breadcrumbs.

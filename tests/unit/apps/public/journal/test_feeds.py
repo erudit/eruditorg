@@ -62,7 +62,7 @@ class TestLatestIssuesFeed:
         assert '<image><url>/static/img/logo-erudit.png</url><title>Érudit</title><link>https://erudit.org</link></image>' in rss
 
         # Check the feed's items order
-        assert '<item><title>journal1, Numéro 110, supplément, hiver 2012</title><link>http://example.com/fr/revues/journal1/{year}-isssue1/</link><pubDate>{pubdate1}</pubDate><guid>http://example.com/fr/revues/journal1/{year}-isssue1/</guid></item><item><title>journal2, Numéro 110, supplément, hiver 2012</title><link>http://example.com/fr/revues/journal2/{year}-isssue2/</link><pubDate>{pubdate2}</pubDate><guid>http://example.com/fr/revues/journal2/{year}-isssue2/</guid></item>'.format(
+        assert '<item><title>Inter, Numéro 110, supplément, hiver 2012</title><link>http://example.com/fr/revues/journal1/{year}-isssue1/</link><pubDate>{pubdate1}</pubDate><guid>http://example.com/fr/revues/journal1/{year}-isssue1/</guid></item><item><title>Inter, Numéro 110, supplément, hiver 2012</title><link>http://example.com/fr/revues/journal2/{year}-isssue2/</link><pubDate>{pubdate2}</pubDate><guid>http://example.com/fr/revues/journal2/{year}-isssue2/</guid></item>'.format(
             year=now.year,
             pubdate1=self._get_pubdate(issue1.date_published),
             pubdate2=self._get_pubdate(issue2.date_published),
