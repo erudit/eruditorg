@@ -1334,7 +1334,7 @@ class Article(FedoraMixin):
 
     @property
     def series_display(self):
-        return self.issue.journal.name
+        return self.issue.journal_formatted_title
 
     @property
     def journal_type(self):

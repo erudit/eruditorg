@@ -138,7 +138,7 @@
                   {{ document.authors_display }}
                 </div>
                 <div class="col-xs-6 text-right">
-                  {{ document.issue.journal.name }}, {{ document.issue.year }}
+                  {{ document.issue.journal_formatted_title }}, {{ document.issue.year }}
                 </div>
               </div>
               <div class="checkbox">
@@ -157,7 +157,7 @@
                     <dd class="cite-mla">
                       {{ document.authors_mla }}
                       {% trans '«&nbsp;' %}{{ document.title }}.{% trans '&nbsp;»' %}
-                      <em>{{ document.issue.journal.name }}</em>, {{ document.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
+                      <em>{{ document.issue.journal_formatted_title }}</em>, {{ document.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                     </dd>
 
                     <dt>APA</dt>
@@ -165,7 +165,7 @@
                       {{ document.authors_apa }}
                       ({{ document.issue.year }}).
                       {{ document.title }}
-                      <em>{{ document.issue.journal.name }}</em>,
+                      <em>{{ document.issue.journal_formatted_title }}</em>,
                       {% if document.issue.volume %}<em>{{ document.issue.volume }}</em>{% endif %}{% if document.issue.number %}({{ document.issue.number }}){% endif %},
                       {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                     </dd>
@@ -174,7 +174,7 @@
                     <dd class="cite-chicago">
                       {{ document.authors_chicago }}
                       {% trans '«&nbsp;' %}{{ document.title }}{% trans '&nbsp;»' %}.
-                      <em>{{ document.issue.journal.name }}</em>
+                      <em>{{ document.issue.journal_formatted_title }}</em>
                       {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}{% trans 'n<sup>o</sup>' %} {{ document.issue.number }}{% endif %}
                       ({{ document.issue.year }}){% trans '&nbsp;:' %} {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                     </dd>

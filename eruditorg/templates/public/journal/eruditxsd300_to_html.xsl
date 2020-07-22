@@ -101,11 +101,11 @@
                   {% endif %}
                   <br/><br/>
                   {% if journal_info.subscription_email or journal_info.phone %}
-                    {% blocktrans trimmed with journal=article.issue.journal.name email=journal_info.subscription_email phone=journal_info.phone %}
+                    {% blocktrans trimmed with journal=article.issue.journal_formatted_title email=journal_info.subscription_email phone=journal_info.phone %}
                     Si vous souhaitez vous abonner à titre individuel, et/ou à la version papier, nous vous invitons à communiquer directement avec l’équipe de <em>{{ journal }}</em> à l’adresse <a href="mailto:{{ email }}?subject=Abonnement%20à%20la%20revue%20{{ journal|urlencode }}">{{ email }}</a> ou par téléphone au {{ phone }}.
                     {% endblocktrans %}
                   {% else %}
-                    {% blocktrans trimmed with journal=article.issue.journal.name %}
+                    {% blocktrans trimmed with journal=article.issue.journal_formatted_title %}
                     Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue%20{{ journal|urlencode }}%20–%20Accès%20aux%20articles">client@erudit.org</a>.
                     {% endblocktrans %}
                   {% endif %}
@@ -137,7 +137,7 @@
 
         <!-- issue cover image or journal logo -->
         <div class="col-md-3">
-          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
+          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal_formatted_title %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
             {% if article.issue.has_coverpage %}
             <div class="doc-head__img coverpage">
               {# The image's src is a transparent pixel placeholder. #}
@@ -148,7 +148,7 @@
                 width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
                 height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
                 class="lazyload img-responsive"
-                alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}"
+                alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal_formatted_title }}"
               />
             </div>
             {% elif article.issue.journal.has_logo %}
@@ -158,7 +158,7 @@
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                 data-src="{% journal_logo_url article.issue.journal %}"
                 class="lazyload img-responsive"
-                alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}"
+                alt="{% trans 'Logo de' %} {{ article.issue.journal_formatted_title }}"
               />
             </div>
             {% endif %}
