@@ -178,7 +178,7 @@ def get_coverpage(article):
     header = []
 
     # Journal main title.
-    journal_titles = article.issue.erudit_object.get_titles()
+    journal_titles = article.issue.erudit_object.get_journal_title()
     journal_main_title = journal_titles.get('main')
     header.append(Paragraph(
         journal_main_title.title,

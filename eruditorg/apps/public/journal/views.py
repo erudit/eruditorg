@@ -500,7 +500,7 @@ class IssueDetailView(
         except ObjectDoesNotExist:
             pass
 
-        titles = self.object.erudit_object.get_titles()
+        titles = self.object.erudit_object.get_journal_title()
         main = titles.get('main')
         context['journal_title'] = main.title
         context['journal_subtitle'] = main.subtitle
