@@ -236,11 +236,11 @@
 
           {% if journal.previous_journal %}
           <dt>{% trans "Revue précédée de…" %}</dt>
-          <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
+          <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.formatted_title }}</a></dd>
           {% endif %}
           {% if journal.next_journal %}
           <dt>{% trans "Revue suivie de…" %}</dt>
-          <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.name }}</a></dd>
+          <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.formatted_title }}</a></dd>
           {% endif %}
 
         </dl>

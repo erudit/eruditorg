@@ -12,7 +12,7 @@
   <li class="sidenav-item{% if menu_journal == 'home' %} active{% endif %}">
     <a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">
       <i class="icon ion-ios-home sidenav-icon"></i>
-      <h2 class="sidenav-label">{{ scope_current_journal.name }}</h2>
+      <h2 class="sidenav-label">{{ scope_current_journal.formatted_title }}</h2>
     </a>
   </li>
   {% if can_manage_information %}

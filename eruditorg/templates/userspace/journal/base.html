@@ -1,7 +1,7 @@
 {% extends "userspace/base.html" %}
 {% load i18n rules userspace_journal_tags %}
 
-{% block userspace_title %}{{ scope_current_journal.name }}{% endblock %}
+{% block userspace_title %}{{ scope_current_journal.formatted_title }}{% endblock %}
 
 {% block inner_nav %}
 {% if scope_user_journals|length > 1 %}
@@ -20,7 +20,7 @@
 {% endblock inner_nav %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
+<li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.formatted_title }}</a></li>
 {% endblock breadcrumb %}
 
 {% block userspace_sidenav %}{% include "userspace/journal/partials/menu.html" %}{% endblock %}

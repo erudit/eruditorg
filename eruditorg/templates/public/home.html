@@ -147,12 +147,12 @@
       <ul>
         {% for journal in new_journals %}
         <li>
-          <h3>{{ journal.name }}</h3>
+          <h3>{{ journal.formatted_title }}</h3>
           <p><small>{{ journal.disciplines.all|join:", " }}</small></p>
           {% if journal.information.about %}
           <p>{{ journal.information.about|striptags|safe|truncatewords:25 }}</p>
           {% endif %}
-          <p><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.name }}">{% trans "En savoir plus" %}</a></p>
+          <p><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.formatted_title }}">{% trans "En savoir plus" %}</a></p>
         </li>
         {% endfor %}
       </ul>

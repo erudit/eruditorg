@@ -132,7 +132,7 @@
           <span>{% trans "Revue précédée de" %}</span>
           <strong>
             <a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">
-              {{ journal.previous_journal.name }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
+              {{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
             </a>
           </strong>
           {% endif %}
@@ -140,7 +140,7 @@
           <span>{% trans "Revue suivie de" %}</span>
           <strong>
             <a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">
-              {{ journal.next_journal.name }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
+              {{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
             </a>
           </strong>
           {% endif %}
