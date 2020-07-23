@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1069092ar" typeart="article" lang="fr" ordseq="3"><admin><infoarticle><idpublic scheme="doi">10.7202/1069092ar</idpublic><pagination> <ppage>30</ppage> <dpage>42</dpage>  
+       </pagination></infoarticle><revue id="mi115" lang="fr en es"><titrerev>Management international</titrerev><titrerevparal lang="en">International Management</titrerevparal><titrerevparal lang="es">Gestiòn Internacional</titrerevparal><titrerevabr>mi</titrerevabr><idissn>1206-1697</idissn><idissnnum>1918-9222</idissnnum><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur en chef</fonction><nompers><prenom>Patrick</prenom><nomfamille>Cohendet</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur en chef</fonction><nompers><prenom>Bachir</prenom><nomfamille>Mazouz</nomfamille></nompers></redacteurchef></revue><numero id="mi05266"><volume>24</volume><nonumero>1</nonumero><pub><annee>2020</annee></pub><pubnum><date typedate="publication">2020-05-04</date></pubnum></numero><editeur><nomorg>HEC Montréal</nomorg></editeur><editeur><nomorg>Université Paris Dauphine</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Management international / International Management / Gestión Internacional</nomorg>, 2020</droitsauteur></admin><liminaire><grtitre>
+      <titre>Entre idéal du projet et consensus idéal, différentes approches de la gouvernance        démocratique des organisations à but non-lucratif</titre>
+      
+      <titreparal lang="en">Between the Ideal of the Project and Ideal Consensus: Different        Approaches to Democratic Governance in Nonprofit Organizations</titreparal>
+      <titreparal lang="es">Entre el ideal del proyecto y el consenso ideal, diferentes concepciones        de la gobernanza democrática de las organizaciones sin fines de lucro</titreparal>
+    </grtitre><grauteur><auteur id="au1"><nompers>
+        <prenom>Patrick</prenom>
+        
+        <nomfamille>Valeau</nomfamille>
+        </nompers><affiliation>
+        <alinea><marquage typemarq="italique">IAE de la Réunion</marquage></alinea>
+        </affiliation></auteur><auteur id="au2"><nompers>
+        <prenom>Hassen</prenom>
+        
+        <nomfamille>Parak</nomfamille>
+        </nompers><affiliation>
+        <alinea><marquage typemarq="italique">IAE de la Réunion</marquage></alinea>
+        </affiliation></auteur><auteur id="au3"><nompers>
+        <prenom>Frédéric</prenom>
+        
+        <nomfamille>Annette</nomfamille>
+        </nompers><affiliation>
+        <alinea><marquage typemarq="italique">IAE de la Réunion</marquage></alinea>
+        </affiliation></auteur><auteur id="au4"><nompers>
+        <prenom>Jérôme</prenom>
+        
+        <nomfamille>Boncler</nomfamille>
+        </nompers><affiliation>
+        <alinea><marquage typemarq="italique">Université de Bordeaux–IUT, Département Technique de          Commercialisation</marquage></alinea>
+        </affiliation></auteur></grauteur><resume typeresume="resume" lang="fr">
+      <alinea>La gouvernance des organisations à but non lucratif est fondée sur le principe        démocratique « <marquage typemarq="italique">un homme, une voix</marquage> ». Nos trente entretiens restituent un continuum        allant de l’« <marquage typemarq="italique">idéal du projet</marquage> » au « <marquage typemarq="italique">consensus idéal</marquage> ». L’idéal du projet        rejoint la fonction disciplinaire de la gouvernance dans le cadre de laquelle les présidents        défendent la réalisation efficiente du projet validée par la majorité. Le consensus idéal        correspond à la fonction cognitive suivant laquelle les présidents laissent le projet        évoluer en fonction des différents points de vue exprimés au sein de l’assemblée afin        d’obtenir l’adhésion de tous.</alinea>
+    </resume><resume typeresume="resume" lang="en">
+      <alinea>The governance of non-profit organizations is based on the democratic principle of        “one man, one voice”. Our thirty interviews revealed a range from the “ideal of the project”        to the “ideal consensus”. The ideal of the project connects the disciplinary function of the        governance in which the presidents defend the efficient realization of the project supported        by the majority. The ideal consensus corresponds to a cognitive approach to governance        according to which the presidents allow the project to evolve according to the different        points of view expressed within the assembly in order to obtain the commitment of        all.</alinea>
+    </resume><resume typeresume="resume" lang="es">
+      <alinea>La gobernanza de las organizaciones sin fines de lucro se basa en el principio        democrático de “un hombre, una voz”. Nuestras treinta entrevistas restauran un continuo que        va desde el “ideal del proyecto” hasta el “consenso ideal”. El ideal del proyecto se une a        la función disciplinaria de gobierno en la cual los presidentes defienden la realización        eficiente del proyecto validado por la mayoría. El consenso ideal corresponde a la función        cognitiva según la cual los presidentes dejan que el proyecto evolucione según los        diferentes puntos de vista expresados dentro de la asamblea para obtener la adhesión de        todos.</alinea>
+    </resume><grmotcle lang="fr">
+      
+      <motcle>OBNL</motcle>
+      <motcle>président</motcle>
+      <motcle>gouvernance</motcle>
+      <motcle>démocratie</motcle>
+      <motcle>conflits</motcle>
+    </grmotcle><grmotcle lang="en">
+      
+      <motcle>Nonprofit organizations</motcle>
+      <motcle>president</motcle>
+      <motcle>governance</motcle>
+      <motcle>democracy</motcle>
+      <motcle>conflicts</motcle>
+    </grmotcle><grmotcle lang="es">
+      
+      <motcle>Organizaciones sin fines de lucro</motcle>
+      <motcle>presidente</motcle>
+      <motcle>gobierno</motcle>
+      <motcle>democrático</motcle>
+      <motcle>conflictos</motcle>
+    </grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no>
+        <alinea>La « <marquage typemarq="italique">gouvernance démocratique</marquage> » constitue
+          l’un des trois critères retenus par les principaux groupes de recherche internationaux
+          (Hopkins; ISTR; EMES; ARNOVA) pour définir les organisations à but non lucratif. Ces
+          groupes considèrent ainsi des organisations (1) productrices de biens et services; (2)
+          avec une finalité sociale visant à prendre en charge des publics exclus ou des problèmes
+          ignorés et (3) caractérisées par une gouvernance démocratique garantissant leur
+          indépendance vis-à-vis des pouvoirs publics et des marchés. Cette gouvernance démocratique
+          est souvent instituée dans le cadre de lois générales indiquant que le conseil
+          d’administration et le président sont élus par une assemblée générale, composée des
+          parties prenantes membres de l’OBNL, suivant le principe « <marquage typemarq="italique">un homme, une voix</marquage> ». Ces « <marquage typemarq="italique">mécanismes
+          intentionnels internes</marquage> » de la gouvernance (Charreaux, 2003) doivent
+          normalement aboutir à l’établissement d’un projet ayant une fonction à la fois cognitive
+          et disciplinaire. Le projet peut être défini comme l’actualisation de la mission sous la
+          forme d’objectifs opérationnels à court et moyen termes associés à des moyens plus
+          précisément identifiés (Hoarau et Laville, 2008; Biondi, Chatelain, Eynaud et Sponem,
+          2010; Boncler et Valéau, 2010). Le projet s’apparente ainsi à une première forme de
+          planification stratégique guidant les actions du président et du conseil d’administration,
+          mais aussi les initiatives et les innovations sociales de l’ensemble des participants, y
+          compris notamment celles du directeur, des salariés et des bénévoles (Valéau, 1999;
+          Valéau, Eynaud, Chatelain-Ponroy et Sponem, 2018).</alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>La littérature sur les OBNL introduit un cadre d’analyse utile, mais ne fournit que
+          peu de connaissances concernant la façon dont cette gouvernance démocratique est mise à
+          l’épreuve de l’action. Les études de cas portant sur d’autres thématiques, qu’elles soient
+          anglo-saxonnes (Kelley, Lune &amp; Murphy, 2005; Kreutzer &amp; Jager, 2011) ou
+          francophones (Hoarau &amp; Laville, 2008; Boncler &amp; Valéau, 2010; Valéau &amp;
+          Annette, 2012) montrent souvent des tensions susceptibles d’émerger entre différents
+          groupes d’acteurs internes, y compris parfois au sein même du conseil d’administration
+          (Valéau, Parak &amp; Louart, 2013). Ces différents acteurs sont tout aussi impliqués, mais
+          ne partagent simplement pas la même vision du développement de leur OBNL (Drucker, 1990,
+          Laville &amp; Glémain, 2009; Boncler &amp; Valéau, 2010). Ces différends sont « normaux »
+          et constituent le corollaire logique des différentes orientations possibles des OBNL
+          (Valéau, 2003, 2015) et de la diversité des acteurs impliqués dans la prise de décision
+          démocratique (Herman &amp; Renz, 1997; Hoarau &amp; Laville, 2008; Valéau, 2003; 2015).
+          Cependant, ces différends et les conflits qui peuvent en résulter mettent à mal la
+          capacité de l’assemblée générale et du conseil d’administration à fournir un projet
+          partagé par tous. Ce problème n’est pas ou peu étudié par la littérature sur la
+          gouvernance des OBNL.</alinea>
+      </para><para id="pa3"><no>3</no>
+        <alinea>La question examinée dans le cadre de cette recherche ne concerne pas le
+          fonctionnement ordinaire de la gouvernance des OBNL, mais porte sur la façon dont les
+          présidents opèrent pour restaurer les mécanismes de la gouvernance des OBNL, lorsque ces
+          derniers sont enrayés par les différends et les conflits entre les parties prenantes
+          présentes au sein de l’assemblée générale et du conseil d’administration. En pratique, le
+          principe « un homme – une voix » peut être interprété tour à tour comme un droit de vote
+          ponctuel ou comme un droit à la parole plus permanent. Nous portons ainsi notre attention
+          sur les relations entre le président et les membres de l’assemblée générale. Plus
+          précisément, nous nous focalisons sur les arbitrages souvent implicites effectués par le
+          président, à l’intérieur des cadres définis par les membres de l’assemblée, afin de
+          réguler ces différends. Nous montrons que, lors de son élection, puis entre deux
+          renouvellements de son mandat, c’est souvent lui qui décide de prendre en compte ou non
+          les voix discordantes au sein de l’assemblée générales dans la définition du projet mis en
+          oeuvre. L’apprentissage de la gouvernance des OBNL par les présidents consiste ainsi, en
+          premier lieu, à accepter les désaccords et à faire le deuil du double idéal d’un collectif
+          uni au service d’une même cause; il implique ensuite de comprendre qu’il n’y a pas d’autre
+          choix que d’arbitrer en faveur de son projet ou du collectif.</alinea>
+      </para><para id="pa4"><no>4</no>
+        <alinea>Suivant une démarche empirico-formelle, sur la base de nos trente entretiens, nous
+          montrons que ces situations obligent les présidents à se positionner le long d’un
+          continuum situé entre deux approches : </alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea> « <marquage typemarq="italique">l’idéal du projet</marquage> » qui consiste
+              pour le président à défendre la réalisation la plus efficiente possible de sa vision
+              du projet, celle pour laquelle il a été élu. Cette approche s’appuie sur la
+              « <marquage typemarq="italique">fonction disciplinaire</marquage> » de l’assemblée
+              générale; </alinea>
+          </elemliste>
+          <elemliste>
+            <alinea> « <marquage typemarq="italique">l’idéal consensuel</marquage> » dans le cadre
+              duquel le président s’attache à débattre et redéfinir les différents aspects du projet
+              avec l’ensemble des parties prenantes de façon que tous en reconnaissent la
+              légitimité. Cette approche rejoint la « <marquage typemarq="italique">fonction
+              cognitive</marquage> » de l’assemblée. </alinea>
+          </elemliste>
+        </listenonord>
+      </para><para id="pa5"><no>5</no>
+        <alinea>Nous retrouvons ce faisant, au coeur de la gouvernance démocratique des OBNL, des
+          interrogations relativement similaires à celles des sciences politiques concernant les
+          pratiques de la démocratie au sein de nos sociétés modernes entre, d’un côté, une
+          « démocratie représentative », efficiente mais qui tend à déresponsabiliser les citoyens
+          et, de l’autre, des formes de « démocratie participative » introduisant un débat légitime
+          mais techniquement difficile à maintenir (Blondiaux, 2008; Callon, Lascoumes &amp; Barthe,
+          2001; Koeble, 2006).</alinea>
+      </para><para id="pa6"><no>6</no>
+        <alinea>L’intérêt de cet article est de contribuer, à travers les cas d’un certain nombre
+          d’OBNL françaises, à la réflexion, internationalement menée, sur les spécificités de la
+          gouvernance dans les OBNL. On sait désormais que ces organisations représentent dans le
+          monde 7 % de l’emploi et 5 % des PIB (Organisation des Nations Unies, Hopkins, 2003).
+          Partant de là, la tentation est grande de les aborder comme des entreprises comme les
+          autres et de dupliquer les normes issues du monde de l’entreprise. Eynaud (2015), Hoarau
+          et Laville (2018), Boncler et Valéau (2015) mettent cependant en avant des spécificités
+          telles que la notion de bien commun et une création de valeur multicritères nécessitant
+          d’adapter les cadres établis pour les entreprises privées. Suivant une approche similaire
+          à celle de Le Tian et Venard (2012), nous formalisons une diversité de modèles suivant
+          lesquels les présidents établissent progressivement des formes socialement construites de
+          la gouvernance démocratique dans les OBNL.</alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Nous commençons par une revue de la littérature appliquant les cadres d’analyse
+          établis par Charreaux aux spécificités des OBNL puis en les confrontant à la notion de
+          désaccords. Nous présentons ensuite notre méthode et nos résultats, puis discutons ces
+          derniers avec une attention particulière pour les recommandations auprès de ces
+          dirigeants.</alinea>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>Cadre théorique</titre><section2 id="s2n1"><no>2.
+				1</no><titre><marquage typemarq="petitecap">Les spécificités de la gouvernance des
+        OBNL</marquage></titre><para id="pa8"><no>8</no>
+        <alinea>Charreaux (1997; 2003; 2006) définit la gouvernance comme un ensemble de mécanismes
+          visant à réduire les biais décisionnels des dirigeants. Charreaux (2003) identifie deux
+          types de biais : des biais disciplinaires, dit d’agence, suivant lequel le dirigeant
+          pourrait adopter des comportements opportunistes et des biais cognitifs liés aux limites
+          des compétences et des connaissances du dirigeant. L’approche disciplinaire de la
+          gouvernance consiste ainsi à limiter les pouvoirs décisionnels des dirigeants et à cadrer
+          leurs initiatives à travers des systèmes de récompenses mais aussi de sanctions, formels
+          et informels, elle s’assure que les orientations suivies et les innovations introduites
+          sont bien conformes aux intérêts de l’entreprise. L’approche cognitive de la gouvernance
+          vise quant à elle le développement de nouvelles opportunités et la création de valeur à
+          travers les apprentissages organisationnels et l’innovation (Charreaux, 2003. Elle a pour
+          objectif « <marquage typemarq="italique">d’exploiter au mieux la connaissance spécifique
+          répartie entre les différents acteurs, de veiller à son allocation optimale</marquage> »
+          (Charreaux, 2003, p. 11). Charreaux (2003) suggère ainsi de considérer l’approche
+          partenariale et la dimension cognitive comme relevant d’un seul et même modèle visant à la
+          fois la pacification des relations avec les différentes parties prenantes et la réduction
+          des biais décisionnels. La gouvernance partenariale et cognitive se fonderait ainsi sur
+          « <marquage typemarq="italique">la variété de ressources cognitives que chaque membre
+          apporte aux organes de gouvernance</marquage> » (Toé, 2014, p. 48).</alinea>
+      </para><para id="pa9"><no>9</no>
+        <alinea>Partant de là, Charreaux (1997) examine différents types de mécanismes participant à
+          la gouvernance. Les « <marquage typemarq="italique">mécanismes externes
+          intentionnels</marquage> » incluent notamment les différents cadres législatifs auxquels
+          l’entreprise doit se plier. Les « <marquage typemarq="italique">mécanismes externes
+          spontanés</marquage> » comprennent en particulier les conditions et normes établies par
+          les marchés suivant lesquels les entreprises peuvent accéder aux ressources matérielles et
+          financières nécessaires à leur développement. Les « <marquage typemarq="italique">mécanismes internes intentionnels</marquage> » comprennent les différents organes de
+          contrôles habituellement mis en place dans les entreprises, en particulier l’assemblée
+          générale des actionnaires et le conseil d’administration. Les « <marquage typemarq="italique">mécanismes internes spontanés</marquage> » relèvent de phénomènes plus
+          informels et moins contrôlés tels que la culture d’entreprise dont les pressions
+          normatives peuvent jouer un rôle déterminant sur les comportements des dirigeants.
+          L’approche de la gouvernance proposée par Charreaux (1997) a ainsi permis d’élargir
+          l’analyse en intégrant à la fois les propriétaires et les parties prenantes. Cette
+          approche intègre ainsi des questions d’efficience et des questions de légitimité. Ce cadre
+          d’analyse permet d’aborder la plupart des organisations, il a notamment été repris dans le
+          champ des OBNL.</alinea>
+      </para><para id="pa10"><no>10</no>
+        <alinea>La gouvernance constitue un des axes de réflexion les plus importants de la
+          recherche de ces dernières années sur les OBNL. Cette littérature s’interroge sur les
+          spécificités de la gouvernance de ces organisations compte tenu d’un certain nombre de
+          caractéristiques les différenciant des entreprises classiques. Boncler et Valéau (2010),
+          Eynaud (2015), Hoarau et Laville (2008) se rejoignent ainsi sur deux spécificités des OBNL
+          en lien avec la gouvernance : l’établissement du projet afin de donner un contenu au but
+          non lucratif et à une mission souvent trop largement définie, et la notion de bien commun
+          à défaut de propriété sur laquelle se fonde le principe « <marquage typemarq="italique">un
+          homme, une voix</marquage> ». Suivant ce principe démocratique, la gouvernance ne concerne
+          plus uniquement les initiatives des dirigeants élus, mais aussi celles des autres membres,
+          ces derniers bénéficiant en général d’une large autonomie ainsi que d’un droit de regard
+          sur les orientations stratégiques de leur OBNL. Cette littérature porte à la fois sur les
+          mécanismes internes et externes : elle met en avant la capacité des OBNL à s’adapter à la
+          compétition sur les « <marquage typemarq="italique">marchés</marquage> » des subventions,
+          des sponsorings ou des dons, tout en restant fidèles à leur mission et à leur culture
+          d’origine.</alinea>
+      </para><para id="pa11"><no>11</no>
+        <alinea>Dans le cadre de cet article, nous focalisons notre attention sur les mécanismes
+          internes intentionnels de la gouvernance des OBNL, autrement dit sur l’assemblée générale
+          et le conseil d’administration. Les OBNL sont, comme les entreprises, gouvernées par une
+          assemblée générale et un conseil d’administration, mais au lieu d’être réservées à des
+          propriétaires actionnaires, ces deux instances sont, dans ce contexte, compte tenu de
+          l’absence de propriété, composées de « <marquage typemarq="italique">membres</marquage> »
+          (Boncler &amp; Valéau, 2010). L’identification des parties prenantes reconnues comme
+          membres est établie lors de la première assemblée et inscrite dans les statuts. Suivant
+          les OBNL, ce statut de membre peut être ouvert à tous sur la base d’une simple adhésion ou
+          contrôlé dans le cadre d’une procédure de cooptation plus restrictive (Boncler &amp;
+          Valéau, 2010). Cette décision fondatrice détermine qui a le droit de vote lors des
+          assemblées, qui peut être élu au CA et qui peut en devenir président. Comme le montrent
+          Eynaud, Chatelain-Ponroy et Sponem (2015), la répartition des compétences et des pouvoirs
+          entre l’assemblée, le conseil d’administration et le président varie considérablement
+          d’une OBNL à l’autre. Dans le cadre de leur étude, ces auteurs identifient des cas où
+          l’assemblée générale domine le conseil d’administration à travers ses débats, ses
+          propositions et ses votes; des cas où ces deux instances coproduisent le projet; et enfin
+          des cas où le projet est proposé par la CA à l’assemblée pour validation. Même dans ce
+          dernier cas de figure, l’assemblée générale garde légalement le dernier mot, la plupart
+          des législations nationales prévoyant au minimum une assemblée par an avec à l’ordre du
+          jour le bilan de l’année passée, le projet pour l’année à venir et la mise au vote du
+          renouvellement des mandats des dirigeants. Ces votes obligent les dirigeants élus à
+          prendre en compte les points de vue des parties prenantes habilitées de façon à pouvoir
+          constituer autour d’eux et de leur projet une majorité.</alinea>
+      </para><para id="pa12"><no>12</no>
+        <alinea>Les recherches de ces dernières années sur la gouvernance des OBNL ont surtout mis
+          en exergue la « <marquage typemarq="italique">fonction cognitive</marquage> » de
+          l’assemblée générale et du conseil d’administration. Hoarau et Laville (2008) indiquent
+          que dans les OBNL, la gouvernance partenariale et la gouvernance cognitive vont presque
+          systématiquement de pair : les différents points de vue exprimés par les parties prenantes
+          aident et incitent le président et les autres membres à prendre en compte différentes
+          finalités et valeurs (Herman et Renz, 1997; Hoarau et Laville, 2008; Biondi <marquage typemarq="italique">et al</marquage>., 2010). Cette idée a été notamment développée par
+          Herman et Renz (1997) qui ont fait le lien entre diversité des parties prenantes et
+          performance, en montrant qu’une gouvernance des OBNL élargie permet de prendre en compte
+          toutes les dimensions d’une performance multicritère. Le modèle partenarial et cognitif
+          offre ainsi une approche intégrative de la gouvernance des OBNL permettant de réunir
+          autour du président l’ensemble des parties prenantes afin de développer le bien commun de
+          façon efficiente et légitime. Valéau, Eynaud, Chatelain-Ponroy et Sponem (2018) ont
+          récemment montré que la place accordée aux volontaires de terrain et aux usagers
+          facilitait l’enracinement de la planification stratégique dans la mission, contribuant
+          ainsi à la performance à la fois communautaire et économique de leur OBNL.</alinea>
+      </para><para id="pa13"><no>13</no>
+        <alinea>La « <marquage typemarq="italique">fonction disciplinaire</marquage> » de
+          l’assemblée générale est en revanche moins souvent abordée par la littérature comme par
+          les acteurs eux-mêmes. Pourtant, comme le rappellent Boncler et Valéau (2010) cette
+          dimension fait partie intégrante de ses prérogatives. L’assemblée générale a non seulement
+          le pouvoir d’établir qui est membre et, ce faisant, qui peut participer à la définition du
+          projet, et qui peut juger l’action des dirigeants et des autres membres sur cette base,
+          mais elle possède aussi le pouvoir d’élire et de révoquer ces derniers. Ce pouvoir,
+          juridiquement établi, est rappelé par le Haut Conseil à la Vie Associative : « <marquage typemarq="italique">une association peut souhaiter exclure un de ses membres pour un motif
+          grave, par exemple des agissements préjudiciables aux intérêts de l’association, des
+          conflits graves entre membres. […] La procédure disciplinaire mise en place doit être
+          celle définie par les statuts. En l’absence d’une instance spécialisée, l’assemblée
+          générale joue ce rôle.</marquage> » (<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="http://www.association.gouv.fr">www.association.gouv.fr</liensimple>). Cette
+          fonction disciplinaire était au coeur de l’article de Valéau (1999) sur l’autonomie
+          conditionnelle accordée aux bénévoles. Cet auteur expliquait que cette fonction
+          disciplinaire restait relativement taboue dans la mesure où elle ne cadre pas avec la
+          sémantique fraternelle habituellement mise en avant par les OBNL. Valéau (1999) montrait
+          ainsi que la liberté d’action et de parole des membres restait en pratique « <marquage typemarq="italique">conditionnelle</marquage> » au respect des lignes directrices définies
+          dans le cadre du projet. </alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>Notre étude ne porte pas directement sur l’exercice ordinaire de l’assemblée
+          générale et du conseil d’administration, c’est-à-dire les discussions (cognitives) et les
+          contrôles (disciplinaires) visant à confronter l’action des dirigeants et des autres
+          membres au projet, mais sur la difficulté d’établir ce projet en cas de différends, voire
+          de conflits, entre les parties prenantes habilitées à le définir. Cette perturbation se
+          manifeste par une incapacité de l’assemblée générale et du conseil d’administration à
+          établir un projet cohérent.</alinea>
+      </para></section2><section2 id="s2n2"><no>2.
+				2</no><titre><marquage typemarq="petitecap">La gouvernance « démocratique » à l’épreuve des
+        désaccords</marquage></titre><para id="pa15"><no>15</no>
+        <alinea>Alors que la plupart des textes sur la gouvernance des OBNL abordent la diversité
+          des parties prenantes impliquées dans la gouvernance comme une source d’inspiration, de
+          légitimité et d’efficacité, ce modèle se heurte à des réalités souvent ignorées de la vie
+          des OBNL : celles des conflits. Ces conflits contredisent les synergies naturelles entre
+          les différents modèles de la gouvernance.</alinea>
+      </para><para id="pa16"><no>16</no>
+        <alinea>L’origine de la plupart des conflits dans les OBNL découle de l’existence de deux
+          projets différents susceptibles d’opposer entre eux les acteurs de la gouvernance
+          (Drucker, 1990; Boncler &amp; Valéau, 2010; Valéau <marquage typemarq="italique">et al</marquage>., 2013; Valéau, 2015). Ces conflits opposent souvent les parties
+          prenantes de l’assemblée générale et les salariés (Boncler &amp; Valéau, 2010) ou les
+          partenaires financiers (Valéau &amp; Annette, 2012), mais ils peuvent aussi survenir au
+          sein même de l’assemblée entre les parties prenantes (Valéau <marquage typemarq="italique">et al</marquage>., 2012). Ces tensions ont souvent pour objet des dilemmes entre respect
+          absolu des valeurs et pragmatisme au service d’une plus grande efficacité (Laville, 2010).
+          La méta-analyse de Valéau (2015) montre que presque toutes les OBNL étudiées par la
+          littérature passent, à un moment de leur développement, par une crise liée à la
+          confrontation entre une approche en termes d’efficience et une vision en termes de
+          légitimité.</alinea>
+      </para><para id="pa17"><no>17</no>
+        <alinea>Au regard de la littérature, cette opposition entre les visions des différentes
+          parties prenantes ne constitue pas une exception, mais une règle relativement fréquente,
+          compte tenu de la nature duale des OBNL entre entreprise et communauté (Valéau, 2003;
+          Rousseau, 2007; Reid &amp; Karambayya, 2009). En conséquence, la gouvernance des OBNL
+          n’est pas forcément apaisée. Les cas étudiés par Kreutzer et Jager (2011) montrent les
+          effets de ces conflits sur l’implication des acteurs. Mintzberg (1983) situe ces conflits
+          dans le cadre d’une arène politique au sein de laquelle les acteurs perdent le sens de la
+          mission. Ces désaccords au sommet peuvent menacer l’équilibre et le développement des
+          OBNL.</alinea>
+      </para><para id="pa18"><no>18</no>
+        <alinea>La notion de désaccord met ainsi le modèle partenarial et cognitif, identifié comme
+          fondement naturel de gouvernance démocratique des OBNL à l’épreuve de la réalité.
+          Différents auteurs identifient ainsi certaines difficultés associées à la consultation
+          régulière des parties prenantes (Valéau, 2003; Meier &amp; Schier, 2008). Certains auteurs
+          évoquent la longueur des débats retardant l’action (Gawell, 2013; Hafsi &amp; Thomas,
+          2005). Comme le soulignent Meier et Schier (2008, p.20), une des principales limites de
+          cette approche est « la multiplication d’objectifs hétérogènes difficiles à satisfaire et
+          qui pose la question du contrôle de la conformité des actions de l’organisation à ces
+          objectifs ». Si l’agora de parties prenantes qui sous-tend le modèle partenarial et
+          cognitif constitue un atout pour définir un projet légitime, prenant en compte les
+          différents aspects liés à la mise en oeuvre de la mission (Hoarau &amp; Laville, 2008;
+          Herman &amp; Renz, 2008; Lecy <marquage typemarq="italique">et al</marquage>., 2012), la
+          consultation régulière multiplie les risques de désaccords ouverts (Mati, 2012; Valéau
+          <marquage typemarq="italique">et al</marquage>., 2013).</alinea>
+      </para><para id="pa19"><no>19</no>
+        <alinea>A l’inverse, d’autres auteurs évoquent un certain nombre de biais aboutissant à des
+          réalisations tronquées du modèle partenarial. Différents auteurs pointent ainsi certaines
+          difficultés voire certaines ambiguïtés dans la mise en oeuvre du modèle partenarial :
+          l’inclusion des uns et des autres dans les organes de gouvernance ne dépend pas seulement
+          de leur légitimité, mais aussi de leur pouvoir et de l’urgence perçue de leurs droits
+          (Mitchell, Agle &amp; Wood, 1997; Bouglet &amp; Joffre, 2015). Les OBNL intègrent
+          volontairement un certain nombre d’acteurs en tant que parties prenantes (El Abboubi,
+          2013; Bouglet &amp; Joffre, 2015). El Abboubi (2013) souligne le caractère socialement
+          construit du statut de « <marquage typemarq="italique">partie prenante</marquage> ».
+          Certaines parties prenantes peuvent ainsi être écartées par négligence ou de façon plus
+          délibérée, à des fins d’efficience.</alinea>
+      </para><para id="pa20"><no>20</no>
+        <alinea>Nous retrouvons, à travers les deux pratiques de la gouvernance démocratique dans
+          les OBNL ci-dessus évoquées, un dilemme semblable à celui identifié par les sciences
+          politiques au sein des sociétés démocratiques contemporaines entre des formes de
+          démocratie dites « <marquage typemarq="italique">représentatives</marquage> » et des
+          formes dites « <marquage typemarq="italique">participatives</marquage> » (Blondiaux, 2008;
+          Callon <marquage typemarq="italique">et al</marquage>., 2001; Koeble, 2006). La
+          gouvernance démocratique des OBNL, sur le principe « un homme - une voix », apparaît,
+          suivant les interprétations de Hoarau et Laville (2008) des grilles de Charreaux (2003),
+          fondamentalement partenariale et cognitive, mais elle peut, en pratique, suivant la grille
+          des sciences politiques, être opérationnalisée sous des formes « <marquage typemarq="italique">représentatives</marquage> » ou « <marquage typemarq="italique">participatives</marquage> ». La démocratie « <marquage typemarq="italique">représentative</marquage> » apparaît comme efficiente car elle permet des suites de
+          décisions rapides et cohérentes, mais elle pose un problème de légitimité dans la mesure
+          où elle n’implique que très ponctuellement des citoyens se reconnaissant de moins en moins
+          dans ce mode de fonctionnement (Blondiaux, 2008). Les formes de démocratie dites
+          « <marquage typemarq="italique">participatives</marquage> » ont pour objectif de raviver
+          les démocraties modernes en réinstaurant des espaces publics (Habermas, 1962) dans le
+          cadre desquels les citoyens peuvent débattre, délibérer et participer à la prise de
+          décision. Elles apparaissent cependant, selon Blondiaux (2008), difficiles à mettre en
+          pratique. Dans les OBNL, suivant un modèle démocratique dit « <marquage typemarq="italique">représentatif</marquage> », le président privilégierait une exécution
+          efficiente du projet sur la base duquel il a été élu, autrement dit, il tenterait de
+          réaliser l’« <marquage typemarq="italique">idéal du projet</marquage> ». Cette approche
+          n’est pas sans rappeler la démarche entrepreneuriale telle que définie par Filion (1990),
+          celle d’un individu porteur d’une vision stratégique cherchant à la concrétiser de la
+          façon la plus efficiente possible. Suivant une approche démocratique dite « <marquage typemarq="italique">participative</marquage> », le président multiplierait les
+          consultations et les délibérations collectives afin de permettre à l’ensemble des parties
+          prenantes de négocier, de résoudre leurs différends à travers l’élaboration conjointe d’un
+          projet reconnu, légitimé par tous, autrement dit, il prioriserait « <marquage typemarq="italique">un consensus idéal</marquage> ».</alinea>
+      </para><para id="pa21"><no>21</no>
+        <alinea>Dans le cadre de cette recherche empirico-formelle, nous explorons les désaccords
+          comme des incidents critiques révélateurs d’arbitrages souvent implicites effectués par le
+          président entre les fonction cognitive et disciplinaire de l’assemblée. Face à ces
+          situations de désaccord, les présidents se trouvent souvent pris au dépourvu et
+          s’interrogent sur la conduite à tenir. Dans le cadre de cette recherche, nous nous
+          interrogeons cependant sur la place du président : s’il apparaît normal et légitime que
+          les différentes parties prenantes défendent leurs convictions, qu’en est-il du président ?
+          Peut-il être un acteur comme les autres ou peut-il se situer au-dessus des parties ?
+          Autrement dit, doit-il utiliser son pouvoir pour défendre ses propres convictions ou
+          doit-il, après avoir tenté de convaincre, lâcher prise sur ces dernières afin de devenir
+          le garant d’un processus de co-construction visant le consensus ? Il appartient alors au
+          président de restaurer les mécanismes internes intentionnels supposés réguler son action
+          et celles des autres acteurs, en optant soit pour l’idéal du projet (le sien), soit pour
+          l’idéal démocratique suivant lequel il adapte sa vision en en fonction des demandes
+          portées par les différentes parties prenantes. Le sujet n’est pas la gouvernance en tant
+          que tel mais les restaurations des mécanismes de la gouvernance mis à mal par les
+          conflits.</alinea>
+      </para></section2></section1><section1 id="s1n3"><no>3</no><titre>Méthodologie qualitative</titre><para id="pa22"><no>22</no>
+        <alinea>Ces questions de gouvernance sont, selon nous, au coeur des sciences de gestion
+          appliquées au monde des OBNL. Elle détermine une grande partie du développement
+          technico-économique et socio-politique de ces structures. Il convient ainsi de garder un
+          point de vue purement scientifique et d’éviter les positions normatives (Laville, 2010;
+          Eynaud, 2015). C’est pourquoi nous « <marquage typemarq="italique">ancrons</marquage> »
+          notre recherche (Glaser &amp; Strauss, 1967) dans les expériences vécues des présidents,
+          en lien avec les décisions et pratiques qui sont les leurs. Nous examinons leurs
+          positionnements mais aussi les processus d’apprentissage sur lesquels ils se
+          fondent.</alinea>
+      </para><para id="pa23"><no>23</no>
+        <alinea>L’objectif de cette recherche était d’étudier l’expérience vécue et les décisions
+          prises par les présidents depuis leur prise de fonction. L’entretien semi-directif nous
+          est apparu comme l’outil le plus adapté pour pouvoir opérer ce type de rétrospective. Nous
+          avons effectué un total de 30 entretiens. Les 22 entretiens principaux ont été effectués
+          avec les présidents eux-mêmes. Ces derniers appartenaient à des organisations de
+          différentes tailles (entre 0 et 260 salariés; de 1 000 à 3,6 millions d’euros de budget
+          annuel) et d’anciennetés variées (de 1 à 42 années d’existence), intervenant dans
+          différents secteurs d’activités (insertion, éducation populaire, sport, culture,
+          protection de l’environnement). En complément de ces entretiens principaux, nous avons
+          également pu, dans un certain nombre de cas, interroger d’autres acteurs : nous avons
+          effectué des entretiens avec trois directeurs et cinq membres du CA. Ces données
+          auxiliaires constituent une forme de triangulation des sources (Denzin et Lincoln, 1994).
+          Deux des chercheurs étaient également en situation d’observation participante, l’un en
+          tant que directeur, l’autre en tant que président, ce qui nous a permis des
+          interprétations croisées des situations rapportées dans le cadre des entretiens. Ces
+          entretiens ont été effectués en France au cours de ces trois dernières années, mais les
+          témoignages ainsi recueillis reviennent sur des évènements et changements se déroulant sur
+          des périodes remontant parfois jusqu’à 20 ans en arrière. Ces deux dernières décennies ont
+          été marquées par une montée des exigences en termes de professionnalisation, ce qui s’est
+          traduit par de nombreuses tensions autour, mais aussi à l’intérieur même de ces
+          organisations comme le montrent Valéau <marquage typemarq="italique">et al</marquage>.
+          (2012). Cette période explique sans doute partiellement les différends fréquents relevés
+          dans le cadre de nos données.</alinea>
+      </para><para id="pa24"><no>24</no>
+        <alinea>Nos entretiens visaient à aborder avec nos interlocuteurs les différents éléments de
+          notre problématique, notre grille d’entretien comprenait ainsi les points suivants : les
+          grands dilemmes rencontrés au cours des années passées, les points de vue et arguments
+          exprimés par les parties prenantes présentes au sein de l’AG, les différends, les
+          décisions prises par le président pour réguler ces derniers et les rationalités
+          sous-jacentes en termes de légitimité ou d’efficience, le retour à la normal. Dans le
+          cadre des entretiens avec les présidents, après avoir demandé à la personne interviewée de
+          se présenter et de présenter son OBNL, nos entretiens démarraient avec la question
+          suivante : « q<marquage typemarq="italique">uels ont été les grands moments, les grandes
+          décisions qui ont marqué votre parcours au sein de cette OBNL</marquage> ? ». Cette
+          question se voulait délibérément plus large que notre problématique et que notre guide
+          d’entretien pour deux raisons : pour ne pas induire de réponses a priori et pour conserver
+          une semi-directivité ouverte à la découverte (Fontana &amp; Frey, 1994). Les « grands
+          moments » correspondaient généralement à des grands débats ayant marqué l’OBNL, les
+          décisions prises par le président intégrait généralement soit une visée consensuelle, soit
+          une recherche d’efficience dans la réalisation de leur propre vision du projet. Dans la
+          plupart des cas, la personne interviewée abordait spontanément l’ensemble des points
+          constituant notre grille d’entretien, même si ce n’était pas forcément dans l’ordre. Nous
+          cochions pendant l’entretien ces points au fur et à mesure sur notre grille. Seulement si
+          la personne n’avait pas abordé spontanément un des points, nous posions des questions plus
+          explicites, par exemple : « avez-vous dû, déjà, faire face à des désaccords au sein de
+          l’assemblée ? ».</alinea>
+      </para><para id="pa25"><no>25</no>
+        <alinea>Suivant une approche empirico-formelle (Glaser &amp; Strauss, 1967; Denzin &amp;
+          Lincoln, 1994), le traitement des données s’est fait sous la forme de codages itératifs
+          émergeant d’allers-retours entre terrain et théories. Une première codification « in
+          vivo », consistant à résumer les propos des présidents et des autres acteurs, est
+          présentée dans la première colonne des tableaux de la section suivante. Suivant les
+          traditions abductives (Dubois &amp; La Gadde, 2002), les codes finaux présentés dans la
+          figure 1 résultent d’une longue série d’allers-retours entre les grilles d’analyse
+          théoriques présentées dans leur version finale dans la première partie de cet article et
+          les contenus des retranscriptions des entretiens. Il peut être utile d’évoquer certains
+          des cheminements ainsi suivis (Valéau &amp; Gardody, 2015). Concernant la gouvernance,
+          nous étions partis des modèles établis par Charreaux (2003), avec notamment le modèle
+          actionnarial, partenarial et cognitif, avant de constater la difficulté de les appliquer
+          stricto sensu aux OBNL. Nous sommes alors revenus aux mécanismes internes et externes,
+          intentionnels et spontanés ayant une portée à la fois disciplinaire et cognitive qui
+          sous-tendent ces modèles (Charreaux, 1997). Nous avons ainsi centré nos réflexions sur la
+          capacité de l’assemblée générale et du conseil d’administration, du fait de leur
+          composition, à produire un projet ayant une fonction à la fois cognitive et disciplinaire.
+          L’étape suivante a consisté à identifier les différends comme une forme de détérioration
+          de ces mécanismes et une forme de paradoxe suivant lequel le président est lui-même amené
+          à restaurer ces mécanismes en vertu desquels son action sera régulée. Cette démarche est
+          d’autant plus ambiguë qu’elle remet en question la possibilité d’émergence d’une
+          opposition, voire d’une nouvelle coalition, en posture de diriger. Ces questions liées à
+          la gouvernance démocratique des OBNL nous ont conduit à des emprunts du côté des sciences
+          politiques. Nous avons ainsi identifié deux orientations de la gouvernance des OBNL :
+          l’une visant l’efficience à travers des démarches entrepreneuriales dans le cadre d’une
+          version représentative de la gouvernance démocratique; l’autre visant la légitimité à
+          travers une approche communautaire dans le cadre d’une version participative de la
+          gouvernance démocratique.</alinea>
+      </para></section1><section1 id="s1n4"><no>4</no><titre>Résultats</titre><para id="pa26"><no>26</no>
+        <alinea>Nous commençons la présentation de nos résultats en montrant le basculement de
+          situations caractérisées par une assemblée et un conseil efficacement et une assemblée et
+          un conseil efficacement et légitimement unis autour d’un même projet à des situations de
+          désaccords. Ces derniers amènent les présidents à constater l’impossibilité de satisfaire
+          simultanément l’idéal du projet et l’idéal consensuel, autrement dit à maintenir
+          conjointement les fonctions cognitive et disciplinaire de l’assemblée et du conseil. Face
+          à ces difficultés, deux grandes voies de résolution émergent de nos données : </alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea>la première privilégie l’idéal du projet dans le cadre d’une gouvernance
+              démocratique de type représentatif privilégiant la fonction disciplinaire de
+              l’assemblée et du conseil d’administration;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>la seconde, relativement moins fréquente au regard de nos données, donne
+              priorité à cet idéal de démocratie qu’est le consensus, dans le cadre d’une
+              gouvernance démocratique de type participatif visant à maintenir la fonction cognitive
+              de ces deux instances.</alinea>
+          </elemliste>
+        </listenonord>
+      </para><section2 id="s2n3"><no>4.
+				1</no><titre><marquage typemarq="petitecap">Les différends ou l’impossibilité du double
+        idéal</marquage></titre><para id="pa27"><no>27</no>
+        <alinea>Cette sous-partie revient sur les expériences du différend rapportées par les
+          présidents et les autres acteurs rencontrés. Ces différends posent une difficulté voire
+          une impossibilité de maintenir l’orientation du projet tout en conservant le consensus de
+          départ. Cette volonté de départ correspondant dans le cadre de la figure 1 à la position
+          « <marquage typemarq="italique">50 % - 50 %</marquage> » consistant à accorder une
+          importance égale à ces deux approches de la gouvernance des OBNL. Nous codons ces
+          différends en termes de « <marquage typemarq="italique">désaccord</marquage> » lorsque les
+          parties-prenantes expriment des points de vue différents, et en termes de « <marquage typemarq="italique">conflits</marquage> » lorsque les échanges se chargent d’émotions
+          négatives.</alinea>
+      </para><para id="pa28"><no>28</no>
+        <alinea>Comme le montre le premier extrait du tableau 1, la vie des OBNL commence souvent
+          dans la plus grande cordialité. Les échanges sont constructifs et respectueux et
+          contribuent au développement d’une action collective au service d’un projet partagé par
+          tous. La notion de « <marquage typemarq="italique">choc</marquage><marquage typemarq="gras"> </marquage>» ici évoquée traduit à la fois la surprise et la déception
+          lorsqu’apparaît le premier désaccord (extrait 1.8). Les présidents et ceux qui les
+          entourent font ainsi face à un décalage entre leur idéal d’action collective au service
+          d’un projet et la réalité du terrain, d’autant que le désaccord risque de tourner au
+          conflit.</alinea>
+      </para><para id="pa29"><no>29</no>
+        <alinea>Comme le montrent les extraits 1.2, 1.3 et 1.4, les désaccords et conflits au sein
+          des OBNL portent sur les finalités, mais aussi, très souvent, sur les moyens et le
+          fonctionnement, une même fin pouvant justifier différents moyens. Ces trois extraits
+          évoquent la confrontation classique entre les tenants d’un entrepreneuriat envisageant un
+          professionnalisme formalisé comme un moyen adéquat et les défenseurs d’une communauté plus
+          spontanée gardant des liens sociaux plus primaires. Dans les deux cas, les acteurs se
+          manifestent pour dénoncer ce qu’ils perçoivent comme une dérive. Cependant, le désaccord
+          résulte surtout dans la manière d’échanger ces points de vue. Les extraits 1.2 à 1.4
+          montrent une escalade dans les modes d’expression. L’extrait 1.2 constitue une façon
+          relativement neutre de « tirer la sonnette d’alarme ». Dans l’extrait 1.3, cet ancien chef
+          d’entreprise ne remet pas intrinsèquement en cause l’OBNL, mais indique ne pas s’être
+          adapté à son fonctionnement communautaire fondé sur une grande part d’informel. L’extrait
+          1.4 introduit une posture plus radicale : les acteurs mettent « <marquage typemarq="italique">les pieds dans le plat</marquage> », ils déclenchent un état d’urgence
+          de façon plus offensive. Le conflit devient alors plus ouvert (extrait 1.5), les individus
+          se retirent (extraits 1.6 et 1.7). Le fonctionnement « idéal » de l’organisation s’en
+          retrouve perturbé, l’OBNL est fragilisée.</alinea>
+      </para><figure id="fi1">
+        <no><marquage typemarq="majuscule">FIGURE 1</marquage></no>
+        <legende lang="fr">
+          <titre>Codages<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa30"><no>30</no>
+        <alinea>Le premier apprentissage des présidents dans le cadre de la gouvernance des OBNL est
+          que la réalité n’est pas aussi simple et idyllique qu’ils ne l’avaient anticipée
+          (extrait 1.8). Ils comprennent ainsi que l’harmonie des premiers mois ou des premières
+          années ne peut être tenue pour acquise. Les désaccords tournent souvent aux conflits et
+          sont vécus par les acteurs comme des échecs. Face aux dysfonctionnements qui en découlent,
+          des solutions doivent être trouvées.</alinea>
+      </para></section2><section2 id="s2n4"><no>4.
+				2</no><titre><marquage typemarq="petitecap">La priorité donnée à l’idéal du projet et à la fonction
+        disciplinaire</marquage></titre><para id="pa31"><no>31</no>
+        <alinea>Une partie des acteurs rencontrés considèrent que l’action collective n’est possible
+          que si les valeurs de base sur lesquelles se fonde le projet sont partagées par tous.
+          Cette approche du fonctionnement des OBNL pose, ce faisant, certaines limites de la
+          démocratie et définit un périmètre au-delà duquel cette dernière ne s’applique plus
+          complètement. Da façon surprenante, suivant cette approche le contrôle disciplinaire
+          s’exerce sur la minorité en désaccord. La neutralisation ou l’exclusion, directe ou
+          indirecte, des acteurs contestataires, est présentée comme une mesure nécessaire en vue de
+          préserver l’OBNL et son projet. Nous codons ces positionnements en termes
+          d’« entrepreneuriat » pour désigner les registres justifiant de ces approches pragmatiques
+          de l’action des OBNL et de « <marquage typemarq="italique">gouvernance démocratique
+          représentative </marquage>» pour identifier les rôles joués par le président dans le cadre
+          des actions ainsi mises en oeuvre à cette fin (tableau 2).</alinea>
+      </para><para id="pa32"><no>32</no>
+        <alinea>Les trois premiers extraits du tableau 2 évoquent un « entrepreneuriat » porté par
+          une vision qu’il s’agit de réaliser de la façon la plus efficiente possible. Ils
+          reprennent, ce faisant, certains fondements traditionnels du mouvement des OBNL avec une
+          affirmation des valeurs inspirant le projet (extraits 2.1, 2.2 et 2.3). En même temps
+          qu’un certain pragmatisme, ces discours expriment ainsi un fort engagement militant fondé
+          sur des convictions humanistes. Cependant, les acteurs s’exprimant dans l’extrait 2.2 et,
+          de façon plus marquée, dans l’extrait 2.3 introduisent ce qu’ils considèrent comme une
+          condition nécessaire à ce fonctionnement : les membres de l’OBNL doivent, selon eux,
+          adhérer à ce projet et ces valeurs. En cas de désaccords (<marquage typemarq="italique">cf</marquage>. tableau 1), lorsque cette condition n’est plus remplie, l’affectif et la
+          démocratie peuvent être momentanément suspendus (extraits 2.3, 2.4 et 2.7). Les présidents
+          et les acteurs de cette coalition déclenchent une forme d’état d’urgence dans le cadre
+          duquel d’autres pratiques sont exceptionnellement mises en place : recadrage (extrait
+          2.6), mais aussi exclusion (extrait 2.7). Bien sûr, certaines de ces prises de pouvoir peu
+          démocratiques peuvent être dénoncées, mais elles restent, selon ces acteurs,
+          exceptionnelles et momentanées. Les OBNL reviennent ensuite à un fonctionnement
+          démocratique (extrait 2.9), la gouvernance partenariale reprend alors ses droits.</alinea>
+      </para><tableau id="ta1">
+        <no><marquage typemarq="majuscule">Tableau 1</marquage></no>
+        <legende lang="fr">
+          <titre>Les différends</titre>
+          <alinea>Note : les extraits d’entretiens ci-dessus évoquent les relations entre le
+            président et l’assemblée générale à travers les différents moments dans la vie de
+            l’association : dans le cadre de réunions en AG ordinaire ou extraordinaire, en conseil
+            d’administration (émanation restreinte de l’AG) mais aussi lors de confrontations plus
+            informelles.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="tableau" xlink:type="simple"></image>
+          <texte>Réf.CodesSources &amp; contextesExtraits1.1.Désaccord (absence)Une réalité
+            initialement conforme au double idéal Président+ de 10 ans d’ancienneté+ de 10
+            salariésInsertion« Je crois que la décision se prenait de façon collégiale parce qu’on
+            n’avait pas eu de désaccord jusque-là. C’était assez évident, on discutait ensemble et
+            puis il y avait une espèce de décision qui s’imposait. On prenait le temps. On a passé
+            de bons moments. »1.2DésaccordDésaccord sur le fonctionnement.Tension entre le CA et les
+            membres de base concernant les prises de décisionMembre bureau+ de 10 ans d’ancienneté+
+            de 10 salariésInsertion« Ma question est : sommes-nous dans cette OBNL dans un système
+            pyramidal où le bureau en haut ne fait que de la « stratégie » et en bas on délègue tout
+            aux « petits » employés et bénévoles (méthode de l’entreprise) ou bien sommes-nous une
+            vraie OBNL où chaque membre est sur un pied d’égalité et participe à chaque
+            opération ? » 1.3DésaccordL’expression des désaccords concernant le
+            fonctionnementPrésident+ de 10 ans d’ancienneté+ de 10 salariésInsertion« Il a dit
+            honnêtement : vous marchez de manière familiale, je comprends, ça ne me gêne pas, ça a
+            l’air de fonctionner, mais moi je ne peux pas fonctionner comme ça. » 1.4Désaccord et
+            ConflitObjection, contestation, oppositionPrésident- de 10 ans d’ancienneté- de 10
+            salariésEducation populaire« Le nouveau trésorier trouvait que ça n’allait pas comme ça.
+            Il a mis les pieds dans le plat. » 1.5ConflitCercle vicieux du différend au
+            conflitEmotions négatives et souffrancePrésident- de 10 ans d’ancienneté- de 10
+            salariésInsertion« Après, il y a eu une période où s’est allé en se dégradant de plus en
+            plus…C’était absolument épouvantable. »1.6ConflitUn fonctionnement perturbéPrésident- de
+            10 ans d’ancienneté- de 10 salariésInsertion« L’impact est le blocage des projets, la
+            frustration des membres du conseil d’administration, la non-adhésion des employés aux
+            décisions. »1.7ConflitDes associations fragiliséesPrésident+ de 10 ans d’ancienneté- de
+            10 salariésInsertion « Des démissions successives au sein de l’association ont fragilisé
+            les relations entre le CA et les salariés. »1.8ConflitUne déceptionPrésident+ de 10 ans
+            d’ancienneté- de 10 salariésInsertion« Je suis trop déçu par ce manque de cohésion des
+            piliers de l’association. Alors je continue les demandes de subvention. »</texte>
+        </objetmedia>
+      </tableau><para id="pa33"><no>33</no>
+        <alinea>L’apprentissage et la construction socialement élaborée consistent ici à fixer les
+          limites et les conditions de l’exercice démocratique nécessaire au maintien du projet. Le
+          choc se manifeste par la transgression de l’idéal consensuel, voire de l’idéal
+          démocratique initialement posé. La manière dont s’opère cette prise de pouvoir varie mais,
+          compte tenu du blocage démocratique, les OBNL ainsi gouvernées passent par une loi
+          d’exception permettant des jeux de pouvoir parfois relativement durs, avant de revenir à
+          une fonction démocratique. La légitimité de ces actions relatives aux minorités se fonde
+          sur la majorité, mais aussi sur le mandat exécutif confié au président suite à son
+          élection.</alinea>
+      </para><tableau id="ta2">
+        <no><marquage typemarq="majuscule">Tableau 2</marquage></no>
+        <legende lang="fr">
+          <titre>Priorité au projet</titre>
+          <alinea>Note : les extraits d’entretiens ci-dessus évoquent les relations entre le
+            président et l’assemblée générale à travers les différents moments dans la vie de
+            l’association : dans le cadre de réunions en AG ordinaire ou extraordinaire, en conseil
+            d’administration (émanation restreinte de l’AG) mais aussi lors de confrontations plus
+            informelles.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="tableau" xlink:type="simple"></image>
+          <texte>Réf.CodesSource &amp; contexteExtraits2.1DisciplineMise en oeuvrePrésident+ de 10
+            ans d’ancienneté+ de 10 salariésEnvironnement« On était très au clair dans notre projet,
+            dans notre diversité. Les valeurs étaient bien établies. On n’a jamais eu aucun doute au
+            niveau du projet. Les fondamentaux étaient là. Ce qu’on voulait, c’était pouvoir le
+            mettre en oeuvre. » 2.2DisciplinePrésident porteur du projetMembre CA+ de 10 ans
+            d’ancienneté+ de 10 salariésInsertion« Il y a une relation de confiance étroite parce
+            que le président est le responsable civil, pénal. A partir de là, s’il y a, ne serait-ce
+            qu’un doute, ça ne peut pas fonctionner. »2.3.Discipline &amp; optimisation du projetLa
+            nécessité de défendre le projetPrésident+ de 10 ans d’ancienneté+ de 10
+            salariésInsertion« Notre vision sociale est simple : partager sans oublier de favoriser
+            les plus démunis. Notre vision économique est pragmatique : sans une saine gestion rien
+            n’est durable. (…) Nous avons été contraints d’éloigner des instances de décision
+            certains membres à l’approche trop mercantile. » 2.4Discipline &amp; optimisation
+            du projetUne absence momentanée d’affectifPrésident+ de 10 ans d’ancienneté- de 10
+            salariésInsertion« Moi, j’en avais marre mais à l’époque, j’avais retiré l’affectif. »
+            2.5Discipline, optimisation du projet et légitimité (absence)Une absence momentanée de
+            démocratie Membre CA+ de 10 ans d’ancienneté- de 10 salariésEducation populaire« La
+            prise de décision n’est pas démocratique, les autres membres du bureau sont obligés de
+            subir les conséquences. »2.6Discipline et légitimité(absence)Les recadragesPrésident+ de
+            10 ans d’ancienneté+ de 10 salariésInsertion« Il nous disait, « vous ne comprenez
+            rien ». En fait, chaque fois il revenait avec cette logique-là, à chaque fois on le
+            repositionnait. » 2.7Discipline &amp; optimisation du projetL’exclusion des
+            bénévolesMembre CA+ de 10 ans d’ancienneté+ de 10 salariésInsertion« Il est déjà arrivé
+            que certains ne soient pas d’accord. Dans ce cas, on essaie de les pousser à la
+            sortie. » 2.8Discipline &amp; légitimité(absence)Des démissionsMembre bureau+ de 10 ans
+            d’ancienneté+ de 10 salariésEducation populaire« Personnellement, vu le manque
+            d›engagement du bureau dans les opérations, je vous annonce que je ne m›occuperai plus
+            de cette activité ni de l›organisation d›aucun événement lié à cette activité. »
+            2.9DisciplineLe retour à la normalePrésident+ de 10 ans d’ancienneté+ de 10
+            salariésCulture« La gouvernance de l’OBNL est passée par plusieurs cycles de conflits. »
+          </texte>
+        </objetmedia>
+      </tableau></section2><section2 id="s2n5"><no>4.
+				3</no><titre><marquage typemarq="petitecap">La priorité donnée à l’idéal consensuel et à la
+        fonction cognitive de la gouvernance</marquage></titre><para id="pa34"><no>34</no>
+        <alinea>Le choix de la démocratie souvent annoncé dans les discours, se pose de façon plus
+          problématique dans la pratique. Il ne s’agit pas ici, comme dans le cas précédent, d’une
+          démocratie représentative, mais d’une démocratie plus absolue fondée sur une participation
+          plus fréquente et plus poussée des parties prenantes dans la construction du projet.
+          Concrètement, cela signifie que les présidents et leurs équipes, bien qu’à priori en
+          situation de contrôle, acceptent, au nom de la légitimité et du consensus, de perdre en
+          partie le contrôle du projet, en remettant régulièrement son orientation aux votes des
+          parties prenantes en présence.</alinea>
+      </para><para id="pa35"><no>35</no>
+        <alinea>Le premier extrait du tableau 3 pose une vision idyllique, mais finalement assez peu
+          fréquente de l’exercice démocratique en OBNL. En pratique, la gouvernance se concrétise
+          souvent par l’exercice du vote à la majorité (extrait 3.2). Suivant une version plus
+          élaborée, certaines OBNL tentent cependant de pousser plus loin le débat (extraits 3.3,
+          3.4 et 3.5). Cependant, ces débats peuvent tourner à la controverse permanente où tout
+          peut être discuté sans fin (extrait 3.4). Finalement, la plupart des OBNL finissent par
+          trouver le bon usage, un usage opérationnel de ce fonctionnement partenarial dans le cadre
+          duquel les acteurs apprennent à séparer le temps du débat contradictoire et le temps d’une
+          convergence nécessaire pour pouvoir parvenir à une décision (extraits 3.5).</alinea>
+      </para><tableau id="ta3">
+        <no><marquage typemarq="majuscule">Tableau 3</marquage></no>
+        <legende lang="fr">
+          <titre>Priorité au consensus</titre>
+          <alinea>Note : les extraits d’entretiens ci-dessus évoquent les relations entre le
+            président et l’assemblée générale à travers les différents moments dans la vie de
+            l’association : dans le cadre de réunions en AG ordinaire ou extraordinaire, en conseil
+            d’administration (émanation restreinte de l’AG) mais aussi lors de confrontations plus
+            informelles.</alinea>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="tableau" xlink:type="simple"></image>
+          <texte>Réf.CodagesSource &amp; contexteExtraits3.1Cognition &amp; légitimitéDébatMembre
+            bureau+ de 10 ans d’ancienneté+ de 10 salariés« C’est un peu ça l’intérêt de fonctionner
+            à plusieurs, c’est d’objectiver. De ne pas en faire une affaire perso. Déjà, on en sort
+            grandi soi-même. (…) Et ça arrive de temps en temps, en bureau, on arrive avec une idée,
+            on ressort avec une idée différente. »3.2Cognition, légitimité &amp; optimisation
+            consensusDébat et vote Membre bureau+ de 10 ans d’ancienneté- de 10 salariés« C’est par
+            vote du conseil d’administration de ce qui est à l’ordre du jour. Le président établit
+            l’ordre du jour. (..) Le président ne prend jamais de décisions seul. Il demande l’avis
+            de tout le monde. On discute. Il y en a qui sont d’accord. D’autres ne le sont pas. Et
+            après, on fait un vote à main levée pour voir qui est d’accord sur tel ou tel projet.
+            Suivant le nombre de votes, soit le projet passe, soit il ne passe pas. » 3.3Cognition,
+            légitimité &amp; idéal du consensusDébat et recherche du compromisPrésident+ de 10 ans
+            d’ancienneté+ de 10 salariés« S’il y a quelqu’un qui est contre, on n’a jamais
+            d’imposition de l’opinion majoritaire. (…) On a toujours essayé de trouver un juste
+            milieu et un compromis, alors que d’autres associations auraient dit on est cinq, le
+            sixième est contre. La majorité l’emporte. » 3.4.Cognition &amp; légitimitéDu débat à la
+            controversePrésident+ de 10 ans d’ancienneté- de 10 salariés« On évolue dans la
+            controverse. Sans se dire qu’on va se bagarrer. C’est épuisant car on a autre chose à
+            faire dans la vie. C’est dans ces situations qu’on apprend le plus. »3.5Cognition,
+            légitimité &amp; optimisation consensusDes usages de la démocratieMembre bureau+ de 10
+            ans d’ancienneté+ de 10 salariés« Chaque fois que ça remonte en conseil
+            d’administration, on commence à retourner les trucs, à peser le pour et le contre. On a
+            une manière de reposer les problèmes qui est devenue une habitude. » 3.6Cognition,
+            légitimité (absence) &amp; consensus idéalPromouvoir le débatPrésident+ de 10 ans
+            d’ancienneté+ de 10 salariés« Ça m’embêtait qu’il n’y ait pas plus d’opposition. C’est
+            pour cela que j’ai fait venir d’autres gens aussi. Finalement, c’était une position qui
+            était confortable mais que je n’aimais pas. J’essayais. Je voulais que ça discute mais
+            on était trop d’accord. Ça ne correspondait pas à ma vision. Au début, c’était pratique.
+            Ça me permettait de faire passer n’importe quoi. Ce n’est pas intéressant. L’intérêt,
+            c’est de faire venir d’autres gens. Il y a un moment où ça a commencé à ne plus
+            discuter. » 3.7Cognition, légitimité et optimisation consensusLâcher prise au nom du
+            consensusPrésident+ de 10 ans d’ancienneté+ de 10 salariés« Je suis à un stade, depuis 3
+            ou 4 ans, où je ne suis plus intéressé par le résultat. Je regarde les processus. Ce qui
+            m’intéresse, c’est la dynamique. Je fais attention à ce que tout le monde s’exprime. Un
+            tel fait ses prises de position et je le défends. »</texte>
+        </objetmedia>
+      </tableau><para id="pa36"><no>36</no>
+        <alinea>L’apprentissage ne concerne pas uniquement la construction d’usage régulant le
+          processus décisionnel, le président et son équipe doivent également apprendre à lâcher
+          prise et à faire des concessions sur le projet. En effet, ces confrontations démocratiques
+          autour d’un projet apparaissent relativement indéterminées (extraits 3.2 et 3.5). Le
+          président et son équipe renoncent ainsi à contrôler la décision pour devenir les garants
+          d’un processus démocratique : ils s’assurent que la diversité des parties prenantes est
+          représentée, et que ces derniers s’expriment et contribuent à la décision finale (extraits
+          3.6 et 3.7).</alinea>
+      </para></section2></section1><section1 id="s1n5"><no>5</no><titre>Discussion</titre><para id="pa37"><no>37</no>
+        <alinea>Il convient tout d’abord de rappeler que le but de cette recherche n’était pas de
+          cautionner l’une ou l’autre de ces deux approches de la gouvernance démocratique des OBNL,
+          mais simplement d’examiner la façon dont elles sont portées et justifiées par les acteurs
+          eux-mêmes. L’objectif de notre recherche était de comprendre comment les acteurs accédant
+          à la fonction de président confrontent le double idéal des OBNL, c’est-à-dire l’idéal du
+          projet et l’idéal consensuel. Comme le rappelaient nos premiers résultats (tableau 1), les
+          différentes parties prenantes participant à l’élection portent souvent différentes visions
+          du projet et différentes conceptions de gouvernance des OBNL. Ce faisant, les désaccords
+          et les controverses restent potentiellement au coeur de la gouvernance de ces
+          organisations (Valéau, 2003, 2015).</alinea>
+      </para><para id="pa38"><no>38</no>
+        <alinea>Nous identifions deux voies pour résoudre ces désaccords, la voie disciplinaire
+          donnant la primauté au projet sur le consensus (figure 2.C - 75 % projet) et la voie
+          cognitive accordant la priorité au consensus en renonçant complètement ou en partie à
+          contrôler le projet (figure 2.D - 75 % consensus). L’arbitrage entre ces deux voies
+          constitue un apprentissage consistant à accepter l’impossibilité d’optimiser simultanément
+          différents principes d’efficience et de légitimité au profit de solutions forcément
+          imparfaites à l’épreuve de l’action (Boncler &amp; Valéau, 2010). Nous formalisons à
+          présent ces apprentissages psycho-cognitifs et sociocognitifs de la gouvernance et les
+          positionnements retenus à travers la figure 1 et quatre propositions.<marquage typemarq="gras"> </marquage></alinea>
+      </para><figure id="fi2">
+        <no><marquage typemarq="majuscule">FIGURE 2</marquage></no>
+        <legende lang="fr">
+          <titre>Modèle</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="figure" xlink:type="simple"></image>
+        </objetmedia>
+      </figure><para id="pa39"><no>39</no>
+        <alinea><marquage typemarq="gras">Proposition 1 : Les désaccords confirment l’impossibilité
+          de maintenir, de façon permanente, une action collective unie autour d’un même projet
+          (figure 2.A – 2.B).</marquage></alinea>
+      </para><para id="pa40"><no>40</no>
+        <alinea>Lorsque les présidents et les autres parties prenantes sont en accord, la
+          gouvernance peut maintenir ce double idéal d’une action collective unie autour d’un même
+          projet (figure 2.A). Tous les acteurs rencontrés ont ainsi évoqué une période idyllique de
+          ce type. Cependant, tous considéraient également cette période comme révolue. Lorsque, tôt
+          ou tard, un désaccord apparaît (figure 2.B), le président et son équipe se retrouvent dans
+          une situation de crise. Le positionnement de ce moment, dans la figure 1, sous les deux
+          minimums du projet et du consensus, signifie davantage le doute, la confusion et
+          l’indétermination concernant la conduite à tenir qu’une absence totale de consensus ou de
+          respect du projet porté par le président. Le président doit alors choisir entre une
+          approche représentative de la gouvernance démocratique privilégiant la réalisation
+          efficiente de l’idéal du projet (figure 2.C) et l’approche partenariale de la démocratie
+          donnant priorité au consensus (figure 2.D). La zone E. de la figure 2 marquée d’un point
+          d’interrogation pose la question de la possibilité d’établir une position intermédiaire
+          face aux différends, celle-ci n’ayant fait l’objet d’aucune occurrence dans le cadre de
+          notre échantillon. Nous retrouvons ce faisant un dilemme propre aux OBNL (Valéau, 2003).
+          Le premier apprentissage lié à la dimension cognitive de la gouvernance consiste, pour le
+          président, notamment, à accepter la difficulté, voire l’impossibilité d’accorder
+          d’optimiser simultanément la réalisation efficiente de l’idéal du projet et le consensus
+          idéal dans le cadre duquel le projet est légitimé par l’ensemble des parties-prenantes. En
+          matière de gouvernance, ces désaccords confirment l’impossibilité de maintenir, de façon
+          permanente, la fonction disciplinaire et la fonction cognitive des mécanismes
+          intentionnels internes.</alinea>
+      </para><para id="pa41"><no>41</no>
+        <alinea><marquage typemarq="gras">Proposition 2 : Certains présidents privilégient l’idéal
+          du projet sous contrainte d’un minimum de consensus (figure 2.C)</marquage></alinea>
+      </para><para id="pa42"><no>42</no>
+        <alinea>Dans le premier scénario (figure 2.C), le plus fréquemment rencontré dans le cadre
+          de nos entretiens, le président et son équipe se définissent eux-mêmes et se présentent
+          comme les gardiens du projet de l’OBNL. Cette voie s’apparente à la gouvernance
+          démocratique « représentative » (Blondiaux, 2008). En vertu de leur élection, les
+          présidents et leurs équipes posent leur vision du projet comme le cadre de référence à
+          l’intérieur duquel les autres acteurs et parties prenantes peuvent concevoir leurs
+          participations. Ce faisant, toute question concernant les fondements du projet est perçue
+          comme une menace pour l’OBNL. L’argument généralement mis en avant porte sur le caractère
+          « anticonstitutionnel » des critiques émises. Partant de là, le président et son équipe
+          identifient un danger justifiant des moyens d’exception, en particulier des formes
+          d’exclusions provisoires ou définitives. L’apprentissage consiste ici à accepter des
+          conflits plus frontaux associés à des options, à certains égards, plus ambiguës.
+          L’exercice de la gouvernance partenariale est alors réduit à son minimum, il dépend alors
+          de la compatibilité des points de vue exprimés avec cet idéal et devient ce faisant
+          conditionnel. Cette voie questionne les limites que posent certaines OBNL à la liberté
+          d’expression et de façon plus générale à la démocratie, réduite à son minimum. En matière
+          de gouvernance, cette voie privilégie la fonction disciplinaire des mécanismes
+          intentionnels internes, au détriment de leur fonction cognitive.</alinea>
+      </para><para id="pa43"><no>43</no>
+        <alinea><marquage typemarq="gras">Proposition 3 : Certains présidents privilégient l’idéal
+          consensuel. Ils garantissent le processus démocratique en renonçant à contrôler totalement
+          le projet (figure 2.D).</marquage></alinea>
+      </para><para id="pa44"><no>44</no>
+        <alinea>Dans le second scénario (figure 2.D), relativement moins fréquent dans le cadre de
+          notre échantillon, le président et son équipe veillent au maintien du consensus entre les
+          parties prenantes. Cette voie se rapproche de la gouvernance partenariale décrite par
+          Charreaux (2003) et, dans le contexte des OBNL, par Hoarau et Laville (2008) : les idées
+          sont débattues plus ou moins longtemps avec un ensemble élargi d’acteurs et de parties
+          prenantes, avant qu’une solution acceptable pour tous puisse être trouvée. L’apprentissage
+          réside ici dans les règles régissant le processus, mais également dans les concessions que
+          le président et son équipe ont à faire pour permettre cette forme plus poussée de
+          démocratie. Dans ce scénario, le résultat obtenu importe moins que la façon dont il est
+          produit. Ce choix consensuel a pour objectif d’éviter les conflits et les différends, en
+          situant l’action partagée et la fraternité au-dessus de toute autre considération. Cette
+          voie questionne cependant la capacité de certaines OBNL à porter un projet cohérent dans
+          la durée, les grandes orientations de l’OBNL pouvant ainsi être critiquées et évoluer au
+          gré des débats. En pratique, les limites au-delà desquelles le projet se retrouverait
+          dénaturé ne sont plus définies par le président, mais socialement construites par une
+          agora de parties-prenantes. En matière de gouvernance, cette voie privilégie la fonction
+          cognitive des mécanismes intentionnels internes, en reléguant au second plan leur fonction
+          disciplinaire.</alinea>
+      </para><para id="pa45"><no>45</no>
+        <alinea>Les arbitrages en faveur du consensus idéal semblent correspondre à une forme de
+          lâcher prise de nature différente des arbitrages en faveur de l’idéal du projet. Ces
+          derniers marquent une conviction dans le cadre d’un conflit cognitif concernant la vision,
+          mais ils peuvent aussi être interprétés comme une forme d’intérêt personnel suivant lequel
+          le président utilise ses marges de manoeuvre pour privilégier sa propre vision du projet
+          au détriment de celle des autres. Les deux présidents s’exprimant dans les deux derniers
+          extraits du tableau 3 apparaissent plus ouverts à la discussion suivant une forme de
+          maturité à travers laquelle ils ne semblent plus considérer que leurs définitions du
+          projet seraient plus pertinentes que celles portées par les autres parties-prenantes. Ces
+          deux présidents admettent avoir développé cette position à la suite de leurs précédentes
+          expériences. Nous ajoutons ce faisant que le rôle cognitif joué par la diversité des
+          parties prenantes (Charreaux, 2003; Herman &amp; Renz, 1997; Hoarau &amp; Laville, 2008)
+          dépendrait en partie de l’ouverture d’esprit du président face à ces apports.</alinea>
+      </para><para id="pa46"><no>46</no>
+        <alinea><marquage typemarq="gras">Proposition 4. Les formes prises par la gouvernance
+          démocratique des OBNL sont le résultat d’un arbitrage</marquage></alinea>
+      </para><para id="pa47"><no>47</no>
+        <alinea>Le principal apprentissage que nous formalisons sur la base de nos données
+          empiriques consiste, pour le président, à mieux comprendre la nature du dilemme que font
+          naître les désaccords et la nécessité d’arbitrer entre deux modes de production de la
+          stratégie. Nous considérons tout d’abord un apprentissage psycho-cognitif au sens de
+          Piaget (1971) et Watzlawick <marquage typemarq="italique">et al</marquage> (1975) dans le
+          cadre duquel le président passe d’un cadre de références fondé sur l’optimisation
+          simultanée des critères d’efficience et de légitimité à une prise de conscience de
+          l’impossibilité de cette double optimisation et de la nécessité d’arbitrer. Nous
+          identifions là un changement des schèmes mentaux qui sous-tendent la logique de son
+          raisonnement.</alinea>
+      </para><para id="pa48"><no>48</no>
+        <alinea>Cet arbitrage se prolonge ensuite sous la forme d’un apprentissage socio-cognitif
+          concernant l’ensemble de la structure. Quelle que soit la voie retenue, le premier
+          arbitrage du nouveau président et de son équipe constitue une jurisprudence initiale
+          établissant auprès de l’ensemble des parties prenantes les modes opératoires destinés à
+          réguler les désaccords durant son mandat. C’est à l’occasion de cette épreuve, qu’ils
+          définissent leurs positions et établissent concrètement jusqu’où ils sont prêts à aller
+          pour défendre le projet ou pour respecter l’exercice démocratique. Certains extraits
+          d’entretiens présentés dans les tableaux 2 et 3 évoquent un retour à la normale, des
+          habitudes et des façons de faire propres à l’OBNL. Ainsi, l’apprentissage, de nature plus
+          collectif, réside également dans la rétention, la légitimation et l’institutionnalisation
+          de ce premier arbitrage. La dimension cognitive de la gouvernance ainsi abordée détermine
+          la façon dont le modèle partenarial (Charreaux, 2003; Haorau &amp; Laville, 2008) sera mis
+          en oeuvre. Une grande partie des cas de processus conflictuels établis par la littérature
+          (Kelley <marquage typemarq="italique">et al</marquage>., 2005; Hoarau &amp; Laville, 2008;
+          Boncler &amp; Valéau, 2010; Kreutzer &amp; Jager, 2011) peuvent être interprétés en ces
+          termes, avec presque toujours, après des périodes de conflits parfois très âpres, un
+          retour à la normale. Le Tian et Venard (2012) proposaient une approche de la gouvernance
+          dont les mécanismes seraient adaptés au type d’organisation, et notamment à sa culture. El
+          Abboubi (2013) soulignait le caractère socialement construit du statut de partie prenante
+          au sein de la gouvernance. Nous ajoutons quelques considérations supplémentaires propres
+          aux OBNL : la diversité des formes prises par la gouvernance démocratique des OBNL est le
+          produit de nombreux facteurs. Parmi ceux-ci, à travers cet article, nous mettons en avant
+          l’importance des arbitrages effectués par les présidents. Nous ajoutons à la diversité des
+          regards portés par les parties-prenantes sur le projet (Herman &amp; Renz, 1997; Valéau,
+          2003), la diversité des arbitrages mis en oeuvre par les présidents pour établir leurs
+          approches de la gouvernance démocratique.</alinea>
+      </para><para id="pa49"><no>49</no>
+        <alinea>Les arbitrages des présidents et de leurs équipes, illustrés dans le cadre de cet
+          article, relient selon nous la gouvernance des OBNL aux sciences de gestion. Pour Laville
+          (2010), l’associationnisme, c’est-à-dire cet espoir d’action collective citoyenne autour
+          d’une cause commune, s’inspire des utopies, mais s’en distingue cependant par sa
+          confrontation à la réalité de l’action. Nous abordons les sciences de gestion comme des
+          sciences de la décision (Simon, 1947), étudiant comment les acteurs en situation de
+          pouvoir mettent leurs valeurs à l’épreuve de l’action. Les sciences de gestion appliquées
+          aux OBNL, ne consistent pas, comme on le présente trop souvent, à défendre une approche
+          similaire aux entreprises. L’une des théories fondatrices des sciences de gestion reste la
+          rationalité limitée : limitée par l’information, mais aussi comme on l’oublie parfois, par
+          les préférences et les systèmes de valeurs des décideurs (Simon, 1947). Dans le cas
+          présent, les présidents se retrouvent face à deux normes : l’idéal du projet et l’idéal
+          consensuel. Leurs arbitrages constituent des apprentissages de la gouvernance (Hoarau
+          &amp; Laville, 2008), mais aussi des innovations sociales (Richez-Battesti, Petrella &amp;
+          Vallade, 2012) : ils permettent des renouvellements des formes de la gouvernance
+          démocratique à travers de nouveaux modèles opérationnels d’action collective plus divers.
+          Cette diversité constitue encore, malgré les processus de normalisation, selon Eynaud
+          (2015) et Valéau (2003 et 2015), l’une des caractéristiques du secteur non
+          lucratif.</alinea>
+      </para><para id="pa50"><no>50</no>
+        <alinea>L’une des limites de cette réflexion réside cependant dans notre focalisation
+          quasi-exclusive sur les présidents, que ce soit à travers leur propre discours ou d’autres
+          acteurs gravitant autour d’eux. Les arbitrages des présidents mis en exergue dans le cadre
+          de cet article ne sont pas le seul facteur déterminant les formes prises par la
+          gouvernance démocratique des OBNL. Même si ceux-ci constituent officiellement le sommet de
+          la hiérarchie organisationnelle (Mintzberg, 1983), d’un point de vue sociologique, ces
+          acteurs élus ne sont jamais que des parties prenantes parmi d’autres. Par ailleurs, le jeu
+          de l’élection démocratique rend leurs prérogatives précaires, les majorités se faisant et
+          se défaisant. Ainsi, nous retenons simplement la façon dont le président et son équipe
+          organisent la gouvernance durant les périodes où ils restent en capacité de
+          décider.</alinea>
+      </para><para id="pa51"><no>51</no>
+        <alinea>Loin d’épuiser le sujet de la gouvernance dans les OBNL, cet article se veut un
+          jalon dans une analyse visant à comprendre les spécificités et les enjeux de ces
+          organisations de façon à éviter un simple mimétisme des modes de gouvernance issus des
+          entreprises. D’autres approches sont possibles, comme par exemple celle de Phanuel (2016)
+          qui met le directeur au centre de l’OBNL. En l’absence de propriété, la question de qui se
+          trouve légitimement au centre et en position d’arbitrage reste en partie indéterminée
+          (Boncler &amp; Valéau, 2010). Certains considèrent qu’une partie importante de la
+          gouvernance des OBNL se joue également dans la relation entre le président et le
+          directeur. Suivant cette autre perspective, il conviendra d’intégrer davantage les
+          problématiques liées aux besoins de professionnalisation des acteurs.</alinea>
+      </para><para id="pa52"><no>52</no>
+        <alinea>Les futures recherches pourraient également prendre davantage en compte le poids des
+          contextes. Bien que notre échantillon soit de taille trop modeste pour valider de
+          quelconques corrélations, nous pouvons évoquer quelques pistes issues de nos données
+          concernant les effets de la taille de l’OBNL, l’expérience du président, le secteur
+          d’activité. Il semble que les préoccupations d’efficience deviennent plus prégnantes dans
+          les grandes structures, cependant les arbitrages des présidents semblent également liés,
+          comme précédemment évoqué à son expérience ainsi qu’au secteur d’activité, le secteur de
+          l’éducation populaire apparaissant plus participatif. Cette relativisation de l’effet de
+          la taille rejoint les constats effectués par Valéau (2015), dans le cadre de sa
+          méta-analyse qualitative, selon lesquels les crises d’identité et le questionnement des
+          priorités entre efficience et légitimité peuvent être posés à tous les stades du
+          développement des OBNL et réorienter leur développement.</alinea>
+      </para><para id="pa53"><no>53</no>
+        <alinea>Enfin, il convient de rappeler que les OBNL ici étudiées étaient toutes françaises.
+          D’autres recherches intégrant des OBNL d’autres pays permettraient d’identifier si les
+          lois et les cultures nationales jouent un rôle dans les formes prises par la gouvernance
+          démocratique des OBNL. Valéau (2015) montrait sur la base d’une méta-analyse comprenant
+          des études de cas issus de plus de quinze pays différents que la plupart des OBNL passent
+          par le même processus de développement mettant en tension des questions d’efficience et de
+          légitimité. Nous faisons ici l’hypothèse que le dilemme posé dans le cadre de cet article
+          entre gouvernance démocratique représentative visant l’idéal du projet et gouvernance
+          démocratique participative visant un consensus idéal, se pose à la plupart des OBNL, quel
+          que soit le contexte national considéré.</alinea>
+      </para></section1><section1 id="s1n6"><no>6</no><titre>Conclusion</titre><para id="pa54"><no>54</no>
+        <alinea>Selon Pareto (1906), la prise en compte de plusieurs critères fait que différentes
+          combinaisons peuvent apparaître objectivement équivalentes, ce faisant seules les
+          préférences humaines peuvent permettre de les départager. Cet article montrait les
+          dilemmes dont les présidents font l’expérience, face aux désaccords, entre l’optimisation
+          du projet sous contrainte d’obtenir une majorité et l’optimisation du consensus sous
+          contrainte de respecter un minimum le projet fondateur. Nos analyses expliquent ainsi les
+          malaises souvent ressentis par les présidents attachés à ces deux fondements des OBNL. Les
+          résultats de notre étude montrent la difficulté, voire dans certains cas l’impossibilité
+          de respecter simultanément et « également » l’idéal du projet et l’idéal consensuel. Nous
+          espérons à l’issue de ce travail avoir donné aux lecteurs impliqués dans la vie des OBNL
+          une perspective inspirée du terrain faisant écho à leur propre expérience.</alinea>
+      </para><para id="pa55"><no>55</no>
+        <alinea>En nous référant à la définition de Hoarau et Laville (2008) définissant la
+          gouvernance des OBNL comme l’ensemble des mécanismes permettant la mise en cohérence du
+          fonctionnement de l’organisation avec le projet, nous avons montré que cette mise en
+          cohérence peut être obtenue de deux manières différentes : soit, suivant une approche
+          disciplinaire de la gouvernance, en adaptant le fonctionnement sans dévier du projet
+          défendu; soit, suivant une approche cognitive, en adaptant le projet de façon à maintenir
+          un fonctionnement purement consensuel. A l’instar d’Eynaud (2015), après avoir donné aux
+          acteurs des informations utiles pour éclairer leurs choix en matière de gouvernance, nous
+          les renvoyons à leurs propres responsabilités : il leur appartient de décider
+          rationnellement (Simon, 1983), quelle est la forme de gouvernance la plus adéquate, entre
+          démocratie représentative et démocratie participative. La portée pratique de cet article
+          s’arrête, délibérément, à une non-réponse retournant aux acteurs eux-mêmes la question du
+          choix entre l’idéal du projet et le consensus idéal, entre démocratie représentative et
+          démocratie participative à l’épreuve des désaccords. Il leur appartient de
+          « reconstruire » cette cohérence évoquée par Hoarau et Laville (2008).</alinea>
+      </para><para id="pa56"><no>56</no>
+        <alinea>Notre étude mettait ainsi en avant une fonction de la présidence des OBNL que nous
+          pourrions qualifier de « <marquage typemarq="italique">méta-gouvernance</marquage> »,
+          consistant à assurer l’opérationnalité des mécanismes intentionnels internes, nécessitant,
+          le cas échéant, de trancher entre leur fonction cognitive et leur fonction disciplinaire,
+          suivant deux interprétations différentes de la démocratie associative. Nous relevons
+          certaines ambiguïtés dans ce rôle du président l’amenant à gérer la démocratie dont il est
+          lui-même issu. Il apparaît ainsi à la fois juge et partie, se retrouvant en position de
+          réguler une gouvernance qui est elle-même supposée l’encadrer. Ce paradoxe constitue un
+          aspect peu examiné du fonctionnement démocratique des OBNL.</alinea>
+      </para></section1></corps><partiesann lang="fr">
+    <grnotebio>
+      <notebio id="nb1" idrefs="au1" lang="fr">
+        <alinea><marquage typemarq="gras">Patrick Valeau </marquage>est professeur à l’Université de la Réunion. Ses          travaux portent principalement sur l’entrepreneuriat, l’engagement, les OSBL.</alinea>
+      </notebio>
+      <notebio id="nb2" idrefs="au2" lang="fr">
+        <alinea><marquage typemarq="gras">Hassen Parak </marquage>est docteur en sciences de gestion. Sa thèse avait          pour sujet la gouvernance des OSBL.</alinea>
+      </notebio>
+      <notebio id="nb3" idrefs="au3" lang="fr">
+        <alinea><marquage typemarq="gras">Frédéric Annette</marquage> est docteur en sciences de gestion. Sa thèse          avait pour sujet la gouvernance des OSBL.</alinea>
+      </notebio>
+      <notebio id="nb4" idrefs="au4" lang="fr">
+        <alinea><marquage typemarq="gras">Jérôme Boncler </marquage>est maître de conférences à l’Université de          Bordeaux. Ses travaux portent principalement sur l’entrepreneuriat et les          OSBL.</alinea>
+      </notebio>
+    </grnotebio><grbiblio>
+      <biblio><refbiblio id="rb1"><marquage typemarq="petitecap">Biondi Y</marquage><marquage typemarq="petitecap">., Chatelain-Ponroy S., Eynaud S. &amp; Sponem S.</marquage> (2010), « Quel modèle de gouvernance pour les associations ? », <marquage typemarq="italique">Politique et Management Public</marquage>, 27(1), p. 3-7.</refbiblio>
+<refbiblio id="rb2"><marquage typemarq="petitecap">Blondiaux L</marquage><marquage typemarq="petitecap">.</marquage> (2008), <marquage typemarq="italique">Le nouvel esprit de la démocratie. Actualité de la démocratie participative.</marquage> Paris, Le Seuil.</refbiblio>
+<refbiblio id="rb3"><marquage typemarq="petitecap">Boncler J</marquage><marquage typemarq="petitecap">. &amp; Valéau P.</marquage> (2010), <marquage typemarq="italique">Créer et manager une association loi 1901</marquage>, Éditions De Boeck.</refbiblio>
+<refbiblio id="rb4"><marquage typemarq="petitecap">Bouglet J</marquage><marquage typemarq="petitecap">. &amp; Joffre O.</marquage> (2015), «<marquage typemarq="gras"> </marquage>Les priorités du dirigeant face à ses parties prenantes : l’apport d’une approche centrée sur les attentes<marquage typemarq="gras"> </marquage>»,<marquage typemarq="italique">Management international</marquage>, HEC Montréal, 20 (1).</refbiblio>
+<refbiblio id="rb5"><marquage typemarq="petitecap">Callon M</marquage><marquage typemarq="petitecap">., Lascoumes P. &amp; Barthe Y.</marquage> (2001), <marquage typemarq="italique">Agir dans un monde incertain. Essai sur la démocratie technique</marquage>. Paris, Le Seuil.</refbiblio>
+<refbiblio id="rb6"><marquage typemarq="petitecap">Charreaux</marquage> G. (1997), <marquage typemarq="italique">Le gouvernement des entreprises, </marquage>Paris, Economica.</refbiblio>
+<refbiblio id="rb7"><marquage typemarq="petitecap">Charreaux</marquage> G. (2003), « Quelle théorie pour la gouvernance ? De la gouvernance actionnariale à la gouvernance cognitive », in Allouche J., Encyclopédie des Ressources Humaines, Paris, Vuibert.</refbiblio>
+<refbiblio id="rb8"><marquage typemarq="petitecap">Charreaux</marquage> G. (2006), « Les théories de la gouvernance : de la gouvernance des entreprises à la gouvernance des systèmes nationaux », in Charreaux G. et Wirtz P., <marquage typemarq="italique">Gouvernance des entreprises Nouvelles perspectives</marquage>, Paris, Economica.</refbiblio>
+<refbiblio id="rb9"><marquage typemarq="petitecap">Defourny</marquage> J. &amp; Nyssens M. (2010), Approches européennes et américaines de l’entreprise sociale : une perspective comparative, Colloque 2010, ADDES (Association pour le développement de la documentation sur l’économie sociale).</refbiblio>
+<refbiblio id="rb10"><marquage typemarq="petitecap">Denzin N</marquage><marquage typemarq="petitecap">.K. &amp; Lincoln Y.S.</marquage> (1994), <marquage typemarq="italique">Handbook of Qualitative Research</marquage>, Sage.</refbiblio>
+<refbiblio id="rb11"><marquage typemarq="petitecap">Drucker</marquage> <marquage typemarq="petitecap">P</marquage><marquage typemarq="petitecap">. (1990), </marquage><marquage typemarq="italique">Managing the Nonprofit Organization, </marquage>Harper, New-York.</refbiblio>
+<refbiblio id="rb12"><marquage typemarq="petitecap">Eynaud</marquage> P. (2015), <marquage typemarq="italique">Pratiques de gouvernance : entre diversité et normalisation</marquage>, Collection Hors-Série Juris Association, Editeur Dalloz.</refbiblio>
+<refbiblio id="rb13"><marquage typemarq="petitecap">El Abboubi M</marquage>. (2013), « Comment identifier les parties prenantes dans une certification RSE ? », <marquage typemarq="italique">Management</marquage> <marquage typemarq="italique">International</marquage>, Vol. 17, N° 2, p. 48-62.</refbiblio>
+<refbiblio id="rb14"><marquage typemarq="petitecap">Eynaud P</marquage><marquage typemarq="petitecap">., Chatelain-Ponroy S. &amp; Sponem S. </marquage>(2015), Panorama et typologie des modes de gouvernance des associations, in Philippe Eynaud. La gouvernance entre diversité et normalisation, Dalloz, jurisEditions, p. 22-42.</refbiblio>
+<refbiblio id="rb15"><marquage typemarq="petitecap">Fontana A</marquage><marquage typemarq="petitecap">.&amp; Frey J.</marquage> (1994). « Interviewing, the Art of Science » in <marquage typemarq="italique">The Handbook of Qualitative Research</marquage>, N. a. Y. L. Denzin. Thousand Oaks : Sage</refbiblio>
+<refbiblio id="rb16"><marquage typemarq="petitecap">Freeman</marquage> R.E. (1984), <marquage typemarq="italique">Strategic Management: A Stakeholder Approach</marquage>, Pitman, Boston.</refbiblio>
+<refbiblio id="rb17"><marquage typemarq="petitecap">Glaser B</marquage><marquage typemarq="petitecap">. &amp; Strauss A.</marquage> (1967), <marquage typemarq="italique">The discovery of grounded theory, strategies of qualitative research</marquage>, Aldine Publishing Company.</refbiblio>
+<refbiblio id="rb18"><marquage typemarq="petitecap">Habermas</marquage>, J. (1989). <marquage typemarq="italique">The structural transformation of the public sphere</marquage>. MIT: Cambridge</refbiblio>
+<refbiblio id="rb19"><marquage typemarq="petitecap">Herman R</marquage><marquage typemarq="petitecap">. D. &amp; Renz, D.O.</marquage> (1997), «<marquage typemarq="gras"> </marquage>Multiple constituencies and the social construction of non-profit organization effectiveness », <marquage typemarq="italique">Nonprofit and Voluntary Sector Quarterly</marquage>, 26, 185-206.</refbiblio>
+<refbiblio id="rb20"><marquage typemarq="petitecap">Herman R</marquage><marquage typemarq="petitecap">.D. &amp; Renz, D.O.</marquage> (2008), «<marquage typemarq="gras"> </marquage>Advancing nonprofit organizational effectiveness research and theory: Nine theses », Nonprofit Management &amp; Leadership, 18(4), p.399-415.</refbiblio>
+<refbiblio id="rb21"><marquage typemarq="petitecap">Hoarau C</marquage><marquage typemarq="petitecap">. &amp; Laville J.-L.</marquage> (2008), <marquage typemarq="italique">La Gouvernance des associations</marquage>, Sociologie économique, Toulouse, ERES.</refbiblio>
+<refbiblio id="rb22"><marquage typemarq="petitecap">Kelley M</marquage><marquage typemarq="petitecap">., Lune H. &amp; Murphy S.</marquage> (2005), «<marquage typemarq="gras"> </marquage>Doing syringe exchange », <marquage typemarq="italique">Nonprofit and Voluntary Sector Quarterly</marquage>, 34(3), p. 362-386.</refbiblio>
+<refbiblio id="rb23"><marquage typemarq="petitecap">Koeble M</marquage><marquage typemarq="petitecap">.</marquage> (2006), <marquage typemarq="italique">Le pouvoir local ou la démocratie improbable</marquage>, Paris, Editions de Croquant.</refbiblio>
+<refbiblio id="rb24"><marquage typemarq="petitecap">Kreutzer K</marquage><marquage typemarq="petitecap">. &amp; Jager U. </marquage>(2011), « Volunteering vs managerialism », <marquage typemarq="italique">Nonprofit and Voluntary Sector Quarterly</marquage><marquage typemarq="gras">,</marquage> N° 40, p. 634-661.</refbiblio>
+<refbiblio id="rb25"><marquage typemarq="petitecap">Laville J</marquage><marquage typemarq="petitecap">.-L. &amp; Sainsaulieu R.</marquage> (1997), <marquage typemarq="italique">Sociologie de l’association</marquage>, Desclée, Paris.</refbiblio>
+<refbiblio id="rb26"><marquage typemarq="petitecap">Laville J</marquage><marquage typemarq="petitecap">.-L. &amp; Glémain P.</marquage> (2009), <marquage typemarq="italique">L’ESS aux prises avec la gestion</marquage>, Desclée, Paris.</refbiblio>
+<refbiblio id="rb27"><marquage typemarq="petitecap">Laville J</marquage><marquage typemarq="petitecap">.-L. </marquage>(2010), <marquage typemarq="italique">Politique de l’association</marquage>, Seuil, Paris.</refbiblio>
+<refbiblio id="rb28"><marquage typemarq="petitecap">Laville J</marquage><marquage typemarq="petitecap">.-L. &amp; Sainsaulieu R.</marquage> (2013), <marquage typemarq="italique">L’association, Sociologie et économie</marquage>, Pluriel.</refbiblio>
+<refbiblio id="rb29"><marquage typemarq="petitecap">Laville J</marquage><marquage typemarq="petitecap">.-L., Young D. &amp; Eynaud P.</marquage> (2015), <marquage typemarq="italique">Civil society, The Third Sector, Social Enterprise: Governance and Democracy</marquage>, Routledge Publisher Oxfordshire, Royaume Uni.</refbiblio>
+<refbiblio id="rb30"><marquage typemarq="petitecap">Laville J</marquage><marquage typemarq="petitecap">.-L</marquage>. (2016), <marquage typemarq="italique">L’Économie sociale et solidaire, Pratiques, théories, débats</marquage>, Seuil, Paris.</refbiblio>
+<refbiblio id="rb31"><marquage typemarq="petitecap">Lecy J</marquage><marquage typemarq="petitecap">. D., Schmitz H. P., &amp; Swedlund H.</marquage> (2012), « Non-governmental and not-for-profit organizational effectiveness: A modern synthesis », V<marquage typemarq="italique">oluntas: International Journal of Voluntary and Nonprofit Organizations</marquage>, 23(2), p. 434-457.</refbiblio>
+<refbiblio id="rb32"><marquage typemarq="petitecap">Le Tian C</marquage><marquage typemarq="petitecap">. &amp; Venard B.</marquage> (2012), « Pour une approche contingente de la gouvernance », <marquage typemarq="italique">Management International</marquage>, 16 (2), p. 25-38.</refbiblio>
+<refbiblio id="rb33"><marquage typemarq="petitecap">Mayaux F</marquage><marquage typemarq="petitecap">.</marquage> (1996), <marquage typemarq="italique">Noyau stratégique des associations</marquage>, Thèse de Doctorat, Université Lyon 3.</refbiblio>
+<refbiblio id="rb34">Meier O. &amp; Schier G. (2008), « Quelles théories et principes d’actions en matière de gouvernance des associations ? », <marquage typemarq="italique">Revue management et avenir</marquage>, 2008/6, N° 20, p. 179-198.</refbiblio>
+<refbiblio id="rb35"><marquage typemarq="petitecap">Mitchell R</marquage><marquage typemarq="petitecap">.K., Agle B.R. et Wood D.J. </marquage>(1997), « Toward a Theory of Stakeholder Identification and Salience: Defining the Principle of Who and What Really Counts », <marquage typemarq="italique">Academy of Management Review</marquage>, 22 : 4, p. 853-886.</refbiblio>
+<refbiblio id="rb36"><marquage typemarq="petitecap">Mintzberg H</marquage><marquage typemarq="petitecap">.</marquage> (1983), <marquage typemarq="italique">Power in and around organizations</marquage>, Prentice-Hall.</refbiblio>
+<refbiblio id="rb37">Organisation des Nations Unies, Hopkins (2003),</refbiblio>
+<refbiblio id="rb38"><marquage typemarq="petitecap">Pareto V</marquage><marquage typemarq="petitecap">.</marquage> (1906), <marquage typemarq="italique">Manuale d’economia politica</marquage>, Milano : Società editrice libraria, 1<exposant>ère</exposant> édition française, Paris : Giard et Brière 1909, réédition in Oeuvres complètes de Vilfredo Pareto, Genève : Droz, 1966.</refbiblio>
+<refbiblio id="rb39"><marquage typemarq="petitecap">Phanuel</marquage> D. (2016), « Le management relationnel d’une association de l’économie sociale et solidaire », <marquage typemarq="italique">Management International</marquage>, Vol. 20, N° 3, p. 105-121.</refbiblio>
+<refbiblio id="rb40"><marquage typemarq="petitecap">Reid W</marquage><marquage typemarq="petitecap">. &amp; Karambayya R</marquage>. (2009), « Impact of dual executive leadership », <marquage typemarq="italique">Human Relations</marquage>, N° 7, p. 1073-1112.</refbiblio>
+<refbiblio id="rb41"><marquage typemarq="petitecap">Richez-Battesti N</marquage><marquage typemarq="petitecap">., Petrella F. &amp; Vallade D.</marquage> (2012), « L’innovation sociale une notion aux usages pluriels : quels enjeux et défis pour l’analyse », <marquage typemarq="italique">Innovations</marquage>, p. 15-36, N° 35.</refbiblio>
+<refbiblio id="rb42"><marquage typemarq="petitecap">Rothschild J</marquage><marquage typemarq="petitecap">. &amp; Stephenson M.</marquage> (2009), « The Meaning of Democracy in Non-profit and Community Organizations - Charting the Currents of Change », <marquage typemarq="italique">American Behavioral Scientist</marquage>, Vol. 52, N° 6, p. 800-806.</refbiblio>
+<refbiblio id="rb43"><marquage typemarq="petitecap">Rousseau</marquage> F. (2007), « Réapprendre à conter : genèse d’un entrepreneur social », <marquage typemarq="italique">Gérer et comprendre</marquage>, N° 87, p. 23-34.</refbiblio>
+<refbiblio id="rb44"><marquage typemarq="petitecap">Salamon L</marquage><marquage typemarq="petitecap">.M. &amp; Anheier H.K</marquage>. (1992), « In search of the non-profit sector. I: The question of definitions », <marquage typemarq="italique">Voluntas</marquage>, N° 3, p. 125-151.</refbiblio>
+<refbiblio id="rb45"><marquage typemarq="petitecap">Simon</marquage> H. (1947), <marquage typemarq="italique">Administrative Behavior: a Study of Decision-Making Processes in Administrative Organization</marquage>, MacMillan.</refbiblio>
+<refbiblio id="rb46"><marquage typemarq="petitecap">Simon</marquage> H. (1983), <marquage typemarq="italique">Administration et processus de décision</marquage>, Economica.</refbiblio>
+<refbiblio id="rb47"><marquage typemarq="petitecap">Toé</marquage> M. (2014), « Les déterminants individuels du plafond de verre : cas de la composition des instances de gouvernance des entreprises françaises cotées », <marquage typemarq="italique">Management International</marquage>, Vol. 18, N° 4, p. 48-67.</refbiblio>
+<refbiblio id="rb48"><marquage typemarq="petitecap">Valéau</marquage> P. (2003), « Différentes manières de gérer les associations », <marquage typemarq="italique">Revue Française de Gestion</marquage>, N° 146, p. 9-21.</refbiblio>
+<refbiblio id="rb49"><marquage typemarq="petitecap">Valéau P</marquage><marquage typemarq="petitecap">. &amp; Annette F</marquage>. (2012), La gestion des « déviances » des associations par les pouvoirs publics : une autonomie conditionnelle », <marquage typemarq="italique">Management International</marquage>, 16(3), p. 139-152.</refbiblio>
+<refbiblio id="rb50"><marquage typemarq="petitecap">Valéau P</marquage><marquage typemarq="petitecap">., Parak H. &amp; Louart P</marquage>. (2013), « Les équipes associatives entre rationalité en valeur et entrepreneuriat social », <marquage typemarq="italique">RECMA</marquage>, N° 330, p. 89-106.</refbiblio>
+<refbiblio id="rb51"><marquage typemarq="petitecap">Valéau</marquage> P. (2015), « Stages and Pathways of Development of Nonprofit Organizations: An Integrative Model », <marquage typemarq="italique">Voluntas</marquage>, Vol. 26, Issue 5, p. 1894-1919.</refbiblio></biblio>
+    </grbiblio>
+  <grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Cette présentation se réfère aux nouvelles normes des recherches qualitatives
+          établies dans la revue Academy of Management Journal.</alinea>
+      </note>
+    </grnote></partiesann><partiesann lang="en">
+    <grnotebio>
+      <notebio id="nb5" idrefs="au1" lang="en">
+        <alinea><marquage typemarq="gras">Patrick Valéau</marquage> is a professor and the research director at          University of Reunion Island Business School (IAE). He studies the governance, HRM, and          development of nonprofit organizations.</alinea>
+      </notebio>
+      <notebio id="nb6" idrefs="au2" lang="en">
+        <alinea><marquage typemarq="gras">Hassen Parak </marquage>is a doctor in management science. His Ph.D focus          was on nonprofit governance.</alinea>
+      </notebio>
+      <notebio id="nb7" idrefs="au3" lang="en">
+        <alinea><marquage typemarq="gras">Frédéric Annette </marquage>is a doctor in management science. His Ph.D          focus was on nonprofit governance.</alinea>
+      </notebio>
+      <notebio id="nb8" idrefs="au4" lang="en">
+        <alinea><marquage typemarq="gras">Jérôme Boncler </marquage>is a senior lecturer the University of Bordeaux.          He studies entrepreneurship, and Nonprofit Organizations.</alinea>
+      </notebio>
+    </grnotebio>
+  </partiesann><partiesann lang="es">
+    <grnotebio>
+      <notebio id="nb9" idrefs="au1" lang="es">
+        <alinea><marquage typemarq="gras">Patrick Valeau</marquage> es profesor en la Universidad de Reunión. Su          trabajo se centra en las organizaciones sin fines de lucro.</alinea>
+      </notebio>
+      <notebio id="nb10" idrefs="au2" lang="es">
+        <alinea><marquage typemarq="gras">Hassen Parak</marquage> es un doctor en ciencias de la administración. Su          tesis fue sobre el gobierno de las organizaciones sin fines de lucro.</alinea>
+      </notebio>
+      <notebio id="nb11" idrefs="au3" lang="es">
+        <alinea><marquage typemarq="gras">Frédéric Annette</marquage> es un doctor en ciencias de la administración.          Su tesis fue sobre el gobierno de las organizaciones sin fines de lucro.</alinea>
+      </notebio>
+      <notebio id="nb12" idrefs="au4" lang="es">
+        <alinea><marquage typemarq="gras">Jérôme Boncler </marquage>es profesor en la Universidad de Bordeaux. Su          trabajo se centra en les organizaciones sin fines de lucro.</alinea>
+      </notebio>
+    </grnotebio>
+    
+  </partiesann></article>

@@ -899,8 +899,20 @@
         <xsl:when test="titre and titre != ''">
           <xsl:value-of select="titre"/>
         </xsl:when>
-        <xsl:when test="count(annexe) = 1">{% trans "Annexe" %}</xsl:when>
-        <xsl:otherwise>{% trans "Annexes" %}</xsl:otherwise>
+        <xsl:when test="count(annexe) = 1">
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Appendix</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Apéndice</xsl:when>
+            <xsl:otherwise>Annexe</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Appendices</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Apéndices</xsl:when>
+            <xsl:otherwise>Annexes</xsl:otherwise>
+          </xsl:choose>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
     <xsl:if test="self::grnotebio">
@@ -908,8 +920,20 @@
         <xsl:when test="titre and titre != ''">
           <xsl:value-of select="titre"/>
         </xsl:when>
-        <xsl:when test="count(notebio) = 1">{% trans "Note biographique" %}</xsl:when>
-        <xsl:otherwise>{% trans "Notes biographiques" %}</xsl:otherwise>
+        <xsl:when test="count(notebio) = 1">
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Biographical note</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Nota biográfica</xsl:when>
+            <xsl:otherwise>Note biographique</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Biographical notes</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Notas biograficas</xsl:when>
+            <xsl:otherwise>Notes biographiques</xsl:otherwise>
+          </xsl:choose>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
     <xsl:if test="self::grnote">
@@ -917,8 +941,20 @@
         <xsl:when test="titre and titre != ''">
           <xsl:value-of select="titre"/>
         </xsl:when>
-        <xsl:when test="count(note) = 1">{% trans "Note" %}</xsl:when>
-        <xsl:otherwise>{% trans "Notes" %}</xsl:otherwise>
+        <xsl:when test="count(note) = 1">
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Note</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Nota</xsl:when>
+            <xsl:otherwise>Note</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Notes</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Notas</xsl:when>
+            <xsl:otherwise>Notes</xsl:otherwise>
+          </xsl:choose>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
     <xsl:if test="self::merci">
@@ -926,7 +962,13 @@
         <xsl:when test="titre and titre != ''" >
           <xsl:value-of select="titre"/>
         </xsl:when>
-        <xsl:otherwise>{% trans "Remerciements" %}</xsl:otherwise>
+        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Acknowledgements</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Gracias</xsl:when>
+            <xsl:otherwise>Remerciements</xsl:otherwise>
+          </xsl:choose>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
     <xsl:if test="self::grbiblio">
@@ -934,8 +976,20 @@
         <xsl:when test="biblio/titre and biblio/titre != ''">
           <xsl:value-of select="biblio/titre"/>
         </xsl:when>
-        <xsl:when test="count(biblio) = 1">{% trans "Bibliographie" %}</xsl:when>
-        <xsl:otherwise>{% trans "Bibliographies" %}</xsl:otherwise>
+        <xsl:when test="count(biblio) = 1">
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Bibliography</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Bibliografía</xsl:when>
+            <xsl:otherwise>Bibliographie</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="parent::partiesann/@lang = 'en'">Bibliographies</xsl:when>
+            <xsl:when test="parent::partiesann/@lang = 'es'">Bibliografias</xsl:when>
+            <xsl:otherwise>Bibliographies</xsl:otherwise>
+          </xsl:choose>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
   </xsl:template>
