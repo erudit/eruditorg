@@ -2021,7 +2021,7 @@ class TestArticleDetailView:
         # Articles without specified titles in the XML, default values should be used.
         ('1054008ar', 'grnotebio', 'Note biographique'),
         ('1054008ar', 'grnote', 'Notes'),
-        ('1059303ar', 'merci', 'Remerciements'),
+        ('1059303ar', 'merci', 'Acknowledgements'),
         ('009676ar', 'grbiblio', 'Bibliographie'),
         # Articles with specified titles in the XML.
         ('009676ar', 'grnotebio', 'Collaboratrice'),
@@ -2199,6 +2199,20 @@ class TestArticleDetailView:
         assert '<li class="auteur-affiliation">' \
                '<p><strong>The MAP Research Team</strong></p>' \
                '</li>' in html
+
+    def test_appendices_titles_language(self):
+        article = ArticleFactory(
+            from_fixture='1069092ar',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        sections = dom.find_all('section', {'class': 'grnotebio'})
+        assert len(sections) == 3
+        assert sections[0].find('h2').decode() == '<h2>Notes biographiques</h2>'
+        assert sections[1].find('h2').decode() == '<h2>Biographical notes</h2>'
+        assert sections[2].find('h2').decode() == '<h2>Notas biograficas</h2>'
 
 
 class TestArticleRawPdfView:
