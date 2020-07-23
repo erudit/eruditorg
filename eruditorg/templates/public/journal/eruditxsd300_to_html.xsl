@@ -206,7 +206,7 @@
         <div class="col-sm-6 doc-head__metadata">
           <p>
             {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-            <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
+            <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal_formatted_title }}</a>
             {# Peer review seal #}
             {% if article.issue.journal.type.code == 'S' and article.erudit_object.get_article_type == 'article' %}
             <xsl:text>&#160;</xsl:text>
