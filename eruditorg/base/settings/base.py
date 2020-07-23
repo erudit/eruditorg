@@ -101,6 +101,7 @@ env = environ.Env(
     }, {'BATCH_SIZE': 25}),
 
     WEBPACK_DEV_SERVER_URL=(str, ''),
+    BOOKS_UPDATE_EMAILS=(list, []),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 
@@ -352,6 +353,7 @@ EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+BOOKS_UPDATE_EMAILS = env("BOOKS_UPDATE_EMAILS")
 
 # Addresses
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')

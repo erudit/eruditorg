@@ -1,9 +1,11 @@
 from typing import Optional
 
+from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
+from core.email import Email
 from .managers import BooksManager
 
 
@@ -177,9 +179,24 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._original_is_published = self.is_published
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = short_slug(self.title, self.isbn or self.digital_isbn)
+        if self._original_is_published != self.is_published:
+            emails = settings.BOOKS_UPDATE_EMAILS
+            if len(emails):
+                email = Email(
+                    emails,
+                    html_template='emails/book/book_update_content.html',
+                    subject_template='emails/book/book_update_subject.html',
+                    extra_context={'book': self},
+                    tag='www-livres',
+                )
+                email.send()
         return super().save(*args, **kwargs)
 
 
