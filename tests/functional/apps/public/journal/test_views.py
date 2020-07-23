@@ -750,6 +750,43 @@ class TestIssueDetailView:
             toolbox = dom.find('ul', {'class': 'toolbox'})
             assert expected_link in toolbox.decode()
 
+    def test_journal_titles_and_subtitles_are_displayed_in_all_languages(self):
+        issue = IssueFactory(journal__code='journal')
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open('tests/fixtures/issue/im03868.xml', 'rb').read(),
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'localidentifier': issue.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        title1 = dom.find('p', {'class': 'main-header__meta'}).decode()
+        assert title1 == '<p class="main-header__meta">\n' \
+                         '<a href="/fr/revues/journal/" title="Consulter la revue">\n        ' \
+                         'Intermédialités\n        \n        \n        ' \
+                         '<span class="hint--bottom-left hint--no-animate" ' \
+                         'data-hint="Tous les articles de cette revue sont soumis à un processus ' \
+                         'd’évaluation par les pairs.">\n' \
+                         '<i class="icon ion-ios-checkmark-circle"></i>\n' \
+                         '</span>\n<br/>\n' \
+                         '<span class="journal-subtitle">Histoire et théorie des arts, ' \
+                         'des lettres et des techniques</span>\n<br/>\n          ' \
+                         'Intermediality\n          \n          \n          <br/>\n' \
+                         '<span class="journal-subtitle">History and Theory of the Arts, ' \
+                         'Literature and Technologies</span>\n</a>\n</p>'
+
+        title2 = dom.find('div', {'class': 'latest-issue'}).find('h2').decode()
+        assert title2 == '<h2>\n<a href="/fr/revues/journal/" title="Consulter la revue">\n      ' \
+                         'Intermédialités\n      \n      <br/>\n' \
+                         '<span class="journal-subtitle">Histoire et théorie des arts, ' \
+                         'des lettres et des techniques</span>\n<br/>\n        ' \
+                         'Intermediality\n        \n        \n        <br/>\n' \
+                         '<span class="journal-subtitle">History and Theory of the Arts, ' \
+                         'Literature and Technologies</span>\n</a>\n</h2>'
+
 
 class TestArticleDetailView:
 
