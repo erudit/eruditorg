@@ -253,7 +253,7 @@ class JournalDetailView(
 
             context['paral_titles'] = []
 
-            context['journal_formatted_title'] = self.object.name
+            context['journal_formatted_title'] = self.object.formatted_title
 
             context['meta_info_issue'] = {
                 'localidentifier': None,
@@ -366,7 +366,7 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
             }
             # If we don't have a current issue, use the journal code for the cache key.
             context['primary_cache_key'] = self.journal.code
-            context['journal_formatted_title'] = self.journal.name
+            context['journal_formatted_title'] = self.journal.formatted_title
 
         # Fetches the JournalInformation instance associated to the current journal
         try:
