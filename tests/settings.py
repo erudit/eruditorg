@@ -79,3 +79,5 @@ SOLR_ROOT = 'http://erudit.org'
 POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',
 }
+
+BOOKS_UPDATE_EMAILS = ['foo@bar.com', 'foo@baz.com']
