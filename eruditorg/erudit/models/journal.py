@@ -259,6 +259,13 @@ class Journal(FedoraMixin, FedoraDated):
             titles = current_issue.erudit_object.get_journal_title()
         return titles
 
+    @property
+    def formatted_title(self):
+        if self.current_issue:
+            return self.current_issue.journal_formatted_title
+        else:
+            return self.name
+
     # Journal-related methods and properties
     # --
 
@@ -468,6 +475,13 @@ class Issue(FedoraMixin, FedoraDated):
         Will be removed in next version.
 
     The last page of the issue """
+
+    @property
+    def journal_formatted_title(self):
+        if self.is_in_fedora:
+            return self.erudit_object.get_journal_title(formatted=True, subtitles=False)
+        else:
+            return self.journal.name
 
     @property
     def last_page(self):
@@ -1320,7 +1334,7 @@ class Article(FedoraMixin):
 
     @property
     def series_display(self):
-        return self.issue.journal.name
+        return self.issue.journal_formatted_title
 
     @property
     def journal_type(self):
@@ -1368,7 +1382,7 @@ class Article(FedoraMixin):
             'title': self.html_title,
             'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
             'close': _('&nbsp;»'),
-            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+            'journal': self.issue.journal_formatted_title,
         })
         if self.issue.volume_title:
             cite_string += ' {}'.format(self.issue.volume_title.lower())
@@ -1398,7 +1412,7 @@ class Article(FedoraMixin):
             'year': self.issue.year,
             'title': title,
             'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
-            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+            'journal': self.issue.journal_formatted_title,
         })
         if self.issue.volume:
             cite_string += ' <em>{}</em>'.format(self.issue.volume)
@@ -1423,7 +1437,7 @@ class Article(FedoraMixin):
             'open': _('«&nbsp;'),
             'title': self.html_title,
             'close': _('&nbsp;»'),
-            'journal': self.issue.erudit_object.get_journal_title(formatted=True, subtitles=False),
+            'journal': self.issue.journal_formatted_title,
         })
         if self.issue.volume:
             cite_string += ' {},'.format(self.issue.volume)

@@ -1,7 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
 {% load erudit_cache_tag i18n model_formatters static public_journal_tags %}
 
-{% block title %}{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle }}{% endif %}{% endblock title %}
+{% block title %}{{ journal.formatted_title }}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}{% endblock meta_description %}
 
@@ -9,7 +9,7 @@
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %}">
+<meta property="og:title" content="{{ journal.formatted_title }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if journal.has_logo %}
@@ -21,8 +21,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{{ main_title.title|safe }}{% if main_title.subtitle %}{% trans ' :' %} {{ main_title.subtitle|safe }}{% endif %} – Érudit">
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ main_title.title|safe }}">
+<meta name="twitter:title" content="{{ journal.formatted_title }} – Érudit">
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.formatted_title }}">
 {% if journal.has_logo %}
 <meta name="twitter:image" content="{% journal_logo_url journal %}">
 {% endif %}
@@ -54,7 +54,7 @@
     "position": 3,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' journal.code %}",
-      "name": "{{ main_title.title }}"
+      "name": "{{ journal.formatted_title }}"
     }
   }]
 }
@@ -132,7 +132,7 @@
           <span>{% trans "Revue précédée de" %}</span>
           <strong>
             <a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">
-              {{ journal.previous_journal.name }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
+              {{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
             </a>
           </strong>
           {% endif %}
@@ -140,7 +140,7 @@
           <span>{% trans "Revue suivie de" %}</span>
           <strong>
             <a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">
-              {{ journal.next_journal.name }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
+              {{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
             </a>
           </strong>
           {% endif %}

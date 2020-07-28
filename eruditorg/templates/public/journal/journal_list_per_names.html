@@ -163,10 +163,10 @@
                   {% if journal.previous_journal or journal.next_journal %}
                   <div class="journal-history">
                     {% if journal.previous_journal %}
-                    {% trans "Précédé de" %} <strong>{{ journal.previous_journal.name }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}</strong>
+                    {% trans "Précédé de" %} <strong>{{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}</strong>
                     {% endif %}
                     {% if journal.next_journal %}
-                    {% trans "Suivi de" %} <strong>{{ journal.next_journal.name }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}</strong>
+                    {% trans "Suivi de" %} <strong>{{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}</strong>
                     {% endif %}
                   </div>
                   {% endif %}

@@ -116,10 +116,7 @@
           {% endif %}
           class="card">
             <h4 class="card__title">
-              <span>{{ journal.name }}</span>
-              {% if journal.subtitle %}
-              <span><br/>{{ journal.subtitle }}</span>
-              {% endif %}
+              <span>{{ journal.formatted_title }}</span>
             </h4>
             {% if journal.open_access %}
             <div class="erudicon erudicon-open-access"></div>
@@ -137,7 +134,7 @@
                 <img
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                   data-src="{% journal_logo_url journal %}"
-                  alt="{% trans 'Logo pour'%} {{ journal.name }}"
+                  alt="{% trans 'Logo pour'%} {{ journal.formatted_title }}"
                   class="lazyload img-responsive card__figure"
                 />
               </div>

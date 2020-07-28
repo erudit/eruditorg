@@ -4,7 +4,7 @@
     {% for journal in journals %}
     {% if journal.issn_web or journal.issn_print %}
     <item>
-        <title>{{ journal.name }}</title>
+        <title>{{ journal.formatted_title }}</title>
         {% if journal.issn_web %}
         <issn>{{ journal.issn_web }}</issn>
         {% endif %}

@@ -1,32 +1,32 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n public_journal_tags %}
 
-{% block title %}{% trans "Index des auteurs" %} – {{ journal.name|safe }}{% endblock title %}
+{% block title %}{% trans "Index des auteurs" %} – {{ journal.formatted_title }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with journal=journal.formatted_title %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% trans 'Index des auteurs' %} – {{ journal.name|safe }}">
+<meta property="og:title" content="{% trans 'Index des auteurs' %} – {{ journal.formatted_title }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if journal.has_logo %}
 <meta property="og:image" content="{% journal_logo_url journal %}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktrans with journal=journal.formatted_title %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{% trans 'Index des auteurs' %} – {{ journal.name|safe }} – Érudit">
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.name|safe }}">
+<meta name="twitter:title" content="{% trans 'Index des auteurs' %} – {{ journal.formatted_title }} – Érudit">
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.formatted_title }}">
 {% if journal.has_logo %}
 <meta name="twitter:image" content="{% journal_logo_url journal %}">
 {% endif %}
-<meta name="twitter:description" content="{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:description" content="{% blocktrans with journal=journal.formatted_title %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -54,7 +54,7 @@
     "position": 3,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' journal.code %}",
-      "name": "{{ journal.name }}"
+      "name": "{{ journal.formatted_title }}"
     }
   },{
     "@type": "ListItem",
@@ -80,7 +80,7 @@
     <div class="col-xs-12">
       <h1>
         <span>{% trans 'Index des auteurs' %}</span>
-        <span>{{ journal.name }}</span>
+        <span>{{ journal.formatted_title }}</span>
       </h1>
     </div>
   </header>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal.name|safe }} – Érudit</title>
+    <title>{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal_formatted_title }} – Érudit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/issue_reader.css' %}"/>

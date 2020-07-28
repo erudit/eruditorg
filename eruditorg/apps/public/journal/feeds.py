@@ -46,7 +46,7 @@ class LatestIssuesFeed(Feed):
     def item_title(self, item):
         """ Returns the title of a feed item. """
         return '{journal_name}, {volume_title}'.format(
-            journal_name=item.journal.name,
+            journal_name=item.journal.formatted_title,
             volume_title=item.volume_title,
         )
 

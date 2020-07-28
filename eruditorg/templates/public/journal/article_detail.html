@@ -36,7 +36,7 @@
     "position": 3,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}",
-      "name": "{{ article.issue.journal.name }}"
+      "name": "{{ article.issue.journal_formatted_title }}"
     }
   },{
     "@type": "ListItem",
