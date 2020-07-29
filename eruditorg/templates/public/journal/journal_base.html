@@ -188,7 +188,7 @@
 
           {% if journal.publication_period %}
           <dt>{% trans "Période de publication" %}</dt>
-          <dd>{{ journal.publication_period }}</dd>
+          <dd>{{ journal.publication_period }} <span class="hint--top hint--no-animate" data-hint="{% trans 'Numéros disponibles sur la plateforme Érudit' %}"><i class="icon ion-ios-help-circle"></i></span></dd>
           {% endif %}
 
           {% if journal.first_issue_published_on_erudit %}
