@@ -31,14 +31,25 @@ logger = structlog.getLogger(__name__)
 class Command(BaseCommand):
     """ Imports journal objects from a Fedora Commons repository.
 
-    The command is able to import a journal object - including its issues and its articles - from
+    The command is able to import a journal object and its issues from
     a Fedora Commons repository. To do so, the command assumes that some journal collections
     (:py:class`Collection <erudit.models.core.Collection>` instances) are already created in the
     database.
 
     By default the command will try to import the journal objects that have been modified since the
     latest journal modification date stored in the database. If no journals can be found in the
-    database, the command will perform a full import.
+    database or the `full` switch is passed, the command will perform a full import.
+
+    If an `issue_pid` argument is passed, then the command will try and import this particular
+    issue.
+
+    If the `import_missing` switch is passed, then the command will compare the list of issues
+    present in the database with the list of issues present in Fedora. It will then import
+    all those issues that are in Fedora but not in the database.
+
+    If a `journal_pid` argument is passed, a single journal will be handled. Using Fedora data,
+    it will be created in the database if it doesn't exist, or updated if it already exists. Every
+    issue of that journal missing from the database will then be imported.
     """
 
     help = 'Import journals from Fedora'
@@ -122,7 +133,7 @@ class Command(BaseCommand):
             self.import_journal_precedences(self.journal_precedence_relations)
             return
 
-        # Imports each collection
+        # Default path: imports each collection
         journal_count, journal_errored_count = 0, 0
         issue_count, issue_errored_count = 0, 0
         for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('fedora'):
@@ -350,6 +361,10 @@ class Command(BaseCommand):
             'previous_localid': None,
             'next_localid': None,
         }
+        # In the publications datastream, the issues are sorted in descending publication date
+        # order. We use this fact to search if the journal's localidentifier has changed over
+        # time. If it has, we want the last localid it held before the current one
+        # and/or the first localid it'll hold after the current one.
         for issue in issues:
             issue_pid = issue.get('pid')
             journal_localid = issue_pid.split('.')[-2]
@@ -390,11 +405,14 @@ class Command(BaseCommand):
             collectionid=journal.collection.localidentifier,
             journalid=journal.localidentifier
         )
+        # pids for all issues found in Fedora for this journal
         issue_pids = get_pids(issue_fedora_query)
+        # pids for all issues that are either in fedora or the db (but not in both)
         issue_pids_to_sync = get_journal_issue_pids_to_sync(
             journal,
             journal_erudit_object.get_published_issues_pids(),
         )
+        # TODO: what's the point of this since we union both sets and we never delete issues ?
         for ipid in set(issue_pids) | issue_pids_to_sync:
             if ipid.startswith(journal_pid):
                 # Imports the issue only if its PID is prefixed with the PID of the journal object.

@@ -84,7 +84,7 @@ def get_journal_issue_pids_to_sync(journal, published_in_fedora_pids):
     """ Returns a list of issue pids in need for synchronization for a given journal.
 
     Those issues are either:
-        * published in fedora bot not on www
+        * published in fedora but not on www
         * published on www but not in fedora
 
     symmetric_difference() returns the set of elements which are in either of the sets
