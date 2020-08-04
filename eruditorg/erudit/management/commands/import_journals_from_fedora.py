@@ -234,11 +234,12 @@ class Command(BaseCommand):
                     journal,
                     journal_erudit_object.get_published_issues_pids(),
                 ))
-            except Exception:
+            except Exception as e:
                 journal_errored_count += 1
                 logger.exception(
                     "journal.import.error",
                     journal_pid=jpid,
+                    msg=repr(e),
                 )
             else:
                 journal_count += 1
@@ -280,11 +281,12 @@ class Command(BaseCommand):
             else:
                 try:
                     self._import_issue(ipid, journal)
-                except Exception:
+                except Exception as e:
                     issue_errored_count += 1
                     logger.exception(
                         "issue.import.error",
-                        issue_pid=ipid
+                        issue_pid=ipid,
+                        msg=repr(e),
                     )
                 else:
                     issue_count += 1
