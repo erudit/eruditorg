@@ -64,8 +64,8 @@ class Command(BaseCommand):
             help='Modification date to use to retrieve journals to import (iso format).')
 
     def handle(self, *args, **options):
-        self.full_import = options.get('full', False)
-        self.journal_pid = options.get('journal_pid', None)
+        full_import = options.get('full', False)
+        journal_pid = options.get('journal_pid', None)
         modification_date = options.get('mdate', None)
         self.journal_precedence_relations = []
         issue_pid = options.get('issue_pid', None)
@@ -105,21 +105,21 @@ class Command(BaseCommand):
             return
 
             # Imports a journal PID manually
-        if self.journal_pid:
+        if journal_pid:
             logger.info(
                 'journal.import.start',
-                journal_pid=self.journal_pid
+                journal_pid=journal_pid
             )
 
-            if not re.match(r'^\w+:\w+\.\w+$', self.journal_pid):
+            if not re.match(r'^\w+:\w+\.\w+$', journal_pid):
                 logger.error(
                     "invalid_argument",
                     msg="The specified journal pid is not formatted correctly",
-                    journal_pid=self.journal_pid
+                    journal_pid=journal_pid
                 )
                 return
 
-            collection_localidentifier = self.journal_pid.split(':')[1].split('.')[0]
+            collection_localidentifier = journal_pid.split(':')[1].split('.')[0]
             try:
                 collection = Collection.objects.get(localidentifier=collection_localidentifier)
             except Collection.DoesNotExist:
@@ -130,7 +130,7 @@ class Command(BaseCommand):
                 )
                 return
 
-            self.import_journal(self.journal_pid, collection)
+            self.import_journal(journal_pid, collection)
             self.import_journal_precedences(self.journal_precedence_relations)
             return
 
@@ -146,7 +146,7 @@ class Command(BaseCommand):
                     code=collection_code, name=collection_config.get('collection_title'),
                     localidentifier=collection_config.get('localidentifier'))
             else:
-                _jc, _jec, _ic, _iec = self.import_collection(collection)
+                _jc, _jec, _ic, _iec = self.import_collection(collection, full_import)
                 journal_count += _jc
                 journal_errored_count += _jec
                 issue_count += _ic
@@ -160,20 +160,20 @@ class Command(BaseCommand):
             issue_errored_count=issue_errored_count,
         )
 
-    def import_collection(self, collection):
+    def import_collection(self, collection: Collection, full_import: bool):
         """ Imports all the journals of a specific collection. """
 
         self.journal_precedence_relations = []
 
         latest_update_date = self.modification_date
-        if not self.full_import and latest_update_date is None:
+        if not full_import and latest_update_date is None:
             # Tries to fetch the date of the Journal instance with the more recent update date.
             latest_journal_update = Journal.objects.order_by('-fedora_updated').first()
             latest_update_date = latest_journal_update.fedora_updated.date() \
                 if latest_journal_update else None
 
         latest_issue_update_date = self.modification_date
-        if not self.full_import and latest_issue_update_date is None:
+        if not full_import and latest_issue_update_date is None:
             # Tries to fetch the date of the Issue instance with the more recent update date.
             latest_issue_update = Issue.objects.order_by('-fedora_updated').first()
             latest_issue_update_date = latest_issue_update.fedora_updated.date() \
@@ -184,7 +184,7 @@ class Command(BaseCommand):
 
         base_fedora_query = "pid~erudit:{collectionid}.* label='Series Erudit'".format(
             collectionid=collection.localidentifier)
-        if self.full_import or latest_update_date is None:
+        if full_import or latest_update_date is None:
             modification_date = None
             full_import = True
             journal_pids = get_pids(base_fedora_query)
@@ -235,7 +235,7 @@ class Command(BaseCommand):
         # --
         issue_fedora_query = "pid~erudit:{collectionid}.*.* label='Publication Erudit'".format(
             collectionid=collection.localidentifier)
-        if self.full_import or latest_update_date is None:
+        if full_import or latest_update_date is None:
             issue_pids = get_pids(issue_fedora_query)
         else:
             # Fetches the PIDs of all the issues that have been update since the latest
