@@ -1,9 +1,14 @@
 import datetime as dt
+from typing import Sequence
+
 import structlog
 import re
 
 from django.core.cache import cache
-from django.core.management.base import BaseCommand
+from django.core.management.base import (
+    BaseCommand,
+    CommandError,
+)
 from django.db import transaction
 from eruditarticle.utils import remove_xml_namespaces
 import lxml.etree as et
@@ -87,11 +92,8 @@ class Command(BaseCommand):
                 logger.info("import.started", issue_pid=issue_pid)
                 unimported_issues_pids = [issue_pid]
                 if not re.match(r'^\w+:\w+\.\w+\.\w+$', issue_pid):
-                    logger.error(
-                        "invalid_argument",
-                        issue_pid=issue_pid,
-                        msg="The specified issue pid is not formatted correctly"
-                    )
+                    raise CommandError(f"Invalid argument issue_pid: "
+                                       f"{issue_pid} is not valid")
             else:
                 unimported_issues_pids = get_unimported_issues_pids()
                 logger.info(
@@ -99,25 +101,7 @@ class Command(BaseCommand):
                     issues_count=len(unimported_issues_pids),
                     msg="Importing missing issues"
                 )
-            for issue_pid in unimported_issues_pids:
-                journal_localidentifier = issue_pid.split(':')[1].split('.')[1]
-                try:
-                    journal = Journal.objects.get(localidentifier=journal_localidentifier)
-                except (Journal.DoesNotExist, Journal.MultipleObjectsReturned) as e:
-                    logger.error(
-                        "journal.import.error",
-                        journal_pid=journal_localidentifier,
-                        msg=repr(e),
-                    )
-                    return
-                try:
-                    self._import_issue(issue_pid, journal)
-                except Exception as e:
-                    logger.exception(
-                        'issue.import.error',
-                        issue_pid=issue_pid,
-                        error=e,
-                    )
+            self.import_issues(unimported_issues_pids)
             return
 
             # Imports a journal PID manually
@@ -483,3 +467,25 @@ class Command(BaseCommand):
         if journal.name is None:
             journal.name = issue_erudit_object.get_journal_title(formatted=True)
         journal.save()
+
+    def import_issues(self, unimported_issues_pids: Sequence[str]):
+        for issue_pid in unimported_issues_pids:
+            journal_localidentifier = issue_pid.split(':')[1].split('.')[1]
+            try:
+                journal = Journal.objects.get(localidentifier=journal_localidentifier)
+            except (Journal.DoesNotExist, Journal.MultipleObjectsReturned) as e:
+                logger.error(
+                    "journal.import.error",
+                    journal_pid=journal_localidentifier,
+                    msg=repr(e),
+                )
+                return
+            try:
+                self._import_issue(issue_pid, journal)
+            except Exception as e:
+                logger.exception(
+                    'issue.import.error',
+                    issue_pid=issue_pid,
+                    error=e,
+                )
+
