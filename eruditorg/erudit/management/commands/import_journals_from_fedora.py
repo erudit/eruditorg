@@ -38,6 +38,8 @@ class Command(BaseCommand):
 
     help = 'Import journals from Fedora'
 
+    modification_date = None
+
     def add_arguments(self, parser):
         parser.add_argument(
             '--full', action='store_true', dest='full', default=False,
@@ -59,8 +61,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.journal_pid = options.get('journal_pid', None)
-        self.modification_date = options.get('mdate', None)
-        self.journal_precendence_relations = []
+        modification_date = options.get('mdate', None)
+        self.journal_precedence_relations = []
         self.issue_pid = options.get('issue_pid', None)
         self.import_missing = options.get('import_missing', None)
         logger.info("import.started", **options)
@@ -70,17 +72,15 @@ class Command(BaseCommand):
 
         # Handles a potential modification date option
         try:
-            assert self.modification_date is not None
-            self.modification_date = dt.datetime.strptime(self.modification_date, '%Y-%m-%d').date()
+            if modification_date is not None:
+                self.modification_date = dt.datetime.strptime(modification_date, '%Y-%m-%d').date()
         except ValueError:
             logger.error(
                 "invalid_argument",
                 msg="A modification date has been specified, but it cannot be parsed by strptime",
-                modification_date=self.modification_date
+                modification_date=modification_date
             )
             return
-        except AssertionError:
-            pass
 
         if self.issue_pid or self.import_missing:
             if self.issue_pid:
