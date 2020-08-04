@@ -104,13 +104,9 @@ class Command(BaseCommand):
             self.import_issues(unimported_issues_pids)
             return
 
-            # Imports a journal PID manually
+        # Imports a journal PID manually
         if journal_pid:
-            logger.info(
-                'journal.import.start',
-                journal_pid=journal_pid
-            )
-
+            logger.info('journal.import.start', journal_pid=journal_pid)
             if not re.match(r'^\w+:\w+\.\w+$', journal_pid):
                 logger.error(
                     "invalid_argument",
@@ -357,7 +353,7 @@ class Command(BaseCommand):
         journal.first_publication_year = journal_erudit_object.first_publication_year
         journal.last_publication_year = journal_erudit_object.last_publication_year
 
-        issues = xml_issue = publications_tree.xpath('.//numero')
+        issues = publications_tree.xpath('.//numero')
         current_journal_localid_found = False
         precedences_relation = {
             'journal_localid': journal.localidentifier,
@@ -487,4 +483,3 @@ class Command(BaseCommand):
                     issue_pid=issue_pid,
                     error=e,
                 )
-
