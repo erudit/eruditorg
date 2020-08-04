@@ -1137,7 +1137,7 @@ class Article(FedoraMixin):
         return self.get_formatted_authors(style='chicago')
 
     def get_formatted_authors_without_suffixes(self):
-        return self.erudit_object.get_authors(formatted=True, suffixes=False)
+        return self.erudit_object.get_authors(formatted=True, html=True, suffixes=False)
 
     @property
     @catch_and_log

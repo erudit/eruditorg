@@ -429,6 +429,21 @@ class TestIssueDetailSummary:
         # Check that authors' suffixes are not displayed on the issue detail view.
         assert '<p class="bib-record__authors col-sm-9">\n      Mélissa Beaudoin, Stéphane Potvin, Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, André Ngamini-Ngui et Alexandre Dumais\n    </p>' in html
 
+    def test_article_authors_html_display(self):
+        article = ArticleFactory(
+            from_fixture='1070658ar',
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'localidentifier': article.issue.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        # Check that authors are displayed with html.
+        assert '<p class="bib-record__authors col-sm-9">\n      Le Comité exécutif de la ' \
+               '<em>Revue québécoise de psychologie</em> (Suzanne Léveillée, Julie Maheux, ' \
+               'Gaëtan Tremblay, Carolanne Vignola-Lévesque)\n    </p>' in html
+
     @pytest.mark.parametrize('journal_type', [
         ('S'),
         ('C'),
