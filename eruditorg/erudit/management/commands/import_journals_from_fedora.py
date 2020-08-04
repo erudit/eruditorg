@@ -145,12 +145,11 @@ class Command(BaseCommand):
                 collection = Collection.objects.create(
                     code=collection_code, name=collection_config.get('collection_title'),
                     localidentifier=collection_config.get('localidentifier'))
-            else:
-                _jc, _jec, _ic, _iec = self.import_collection(collection, full_import)
-                journal_count += _jc
-                journal_errored_count += _jec
-                issue_count += _ic
-                issue_errored_count += _iec
+            _jc, _jec, _ic, _iec = self.import_collection(collection, full_import)
+            journal_count += _jc
+            journal_errored_count += _jec
+            issue_count += _ic
+            issue_errored_count += _iec
 
         logger.info(
             "import.finished",
