@@ -89,7 +89,7 @@ class Command(BaseCommand):
                     issue_pid=self.issue_pid,
                 )
                 unimported_issues_pids = [self.issue_pid]
-                if not re.match(r'^\w+\:\w+\.\w+\.\w+$', self.issue_pid):
+                if not re.match(r'^\w+:\w+\.\w+\.\w+$', self.issue_pid):
                     logger.error(
                         "invalid_argument",
                         issue_pid=self.issue_pid,
@@ -129,7 +129,7 @@ class Command(BaseCommand):
                 journal_pid=self.journal_pid
             )
 
-            if not re.match(r'^\w+\:\w+\.\w+$', self.journal_pid):
+            if not re.match(r'^\w+:\w+\.\w+$', self.journal_pid):
                 logger.error(
                     "invalid_argument",
                     msg="The specified journal pid is not formatted correctly",
