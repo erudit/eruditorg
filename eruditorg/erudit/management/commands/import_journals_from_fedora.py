@@ -294,11 +294,9 @@ class Command(BaseCommand):
         # STEP 1: fetches the full Journal fedora object
         # --
 
-        try:
-            fedora_journal = JournalDigitalObject(api, journal_pid)
-            assert fedora_journal.exists
-        except AssertionError:
-            msg = 'The journal with PID "{}" seems to be inexistant'.format(journal_pid)
+        fedora_journal = JournalDigitalObject(api, journal_pid)
+        if not fedora_journal.exists:
+            msg = f'The journal with PID "{journal_pid}" seems to be inexistant in Fedora'
             logger.exception(
                 "journal.import.error",
                 msg=msg,
@@ -414,16 +412,14 @@ class Command(BaseCommand):
         # STEP 1: fetches the full Issue fedora object
         # --
 
-        try:
-            fedora_issue = PublicationDigitalObject(api, issue_pid)
-            assert fedora_issue.exists
-        except AssertionError:
+        fedora_issue = PublicationDigitalObject(api, issue_pid)
+        if not fedora_issue.exists:
             logger.error(
                 'issue.import.error',
                 issue_pid=issue_pid,
                 msg='The issue with the given pid does not exist in Fedora',
             )
-            raise
+            raise CommandError(f"The issue with the pid {issue_pid} does not exist in Fedora")
 
         # STEP 2: creates or updates the issue object
         # --
