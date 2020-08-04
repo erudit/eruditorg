@@ -106,10 +106,11 @@ class Command(BaseCommand):
                 journal_localidentifier = issue_pid.split(':')[1].split('.')[1]
                 try:
                     journal = Journal.objects.get(localidentifier=journal_localidentifier)
-                except Journal.exception:
+                except (Journal.DoesNotExist, Journal.MultipleObjectsReturned) as e:
                     logger.error(
                         "journal.import.error",
                         journal_pid=journal_localidentifier,
+                        msg=repr(e),
                     )
                     return
                 try:
