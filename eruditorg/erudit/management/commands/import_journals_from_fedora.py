@@ -63,8 +63,8 @@ class Command(BaseCommand):
         self.journal_pid = options.get('journal_pid', None)
         modification_date = options.get('mdate', None)
         self.journal_precedence_relations = []
-        self.issue_pid = options.get('issue_pid', None)
-        self.import_missing = options.get('import_missing', None)
+        issue_pid = options.get('issue_pid', None)
+        import_missing = options.get('import_missing', None)
         logger.info("import.started", **options)
 
         with sentry_sdk.configure_scope() as scope:
@@ -82,17 +82,14 @@ class Command(BaseCommand):
             )
             return
 
-        if self.issue_pid or self.import_missing:
-            if self.issue_pid:
-                logger.info(
-                    "import.started",
-                    issue_pid=self.issue_pid,
-                )
-                unimported_issues_pids = [self.issue_pid]
-                if not re.match(r'^\w+:\w+\.\w+\.\w+$', self.issue_pid):
+        if issue_pid or import_missing:
+            if issue_pid:
+                logger.info("import.started", issue_pid=issue_pid)
+                unimported_issues_pids = [issue_pid]
+                if not re.match(r'^\w+:\w+\.\w+\.\w+$', issue_pid):
                     logger.error(
                         "invalid_argument",
-                        issue_pid=self.issue_pid,
+                        issue_pid=issue_pid,
                         msg="The specified issue pid is not formatted correctly"
                     )
             else:
