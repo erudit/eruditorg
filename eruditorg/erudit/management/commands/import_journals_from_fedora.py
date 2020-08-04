@@ -5,7 +5,6 @@ import re
 from django.core.cache import cache
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from django.utils.encoding import smart_str
 from eruditarticle.utils import remove_xml_namespaces
 import lxml.etree as et
 import sentry_sdk
@@ -45,10 +44,6 @@ class Command(BaseCommand):
             help='Perform a full import.')
 
         parser.add_argument(
-            '--test-xslt', action='store', dest='test_xslt',
-            help='Python path to a function to test the XSLT transformation of articles')
-
-        parser.add_argument(
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
         parser.add_argument(
@@ -63,7 +58,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
-        self.test_xslt = options.get('test_xslt', None)
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
         self.journal_precendence_relations = []
@@ -73,23 +67,6 @@ class Command(BaseCommand):
 
         with sentry_sdk.configure_scope() as scope:
             scope.fingerprint = ['import-journals-from-fedora']
-
-        # Handles a potential XSLT test function
-        try:
-            assert self.test_xslt is not None
-            module, xslt_test_func = self.test_xslt.rsplit('.', 1)
-            module, xslt_test_func = smart_str(module), smart_str(xslt_test_func)
-            xslt_test_func = getattr(__import__(module, {}, {}, [xslt_test_func]), xslt_test_func)
-            self.xslt_test_func = xslt_test_func
-        except ImportError:
-            logger.error(
-                "invalid_argument",
-                xslt_test_func=self.test_xslt,
-                msg="A XSLT test function has been specified, but it cannot be imported"
-            )
-            return
-        except AssertionError:
-            pass
 
         # Handles a potential modification date option
         try:

@@ -1,6 +1,6 @@
 import datetime as dt
 import pytest
-import unittest
+from unittest import mock
 
 from django.core.management import call_command
 from erudit.fedora import repository
@@ -12,7 +12,7 @@ from erudit.models import Journal
 pytestmark = pytest.mark.django_db
 
 
-@unittest.mock.patch('erudit.fedora.modelmixins.cache')
+@mock.patch('erudit.fedora.modelmixins.cache')
 @pytest.mark.parametrize('kwargs', [
     ({}),
     ({'full': True}),
@@ -79,7 +79,7 @@ def test_import_nonexisting_journal_creates_code():
     assert Journal.objects.filter(code='bc').exists()
 
 
-@unittest.mock.patch('erudit.management.commands.import_journals_from_fedora.cache')
+@mock.patch('erudit.management.commands.import_journals_from_fedora.cache')
 @pytest.mark.parametrize('kwargs, expected_count', [
     # There should be 2 delete cache calls, one for the journal and one for the issue.
     ({'pid': 'erudit:erudit.journal_test'}, 2),
