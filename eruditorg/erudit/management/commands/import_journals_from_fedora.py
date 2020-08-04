@@ -108,23 +108,15 @@ class Command(BaseCommand):
         if journal_pid:
             logger.info('journal.import.start', journal_pid=journal_pid)
             if not re.match(r'^\w+:\w+\.\w+$', journal_pid):
-                logger.error(
-                    "invalid_argument",
-                    msg="The specified journal pid is not formatted correctly",
-                    journal_pid=journal_pid
-                )
-                return
+                raise CommandError(f"Invalid argument journal_pid: "
+                                   f"{journal_pid} is not valid")
 
             collection_localidentifier = journal_pid.split(':')[1].split('.')[0]
             try:
                 collection = Collection.objects.get(localidentifier=collection_localidentifier)
             except Collection.DoesNotExist:
-                logger.exception(
-                    "invalid_argument",
-                    msg="Collection does not exist",
-                    collection_pid=collection_localidentifier,
-                )
-                return
+                raise CommandError(f"Invalid argument: "
+                                   f"collection {collection_localidentifier} doesn't exist")
 
             self.import_journal(journal_pid, collection)
             self.import_journal_precedences(self.journal_precedence_relations)
