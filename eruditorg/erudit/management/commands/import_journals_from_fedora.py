@@ -267,8 +267,8 @@ class Command(BaseCommand):
         issue_count, issue_errored_count = 0, 0
 
         for ipid in set(issue_pids) | issue_pids_to_sync:
+            journal_localidentifier = ipid.split(':')[1].split('.')[1]
             try:
-                journal_localidentifier = ipid.split(':')[1].split('.')[1]
                 journal = Journal.objects.get(localidentifier=journal_localidentifier)
             except Journal.DoesNotExist:
                 issue_errored_count += 1
@@ -365,12 +365,12 @@ class Command(BaseCommand):
                 journal = Journal.objects.get(code=code)
             except Journal.DoesNotExist:
                 journal = Journal()
-            finally:
-                journal.localidentifier = journal_localidentifier
-                journal.code = code
-                journal.collection = collection
-                journal.fedora_created = fedora_journal.created
-                journal.name = xml_name.text if xml_name is not None else None
+
+            journal.localidentifier = journal_localidentifier
+            journal.code = code
+            journal.collection = collection
+            journal.fedora_created = fedora_journal.created
+            journal.name = xml_name.text if xml_name is not None else None
 
         journal_erudit_object = journal.get_erudit_object(use_cache=False)
         journal.first_publication_year = journal_erudit_object.first_publication_year
