@@ -150,7 +150,7 @@ class Command(BaseCommand):
                 return
 
             self.import_journal(self.journal_pid, collection)
-            self.import_journal_precedences(self.journal_precendence_relations)
+            self.import_journal_precedences(self.journal_precedence_relations)
             return
 
         # Imports each collection
@@ -182,7 +182,7 @@ class Command(BaseCommand):
     def import_collection(self, collection):
         """ Imports all the journals of a specific collection. """
 
-        self.journal_precendence_relations = []
+        self.journal_precedence_relations = []
 
         latest_update_date = self.modification_date
         if not self.full_import and latest_update_date is None:
@@ -248,7 +248,7 @@ class Command(BaseCommand):
         # STEP 3: associates Journal instances with other each other
         # --
 
-        self.import_journal_precedences(self.journal_precendence_relations)
+        self.import_journal_precedences(self.journal_precedence_relations)
 
         # STEP 4: fetches the PIDs of the issues that will be imported
         # --
@@ -294,9 +294,9 @@ class Command(BaseCommand):
 
         return journal_count, journal_errored_count, issue_count, issue_errored_count
 
-    def import_journal_precedences(self, precendences_relations):
+    def import_journal_precedences(self, precedences_relations):
         """ Associates previous/next Journal instances with each journal. """
-        for r in precendences_relations:
+        for r in precedences_relations:
             localid = r['journal_localid']
             previous_localid = r['previous_localid']
             next_localid = r['next_localid']
@@ -379,7 +379,7 @@ class Command(BaseCommand):
 
         issues = xml_issue = publications_tree.xpath('.//numero')
         current_journal_localid_found = False
-        precendences_relation = {
+        precedences_relation = {
             'journal_localid': journal.localidentifier,
             'previous_localid': None,
             'next_localid': None,
@@ -388,12 +388,12 @@ class Command(BaseCommand):
             issue_pid = issue.get('pid')
             journal_localid = issue_pid.split('.')[-2]
             if journal_localid != journal.localidentifier and not current_journal_localid_found:
-                precendences_relation['next_localid'] = journal_localid
+                precedences_relation['next_localid'] = journal_localid
             elif journal_localid != journal.localidentifier and current_journal_localid_found:
-                precendences_relation['previous_localid'] = journal_localid
+                precedences_relation['previous_localid'] = journal_localid
             elif journal_localid == journal.localidentifier:
                 current_journal_localid_found = True
-        self.journal_precendence_relations.append(precendences_relation)
+        self.journal_precedence_relations.append(precedences_relation)
 
         journal_created = journal.id is None
 
