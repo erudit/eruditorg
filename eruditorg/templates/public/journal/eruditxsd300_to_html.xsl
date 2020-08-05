@@ -954,6 +954,67 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="section-heading">
+    <xsl:if test="self::grannexe">
+      <xsl:choose>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="grnote-titre">
+            <xsl:with-param name="count" select="count(annexe)"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="self::grnotebio">
+      <xsl:choose>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="grnote-titre">
+            <xsl:with-param name="count" select="count(notebio)"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="self::grnote">
+      <xsl:choose>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="grnote-titre">
+            <xsl:with-param name="count" select="count(note)"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="self::merci">
+      <xsl:choose>
+        <xsl:when test="titre and titre != ''" >
+          <xsl:apply-templates select="titre"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="merci-titre"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="self::grbiblio">
+      <xsl:choose>
+        <xsl:when test="biblio/titre and biblio/titre != ''">
+          <xsl:apply-templates select="biblio/titre"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="grbiblio-titre">
+            <xsl:with-param name="count" select="count(biblio)"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template name="grannexe-titre">
     <xsl:param name="count"/>
     <xsl:choose>
@@ -2321,14 +2382,7 @@
   <!-- bibliography -->
   <xsl:template match="biblio">
     <h2>
-      <xsl:choose>
-        <xsl:when test="titre">
-          <xsl:apply-templates select="titre"/>
-        </xsl:when>
-        <xsl:otherwise>
-          {% trans 'Bibliographie' %}
-        </xsl:otherwise>
-      </xsl:choose>
+      <xsl:apply-templates select="parent::grbiblio" mode="section-heading"/>
     </h2>
     <div class="biblio">
       <ol class="unstyled {name()}">
