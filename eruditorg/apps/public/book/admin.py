@@ -1,5 +1,6 @@
 import csv
 
+from datetime import datetime
 from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.translation import gettext as _
@@ -111,6 +112,8 @@ class BookAdmin(admin.ModelAdmin):
         ]
 
         response = HttpResponse(content_type='text/csv')
+        date = datetime.now().strftime("%Y-%m-%d")
+        response['Content-Disposition'] = f'attachment; filename="livres-{date}.csv"'
         writer = csv.writer(response)
         writer.writerow([field_labels.get(field) for field in fields])
 
