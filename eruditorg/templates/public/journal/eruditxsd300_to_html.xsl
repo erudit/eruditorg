@@ -897,7 +897,7 @@
     <xsl:if test="self::grannexe">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
-          <xsl:value-of select="titre"/>
+          <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="grnote-titre">
@@ -909,7 +909,7 @@
     <xsl:if test="self::grnotebio">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
-          <xsl:value-of select="titre"/>
+          <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="grnotebio-titre">
@@ -921,7 +921,7 @@
     <xsl:if test="self::grnote">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
-          <xsl:value-of select="titre"/>
+          <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="grnote-titre">
@@ -933,7 +933,7 @@
     <xsl:if test="self::merci">
       <xsl:choose>
         <xsl:when test="titre and titre != ''" >
-          <xsl:value-of select="titre"/>
+          <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="merci-titre"/>
@@ -943,7 +943,7 @@
     <xsl:if test="self::grbiblio">
       <xsl:choose>
         <xsl:when test="biblio/titre and biblio/titre != ''">
-          <xsl:value-of select="biblio/titre"/>
+          <xsl:apply-templates select="biblio/titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="grbiblio-titre">
