@@ -2105,6 +2105,7 @@ class TestArticleDetailView:
         ('1054008ar', 'grnote', 'Notes'),
         ('1059303ar', 'merci', 'Acknowledgements'),
         ('009676ar', 'grbiblio', 'Bibliographie'),
+        ('1070621ar', 'grbiblio', 'Bibliography'),
         # Articles with specified titles in the XML.
         ('009676ar', 'grnotebio', 'Collaboratrice'),
         ('009381ar', 'grnote', 'Notas'),
@@ -2273,6 +2274,7 @@ class TestArticleDetailView:
                'title="La bibliographie recense exclusivement les travaux cités dans l’article. ' \
                'En complément, la base de données des logiciels et projets (cf.\xa0note 2) ' \
                'propose pour l’ensemble des logicie[…]">[49]</a>\n</h2>' in html
+        assert '<li><a href="#grbiblio">Bibliographie sélective</a></li>' in html
 
     def test_organistaion_as_author_is_displayed_in_bold(self):
         article = ArticleFactory(from_fixture='1068900ar')
