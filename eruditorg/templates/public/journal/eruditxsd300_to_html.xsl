@@ -1165,7 +1165,32 @@
   </xsl:template>
 
   <xsl:template match="bloc" mode="poeme">
-    <div class="bloc"><xsl:apply-templates mode="poeme"/></div>
+    <xsl:element name="div">
+      <xsl:attribute name="class">
+        <xsl:text>bloc</xsl:text>
+        <xsl:if test="@alignh">
+          <xsl:text> align </xsl:text>
+          <xsl:choose>
+            <xsl:when test="@alignh = 'gauche'">
+              <xsl:text>align-left</xsl:text>
+            </xsl:when>
+            <xsl:when test="@alignh = 'centre'">
+              <xsl:text>align-center</xsl:text>
+            </xsl:when>
+            <xsl:when test="@alignh = 'droite'">
+              <xsl:text>align-right</xsl:text>
+            </xsl:when>
+            <xsl:when test="@alignh = 'justifie'">
+              <xsl:text>align-justify</xsl:text>
+            </xsl:when>
+            <xsl:when test="@alignh = 'carac'">
+              <xsl:text>align-char</xsl:text>
+            </xsl:when>
+          </xsl:choose>
+        </xsl:if>
+      </xsl:attribute>
+      <xsl:apply-templates mode="poeme"/>
+    </xsl:element>
   </xsl:template>
 
   <xsl:template match="bloc/ligne" mode="poeme">

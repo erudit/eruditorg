@@ -1705,6 +1705,51 @@ class TestArticleDetailView:
                                  'pardonne-leur et leur donne le repos.</p>\n<p class="ligne">' \
                                  'Jésus, accorde-leur le repos.</p>\n</div>\n</blockquote>'
 
+    def test_verbatim_poeme_horizontal_align(self):
+        article = ArticleFactory(
+            from_fixture='1070671ar',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        poeme = dom.find('blockquote', {'class': 'verbatim poeme'}).decode()
+        # Check that poems lines are centered (align-center).
+        assert poeme == '<blockquote class="verbatim poeme">\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">On the land</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">On the water</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">Held in <span class="majuscule">Senćoŧen\n' \
+                        '								</span>kinship</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">Today is the future</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">It belongs to the next generations</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">of learners — dreamers — healers</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">Maybe one day we will move beyond territorial\n' \
+                        '								acknowledgement</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">and gather here in a good way</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">so that the land and their kin</p>\n' \
+                        '</div>\n' \
+                        '<div class="bloc align align-center">\n' \
+                        '<p class="ligne">can introduce themselves.</p>\n' \
+                        '</div>\n' \
+                        '</blockquote>'
+
     def test_grfigure_caption_position(self):
         article = ArticleFactory(
             from_fixture='1062105ar',
