@@ -311,7 +311,7 @@
                       <!-- #biblio-1, #biblio-2, etc. -->
                       <xsl:text>#biblio-</xsl:text><xsl:value-of select="count(preceding-sibling::biblio) + 1"/>
                     </xsl:attribute>
-                    <xsl:apply-templates select="parent::grbiblio" mode="toc-heading"/>
+                    <xsl:apply-templates select="." mode="toc-heading"/>
                   </xsl:element>
                 </li>
                 </xsl:for-each>
@@ -899,7 +899,7 @@
     </xsl:element>
   </xsl:template>
 
-  <xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="toc-heading">
+  <xsl:template match="grannexe | grnotebio | grnote | merci | biblio"  mode="toc-heading">
     <xsl:if test="self::grannexe">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
@@ -946,21 +946,21 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
-    <xsl:if test="self::grbiblio">
+    <xsl:if test="self::biblio">
       <xsl:choose>
-        <xsl:when test="biblio/titre and biblio/titre != ''">
-          <xsl:apply-templates select="biblio/titre" mode="toc-heading"/>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grbiblio-titre">
-            <xsl:with-param name="count" select="count(biblio)"/>
+          <xsl:call-template name="biblio-titre">
+            <xsl:with-param name="count" select="count(../biblio)"/>
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="section-heading">
+  <xsl:template match="grannexe | grnotebio | grnote | merci | biblio"  mode="section-heading">
     <xsl:if test="self::grannexe">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
@@ -1007,14 +1007,14 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
-    <xsl:if test="self::grbiblio">
+    <xsl:if test="self::biblio">
       <xsl:choose>
-        <xsl:when test="biblio/titre and biblio/titre != ''">
-          <xsl:apply-templates select="biblio/titre"/>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grbiblio-titre">
-            <xsl:with-param name="count" select="count(biblio)"/>
+          <xsl:call-template name="biblio-titre">
+            <xsl:with-param name="count" select="count(../biblio)"/>
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
@@ -1089,7 +1089,7 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template name="grbiblio-titre">
+  <xsl:template name="biblio-titre">
     <xsl:param name="count"/>
     <xsl:choose>
       <xsl:when test="$count = 1">
@@ -2417,7 +2417,7 @@
         <!-- biblio-1, biblio-2, etc. -->
         <xsl:text>biblio-</xsl:text><xsl:value-of select="count(preceding-sibling::biblio) + 1"/>
       </xsl:attribute>
-      <xsl:apply-templates select="parent::grbiblio" mode="section-heading"/>
+      <xsl:apply-templates select="." mode="section-heading"/>
     </xsl:element>
     <div class="biblio">
       <ol class="unstyled {name()}">
