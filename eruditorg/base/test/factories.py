@@ -29,7 +29,7 @@ class UserFactory(factory.django.DjangoModelFactory):
         self.save()
 
 
-class GroupFactory(factory.DjangoModelFactory):
+class GroupFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: '{}-{}'.format(str(n), faker.job()))
 
     class Meta:

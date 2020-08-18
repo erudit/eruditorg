@@ -13,7 +13,7 @@ from core.authorization.defaults import AuthorizationConfig as AC
 faker = FakerFactory.create()
 
 
-class AuthorizationFactory(factory.DjangoModelFactory):
+class AuthorizationFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     group = factory.SubFactory(GroupFactory)
     authorization_codename = factory.LazyAttribute(lambda t: faker.text(max_nb_chars=100))

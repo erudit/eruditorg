@@ -19,7 +19,7 @@ from ..models import InstitutionReferer
 from ..models import AccessBasket
 
 
-class AccessBasketFactory(factory.DjangoModelFactory):
+class AccessBasketFactory(factory.django.DjangoModelFactory):
     name = "some name"
 
     class Meta:
@@ -32,7 +32,7 @@ class AccessBasketFactory(factory.DjangoModelFactory):
                 obj.journals.add(journal)
 
 
-class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
+class JournalAccessSubscriptionFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     organisation = factory.SubFactory(OrganisationFactory)
 
@@ -114,7 +114,7 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
             ExpiredJournalAccessSubscriptionPeriodFactory(subscription=obj)
 
 
-class JournalAccessSubscriptionPeriodFactory(factory.DjangoModelFactory):
+class JournalAccessSubscriptionPeriodFactory(factory.django.DjangoModelFactory):
     subscription = factory.SubFactory(JournalAccessSubscriptionFactory)
 
     class Meta:
@@ -133,7 +133,7 @@ class ExpiredJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPer
     end = dt.datetime.now() - dt.timedelta(days=5)
 
 
-class InstitutionRefererFactory(factory.DjangoModelFactory):
+class InstitutionRefererFactory(factory.django.DjangoModelFactory):
 
     subscription = factory.SubFactory(ValidJournalAccessSubscriptionPeriodFactory)
 
@@ -180,7 +180,7 @@ class JournalManagementSubscriptionFactory(factory.django.DjangoModelFactory):
                 end=dt.datetime.now() - dt.timedelta(days=5))
 
 
-class JournalManagementSubscriptionPeriodFactory(factory.DjangoModelFactory):
+class JournalManagementSubscriptionPeriodFactory(factory.django.DjangoModelFactory):
     subscription = factory.SubFactory(JournalManagementSubscriptionFactory)
 
     class Meta:
