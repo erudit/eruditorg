@@ -304,11 +304,17 @@
               {% endif %}
               {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
               <xsl:if test="grbiblio">
+                <xsl:for-each select="grbiblio/biblio">
                 <li>
-                  <a href="#grbiblio">
-                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
-                  </a>
+                  <xsl:element name="a">
+                    <xsl:attribute name="href">
+                      <!-- #biblio-1, #biblio-2, etc. -->
+                      <xsl:text>#biblio-</xsl:text><xsl:value-of select="count(preceding-sibling::biblio) + 1"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates select="parent::grbiblio" mode="toc-heading"/>
+                  </xsl:element>
                 </li>
+                </xsl:for-each>
               </xsl:if>
               {% endif %}
             </xsl:for-each>
@@ -2406,9 +2412,13 @@
 
   <!-- bibliography -->
   <xsl:template match="biblio">
-    <h2>
+    <xsl:element name="h2">
+      <xsl:attribute name="id">
+        <!-- biblio-1, biblio-2, etc. -->
+        <xsl:text>biblio-</xsl:text><xsl:value-of select="count(preceding-sibling::biblio) + 1"/>
+      </xsl:attribute>
       <xsl:apply-templates select="parent::grbiblio" mode="section-heading"/>
-    </h2>
+    </xsl:element>
     <div class="biblio">
       <ol class="unstyled {name()}">
         <xsl:for-each select="node()[name() != '' and name() != 'titre']">
