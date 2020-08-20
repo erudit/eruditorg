@@ -99,7 +99,7 @@
     </script>
 
     {# Ionicon font icon #}
-    <link rel="preload" href="https://unpkg.com/ionicons@4.4.4/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/ionicons@4.4.4/dist/css/ionicons.min.css">
 
     {# Cookie consent widget #}
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
@@ -494,7 +494,8 @@
     <script src="{% static 'js/modernizr.js' %}"></script>
     <script src="{% url 'javascript-catalog' %}"></script>
     <script src="{% url 'js_reverse' %}"></script>
-    <script rel="preload" src="https://cdn.iubenda.com/iubenda.js"></script>
+    <script>(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <script>(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
     <script>
     window.addEventListener("load", function(){
