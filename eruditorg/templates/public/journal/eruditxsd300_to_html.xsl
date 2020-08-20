@@ -900,7 +900,7 @@
           <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grnote-titre">
+          <xsl:call-template name="grannexe-titre">
             <xsl:with-param name="count" select="count(annexe)"/>
           </xsl:call-template>
         </xsl:otherwise>
@@ -961,7 +961,7 @@
           <xsl:apply-templates select="titre"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grnote-titre">
+          <xsl:call-template name="grannexe-titre">
             <xsl:with-param name="count" select="count(annexe)"/>
           </xsl:call-template>
         </xsl:otherwise>
@@ -973,7 +973,7 @@
           <xsl:apply-templates select="titre"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grnote-titre">
+          <xsl:call-template name="grnotebio-titre">
             <xsl:with-param name="count" select="count(notebio)"/>
           </xsl:call-template>
         </xsl:otherwise>
