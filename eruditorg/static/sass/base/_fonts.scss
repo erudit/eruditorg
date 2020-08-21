@@ -15,6 +15,7 @@
        url('../fonts/freighttextpro/Serif-Book.svg') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -26,6 +27,7 @@
        url('../fonts/freighttextpro/Serif-BookItalic.svg') format('svg');
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -37,6 +39,7 @@
        url('../fonts/freighttextpro/Serif-Bold.svg') format('svg');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -48,6 +51,7 @@
        url('../fonts/freighttextpro/Serif-BoldItalic.svg') format('svg');
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 /**
@@ -63,6 +67,7 @@
        url('../fonts/maax/Sans-Regular.svg') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -74,6 +79,7 @@
        url('../fonts/maax/Sans-Italic.svg') format('svg');
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -85,6 +91,7 @@
        url('../fonts/maax/Sans-Medium.svg') format('svg');
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -96,6 +103,7 @@
        url('../fonts/maax/Sans-MediumItalic.svg') format('svg');
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -107,6 +115,7 @@
        url('../fonts/maax/Sans-Bold.svg') format('svg');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -118,6 +127,7 @@
        url('../fonts/maax/Sans-BoldItalic.svg') format('svg');
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 /**
@@ -133,6 +143,7 @@
        url('../fonts/maax/Sans-Mono.svg') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -144,19 +155,5 @@
        url('../fonts/maax/Sans-MonoItalic.svg') format('svg');
   font-weight: normal;
   font-style: italic;
-}
-
-/**
- * Icon fonts
- */
-
-@font-face {
-  font-family: 'erudicon';
-  src: url('../fonts/erudicon/erudicon.eot');
-  src: url('../fonts/erudicon/erudicon.eot?#iefix') format('eot'),
-    url('../fonts/erudicon/erudicon.woff') format('woff'),
-    url('../fonts/erudicon/erudicon.ttf') format('truetype'),
-    url('../fonts/erudicon/erudicon.svg#erudicon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  font-display: swap;
 }
