@@ -2104,13 +2104,10 @@ class TestArticleDetailView:
         ('1054008ar', 'grnotebio', 'Note biographique'),
         ('1054008ar', 'grnote', 'Notes'),
         ('1059303ar', 'merci', 'Acknowledgements'),
-        ('009676ar', 'grbiblio', 'Bibliographie'),
-        ('1070621ar', 'grbiblio', 'Bibliography'),
         # Articles with specified titles in the XML.
         ('009676ar', 'grnotebio', 'Collaboratrice'),
         ('009381ar', 'grnote', 'Notas'),
         ('1040250ar', 'merci', 'Remerciements et financement'),
-        ('1054008ar', 'grbiblio', 'Références'),
     ))
     def test_article_annex_section_titles(self, fixture, section_id, expected_title):
         article = ArticleFactory(
@@ -2123,6 +2120,24 @@ class TestArticleDetailView:
         article_toc = dom.find('nav', {'class': 'article-table-of-contents'})
         section = dom.find('section', {'id': section_id})
         assert article_toc.find('a', {'href': '#' + section_id}).text == expected_title
+        assert section.find('h2').text == expected_title
+
+    @pytest.mark.parametrize('fixture, expected_title', (
+        ('009676ar', 'Bibliographie'),
+        ('1070621ar', 'Bibliography'),
+        ('1054008ar', 'Références'),
+    ))
+    def test_article_grbiblio_section_titles(self, fixture, expected_title):
+        article = ArticleFactory(
+            from_fixture=fixture,
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        article_toc = dom.find('nav', {'class': 'article-table-of-contents'})
+        section = dom.find('section', {'id': 'grbiblio'})
+        assert article_toc.find('a', {'href': '#biblio-1'}).text == expected_title
         assert section.find('h2').text == expected_title
 
     def test_media_object_source(self):
@@ -2270,11 +2285,11 @@ class TestArticleDetailView:
         article = ArticleFactory(from_fixture='1068385ar')
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
-        assert '<h2>Bibliographie sélective<a href="#no49" id="re1no49" class="norenvoi" ' \
+        assert '<h2 id="biblio-1">Bibliographie sélective<a href="#no49" id="re1no49" class="norenvoi" ' \
                'title="La bibliographie recense exclusivement les travaux cités dans l’article. ' \
                'En complément, la base de données des logiciels et projets (cf.\xa0note 2) ' \
                'propose pour l’ensemble des logicie[…]">[49]</a>\n</h2>' in html
-        assert '<li><a href="#grbiblio">Bibliographie sélective</a></li>' in html
+        assert '<li><a href="#biblio-1">Bibliographie sélective</a></li>' in html
 
     def test_organistaion_as_author_is_displayed_in_bold(self):
         article = ArticleFactory(from_fixture='1068900ar')

@@ -304,11 +304,17 @@
               {% endif %}
               {% if not is_of_type_roc and display_biblio or display_biblio and not display_abstracts %}
               <xsl:if test="grbiblio">
+                <xsl:for-each select="grbiblio/biblio">
                 <li>
-                  <a href="#grbiblio">
-                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
-                  </a>
+                  <xsl:element name="a">
+                    <xsl:attribute name="href">
+                      <!-- #biblio-1, #biblio-2, etc. -->
+                      <xsl:text>#biblio-</xsl:text><xsl:value-of select="count(preceding-sibling::biblio) + 1"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates select="." mode="toc-heading"/>
+                  </xsl:element>
                 </li>
+                </xsl:for-each>
               </xsl:if>
               {% endif %}
             </xsl:for-each>
@@ -893,7 +899,7 @@
     </xsl:element>
   </xsl:template>
 
-  <xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="toc-heading">
+  <xsl:template match="grannexe | grnotebio | grnote | merci | biblio"  mode="toc-heading">
     <xsl:if test="self::grannexe">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
@@ -940,21 +946,21 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
-    <xsl:if test="self::grbiblio">
+    <xsl:if test="self::biblio">
       <xsl:choose>
-        <xsl:when test="biblio/titre and biblio/titre != ''">
-          <xsl:apply-templates select="biblio/titre" mode="toc-heading"/>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre" mode="toc-heading"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grbiblio-titre">
-            <xsl:with-param name="count" select="count(biblio)"/>
+          <xsl:call-template name="biblio-titre">
+            <xsl:with-param name="count" select="count(../biblio)"/>
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="section-heading">
+  <xsl:template match="grannexe | grnotebio | grnote | merci | biblio"  mode="section-heading">
     <xsl:if test="self::grannexe">
       <xsl:choose>
         <xsl:when test="titre and titre != ''">
@@ -1001,14 +1007,14 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
-    <xsl:if test="self::grbiblio">
+    <xsl:if test="self::biblio">
       <xsl:choose>
-        <xsl:when test="biblio/titre and biblio/titre != ''">
-          <xsl:apply-templates select="biblio/titre"/>
+        <xsl:when test="titre and titre != ''">
+          <xsl:apply-templates select="titre"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="grbiblio-titre">
-            <xsl:with-param name="count" select="count(biblio)"/>
+          <xsl:call-template name="biblio-titre">
+            <xsl:with-param name="count" select="count(../biblio)"/>
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
@@ -1020,15 +1026,15 @@
     <xsl:choose>
       <xsl:when test="$count = 1">
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Appendix</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Apéndice</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Appendix</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Apéndice</xsl:when>
           <xsl:otherwise>Annexe</xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Appendices</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Apéndices</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Appendices</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Apéndices</xsl:when>
           <xsl:otherwise>Annexes</xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
@@ -1040,15 +1046,15 @@
     <xsl:choose>
       <xsl:when test="$count = 1">
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Biographical note</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Nota biográfica</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Biographical note</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Nota biográfica</xsl:when>
           <xsl:otherwise>Note biographique</xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Biographical notes</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Notas biograficas</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Biographical notes</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Notas biograficas</xsl:when>
           <xsl:otherwise>Notes biographiques</xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
@@ -1060,15 +1066,15 @@
     <xsl:choose>
       <xsl:when test="$count = 1">
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Note</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Nota</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Note</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Nota</xsl:when>
           <xsl:otherwise>Note</xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Notes</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Notas</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Notes</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Notas</xsl:when>
           <xsl:otherwise>Notes</xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
@@ -1077,26 +1083,26 @@
 
   <xsl:template name="merci-titre">
     <xsl:choose>
-      <xsl:when test="parent::partiesann/@lang = 'en'">Acknowledgements</xsl:when>
-      <xsl:when test="parent::partiesann/@lang = 'es'">Gracias</xsl:when>
+      <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Acknowledgements</xsl:when>
+      <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Gracias</xsl:when>
       <xsl:otherwise>Remerciements</xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template name="grbiblio-titre">
+  <xsl:template name="biblio-titre">
     <xsl:param name="count"/>
     <xsl:choose>
       <xsl:when test="$count = 1">
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Bibliography</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Bibliografía</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Bibliography</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Bibliografía</xsl:when>
           <xsl:otherwise>Bibliographie</xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="parent::partiesann/@lang = 'en'">Bibliographies</xsl:when>
-          <xsl:when test="parent::partiesann/@lang = 'es'">Bibliografias</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Bibliographies</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Bibliografias</xsl:when>
           <xsl:otherwise>Bibliographies</xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
@@ -2406,9 +2412,13 @@
 
   <!-- bibliography -->
   <xsl:template match="biblio">
-    <h2>
-      <xsl:apply-templates select="parent::grbiblio" mode="section-heading"/>
-    </h2>
+    <xsl:element name="h2">
+      <xsl:attribute name="id">
+        <!-- biblio-1, biblio-2, etc. -->
+        <xsl:text>biblio-</xsl:text><xsl:value-of select="count(preceding-sibling::biblio) + 1"/>
+      </xsl:attribute>
+      <xsl:apply-templates select="." mode="section-heading"/>
+    </xsl:element>
     <div class="biblio">
       <ol class="unstyled {name()}">
         <xsl:for-each select="node()[name() != '' and name() != 'titre']">
