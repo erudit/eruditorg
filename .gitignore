@@ -67,4 +67,5 @@ docs/_build
 
 /eruditorg/erudit/management/commands/fixtures/
 
+lighthouserc.js
 .lighthouseci/
