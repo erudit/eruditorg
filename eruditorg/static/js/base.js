@@ -13,35 +13,4 @@ import '!!script-loader!lazysizes/plugins/aspectratio/ls.aspectratio.min';
 
 import modules from './modules';
 
-import csrfSafeMethod from './core/csrfSafeMethod';
 import Select2 from 'select2/dist/js/select2.full';
-import getCsrfToken from './core/getCsrfToken';
-
-
-// Initializes the jQuery csrf setup
-$.ajaxSetup({
-  beforeSend: function(xhr, settings) {
-    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-      xhr.setRequestHeader("X-CSRFToken", getCsrfToken());
-    }
-  },
-  // Normally, the "X-CSRFToken" should be enough for our purpose, but
-  // some proxies strip this header so it's safer to also include it in
-  // the POST values.
-  data: { csrfmiddlewaretoken: getCsrfToken() }
-});
-
-// Hide site messages if the user has closed them.
-$('.site-messages .alert').each(function() {
-    var id = $(this).attr('id');
-    if (document.cookie.split(';').some(function(item) {
-        return item.trim().indexOf(id) == 0;
-    })) {
-        $(this).hide();
-    } else {
-        $(this).show();
-    }
-    $(this).find('button').on('click', function() {
-        document.cookie = id + '=closed; max-age=86400; path=/';
-    });
-});
