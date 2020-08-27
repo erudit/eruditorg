@@ -1,3 +1,6 @@
+import '!!script-loader!magnific-popup/dist/jquery.magnific-popup.min';
+
+
 class CiteModal {
 
   constructor(el) {

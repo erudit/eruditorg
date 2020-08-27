@@ -1,3 +1,5 @@
+import '!!script-loader!magnific-popup/dist/jquery.magnific-popup.min';
+
 import SharingUtils from '../core/SharingUtils';
 
 class ShareModal {
