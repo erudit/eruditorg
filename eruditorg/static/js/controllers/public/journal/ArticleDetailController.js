@@ -1,4 +1,5 @@
 import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill.promise';
+import '!!script-loader!sticky-kit/dist/sticky-kit.min';
 
 import Scrollspy from 'scrollspy-js/src/js/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
