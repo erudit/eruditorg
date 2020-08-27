@@ -96,6 +96,9 @@ var webpackConfig = {
     editor: [
       js_dir + '/editor.js',
     ],
+    library_connection: [
+      js_dir + '/library_connection.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -330,6 +333,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     editor: [
       js_dir + '/editor.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    library_connection: [
+      js_dir + '/library_connection.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
