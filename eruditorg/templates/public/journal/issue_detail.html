@@ -35,6 +35,11 @@
 {% endif %}
 {% endblock meta_tags %}
 
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/issue.js' %}"></script>
+{% endblock scripts %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">

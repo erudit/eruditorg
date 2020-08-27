@@ -81,6 +81,9 @@ var webpackConfig = {
     article: [
       js_dir + '/article.js',
     ],
+    issue: [
+      js_dir + '/issue.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -290,6 +293,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     article: [
       js_dir + '/article.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    issue: [
+      js_dir + '/issue.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

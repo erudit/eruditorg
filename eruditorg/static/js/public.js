@@ -9,13 +9,11 @@ import '!!script-loader!lazysizes/plugins/aspectratio/ls.aspectratio.min';
 import modules from './modules';
 import DOMRouter from './core/DOMRouter';
 
-import IssueDetailController from './controllers/public/journal/IssueDetailController';
 import JournalListController from './controllers/public/journal/JournalListController';
 import JournalDetailController from './controllers/public/journal/JournalDetailController';
 import SavedCitationListController from './controllers/public/citations/SavedCitationListController';
 
 const controllers = {
-  'public:journal:issue_detail': IssueDetailController,
   'public:journal:journal_list': JournalListController,
   'public:journal:journal_detail': JournalDetailController,
   'public:citations:list': SavedCitationListController,
