@@ -30,6 +30,11 @@
 </script>
 {% endblock structured_data %}
 
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_list.js' %}"></script>
+{% endblock scripts %}
+
 {% block body_class %}{{ block.super }} journal_list_per_disciplines{% endblock body_class %}
 {% block body_id %}journal_list_per_disciplines{% endblock body_id %}
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
