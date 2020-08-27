@@ -29,6 +29,11 @@
 <meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 {% endblock meta_tags %}
 
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal.js' %}"></script>
+{% endblock scripts %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">
