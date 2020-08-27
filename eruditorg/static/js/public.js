@@ -7,20 +7,3 @@ import '!!script-loader!lazysizes/lazysizes.min';
 import '!!script-loader!lazysizes/plugins/aspectratio/ls.aspectratio.min';
 
 import modules from './modules';
-import DOMRouter from './core/DOMRouter';
-
-import SavedCitationListController from './controllers/public/citations/SavedCitationListController';
-
-const controllers = {
-  'public:citations:list': SavedCitationListController,
-};
-
-export default controllers;
-
-
-// Defines the router and initializes it!
-let router = new DOMRouter(controllers);
-$(document).ready(function(ev) {
-  // Initializes the router
-  router.init();
-});

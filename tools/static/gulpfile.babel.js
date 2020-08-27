@@ -90,6 +90,9 @@ var webpackConfig = {
     journal_list: [
       js_dir + '/journal_list.js',
     ],
+    citations: [
+      js_dir + '/citations.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -314,6 +317,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     journal_list: [
       js_dir + '/journal_list.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    citations: [
+      js_dir + '/citations.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
