@@ -69,6 +69,9 @@ var webpackConfig = {
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
     ],
+    login: [
+      js_dir + '/login.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -258,6 +261,11 @@ gulp.task('webpack-dev-server', function(callback) {
     issue_reader: [
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    login: [
+      js_dir + '/login.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

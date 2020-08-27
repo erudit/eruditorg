@@ -9,7 +9,6 @@ import '!!script-loader!lazysizes/plugins/aspectratio/ls.aspectratio.min';
 import modules from './modules';
 import DOMRouter from './core/DOMRouter';
 
-import LoginController from './controllers/public/LoginController';
 import AdvancedSearchController from './controllers/public/search/AdvancedSearchController';
 import ResultsController from './controllers/public/search/ResultsController';
 import ArticleDetailController from './controllers/public/journal/ArticleDetailController';
@@ -19,7 +18,6 @@ import JournalDetailController from './controllers/public/journal/JournalDetailC
 import SavedCitationListController from './controllers/public/citations/SavedCitationListController';
 
 const controllers = {
-  'public:login': LoginController,
   'public:search:advanced-search': AdvancedSearchController,
   'public:search:results': ResultsController,
   'public:journal:article_detail': ArticleDetailController,
