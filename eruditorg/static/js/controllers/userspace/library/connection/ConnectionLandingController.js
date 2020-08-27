@@ -1,3 +1,6 @@
+import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill.promise';
+
+
 export default {
 
   init: function() {

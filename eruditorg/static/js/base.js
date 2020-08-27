@@ -6,6 +6,5 @@ import '!!script-loader!inline-svg/dist/inlineSVG.min';
 
 import '!!script-loader!magnific-popup/dist/jquery.magnific-popup.min';
 import '!!script-loader!sticky-kit/dist/sticky-kit.min';
-import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill.promise';
 
 import modules from './modules';
