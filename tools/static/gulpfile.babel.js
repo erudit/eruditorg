@@ -72,6 +72,9 @@ var webpackConfig = {
     login: [
       js_dir + '/login.js',
     ],
+    advanced_search: [
+      js_dir + '/advanced_search.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -266,6 +269,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     login: [
       js_dir + '/login.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    advanced_search: [
+      js_dir + '/advanced_search.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
