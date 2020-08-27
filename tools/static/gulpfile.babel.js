@@ -93,6 +93,9 @@ var webpackConfig = {
     citations: [
       js_dir + '/citations.js',
     ],
+    editor: [
+      js_dir + '/editor.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -322,6 +325,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     citations: [
       js_dir + '/citations.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    editor: [
+      js_dir + '/editor.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

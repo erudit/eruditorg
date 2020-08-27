@@ -8,12 +8,10 @@ import modules from './modules';
 import Select2 from 'select2/dist/js/select2.full.min';
 import DOMRouter from './core/DOMRouter';
 
-import FormController from './controllers/userspace/editor/FormController';
 import ConnectionLandingController from './controllers/userspace/library/connection/ConnectionLandingController';
 import {JournalInformationFormController} from './controllers/userspace/journalinformation/FormController';
 
 const controllers = {
-  'userspace:editor:form': FormController,
   'userspace:library:connection:landing': ConnectionLandingController,
   'userspace:journalinformation:update': new JournalInformationFormController(),
 };
