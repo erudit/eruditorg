@@ -106,7 +106,7 @@ var webpackConfig = {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      minChunks: 2,
+      minSize: 100000,
       name: function (module, chunks, cacheGroupKey) {
         return chunks.map((item) => item.name).join('-');
       },
