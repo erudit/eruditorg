@@ -105,6 +105,11 @@
 {% endcache %}
 {% endblock meta_tags %}
 
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/article.js' %}"></script>
+{% endblock scripts %}
+
 {% block structured_data %}
 {{ block.super }}
 {# If the issue is published, the article structured data will be cached for one day. #}
