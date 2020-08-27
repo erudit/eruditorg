@@ -99,6 +99,9 @@ var webpackConfig = {
     library_connection: [
       js_dir + '/library_connection.js',
     ],
+    journal_info: [
+      js_dir + '/journal_info.js',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -338,6 +341,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     library_connection: [
       js_dir + '/library_connection.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    journal_info: [
+      js_dir + '/journal_info.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
