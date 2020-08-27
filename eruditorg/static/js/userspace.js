@@ -1,4 +1,5 @@
 import './base';
+import Select2 from 'select2/dist/js/select2.full.min';
 import DOMRouter from './core/DOMRouter';
 import controllers from './controllers/userspace';
 

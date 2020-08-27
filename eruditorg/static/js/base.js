@@ -12,5 +12,3 @@ import '!!script-loader!lazysizes/lazysizes.min';
 import '!!script-loader!lazysizes/plugins/aspectratio/ls.aspectratio.min';
 
 import modules from './modules';
-
-import Select2 from 'select2/dist/js/select2.full';
