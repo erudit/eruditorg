@@ -1,5 +1,5 @@
-import ResultsController from './controllers/public/search/ResultsController';
 import DOMRouter from './core/DOMRouter';
+import ResultsController from './controllers/public/search/ResultsController';
 
 
 $(document).ready(function() {

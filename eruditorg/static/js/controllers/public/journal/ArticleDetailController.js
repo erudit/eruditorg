@@ -1,5 +1,4 @@
 import '!!script-loader!clipboard-polyfill/dist/clipboard-polyfill.promise';
-import '!!script-loader!magnific-popup/dist/jquery.magnific-popup.min';
 import '!!script-loader!sticky-kit/dist/sticky-kit.min';
 
 import Scrollspy from 'scrollspy-js/src/js/scrollspy';
