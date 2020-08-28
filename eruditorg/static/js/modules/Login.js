@@ -1,5 +1,3 @@
-import '!!script-loader!jquery-validation/dist/jquery.validate.min';
-import '!!script-loader!jquery-validation/dist/localization/messages_fr';
 // form ID
 export const formSelector = "form#id-login-form";
 

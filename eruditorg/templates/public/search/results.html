@@ -1,7 +1,12 @@
 {% extends "public/search/base.html" %}
-{% load adv_cache i18n public_journal_tags widget_tweaks %}
+{% load adv_cache i18n public_journal_tags static widget_tweaks %}
 
 {% block title %}{% trans "Résultats de recherche" %}{% endblock title %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/search_results.js' %}"></script>
+{% endblock scripts %}
 
 {% block meta_tags %}
 {{ block.super }}

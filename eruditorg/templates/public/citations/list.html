@@ -1,10 +1,14 @@
 {% extends "public/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Ma bibliothèque" %}{% endblock title %}
 
 {% block meta_description %}{% trans 'Sauvegardez et téléchargez des notices d’articles en sciences humaines et sociales pour EndNote, Zotero, RefWorks, BibTeX et Mendeley sur la plateforme Érudit.' %}{% endblock meta_description %}
 
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/citations.js' %}"></script>
+{% endblock scripts %}
 
 {% block body_id %}citations_list{% endblock body_id %}
 {% block data_controller %}public:citations:list{% endblock data_controller %}

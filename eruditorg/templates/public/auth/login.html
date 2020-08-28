@@ -3,6 +3,11 @@
 
 {% block title %}{% trans 'Connexion' %}{% endblock title %}
 
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/login.js' %}"></script>
+{% endblock scripts %}
+
 {% block body_id %}login-page{% endblock body_id %}
 {% block data_controller %}public:login{% endblock data_controller %}
 

@@ -1,5 +1,11 @@
 {% extends "userspace/journal/base.html" %}
-{% load i18n widget_tweaks waffle_tags %}
+{% load i18n static widget_tweaks waffle_tags %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_info.js' %}"></script>
+{% endblock scripts %}
+
 {% block data_controller %}userspace:journalinformation:update{% endblock %}
 {% block title %}{% trans "À propos" %} {{ block.super }}{% endblock title %}
 

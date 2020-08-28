@@ -69,11 +69,44 @@ var webpackConfig = {
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
     ],
+    login: [
+      js_dir + '/login.js',
+    ],
+    advanced_search: [
+      js_dir + '/advanced_search.js',
+    ],
+    search_results: [
+      js_dir + '/search_results.js',
+    ],
+    article: [
+      js_dir + '/article.js',
+    ],
+    issue: [
+      js_dir + '/issue.js',
+    ],
+    journal: [
+      js_dir + '/journal.js',
+    ],
+    journal_list: [
+      js_dir + '/journal_list.js',
+    ],
+    citations: [
+      js_dir + '/citations.js',
+    ],
+    editor: [
+      js_dir + '/editor.js',
+    ],
+    library_connection: [
+      js_dir + '/library_connection.js',
+    ],
+    journal_info: [
+      js_dir + '/journal_info.js',
+    ],
   },
   optimization: {
     splitChunks: {
       chunks: 'all',
-      minChunks: 2,
+      minSize: 100000,
       name: function (module, chunks, cacheGroupKey) {
         return chunks.map((item) => item.name).join('-');
       },
@@ -130,8 +163,8 @@ var webpackConfig = {
   performance: {
     // Raise error if prod assets & entrypoints exceed max sizes (300KiB & 600KiB).
     hints: PROD_ENV ? 'error' : false,
-    maxAssetSize: PROD_ENV ? 300000 : 900000,
-    maxEntrypointSize: PROD_ENV ? 600000 : 1800000,
+    maxAssetSize: PROD_ENV ? 300000 : 600000,
+    maxEntrypointSize: PROD_ENV ? 500000 : 1000000,
     // Only check CSS & JS files and ignore issue_reader files.
     assetFilter: function(assetFilename) {
       return (/\.(css|js)$/.test(assetFilename)) && !(/issue_reader/.test(assetFilename));
@@ -258,6 +291,61 @@ gulp.task('webpack-dev-server', function(callback) {
     issue_reader: [
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    login: [
+      js_dir + '/login.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    advanced_search: [
+      js_dir + '/advanced_search.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    search_results: [
+      js_dir + '/search_results.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    article: [
+      js_dir + '/article.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    issue: [
+      js_dir + '/issue.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    journal: [
+      js_dir + '/journal.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    journal_list: [
+      js_dir + '/journal_list.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    citations: [
+      js_dir + '/citations.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    editor: [
+      js_dir + '/editor.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    library_connection: [
+      js_dir + '/library_connection.js',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    journal_info: [
+      js_dir + '/journal_info.js',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

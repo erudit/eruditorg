@@ -1,5 +1,10 @@
 {% extends "userspace/library/base.html" %}
-{% load i18n %}
+{% load i18n static %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/library_connection.js' %}"></script>
+{% endblock scripts %}
 
 {% block body_id %}connection{% endblock body_id %}
 {% block data_controller %}userspace:library:connection:landing{% endblock data_controller %}
