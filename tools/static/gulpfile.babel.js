@@ -79,6 +79,7 @@ var webpackConfig = {
     ],
     advanced_search: [
       js_dir + '/advanced_search.js',
+      sass_dir + '/advanced_search.scss',
     ],
     search_results: [
       js_dir + '/search_results.js',
@@ -316,6 +317,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     advanced_search: [
       js_dir + '/advanced_search.js',
+      sass_dir + '/advanced_search.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

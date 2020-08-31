@@ -3,6 +3,13 @@
 
 {% block title %}{% trans "Recherche avancée" %}{% endblock title %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/advanced_search.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block scripts %}
 {{ block.super }}
 <script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/advanced_search.js' %}"></script>
