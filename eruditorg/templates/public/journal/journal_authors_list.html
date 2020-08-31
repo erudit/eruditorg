@@ -1,7 +1,14 @@
 {% extends "public/journal/journal_base.html" %}
-{% load i18n public_journal_tags %}
+{% load i18n public_journal_tags static %}
 
 {% block title %}{% trans "Index des auteurs" %} – {{ journal.formatted_title }}{% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authors_list.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
 {% block meta_description %}{% blocktrans with journal=journal.formatted_title %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
