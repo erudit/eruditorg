@@ -99,6 +99,7 @@ var webpackConfig = {
     ],
     journal_list: [
       js_dir + '/journal_list.js',
+      sass_dir + '/journal_list.scss',
     ],
     citations: [
       js_dir + '/citations.js',
@@ -351,6 +352,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     journal_list: [
       js_dir + '/journal_list.js',
+      sass_dir + '/journal_list.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

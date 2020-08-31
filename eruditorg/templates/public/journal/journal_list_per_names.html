@@ -30,6 +30,13 @@
 </script>
 {% endblock structured_data %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/journal_list.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block scripts %}
 {{ block.super }}
 <script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_list.js' %}"></script>
