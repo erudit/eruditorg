@@ -90,7 +90,6 @@ var webpackConfig = {
     ],
     public: [
       js_dir + '/public.js',
-      sass_dir + '/public.scss',
     ],
     userspace: [
       js_dir + '/userspace.js',
@@ -374,7 +373,6 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     public: [
       js_dir + '/public.js',
-      sass_dir + '/public.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
