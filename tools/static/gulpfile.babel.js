@@ -23,10 +23,11 @@ import minimist from 'minimist';
 import through2 from 'through2';
 import PluginError from 'plugin-error';
 import log from 'fancy-log';
+import analyzer from 'webpack-bundle-analyzer';
 
 
 var args = minimist(process.argv.slice(2), {
-  boolean: ['production'],
+  boolean: ['production', 'analyzer'],
   string: ['host', 'port'],
   default: {host: 'localhost', port: '8080'}
 })
@@ -156,6 +157,10 @@ var webpackConfig = {
     'jquery': 'jQuery'
   },
   plugins: [
+    new analyzer.BundleAnalyzerPlugin({
+      analyzerMode: args.analyzer ? 'server' : 'disabled',
+      openAnalyzer: args.analyzer,
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     })
