@@ -5,17 +5,11 @@
 
 @charset 'UTF-8';
 
-// 1. Base
-@import 'base';
-
 // 2. Configuration and helpers
 @import
   'utils/colours',
-  'utils/erudicon',
   'utils/font-styles',
-  'utils/functions',
   'utils/mixins',
-  'utils/sprite',
   'utils/variables';
 
 // 3. Page-specific styles
