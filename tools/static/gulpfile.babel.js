@@ -67,6 +67,9 @@ var webpackConfig = {
     home: [
       sass_dir + '/home.scss',
     ],
+    brand: [
+      sass_dir + '/brand.scss',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
@@ -310,6 +313,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     home: [
       sass_dir + '/home.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    brand: [
+      sass_dir + '/brand.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
