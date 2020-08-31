@@ -95,6 +95,7 @@ var webpackConfig = {
     ],
     journal: [
       js_dir + '/journal.js',
+      sass_dir + '/journal.scss',
     ],
     journal_list: [
       js_dir + '/journal_list.js',
@@ -344,6 +345,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     journal: [
       js_dir + '/journal.js',
+      sass_dir + '/journal.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
