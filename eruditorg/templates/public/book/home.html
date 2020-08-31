@@ -1,6 +1,13 @@
 {% extends "public/base.html" %}
 {% load humanize i18n static adv_cache %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/book.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block title %}{% trans "Livres et actes" %}{% endblock title %}
 
 {% block meta_description %}{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}{% endblock meta_description %}

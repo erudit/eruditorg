@@ -76,6 +76,9 @@ var webpackConfig = {
     account: [
       sass_dir + '/account.scss',
     ],
+    book: [
+      sass_dir + '/book.scss',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
@@ -337,6 +340,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     account: [
       sass_dir + '/account.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    book: [
+      sass_dir + '/book.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
