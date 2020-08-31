@@ -79,6 +79,15 @@ var webpackConfig = {
     book: [
       sass_dir + '/book.scss',
     ],
+    thesis_home: [
+      sass_dir + '/thesis_home.scss',
+    ],
+    thesis_collection_list: [
+      sass_dir + '/thesis_collection_list.scss',
+    ],
+    thesis_collection_home: [
+      sass_dir + '/thesis_collection_home.scss',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
@@ -345,6 +354,21 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     book: [
       sass_dir + '/book.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    thesis_home: [
+      sass_dir + '/thesis_home.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    thesis_collection_list: [
+      sass_dir + '/thesis_collection_list.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    thesis_collection_home: [
+      sass_dir + '/thesis_collection_home.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

@@ -1,5 +1,12 @@
 {% extends "public/base.html" %}
-{% load humanize i18n %}
+{% load humanize i18n static %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/thesis_collection_list.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
 {% block structured_data %}
 {{ block.super }}
