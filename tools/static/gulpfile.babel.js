@@ -87,6 +87,7 @@ var webpackConfig = {
     ],
     article: [
       js_dir + '/article.js',
+      sass_dir + '/article.scss',
     ],
     issue: [
       js_dir + '/issue.js',
@@ -330,6 +331,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     article: [
       js_dir + '/article.js',
+      sass_dir + '/article.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
