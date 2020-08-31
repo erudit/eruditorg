@@ -58,6 +58,9 @@ var webpackConfig = {
   mode: PROD_ENV ? "production" : "development",
 
   entry: {
+    main: [
+      sass_dir + '/main.scss',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
@@ -281,6 +284,11 @@ gulp.task('webpack-dev-server', function(callback) {
   devWebpackConfig.mode = 'development';
   devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
+    main: [
+      sass_dir + '/main.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',

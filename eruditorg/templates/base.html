@@ -92,7 +92,12 @@
     </script>
     {% endblock structured_data %}
 
-    {% block stylesheets %}{% endblock stylesheets %}
+    {% block stylesheets %}
+    {{ block.super }}
+    {% if not WEBPACK_DEV_SERVER_URL %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    {% endif %}
+    {% endblock stylesheets %}
 
     <script>
       var LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
