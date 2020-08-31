@@ -83,6 +83,7 @@ var webpackConfig = {
     ],
     search_results: [
       js_dir + '/search_results.js',
+      sass_dir + '/search_results.scss',
     ],
     article: [
       js_dir + '/article.js',
@@ -323,6 +324,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     search_results: [
       js_dir + '/search_results.js',
+      sass_dir + '/search_results.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
