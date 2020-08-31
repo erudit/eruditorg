@@ -73,6 +73,9 @@ var webpackConfig = {
     twenty_years: [
       sass_dir + '/twenty_years.scss',
     ],
+    account: [
+      sass_dir + '/account.scss',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
@@ -329,6 +332,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     twenty_years: [
       sass_dir + '/twenty_years.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    account: [
+      sass_dir + '/account.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
