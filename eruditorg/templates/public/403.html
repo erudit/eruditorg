@@ -1,5 +1,5 @@
 {% extends "public/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "403. Permission refusée" %}{% endblock title %}
 
@@ -37,3 +37,10 @@ d8eeeee88888eer 48888X   88888  :@88N   '8888N
   </div>
 </main>
 {% endblock content %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/error_pages.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
