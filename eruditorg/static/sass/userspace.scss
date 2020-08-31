@@ -12,6 +12,9 @@
   'utils/mixins',
   'utils/variables';
 
+@import
+  '~select2/dist/css/select2.min';
+
 // 3. Page-specific styles
 @import
   'pages/userspace/authorizations',
