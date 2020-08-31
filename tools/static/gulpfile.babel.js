@@ -75,6 +75,7 @@ var webpackConfig = {
     ],
     login: [
       js_dir + '/login.js',
+      sass_dir + '/login.scss',
     ],
     advanced_search: [
       js_dir + '/advanced_search.js',
@@ -309,6 +310,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     login: [
       js_dir + '/login.js',
+      sass_dir + '/login.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
