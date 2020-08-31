@@ -35,6 +35,13 @@
 {% endif %}
 {% endblock meta_tags %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/issue.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block scripts %}
 {{ block.super }}
 <script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/issue.js' %}"></script>
