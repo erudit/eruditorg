@@ -64,6 +64,9 @@ var webpackConfig = {
     error_pages: [
       sass_dir + '/error_pages.scss',
     ],
+    home: [
+      sass_dir + '/home.scss',
+    ],
     public: [
       js_dir + '/public.js',
       sass_dir + '/public.scss',
@@ -302,6 +305,11 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     error_pages: [
       sass_dir + '/error_pages.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    home: [
+      sass_dir + '/home.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
