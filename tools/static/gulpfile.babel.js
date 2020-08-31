@@ -103,6 +103,7 @@ var webpackConfig = {
     ],
     citations: [
       js_dir + '/citations.js',
+      sass_dir + '/citations.scss',
     ],
     editor: [
       js_dir + '/editor.js',
@@ -358,6 +359,7 @@ gulp.task('webpack-dev-server', function(callback) {
     ],
     citations: [
       js_dir + '/citations.js',
+      sass_dir + '/citations.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],

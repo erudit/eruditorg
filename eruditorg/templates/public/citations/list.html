@@ -5,6 +5,13 @@
 
 {% block meta_description %}{% trans 'Sauvegardez et téléchargez des notices d’articles en sciences humaines et sociales pour EndNote, Zotero, RefWorks, BibTeX et Mendeley sur la plateforme Érudit.' %}{% endblock meta_description %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/citations.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block scripts %}
 {{ block.super }}
 <script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/citations.js' %}"></script>
