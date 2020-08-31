@@ -33,18 +33,18 @@
 {% block stylesheets %}
 {{ block.super }}
 {% if not WEBPACK_DEV_SERVER_URL %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/journal_list.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/journal_list_per_names.css' %}" />
 {% endif %}
 {% endblock stylesheets %}
 
 {% block scripts %}
 {{ block.super }}
-<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_list.js' %}"></script>
+<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_list_per_names.js' %}"></script>
 {% endblock scripts %}
 
 {% block body_class %}{{ block.super }} journal_list{% endblock body_class %}
 {% block body_id %}journal_list_per_names{% endblock body_id %}
-{% block data_controller %}public:journal:journal_list{% endblock data_controller %}
+{% block data_controller %}public:journal:journal_list_per_names{% endblock data_controller %}
 {% block body_data_attributes %} data-spy="scroll" data-target="#id_journal_list_body" data-offset="180"{% endblock body_data_attributes %}
 
 {% block breadcrumb %}{{ block.super }}

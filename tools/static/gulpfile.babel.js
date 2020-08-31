@@ -126,9 +126,13 @@ var webpackConfig = {
     authors_list: [
       sass_dir + '/authors_list.scss',
     ],
-    journal_list: [
-      js_dir + '/journal_list.js',
-      sass_dir + '/journal_list.scss',
+    journal_list_per_names: [
+      js_dir + '/journal_list_per_names.js',
+      sass_dir + '/journal_list_per_names.scss',
+    ],
+    journal_list_per_disciplines: [
+      js_dir + '/journal_list_per_disciplines.js',
+      sass_dir + '/journal_list_per_disciplines.scss',
     ],
     citations: [
       js_dir + '/citations.js',
@@ -429,9 +433,15 @@ gulp.task('webpack-dev-server', function(callback) {
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
-    journal_list: [
-      js_dir + '/journal_list.js',
-      sass_dir + '/journal_list.scss',
+    journal_list_per_names: [
+      js_dir + '/journal_list_per_names.js',
+      sass_dir + '/journal_list_per_names.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
+    journal_list_per_disciplines: [
+      js_dir + '/journal_list_per_disciplines.js',
+      sass_dir + '/journal_list_per_disciplines.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',
     ],
