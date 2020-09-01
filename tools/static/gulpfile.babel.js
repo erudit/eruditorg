@@ -65,7 +65,6 @@ var webpackConfig = {
 
     // Entrypoints with SASS only.
     // Those entrypoints also generate one JavaScript file for each SASS file, be we ignore them.
-    main: sass_dir + '/main.scss',
     error_pages: sass_dir + '/error_pages.scss',
     home: sass_dir + '/home.scss',
     brand: sass_dir + '/brand.scss',
@@ -79,6 +78,10 @@ var webpackConfig = {
     authorizations: sass_dir + '/authorizations.scss',
 
     // Entrypoints with JavaScript & SASS.
+    main: [
+      js_dir + '/main.js',
+      sass_dir + '/main.scss',
+    ],
     userspace: [
       js_dir + '/userspace.js',
       sass_dir + '/userspace.scss',
@@ -314,6 +317,7 @@ gulp.task('webpack-dev-server', function(callback) {
       js_dir + '/journal_list_per_disciplines.js',
       js_dir + '/journal_list_per_names.js',
       js_dir + '/login.js',
+      js_dir + '/main.js',
       js_dir + '/public.js',
       js_dir + '/search_results.js',
       sass_dir + '/account.scss',
