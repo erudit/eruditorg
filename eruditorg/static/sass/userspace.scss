@@ -1,11 +1,5 @@
-// -----------------------------------------------------------------------------
-// Import partials
-// Always sort partials in alphabetical order, except for base directory
-// -----------------------------------------------------------------------------
-
 @charset 'UTF-8';
 
-// 2. Configuration and helpers
 @import
   'utils/colours',
   'utils/font-styles',
@@ -15,10 +9,5 @@
 @import
   '~select2/dist/css/select2.min';
 
-// 3. Page-specific styles
-@import
-  'pages/userspace/subscription-ips';
-
-// 7. Themes
 @import
   'themes/dashboard';
