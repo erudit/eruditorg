@@ -131,15 +131,6 @@ var webpackConfig = {
       sass_dir + '/issue_submission.scss',
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 100000,
-      name: function (module, chunks, cacheGroupKey) {
-        return chunks.map((item) => item.name).join('-');
-      },
-    },
-  },
   output: {
     filename: 'js/[name].js',
   },
