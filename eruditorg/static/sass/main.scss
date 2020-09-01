@@ -19,7 +19,6 @@
 @import
   '~akkordion/dist/akkordion',
   '~hint.css/hint.base.min',
-  '~select2/dist/css/select2.min',
   'vendor/magnific-popup/magnific-popup',
   'vendor/normalize';
 
@@ -89,17 +88,6 @@
   'components/tooltips',
   'components/status-indicators',
   'components/wysiwyg';
-
-// 6. Page-specific styles
-@import
-  'pages/error-pages',
-  'pages/individual-subscription',
-  'pages/login';
-
-// 7. Themes
-@import
-  'themes/campaign',
-  'themes/dashboard';
 
 // $spritesheet-sprites is an array of all sprite image names
 @include sprites($spritesheet-sprites);

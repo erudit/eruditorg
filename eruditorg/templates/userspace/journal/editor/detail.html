@@ -2,6 +2,13 @@
 {% load i18n static %}
 {% load rules %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/issue_submission.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block title %}{{ issue }} – {% trans "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}

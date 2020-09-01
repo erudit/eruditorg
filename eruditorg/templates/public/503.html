@@ -1,5 +1,5 @@
 {% extends "public/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "503. Service non disponible" %}{% endblock title %}
 
@@ -37,3 +37,10 @@
   </div>
 </main>
 {% endblock content %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/error_pages.css' %}" />
+{% endif %}
+{% endblock stylesheets %}

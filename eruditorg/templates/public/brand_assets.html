@@ -5,6 +5,13 @@
 
 {% block meta_description %}{% blocktrans %}Consultez le guide de style d’Érudit : logo, palette de couleurs, identité.{% endblocktrans %}{% endblock meta_description %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/brand.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">

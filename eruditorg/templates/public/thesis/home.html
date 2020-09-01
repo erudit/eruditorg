@@ -1,6 +1,13 @@
 {% extends "public/base.html" %}
 {% load humanize i18n static %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/thesis_home.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block title %}{% trans "Thèses et mémoires" %}{% endblock title %}
 
 {% block meta_description %}{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}

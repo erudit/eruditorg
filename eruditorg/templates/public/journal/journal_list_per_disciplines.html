@@ -30,14 +30,23 @@
 </script>
 {% endblock structured_data %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/journal_list_per_disciplines.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block scripts %}
 {{ block.super }}
-<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_list.js' %}"></script>
+{% if not WEBPACK_DEV_SERVER_URL %}
+<script src="{% static 'js/journal_list_per_disciplines.js' %}"></script>
+{% endif %}
 {% endblock scripts %}
 
 {% block body_class %}{{ block.super }} journal_list_per_disciplines{% endblock body_class %}
 {% block body_id %}journal_list_per_disciplines{% endblock body_id %}
-{% block data_controller %}public:journal:journal_list{% endblock data_controller %}
+{% block data_controller %}public:journal:journal_list_per_disciplines{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% trans "Revues" %}</a></li>

@@ -3,6 +3,13 @@
 
 {% block title %}{% trans "Cultivez votre savoir" %}{% endblock title %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">

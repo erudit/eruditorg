@@ -1,5 +1,12 @@
 {% extends "public/base.html" %}
-{% load i18n %}
+{% load i18n static %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/account.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
 {% block breadcrumb %}
   {{ block.super }} <li><a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a></li>
