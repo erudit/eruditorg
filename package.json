@@ -5,6 +5,7 @@
     "bookreader": "git://github.com/internetarchive/bookreader.git#v4.5.0",
     "bootstrap-sass": "^3.4.1",
     "clipboard-polyfill": "^2.8.6",
+    "cookieconsent": "^3.0.4",
     "get-prefix": "^1.0.0",
     "hint.css": "^2.6.0",
     "inline-svg": "^2.2.3",
