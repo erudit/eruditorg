@@ -181,7 +181,7 @@ var webpackConfig = {
   performance: {
     // Raise error if prod assets & entrypoints exceed max sizes (300KiB & 600KiB).
     hints: PROD_ENV ? 'error' : false,
-    maxAssetSize: PROD_ENV ? 300000 : 600000,
+    maxAssetSize: PROD_ENV ? 300000 : 800000,
     maxEntrypointSize: PROD_ENV ? 500000 : 1000000,
     // Only check CSS & JS files and ignore issue_reader files.
     assetFilter: function(assetFilename) {
