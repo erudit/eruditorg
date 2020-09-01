@@ -150,6 +150,9 @@ var webpackConfig = {
     authorizations: [
       sass_dir + '/authorizations.scss',
     ],
+    issue_submission: [
+      sass_dir + '/issue_submission.scss',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -366,6 +369,7 @@ gulp.task('webpack-dev-server', function(callback) {
       js_dir + '/library_connection.js',
       js_dir + '/userspace.js',
       sass_dir + '/authorizations.scss',
+      sass_dir + '/issue_submission.scss',
       sass_dir + '/userspace.scss',
     ],
     issue_reader: [

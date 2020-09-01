@@ -3,6 +3,13 @@
 {% load static %}
 {% load rules %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/issue_submission.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block title %}
 {% if object.pk %}
 {% trans "Modifer" %} {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }} –
