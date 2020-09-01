@@ -8,6 +8,7 @@
     "get-prefix": "^1.0.0",
     "hint.css": "^2.6.0",
     "inline-svg": "^2.2.3",
+    "jquery": "^3.5.1",
     "jquery-validation": "^1.19.2",
     "lazysizes": "^5.2.2",
     "magnific-popup": "^1.1.0",

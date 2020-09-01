@@ -169,11 +169,6 @@ var webpackConfig = {
       { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' },
     ],
   },
-  externals: {
-    // require("jquery") is external and available
-    //  on the global var jQuery
-    'jquery': 'jQuery'
-  },
   plugins: [
     new analyzer.BundleAnalyzerPlugin({
       analyzerMode: args.analyzer ? 'server' : 'disabled',
@@ -379,9 +374,6 @@ gulp.task('webpack-dev-server', function(callback) {
   ];
   devWebpackConfig.resolve = {
     modules: ['node_modules'],
-  };
-  devWebpackConfig.externals = {
-    'jquery': 'jQuery',
   };
 
   // Start a webpack-dev-server
