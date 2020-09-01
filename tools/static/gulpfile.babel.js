@@ -60,7 +60,6 @@ var webpackConfig = {
   entry: {
     // Entrypoints with JavaScript only.
     public: js_dir + '/public.js',
-    editor: js_dir + '/editor.js',
     library_connection: js_dir + '/library_connection.js',
     journal_info: js_dir + '/journal_info.js',
 
@@ -78,7 +77,6 @@ var webpackConfig = {
     thesis_collection_home: sass_dir + '/thesis_collection_home.scss',
     authors_list: sass_dir + '/authors_list.scss',
     authorizations: sass_dir + '/authorizations.scss',
-    issue_submission: sass_dir + '/issue_submission.scss',
 
     // Entrypoints with JavaScript & SASS.
     userspace: [
@@ -124,6 +122,10 @@ var webpackConfig = {
     citations: [
       js_dir + '/citations.js',
       sass_dir + '/citations.scss',
+    ],
+    issue_submission: [
+      js_dir + '/issue_submission.js',
+      sass_dir + '/issue_submission.scss',
     ],
   },
   optimization: {
@@ -336,7 +338,7 @@ gulp.task('webpack-dev-server', function(callback) {
       sass_dir + '/twenty_years.scss',
     ],
     userspace: [
-      js_dir + '/editor.js',
+      js_dir + '/issue_submission.js',
       js_dir + '/journal_info.js',
       js_dir + '/library_connection.js',
       js_dir + '/userspace.js',
