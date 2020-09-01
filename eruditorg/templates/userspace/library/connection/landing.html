@@ -4,7 +4,7 @@
 {% block scripts %}
 {{ block.super }}
 {% if not WEBPACK_DEV_SERVER_URL %}
-<script src="{{% static 'js/library_connection.js' %}"></script>
+<script src="{% static 'js/library_connection.js' %}"></script>
 {% endif %}
 {% endblock scripts %}
 

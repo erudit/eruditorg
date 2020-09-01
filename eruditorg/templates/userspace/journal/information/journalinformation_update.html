@@ -4,7 +4,7 @@
 {% block scripts %}
 {{ block.super }}
 {% if not WEBPACK_DEV_SERVER_URL %}
-<script src="{{% static 'js/journal_info.js' %}"></script>
+<script src="{% static 'js/journal_info.js' %}"></script>
 {% endif %}
 {% endblock scripts %}
 
