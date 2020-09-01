@@ -147,6 +147,9 @@ var webpackConfig = {
     journal_info: [
       js_dir + '/journal_info.js',
     ],
+    authorizations: [
+      sass_dir + '/authorizations.scss',
+    ],
   },
   optimization: {
     splitChunks: {
@@ -362,6 +365,7 @@ gulp.task('webpack-dev-server', function(callback) {
       js_dir + '/journal_info.js',
       js_dir + '/library_connection.js',
       js_dir + '/userspace.js',
+      sass_dir + '/authorizations.scss',
       sass_dir + '/userspace.scss',
     ],
     issue_reader: [

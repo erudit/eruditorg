@@ -1,5 +1,12 @@
 {% extends "userspace/library/base.html" %}
-{% load i18n %}
+{% load i18n static %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authorizations.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
 {% block body_id %}authorizations{% endblock body_id %}
 

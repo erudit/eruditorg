@@ -1,6 +1,13 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
-{% load widget_tweaks %}
+{% load static widget_tweaks %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authorizations.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
 {% block title %}{% trans "Ajouter un accès" %} {{ block.super }}{% endblock title %}
 
