@@ -58,39 +58,29 @@ var webpackConfig = {
   mode: PROD_ENV ? "production" : "development",
 
   entry: {
-    main: [
-      sass_dir + '/main.scss',
-    ],
-    error_pages: [
-      sass_dir + '/error_pages.scss',
-    ],
-    home: [
-      sass_dir + '/home.scss',
-    ],
-    brand: [
-      sass_dir + '/brand.scss',
-    ],
-    twenty_years: [
-      sass_dir + '/twenty_years.scss',
-    ],
-    account: [
-      sass_dir + '/account.scss',
-    ],
-    book: [
-      sass_dir + '/book.scss',
-    ],
-    thesis_home: [
-      sass_dir + '/thesis_home.scss',
-    ],
-    thesis_collection_list: [
-      sass_dir + '/thesis_collection_list.scss',
-    ],
-    thesis_collection_home: [
-      sass_dir + '/thesis_collection_home.scss',
-    ],
-    public: [
-      js_dir + '/public.js',
-    ],
+    // Entrypoints with JavaScript only.
+    public: js_dir + '/public.js',
+    editor: js_dir + '/editor.js',
+    library_connection: js_dir + '/library_connection.js',
+    journal_info: js_dir + '/journal_info.js',
+
+    // Entrypoints with SASS only.
+    // Those entrypoints also generate one JavaScript file for each SASS file, be we ignore them.
+    main: sass_dir + '/main.scss',
+    error_pages: sass_dir + '/error_pages.scss',
+    home: sass_dir + '/home.scss',
+    brand: sass_dir + '/brand.scss',
+    twenty_years: sass_dir + '/twenty_years.scss',
+    account: sass_dir + '/account.scss',
+    book: sass_dir + '/book.scss',
+    thesis_home: sass_dir + '/thesis_home.scss',
+    thesis_collection_list: sass_dir + '/thesis_collection_list.scss',
+    thesis_collection_home: sass_dir + '/thesis_collection_home.scss',
+    authors_list: sass_dir + '/authors_list.scss',
+    authorizations: sass_dir + '/authorizations.scss',
+    issue_submission: sass_dir + '/issue_submission.scss',
+
+    // Entrypoints with JavaScript & SASS.
     userspace: [
       js_dir + '/userspace.js',
       sass_dir + '/userspace.scss',
@@ -123,9 +113,6 @@ var webpackConfig = {
       js_dir + '/journal.js',
       sass_dir + '/journal.scss',
     ],
-    authors_list: [
-      sass_dir + '/authors_list.scss',
-    ],
     journal_list_per_names: [
       js_dir + '/journal_list_per_names.js',
       sass_dir + '/journal_list_per_names.scss',
@@ -137,21 +124,6 @@ var webpackConfig = {
     citations: [
       js_dir + '/citations.js',
       sass_dir + '/citations.scss',
-    ],
-    editor: [
-      js_dir + '/editor.js',
-    ],
-    library_connection: [
-      js_dir + '/library_connection.js',
-    ],
-    journal_info: [
-      js_dir + '/journal_info.js',
-    ],
-    authorizations: [
-      sass_dir + '/authorizations.scss',
-    ],
-    issue_submission: [
-      sass_dir + '/issue_submission.scss',
     ],
   },
   optimization: {
