@@ -39,7 +39,9 @@
 
 {% block scripts %}
 {{ block.super }}
-<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_list_per_names.js' %}"></script>
+{% if not WEBPACK_DEV_SERVER_URL %}
+<script src="{% static 'js/journal_list_per_names.js' %}"></script>
+{% endif %}
 {% endblock scripts %}
 
 {% block body_class %}{{ block.super }} journal_list{% endblock body_class %}

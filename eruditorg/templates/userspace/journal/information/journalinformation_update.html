@@ -3,7 +3,9 @@
 
 {% block scripts %}
 {{ block.super }}
-<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/journal_info.js' %}"></script>
+{% if not WEBPACK_DEV_SERVER_URL %}
+<script src="{{% static 'js/journal_info.js' %}"></script>
+{% endif %}
 {% endblock scripts %}
 
 {% block data_controller %}userspace:journalinformation:update{% endblock %}

@@ -12,7 +12,9 @@
 
 {% block scripts %}
 {{ block.super }}
-<script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/advanced_search.js' %}"></script>
+{% if not WEBPACK_DEV_SERVER_URL %}
+<script src="{% static 'js/advanced_search.js' %}"></script>
+{% endif %}
 {% endblock scripts %}
 
 {% block meta_description %}{% blocktrans %}Effectuez une recherche avancée dans le corpus Érudit à l'aide d'opérateurs booléens et de filtres.{% endblocktrans %}{% endblock meta_description %}
