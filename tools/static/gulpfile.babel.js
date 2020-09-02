@@ -65,7 +65,6 @@ var webpackConfig = {
 
     // Entrypoints with SASS only.
     // Those entrypoints also generate one JavaScript file for each SASS file, be we ignore them.
-    main: sass_dir + '/main.scss',
     error_pages: sass_dir + '/error_pages.scss',
     home: sass_dir + '/home.scss',
     brand: sass_dir + '/brand.scss',
@@ -79,6 +78,10 @@ var webpackConfig = {
     authorizations: sass_dir + '/authorizations.scss',
 
     // Entrypoints with JavaScript & SASS.
+    main: [
+      js_dir + '/main.js',
+      sass_dir + '/main.scss',
+    ],
     userspace: [
       js_dir + '/userspace.js',
       sass_dir + '/userspace.scss',
@@ -128,15 +131,6 @@ var webpackConfig = {
       sass_dir + '/issue_submission.scss',
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 100000,
-      name: function (module, chunks, cacheGroupKey) {
-        return chunks.map((item) => item.name).join('-');
-      },
-    },
-  },
   output: {
     filename: 'js/[name].js',
   },
@@ -175,11 +169,6 @@ var webpackConfig = {
       { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' },
     ],
   },
-  externals: {
-    // require("jquery") is external and available
-    //  on the global var jQuery
-    'jquery': 'jQuery'
-  },
   plugins: [
     new analyzer.BundleAnalyzerPlugin({
       analyzerMode: args.analyzer ? 'server' : 'disabled',
@@ -192,7 +181,7 @@ var webpackConfig = {
   performance: {
     // Raise error if prod assets & entrypoints exceed max sizes (300KiB & 600KiB).
     hints: PROD_ENV ? 'error' : false,
-    maxAssetSize: PROD_ENV ? 300000 : 600000,
+    maxAssetSize: PROD_ENV ? 300000 : 800000,
     maxEntrypointSize: PROD_ENV ? 500000 : 1000000,
     // Only check CSS & JS files and ignore issue_reader files.
     assetFilter: function(assetFilename) {
@@ -314,6 +303,7 @@ gulp.task('webpack-dev-server', function(callback) {
       js_dir + '/journal_list_per_disciplines.js',
       js_dir + '/journal_list_per_names.js',
       js_dir + '/login.js',
+      js_dir + '/main.js',
       js_dir + '/public.js',
       js_dir + '/search_results.js',
       sass_dir + '/account.scss',
@@ -384,9 +374,6 @@ gulp.task('webpack-dev-server', function(callback) {
   ];
   devWebpackConfig.resolve = {
     modules: ['node_modules'],
-  };
-  devWebpackConfig.externals = {
-    'jquery': 'jQuery',
   };
 
   // Start a webpack-dev-server
