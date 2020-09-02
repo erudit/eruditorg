@@ -1,6 +1,13 @@
 {% extends "public/base.html" %}
 {% load humanize i18n static waffle_tags adv_cache %}
 
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/chapter.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
 {% block title %}{{ chapter.title|striptags }}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}{% endblock meta_description %}

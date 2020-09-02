@@ -7,6 +7,8 @@
   'utils/variables';
 
 @import
-  'components/bibliographic-records',
-  'components/table-of-contents',
-  'components/toolboxes';
+  'pages/public/book-home';
+
+@import
+  'components/alternating-rows',
+  'components/cards';
