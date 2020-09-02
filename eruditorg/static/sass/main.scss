@@ -12,7 +12,6 @@
   'utils/font-styles',
   'utils/functions',
   'utils/mixins',
-  'utils/sprite',
   'utils/variables';
 
 // 2. Vendors
@@ -90,6 +89,3 @@
   'components/tooltips',
   'components/status-indicators',
   'components/wysiwyg';
-
-// $spritesheet-sprites is an array of all sprite image names
-@include sprites($spritesheet-sprites);
