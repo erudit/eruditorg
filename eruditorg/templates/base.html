@@ -94,9 +94,7 @@
 
     {% block stylesheets %}
     {{ block.super }}
-    {% if not WEBPACK_DEV_SERVER_URL %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
-    {% endif %}
     {% endblock stylesheets %}
 
     <script>
@@ -495,9 +493,7 @@
     <script src="{% url 'js_reverse' %}"></script>
 
     {% block scripts %}
-    {% if not WEBPACK_DEV_SERVER_URL %}
-    <script src="{% static 'js/main.js' %}"></script>
-    {% endif %}
+    <script src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/main.js' %}"></script>
     {% endblock scripts %}
 
     <script>(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>

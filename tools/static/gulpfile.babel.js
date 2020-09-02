@@ -294,6 +294,12 @@ gulp.task('webpack-dev-server', function(callback) {
   devWebpackConfig.mode = 'development';
   devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
+    main: [
+      js_dir + '/main.js',
+      sass_dir + '/main.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
+    ],
     public: [
       js_dir + '/advanced_search.js',
       js_dir + '/article.js',
@@ -303,7 +309,6 @@ gulp.task('webpack-dev-server', function(callback) {
       js_dir + '/journal_list_per_disciplines.js',
       js_dir + '/journal_list_per_names.js',
       js_dir + '/login.js',
-      js_dir + '/main.js',
       js_dir + '/public.js',
       js_dir + '/search_results.js',
       sass_dir + '/account.scss',
@@ -320,12 +325,13 @@ gulp.task('webpack-dev-server', function(callback) {
       sass_dir + '/journal_list_per_disciplines.scss',
       sass_dir + '/journal_list_per_names.scss',
       sass_dir + '/login.scss',
-      sass_dir + '/main.scss',
       sass_dir + '/search_results.scss',
       sass_dir + '/thesis_collection_home.scss',
       sass_dir + '/thesis_collection_list.scss',
       sass_dir + '/thesis_home.scss',
       sass_dir + '/twenty_years.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
     ],
     userspace: [
       js_dir + '/issue_submission.js',
@@ -335,10 +341,14 @@ gulp.task('webpack-dev-server', function(callback) {
       sass_dir + '/authorizations.scss',
       sass_dir + '/issue_submission.scss',
       sass_dir + '/userspace.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
     ],
     issue_reader: [
       js_dir + '/issue_reader.js',
       sass_dir + '/issue_reader.scss',
+      'webpack-dev-server/client?' + WEBPACK_URL,
+      'webpack/hot/only-dev-server',
     ],
   };
   devWebpackConfig.module = {
