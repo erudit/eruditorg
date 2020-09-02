@@ -37,7 +37,7 @@ $article-toolbar-width: 80px;
 
   .titre:first-child,
   .titreparal {
-    color: #000;
+    color: $black;
   }
 
   .sstitre,
@@ -105,7 +105,7 @@ $article-toolbar-width: 80px;
         @include transition(padding 0.05s ease-in);
 
         &.active, &:hover, &:active {
-          color: #FFF;
+          color: $white;
           background-color: $coral-red;
           padding: 0.75em 0.25em;
           @include transition(padding 0.05s ease-out);
@@ -118,7 +118,7 @@ $article-toolbar-width: 80px;
         color: $coral-red;
 
         &.active, &:hover, &:active {
-          color: #FFF;
+          color: $white;
         }
 
 

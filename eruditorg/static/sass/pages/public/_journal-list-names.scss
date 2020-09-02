@@ -65,7 +65,7 @@
 
       .filters,
       .list-header {
-        background: #FFF;
+        background: $white;
         padding-top: 15px;
         margin-bottom: 0;
       }
@@ -128,14 +128,14 @@
           &:hover, &:active, &:focus, &:active:focus {
             background: $coral-red;
             border-color: $coral-red;
-            color: #FFF;
+            color: $white;
             letter-spacing: 0.1px;
             text-decoration: none;
 
             .journal-subtitle,
             .journal-history,
             .erudicon {
-              color: #FFF;
+              color: $white;
             }
 
           }

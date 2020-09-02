@@ -32,7 +32,7 @@
 
           &:hover, &:active, &:focus, &:active:focus {
             background: $coral-red;
-            color: #FFF;
+            color: $white;
             text-decoration: none;
             border-color: $coral-red;
           }

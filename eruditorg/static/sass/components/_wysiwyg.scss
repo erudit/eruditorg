@@ -88,7 +88,7 @@
   }
 
   a.cke_dialog_tab_selected {
-    background-color: #fff;
+    background-color: $white;
   }
 
   a.cke_dialog_tab:hover,
@@ -123,7 +123,7 @@
       background: transparent;
       background-color: $coral-red;
       border-color: $coral-red;
-      color: #fff;
+      color: $white;
     }
 
   }
@@ -132,7 +132,7 @@
     background-color: $coral-red;
     background-image: none;
     box-shadow: none;
-    color: #fff;
+    color: $white;
 
     &:hover {
       background: none;
@@ -144,7 +144,7 @@
   }
 
   .cke_dialog_footer {
-    background-color: #fff;
+    background-color: $white;
     background-image: none;
     border-radius: 0;
     box-shadow: none;

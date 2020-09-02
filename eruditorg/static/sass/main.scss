@@ -12,7 +12,6 @@
   'utils/font-styles',
   'utils/functions',
   'utils/mixins',
-  'utils/sprite',
   'utils/variables';
 
 // 2. Vendors
@@ -47,49 +46,23 @@
 @import
   'components/accordions',
   'components/alerts',
-  'components/alpha-nav',
-  'components/alternating-rows',
-  'components/bibliographic-records',
   'components/breadcrumbs',
   'components/buttons',
-  'components/cards',
   'components/checkboxes',
-  'components/clipboards',
   'components/component-animations',
-  'components/document-headings',
-  'components/dropdown-buttons',
-  'components/error-lists',
   'components/forms',
   'components/glory',
   'components/header-logo',
   'components/input-groups',
-  'components/issue-covers',
   'components/lists',
-  'components/lists-as-tables',
   'components/modals',
-  'components/multiselects',
   'components/nav-menu',
   'components/nav-search-triggers',
   'components/nav-search',
   'components/nav-submenu',
   'components/navbars',
-  'components/pagination',
-  'components/pagination-arrows',
   'components/panels',
-  'components/responsive-embed',
   'components/scroll-top',
-  'components/section-nav',
   'components/inverted-search',
-  'components/separators',
-  'components/subscription-sponsor',
-  'components/table-of-contents-nav',
-  'components/table-of-contents',
   'components/tables',
-  'components/tabs',
-  'components/toolboxes',
-  'components/tooltips',
-  'components/status-indicators',
-  'components/wysiwyg';
-
-// $spritesheet-sprites is an array of all sprite image names
-@include sprites($spritesheet-sprites);
+  'components/tooltips';

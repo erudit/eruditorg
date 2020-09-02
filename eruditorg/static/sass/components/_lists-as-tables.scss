@@ -37,11 +37,11 @@
 
         &:hover, &:focus, &:active {
           text-decoration: none;
-          color: #fff;
+          color: $white;
           background-color: $coral-red;
 
           [class^="status-indicator"] {
-            background-color: #fff;
+            background-color: $white;
           }
 
         }

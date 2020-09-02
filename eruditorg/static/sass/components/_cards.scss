@@ -14,7 +14,7 @@
   &:hover, &:active, &:focus, &:active:focus {
     background: $coral-red;
     border-color: $coral-red;
-    color: #FFF;
+    color: $white;
     text-decoration: none;
 
     .card__figure {
@@ -24,7 +24,7 @@
     }
 
     .card__metadata {
-      color: #FFF;
+      color: $white;
     }
   }
 }

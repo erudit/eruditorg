@@ -40,9 +40,9 @@
       }
 
       &.disabled {
-        color: #FFF;
-        background-color: #000;
-        border-color: #000;
+        color: $white;
+        background-color: $black;
+        border-color: $black;
         opacity: 1;
 
         + p {
@@ -85,7 +85,7 @@
           width: 40px;
           height: 40px;
           background: $coral-red;
-          color: #FFF;
+          color: $white;
           font-size: 18px;
         }
 
@@ -175,7 +175,7 @@
         margin: 0;
         padding: 0.5em;
         background-color: $light-grey;
-        color: #000;
+        color: $black;
         font-size: 14px;
       }
 

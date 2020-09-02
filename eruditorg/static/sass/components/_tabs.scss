@@ -21,7 +21,7 @@
     &:hover {
       background-color: $coral-red;
       border-color: $coral-red;
-      color: #fff;
+      color: $white;
       text-decoration: none;
     }
   }
@@ -30,7 +30,7 @@
 .tabs__item_active {
   a {
     background-color: $coral-red;
-    color: #fff;
+    color: $white;
     border-color: $coral-red;
   }
 }
@@ -61,7 +61,7 @@
 
        &:hover {
          background-color: $coral-red;
-         color: #fff;
+         color: $white;
          text-decoration: none;
        }
 
@@ -71,7 +71,7 @@
        &,
        &:hover,
        &:focus {
-         color: #fff;
+         color: $white;
          background-color: $coral-red;
          cursor: default;
        }

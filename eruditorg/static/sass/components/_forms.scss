@@ -57,7 +57,7 @@ form {
 fieldset {
   padding: 0;
   margin-bottom: 3em;
-  background-color: #FFF;
+  background-color: $white;
   &:last-child {
     margin-bottom: 1em;
   }
@@ -104,12 +104,12 @@ input[list],
   border-width: $border-width;
   border-style: solid;
   border-color: $dark-grey;
-  color: #000;
+  color: $black;
   vertical-align: middle;
   padding: 0 0.5em;
   height: 40px;
   line-height: 40px;
-  background-color: #FFF;
+  background-color: $white;
   @include placeholder($dark-grey);
 
   &:hover, &:active, &:focus {
@@ -186,7 +186,7 @@ select {
   margin: 0 auto;
   height: 40px;
   position: relative;
-  background: #FFF url(../iconfont/chevron-down.svg) no-repeat 95% center;
+  background: $white url(../iconfont/chevron-down.svg) no-repeat 95% center;
   background-size: 0.65em;
 
   option {

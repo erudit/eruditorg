@@ -6,15 +6,15 @@
 .panel {
   padding: 0;
   margin-bottom: $line-height-computed;
-  background-color: #FFF;
-  border: 1px solid #000;
+  background-color: $white;
+  border: 1px solid $black;
 
   // Optional heading
   .panel-heading {
     padding: $padding-base-vertical * 2 $padding-base-horizontal;
     border-bottom: 1px solid transparent;
-    background-color: #000;
-    color: #FFF;
+    background-color: $black;
+    color: $white;
 
     h1 {
       margin: 0;
@@ -46,7 +46,7 @@
   // Optional footer (stays gray in every modifier class)
   .panel-footer {
     padding: 1em;
-    background-color: #FFF;
+    background-color: $white;
     border-top: 1px solid $mid-grey;
   }
 

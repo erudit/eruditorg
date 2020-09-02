@@ -14,7 +14,7 @@
     @include column-break-inside(avoid);
 
     h2, h3, h4 {
-      color: #000;
+      color: $black;
       margin-top: 0;
     }
 

@@ -127,12 +127,12 @@ address {
 
 ::-moz-selection {
   background: $midnight-blue;
-  color: #FFF;
+  color: $white;
 }
 
 ::selection {
   background: $midnight-blue;
-  color: #FFF;
+  color: $white;
 }
 
 .category-tag,

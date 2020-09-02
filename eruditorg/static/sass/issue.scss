@@ -8,3 +8,10 @@
 
 @import
   'pages/public/issue-detail';
+
+@import
+  'components/bibliographic-records',
+  'components/cards',
+  'components/issue-covers',
+  'components/table-of-contents',
+  'components/toolboxes';

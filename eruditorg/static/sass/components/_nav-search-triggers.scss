@@ -16,11 +16,11 @@
 .nav-search-triggers__close {
   display: none;
   cursor: pointer;
-  color: #fff;
+  color: $white;
 
   .nav-search-triggers__icon {
     &:hover, &:active, &:focus {
-      color: #fff;
+      color: $white;
     }
   }
 }

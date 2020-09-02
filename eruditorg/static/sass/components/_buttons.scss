@@ -36,10 +36,10 @@
   &:hover,
   &:focus,
   &.focus {
-    color: #FFF;
+    color: $white;
     text-decoration: none;
     background-image: none;
-    background-color: #000;
+    background-color: $black;
   }
 
   &:active,
@@ -71,11 +71,11 @@ a.btn {
 
 // with coral-red as bg
 .btn-primary {
-  @include button-variant(#FFF, $coral-red, $coral-red);
+  @include button-variant($white, $coral-red, $coral-red);
   text-decoration: none;
   &:hover, &:active, &:focus, &:focus:active {
     color: $coral-red;
-    background-color: #FFF;
+    background-color: $white;
     border-color: $coral-red;
     background-image: none;
     text-decoration: none;
@@ -86,7 +86,7 @@ a.btn {
 .btn-secondary {
   @include button-variant($coral-red, transparent, $coral-red);
   &:hover, &:active, &:focus, &:focus:active {
-    color: #FFF;
+    color: $white;
     background-color: $coral-red;
     border-color: $coral-red;
     background-image: none;
@@ -95,7 +95,7 @@ a.btn {
 }
 
 .btn-dark {
-  @include button-variant(#fff, #000, transparent);
+  @include button-variant($white, $black, transparent);
 }
 
 // Link buttons

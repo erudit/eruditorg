@@ -248,7 +248,7 @@
 }
 
 // Create a top or bottom border for Bootstrap's grid cell
-@mixin grid-cell-border($direction: 'top', $border-width: 1px, $border-color: #000) {
+@mixin grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $black) {
   position: relative;
 
   @if $direction == 'top' {

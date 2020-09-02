@@ -57,7 +57,7 @@
 .nav-menu__link {
   display: block;
   position: relative;
-  color: #000;
+  color: $black;
   margin: 5px 0;
 
   &:hover,
@@ -108,15 +108,15 @@
       display: block;
 
       > a {
-        color: #FFF;
+        color: $white;
         font-size: 18px;
         margin: 0;
         padding: 15px 10px;
         line-height: 20px;
-        border-bottom: 1px solid #FFF;
+        border-bottom: 1px solid $white;
 
         &:hover, &:active, &:focus {
-          color: #FFF;
+          color: $white;
           text-decoration: none;
           @include fw-sans-bold;
         }

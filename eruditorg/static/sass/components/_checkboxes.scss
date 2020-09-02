@@ -13,7 +13,7 @@ $check-icon: "\f3ff" !default;
       background-color: $color;
     }
     &::after{
-      color: #fff;
+      color: $white;
     }
   }
 }
@@ -26,7 +26,7 @@ $check-icon: "\f3ff" !default;
       // border-color: $color;
     }
     &::after{
-      background-color: #fff;
+      background-color: $white;
     }
   }
 }
@@ -130,8 +130,8 @@ input[type="checkbox"] {
       height: 17px;
       left: 0;
       margin-left: -20px;
-      border: 1px solid #000;
-      background-color: #fff;
+      border: 1px solid $black;
+      background-color: $white;
       @include transition(border 0.15s, color 0.15s);
     }
 
@@ -241,7 +241,7 @@ input[type="checkbox"] {
       margin-left: -20px;
       border: 1px solid $dark-grey;
       border-radius: 50%;
-      background-color: #fff;
+      background-color: $white;
       @include transition(border 0.15s ease-in-out);
     }
 
@@ -300,10 +300,10 @@ input[type="radio"] {
   }
   .styled:checked + label {
     &::before {
-      color: #fff;
+      color: $white;
     }
     &::after {
-      color: #fff;
+      color: $white;
     }
   }
 }

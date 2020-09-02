@@ -35,7 +35,7 @@
         color: $dark-grey;
 
         &:last-child {
-          color: #000;
+          color: $black;
         }
 
       }
@@ -92,7 +92,7 @@
     }
 
     .ion-help-circled {
-      color: #000;
+      color: $black;
     }
 
   }
