@@ -3,13 +3,13 @@
  */
 
 .modal {
-  background: #FFF;
-  border: 1px solid #000;
+  background: $white;
+  border: 1px solid $black;
   padding: 0;
 
   .modal-header {
-    color: #FFF;
-    background: #000;
+    color: $white;
+    background: $black;
     padding: 0.5em 0.35em 0.35em 0.35em;
     margin: 0;
     text-align: center;

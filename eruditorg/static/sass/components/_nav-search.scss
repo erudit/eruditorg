@@ -18,9 +18,9 @@
   width: 55%;
   max-width: 700px;
   background-color: transparent;
-  border: 2px solid #fff;
+  border: 2px solid $white;
   font-size: 16px;
-  color: #fff;
+  color: $white;
   @include fw-sans-medium;
 
   &::placeholder {
@@ -29,15 +29,15 @@
   }
 
   &:hover, &:active, &:focus {
-    border-color: #fff;
+    border-color: $white;
   }
 
 }
 
 .nav-search__btn {
-  border: 2px solid #fff;
+  border: 2px solid $white;
   height: 34px;
-  color: #fff;
+  color: $white;
   line-height: 0.85;
   margin-left: -6px;
   font-size: 20px;
@@ -45,8 +45,8 @@
   max-width: 10%;
 
   &:hover, &:active, &:focus {
-    background-color: #fff;
-    border-color: #fff;
+    background-color: $white;
+    border-color: $white;
     color: $coral-red;
   }
 }

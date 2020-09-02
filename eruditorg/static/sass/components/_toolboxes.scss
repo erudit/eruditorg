@@ -15,8 +15,8 @@
     .tool-btn {
       min-width: 30px;
       font-size: 0.65em;
-      color: #FFF;
-      background-color: #000;
+      color: $white;
+      background-color: $black;
 
       &:hover, &:focus, &:active:focus, &.saved {
         background: $coral-red;
@@ -76,7 +76,7 @@
     display: inline-block;
     width: 30px;
     height: 30px;
-    outline: 1px solid #FFF;
+    outline: 1px solid $white;
   }
 
 }
@@ -108,7 +108,7 @@
       height: 100%;
       background: $coral-red;
       border: none;
-      color: #fff;
+      color: $white;
       font-size: 0.8em;
       white-space: nowrap;
       float: right;
@@ -137,7 +137,7 @@
       }
 
       &:hover, &:active, &:active:focus {
-        background-color: #000;
+        background-color: $black;
 
         .tools-label {
           display: block;
@@ -145,7 +145,7 @@
       }
 
       &[id^=tool-citation-remove] {
-        background-color: #000;
+        background-color: $black;
       }
 
     }

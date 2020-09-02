@@ -42,7 +42,7 @@ footer#site-footer {
   */
 
   #footer-nav {
-    background: #FFF;
+    background: $white;
     padding-top: $margin-vertical-default*2;
     padding-bottom: $margin-vertical-default;
     font-size: 18px;
@@ -59,10 +59,10 @@ footer#site-footer {
   */
 
   .footer-legal {
-    background-color: #000;
+    background-color: $black;
     padding-top: $margin-vertical-default;
     padding-bottom: $margin-vertical-default/2;
-    color: #fff;
+    color: $white;
 
     p, li {
       font-size: 14px;
@@ -71,7 +71,7 @@ footer#site-footer {
 
     svg {
       path, rect {
-        fill: #fff;
+        fill: $white;
       }
     }
 
@@ -86,7 +86,7 @@ footer#site-footer {
     }
 
     a {
-      color: #fff;
+      color: $white;
 
       &:hover, &:focus, &:active {
         color: $coral-red;
@@ -95,7 +95,7 @@ footer#site-footer {
     }
 
     .erudit-headline {
-      border-top: 1px solid #FFF;
+      border-top: 1px solid $white;
       padding-top: 0.25em;
       margin-top: 1.75em;
       display: inline-block;

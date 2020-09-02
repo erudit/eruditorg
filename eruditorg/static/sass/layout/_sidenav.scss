@@ -27,11 +27,11 @@
           text-decoration: none;
           border-color: $coral-red;
           background: $coral-red;
-          color: #FFF;
+          color: $white;
           padding-left: 15px;
 
           .sidenav-icon {
-            color: #fff;
+            color: $white;
           }
         }
 
@@ -67,18 +67,18 @@
 
       &.active a {
         text-decoration: none;
-        border-color: #000;
-        background: #000;
-        color: #FFF;
+        border-color: $black;
+        background: $black;
+        color: $white;
 
         .sidenav-icon {
-          color: #fff;
+          color: $white;
         }
 
         &:hover, &:focus, &:active {
 
           &::before {
-            color: #FFF;
+            color: $white;
           }
 
         }

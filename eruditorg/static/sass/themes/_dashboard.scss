@@ -14,7 +14,7 @@
       }
 
       &[href^="tel:"] {
-        color: #000;
+        color: $black;
       }
 
     }
@@ -44,15 +44,15 @@
     p {
 
       a:not(.btn) {
-        color: #000;
+        color: $black;
         display: inline-block;
 
         &:after {
           content: '';
           display: block;
           width: 100%;
-          color: #000;
-          border-bottom: 1px solid #000;
+          color: $black;
+          border-bottom: 1px solid $black;
           margin-top: -3px;
         }
 

@@ -6,11 +6,11 @@
 .inverted-search-bar {
   background-color: rgba(255, 66, 66, 0.9);
   height: 50px;
-  color: #fff;
+  color: $white;
 
   .header-logo__img path,
   .header-logo__img rect {
-    fill: #fff;
+    fill: $white;
   }
 
   .nav-search-triggers__open,

@@ -14,18 +14,18 @@
 
     .header-logo__img rect,
     .header-logo__img path {
-      fill: #fff;
+      fill: $white;
     }
 
     .nav-menu__link {
       &:hover, &:focus, &:active {
-        color: #000;
+        color: $black;
       }
     }
   }
 
   .site-header__scrolled {
-    background-color: #fff;
+    background-color: $white;
     @include box-shadow(0 3px 5px rgba(0,0,0,0.1));
 
     .header-logo__img rect,
@@ -44,7 +44,7 @@
 
       .header-logo__img rect,
       .header-logo__img path {
-        fill: #fff;
+        fill: $white;
       }
     }
   }
@@ -62,7 +62,7 @@
     font-size: 4vh;
 
     a {
-      color: #fff;
+      color: $white;
       display: inline-block;
     }
 
@@ -82,10 +82,10 @@
   /* Search tool */
   .home-search {
     margin: 240px 0 60px 0;
-    color: #fff;
+    color: $white;
 
     a {
-      color: #fff;
+      color: $white;
     }
 
     .arrow {
@@ -104,7 +104,7 @@
   }
 
   .home-search__input {
-    border: 1px solid #fff;
+    border: 1px solid $white;
     border-right: none;
     height: 50px;
     line-height: 50px;
@@ -133,7 +133,7 @@
     padding: 0;
     margin: 0;
     border: none;
-    background-color: #fff;
+    background-color: $white;
     color: $midnight-blue;
 
     .icon:before {
@@ -145,7 +145,7 @@
   .home-issues {
     margin-top: -5px;
     background-color: $midnight-blue;
-    color: #fff;
+    color: $white;
     border-bottom: 1px solid $midnight-blue;
     clear: both;
 
@@ -155,7 +155,7 @@
     }
 
     a {
-      color: #fff;
+      color: $white;
     }
   }
 
@@ -216,10 +216,10 @@
 
   .home-issues__btn {
     margin-top: 2.5vh;
-    border: 1px solid #fff;
+    border: 1px solid $white;
 
     &:hover, &:focus, &:active {
-      background-color: #fff;
+      background-color: $white;
       color: $midnight-blue;
     }
   }
@@ -228,7 +228,7 @@
   .home-journals {
     padding-bottom: 6em;
     background-color: $light-grey;
-    color: #000;
+    color: $black;
     clear: both;
 
     &:before {
@@ -328,7 +328,7 @@
   .home-news__title a {
     margin: 0 0 0.75em 0;
     font-size: 24px;
-    color: #000;
+    color: $black;
   }
 
   .home-news__date {
@@ -343,7 +343,7 @@
 
     &:hover, &:focus, &:active {
       background-color: $coral-red;
-      color: #fff;
+      color: $white;
     }
   }
 

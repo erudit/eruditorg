@@ -9,8 +9,8 @@
     cursor: pointer;
     display: block;
     padding: ($grid-gutter-width / 2) ($grid-gutter-width);
-    border: 1px solid #000;
-    background-color: #fff;
+    border: 1px solid $black;
+    background-color: $white;
     .caret {
       float: right;
     }
@@ -19,7 +19,7 @@
   > ul {
     display: none;
     position: absolute;
-    background-color: #fff;
+    background-color: $white;
     width: 100%;
     left: 0;
     z-index: $zindex-dropdown;
@@ -33,12 +33,12 @@
 
     a {
       padding: ($grid-gutter-width / 2) ($grid-gutter-width);
-      border: 1px solid #000;
+      border: 1px solid $black;
       border-top: none;
       display: block;
       &:hover {
-        background-color: #000;
-        color: #fff;
+        background-color: $black;
+        color: $white;
         text-decoration: none;
       }
     }
@@ -46,10 +46,10 @@
 
   &:hover {
     > a {
-      background-color: #000 !important;
-      color: #fff !important;
+      background-color: $black !important;
+      color: $white !important;
       text-decoration: none;
-      border-color: #000 !important;
+      border-color: $black !important;
       span {
         @include rotate(180deg);
         margin-top: -5px;

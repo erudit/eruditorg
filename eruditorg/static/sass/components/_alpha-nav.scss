@@ -23,7 +23,7 @@
       &:hover, &:active, &:focus, &:active:focus, &.active {
         text-decoration: none;
         background: $coral-red;
-        color: #FFF;
+        color: $white;
       }
 
     }
@@ -38,7 +38,7 @@
       a {
         background: $coral-red;
         text-decoration: none;
-        color: #FFF;
+        color: $white;
       }
 
     }

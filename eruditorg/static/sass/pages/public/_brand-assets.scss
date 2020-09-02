@@ -33,7 +33,7 @@
 
     th {
       text-align: left;
-      color: #000;
+      color: $black;
     }
 
   }
@@ -135,7 +135,7 @@
       background: $coral-red;
 
       g {
-        fill: #fff;
+        fill: $white;
       }
 
     }
@@ -144,13 +144,13 @@
       background: $midnight-blue;
 
       g {
-        fill: #fff;
+        fill: $white;
       }
 
     }
 
     .logo-red-bg-white {
-      background: #fff;
+      background: $white;
       outline: 1px solid $mid-grey;
 
       g {
@@ -160,11 +160,11 @@
     }
 
     .logo-black-bg-white {
-      background: #fff;
+      background: $white;
       outline: 1px solid $mid-grey;
 
       g {
-        fill: #000;
+        fill: $black;
       }
 
     }
@@ -175,7 +175,7 @@
     }
 
     .symbol-red-bg-white {
-      background: #fff;
+      background: $white;
 
       g {
         fill: $coral-red;
@@ -187,16 +187,16 @@
       background: $coral-red;
 
       g {
-        fill: #fff;
+        fill: $white;
       }
 
     }
 
     .symbol-black-bg-white {
-      background: #fff;
+      background: $white;
 
       g {
-        fill: #000;
+        fill: $black;
       }
 
     }

@@ -37,7 +37,7 @@
     font-size: 16px;
 
     .select2-selection__rendered {
-      color: #000;
+      color: $black;
     }
 
   }
@@ -71,7 +71,7 @@
     position: absolute;
     height: 2px;
     width: 28px;
-    background: #000;
+    background: $black;
     opacity: 1;
     left: 0;
     @include transform-origin(left center);
