@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package* /app/
 COPY tools/static/* /app/tools/static/
 RUN npm ci && npm cache clean --force
-COPY .babelrc /app/.babelrc
+COPY .babelrc.json /app/.babelrc.json
 COPY eruditorg/static /app/eruditorg/static/
 RUN npm run gulp -- build --production
 
