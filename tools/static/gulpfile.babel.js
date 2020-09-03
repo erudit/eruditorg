@@ -1,27 +1,18 @@
-import '@babel/polyfill';
-
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import gulp from 'gulp';
-import concat from 'gulp-concat';
 import consolidate from 'gulp-consolidate';
-import env from 'gulp-env';
 import iconfont from 'gulp-iconfont';
 import livereload from 'gulp-livereload';
-import merge from 'merge-stream';
-import minifyCSS from 'gulp-clean-css';
 import modernizr from 'gulp-modernizr';
 import rename from 'gulp-rename';
-import sass from 'gulp-sass';
 import uglify from 'gulp-uglify';
 import path from 'path';
 import named from 'vinyl-named';
-import spritesmith from 'gulp.spritesmith';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackStream from 'webpack-stream';
 import minimist from 'minimist';
 import through2 from 'through2';
-import PluginError from 'plugin-error';
 import log from 'fancy-log';
 import analyzer from 'webpack-bundle-analyzer';
 
@@ -43,7 +34,6 @@ const WEBPACK_URL = 'http://' + args.host + ':' + args.port;
 var build_dir = PROD_ENV ? static_dir + 'build' : static_dir + 'build_dev';
 var sass_dir = static_dir + 'sass';
 var js_dir = static_dir + 'js';
-var img_dir = static_dir + 'img';
 var font_dir = static_dir + 'fonts';
 var iconfont_dir = static_dir + 'iconfont';
 
@@ -147,10 +137,6 @@ var webpackConfig = {
           exclude: /node_modules/,
           use: {
               loader: 'babel-loader',
-              options: {
-                presets: ["@babel/preset-env"],
-                plugins: ["@babel/plugin-proposal-function-bind"]
-              }
           },
       },
       {
@@ -183,8 +169,8 @@ var webpackConfig = {
   performance: {
     // Raise error if prod assets & entrypoints exceed max sizes (300KiB & 600KiB).
     hints: PROD_ENV ? 'error' : false,
-    maxAssetSize: PROD_ENV ? 300000 : 800000,
-    maxEntrypointSize: PROD_ENV ? 500000 : 1000000,
+    maxAssetSize: PROD_ENV ? 250 * 1000 : 500 * 1000,
+    maxEntrypointSize: PROD_ENV ? 400 * 1000 : 800 * 1000,
     // Only check CSS & JS files and ignore issue_reader files.
     assetFilter: function(assetFilename) {
       return (/\.(css|js)$/.test(assetFilename)) && !(/issue_reader/.test(assetFilename));
@@ -254,24 +240,6 @@ gulp.task('build-iconfont', function(){
         .pipe(gulp.dest(sass_dir + '/utils/'));
     })
     .pipe(gulp.dest(font_dir + '/erudicon/'));
-});
-
-gulp.task('build-sprite', function () {
-  let spriteData = gulp.src(img_dir + '/sprite/*.png').pipe(spritesmith({
-    imgName: '../img/sprite.png',
-    cssName: '_sprite.scss',
-    cssVarMap: function (sprite) {
-      sprite.name = 'sprite-' + sprite.name;
-    }
-  }));
-
-  let imgStream = spriteData.img
-    .pipe(gulp.dest(img_dir));
-
-  let cssStream = spriteData.css
-    .pipe(gulp.dest(sass_dir + '/utils/'));
-
-  return merge(imgStream, cssStream);
 });
 
 /*
@@ -362,10 +330,6 @@ gulp.task('webpack-dev-server', function(callback) {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ["@babel/preset-env"],
-            plugins: ["@babel/plugin-proposal-function-bind"],
-          },
         },
       },
       {
