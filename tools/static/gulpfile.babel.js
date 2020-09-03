@@ -1,16 +1,10 @@
-import '@babel/polyfill';
-
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import gulp from 'gulp';
-import concat from 'gulp-concat';
 import consolidate from 'gulp-consolidate';
-import env from 'gulp-env';
 import iconfont from 'gulp-iconfont';
 import livereload from 'gulp-livereload';
-import minifyCSS from 'gulp-clean-css';
 import modernizr from 'gulp-modernizr';
 import rename from 'gulp-rename';
-import sass from 'gulp-sass';
 import uglify from 'gulp-uglify';
 import path from 'path';
 import named from 'vinyl-named';
@@ -19,7 +13,6 @@ import WebpackDevServer from 'webpack-dev-server';
 import webpackStream from 'webpack-stream';
 import minimist from 'minimist';
 import through2 from 'through2';
-import PluginError from 'plugin-error';
 import log from 'fancy-log';
 import analyzer from 'webpack-bundle-analyzer';
 
