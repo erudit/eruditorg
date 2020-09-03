@@ -139,7 +139,10 @@ var webpackConfig = {
               loader: 'babel-loader',
               options: {
                 presets: ["@babel/preset-env"],
-                plugins: ["@babel/plugin-proposal-function-bind"]
+                plugins: [
+                  "@babel/plugin-proposal-function-bind",
+                  "@babel/plugin-transform-object-assign",
+                ]
               }
           },
       },
@@ -336,7 +339,10 @@ gulp.task('webpack-dev-server', function(callback) {
           loader: 'babel-loader',
           options: {
             presets: ["@babel/preset-env"],
-            plugins: ["@babel/plugin-proposal-function-bind"],
+            plugins: [
+              "@babel/plugin-proposal-function-bind",
+              "@babel/plugin-transform-object-assign",
+            ],
           },
         },
       },
