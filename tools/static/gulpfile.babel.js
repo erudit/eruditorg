@@ -137,6 +137,10 @@ var webpackConfig = {
           exclude: /node_modules/,
           use: {
               loader: 'babel-loader',
+              options: {
+                presets: ["@babel/preset-env"],
+                plugins: ["@babel/plugin-proposal-function-bind"]
+              }
           },
       },
       {
@@ -330,6 +334,10 @@ gulp.task('webpack-dev-server', function(callback) {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-proposal-function-bind"],
+          },
         },
       },
       {

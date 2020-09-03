@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-function-bind": "^7.11.5",
     "@babel/preset-env": "^7.11.0",
     "@babel/register": "^7.10.5",
     "babel-loader": "^8.1.0",
