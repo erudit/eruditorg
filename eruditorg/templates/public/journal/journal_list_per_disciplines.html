@@ -135,11 +135,6 @@
             {% if journal.open_access %}
             <div class="erudicon erudicon-open-access"></div>
             {% endif %}
-            {% if not journal.open_access and journal.special_open_access_opt_in %}
-            <span class="hint--bottom-right hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cette revue est temporairement disponible gratuitement.' %}">
-              <i class="erudicon erudicon-open-access" style="color: green;"></i>
-            </span>
-            {% endif %}
 
             {% if journal.is_in_fedora and journal.has_logo %}
             <div class="row">

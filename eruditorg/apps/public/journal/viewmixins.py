@@ -111,19 +111,10 @@ class ContentAccessCheckMixin:
         content = self.get_content()
         if isinstance(content, Article):
             issue = content.issue
-            journal = issue.journal
         elif isinstance(content, Issue):
             issue = content
-            journal = issue.journal
-        elif isinstance(content, Journal):
-            issue = None
-            journal = content
         else:
             issue = None
-            journal = None
-
-        if journal and journal.special_open_access_opt_in:
-            return True
 
         if issue:
             # If the issue is in open access or if it's not embargoed, the access should always be

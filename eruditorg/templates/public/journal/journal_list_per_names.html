@@ -55,7 +55,7 @@
 
 {% block content %}
 {# Journal list per names & filter form are cached for one day based on the filter form values and the current language code. #}
-{% cache LONG_TTL "public_journal_list" "per_names" filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.special_open_access_opt_in.value filter_form.is_new.value LANGUAGE_CODE "v1" %}
+{% cache LONG_TTL "public_journal_list" "per_names" filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value LANGUAGE_CODE "v1" %}
 <main class="container">
   <div class="row">
     <div class="col-sm-8">
@@ -92,13 +92,6 @@
                     {{ filter_form.open_access.label }}&nbsp;<span class="erudicon erudicon-open-access"></span>
                   </label>
                   {% for error in filter_form.open_access.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                </div>
-                <div id="div_id_{{ filter_form.special_open_access_opt_in.html_name }}" class="checkbox">
-                  {{ filter_form.special_open_access_opt_in|add_class:'form-control' }}
-                  <label for="{{ filter_form.special_open_access_opt_in.auto_id }}" class="control-label">
-                    {{ filter_form.special_open_access_opt_in.label }}&nbsp;<span class="erudicon erudicon-open-access" style="color: green;"></span>
-                  </label>
-                  {% for error in filter_form.special_open_access_opt_in.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
 
                 <div id="div_id_{{ filter_form.is_new.html_name }}" class="checkbox">
@@ -193,11 +186,6 @@
                 </div>
                 <div class="col-sm-1 col-xs-4 journal-access">
                   {% if journal.open_access %}<span class="erudicon erudicon-open-access"></span>{% endif %}
-                  {% if not journal.open_access and journal.special_open_access_opt_in %}
-                  <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cette revue est temporairement disponible gratuitement.' %}">
-                    <i class="erudicon erudicon-open-access" style="color: green;"></i>
-                  </span>
-                  {% endif %}
                 </div>
               </div>
             </a>

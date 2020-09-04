@@ -113,10 +113,6 @@
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
               <span class="erudicon erudicon-open-access"></span>
             </span>
-            {% elif journal.special_open_access_opt_in %}
-            <span class="hint--bottom-right hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, cette revue est temporairement disponible gratuitement.' %}">
-              <i class="erudicon erudicon-open-access" style="color: green;"></i>&nbsp;
-            </span>
             {% endif %}
           </span>
         </h1>
@@ -232,11 +228,6 @@
             {% for issue in year.list %}
             <li class="issue-list__item">
               <a {{ issue.extra.detail_link_attrs }}>
-                {% if issue.embargoed and issue.journal.special_open_access_opt_in %}
-                <span class="hint--bottom-right hint--no-animate" data-hint="{% trans 'En raison de la crise de la COVID-19, ce numéro est temporairement disponible gratuitement.' %}">
-                  <i class="erudicon erudicon-open-access" style="color: green;"></i>&nbsp;
-                </span>
-                {% endif %}
                 {% if issue.extra.is_locked %}<i class="icon ion-ios-lock"></i>&nbsp;{% endif %}<span>{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                 {% if issue.html_title %}<br/><span class="issue-list__theme">{{ issue.html_title|safe }}</span>{% endif %}
               </a>
