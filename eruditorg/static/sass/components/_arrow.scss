@@ -1,0 +1,6 @@
+// Base arrow style for the scroll-top arrow found on all pages.
+.arrow {
+  margin: 2px;
+  @include arrow(8px, 2px, 2px, 12px);
+  @include arrowColor($coral-red);
+}
