@@ -225,6 +225,10 @@ $article-toolbar-width: 80px;
       padding-right: $grid-gutter-width * 2;
     }
 
+    li, li > p {
+	margin: 0;
+    }
+
     .para {
       margin-top: $margin-vertical-default;
       &:first-of-type {
