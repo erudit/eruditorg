@@ -493,3 +493,7 @@ class TestArticleAccessLogMixin:
                 username="",
             )
             assert article_access_log == expected_article_access_log
+
+            # Check that the log timestamp tzinfo parameter has a value
+            # and therefore, that the log timestamp is a timezone "aware" object
+            assert article_access_log.timestamp.tzinfo is not None
