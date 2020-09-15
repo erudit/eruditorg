@@ -41,5 +41,4 @@ def cache_constants(request):
         'NEVER_TTL': settings.NEVER_TTL,        # Do not cache
         'SHORT_TTL': settings.SHORT_TTL,        # Cache for 1 hour
         'LONG_TTL': settings.LONG_TTL,          # Cache for 1 day
-        'FOREVER_TTL': settings.FOREVER_TTL,    # Cache forever
     }
