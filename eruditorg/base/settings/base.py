@@ -36,7 +36,7 @@ env = environ.Env(
     RESTRICTION_DATABASE_URL=(str, 'mysql://root@localhost/restriction'),
 
     CACHE_URL=(str, 'locmemcache://'),
-    FEDORA_CACHE_TIMEOUT=(str, None),
+    FEDORA_CACHE_TIMEOUT=(int, 60 * 60 * 24 * 30),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(int, 25),
     EMAIL_HOST_USER=(str, None),
@@ -324,7 +324,6 @@ CACHES = {
 NEVER_TTL = 0               # Do not cache
 SHORT_TTL = 60 * 60         # Cache for 1 hour
 LONG_TTL = 60 * 60 * 24     # Cache for 1 day
-FOREVER_TTL = None          # Cache forever
 
 # django-adv-cache-tag settings
 # -----------------------------------------------------------------------------
@@ -339,12 +338,6 @@ ADV_CACHE_VERSIONING = True
 ADV_CACHE_COMPRESS = True
 
 FEDORA_CACHE_TIMEOUT = env("FEDORA_CACHE_TIMEOUT")
-# Make sure that if we get an empty string from environment variables we parse it as None.
-# A None value for the Redis TTL means that keys will never expire.
-if FEDORA_CACHE_TIMEOUT is None or FEDORA_CACHE_TIMEOUT == "":
-    FEDORA_CACHE_TIMEOUT = None
-else:
-    FEDORA_CACHE_TIMEOUT = int(FEDORA_CACHE_TIMEOUT)
 
 # Emails
 # -----------------------------------------------------------------------------

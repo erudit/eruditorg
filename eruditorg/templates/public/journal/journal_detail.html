@@ -83,7 +83,7 @@
 {# The journal's code is used as a primary key for the cache key. #}
 {# The content_access_granted and LANGUAGE_CODE arguments are use to generate the cache key hash. #}
 {# The journal info's update time is used as the cache content version. #}
-{% cache FOREVER_TTL "public_journal_detail" journal.code content_access_granted LANGUAGE_CODE journal_info.updated %}
+{% cache LONG_TTL "public_journal_detail" journal.code content_access_granted LANGUAGE_CODE journal_info.updated %}
 <main class="col-sm-8 col-md-7">
   <header class="main-header row">
     <div class="col-sm-12">
