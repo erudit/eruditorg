@@ -2305,6 +2305,17 @@ class TestArticleDetailView:
         assert sections[1].find('h2').decode() == '<h2>Biographical notes</h2>'
         assert sections[2].find('h2').decode() == '<h2>Notas biograficas</h2>'
 
+    def test_do_not_display_label_if_no_volume_and_number(self):
+        article = ArticleFactory(
+            from_fixture='1059031ar',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, 'html.parser')
+        span = dom.find('span', {'class': 'volumaison'})
+        assert span.decode() == '<span class="volumaison">2018</span>'
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')

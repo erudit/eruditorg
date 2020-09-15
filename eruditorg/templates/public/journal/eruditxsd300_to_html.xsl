@@ -686,20 +686,22 @@
   <xsl:template match="admin/numero" mode="refpapier">
     <span class="volumaison">
       <xsl:for-each select="volume | nonumero[1] | pub/periode | pub/annee | pagination">
-        <xsl:apply-templates select="."/>
-        <xsl:choose>
-          <!-- Put an hyphen between multiple periods (ie: Avril–Mai) -->
-          <xsl:when test="name(.) = 'periode' and name(following-sibling::*) = 'periode'">
-            <xsl:text>–</xsl:text>
-          </xsl:when>
-          <!-- Do not put a coma between period and year (ie: Avril-Mai 2020) -->
-          <xsl:when test="name(.) = 'periode' and name(following-sibling::*) = 'annee'">
-            <xsl:text> </xsl:text>
-          </xsl:when>
-          <xsl:when test="position() != last()">
-            <xsl:text>, </xsl:text>
-          </xsl:when>
-        </xsl:choose>
+        <xsl:if test=". != ''">
+          <xsl:apply-templates select="."/>
+          <xsl:choose>
+            <!-- Put an hyphen between multiple periods (ie: Avril–Mai) -->
+            <xsl:when test="name(.) = 'periode' and name(following-sibling::*) = 'periode'">
+              <xsl:text>–</xsl:text>
+            </xsl:when>
+            <!-- Do not put a coma between period and year (ie: Avril-Mai 2020) -->
+            <xsl:when test="name(.) = 'periode' and name(following-sibling::*) = 'annee'">
+              <xsl:text> </xsl:text>
+            </xsl:when>
+            <xsl:when test="position() != last()">
+              <xsl:text>, </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+        </xsl:if>
       </xsl:for-each>
     </span>
   </xsl:template>
