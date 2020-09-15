@@ -618,13 +618,10 @@ class Issue(FedoraMixin, FedoraDated):
     def get_articles_from_fedora(self):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
         # elegant way to generalize that code. This mechanism will probably change soon anyway.
-        if self._should_use_cache():
-            summary_tree = et.fromstring(
-                get_cached_datastream_content(
-                    self.fedora_object, 'summary').serialize()
-            )
-        else:
-            summary_tree = et.fromstring(self.fedora_object.xml_content)
+        summary_tree = et.fromstring(
+            get_cached_datastream_content(
+                self.fedora_object, 'summary').serialize()
+        )
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
@@ -875,11 +872,6 @@ class Issue(FedoraMixin, FedoraDated):
     def licenses(self):
         return self.erudit_object.get_droitsauteur(links_only=True)
 
-    def _should_use_cache(self):
-        if self.is_published:
-            return True
-        return False
-
 
 def fedora_only(method):
 
@@ -996,11 +988,6 @@ class Article(FedoraMixin):
             raise Article.DoesNotExist()
         else:
             return Article.from_issue_and_localidentifier(issue, localidentifier)
-
-    def _should_use_cache(self):
-        if self.issue.is_published:
-            return True
-        return False
 
     # Solr-related methods and properties
     # --

@@ -4,7 +4,6 @@ from typing import Sequence
 import structlog
 import re
 
-from django.core.cache import cache
 from django.core.management.base import (
     BaseCommand,
     CommandError,
@@ -209,7 +208,7 @@ class Command(BaseCommand):
             try:
                 self.import_journal(jpid, collection, False)
                 journal = Journal.objects.get(localidentifier=localidentifier_from_pid(jpid))
-                journal_erudit_object = journal.get_erudit_object(use_cache=False)
+                journal_erudit_object = journal.get_erudit_object()
                 issue_pids_to_sync.update(get_journal_issue_pids_to_sync(
                     journal,
                     journal_erudit_object.get_published_issues_pids(),
@@ -350,7 +349,7 @@ class Command(BaseCommand):
             journal.fedora_created = fedora_journal.created
             journal.name = xml_name.text if xml_name is not None else None
 
-        journal_erudit_object = journal.get_erudit_object(use_cache=False)
+        journal_erudit_object = journal.get_erudit_object()
         journal.first_publication_year = journal_erudit_object.first_publication_year
         journal.last_publication_year = journal_erudit_object.last_publication_year
 
@@ -380,7 +379,6 @@ class Command(BaseCommand):
 
         journal.fedora_updated = fedora_journal.modified
         journal.save()
-        cache.delete(journal.localidentifier)
 
         if journal_created:
             logger.info(
@@ -453,13 +451,12 @@ class Command(BaseCommand):
             issue.fedora_created = fedora_issue.created
 
         # Set the proper values on the Issue instance
-        issue_erudit_object = issue.get_erudit_object(use_cache=False)
+        issue_erudit_object = issue.get_erudit_object()
         issue.sync_with_erudit_object(erudit_object=issue_erudit_object)
         issue.fedora_updated = fedora_issue.modified
-        journal_erudit_object = journal.get_erudit_object(use_cache=False)
+        journal_erudit_object = journal.get_erudit_object()
         issue.is_published = issue_pid in journal_erudit_object.get_published_issues_pids()
         issue.save()
-        cache.delete(issue.localidentifier)
 
         # STEP 4: patches the journal associated with the issue
         # --

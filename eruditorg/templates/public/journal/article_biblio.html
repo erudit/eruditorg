@@ -71,7 +71,7 @@
 {# If the issue is not published, the article biblio will not be cached. #}
 {# The article's localidentifier is used as a primary key for the cache key. #}
 {# The in_citation_list, article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
-{% cache cache_timeout "public_article_biblio" article.localidentifier in_citation_list article.issue.is_published LANGUAGE_CODE 'v1' %}
+{% cache LONG_TTL "public_article_biblio" article.localidentifier in_citation_list article.issue.is_published LANGUAGE_CODE 'v1' %}
 <main
     id="article-{{ article.localidentifier }}"
     class="container"

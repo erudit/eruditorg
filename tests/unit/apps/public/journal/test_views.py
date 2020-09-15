@@ -361,11 +361,7 @@ class TestIssueDetailSummary:
 
     @unittest.mock.patch('erudit.fedora.modelmixins.cache')
     @pytest.mark.parametrize('is_published, expected_count', [
-        # When an issue is not published, the only cache.get() call we should get is for the
-        # journal. No cache.get() should be called for the issue or the articles.
-        (False, 1),
-        # When an issue is published, cache.get() should be called once for the journal, once for
-        # the issue and once for each article.
+        (False, 3),
         (True, 3),
     ])
     def test_issue_caching(self, mock_cache, is_published, expected_count):
@@ -566,34 +562,34 @@ class TestIssueReaderPageView:
 
     @pytest.mark.parametrize('is_published', (True, False))
     @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
-    def test_do_not_cache_unpublished_issue_pages(self, mock_get_cached_datastream_content, is_published):
+    def test_cache_unpublished_issue_pages(self, mock_get_cached_datastream_content, is_published):
         issue = IssueFactory(localidentifier='issue', is_published=is_published)
         view = IssueReaderPageView()
         view.kwargs = {'localidentifier': issue.localidentifier}
         view.get_datastream_content(unittest.mock.MagicMock())
-        assert mock_get_cached_datastream_content.call_count == int(is_published)
+        assert mock_get_cached_datastream_content.call_count == 1
 
 
 class TestIssueRawCoverpageView:
     @pytest.mark.parametrize('is_published', (True, False))
     @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
-    def test_do_not_cache_unpublished_issue_coverpages(self, mock_get_cached_datastream_content, is_published):
+    def test_cache_unpublished_issue_coverpages(self, mock_get_cached_datastream_content, is_published):
         issue = IssueFactory(localidentifier='issue', is_published=is_published)
         view = IssueRawCoverpageView()
         view.kwargs = {'localidentifier': issue.localidentifier}
         view.get_datastream_content(unittest.mock.MagicMock())
-        assert mock_get_cached_datastream_content.call_count == int(is_published)
+        assert mock_get_cached_datastream_content.call_count == 1
 
 
 class TestIssueRawCoverpageHDView:
     @pytest.mark.parametrize('is_published', (True, False))
     @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
-    def test_do_not_cache_unpublished_issue_coverpages_hd(self, mock_get_cached_datastream_content, is_published):
+    def test_cache_unpublished_issue_coverpages_hd(self, mock_get_cached_datastream_content, is_published):
         issue = IssueFactory(localidentifier='issue', is_published=is_published)
         view = IssueRawCoverpageHDView()
         view.kwargs = {'localidentifier': issue.localidentifier}
         view.get_datastream_content(unittest.mock.MagicMock())
-        assert mock_get_cached_datastream_content.call_count == int(is_published)
+        assert mock_get_cached_datastream_content.call_count == 1
 
 
 class TestIssueXmlView:
@@ -985,7 +981,7 @@ class TestArticleRawPdfFirstPageView:
 class TestArticleMediaView:
     @pytest.mark.parametrize('is_published', (True, False))
     @unittest.mock.patch('erudit.fedora.views.generic.get_cached_datastream_content')
-    def test_do_not_cache_unpublished_issue_article_medias(self, mock_get_cached_datastream_content, is_published):
+    def test_cache_unpublished_issue_article_medias(self, mock_get_cached_datastream_content, is_published):
         article = ArticleFactory(
             localidentifier='article',
             issue__is_published=is_published,
@@ -1000,4 +996,4 @@ class TestArticleMediaView:
         }
         view.get_object = unittest.mock.MagicMock(return_value=article)
         view.get_datastream_content(unittest.mock.MagicMock())
-        assert mock_get_cached_datastream_content.call_count == int(is_published)
+        assert mock_get_cached_datastream_content.call_count == True

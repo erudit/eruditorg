@@ -234,7 +234,6 @@ class JournalDetailView(
         context['issues'] = issues
         current_issue = IssueAnnotator.annotate(self.object.current_issue, self)
         context['current_issue'] = current_issue
-        context['cache_timeout'] = settings.LONG_TTL
         if current_issue is not None and current_issue.is_in_fedora:
             titles = current_issue.erudit_object.get_journal_title()
             context['main_title'] = titles['main']
@@ -351,7 +350,6 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
         context['current_issue'] = self.journal.current_issue
-        context['cache_timeout'] = settings.LONG_TTL
         if context['current_issue'] is not None:
             context['meta_info_issue'] = context['current_issue']
             # If we have a current issue, use its localidentifier for the cache key.
@@ -479,14 +477,8 @@ class IssueDetailView(
         return self.object
 
     def get_context_data(self, **kwargs):
-        shouldcache = self.object.is_published
         context = super(IssueDetailView, self).get_context_data(**kwargs)
         context['journal'] = self.object.journal
-        # If the issue is published, the template should be cached for one day.
-        # If the issue is not published, the template should not be cached.
-        # We cannot cache issues' templates forever because we use articles' metadata to build them
-        # and we cannot know when an article has been modified.
-        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         # Use the issue localidentifier for the cache key.
         context['primary_cache_key'] = self.object.localidentifier
@@ -618,11 +610,6 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
 
-    def get_datastream_content(self, fedora_object, use_cache=True):
-        issue = self.get_object()
-        use_cache = issue.is_published
-        return super().get_datastream_content(fedora_object, use_cache)
-
 
 class IssueRawCoverpageHDView(FedoraFileDatastreamView):
     """
@@ -635,11 +622,6 @@ class IssueRawCoverpageHDView(FedoraFileDatastreamView):
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
-
-    def get_datastream_content(self, fedora_object, use_cache=True):
-        issue = self.get_object()
-        use_cache = issue.is_published
-        return super().get_datastream_content(fedora_object, use_cache)
 
 
 class IssueReaderView(
@@ -702,11 +684,6 @@ class IssueReaderPageView(
         if issue.is_published and not self.content_access_granted and int(kwargs['page']) > 5:
             return redirect(static('img/bookreader/restriction.jpg'))
         return super().get(request, *args, **kwargs)
-
-    def get_datastream_content(self, fedora_object, use_cache=True):
-        issue = self.get_object()
-        use_cache = issue.is_published
-        return super().get_datastream_content(fedora_object, use_cache)
 
 
 class IssueXmlView(
@@ -779,15 +756,6 @@ class BaseArticleDetailView(
         context.update(previous_next)
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
-
-        # don't cache anything when the issue is unpublished. That means that we're still working
-        # on it and we want to see fresh renderings every time.
-        shouldcache = issue.is_published
-        # If the issue is published, the template should be cached for one day.
-        # If the issue is not published, the template should not be cached.
-        # We cannot cache articles' templates forever because we risk invalidating the cached
-        # template before the cached Fedora object and thus use an out-of-date Fedora object.
-        context['cache_timeout'] = settings.LONG_TTL if shouldcache else settings.NEVER_TTL
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
         # media URL and then remove the media_localid part to get the prefix only.
@@ -1079,15 +1047,6 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     raise_exception = True
     tracking_view_type = 'pdf'
 
-    def get_datastream_content(self, fedora_object):
-        obj = self.get_content()
-        if obj.issue.is_published:
-            return super(ArticleFormatDownloadView, self).get_datastream_content(
-                fedora_object, use_cache=True)
-        else:
-            return super(ArticleFormatDownloadView, self).get_datastream_content(
-                fedora_object, use_cache=False)
-
     def write_datastream_content(self, response, content):
         coverpage = get_coverpage(self.get_object())
         response.content = add_coverpage_to_pdf(coverpage, content)
@@ -1173,11 +1132,6 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
 
     def get_content_type(self, fedora_object):
         return str(fedora_object.content.mimetype)
-
-    def get_datastream_content(self, fedora_object, use_cache=True):
-        article = self.get_object()
-        use_cache = article.issue.is_published
-        return super().get_datastream_content(fedora_object, use_cache)
 
 
 @method_decorator(cache_page(settings.LONG_TTL), name='dispatch')

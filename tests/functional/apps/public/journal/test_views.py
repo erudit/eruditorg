@@ -869,7 +869,7 @@ class TestArticleDetailView:
         assert b'thiswillendupinhtml' not in response.content
         assert b'thiswillreplaceoldinhtml' in response.content
 
-    def test_dont_cache_fedora_objects_of_articles_of_unpublished_issues(self):
+    def test_cache_fedora_objects_of_articles_of_unpublished_issues(self):
 
         with unittest.mock.patch('erudit.fedora.modelmixins.cache') as cache_mock:
             cache_mock.get.return_value = None
@@ -879,7 +879,7 @@ class TestArticleDetailView:
             response = Client().get(url)
             assert response.status_code == 200
             # Assert that the cache has not be called.
-            assert cache_mock.get.call_count == 0
+            assert cache_mock.get.call_count == 2
 
     def test_allow_ephemeral_articles(self):
         # When receiving a request for an article that doesn't exist in the DB, try querying fedora
@@ -949,11 +949,7 @@ class TestArticleDetailView:
     @unittest.mock.patch('erudit.fedora.cache.get_datastream_file_cache')
     @unittest.mock.patch('erudit.fedora.cache.get_cached_datastream_content')
     @pytest.mark.parametrize('is_published, expected_count', [
-        # When an issue is not published, we should not get any cache.get() calls when displaying
-        # an article's PDF.
-        (False, 0),
-        # When an issue is published, we should get one cache.get() calls when displaying an
-        # article's PDF.
+        (False, 1),
         (True, 1),
     ])
     def test_pdf_datastream_caching(self, mock_cache, mock_get_datastream_file_cache,
@@ -982,11 +978,7 @@ class TestArticleDetailView:
 
     @unittest.mock.patch('erudit.fedora.modelmixins.cache')
     @pytest.mark.parametrize('is_published, expected_count', [
-        # When an issue is not published, we should not get any cache.get() calls when displaying
-        # an article's XML.
-        (False, 0),
-        # When an issue is published, we should get one cache.get() calls when displaying an
-        # article's XML.
+        (False, 1),
         (True, 1),
     ])
     def test_xml_datastream_caching(self, mock_cache, is_published, expected_count):
