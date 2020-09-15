@@ -2,11 +2,11 @@ import json
 import string
 import structlog
 
-from datetime import datetime
 from django.db.models import Q
 from django.urls import reverse
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
@@ -315,7 +315,7 @@ class ArticleAccessLogMixin:
         client_ip, _ = get_client_ip(request, proxy_order='right-most')
         article_access_log = ArticleAccessLog(
             # apache
-            timestamp=datetime.now(),
+            timestamp=timezone.now(),
             accessed_uri=request.get_raw_uri(),
             ip=client_ip,
             protocol=request.META.get("SERVER_PROTOCOL", ""),
