@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><article xmlns="http://www.erudit.org/xsd/article" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1059031ar" typeart="autre" lang="it" horstheme="oui" ordseq="50">
+   <admin>
+      <infoarticle><idpublic scheme="doi">10.7202/1059031ar</idpublic>
+         <grdescripteur lang="fr" scheme="http://rameau.bnf.fr">
+            <descripteur>Mouvement social</descripteur>
+            <descripteur>Milieu politique</descripteur>
+            <descripteur>Politique et société</descripteur>
+            <descripteur>Démocratie</descripteur>
+         </grdescripteur>
+         <nbpara>5</nbpara>
+         <nbmot>2001</nbmot>
+         <nbfig>0</nbfig>
+         <nbtabl>0</nbtabl>
+         <nbaudio>0</nbaudio>
+         <nbvideo>0</nbvideo>
+         <nbrefbiblio>0</nbrefbiblio>
+         <nbnote>0</nbnote>
+      </infoarticle>
+      <revue lang="fr" id="sp02131"><titrerev>Sens public</titrerev><titrerevabr>sp</titrerevabr><grdescripteur lang="fr"><descripteur typedesc="discipline">Études littéraires</descripteur><descripteur typedesc="discipline">Philosophie</descripteur><descripteur typedesc="discipline">Sciences humaines et sociales</descripteur></grdescripteur><idissnnum>2104-3272</idissnnum><directeur><nompers><prenom>Marcello</prenom><nomfamille>Vitali-Rosati</nomfamille></nompers></directeur><redacteurchef typerc="regulier"><nompers><prenom>Marcello</prenom><nomfamille>Vitali-Rosati</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1271"><nompers><prenom>Sara</prenom><nomfamille>Bédard-Goulet</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1305"><nompers><prenom>Thomas</prenom><nomfamille>Carrier-Lafleur</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1305"><nompers><prenom>André</prenom><nomfamille>Gaudreault</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1305 th1282"><nompers><prenom>Servanne</prenom><nomfamille>Monjour</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1319"><nompers><prenom>Éric</prenom><nomfamille>Méchoulan</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1282"><nompers><prenom>Matteo</prenom><nomfamille>Treleani</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1305 th1319 th1282"><nompers><prenom>Marcello</prenom><nomfamille>Vitali-Rosati</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1357"><nompers><prenom>Gérard</prenom><nomfamille>Wormser</nomfamille></nompers></redacteurchef></revue>
+      <numero id="sp04510"><volume/><nonumero/><pub><periode/><annee>2018</annee></pub><pubnum><date typedate="publication">2019-04-18</date></pubnum><grtheme  id="th1271">
+            <theme>Corps contemporain et espace vécu</theme>
+         </grtheme><grtheme  id="th1282">
+            <theme>Ontologie du numérique</theme>
+         </grtheme><grtheme  id="th1305">
+            <theme>L’invention littéraire des médias</theme>
+         </grtheme><grtheme  id="th1319">
+            <theme>L’espace numérique</theme>
+         </grtheme><grtheme  id="th1357">
+            <theme>Facebook. L’école des fans</theme>
+         </grtheme><grtheme  id="th1358">
+            <theme>Exigeons de meilleures bibliothèques</theme>
+         </grtheme></numero>
+      <editeur>
+         <nomorg>Département des littératures de langue française</nomorg>
+      </editeur>
+      <prod>
+         <nomorg>Sens Public</nomorg>
+      </prod>
+      <prodnum>
+         <nomorg>Sens Public</nomorg>
+      </prodnum>
+      <diffnum>
+         <nomorg>Érudit</nomorg>
+      </diffnum>
+      <schema nom="Erudit Article" version="3.0.0" lang="fr"/>
+      <droitsauteur>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)<nomorg>Sens Public</nomorg>, 2018</droitsauteur>
+      <droitsauteur>
+         <liensimple id="ls1" xlink:href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" xlink:actuate="onRequest" xlink:show="replace" xlink:type="simple">
+            <objetmedia flot="ligne">
+               <image typeimage="forme" xlink:href="http://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" xlink:actuate="onLoad" xlink:show="embed" xlink:type="simple"/>
+            </objetmedia>
+         </liensimple>
+      </droitsauteur>
+   </admin>
+   <liminaire>
+      <grtitre>
+         <surtitre>Varia</surtitre>
+         <surtitre2>Chronique</surtitre2>
+         <titre>L’Italia disfatta</titre>
+      </grtitre>
+      <grauteur>
+         <auteur id="au1">
+            <nompers>
+               <prenom>Libero</prenom>
+               <nomfamille>D’Agostino</nomfamille>
+            </nompers>
+         </auteur>
+      </grauteur>
+      <resume lang="fr">
+         <alinea>Les élections présidentielles françaises en mai 2017, avec la défaite nette du Front National de Marine Le Pen, semblaient avoir exorcisé la menace du populisme en Europe. À peine un an après, cette menace est réapparue en Italie avec la victoire de la « Lega » et du Mouvement cinq étoiles. C’est la preuve que le néopopulisme n’est pas un phénomène transitoire, mais bien une condition structurelle des démocraties occidentales contemporaines. Il marque le passage de la représentativité politique à la représentation politique, à une époque dans laquelle incertitude et insécurité, rage et peur, matières premières des partis antisystèmes, semblent être destinées à monopoliser l’horizon émotif et politique du nouveau millénaire.</alinea>
+      </resume>
+      <resume lang="it">
+         <alinea>Le elezioni presidenziali francesi del maggio 2017, con la secca sconfitta del Fronte Nazionale di Marine Le Pen, sembravano aver esorcizzato lo spettro del populismo in Europa. Appena un anno dopo, questo incubo si è ripresentato con la vittoria elettorale in Italia della Lega e del Movimento cinque stelle. È la conferma che il neopopulismo non è un fenomeno transitorio, ma una condizione strutturale delle odierne democrazie occidentali. Esso contrassegna il passaggio dalla rappresentanza politica alla rappresentazione della politica, in un’epoca in cui incertezza e insicurezza, rabbia e paura, la materia prima dei partiti antisistema, sembrano destinate a monopolizzare l’orizzonte emotivo e politico del nuovo Millennio.</alinea>
+      </resume>
+      <grmotcle lang="fr">
+         <motcle>Lega</motcle>
+         <motcle>M5S</motcle>
+         <motcle>néopopulisme</motcle>
+         <motcle>Berlusconi</motcle>
+         <motcle>Salvini</motcle>
+         <motcle>Grillo</motcle>
+         <motcle>Italie</motcle>
+         <motcle>souverainisme</motcle>
+         <motcle>droite</motcle>
+         <motcle>gauche</motcle>
+      </grmotcle>
+      <grmotcle lang="it">
+         <motcle>Lega</motcle>
+         <motcle>M5S</motcle>
+         <motcle>neopopulismo</motcle>
+         <motcle>Berlusconi</motcle>
+         <motcle>Salvini</motcle>
+         <motcle>Grillo</motcle>
+         <motcle>Italia</motcle>
+         <motcle>sovranismo</motcle>
+         <motcle>destra</motcle>
+         <motcle>sinistra</motcle>
+      </grmotcle>
+   </liminaire>
+   <corps>
+
+      <section1 id="s1n1"><no>1</no>
+         <titre>Ritorna lo spettro del populismo</titre>
+         <para id="pa1"><no>1</no>
+            <alinea>La secca sconfitta del Fronte nazionale di Marine Le Pen alle presidenziali francesi del 2017 e l’inno dell’Unione europea che, la sera del 7 maggio, scandiva il passo sicuro di Emmanuel Macron sul piazzale del Louvre, sembravano aver esorcizzato lo spettro del populismo in Europa. Nella magica euforia di quella serata, persino l’arrivo, appena sei mesi prima, alla Casa Bianca di Donald Trump, con il suo slogan “America First”, sembrava solo folclore politico americano, più che il pericolo di un risorgente nazionalismo. Un anno dopo, con la vittoria elettorale in Italia del Movimento cinque stelle (M5S), e della Lega alla guida di una coalizione di destra, si è ridestato l’incubo di un’avanzata inarrestabile del populismo nel vecchio Continente, lacerato dalla Brexit e con le sue frontiere mediterranee travolte delle ondate migratorie e da una feroce risacca xenofoba. In un’Europa minacciata ad Est dal nuovo Zar Putin, ricattata dal presidente turco Erdogan, che incassa miliardi di euro per trattenere con la forza nel suo Paese decine di migliaia di profughi, e con i populisti già saldamente al governo in Austria, Ungheria e Polonia. Proprio il caso italiano con l’affermazione della Lega e del M5S dimostra che il neopopulismo non è un fenomeno transitorio. È, invece, una condizione ormai strutturale non solo dei governi latino-americani, ma anche delle odierne democrazie occidentali. Che contrassegna il passaggio dalla rappresentanza politica alla rappresentazione della politica, in un’epoca in cui incertezza e insicurezza, rabbia e paure, risentimenti e rancori, la materia prima dei partiti antisistema, sembrano destinati a monopolizzare l’orizzonte emotivo e politico del nuovo Millennio. Per affermarsi il populismo non ha bisogno di vincere le elezioni e governare. La sua presenza sulla scena politica oggi condiziona in ogni Paese le scelte governative sui grandi temi della sicurezza, dei diritti di cittadinanza, dei rapporti con l’Ue, della convivenza religiosa e della società multiculturale. Il suo stile e il suo linguaggio hanno, inoltre, pesantemente contaminato quelli dei leader dei partiti tradizionali.</alinea>
+         </para>
+      </section1>
+      <section1 id="s1n2"><no>2</no>
+         <titre>Un caso da manuale</titre>
+         <para id="pa2"><no>2</no>
+            <alinea>Il passaggio dalla rappresentatività della democrazia parlamentare alla rappresentazione della politica, in Italia, come altrove, è stato favorito dalla personalizzazione della politica e dall’irrompere nello spazio pubblico dei social media. La personalizzazione della politica, con i partiti trasformati in semplici aggregati elettorali al servizio del leader — figura storicamente centrale nella prassi populista — e il nuovo ruolo dei social media che con la loro potenza virale si configurano come un vettore cruciale nel formare l’opinione pubblica, sono tra i fattori principali dell’affermarsi del neo-populismo. In particolare in Italia, che in pochi anni è passata dal populismo televisivo di Silvio Berlusconi al populismo digitale di Bebbe Grillo, il fondatore del M5S. Qui il neo-populismo ha trovato il terreno di coltura ideale per la sua crescita. Alimentando addirittura lo sviluppo e il successo di ben due forze politiche: la Lega e il M5S, che si contendono la premiership incarnando quel Sovranismo, ossia il sogno impossibile del ritorno alla piena sovranità dei vecchi Stati nazionali, già sperimentato in Francia da Marine Le Pen come la continuazione del populismo con altri mezzi. La sovranità popolare si contrappone alle “oligarchie nazionali ed europee”, secondo una narrazione della politica che alla complessità del reale risponde con gli slogan delle soluzioni semplicistiche. È il Sovranismo lo spazio dove il neopopulismo identitario di Salvini s’incrocia con quello sociale di Grillo, con una visione comune del protezionismo quale antidoto alla globalizzazione. In un unico crogiuolo, con due nomi diversi, si fondono risentimenti e rancori sociali, protesta verso il sistema politico ed eurofobia, difesa identitaria e xenofobia, neonazionalismo e demagogia, protezionismo e ostilità ai mercati globali. Un’offerta politica a largo spettro capace di richiamare sotto le sue bandiere la destra reazionaria e quella più moderata, il popolo disilluso della sinistra e il ceto medio che è andato impoverendosi, i piccoli imprenditori che si sentono strozzati dallo Stato e da Bruxelles e gli operai spaventati dalla delocalizzazione delle industrie. E con una vocazione autoritaria di fondo ben evidenziata dalle minacce di Grillo, “apriremo il parlamento come una scatoletta di tonno”, dai suoi abituali insulti ai giornalisti, e dalla fascinazione esercitata da Putin e Orban sul leader della Lega Matteo Salvini e sulla sua alleata Giorgia Meloni, presidente di Fratelli d’Italia. Due forze che hanno saputo sfruttare spregiudicatamente il generale degrado politico e sociale in cui versa l’Italia.</alinea>
+         </para>
+      </section1>
+      <section1 id="s1n3"><no>3</no>
+         <titre>Destra e sinistra</titre>
+         <para id="pa3"><no>3</no>
+            <alinea>Con la fine della Prima Repubblica, travolta agli inizi degli anni ‘90 dalle inchieste della magistratura sulla corruzione dei politici, e il conseguente tracollo dei vecchi partiti, si è aperto un trentennio dominato da un lato dall’ascesa di Silvio Berlusconi, il fondatore di Forza Italia, e dall’altro dal progressivo snaturamento di una sinistra che ha perso riconoscibilità politica e presa sociale. Berlusconi è un esemplare unico di quel “populismo imprenditoriale” che promette prosperità e ricchezza per tutti, con illustri precedenti: Bernard Tapie in Francia, Christoph Blocher in Svizzera ed emuli come Andrej Babiš in Repubblica Ceca, Frank Stronach in Austria e ora con Donald Trump alla Casa Bianca. Ma Berlusconi è stato soprattutto il precursore di quel populismo televisivo che ha radicalmente cambiato il linguaggio politico e riplasmato l’immaginario degli italiani con le sue tre reti tv. È con Berlusconi che la politica italiana si trasforma in rappresentazione scenica con al centro il leader quale primo attore. Sul piano politico la sua presenza ha avuto due conseguenze nefaste. Nel nome del suo liberalismo posticcio ha, innanzitutto, distrutto, la prospettiva della nascita di una moderna destra liberale in Italia; in secondo luogo nel 1994 ha sdoganato istituzionalmente la Lega portandola al governo del Paese. Quella Lega che guidata ora da Salvini lo sta emarginando dalla scena politica, riorientando i ceti moderati verso una nuova destra reazionaria e nazionalista. Non meno infelice è il destino della sinistra che non ha saputo cogliere le paure degli sconfitti della globalizzazione, delle classi popolari più colpite dalla crisi e dare voce ad un bisogno di protesta contro le crescenti disuguaglianze economiche che alla fine si è orientato verso le forze del neo-populismo. Una sinistra che, di mutazione in mutazione, di sigla in sigla, di scissione in scissione ha perso la sua identità, subendo col Partito democratico di Matteo Renzi una sconfitta storica. Questa sinistra geneticamente modificata non è stata in grado né di interpretare la carica di antagonismo che si andava coagulando nelle sacche di disagio sociale nel nord e nel sud del Paese, né tantomeno di imprimere una svolta decisa verso un riformismo moderno. Un riformismo capace di sburocratizzare il Paese, di innovare un Welfare State ormai in affanno, di correggere una fiscalità opprimente per le imprese, di eliminare le barriere che impediscono l’accesso al mercato del lavoro dei giovani, di strutturare una politica di accoglienza per non lasciare decine di migliaia di profughi e immigrati allo sbando o nelle mani della criminalità organizzata, e di tradurre in senso non securitario il sentimento d’insicurezza che si diffondeva tra le fasce popolari delle periferie metropolitane. Il declino della sinistra in Italia è ben raffigurato nella topografia del voto in queste ultime elezioni: dopo aver perso le roccaforti operaie e le regioni tradizionalmente rosse, che una volta erano il modello della buona amministrazione, ora si ritrova ben radicata solo nelle Ztl, le zone a traffico limitato, delle grandi città, i tranquilli quartieri bene dove risiede il cosiddetto “ceto medio riflessivo”, ossia intellettuali, media e alta borghesia vocati all’impegno civile e culturale, ma con scarsa incidenza politica. In Italia oggi non si avvertono, né a destra né a sinistra, i fermenti di un nuovo pensiero politico capace di promuovere un autentico liberalismo e una socialdemocrazia avanzata, per uscire dalle gabbie ideologiche del Novecento e superare la contrapposizione tra mercati globali e politica nazionale.</alinea>
+         </para>
+      </section1>
+      <section1 id="s1n4"><no>4</no>
+         <titre>Le fratture sociali e territoriali</titre>
+         <para id="pa4"><no>4</no>
+            <alinea>Nel cortocircuito del fallimento della destra e della sinistra si è aperta la strada per la Lega e il M5S, favorite da un diffuso risentimento verso la politica tradizionale “che non cambia nulla”, verso la corruzione e la mala amministrazione pubblica. In un quadro d’instabilità governativa, 64 esecutivi in 70 anni, in cui si sono succedute ben quattro fallimentari leggi elettorali, che non hanno mai assicurato una maggioranza in grado davvero di governare. Una miscela incendiaria alimentata dalla crisi economica e dai vincoli al bilancio imposti da Bruxelles che hanno drasticamente ridotto i massicci flussi di denaro pubblico nei canali clientelari e assistenziali che assicuravano il consenso politico. Da almeno un decennio in Italia si è bloccato quell’ascensore sociale che permetteva ai più giovani di conquistare uno status professionale ed economico migliore rispetto a quello raggiunto dai loro genitori. L’unico ascensore veloce ed efficiente è quello della politica. Scomparsi i grandi partiti, Democrazia cristiana, Partito comunista e Partito socialista, scomparse le loro scuole di formazione ideologica e amministrativa, la selezione del personale politico è degradata, aprendo le porte a candidati alle cariche pubbliche assai spesso digiuni di cultura generale, del tutto privi di cultura istituzionale e di competenze tecniche o amministrative. Una nuova e famelica classe politica si è mossa all’arrembaggio dello Stato, devastando il tessuto istituzionale e inquinando in profondità lo spazio pubblico.</alinea>
+         </para>
+      </section1>
+      <section1 id="s1n5"><no>5</no>
+         <titre>L’altra Italia</titre>
+         <para id="pa5"><no>5</no>
+            <alinea>L’istituzione nel 1970 delle Regioni che andavano ad affiancare le altre autonomie territoriali, Provincie e Comuni, teoricamente un buon modello di decentramento amministrativo, si è rivelata nella realtà soprattutto del sud Italia un potente moltiplicatore della mala amministrazione. La decentralizzazione ha, difatti, portato ai posti di comando nei governi locali politicanti senza scrupoli e senza senso dello Stato, faccendieri e affaristi di ogni genere, spesso conniventi delle organizzazioni mafiose. Un ceto politico rampante che ha perpetuato il suo potere tentacolare attraverso l’assistenzialismo e il clientelismo finanziati con i soldi dello Stato e gli ingenti fondi europei destinati allo sviluppo delle regioni meridionali. Un fiume di denaro che, col tacito accordo tra mafia e politica, è servito soprattutto a cementificare territori dalle incomparabili bellezze naturali, mentre si andavano sbriciolando nell’incuria amministrativa le infrastrutture civili: strade, aeroporti, edifici scolastici, acquedotti, ospedali, servizi per lo smaltimento dei rifiuti e reti ferroviarie. Un enorme sperpero di denaro pubblico che, sommato ai guasti provocati dalla politica assistenziale attuata dal governo centrale a partire dagli anni ’50-60, ha innescato una deriva non solo politica ed economica, ma anche antropologica del Meridione d’Italia. Della fierezza della gente del Sud, del tenace orgoglio della civiltà contadina oggi non resta niente, resistono solo sparute oasi di resistenza civile alle lusinghe di una modernizzazione fasulla e al parassitismo dilagante. Queste sono le terre dove le statistiche nazionali registrano il più alto di disoccupazione ma anche di lavoro nero, il più alto indice di povertà come pure di evasione fiscale, il più basso reddito pro capite ufficiale ma il massimo di ricchezza diffusa dall’economia illegale attivata dalle grandi organizzazioni criminali. In questa altra Italia era inevitabile che la proposta del M5S sul reddito di cittadinanza (780 euro per una persona sola e 1560 per una famiglia con un figlio) facesse il pieno di voti, spazzando via Forza Italia e quel che restava del Partito democratico. La geografia del voto con la precisione di un sismografo ha registrato fedelmente le cause sociali, economiche, ma anche culturali, per cui nelle regioni del Sud ha vinto l’M5S mentre al Nord la Lega. Nel settentrione del Paese, la Lega di Salvini ha, invece, conquistato persino le fasce operaie e popolari che hanno voltato le spalle alla sinistra, e ha scalzato Forza Italia nella rappresentanza dei ceti moderati, delle migliaia di piccoli imprenditori e artigiani del Nord-Est, che sono stati vitali per la ripresa economica italiana negli anni 2000. Una forza produttiva che da anni si sente scarsamente considerata dal governo di Roma, oppressa dal fisco e vessata una burocrazia invasiva. Il vecchio secessionismo leghista si è già tradotto nel riconoscimento di una maggiore autonomia della Lombardia e del Veneto, le regioni più competitive d’Italia. Oggi l’interrogativo che ha davanti il Paese è se le istituzioni democratiche riusciranno a metabolizzare le due facce di un aggressivo neopopulismo identitario, che nel bene e nel male risponde anche ad una domanda insoddisfatta di partecipazione politica, o se invece esso sfocerà in una svolta autoritaria. Verso quella “democrazia illiberale” teorizzata da Orban, già regime in Ungheria, Turchia e Russia.</alinea>
+         </para>
+      </section1>
+   </corps>
+</article>
