@@ -226,7 +226,7 @@ $article-toolbar-width: 80px;
     }
 
     li, li > p {
-	margin: 0;
+      margin-bottom: 0;
     }
 
     .para {
@@ -292,6 +292,9 @@ $article-toolbar-width: 80px;
       line-height: 1.45;
     }
 
+    li:not([class]), li:not([class]) > p {
+      margin-bottom: 0;
+    }
   }
 
   .grannexe {
