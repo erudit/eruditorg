@@ -117,6 +117,20 @@ class TestSavedCitationListView:
         response = self.client.get(url, data={'document_ids': ['foo', 'bar', ]})
         assert response.status_code == 404
 
+    def test_non_existent_page_access_request_shows_last_available_page(self):
+        """
+        There are 5 citations on the view (defined in the setup function above).
+        Since the default pagination is 20 records per page there is only one
+        page available, not 50. The access to page 50 should lead to the last
+        available page
+        """
+        url = reverse('public:citations:list')
+        response = self.client.get(url, data={'page': 50})
+        # Status code 302 expected since it is a redirect
+        assert response.status_code == 302
+        # Check if correctly redirected to last available page
+        assert response.url == '/fr/notices/?page=1'
+
 
 def test_cannot_cite_article_not_in_fedora(solr_client):
     doc = SolrDocumentFactory()
