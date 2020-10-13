@@ -181,7 +181,7 @@ class TestSubscriptionMiddleware:
 
         request.subscriptions.set_active_subscription_for(article=article)
         assert mock_log.info.call_count == 0
-        middleware.process_response(request, HttpResponse())
+        middleware.log_http_transaction(request, HttpResponse())
         assert mock_log.info.call_count == 1
 
         log_args = mock_log.info.call_args[0][0]
@@ -191,7 +191,7 @@ class TestSubscriptionMiddleware:
         request.META['HTTP_REFERER'] = 'http://www.no-referer.ca'
 
         middleware.process_request(request)
-        middleware.process_response(request, HttpResponse())
+        middleware.log_http_transaction(request, HttpResponse())
         assert mock_log.info.call_count == 1
 
     @unittest.mock.patch('core.subscription.middleware.logger')
@@ -213,7 +213,7 @@ class TestSubscriptionMiddleware:
         middleware.process_request(request)
         assert mock_log.info.call_count == 0
         request.subscriptions.set_active_subscription_for(article=article)
-        middleware.process_response(request, HttpResponse())
+        middleware.log_http_transaction(request, HttpResponse())
         assert mock_log.info.call_count == 0
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
