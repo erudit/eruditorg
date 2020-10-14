@@ -501,19 +501,17 @@ class TestIssue:
         article_1 = ArticleFactory(issue=issue)
         article_2 = ArticleFactory(issue=issue)
         article_3 = ArticleFactory(issue=issue)
-        assert issue.get_previous_and_next_articles(article_1.localidentifier) == {
-            'previous_article': None,
-            'next_article': article_2,
-        }
-        assert issue.get_previous_and_next_articles(article_2.localidentifier) == {
-            'previous_article': article_1,
-            'next_article': article_3,
-        }
-        assert issue.get_previous_and_next_articles(article_3.localidentifier) == {
-            'previous_article': article_2,
-            'next_article': None,
-        }
+        previous_article, next_article = issue.get_previous_and_next_articles(article_1.localidentifier)
+        assert previous_article is None
+        assert next_article == article_2
 
+        previous_article, next_article = issue.get_previous_and_next_articles(article_2.localidentifier)
+        assert previous_article == article_1
+        assert next_article == article_3
+
+        previous_article, next_article = issue.get_previous_and_next_articles(article_3.localidentifier)
+        assert previous_article == article_2
+        assert next_article is None
 
 class TestArticle:
     def test_properties(self):

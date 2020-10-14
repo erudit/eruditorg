@@ -49,6 +49,7 @@ from core.metrics.conf import settings as metrics_settings
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
 from apps.public.journal.views import ArticleRawPdfFirstPageView
+from collections import namedtuple
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -871,10 +872,10 @@ class TestArticleDetailView:
 
     def test_cache_fedora_objects_of_articles_of_unpublished_issues(self):
 
+        issue = IssueFactory.create(is_published=False)
+        article = ArticleFactory.create(issue=issue)
         with unittest.mock.patch('erudit.fedora.modelmixins.cache') as cache_mock:
             cache_mock.get.return_value = None
-            issue = IssueFactory.create(is_published=False)
-            article = ArticleFactory.create(issue=issue)
             url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
             response = Client().get(url)
             assert response.status_code == 200
@@ -889,6 +890,9 @@ class TestArticleDetailView:
         repository.api.register_article(
             '{}.{}'.format(issue.get_full_identifier(), article_localidentifier)
         )
+
+        Article = namedtuple('Article', 'localidentifier html_title issue pid')
+        repository.api.add_article_to_parent_publication(Article(localidentifier="foo", html_title="bar", issue=issue, pid="foo"))
         url = reverse('public:journal:article_detail', kwargs={
             'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
             'issue_localid': issue.localidentifier, 'localid': article_localidentifier})
@@ -1242,7 +1246,7 @@ class TestArticleDetailView:
             localidentifier='issue',
             year='2000',
         )
-        ArticleFactory(
+        prev = ArticleFactory(
             from_fixture='1054008ar',
             localidentifier='prev_article',
             issue=issue,
@@ -1258,17 +1262,12 @@ class TestArticleDetailView:
         url = article_detail_url(article)
         response = Client().get(url)
         html = response.content.decode()
-        # Check that TOC navigation titles include converted marquage.
-        assert '<a href="/fr/revues/journal/2000-issue/prev_article/" class="toc-nav__prev" ' \
-               'title="Article précédent"><span class="toc-nav__arrow">' \
-               '<span class="arrow arrow-bar is-left"></span></span>' \
-               '<h4 class="toc-nav__title">\n        L’action et le verbe dans ' \
-               '<em>Feuillets d’Hypnos</em>\n</h4></a>' in html
-        assert '<a href="/fr/revues/journal/2000-issue/next_article/" class="toc-nav__next" ' \
-               'title="Article suivant"><span class="toc-nav__arrow">' \
-               '<span class="arrow arrow-bar is-right"></span></span><h4 ' \
-               'class="toc-nav__title">\n        L’action et le verbe dans ' \
-               '<em>Feuillets d’Hypnos</em>\n</h4></a>' in html
+
+        tree = et.parse(io.StringIO(html), et.HTMLParser())
+
+        h4s = tree.findall('.//h4[@class="toc-nav__title"]')
+        for h4 in h4s:
+            assert h4.text.strip() == 'L’action et le verbe dans <em>Feuillets d’Hypnos</em>'
 
     def test_surtitre_not_split_in_multiple_spans(self):
         article = ArticleFactory(

@@ -4,6 +4,7 @@ from hashlib import md5
 from functools import wraps
 import structlog
 import fitz
+import typing
 import re
 
 from lxml import etree as et
@@ -19,7 +20,7 @@ from django.utils.translation import gettext_lazy as _, pgettext
 from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
-from eruditarticle.objects import EruditPublication
+from eruditarticle.objects import EruditPublication, SummaryArticle
 from urllib.parse import urlparse
 
 from ..abstract_models import FedoraDated
@@ -629,30 +630,19 @@ class Issue(FedoraMixin, FedoraDated):
             except Article.DoesNotExist:
                 pass
 
-    def get_previous_and_next_articles(self, current_article_localidentifier):
-        articles = {
-            'previous_article': None,
-            'next_article': None,
-        }
-        summary_tree = self.erudit_object._dom
-        current_article = summary_tree.find(
-            f'article[@idproprio="{current_article_localidentifier}"]'
-        )
-        if current_article is None:
-            return articles
-        articles['previous_article'] = current_article.getprevious()
-        articles['next_article'] = current_article.getnext()
-        for key, article in articles.items():
-            if article is None or article.tag != "article":
-                articles[key] = None
-                continue
-            try:
-                articles[key] = Article.from_issue_and_localidentifier(
-                    self, article.get('idproprio')
-                )
-            except Article.DoesNotExist:
-                articles[key] = None
-        return articles
+    def get_previous_and_next_articles(self, current_article_localidentifier) \
+            -> typing.Tuple[typing.Optional[SummaryArticle], typing.Optional[SummaryArticle]]:
+        previous_article = None
+        next_article = None
+
+        summary_articles = self.erudit_object.get_summary_articles()
+        current_article = self.erudit_object.get_summary_article(current_article_localidentifier)
+        current_article_pos = summary_articles.index(current_article)
+        if current_article_pos > 0:
+            previous_article = summary_articles[current_article_pos - 1]
+        if current_article_pos + 1 < len(summary_articles):
+            next_article = summary_articles[current_article_pos + 1]
+        return previous_article, next_article
 
     @cached_property
     def has_coverpage(self):
