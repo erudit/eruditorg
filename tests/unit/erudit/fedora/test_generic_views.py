@@ -73,7 +73,7 @@ class TestFedoraFileDatastreamView:
         journal = JournalFactory()
 
         # Run & check
-        with pytest.raises(ImproperlyConfigured):
+        with pytest.raises(AttributeError):
             MyView.as_view()(request, pk=journal.pk)
 
     def test_raises_if_the_datastream_does_not_have_content(self):
@@ -95,7 +95,7 @@ class TestFedoraFileDatastreamView:
         journal = JournalFactory()
 
         # Run & check
-        with pytest.raises(ImproperlyConfigured):
+        with pytest.raises(AttributeError):
             MyView.as_view()(request, pk=journal.pk)
 
     def test_can_return_the_fedora_pid(self):
