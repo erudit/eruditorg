@@ -955,11 +955,6 @@ class Article(FedoraMixin):
             self.localidentifier
         )
 
-    def get_summary_node(self):
-        summary_tree = self.issue.erudit_object._dom
-        xpath = './/article[@idproprio="{}"]'.format(self.localidentifier)
-        return summary_tree.find(xpath)
-
     @staticmethod
     def from_issue_and_localidentifier(issue, localidentifier):
         article = Article(issue, localidentifier)
