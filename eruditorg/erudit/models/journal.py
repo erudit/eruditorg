@@ -1068,13 +1068,9 @@ class Article(FedoraMixin):
                 'issue_localid': self.issue.localidentifier,
                 'localid': self.localidentifier,
             })
-        summary_node = self.get_summary_node()
-        if summary_node is not None:
-            urlpdf = summary_node.find('urlpdf')
-            if urlpdf is not None and urlpdf.text:
-                # If we have a external pdf url, then it's always the proper one to return.
-                return urlpdf.text
-        return None
+
+        summmary_article = self.issue.erudit_object.get_summary_article(self.localidentifier)
+        return summmary_article.urlpdf
 
     def cite_url(self, type):
         return reverse('public:journal:article_{}'.format(type), kwargs={
