@@ -978,8 +978,8 @@ class TestArticleDetailView:
 
     @unittest.mock.patch('erudit.fedora.modelmixins.cache')
     @pytest.mark.parametrize('is_published, expected_count', [
-        (False, 1),
-        (True, 1),
+        (False, 2),
+        (True, 2),
     ])
     def test_xml_datastream_caching(self, mock_cache, is_published, expected_count):
         mock_cache.get.return_value = None

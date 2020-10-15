@@ -634,7 +634,7 @@ class Issue(FedoraMixin, FedoraDated):
             'previous_article': None,
             'next_article': None,
         }
-        summary_tree = et.fromstring(self.fedora_object.xml_content)
+        summary_tree = self.erudit_object._dom
         current_article = summary_tree.find(
             f'article[@idproprio="{current_article_localidentifier}"]'
         )
@@ -693,7 +693,7 @@ class Issue(FedoraMixin, FedoraDated):
         :returns: ``True`` if the issue is external"""
         if bool(self.external_url):
             return True
-        summary_tree = et.fromstring(self.fedora_object.xml_content)
+        summary_tree = self.erudit_object._dom
         articles = summary_tree.xpath("article[not(accessible) or accessible != 'non']")
         if not articles:
             return False
@@ -969,7 +969,7 @@ class Article(FedoraMixin):
         )
 
     def get_summary_node(self):
-        summary_tree = et.fromstring(self.issue.fedora_object.xml_content)
+        summary_tree = self.issue.erudit_object._dom
         xpath = './/article[@idproprio="{}"]'.format(self.localidentifier)
         return summary_tree.find(xpath)
 
