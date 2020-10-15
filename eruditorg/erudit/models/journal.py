@@ -683,15 +683,12 @@ class Issue(FedoraMixin, FedoraDated):
         :returns: ``True`` if the issue is external"""
         if bool(self.external_url):
             return True
-        summary_tree = self.erudit_object._dom
-        articles = summary_tree.xpath("article[not(accessible) or accessible != 'non']")
-        if not articles:
-            return False
-        urlpdf = articles[0].find('urlpdf')
-        urlhtml = articles[0].find('urlhtml')
-        external_pdf = urlpdf is not None and urlpdf.text and bool(urlparse(urlpdf.text).netloc)
-        external_html = urlhtml is not None and urlhtml.text and bool(urlparse(urlhtml.text).netloc)
-        return external_pdf or external_html
+
+        summary_articles = self.erudit_object.get_summary_articles()
+        for article in summary_articles:
+            if not article.accessible:
+                continue
+            return article.has_external_url()
 
     @property
     @catch_and_log
