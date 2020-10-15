@@ -263,7 +263,7 @@ class TestJournalListView:
         logo = '<img\n                  ' \
                'src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQV' \
                'R42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="\n                  ' \
-               'data-src="/logo/journal/20110811144159.jpg"\n                  ' \
+               'data-src="/fr/revues/journal/logo.jpg"\n                  ' \
                'alt="Logo pour Inter"\n                  ' \
                'class="lazyload img-responsive card__figure"\n                ' \
                '/>'
