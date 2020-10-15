@@ -1258,11 +1258,8 @@ class Article(FedoraMixin):
     @cached_property
     @catch_and_log
     def publication_allowed(self) -> bool:
-        summary_node = self.get_summary_node()
-        if summary_node is None:
-            return False
-        node = summary_node.find('accessible')
-        return node is None or node.text != 'non'
+        summary_article = self.issue.erudit_object.get_summary_article(self.localidentifier)
+        return summary_article.accessible
 
     @cached_property
     @catch_and_log
