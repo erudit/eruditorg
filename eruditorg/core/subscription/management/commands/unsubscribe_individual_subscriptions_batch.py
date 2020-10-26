@@ -57,27 +57,36 @@ class Command(BaseCommand):
         for email, in self.subscriptions:
             try:
                 user = User.objects.get(email=email)
+                subscription = JournalAccessSubscription.objects.get(
+                    journal_management_subscription=plan, user=user
+                )
+                subscription.delete()
+                logger.info(
+                    "subscription.deleted",
+                    user=user.username,
+                    journal=journal_shortname,
+                    plan=plan.pk
+                )
             except User.DoesNotExist:
                 logger.error("user.doesnotexist", email=email)
             except User.MultipleObjectsReturned:
                 logger.error("user.multipleobjectsreturned", email=email)
                 raise
-            finally:
-                try:
-                    subscription = JournalAccessSubscription.objects.get(
-                        journal_management_subscription=plan, user=user
-                    )
-                    subscription.delete()
-                    logger.info(
-                        "subscription.deleted",
-                        user=user.username,
-                        journal=journal_shortname,
-                        plan=plan.pk
-                    )
-                except JournalAccessSubscription.DoesNotExist:
-                    logger.error(
-                        "subscription.doesnotexist",
-                        user=user.username,
-                        journal=journal_shortname,
-                        plan=plan.pk
-                    )
+            except JournalAccessSubscription.MultipleObjectsReturned:
+                deleted = JournalAccessSubscription.objects.filter(
+                    journal_management_subscription=plan, user=user
+                ).delete()
+                logger.warn(
+                    "subscription.MultipleObjectsReturned",
+                    user=user,
+                    journal_management_subscription=plan.pk,
+                    deleted=deleted
+                )
+
+            except JournalAccessSubscription.DoesNotExist:
+                logger.error(
+                    "subscription.doesnotexist",
+                    user=user,
+                    journal=journal_shortname,
+                    plan=plan.pk
+                )
