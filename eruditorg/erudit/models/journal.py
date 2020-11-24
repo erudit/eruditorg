@@ -3,7 +3,7 @@ import dateutil.relativedelta as dr
 from hashlib import md5
 from functools import wraps
 import structlog
-import pikepdf
+import fitz
 import re
 
 from lxml import etree as et
@@ -1225,8 +1225,8 @@ class Article(FedoraMixin):
     @cached_property
     def can_display_first_pdf_page(self):
         if self.has_pdf:
-            pdf = pikepdf.open(self.fedora_object.pdf.content)
-            return len(pdf.pages) > 1
+            pdf = fitz.Document(stream=self.fedora_object.pdf.content, filetype="pdf")
+            return len(pdf) > 1
         else:
             return False
 

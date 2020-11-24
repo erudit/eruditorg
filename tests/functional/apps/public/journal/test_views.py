@@ -5,7 +5,7 @@ from lxml import etree as et
 import datetime as dt
 import io
 import os
-import pikepdf
+import fitz
 import unittest.mock
 import subprocess
 import itertools
@@ -895,7 +895,7 @@ class TestArticleDetailView:
         response = Client().get(url)
         assert response.status_code == 200
 
-    @unittest.mock.patch('pikepdf.open')
+    @unittest.mock.patch('fitz.Document')
     @unittest.mock.patch('eulfedora.models.FileDatastreamObject._get_content')
     @pytest.mark.parametrize('content_access_granted,has_abstracts,should_fetch_pdf', (
         (True, True, False),
@@ -904,7 +904,7 @@ class TestArticleDetailView:
         (False, False, True)
     ))
     def test_do_not_fetch_pdfs_if_not_necessary(
-        self, mock_pikepdf, mock_content, content_access_granted, has_abstracts, should_fetch_pdf
+        self, mock_fitz, mock_content, content_access_granted, has_abstracts, should_fetch_pdf
     ):
         """ Test that the PDF is only fetched on ArticleDetailView when the the user is not subscribed
         and the article has no abstract
@@ -1853,7 +1853,7 @@ class TestArticleDetailView:
     def test_can_display_first_pdf_page(
         self, with_pdf, pages, has_abstracts, open_access, expected_result, monkeypatch,
     ):
-        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        monkeypatch.setattr(fitz.Document, '__len__', lambda p: len(pages))
         article = ArticleFactory(
             issue__journal__open_access=open_access,
             with_pdf=with_pdf,
@@ -2016,7 +2016,7 @@ class TestArticleDetailView:
     def test_minimal_processing_article_without_abstracts_and_with_only_one_page(
         self, url_name, open_access, monkeypatch
     ):
-        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', [1])
+        monkeypatch.setattr(fitz.Document, '__len__', lambda p: 1)
         article = ArticleFactory(
             from_fixture='1056823ar',
             issue__journal__open_access=open_access,
@@ -2073,7 +2073,7 @@ class TestArticleDetailView:
     def test_minimal_processing_article_content_access_not_granted_alert(
         self, has_abstracts, pages, expected_alert, monkeypatch,
     ):
-        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        monkeypatch.setattr(fitz.Document, '__len__', lambda p: len(pages))
         article = ArticleFactory(
             from_fixture='1056823ar',
             issue__journal__open_access=False,
@@ -2375,7 +2375,7 @@ class TestArticleRawPdfView:
         ([1, 2], False),
     ])
     def test_can_retrieve_the_firstpage_pdf_of_existing_articles(self, mock_check_call, mock_pdf, pages, expected_exception, monkeypatch):
-        monkeypatch.setattr(pikepdf._qpdf.Pdf, 'pages', pages)
+        monkeypatch.setattr(fitz.Document, '__len__', lambda p: len(pages))
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
