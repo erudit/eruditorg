@@ -166,21 +166,21 @@
 
   {% if journal_info or issues %}
   <ul class="nav-tabs" role="tablist">
-    {% if journal_info.about %}<li role="presentation" id="journal-info-about-li"><a href="#journal-info-about" onclick="window.location.hash='#journal-info-about';return false;" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
+    {% if journal_info.about %}<li role="presentation" id="journal-info-about-li"><a href="#journal-info-about-section" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
 
     {% nocache %}
-    {% if issues %}<li role="presentation" id="back-issues-li"><a href="#back-issues" onclick="window.location.hash='#back-issues';return false;" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
+    {% if issues %}<li role="presentation" id="back-issues-li"><a href="#back-issues-section" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
     {% endnocache %}
 
-    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation" id="journal-info-editorial_policy-li"><a href="#journal-info-editorial_policy" onclick="window.location.hash='#journal-info-editorial_policy';return false;" role="tab" data-toggle="tab">{% trans "Politique éditoriale et éthique" %}</a></li>{% endif %}
+    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation" id="journal-info-editorial_policy-li"><a href="#journal-info-editorial_policy-section" role="tab" data-toggle="tab">{% trans "Politique éditoriale et éthique" %}</a></li>{% endif %}
 
-    {% if journal_info.team %}<li role="presentation" id="journal-info-team-li"><a href="#journal-info-team" onclick="window.location.hash='#journal-info-team';return false;" role="tab" data-toggle="tab">{% trans "Comité de rédaction" %}</a></li>{% endif %}
+    {% if journal_info.team %}<li role="presentation" id="journal-info-team-li"><a href="#journal-info-team-section" role="tab" data-toggle="tab">{% trans "Comité de rédaction" %}</a></li>{% endif %}
 
   </ul>
 
   <div class="tab-content">
     {% if journal_info.about %}
-    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about">
+    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about-section">
       <h2 class="sr-only">{% trans "À propos" %}</h2>
       {{ journal_info.about|safe }}
       <section>
@@ -206,7 +206,7 @@
     {# The journal's update time from Fedora is used as the cache content version. #}
     {% cache LONG_TTL "public_journal_detail_back_issues" journal.code content_access_granted free_access_cache_key LANGUAGE_CODE journal.fedora_updated %}
     {% if issues %}
-    <section role="tabpanel" class="tab-pane" id="back-issues">
+    <section role="tabpanel" class="tab-pane" id="back-issues-section">
       <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
       {% if journal.collection.code == 'erudit' %}
       <div class="alert alert-info">
@@ -257,7 +257,7 @@
     {% endnocache %}
 
     {% if journal_info.editorial_policy or journal_info.publishing_ethics or journal_info.instruction_for_authors %}
-    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-editorial_policy">
+    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-editorial_policy-section">
       <h2 class="sr-only">{% trans "Politique éditoriale et éthique" %}</h2>
       {% if journal_info.editorial_policy %}
       {{ journal_info.editorial_policy|safe }}
@@ -278,7 +278,7 @@
     {% endif %}
 
     {% if journal_info.team %}
-    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-team">
+    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-team-section">
       <h2 class="sr-only">{% trans "Comité de rédaction" %}</h2>
       {{ journal_info.team|safe }}
     </section>
