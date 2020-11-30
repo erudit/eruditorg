@@ -8,7 +8,7 @@ git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#e
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@master#egg=django-resumable-uploads  # via -r requirements.in
 git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora  # via -r requirements.in
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml  # via -r requirements.in, eulfedora
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.6.68#egg=liberuditarticle  # via -r requirements.in
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.69#egg=liberuditarticle  # via -r requirements.in
 arabic-reshaper==2.1.1    # via -r requirements.in
 asgiref==3.3.1            # via django
 babel==2.9.0              # via -r requirements.in
