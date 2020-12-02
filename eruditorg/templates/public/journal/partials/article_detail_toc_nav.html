@@ -7,7 +7,7 @@
   <div class="hidden-xs col-sm-4">
     {% if previous_article %}
     <a
-      href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
+      href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=previous_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
       class="toc-nav__prev"
       title="{% trans 'Article précédent' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
@@ -31,7 +31,7 @@
   <div class="hidden-xs col-sm-offset-4 col-sm-4">
     {% if next_article %}
     <a
-      href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
+      href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=next_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
       class="toc-nav__next"
       title="{% trans 'Article suivant' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>

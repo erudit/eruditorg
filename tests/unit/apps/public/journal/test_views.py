@@ -659,6 +659,11 @@ class TestRenderArticleTemplateTag:
         view = ArticleDetailView()
         view.request = unittest.mock.MagicMock()
         view.object = article
+
+        def _get_next_and_previous(self):
+            return None, None
+
+        article.issue.get_previous_and_next_articles = _get_next_and_previous
         view.get_object = unittest.mock.MagicMock(return_value=article)
         context = view.get_context_data()
 

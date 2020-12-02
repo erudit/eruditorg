@@ -14,18 +14,20 @@ from urllib.parse import unquote
 from .models import JournalAccessSubscription
 from core.subscription.models import UserSubscriptions
 from django.conf import settings
-from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
 structlogger = structlog.getLogger(__name__)
 
 
-class SubscriptionMiddleware(MiddlewareMixin):
+class SubscriptionMiddleware:
     """ This middleware attaches subscription information to the request object.
 
     This middleware attaches informations related to the subscription
     of the current user to the request object.
     """
+
+    def __init__(self, get_response=None):
+        self.get_response = get_response
 
     def _get_user_referer_for_subscription(self, request):
         """ Return the referer of the user, with regards to subscription validation
@@ -41,6 +43,12 @@ class SubscriptionMiddleware(MiddlewareMixin):
             return request.META.get('HTTP_CLIENT_IP', None)
         user_ip, _ = get_client_ip(request, proxy_order='right-most')
         return user_ip
+
+    def __call__(self, request):
+        self.process_request(request)
+        response = self.get_response(request)
+        self.log_http_transaction(request, response)
+        return response
 
     def process_request(self, request):
         # Tries to determine if the user's IP address is contained into
@@ -83,7 +91,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
             except JournalAccessSubscription.DoesNotExist:
                 pass
 
-    def process_response(self, request, response):
+    def log_http_transaction(self, request, response):
         active_subscription = request.subscriptions.active_subscription
 
         referer = self._get_user_referer_for_subscription(request)
@@ -103,8 +111,6 @@ class SubscriptionMiddleware(MiddlewareMixin):
                 size="",
                 referer_access=referer.referer
             ))
-
-        return response
 
     def casa_authorize(self, key: str, token: str, user_ip: str) -> Union[str, bool]:
         """

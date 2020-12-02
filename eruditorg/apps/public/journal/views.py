@@ -752,8 +752,13 @@ class BaseArticleDetailView(
         issue = current_article.issue
 
         # Pick the previous article and the next article
-        previous_next = issue.get_previous_and_next_articles(current_article.localidentifier)
-        context.update(previous_next)
+        previous_article, next_article = issue.get_previous_and_next_articles(
+            current_article.localidentifier
+        )
+        context.update({
+            'previous_article': previous_article,
+            'next_article': next_article
+        })
 
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
@@ -784,11 +789,24 @@ class BaseArticleDetailView(
         # A list of Fedora objects' pids to which this view's templates cache keys will
         # be associated. For each pid in this list, EruditCache will add this view's
         # templates cache keys to a Redis tag with `tag:<pid>` as the tag key.
+
+        previous_article_cache_key = None
+        next_article_cache_key = None
+        if previous_article:
+            previous_article_cache_key =\
+                f"{current_article.issue.pid}.{previous_article.localidentifier}"
+        if next_article:
+            next_article_cache_key = f"{current_article.issue.pid}.{next_article.localidentifier}"
+
         context['cache_pids'] = [
             current_article.issue.journal.pid,
             current_article.issue.pid,
             current_article.pid,
-        ] + [article.pid for article in previous_next.values() if article is not None]
+        ] + [
+            cache_key
+            for cache_key in (previous_article_cache_key, next_article_cache_key)
+            if cache_key is not None
+        ]
 
         return context
 

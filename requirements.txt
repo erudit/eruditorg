@@ -8,7 +8,7 @@ git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#e
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@master#egg=django-resumable-uploads  # via -r requirements.in
 git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora  # via -r requirements.in
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml  # via -r requirements.in, eulfedora
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.6.68#egg=liberuditarticle  # via -r requirements.in
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.69#egg=liberuditarticle  # via -r requirements.in
 arabic-reshaper==2.1.1    # via -r requirements.in
 asgiref==3.3.1            # via django
 babel==2.9.0              # via -r requirements.in
@@ -51,13 +51,13 @@ feedparser==6.0.2         # via -r requirements.in
 future==0.18.2            # via arabic-reshaper
 gunicorn==20.0.4          # via -r requirements.in
 html2text==2020.1.16      # via -r requirements.in
-humanfriendly==8.2        # via django-resumable-uploads
+humanfriendly==9.0        # via django-resumable-uploads
 idna==2.10                # via requests
 influxdb==5.3.1           # via -r requirements.in
 isodate==0.6.0            # via rdflib
 jdcal==1.4.1              # via openpyxl
 jsonfield==3.1.0          # via django-post-office
-lxml[cssselect]==4.6.1    # via -r requirements.in, eulxml, liberuditarticle, sickle
+lxml[cssselect]==4.6.2    # via -r requirements.in, eulxml, liberuditarticle, sickle
 msgpack==1.0.0            # via influxdb
 mysqlclient==2.0.1        # via -r requirements.in
 openpyxl==3.0.5           # via -r requirements.in
@@ -66,7 +66,7 @@ ply==3.11                 # via -r requirements.in, eulxml
 prometheus-client==0.9.0  # via django-prometheus
 pycparser==2.20           # via cffi
 pycryptodome==3.9.9       # via eulfedora
-pydantic==1.7.2           # via -r requirements.in
+pydantic==1.7.3           # via -r requirements.in
 pymupdf==1.18.4           # via -r requirements.in
 pyparsing==2.4.7          # via rdflib
 pypdf2==1.26.0            # via eulfedora

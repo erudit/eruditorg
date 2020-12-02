@@ -110,8 +110,12 @@ class EruditPublicationDomChanger(BaseDomChanger):
     def add_article(self, article, publication_allowed=True, pdf_url=None, html_url=None):
         if self.root.find('article[@idproprio="{}"]'.format(article.localidentifier)) is not None:
             return  # already there
-        num_articles = len(self.root.findall('article'))
-        elem = E.article(idproprio=article.localidentifier, lang='fr', ordseq=str(num_articles))
+        ordseq = len(self.root.findall('article')) + 1
+        elem = E.article(idproprio=article.localidentifier, lang='fr', ordseq=str(ordseq))
+
+        titre = E.liminaire(E.grtitre(E.titre(str(article.html_title))))
+        elem.append(titre)
+
         if not publication_allowed:
             subelem = E.accessible("non")
             elem.append(subelem)
