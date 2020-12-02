@@ -57,11 +57,12 @@ influxdb==5.3.1           # via -r requirements.in
 isodate==0.6.0            # via rdflib
 jdcal==1.4.1              # via openpyxl
 jsonfield==3.1.0          # via django-post-office
-lxml[cssselect]==4.6.2    # via -r requirements.in, eulxml, liberuditarticle, sickle
+lxml[cssselect]==4.6.2    # via -r requirements.in, eulxml, liberuditarticle, pikepdf, sickle
 msgpack==1.0.0            # via influxdb
 mysqlclient==2.0.1        # via -r requirements.in
 openpyxl==3.0.5           # via -r requirements.in
-pillow==8.0.1             # via -r requirements.in, cairosvg, reportlab
+pikepdf==2.2.0            # via -r requirements.in
+pillow==8.0.1             # via -r requirements.in, cairosvg, pikepdf, reportlab
 ply==3.11                 # via -r requirements.in, eulxml
 prometheus-client==0.9.0  # via django-prometheus
 pycparser==2.20           # via cffi
@@ -79,7 +80,7 @@ pytz==2020.4              # via babel, django, influxdb
 rdflib==5.0.0             # via eulfedora
 redis-key-tagging==0.0.5  # via -r requirements.in
 redis==3.5.3              # via django-redis, redis-key-tagging
-reportlab==3.5.55         # via -r requirements.in
+reportlab==3.5.56         # via -r requirements.in
 requests-toolbelt==0.9.1  # via eulfedora
 requests[socks]==2.25.0   # via -r requirements.in, eulfedora, influxdb, pysolr, requests-toolbelt, sickle
 roman==3.3                # via liberuditarticle
