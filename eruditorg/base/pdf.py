@@ -25,7 +25,7 @@ def add_coverpage_to_pdf(coverpage, content):
         coverpage_pdf.insertPDF(content_pdf)
         return coverpage_pdf.write()
     except RuntimeError:
-        logger.exception("RuntimeError in fitz")
+        logger.error("RuntimeError in fitz", exc_info=True)
         output = BytesIO()
         coverpage_pdf = pikepdf.open(coverpage)
         content_pdf = pikepdf.open(content)
@@ -44,7 +44,7 @@ def get_pdf_first_page(content):
         first_page.insertPDF(doc, to_page=1)
         return first_page.write()
     except RuntimeError:
-        logger.exception("RuntimeError in fitz")
+        logger.error("RuntimeError in fitz", exc_info=True)
         output = BytesIO()
         pdf = pikepdf.open(content)
         del pdf.pages[1:]
