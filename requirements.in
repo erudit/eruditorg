@@ -1,22 +1,10 @@
 Django>=3.0,<4.0
--e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.69#egg=liberuditarticle
--e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@master#egg=django-resumable-uploads
--e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
--e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
--e git+https://gitlab.erudit.org/erudit/portail/eulfedora.git@use-pycryptodome#egg=eulfedora
-redis-key-tagging>=0.0.3,<1.0
-
-# pip-compile can't detect transitive dependencies from git dependecies. We have to list them
-# ourselves
-
-# from django-resumable-uploads
-simplejson>=3.8.2
-
-# from eulxml
-ply>=3.8
-lxml[cssselect]>=3.5
-
-# end of transitive dependencies
+liberuditarticle>=0.2.70
+django-resumable-uploads>=1.0.12
+django-account-actions>=0.1.1
+eulxml>=1.1.6
+eulfedora>=1.7.4
+redis-key-tagging>=0.0.6
 
 # dependencies for erudit-core
 
