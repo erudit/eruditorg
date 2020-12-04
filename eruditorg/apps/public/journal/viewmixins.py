@@ -297,10 +297,14 @@ class ArticleAccessLogMixin:
 
         active_subscription = request.subscriptions.active_subscription
         if active_subscription:
-            subscriber_id = active_subscription.organisation_id
+            if hasattr(active_subscription.organisation, 'legacyorganisationprofile'):
+                restriction_subscriber_id = (active_subscription.organisation
+                                             .legacyorganisationprofile.account_id)
+            else:
+                restriction_subscriber_id = None
             is_subscribed_to_journal = active_subscription.provides_access_to(journal=journal)
         else:
-            subscriber_id = None
+            restriction_subscriber_id = None
             is_subscribed_to_journal = False
 
         if "article_access_log_session_key" in request.COOKIES:
@@ -328,7 +332,7 @@ class ArticleAccessLogMixin:
             article_full_pid=article.get_full_identifier(),
 
             # subscription info
-            subscriber_id=subscriber_id,
+            restriction_subscriber_id=restriction_subscriber_id,
             is_subscribed_to_journal=is_subscribed_to_journal,
 
             # access info
