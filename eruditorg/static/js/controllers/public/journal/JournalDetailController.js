@@ -2,36 +2,20 @@
 export default {
 
   init: function() {
-    var fragment_to_activate = this.find_url_fragment();
-    this.set_active_fragment(fragment_to_activate[0], fragment_to_activate[1]);
-  },
-
-  find_url_fragment : function () {
-    var element_li = null;
-    var element_section = null;
-    if (window.location.hash) {
-      var anchor_id = window.location.hash.substring(1);
-      var li_id = anchor_id + "-li";
-      element_li = $("#" + li_id);
-      element_section = $("#" + anchor_id);
+    var url_hash = window.location.hash
+    if (url_hash) {
+      // If hash specified in url, go to specified tab
+      $(url_hash + "-li").addClass("active");
+      $(url_hash + "-section").addClass("active");
+    } else {
+      // Go to first tab
+      $('[role="presentation"]').first().addClass("active");
+      $('[role="tabpanel"]').first().addClass("active");
     }
-    return [element_li, element_section]
-  },
-
-  set_active_fragment : function (element_li, element_section) {
-    /*
-     * modify the attributes of the elements corresponding to the anchor if it
-     * exists otherwise modify the attributes of the first elements
-     */
-
-    if (!element_li) {
-      element_li = $('[role="presentation"]').first();
-    }
-
-    if (!element_section) {
-      element_section  = $('[role="tabpanel"]').first();
-    }
-    $(element_li).addClass("active");
-    $(element_section).addClass("active");
+    // Add click event listener to each tab to manage hash in url
+    $( "a[role='tab']" ).on("click", function() {
+        var href_str = $(this).attr("href")
+        window.location.hash = href_str.substring(0, href_str.length - 8);
+    });
   }
 };
