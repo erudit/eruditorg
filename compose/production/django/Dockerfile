@@ -14,6 +14,7 @@ FROM python:3.6-slim-buster
 WORKDIR /opt/eruditorg
 COPY requirements.txt /opt/eruditorg/requirements.txt
 
+ARG PIP_EXTRA_INDEX_URL
 RUN apt update && \
     apt install -y git libjpeg-dev libxslt-dev libffi-dev gcc libcairo2-dev libmariadbclient-dev locales && \
     pip install wheel setuptools && \
