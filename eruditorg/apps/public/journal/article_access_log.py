@@ -46,7 +46,7 @@ class ArticleAccessLog(BaseModel):
     article_full_pid: str
 
     # subscription info
-    subscriber_id: Optional[int]
+    restriction_subscriber_id: Optional[int]
     is_subscribed_to_journal: bool
 
     # access info

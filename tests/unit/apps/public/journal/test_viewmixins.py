@@ -29,7 +29,7 @@ from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.models import UserSubscriptions
 from base.test.factories import get_anonymous_request, get_authenticated_request
 from erudit.test.factories import JournalFactory, JournalInformationFactory, ContributorFactory, \
-    IssueFactory
+    IssueFactory, LegacyOrganisationProfileFactory
 from erudit.fedora import repository
 
 middleware = SubscriptionMiddleware()
@@ -462,8 +462,13 @@ class TestArticleAccessLogMixin:
             subscription = JournalAccessSubscriptionFactory(
                 journals=[article.issue.journal],
                 post__valid=True,
+                organisation=LegacyOrganisationProfileFactory().organisation,
             )
             request.subscriptions.add_subscription(subscription)
+            restriction_subscriber_id = (subscription.organisation.legacyorganisationprofile
+                                         .account_id)
+        else:
+            restriction_subscriber_id = None
 
         view = MyView()
         view.dispatch(request)
@@ -483,7 +488,7 @@ class TestArticleAccessLogMixin:
                 subscriber_referer="https://www.umontreal.ca/",
                 article_id=article.localidentifier,
                 article_full_pid=article.get_full_identifier(),
-                subscriber_id=subscription.id if active_subscription else None,
+                restriction_subscriber_id=restriction_subscriber_id,
                 is_subscribed_to_journal=active_subscription,
                 access_type="html_full_view",
                 content_access_granted=True,
