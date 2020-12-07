@@ -1,5 +1,6 @@
 import copy
 import structlog
+import requests
 
 from django.conf import settings
 from django.core.cache import cache
@@ -44,6 +45,9 @@ class FedoraMixin:
     def fedora_model(self):
         return self.get_fedora_model()
 
+    def get_erudit_content_url(self):
+        raise NotImplementedError
+
     def get_fedora_object(self):
         """
         Returns the eulfedora's object associated with the considered Django object.
@@ -84,8 +88,11 @@ class FedoraMixin:
 
         try:
             assert fedora_xml_content is None
-            fedora_object = self.get_fedora_object()
-            fedora_xml_content = fedora_object.xml_content
+            xml_response = requests.get(settings.FEDORA_ROOT + self.get_erudit_content_url())
+            if xml_response.status_code != 200:
+                raise ConnectionError
+            fedora_xml_content = xml_response.content
+
         except (RequestFailed, ConnectionError):  # pragma: no cover
             with configure_scope() as scope:
                 scope.fingerprint = ['fedora-warnings']

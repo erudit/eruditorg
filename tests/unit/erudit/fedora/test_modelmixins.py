@@ -7,13 +7,20 @@ from django.core.cache import cache
 from django.test import TestCase
 from eruditarticle.objects import EruditArticle
 
+from erudit.fedora import repository
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.test.factories import ArticleFactory, IssueFactory, JournalFactory
-from unittest.mock import Mock
+
 
 class DummyModel(FedoraMixin):
-    localidentifier = 'dummy139'
+    localidentifier = 'erudit:erudit.ae49.ae3958.045074ar'
+
+    def __init__(self):
+        repository.api.register_pid(self.localidentifier)
+
+    def get_erudit_content_url(self):
+        return f"objects/{self.pid}/datastreams/ERUDITXSD300/content"
 
     def get_fedora_model(self):
         return ArticleDigitalObject
@@ -27,8 +34,8 @@ class TestFedoraMixin:
         # Setup
         obj = DummyModel()
         # Run & check
-        assert obj.get_full_identifier() == 'dummy139'
-        assert obj.pid == 'dummy139'
+        assert obj.get_full_identifier() == 'erudit:erudit.ae49.ae3958.045074ar'
+        assert obj.pid == 'erudit:erudit.ae49.ae3958.045074ar'
 
     def test_can_return_the_eulfedora_model(self):
         # Setup
