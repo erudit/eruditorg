@@ -8,7 +8,7 @@ from django.utils.functional import cached_property
 from PIL import Image
 from sentry_sdk import configure_scope
 from eulfedora.util import RequestFailed
-from requests.exceptions import ConnectionError
+from requests.exceptions import HTTPError, ConnectionError
 
 from .cache import get_cached_datastream_content
 from .repository import api
@@ -86,14 +86,21 @@ class FedoraMixin:
             fedora_xml_content_key = None
             fedora_xml_content = None
 
+        if fedora_xml_content is not None:
+            return self.erudit_class(fedora_xml_content)
         try:
-            assert fedora_xml_content is None
             xml_response = requests.get(settings.FEDORA_ROOT + self.get_erudit_content_url())
-            if xml_response.status_code != 200:
-                raise ConnectionError
+            xml_response.raise_for_status()
             fedora_xml_content = xml_response.content
-
-        except (RequestFailed, ConnectionError):  # pragma: no cover
+            if use_cache:
+                cache_set(
+                    cache,
+                    fedora_xml_content_key,
+                    fedora_xml_content,
+                    settings.FEDORA_CACHE_TIMEOUT,
+                    pids=[self.pid],
+                )
+        except (HTTPError, ConnectionError):  # pragma: no cover
             with configure_scope() as scope:
                 scope.fingerprint = ['fedora-warnings']
                 logger.warning("fedora.exception", pid=self.pid)
@@ -107,19 +114,6 @@ class FedoraMixin:
                 # The UNB collection *has* articles that are missing from Fedora
                 return
             raise
-        except AssertionError:
-            # We've fetched the XML content from the cache so we just pass
-            pass
-        else:
-            # Stores the XML content of the object for further use
-            if use_cache:
-                cache_set(
-                    cache,
-                    fedora_xml_content_key,
-                    fedora_xml_content,
-                    settings.FEDORA_CACHE_TIMEOUT,
-                    pids=[self.pid],
-                )
 
         return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
 
