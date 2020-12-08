@@ -631,7 +631,7 @@ class TestRenderArticleTemplateTag:
     def article_detail_solr_data(self, monkeypatch):
         monkeypatch.setattr(SolrDataMixin, 'solr_data', FakeSolrData())
 
-    def mock_article_detail_view(self, fixture='article.xml'):
+    def render_article_detail_html(self, fixture='article.xml'):
         """ Helper method to mock an article detail view from a given fixture."""
         with open(FIXTURE_ROOT + '/' + fixture, mode='r') as fp:
             xml = fp.read()
@@ -652,7 +652,7 @@ class TestRenderArticleTemplateTag:
         return view.render_xml_content(context)
 
     def test_can_transform_article_xml_to_html(self):
-        ret = self.mock_article_detail_view()
+        ret = self.render_article_detail_html()
 
         # Check
         assert ret is not None
@@ -666,14 +666,14 @@ class TestRenderArticleTemplateTag:
         mock_pdf.content = fp
 
         # Run
-        ret = self.mock_article_detail_view()
+        ret = self.render_article_detail_html()
 
         # Check
         fp.close()
         assert ret is not None
 
     def test_html_tags_in_transformed_article_biblio_titles(self):
-        ret = self.mock_article_detail_view()
+        ret = self.render_article_detail_html()
         # Check that HTML tags in biblio titles are not stripped.
 
         assert '<h3 class="titre">H3 avec balise <strong>strong</strong>\n</h3>' in ret
@@ -681,7 +681,7 @@ class TestRenderArticleTemplateTag:
         assert '<h5 class="titre">H5 avec balise <small>small</small>\n</h5>' in ret
 
     def test_footnotes_in_section_titles_not_in_toc(self):
-        ret = self.mock_article_detail_view('1053699ar.xml')
+        ret = self.render_article_detail_html('1053699ar.xml')
 
         # Check that footnotes in section titles are stripped when displayed in
         # table of content and not stripped when displayed as section titles.
@@ -698,19 +698,19 @@ class TestRenderArticleTemplateTag:
         assert '<h2><span class="petitecap">Titre petitecap<a href="#no4" id="re1no4" class="norenvoi" title="">[4]</a></span></h2>' in ret
 
     def test_space_between_two_tags(self):
-        ret = self.mock_article_detail_view('1053699ar.xml')
+        ret = self.render_article_detail_html('1053699ar.xml')
 
         # Check that the space is preserved between two tags.
         assert '<span class="petitecap">Note 1,</span> <em>avec espace entre deux marquages</em>' in ret
 
     def test_blockquote_between_two_spans(self):
-        ret = self.mock_article_detail_view('1053699ar.xml')
+        ret = self.render_article_detail_html('1053699ar.xml')
 
         # Check that the blockquote is displayed before the second paragraph.
         assert '<blockquote class="bloccitation ">\n<p class="alinea">Citation</p>\n<cite class="source">Source</cite>\n</blockquote>\n<p class="alinea">Paragraphe</p>' in ret
 
     def test_annexes_footnotes(self):
-        ret = self.mock_article_detail_view('1035294ar.xml')
+        ret = self.render_article_detail_html('1035294ar.xml')
 
         # Check that annexes have an ID set.
         assert '<div id="an1" class="article-section-content" role="complementary">' in ret
@@ -726,7 +726,7 @@ class TestRenderArticleTemplateTag:
         assert '<sup><a href="#an3" id="" class="norenvoi" title="">[**]</a></sup>' not in ret
 
     def test_space_between_keywords_and_colon(self):
-        ret = self.mock_article_detail_view('1055726ar.xml')
+        ret = self.render_article_detail_html('1055726ar.xml')
 
         # Check that a space is present before the colon in French, but not in the other languages.
         assert 'Mots-clés :' in ret
@@ -734,27 +734,27 @@ class TestRenderArticleTemplateTag:
         assert 'Palabras clave:' in ret
 
     def test_article_titles_css_class(self):
-        ret = self.mock_article_detail_view('1055651ar.xml')
+        ret = self.render_article_detail_html('1055651ar.xml')
         # A normal title should not have any class.
         assert '<h2>La synthèse hoguettienne</h2>' in ret
         # A special character title should have the 'special' class.
         assert '<h2 class="special">*</h2>' in ret
-        ret = self.mock_article_detail_view('1055648ar.xml')
+        ret = self.render_article_detail_html('1055648ar.xml')
         # An empty title should have the 'special' and 'empty' classes and should be empty.
         assert '<h2 class="special empty"></h2>' in ret
 
     def test_volumaison_punctuation(self):
-        ret = self.mock_article_detail_view('1053504ar.xml')
+        ret = self.render_article_detail_html('1053504ar.xml')
         # There should be an hyphen between multiple months and no coma between month and year.
         assert '<p class="refpapier"><span class="volumaison"><span class="nonumero">Numéro 179</span>, Janvier–Avril 2018</span>, p. 1–2</p>' in ret
 
     def test_volumaison_with_multiple_numbers(self):
-        ret = self.mock_article_detail_view('1067490ar.xml')
+        ret = self.render_article_detail_html('1067490ar.xml')
         # There should be an hyphen between multiple numbers and a coma between numbers and period.
         assert '<p class="refpapier"><span class="volumaison"><span class="volume">Volume\xa028</span>, <span class="nonumero">Numéro\xa02–3</span>, Printemps 2018</span>, p.\xa07–9' in ret
 
     def test_separator_between_sections_in_different_languages(self):
-        ret = self.mock_article_detail_view('1046558ar.xml')
+        ret = self.render_article_detail_html('1046558ar.xml')
         # There should not be a separator before the first section.
         assert '<hr>\n<section id="s1n1"><div class="para" id="pa1">' not in ret
         # There should be a separator before sections in different languages.
@@ -762,7 +762,7 @@ class TestRenderArticleTemplateTag:
         assert '<hr>\n<section id="s1n3"><div class="para" id="pa21">' in ret
 
     def test_multilingual_titreparal_and_sstitreparal_order(self):
-        ret = self.mock_article_detail_view('1058157ar.xml')
+        ret = self.render_article_detail_html('1058157ar.xml')
         # Check that titreparal and sstitreparal are in the right order.
         assert '<h1 class="doc-head__title">\n<span class="titre">Introduction au dossier spécial</span><span class="sstitre">À la découverte du lien organisationnel : avez-vous lu A. O. Hirschman ?</span><span class="titreparal">Introduction to the special section</span><span class="sstitreparal">Exploring the Organizational Link: Have You Read A. O.\n        Hirschman?</span><span class="titreparal">Introducción Dossier Especial</span><span class="sstitreparal">Descubriendo las relaciones organizativas: ¿leyó a A.O.\n        Hirschman?</span>\n</h1>' in ret
 
