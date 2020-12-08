@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import View
+from django.shortcuts import redirect, reverse
 
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
@@ -47,6 +48,27 @@ class SavedCitationListView(ListView):
         if reverse:
             result = list(reversed(result))
         return result
+
+    def get(self, request, *args, **kwargs):
+        # If the request query string page number is greater than the number of available
+        # pages, redirect to the SavedCitationListView of the last available page
+        num_pages = self.get_paginator(self.get_queryset(), self.paginate_by).num_pages
+        query_params = self.request.GET.copy()
+        query_string_page_number = query_params.get('page')
+
+        # Check if trying to access a page number higher then the available
+        try:
+            if int(query_string_page_number) > num_pages:
+                # Assign last available page
+                query_params['page'] = num_pages
+                return redirect('{}?{}'.format(
+                    reverse('public:citations:list'),
+                    query_params.urlencode(),
+                ))
+        except (TypeError, ValueError):
+            pass
+
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SavedCitationListView, self).get_context_data(**kwargs)
