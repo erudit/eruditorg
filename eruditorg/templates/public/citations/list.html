@@ -74,7 +74,12 @@
     </aside>
 
     <section class="col-md-8 clearfix main-content documents-list-wrapper">
-      <h2>{{ documents|length }} {% trans "notices sauvegardées" %}</h2>
+      {% blocktrans count counter=documents|length %}
+      <h2>{{ counter }} notice sauvegardée</h2>
+      {% plural %}
+      <h2>{{ counter }} notices sauvegardées</h2>
+      {% endblocktrans %}
+
       {% if documents %}
       {% include "public/partials/pagination.html" %}
       <div class="documents-wrapper">
