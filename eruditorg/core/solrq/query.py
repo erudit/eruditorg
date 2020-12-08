@@ -48,10 +48,15 @@ class Q:
 
 # thanks to https://github.com/swistakm/solrq
 ESCAPE_RE = re.compile(r'(?<!\\)(?P<char>[ &|+\\\-!(){}[\]*^"~?:])')
+ESCAPE_RE_IF_SAFE = re.compile(r'(?<!\\)(?P<char>[:])')
 
 
 def solr_escape(val):
     return ESCAPE_RE.sub(r'\\\g<char>', val)
+
+
+def solr_escape_if_safe(val):
+    return ESCAPE_RE_IF_SAFE.sub(r'\\\g<char>', val)
 
 
 class Query:
@@ -151,6 +156,8 @@ class Query:
         for k, v in params_dict.items():
             if not safe:
                 v = solr_escape(v)
+            else:
+                v = solr_escape_if_safe(v)
             if k in self.search.filters_mapping:
                 subqs = self.search.filters_mapping[k].format(**{k: v})
             else:

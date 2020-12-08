@@ -130,3 +130,9 @@ class TestQuery:
 
         # Run & check
         assert query.filter(author='test')._q == '(Auteur_tri:*test* OR Auteur_fac:*test*)'
+
+    def test_query_escapes_colon_character_if_search_string_is_safe(self):
+        # Setup
+        query = Query(self.search)
+        # Run & check
+        assert query.filter(Q(foo='bar : baz'), safe=True)._q == '(foo:bar \: baz)'
