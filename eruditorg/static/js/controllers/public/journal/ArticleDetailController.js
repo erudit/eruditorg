@@ -175,7 +175,14 @@ export default {
           // Figure group caption.
           var grfigure_legend = grfigure_caption.find('div.legende')
           // Figure number.
-          var figure_number = figure.find('.no')
+          // If there's only one figure, get the figure number.
+          if (this.currItem.el.prevAll('.objetmedia').length == 0) {
+            var figure_number = figure.find('.no')
+          // Otherwise, for the following figures, get the figure number with the continuation text.
+          } else {
+            var figure_number = figure.find('.no-continuation').first()
+          }
+
           // Figure caption.
           var figure_caption = figure.find('.legende')
 

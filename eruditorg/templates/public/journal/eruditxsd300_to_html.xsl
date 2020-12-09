@@ -1399,6 +1399,13 @@
 
   <!-- media tables -->
   <xsl:template match="figure/objetmedia|tableau/objetmedia">
+    <xsl:if test="position() != 1">
+      <figcaption>
+        <p class="no-continuation">
+          <xsl:apply-templates select="../no"/>&#160;<span>{% trans '(suite)' %}</span>
+        </p>
+      </figcaption>
+    </xsl:if>
     <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
     <xsl:variable name="imgPlGrWidth" select="concat('width-', image/@id)"/>
     <xsl:variable name="imgPlGrHeight" select="concat('height-', image/@id)"/>
