@@ -2,7 +2,9 @@ import re
 from contextlib import contextmanager
 from lxml import etree
 from lxml.builder import E
+from requests.exceptions import HTTPError
 
+from django.conf import settings
 from eulfedora.api import ApiFacade
 from eulfedora.util import RequestFailed
 
@@ -105,6 +107,10 @@ class FakeResponse:
         self.content = content
         self.url = FakeAPI.BASE_URL + path
         self.text = ""
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise HTTPError
 
 
 class FakeAPI(ApiFacade):
@@ -249,6 +255,10 @@ class FakeAPI(ApiFacade):
             wrapper.add_notes(notes)
 
     def get(self, url, **kwargs):
+
+        if settings.FEDORA_ROOT in url:
+            url = url[len(settings.FEDORA_ROOT):]
+
         if url == 'objects':
             params = kwargs.get('params')
             query = params.get('query')
@@ -261,6 +271,7 @@ class FakeAPI(ApiFacade):
             return FakeResponse(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'), url)
         result = None
         pid = None
+
         m = re.match(r"^objects/(erudit:[\w\-.]+)(/datastreams)?(.*)", url)
         if m:
             pid, datastream, subselection = m.groups()
