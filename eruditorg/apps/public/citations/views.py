@@ -72,14 +72,16 @@ class SavedCitationListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SavedCitationListView, self).get_context_data(**kwargs)
-        documents = context['documents']
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
 
-        counts = collections.Counter(d.corpus for d in documents)
+        # Get a list of all documents, not just the ones on the current page.
+        object_list = context['paginator'].object_list
+        counts = collections.Counter(d.corpus for d in object_list)
         context['scientific_articles_count'] = counts.get('Article', 0)
         context['cultural_articles_count'] = counts.get('Culturel', 0)
         context['theses_count'] = counts.get('Thèses', 0)
+        context['total_citations_count'] = len(object_list)
 
         return context
 
