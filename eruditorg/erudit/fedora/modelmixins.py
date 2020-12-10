@@ -124,7 +124,7 @@ class FedoraMixin:
         The presence of a full_identifier is not sufficient to determine if the object
         is present in fedora. Some articles have Fedora ids but are _not_ in Fedora."""
         try:
-            return self.get_full_identifier() and self.erudit_object
+            return bool(self.get_full_identifier() and self.erudit_object)
         except RequestFailed:
             return False
 

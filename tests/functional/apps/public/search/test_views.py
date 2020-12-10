@@ -102,6 +102,21 @@ class TestEruditSearchResultsView:
         assert results['pagination']['count'] == 1
         assert b'aybabtu' in response.content
 
+    def test_cannot_save_article_into_citation_library(self, solr_client):
+        doc = SolrDocumentFactory(
+            title='foo',
+            solr_attrs={
+                'Fonds_fac': 'Persée',
+                'RevueID': 'bar',
+                'NumeroID': 'baz',
+            },
+        )
+        solr_client.add_document(doc)
+        url = reverse('public:search:results')
+        response = Client().get(url, data={'basic_search_term': 'foo'})
+        assert b'tool-citation-save-' not in response.content
+        assert b'tool-citation-remove-' not in response.content
+
 
 class TestAdvancedSearchView:
 
