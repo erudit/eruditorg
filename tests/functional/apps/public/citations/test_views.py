@@ -68,6 +68,7 @@ class TestSavedCitationListView:
         self.user.saved_citations.create(solr_id=self.article_2.localidentifier)
         self.user.saved_citations.create(solr_id=self.article_3.localidentifier)
         self.client = Client(logged_user=self.user)
+        self.solr_client = solr_client
 
     def test_embeds_the_count_of_article_types_in_the_context(self):
         url = reverse('public:citations:list')
@@ -76,6 +77,31 @@ class TestSavedCitationListView:
         assert response.context['scientific_articles_count'] == 2
         assert response.context['cultural_articles_count'] == 1
         assert response.context['theses_count'] == 2
+
+    def test_citations_counts_take_into_account_all_pages(self):
+        # Add 20 more scientific articles to the saved citations.
+        scientific_articles = ArticleFactory.create_batch(20, issue=self.issue_1)
+        for article in scientific_articles:
+            self.user.saved_citations.create(solr_id=article.localidentifier)
+        # Add 20 more cultural articles to the saved citations.
+        cultural_articles = ArticleFactory.create_batch(20, issue=self.issue_2)
+        for article in cultural_articles:
+            self.user.saved_citations.create(solr_id=article.localidentifier)
+        # Add 20 more theses to the saved citations.
+        theses = ThesisFactory.create_batch(20)
+        for thesis in theses:
+            self.solr_client.add_document(thesis)
+            self.user.saved_citations.create(solr_id=thesis.id)
+        # Visit the saved citations view.
+        url = reverse('public:citations:list')
+        response = self.client.get(url)
+        # Only 20 citations should be visible on the first page.
+        assert len(response.context['documents']) == 20
+        # The citations counts should take into account all pages, not just the current one.
+        assert response.context['scientific_articles_count'] == 22
+        assert response.context['cultural_articles_count'] == 21
+        assert response.context['theses_count'] == 22
+        assert response.context['total_citations_count'] == 65
 
     # needs fr_ca locale to properly sort authors
     @needs_fr_ca
