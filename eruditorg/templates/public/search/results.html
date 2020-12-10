@@ -286,7 +286,7 @@
               {# Toolbox #}
               <div class="toolbox-wrapper">
                 <ul class="toolbox toolbox-compact">
-                  {% if document.document_type == 'article' or document.document_type == 'thesis' %}
+                  {% if document.can_cite %}
                   <li>
                     <a class="tool-btn" id="tool-citation-save-{{ forloop.counter }}" data-citation-save="#document-{{ forloop.counter }}"{% if document.localidentifier in request.saved_citations %} style="display:none;"{% endif %}>
                       <i class="icon ion-ios-bookmark toolbox-save"></i>
@@ -297,8 +297,6 @@
                       <span class="tools-label">{% trans "Supprimer" %}</span>
                     </a>
                   </li>
-                  {% endif %}
-                  {% if document.can_cite %}
                   <li>
                     <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ document.localidentifier|slugify }}">
                       <i class="icon ion-ios-quote toolbox-cite"></i>
