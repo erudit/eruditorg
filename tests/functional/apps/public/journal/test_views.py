@@ -1504,6 +1504,25 @@ class TestArticleDetailView:
         assert '<figcaption><p class="legende"><strong class="titre">German interpreted' \
                '</strong></p></figcaption>' in html
 
+    def test_existance_of_continuation_mention_in_split_figure(self):
+        article = ArticleFactory(
+            from_fixture='1056317ar',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<p class="no-continuation">Tableau\xa04\xa0<span>(suite)</span></p>' in html
+
+    def test_existance_of_continuation_mention_in_split_table(self):
+        article = ArticleFactory(
+            from_fixture='1058427ar',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<p class="no-continuation"><span class="majuscule">Graphique 3</span>\xa0' \
+               '<span>(suite)</span></p>' in html
+
     def test_article_multilingual_titles(self):
         article = ArticleFactory(
             from_fixture='1059303ar',
