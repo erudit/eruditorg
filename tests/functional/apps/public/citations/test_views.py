@@ -144,6 +144,22 @@ def test_cannot_cite_article_not_in_fedora(solr_client):
     assert b'id_cite_modal_' not in response.content
 
 
+@pytest.mark.parametrize('url', (
+    'public:citations:citation_enw',
+    'public:citations:citation_ris',
+    'public:citations:citation_bib',
+))
+def test_exporting_an_article_not_in_fedora_does_not_crash(solr_client, url):
+    doc = SolrDocumentFactory()
+    solr_client.add_document(doc)
+    user = UserFactory()
+    user.saved_citations.create(solr_id=doc.id)
+    client = Client(logged_user=user)
+    url = reverse(url)
+    response = client.get(url, data={'document_ids': [doc.id]})
+    assert response.status_code == 200
+
+
 class TestSavedCitationAddView:
 
     def test_cannot_cite_article_not_in_fedora(self, solr_client):
