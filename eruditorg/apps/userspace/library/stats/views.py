@@ -15,6 +15,7 @@ from .settings import ERUDIT_COUNTER_BACKEND_URL
 from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
+from apps.public.site_messages.models import SiteMessage
 from apps.userspace.library.viewmixins import OrganisationScopePermissionRequiredMixin
 
 from .forms import (
@@ -95,6 +96,7 @@ class StatsLandingView(
             }
         context["releases"] = releases
         context["section_aside"] = True
+        context["library_statistics_site_messages"] = SiteMessage.objects.library_statistics()
         return context
 
     def get_r4_report(self, form):

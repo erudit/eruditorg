@@ -12,6 +12,18 @@
 {% endblock %}
 
 {% block section_intro %}
+{% if library_statistics_site_messages %}
+<div class="site-messages userspace">
+  {% for site_message in library_statistics_site_messages %}
+  <div id="site-message-{{ site_message.id }}" class="alert alert-dismissible site-message-{{ site_message.level.lower }}">
+    <p>
+      {{ site_message.message|safe }}
+    </p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  </div>
+ {% endfor %}
+</div>
+{% endif %}
 {% blocktrans %}
 <p>Cette section vous donne accès aux statistiques de consultation de votre établissement pour les différentes revues souscrites. Les rapports disponibles respectent la norme COUNTER (R4), et nous mettons à votre disposition les rapports JR1 et JR1 GOA, aux formats CSV, XML ou HTML, par année d’abonnement ou pour la période de votre choix.</p>
 {% endblocktrans %}
