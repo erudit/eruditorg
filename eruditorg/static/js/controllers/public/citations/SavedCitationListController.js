@@ -52,6 +52,13 @@ export default {
     }
 
     /*
+     * Reload page if all documents were removed from the page
+     */
+    function reloadPageIfAllDocumentsRemoved() {
+      if ($('.bib-record').length === 0) location.reload();
+    }
+
+    /*
      * Remove a specific document from the saved citations list.
      * The function also updates the texts displaying the number of documents associated with the
      * document type of the document being removed.
@@ -67,6 +74,7 @@ export default {
         $document.remove();
         updateDocumentSelectionCount();
         updateDocumentTypeCount($document);
+        reloadPageIfAllDocumentsRemoved()
         updateTotalDocumentsCount();
       });
     }
@@ -125,6 +133,7 @@ export default {
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();
+          reloadPageIfAllDocumentsRemoved()
           updateTotalDocumentsCount();
         });
       });
