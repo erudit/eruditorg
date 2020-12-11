@@ -44,6 +44,14 @@ export default {
     }
 
     /*
+     * Update the total documents count
+     */
+    function updateTotalDocumentsCount() {
+      let newTotalDocumentsCount = parseInt($('.total-documents').text()) - 1;
+      $('.total-documents').text(newTotalDocumentsCount);
+    }
+
+    /*
      * Remove a specific document from the saved citations list.
      * The function also updates the texts displaying the number of documents associated with the
      * document type of the document being removed.
@@ -59,6 +67,7 @@ export default {
         $document.remove();
         updateDocumentSelectionCount();
         updateDocumentTypeCount($document);
+        updateTotalDocumentsCount();
       });
     }
 
@@ -116,6 +125,7 @@ export default {
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();
+          updateTotalDocumentsCount();
         });
       });
     });
