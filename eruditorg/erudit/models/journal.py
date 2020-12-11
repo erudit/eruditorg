@@ -243,9 +243,6 @@ class Journal(FedoraMixin, FedoraDated):
             self.localidentifier
         )
 
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/PUBLICATIONS/content"
-
     def get_fedora_model(self):
         return JournalDigitalObject
 
@@ -536,9 +533,6 @@ class Issue(FedoraMixin, FedoraDated):
 
     # Fedora-related methods and properties
     # --
-
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/SUMMARY/content"
 
     def get_fedora_model(self):
         return PublicationDigitalObject
@@ -945,9 +939,6 @@ class Article(FedoraMixin):
 
     # Fedora-related methods and properties
     # --
-
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/ERUDITXSD300/content"
 
     def get_fedora_model(self):
         return ArticleDigitalObject
