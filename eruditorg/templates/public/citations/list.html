@@ -113,6 +113,8 @@
         <ol class="bib-records">
           {% for document in documents %}
 
+          {% widthratio page_obj.number|add:"-1" 1 paginator.per_page as doc_count_offset %}
+
           {% if document.document_type == 'article' %}
           <li data-document-id="{{ document.localidentifier }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="bib-record">
 
@@ -144,7 +146,7 @@
             </ul>
 
             <p class="bib-record__type">{{ document.document_type }}</p>
-            <h3 class="bib-record__title bib-record__counter" data-record-counter="{{ forloop.counter }}">
+            <h3 class="bib-record__title bib-record__counter" data-record-counter="{{ doc_count_offset|add:forloop.counter }}">
               <a href="{{ document.get_absolute_url }}" target="_blank">
                 {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
               </a>
@@ -249,7 +251,7 @@
             </ul>
 
             <p class="bib-record__type">{{ document.document_type }}</p>
-            <h3 class="bib-record__title bib-record__counter" data-record-counter="{{ forloop.counter }}">
+            <h3 class="bib-record__title bib-record__counter" data-record-counter="{{ doc_count_offset|add:forloop.counter }}">
               <a href="{{ document.url }}" target="_blank">{{ document.title }}</a>
             </h3>
 
