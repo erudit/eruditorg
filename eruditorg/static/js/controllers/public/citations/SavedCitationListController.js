@@ -111,6 +111,7 @@ export default {
     $('a[data-remove]').click(function(ev) {
       ev.preventDefault();
       let $document = $(this).parents('li\.bib-record');
+      $document.find('.checkbox input[type=checkbox]').prop('checked', false);  // Uncheck checkbox
       removeDocument($document);
     });
 
@@ -128,8 +129,10 @@ export default {
         data: { document_ids: documentIds },
         traditional: true
       }).done(function() {
+        $('.documents-head input[type=checkbox]').prop('checked', false);  // Uncheck '#select-all' checkbox
         $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').each(function() {
           let $document = $(this).parents('li\.bib-record');
+          $document.find('.checkbox input[type=checkbox]').prop('checked', false);  // Uncheck checkbox
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();
