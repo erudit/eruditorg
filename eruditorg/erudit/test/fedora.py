@@ -348,8 +348,10 @@ class FakeAPI(ApiFacade):
             response = FakeResponse(result, url)
             if response.status_code == 200:
                 return response
+            response.text = pid
+            if response.status_code == 404:
+                raise HTTPError
             else:
-                response.text = pid
                 raise RequestFailed(response)
         else:
             print("WARNING: unsupported URL for fake fedora API: {}".format(url))

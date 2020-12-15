@@ -30,6 +30,13 @@ class DummyModel(FedoraMixin):
 
 
 class TestFedoraMixin:
+
+    def test_is_in_fedora(self):
+        obj = DummyModel()
+        obj.get_erudit_content_url = lambda: "objects/erudit:erudit.journal.issue.article/datastreams/ERUDITXSD300/content"
+        assert obj.is_in_fedora == False
+
+
     def test_can_return_the_pid_of_the_object(self):
         # Setup
         obj = DummyModel()

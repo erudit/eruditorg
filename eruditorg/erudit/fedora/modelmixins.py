@@ -125,7 +125,7 @@ class FedoraMixin:
         is present in fedora. Some articles have Fedora ids but are _not_ in Fedora."""
         try:
             return bool(self.get_full_identifier() and self.erudit_object)
-        except RequestFailed:
+        except (HTTPError, ConnectionError):
             return False
 
     @cached_property
