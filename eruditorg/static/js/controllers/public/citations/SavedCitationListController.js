@@ -44,6 +44,21 @@ export default {
     }
 
     /*
+     * Update the total documents count
+     */
+    function updateTotalDocumentsCount() {
+      let newTotalDocumentsCount = parseInt($('.total-documents').text()) - 1;
+      $('.total-documents').text(newTotalDocumentsCount);
+    }
+
+    /*
+     * Reload page if all documents were removed from the page
+     */
+    function reloadPageIfAllDocumentsRemoved() {
+      if ($('.bib-record').length === 0) location.reload();
+    }
+
+    /*
      * Remove a specific document from the saved citations list.
      * The function also updates the texts displaying the number of documents associated with the
      * document type of the document being removed.
@@ -59,6 +74,8 @@ export default {
         $document.remove();
         updateDocumentSelectionCount();
         updateDocumentTypeCount($document);
+        reloadPageIfAllDocumentsRemoved()
+        updateTotalDocumentsCount();
       });
     }
 
@@ -94,6 +111,7 @@ export default {
     $('a[data-remove]').click(function(ev) {
       ev.preventDefault();
       let $document = $(this).parents('li\.bib-record');
+      $document.find('.checkbox input[type=checkbox]').prop('checked', false);  // Uncheck checkbox
       removeDocument($document);
     });
 
@@ -111,11 +129,15 @@ export default {
         data: { document_ids: documentIds },
         traditional: true
       }).done(function() {
+        $('.documents-head input[type=checkbox]').prop('checked', false);  // Uncheck '#select-all' checkbox
         $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').each(function() {
           let $document = $(this).parents('li\.bib-record');
+          $document.find('.checkbox input[type=checkbox]').prop('checked', false);  // Uncheck checkbox
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();
+          reloadPageIfAllDocumentsRemoved()
+          updateTotalDocumentsCount();
         });
       });
     });
