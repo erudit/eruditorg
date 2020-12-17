@@ -2,7 +2,8 @@ import pytest
 import unittest.mock
 
 from django.contrib.auth.models import AnonymousUser
-from django.http import Http404
+from django.http import Http404, HttpResponse
+from django.http.response import HttpResponseRedirect
 from django.test import RequestFactory
 from django.test.utils import override_settings
 from django.views.generic import DetailView, View
@@ -448,6 +449,9 @@ class TestArticleAccessLogMixin:
             def content_access_granted(self):
                 return True
 
+            def get(self, request, *args, **kwargs):
+                return HttpResponse('')
+
         request = RequestFactory(
             HTTP_X_FORWARDED_FOR="0.0.0.0",
             SERVER_PROTOCOL="HTTP/1.1",
@@ -502,3 +506,29 @@ class TestArticleAccessLogMixin:
             # Check that the log timestamp tzinfo parameter has a value
             # and therefore, that the log timestamp is a timezone "aware" object
             assert article_access_log.timestamp.tzinfo is not None
+
+    @unittest.mock.patch("apps.public.journal.viewmixins.logger")
+    def test_do_not_log_for_external_articles(self, mock_logger):
+        article = ArticleFactory()
+
+        class MyView(ArticleAccessLogMixin, View):
+            def get_object(self):
+                return article
+
+            def get_access_type(self):
+                return ArticleAccessType.html_full_view
+
+            @property
+            def content_access_granted(self):
+                return True
+
+            def get(self, request, *args, **kwargs):
+                return HttpResponseRedirect('')
+
+        request = RequestFactory().get("/myview")
+        request.session = {"HTTP_REFERER": "https://www.umontreal.ca/"}
+        request.subscriptions = UserSubscriptions()
+        request.user = AnonymousUser()
+        view = MyView()
+        view.dispatch(request)
+        mock_logger.info.assert_not_called()
