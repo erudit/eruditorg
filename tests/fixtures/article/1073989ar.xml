@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="minimal" idproprio="1073989ar" typeart="article" lang="fr" ordseq="5"><admin><infoarticle><idpublic scheme="doi">10.7202/1073989ar</idpublic><pagination> <ppage>65</ppage> <dpage>76</dpage>  
+       </pagination></infoarticle><revue id="natcan070" lang="fr"><titrerev>Le Naturaliste canadien</titrerev><titrerevabr>natcan</titrerevabr><idissnnum>1929-3208</idissnnum><redacteurchef typerc="regulier" sexe="feminin"><fonction lang="fr">Rédactrice en chef</fonction><nompers><prenom>Denise</prenom><nomfamille>Tousignant</nomfamille></nompers></redacteurchef></revue><numero id="natcan05514"><volume>144</volume><nonumero>2</nonumero><pub><periode>Automne</periode><annee>2020</annee></pub><pubnum><date typedate="publication">2020-09-22</date></pubnum></numero><editeur><nomorg>La Société Provancher d'histoire naturelle du Canada</nomorg></editeur><prod><nomorg>La Société Provancher d'histoire naturelle du Canada</nomorg></prod><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>La Société Provancher d'histoire naturelle du Canada</nomorg>, 2020</droitsauteur></admin><liminaire><grtitre><surtitre>Milieux aquatiques</surtitre>
+      <titre>Effets de différentes conditions environnementales sur la production, l’excrétion et la        dégradation des cyanotoxines dans les écosystèmes d’eau douce et saumâtre</titre>
+      
+    </grtitre><grauteur><auteur id="au1"><nompers>
+        <prenom>Jade</prenom>
+        
+        <nomfamille>Dormoy-Boulanger</nomfamille>
+        </nompers><courriel><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:jade.dormoy@hotmail.com" xlink:type="simple">jade.dormoy@hotmail.com</liensimple></courriel></auteur><auteur id="au2"><nompers>
+        <prenom>Irene</prenom>
+        
+        <nomfamille>Gregory-Eaves</nomfamille>
+        </nompers></auteur><auteur id="au3"><nompers>
+        <prenom>Philippe</prenom>
+        
+        <nomfamille>Juneau</nomfamille>
+        </nompers></auteur><auteur id="au4"><nompers>
+        <prenom>Beatrix</prenom>
+        <autreprenom>E.</autreprenom>
+        <nomfamille>Beisner</nomfamille>
+        </nompers><courriel><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:beisner.beatrix@uqam.ca" xlink:type="simple">beisner.beatrix@uqam.ca</liensimple></courriel></auteur></grauteur><resume typeresume="resume" lang="fr">
+      <alinea>Les cyanotoxines présentes dans l’environnement menacent l’intégrité des        écosystèmes aquatiques et la santé humaine. Dans un contexte où les changements climatiques        sont susceptibles de favoriser les efflorescences cyanobactériennes, il nous apparaît        nécessaire de mettre à jour nos connaissances sur ce sujet. Cette revue de littérature        synthétise les effets de différents facteurs environnementaux sur la production et la        dégradation des cyanotoxines ainsi que sur la détoxification de la colonne d’eau dans les        écosystèmes naturels d’eau douce et saumâtre au Québec. Les effets de certains facteurs        traités dans cet article sont bien connus (nutriments, lumière, température de l’eau,        biodégradation et activité bactérienne), alors que d’autres, aussi importants (salinité,        vent, métaux-traces, pesticides et contact avec les sédiments), mériteraient d’être plus        étudiés.</alinea>
+    </resume><resume typeresume="resume" lang="en">
+      <alinea>Cyanotoxins in our environment threaten the integrity of aquatic ecosystems and        human health. As climate change is suspected to favour cyanobacterial blooms, it is        important to have an up-to-date picture of our knowledge concerning this subject. This        review summarizes the effects of various environmental factors on the production and        degradation of cyanotoxins, and on the detoxification of the water column in freshwater and        brackish ecosystems in Quebec (Canada). The influence of some factors discussed in this        paper is well known (e.g., nutrients, light, water temperature and bacterial activity),        while that of others, which are equally important (e.g., salinity, wind, trace metals,        pesticides and sediments), would benefit from further study.</alinea>
+    </resume><grmotcle lang="fr">
+      
+      <motcle>changements globaux</motcle>
+      <motcle>cyanotoxines</motcle>
+      <motcle>facteurs anthropiques</motcle>
+      <motcle>milieux naturels</motcle>
+      <motcle>synthèse de toxines</motcle>
+    </grmotcle><grmotcle lang="en">
+      
+      <motcle>anthropogenic factors</motcle>
+      <motcle>cyanotoxins</motcle>
+      <motcle>global changes</motcle>
+      <motcle>natural environment</motcle>
+      <motcle>toxin synthesis</motcle>
+    </grmotcle></liminaire><corps lang="fr"><texte typetexte="libre">Milieux aquatiques Effets de différentes conditions
+    environnementales sur la production, l’excrétion et la dégradation des cyanotoxines dans les
+    écosystèmes d’eau douce et saumâtre Jade Dormoy-Boulanger, Irene Gregory-Eaves, Philippe Juneau
+    et Beatrix E. Beisner Résumé Les cyanotoxines présentes dans l’environnement menacent
+    l’intégrité des écosystèmes aquatiques et la santé humaine. Dans un contexte où les changements
+    climatiques sont susceptibles de favoriser les efflorescences cyanobactériennes, il nous
+    apparaît nécessaire de mettre à jour nos connaissances sur ce sujet. Cette revue de littérature
+    synthétise les effets de différents facteurs environnementaux sur la production et la
+    dégradation des cyanotoxines ainsi que sur la détoxification de la colonne d’eau dans les
+    écosystèmes naturels d’eau douce et saumâtre au Québec. Les effets de certains facteurs traités
+    dans cet article sont bien connus (nutriments, lumière, température de l’eau, biodégradation et
+    activité bactérienne), alors que d’autres, aussi importants (salinité, vent, métaux-traces,
+    pesticides et contact avec les sédiments), mériteraient d’être plus étudiés. Mots clés :
+    changements globaux, cyanotoxines, facteurs anthropiques, milieux naturels, synthèse de toxines
+    Abstract Cyanotoxins in our environment threaten the integrity of aquatic ecosystems and human
+    health. As climate change is suspected to favour cyanobacterial blooms, it is important to have
+    an up-to-date picture of our knowledge concerning this subject. This review summarizes the
+    effects of various environmental factors on the production and degradation of cyanotoxins, and
+    on the detoxification of the water column in freshwater and brackish ecosystems in Quebec
+    (Canada). The influence of some factors discussed in this paper is well known (e.g., nutrients,
+    light, water temperature and bacterial activity), while that of others, which are equally
+    important (e.g., salinity, wind, trace metals, pesticides and sediments), would benefit from
+    further study. Keywords: anthropogenic factors, cyanotoxins, global changes, natural
+    environment, toxin synthesis Introduction Les cyanobactéries, parce qu’elles produisent des
+    cyanotoxines sous certaines conditions, peuvent avoir un potentiel toxique élevé dans les
+    milieux aquatiques continentaux (Chorus et Bartram, 1999 ; Meriluoto et Spoof, 2008). Leur
+    présence sur le territoire québécois est de plus en plus problématique. On trouve une grande
+    diversité de genres cyanobactériens potentiellement nocifs dans les lacs, les rivières et les
+    étangs du sud du Québec (MELCC, 2018). En effet, dans l’ensemble des 620 milieux aquatiques
+    échantillonnés au moins une fois de 2007 à 2012 dans le cadre du Plan de gestion des épisodes de
+    fleurs d’eau d’algues bleu-vert, on a recensé 43 genres de cyanobactéries, dont 23 à potentiel
+    toxique (MDDEFP, 2014). Parmi ces derniers, Dolichospermum, Microcystis (Pick, 2016),
+    Aphanizomenon (Bowling et collab., 2015) et Woronichinia (MDDEFP, 2014) semblent les plus
+    fréquents dans les lacs québécois, et Microseira forme souvent des matelas toxiques visibles sur
+    le lit du fleuve Saint-Laurent (Hudon et collab., 2014 ; Kenins, 2017) (tableau 1). Les
+    cyanotoxines présentes dans les cellules cyanobactériennes sont dites intracellulaires. Une fois
+    relâchées dans l’environnement, soit naturellement par la cellule ou lors de sa mort, elles sont
+    dites extracellulaires (tableau 1) (Santé Canada, 2017). Les facteurs environnementaux agissent
+    avant tout sur la croissance et la sénescence des populations cyanobactériennes. La croissance
+    et la sénescence des populations ont, par la suite, une influence sur la production et la
+    libération des cyanotoxines dans l’environnement. La production de cyanotoxines est influencée
+    en premier lieu par l’état physiologique et la phase de croissance de la cellule, ainsi que par
+    les conditions du milieu environnemental (p. ex. : la disponibilité des nutriments ; Boopathi et
+    Ki, 2014). Bien qu’elles puissent affecter la santé humaine (tableau 1) par l’entremise de
+    diverses sources d’exposition (p. ex. : eau potable, activités nautiques, etc.), les
+    cyanotoxines agissent aussi sur les écosystèmes naturels. En effet, elles ont des effets
+    négatifs tant sur les animaux (p. ex. : zooplancton, grenouilles, poissons, tortues, chevreuils
+    ; de Boutray et collab., 2017 ; Santé Canada, 2017) que sur les plantes et les autres espèces de
+    phytoplancton, ce qui inclut les cyanobactéries (Cronberg et Annadotter, 2006 ; de Boutray et
+    collab., 2017) d’eau douce et saumâtre. En 2017, de Boutray et collab. ont produit, pour le
+    ministère de l’Environnement et de la Lutte contre les changements climatiques du Québec
+    (MELCC), un rapport intitulé Revue de littérature sur les cyanotoxines dans les milieux
+    aquatiques d’eau douce : leurs effets potentiels sur la santé des usagers et les critères ou
+    seuils d’alerte de toxicité chronique et aiguë avec pour objectif de fournir des informations
+    sur la dynamique des cyanotoxines. Le tableau 2 collige les principaux résultats de cette revue
+    de littérature. Après avoir analysé ce rapport, et considérant que l’étude des effets des
+    conditions environnementales sur l’écologie des cyanotoxines dans les écosystèmes naturels est
+    un champ de recherche très actif, nous avons noté que plusieurs aspects méritaient d’être
+    approfondis. Nous proposons donc un portrait complémentaire et à jour des connaissances sur la
+    dynamique des cyanotoxines (les microcystines [MCs] étant les plus étudiées) dans les
+    écosystèmes naturels. Comme il nous semblait trop ambitieux de couvrir tous les aspects touchant
+    de près ou de loin l’écologie des cyanotoxines, notre revue de littérature se concentre
+    principalement sur des connaissances générales. Certains éléments sont abordés plus en détail
+    quand nous l’avons jugé pertinent pour faciliter la compréhension. Même si certaines des
+    informations présentées peuvent sembler contradictoires, nous avons voulu rapporter toutes les
+    études en lien avec la production, l’excrétion et la dégradation des cyanotoxines ; dans
+    certains cas, une conclusion définitive n’existe pas encore. En l’absence d’un consensus
+    scientifique quant à l’importance relative de l’effet des différents facteurs, ceux-ci sont
+    présentés dans un ordre arbitraire. Méthodologie Nous avons effectué une recherche dans les
+    bases de données de Elsevier (incluant Scopus), Springer Science, Érudit, WorldWideScience et
+    Google Scholar en utilisant les mots clés suivants, seuls ou en combinaison : cyanotoxin
+    production, cyanotoxin degradation, nutrient cyanotoxin, pesticide cyanotoxin, bacteria
+    cyanotoxin, salinity cyanotoxin, biodegradation cyanotoxin, temperature cyanotoxin, sediments
+    cyanotoxin, wind cyanotoxin et trace metals cyanotoxin. Nous nous sommes concentrés sur le terme
+    cyanotoxin, afin de limiter le nombre de résultats obtenus. À partir de ceux-ci, nous avons
+    étendu nos recherches grâce à la méthode « boule de neige », en consultant les références dans
+    la bibliographie des articles initiaux. Pour les facteurs déjà abordés par de Boutray et collab.
+    (2017), nous avons sélectionné les années de publication plus récentes que celles citées. Si le
+    sujet n’y était pas traité, nous avons retenu les publications les plus récentes disponibles. Au
+    total, nous avons consulté 341 publications et nous en avons retenu 106. Après une lecture
+    approfondie, nous en avons rejeté certaines, dont le sujet ne s’est pas avéré pertinent pour
+    cette revue de littérature. Résultats Les effets des principaux facteurs approfondis dans la
+    présente revue de littérature sont synthétisés dans le tableau 3 et détaillés ci-dessous.
+    Nutriments Les nutriments les plus reconnus pour favoriser les efflorescences de cyanobactéries
+    sont le phosphore (P) et l’azote (N). Ils jouent aussi un rôle important dans la production des
+    cyanotoxines (Bowling et collab., 2015 ; Taranu et collab., 2017). Les avis diffèrent,
+    cependant, quant à la nature et à l’importance de leur rôle dans la production et la dégradation
+    des différentes cyanotoxines. À notre connaissance, aucune étude ne démontre un effet de ces
+    nutriments sur la dégradation des cyanotoxines. L’influence du N sur la production des
+    cyanotoxines est encore mal comprise. L’une des hypothèses avancées est que les effets de ce
+    nutriment varient selon la stratégie adoptée pour son assimilation (Kaebernick et Neilan, 2001).
+    Les cyanobactéries diazotrophes, c’est-à-dire capables de fixer et d’utiliser le N
+    atmosphérique, comme Dolichospermum (anciennement Anabaena), Aphanizomenon, Nodularia et
+    Cylindrospermopsis, augmentent leur production de toxines en l’absence de composés azotés
+    dissous dans l’eau. Quant à elles, Oscillatoria et Microcystis, non diazotrophes, augmentent
+    leur production en présence de N assimilable dans l’environnement (Kaebernick et Neilan, 2001).
+    Toutefois, selon d’autres chercheurs, la stratégie d’assimilation n’a pas d’influence sur la
+    production de toxines. C’est ce qu’ont démontré Stucken et collab. (2014) pour
+    Cylindrospermopsis raciborskii CS-505 (diazotrophe) et Raphidiopsis brookii D9
+    (non-diazotrophe). Une concentration faible de N dissous dans le milieu réduit aussi la
+    production de toxines, possiblement parce que les gènes responsables de la régulation du N dans
+    la cellule de la cyanobactérie sont adjacents à ceux de la synthèse des cyanotoxines (Stucken et
+    collab., 2014). Il semble que les différentes formes de N inorganique dissous (nitrites et
+    nitrates) n’influencent pas la production de cylindrospermopsines (CYNs) et de saxitoxines
+    (STX). Le N inorganique dissous sous forme d’ammonium fait exception, car il peut diminuer la
+    production de STX (Stucken et collab., 2014) et augmenter la production de MCs (Donald et
+    collab., 2011). La présence d’urée, une forme de N organique présente dans les engrais, favorise
+    également la production de MCs (Donald et collab., 2011). De plus, puisque les concentrations de
+    N total, d’ammonium et de N organique (p. ex : l’urée) influencent la structure de la communauté
+    de cyanobactéries, elles influencent aussi les types de congénères de MCs produits (Monchamp et
+    collab., 2014). Bien que la disponibilité du P joue un rôle dans la production de cyanotoxines,
+    les mécanismes sous-jacents ne sont pas totalement connus. Certains affirment qu’une baisse du P
+    inorganique biodisponible inhibe la synthèse de MCs et d’anatoxines (ANA-a) chez plusieurs
+    genres de cyanobactéries (Kaebernick et Neilan, 2001). D’autres attestent plutôt que le P n’a
+    pas d’effets clairs sur la production de MCs (Mantzouki et collab., 2018 ; Pineda-Mendoza et
+    collab., 2016). Cependant, Bar-Yosef et collab. (2010) ont démontré que la baisse de P
+    inorganique dans un milieu induit la production de CYNs par Aphanizomenon ovalisporum. Cette
+    baisse de P augmente également la capacité d’absorption du P par cette espèce. En outre, il
+    semblerait que les producteurs de CYNs favorisent la disponibilité du P inorganique, en forçant
+    les algues en suspension dans la colonne d’eau à libérer leurs réserves sous forme de
+    phosphatases alcalines qui seront ensuite absorbées par les cyanobactéries (Bar-Yosef et
+    collab., 2010). D’autres aspects sur les nutriments sont discutés en lien avec la lumière à la
+    section suivante ainsi qu'aux sections sur les pesticides et sur les métaux-traces. Lumière La
+    lumière est un élément clé qui influence la photosynthèse des cyanobactéries et leur production
+    de cyanotoxines, par son intensité, sa qualité ou son type de rayonnement (Chorus et Bartram,
+    1999). Par exemple, Cylindrospermopsis raciborskii, exposé à une haute intensité lumineuse,
+    augmente sa concentration de CYNs intracellulaire (Dyble et collab., 2006). En général, les
+    souches cyanobactériennes toxiques ont tendance à augmenter leur rendement de production (mg/g)
+    de nodularines (NODs) et de SXTs à la suite d’une élévation de l’intensité lumineuse (Boopathi
+    et Ki, 2014). Cependant, Microcystis aeruginosa semble être une exception (Deblois et Juneau,
+    2010). En effet, après une augmentation de l’éclairement énergétique (μmol photons • m−2 • s−1),
+    les cellules de M. aeruginosa réduisent leur concentration de chlorophylle a afin de se protéger
+    contre un surplus d’énergie découlant de la suractivité photosynthétique et des dommages causés
+    par la lumière elle-même ; elles réduisent également leur production de MCs (Deblois et Juneau,
+    2010). Ces phénomènes sont attribuables au fait de la relation positive entre la production de
+    MCs des cyanobactéries et leur activité photosynthétique : la photosynthèse active est requise
+    pour la production de toxines (Boopathi et Ki, 2014). Selon plusieurs études (p. ex. : Paerl et
+    Otten, 2013 ; Phelan et Downing, 2011), les MCs auraient pour rôle de protéger les cellules
+    contre les stress oxydatifs (causés par les radicaux libres, par exemple) produits par la
+    dégradation des molécules organiques en présence de lumière et d’oxygène. Ceci expliquerait la
+    forte corrélation entre la disponibilité de la lumière et la production de toxines. Cette
+    relation a été démontrée, entre autres, sur Microcystis PCC7806, dans une expérience exposant à
+    différentes intensités lumineuses des souches naturelles et des souches génétiquement modifiées
+    pour en éliminer la toxicité (Phelan et Downing, 2011). Seules les cellules toxiques ont survécu
+    à de très hautes intensités lumineuses, tandis que les souches modifiées sont mortes. Le carbone
+    organique dissous (COD) se dégrade et occasionne divers stress oxydatifs lorsqu’il est libéré
+    par les cellules mortes d’une efflorescence exposées à des rayons UV. Les stress oxydatifs,
+    issus de la sénescence de la population cyanobactérienne, sont également létaux pour cette même
+    population (Paerl et Otten, 2013). Ces stress oxydatifs stimulent la production de MCs
+    stress-protectrices chez les cellules ou les souches toxiques d’une même population, ce qui
+    favoriserait la sélection d’espèces et de souches cyanobactériennes toxiques (Paerl et Otten,
+    2013). En revanche, des expériences récentes ont démontré que la lumière seule n’a pas d’effet
+    sur la concentration de MCs (Chaffin et collab., 2018), qui serait plutôt influencée par les
+    interactions entre la lumière et les nutriments. Par exemple, Planktothrix et Microcystis
+    augmentent leur production de MCs seulement lorsque la lumière et le N biodisponible
+    s’accroissent (Chaffin et collab., 2018). Le seul cas d’exception est celui des ANA-a qui,
+    contrairement aux autres toxines, voient leur production s’accroître avec une baisse de la
+    luminosité, même à des concentrations de nutriments favorables et à une température optimale
+    (Boopathi et Ki, 2014 ; Rapala et Sivonen, 1998). Plusieurs cyanotoxines sont sensibles à la
+    photodégradation, c’est-à-dire la décomposition chimique causée par l’irradiation solaire. Cette
+    sensibilité diffère toutefois selon le type de toxine. Les CYNs et les ANA-a se dégradent
+    simplement par exposition aux rayons du soleil (Boopathi et Ki, 2014). En revanche, à cause de
+    leur structure cyclique, les MCs sont extrêmement stables et résistantes à la photodégradation
+    dans des conditions de pH neutre (Svrcek et Smith, 2004). Cependant, leur dégradation est
+    favorisée en milieu acide et en présence de phycocyanines (pigments nécessaires pour la
+    photosynthèse des cyanobactéries). Néanmoins, les variations structurelles des différents
+    congénères de MCs ne semblent pas avoir d’effet significatif sur leur phototransformation (Song
+    et collab., 2007 ; Thirumavalavan et collab., 2012). En plus de dépendre de l’intensité du
+    soleil, de la profondeur de la colonne d’eau et de la concentration en COD, le taux de
+    photodégradation dépend également de la saison, de l’incidence des rayons UV, des matières en
+    suspension et des acides humiques présents (Thirumavalavan et collab., 2012). Les composantes
+    humiques ont d’ailleurs une influence négative sur la dégradation de cyanotoxines par la lumière
+    du soleil, probablement en raison de la diminution de la pénétration des rayons du soleil dans
+    la colonne d’eau (Prosen et Zupančič-Kralj, 2005). D’autres aspects de l’influence de la lumière
+    sont discutés en lien avec le fer (Fe) dans la section sur les métaux-traces. Température de
+    l’eau La température de l’eau est un facteur important dans le développement des efflorescences
+    toxiques (Affan et collab., 2015 ; Chorus et Bartram, 1999), mais son rôle dans la production
+    des cyanotoxines est assez controversé. Même si l’on admet généralement que la concentration des
+    cyanotoxines libérées dans l’eau augmente en fonction de la température d’un milieu aquatique
+    (Walls et collab., 2018), les avis diffèrent quant à l’importance de la température dans la
+    formation des efflorescences et la production de cyanotoxines. Certaines études suggèrent que si
+    la hausse de température s’étend au-delà de la température optimale de croissance de l’espèce,
+    la production de MCs tend à diminuer (Pavlova et collab., 2010). Une étude de 2016 démontre
+    cependant que le lien est faible entre la température de l’eau et la concentration de MCs
+    intracellulaire (Pineda-Mendoza et collab., 2016). De plus, les variations de température
+    régulent légèrement la production des différentes formes (congénères) de MCs chez des taxons
+    comme Dolichospermum et Microcystis aeruginosa (Pineda-Mendoza et collab., 2016). En revanche,
+    une autre étude a permis d’établir que la température de l’eau de surface et celle de la strate
+    supérieure de la colonne d’eau (épilimnion) jouent un rôle prédominant dans la distribution,
+    l’abondance relative et la richesse des différents congénères de MCs à l’échelle continentale
+    (Mantzouki et collab., 2018). Il semble aussi qu’une hausse de température réduise la diversité
+    des cyanotoxines en favorisant la dominance de quelques espèces de cyanobactéries très toxiques
+    (Mantzouki et collab., 2018 ; Taranu et collab., 2019). Salinité Certaines cyanobactéries d’eau
+    douce (salinité de &lt; 0,5 g/l ; NOAA, 2020) tolèrent assez bien la salinisation progressive de
+    leur milieu et sont capables d’y maintenir leur métabolisme. Microcystis aeruginosa ne présente
+    aucun changement dans sa production de MCs à la suite d’une augmentation de la salinité jusqu’à
+    10 g/l (Tonk et collab., 2007). Au-delà de cette concentration (l’eau de mer en contient environ
+    35 g/l), une baisse des concentrations des toxines intracellulaires et une hausse des
+    concentrations extracellulaires peuvent être observées à la suite de la mort des cyanobactéries,
+    de la rupture de leurs cellules et de la fuite membranaire des toxines (Tonk et collab., 2007).
+    La tolérance au sel de certaines cyanobactéries d’eau douce semble varier considérablement selon
+    la souche testée. Les effets de la salinité ont été très étudiés chez Nodularia spumigena, une
+    espèce proliférant en eau douce, saumâtre ou salée pour laquelle la salinité a un effet direct
+    sur la production de NODs (Georges des Aulnois et collab., 2019). À long terme, la concentration
+    intracellulaire de NODs dépend de la salinité du milieu. Cependant, après de subites et fortes
+    augmentations de la salinité, une hausse abrupte de la production de NODs est observée jusqu’à
+    la mort des cellules cyanobactériennes (Hameed et collab., 2017). Une étude récente a montré
+    l’existence de 2 seuils de salinité pour la production de NODs chez Nodularia spumigena, qui
+    augmente à des salinités de moins de 0,001 g/l et de plus de 0,015 g/l (Silveira et Odebrecht,
+    2019). Vents Il existe un lien entre la concentration des β-N-méthylamino-L-alanine (BMAA) et la
+    direction des vents dominants sur les lacs affectés par des fleurs d’eau de cyanobactéries
+    (Banack et collab., 2015). Le vent peut transporter des fleurs d’eau de cyanobactéries par
+    advection (de Souza et collab., 2018), mais, s’il est trop fort, il peut aussi les détruire
+    (Wang et collab., 2016). Le vent a donc un effet indirect sur les cyanotoxines par son influence
+    sur les populations des espèces planctoniques de cyanobactéries (de Souza et collab., 2018 ;
+    Wang et collab., 2016). Métaux-traces Plusieurs théories décrivent le lien entre la présence des
+    métaux-traces dans l’eau et la production de cyanotoxines. Selon certains chercheurs, les MCs
+    favorisent l’assimilation et l’accumulation des métaux chez les cyanobactéries (Saito et
+    collab., 2008), ce qui avantage les espèces synthétisant cette toxine dans des milieux pauvres
+    en Fe (Alexova et collab., 2011). Bien que le Fe favorise la production de MCs, il existe 2
+    hypothèses quant aux mécanismes sous-jacents. Premièrement, selon une étude, l’augmentation de
+    la lumière disponible serait à l’origine de l’élévation de l’absorption du Fe par la cellule
+    (Utkilen et Gjolme, 1995). Par la suite, cette hausse de Fe ferait augmenter la production de
+    toxines dans les cellules cyanobactériennes (Kaebernick et Neilan, 2001 ; figure 1A).
+    Deuxièmement, le Fe jouerait un rôle de protection contre les radicaux libres produits lors de
+    la photosynthèse, en plus d’autres processus cellulaires (figure 1A). En l’absence de Fe (figure
+    1B), la production de MCs serait augmentée dans les cellules, et les cyanotoxines joueraient un
+    rôle semblable à celui du Fe (Alexova et collab., 2011 ; Yeung et collab., 2016). Après une
+    période de latence pendant laquelle les dernières réserves de Fe sont totalement consommées
+    (Sevilla et collab., 2008), les MCs extracellulaires agissent en signal pour induire la
+    production de MCs intracellulaires dans la population (Yeung et collab., 2016) (figure 1B). Ceci
+    serait en partie causé par leur rôle de transport du Fe que les MCs pourraient combler dans la
+    cellule et dans le transport intermembranaire (Klein et collab., 2013). Toutefois, les MCs ne
+    seraient pas des sidérophores (molécules liant puissamment le Fe(II) et le Fe(III) (Fujii et
+    collab., 2011), car leur couplage avec le Fe(II) est seulement de force modérée (Klein et
+    collab., 2013). Fait intéressant, une augmentation des concentrations du Fe et du cuivre (Cu)
+    n’affecte pas la production d’ANA-a, et ce, jusqu’à l’atteinte de concentrations létales pour
+    les cellules (Harland et collab., 2013). La présence d’autres métaux peut également contribuer à
+    faire varier la production de cyanotoxines. Par exemple, les MCs jouent un rôle de protection
+    contre le nickel (Ni) (Martínez-Ruiz et Martínez-Jerónimo, 2016). À partir de concentrations de
+    Ni de 3 μg/l (la limite acceptée par l’Agence de protection environnementale des États-Unis est
+    de 52 μg/l), Microcystis aeruginosa augmente sa production de MCs (Martínez-Ruiz et
+    Martínez-Jerónimo, 2016). Cette production continue jusqu’à un seuil létal de Ni pour la
+    cellule, soit d’environ 3,7 μg/l (Martínez-Ruiz et Martínez-Jerónimo, 2016). À l’opposé,
+    certains chercheurs affirment que les MCs n’ont aucun effet sur la capacité des cyanobactéries à
+    éliminer les métaux toxiques. Par exemple, il a été démontré que les souches toxiques et non
+    toxiques de Microcystis aeruginosa sont affectées de manière similaire par la toxicité du
+    cadmium (Cd) (Huang et collab., 2015). De plus, les concentrations de MCs intracellulaires ne
+    varient pas en fonction des différentes concentrations de Cu et de zinc (Zn) dans
+    l’environnement (Gouvêa et collab., 2008). Pesticides À ce jour, la relation entre les
+    pesticides et la production de cyanotoxines est encore très peu étudiée (Brêda-Alves et collab.,
+    2020). La présente section ne traitera donc que de trois herbicides et d’un fongicide. Le
+    glyphosate (commercialisé sous le nom de RoundupMC par Monsanto ; Bayer Group, 2019) est
+    l’herbicide le plus utilisé au Québec (Giroux, 2019) et dans le monde. Sa dégradation rapide
+    dans l’environnement est souvent associée à un faible potentiel de toxicité pour les écosystèmes
+    aquatiques. Par exemple, la concentration nécessaire pour inhiber la croissance de Microcystis
+    aeruginosa et éventuellement mener à la mort des cellules est de 120 mg/l, mais même à cette
+    concentration, on trouve encore quelques cellules résistantes au glyphosate (López-Rodas et
+    collab., 2007). Les produits de dégradation du glyphosate, bien que considérés comme presque
+    inoffensifs pour l’environnement, sont une source importante de P comparable à celle qui, par le
+    passé, a mené aux premières règlementations gouvernementales concernant le phosphate dans les
+    savons et les détersifs au Canada (Hébert et collab., 2019). Ces produits sont principalement
+    l’AMPA (α-amino-3-hydroxy-5-méthylisoazol-4-propionate) et la sarcosine. L’AMPA est peu toxique
+    pour les organismes photosynthétiques et les animaux (Beaulieu et collab., 2014) et la sarcosine
+    n’est simplement pas toxique (HMBD, 2020). Même à faible concentration dans l’eau, le P dérivant
+    du glyphosate (AMPA et sarcosine réunis) promeut la présence d’efflorescences cyanobactériennes,
+    car les cyanobactéries sont capables de dégrader le glyphosate et de l’utiliser comme source de
+    P (Forlani et collab., 2008). Le glyphosate augmente également la concentration de MC-LR (un des
+    congénères de MCs) intracellulaire des cyanobactéries. Par contre, aucun effet n’a été observé
+    sur la concentration extracellulaire (Zhang et collab., 2016). Il a récemment été démontré qu’au
+    contact du cléthodime, un herbicide commercialisé sous la marque SelectMC (Giroux, 2019), les
+    concentrations de peroxyde d’hydrogène dans les cellules augmentent, et les activités
+    enzymatiques antioxydantes sont altérées. Chez Cylindrospermopsis raciborskii et Microcystis
+    aeruginosa, cela se traduit, respectivement, par une augmentation des SXTs et des MCs
+    intracellulaires (Brêda-Alves et collab., 2020). Une faible concentration de l’herbicide
+    métolachlore, plus connu sous le nom de Dual II MagnumMC (Giroux, 2019), pourrait promouvoir la
+    croissance des cyanobactéries (Wang et collab., 2017). Cependant, de fortes concentrations de
+    cet herbicide sont létales pour les cellules. Le bris des cellules, après leur mort, augmente
+    les concentrations de MCs extracellulaires dans l’environnement (Wang et collab., 2017).
+    Finalement, le 1,2,4-triazole, un métabolite commun à plusieurs fongicides à base de triazole,
+    semble favoriser le relargage des MCs dans l’environnement en modifiant la perméabilisation de
+    la membre cellulaire des cyanobactéries (Polyak et collab., 2013). Activité bactérienne
+    Certaines bactéries pourraient abaisser les concentrations de cyanotoxines dans les cellules
+    cyanobactériennes. L’étude de Ndlela et collab. (2019) a suggéré qu’en présence des genres
+    bactériens Aeromonas et Pseudomonas, les concentrations de MCs, de NODs et d’ANA-a
+    intracellulaires dans les cyanobactéries Microcystis sp. et Oscillatoria sp. diminueraient
+    significativement. Les bactéries dégradent-elles les cyanotoxines dans les cellules
+    cyanobactériennes, ou ont-elles une influence négative directe sur la production de
+    cyanotoxines? Les expériences menées à ce jour ne permettent pas de départager les hypothèses
+    sous-jacentes à cette observation (Ndlela et collab., 2019). La biodégradation semble être le
+    mécanisme principal de détoxification par certaines bactéries de la plupart des cyanotoxines
+    dans la colonne d’eau et les sédiments (Chen et collab., 2008). Maghsoudi et collab. (2016) ont
+    montré que le taux de dégradation dépend, entre autres, du pH ambiant, l’optimum étant à un pH
+    de 7. Leurs résultats démontrent que certaines communautés bactériennes naturelles, en plus
+    d’être capables de dégrader les MCs, peuvent aussi dégrader un large éventail de cyanopeptides
+    produits et excrétés dans l’eau par Microcystis aeruginosa PCC 7806. Cependant, la concentration
+    de ces molécules dans les cellules cyanobactériennes ne serait pas affectée par l’activité
+    bactérienne, ce qui suggère que les bactéries n’influenceraient pas la production
+    intracellulaire des cyanopeptides (Briand et collab., 2016). La concentration des cyanotoxines
+    présentes dans l’environnement semble aussi jouer un rôle dans les taux de biodégradation
+    (Toruńska-Sitarz et collab., 2018). Par exemple, plus il y a de NODs dans les sédiments d’un
+    plan d’eau, plus la biodégradation se fait rapidement. Fait particulièrement intéressant, la
+    dégradation peut avoir lieu toutes les saisons, même sous la glace (Toruńska-Sitarz et collab.,
+    2018). Sédiments Les sédiments, en plus d’être un site potentiel de biodégradation grâce à leur
+    communauté bactérienne (Chen et collab., 2008), ont la capacité d’adsorber les cyanotoxines
+    (Maghsoudi et collab., 2015b ; Wu et collab., 2011 ; Zastepa et collab., 2017b). Les sédiments
+    peuvent également libérer les cyanotoxines dans la colonne d’eau et devenir une source de
+    contamination (Maghsoudi et collab., 2015b ; Zastepa et collab., 2017b). Deux processus sont à
+    l’origine de ce phénomène. Premièrement, le potentiel de désorption (libération des substances
+    de la surface des particules) des sédiments est propre à chaque toxine et varie en fonction de
+    la teneur en matière organique (MO). La MO, en milieu aquatique, est composée d’organismes en
+    décomposition (p. ex. : plantes, algues, poissons). Elle peut être présente dans les sédiments
+    et dissoute dans l’eau sous forme de carbone organique dissous (Thirumavalavan et collab.,
+    2012). Deuxièmement, une étude a démontré que le taux de diffusion des MCs des sédiments vers la
+    colonne d’eau est plus élevé que leur taux d’enfouissement (Zastepa et collab., 2017a) ; les
+    sédiments peuvent donc être une source de MCs. Deux hypothèses pourraient expliquer ce phénomène
+    soit : la production de MCs directement dans les sédiments ou la diffusion des MCs issus de la
+    lyse des cellules cyanobactériennes dans les sédiments, après un épisode de fleurs d’eau en
+    surface (les cellules mortes d’une fleur d’eau tendent à sédimenter) (Zastepa et collab.,
+    2017a). Plusieurs membres de la communauté scientifique affirment que l’adsorption des
+    cyanotoxines sur les sédiments est l’un des processus principaux de la détoxification de la
+    colonne d’eau (p. ex. : Liu et collab., 2008 ; Maghsoudi et collab., 2015b). Meriluoto et Spoof
+    (2008) ont démontré que 1 ml de sédiments stériles peut adsorber de 13 à 24 μg de MCs et de 50 à
+    82 μg d’ANA-a. Les processus d’adsorption dépendent autant de la composition des sédiments que
+    du type de cyanotoxines. Les sédiments sablonneux ont un fort potentiel d’adsorption, lequel
+    diminue avec l’augmentation de la taille des grains de sable présents (Maghsoudi et collab.,
+    2015b). Une autre étude rapporte que les différents mécanismes d’adsorption des MCs sont plutôt
+    dépendants de la teneur en MO des sédiments (Wu et collab., 2011). Selon elle, des sédiments
+    contenant moins de 8 % de MO présentent une diminution de l’adsorption des MCs quand le
+    pourcentage de MO augmente. Lorsque les sédiments contiennent plus de 8 % de MO, alors
+    l’adsorption des MCs augmente avec le pourcentage de MO (Wu et collab., 2011). Une autre étude a
+    examiné la relation entre les mécanismes d’adsorption et les différents congénères de MCs
+    (Zastepa et collab., 2017a). Elle a démontré que les congénères MC-LA et MC-LR se trouvent dans
+    l’eau interstitielle dans laquelle baignent les sédiments, tandis que les congénères MC-LW,
+    MC-RR, MC-YR, MC-WR et MC-dmLR sont directement adsorbés sur les particules sédimentaires
+    (Zastepa et collab., 2017a). Discussion Cette analyse de la littérature scientifique sur les
+    cyanotoxines montre qu’il y a proportionnellement peu de recherches sur les cyanotoxines autres
+    que les MCs. Nous croyons nécessaire que ces connaissances soient comblées pour que s’améliore
+    la gestion future des écosystèmes aquatiques. De plus, dans le cadre de cette revue de
+    littérature, nous avons rapporté plusieurs éléments clés souvent peu mentionnés lorsque le thème
+    des cyanotoxines est abordé : l’adsorption et la désorption des cyanotoxines par les sédiments,
+    l’influence de certains pesticides sur la production de cyanotoxines et le rôle médiateur de
+    plusieurs métaux-traces (p. ex. : le Fe) sur l’initiation de la production de MCs. Par ailleurs,
+    nous soulignons l’importance qu’apporteraient des recherches sur les interactions entre les
+    souches de cyanobactéries toxiques et les pesticides utilisés en agriculture pour la
+    conservation durable des écosystèmes aquatiques. Dans cette optique, nous avons aussi relevé le
+    nombre limité de travaux sur les interactions chimiques entre les différents composés des
+    pesticides, leurs métabolites et les cyanotoxines une fois libérées dans l’environnement.
+    L’influence de la vaporisation des toxines dans l’air sur leurs concentrations dans les eaux
+    contaminées, particulièrement lorsque la température de l’eau est plus chaude que l’air (p. ex.
+    : la brume au-dessus des lacs certains matins), mériterait d’être étudiée. Finalement,
+    considérant l’industrialisation et le développement économique actuel du Québec, nous
+    encourageons l’acquisition de nouvelles connaissances, notamment sur les effets de la hausse de
+    la salinité du milieu causée par les sels de route et la présence accrue de métaux-traces sur la
+    production et dégradation des cyanotoxines. Conclusion Malgré un grand nombre d’études sur les
+    cyanotoxines, il reste encore beaucoup de recherches à faire afin de cerner leurs effets à long
+    terme sur la qualité des écosystèmes aquatiques. Certaines cyanotoxines peuvent, en effet,
+    persister très longtemps dans l’environnement (p. ex. : les MCs peuvent être présentes dans
+    l’eau de 1 à 3 mois après une fleur d’eau et peuvent subsister jusqu’à 6 mois dans des écumes
+    séchées sur la rive ; Žegura et collab., 2011). Dans cette optique, de nouvelles connaissances
+    permettront d’adapter la gestion future des activités dans les bassins versants et cours d’eau
+    du Québec afin d’établir une politique efficace de la gestion durable de nos écosystèmes
+    aquatiques. Signalement des cyanobactéries Si vous pensez être en présence d’une efflorescence
+    de cyanobactéries, n’hésitez pas à la signaler au MELCC, de préférence à l’aide du formulaire de
+    constat visuel sur le site Web1 du Ministère, par téléphone au bureau régional2 ou, en dehors
+    des heures de bureau, en appelant Urgence-Environnement au 1 866 694-5454. Remerciements Nous
+    reconnaissons le soutien financier d’Ouranos – Consortium sur la climatologie régionale et
+    l'adaptation aux changements climatiques pour une subvention accordée aux professeurs B. E.
+    Beisner, P. Juneau et I. Gregory-Eaves, en collaboration avec le MELCC et le ministère des
+    Forêts, de la Faune et des Parcs (MFFP). Nous reconnaissons également le soutien financier du
+    Groupe de recherche interuniversitaire en limnologie (GRIL), un regroupement stratégique financé
+    par le Fonds de recherche du Québec – Nature et technologies (FRQNT). De plus, nous souhaitons
+    remercier les membres du laboratoire de B. E. Beisner de l’Université du Québec à Montréal
+    (UQAM) et du laboratoire de I. Gregory-Eaves à l’Université McGill pour leurs commentaires et
+    leur soutien au cours du processus d’écriture de cette revue de littérature. Nous souhaitons
+    faire mention du travail bénévole des réviseurs scientifiques et de l’équipe éditoriale du
+    Naturaliste canadien. Finalement, nous voulons remercier Lissa Dormoy-Boulanger pour ses
+    connaissances du logiciel Photoshop. ◀ Références Affan, A., H.S. Khomayis, S. Marzoog Al-Harbi,
+    M. Haque et S. Khan, 2015. Effect of environmental factors on cyanobacterial abundance and
+    cyanotoxins production in natural and drinking water, Bangladesh. Pakistan Journal of Biological
+    Sciences, 18 : 50-58. https://doi.org/10.3923/pjbs.2015.50.58. Alexova, R., M. Fujii, D. Birch,
+    J. Cheng, T.D. Waite, B.C. Ferrari et B.A. Neilan, 2011. Iron uptake and toxin synthesis in the
+    bloom-forming Microcystis aeruginosa under iron limitation. Environmental Microbiology, 13 :
+    1064-1077. https://doi.org/10.1111/j.1462-2920.2010.02412.x. Antoniou, M.G., J.A. Shoemaker,
+    A.A. de la Cruz et D.D. Dionysiou, 2008. Unveiling new degradation intermediates/pathways from
+    the photocatalytic degradation of microcystin-LR. Environmental Science and Technology, 42 :
+    8877-8883. https://doi.org/10.1021/es801637z. Banack, S.A., T. Caller, P. Henegan, J. Haney, A.
+    Murby, J.S. Metcalf, J. Powell, P. Alan et E. Stommel, 2015. Detection of cyanotoxins,
+    β-N-methylamino-L-alanine and microcystins, from a lake surrounded by cases of amyotrophic
+    lateral sclerosis. Toxins, 7 : 322-336. https://doi.org/10.3390/toxins7020322. Bar-Yosef, Y., A.
+    Sukenik, O. Hadas, Y. Viner-Mozzini et A. Kaplan, 2010. Enslavement in the water body by toxic
+    Aphanizomenon ovalisporum, inducing alkaline phosphatase in phytoplanktons. Current Biology, 20
+    : 1557-1561. https://doi.org/10.1016/j.cub.2010.07.032. Bayer Group, 2019. Products | Roundup
+    WeatherMAX | Soybeans | Roundup Ready PLUS. Disponible en ligne à :
+    https://www.roundupreadyplus.com/products/soybeans/roundupweathermax. [Visité le 2019-12-19].
+    Beaulieu, M., G. Marcil, Y. Huot, J. Lacey, R. Leconte et H. Cabana, 2014. Pesticides et
+    phytoplancton au Québec : Conditions propices aux efflorescences cyanobactériennes? Université
+    de Sherbrooke, Sherbrooke, 132 p. Boopathi, T. et J.S Ki, 2014. Impact of environmental factors
+    on the regulation of cyanotoxin production. Toxins, 6 : 1951-1978.
+    https://doi.org/10.3390/toxins6071951. Boutray, M.-L. de, E. Maghsoudi, M. Ndong et S. Dorner,
+    2017. Revue de littérature sur les cyanotoxines dans les milieux aquatiques d’eau douce : leurs
+    effets potentiels sur la santé des usagers et les critères ou seuils d’alerte de toxicité
+    chronique et aiguë. Chaire de recherche du Canada en protection des sources d’eau potable,
+    Polytechnique Montréal, Montréal, 188 p. Disponible en ligne à :
+    https://www.google.ca/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwjFsenh98zqAhVjleAKHc7lA24QFjABegQIAxAB&amp;url=https%3A%2F%2Fshare.polymtl.ca%2Falfresco%2Fservice%2Fapi%2Fpath%2Fcontent%3Bcm%3Acontent%2Fworkspace%2FSpacesStore%2FCompany%2520Home%2FSites%2Fchaire-eau-web%2FdocumentLibrary%2Fsarah_dorner%2FDorner_cyanotoxines_revue_31_janvier_2017.pdf%3Fa%3Dtrue%26guest%3Dtrue&amp;usg=AOvVaw3EueavVtdKOH_d9T-uvM_e.
+    Bowling, L.C., S. Blais et M. Sinotte, 2015. Heterogeneous spatial and temporal cyanobacterial
+    distributions in Missisquoi Bay, Lake Champlain: An analysis of a 9 year data set. Journal of
+    Great Lakes Research, 41 : 164-179. https://doi.org/10.1016/j.jglr.2014.12.012. Brêda-Alves, F.,
+    F.P. Militão, B. Freitas de Alvarenga, P.F. Miranda, V. de Oliveira Fernandes, M.K.
+    Cordeiro-Araújo et M.A. Chia, 2020. Clethodim (herbicide) alters the growth and toxins content
+    of Microcystis aeruginosa and Raphidiopsis raciborskii. Chemosphere, 243 : 2-9.
+    https://doi.org/10.1016/j.chemosphere.2019.125318. Briand, E., J.F. Humbert, K. Tambosco, M.
+    Bormans et W.H. Gerwick, 2016. Role of bacteria in the production and degradation of Microcystis
+    cyanopeptides. MicrobiologyOpen, 5 : 469-478. https://doi.org/10.1002/mbo3.343. Burns, J.M., S.
+    Hall et J.L. Ferry, 2009. The adsorption of saxitoxin to clays and sediments in fresh and saline
+    waters. Water Research, 43 : 1899-1904. https://doi.org/10.1016/j.watres.2009.02.004. Casero,
+    M.C., A. Ballot, R. Agha, A. Quesada et S. Cirés, 2014. Characterization of saxitoxin production
+    and release and phylogeny of sxt genes in paralytic shellfish poisoning toxin-producing
+    Aphanizomenon gracile. Harmful Algae, 37 : 28:37. https://doi.org/10.1016/j.hal.2014.05.006.
+    Chaffin, J.D., T.W. Davis, D.J. Smith, M.M. Baer et G.J. Dick, 2018. Interactions between
+    nitrogen form, loading rate, and light intensity on Microcystis and Planktothrix growth and
+    microcystin production. Harmful Algae, 73 : 84-97. https://doi.org/10.1016/j.hal.2018.02.001.
+    Chen, W., L. Song, L. Peng, N. Wan, X. Zhang et N. Gan, 2008. Reduction in microcystin
+    concentrations in large and shallow lakes: Water and sediment-interface contributions. Water
+    Research, 42 : 763-773. https://doi.org/10.1016/j.watres.2007.08.007. Cheng, S.Y., Y. Zhou, C.M.
+    Irvin, B. Kirkpatrick et L.C. Backer, 2007. Characterization of aerosols containing microcystin.
+    Marine Drugs, 5 : 136-150. https://doi.org/10.3390/md20070010. Chorus, I. et J. Bartram, 1999.
+    Toxic cyanobacteria in water: A guide to their public health consequences, monitoring and
+    management. E &amp; FN Spon, London, 400 p. Cirés, S. et A. Ballot, 2016. A review of the
+    phylogeny, ecology and toxin production of bloom-forming Aphanizomenon spp. and related species
+    within the Nostocales (cyanobacteria). Harmful Algae, 54 : 21-43.
+    https://doi.org/10.1016/j.hal.2015.09.007. Cousins, I.T., D.J. Bealing, H.A. James et A. Sutton,
+    1996. Biodegradation of microcystin-LR by indigenous mixed bacterial populations. Water
+    Research, 30 : 481-485. https://doi.org/10.1016/0043-1354(95)00189-1. Cronberg, G. et H.
+    Annadotter, 2006. Manual on aquatic cyanobacteria, a photo guide and a synopsis of their
+    toxicology. International Society for the Study of Harmful Algae and the United Nations
+    Educational, Scientific and Cultural Organisation, Copenhagen, 106 p. Deblois, C.P. et P.
+    Juneau, 2010. Relationship between photosynthetic processes and microcystin in Microcystis
+    aeruginosa grown under different photon irradiances. Harmful Algae, 9 : 18-24.
+    https://doi.org/10.1016/j.hal.2009.07.001. Dias, E., P. Pereira et S. Franca, 2002. Production
+    of paralytic shellfish toxins by Aphanizomenon sp. lmecya 31 (cyanobacteria). Journal of
+    Phycology, 38 : 705-712. https://doi.org/10.1046/j.1529-8817.2002.01146.x. Donald, D.B., M.J.
+    Bogard, K. Finlay et P.R. Leavitt, 2011. Comparative effects of urea, ammonium, and nitrate on
+    phytoplankton abundance, community composition, and toxicity in hypereutrophic freshwaters.
+    Limnology and Oceanography, 56 : 2161-2175. https://doi.org/10.4319/lo.2011.56.6.2161. Downing,
+    S., S.A. Banack, J.S. Metcalf, P.A. Cox et T.G. Downing, 2011. Nitrogen starvation of
+    cyanobacteria results in the production of β-N-methylamino-L-alanine. Toxicon, 58 : 187-194.
+    https://doi.org/10.1016/j.toxicon.2011.05.017. Dyble, J., P.A. Tester et R.W. Litaker, 2006.
+    Effects of light intensity on cylindrospermopsin production in the cyanobacterial HAB species
+    Cylindrospermopsis raciborskii. African Journal of Marine Science, 28 : 309-312.
+    https://doi.org/10.2989/18142320609504168. Forlani, G., M. Pavan, M. Gramek, P. Kafarski et J.
+    Lipok, 2008. Biochemical bases for a widespread tolerance of cyanobacteria to the phosphonate
+    herbicide glyphosate. Plant and Cell Physiology, 49 : 443-456.
+    https://doi.org/10.1093/pcp/pcn021. Fujii, M., A.L. Rose et T.D. Waite, 2011. Iron uptake by
+    toxic and nontoxic strains of Microcystis aeruginosa. Applied and Environmental Microbiology, 77
+    : 7068-7071. https://doi.org/10.1128/AEM.05270-11. Georges des Aulnois, M., P. Roux, A. Caruana,
+    D. Réveillon, E. Briand, F. Hervé, V. Savar, H. Bormans et Z. Amzil, 2019. Physiological and
+    metabolic responses of freshwater and brackish strains of Microcystis aeruginosa acclimated to a
+    salinity gradient: insight into salt tolerance. Applied and Environmental Microbiology, 85 :
+    1614-1619. https://doi.org/10.1128/aem.01614-19. Giani, A., D.F. Bird, Y.T. Prairie et J.F.
+    Lawrence, 2005. Empirical study of cyanobacterial toxicity along a trophic gradient of lakes.
+    Canadian Journal of Fisheries and Aquatic Sciences, 62 : 2100-2109.
+    https://doi.org/10.1139/f05-124. Giroux, I. 2019. Présence de pesticides dans l’eau au Québec :
+    Portrait et tendances dans les zones de maïs et de soya – 2015 à 2017. Québec, ministère de
+    l’Environnement et de la Lutte contre les changements climatiques, Direction générale du suivi
+    de l’état de l’environnement, 64 p. + 6 ann. Disponible en ligne à :
+    http://142.213.133.76/pesticides/mais_soya/portrait2015-2017/rapport-2015-2017.pdf. Gouvêa,
+    S.P., G.L. Boyer et M.R. Twiss, 2008. Influence of ultraviolet radiation, copper, and zinc on
+    microcystin content in Microcystis aeruginosa (Cyanobacteria). Harmful Algae, 7 : 194-205.
+    https://doi.org/10.1016/j.hal.2007.07.003. Hameed, S., L.A. Lawton, C. Edwards, A. Khan, A., U.
+    Farooq et F.A. Khan, 2017. Effects of temperature and salinity on the production of cell
+    biomass, chlorophyll-a and intra- and extracellular nodularins (NOD) and nodulopeptin 901
+    produced by Nodularia spumigena KAC 66. Journal of Applied Phycology, 29 : 1801-1810.
+    https://doi.org/10.1007/s10811-017-1115-5. Harland, F.M.J., S.A. Wood, E. Moltchanova, W.M.
+    Williamson et S. Gaw, 2013. Phormidium autumnale growth and anatoxin-a production under iron and
+    copper stress. Toxins, 5 : 2504-2521. https://doi.org/10.3390/toxins5122504. Hébert, M.P., V.
+    Fugère et A. Gonzalez, 2019. The overlooked impact of rising glyphosate use on phosphorus
+    loading in agricultural watersheds. Frontiers in Ecology and the Environment, 17 : 48-56.
+    https://doi.org/10.1002/fee.1985. Heresztyn, T. et B.C. Nicholson, 1997. Nodularin
+    concentrations in lakes Alexandrina and Albert, South Australia, during a bloom of the
+    cyanobacterium (Blue-Green alga) Nodularia spumigena and degradation of the toxin. Environmental
+    Toxicology and Water Quality, 12 : 273-282.
+    https://doi.org/10.1002/(SICI)1098-2256(1997)12:4273::AID-TOX13.0.CO;2-5. Hiller, S., B.
+    Krock, A. Cembella et B. Luckas, 2007. Rapid detection of cyanobacterial toxins in precursor ion
+    mode by liquid chromatography tandem mass spectrometry. Journal of Mass Spectometry, 47 :
+    1238-1250. https://doi.org/10.1002/jms.1257. [HMBD] Human Matabolome Database, 2020. Showing
+    metabocard for Sarcosine (HMDB0000271). Disponible en ligne à :
+    https://hmdb.ca/metabolites/HMDB0000271. [Visité le 2020-10-28]. Ho, L., D. Hoefel, C.P. Saint
+    et G. Newcombe, 2007. Isolation and identification of a novel microcystin-degrading bacterium
+    from a biological sand filter. Water Research, 41 : 4685-4695.
+    https://doi.org/10.1016/j.watres.2007.06.057. Ho, L., E. Sawade et G. Newcombe, 2012. Biological
+    treatment options for cyanobacteria metabolite removal - A review. Water Research, 46 :
+    1536-1548. https://doi.org/10.1016/j.watres.2011.11.018. Huang, B., S. Xu, A.J. Miao, L. Xiao et
+    L.Y. Yang, 2015. Cadmium toxicity to Microcystis aeruginosa PCC 7806 and its microcystin-lacking
+    mutant. PLoS ONE, 10 : 1-18. https://doi.org/10.1371/journal.pone.0116659. Hudon, C., M. De Sève
+    et A. Cattaneo, 2014. Increasing occurrence of the benthic filamentous cyanobacterium Lyngbya
+    wollei: A symptom of freshwater ecosystem degradation. Freshwater Science, 33 : 606-618.
+    https://doi.org/10.1086/675932. Kaebernick, M. et B.A Neilan, 2001. Ecological and molecular
+    investigations of cyanotoxin production. FEMS Microbiology Ecology, 35 : 1-9.
+    https://doi.org/10.1016/S0168-6496(00)00093-3. Kenins A., 2017. Validation of the noxious
+    cyanophyte Microseira wollei (Farlow ex Gomont) G.B.McGregor &amp; Sendall (Oscillatoriaceae).
+    Notulae algarum, 43 : 1-3. Klein, A.R., D.S. Baldwin, S. Darren et E. Silvester, 2013. Proton
+    and iron binding by the cyanobacterial toxin microcystin-LR. Environmental Science and
+    Technology, 47 : 5178-5184. https://doi.org/10.1021/es400464e. Klitzke, S., S. Apelt, C. Weiler,
+    J. Fastner et I. Chorus, 2010. Retention and degradation of the cyanobacterial toxin
+    cylindrospermopsin in sediments - The role of sediment preconditioning and DOM composition.
+    Toxicon, 55 : 999-1007. https://doi.org/10.1016/j.toxicon.2009.06.036. Kotak, B.G., S.L.
+    Kenefick, D.L. Fritz, C.G. Rousseaux, E.E. Prepas et S.E. Hrudey, 1993. Occurrence and
+    toxicological evaluation of cyanobacterial toxins in Alberta lakes and farm dugouts. Water
+    Research, 27 : 495-506. https://doi.org/10.1016/0043-1354(93)90050-R. Kotak, B.G., A.K.-Y. Lam,
+    E.E. Prepas, S.L. Kenefick et S.E. Hrudey, 1995. Variability of the hepatotoxin microcystin‐Lr
+    in hypereutrophic drinking water lakes. Journal of Phycology, 31 : 248-263.
+    https://doi.org/10.1111/j.0022-3646.1995.00248.x. Krishnamurthy, T., L. Szafraniec, D.F. Hunt,
+    J. Shabanowitz, J.R. Yates, C.R. Hauer, W.W. Carmichael, O. Skulberg, G.A. Codd et S. Missler,
+    1989. Structural characterization of toxic cyclic peptides from blue-green algae by tandem mass
+    spectrometry. Proceedings of the National Academy of Sciences of the United States of America,
+    86 : 770-774. https://doi.org/10.1073/pnas.86.3.770. Lemes, G.A.F., R. Kersanach, L. da S.
+    Pinto, O.A. Dellagostin, J.S. Yunes et A. Matthiensen, 2008. Biodegradation of microcystins by
+    aquatic Burkholderia sp. from a South Brazilian coastal lagoon. Ecotoxicology and Environmental
+    Safety, 69 : 358-365. https://doi.org/10.1016/j.ecoenv.2007.03.013. Liu, G., Y. Qian, S. Dai et
+    N. Feng, 2008. Adsorption of microcystin LR and LW on suspended particulate matter (SPM) at
+    different pH. Water, Air, and Soil Pollution, 192 : 67-76.
+    https://doi.org/10.1007/s11270-008-9635-x. López-Rodas, V., A. Flores-Moya, E. Maneiro, N.
+    Perdigones, F. Marva, M.E. García et E. Costas, 2007. Resistance to glyphosate in the
+    cyanobacterium Microcystis aeruginosa as result of pre-selective mutations. Evolutionary
+    Ecology, 21 : 535-547. https://doi.org/10.1007/s10682-006-9134-8. Maghsoudi, E., N. Fortin, C.
+    Greer, S.V. Duy, P. Fayad, S. Sauvé, M. Prévost, S. Dorner, 2015a. Biodegradation of multiple
+    microcystins and cylindrospermopsin in clarifier sludge and a drinking water source: Effects of
+    particulate attached bacteria and phycocyanin. Ecotoxicology and Environmental Safety, 120 :
+    409-417. https://doi.org/10.1016/j.ecoenv.2015.06.001. Maghsoudi, E., M. Prévost, S. Vo Duy, S.
+    Sauvé et S. Dorner, 2015b. Adsorption characteristics of multiple microcystins and
+    cylindrospermopsin on sediment: Implications for toxin monitoring and drinking water treatment.
+    Toxicon, 103 : 48-54. https://doi.org/10.1016/j.toxicon.2015.06.007. Maghsoudi, E., N. Fortin,
+    C. Greer, C. Maynard, A. Pagé, S.V. Duy, S. Sauvé et S. Dorner, 2016. Cyanotoxin degradation
+    activity and: Mlr gene expression profiles of a Sphingopyxis sp. isolated from Lake Champlain,
+    Canada. Environmental Science: Processes and Impacts, 18 : 1417-1426.
+    https://doi.org/10.1039/c6em00001k. Mantzouki, E., M. Lürling, J. Fastner et 192 auteurs, 2018.
+    Temperature effects explain continental scale distribution of cyanobacterial toxins. Toxins, 10
+    : 1-24. https://doi.org/10.3390/toxins10040156. Martínez-Ruiz, E.B. et F. Martínez-Jerónimo,
+    2016. How do toxic metals affect harmful cyanobacteria? An integrative study with a toxigenic
+    strain of Microcystis aeruginosa exposed to nickel stress. Ecotoxicology and Environmental
+    Safety, 133 : 36-46. https://doi.org/10.1016/j.ecoenv.2016.06.040. [MDDEFP] Ministère du
+    Développement durable, de l’Environnement, de la Faune et des Parcs, 2014. Bilan de la gestion
+    des épisodes de fleurs d'eau d'algues bleu-vert au Québec, de 2007 à 2012. Direction du suivi de
+    l’état de l’environnement, Québec, 32 p. Disponible en ligne à :
+    http://www.environnement.gouv.qc.ca/eau/algues-bv/bilan/Bilan_ABV_2007-2012.pdf. [MELCC]
+    Ministère de l'Environnement et de la Lutte contre les changements climatiques, 2018. Liste des
+    plans d'eau touchés par une fleur d'eau d'algues bleu-vert de 2004 à 2017 et des plans d'eau
+    récurrents signalés de 2013 à 2015. Québec, 32 p. Disponible en ligne à :
+    http://www.environnement.gouv.qc.ca/eau/algues-bv/bilan/Liste-plans-eau-touches-abv.pdf.
+    Meriluoto, J.A.O. et L.E.M. Spoof, 2008. Cyanotoxins: sampling, sample processing and toxin
+    uptake. Advances in Experimental Medicine and Biology, 619 : 483-499.
+    https://doi.org/10.1007/978-0-387-75865-7_21. Meriluoto, J., L. Spoof et G.A. Codd, 2017.
+    Handbook of cyanobacterial monitoring and cyanotoxin analysis. John Wiley &amp; Sons, édition
+    illustrée, West Sussex, 576 p. Monchamp, M-E., F.R. Pick, B.E. Beisner et R. Maranger, 2014.
+    Nitrogen forms influence microcystin concentration and composition via changes in cyanobacterial
+    community structure. PLoS ONE, 9 : e85573. https://doi.org/10.1371/journal.pone.0085573. Ndlela,
+    L.L., P.J. Oberholster, J.H. Van Wyk et P.H. Cheng, 2019. A laboratory based exposure of
+    Microcystis and Oscillatoria cyanobacterial isolates to heterotrophic bacteria. Toxicon, 165 :
+    1-12. https://doi.org/10.1016/j.toxicon.2019.04.002. Neilan, B.A., L.A. Pearson, J. Muenchhoff,
+    M.C. Moffitt et E. Dittmann, 2013. Environmental conditions that influence toxin biosynthesis in
+    cyanobacteria. Environmental Microbiology, 15 : 1239-1253.
+    https://doi.org/10.1111/j.1462-2920.2012.02729.x. [NEIWPCC] New England Interstate Water
+    Pollution Control Commision, Lake Champlain Basin Program et Organisme de bassin versant de la
+    Baie Missisquoi, 2019. Apports de nutriments et ses impacts sur le lac Champlain, la baie
+    Missisquoi et la rivière Richelieu. Commission mixte internationale, 90 p. Disponible en ligne à
+    :
+    https://www.ijc.org/sites/default/files/2019-11/20191114_Missisquoi_BayLit_Review_LCBP_OBVBM_FR.pdf.
+    [NOAA] National Oceanic and Atmospheric Administration, National Ocean Service Education, 2020.
+    Estuaries. NOAA's National Ocean Service Education. Disponible en ligne à :
+    https://oceanservice.noaa.gov/education/kits/estuaries/estuaries01_whatis.html. [Visité le
+    2020-01-29]. Oh, H.M., S.J. Lee, M.H. Jang et B.D.Yoon, 2000. Microcystin production by
+    Microcystis aeruginosa in a phosphorus-limited chemostat. Applied and Environmental
+    Microbiology, 66 : 176-179. https://doi.org/10.1128/AEM.66.1.176-179.2000. Paerl, H.W. et T.G.
+    Otten, 2013. Blooms bite the hand that feeds them. Science, 342 : 433-434.
+    https://doi.org/10.1126/science.1245276. Pavlova, V., S. Furnadzhieva, J. Rose, R. Andreeva, Z.
+    Bratanova et A. Nayak, 2010. Effect of temperature and light intensity on the growth,
+    chlorophyll a concentration and microcystin production by Microcystis aeruginosa. General and
+    Applied Plant Physiology, 36 : 148-158. Pearson, L., T. Mihali, M. Moffitt, R. Kellmann et B.
+    Neilan, 2010. On the chemistry, toxicology and genetics of the cyanobacterial toxins,
+    microcystin, nodularin, saxitoxin and cylindrospermopsin. Marine Drugs, 8 : 1650-1680.
+    https://doi.org/10.3390/md8051650. Phelan, R.R. et T.G. Downing, 2011. A growth advantage for
+    microcystin production by Microcystis PCC7806 under high light. Journal of Phycology, 47 :
+    1241-1246. https://doi.org/10.1111/j.1529-8817.2011.01056.x. Pick, F., 2016. Blooming algae: A
+    Canadian perspective on the rise of toxic cyanobacteria. Canadian Journal of Fisheries and
+    Aquatic Sciences, 73 : 1149-1158. https://doi.org/10.1139/cjfas-2015-0470. Pineda-Mendoza, R.M.,
+    G. Zúñiga et F. Martínez-Jerónimo, 2016. Microcystin production in Microcystis aeruginosa:
+    effect of type of strain, environmental factors, nutrient concentrations, and N:P ratio on mcyA
+    gene expression. Aquatic Ecology, 50 : 103-119. https://doi.org/10.1007/s10452-015-9559-7.
+    Polyak, Y., T. Zaytseva et N. Medvedeva, 2013. Response of toxic cyanobacterium Microcystis
+    aeruginosa to environmental pollution. Water, Air, and Soil Pollution, 224 : 1494-1508.
+    https://doi.org/10.1007/s11270-013-1494-4. Preußel, K., G. Wessel, J. Fastner et I. Chorus,
+    2009. Response of cylindrospermopsin production and release in Aphanizomenon flos-aquae
+    (Cyanobacteria) to varying light and temperature conditions. Harmful Algae, 8 : 645-650.
+    https://doi.org/10.1016/j.hal.2008.10.009. Prosen, H. et L. Zupančič-Kralj, 2005. Evaluation of
+    photolysis and hydrolysis of atrazine and its first degradation products in the presence of
+    humic acids. Environmental Pollution, 133 : 517-529.
+    https://doi.org/10.1016/j.envpol.2004.06.015. Rapala, J. et K. Sivonen, 1998. Assessment of
+    environmental conditions that favor hepatotoxic and neurotoxic Anabaena spp. strains cultured
+    under light limitation at different temperatures. Microbial Ecology, 36 : 181-192.
+    https://doi.org/10.1007/s002489900105. Rapala, J., K. Lahti, K. Sivonen et S.I. Niemelä, 1994.
+    Biodegrability and adsorption on lake sediments of cyanobacterial hepatotoxins and anatoxin-a.
+    Letters in Applied Microbiology, 19 : 423-428.
+    https://doi.org/10.1111/j.1472-765x.1994.tb00972.x. Rapala, J., K. Sivonen, K., C. Lyra et S.I.
+    Niemelä, 1997. Variation of microcystins, cyanobacterial hepatotoxins, in Anabaena spp. as a
+    function of growth stimuli. Applied and Environmental Microbiology, 63 : 2206-2212.
+    https://doi.org/10.1128/AEM.63.6.2206-2212.1997. Rivasseau, C., S. Martins et M.C. Hennion,
+    1998. Determination of some physicochemical parameters of microcystins (cyanobacterial toxins)
+    and trace level analysis in environmental samples using liquid chromatography. Journal of
+    Chromatography A, 799 : 155-169. https://doi.org/10.1016/S0021-9673(97)01095-9. Saito, K., Y.
+    Sei, S. Miki et K. Yamaguchi, 2008. Detection of microcystin-metal complexes by using cryospray
+    ionization-Fourier transform ion cyclotron resonance mass spectrometry. Toxicon, 51 : 1496-1498.
+    https://doi.org/10.1016/j.toxicon.2008.03.026. Santé Canada, 2017. Recommandations pour la
+    qualité de l’eau potable au Canada : document technique — Les toxines cyanobactériennes. Bureau
+    de la qualité de l’eau et de l’air, Direction générale de la santé environnementale et de la
+    sécurité des consommateurs, Santé Canada, Ottawa, 220 p. (N° de catalogue H144-38/2017F-PDF).
+    Disponible en ligne à :
+    https://www.canada.ca/content/dam/canada/health-canada/migration/healthy-canadians/publications/healthy-living-vie-saine/water-cyanobacteria-cyanobacterie-eau/alt/water-cyanobacteria-cyanobacterie-eau-fra.pdf.
+    Sevilla, E., B. Martin-Luna, L. Vela, M.T. Bes, M.F. Fillat et M.L. Peleato, 2008. Iron
+    availability affects mcyD expression and microcystin-LR synthesis in Microcystis aeruginosa
+    PCC7806. Environmental Microbiology, 10 : 2476-2483.
+    https://doi.org/10.1111/j.1462-2920.2008.01663.x. Silveira, S.B. et C. Odebrecht, 2019. Effects
+    of salinity and temperature on the growth, toxin production, and akinete germination of the
+    cyanobacterium Nodularia spumigena. Frontiers in Marine Science, 6 : 1-12.
+    https://doi.org/10.3389/fmars.2019.00339. Sivonen K., 1990. Effects of light, temperature,
+    nitrate, orthophosphate, and bacteria on growth of and hepatotoxin production by Oscillatoria
+    agardhii strains. Applied and Environmental Microbiology, 56 : 2658:2666. Song, W., S. Bardowell
+    et K.E. O’Shea, 2007. Mechanistic study and the influence of oxygen on the photosensitized
+    transformations of microcystins (cyanotoxins). Environmental Science and Technology, 41 :
+    5336-5341. https://doi.org/10.1021/es063066o. Souza, M.S. de, J.H. Muelbert, L.D.F. Costa,
+    E.V.Klering et J.S. Yunes, 2018. Environmental variability and cyanobacterial blooms in a
+    subtropical coastal lagoon: Searching for a sign of climate change effects. Frontiers in
+    Microbiology, 9 : 1-10. https://doi.org/10.3389/fmicb.2018.01727. Stucken, K., U. John, A.
+    Cembella, K. Soto-Liebe et M. Vásquez, 2014. Impact of nitrogen sources on gene expression and
+    toxin production in the diazotroph Cylindrospermopsis raciborskii CS-505 and non-diazotroph
+    Raphidiopsis brookii D9. Toxins, 6 : 1896-1915. https://doi.org/10.3390/toxins6061896. Svrcek,
+    C. et D.W. Smith, 2004. Cyanobacteria toxins and the current state of knowledge on water
+    treatment options: A review. Journal of Environmental Engineering and Science, 3 : 155-185.
+    https://doi.org/10.1139/S04-010. Taranu, Z.E., I. Gregory-Eaves, R.J. Steele, M. Beaulieu et P.
+    Legendre, 2017. Predicting microcystin concentrations in lakes and reservoirs at a continental
+    scale: A new framework for modelling an important health risk factor. Global Ecology and
+    Biogeography, 26 : 625-637. https://doi.org/10.1111/geb.12569. Taranu, Z.E., F.R. Pick, I.F.
+    Creed, A. Zastepa et S.B. Watson, 2019. Meteorological and nutrient conditions influence
+    microcystin congeners in freshwaters. Toxins, 11 : 1-21. https://doi.org/10.3390/toxins11110620.
+    Thirumavalavan, M., Y.L. Hu et J.F. Lee, 2012. Effects of humic acid and suspended soils on
+    adsorption and photo-degradation of microcystin-LR onto samples from Taiwan reservoirs and
+    rivers. Journal of Hazardous Materials, 217-218 : 323-329.
+    https://doi.org/10.1016/j.jhazmat.2012.03.031. Tonk, L., K. Bosch, P.M. Visser et J. Huisman,
+    2007. Salt tolerance of the harmful cyanobacterium Microcystis aeruginosa. Aquatic Microbial
+    Ecology, 46 : 117-123. https://doi.org/10.3354/ame046117. Toruńska-Sitarz, A., E. Kotlarska et
+    H. Mazur-Marzec, 2018. Biodegradation of nodularin and other nonribosomal peptides by the Baltic
+    bacteria. International Biodeterioration and Biodegradation, 134 : 48-57.
+    https://doi.org/10.1016/j.ibiod.2018.08.004. Utkilen, H. et N. Gjolme, 1995. Iron-stimulated
+    toxin production in Microcystis aeruginosa. Applied and Environmental Microbiology, 61 :
+    797-800. Walls, J.T., K.H. Wyatt, J.C. Doll, E.M. Rubenstein et A.R. Rober, 2018. Hot and toxic:
+    Temperature regulates microcystin release from cyanobacteria. Science of the Total Environment,
+    610-611 : 786-795. https://doi.org/10.1016/j.scitotenv.2017.08.149. Wang, X., P. Parkpian, N.
+    Fujimoto, K.M. Ruchirawat, R.D. DeLaune et A. Jugsujinda, 2002, Environmental conditions
+    associating microcystins production to Microcystis aeruginosa in a reservoir of Thailand.
+    Journal of Environmental Science and Health - Part A Toxic/Hazardous Substances and
+    Environmental Engineering, 37 : 1181-1207. https://doi.org/10.1081/ESE-120005980. Wang, H., Z.
+    Zhang, D.Liang, H. Du, Y. Pang, K. Hu et J. Wang, 2016. Separation of wind's influence on
+    harmful cyanobacterial blooms. Water Research, 98 : 280-292.
+    https://doi.org/10.1016/j.watres.2016.04.037. Wang, J., L. Zhang, J. Fan et Y. Wen, 2017.
+    Impacts of Rac- and S-metolachlor on cyanobacterial cell integrity and release of microcystins
+    at different nitrogen levels. Chemosphere, 181 : 619-626.
+    https://doi.org/10.1016/j.chemosphere.2017.04.101. Watanabe, M.F. et S. Oishi, 1985. Effects of
+    environmental factors on toxicity of a cyanobacterium (Microcystis aeruginosa) under culture
+    conditions. Applied and Environmental Microbiology, 49 : 1342-1344. Wu, X., B. Xiao, R. Li, C.
+    Wang, J. Huang et Z. Wang, 2011. Mechanisms and factors affecting sorption of microcystins onto
+    natural sediments. Environmental Science and Technology, 45 : 2641-2647.
+    https://doi.org/10.1021/es103729m. Yeung, A.C.Y., P.M. D’Agostino, A. Poljak, J. McDonald, M.W.
+    Bligh, T.D. Waite et B.A. Neilan, 2016. Physiological and proteomic responses of continuous
+    cultures of Microcystis aeruginosa PCC 7806 to changes in iron bioavailability and growth rate.
+    Applied and Environmental Microbiology, 82 : 5918-5929. https://doi.org/10.1128/AEM.01207-16.
+    Zastepa, A., F.R. Pick et J.M. Blais, 2017a. Distribution and flux of microcystin congeners in
+    lake sediments. Lake and Reservoir Management, 33 : 444-451.
+    https://doi.org/10.1080/10402381.2017.1362491. Zastepa, A., Z.E. Taranu, L.E. Kimpe, J.M. Blais,
+    I. Gregory-Eaves, R.W. Zurawell et F.R. Pick, 2017b. Reconstructing a long-term record of
+    microcystins from the analysis of lake sediments. Science of the Total Environment, 579 :
+    893-901. https://doi.org/10.1016/j.scitotenv.2016.10.211. Žegura, B., A. Štraser et M. Filipič,
+    2011. Genotoxicity and potential carcinogenicity of cyanobacterial toxins — a review. Mutation
+    Research — Reviews in Mutation Research, 727 : 16-41.
+    https://doi.org/10.1016/j.mrrev.2011.01.002. Zhang, Q., H. Zhou, Z. Li, J. Zhu, C. Zhou et M.
+    Zhao, 2016. Effects of glyphosate at environmentally relevant concentrations on the growth of
+    and microcystin production by Microcystis aeruginosa. Environmental Monitoring and Assessment,
+    188 : 632-639. https://doi.org/10.1007/s10661-016-5627-2. 1 .
+    http://www.environnement.gouv.qc.ca/eau/algues-bv/identifier-fleurs-eau.htm 2 .
+    https://www.quebec.ca/gouv/ministere/environnement/coordonnees/adresses-des-directions-regionales/
+    Jade Dormoy-Boulanger est étudiante à la maîtrise en biologie à l’Université du Québec à
+    Montréal (UQAM) et membre étudiante du Groupe de recherche interuniversitaire en limnologie
+    (GRIL). jade.dormoy@hotmail.com Irene Gregory-Eaves est professeure agrégée au département de
+    biologie de l’Université McGill, titulaire de la Chaire de recherche du Canada en écologie des
+    eaux douces et des changements globaux et membre chercheuse du GRIL. Philippe Juneau est
+    professeur titulaire au département de biologie de l’UQAM, membre du Groupe de recherche en
+    toxicologie de l’environnement (TOXEN) et membre du GRIL. Beatrix E. Beisner est professeure
+    titulaire au département de biologie de l’UQAM et directrice du GRIL. beisner.beatrix@uqam.ca
+    Tableau 1. Liste des cyanotoxines trouvées en eau douce et saumâtre au Québec. Un genre de
+    cyanobactéries peut produire plusieurs cyanotoxines différentes, et plus d’un genre peut
+    produire la même toxine : les genres emblèmes ne sont donc pas les seuls à pouvoir produire la
+    toxine qui leur est associée. Cyanotoxine Abréviation Nombre de congénères* Type de toxine†
+    Genre emblème Sources Microcystines MCs 240 Hépatotoxine Microcystis Giani et collab., 2005 ;
+    Meriluoto et collab., 2017 Nodularines NODs 7 Hépatotoxine Nodularia Pearson et collab., 2010
+    Anatoxines ANA-a s. o. Neurotoxine Dolichospermum NEIWPCC, 2019 Saxitoxines SXTs 25 Neurotoxine
+    Microseira Hudon et collab., 2014 ; Kenins, 2017 β-N-méthylamino-L-alanine BMAA s. o.
+    Neurotoxine Aphanizomenon Cirés et Ballot, 2016 Cylindrospermopsine CYNs 3 Hépatotoxine
+    Cylindrospermopsis Hiller et collab., 2007 * Un congénère est une variante d’une molécule ayant
+    la même configuration de base. † Une hépatotoxine affecte le foie des humains et des animaux,
+    alors qu’une neurotoxine affecte le système nerveux. Tableau 2. Synthèse des informations
+    disponibles dans la littérature et répertoriées par de Boutray et collab. (2017) sur les
+    facteurs influençant la production, la dégradation et la décontamination des cyanotoxines dans
+    la colonne d’eau. Les numéros de pages correspondent à ceux dans la publication d’origine.
+    Facteur Effets* Sources Nutriments La présence de MCs est fortement corrélée à celle de P
+    soluble, surtout la MC-LR (p. 39). Kotak et collab., 1993 ; 1995 La production de BMAA augmente
+    en réponse à la déplétion de N (p. 39). Downing et collab., 2011 Lumière La production des MCs
+    augmente en fonction de la luminosité chez Microcystis aeruginosa et Aphanizomenon flos-aquae
+    (p. 40). Preußel et collab., 2009 ; Watanabe et Oishi, 1985 Les MCs sont très résistantes à la
+    lumière du soleil, mais les pigments photosensibilisants (p. ex. : phycocyanines, substances
+    humiques) permettent la photodégradation des MCs (p. 178-179). Antoniou et collab., 2008 L’ANA-a
+    est très sensible à la photodégradation (p. 180). Sivonen, 1990 Température de l’eau La
+    production de MCs chez Dolichospermum et Microcystis est optimale entre 18 et 25 °C (p. 40). Oh
+    et collab., 2000 ; Wang et collab., 2002 Aphanizomenon double sa production d’ANA-a à plus de 25
+    °C (p. 41). Casero et collab., 2014 ; Dias et collab., 2002 La biodégradation des cyanotoxines
+    dépend, entre autres, de la température (p. 181). Krishnamurthy et collab., 1989 Vent Le vent
+    peut influencer la production de cyanotoxines (p. 38). Neilan et collab., 2013 Les toxines
+    peuvent être pulvérisées en aérosols par éclatement des bulles, puis massivement transférées
+    dans l’air quand il y a beaucoup de vent (p. 177). Cheng et collab., 2007 Biodégradation La
+    biodégradation serait le mécanisme principal de détoxification de la colonne d’eau, surtout pour
+    les plans d’eau ayant un historique d’efflorescences de cyanobactéries (p. 174). Chen et
+    collab., 2008 ; Cousins et collab., 1996 Elle s’effectue grâce à la présence de bactéries aptes
+    à dégrader les toxines, suivant une période de latence de 2 jours à 3 semaines, surtout dans les
+    sédiments (p. 174 et p. 181). Ho et collab., 2012 ; Krishnamurthy et collab., 1989 Elle dépend
+    des conditions climatiques et du pH (p. 174 et p. 181). Krishnamurthy et collab., 1989 ; Rapala
+    et collab., 1994 ; Rapala et collab., 1997 Elle ne s’appliquerait pas aux CYNs (p. 174).
+    Maghsoudi et collab., 2015a Les NODs seraient dégradées le plus rapidement (p. 175). Heresztyn
+    et Nicholson, 1997 Sphingomonas, Pseudomonas, Sphingosinicella, Paucibacter, Sphingopyxis et
+    Burkholderia sont des bactéries dégradant les cyanotoxines (p. 175). Ho et collab., 2007 ; Lemes
+    et collab., 2008 Sédiments Les MCs s’adsorbent faiblement sur les sédiments et les matières en
+    suspension (p. 183). Chen et collab., 2008 ; Rivasseau et collab., 1998 L’adsorption dépend du
+    type de sédiments, du type de cyanotoxines et du pH (p. 183). Klitzke et collab., 2010 Les CYNs,
+    l’ANA-a, les MCs, les NODs et les SXTs peuvent être adsorbées sur les sédiments (p. 183-184).
+    Burns et collab., 2009 ; Chen et collab., 2008 ; Klitzke et collab., 2010 ; Rivasseau et
+    collab., 1998 Les SXTs peuvent être désorbées des sédiments et remises en suspension dans la
+    colonne d’eau (p. 184). Burns et collab., 2009 * Les abréviations des noms des cyanotoxines sont
+    définies au tableau 1. Tableau 3. Synthèse des nouvelles connaissances présentées dans cette
+    revue de littérature. Il est à noter que la colonne « Effet connu » porte sur celui d’une
+    augmentation du facteur sur la concentration en cyanotoxines d’un milieu. Les « nouvelles »
+    connaissances sont considérées comme telles par rapport à la publication produite par de Boutray
+    et collab. en 2017. Les nouveaux facteurs sont marqués d’un astérisque (*). Facteur Effet connu
+    Nouvelles connaissances Azote Positif L’urée promeut la production de MCs (Donald et collab.,
+    2011). Phosphore Positif Une baisse du P promeut la production de CYNs, afin d’aller voler les
+    réserves aux autres espèces d’algues en suspension dans la colonne d’eau (Bar-Yosef et collab.,
+    2010). Lumière Positif Les MCs protègent contre les stress oxydatifs provenant de la
+    photodégradation de la matière organique (Paerl et Otten, 2013). Le taux de photodégradation des
+    MCs en présence de phycocyanine dépend du pH (Thirumavalavan et collab., 2012). Salinité*
+    Positif Microcystis aeruginosa maintient sa production de MCs à une salinité proche de celle de
+    l’océan (Tonk et collab., 2007). La production de NODs dépend de la salinité (Georges des
+    Aulnois et collab., 2019). Vent Neutre Il y a une corrélation entre les cyanotoxines trouvées
+    dans l’air, la direction des vents et la proximité d’un lac contaminé (Banack et collab., 2015).
+    Métaux-traces* Positif Une baisse de la concentration de Fe dans le milieu induit la production
+    de MCs (Yeung et collab., 2016). Les MCs offrent une protection contre la toxicité du Ni
+    (Martìnez-Ruiz et Martìnez-Jerònimo, 2016). Pesticides* Positif Le glyphosate (Zhang et collab.,
+    2016), le cléthodime (Brêda-Alves et collab., 2020), le métolachlore (Wang et collab., 2017) et
+    le triazole (Polyak et collab., 2013) promeuvent la production de cyanotoxines. Activité
+    bactérienne Négatif Les communautés bactériennes induiraient une baisse de production des
+    cyanotoxines (Ndlela et collab., 2019). La biodégradation des cyanotoxines dépend en grande
+    partie du pH (Maghsoudi et collab., 2016). La biodégradation des NODs se fait durant toute
+    l’année (Torunska-Sitarz et collab., 2018). Sédiments Négatif L’adsorption des cyanotoxines
+    dépend du contenu en matière organique (Wu et collab., 2011). Les sédiments pourraient être une
+    source de cyanotoxines (Maghsoudi et collab., 2015b). Figure 1. Les 2 grandes hypothèses quant
+    au lien unissant la disponibilité du fer (Fe) dans le milieu et la production de microcystines
+    (MCs) chez les cyanobactéries. (A) L’augmentation de la luminosité augmente l’absorption du Fe.
+    Par la suite, il y a une augmentation de la production de microcystines (Kaebernick et Neilan,
+    2001 ; Utkilen et Gjolme, 1995). (B) En milieu pauvre en Fe biodisponible, à la suite d’une
+    période de latence pendant laquelle les cellules consomment leurs réserves de Fe, la production
+    de microcystines augmente. Par la suite, les microcystines agissent sur la communication
+    intracellulaire, incitant le reste de la population à produire des microcystines (Sevilla et
+    collab., 2008 ; Yeung et collab., 2016). </texte></corps><partiesann lang="fr">
+    <merci>
+      <alinea>Nous reconnaissons le soutien financier d’Ouranos – Consortium sur la climatologie        régionale et l'adaptation aux changements climatiques pour une subvention accordée aux        professeurs B. E. Beisner, P. Juneau et I. Gregory-Eaves, en collaboration avec le MELCC et        le ministère des Forêts, de la Faune et des Parcs (MFFP). Nous reconnaissons également le        soutien financier du Groupe de recherche interuniversitaire en limnologie (GRIL), un        regroupement stratégique financé par le Fonds de recherche du Québec – Nature et        technologies (FRQNT). De plus, nous souhaitons remercier les membres du laboratoire de B. E.        Beisner de l’Université du Québec à Montréal (UQAM) et du laboratoire de I. Gregory-Eaves à        l’Université McGill pour leurs commentaires et leur soutien au cours du processus d’écriture        de cette revue de littérature. Nous souhaitons faire mention du travail bénévole des        réviseurs scientifiques et de l’équipe éditoriale du <marquage typemarq="italique">Naturaliste canadien</marquage>.        Finalement, nous voulons remercier Lissa Dormoy-Boulanger pour ses connaissances du logiciel        Photoshop.</alinea>
+    </merci>
+    <grnotebio>
+      <notebio id="nb1" idrefs="au1" lang="fr">
+        <alinea><marquage typemarq="italique">Jade Dormoy-Boulanger est étudiante à la maîtrise en biologie à l’Université          du Québec à Montréal (UQAM) et membre étudiante du Groupe de recherche interuniversitaire          en limnologie (GRIL).</marquage></alinea>
+      </notebio>
+      <notebio id="nb2" idrefs="au2" lang="fr">
+        <alinea><marquage typemarq="italique">Irene Gregory-Eaves est professeure agrégée au département de biologie de          l’Université McGill, titulaire de la Chaire de recherche du Canada en écologie des eaux          douces et des changements globaux et membre chercheuse du GRIL.</marquage></alinea>
+      </notebio>
+      <notebio id="nb3" idrefs="au3" lang="fr">
+        <alinea><marquage typemarq="italique">Philippe Juneau est professeur titulaire au département de biologie de          l’UQAM, membre du Groupe de recherche en toxicologie de l’environnement (TOXEN) et membre          du GRIL.</marquage></alinea>
+      </notebio>
+      <notebio id="nb4" idrefs="au4" lang="fr">
+        <alinea><marquage typemarq="italique">Beatrix E. Beisner est professeure titulaire au département de biologie de          l’UQAM et directrice du GRIL.</marquage></alinea>
+      </notebio>
+    </grnotebio>
+    <grbiblio>
+      <biblio><refbiblio id="rb1"><marquage typemarq="petitecap">Affan</marquage>, A., H.S. <marquage typemarq="petitecap">Khomayis</marquage>, S. <marquage typemarq="petitecap">Marzoog</marquage> <marquage typemarq="petitecap">Al-Harbi</marquage>, M. <marquage typemarq="petitecap">Haque</marquage> et S. <marquage typemarq="petitecap">Khan</marquage>, 2015. Effect of environmental factors on cyanobacterial abundance and cyanotoxins production in natural and drinking water, Bangladesh. Pakistan Journal of Biological Sciences, 18 : 50-58. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="https://doi.org/10.3923/pjbs.2015.50.58" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3923/pjbs.2015.50.58</liensimple>.</refbiblio>
+<refbiblio id="rb2"><marquage typemarq="petitecap">Alexova</marquage>, R., M. <marquage typemarq="petitecap">Fujii</marquage>, D. <marquage typemarq="petitecap">Birch</marquage>, J. <marquage typemarq="petitecap">Cheng</marquage>, T.D. <marquage typemarq="petitecap">Waite</marquage>, B.C. <marquage typemarq="petitecap">Ferrari</marquage> et B.A. <marquage typemarq="petitecap">Neilan</marquage>, 2011. Iron uptake and toxin synthesis in the bloom-forming <marquage typemarq="italique">Microcystis aeruginosa</marquage> under iron limitation. Environmental Microbiology, 13 : 1064-1077. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="https://doi.org/10.1111/j.1462-2920.2010.02412.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/j.1462-2920.2010.02412.x</liensimple>.</refbiblio>
+<refbiblio id="rb3"><marquage typemarq="petitecap">Antoniou</marquage>, M.G., J.A. <marquage typemarq="petitecap">Shoemaker</marquage>, A.A. <marquage typemarq="petitecap">de</marquage> <marquage typemarq="petitecap">la</marquage> <marquage typemarq="petitecap">Cruz</marquage> et D.D. <marquage typemarq="petitecap">Dionysiou</marquage>, 2008. Unveiling new degradation intermediates/pathways from the photocatalytic degradation of microcystin-LR. Environmental Science and Technology, 42 : 8877-8883. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="https://doi.org/10.1021/es801637z" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1021/es801637z</liensimple>.</refbiblio>
+<refbiblio id="rb4"><marquage typemarq="petitecap">Banack</marquage>, S.A., T. <marquage typemarq="petitecap">Caller</marquage>, P. <marquage typemarq="petitecap">Henegan</marquage>, J. <marquage typemarq="petitecap">Haney</marquage>, A. <marquage typemarq="petitecap">Murby</marquage>, J.S. <marquage typemarq="petitecap">Metcalf</marquage>, J. <marquage typemarq="petitecap">Powell</marquage>, P. <marquage typemarq="petitecap">Alan</marquage> et E. <marquage typemarq="petitecap">Stommel</marquage>, 2015. Detection of cyanotoxins, β-N-methylamino-L-alanine and microcystins, from a lake surrounded by cases of amyotrophic lateral sclerosis. Toxins, 7 : 322-336. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:href="https://doi.org/10.3390/toxins7020322" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/toxins7020322</liensimple>.</refbiblio>
+<refbiblio id="rb5"><marquage typemarq="petitecap">Bar</marquage>-<marquage typemarq="petitecap">Yosef</marquage>, Y., A. <marquage typemarq="petitecap">Sukenik</marquage>, O. <marquage typemarq="petitecap">Hadas</marquage>, Y. <marquage typemarq="petitecap">Viner</marquage>-<marquage typemarq="petitecap">Mozzini</marquage> et A. <marquage typemarq="petitecap">Kaplan</marquage>, 2010. Enslavement in the water body by toxic <marquage typemarq="italique">Aphanizomenon ovalisporum</marquage>, inducing alkaline phosphatase in phytoplanktons. Current Biology, 20 : 1557-1561. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:href="https://doi.org/10.1016/j.cub.2010.07.032" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.cub.2010.07.032</liensimple>.</refbiblio>
+<refbiblio id="rb6"><marquage typemarq="petitecap">Bayer</marquage> <marquage typemarq="petitecap">Group</marquage>, 2019. Products | Roundup WeatherMAX | Soybeans | Roundup Ready PLUS. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:href="https://www.roundupreadyplus.com/products/soybeans/roundupweathermax" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.roundupreadyplus.com/products/soybeans/roundupweathermax</liensimple>. [Visité le 2019-12-19].</refbiblio>
+<refbiblio id="rb7"><marquage typemarq="petitecap">Beaulieu</marquage>, M., G. <marquage typemarq="petitecap">Marcil</marquage>, Y. <marquage typemarq="petitecap">Huot</marquage>, J. <marquage typemarq="petitecap">Lacey</marquage>, R. <marquage typemarq="petitecap">Leconte</marquage> et H. <marquage typemarq="petitecap">Cabana</marquage>, 2014. Pesticides et phytoplancton au Québec : Conditions propices aux efflorescences cyanobactériennes? Université de Sherbrooke, Sherbrooke, 132 p.</refbiblio>
+<refbiblio id="rb8"><marquage typemarq="petitecap">Boopathi</marquage>, T. et J.S <marquage typemarq="petitecap">Ki</marquage>, 2014. Impact of environmental factors on the regulation of cyanotoxin production. Toxins, 6 : 1951-1978. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:href="https://doi.org/10.3390/toxins6071951" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/toxins6071951</liensimple>.</refbiblio>
+<refbiblio id="rb9"><marquage typemarq="petitecap">Boutray</marquage>, M.-L. <marquage typemarq="petitecap">de</marquage>, E. <marquage typemarq="petitecap">Maghsoudi</marquage>, M. <marquage typemarq="petitecap">Ndong</marquage> et S. <marquage typemarq="petitecap">Dorner</marquage>, 2017. Revue de littérature sur les cyanotoxines dans les milieux aquatiques d’eau douce : leurs effets potentiels sur la santé des usagers et les critères ou seuils d’alerte de toxicité chronique et aiguë. Chaire de recherche du Canada en protection des sources d’eau potable, Polytechnique Montréal, Montréal, 188 p. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls10" xlink:href="https://www.google.ca/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwjFsenh98zqAhVjleAKHc7lA24QFjABegQIAxAB&amp;url=https%3A%2F%2Fshare.polymtl.ca%2Falfresco%2Fservice%2Fapi%2Fpath%2Fcontent%3Bcm%3Acontent%2Fworkspace%2FSpacesStore%2FCompany%2520Home%2FSites%2Fchaire-eau-web%2FdocumentLibrary%2Fsarah_dorner%2FDorner_cyanotoxines_revue_31_janvier_2017.pdf%3Fa%3Dtrue%26guest%3Dtrue&amp;usg=AOvVaw3EueavVtdKOH_d9T-uvM_e" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.google.ca/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwjFsenh98zqAhVjleAKHc7lA24QFjABegQIAxAB&amp;url=https%3A%2F%2Fshare.polymtl.ca%2Falfresco%2Fservice%2Fapi%2Fpath%2Fcontent%3Bcm%3Acontent%2Fworkspace%2FSpacesStore%2FCompany%2520Home%2FSites%2Fchaire-eau-web%2FdocumentLibrary%2Fsarah_dorner%2FDorner_cyanotoxines_revue_31_janvier_2017.pdf%3Fa%3Dtrue%26guest%3Dtrue&amp;usg=AOvVaw3EueavVtdKOH_d9T-uvM_e</liensimple>.</refbiblio>
+<refbiblio id="rb10"><marquage typemarq="petitecap">Bowling</marquage>, L.C., S. <marquage typemarq="petitecap">Blais</marquage> et M. <marquage typemarq="petitecap">Sinotte</marquage>, 2015. Heterogeneous spatial and temporal cyanobacterial distributions in Missisquoi Bay, Lake Champlain: An analysis of a 9 year data set. Journal of Great Lakes Research, 41 : 164-179. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls11" xlink:href="https://doi.org/10.1016/j.jglr.2014.12.012" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.jglr.2014.12.012</liensimple>.</refbiblio>
+<refbiblio id="rb11"><marquage typemarq="petitecap">Brêda</marquage>-<marquage typemarq="petitecap">Alves</marquage>, F., F.P. <marquage typemarq="petitecap">Militão</marquage>, B. <marquage typemarq="petitecap">Freitas</marquage> <marquage typemarq="petitecap">de</marquage> <marquage typemarq="petitecap">Alvarenga</marquage>, P.F. <marquage typemarq="petitecap">Miranda</marquage>, V. <marquage typemarq="petitecap">de</marquage> <marquage typemarq="petitecap">Oliveira</marquage> <marquage typemarq="petitecap">Fernandes</marquage>, M.K. <marquage typemarq="petitecap">Cordeiro</marquage>-<marquage typemarq="petitecap">Araújo</marquage> et M.A. <marquage typemarq="petitecap">Chia</marquage>, 2020. Clethodim (herbicide) alters the growth and toxins content of <marquage typemarq="italique">Microcystis aeruginosa</marquage> and <marquage typemarq="italique">Raphidiopsis raciborskii</marquage>. Chemosphere, 243 : 2-9. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls12" xlink:href="https://doi.org/10.1016/j.chemosphere.2019.125318" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.chemosphere.2019.125318</liensimple>.</refbiblio>
+<refbiblio id="rb12"><marquage typemarq="petitecap">Briand</marquage>, E., J.F. <marquage typemarq="petitecap">Humbert</marquage>, K. <marquage typemarq="petitecap">Tambosco</marquage>, M. <marquage typemarq="petitecap">Bormans</marquage> et W.H. <marquage typemarq="petitecap">Gerwick</marquage>, 2016. Role of bacteria in the production and degradation of <marquage typemarq="italique">Microcystis cyanopeptides</marquage>. MicrobiologyOpen, 5 : 469-478. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls13" xlink:href="https://doi.org/10.1002/mbo3.343" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1002/mbo3.343</liensimple>.</refbiblio>
+<refbiblio id="rb13"><marquage typemarq="petitecap">Burns</marquage>, J.M., S. <marquage typemarq="petitecap">Hall</marquage> et J.L. <marquage typemarq="petitecap">Ferry</marquage>, 2009. The adsorption of saxitoxin to clays and sediments in fresh and saline waters. Water Research, 43 : 1899-1904. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls14" xlink:href="https://doi.org/10.1016/j.watres.2009.02.004" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.watres.2009.02.004</liensimple>.</refbiblio>
+<refbiblio id="rb14"><marquage typemarq="petitecap">Casero</marquage>, M.C., A. <marquage typemarq="petitecap">Ballot</marquage>, R. <marquage typemarq="petitecap">Agha</marquage>, A. <marquage typemarq="petitecap">Quesada</marquage> et S. <marquage typemarq="petitecap">Cirés</marquage>, 2014. Characterization of saxitoxin production and release and phylogeny of sxt genes in paralytic shellfish poisoning toxin-producing <marquage typemarq="italique">Aphanizomenon gracile</marquage>. Harmful Algae, 37 : 28:37. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls15" xlink:href="https://doi.org/10.1016/j.hal.2014.05.006" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.hal.2014.05.006</liensimple>.</refbiblio>
+<refbiblio id="rb15"><marquage typemarq="petitecap">Chaffin</marquage>, J.D., T.W. <marquage typemarq="petitecap">Davis</marquage>, D.J. <marquage typemarq="petitecap">Smith</marquage>, M.M. <marquage typemarq="petitecap">Baer</marquage> et G.J. <marquage typemarq="petitecap">Dick</marquage>, 2018. Interactions between nitrogen form, loading rate, and light intensity on <marquage typemarq="italique">Microcystis</marquage> and <marquage typemarq="italique">Planktothrix</marquage> growth and microcystin production. Harmful Algae, 73 : 84-97. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls16" xlink:href="https://doi.org/10.1016/j.hal.2018.02.001" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.hal.2018.02.001</liensimple>.</refbiblio>
+<refbiblio id="rb16"><marquage typemarq="petitecap">Chen</marquage>, W., L. <marquage typemarq="petitecap">Song</marquage>, L. <marquage typemarq="petitecap">Peng</marquage>, N. <marquage typemarq="petitecap">Wan</marquage>, X. <marquage typemarq="petitecap">Zhang</marquage> et N. <marquage typemarq="petitecap">Gan</marquage>, 2008. Reduction in microcystin concentrations in large and shallow lakes: Water and sediment-interface contributions. Water Research, 42 : 763-773. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls17" xlink:href="https://doi.org/10.1016/j.watres.2007.08.007" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.watres.2007.08.007</liensimple>.</refbiblio>
+<refbiblio id="rb17"><marquage typemarq="petitecap">Cheng</marquage>, S.Y., Y. <marquage typemarq="petitecap">Zhou</marquage>, C.M. <marquage typemarq="petitecap">Irvin</marquage>, B. <marquage typemarq="petitecap">Kirkpatrick</marquage> et L.C. <marquage typemarq="petitecap">Backer</marquage>, 2007. Characterization of aerosols containing microcystin. Marine Drugs, 5 : 136-150. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls18" xlink:href="https://doi.org/10.3390/md20070010" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/md20070010</liensimple>.</refbiblio>
+<refbiblio id="rb18"><marquage typemarq="petitecap">Chorus</marquage>, I. et J. <marquage typemarq="petitecap">Bartram</marquage>, 1999. Toxic cyanobacteria in water: A guide to their public health consequences, monitoring and management. E &amp; FN Spon, London, 400 p.</refbiblio>
+<refbiblio id="rb19"><marquage typemarq="petitecap">Cirés</marquage>, S. et A. <marquage typemarq="petitecap">Ballot</marquage>, 2016. A review of the phylogeny, ecology and toxin production of bloom-forming <marquage typemarq="italique">Aphanizomenon</marquage> spp. and related species within the Nostocales (cyanobacteria). Harmful Algae, 54 : 21-43. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls19" xlink:href="https://doi.org/10.1016/j.hal.2015.09.007" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.hal.2015.09.007</liensimple>.</refbiblio>
+<refbiblio id="rb20"><marquage typemarq="petitecap">Cousins</marquage>, I.T., D.J. <marquage typemarq="petitecap">Bealing</marquage>, H.A. <marquage typemarq="petitecap">James</marquage> et A. <marquage typemarq="petitecap">Sutton</marquage>, 1996. Biodegradation of microcystin-LR by indigenous mixed bacterial populations. Water Research, 30 : 481-485. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls20" xlink:href="https://doi.org/10.1016/0043-1354(95)00189-1" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/0043-1354(95)00189-1</liensimple>.</refbiblio>
+<refbiblio id="rb21"><marquage typemarq="petitecap">Cronberg</marquage>, G. et H. <marquage typemarq="petitecap">Annadotter</marquage>, 2006. Manual on aquatic cyanobacteria, a photo guide and a synopsis of their toxicology. International Society for the Study of Harmful Algae and the United Nations Educational, Scientific and Cultural Organisation, Copenhagen, 106 p.</refbiblio>
+<refbiblio id="rb22"><marquage typemarq="petitecap">Deblois</marquage>, C.P. et P. <marquage typemarq="petitecap">Juneau</marquage>, 2010. Relationship between photosynthetic processes and microcystin in <marquage typemarq="italique">Microcystis aeruginosa</marquage> grown under different photon irradiances. Harmful Algae, 9 : 18-24. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls21" xlink:href="https://doi.org/10.1016/j.hal.2009.07.001" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.hal.2009.07.001</liensimple>.</refbiblio>
+<refbiblio id="rb23"><marquage typemarq="petitecap">Dias</marquage>, E., P. <marquage typemarq="petitecap">Pereira</marquage> et S. <marquage typemarq="petitecap">Franca</marquage>, 2002. Production of paralytic shellfish toxins by <marquage typemarq="italique">Aphanizomenon</marquage> sp. <marquage typemarq="italique">lmecya</marquage> 31 (cyanobacteria). Journal of Phycology, 38 : 705-712. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls22" xlink:href="https://doi.org/10.1046/j.1529-8817.2002.01146.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1046/j.1529-8817.2002.01146.x</liensimple>.</refbiblio>
+<refbiblio id="rb24"><marquage typemarq="petitecap">Donald</marquage>, D.B., M.J. <marquage typemarq="petitecap">Bogard</marquage>, K. <marquage typemarq="petitecap">Finlay</marquage> et P.R. <marquage typemarq="petitecap">Leavitt</marquage>, 2011. Comparative effects of urea, ammonium, and nitrate on phytoplankton abundance, community composition, and toxicity in hypereutrophic freshwaters. Limnology and Oceanography, 56 : 2161-2175. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls23" xlink:href="https://doi.org/10.4319/lo.2011.56.6.2161" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.4319/lo.2011.56.6.2161</liensimple>.</refbiblio>
+<refbiblio id="rb25"><marquage typemarq="petitecap">Downing</marquage>, S., S.A. <marquage typemarq="petitecap">Banack</marquage>, J.S. <marquage typemarq="petitecap">Metcalf</marquage>, P.A. <marquage typemarq="petitecap">Cox</marquage> et T.G. <marquage typemarq="petitecap">Downing</marquage>, 2011. Nitrogen starvation of cyanobacteria results in the production of β-N-methylamino-L-alanine. Toxicon, 58 : 187-194. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls24" xlink:href="https://doi.org/10.1016/j.toxicon.2011.05.017" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.toxicon.2011.05.017</liensimple>.</refbiblio>
+<refbiblio id="rb26"><marquage typemarq="petitecap">Dyble</marquage>, J., P.A. <marquage typemarq="petitecap">Tester</marquage> et R.W. <marquage typemarq="petitecap">Litaker</marquage>, 2006. Effects of light intensity on cylindrospermopsin production in the cyanobacterial HAB species <marquage typemarq="italique">Cylindrospermopsis raciborskii</marquage>. African Journal of Marine Science, 28 : 309-312. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls25" xlink:href="https://doi.org/10.2989/18142320609504168" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.2989/18142320609504168</liensimple>.</refbiblio>
+<refbiblio id="rb27"><marquage typemarq="petitecap">Forlani</marquage>, G., M. <marquage typemarq="petitecap">Pavan</marquage>, M. <marquage typemarq="petitecap">Gramek</marquage>, P. <marquage typemarq="petitecap">Kafarski</marquage> et J. <marquage typemarq="petitecap">Lipok</marquage>, 2008. Biochemical bases for a widespread tolerance of cyanobacteria to the phosphonate herbicide glyphosate. Plant and Cell Physiology, 49 : 443-456. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls26" xlink:href="https://doi.org/10.1093/pcp/pcn021" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1093/pcp/pcn021</liensimple>.</refbiblio>
+<refbiblio id="rb28"><marquage typemarq="petitecap">Fujii</marquage>, M., A.L. <marquage typemarq="petitecap">Rose</marquage> et T.D. <marquage typemarq="petitecap">Waite</marquage>, 2011. Iron uptake by toxic and nontoxic strains of <marquage typemarq="italique">Microcystis aeruginosa</marquage>. Applied and Environmental Microbiology, 77 : 7068-7071. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls27" xlink:href="https://doi.org/10.1128/AEM.05270-11" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1128/AEM.05270-11</liensimple>.</refbiblio>
+<refbiblio id="rb29"><marquage typemarq="petitecap">Georges</marquage> <marquage typemarq="petitecap">des</marquage> <marquage typemarq="petitecap">Aulnois</marquage>, M., P. <marquage typemarq="petitecap">Roux</marquage>, A. <marquage typemarq="petitecap">Caruana</marquage>, D. <marquage typemarq="petitecap">Réveillon</marquage>, E. <marquage typemarq="petitecap">Briand</marquage>, F. <marquage typemarq="petitecap">Hervé</marquage>, V. <marquage typemarq="petitecap">Savar</marquage>, H. <marquage typemarq="petitecap">Bormans</marquage> et Z. <marquage typemarq="petitecap">Amzil</marquage>, 2019. Physiological and metabolic responses of freshwater and brackish strains of <marquage typemarq="italique">Microcystis aeruginosa</marquage> acclimated to a salinity gradient: insight into salt tolerance. Applied and Environmental Microbiology, 85 : 1614-1619. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls28" xlink:href="https://doi.org/10.1128/aem.01614-19" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1128/aem.01614-19</liensimple>.</refbiblio>
+<refbiblio id="rb30"><marquage typemarq="petitecap">Giani</marquage>, A., D.F. <marquage typemarq="petitecap">Bird</marquage>, Y.T. <marquage typemarq="petitecap">Prairie</marquage> et J.F. <marquage typemarq="petitecap">Lawrence</marquage>, 2005. Empirical study of cyanobacterial toxicity along a trophic gradient of lakes. Canadian Journal of Fisheries and Aquatic Sciences, 62 : 2100-2109. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls29" xlink:href="https://doi.org/10.1139/f05-124" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1139/f05-124</liensimple>.</refbiblio>
+<refbiblio id="rb31"><marquage typemarq="petitecap">Giroux</marquage>, I. 2019. Présence de pesticides dans l’eau au Québec : Portrait et tendances dans les zones de maïs et de soya – 2015 à 2017. Québec, ministère de l’Environnement et de la Lutte contre les changements climatiques, Direction générale du suivi de l’état de l’environnement, 64 p. + 6 ann. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls30" xlink:href="http://142.213.133.76/pesticides/mais_soya/portrait2015-2017/rapport-2015-2017.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://142.213.133.76/pesticides/mais_soya/portrait2015-2017/rapport-2015-2017.pdf</liensimple>.</refbiblio>
+<refbiblio id="rb32"><marquage typemarq="petitecap">Gouvêa</marquage>, S.P., G.L. <marquage typemarq="petitecap">Boyer</marquage> et M.R. <marquage typemarq="petitecap">Twiss</marquage>, 2008. Influence of ultraviolet radiation, copper, and zinc on microcystin content in <marquage typemarq="italique">Microcystis aeruginosa </marquage>(Cyanobacteria). Harmful Algae, 7 : 194-205. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls31" xlink:href="https://doi.org/10.1016/j.hal.2007.07.003" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.hal.2007.07.003</liensimple>.</refbiblio>
+<refbiblio id="rb33"><marquage typemarq="petitecap">Hameed</marquage>, S., L.A. <marquage typemarq="petitecap">Lawton</marquage>, C. <marquage typemarq="petitecap">Edwards</marquage>, A. <marquage typemarq="petitecap">Khan</marquage>, A., U. <marquage typemarq="petitecap">Farooq</marquage> et F.A. <marquage typemarq="petitecap">Khan</marquage>, 2017. Effects of temperature and salinity on the production of cell biomass, chlorophyll-a and intra- and extracellular nodularins (NOD) and nodulopeptin 901 produced by <marquage typemarq="italique">Nodularia spumigena</marquage> KAC 66. Journal of Applied Phycology, 29 : 1801-1810. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls32" xlink:href="https://doi.org/10.1007/s10811-017-1115-5" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s10811-017-1115-5</liensimple>.</refbiblio>
+<refbiblio id="rb34"><marquage typemarq="petitecap">Harland</marquage>, F.M.J., S.A. <marquage typemarq="petitecap">Wood</marquage>, E. <marquage typemarq="petitecap">Moltchanova</marquage>, W.M. <marquage typemarq="petitecap">Williamson</marquage> et S. <marquage typemarq="petitecap">Gaw</marquage>, 2013. <marquage typemarq="italique">Phormidium autumnale</marquage> growth and anatoxin-a production under iron and copper stress. Toxins, 5 : 2504-2521. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls33" xlink:href="https://doi.org/10.3390/toxins5122504" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/toxins5122504</liensimple>.</refbiblio>
+<refbiblio id="rb35"><marquage typemarq="petitecap">Hébert</marquage>, M.P., V. <marquage typemarq="petitecap">Fugère</marquage> et A. <marquage typemarq="petitecap">Gonzalez</marquage>, 2019. The overlooked impact of rising glyphosate use on phosphorus loading in agricultural watersheds. Frontiers in Ecology and the Environment, 17 : 48-56. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls34" xlink:href="https://doi.org/10.1002/fee.1985" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1002/fee.1985</liensimple>.</refbiblio>
+<refbiblio id="rb36"><marquage typemarq="petitecap">Heresztyn</marquage>, T. et B.C. <marquage typemarq="petitecap">Nicholson</marquage>, 1997. Nodularin concentrations in lakes Alexandrina and Albert, South Australia, during a bloom of the cyanobacterium (Blue-Green alga) <marquage typemarq="italique">Nodularia spumigena</marquage> and degradation of the toxin. Environmental Toxicology and Water Quality, 12 : 273-282. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls35" xlink:href="https://doi.org/10.1002/(SICI)1098-2256(1997)12:4273::AID-TOX13.0.CO;2-5" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1002/(SICI)1098-2256(1997)12:4273::AID-TOX13.0.CO;2-5</liensimple>.</refbiblio>
+<refbiblio id="rb37"><marquage typemarq="petitecap">Hiller</marquage>, S., B. <marquage typemarq="petitecap">Krock</marquage>, A. <marquage typemarq="petitecap">Cembella</marquage> et B. <marquage typemarq="petitecap">Luckas</marquage>, 2007. Rapid detection of cyanobacterial toxins in precursor ion mode by liquid chromatography tandem mass spectrometry. Journal of Mass Spectometry, 47 : 1238-1250. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls36" xlink:href="https://doi.org/10.1002/jms.1257" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1002/jms.1257</liensimple>.</refbiblio>
+<refbiblio id="rb38"><marquage typemarq="petitecap">[HMBD] Human Matabolome Database, 2020</marquage>. Showing metabocard for Sarcosine (HMDB0000271). Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls37" xlink:href="https://hmdb.ca/metabolites/HMDB0000271" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://hmdb.ca/metabolites/HMDB0000271</liensimple>. [Visité le 2020-10-28].</refbiblio>
+<refbiblio id="rb39"><marquage typemarq="petitecap">Ho</marquage>, L., D. <marquage typemarq="petitecap">Hoefel</marquage>, C.P. <marquage typemarq="petitecap">Saint</marquage> et G. <marquage typemarq="petitecap">Newcombe</marquage>, 2007. Isolation and identification of a novel microcystin-degrading bacterium from a biological sand filter. Water Research, 41 : 4685-4695. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls38" xlink:href="https://doi.org/10.1016/j.watres.2007.06.057" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.watres.2007.06.057</liensimple>.</refbiblio>
+<refbiblio id="rb40"><marquage typemarq="petitecap">Ho</marquage>, L., E. <marquage typemarq="petitecap">Sawade</marquage> et G. <marquage typemarq="petitecap">Newcombe</marquage>, 2012. Biological treatment options for cyanobacteria metabolite removal - A review. Water Research, 46 : 1536-1548. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls39" xlink:href="https://doi.org/10.1016/j.watres.2011.11.018" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.watres.2011.11.018</liensimple>.</refbiblio>
+<refbiblio id="rb41"><marquage typemarq="petitecap">Huang</marquage>, B., S. <marquage typemarq="petitecap">Xu</marquage>, A.J. <marquage typemarq="petitecap">Miao</marquage>, L. <marquage typemarq="petitecap">Xiao</marquage> et L.Y. <marquage typemarq="petitecap">Yang</marquage>, 2015. Cadmium toxicity to <marquage typemarq="italique">Microcystis aeruginosa</marquage> PCC 7806 and its microcystin-lacking mutant. PLoS ONE, 10 : 1-18. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls40" xlink:href="https://doi.org/10.1371/journal.pone.0116659" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1371/journal.pone.0116659</liensimple>.</refbiblio>
+<refbiblio id="rb42"><marquage typemarq="petitecap">Hudon</marquage>, C., M. <marquage typemarq="petitecap">De</marquage> <marquage typemarq="petitecap">Sève</marquage> et A. <marquage typemarq="petitecap">Cattaneo</marquage>, 2014. Increasing occurrence of the benthic filamentous cyanobacterium <marquage typemarq="italique">Lyngbya wollei</marquage>: A symptom of freshwater ecosystem degradation. Freshwater Science, 33 : 606-618. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls41" xlink:href="https://doi.org/10.1086/675932" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1086/675932</liensimple>.</refbiblio>
+<refbiblio id="rb43"><marquage typemarq="petitecap">Kaebernick</marquage>, M. et B.A <marquage typemarq="petitecap">Neilan</marquage>, 2001. Ecological and molecular investigations of cyanotoxin production. FEMS Microbiology Ecology, 35 : 1-9. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls42" xlink:href="https://doi.org/10.1016/S0168-6496(00)00093-3" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/S0168-6496(00)00093-3</liensimple>.</refbiblio>
+<refbiblio id="rb44"><marquage typemarq="petitecap">Kenins</marquage> A., 2017. Validation of the noxious cyanophyte <marquage typemarq="italique">Microseira</marquage> <marquage typemarq="italique">wollei</marquage> (Farlow ex Gomont) G.B.McGregor &amp; Sendall (Oscillatoriaceae). Notulae algarum, 43 : 1-3.</refbiblio>
+<refbiblio id="rb45"><marquage typemarq="petitecap">Klein</marquage>, A.R., D.S. <marquage typemarq="petitecap">Baldwin</marquage>, S. <marquage typemarq="petitecap">Darren</marquage> et E. <marquage typemarq="petitecap">Silvester</marquage>, 2013. Proton and iron binding by the cyanobacterial toxin microcystin-LR. Environmental Science and Technology, 47 : 5178-5184. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls43" xlink:href="https://doi.org/10.1021/es400464e" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1021/es400464e</liensimple>.</refbiblio>
+<refbiblio id="rb46"><marquage typemarq="petitecap">Klitzke</marquage>, S., S. <marquage typemarq="petitecap">Apelt</marquage>, C. <marquage typemarq="petitecap">Weiler</marquage>, J. <marquage typemarq="petitecap">Fastner</marquage> et I. <marquage typemarq="petitecap">Chorus</marquage>, 2010. Retention and degradation of the cyanobacterial toxin cylindrospermopsin in sediments - The role of sediment preconditioning and DOM composition. Toxicon, 55 : 999-1007. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls44" xlink:href="https://doi.org/10.1016/j.toxicon.2009.06.036" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.toxicon.2009.06.036</liensimple>.</refbiblio>
+<refbiblio id="rb47"><marquage typemarq="petitecap">Kotak</marquage>, B.G., S.L. <marquage typemarq="petitecap">Kenefick</marquage>, D.L. <marquage typemarq="petitecap">Fritz</marquage>, C.G. <marquage typemarq="petitecap">Rousseaux</marquage>, E.E. <marquage typemarq="petitecap">Prepas</marquage> et S.E. <marquage typemarq="petitecap">Hrudey</marquage>, 1993. Occurrence and toxicological evaluation of cyanobacterial toxins in Alberta lakes and farm dugouts. Water Research, 27 : 495-506. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls45" xlink:href="https://doi.org/10.1016/0043-1354(93)90050-R" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/0043-1354(93)90050-R</liensimple>.</refbiblio>
+<refbiblio id="rb48"><marquage typemarq="petitecap">Kotak</marquage>, B.G., A.K.-Y. <marquage typemarq="petitecap">Lam</marquage>, E.E. <marquage typemarq="petitecap">Prepas</marquage>, S.L. <marquage typemarq="petitecap">Kenefick</marquage> et S.E. <marquage typemarq="petitecap">Hrudey</marquage>, 1995. Variability of the hepatotoxin microcystin‐Lr in hypereutrophic drinking water lakes. Journal of Phycology, 31 : 248-263. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls46" xlink:href="https://doi.org/10.1111/j.0022-3646.1995.00248.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/j.0022-3646.1995.00248.x</liensimple>.</refbiblio>
+<refbiblio id="rb49"><marquage typemarq="petitecap">Krishnamurthy</marquage>, T., L. <marquage typemarq="petitecap">Szafraniec</marquage>, D.F. <marquage typemarq="petitecap">Hunt</marquage>, J. <marquage typemarq="petitecap">Shabanowitz</marquage>, J.R. <marquage typemarq="petitecap">Yates</marquage>, C.R. <marquage typemarq="petitecap">Hauer</marquage>, W.W. <marquage typemarq="petitecap">Carmichael</marquage>, O. <marquage typemarq="petitecap">Skulberg</marquage>, G.A. <marquage typemarq="petitecap">Codd</marquage> et S. <marquage typemarq="petitecap">Missler</marquage>, 1989. Structural characterization of toxic cyclic peptides from blue-green algae by tandem mass spectrometry. Proceedings of the National Academy of Sciences of the United States of America, 86 : 770-774. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls47" xlink:href="https://doi.org/10.1073/pnas.86.3.770" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1073/pnas.86.3.770</liensimple>.</refbiblio>
+<refbiblio id="rb50"><marquage typemarq="petitecap">Lemes</marquage>, G.A.F., R. <marquage typemarq="petitecap">Kersanach</marquage>, L. <marquage typemarq="petitecap">da</marquage> S. <marquage typemarq="petitecap">Pinto</marquage>, O.A. <marquage typemarq="petitecap">Dellagostin</marquage>, J.S. <marquage typemarq="petitecap">Yunes</marquage> et A. <marquage typemarq="petitecap">Matthiensen</marquage>, 2008. Biodegradation of microcystins by aquatic <marquage typemarq="italique">Burkholderia</marquage> sp. from a South Brazilian coastal lagoon. Ecotoxicology and Environmental Safety, 69 : 358-365. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls48" xlink:href="https://doi.org/10.1016/j.ecoenv.2007.03.013" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.ecoenv.2007.03.013</liensimple>.</refbiblio>
+<refbiblio id="rb51"><marquage typemarq="petitecap">Liu</marquage>, G., Y. <marquage typemarq="petitecap">Qian</marquage>, S. <marquage typemarq="petitecap">Dai</marquage> et N. <marquage typemarq="petitecap">Feng</marquage>, 2008. Adsorption of microcystin LR and LW on suspended particulate matter (SPM) at different pH. Water, Air, and Soil Pollution, 192 : 67-76. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls49" xlink:href="https://doi.org/10.1007/s11270-008-9635-x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s11270-008-9635-x</liensimple>.</refbiblio>
+<refbiblio id="rb52"><marquage typemarq="petitecap">López</marquage>-<marquage typemarq="petitecap">Rodas</marquage>, V., A. <marquage typemarq="petitecap">Flores</marquage>-<marquage typemarq="petitecap">Moya</marquage>, E. <marquage typemarq="petitecap">Maneiro</marquage>, N. <marquage typemarq="petitecap">Perdigones</marquage>, F. <marquage typemarq="petitecap">Marva</marquage>, M.E. <marquage typemarq="petitecap">García</marquage> et E. <marquage typemarq="petitecap">Costas</marquage>, 2007. Resistance to glyphosate in the cyanobacterium <marquage typemarq="italique">Microcystis aeruginosa</marquage> as result of pre-selective mutations. Evolutionary Ecology, 21 : 535-547. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls50" xlink:href="https://doi.org/10.1007/s10682-006-9134-8" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s10682-006-9134-8</liensimple>.</refbiblio>
+<refbiblio id="rb53"><marquage typemarq="petitecap">Maghsoudi</marquage>, E., N. <marquage typemarq="petitecap">Fortin</marquage>, C. <marquage typemarq="petitecap">Greer</marquage>, S.V. <marquage typemarq="petitecap">Duy</marquage>, P. <marquage typemarq="petitecap">Fayad</marquage>, S. <marquage typemarq="petitecap">Sauvé</marquage>, M. <marquage typemarq="petitecap">Prévost</marquage>, S. <marquage typemarq="petitecap">Dorner</marquage>, 2015a. Biodegradation of multiple microcystins and cylindrospermopsin in clarifier sludge and a drinking water source: Effects of particulate attached bacteria and phycocyanin. Ecotoxicology and Environmental Safety, 120 : 409-417. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls51" xlink:href="https://doi.org/10.1016/j.ecoenv.2015.06.001" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.ecoenv.2015.06.001</liensimple>.</refbiblio>
+<refbiblio id="rb54"><marquage typemarq="petitecap">Maghsoudi</marquage>, E., M. <marquage typemarq="petitecap">Prévost</marquage>, S. <marquage typemarq="petitecap">Vo</marquage> <marquage typemarq="petitecap">Duy</marquage>, S. <marquage typemarq="petitecap">Sauvé</marquage> et S. <marquage typemarq="petitecap">Dorner</marquage>, 2015b. Adsorption characteristics of multiple microcystins and cylindrospermopsin on sediment: Implications for toxin monitoring and drinking water treatment. Toxicon, 103 : 48-54. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls52" xlink:href="https://doi.org/10.1016/j.toxicon.2015.06.007" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.toxicon.2015.06.007</liensimple>.</refbiblio>
+<refbiblio id="rb55"><marquage typemarq="petitecap">Maghsoudi</marquage>, E., N. <marquage typemarq="petitecap">Fortin</marquage>, C. <marquage typemarq="petitecap">Greer</marquage>, C. <marquage typemarq="petitecap">Maynard</marquage>, A. <marquage typemarq="petitecap">Pagé</marquage>, S.V. <marquage typemarq="petitecap">Duy</marquage>, S. <marquage typemarq="petitecap">Sauvé</marquage> et S. <marquage typemarq="petitecap">Dorner</marquage>, 2016. Cyanotoxin degradation activity and: Mlr gene expression profiles of a <marquage typemarq="italique">Sphingopyxis</marquage> sp. isolated from Lake Champlain, Canada. Environmental Science: Processes and Impacts, 18 : 1417-1426. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls53" xlink:href="https://doi.org/10.1039/c6em00001k" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1039/c6em00001k</liensimple>.</refbiblio>
+<refbiblio id="rb56"><marquage typemarq="petitecap">Mantzouki</marquage>, E., M. <marquage typemarq="petitecap">Lürling</marquage>, J. <marquage typemarq="petitecap">Fastner</marquage> et 192 auteurs, 2018. Temperature effects explain continental scale distribution of cyanobacterial toxins. Toxins, 10 : 1-24. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls54" xlink:href="https://doi.org/10.3390/toxins10040156" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/toxins10040156</liensimple>.</refbiblio>
+<refbiblio id="rb57"><marquage typemarq="petitecap">Martínez</marquage>-<marquage typemarq="petitecap">Ruiz</marquage>, E.B. et F. <marquage typemarq="petitecap">Martínez</marquage>-<marquage typemarq="petitecap">Jerónimo</marquage>, 2016. How do toxic metals affect harmful cyanobacteria? An integrative study with a toxigenic strain of <marquage typemarq="italique">Microcystis aeruginosa</marquage> exposed to nickel stress. Ecotoxicology and Environmental Safety, 133 : 36-46. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls55" xlink:href="https://doi.org/10.1016/j.ecoenv.2016.06.040" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.ecoenv.2016.06.040</liensimple>.</refbiblio>
+<refbiblio id="rb58"><marquage typemarq="petitecap">[MDDEFP] Ministère du Développement durable, de l’Environnement, de la Faune et des Parcs</marquage>, 2014. Bilan de la gestion des épisodes de fleurs d'eau d'algues bleu-vert au Québec, de 2007 à 2012. Direction du suivi de l’état de l’environnement, Québec, 32 p. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls56" xlink:href="http://www.environnement.gouv.qc.ca/eau/algues-bv/bilan/Bilan_ABV_2007-2012.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.environnement.gouv.qc.ca/eau/algues-bv/bilan/Bilan_ABV_2007-2012.pdf</liensimple>.</refbiblio>
+<refbiblio id="rb59"><marquage typemarq="petitecap">[MELCC] Ministère de l'Environnement et de la Lutte contre les changements climatiques</marquage>, 2018. Liste des plans d'eau touchés par une fleur d'eau d'algues bleu-vert de 2004 à 2017 et des plans d'eau récurrents signalés de 2013 à 2015. Québec, 32 p. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls57" xlink:href="http://www.environnement.gouv.qc.ca/eau/algues-bv/bilan/Liste-plans-eau-touches-abv.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.environnement.gouv.qc.ca/eau/algues-bv/bilan/Liste-plans-eau-touches-abv.pdf</liensimple>.</refbiblio>
+<refbiblio id="rb60"><marquage typemarq="petitecap">Meriluoto</marquage>, J.A.O. et L.E.M. <marquage typemarq="petitecap">Spoof</marquage>, 2008. Cyanotoxins: sampling, sample processing and toxin uptake. Advances in Experimental Medicine and Biology, 619 : 483-499. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls58" xlink:href="https://doi.org/10.1007/978-0-387-75865-7_21" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/978-0-387-75865-7_21</liensimple>.</refbiblio>
+<refbiblio id="rb61"><marquage typemarq="petitecap">Meriluoto</marquage>, J., L. <marquage typemarq="petitecap">Spoof</marquage> et G.A. <marquage typemarq="petitecap">Codd</marquage>, 2017. Handbook of cyanobacterial monitoring and cyanotoxin analysis. John Wiley &amp; Sons, édition illustrée, West Sussex, 576 p.</refbiblio>
+<refbiblio id="rb62"><marquage typemarq="petitecap">Monchamp</marquage>, M-E., F.R. <marquage typemarq="petitecap">Pick</marquage>, B.E. <marquage typemarq="petitecap">Beisner</marquage> et R. <marquage typemarq="petitecap">Maranger</marquage>, 2014. Nitrogen forms influence microcystin concentration and composition via changes in cyanobacterial community structure. PLoS ONE, 9 : e85573. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls59" xlink:href="https://doi.org/10.1371/journal.pone.0085573" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1371/journal.pone.0085573</liensimple>.</refbiblio>
+<refbiblio id="rb63"><marquage typemarq="petitecap">Ndlela</marquage>, L.L., P.J. <marquage typemarq="petitecap">Oberholster</marquage>, J.H. <marquage typemarq="petitecap">Van</marquage> <marquage typemarq="petitecap">Wyk</marquage> et P.H. <marquage typemarq="petitecap">Cheng</marquage>, 2019. A laboratory based exposure of <marquage typemarq="italique">Microcystis</marquage> and <marquage typemarq="italique">Oscillatoria</marquage> cyanobacterial isolates to heterotrophic bacteria. Toxicon, 165 : 1-12. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls60" xlink:href="https://doi.org/10.1016/j.toxicon.2019.04.002" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.toxicon.2019.04.002</liensimple>.</refbiblio>
+<refbiblio id="rb64"><marquage typemarq="petitecap">Neilan</marquage>, B.A., L.A. <marquage typemarq="petitecap">Pearson</marquage>, J. <marquage typemarq="petitecap">Muenchhoff</marquage>, M.C. <marquage typemarq="petitecap">Moffitt</marquage> et E. <marquage typemarq="petitecap">Dittmann</marquage>, 2013. Environmental conditions that influence toxin biosynthesis in cyanobacteria. Environmental Microbiology, 15 : 1239-1253. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls61" xlink:href="https://doi.org/10.1111/j.1462-2920.2012.02729.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/j.1462-2920.2012.02729.x</liensimple>.</refbiblio>
+<refbiblio id="rb65"><marquage typemarq="petitecap">[NEIWPCC] New England Interstate Water Pollution Control Commision</marquage>, Lake Champlain Basin Program et Organisme de bassin versant de la Baie Missisquoi, 2019. Apports de nutriments et ses impacts sur le lac Champlain, la baie Missisquoi et la rivière Richelieu. Commission mixte internationale, 90 p. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls62" xlink:href="https://www.ijc.org/sites/default/files/2019-11/20191114_Missisquoi_BayLit_Review_LCBP_OBVBM_FR.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.ijc.org/sites/default/files/2019-11/20191114_Missisquoi_BayLit_Review_LCBP_OBVBM_FR.pdf</liensimple>. </refbiblio>
+<refbiblio id="rb66"><marquage typemarq="petitecap">[NOAA] National Oceanic and Atmospheric Administration, National Ocean Service Education</marquage>, 2020. Estuaries. NOAA's National Ocean Service Education. Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls63" xlink:href="https://oceanservice.noaa.gov/education/kits/estuaries/estuaries01_whatis.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://oceanservice.noaa.gov/education/kits/estuaries/estuaries01_whatis.html</liensimple>. [Visité le 2020-01-29].</refbiblio>
+<refbiblio id="rb67"><marquage typemarq="petitecap">Oh</marquage>, H.M., S.J. <marquage typemarq="petitecap">Lee</marquage>, M.H. <marquage typemarq="petitecap">Jang</marquage> et B.D.<marquage typemarq="petitecap">Yoon</marquage>, 2000. Microcystin production by <marquage typemarq="italique">Microcystis aeruginosa</marquage> in a phosphorus-limited chemostat. Applied and Environmental Microbiology, 66 : 176-179. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls64" xlink:href="https://doi.org/10.1128/AEM.66.1.176-179.2000" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1128/AEM.66.1.176-179.2000</liensimple>.</refbiblio>
+<refbiblio id="rb68"><marquage typemarq="petitecap">Paerl</marquage>, H.W. et T.G. <marquage typemarq="petitecap">Otten</marquage>, 2013. Blooms bite the hand that feeds them. Science, 342 : 433-434. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls65" xlink:href="https://doi.org/10.1126/science.1245276" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1126/science.1245276</liensimple>.</refbiblio>
+<refbiblio id="rb69"><marquage typemarq="petitecap">Pavlova</marquage>, V., S. <marquage typemarq="petitecap">Furnadzhieva</marquage>, J. <marquage typemarq="petitecap">Rose</marquage>, R. <marquage typemarq="petitecap">Andreeva</marquage>, Z. <marquage typemarq="petitecap">Bratanova</marquage> et A. <marquage typemarq="petitecap">Nayak</marquage>, 2010. Effect of temperature and light intensity on the growth, chlorophyll a concentration and microcystin production by <marquage typemarq="italique">Microcystis aeruginosa</marquage>. General and Applied Plant Physiology, 36 : 148-158.</refbiblio>
+<refbiblio id="rb70"><marquage typemarq="petitecap">Pearson</marquage>, L., T. <marquage typemarq="petitecap">Mihali</marquage>, M. <marquage typemarq="petitecap">Moffitt</marquage>, R. <marquage typemarq="petitecap">Kellmann</marquage> et B. <marquage typemarq="petitecap">Neilan</marquage>, 2010. On the chemistry, toxicology and genetics of the cyanobacterial toxins, microcystin, nodularin, saxitoxin and cylindrospermopsin. Marine Drugs, 8 : 1650-1680. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls66" xlink:href="https://doi.org/10.3390/md8051650" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/md8051650</liensimple>.</refbiblio>
+<refbiblio id="rb71"><marquage typemarq="petitecap">Phelan</marquage>, R.R. et T.G. <marquage typemarq="petitecap">Downing</marquage>, 2011. A growth advantage for microcystin production by <marquage typemarq="italique">Microcystis</marquage> PCC7806 under high light. Journal of Phycology, 47 : 1241-1246. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls67" xlink:href="https://doi.org/10.1111/j.1529-8817.2011.01056.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/j.1529-8817.2011.01056.x</liensimple>.</refbiblio>
+<refbiblio id="rb72"><marquage typemarq="petitecap">Pick</marquage>, F., 2016. Blooming algae: A Canadian perspective on the rise of toxic cyanobacteria. Canadian Journal of Fisheries and Aquatic Sciences, 73 : 1149-1158. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls68" xlink:href="https://doi.org/10.1139/cjfas-2015-0470" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1139/cjfas-2015-0470</liensimple>.</refbiblio>
+<refbiblio id="rb73"><marquage typemarq="petitecap">Pineda</marquage>-<marquage typemarq="petitecap">Mendoza</marquage>, R.M., G. <marquage typemarq="petitecap">Zúñiga</marquage> <marquage typemarq="petitecap">et</marquage> F. <marquage typemarq="petitecap">Martínez</marquage>-<marquage typemarq="petitecap">Jerónimo</marquage>, 2016. Microcystin production in <marquage typemarq="italique">Microcystis aeruginosa</marquage>: effect of type of strain, environmental factors, nutrient concentrations, and N:P ratio on <marquage typemarq="italique">mcy</marquage>A gene expression. Aquatic Ecology, 50 : 103-119. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls69" xlink:href="https://doi.org/10.1007/s10452-015-9559-7" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s10452-015-9559-7</liensimple>.</refbiblio>
+<refbiblio id="rb74"><marquage typemarq="petitecap">Polyak</marquage>, Y., T. <marquage typemarq="petitecap">Zaytseva</marquage> et N. <marquage typemarq="petitecap">Medvedeva</marquage>, 2013. Response of toxic cyanobacterium <marquage typemarq="italique">Microcystis aeruginosa</marquage> to environmental pollution. Water, Air, and Soil Pollution, 224 : 1494-1508. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls70" xlink:href="https://doi.org/10.1007/s11270-013-1494-4" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s11270-013-1494-4</liensimple>.</refbiblio>
+<refbiblio id="rb75"><marquage typemarq="petitecap">Preussel</marquage>, K., G. <marquage typemarq="petitecap">Wessel</marquage>, J. <marquage typemarq="petitecap">Fastner</marquage> et I. <marquage typemarq="petitecap">Chorus</marquage>, 2009. Response of cylindrospermopsin production and release in <marquage typemarq="italique">Aphanizomenon flos-aquae </marquage>(Cyanobacteria) to varying light and temperature conditions. Harmful Algae, 8 : 645-650. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls71" xlink:href="https://doi.org/10.1016/j.hal.2008.10.009" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.hal.2008.10.009</liensimple>.</refbiblio>
+<refbiblio id="rb76"><marquage typemarq="petitecap">Prosen</marquage>, H. et L. <marquage typemarq="petitecap">Zupan</marquage><marquage typemarq="petitecap">č</marquage><marquage typemarq="petitecap">i</marquage><marquage typemarq="petitecap">č</marquage>-<marquage typemarq="petitecap">Kralj</marquage>, 2005. Evaluation of photolysis and hydrolysis of atrazine and its first degradation products in the presence of humic acids. Environmental Pollution, 133 : 517-529. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls72" xlink:href="https://doi.org/10.1016/j.envpol.2004.06.015" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.envpol.2004.06.015</liensimple>.</refbiblio>
+<refbiblio id="rb77"><marquage typemarq="petitecap">Rapala</marquage>, J. et K. <marquage typemarq="petitecap">Sivonen</marquage>, 1998. Assessment of environmental conditions that favor hepatotoxic and neurotoxic <marquage typemarq="italique">Anabaena</marquage> spp. strains cultured under light limitation at different temperatures. Microbial Ecology, 36 : 181-192. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls73" xlink:href="https://doi.org/10.1007/s002489900105" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s002489900105</liensimple>.</refbiblio>
+<refbiblio id="rb78"><marquage typemarq="petitecap">Rapala</marquage>, J., K. <marquage typemarq="petitecap">Lahti</marquage>, K. <marquage typemarq="petitecap">Sivonen</marquage> et S.I. <marquage typemarq="petitecap">Niemelä</marquage>, 1994. Biodegrability and adsorption on lake sediments of cyanobacterial hepatotoxins and anatoxin-a. Letters in Applied Microbiology, 19 : 423-428. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls74" xlink:href="https://doi.org/10.1111/j.1472-765x.1994.tb00972.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/j.1472-765x.1994.tb00972.x</liensimple>.</refbiblio>
+<refbiblio id="rb79"><marquage typemarq="petitecap">Rapala</marquage>, J., K. <marquage typemarq="petitecap">Sivonen</marquage>, K., C. <marquage typemarq="petitecap">Lyra</marquage> et S.I. <marquage typemarq="petitecap">Niemelä</marquage>, 1997. Variation of microcystins, cyanobacterial hepatotoxins, in <marquage typemarq="italique">Anabaena</marquage> spp. as a function of growth stimuli. Applied and Environmental Microbiology, 63 : 2206-2212. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls75" xlink:href="https://doi.org/10.1128/AEM.63.6.2206-2212.1997" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1128/AEM.63.6.2206-2212.1997</liensimple>.</refbiblio>
+<refbiblio id="rb80"><marquage typemarq="petitecap">Rivasseau</marquage>, C., S. <marquage typemarq="petitecap">Martins</marquage> et M.C. <marquage typemarq="petitecap">Hennion</marquage>, 1998. Determination of some physicochemical parameters of microcystins (cyanobacterial toxins) and trace level analysis in environmental samples using liquid chromatography. Journal of Chromatography A, 799 : 155-169. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls76" xlink:href="https://doi.org/10.1016/S0021-9673(97)01095-9" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/S0021-9673(97)01095-9</liensimple>.</refbiblio>
+<refbiblio id="rb81"><marquage typemarq="petitecap">Saito</marquage>, K., Y. <marquage typemarq="petitecap">Sei</marquage>, S. <marquage typemarq="petitecap">Miki</marquage> et K. <marquage typemarq="petitecap">Yamaguchi</marquage>, 2008. Detection of microcystin-metal complexes by using cryospray ionization-Fourier transform ion cyclotron resonance mass spectrometry. Toxicon, 51 : 1496-1498. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls77" xlink:href="https://doi.org/10.1016/j.toxicon.2008.03.026" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.toxicon.2008.03.026</liensimple>.</refbiblio>
+<refbiblio id="rb82"><marquage typemarq="petitecap">Santé Canada</marquage>, 2017. Recommandations pour la qualité de l’eau potable au Canada : document technique — Les toxines cyanobactériennes. Bureau de la qualité de l’eau et de l’air, Direction générale de la santé environnementale et de la sécurité des consommateurs, Santé Canada, Ottawa, 220 p. (N° de catalogue H144-38/2017F-PDF). Disponible en ligne à : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls78" xlink:href="https://www.canada.ca/content/dam/canada/health-canada/migration/healthy-canadians/publications/healthy-living-vie-saine/water-cyanobacteria-cyanobacterie-eau/alt/water-cyanobacteria-cyanobacterie-eau-fra.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.canada.ca/content/dam/canada/health-canada/migration/healthy-canadians/publications/healthy-living-vie-saine/water-cyanobacteria-cyanobacterie-eau/alt/water-cyanobacteria-cyanobacterie-eau-fra.pdf</liensimple>.</refbiblio>
+<refbiblio id="rb83"><marquage typemarq="petitecap">Sevilla</marquage>, E., B. <marquage typemarq="petitecap">Martin</marquage>-<marquage typemarq="petitecap">Luna</marquage>, L. <marquage typemarq="petitecap">Vela</marquage>, M.T. <marquage typemarq="petitecap">Bes</marquage>, M.F. <marquage typemarq="petitecap">Fillat</marquage> et M.L. <marquage typemarq="petitecap">Peleato</marquage>, 2008. Iron availability affects <marquage typemarq="italique">mcy</marquage>D expression and microcystin-LR synthesis in <marquage typemarq="italique">Microcystis aeruginosa</marquage> PCC7806. Environmental Microbiology, 10 : 2476-2483. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls79" xlink:href="https://doi.org/10.1111/j.1462-2920.2008.01663.x" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/j.1462-2920.2008.01663.x</liensimple>.</refbiblio>
+<refbiblio id="rb84"><marquage typemarq="petitecap">Silveira</marquage>, S.B. et C. <marquage typemarq="petitecap">Odebrecht</marquage>, 2019. Effects of salinity and temperature on the growth, toxin production, and akinete germination of the cyanobacterium <marquage typemarq="italique">Nodularia spumigena</marquage>. Frontiers in Marine Science, 6 : 1-12. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls80" xlink:href="https://doi.org/10.3389/fmars.2019.00339" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3389/fmars.2019.00339</liensimple>.</refbiblio>
+<refbiblio id="rb85"><marquage typemarq="petitecap">Sivonen</marquage> K., 1990. Effects of light, temperature, nitrate, orthophosphate, and bacteria on growth of and hepatotoxin production by <marquage typemarq="italique">Oscillatoria agardhii </marquage>strains. Applied and Environmental Microbiology, 56 : 2658:2666.</refbiblio>
+<refbiblio id="rb86"><marquage typemarq="petitecap">Song</marquage>, W., S. <marquage typemarq="petitecap">Bardowell</marquage> et K.E. <marquage typemarq="petitecap">O’Shea</marquage>, 2007. Mechanistic study and the influence of oxygen on the photosensitized transformations of microcystins (cyanotoxins). Environmental Science and Technology, 41 : 5336-5341. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls81" xlink:href="https://doi.org/10.1021/es063066o" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1021/es063066o</liensimple>.</refbiblio>
+<refbiblio id="rb87"><marquage typemarq="petitecap">Souza</marquage>, M.S. <marquage typemarq="petitecap">de</marquage>, J.H. <marquage typemarq="petitecap">Muelbert</marquage>, L.D.F. <marquage typemarq="petitecap">Costa</marquage>, E.V.<marquage typemarq="petitecap">Klering</marquage> et J.S. <marquage typemarq="petitecap">Yunes</marquage>, 2018. Environmental variability and cyanobacterial blooms in a subtropical coastal lagoon: Searching for a sign of climate change effects. Frontiers in Microbiology, 9 : 1-10. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls82" xlink:href="https://doi.org/10.3389/fmicb.2018.01727" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3389/fmicb.2018.01727</liensimple>.</refbiblio>
+<refbiblio id="rb88"><marquage typemarq="petitecap">Stucken</marquage>, K., U. <marquage typemarq="petitecap">John</marquage>, A. <marquage typemarq="petitecap">Cembella</marquage>, K. <marquage typemarq="petitecap">Soto</marquage>-<marquage typemarq="petitecap">Liebe</marquage> et M. <marquage typemarq="petitecap">Vásquez</marquage>, 2014. Impact of nitrogen sources on gene expression and toxin production in the diazotroph <marquage typemarq="italique">Cylindrospermopsis</marquage> <marquage typemarq="italique">raciborskii</marquage> CS-505 and non-diazotroph <marquage typemarq="italique">Raphidiopsis brookii</marquage> D9. Toxins, 6 : 1896-1915. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls83" xlink:href="https://doi.org/10.3390/toxins6061896" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/toxins6061896</liensimple>.</refbiblio>
+<refbiblio id="rb89"><marquage typemarq="petitecap">Svrcek</marquage>, C. et D.W. <marquage typemarq="petitecap">Smith</marquage>, 2004. Cyanobacteria toxins and the current state of knowledge on water treatment options: A review. Journal of Environmental Engineering and Science, 3 : 155-185. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls84" xlink:href="https://doi.org/10.1139/S04-010" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1139/S04-010</liensimple>.</refbiblio>
+<refbiblio id="rb90"><marquage typemarq="petitecap">Taranu</marquage>, Z.E., I. <marquage typemarq="petitecap">Gregory</marquage>-<marquage typemarq="petitecap">Eaves</marquage>, R.J. <marquage typemarq="petitecap">Steele</marquage>, M. <marquage typemarq="petitecap">Beaulieu</marquage> et P. <marquage typemarq="petitecap">Legendre</marquage>, 2017. Predicting microcystin concentrations in lakes and reservoirs at a continental scale: A new framework for modelling an important health risk factor. Global Ecology and Biogeography, 26 : 625-637. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls85" xlink:href="https://doi.org/10.1111/geb.12569" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1111/geb.12569</liensimple>.</refbiblio>
+<refbiblio id="rb91"><marquage typemarq="petitecap">Taranu</marquage>, Z.E., F.R. <marquage typemarq="petitecap">Pick</marquage>, I.F. <marquage typemarq="petitecap">Creed</marquage>, A. <marquage typemarq="petitecap">Zastepa</marquage> et S.B. <marquage typemarq="petitecap">Watson</marquage>, 2019. Meteorological and nutrient conditions influence microcystin congeners in freshwaters. Toxins, 11 : 1-21. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls86" xlink:href="https://doi.org/10.3390/toxins11110620" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3390/toxins11110620</liensimple>.</refbiblio>
+<refbiblio id="rb92"><marquage typemarq="petitecap">Thirumavalavan</marquage>, M., Y.L. <marquage typemarq="petitecap">Hu</marquage> et J.F. <marquage typemarq="petitecap">Lee</marquage>, 2012. Effects of humic acid and suspended soils on adsorption and photo-degradation of microcystin-LR onto samples from Taiwan reservoirs and rivers. Journal of Hazardous Materials, 217-218 : 323-329. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls87" xlink:href="https://doi.org/10.1016/j.jhazmat.2012.03.031" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.jhazmat.2012.03.031</liensimple>.</refbiblio>
+<refbiblio id="rb93"><marquage typemarq="petitecap">Tonk</marquage>, L., K. <marquage typemarq="petitecap">Bosch</marquage>, P.M. <marquage typemarq="petitecap">Visser</marquage> et J. <marquage typemarq="petitecap">Huisman</marquage>, 2007. Salt tolerance of the harmful cyanobacterium <marquage typemarq="italique">Microcystis aeruginosa</marquage>. Aquatic Microbial Ecology, 46 : 117-123. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls88" xlink:href="https://doi.org/10.3354/ame046117" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.3354/ame046117</liensimple>.</refbiblio>
+<refbiblio id="rb94"><marquage typemarq="petitecap">Toruńska</marquage>-<marquage typemarq="petitecap">Sitarz</marquage>, A., E. <marquage typemarq="petitecap">Kotlarska</marquage> et H. <marquage typemarq="petitecap">Mazur</marquage>-<marquage typemarq="petitecap">Marzec</marquage>, 2018. Biodegradation of nodularin and other nonribosomal peptides by the Baltic bacteria. International Biodeterioration and Biodegradation, 134 : 48-57. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls89" xlink:href="https://doi.org/10.1016/j.ibiod.2018.08.004" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.ibiod.2018.08.004</liensimple>.</refbiblio>
+<refbiblio id="rb95"><marquage typemarq="petitecap">Utkilen</marquage>, H. et N. <marquage typemarq="petitecap">Gjolme</marquage>, 1995. Iron-stimulated toxin production in <marquage typemarq="italique">Microcystis aeruginosa</marquage>. Applied and Environmental Microbiology, 61 : 797-800.</refbiblio>
+<refbiblio id="rb96"><marquage typemarq="petitecap">Walls</marquage>, J.T., K.H. <marquage typemarq="petitecap">Wyatt</marquage>, J.C. <marquage typemarq="petitecap">Doll</marquage>, E.M. <marquage typemarq="petitecap">Rubenstein</marquage> et A.R. <marquage typemarq="petitecap">Rober</marquage>, 2018. Hot and toxic: Temperature regulates microcystin release from cyanobacteria. Science of the Total Environment, 610-611 : 786-795. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls90" xlink:href="https://doi.org/10.1016/j.scitotenv.2017.08.149" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.scitotenv.2017.08.149</liensimple>. </refbiblio>
+<refbiblio id="rb97"><marquage typemarq="petitecap">Wang</marquage>, X., P. <marquage typemarq="petitecap">Parkpian</marquage>, N. <marquage typemarq="petitecap">Fujimoto</marquage>, K.M. <marquage typemarq="petitecap">Ruchirawat</marquage>, R.D. <marquage typemarq="petitecap">DeLaune</marquage> et A. <marquage typemarq="petitecap">Jugsujinda</marquage>, 2002, Environmental conditions associating microcystins production to <marquage typemarq="italique">Microcystis aeruginosa</marquage> in a reservoir of Thailand. Journal of Environmental Science and Health - Part A Toxic/Hazardous Substances and Environmental Engineering, 37 : 1181-1207. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls91" xlink:href="https://doi.org/10.1081/ESE-120005980" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1081/ESE-120005980</liensimple>.</refbiblio>
+<refbiblio id="rb98"><marquage typemarq="petitecap">Wang</marquage>, H., Z. <marquage typemarq="petitecap">Zhang</marquage>, D.<marquage typemarq="petitecap">Liang</marquage>, H. <marquage typemarq="petitecap">Du</marquage>, Y. <marquage typemarq="petitecap">Pang</marquage>, K. <marquage typemarq="petitecap">Hu</marquage> et J. <marquage typemarq="petitecap">Wang</marquage>, 2016. Separation of wind's influence on harmful cyanobacterial blooms. Water Research, 98 : 280-292. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls92" xlink:href="https://doi.org/10.1016/j.watres.2016.04.037" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.watres.2016.04.037</liensimple>.</refbiblio>
+<refbiblio id="rb99"><marquage typemarq="petitecap">Wang</marquage>, J., L. <marquage typemarq="petitecap">Zhang</marquage>, J. <marquage typemarq="petitecap">Fan</marquage> et Y. <marquage typemarq="petitecap">Wen</marquage>, 2017. Impacts of Rac- and S-metolachlor on cyanobacterial cell integrity and release of microcystins at different nitrogen levels. Chemosphere, 181 : 619-626. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls93" xlink:href="https://doi.org/10.1016/j.chemosphere.2017.04.101" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.chemosphere.2017.04.101</liensimple>.</refbiblio>
+<refbiblio id="rb100"><marquage typemarq="petitecap">Watanabe</marquage>, M.F. et S. <marquage typemarq="petitecap">Oishi</marquage>, 1985. Effects of environmental factors on toxicity of a cyanobacterium (<marquage typemarq="italique">Microcystis aeruginosa</marquage>) under culture conditions. Applied and Environmental Microbiology, 49 : 1342-1344.</refbiblio>
+<refbiblio id="rb101"><marquage typemarq="petitecap">Wu</marquage>, X., B. <marquage typemarq="petitecap">Xiao</marquage>, R. Li, C. <marquage typemarq="petitecap">Wang</marquage>, J. <marquage typemarq="petitecap">Huang</marquage> et Z. <marquage typemarq="petitecap">Wang</marquage>, 2011. Mechanisms and factors affecting sorption of microcystins onto natural sediments. Environmental Science and Technology, 45 : 2641-2647. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls94" xlink:href="https://doi.org/10.1021/es103729m" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1021/es103729m</liensimple>.</refbiblio>
+<refbiblio id="rb102"><marquage typemarq="petitecap">Yeung</marquage>, A.C.Y., P.M. <marquage typemarq="petitecap">D’Agostino</marquage>, A. <marquage typemarq="petitecap">Poljak</marquage>, J. <marquage typemarq="petitecap">McDonald</marquage>, M.W. <marquage typemarq="petitecap">Bligh</marquage>, T.D. <marquage typemarq="petitecap">Waite</marquage> et B.A. <marquage typemarq="petitecap">Neilan</marquage>, 2016. Physiological and proteomic responses of continuous cultures of <marquage typemarq="italique">Microcystis aeruginosa</marquage> PCC 7806 to changes in iron bioavailability and growth rate. Applied and Environmental Microbiology, 82 : 5918-5929. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls95" xlink:href="https://doi.org/10.1128/AEM.01207-16" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1128/AEM.01207-16</liensimple>.</refbiblio>
+<refbiblio id="rb103"><marquage typemarq="petitecap">Zastepa</marquage>, A., F.R. <marquage typemarq="petitecap">Pick</marquage> et J.M. <marquage typemarq="petitecap">Blais</marquage>, 2017a. Distribution and flux of microcystin congeners in lake sediments. Lake and Reservoir Management, 33 : 444-451. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls96" xlink:href="https://doi.org/10.1080/10402381.2017.1362491" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1080/10402381.2017.1362491</liensimple>.</refbiblio>
+<refbiblio id="rb104"><marquage typemarq="petitecap">Zastepa</marquage>, A., Z.E. <marquage typemarq="petitecap">Taranu</marquage>, L.E. <marquage typemarq="petitecap">Kimpe</marquage>, J.M. <marquage typemarq="petitecap">Blais</marquage>, I. <marquage typemarq="petitecap">Gregory</marquage>-<marquage typemarq="petitecap">Eaves</marquage>, R.W. <marquage typemarq="petitecap">Zurawell</marquage> et F.R. <marquage typemarq="petitecap">Pick</marquage>, 2017b. Reconstructing a long-term record of microcystins from the analysis of lake sediments. Science of the Total Environment, 579 : 893-901. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls97" xlink:href="https://doi.org/10.1016/j.scitotenv.2016.10.211" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.scitotenv.2016.10.211</liensimple>.</refbiblio>
+<refbiblio id="rb105"><marquage typemarq="petitecap">Žegura</marquage>, B., A. <marquage typemarq="petitecap">Štraser</marquage> et M. <marquage typemarq="petitecap">Filipi</marquage><marquage typemarq="petitecap">č</marquage>, 2011. Genotoxicity and potential carcinogenicity of cyanobacterial toxins — a review. Mutation Research — Reviews in Mutation Research, 727 : 16-41. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls98" xlink:href="https://doi.org/10.1016/j.mrrev.2011.01.002" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1016/j.mrrev.2011.01.002</liensimple>.</refbiblio>
+<refbiblio id="rb106"><marquage typemarq="petitecap">Zhang</marquage>, Q., H. <marquage typemarq="petitecap">Zhou</marquage>, Z. <marquage typemarq="petitecap">Li,</marquage> J. <marquage typemarq="petitecap">Zhu</marquage>, C. <marquage typemarq="petitecap">Zhou</marquage> et M. <marquage typemarq="petitecap">Zhao</marquage>, 2016. Effects of glyphosate at environmentally relevant concentrations on the growth of and microcystin production by <marquage typemarq="italique">Microcystis aeruginosa</marquage>. Environmental Monitoring and Assessment, 188 : 632-639. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls99" xlink:href="https://doi.org/10.1007/s10661-016-5627-2" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.1007/s10661-016-5627-2</liensimple>.</refbiblio></biblio>
+    </grbiblio>
+  </partiesann></article>

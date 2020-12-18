@@ -1523,6 +1523,36 @@ class TestArticleDetailView:
         assert '<p class="no-continuation"><span class="majuscule">Graphique 3</span>\xa0' \
                '<span>(suite)</span></p>' in html
 
+    def test_integral_text_pdf_nav_item_is_displayed_if_there_is_a_pdf_in_the_page(self):
+        article = ArticleFactory(
+            from_fixture='1073992ar',
+            issue__journal__open_access=True,
+            with_pdf=True,
+        )
+        url = reverse('public:journal:article_summary', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        assert '<a href="#pdf-viewer" id="pdf-viewer-menu-link">Texte intégral (PDF)</a>' in html
+
+    def test_integral_text_pdf_nav_item_is_not_displayed_if_there_is_not_a_pdf_in_the_page(self):
+        article = ArticleFactory(
+            from_fixture='1073989ar',
+            issue__journal__open_access=True,
+            with_pdf=False,
+        )
+        url = reverse('public:journal:article_summary', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        assert '<a href="#pdf-viewer" id="pdf-viewer-menu-link">Texte intégral (PDF)</a>' not in html
+
     def test_article_multilingual_titles(self):
         article = ArticleFactory(
             from_fixture='1059303ar',
