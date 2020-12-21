@@ -1523,6 +1523,25 @@ class TestArticleDetailView:
         assert '<p class="no-continuation"><span class="majuscule">Graphique 3</span>\xa0' \
                '<span>(suite)</span></p>' in html
 
+    @pytest.mark.parametrize('localidentifier, expected_result', (
+        ('1073992ar', True),
+        ('1073989ar', False),
+    ))
+    def test_pdf_link_in_toc(self, localidentifier, expected_result):
+        article = ArticleFactory(
+            from_fixture=localidentifier,
+            with_pdf=True,
+        )
+        url = reverse('public:journal:article_summary', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'issue_localid': article.issue.localidentifier,
+            'localid': article.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        pdf_link = '<a href="#pdf-viewer" id="pdf-viewer-menu-link">Texte intégral (PDF)</a>'
+        assert (pdf_link in html) is expected_result
+
     def test_article_multilingual_titles(self):
         article = ArticleFactory(
             from_fixture='1059303ar',
