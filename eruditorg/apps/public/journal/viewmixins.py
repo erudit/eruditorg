@@ -287,6 +287,8 @@ class ArticleAccessLogMixin:
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
+        if response.status_code != 200:
+            return response
 
         article = self.get_object()
         issue = article.issue
