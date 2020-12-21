@@ -41,7 +41,7 @@ def get_pdf_first_page(content):
     try:
         doc = fitz.Document(stream=content, filetype="pdf")
         first_page = fitz.Document()
-        first_page.insertPDF(doc, to_page=1)
+        first_page.insertPDF(doc, to_page=0)
         return first_page.write()
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
