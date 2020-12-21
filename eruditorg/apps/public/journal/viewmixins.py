@@ -287,6 +287,8 @@ class ArticleAccessLogMixin:
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
+
+        # Do not log if status code is not 200.
         if response.status_code != 200:
             return response
 
@@ -294,8 +296,9 @@ class ArticleAccessLogMixin:
         issue = article.issue
         journal = issue.journal
 
+        # Do not log if issue is not published.
         if not issue.is_published:
-            return super().dispatch(request, *args, **kwargs)
+            return response
 
         active_subscription = request.subscriptions.active_subscription
         if active_subscription:
