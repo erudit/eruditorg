@@ -62,20 +62,23 @@ class TestOrganisationScopeMixin:
         assert list(response.context_data['scope_user_organisations']) == [self.organisation, ]
 
     def test_can_set_last_year_of_subscription_in_context(self):
+        organisation = OrganisationFactory()
+        organisation.members.add(self.user)
+        subscription = JournalAccessSubscriptionFactory(organisation=organisation)
         JournalAccessSubscriptionPeriodFactory(
-            subscription=self.subscription,
-            start=dt.datetime.now(),
+            subscription=subscription,
+            start=dt.datetime(year=2020, month=1, day=1),
             end=dt.datetime(year=2020, month=12, day=31)
         )
 
         url = reverse(
-            'userspace:library:home', kwargs={'organisation_pk': self.organisation.pk})
+            'userspace:library:home', kwargs={'organisation_pk': organisation.pk})
 
         request = self.get_request(url)
         my_view = MyView.as_view()
 
         # Run
-        response = my_view(request, organisation_pk=self.organisation.pk)
+        response = my_view(request, organisation_pk=organisation.pk)
         assert response.status_code == 200
         assert response.context_data['last_year_of_subscription'] == 2020
 
