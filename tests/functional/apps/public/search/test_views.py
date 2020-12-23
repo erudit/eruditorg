@@ -117,6 +117,24 @@ class TestEruditSearchResultsView:
         assert b'tool-citation-save-' not in response.content
         assert b'tool-citation-remove-' not in response.content
 
+    @pytest.mark.parametrize('collection_code, expected_document_id', (
+        ('erudit', 'article1'),
+        ('unb', 'unb:article1'),
+    ))
+    def test_data_document_id_includes_unb_prefix(
+        self, collection_code, expected_document_id, solr_client,
+    ):
+        article = ArticleFactory(
+            issue__journal__collection__code=collection_code,
+            localidentifier='article1',
+        )
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_title('foo bar')
+        solr_client.add_article(article)
+        url = reverse('public:search:results')
+        html = Client().get(url, data={'basic_search_term': 'foo'}).content.decode()
+        assert f'data-document-id="{expected_document_id}"' in html
+
 
 class TestAdvancedSearchView:
 

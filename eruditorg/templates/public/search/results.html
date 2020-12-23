@@ -170,7 +170,7 @@
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
             {% for document in results.results %}
-            <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.localidentifier }}" {% if document.localidentifier in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
+            <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.solr_id }}" {% if document.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
                 {% cache SHORT_TTL "public_search_result_document_fragment" document.localidentifier LANGUAGE_CODE "v1" %}
@@ -288,11 +288,11 @@
                 <ul class="toolbox toolbox-compact">
                   {% if document.can_cite %}
                   <li>
-                    <a class="tool-btn" id="tool-citation-save-{{ forloop.counter }}" data-citation-save="#document-{{ forloop.counter }}"{% if document.localidentifier in request.saved_citations %} style="display:none;"{% endif %}>
+                    <a class="tool-btn" id="tool-citation-save-{{ forloop.counter }}" data-citation-save="#document-{{ forloop.counter }}"{% if document.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                       <i class="icon ion-ios-bookmark toolbox-save"></i>
                       <span class="tools-label">{% trans "Sauvegarder" %}</span>
                     </a>
-                    <a class="tool-btn saved" id="tool-citation-remove-{{ forloop.counter }}" data-citation-remove="#document-{{ forloop.counter }}"{% if not document.localidentifier in request.saved_citations %} style="display:none;"{% endif %}>
+                    <a class="tool-btn saved" id="tool-citation-remove-{{ forloop.counter }}" data-citation-remove="#document-{{ forloop.counter }}"{% if not document.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                       <i class="icon ion-ios-bookmark toolbox-save"></i>
                       <span class="tools-label">{% trans "Supprimer" %}</span>
                     </a>
