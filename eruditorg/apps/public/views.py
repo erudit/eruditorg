@@ -10,7 +10,11 @@ from django.core.cache import cache
 from django.utils import translation
 from django.views.generic import TemplateView
 from django.template import loader
-from django.http.response import HttpResponseNotFound, HttpResponseServerError
+from django.http.response import (
+    HttpResponseForbidden,
+    HttpResponseNotFound,
+    HttpResponseServerError,
+)
 from feedparser import parse as rss_parse
 
 from erudit.models import Issue
@@ -26,6 +30,10 @@ def internal_error_view(request, exception=None):
 
 def not_found_view(request, exception=None):
     return HttpResponseNotFound(loader.render_to_string('public/404.html', None, request))
+
+
+def forbidden_view(request, exception=None):
+    return HttpResponseForbidden(loader.render_to_string('public/403.html', None, request))
 
 
 class HomeView(TemplateView):
