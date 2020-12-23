@@ -36,6 +36,10 @@ def forbidden_view(request, exception=None):
     return HttpResponseForbidden(loader.render_to_string('public/403.html', None, request))
 
 
+def forbidden_view_csrf(request, reason=''):
+    return HttpResponseForbidden(loader.render_to_string('public/403.html', None, request))
+
+
 class HomeView(TemplateView):
     """
     This is the main view of the Érudit's public site.
