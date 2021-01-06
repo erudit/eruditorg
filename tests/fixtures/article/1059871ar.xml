@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1059871ar" typeart="article" lang="fr" ordseq="1"><admin><infoarticle><pagination>
+            <ppage>5</ppage>
+            <dpage>16</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="ritpu112" lang="fr en"><titrerev>Revue internationale des technologies en pédagogie universitaire</titrerev><titrerevparal lang="en">International Journal of Technologies in Higher Education</titrerevparal><titrerevabr>ritpu</titrerevabr><idissnnum>1708-7570</idissnnum><redacteurchef typerc="regulier" sexe="masculin"><nompers><prenom>Thierry</prenom><nomfamille>Karsenti</nomfamille></nompers></redacteurchef></revue><numero id="ritpu04594"><volume>14</volume><nonumero>3</nonumero><pub><annee>2017</annee></pub><pubnum><date typedate="publication">2019-05-16</date></pubnum></numero><editeur><nomorg>CRIFPE</nomorg></editeur><prodnum><nomorg>CRIFPE</nomorg></prodnum><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Droits d'auteur © <nompers><prenom>Amélie</prenom><nomfamille>Duguet</nomfamille></nompers> et <nompers><prenom>Sophie</prenom><nomfamille>Morlaix</nomfamille></nompers>, 2017</droitsauteur><droitsauteur><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://creativecommons.org/licences/by/4.0/deed.fr" xlink:actuate="onRequest" xlink:show="replace" xlink:type="simple"><objetmedia flot="ligne"><image typeimage="forme" xlink:href="http://licensebuttons.net/l/by/4.0/88x31.png" xlink:actuate="onLoad" xlink:show="embed" xlink:type="simple"/></objetmedia></liensimple></droitsauteur></admin><liminaire><grtitre>
+                <titre>Perception des TIC par les enseignants universitaires : l’exemple d’une université française</titre>
+                <titreparal lang="en">Perceptions of ICT by university teachers: The example of a French university</titreparal>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Amélie</prenom><nomfamille>Duguet</nomfamille></nompers><affiliation><alinea>Université Bourgogne Franche-Comté</alinea></affiliation><courriel><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:Amelie.duguet@u-bourgogne.fr" xlink:type="simple">Amelie.duguet@u-bourgogne.fr</liensimple></courriel></auteur><auteur id="au2"><nompers><prenom>Sophie</prenom><nomfamille>Morlaix</nomfamille></nompers><affiliation><alinea>Université Bourgogne Franche-Comté</alinea></affiliation><courriel><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:Sophie.morlaix@u-bourgogne.fr" xlink:type="simple">Sophie.morlaix@u-bourgogne.fr</liensimple></courriel></auteur></grauteur><resume typeresume="resume" lang="fr"><alinea>Dans cet article, nous nous intéressons à la perception des TIC par les enseignants universitaires. Prenant appui sur plusieurs modèles théoriques d’intégration des TIC, nous avons réalisé une enquête par questionnaire auprès de 248 enseignants d’une université française. Nous montrons d’une part que les enseignants interrogés ont dans l’ensemble une perception plutôt positive des TIC. Nous construisons d’autre part des modèles d’analyse de cette perception : celle-ci apparaît comme particulièrement dépendante de certains facteurs contextuels et du sentiment de compétence de l’enseignant en matière de TIC.</alinea></resume><resume typeresume="resume" lang="en"><alinea>In this article, we are interested in the perception of ICTs by university teachers. Based on several theoretical models of ICT integration, a questionnaire survey was conducted among 248 teachers at a French university. We show on the one hand that the teachers interviewed generally have a rather positive perception of ICTs. On the other hand, we construct models for analyzing this perception: it appears to be particularly dependent on certain contextual factors and on the teacher’s sense of competence in the field of ICT.</alinea></resume><grmotcle lang="fr"><motcle>TIC</motcle><motcle>université</motcle><motcle>perception des enseignants</motcle><motcle>modèle d’intégration des TIC</motcle><motcle>facteurs explicatifs</motcle></grmotcle><grmotcle lang="en"><motcle>ICT</motcle><motcle>university</motcle><motcle>teacher perception</motcle><motcle>ICT integration model</motcle><motcle>explanatory factors</motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><titre>Introduction</titre><para id="pa1"><no>1</no>
+        <alinea>Depuis la déclaration de Bologne (1999) organisant un espace européen de
+          l’enseignement supérieur et la stratégie de Lisbonne (2000) faisant des structures
+          d’enseignement supérieur des outils de compétitivité économique, les universités sont
+          confrontées à de nouveaux défis, d’un point de vue tant économique qu’organisationnel et
+          pédagogique, engendrant par là même des conséquences sur les modalités d’enseignement
+          (Lanarès et Poteaux, 2013). Or, en France, le système transmissif qui prévaut encore dans
+          les universités est largement remis en cause, étant considéré comme inadapté au public
+          étudiant actuel (Bertrand, 2014 ; Felouzis, 2003) et n’étant plus « en phase » avec
+          « l’évolution des techniques » (Poteaux, 2013). Dans ce contexte, les technologies de
+          l’information et de la communication (TIC) sont perçues, en témoignent le rapport Le Déaut
+          (2013) et le rapport Bertrand (2014), comme un levier pour transformer, si ce n’est
+          améliorer la qualité pédagogique de l’enseignement. De même, le rapport du comité pour la
+          stratégie nationale de l’enseignement supérieur (StraNES), remis en septembre 2015 au
+          président de la République, voit dans le numérique une occasion de « renouveau
+          pédagogique ». Dans un même temps, les pouvoirs politiques entendent promouvoir l’usage du
+          numérique afin de rénover la pédagogie universitaire (Ministère de l’Enseignement
+          supérieur et de la Recherche [MESR], 2015). Cet essor du numérique a entraîné depuis une
+          quinzaine d’années un intérêt croissant des chercheurs pour les différents enjeux liés à
+          cette émergence des technologies. De fait, le passage en revue de la littérature
+          scientifique portant sur les TIC à l’université permet de constater qu’un grand nombre de
+          dimensions ont déjà été abordées par la communauté scientifique. Nous pouvons en citer
+          quelques-unes de manière non exhaustive : les enjeux liés aux MOOC (Karsenti, 2013a;
+          Vrillon, 2017), l’analyse de la mise en oeuvre de dispositifs pédagogiques en lien avec le
+          numérique (Cosnefroy, 2014; Lamine et Petit, 2014; Simonian et Ladage, 2014), les usages
+          des TIC par les étudiants (Papi, 2012; Papi et Glikman, 2015; Raby, Karsenti, Meunier et
+          Villeneuve, 2011), les effets des TIC sur la scolarité de ces derniers (Dahmani et Ragni,
+          2009; Monsakul, 2008; Saunders et Klemming, 2003), les usages (Gremmo et Kellner, 2011) et
+          le non-usage des TIC par les enseignants (Boudokhane, 2006; Trestini, 2012). Néanmoins, à
+          notre connaissance, peu de recherches ont porté sur la perception des TIC par les
+          enseignants universitaires. Pourtant, des travaux portant sur l’intégration des TIC, sur
+          lesquels nous reviendrons ultérieurement, laissent supposer que cette perception exerce un
+          effet sur les usages des TIC par les enseignants. C’est par conséquent à cette dimension
+          que nous nous intéressons dans le présent article. Nous commencerons par présenter le
+          cadre conceptuel de la recherche et la problématique autour de laquelle elle s’articule.
+          Puis, nous exposerons les contours du dispositif empirique mis en oeuvre pour répondre aux
+          questions de recherche. Enfin, après avoir présenté les résultats, nous discuterons ces
+          derniers en montrant en quoi ils peuvent s’avérer éclairants en matière d’usage des TIC
+          par les enseignants.</alinea>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>Usage des TIC et modèles d’intégration à l’enseignement</titre><para id="pa2"><no>2</no>
+        <alinea>Les TIC, technologies de l’information et de la communication, rassemblent à la fois
+          l’utilisation d’Internet, de logiciels de présentation, du courrier électronique et
+          d’environnements d’apprentissage en ligne (Raby <marquage typemarq="italique">et al.</marquage>, 2011). De manière plus étendue, Basque (2005) renvoie les TIC à : </alinea>
+        <bloccitation>
+          <alinea>… un ensemble de technologies fondées sur l’informatique, la microélectronique,
+            les télécommunications (notamment les réseaux), le multimédia et l’audiovisuel, qui,
+            lorsqu’elles sont combinées et interconnectées, permettent de rechercher, de stocker, de
+            traiter et de transmettre des informations, sous forme de données de divers types
+            (texte, son, images fixes, images vidéo, etc.), et permettent l’interactivité entre des
+            personnes, et entre des personnes et des machines.</alinea>
+          <source>p. 34</source>
+        </bloccitation>
+      </para><para id="pa3"><no>3</no>
+        <alinea>Reprenant les différentes dimensions nommées dans ces définitions, nous désignons
+          les TIC dans ce travail comme étant l’ensemble des matériels, logiciels et services
+          numériques pouvant être utilisés pour enseigner. Or, nombre de travaux portent sur les
+          usages et par extension le non-usage des TIC par les enseignants universitaires. Plusieurs
+          modèles d’intégration permettent d’en éclairer les causes. </alinea>
+      </para><section2 id="s2n1"><no>2.
+				1</no><titre>Des usages restreints des TIC</titre><para id="pa4"><no>4</no>
+        <alinea>La question des usages des TIC par les enseignants dans le cadre de leurs activités
+          d’enseignement demeure aujourd’hui cruciale, dans un contexte où la communauté
+          scientifique s’interroge sur la capacité des technologies à constituer un réel vecteur
+          d’innovation pédagogique. Or, des travaux portant sur les usages des TIC indiquent que ces
+          dernières semblent être en réalité le plus souvent mobilisées dans le cadre d’usages
+          classiques, souvent même en renfort d’une pédagogie transmissive. C’est notamment le
+          constat effectué en 2011 par Albero (citée par Paivandi et Espinosa, 2013), selon qui « la
+          vision des TIC en tant que simples véhicules d’information semble rester dominante dans le
+          contexte français ». En ce sens, la production et la mise à disposition de ressources
+          numériques s’avèrent plus prégnantes dans les campus numériques français que
+          l’accompagnement et la communication pédagogique (Degache et Nissen, 2008). Une telle
+          situation est sans nul doute à mettre en lien avec les objectifs qu’assignent les
+          enseignants à leur utilisation des TIC. En effet, selon le rapport de la mission Fourgous
+          (2010), les outils numériques facilitent à l’école la mise en place d’une pédagogie
+          « active, individualisée et collaborative ». Pourtant, Gremmo et Kellner (2011) montrent
+          que les enseignants universitaires privilégient en réalité trois sortes d’objectifs de
+          nature plus classique : se documenter dans la préparation de leurs cours, rédiger leurs
+          cours et mettre des contenus à disposition des étudiants. Il semble alors cohérent de
+          constater que les outils communicationnels et rédactionnels de même que les plateformes de
+          cours sont les plus mobilisés par les enseignants (enquête de Léger Marketing, 2011, citée
+          par Fusaro et Couture, 2012). Une recherche québécoise montre d’ailleurs que d’autres
+          technologies permettant de rendre les apprenants davantage acteurs de la situation
+          pédagogique, telles que les tests/quiz, les outils et logiciels spécialisés, les blogues,
+          les wikis, les exerciseurs, les simulateurs ou bien encore les portfolios numériques, ne
+          sont jamais mobilisées pour enseigner par plus de la moitié des enseignants (Fusaro et
+          Couture, 2012). Ces auteurs indiquent finalement que seules les technologies « standards »
+          sont les plus utilisées par les enseignants. </alinea>
+      </para></section2><section2 id="s2n2"><no>2.
+				2</no><titre>Comment expliquer le non-usage des TIC?</titre><para id="pa5"><no>5</no>
+        <alinea>Forts de ces constats, plusieurs auteurs ont tenté d’expliquer ce « non-usage » des
+          TIC. Ainsi, pour certains, les causes ne seraient pas à chercher dans une incapacité des
+          acteurs, mais plutôt au coeur même de la tradition universitaire (Albero, 2011, citée par
+          Endrizzi, 2012). Ben Abid-Zarrouk (2012) relève pour sa part la peur que génère chez
+          certains enseignants l’usage des TIC, car cet usage peut leur apparaître comme susceptible
+          de redéfinir « toute la mission de l’enseignant ». Un sentiment d’incertitude et
+          d’anxiété, lié au manque de compétences ou à une opposition idéologique, viendrait en ce
+          sens freiner l’implication des enseignants dans leur usage des TIC (Paivandi et Espinosa,
+          2013). Tout se passe donc comme si mobiliser les TIC était, pour certains enseignants,
+          contraire à la tradition universitaire et les plaçait dans une zone d’inconfort. Trestini
+          (2012) a pour sa part interrogé 343 enseignants de l’Université de Strasbourg en
+          septembre 2009 afin de déterminer les causes de non-usage des TIC. Il en ressort que le
+          manque de temps est le facteur le plus souvent évoqué par les enseignants comme frein à
+          l’utilisation des TIC. Interviennent ensuite le coût du matériel, le manque de familiarité
+          avec les services en ligne et la mauvaise maîtrise de l’informatique, cités par 10 à 25 %
+          des enseignants. Cet auteur établit en outre un lien significatif entre la perception de
+          l’utilité des TIC et l’usage qu’en font les enseignants. </alinea>
+      </para></section2><section2 id="s2n3"><no>2.
+				3</no><titre>Les facteurs d’intégration des TIC</titre><para id="pa6"><no>6</no>
+        <alinea>Afin de mieux comprendre les mécanismes à l’oeuvre dans les usages des TIC par les
+          enseignants, plusieurs chercheurs ont établi des modèles théoriques d’intégration de ces
+          TIC à l’enseignement. Ne prétendant pas à l’exhaustivité, nous évoquerons trois modèles.
+          Ainsi, le modèle SAMR (substitution, augmentation, modification, redéfinition) de
+          Puentedura (2009) propose quatre niveaux d’intégration des TIC : la substitution (les TIC
+          remplacent les outils existants sans pour autant que la finalité du travail demandé aux
+          élèves ne change), l’augmentation (les TIC apportent des fonctionnalités supplémentaires
+          améliorant l’efficacité des activités pédagogiques existantes), la modification (les TIC
+          entraînent une réelle transformation de la scénarisation pédagogique) et la redéfinition
+          (les TIC permettent la création de nouvelles tâches impossibles à réaliser sans les
+          technologies). Cette idée d’un continuum décrivant les différents « degrés » d’intégration
+          des TIC se retrouve également dans les travaux de Karsenti (2013b) et son modèle
+          « ASPID » (adoption, substitution, progrès, innovation… détérioration) : l’intégration des
+          TIC débute par une phase « d’adoption » (l’enseignant se familiarise avec les TIC). Puis,
+          l’auteur distingue deux voies susceptibles d’être suivies par les enseignants : </alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea>La première voie, nommée « détérioration », conduit à un impact négatif sur
+              l’enseignement, dans la mesure où l’usage des TIC par les enseignants comporte de
+              « nombreux désavantages » et conduit à une détérioration de l’enseignement.</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>La seconde voie entraîne des effets positifs sur l’enseignement. L’intégration
+              des TIC se fait alors en trois étapes : d’abord la substitution (l’efficacité est
+              identique à celle d’un enseignement sans les TIC), puis le progrès (les TIC permettent
+              de réaliser des tâches scolaires traditionnelles avec une efficacité accrue), et enfin
+              l’innovation (les TIC permettent d’enseigner de façon innovante). Ces deux dernières
+              étapes se rapprochent réciproquement de la modification et de la redéfinition décrites
+              par Puentedura (2009). </alinea>
+          </elemliste>
+        </listenonord>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Néanmoins, Karsenti considère que l’intégration des TIC est dépendante des usages
+          responsables qu’en font les apprenants ainsi que du niveau d’engagement technopédagogique
+          de l’enseignant. On peut alors s’interroger sur les facteurs qui peuvent peser sur
+          l’engagement des enseignants en matière de technologies. Le modèle TAM (<marquage typemarq="italique">technology acceptance model</marquage>) de Davis (1989) apporte à
+          cette question quelques éléments de réponse. D’après ce modèle, la perception de l’utilité
+          et la perception de la facilité d’utilisation des TIC exercent un effet sur l’attitude et
+          l’intention de l’enseignant d’utiliser les TIC et donc par ce biais sur son usage des TIC.
+          À la lecture de ces travaux, il paraît important de se pencher davantage sur la perception
+          des TIC par les enseignants.</alinea>
+      </para></section2><section2 id="s2n4"><no>2.
+				4</no><titre>La perception des TIC par les enseignants : un objet de questionnements</titre><para id="pa8"><no>8</no>
+        <alinea>Les travaux préalablement cités conduisent à supposer que la façon dont les
+          enseignants perçoivent les TIC influe sur leurs usages des technologies. De ce fait, on
+          peut considérer les perceptions des TIC comme un objet d’études à part entière. En effet,
+          apporter de nouveaux éclairages sur la perception des TIC par les enseignants pourrait en
+          ce sens apporter de nouveaux éléments de compréhension concernant leurs usages. Or, si des
+          recherches ont été produites à l’international sur le sujet (Mahdizadeh, Biemans et
+          Mulder, 2008; Muñoz Carril, González Sanmamed et Hernández Sellés, 2013; Yuen et Ma,
+          2008), aucune recherche n’a été produite sur le sujet, à notre connaissance, dans le cadre
+          de l’Hexagone. C’est la raison pour laquelle nous avons fait le choix dans cet article de
+          focaliser notre attention sur cette perception, cela au travers de deux types de
+          questionnement :</alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea>Comment les enseignants universitaires perçoivent-ils les TIC? En ont-ils une
+              perception positive ou bien au contraire négative? Les travaux de Bédard <marquage typemarq="italique">et al.,</marquage> datant maintenant de plus d’une dizaine
+              d’années (2005), témoignent d’une perception globalement positive des technologies
+              numériques. Qu’en est-il aujourd’hui?</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Comment expliquer cette perception des TIC? Quels sont les facteurs qui influent
+              sur celle-ci?</alinea>
+          </elemliste>
+        </listenonord>
+        <alinea>En réponse à ces questionnements, nous formulons deux hypothèses :</alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea>Hypothèse 1 — En référence aux travaux de Bédard <marquage typemarq="italique">et al.</marquage> (2005) précédemment cités et à ceux de Trestini (2012) selon qui le
+              manque d’intérêt pour les technologies est mentionné par moins de 10 % des
+              enseignants, nous supposons que ceux-ci ont une perception positive des TIC. En
+              d’autres termes, ils considèreraient les TIC comme étant plutôt efficaces et
+              n’évoqueraient pas de difficulté particulière les concernant.</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Hypothèse 2 — Les caractéristiques personnelles des enseignants telles que leur
+              âge, leur statut, leur sexe et leur ancienneté influent peu sur ces représentations.
+              <marquage typemarq="italique">A contrario</marquage>, leur formation aux TIC, leur
+              sentiment de compétence en la matière et le contexte d’enseignement (composante de
+              rattachement, niveau d’enseignement, type de cours, matériel mis à disposition…)
+              constitueraient des facteurs significativement explicatifs de la perception que les
+              enseignants ont des TIC.</alinea>
+          </elemliste>
+        </listenonord>
+      </para></section2></section1><section1 id="s1n3"><no>3</no><titre>Présentation du dispositif empirique et description de l’échantillon</titre><para id="pa9"><no>9</no>
+        <alinea>En vue d’apporter des éléments de réponse à ces questions, nous avons procédé à une
+          enquête empirique dans une université française. Notre population, environ
+          1 500 personnes, était constituée de l’ensemble des enseignants, quel que soit leur statut
+          (professeur des universités, maître de conférences, attaché temporaire d’enseignement et
+          de recherche, professeur agrégé, doctorant allocataire, ou bien encore vacataire). Ceux-ci
+          ont été interrogés par questionnaire dans le cadre d’une enquête en ligne réalisée en
+          mai 2016. Le questionnaire, élaboré notamment à l’appui des travaux de Fusaro et Couture
+          (2012), Trestini (2012) et Demougeot-Lebel et Perret (2010), visait notamment à recueillir
+          des données concernant leur profil (sexe, ancienneté, âge, statut, conception de
+          l’enseignement, niveau de compétence en TIC, formation aux TIC), les caractéristiques du
+          contexte d’enseignement (composante principale d’enseignement, niveaux et types de cours
+          enseignés, matériel numérique mis à disposition par l’université, moyens humains proposés
+          par l’université dans l’accompagnement de l’utilisation du numérique) et leur perception
+          des TIC. Cette dernière a été appréhendée au travers de plusieurs items portant sur les
+          effets des TIC sur les étudiants, les difficultés d’utilisation des TIC ainsi que les
+          possibilités pédagogiques offertes par les TIC. </alinea>
+      </para><para id="pa10"><no>10</no>
+        <alinea>Le questionnaire a été rempli par 248 enseignants (soit environ 15 % de la
+          population initiale) qui présentent les caractéristiques suivantes : </alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea>40,7 % sont des femmes.</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Les représentants de la génération Y (nés entre 1979 et 1989) sont les moins
+              représentés (19,4 %), contrairement aux baby-boomers (46,4 %, nés entre 1948 et 1964)
+              et aux individus de la génération X (34,3 %, nés entre 1965 et 1978).</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Les répondants sont en majorité des professeurs des universités ou des maîtres
+              de conférences titulaires d’une habilitation à diriger des recherches (31,9 %), des
+              maîtres de conférences sans habilitation (37,9 %) ou des professeurs agrégés
+              (16,9 %).</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Moins d’un enseignant sur cinq (17,6 %) a moins de six années d’expérience.
+              <marquage typemarq="italique">A contrario</marquage>, non loin d’un enseignant sur
+              deux (46,4 %) exerce depuis plus de seize années. </alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Une large partie des enseignants (44,3 %) est en activité dans des composantes
+              liées aux sciences humaines, aux sciences économiques, au droit, aux lettres et aux
+              langues. Un peu plus de la moitié le sont dans des instituts dont le fonctionnement
+              peut être assimilé à celui d’une école<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> (29,8 %) ou
+              dans des composantes dites de « sciences dures » (25,9 %).</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Plus d’un enseignant sur six (62,5 %) exerce uniquement en travaux dirigés et en
+              travaux pratiques (TD/TP), près d’un quart (23,4 %) en cours magistral (CM)
+              uniquement. Rares sont ceux déclarant avoir un service équilibré entre CM et TD/TP
+              (4,4 %). Près de 70 % enseignent à la fois en licence et en master.</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>54,8 % des enseignants indiquent avoir un niveau intermédiaire en matière de
+              maîtrise des outils numériques et 27,4 % un niveau expert, alors que 12,1 % confient
+              être novices. </alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Plus d’un enseignant sur deux (56,9 %) n’a participé à aucune formation aux TIC
+              au cours des deux années précédentes, 17,7 % ont participé à une formation et 16,9 % à
+              trois formations ou plus.</alinea>
+          </elemliste>
+        </listenonord>
+      </para><para id="pa11"><no>11</no>
+        <alinea>Certes, en raison du mode de passation du questionnaire, il est probable que les
+          enseignants les plus réfractaires aux technologies n’aient pas rempli ce dernier. Par
+          ailleurs, ne disposant d’aucune donnée sur le sujet, nous ne pouvons débattre de la
+          représentativité de cet échantillon par rapport à la population initialement visée.
+          Néanmoins, le travail réalisé à partir des réponses recueillies dans le cadre de cette
+          enquête permet de fournir de premières pistes de réflexion qui pourront être approfondies
+          lors d’une enquête réalisée à plus grande échelle et au renfort de davantage de moyens
+          humains et financiers.</alinea>
+      </para></section1><section1 id="s1n4"><no>4</no><titre>Une perception favorable des TIC</titre><para id="pa12"><no>12</no>
+        <alinea>La perception des TIC par les enseignants a été interrogée au travers de plusieurs
+          dimensions. Trois items du questionnaire nous ont permis d’examiner si ceux-ci
+          considéraient que les TIC pouvaient avoir un effet sur les étudiants :</alinea>
+        <tableau id="ta1">
+          <no>Tableau 1</no>
+          <legende lang="fr">
+            <titre>Perception des enseignants concernant l’efficacité des TIC (en %)</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="tableau" xlink:type="simple"/>
+            <texte>D’accordPas d’accordNon-réponseL’emploi des TIC favorise la motivation des
+              étudiants 70,521,48,1L’emploi des TIC facilite la compréhension du cours par les
+              étudiants 78,213,78,1L’emploi des TIC favorise la réussite des
+              étudiants 5239,98,1</texte>
+          </objetmedia>
+        </tableau>
+      </para><para id="pa13"><no>13</no>
+        <alinea>Près des trois quarts des enseignants sont convaincus de l’efficacité des TIC en
+          matière de motivation et de compréhension du cours par les étudiants. Plus d’un sur deux
+          estime que l’emploi des TIC favorise la réussite. Un tel constat est intéressant et peut
+          paraître paradoxal dans la mesure où les travaux scientifiques portant sur l’efficacité
+          des TIC sont marqués par un manque de consensus autour de cette question, notamment du
+          fait des différentes méthodologies mobilisées et des divers types de TIC analysés. Des
+          auteurs (Tamim, Bernard, Borokhovski, Abrami et Schmid, 2011) indiquent même que les
+          recherches visant à confronter l’usage au non-usage des TIC ne parviennent pas à mettre en
+          évidence un impact sur les performances des apprenants. Il serait alors intéressant
+          d’examiner dans quelle mesure la perception des enseignants de l’efficacité des TIC peut
+          exercer un rôle sur leurs usages des TIC et par ce biais sur la réussite étudiante.
+        </alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>Par ailleurs, nous avons questionné les enseignants quant aux difficultés qu’ils
+          sont susceptibles de rencontrer à l’égard des TIC :</alinea>
+        <tableau id="ta2">
+          <no>Tableau 2</no>
+          <legende lang="fr">
+            <titre>Perception des enseignants concernant les difficultés d’usage des TIC
+              (en %)</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="tableau" xlink:type="simple"/>
+            <texte>D’accordPas d’accordNon-réponseL’emploi des outils numériques pour enseigner est
+              inutile/sans intérêt11,780,67,7Je n’utilise pas les outils numériques car cela me
+              prend trop de temps en termes de préparation24,168,27,7Les outils numériques sont trop
+              compliqués à utiliser21,3717,7Je ne sais pas quel(s) type(s) d’outil(s)
+              utiliser17,374,68,1Je me sens en décalage avec cet engouement actuel pour les outils
+              numériques20,571,87,7L’emploi de ces outils dissipe l’attention des
+              étudiants25,3677,7Mobiliser les TIC est une perte de temps pour le déroulement du
+              cours6,475,118,5Mobiliser les TIC est difficile en raison du nombre d’étudiants
+              présents en cours18,962,618,5</texte>
+          </objetmedia>
+        </tableau>
+      </para><para id="pa15"><no>15</no>
+        <alinea>Pour près d’un quart des enseignants, l’emploi des TIC dissipe l’attention des
+          étudiants et exige trop de temps de préparation. Ce dernier résultat entre en cohérence
+          avec le constat effectué par Trestini (2012) selon lequel le manque de temps est la raison
+          la plus fréquemment citée pour justifier le non-usage des TIC. De même, les TIC sont
+          perçues comme étant trop compliquées à utiliser par 21,3 % des enseignants. Un tel constat
+          est sans nul doute à rapprocher du manque d’accompagnement humain à l’université en
+          matière de TIC évoqué simultanément par 15 % des enseignants<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>. Près d’un enseignant sur cinq se sent en décalage avec l’engouement actuel
+          pour les technologies, cette variable n’étant d’ailleurs pas significativement liée à
+          l’ancienneté ni au statut de l’enseignant. </alinea>
+      </para><para id="pa16"><no>16</no>
+        <alinea>Les enseignants considèrent à 18,9 % qu’il est difficile de mobiliser les TIC en
+          raison du nombre d’étudiants présents en cours. Une telle donnée conduit à s’interroger
+          sur l’utilisation des TIC lors des différents types de cours (cours magistraux, travaux
+          dirigés, travaux pratiques) : on peut supposer que le recours aux TIC pour enseigner est
+          plus aisé en petits groupes que lors des cours magistraux. Enfin, 17,3 % ne savent pas
+          quels types d’outils utiliser. Se pose alors ici la question de la formation des
+          enseignants aux TIC. </alinea>
+      </para><para id="pa17"><no>17</no>
+        <alinea>Nous avons construit deux scores de perception des TIC : un score A pour la
+          perception de l’efficacité des TIC et un score B pour les difficultés d’usage des TIC
+          (tableau 3). Pour chacun des deux scores, nous avons procédé par addition en attribuant
+          0 point en cas de désaccord et 1 point en cas d’accord de l’enseignant avec l’item
+          proposé. Plus le score A est élevé, plus les enseignants ont une perception positive de
+          l’effet des TIC sur les étudiants. <marquage typemarq="italique">A contrario</marquage>,
+          plus le score B est élevé, plus les enseignants ont une perception négative des TIC. La
+          fiabilité de ces scores a été appréciée au travers du calcul des alphas de Cronbach :
+          ceux-ci s’élèvent à 0,774 pour le score A et à 0,764 pour le score B; ils indiquent donc
+          une bonne homogénéité des échelles de mesure. Ces scores, dont la moyenne est élevée pour
+          le score A et faible pour le score B, témoignent d’une perception positive des TIC par les
+          enseignants. Ils ont en outre été standardisés et constituent des variables dépendantes
+          que nous allons ensuite chercher à expliquer. </alinea>
+      </para><tableau id="ta3">
+        <no>Tableau 3</no>
+        <legende lang="fr">
+          <titre>Caractéristiques des scores de perception TIC</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="tableau" xlink:type="simple"/>
+          <texte>Minim.Maxim.Écart-typeScore A (/3)032,181,01Score B (/8)061,661,66</texte>
+        </objetmedia>
+      </tableau></section1><section1 id="s1n5"><no>5</no><titre>La perception des TIC par les enseignants : quels sont les facteurs
+        explicatifs?</titre><para id="pa18"><no>18</no>
+        <alinea>Nous avons cherché à expliquer les scores A et B au travers de modèles de régression
+          linéaire. Ce type de modèle présente l’intérêt de pouvoir raisonner « toutes choses égales
+          par ailleurs ». Les variables explicatives introduites dans les modèles sont
+          relatives :</alinea>
+        <listenonord signe="tiret">
+          <elemliste>
+            <alinea>Aux caractéristiques personnelles et professionnelles des enseignants : sexe,
+              âge, statut professionnel, ancienneté, conception de l’enseignement, niveau de
+              compétences déclaré en technologies, nombre de formations auxquelles l’enseignant a
+              participé ces deux dernières années;</alinea>
+          </elemliste>
+          <elemliste>
+            <alinea>Au contexte d’enseignement : composante d’enseignement, type de cours enseigné,
+              niveau d’enseignement, matériel mis à disposition par l’université. Pour ce dernier
+              facteur, nous avons construit un indicateur synthétique du matériel auquel les
+              enseignants indiquent avoir accès à l’appui des items suivants : mise à disposition
+              par l’université d’un ordinateur fixe, d’un ordinateur portable, d’une connexion
+              Internet, d’un vidéoprojecteur, d’un tableau blanc interactif, d’outils nomades, d’une
+              salle informatique et de matériel multimédia (micro, webcam…). Nous avons attribué
+              0 point en cas de réponse négative et 1 point en cas de réponse positive. Plus le
+              score est élevé, plus il indique que l’université met à disposition des enseignants du
+              matériel numérique pour enseigner ou bien, en d’autres termes, que les enseignants ont
+              accès à une variété de matériel numérique sur leur lieu de travail.</alinea>
+          </elemliste>
+        </listenonord>
+      </para><tableau id="ta4">
+        <no>Tableau 4</no>
+        <legende lang="fr">
+          <titre>Effet des caractéristiques des enseignants et des caractéristiques du contexte sur
+            la perception de l’efficacité des TIC (score A) (<marquage typemarq="italique">N</marquage> = 248)</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="tableau" xlink:type="simple"/>
+          <texte>Modèle 1Modalité de référenceModalité activeCoef.Sign.Ancienneté de 16 ans ou
+            plus1 an ou moins à 5 ans0,052ns6 ans à 15 ans0,185*Enseigne en licence et en
+            masterEnseigne en licence uniquement0,147nsEnseigne en master uniquement0,192**Majorité
+            du service en travaux dirigés/pratiquesMajorité du service en cours
+            magistral- 0,338***Service équilibré0,048nsNiveau de compétence noviceNiveau
+            intermédiaire0,229*Niveau expert0,259*Score de matériel0,213***R² ajusté24,5 %</texte>
+        </objetmedia>
+      </tableau><para id="pa19"><no>19</no>
+        <alinea>Lecture : Un modèle de régression linéaire fournit plusieurs informations utiles à
+          considérer dans l’interprétation. La valeur du coefficient bêta associée à chaque variable
+          indépendante introduite dans le modèle indique le poids de chaque facteur considéré dans
+          l’explication de la variable dépendante. Ici, à caractéristiques personnelles,
+          professionnelles et contextuelles données, le fait d’enseigner en master uniquement,
+          plutôt qu’en licence et en master, augmente de 0,192 point le score de perception de
+          l’efficacité des TIC. Par ailleurs, un point de plus en score de matériel augmente de
+          0,213 point le score de perception de l’efficacité des TIC. La valeur des coefficients
+          n’est à interpréter qu’en rapport avec leur significativité, déterminée à partir d’un test
+          d’hypothèse nulle (t de Student), qui se lit comme suit : 1 %***, 5 %**, 10 %*,
+          ns &gt; 10 % (non significatif). Le coefficient de détermination (R² ajusté) indique la
+          part de variance expliquée par l’ensemble des variables indépendantes introduites dans le
+          modèle. </alinea>
+      </para><para id="pa20"><no>20</no>
+        <alinea>Le matériel mis à disposition par l’université figure parmi les variables les plus
+          explicatives de la perception de l’efficacité des TIC : plus les enseignants ont accès à
+          du matériel, plus cette perception est positive. De plus, le fait d’assurer la majorité de
+          son service en cours magistral joue négativement sur la perception des TIC. Un tel
+          résultat renvoie aux débats sur les cours magistraux qui perdurent depuis plusieurs
+          années, comme en témoigne un récent numéro de la revue <marquage typemarq="italique">Distances et médiations des savoirs</marquage>, paru en 2015 et intitulé « Le cours
+          magistral a-t-il un avenir? ». En outre, le fait d’enseigner en master uniquement augmente
+          de 0,192 point le score de perception de l’efficacité des TIC. </alinea>
+      </para><para id="pa21"><no>21</no>
+        <alinea>D’autres variables, bien qu’associées à un coefficient positif, jouent de manière
+          peu significative sur la perception de l’efficacité des TIC. C’est le cas de l’ancienneté
+          et du niveau de compétence en technologies numériques déclaré par l’enseignant. Ce modèle
+          permet en définitive d’expliquer un quart de la variance du score de perception de
+          l’efficacité des TIC. </alinea>
+      </para><para id="pa22"><no>22</no>
+        <alinea>Concernant le score B (perception des difficultés d’usage des TIC), les résultats
+          produits par le même genre d’analyse statistique sont différents<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>.</alinea>
+      </para><tableau id="ta5">
+        <no>Tableau 5</no>
+        <legende lang="fr">
+          <titre>Effet des caractéristiques des enseignants et des caractéristiques du contexte sur
+            la perception des difficultés liées aux TIC (score B)</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="tableau" xlink:type="simple"/>
+          <texte>Modèle 1Modalité de référenceModalité activeCoef.Sign.Niveau de compétence
+            noviceNiveau intermédiaire- 0,584***Niveau expert- 0,738***Score de matériel- 0,185**R²
+            ajusté15,5 %</texte>
+        </objetmedia>
+      </tableau><para id="pa23"><no>23</no>
+        <alinea>Deux facteurs apparaissent particulièrement explicatifs de la perception des
+          difficultés liées aux TIC : d’une part le niveau de compétence en technologies déclaré par
+          l’enseignant. Plus ce niveau est élevé, plus le score de perception des difficultés
+          diminue ou, autrement dit, plus les enseignants se déclarent compétents en matière de
+          numérique, plus leur perception des TIC est positive. D’autre part, le matériel numérique
+          accessible pour enseigner semble également exercer un effet significatif sur la perception
+          des difficultés d’usage des TIC. Ainsi, plus les enseignants disposent de matériel
+          numérique, moins ils ont une perception négative des difficultés liées aux TIC.</alinea>
+      </para></section1><section1 id="s1n6"><no>6</no><titre>Discussion et conclusion</titre><para id="pa24"><no>24</no>
+        <alinea>La littérature scientifique portant sur les usages (ou les non-usages) des TIC par
+          les enseignants et les modèles d’intégration des TIC nous ont conduites à focaliser notre
+          attention dans cet article sur la perception des TIC par les enseignants universitaires,
+          puisque celle-ci, peu étudiée dans la littérature, pouvait avoir un effet sur les usages.
+          Par conséquent, l’objectif de cette recherche était double : d’une part établir la nature
+          de la perception des TIC par les enseignants et d’autre part examiner les facteurs qui
+          contribuent à expliquer cette perception. Une telle recherche revêt toute son importance
+          dans un contexte où l’intégration des TIC place les universités devant de véritables défis
+          tels que l’adaptation des enseignants aux technologies et la transformation de leurs
+          pratiques d’enseignement (Bédard <marquage typemarq="italique">et al.</marquage>, 2005). À
+          l’issue d’une enquête par questionnaire menée auprès de l’ensemble d’une communauté
+          d’universitaires, nous avons pu constater que les enseignants avaient une vision plutôt
+          favorable des technologies, validant ainsi notre première hypothèse. Un tel résultat, bien
+          que rejoignant ceux de Bédard <marquage typemarq="italique">et al.</marquage> (2005) et de
+          Trestini (2012), semble cependant surprenant dans un contexte où les technologies sont peu
+          mobilisées par les enseignants et le plus souvent dans le cadre d’usages classiques.
+        </alinea>
+      </para><para id="pa25"><no>25</no>
+        <alinea>Ce premier résultat nous a conduites à cerner certains facteurs explicatifs de la
+          perception des TIC, parmi lesquels figure en première place le matériel numérique mis à
+          disposition par l’université : celui-ci joue à la fois de façon positive sur la perception
+          de l’efficacité des TIC et sur le score de perception de difficulté dans l’usage des TIC.
+          Ce constat, particulièrement mis en valeur car rarement relevé dans les recherches
+          traitant de la perception des TIC par les enseignants (Mahdizadeh <marquage typemarq="italique">et al.</marquage>, 2008; Muñoz Carril <marquage typemarq="italique">et al.</marquage>, 2013; Yuen et Ma, 2008), pose la question des investissements que les
+          universités doivent effectuer en la matière. En effet, si la plupart des enseignants
+          disent avoir accès à un vidéoprojecteur et à une connexion Internet, peu en revanche
+          déclarent disposer d’outils moins classiques tels que les outils nomades (9,3 %). De même,
+          une proportion non négligeable d’enseignants ignorent s’ils ont la possibilité d’avoir
+          accès à du matériel multimédia (19 %) et à un tableau blanc interactif (12,5 %). On peut
+          en ce sens émettre l’hypothèse que mettre davantage de matériel à disposition des
+          enseignants permettrait d’améliorer encore davantage la perception des TIC par les
+          enseignants et par ce biais leurs usages. </alinea>
+      </para><para id="pa26"><no>26</no>
+        <alinea>De même, nos résultats montrent que le niveau de compétence en TIC déclaré par
+          l’enseignant influe particulièrement sur sa perception des difficultés liées à l’usage des
+          TIC. Un tel résultat paraît peu surprenant dans la mesure ou d’autres travaux (Mahdizadeh
+          <marquage typemarq="italique">et al.</marquage>, 2008; Yuen et Ma, 2008) ont déjà pu
+          démontrer que des facteurs comme la facilité d’utilisation perçue ou encore l’expérience
+          antérieure avec les TIC pouvaient contribuer à expliquer de manière significative la
+          perception de ces dernières par les enseignants. On peut alors supposer que la facilité
+          d’utilisation perçue et l’expérience antérieure constituent des facteurs influant
+          certainement sur le sentiment de compétence de l’individu. Il serait en ce sens
+          intéressant d’examiner plus avant les facteurs susceptibles d’influer sur ce sentiment.
+        </alinea>
+      </para><para id="pa27"><no>27</no>
+        <alinea>Finalement, notre hypothèse d’un effet plus prégnant des caractéristiques
+          professionnelles et contextuelles que des caractéristiques personnelles des enseignants
+          sur leur perception des TIC est en partie validée. En partie seulement, car pour une large
+          part, cette perception demeure inexpliquée dans nos modèles. Il serait alors intéressant
+          d’examiner le rôle d’autres facteurs explicatifs tels que la manière dont les étudiants
+          perçoivent les usages des TIC par les enseignants : on peut en effet supposer que plus les
+          étudiants ont une représentation positive de ces usages, plus cela conforte les
+          enseignants dans une représentation positive de l’efficacité des TIC. De même, une autre
+          piste de recherche vise à davantage se pencher sur la formation des enseignants, celle-ci
+          apparaissant dans nos modèles comme non significative : outre le nombre de formations
+          auxquelles ils ont participé, il serait pertinent de questionner les enseignants sur la
+          nature et les apports de ces formations, car on peut supposer que si la formation n’a pas
+          d’effet direct sur la perception des TIC, elle joue sans doute un rôle, quand bien même
+          mineur, sur le sentiment de compétence en TIC. En outre, se pose la question de
+          l’efficacité des usages des technologies par les enseignants, un usage efficace étant lié,
+          comme l’illustrent les modèles d’intégration des TIC, à une réelle appropriation des TIC
+          par les enseignants et à une transformation de la situation pédagogique.</alinea>
+      </para><para id="pa28"><no>28</no>
+        <alinea>Certes, la recherche présentée ici comporte certaines limites, notamment en ce qui a
+          trait au terrain d’enquête. Nous ne disposons en effet d’aucune donnée concernant les
+          caractéristiques de l’ensemble des enseignants de l’université investiguée ; il nous est
+          de ce fait difficile de conclure à une réelle représentativité de notre échantillon
+          d’enseignants. Il serait en ce sens intéressant d’interroger un plus large nombre
+          d’enseignants, au sein d’autres universités notamment, afin d’examiner si la perception
+          des TIC des enseignants peut être liée à un effet propre du contexte, ou encore aux
+          politiques des universités en matière de technologie. Le mode de passation du
+          questionnaire ne nous a en outre certainement pas permis d’atteindre les enseignants
+          « technophobes », considérés comme étant les plus réticents aux technologies. La
+          réalisation d’entretiens auprès de ces enseignants pourrait sans doute venir remédier en
+          partie à ce problème. Néanmoins, les résultats présentés ici fournissent certaines pistes
+          de compréhension quant aux mécanismes qui influent sur la perception des TIC par les
+          enseignants. Ils conduisent également à s’interroger sur les usages des TIC et les
+          objectifs pédagogiques assignés à ces usages.</alinea>
+      </para></section1></corps><partiesann lang="fr"><merci><alinea>Nous remercions William Pérez pour sa collaboration dans la construction et la mise en ligne du questionnaire.</alinea></merci><grbiblio><biblio><titre>Références</titre><refbiblio id="rb1">Basque, J. (2005). Une réflexion sur les fonctions attribuées aux TIC en enseignement universitaire. <marquage typemarq="italique">Revue Internationale des Technologies en Pédagogie Universitaire</marquage>,<marquage typemarq="italique"> 2</marquage>(1), 30-41. Récupéré de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="https://edutice.archives-ouvertes.fr/edutice-00086399/document" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://edutice.archives-ouvertes.fr/edutice-00086399/document</liensimple></refbiblio>
+<refbiblio id="rb2">Bédard, F., Kadri, B., Giroux, P., Géronimi, M., Duguay, B. et Boulard, D. (2005). Les enjeux de l’intégration des TIC à l’Université : adaptation du corps enseignant et transformation des pratiques d’enseignement. L’expérience de l’Université du Québec à Montréal. <marquage typemarq="italique">Res Academica</marquage>, <marquage typemarq="italique">23</marquage>(1), 7-26.</refbiblio>
+<refbiblio id="rb3">Ben Abid-Zarrouk, S. (2012). Innovations pédagogiques et biais cognitifs. Une approche par les sciences économiques comportementales. <marquage typemarq="italique">Recherches et éducations</marquage>, <marquage typemarq="italique">6</marquage>, 56-70. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="http://journals.openedition.org/rechercheseducations/1223" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:href="http://journals.openedition.org/rechercheseducations" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://journals.openedition.org/rechercheseducations</liensimple></refbiblio>
+<refbiblio id="rb4">Bertrand, C. (2014). <marquage typemarq="italique">Soutenir la transformation pédagogique dans l’enseignement supérieur.</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:href="http://www.enseignementsup-recherche.gouv.fr/cid82478/soutenir-la-transformation-pedagogique-dans-l-enseignement-superieur.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site du Ministère de l’Enseignement supérieur, de la Recherche et de l’Innovation : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:href="http://enseignementsup-recherche.gouv.fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://enseignementsup-recherche.gouv.fr</liensimple></refbiblio>
+<refbiblio id="rb5">Boudokhane, F. (2006). Comprendre le non-usage technique : réflexions théoriques. <marquage typemarq="italique">Les enjeux de l’information et de la communication</marquage>. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:href="http://lesenjeux.univ-grenoble-alpes.fr/2006/Boudokhane/index.php" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls10" xlink:href="http://lesenjeux.univ-grenoble-alpes.fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://lesenjeux.univ-grenoble-alpes.fr</liensimple></refbiblio>
+<refbiblio id="rb6">Cosnefroy, L. (2014). Pédagogie universitaire et pratiques documentaires numériques des étudiants. Dans G. Lameul et C. Loisy (dir.), <marquage typemarq="italique">La pédagogie universitaire à l’heure du numérique. Questionnement et éclairage de la recherche</marquage> (p. 83-95). Bruxelles, Belgique : De Boeck.</refbiblio>
+<refbiblio id="rb7">Dahmani, M. et Ragni, L. (2009). L’impact des technologies de l’information et de la communication sur les performances des étudiants. <marquage typemarq="italique">Réseaux</marquage>, <marquage typemarq="italique">3</marquage>(155), 81-110. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls11" xlink:href="http://www.cairn.info/article.php?ID_ARTICLE=RES_155_0081" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls12" xlink:href="http://cairn.info/revue-reseaux.htm" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://cairn.info/revue-reseaux.htm</liensimple></refbiblio>
+<refbiblio id="rb8">Davis, F. D. (1989). Perceived usefulness, perceived ease of use, and user acceptance of information technology. <marquage typemarq="italique">MIS Quarterly, 13</marquage>(3), 319-340. doi:10.2307/249008</refbiblio>
+<refbiblio id="rb9">Degache, C. et Nissen, E. (2008). Formations hybrides et interactions en ligne du point de vue de l’enseignant : pratiques, représentations, évolutions. <marquage typemarq="italique">Alsic</marquage>, <marquage typemarq="italique">1</marquage>, 61-92. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls13" xlink:href="http://journals.openedition.org/alsic/797" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls14" xlink:href="http://journals.openedition.org/alsic" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://journals.openedition.org/alsic</liensimple></refbiblio>
+<refbiblio id="rb10">Demougeot-Lebel, J. et Perret, C. (2010). Identifier les conceptions de l’enseignement et de l’apprentissage pour accompagner le développement professionnel des enseignants débutants à l’université. <marquage typemarq="italique">Savoirs</marquage>, <marquage typemarq="italique">23</marquage>, 51-72. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls15" xlink:href="http://www.cairn.info/article.php?ID_ARTICLE=SAVO_023_0051" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls16" xlink:href="http://cairn.info/revue-savoirs.htm" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://cairn.info/revue-savoirs.htm</liensimple></refbiblio>
+<refbiblio id="rb11">Endrizzi, L. (2012). Les technologies numériques dans l’enseignement supérieur, entre défis et opportunités (dossier de veille n<exposant>o</exposant> 78). <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls17" xlink:href="http://ife.ens-lyon.fr/vst/DA/detailsDossier.php?dossier=78&amp;lang=fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site de l’Ifé : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls18" xlink:href="http://ife.ens-lyon.fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://ife.ens-lyon.fr</liensimple></refbiblio>
+<refbiblio id="rb12">Felouzis, G. (2003). <marquage typemarq="italique">Les mutations actuelles de l’Université</marquage>. Paris : Presses Universitaires de France.</refbiblio>
+<refbiblio id="rb13">Fourgous, J. M. (2010). <marquage typemarq="italique">Réussir l’école numérique</marquage>. <marquage typemarq="italique">Rapport de la mission parlementaire Fourgous sur l’école numérique</marquage>. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls19" xlink:href="http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/104000080.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls20" xlink:href="http://ladocumentationfrancaise.fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://ladocumentationfrancaise.fr</liensimple></refbiblio>
+<refbiblio id="rb14">Fusaro, M. et Couture, A. (2012). <marquage typemarq="italique">Étude sur les modalités d’apprentissage et les technologies de l’information et de la communication dans l’enseignement.</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls21" xlink:href="https://www.bci-qc.ca/wp-content/uploads/2016/10/Rapport-Etude-TIC-Mai-2012-VF.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site du Bureau de coopération interuniversitaire : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls22" xlink:href="http://bci-qc.ca" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://bci-qc.ca</liensimple></refbiblio>
+<refbiblio id="rb15">Gremmo, M.-J. et Kellner, C. (2011). Pratiques pédagogiques et usages des TIC : enseigner à l’université, un impensé?<marquage typemarq="italique"> Dans </marquage>M.-J. Barbot et L. Massou (dir.), <marquage typemarq="italique">TIC et métiers de l’enseignement supérieur. Émergences, transformations</marquage> (p. 35-52). Nancy, France : Presses universitaires de Nancy.</refbiblio>
+<refbiblio id="rb16">Karsenti, T. (2013a). MOOC : révolution ou simple effet de mode? <marquage typemarq="italique">Revue internationale des technologies en pédagogie universitaire, 10</marquage>(2), 6-22. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls23" xlink:href="https://doi.org/10.18162/ritpu.2013.227" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.18162/ritpu.2013.227</liensimple></refbiblio>
+<refbiblio id="rb17">Karsenti, T. (2013b). Le modèle ASPID : modéliser le processus d’adoption et d’intégration pédagogique des technologies en contexte éducatif. <marquage typemarq="italique">Formation et profession, 21</marquage>(1), 74-75. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls24" xlink:href="https://doi.org/10.18162/fp.2013.a17" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.18162/fp.2013.a17</liensimple></refbiblio>
+<refbiblio id="rb18">Lamine, B. et Petit, L. (2014). Les boîtiers de réponse pour un apprentissage interactif en amphithéâtre. Une expérience d’accompagnement et d’évaluation par la recherche. Dans G. Lameul et C. Loisy (dir.), <marquage typemarq="italique">La pédagogie universitaire à l’heure du numérique. Regards croisés de chercheurs et de praticiens </marquage>(p. 129-145). Bruxelles, Belgique : De Boeck.</refbiblio>
+<refbiblio id="rb19">Lanarès, J. et <marquage typemarq="gras">Poteaux, N.</marquage> (2013). Comment répondre aux défis actuels de l’enseignement supérieur? Dans D. Berthiaume et N. Rege-Colet (dir.), <marquage typemarq="italique">La pédagogie de l’enseignement supérieur : repères théoriques et applications pratiques </marquage>(t. 1<marquage typemarq="italique">) — Enseigner au supérieur</marquage> (p. 9-24). Berne, Suisse : Peter Lang.</refbiblio>
+<refbiblio id="rb20">Le Déaut, J. Y. (2013). <marquage typemarq="italique">Refonder l’université, dynamiser la recherche</marquage>. <marquage typemarq="italique">Rapport au premier ministre.</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls25" xlink:href="http://www.ladocumentationfrancaise.fr/rapports-publics/134000040/index.shtml" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls26" xlink:href="http://ladocumentationfrancaise.fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://ladocumentationfrancaise.fr</liensimple></refbiblio>
+<refbiblio id="rb21">Mahdizadeh, H., Biemans, H. et Mulder, M. (2008). Determining factors of the use of e-learning environments by university teachers. <marquage typemarq="italique">Computers &amp; Education</marquage>, <marquage typemarq="italique">51</marquage>(1), 142-154. doi:10.1016/j.compedu.2007.04.004</refbiblio>
+<refbiblio id="rb22">Ministère de l’Enseignement supérieur et de la Recherche (MESR). (2015, mai). <marquage typemarq="italique">Le numérique au service d’une université performante, innovante et ouverte sur le monde.</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls27" xlink:href="http://www.enseignementsup-recherche.gouv.fr/cid89439/le-numerique-au-service-d-une-universite-performante-innovante-et-ouverte-sur-le-monde.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site du ministère : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls28" xlink:href="http://enseignementsup-recherche.gouv.fr" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://enseignementsup-recherche.gouv.fr</liensimple></refbiblio>
+<refbiblio id="rb23">Monsakul, J. (2008). A research synthesis of instructional technology in higher education. Dans K. McFerrin <marquage typemarq="italique">et al. </marquage>(dir.), <marquage typemarq="italique">Proceedings of Society for Information</marquage> <marquage typemarq="italique">Technology &amp; Teacher Education (SITE) International</marquage> <marquage typemarq="italique">Conference 2008 </marquage>(p. 2134-2139). Chesapeake, VA : Association for the Advancement of Computing in Education (AACE).</refbiblio>
+<refbiblio id="rb24">Muñoz Carril, P. C., González Sanmamed, M. et Hernández Sellés, N. (2013). Pedagogical roles and competencies of university teachers practicing in the e-learning environment. <marquage typemarq="italique">The International Review of Research in Open and Distributed Learning, 14</marquage>(3), 462. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls29" xlink:href="https://doi.org/10.19173/irrodl.v14i3.1477" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.19173/irrodl.v14i3.1477</liensimple></refbiblio>
+<refbiblio id="rb25">Paivandi, S.<marquage typemarq="gras"> et </marquage>Espinosa, G. (2013). Les TIC et la relation entre enseignants et étudiants à l’université. <marquage typemarq="italique">Distances et médiations des savoirs</marquage>, <marquage typemarq="italique">4</marquage>. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls30" xlink:href="https://doi.org/10.4000/dms.425" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.4000/dms.425</liensimple></refbiblio>
+<refbiblio id="rb26">Papi, C. (2012). Causes et motifs du non-usage de ressources numériques. Logiques d’usage des étudiants en formation initiale. <marquage typemarq="italique">Recherches et éducations</marquage>, <marquage typemarq="italique">6</marquage>, 127-142. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls31" xlink:href="http://rechercheseducations.revues.org/1074" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls32" xlink:href="http://rechercheseducations.revues.org" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://rechercheseducations.revues.org</liensimple></refbiblio>
+<refbiblio id="rb27">Papi, C. et Glikman, V. (2015). Les étudiants entre cours magistraux et usage des TIC. <marquage typemarq="italique">Distances et médiations des savoirs, 9.</marquage> <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls33" xlink:href="http://dms.revues.org/1012" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls34" xlink:href="http://dms.revues.org" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://dms.revues.org</liensimple></refbiblio>
+<refbiblio id="rb28">Poteaux, N. (2013). Pédagogie de l’enseignement supérieur en France : état de la question. <marquage typemarq="italique">Distances et médiations des savoirs</marquage>, <marquage typemarq="italique">4</marquage>. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls35" xlink:href="https://dms.revues.org/403" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls36" xlink:href="http://dms.revues.org" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://dms.revues.org</liensimple></refbiblio>
+<refbiblio id="rb29">Puentedura, R. (2009). <marquage typemarq="italique">As we may teach: Educational technology, from theory into practice</marquage> [balado]. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls37" xlink:href="https://itunes.apple.com/itunes-u/as-we-may-teach-educational/id380294705" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site iTunes : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls38" xlink:href="http://itunes.apple.com" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://itunes.apple.com</liensimple></refbiblio>
+<refbiblio id="rb30">Raby, C., Karsenti, T., Meunier, H. et Villeneuve, S. (2011). Usage des TIC en pédagogie universitaire : point de vue des étudiants. <marquage typemarq="italique">Revue internationale des technologies en pédagogie universitaire</marquage>, <marquage typemarq="italique">3</marquage>, 6-19. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls39" xlink:href="https://doi.org/10.18162/ritpu.2011.199" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://doi.org/10.18162/ritpu.2011.199</liensimple></refbiblio>
+<refbiblio id="rb31">Saunders, G. et Klemming, F. (2003). Integrating technology into a traditional learning environment. Reasons and risks of success. <marquage typemarq="italique">Active Learning in</marquage> <marquage typemarq="italique">Higher Education, 4</marquage>(1), 74-86. doi:10.1177/1469787403004001862. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls40" xlink:href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.132.5842&amp;rep=rep1&amp;type=pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site CiteSeerX : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls41" xlink:href="http://citeseerx.ist.psu.edu" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://citeseerx.ist.psu.edu</liensimple></refbiblio>
+<refbiblio id="rb32">Simonian, S. et Ladage, C. (2014). L’accompagnement et la mise en ligne d’une formation universitaire. Dans C. Loisy et G. Lameul, <marquage typemarq="italique">La pédagogie universitaire à l’heure du numérique </marquage>(p. 173-188). Bruxelles, Belgique : De Boeck.</refbiblio>
+<refbiblio id="rb33">Tamim, R. M., Bernard, R. M., Borokhovski, E., Abrami, P. C. et Schmid, R. F. (2011). What forty years of research says about the impact of technology on learning. A second-order meta-analysis and validation study. <marquage typemarq="italique">Review of Educational Research</marquage>, <marquage typemarq="italique">81</marquage>(1), 4-28. doi:10.3102/0034654310393361 <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls42" xlink:href="http://cid.vcc.ca/p1-dl/research/Tech_Metanalysis.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> du site du Centre for Instructional Development du Vancouver Community College : <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls43" xlink:href="http://cid.vcc.ca" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://cid.vcc.ca</liensimple></refbiblio>
+<refbiblio id="rb34">Trestini, M. (2012). Causes de non-usage des TICE à l’université : des changements? <marquage typemarq="italique">Recherches et éducations</marquage>, <marquage typemarq="italique">6</marquage>, 15-33. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls44" xlink:href="http://rechercheseducations.revues.org/935" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls45" xlink:href="http://rechercheseducations.revues.org" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://rechercheseducations.revues.org</liensimple></refbiblio>
+<refbiblio id="rb35">Vrillon, E. (2017). Vers une démocratisation de l’éducation et de la formation par les MOOC ? <marquage typemarq="italique">Recherches en éducation</marquage>,<marquage typemarq="italique"> 30</marquage>, 138-155. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls46" xlink:href="http://www.recherches-en-education.net/" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Récupéré</liensimple> de <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls47" xlink:href="http://www.recherches-en-education.net/" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.recherches-en-education.net/</liensimple></refbiblio>
+<refbiblio id="rb36">Yuen, A. H. K. et Ma, W. W. K. (2008). Exploring teacher acceptance of e-learning technology. <marquage typemarq="italique">Asia-Pacific Journal of Teacher Education, 36</marquage>(3), 229-243. doi:10.1080/13598660802232779</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Institut d’administration des entreprises, instituts universitaires de technologie,
+          Institut universitaire de la vigne et du vin, Institut supérieur de l’automobile et des
+          transports, École supérieure d’ingénieurs de recherche en matériaux et en infotronique,
+          Institut national supérieur des sciences agronomiques, de l’alimentation et de
+          l’environnement. </alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>Valeur du khi<exposant>2</exposant> significative au seuil de 1 %.</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>Les variables introduites dans l’analyse sont les mêmes que précédemment. Seules les
+          variables significatives sont présentées dans ce tableau. </alinea>
+      </note>
+    </grnote></partiesann></article>

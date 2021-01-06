@@ -1729,25 +1729,36 @@
     <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:element name="img">
-      {# The image's src is a transparent pixel placeholder. #}
-      <xsl:attribute name="src">
-        <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=</xsl:text>
-      </xsl:attribute>
-      <xsl:attribute name="data-srcset">
-        <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/><xsl:text> </xsl:text><xsl:value-of select="@dimx"/><xsl:text>w</xsl:text>
-      </xsl:attribute>
-      <xsl:attribute name="data-aspectratio">
-        <xsl:value-of select="@dimx div @dimy"/>
-      </xsl:attribute>
-      <xsl:attribute name="width">
-        <xsl:value-of select="@dimx"/>
-      </xsl:attribute>
-      <xsl:attribute name="height">
-        <xsl:value-of select="@dimy"/>
-      </xsl:attribute>
-      <xsl:attribute name="class">
-        <xsl:text>lazyload</xsl:text>
-      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="@dimx and @dimy">
+          <!-- Image has a dimx attribute. -->
+          {# The image's src is a transparent pixel placeholder. #}
+          <xsl:attribute name="src">
+            <xsl:text>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=</xsl:text>
+          </xsl:attribute>
+          <xsl:attribute name="data-srcset">
+            <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/><xsl:text> </xsl:text><xsl:value-of select="@dimx"/><xsl:text>w</xsl:text>
+          </xsl:attribute>
+          <xsl:attribute name="data-aspectratio">
+            <xsl:value-of select="@dimx div @dimy"/>
+          </xsl:attribute>
+          <xsl:attribute name="width">
+            <xsl:value-of select="@dimx"/>
+          </xsl:attribute>
+          <xsl:attribute name="height">
+            <xsl:value-of select="@dimy"/>
+          </xsl:attribute>
+          <xsl:attribute name="class">
+            <xsl:text>lazyload</xsl:text>
+          </xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <!-- Image does not have a dimx attribute. -->
+          <xsl:attribute name="src">
+            <xsl:value-of select="@href"/>
+          </xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>
       </xsl:attribute>
