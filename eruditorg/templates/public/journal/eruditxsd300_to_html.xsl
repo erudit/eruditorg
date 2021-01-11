@@ -81,40 +81,33 @@
               <xsl:apply-templates select="liminaire/notegen"/>
               {% if not content_access_granted and display_full_article %}
               <div class="alert">
-                <p>
-                  {% blocktrans trimmed with code=article.issue.journal.code %}
-                  L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Pour accéder aux numéros d’archives disponibles en libre accès, consultez l’<a href="https://www.erudit.org/fr/revues/{{ code }}">historique des numéros</a>.
-                  {% endblocktrans %}
-                  {% url 'public:auth:landing' as login_url %}
-                  {% if request.user.is_anonymous %}
-                  <br/><br/>
-                  {% blocktrans %}
-                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" id="article-login-modal" title="Se connecter au tableau de bord">en vous connectant</a>.
-                  {% endblocktrans %}
-                  {% endif %}
-                  <br/><br/>
-                  {% if journal_info.subscription_email or journal_info.phone %}
-                    {% blocktrans trimmed with journal=article.issue.journal_formatted_title email=journal_info.subscription_email phone=journal_info.phone %}
-                    Si vous souhaitez vous abonner à titre individuel, et/ou à la version papier, nous vous invitons à communiquer directement avec l’équipe de <em>{{ journal }}</em> à l’adresse <a href="mailto:{{ email }}?subject=Abonnement%20à%20la%20revue%20{{ journal|urlencode }}">{{ email }}</a> ou par téléphone au {{ phone }}.
-                    {% endblocktrans %}
-                  {% else %}
-                    {% blocktrans trimmed with journal=article.issue.journal_formatted_title %}
-                    Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue%20{{ journal|urlencode }}%20–%20Accès%20aux%20articles">client@erudit.org</a>.
-                    {% endblocktrans %}
-                  {% endif %}
-                  <strong>
+                <div>
+                  <p>
+                    <strong>
+                    {% trans "L’accès à cet article est réservé aux abonnés." %}
                     {% if article.abstracts %}
-                    <br/><br/>
                     {% trans "Seul le résumé sera affiché." %}
                     {% elif article.processing == 'C' %}
-                    <br/><br/>
                     {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
                     {% elif can_display_first_pdf_page %}
-                    <br/><br/>
                     {% trans "Seule la première page du PDF sera affichée." %}
                     {% endif %}
-                  </strong>
-                </p>
+                    </strong>
+                  </p>
+                  <p>Options d’accès&#160;:</p>
+                  <ul>
+                    <li>{% trans "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”." %}</li>
+                    <li>{% trans "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. Connectez-vous si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel." %}</li>
+                  </ul>
+                  <p>
+                    {% blocktrans trimmed with code=article.issue.journal.code %}
+                    Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les derniers numéros de cette revue sont sous restriction. <a href="https://www.erudit.org/fr/revues/{{ code }}">L’ensemble des numéros antérieurs</a> est consultable librement sur la plateforme.
+                    {% endblocktrans %}
+                  </p>
+                  <a class="btn btn-primary" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform">
+                    {% trans "Options d’accès" %}
+                  </a>
+                </div>
               </div>
               {% endif %}
               {% if not article.publication_allowed %}

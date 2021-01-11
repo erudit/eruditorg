@@ -176,3 +176,30 @@
 .cc-dismiss {
   @include font-styles('sans-medium');
 }
+
+#article-header {
+  .alert {
+    div {
+      border: 1px solid $mid-grey;
+      padding: 0.75em 0.75em;
+      margin: 1em 0;
+    }
+
+    p {
+      border: none;
+      padding: 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    a.btn {
+      color: $white;
+
+      &:hover, &:focus, &:active, &:active:focus {
+        color: $coral-red;
+      }
+    }
+  }
+}
