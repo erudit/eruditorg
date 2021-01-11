@@ -5,10 +5,6 @@ from erudit.models import JournalType, Collection, Discipline
 
 class JournalListFilterForm(forms.Form):
     open_access = forms.BooleanField(label=_('Libre accès'), required=False)
-    special_open_access_opt_in = forms.BooleanField(
-        label=_('Temporairement disponible gratuitement'),
-        required=False,
-    )
     is_new = forms.BooleanField(label=_('Nouveautés'), required=False)
     types = forms.MultipleChoiceField(
         label=_('Par type'), required=False,
