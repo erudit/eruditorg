@@ -96,12 +96,12 @@
                   </p>
                   <p>{% trans "Options d’accès&#160;:" %}</p>
                   <ul>
-                    <li>{% trans "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”." %}</li>
-                    <li>{% trans "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. Connectez-vous si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel." %}</li>
+                    <li><p>{% trans "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”." %}</p></li>
+                    <li><p>{% trans "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. <a href='https://www.erudit.org/fr/compte/connexion/'>Connectez-vous</a> si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel." %}</p></li>
                   </ul>
                   <p>
                     {% blocktrans trimmed with code=article.issue.journal.code %}
-                    Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les derniers numéros de cette revue sont sous restriction. <a href="https://www.erudit.org/fr/revues/{{ code }}">L’ensemble des numéros antérieurs</a> est consultable librement sur la plateforme.
+                    Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les derniers numéros de cette revue sont sous restriction. <a href="https://www.erudit.org/fr/revues/{{ code }}/#back-issues">L’ensemble des numéros antérieurs</a> est consultable librement sur la plateforme.
                     {% endblocktrans %}
                   </p>
                   <a class="btn btn-primary" target="_blank" href="{% trans 'https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform' %}">
