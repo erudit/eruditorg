@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 19:25-0500\n"
+"POT-Creation-Date: 2021-01-12 11:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4981,6 +4981,12 @@ msgid ""
 "derniers numéros de cette revue sont sous restriction. <a href=\"https://www."
 "erudit.org/fr/revues/%(code)s\">L’ensemble des numéros antérieurs</a> est "
 "consultable librement sur la plateforme."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:107
+msgid ""
+"https://docs.google.com/forms/d/"
+"e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform"
 msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:108

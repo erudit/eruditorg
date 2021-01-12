@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 19:25-0500\n"
+"POT-Creation-Date: 2021-01-12 11:14-0500\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -5041,6 +5041,13 @@ msgstr ""
 "of this journal are restricted. <a "
 "href=\"https://www.erudit.org/fr/revues/%(code)s\">All of its archives</a> "
 "can be freely consulted on the platform."
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:107
+msgid ""
+"https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform"
+msgstr ""
+"https://docs.google.com/forms/d/e/1FAIpQLSfgf8N6PF5fd8oEtqycKAOXTt-"
+"HgsEsrBSGNbgGFmrWmDXBfg/viewform"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:108
 msgid "Options d’accès"
