@@ -94,7 +94,7 @@
                     {% endif %}
                     </strong>
                   </p>
-                  <p>Options d’accès&#160;:</p>
+                  <p>{% trans "Options d’accès&#160;:" %}</p>
                   <ul>
                     <li>{% trans "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”." %}</li>
                     <li>{% trans "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. Connectez-vous si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel." %}</li>
