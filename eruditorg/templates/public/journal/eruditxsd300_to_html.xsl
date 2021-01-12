@@ -104,7 +104,7 @@
                     Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les derniers numéros de cette revue sont sous restriction. <a href="https://www.erudit.org/fr/revues/{{ code }}">L’ensemble des numéros antérieurs</a> est consultable librement sur la plateforme.
                     {% endblocktrans %}
                   </p>
-                  <a class="btn btn-primary" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform">
+                  <a class="btn btn-primary" target="_blank" href="{% trans 'https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform' %}">
                     {% trans "Options d’accès" %}
                   </a>
                 </div>
