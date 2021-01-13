@@ -1504,6 +1504,15 @@ class TestArticleDetailView:
         assert '<figcaption><p class="legende"><strong class="titre">German interpreted' \
                '</strong></p></figcaption>' in html
 
+    def test_display_license_img(self):
+        article = ArticleFactory(
+            from_fixture='1059871ar',
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<img src="http://licensebuttons.net/l/by/4.0/88x31.png" id="" alt="forme: ">' in html
+
     def test_existance_of_continuation_mention_in_split_figure(self):
         article = ArticleFactory(
             from_fixture='1056317ar',
