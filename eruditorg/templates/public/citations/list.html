@@ -116,7 +116,7 @@
           {% widthratio page_obj.number|add:"-1" 1 paginator.per_page as doc_count_offset %}
 
           {% if document.document_type == 'article' %}
-          <li data-document-id="{{ document.localidentifier }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="bib-record">
+          <li data-document-id="{{ document.solr_id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="bib-record">
 
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
               {% spaceless %}
@@ -229,7 +229,7 @@
           </li>
 
           {% elif document.document_type == 'thesis' %}
-          <li data-document-id="{{ document.localidentifier }}" data-document-type="thesis" class="bib-record">
+          <li data-document-id="{{ document.solr_id }}" data-document-type="thesis" class="bib-record">
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
               {% spaceless %}
               <li>

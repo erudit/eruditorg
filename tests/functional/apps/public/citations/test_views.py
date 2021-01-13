@@ -33,7 +33,8 @@ class TestSavedCitationListView:
     def setup(self, solr_client):
         self.collection = CollectionFactory.create(
             code='erudit', localidentifier='erudit', name='Érudit')
-        self.collection_1 = CollectionFactory.create()
+        self.collection_1 = CollectionFactory.create(
+            code='unb', localidentifier='unb', name='UNB')
         self.thesis_1 = ThesisFactory.create(
             id='t1', authors=['Abc, Def'], title='Thesis A', year=2014)
         solr_client.add_document(self.thesis_1)
@@ -43,7 +44,7 @@ class TestSavedCitationListView:
         self.journal_1 = JournalFactory.create(
             collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
-            collection=self.collection, type_code='C')
+            collection=self.collection_1, type_code='C')
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
         self.article_1 = ArticleFactory.create(issue=self.issue_1, localidentifier='a1')
@@ -64,9 +65,9 @@ class TestSavedCitationListView:
         self.user = UserFactory()
         self.user.saved_citations.create(solr_id=self.thesis_1.id)
         self.user.saved_citations.create(solr_id=self.thesis_2.id)
-        self.user.saved_citations.create(solr_id=self.article_1.localidentifier)
-        self.user.saved_citations.create(solr_id=self.article_2.localidentifier)
-        self.user.saved_citations.create(solr_id=self.article_3.localidentifier)
+        self.user.saved_citations.create(solr_id=self.article_1.solr_id)
+        self.user.saved_citations.create(solr_id=self.article_2.solr_id)
+        self.user.saved_citations.create(solr_id=self.article_3.solr_id)
         self.client = Client(logged_user=self.user)
         self.solr_client = solr_client
 
@@ -82,11 +83,11 @@ class TestSavedCitationListView:
         # Add 20 more scientific articles to the saved citations.
         scientific_articles = ArticleFactory.create_batch(20, issue=self.issue_1)
         for article in scientific_articles:
-            self.user.saved_citations.create(solr_id=article.localidentifier)
+            self.user.saved_citations.create(solr_id=article.solr_id)
         # Add 20 more cultural articles to the saved citations.
         cultural_articles = ArticleFactory.create_batch(20, issue=self.issue_2)
         for article in cultural_articles:
-            self.user.saved_citations.create(solr_id=article.localidentifier)
+            self.user.saved_citations.create(solr_id=article.solr_id)
         # Add 20 more theses to the saved citations.
         theses = ThesisFactory.create_batch(20)
         for thesis in theses:
@@ -106,18 +107,18 @@ class TestSavedCitationListView:
     # needs fr_ca locale to properly sort authors
     @needs_fr_ca
     @pytest.mark.parametrize('criteria,expected_order', [
-        ('title_asc', ['a1', 'a2', 'a3', 't1', 't2']),
-        ('title_desc', ['t2', 't1', 'a3', 'a2', 'a1']),
-        ('year_asc', ['t2', 'a1', 'a2', 'a3', 't1']),
-        ('year_desc', ['t1', 'a3', 'a2', 'a1', 't2']),
-        ('author_asc', ['t1', 't2', 'a1', 'a3', 'a2']),
-        ('author_desc', ['a2', 'a3', 'a1', 't2', 't1']),
+        ('title_asc', ['a1', 'a2', 'unb:a3', 't1', 't2']),
+        ('title_desc', ['t2', 't1', 'unb:a3', 'a2', 'a1']),
+        ('year_asc', ['t2', 'a1', 'a2', 'unb:a3', 't1']),
+        ('year_desc', ['t1', 'unb:a3', 'a2', 'a1', 't2']),
+        ('author_asc', ['t1', 't2', 'a1', 'unb:a3', 'a2']),
+        ('author_desc', ['a2', 'unb:a3', 'a1', 't2', 't1']),
     ])
     def test_can_sort_documents_by_criteria(self, criteria, expected_order):
         url = reverse('public:citations:list')
         response = self.client.get(url, data={'sort_by': criteria})
         documents = list(response.context['documents'])
-        ordered_ids = [doc.localidentifier for doc in documents]
+        ordered_ids = [doc.solr_id for doc in documents]
 
         assert response.status_code == 200
         assert ordered_ids == expected_order
@@ -128,7 +129,7 @@ class TestSavedCitationListView:
         url = reverse('public:citations:citation_enw')
         response = self.client.get(
             url, data={'document_ids': [
-                self.thesis_1.id, self.article_1.localidentifier
+                self.thesis_1.id, self.article_1.solr_id
             ]}
         )
         assert response.status_code == 200
@@ -156,6 +157,15 @@ class TestSavedCitationListView:
         assert response.status_code == 302
         # Check if correctly redirected to last available page
         assert response.url == '/fr/notices/?page=1'
+
+    def test_data_document_id_includes_unb_prefix(self):
+        url = reverse('public:citations:list')
+        html = self.client.get(url).content.decode()
+        assert 'data-document-id="a1"' in html
+        assert 'data-document-id="a2"' in html
+        assert 'data-document-id="unb:a3"' in html
+        assert 'data-document-id="t1"' in html
+        assert 'data-document-id="t2"' in html
 
 
 def test_cannot_cite_article_not_in_fedora(solr_client):
@@ -202,14 +212,14 @@ class TestSavedCitationAddView:
     def test_can_add_an_article_to_a_citation_list(self):
         issue = IssueFactory.create()
         article = ArticleFactory.create(issue=issue)
-        request = RequestFactory().post('/', data={'document_id': article.localidentifier})
+        request = RequestFactory().post('/', data={'document_id': article.solr_id})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         SavedCitationListMiddleware().process_request(request)
         view = SavedCitationAddView.as_view()
         response = view(request)
         assert response.status_code == 200
-        assert list(request.saved_citations) == [str(article.localidentifier), ]
+        assert list(request.saved_citations) == [str(article.solr_id), ]
 
 
 class TestSavedCitationRemoveView:
@@ -217,11 +227,11 @@ class TestSavedCitationRemoveView:
         # Setup
         issue = IssueFactory.create()
         article = ArticleFactory.create(issue=issue)
-        request = RequestFactory().post('/', data={'document_id': article.localidentifier})
+        request = RequestFactory().post('/', data={'document_id': article.solr_id})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         SavedCitationListMiddleware().process_request(request)
-        request.saved_citations.add(article.localidentifier)
+        request.saved_citations.add(article.solr_id)
         view = SavedCitationRemoveView.as_view()
         response = view(request)
         assert response.status_code == 200
@@ -230,7 +240,7 @@ class TestSavedCitationRemoveView:
     def test_can_properly_handle_the_case_where_an_item_is_no_longer_in_the_citation_list(self):
         issue = IssueFactory.create()
         article = ArticleFactory.create(issue=issue)
-        request = RequestFactory().post('/', data={'document_id': article.localidentifier})
+        request = RequestFactory().post('/', data={'document_id': article.solr_id})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         SavedCitationListMiddleware().process_request(request)
@@ -268,16 +278,16 @@ class TestSavedCitationBatchRemoveView:
         self.user = UserFactory()
         self.user.saved_citations.create(solr_id=self.thesis_1.id)
         self.user.saved_citations.create(solr_id=self.thesis_2.id)
-        self.user.saved_citations.create(solr_id=self.article_1.localidentifier)
-        self.user.saved_citations.create(solr_id=self.article_2.localidentifier)
-        self.user.saved_citations.create(solr_id=self.article_3.localidentifier)
+        self.user.saved_citations.create(solr_id=self.article_1.solr_id)
+        self.user.saved_citations.create(solr_id=self.article_2.solr_id)
+        self.user.saved_citations.create(solr_id=self.article_3.solr_id)
         self.client = Client(logged_user=self.user)
 
     def test_can_remove_many_documents_from_a_saved_citations_list(self):
         url = reverse('public:citations:remove_citation_batch')
         idlist = [
             self.thesis_1.id,
-            self.article_1.localidentifier,
+            self.article_1.solr_id,
         ]
         response = self.client.post(url, data={'document_ids': idlist})
         assert response.status_code == 200

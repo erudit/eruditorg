@@ -788,6 +788,23 @@ class TestIssueDetailView:
                          '<span class="journal-subtitle">History and Theory of the Arts, ' \
                          'Literature and Technologies</span>\n</a>\n</h2>'
 
+    @pytest.mark.parametrize('collection_code, expected_document_id', (
+        ('erudit', 'article1'),
+        ('unb', 'unb:article1'),
+    ))
+    def test_data_document_id_includes_unb_prefix(self, collection_code, expected_document_id):
+        article = ArticleFactory(
+            issue__journal__collection__code=collection_code,
+            localidentifier='article1',
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': article.issue.journal.code,
+            'issue_slug': article.issue.volume_slug,
+            'localidentifier': article.issue.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        assert f'data-document-id="{expected_document_id}"' in html
+
 
 class TestArticleDetailView:
 
@@ -2361,6 +2378,19 @@ class TestArticleDetailView:
         dom = BeautifulSoup(html, 'html.parser')
         span = dom.find('span', {'class': 'volumaison'})
         assert span.decode() == '<span class="volumaison">2018</span>'
+
+    @pytest.mark.parametrize('collection_code, expected_document_id', (
+        ('erudit', 'article1'),
+        ('unb', 'unb:article1'),
+    ))
+    def test_data_document_id_includes_unb_prefix(self, collection_code, expected_document_id):
+        article = ArticleFactory(
+            issue__journal__collection__code=collection_code,
+            localidentifier='article1',
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert f'data-document-id="{expected_document_id}"' in html
 
 
 class TestArticleRawPdfView:

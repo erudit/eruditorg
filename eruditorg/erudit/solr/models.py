@@ -53,6 +53,7 @@ LANGUAGE_LABELS = {
 
 class SolrDocument:
     def __init__(self, solr_data):
+        self.solr_id = solr_data['ID']
         self.localidentifier = solr_data['ID'].replace('unb:', '')
         self.corpus = solr_data.get('Corpus_fac')
         self.solr_data = solr_data
