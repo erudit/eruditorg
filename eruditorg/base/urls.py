@@ -93,5 +93,6 @@ if settings.DEBUG:
     ] + urlpatterns
 
 
+handler403 = 'apps.public.views.forbidden_view'
 handler404 = 'apps.public.views.not_found_view'
 handler500 = 'apps.public.views.internal_error_view'

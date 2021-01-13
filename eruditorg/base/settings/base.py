@@ -102,6 +102,7 @@ env = environ.Env(
 
     WEBPACK_DEV_SERVER_URL=(str, ''),
     BOOKS_UPDATE_EMAILS=(list, []),
+    CSRF_FAILURE_VIEW=(str, 'apps.public.views.forbidden_view'),
 )
 environ.Env.read_env(str(ROOT_DIR / '.env'))
 
