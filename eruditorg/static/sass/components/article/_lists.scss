@@ -64,10 +64,18 @@ ol {
 
   &.romainmaj {
     list-style: upper-roman;
+
+    & > li {
+      margin-left: 12px;
+    }
   }
 
   &.romainmin {
     list-style: lower-roman;
+
+    & > li {
+      margin-left: 12px;
+    }
   }
 
 }
