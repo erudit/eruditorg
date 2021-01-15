@@ -179,19 +179,19 @@
             </li>
             {% else %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="nav-menu__link">{% trans "Mon compte" %} <i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
-              <ul class="hidden-xs hidden-sm nav-submenu">
+              <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="hidden-xs hidden-sm nav-menu__link">{% trans "Mon compte" %} <i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
+              <ul class="nav-submenu">
                 {% has_perm 'userspace.access' request.user as can_access_userspace %}
                 {% if can_access_userspace %}
                 <li class="nav-submenu__item">
-                  <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord" %}</a>
+                  <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}"><span class="hidden-gtsm">{% trans "Mon compte" %} - </span>{% trans "Tableau de bord" %}</a>
                 </li>
                 {% endif %}
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}">{% trans "Paramètres" %}</a>
+                  <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}"><span class="hidden-gtsm">{% trans "Mon compte" %} - </span>{% trans "Paramètres" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:auth:logout' %}?next={{ request.get_full_path|urlencode }}" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
+                  <a href="{% url 'public:auth:logout' %}?next={{ request.get_full_path|urlencode }}" title="{% trans 'Se déconnecter' %}"><span class="hidden-gtsm">{% trans "Mon compte" %} - </span>{% trans "Déconnexion" %}</a>
                 </li>
               </ul>
             </li>

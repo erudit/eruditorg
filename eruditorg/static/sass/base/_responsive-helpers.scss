@@ -140,6 +140,10 @@
   @include responsive-invisibility('.hidden-lg');
 }
 
+@media (min-width: $screen-sm-max) {
+  @include responsive-invisibility('.hidden-gtsm');
+}
+
 /**
  * Print utilities
  *
