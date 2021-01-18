@@ -11,6 +11,7 @@ from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from ipware import get_client_ip
+from prometheus_client import Counter
 
 from erudit.models import Article
 from erudit.models import Issue
@@ -20,12 +21,16 @@ from erudit.solr.models import (
     get_solr_data,
 )
 
-from core.metrics.metric import metric
 from .article_access_log import (
     ArticleAccessLog,
     ArticleAccessType,
 )
 
+embargoed_article_views_by_subscription_type = Counter(
+    "eruditorg_embargoed_article_views_by_subscription_type",
+    _("Nombre de consultations d'articles sous embargo par type d'abonnement"),
+    ["subscription_type"]
+)
 
 logger = structlog.get_logger(__name__)
 
@@ -207,34 +212,14 @@ class ArticleViewMetricCaptureMixin:
     tracking_view_type = 'html'
 
     def dispatch(self, request, *args, **kwargs):
-        self.request = request
-        response = super(ArticleViewMetricCaptureMixin, self).dispatch(request, *args, **kwargs)
-        if response.status_code == 200 and self.content_access_granted:
+        response = super().dispatch(request, *args, **kwargs)
+        subscription = request.subscriptions.active_subscription
+        if response.status_code == 200 and subscription is not None and self.content_access_granted:
             # We register this metric only if the article can be viewed
-            metric(
-                self.tracking_article_view_granted_metric_name,
-                tags=self.get_metric_tags(), **self.get_metric_fields())
+            embargoed_article_views_by_subscription_type.labels(
+                subscription_type=subscription.get_subscription_type()
+            ).inc(1)
         return response
-
-    def get_metric_fields(self):
-        article = self.get_content()
-        subscription = self.request.subscriptions.active_subscription
-        return {
-            'issue_localidentifier': article.issue.localidentifier,
-            'localidentifier': article.localidentifier,
-            'subscription_id': subscription.id if subscription else None,
-        }
-
-    def get_metric_tags(self):
-        article = self.get_content()
-        return {
-            'journal_localidentifier': article.issue.journal.localidentifier,
-            'open_access': article.open_access or not article.embargoed,
-            'view_type': self.get_tracking_view_type(),
-        }
-
-    def get_tracking_view_type(self):
-        return self.tracking_view_type
 
 
 class ContributorsMixin:
