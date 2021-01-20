@@ -8,6 +8,8 @@ from ..modelfields import SizeConstrainedImageField
 
 class Organisation(models.Model):
     """ A single organisation. """
+    account_id = models.CharField(max_length=10, verbose_name=_('Identifiant'))
+
     name = models.CharField(max_length=300, verbose_name=_('Nom'))
 
     badge = SizeConstrainedImageField(
@@ -15,6 +17,13 @@ class Organisation(models.Model):
         height=140)
 
     members = models.ManyToManyField(User, related_name='organisations', verbose_name=_('Membres'))
+
+    sushi_requester_id = models.CharField(
+        max_length=10,
+        verbose_name=_('Identifiant SUSHI'),
+        blank=True,
+        null=True
+    )
 
     google_scholar_opt_out = models.BooleanField(
         default=False, verbose_name=_('Ne pas inclure dans les programmes de Google Scholar'))
