@@ -5,7 +5,6 @@ from ..models import Collection
 from ..models import Discipline
 from ..models import JournalType
 from ..models import Organisation
-from ..models import LegacyOrganisationProfile
 from ..models import Language
 
 
@@ -26,14 +25,8 @@ class DisciplineAdmin(TranslationAdmin):
     pass
 
 
-class LegacyOrganisationProfileInline(admin.TabularInline):
-    model = LegacyOrganisationProfile
-
-
 class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ('name',)
-
-    inlines = (LegacyOrganisationProfileInline, )
 
     filter_horizontal = ('members',)
 

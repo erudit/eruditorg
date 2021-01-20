@@ -17,6 +17,8 @@ faker = Factory.create()
 class OrganisationFactory(factory.django.DjangoModelFactory):
 
     name = factory.Sequence(lambda n: 'organization{}'.format(n))
+    account_id = factory.Sequence(lambda n: n)
+    sushi_requester_id = factory.Sequence(lambda n: 'organization{}'.format(n))
 
     class Meta:
         model = 'erudit.Organisation'
@@ -249,14 +251,6 @@ class EmbargoedArticleFactory(ArticleFactory):
 
 class NonEmbargoedArticleFactory(ArticleFactory):
     issue = factory.SubFactory(NonEmbargoedIssueFactory)
-
-
-class LegacyOrganisationProfileFactory(factory.django.DjangoModelFactory):
-    organisation = factory.SubFactory(OrganisationFactory)
-    account_id = factory.sequence(lambda n: n)
-
-    class Meta:
-        model = 'erudit.LegacyOrganisationProfile'
 
 
 class ThesisRepositoryFactory(factory.django.DjangoModelFactory):

@@ -292,12 +292,8 @@ class ArticleAccessLogMixin:
             return response
 
         active_subscription = request.subscriptions.active_subscription
-        if active_subscription:
-            if hasattr(active_subscription.organisation, 'legacyorganisationprofile'):
-                restriction_subscriber_id = (active_subscription.organisation
-                                             .legacyorganisationprofile.account_id)
-            else:
-                restriction_subscriber_id = None
+        if active_subscription and active_subscription.organisation:
+            restriction_subscriber_id = active_subscription.organisation.account_id
             is_subscribed_to_journal = active_subscription.provides_access_to(journal=journal)
         else:
             restriction_subscriber_id = None

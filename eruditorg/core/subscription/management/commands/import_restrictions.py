@@ -10,7 +10,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from erudit.models import Journal
-from erudit.models import Organisation, LegacyOrganisationProfile
+from erudit.models import Organisation
 
 from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import InstitutionReferer
@@ -65,7 +65,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
     ).order_by('abonneid').values_list('abonneid', flat=True).distinct()
 
     orgs_with_no_revueabonne = Organisation.objects.exclude(
-        legacyorganisationprofile__account_id__in=set(abonneid_for_year)
+        account_id__in=set(abonneid_for_year)
     )
 
     # Get all organisations that have a valid subscription
@@ -77,7 +77,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
 
     if organisation_id is not None:
         orgs_with_valid_subscription = orgs_with_valid_subscription.filter(
-            legacyorganisationprofile__account_id=organisation_id
+            account_id=organisation_id
         )
 
     # diff the sets and find the subscribers with no revueabonne
@@ -191,7 +191,9 @@ class Command(BaseCommand):
             logger.info("import.finished", **created_objects)
 
     @transaction.atomic
-    def import_restriction_subscriber(self, restriction_subscriber: Abonne, subscription_qs, logger=None):
+    def import_restriction_subscriber(
+        self, restriction_subscriber: Abonne, subscription_qs, logger=None
+    ):
 
         if not logger:
             logger = structlog.get_logger(__name__)
@@ -207,32 +209,18 @@ class Command(BaseCommand):
             return
 
         try:
-            profile = LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
-            profile.organisation.name = restriction_subscriber.abonne
-
-        except LegacyOrganisationProfile.DoesNotExist:
-
             organisation, created = Organisation.objects.get_or_create(
-                name=restriction_subscriber.abonne
+                account_id=restriction_subscriber.pk
             )
-            profile = LegacyOrganisationProfile.objects.create(
-                organisation=organisation
-            )
-
-            profile.sushi_requester_id = restriction_subscriber.requesterid
-            profile.account_id = restriction_subscriber.pk
-            profile.save()
-            logger.info(
-                "organisationprofile.created",
-                account_id=restriction_subscriber.pk,
-                sushi_requester_id=restriction_subscriber.requesterid
-            )
+            organisation.name = restriction_subscriber.abonne
+            organisation.sushi_requester_id = restriction_subscriber.requesterid
+            organisation.account_id = restriction_subscriber.pk
+            organisation.save()
 
             if created:
                 logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
         finally:
-            profile.organisation.save()
-            organisation = profile.organisation
+            organisation.save()
 
         # gets or creates the RestrictionProfile instance
         # --

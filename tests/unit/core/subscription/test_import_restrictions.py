@@ -4,7 +4,7 @@ import pytest
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
 
-from erudit.models import Organisation, LegacyOrganisationProfile
+from erudit.models import Organisation
 from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod, InstitutionReferer
@@ -16,7 +16,7 @@ from core.subscription.restriction.test.factories import (
 from core.subscription.management.commands import import_restrictions
 
 from core.accounts.test.factories import LegacyAccountProfileFactory
-from erudit.test.factories import JournalFactory, LegacyOrganisationProfileFactory
+from erudit.test.factories import JournalFactory
 
 @pytest.mark.django_db
 def test_import_subscriber():
@@ -31,10 +31,9 @@ def test_import_subscriber():
     # Run & check
     accprofile = LegacyAccountProfile.objects.get(legacy_id=abonne1.abonneid)
     org = accprofile.organisation
-    orgprofile = org.legacyorganisationprofile
     assert org.name == abonne1.abonne
-    assert orgprofile.account_id == str(abonne1.abonneid)
-    assert orgprofile.sushi_requester_id == abonne1.requesterid
+    assert org.account_id == str(abonne1.abonneid)
+    assert org.sushi_requester_id == abonne1.requesterid
     assert accprofile.user.username == 'restriction-{}'.format(abonne1.abonneid)
     assert accprofile.user.email == abonne1.courriel
     assert accprofile.legacy_id == str(abonne1.abonneid)
@@ -66,10 +65,10 @@ def test_import_journal():
 def test_assign_user_to_existing_organisation():
     """ If an organisation has the LegacyOrganisationId of the restriction user to import,
     add the created user to this organisation"""
-    profile = LegacyOrganisationProfileFactory()
+    org = OrganisationFactory()
     journal1 = JournalFactory.create()
     abonne1 = AbonneFactory.create()
-    abonne1.abonneid = profile.account_id
+    abonne1.abonneid = org.account_id
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
     sub1 = RevueabonneFactory.create(
         abonneid=abonne1.abonneid,
@@ -86,13 +85,13 @@ def test_assign_user_to_existing_organisation():
 
 @pytest.mark.django_db
 def test_import_can_rename_organisation():
-    profile = LegacyOrganisationProfileFactory()
-    profile.organisation.name = "old name"
-    profile.organisation.save()
+    organisation = OrganisationFactory()
+    organisation.name = "old name"
+    organisation.save()
     journal1 = JournalFactory.create()
     abonne1 = AbonneFactory.create()
     abonne1.abonne = "new name"
-    abonne1.abonneid = profile.account_id
+    abonne1.abonneid = organisation.account_id
 
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
     sub1 = RevueabonneFactory.create(
@@ -252,7 +251,6 @@ def test_dry_run_mode_does_not_create_anything():
     assert InstitutionReferer.objects.count() == 0
     assert LegacyAccountProfile.objects.count() == 0
     assert JournalAccessSubscriptionPeriod.objects.count() == 0
-    assert LegacyOrganisationProfile.objects.count() == 0
     assert Organisation.objects.count() == 0
     assert JournalAccessSubscription.objects.count() == 0
     assert InstitutionIPAddressRange.objects.count() == 0

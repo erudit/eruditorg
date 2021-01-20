@@ -36,7 +36,6 @@
     </div>
 
     <div class="glory">
-      {% if has_legacy_profile %}
       <dl class="row index-card">
         <dt class="col-sm-6">{% trans "Serveur" %}</dt>
         <dd class="col-sm-6">
@@ -74,11 +73,6 @@
           </span>
         </dd>
       </dl>
-      {% else %}
-        {% blocktrans with organisation=scope_current_organisation.name %}
-        <p>Vous n’avez aucun compte. Veuillez nous contacter par courriel à l’adresse <a href="mailto:client@erudit.org?subject=Aucun%20compte%20Z39.50%20–%20{{ organisation }}">client@erudit.org</a>.</p>
-        {% endblocktrans %}
-      {% endif %}
     </div>
   </div>
 </section>

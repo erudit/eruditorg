@@ -9,7 +9,8 @@ from django.test.utils import override_settings
 from django.views.generic import DetailView, View
 
 from erudit.test.factories import (
-    ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory, EmbargoedIssueFactory
+    ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory, EmbargoedIssueFactory,
+    OrganisationFactory
 )
 from erudit.models import Article
 
@@ -30,7 +31,7 @@ from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.models import UserSubscriptions
 from base.test.factories import get_anonymous_request, get_authenticated_request
 from erudit.test.factories import JournalFactory, JournalInformationFactory, ContributorFactory, \
-    IssueFactory, LegacyOrganisationProfileFactory
+    IssueFactory
 from erudit.fedora import repository
 
 middleware = SubscriptionMiddleware()
@@ -466,11 +467,10 @@ class TestArticleAccessLogMixin:
             subscription = JournalAccessSubscriptionFactory(
                 journals=[article.issue.journal],
                 post__valid=True,
-                organisation=LegacyOrganisationProfileFactory().organisation,
+                organisation=OrganisationFactory(),
             )
             request.subscriptions.add_subscription(subscription)
-            restriction_subscriber_id = (subscription.organisation.legacyorganisationprofile
-                                         .account_id)
+            restriction_subscriber_id = subscription.organisation.account_id
         else:
             restriction_subscriber_id = None
 

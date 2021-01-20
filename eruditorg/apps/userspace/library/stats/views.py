@@ -133,7 +133,7 @@ class StatsLandingView(
         # report_arguments = form_data
         report_arguments = {}
         report_arguments['format'] = form_data['format']
-        report_arguments['id'] = self.current_organisation.legacyorganisationprofile.account_id
+        report_arguments['id'] = self.current_organisation.account_id
         report_arguments['beginPeriod'] = dstart.strftime("%Y-%m-%d")
         report_arguments['endPeriod'] = dend.strftime("%Y-%m-%d")
         if form_data.get('report_type') == 'counter-jr1-goa':
@@ -194,7 +194,7 @@ class StatsLandingView(
         return self.report_base_url
 
     def get_organisation_id(self):
-        return self.current_organisation.legacyorganisationprofile.account_id
+        return self.current_organisation.account_id
 
     def get_r5_report(self, form):
         begin_date, end_date = form.get_report_period()
