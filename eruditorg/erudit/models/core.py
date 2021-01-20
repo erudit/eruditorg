@@ -10,13 +10,6 @@ class Organisation(models.Model):
     """ A single organisation. """
     name = models.CharField(max_length=300, verbose_name=_('Nom'))
 
-    street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Adresse'))
-    postal_code = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name=_('Code postal'))
-    city = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Ville'))
-    province = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Province'))
-    country = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Pays'))
-
     badge = SizeConstrainedImageField(
         verbose_name=_('Badge'), blank=True, null=True, upload_to='organisation_badges', width=140,
         height=140)

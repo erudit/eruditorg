@@ -191,7 +191,8 @@ class Command(BaseCommand):
             logger.info("import.finished", **created_objects)
 
     @transaction.atomic
-    def import_restriction_subscriber(self, restriction_subscriber, subscription_qs, logger=None):
+    def import_restriction_subscriber(self, restriction_subscriber: Abonne, subscription_qs, logger=None):
+
         if not logger:
             logger = structlog.get_logger(__name__)
         logger = logger.bind(
