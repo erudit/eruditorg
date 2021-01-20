@@ -1,0 +1,274 @@
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="p0798898" date="2012-04-02" application="Tournesol"/>
+<copyright>
+	<year>2011</year>
+<contribution>
+<artificialperson>
+	<name>CRÉPUQ</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="en">Copyright Holder</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="es">Reservados todos los derechos</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2011">
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/ritpu/2011/v8/n3</url>
+  <nbarticle>5</nbarticle>
+  <revue id="ritpu112" lang="fr en">
+    <titrerev>Revue internationale des technologies en pédagogie universitaire</titrerev>
+    <titrerevparal lang="en">International Journal of Technologies in Higher Education</titrerevparal>
+    <titrerevabr>ritpu</titrerevabr>
+    <idissnnum>1708-7570</idissnnum>
+    <redacteurchef sexe="masculin" typerc="regulier">
+      <nompers>
+        <prenom>Thierry</prenom>
+        <nomfamille>Karsenti</nomfamille>
+      </nompers>
+      <key>redacteurchef</key>
+    </redacteurchef>
+  </revue>
+  <numero id="ritpu1824085">
+    <volume>8</volume>
+    <nonumero>3</nonumero>
+    <pub>
+      <annee>2011</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2011-11-21</date>
+    </pubnum>
+  </numero>
+  <editeur>
+    <nomorg>CRÉPUQ</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>CRÉPUQ</nomorg>, 2011</droitsauteur>
+  <droitsauteur>
+    <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:actuate="onRequest" xlink:href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr_CA" xlink:show="replace" xlink:type="simple">
+      <objetmedia flot="ligne">
+        <image typeimage="forme" xlink:actuate="onLoad" xlink:href="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" xlink:show="embed" xlink:type="simple"/>
+      </objetmedia>
+    </liensimple>
+  </droitsauteur>
+</infosommaire>
+<article idproprio="1006396ar" lang="fr" ordseq="1" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="335" unite="ko">/revue/ritpu/2011/v8/n3/1006396ar.pdf</urlpdf>
+  <pagination>
+    <ppage>6</ppage>
+    <dpage>19</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Usage des TIC en pédagogie universitaire : point de vue des étudiants</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Carole</prenom>
+    <nomfamille>Raby</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Montréal</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:raby.carole@uqam.ca" xlink:type="simple">raby.carole@uqam.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Thierry</prenom>
+    <nomfamille>Karsenti</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Montréal</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:thierry.karsenti@umontreal.ca" xlink:type="simple">thierry.karsenti@umontreal.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Hélène</prenom>
+    <nomfamille>Meunier</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Montréal</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="mailto:meunier.h@uqam.ca" xlink:type="simple">meunier.h@uqam.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Stéphane</prenom>
+    <nomfamille>Villeneuve</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Montréal</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="mailto:s.villeneuve@umontreal.ca" xlink:type="simple">s.villeneuve@umontreal.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Ce texte porte sur l’utilisation des technologies de l’information et de la communication (TIC) en pédagogie universitaire, telle que perçue par les étudiants. Plus précisément, cette étude présente à la fois les pratiques pédagogiques faisant appel aux TIC les plus favorables à l’apprentissage, mais également celles qui le sont le moins. Les données ont été recueillies a) par le biais d’une enquête par questionnaire et b) par des groupes de discussion, auprès de quelque 10 266 étudiants universitaires du Québec (Canada). Les résultats montrent que les étudiants considèrent que certaines pratiques pédagogiques faisant appel aux TIC favorisent leurs apprentissages, alors que d’autres leur sont moins bénéfiques. Les résultats sont particulièrement intéressants puisqu’ils permettent de démontrer notamment qu’au-delà des TIC, ce sont plutôt les pratiques pédagogiques sous-jacentes à l’usage des outils technologiques qui font toute la différence.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>In this article, the students’ perception of the use of information and communication technologies (ICT) in higher education is presented. More specifically, this study describes which pedagogical practices using ICT enhance and which are less conducive to learning, according to 10,266 university students. These students completed a questionnaire and some discussion groups were conducted. The results show that university students perceived that some pedagogical practices, such as using emails, forums and an integrated learning platform, contribute to enhance their learning. However, results also show that some pedagogical practices using ICT are less conducive to learning. </alinea>
+ </resume><grmotcle lang="fr"><motcle>TIC</motcle><motcle>technologies de l’information et de la communication</motcle><motcle>pédagogie universitaire</motcle><motcle>apprentissage</motcle></grmotcle><grmotcle lang="en"><motcle>ICT</motcle><motcle>information and communication technologies</motcle><motcle>higher education</motcle><motcle>learning</motcle></grmotcle>
+</liminaire>
+</article>
+<article idproprio="1006397ar" lang="fr" ordseq="2" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="324" unite="ko">/revue/ritpu/2011/v8/n3/1006397ar.pdf</urlpdf>
+  <pagination>
+    <ppage>20</ppage>
+    <dpage>35</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Une analyse longitudinale de la réussite des étudiants « en ligne » ou « en classe » : le cas d’un cours de marketing suivi au sein d’une université québécoise</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>William</prenom>
+    <nomfamille>Menvielle</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Trois-Rivières</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:William.Menvielle@uqtr.ca" xlink:type="simple">William.Menvielle@uqtr.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Les études comparatives sur les résultats des étudiants suivant des enseignements en ligne ou en classe ont été nombreuses et les résultats démontrent, dans l’ensemble, qu’il n’y a pas prépondérance de l’une ou de l’autre des formes d’enseignement. Nous présentons ici une étude sur la réussite des étudiants de 1<exposant>er</exposant> cycle universitaire d’un cours de base en marketing, dont nous avons suivi les résultats entre l’été 2008 et l’hiver 2009 avec le même professeur. Un échantillon de 373 répondants a ainsi été formé et les résultats démontrent, entre autres, qu’il n’y a pas de différences significatives pour un même type d’examen entre les étudiants de ces deux groupes. Par contre, lors d’évaluations différenciées pour chaque groupe, les étudiants suivant un cours en classe réussissent mieux que leurs homologues en ligne.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>We will present a study on the success of first-year university students taking an introductory marketing class between Summer 2008 and Winter 2009 semesters. Our study tracked 373 first-year undergraduate students that had the same professor for these two semesters. Results of comparative studies examining online or in-class teaching demonstrate there is no difference between both methods. The results of our findings show there are no significant results between both samples. However, students who evaluated in-class courses, reacted more favorably than their online counterparts.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Réussite</motcle><motcle>cours en ligne</motcle><motcle>cours en classe</motcle><motcle>comparaison des modes d’enseignement</motcle><motcle>marketing</motcle></grmotcle><grmotcle lang="en"><motcle>Academic performance</motcle><motcle>online</motcle><motcle>face-to-face</motcle><motcle>learning mode comparison</motcle><motcle>marketing</motcle></grmotcle>
+</liminaire>
+</article>
+<article idproprio="1006398ar" lang="fr" ordseq="3" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="326" unite="ko">/revue/ritpu/2011/v8/n3/1006398ar.pdf</urlpdf>
+  <pagination>
+    <ppage>36</ppage>
+    <dpage>48</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Formation en ligne : types d’interaction souhaités chez des directions d’école et des enseignants franco-canadiens</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Claire</prenom>
+    <nomfamille>IsaBelle</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université d’Ottawa</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:Claire.Isabelle@uottawa.ca" xlink:type="simple">Claire.Isabelle@uottawa.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Emmanuel</prenom>
+    <nomfamille>Duplàa</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université d’Ottawa</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:eduplaa@uottawa.ca" xlink:type="simple">eduplaa@uottawa.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Pour desservir la communauté francophone en situation de valorisation culturelle et linguistique, la formation en ligne est toute désignée. Une nouvelle maîtrise professionnelle en éducation entièrement en ligne et en français est offerte. Dans un cadre de formations réelles, la présente étude évalue la pertinence de certaines composantes pédagogiques. Les résultats révèlent que les apprenants en ligne considèrent que les travaux d’équipe et les rencontres synchrones entre le formateur et les apprenants favorisent la compréhension du contenu et enrichissent leur apprentissage. </alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Web-based distance learning education program is appropriate to meet the training needs of teachers and school principals in French-language minority contexts in Canada. This study evaluates some educational components of one program which is entirely offered online in Canada: the francophone Professional Master’s program in education. According to the results, the majority of participants are very satisfied with their courses and agree that team homework and synchronous meeting with the professor and other students promote understanding of content and enhance learning. </alinea>
+ </resume><grmotcle lang="fr"><motcle>Formation en ligne</motcle><motcle>directions d’école</motcle><motcle>enseignants</motcle><motcle>travaux d’équipe</motcle></grmotcle><grmotcle lang="en"><motcle>Online learning</motcle><motcle>school principals</motcle><motcle>teachers</motcle><motcle>team homework</motcle></grmotcle>
+</liminaire>
+</article>
+<article idproprio="1006399ar" lang="fr" ordseq="4" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="430" unite="ko">/revue/ritpu/2011/v8/n3/1006399ar.pdf</urlpdf>
+  <pagination>
+    <ppage>49</ppage>
+    <dpage>65</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Le discours asynchrone d’une communauté d’apprentissage en réseau : source reconnue de l’action en classe par des stagiaires en enseignement</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Stéphane</prenom>
+    <nomfamille>Allaire</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec à Chicoutimi</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:Stephane_Allaire@uqac.ca" xlink:type="simple">Stephane_Allaire@uqac.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Les communautés d’apprenants en réseau, incluant celles en formation initiale à l’enseignement, offrent un contexte propice à la réflexion sur l’action. Cette étude descriptive documente en quoi le discours asynchrone élaboré collectivement est réinvesti par les stagiaires en enseignement lorsqu’ils sont de retour en classe. Les variables de l’intervention en classe favorisant l’apprentissage des élèves ont servi de cadre de référence. La méthodologie combine des analyses qualitatives et quantitatives. Les résultats indiquent que les futurs enseignants estiment que les idées partagées au sein de la communauté en réseau aiguillent leur action en classe dans une proportion appréciable.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Networked learning communities, including those devoted to pre-service teacher training, are a good backdrop for reflection-on-action. This descriptive study documents what exactly, of collectively elaborated asynchronous discourse, is integrated into student teachers’ practices when they are back in the classroom. The variables of classroom intervention have served as a framework to this study. Our methodology combines both quantitative and qualitative analyses. Results show that student teachers say that the ideas shared in the networked community considerably influence their teaching practice.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Analyse réflexive</motcle><motcle>communauté d’apprentissage</motcle><motcle>stagiaires</motcle><motcle>transposition</motcle><motcle>TIC</motcle></grmotcle><grmotcle lang="en"><motcle>Reflective analysis</motcle><motcle>learning community</motcle><motcle>pre-service teacher</motcle><motcle>transposition</motcle><motcle>ICT</motcle></grmotcle>
+</liminaire>
+</article>
+<article idproprio="1006400ar" lang="fr" ordseq="5" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1" unite="mo">/revue/ritpu/2011/v8/n3/1006400ar.pdf</urlpdf>
+  <pagination>
+    <ppage>66</ppage>
+    <dpage>84</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Impacts des TIC sur l’enseignement et l’apprentissage des conceptions relatives au champ électrostatique en classes préparatoires aux grandes écoles d’ingénieurs (CPGE) </titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Abdelaziz</prenom>
+    <nomfamille>Bouchaib</nomfamille>
+   </nompers>
+  <affiliation><alinea>Faculté des Sciences Dhar El Mehraz, Maroc</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:Bouchaib1abdelaziz@gmail.com" xlink:type="simple">Bouchaib1abdelaziz@gmail.com</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Nadia</prenom>
+    <nomfamille>Benjelloun</nomfamille>
+   </nompers>
+  <affiliation><alinea>Faculté des Sciences Dhar El Mehraz, Maroc</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:benjelloun.nadia@yahoo.fr" xlink:type="simple">benjelloun.nadia@yahoo.fr</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article décrit une séquence d’enseignement au cours de laquelle nous avons expérimenté les ressources numériques du site Université en Ligne (UeL), relatives au module d’électrostatique, avec des étudiants de la première année des classes préparatoires aux grandes écoles d’ingénieurs. Nous rappelons brièvement les difficultés conceptuelles rencontrées chez les étudiants de premier cycle universitaire dans le domaine de l’électrostatique. La description de la séquence, expérimentée durant trois années consécutives en deux versions, est suivie d’une analyse des perceptions des étudiants à propos du site UeL. Cette analyse montre que les étudiants sont largement satisfaits du contenu, de la clarté et de la motivation que le site procure dans l’apprentissage. Nous étudions ensuite l’apport de l’UeL sur les conceptions des étudiants participant à l’expérimentation à propos du champ électrostatique créé par une charge ponctuelle et du principe de superposition des champs créés par deux charges ponctuelles. Les résultats montrent que, lorsque les ressources de l’UeL sont intégrées en situation d’auto-apprentissage accompagné par un enseignant tuteur, elles permettent une bonne appropriation de ces concepts et une meilleure interprétation des situations utilisées comme instrument d’évaluation. </alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This article describes a teaching sequence in which we have experimented digital resources of “online university (UeL)” site related to Electrostatics module with students of the first year of preparatory classes for engineering schools. We briefly remind the conceptual difficulties faced by the first cycle university students in the domain of Electrostatics. The sequence description experienced during three consecutive years in two versions is followed by an analysis of students’ perception of UeL site. This analysis shows that students are widely satisfied of the content, clarity and motivation provided by this site towards learning. Then, we study the contribution of UeL to conceptions of students participating in the experiment of the Electrostatic field created by a point charge and of the superposition principle of fields created by two point charges. The results show that when UeL resources are integrated into self-learning situation accompanied with a tutor or a teacher, they permit a good appropriation of these concepts and a better interpretation of situations used as evaluation instrument.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Site web Université en Ligne (UeL)</motcle><motcle>TIC</motcle><motcle>électrostatique</motcle><motcle>évaluation</motcle><motcle>conceptions</motcle></grmotcle><grmotcle lang="en"><motcle>Online university web site (UeL)</motcle><motcle>ICT</motcle><motcle>electrostatics</motcle><motcle>evaluation</motcle><motcle>conceptions</motcle></grmotcle>
+</liminaire>
+</article>
+</sommaire>

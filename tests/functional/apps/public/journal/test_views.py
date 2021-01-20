@@ -805,6 +805,23 @@ class TestIssueDetailView:
         html = Client().get(url).content.decode()
         assert f'data-document-id="{expected_document_id}"' in html
 
+    @pytest.mark.parametrize('issue_xml', ('ritpu0326.xml', 'ritpu1824085.xml'))
+    def test_absence_of_copyright_and_presence_of_license_image_in_issue_summary(self, issue_xml):
+        issue = IssueFactory(journal__code='journal')
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open(f'tests/fixtures/issue/{issue_xml}', 'rb').read(),
+        )
+        url = reverse('public:journal:issue_detail', kwargs={
+            'journal_code': issue.journal.code,
+            'issue_slug': issue.volume_slug,
+            'localidentifier': issue.localidentifier,
+        })
+        html = Client().get(url).content.decode()
+        assert '<p><small>Tous droits réservés © CRÉPUQ, 2012</small></p>' not in html
+        assert '<p><a href="http://creativecommons.org/licenses/by-nc-sa/' \
+               '3.0/deed.fr_CA" target="_blank">' in html
+
 
 class TestArticleDetailView:
 
