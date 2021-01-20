@@ -5,14 +5,6 @@ from base.settings.base import *  # noqa
 DEBUG = True
 
 
-class DisableMigrations:
-    def __contains__(self, item):
-        return True
-
-    def __getitem__(self, item):
-        return 'notmigrations'
-
-
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 SECRET_KEY = 'insecure'
@@ -62,7 +54,22 @@ INSTALLED_APPS.append('tests')
 
 FALLBACK_BASE_URL = 'https://retro.erudit.org/'
 
-MIGRATION_MODULES = DisableMigrations()
+MIGRATION_MODULES = {
+        'auth': None,
+        'authorization': None,
+        'contenttypes': None,
+        'sessions': None,
+        'erudit': None,
+        'accounts': None,
+        'citations': None,
+        'editor': None,
+        'subscription': None,
+        'taggit': None,
+        'waffle': None,
+        'account_actions': None,
+        'resumable_uploads': None,
+        'reversion': None
+}
 
 USE_DEBUG_EMAIL = False
 
