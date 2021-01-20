@@ -67,17 +67,14 @@ def get_datastream_file_cache():
     return caches[erudit_settings.FEDORA_FILEBASED_CACHE_NAME]
 
 
-def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
-    """ Given a Fedora object and a datastream name, returns the content of the datastream.
+def get_cached_datastream_content(pid, datastream_name, cache=None):
+    """ Given a Fedora object pid and a datastream name, returns the content of the datastream.
 
     Note that this content can be cached in a file-based cache!
     """
     cache = cache or get_datastream_file_cache()
     serializer, deserializer = get_datastream_cache_serializer(datastream_name)
-    content_key = 'erudit-fedora-file-{pid}-{datastream_name}'.format(
-        pid=fedora_object.pid,
-        datastream_name=datastream_name,
-    )
+    content_key = f'erudit-fedora-file-{pid}-{datastream_name}'
 
     content = deserializer(cache.get(content_key))
 
@@ -87,7 +84,7 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
                 settings.FEDORA_ROOT + \
                 # TODO: We will be able to remove the upper() call when we will get rid of
                 # eulfedora's DigitalObjects.
-                f"objects/{fedora_object.pid}/datastreams/{datastream_name.upper()}/content",
+                f"objects/{pid}/datastreams/{datastream_name.upper()}/content",
             )
             response.raise_for_status()
             content = io.BytesIO(response.content)
@@ -97,11 +94,11 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
                 content_key,
                 serializer(content),
                 settings.FEDORA_CACHE_TIMEOUT,
-                pids=[fedora_object.pid],
+                pids=[pid],
             )
         except (HTTPError, ConnectionError):  # pragma: no cover
             with configure_scope() as scope:
                 scope.fingerprint = ['fedora-warnings']
-                logger.warning("fedora.exception", pid=fedora_object.pid, datastream=datastream_name)
+                logger.warning("fedora.exception", pid=pid, datastream=datastream_name)
 
     return content
