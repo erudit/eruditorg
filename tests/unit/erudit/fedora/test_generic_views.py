@@ -110,7 +110,8 @@ class TestFedoraFileDatastreamView:
         pid = view.get_fedora_object_pid()
         assert pid == journal.pid
 
-    def test_raises_http_404_if_the_datastream_cannot_be_retrieved(self):
+    @unittest.mock.patch.object(JournalDigitalObject, 'logo')
+    def test_raises_http_404_if_the_datastream_cannot_be_retrieved(self, mock_logo):
         class MyView(FedoraFileDatastreamView):
             content_type = 'image/jpeg'
             datastream_name = 'logo'
@@ -119,6 +120,7 @@ class TestFedoraFileDatastreamView:
 
         request = RequestFactory().get('/')
         journal = JournalFactory()
+        mock_logo.exists = False
 
         with pytest.raises(Http404):
             MyView.as_view()(request, pk=journal.pk)
@@ -154,6 +156,8 @@ class TestFedoraFileDatastreamView:
         mock_fedora_obj.dstream = unittest.mock.MagicMock()
         mock_fedora_obj.dstream.content = None
         mock_fedora_obj.dstream.exists = False
+
+        view.get_object = unittest.mock.MagicMock(return_value=mock_fedora_obj)
 
         # Run & check
         with pytest.raises(Http404):

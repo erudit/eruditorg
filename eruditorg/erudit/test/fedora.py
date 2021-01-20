@@ -357,4 +357,4 @@ class FakeAPI(ApiFacade):
             print("WARNING: unsupported URL for fake fedora API: {}".format(url))
             response = FakeResponse(b'', url)
             response.text = pid
-            raise RequestFailed(response)
+            raise HTTPError

@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
+import io
 import random
+import requests
+import structlog
 
 from django.conf import settings
 from django.core.cache import caches, cache
 from django.utils.translation import get_language
+from requests.exceptions import HTTPError, ConnectionError
+from sentry_sdk import configure_scope
 
 from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
 from erudit.cache import cache_set
+
+logger = structlog.getLogger(__name__)
 
 
 def cache_fedora_result(method, duration=settings.LONG_TTL):
@@ -73,20 +80,28 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
     )
 
     content = deserializer(cache.get(content_key))
-    try:
-        assert content is None
-        content = getattr(fedora_object, datastream_name).content
-    except AssertionError:
-        # We've just retrieved the content of the file from the file-based cache!
-        pass
-    else:
-        # Puts the content of the file in the file-based cache!
-        cache_set(
-            cache,
-            content_key,
-            serializer(content),
-            settings.FEDORA_CACHE_TIMEOUT,
-            pids=[fedora_object.pid],
-        )
+
+    if content is None:
+        try:
+            response = requests.get(
+                settings.FEDORA_ROOT + \
+                # TODO: We will be able to remove the upper() call when we will get rid of
+                # eulfedora's DigitalObjects.
+                f"objects/{fedora_object.pid}/datastreams/{datastream_name.upper()}/content",
+            )
+            response.raise_for_status()
+            content = io.BytesIO(response.content)
+
+            cache_set(
+                cache,
+                content_key,
+                serializer(content),
+                settings.FEDORA_CACHE_TIMEOUT,
+                pids=[fedora_object.pid],
+            )
+        except (HTTPError, ConnectionError):  # pragma: no cover
+            with configure_scope() as scope:
+                scope.fingerprint = ['fedora-warnings']
+                logger.warning("fedora.exception", pid=fedora_object.pid, datastream=datastream_name)
 
     return content
