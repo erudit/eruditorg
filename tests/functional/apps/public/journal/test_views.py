@@ -1402,8 +1402,7 @@ class TestArticleDetailView:
         assert voirliste.decode() == '<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste ' \
                                      'des figures</a></p>'
 
-    @unittest.mock.patch.object(ArticleDigitalObject, 'infoimg')
-    def test_figure_with_float_dimensions(self, mock_infoimg):
+    def test_figure_with_float_dimensions(self, monkeypatch):
         article = ArticleFactory(
             from_fixture='1068859ar',
             localidentifier='article',
@@ -1413,9 +1412,11 @@ class TestArticleDetailView:
             issue__journal__open_access=True,
         )
 
-        mock_infoimg.content = unittest.mock.MagicMock()
-        mock_infoimg.content.serialize = unittest.mock.MagicMock(
-            return_value="""
+        import erudit.models.journal
+        monkeypatch.setattr(
+            erudit.models.journal,
+            'get_cached_datastream_content',
+            unittest.mock.MagicMock(return_value=io.BytesIO(b"""
 <infoDoc>
     <im id="img-05-01.png">
         <imPlGr>
@@ -1427,7 +1428,7 @@ class TestArticleDetailView:
     </im>
 </infoDoc>
             """
-        )
+        )))
 
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
