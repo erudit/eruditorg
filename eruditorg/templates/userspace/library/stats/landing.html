@@ -4,7 +4,7 @@
 {% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li xmlns="http://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+<li xmlns="https://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}

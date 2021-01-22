@@ -14,7 +14,7 @@
 {{ block.super }}
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
+  "@context" : "https://schema.org",
   "@type" : "WebSite",
   "name" : "Érudit",
   "url" : "{{ request.scheme }}://{{ request.site.domain }}",
@@ -27,7 +27,7 @@
 </script>
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [{
     "@type": "ListItem",
@@ -201,7 +201,7 @@
           <h2 class="home-about__title">erudit.<br/>org</h2>
         </div>
         <div class="col-sm-6">
-          <p class="home-about__desc">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="http://apropos.erudit.org" target="_blank" class="home-about__link">{% trans "En savoir plus" %}</a></p>
+          <p class="home-about__desc">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="https://apropos.erudit.org" target="_blank" class="home-about__link">{% trans "En savoir plus" %}</a></p>
         </div>
       </div>
       <ul class="row home-about__users">

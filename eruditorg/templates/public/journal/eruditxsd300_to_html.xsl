@@ -1692,7 +1692,7 @@
   <xsl:template match="objetmedia/audio">
     <xsl:variable name="nomAud" select="@*[local-name()='href']"/>
     <audio class="media-object" id="{@id}" preload="metadata" controls="controls">
-      <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}" />
+      <source src="https://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}" />
       <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à jour.' %}</em></p>
     </audio>
   </xsl:template>
@@ -1703,7 +1703,7 @@
     <xsl:variable name="padding-bottom" select="format-number(translate(@dimy, 'px', '') div translate(@dimx, 'px', '') * 100, '#.###')"/>
     <div class="embed-responsive" style="padding-bottom: {$padding-bottom}%">
       <video class="embed-responsive-item" id="{@id}" preload="metadata" controls="controls">
-        <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4" />
+        <source src="https://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4" />
         <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
       </video>
     </div>
@@ -2555,7 +2555,7 @@
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>
       </xsl:attribute>
-      <xsl:if test="not(starts-with( @href , 'http://www.erudit.org'))">
+      <xsl:if test="not(starts-with( @href , 'http://www.erudit.org') or starts-with( @href , 'https://www.erudit.org'))">
         <xsl:attribute name="target">_blank</xsl:attribute>
       </xsl:if>
       <xsl:apply-templates/>
