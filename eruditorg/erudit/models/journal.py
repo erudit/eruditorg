@@ -1,5 +1,7 @@
 import datetime as dt
 import dateutil.relativedelta as dr
+import lxml.etree as et
+from collections import OrderedDict
 from hashlib import md5
 from functools import wraps
 import structlog
@@ -28,6 +30,7 @@ from ..fedora.objects import ArticleDigitalObject
 from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..fedora.cache import cache_fedora_result
+from ..fedora.cache import get_cached_datastream_content
 from ..fedora.utils import localidentifier_from_pid
 
 
@@ -1409,6 +1412,30 @@ class Article(FedoraMixin):
         if self.doi:
             cite_string += ' {}'.format(self.url_doi)
         return cite_string
+
+    @cached_property
+    def infoimg_dict(self):
+        """ Returns the content of the INFOIMG datastream as a dictionary. """
+        content = get_cached_datastream_content(self.get_full_identifier(), 'INFOIMG')
+        if content is None:
+            return {}
+        infoimg = content.read()
+        infoimg_tree = et.fromstring(infoimg.decode())
+        infoimg_dict = OrderedDict()
+        for im_tree in infoimg_tree.findall('im'):
+            plgr_node = im_tree.find('imPlGr//nomImg')
+            dimx_node = im_tree.find('imPlGr//dimx')
+            dimy_node = im_tree.find('imPlGr//dimy')
+            if plgr_node is None:
+                continue
+            infoimg_dict.update({
+                im_tree.get('id'): {
+                    'plgr': plgr_node.text,
+                    'width': str(int(float(dimx_node.text))) if dimx_node is not None else '',
+                    'height': str(int(float(dimy_node.text))) if dimy_node is not None else '',
+                },
+            })
+        return infoimg_dict
 
 
 class JournalInformation(models.Model):
