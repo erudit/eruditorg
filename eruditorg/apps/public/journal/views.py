@@ -1,10 +1,12 @@
 from collections import OrderedDict
 from itertools import groupby
 from operator import attrgetter
+from PIL import Image
 from string import ascii_uppercase
 import io
 from typing import List
 
+import copy
 import functools
 import pysolr
 import random
@@ -1145,7 +1147,9 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
         return '{0}.{1}'.format(issue_pid, self.kwargs['media_localid'])
 
     def get_content_type(self, fedora_object):
-        return str(fedora_object.content.mimetype)
+        content = self.get_datastream_content(fedora_object)
+        im = Image.open(copy.copy(content))
+        return Image.MIME[im.format]
 
 
 @method_decorator(cache_page(settings.LONG_TTL), name='dispatch')
