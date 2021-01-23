@@ -38,6 +38,7 @@ from django.db.models import Prefetch
 from rules.contrib.views import PermissionRequiredMixin
 from lxml import etree as et
 
+from erudit.fedora.cache import get_cached_datastream_content
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -642,11 +643,12 @@ class IssueReaderView(
         # Raise 404 if journal is not cultural.
         if not issue.journal.is_cultural():
             raise Http404()
-        pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
-        pages = et.fromstring(pages_ds.content.serialize())
-        context['num_leafs'] = pages.get('nb')
-        context['page_width'] = pages.get('imageWidth')
-        context['page_height'] = pages.get('imageHeight')
+        content = get_cached_datastream_content(issue.get_full_identifier(), 'PAGES')
+        pages = content.read()
+        pages_tree = et.fromstring(pages.decode())
+        context['num_leafs'] = pages_tree.get('nb')
+        context['page_width'] = pages_tree.get('imageWidth')
+        context['page_height'] = pages_tree.get('imageHeight')
         context['issue_url'] = reverse('public:journal:issue_detail', kwargs={
             'journal_code': issue.journal.code,
             'issue_slug': issue.volume_slug,
