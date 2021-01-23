@@ -2820,29 +2820,28 @@ class TestArticleXmlView:
         assert response['Content-Type'] == 'application/xml'
 
 
-class TestArticleMediaView(TestCase):
-    @unittest.mock.patch.object(MediaDigitalObject, 'content')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_content):
-        # Setup
-        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), 'rb') as f:
-            mock_content.content = io.BytesIO()
-            mock_content.content.write(f.read())
-        mock_content.mimetype = 'image/png'
-
-        issue = IssueFactory.create(date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue)
-        issue_id = issue.localidentifier
-        article_id = article.localidentifier
-        request = RequestFactory().get('/')
-
-        # Run
+class TestArticleMediaView:
+    @pytest.mark.parametrize('image, expected_content_type', (
+        ('pixel.png', 'image/png'),
+        ('logo.jpg', 'image/jpeg'),
+    ))
+    def test_article_media_content_type(self, image, expected_content_type, monkeypatch):
+        article = ArticleFactory()
+        with open(os.path.join(FIXTURE_ROOT, image), 'rb') as f:
+            monkeypatch.setattr(
+                ArticleMediaView,
+                'get_datastream_content',
+                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
+            )
         response = ArticleMediaView.as_view()(
-            request, journal_code=issue.journal.code, issue_localid=issue_id,
-            localid=article_id, media_localid='test')
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'image/png')
+            RequestFactory().get('/'),
+            journal_code=article.issue.journal.code,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier,
+            media_localid='test',
+        )
+        assert response.status_code == 200
+        assert response['Content-Type'] == expected_content_type
 
 
 class TestExternalURLRedirectViews:
