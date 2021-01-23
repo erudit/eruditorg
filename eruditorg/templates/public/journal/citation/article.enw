@@ -18,7 +18,7 @@
 %X {{ abstract.content }}{% endfor %}{% endif %}{% endspaceless %}
 {% if article.url_doi %}%R {{ article.url_doi }}{% endif %}
 %U https://id.erudit.org/iderudit/{{ article.localidentifier }}
-{% if article.has_pdf %}%> https://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}
+{% if pdf_exists %}%> https://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}
 %[ {% now "SHORT_DATETIME_FORMAT" as now_dt %}{{ now_dt }}
 %~ Érudit
 %W Érudit: www.erudit.org
