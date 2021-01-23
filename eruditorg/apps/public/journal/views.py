@@ -990,6 +990,11 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     context_object_name = 'article'
     template_name = 'public/journal/citation/article.enw'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pdf_exists'] = context['article'].has_pdf
+        return context
+
 
 class ArticleRisCitationView(SingleArticleMixin, DetailView):
     """
@@ -998,6 +1003,11 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     content_type = 'application/x-research-info-systems'
     context_object_name = 'article'
     template_name = 'public/journal/citation/article.ris'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pdf_exists'] = context['article'].has_pdf
+        return context
 
 
 class ArticleBibCitationView(SingleArticleMixin, DetailView):

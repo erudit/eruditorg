@@ -1192,12 +1192,16 @@ class Article(FedoraMixin):
 
     @cached_property
     def has_pdf(self):
-        return self.fedora_object is not None and self.fedora_object.pdf.exists
+        return self.has_datastream('PDF')
+
+    @cached_property
+    def pdf(self):
+        return get_cached_datastream_content(self.get_full_identifier(), 'PDF')
 
     @cached_property
     def can_display_first_pdf_page(self):
         if self.has_pdf:
-            pdf = fitz.Document(stream=self.fedora_object.pdf.content, filetype="pdf")
+            pdf = fitz.Document(stream=self.pdf, filetype="pdf")
             return len(pdf) > 1
         else:
             return False
