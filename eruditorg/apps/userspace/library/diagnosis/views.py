@@ -7,7 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from core.subscription.models import JournalAccessSubscription
-from erudit.models import LegacyOrganisationProfile
 
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
@@ -33,9 +32,6 @@ class DiagnosisLandingView(
         context['client_ip'] = get_ip(self.request)
         context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
         context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
-        try:
-            context['identifier'] = self.current_organisation.legacyorganisationprofile.account_id
-        except LegacyOrganisationProfile.DoesNotExist:
-            context['identifier'] = ''
+        context['identifier'] = self.current_organisation.account_id
         context['institution'] = self.current_organisation.name
         return context

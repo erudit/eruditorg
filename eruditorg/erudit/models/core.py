@@ -2,20 +2,15 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 
-from ..managers.core import LegacyOrganisationManager, JournalCollectionManager
+from ..managers.core import JournalCollectionManager
 from ..modelfields import SizeConstrainedImageField
 
 
 class Organisation(models.Model):
     """ A single organisation. """
-    name = models.CharField(max_length=300, verbose_name=_('Nom'))
+    account_id = models.CharField(max_length=10, verbose_name=_('Identifiant'))
 
-    street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Adresse'))
-    postal_code = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name=_('Code postal'))
-    city = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Ville'))
-    province = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Province'))
-    country = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Pays'))
+    name = models.CharField(max_length=300, verbose_name=_('Nom'))
 
     badge = SizeConstrainedImageField(
         verbose_name=_('Badge'), blank=True, null=True, upload_to='organisation_badges', width=140,
@@ -23,11 +18,17 @@ class Organisation(models.Model):
 
     members = models.ManyToManyField(User, related_name='organisations', verbose_name=_('Membres'))
 
+    sushi_requester_id = models.CharField(
+        max_length=10,
+        verbose_name=_('Identifiant SUSHI'),
+        blank=True,
+        null=True
+    )
+
     google_scholar_opt_out = models.BooleanField(
         default=False, verbose_name=_('Ne pas inclure dans les programmes de Google Scholar'))
 
     objects = models.Manager()
-    legacy_objects = LegacyOrganisationManager()
 
     class Meta:
         verbose_name = _('Organisation')
@@ -36,25 +37,6 @@ class Organisation(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class LegacyOrganisationProfile(models.Model):
-    """ Profile of the organisation in the legacy ``restriction`` database. """
-
-    organisation = models.OneToOneField('erudit.Organisation', on_delete=models.CASCADE)
-    account_id = models.CharField(max_length=10, verbose_name=_('Identifiant'))
-    sushi_requester_id = models.CharField(
-        max_length=10,
-        verbose_name=_('Identifiant SUSHI'),
-        blank=True,
-        null=True
-    )
-
-    class Meta:
-        verbose_name = _("Compatibilité avec la base de données restriction")
-
-    def __str__(self):
-        return "{} / {}".format(self.organisation.name, self.account_id)
 
 
 class Collection(models.Model):
