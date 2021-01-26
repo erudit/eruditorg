@@ -5,6 +5,7 @@ set -o pipefail
 set -o nounset
 
 python /opt/eruditorg/eruditorg/manage.py collectstatic --noinput
+python /opt/eruditorg/eruditorg/manage.py migrate --noinput
 /usr/local/bin/gunicorn \
     -b 0.0.0.0:8000 \
     --pythonpath /opt/eruditorg/eruditorg \
