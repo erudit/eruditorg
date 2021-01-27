@@ -51,7 +51,11 @@ class PolyglotLocaleMiddleware(LocaleMiddleware):
                 with translation.override(language):
                     resp = super().process_response(request, response)
                     if resp.status_code != 404:
-                        return self.response_redirect_class(translate_url(resp.url, user_lang))
+                        resp = self.response_redirect_class(translate_url(resp.url, user_lang))
+                        # We need this to have RFC2616 compatible responses if this is run after
+                        # CommonMiddleware.
+                        resp['Content-Length'] = 0
+                        return resp
         return response
 
 
