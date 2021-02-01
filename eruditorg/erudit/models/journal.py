@@ -7,8 +7,6 @@ import fitz
 import typing
 import re
 
-from lxml import etree as et
-
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
@@ -29,7 +27,6 @@ from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import ArticleDigitalObject
 from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
-from ..fedora.cache import get_cached_datastream_content
 from ..fedora.cache import cache_fedora_result
 from ..fedora.utils import localidentifier_from_pid
 
@@ -618,16 +615,9 @@ class Issue(FedoraMixin, FedoraDated):
                 self.force_free_access = True
 
     def get_articles_from_fedora(self):
-        # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
-        # elegant way to generalize that code. This mechanism will probably change soon anyway.
-        summary_tree = et.fromstring(
-            get_cached_datastream_content(
-                self.fedora_object, 'summary').serialize()
-        )
-        xml_article_nodes = summary_tree.findall('.//article')
-        for article_node in xml_article_nodes:
+        for article in self.erudit_object.get_summary_articles():
             try:
-                yield Article.from_issue_and_localidentifier(self, article_node.get('idproprio'))
+                yield Article.from_issue_and_localidentifier(self, article.localidentifier)
             except Article.DoesNotExist:
                 pass
 
