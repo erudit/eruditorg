@@ -9,7 +9,7 @@ asgiref==3.3.1            # via django
 babel==2.9.0              # via -r requirements.in
 beautifulsoup4==4.6.1     # via -r requirements.in
 cairocffi==1.2.0          # via -r requirements.in, cairosvg
-cairosvg==2.5.0           # via -r requirements.in
+cairosvg==2.5.1           # via -r requirements.in
 certifi==2020.12.5        # via elasticsearch, requests, sentry-sdk
 cffi==1.14.4              # via cairocffi
 chardet==3.0.4            # via -r requirements.in, requests
