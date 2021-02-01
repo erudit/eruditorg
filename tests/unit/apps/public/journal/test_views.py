@@ -566,7 +566,7 @@ class TestIssueReaderPageView:
     def test_cache_unpublished_issue_pages(self, mock_get_cached_datastream_content, is_published):
         issue = IssueFactory(localidentifier='issue', is_published=is_published)
         view = IssueReaderPageView()
-        view.kwargs = {'localidentifier': issue.localidentifier}
+        view.kwargs = {'localidentifier': issue.localidentifier, 'page': 1}
         view.get_datastream_content(unittest.mock.MagicMock())
         assert mock_get_cached_datastream_content.call_count == 1
 
@@ -968,6 +968,7 @@ class TestArticleMediaView:
         )
         view = ArticleMediaView()
         view.kwargs = {
+            'media_localid': '1234n.jpg',
             'localidentifier': article.localidentifier,
             'issue_localid': article.issue.localidentifier,
             'journal_code': article.issue.journal.code,

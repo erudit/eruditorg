@@ -2428,7 +2428,7 @@ class TestArticleRawPdfView:
         IssueFactory.create(
             journal=journal, year=2010,
             date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue)
+        article = ArticleFactory.create(issue=issue, with_pdf=True)
         journal_id = journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
@@ -2479,7 +2479,7 @@ class TestArticleRawPdfView:
         IssueFactory.create(
             journal=journal, year=2010,
             date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue)
+        article = ArticleFactory.create(issue=issue, with_pdf=True)
         journal_id = journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
