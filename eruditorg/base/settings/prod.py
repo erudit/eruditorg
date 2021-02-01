@@ -222,11 +222,7 @@ LOGGING = {
             'level': 'WARNING',
             'handlers': ['console'],
         },
-        'gunicorn.error': {
-            'level': 'INFO',
-            'handlers': ['console'],
-        },
-        'gunicorn.access': {
+        'gunicorn': {
             'level': 'INFO',
             'handlers': ['console'],
         },
