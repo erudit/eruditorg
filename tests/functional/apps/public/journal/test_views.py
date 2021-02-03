@@ -681,7 +681,8 @@ class TestIssueDetailView:
         assert "thisismynewtitle" in resp.content.decode('utf-8')
 
     @override_settings(CACHES=settings.LOCMEM_CACHES)
-    def test_article_items_are_cached_for_published_issues(self):
+    def test_article_items_are_cached_for_published_issues(self, monkeypatch):
+        monkeypatch.setattr(Issue, 'has_coverpage', False)
         issue = IssueFactory(is_published=True)
         article = ArticleFactory(issue=issue, title="thisismyoldtitle")
 
