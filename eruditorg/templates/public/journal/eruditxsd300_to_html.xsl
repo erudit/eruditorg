@@ -386,7 +386,7 @@
             <li>
               <a class="tool-btn tool-share" data-cite="#id_cite_mla_{{ article.localidentifier }}">
                 <xsl:attribute name="data-title">
-                  {{ article|format_article_title|escape }}
+                  {{ article.title|escape }}
                 </xsl:attribute>
                 <i class="icon ion-ios-share-alt toolbox-share"></i>
                 <span class="tools-label">{% trans "Partager" %}</span>

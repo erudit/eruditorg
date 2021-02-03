@@ -1167,9 +1167,10 @@ class Article(FedoraMixin):
     @catch_and_log
     def title(self):
         if self.fedora_is_loaded():
-            return self.erudit_object.get_title(formatted=True, html=False)
+            title = self.erudit_object.get_title(formatted=True, html=False)
         else:
-            return self.solr_object.title
+            title = self.solr_object.title
+        return title if title else _("[Article sans titre]")
 
     def can_cite(self):
         # We cannot cite articles we don't have in fedora. ref #1491

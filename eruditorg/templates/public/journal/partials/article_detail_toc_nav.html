@@ -12,7 +12,7 @@
       title="{% trans 'Article précédent' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
       <h4 class="toc-nav__title">
-        {{ previous_article|format_article_html_title }}
+        {{ previous_article.html_title|safe }}
       </h4>
     </a>
     {% else %}
@@ -36,7 +36,7 @@
       title="{% trans 'Article suivant' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
       <h4 class="toc-nav__title">
-        {{ next_article|format_article_html_title }}
+        {{ next_article.html_title|safe }}
       </h4>
     </a>
     {% else %}
