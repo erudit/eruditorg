@@ -2164,45 +2164,23 @@ class TestArticleDetailView:
             "musicale,           1935</span></em>)</a></li>"
         )
 
-    def test_related_articles(self, monkeypatch):
+    @pytest.mark.parametrize(
+        "single_issue_in_journal, related_articles",
+        ((True, 4), (False, 0), (False, 3), (False, 4), (False, 5)),
+    )
+    def test_related_articles(self, single_issue_in_journal, related_articles):
         journal = JournalFactory()
-        article_1 = ArticleFactory(issue__journal=journal)
-        article_2 = ArticleFactory(issue__journal=journal)
-        article_3 = ArticleFactory(issue__journal=journal)
-        article_4 = ArticleFactory(issue__journal=journal)
-        # Mock return value for get_journal_related_articles().
-        journal_related_articles = []
-        for article in [article_1, article_2, article_3, article_4]:
-            journal_related_articles.append(
-                SolrArticle(
-                    {
-                        "RevueID": article.issue.journal.localidentifier,
-                        "NumeroID": article.issue.localidentifier,
-                        "ID": article.localidentifier,
-                    }
-                )
-            )
-        # Simulate a Solr result with an issue that is not in Fedora.
-        journal_related_articles.append(
-            SolrArticle(
-                {
-                    "RevueID": journal.localidentifier,
-                    "NumeroID": "not_in_fedora",
-                    "ID": "not_in_fedora",
-                }
-            )
-        )
-        # Patch get_journal_related_articles() so it returns our mocked return value.
-        monkeypatch.setattr(
-            FakeSolrData,
-            "get_journal_related_articles",
-            unittest.mock.Mock(
-                return_value=journal_related_articles,
-            ),
-        )
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        if single_issue_in_journal:
+            issue = issue1
+        else:
+            issue = issue2
+        for i in range(related_articles):
+            ArticleFactory.create(issue=issue)
         # Create the current article, which should not appear in the related articles.
         current_article = ArticleFactory(
-            issue__journal=journal,
+            issue=issue1,
             localidentifier="current_article",
         )
         # Get the response.
@@ -2211,12 +2189,18 @@ class TestArticleDetailView:
         # Get the HTML.
         dom = BeautifulSoup(html, "html.parser")
         footer = dom.find("footer", {"class": "container"})
-        # There should only be 4 related articles.
-        assert len(footer.find_all("article")) == 4
-        # The current article should not be in the related articles.
-        assert "current_article" not in footer.decode()
-        # An article with no issue should not be in related articles.
-        assert "not_in_fedora" not in footer.decode()
+        if single_issue_in_journal:
+            # Since there is only one issue we don't have related issues
+            assert footer is None
+        else:
+            if related_articles == 0:
+                # Since there are no related articles there is no footer
+                assert footer is None
+            else:
+                # There should be 4 (or less) related articles in the footer
+                assert len(footer.find_all("article")) == min(4, related_articles)
+                # The current article should not be in the related articles.
+                assert "current_article" not in footer.decode()
 
     @pytest.mark.parametrize(
         "with_pdf, pages, has_abstracts, open_access, expected_result",
