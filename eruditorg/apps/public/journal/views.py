@@ -4,11 +4,13 @@ from operator import attrgetter
 from PIL import Image
 from string import ascii_uppercase
 import io
-from typing import List
+from typing import List, Optional
+from pydantic import BaseModel
 
 import functools
 import pysolr
 import random
+from random import choice, sample
 import structlog
 import unicodedata
 
@@ -737,6 +739,12 @@ class IssueXmlView(
         return fedora_object.xml_content
 
 
+class RelatedArticle(BaseModel):
+    url: str
+    html_title: str
+    authors: Optional[str]
+
+
 class BaseArticleDetailView(
     ArticleAccessLogMixin,
     FallbackObjectViewMixin,
@@ -818,10 +826,7 @@ class BaseArticleDetailView(
             self.render_xml_content,
             context=context,
         )
-        context["related_articles"] = functools.partial(
-            self.get_related_articles,
-            current_article=current_article,
-        )
+        context["related_articles"] = self.get_related_articles(current_article)
         context["active_campaign"] = Campaign.objects.active_campaign()
 
         # A list of Fedora objects' pids to which this view's templates cache keys will
@@ -849,24 +854,34 @@ class BaseArticleDetailView(
 
         return context
 
-    def get_related_articles(self, current_article: Article) -> List[Article]:
-        related_candidates = self.solr_data.get_journal_related_articles(
-            current_article.issue.journal.code,
-            current_article.localidentifier,
+    def get_related_articles(self, current_article: Article) -> List[RelatedArticle]:
+        candidate_issues = (
+            Issue.objects.filter(
+                journal__localidentifier=current_article.issue.journal.localidentifier,
+                is_published=True,
+            )
+            .exclude(localidentifier=current_article.issue.localidentifier)
+            .values_list(
+                "localidentifier",
+                flat=True,
+            )
         )
+        if len(candidate_issues) == 0:
+            return []
+        random_issue = Issue.objects.get(localidentifier=choice(candidate_issues))
+        summary_articles = random_issue.erudit_object.get_summary_articles()
+        related_candidates = []
         # return 4 randomly — at most
-        random.shuffle(related_candidates)
-        related_articles = []
-        # calls to Article.from_solr_object are expensive, so create only selected articles
-        for candidate in related_candidates:
-            if len(related_articles) == 4:
-                break
-            try:
-                related_articles.append(Article.from_solr_object(candidate))
-            except Article.DoesNotExist:
-                # This might happen for UNB articles with ID mismatch between Solr & Fedora.
-                pass
-        return related_articles
+        for summary_article in sample(summary_articles, k=min(4, len(summary_articles))):
+            url = summary_article.urlhtml if summary_article.urlhtml else summary_article.urlpdf
+            related_candidates.append(
+                RelatedArticle(
+                    url=f"/{self.request.LANGUAGE_CODE}{url}",
+                    html_title=summary_article.html_title,
+                    authors=summary_article.authors,
+                )
+            )
+        return related_candidates
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
