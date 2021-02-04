@@ -41,7 +41,7 @@ class SubscriptionMiddleware:
     def _get_user_ip_address(self, request):
         if request.user.is_active and request.user.is_staff and 'HTTP_CLIENT_IP' in request.META:
             return request.META.get('HTTP_CLIENT_IP', None)
-        user_ip, _ = get_client_ip(request, proxy_order='right-most')
+        user_ip, _ = get_client_ip(request)
         return user_ip
 
     def __call__(self, request):
