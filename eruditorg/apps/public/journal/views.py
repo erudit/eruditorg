@@ -9,7 +9,6 @@ from pydantic import BaseModel
 
 import functools
 import pysolr
-import random
 from random import choice, sample
 import structlog
 import unicodedata
@@ -35,6 +34,7 @@ from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from django.db.models import Prefetch
+from django.core.cache import cache
 
 from rules.contrib.views import PermissionRequiredMixin
 from lxml import etree as et
@@ -855,6 +855,16 @@ class BaseArticleDetailView(
         return context
 
     def get_related_articles(self, current_article: Article) -> List[RelatedArticle]:
+        cache_key = (
+            f"get_related_articles-"
+            f"{self.request.LANGUAGE_CODE}-{current_article.issue.localidentifier}"
+        )
+        # Tries to fetch previously stored issue related articles
+        cached_related_articles = cache.get(cache_key)
+        if cached_related_articles:
+            return cached_related_articles
+
+        # Fetch all journal's issues except for the current article one
         candidate_issues = (
             Issue.objects.filter(
                 journal__localidentifier=current_article.issue.journal.localidentifier,
@@ -866,21 +876,30 @@ class BaseArticleDetailView(
                 flat=True,
             )
         )
+
+        # If there are not other issues for the current journal
         if len(candidate_issues) == 0:
             return []
+
+        # Randomly select 4 (at most) related articles from randomly selected issue
         random_issue = Issue.objects.get(localidentifier=choice(candidate_issues))
         summary_articles = random_issue.erudit_object.get_summary_articles()
         related_candidates = []
-        # return 4 randomly — at most
         for summary_article in sample(summary_articles, k=min(4, len(summary_articles))):
             url = summary_article.urlhtml if summary_article.urlhtml else summary_article.urlpdf
-            related_candidates.append(
-                RelatedArticle(
-                    url=f"/{self.request.LANGUAGE_CODE}{url}",
-                    html_title=summary_article.html_title,
-                    authors=summary_article.authors,
+            # Not include articles that have missing urls or titles
+            if url is not None and summary_article.html_title is not None:
+                related_candidates.append(
+                    RelatedArticle(
+                        url=f"/{self.request.LANGUAGE_CODE}{url}",
+                        html_title=summary_article.html_title,
+                        authors=summary_article.authors,
+                    )
                 )
-            )
+
+        # Store issue related articles in cache
+        cache.set(cache_key, related_candidates, settings.LONG_TTL)  # 24 hours
+
         return related_candidates
 
     @method_decorator(ensure_csrf_cookie)
