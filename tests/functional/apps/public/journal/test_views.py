@@ -2164,43 +2164,48 @@ class TestArticleDetailView:
             "musicale,           1935</span></em>)</a></li>"
         )
 
-    @pytest.mark.parametrize(
-        "single_issue_in_journal, related_articles",
-        ((True, 4), (False, 0), (False, 3), (False, 4), (False, 5)),
-    )
-    def test_related_articles(self, single_issue_in_journal, related_articles):
+    @pytest.mark.parametrize("number_related_articles", (0, 3, 4, 5))
+    def test_related_articles_multiple_issues_in_journal(self, number_related_articles):
         journal = JournalFactory()
         issue1 = IssueFactory(journal=journal)
         issue2 = IssueFactory(journal=journal)
-        if single_issue_in_journal:
-            issue = issue1
-        else:
-            issue = issue2
-        for i in range(related_articles):
-            ArticleFactory.create(issue=issue)
+        for i in range(number_related_articles):
+            ArticleFactory(
+                issue=issue2,
+                add_to_fedora_issue=True,
+                html_url="/test_url",
+            )
         # Create the current article, which should not appear in the related articles.
-        current_article = ArticleFactory(
-            issue=issue1,
-            localidentifier="current_article",
-        )
+        current_article = ArticleFactory(issue=issue1, localidentifier="current_article")
         # Get the response.
         url = article_detail_url(current_article)
         html = Client().get(url).content
         # Get the HTML.
         dom = BeautifulSoup(html, "html.parser")
         footer = dom.find("footer", {"class": "container"})
-        if single_issue_in_journal:
-            # Since there is only one issue we don't have related issues
+        if number_related_articles == 0:
+            # Since there are no related articles there is no footer
             assert footer is None
         else:
-            if related_articles == 0:
-                # Since there are no related articles there is no footer
-                assert footer is None
-            else:
-                # There should be 4 (or less) related articles in the footer
-                assert len(footer.find_all("article")) == min(4, related_articles)
-                # The current article should not be in the related articles.
-                assert "current_article" not in footer.decode()
+            # There should be 4 (or less) related articles in the footer
+            assert len(footer.find_all("article")) == min(4, number_related_articles)
+            # The current article should not be in the related articles.
+            assert "current_article" not in footer.decode()
+
+    def test_related_articles_single_issue_in_journal(self):
+        issue = IssueFactory()
+        for i in range(4):
+            ArticleFactory(issue=issue)
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(issue=issue)
+        # Get the response.
+        url = article_detail_url(current_article)
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, "html.parser")
+        footer = dom.find("footer", {"class": "container"})
+        # Since there is only one issue we don't have related issues
+        assert footer is None
 
     @pytest.mark.parametrize(
         "with_pdf, pages, has_abstracts, open_access, expected_result",
