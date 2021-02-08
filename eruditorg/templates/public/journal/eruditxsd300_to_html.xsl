@@ -26,7 +26,7 @@
   <xsl:variable name="doiStart">https://doi.org/</xsl:variable>
 
   <v:variables xmlns:v="variables-node">
-    {% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
+    {% for imid, infoimg in article.infoimg_dict.items %}
     <v:variable n="plgr-{{ imid }}" value="{{ infoimg.plgr }}" xmlns:v="variables-node" />
     <v:variable n="width-{{ imid }}" value="{{ infoimg.width }}" xmlns:v="variables-node" />
     <v:variable n="height-{{ imid }}" value="{{ infoimg.height }}" xmlns:v="variables-node" />

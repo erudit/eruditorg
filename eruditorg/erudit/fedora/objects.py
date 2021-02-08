@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from collections import OrderedDict
-
-import lxml.etree as et
 from lxml.etree import XMLSyntaxError
 
 from eulfedora import models
@@ -100,28 +97,6 @@ class ArticleDigitalObject(models.DigitalObject):
             with configure_scope() as scope:
                 scope.set_extra("article_pid", self.pid)
                 raise
-
-    @property
-    def infoimg_dict(self):
-        """ Returns the content of the INFOIMG datastream as a dictionary. """
-        if not self.infoimg.exists:
-            return {}
-        infoimg_tree = et.fromstring(self.infoimg.content.serialize())
-        infoimg_dict = OrderedDict()
-        for im_tree in infoimg_tree.findall('im'):
-            plgr_node = im_tree.find('imPlGr//nomImg')
-            dimx_node = im_tree.find('imPlGr//dimx')
-            dimy_node = im_tree.find('imPlGr//dimy')
-            if plgr_node is None:
-                continue
-            infoimg_dict.update({
-                im_tree.get('id'): {
-                    'plgr': plgr_node.text,
-                    'width': str(int(float(dimx_node.text))) if dimx_node is not None else '',
-                    'height': str(int(float(dimy_node.text))) if dimy_node is not None else '',
-                },
-            })
-        return infoimg_dict
 
 
 class MediaDigitalObject(models.DigitalObject):

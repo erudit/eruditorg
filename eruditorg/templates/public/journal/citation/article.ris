@@ -9,9 +9,9 @@ JO  - {{ article.issue.journal_formatted_title }}
 {% if article.first_page %}SP  - {{ article.first_page }}{% endif %}
 {% if article.last_page %}EP  - {{ article.last_page }}{% endif %}
 {% if article.issue.journal.issn_print %}
-SN  - {{ article.issue.journal.issn_print %}
+SN  - {{ article.issue.journal.issn_print }}
 {% elif article.issue.journal.issn_web %}
-SN  - {{ article.issue.journal.issn_web %}
+SN  - {{ article.issue.journal.issn_web }}
 {% endif %}
 Y1  - {{ article.issue.year }}
 Y2  - {% now "SHORT_DATETIME_FORMAT" as now_dt %}{{ now_dt }}
@@ -21,7 +21,7 @@ LA  - {{ article.language|upper }}
 AB  - {{ abstract.content }}{% endfor %}{% endif %}{% endspaceless %}
 {% if article.url_doi %}DO  - {{ article.url_doi }}{% endif %}
 UR  - https://id.erudit.org/iderudit/{{ article.localidentifier }}
-{% if article.has_pdf %}L1  - https://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}
+{% if pdf_exists %}L1  - https://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}
 DP  - Érudit: www.erudit.org
 DB  - Érudit
 ER  -

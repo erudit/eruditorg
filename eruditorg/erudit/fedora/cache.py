@@ -11,7 +11,6 @@ from django.utils.translation import get_language
 from requests.exceptions import HTTPError, ConnectionError
 from sentry_sdk import configure_scope
 
-from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
 from erudit.cache import cache_set
 
@@ -73,10 +72,9 @@ def get_cached_datastream_content(pid, datastream_name, cache=None):
     Note that this content can be cached in a file-based cache!
     """
     cache = cache or get_datastream_file_cache()
-    serializer, deserializer = get_datastream_cache_serializer(datastream_name)
     content_key = f'erudit-fedora-file-{pid}-{datastream_name}'
 
-    content = deserializer(cache.get(content_key))
+    content = cache.get(content_key)
 
     if content is None:
         try:
@@ -92,7 +90,7 @@ def get_cached_datastream_content(pid, datastream_name, cache=None):
             cache_set(
                 cache,
                 content_key,
-                serializer(content),
+                content,
                 settings.FEDORA_CACHE_TIMEOUT,
                 pids=[pid],
             )
