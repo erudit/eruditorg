@@ -99,12 +99,13 @@ class RoyaltiesListView(
     template_name = 'userspace/journal/royalties_list.html'
     permission_required = 'subscription.consult_royalty_reports'
     REPORT_SUBPATH = 'Abonnements/Rapports'
+    NOTICE_SUBPATH = 'Abonnements/Avis'
 
-    def get_royalties_reports(self):
+    def get_files(self, subpath):
         root_path = journal_reports_path(self.current_journal.code)
         result = defaultdict(list)
         try:
-            toppath = os.path.join(root_path, self.REPORT_SUBPATH)
+            toppath = os.path.join(root_path, subpath)
             for root, dirs, files in os.walk(toppath):
                 for filename in files:
                     path = root[len(toppath) + 1:].split('/')
@@ -115,3 +116,9 @@ class RoyaltiesListView(
         except FileNotFoundError:
             pass
         return result
+
+    def get_royalties_reports(self):
+        return self.get_files(self.REPORT_SUBPATH)
+
+    def get_deposit_notices(self):
+        return self.get_files(self.NOTICE_SUBPATH)

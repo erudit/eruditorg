@@ -8,25 +8,57 @@
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Rapports de redevances" %}
+{% trans "Redevances" %}
 {% endblock %}
 
 {% block content_main %}
-    {% for year, files in view.get_royalties_reports.items %}
-    <section class="akkordion" data-akkordion-single="true">
-        <h2 class="akkordion-title">{{ year }}<i class="icon ion-ios-arrow-down caret"></i></h2>
-        <div class="akkordion-content">
-            <ul>
-            {% for file in files %}
-                <li>
-                    <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
-                        {{ file.label }}
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
-    </section>
-    <hr />
-    {% endfor %}
+<section class="akkordion" data-akkordion-single="true">
+    <h2 class="akkordion-title">{% trans "Rapports de redevances" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <div class="akkordion-content">
+        {% for year, files in view.get_royalties_reports.items %}
+        <hr />
+        <section class="akkordion" data-akkordion-single="true">
+            <h3 class="akkordion-title">{{ year }}<i class="icon ion-ios-arrow-down caret"></i></h3>
+            <div class="akkordion-content">
+                <ul>
+                {% for file in files %}
+                    <li>
+                        <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
+                            {{ file.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+</section>
+<hr />
+<br />
+<br />
+<hr />
+<section class="akkordion" data-akkordion-single="true">
+    <h2 class="akkordion-title">{% trans "Avis de dépôts" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <div class="akkordion-content">
+        {% for year, files in view.get_deposit_notices.items %}
+        <hr />
+        <section class="akkordion" data-akkordion-single="true">
+            <h3 class="akkordion-title">{{ year }}<i class="icon ion-ios-arrow-down caret"></i></h3>
+            <div class="akkordion-content">
+                <ul>
+                {% for file in files %}
+                    <li>
+                        <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
+                            {{ file.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+</section>
+<hr />
 {% endblock content_main %}
