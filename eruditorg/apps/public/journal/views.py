@@ -840,7 +840,7 @@ class BaseArticleDetailView(
         if 'article' not in context:
             context['article'] = article
 
-        context['pdf_exists'] = article.pdf
+        context['pdf_exists'] = article.has_pdf
 
         if context['pdf_exists'] and not article.abstracts:
             if context['content_access_granted']:
@@ -994,7 +994,7 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pdf_exists'] = context['article'].pdf
+        context['pdf_exists'] = context['article'].has_pdf
         return context
 
 
@@ -1008,7 +1008,7 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pdf_exists'] = context['article'].pdf
+        context['pdf_exists'] = context['article'].has_pdf
         return context
 
 

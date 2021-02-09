@@ -1053,7 +1053,7 @@ class Article(FedoraMixin):
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
             return None
-        if self.pdf:
+        if self.has_pdf:
             return reverse('public:journal:article_raw_pdf', kwargs={
                 'journal_code': self.issue.journal.code,
                 'issue_slug': self.issue.volume_slug,
@@ -1194,12 +1194,16 @@ class Article(FedoraMixin):
         return section_titles['paral'].values()
 
     @cached_property
+    def has_pdf(self):
+        return self.has_datastream('PDF')
+
+    @cached_property
     def pdf(self):
         return get_cached_datastream_content(self.get_full_identifier(), 'PDF')
 
     @cached_property
     def can_display_first_pdf_page(self):
-        if self.pdf:
+        if self.has_pdf:
             pdf = fitz.Document(stream=self.pdf, filetype="pdf")
             return len(pdf) > 1
         else:
