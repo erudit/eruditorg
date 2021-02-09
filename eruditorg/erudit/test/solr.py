@@ -15,8 +15,6 @@ from luqum.tree import (
 )
 from luqum.parser import parser
 
-from erudit.solr.models import Article
-
 # This fake solr client doesn't try to re-implement solr query parser. It expects a very specific
 # list of queries and return results according to its very basic database.
 
@@ -345,12 +343,6 @@ class FakeSolrData:
     """
     Let's keep these methods empty and override them in tests when needed.
     """
-
-    # noinspection PyMethodMayBeStatic,PyUnusedLocal
-    def get_journal_related_articles(
-        self, journal_code: str, current_article_localidentifier: str
-    ) -> List[Article]:
-        return []
 
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
