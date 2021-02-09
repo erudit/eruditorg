@@ -254,13 +254,12 @@ class FakeAPI(ApiFacade):
         with self.open_journal(journal.pid) as wrapper:
             wrapper.add_notes(notes)
 
-    def get(self, url, **kwargs):
+    def get(self, url, params={}, **kwargs):
 
         if settings.FEDORA_ROOT in url:
             url = url[len(settings.FEDORA_ROOT):]
 
         if url == 'objects':
-            params = kwargs.get('params')
             query = params.get('query')
             label = re.search("label='([A-Za-z]+) Erudit'", query)
             if label:
