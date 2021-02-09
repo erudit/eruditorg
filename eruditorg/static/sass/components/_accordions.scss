@@ -5,6 +5,7 @@
 
 .akkordion {
 
+  h2.akkordion-title:not([data-akkordion-active]),
   h3.akkordion-title:not([data-akkordion-active]) {
     border-bottom: 0;
   }
@@ -17,7 +18,8 @@
     color: $dark-grey;
   }
 
-  [data-akkordion-active] {
+  h2.akkordion-title[data-akkordion-active],
+  h3.akkordion-title[data-akkordion-active] {
     .caret {
       position: relative;
       top: -3px;
