@@ -1,4 +1,4 @@
-{% load public_journal_tags %}%0 Journal Article
+%0 Journal Article
 %T {{ article.title|safe }}
 {% spaceless %}{% for author in article.authors %}{% if author.firstname and author.lastname %}%A {{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}%A {{ author.othername|safe }}{% endif %}
 {% endfor %}{% endspaceless %}

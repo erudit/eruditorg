@@ -1,4 +1,4 @@
-{% load public_journal_tags %}TY  - JOUR
+TY  - JOUR
 ID  - {{ article.localidentifier }}
 T1  - {{ article.title|safe }}
 {% spaceless %}{% for author in article.authors %}{% if author.firstname and author.lastname %}

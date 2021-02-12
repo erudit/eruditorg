@@ -1,4 +1,4 @@
-{% load public_journal_tags i18n %}
+{% load i18n %}
 @article{{ '{' }}{{ article.localidentifier }},
   title="{{ article.title|safe }}",
   author="{% for author in article.authors %}{% if not forloop.first %}{% trans ' ; ' %}{% endif %}{% if author.firstname and author.lastname %}{{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}{{ author.othername|safe }}{% endif %}{% endfor %}",
