@@ -11,7 +11,6 @@ from eruditarticle.objects import EruditPublication
 from eruditarticle.objects import EruditArticle
 
 from erudit.models import Issue, Article
-from erudit.fedora import modelmixins
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora import repository
@@ -324,33 +323,37 @@ class TestIssue:
         article.issue.sync_with_erudit_object()
         assert article.issue.force_free_access
 
-    def test_has_coverpage(self, monkeypatch):
-        issue = IssueFactory(journal__open_access=True)
+    def test_knows_if_it_has_a_coverpage(self):
+        journal = JournalFactory()
+        journal.open_access = True
+        journal.save()
         with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
-            monkeypatch.setattr(
-                modelmixins,
-                'get_cached_datastream_content',
-                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
-            )
-        assert issue.has_coverpage
+            issue_1 = IssueFactory.create(journal=journal)
+            issue_2 = IssueFactory.create(journal=journal)
+            issue_1._fedora_object = unittest.mock.MagicMock()
+            issue_1._fedora_object.pid = "pid"
+            issue_1._fedora_object.coverpage = unittest.mock.MagicMock()
+            issue_1._fedora_object.coverpage.content = io.BytesIO(f.read())
+            issue_2._fedora_object = unittest.mock.MagicMock()
+            issue_2._fedora_object.pid = "pid2"
+            issue_2._fedora_object.coverpage = unittest.mock.MagicMock()
+            issue_2._fedora_object.coverpage.content = ''
+        # We don't crash trying to check the fedora object. We return False
+        issue_3 = IssueFactory.create(journal=journal)
 
-    def test_has_coverpage_with_empty_image(self, monkeypatch):
-        issue = IssueFactory(journal__open_access=True)
+        assert issue_1.has_coverpage
+        assert not issue_2.has_coverpage
+        assert not issue_3.has_coverpage
+
+    def test_knows_that_an_issue_with_an_empty_coverpage_has_no_coverpage(self):
+        journal = JournalFactory(open_access=True)
         with open(settings.MEDIA_ROOT + '/coverpage_empty.png', 'rb') as f:
-            monkeypatch.setattr(
-                modelmixins,
-                'get_cached_datastream_content',
-                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
-            )
-        assert not issue.has_coverpage
+            issue = IssueFactory.create(journal=journal)
+            issue._fedora_object = unittest.mock.MagicMock()
+            issue._fedora_object.pid = "issue"
+            issue._fedora_object.coverpage = unittest.mock.MagicMock()
+            issue._fedora_object.coverpage.content = io.BytesIO(f.read())
 
-    def test_has_coverpage_with_no_datastream(self, monkeypatch):
-        issue = IssueFactory(journal__open_access=True)
-        monkeypatch.setattr(
-            modelmixins,
-            'get_cached_datastream_content',
-            unittest.mock.MagicMock(return_value=None),
-        )
         assert not issue.has_coverpage
 
     @pytest.mark.parametrize('is_published', (True, False))

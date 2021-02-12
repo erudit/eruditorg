@@ -28,7 +28,6 @@ def mock_fedora_api(monkeypatch):
         raise AssertionError('Never supposed to be called')
     monkeypatch.setattr(erudit.fedora.repository.repo.api, '_make_request', shouldnt_call)
     mocked_api = FakeAPI()
-    monkeypatch.setattr(erudit.fedora.cache.requests, 'get', mocked_api.get)
     monkeypatch.setattr(erudit.fedora.repository.repo.api, 'get', mocked_api.get)
     monkeypatch.setattr(erudit.fedora.repository.repo, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.repository, 'api', mocked_api)

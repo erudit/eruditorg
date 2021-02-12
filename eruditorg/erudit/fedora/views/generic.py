@@ -135,7 +135,7 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         By default this requires `self.datastream_name` to be specified but
         subclasses can override this to change this.
         """
-        content = get_cached_datastream_content(self._fedora_object_pid, self.datastream_name)
+        content = get_cached_datastream_content(fedora_object, self.datastream_name)
 
         # Returns a 404 HTTP response if the datastream does not exist on the Fedora object.
         if content is None and not getattr(fedora_object, self.datastream_name).exists:

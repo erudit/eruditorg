@@ -147,7 +147,7 @@ class FedoraMixin:
             return False
 
         try:
-            content = get_cached_datastream_content(self.pid, datastream_name)
+            content = get_cached_datastream_content(self.fedora_object, datastream_name)
         except RequestFailed:
             return False
 

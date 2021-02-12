@@ -254,10 +254,7 @@ def get_coverpage(article):
         'code': article.issue.journal.code,
     })
     # Journal logo.
-    journal_logo_ds = get_cached_datastream_content(
-        article.issue.journal.get_full_identifier(),
-        'LOGO',
-    )
+    journal_logo_ds = get_cached_datastream_content(article.issue.journal.fedora_object, 'logo')
     if journal_logo_ds is not None:
         journal_logo = HyperlinkedImage(
             journal_logo_ds,
