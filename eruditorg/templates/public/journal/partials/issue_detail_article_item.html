@@ -1,4 +1,4 @@
-{% load i18n model_formatters public_journal_tags waffle_tags %}
+{% load i18n model_formatters waffle_tags %}
 
 <li class="bib-record{% if not article.publication_allowed %} article-restricted{% endif %}">
   {% if article.publication_allowed %}
