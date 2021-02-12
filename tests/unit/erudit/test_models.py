@@ -717,42 +717,6 @@ class TestArticle:
         article = ArticleFactory()
         assert article.url_doi == expected_url_doi
 
-    def test_can_return_its_infoimg_content_as_dictionary(self, monkeypatch):
-        # Setup
-        article = ArticleFactory()
-        import erudit.models.journal
-        monkeypatch.setattr(
-            erudit.models.journal,
-            'get_cached_datastream_content',
-            unittest.mock.MagicMock(return_value=io.BytesIO(b"""
-<infoDoc>
-    <originator app="testapp" date="YYYY-MM-DD" username="foobar" />
-    <im id="im1">
-        <src>
-            <nomImg>foo.jpg</nomImg>
-            <dimx>1</dimx>
-            <dimy>1</dimy>
-            <taille>1ko</taille>
-        </src>
-        <imPlGr>
-            <nomImg>bar.jpg</nomImg>
-            <dimx>1</dimx>
-            <dimy>1</dimy>
-            <taille>1ko</taille>
-        </imPlGr>
-    </im>
-</infoDoc>
-            """
-        )))
-        # Run & check
-        assert article.infoimg_dict == {
-            'im1': {
-                'plgr': 'bar.jpg',
-                'width': '1',
-                'height': '1',
-            },
-        }
-
 
 def test_journaltype_can_return_embargo_duration_in_days():
     journal_type = JournalTypeFactory.create(code='S')

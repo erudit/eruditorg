@@ -1,12 +1,10 @@
 from collections import OrderedDict
 from itertools import groupby
 from operator import attrgetter
-from PIL import Image
 from string import ascii_uppercase
 import io
 from typing import List
 
-import copy
 import functools
 import pysolr
 import random
@@ -38,7 +36,6 @@ from django.db.models import Prefetch
 from rules.contrib.views import PermissionRequiredMixin
 from lxml import etree as et
 
-from erudit.fedora.cache import get_cached_datastream_content
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -643,12 +640,11 @@ class IssueReaderView(
         # Raise 404 if journal is not cultural.
         if not issue.journal.is_cultural():
             raise Http404()
-        content = get_cached_datastream_content(issue.get_full_identifier(), 'PAGES')
-        pages = content.read()
-        pages_tree = et.fromstring(pages.decode())
-        context['num_leafs'] = pages_tree.get('nb')
-        context['page_width'] = pages_tree.get('imageWidth')
-        context['page_height'] = pages_tree.get('imageHeight')
+        pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
+        pages = et.fromstring(pages_ds.content.serialize())
+        context['num_leafs'] = pages.get('nb')
+        context['page_width'] = pages.get('imageWidth')
+        context['page_height'] = pages.get('imageHeight')
         context['issue_url'] = reverse('public:journal:issue_detail', kwargs={
             'journal_code': issue.journal.code,
             'issue_slug': issue.volume_slug,
@@ -840,7 +836,7 @@ class BaseArticleDetailView(
         if 'article' not in context:
             context['article'] = article
 
-        context['pdf_exists'] = article.pdf
+        context['pdf_exists'] = article.has_pdf
 
         if context['pdf_exists'] and not article.abstracts:
             if context['content_access_granted']:
@@ -992,11 +988,6 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     context_object_name = 'article'
     template_name = 'public/journal/citation/article.enw'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pdf_exists'] = context['article'].pdf
-        return context
-
 
 class ArticleRisCitationView(SingleArticleMixin, DetailView):
     """
@@ -1005,11 +996,6 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     content_type = 'application/x-research-info-systems'
     context_object_name = 'article'
     template_name = 'public/journal/citation/article.ris'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pdf_exists'] = context['article'].pdf
-        return context
 
 
 class ArticleBibCitationView(SingleArticleMixin, DetailView):
@@ -1159,9 +1145,7 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
         return '{0}.{1}'.format(issue_pid, self.kwargs['media_localid'])
 
     def get_content_type(self, fedora_object):
-        content = self.get_datastream_content(fedora_object)
-        im = Image.open(copy.copy(content))
-        return Image.MIME[im.format]
+        return str(fedora_object.content.mimetype)
 
 
 @method_decorator(cache_page(settings.LONG_TTL), name='dispatch')

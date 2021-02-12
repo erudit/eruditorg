@@ -77,3 +77,36 @@ class TestArticleDigitalObject(TestCase):
         article = ArticleDigitalObject(api, 'test')
         # Run & check
         self.assertEqual(article.xml_content, 'xml-300')
+
+    @unittest.mock.patch.object(ArticleDigitalObject, 'infoimg')
+    def test_can_return_its_infoimg_content_as_dictionary(self, mock_infoimg):
+        # Setup
+        mock_infoimg.content = unittest.mock.MagicMock()
+        mock_infoimg.content.serialize = unittest.mock.MagicMock(
+            return_value="""
+<infoDoc>
+    <originator app="testapp" date="YYYY-MM-DD" username="foobar" />
+    <im id="im1">
+        <src>
+            <nomImg>foo.jpg</nomImg>
+            <dimx>1</dimx>
+            <dimy>1</dimy>
+            <taille>1ko</taille>
+        </src>
+        <imPlGr>
+            <nomImg>bar.jpg</nomImg>
+            <dimx>1</dimx>
+            <dimy>1</dimy>
+            <taille>1ko</taille>
+        </imPlGr>
+    </im>
+</infoDoc>
+            """
+        )
+        article = ArticleDigitalObject(api, 'test')
+        # Run & check
+        self.assertEqual(article.infoimg_dict, {'im1': {
+            'plgr': 'bar.jpg',
+            'width': '1',
+            'height': '1',
+        }})

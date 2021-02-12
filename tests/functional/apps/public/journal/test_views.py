@@ -681,8 +681,7 @@ class TestIssueDetailView:
         assert "thisismynewtitle" in resp.content.decode('utf-8')
 
     @override_settings(CACHES=settings.LOCMEM_CACHES)
-    def test_article_items_are_cached_for_published_issues(self, monkeypatch):
-        monkeypatch.setattr(Issue, 'has_coverpage', False)
+    def test_article_items_are_cached_for_published_issues(self):
         issue = IssueFactory(is_published=True)
         article = ArticleFactory(issue=issue, title="thisismyoldtitle")
 
@@ -1402,7 +1401,8 @@ class TestArticleDetailView:
         assert voirliste.decode() == '<p class="voirliste"><a href="#ligf1">-&gt; Voir la liste ' \
                                      'des figures</a></p>'
 
-    def test_figure_with_float_dimensions(self, monkeypatch):
+    @unittest.mock.patch.object(ArticleDigitalObject, 'infoimg')
+    def test_figure_with_float_dimensions(self, mock_infoimg):
         article = ArticleFactory(
             from_fixture='1068859ar',
             localidentifier='article',
@@ -1412,11 +1412,9 @@ class TestArticleDetailView:
             issue__journal__open_access=True,
         )
 
-        import erudit.models.journal
-        monkeypatch.setattr(
-            erudit.models.journal,
-            'get_cached_datastream_content',
-            unittest.mock.MagicMock(return_value=io.BytesIO(b"""
+        mock_infoimg.content = unittest.mock.MagicMock()
+        mock_infoimg.content.serialize = unittest.mock.MagicMock(
+            return_value="""
 <infoDoc>
     <im id="img-05-01.png">
         <imPlGr>
@@ -1428,7 +1426,7 @@ class TestArticleDetailView:
     </im>
 </infoDoc>
             """
-        )))
+        )
 
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
@@ -2821,28 +2819,29 @@ class TestArticleXmlView:
         assert response['Content-Type'] == 'application/xml'
 
 
-class TestArticleMediaView:
-    @pytest.mark.parametrize('image, expected_content_type', (
-        ('pixel.png', 'image/png'),
-        ('logo.jpg', 'image/jpeg'),
-    ))
-    def test_article_media_content_type(self, image, expected_content_type, monkeypatch):
-        article = ArticleFactory()
-        with open(os.path.join(FIXTURE_ROOT, image), 'rb') as f:
-            monkeypatch.setattr(
-                ArticleMediaView,
-                'get_datastream_content',
-                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
-            )
+class TestArticleMediaView(TestCase):
+    @unittest.mock.patch.object(MediaDigitalObject, 'content')
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_content):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), 'rb') as f:
+            mock_content.content = io.BytesIO()
+            mock_content.content.write(f.read())
+        mock_content.mimetype = 'image/png'
+
+        issue = IssueFactory.create(date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue)
+        issue_id = issue.localidentifier
+        article_id = article.localidentifier
+        request = RequestFactory().get('/')
+
+        # Run
         response = ArticleMediaView.as_view()(
-            RequestFactory().get('/'),
-            journal_code=article.issue.journal.code,
-            issue_localid=article.issue.localidentifier,
-            localid=article.localidentifier,
-            media_localid='test',
-        )
-        assert response.status_code == 200
-        assert response['Content-Type'] == expected_content_type
+            request, journal_code=issue.journal.code, issue_localid=issue_id,
+            localid=article_id, media_localid='test')
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'image/png')
 
 
 class TestExternalURLRedirectViews:

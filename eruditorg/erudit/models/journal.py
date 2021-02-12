@@ -1,7 +1,5 @@
 import datetime as dt
 import dateutil.relativedelta as dr
-import lxml.etree as et
-from collections import OrderedDict
 from hashlib import md5
 from functools import wraps
 import structlog
@@ -30,7 +28,6 @@ from ..fedora.objects import ArticleDigitalObject
 from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..fedora.cache import cache_fedora_result
-from ..fedora.cache import get_cached_datastream_content
 from ..fedora.utils import localidentifier_from_pid
 
 
@@ -1053,7 +1050,7 @@ class Article(FedoraMixin):
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
             return None
-        if self.pdf:
+        if self.has_pdf:
             return reverse('public:journal:article_raw_pdf', kwargs={
                 'journal_code': self.issue.journal.code,
                 'issue_slug': self.issue.volume_slug,
@@ -1194,13 +1191,13 @@ class Article(FedoraMixin):
         return section_titles['paral'].values()
 
     @cached_property
-    def pdf(self):
-        return get_cached_datastream_content(self.get_full_identifier(), 'PDF')
+    def has_pdf(self):
+        return self.fedora_object is not None and self.fedora_object.pdf.exists
 
     @cached_property
     def can_display_first_pdf_page(self):
-        if self.pdf:
-            pdf = fitz.Document(stream=self.pdf, filetype="pdf")
+        if self.has_pdf:
+            pdf = fitz.Document(stream=self.fedora_object.pdf.content, filetype="pdf")
             return len(pdf) > 1
         else:
             return False
@@ -1412,30 +1409,6 @@ class Article(FedoraMixin):
         if self.doi:
             cite_string += ' {}'.format(self.url_doi)
         return cite_string
-
-    @cached_property
-    def infoimg_dict(self):
-        """ Returns the content of the INFOIMG datastream as a dictionary. """
-        content = get_cached_datastream_content(self.get_full_identifier(), 'INFOIMG')
-        if content is None:
-            return {}
-        infoimg = content.read()
-        infoimg_tree = et.fromstring(infoimg.decode())
-        infoimg_dict = OrderedDict()
-        for im_tree in infoimg_tree.findall('im'):
-            plgr_node = im_tree.find('imPlGr//nomImg')
-            dimx_node = im_tree.find('imPlGr//dimx')
-            dimy_node = im_tree.find('imPlGr//dimy')
-            if plgr_node is None:
-                continue
-            infoimg_dict.update({
-                im_tree.get('id'): {
-                    'plgr': plgr_node.text,
-                    'width': str(int(float(dimx_node.text))) if dimx_node is not None else '',
-                    'height': str(int(float(dimy_node.text))) if dimy_node is not None else '',
-                },
-            })
-        return infoimg_dict
 
 
 class JournalInformation(models.Model):
