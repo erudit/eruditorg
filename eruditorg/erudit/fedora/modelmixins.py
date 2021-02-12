@@ -5,7 +5,6 @@ import requests
 from django.conf import settings
 from django.core.cache import cache
 from django.utils.functional import cached_property
-from lxml import etree
 from PIL import Image
 from sentry_sdk import configure_scope
 from eulfedora.util import RequestFailed
@@ -162,16 +161,3 @@ class FedoraMixin:
         im.close()
 
         return not empty_image
-
-    def has_datastream(self, datastream_name):
-        try:
-            response = requests.get(
-                settings.FEDORA_ROOT + f"objects/{self.pid}/datastreams",
-                {"format": "xml"},
-            )
-            response.raise_for_status()
-            xml = etree.fromstring(response.content)
-            datastream = xml.find(f"datastream[@dsid='{datastream_name}']", namespaces=xml.nsmap)
-            return datastream is not None
-        except (HTTPError, ConnectionError):
-            return False
