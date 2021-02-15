@@ -18,6 +18,8 @@ class EruditCacheClient(DefaultClient):
         xx=False,
         pids=None,
     ):
+        if pids is None:
+            pids = []
         redis = get_redis_connection()
 
         # Django's DEFAULT_TIMEOUT is an object() to force backends to set their own default timeout
