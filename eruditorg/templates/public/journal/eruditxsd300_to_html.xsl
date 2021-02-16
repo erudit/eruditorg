@@ -211,9 +211,11 @@
             </xsl:if>
             <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
           </p>
+          {% nocache %}
           {% if content_access_granted and subscription_type == 'individual' %}
           <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
           {% endif %}
+          {% endnocache %}
           <xsl:apply-templates select="admin/droitsauteur"/>
         </div>
       </div>
@@ -328,11 +330,13 @@
           {% endnocache %}
           {% endif %}
           {% endswitch %}
+          {% nocache %}
           {% if content_access_granted and subscription_type == 'individual' %}
           <div class="text-center">
             <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
           </div>
           {% endif %}
+          {% endnocache %}
           {# We must not cache the subscription sponsor badge with the rest of this fragment #}
           {# because it has to vary based on the current user subscription. #}
           {% nocache %}
