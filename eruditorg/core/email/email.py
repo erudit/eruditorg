@@ -20,18 +20,19 @@ class Email:
     """
     def __init__(
             self, recipient, html_template, text_template=None, subject='', from_email=None,
-            subject_template=None, extra_context={}, language=None, attachments={}, tag=None):
+            subject_template=None, extra_context=None, language=None, attachments=None, tag=None):
         self.recipient = recipient if not email_settings.USE_DEBUG_EMAIL \
             else email_settings.DEBUG_EMAIL_ADDRESS
         self.language = language if language else translation.get_language()
-        self.attachments = attachments
+        self.attachments = attachments or {}
         self.from_email = from_email
         self.tag = tag
         with switch_language(self.language):
             self.context = {
                 'site': Site.objects.get_current(),
             }
-            self.context.update(extra_context)
+            if extra_context:
+                self.context.update(extra_context)
 
             self.subject = self._render_template(subject_template).strip() if subject_template \
                 else force_str(subject)

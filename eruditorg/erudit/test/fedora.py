@@ -254,7 +254,8 @@ class FakeAPI(ApiFacade):
         with self.open_journal(journal.pid) as wrapper:
             wrapper.add_notes(notes)
 
-    def get(self, url, params={}, **kwargs):
+    def get(self, url, params=None, **kwargs):
+        params = params or {}
 
         if settings.FEDORA_ROOT in url:
             url = url[len(settings.FEDORA_ROOT):]

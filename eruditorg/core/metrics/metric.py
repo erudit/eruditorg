@@ -10,7 +10,7 @@ from .conf import settings as metrics_settings
 logger = structlog.getLogger(__name__)
 
 
-def metric(metric_name, num=1, time=None, tags={}, **kwargs):
+def metric(metric_name, num=1, time=None, tags=None, **kwargs):
     """ Increments a specific metric.
 
     This function writes a point corresponding to a specific metric into an InfluxDB database. It
@@ -31,7 +31,7 @@ def metric(metric_name, num=1, time=None, tags={}, **kwargs):
     metric_fields.update(kwargs)
     metric_json_body = {
         'measurement': metric_name,
-        'tags': tags,
+        'tags': tags or {},
         'fields': metric_fields,
     }
 
