@@ -231,9 +231,9 @@ class SubscriptionMiddleware:
         """
         try:
             # Try to store in Redis the number of times a particular nonce has been seen.
-            redis_host = getattr(settings, 'REDIS_HOST')
-            redis_port = getattr(settings, 'REDIS_PORT')
-            redis_index = getattr(settings, 'REDIS_INDEX')
+            redis_host = settings.REDIS_HOST
+            redis_port = settings.REDIS_PORT
+            redis_index = settings.REDIS_INDEX
             if not redis_host or not redis_port or not redis_index:
                 raise redis.exceptions.ConnectionError
             r = redis.Redis(host=redis_host, port=redis_port, db=redis_index)
