@@ -1,0 +1,12 @@
+-r requirements.txt  # include production packages
+
+pytest>=5.4.3
+pytest-cov>=2.9.0
+pytest-django>=3.9.0
+pytest-xdist>=1.32.0
+codecov>=2.1.4
+factory-boy>=2.12.0
+Faker>=4.1.0
+tox>=3.15.2
+luqum>=0.8.1
+ipdb>=0.8.1
