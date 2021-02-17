@@ -218,11 +218,12 @@ class FakeSolrClient:
 
             return list(filter(matches, docs))
 
-        def create_results(docs, facets=[]):
+        def create_results(docs, facets=None):
             # Add facets
             facet_fields = {}
-            for facet in facets:
-                facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
+            if facets:
+                for facet in facets:
+                    facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
 
             # apply sorting
             sort_args = kwargs.get('sort')

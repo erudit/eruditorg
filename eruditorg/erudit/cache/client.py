@@ -16,7 +16,7 @@ class EruditCacheClient(DefaultClient):
         client=None,
         nx=False,
         xx=False,
-        pids=[],
+        pids=None,
     ):
         redis = get_redis_connection()
 
@@ -32,7 +32,7 @@ class EruditCacheClient(DefaultClient):
                 self.make_key(key, version=version),
                 self.encode(value),
                 ex=timeout,
-                tags=pids,
+                tags=pids or [],
             )
         else:
             return super().set(key, value, timeout, version, client, nx, xx)

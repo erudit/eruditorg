@@ -43,9 +43,10 @@ class SolrFilter:
                 search_term = search_term.replace(correspondence, operator)
         return search_term
 
-    def build_solr_filters(self, query_params={}):
+    def build_solr_filters(self, query_params=None):
         """ Return the filters to use to query the Solr index. """
         filters = {}
+        query_params = query_params or {}
 
         # STEP 1: register main search filters
         # --
