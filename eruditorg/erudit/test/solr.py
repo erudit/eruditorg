@@ -266,7 +266,7 @@ class FakeSolrClient:
             searchvals = extract_pq_searchvals(pq)
             journal_code = searchvals['RevueAbr']
             result = []
-            for author, docs in self.authors.items():
+            for docs in self.authors.values():
                 docs = apply_filters(docs, searchvals)
                 result += [doc for doc in docs if doc.journal_code == journal_code]
             return create_results(result, facets=['AuteurNP_fac', 'TypeArticle_fac'])
