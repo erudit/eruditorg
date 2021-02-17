@@ -6,3 +6,5 @@ django-debug-toolbar-template-timings>=0.6.6
 ipdb>=0.8.1
 ipython>=4.0.0
 pip-tools
+flake8
+flake8-bugbear
