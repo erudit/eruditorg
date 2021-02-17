@@ -106,7 +106,7 @@ class RoyaltiesListView(
         result = defaultdict(list)
         try:
             toppath = os.path.join(root_path, subpath)
-            for root, dirs, files in os.walk(toppath):
+            for root, _dirs, files in os.walk(toppath):
                 for filename in files:
                     path = root[len(toppath) + 1:].split('/')
                     year = path.pop(0)
