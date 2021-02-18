@@ -17,7 +17,7 @@ class ConnectionLandingView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["sushi_requestor_id"] = self.current_organisation.sushi_requester_id
+        context["sushi_requester_id"] = self.current_organisation.sushi_requester_id
         context["id_client"] = self.current_organisation.account_id
         context["sushi_url"] = getattr(settings, "SUSHI_URL", "")
         context["z3950_host"] = getattr(settings, "Z3950_HOST", "")

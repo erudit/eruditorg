@@ -1,5 +1,5 @@
 {% extends "userspace/library/base.html" %}
-{% load i18n static %}
+{% load i18n static waffle_tags %}
 
 {% block scripts %}
 {{ block.super }}
@@ -26,6 +26,70 @@
 {% endblock section_intro %}
 
 {% block content_main %}
+
+{% flag "CounterR5" %}
+
+<section class="akkordion" data-akkordion-single="true">
+  <h2 class="akkordion-title">{% trans "SUSHI" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <div class="akkordion-content">
+    <div class="row">
+      <div class="col-md-12">
+        <p>{% trans "Le protocole SUSHI vous permet d’automatiser la collecte de vos statistiques de consultation COUNTER. Utilisez les paramètres de connexion ci-dessous pour récupérer les statistiques de consultation de votre établissement sur la plateforme Érudit." %}</p>
+      </div>
+    </div>
+
+    {% if sushi_requester_id %}
+    <div class="glory">
+      <dl class="row index-card">
+        <dt class="col-sm-6">{% trans "Sushi Requester ID" %}</dt>
+        <dd class="col-sm-6">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+            <span data-clipboard-text="{{ sushi_requester_id }}" class="clipboard-data">
+              <span class="ion-ios-copy-outline clipboard-icon"></span>
+              {{ sushi_requester_id }}
+              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+            </span>
+          </span>
+        </dd>
+
+        <dt class="col-sm-6">{% trans "ID référence client" %}</dt>
+        <dd class="col-sm-6">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+            <span data-clipboard-text="{{ id_client }}" class="clipboard-data">
+              <span class="ion-ios-copy-outline clipboard-icon"></span>
+              {{ id_client }}
+              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+            </span>
+          </span>
+        </dd>
+
+        <dt class="col-sm-6">{% trans "URL" %}</dt>
+        <dd class="col-sm-6">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+            <span data-clipboard-text="{{ sushi_url }}" class="clipboard-data">
+              <span class="ion-ios-copy-outline clipboard-icon"></span>
+              {{ sushi_url }}
+              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+            </span>
+          </span>
+        </dd>
+      </dl>
+    </div>
+    {% else %}
+    {% blocktrans with organisation=scope_current_organisation.name %}
+    <p>Vous n’avez aucun compte. Veuillez nous contacter par courriel à l’adresse <a href="mailto:client@erudit.org?subject=Aucun%20compte%20SUSHI%20–%20{{ organisation }}">client@erudit.org</a>.</p>
+    {% endblocktrans %}
+    {% endif %}
+  </div>
+</section>
+
+<hr>
+
+{% endflag %}
+
 <section class="akkordion" data-akkordion-single="true">
   <h2 class="akkordion-title">{% trans "Z39.50&nbsp;/ SRU/SRW" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
