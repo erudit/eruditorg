@@ -692,7 +692,7 @@ def clean(text, article, font_weight=None):
             with sentry_sdk.configure_scope() as scope:
                 scope.fingerprint = [article_pid]
             # If some characters are not supported by our fonts, log them.
-            logger.error(
+            logger.warning(
                 'Coverpage: Unsupported characters',
                 unsupported_characters=unsupported_characters,
                 article_pid=article_pid,
