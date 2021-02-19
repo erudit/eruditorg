@@ -223,7 +223,7 @@ class ArticleViewMetricCaptureMixin:
         return response
 
 
-class ContributorsMixin:
+class MetaInfoIssueMixin:
     def get_contributors(self, journal_info=None, issue=None):
         contributors = {
             "directors": [],
@@ -265,6 +265,24 @@ class ContributorsMixin:
                 )
 
         return contributors
+
+    def get_issn(self, journal=None, issue=None):
+        issn = {
+            "print": None,
+            "web": None,
+        }
+
+        # If we are provided with an issue, it should always be the source for the ISSN.
+        if issue:
+            issn["print"] = issue.erudit_object.issn
+            issn["web"] = issue.erudit_object.issn_num
+        # Otherwise, it means the journal has not published yet, so get the ISSN from the Django
+        # Journal object.
+        elif journal:
+            issn["print"] = journal.issn_print
+            issn["web"] = journal.issn_web
+
+        return issn
 
 
 class ArticleAccessLogMixin:
