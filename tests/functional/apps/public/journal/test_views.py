@@ -2856,6 +2856,40 @@ class TestArticleDetailView:
         response = client.get(article_detail_url(article))
         assert "Vous êtes abonné à cette revue." not in response.content.decode()
 
+    @pytest.mark.parametrize(
+        "issue_localid, article_localid, expected",
+        (
+            (
+                "ritpu1824085",
+                "1006396ar",
+                [
+                    '<meta content="1708-7570" name="citation_issn"/>',
+                ],
+            ),
+            (
+                "images1080663",
+                "23339ac",
+                [
+                    '<meta content="0707-9389" name="citation_issn"/>',
+                    '<meta content="1923-5097" name="citation_issn"/>',
+                ],
+            ),
+        ),
+    )
+    def test_issue_issn_print_and_issn_web_display(self, issue_localid, article_localid, expected):
+        article = ArticleFactory(localidentifier=article_localid)
+        repository.api.set_publication_xml(
+            article.issue.get_full_identifier(),
+            open(f"tests/fixtures/issue/{issue_localid}.xml", "rb").read(),
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        issn_metas = dom.find_all("meta", {"name": "citation_issn"})
+        assert len(issn_metas) == len(expected)
+        for i, issn in enumerate(issn_metas):
+            assert issn.decode() == expected[i]
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, "logo")

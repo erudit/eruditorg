@@ -408,7 +408,7 @@ def get_coverpage(article):
     left_column.append(large_spacer)
 
     # ISSN
-    if article.issue.journal.issn_print or article.issue.journal.issn_web:
+    if article.issue.erudit_object.issn or article.issue.erudit_object.issn_num:
         left_column.append(
             Paragraph(
                 _("ISSN"),
@@ -416,21 +416,21 @@ def get_coverpage(article):
             )
         )
     left_column.append(medium_spacer)
-    if article.issue.journal.issn_print:
+    if article.issue.erudit_object.issn:
         left_column.append(
             Paragraph(
                 "{issn} ({label})".format(
-                    issn=article.issue.journal.issn_print,
+                    issn=article.issue.erudit_object.issn,
                     label=_("imprimé"),
                 ),
                 styles["small"],
             )
         )
-    if article.issue.journal.issn_web:
+    if article.issue.erudit_object.issn_num:
         left_column.append(
             Paragraph(
                 "{issn} ({label})".format(
-                    issn=article.issue.journal.issn_web,
+                    issn=article.issue.erudit_object.issn_num,
                     label=_("numérique"),
                 ),
                 styles["small"],

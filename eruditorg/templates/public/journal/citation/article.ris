@@ -8,10 +8,10 @@ JO  - {{ article.issue.journal_formatted_title }}
 {% if article.issue.number %}IS  - {{ article.issue.number }}{% endif %}
 {% if article.first_page %}SP  - {{ article.first_page }}{% endif %}
 {% if article.last_page %}EP  - {{ article.last_page }}{% endif %}
-{% if article.issue.journal.issn_print %}
-SN  - {{ article.issue.journal.issn_print }}
-{% elif article.issue.journal.issn_web %}
-SN  - {{ article.issue.journal.issn_web }}
+{% if article.issue.erudit_object.issn %}
+SN  - {{ article.issue.erudit_object.issn }}
+{% elif article.issue.erudit_object.issn_num %}
+SN  - {{ article.issue.erudit_object.issn_num }}
 {% endif %}
 Y1  - {{ article.issue.year }}
 Y2  - {% now "SHORT_DATETIME_FORMAT" as now_dt %}{{ now_dt }}

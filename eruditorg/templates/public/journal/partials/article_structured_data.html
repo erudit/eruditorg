@@ -20,7 +20,7 @@
     {
       "@id": "#journal-{{ article.issue.journal.code }}",
       "@type": "Periodical",
-      {% if article.issue.journal.issn_print and article.issue.journal.issn_web %}"issn": ["{{ article.issue.journal.issn_print }}", "{{ article.issue.journal.issn_web }}"],{% elif article.issue.journal.issn_print %}"issn": "{{ article.issue.journal.issn_print }}",{% elif article.issue.journal.issn_web %}"issn": "{{ article.issue.journal.issn_web }}",{% endif %}
+      {% if article.issue.erudit_object.issn and article.issue.erudit_object.issn_num %}"issn": ["{{ article.issue.erudit_object.issn }}", "{{ article.issue.erudit_object.issn_num }}"],{% elif article.issue.erudit_object.issn %}"issn": "{{ article.issue.erudit_object.issn }}",{% elif article.issue.erudit_object.issn_num %}"issn": "{{ article.issue.erudit_object.issn_num }}",{% endif %}
       "name": "{{ article.issue.journal_formatted_title }}"
     },
     {
