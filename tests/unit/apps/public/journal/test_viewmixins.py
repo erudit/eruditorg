@@ -25,7 +25,7 @@ from apps.public.journal.article_access_log import (
 from apps.public.journal.viewmixins import (
     ArticleAccessLogMixin,
     ContentAccessCheckMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     SingleArticleMixin,
     SingleJournalMixin,
 )
@@ -367,7 +367,7 @@ class TestContentAccessCheckMixin:
         assert view.content_access_granted == access_granted
 
 
-class TestContributorsMixin:
+class TestMetaInfoIssueMixin:
     @pytest.mark.parametrize(
         "use_journal_info, use_issue, expected_contributors",
         (
@@ -428,7 +428,7 @@ class TestContributorsMixin:
                 journal_information=journal_info,
             )
         )
-        mixin = ContributorsMixin()
+        mixin = MetaInfoIssueMixin()
         contributors = mixin.get_contributors(
             journal_info=journal_info if use_journal_info else None,
             issue=issue if use_issue else None,
@@ -478,9 +478,29 @@ class TestContributorsMixin:
             issue.get_full_identifier(),
             open("tests/fixtures/issue/{}.xml".format(fixture), "rb").read(),
         )
-        mixin = ContributorsMixin()
+        mixin = MetaInfoIssueMixin()
         with override_settings(LANGUAGE_CODE=language):
             assert mixin.get_contributors(issue=issue) == expected_contributors
+
+    @pytest.mark.parametrize(
+        "with_issue, expected_issn",
+        (
+            (True, {"print": "0707-9389", "web": "1923-5097"}),
+            (False, {"print": "0000-0000", "web": "1111-1111"}),
+        ),
+    )
+    def test_get_issn(self, with_issue, expected_issn):
+        journal = JournalFactory(issn_print="0000-0000", issn_web="1111-1111")
+        if with_issue:
+            issue = IssueFactory(journal=journal)
+            repository.api.set_publication_xml(
+                issue.get_full_identifier(),
+                open("tests/fixtures/issue/images1080663.xml", "rb").read(),
+            )
+        else:
+            issue = None
+        mixin = MetaInfoIssueMixin()
+        assert mixin.get_issn(issue=issue, journal=journal) == expected_issn
 
 
 class TestArticleAccessLogMixin:

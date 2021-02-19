@@ -65,7 +65,7 @@ from .viewmixins import (
     ArticleAccessLogMixin,
     ArticleViewMetricCaptureMixin,
     ContentAccessCheckMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     PrepublicationTokenRequiredMixin,
     SingleArticleMixin,
     SingleArticleWithScholarMetadataMixin,
@@ -205,7 +205,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 class JournalDetailView(
     SingleJournalMixin,
     ContentAccessCheckMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     DetailView,
 ):
     """
@@ -284,6 +284,11 @@ class JournalDetailView(
             journal_info=journal_info,
             issue=current_issue,
         )
+        # ISSN
+        context["issn"] = self.get_issn(
+            journal=self.object,
+            issue=current_issue,
+        )
 
         # Generate a cache key based on the forced free access issues queryset so that the cache is
         # invalidated when the queryset changes.
@@ -302,7 +307,7 @@ class JournalDetailView(
         return context
 
 
-class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView):
+class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateView):
     """
     Displays a list of authors associated with a specific journal.
     """
@@ -405,6 +410,11 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
             journal_info=journal_info,
             issue=context["current_issue"],
         )
+        # ISSN
+        context["issn"] = self.get_issn(
+            journal=self.journal,
+            issue=context["current_issue"],
+        )
 
         return context
 
@@ -424,7 +434,7 @@ class IssueDetailView(
     FallbackObjectViewMixin,
     ContentAccessCheckMixin,
     PrepublicationTokenRequiredMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     DetailView,
 ):
     """
@@ -551,6 +561,8 @@ class IssueDetailView(
 
         # Directors & editors.
         context["contributors"] = self.get_contributors(issue=self.object)
+        # ISSN
+        context["issn"] = self.get_issn(issue=self.object)
 
         # Generate a cache key based on the list of articles so that the cache is not used when a
         # new article is added (or removed).
