@@ -1,4 +1,4 @@
-Django>=3.0,<4.0
+Django>=3.0,<3.1
 liberuditarticle>=0.2.70
 django-resumable-uploads>=1.0.12
 django-account-actions>=0.1.1
