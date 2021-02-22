@@ -17,8 +17,8 @@ class DummyModel(FedoraMixin):
     def __init__(self):
         repository.api.register_pid(self.localidentifier)
 
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/ERUDITXSD300/content"
+    def get_erudit_object_datastream_name(self):
+        return "ERUDITXSD300"
 
     def get_fedora_model(self):
         return ArticleDigitalObject
@@ -30,10 +30,8 @@ class DummyModel(FedoraMixin):
 class TestFedoraMixin:
     def test_is_in_fedora(self):
         obj = DummyModel()
-        obj.get_erudit_content_url = (
-            lambda: "objects/erudit:erudit.journal.issue.article/datastreams/ERUDITXSD300/content"
-        )
-        assert not obj.is_in_fedora
+        obj.get_erudit_object_datastream_name = lambda: "ERUDITXSD300"
+        assert obj.is_in_fedora
 
     def test_can_return_the_pid_of_the_object(self):
         # Setup
@@ -77,7 +75,7 @@ class TestFedoraMixin:
         assert isinstance(obj.get_erudit_object(), EruditArticle)
         assert isinstance(obj.erudit_object, EruditArticle)
 
-    @unittest.mock.patch("erudit.fedora.modelmixins.cache")
+    @unittest.mock.patch("erudit.fedora.cache.cache")
     @unittest.mock.patch.object(ArticleDigitalObject, "erudit_xsd300")
     @unittest.mock.patch.object(ArticleDigitalObject, "_get_datastreams")
     def test_can_set_the_xml_content_in_the_cache_if_it_is_not_there_already(
@@ -97,7 +95,7 @@ class TestFedoraMixin:
         assert mock_cache.get.call_count == 1
         assert mock_cache.set.call_count == 1
 
-    @unittest.mock.patch("erudit.fedora.modelmixins.cache")
+    @unittest.mock.patch("erudit.fedora.cache.cache")
     @unittest.mock.patch.object(ArticleDigitalObject, "erudit_xsd300")
     @unittest.mock.patch.object(ArticleDigitalObject, "_get_datastreams")
     def test_can_fetch_the_xml_content_from_the_cache_if_applicable(
@@ -119,7 +117,7 @@ class TestFedoraMixin:
 
     @pytest.mark.django_db
     @pytest.mark.parametrize("ModelFactory", (ArticleFactory, IssueFactory, JournalFactory))
-    @unittest.mock.patch("erudit.fedora.modelmixins.cache")
+    @unittest.mock.patch("erudit.fedora.cache.cache")
     def test_uses_localidentifier_of_the_model_as_the_cache_key(self, mock_cache, ModelFactory):
         mock_cache.get.return_value = None
         model = ModelFactory(localidentifier="test")

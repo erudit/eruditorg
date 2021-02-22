@@ -665,8 +665,7 @@ class IssueReaderView(ContentAccessCheckMixin, PrepublicationTokenRequiredMixin,
         # Raise 404 if journal is not cultural.
         if not issue.journal.is_cultural():
             raise Http404()
-        content = get_cached_datastream_content(issue.get_full_identifier(), "PAGES")
-        pages = content.read()
+        pages = get_cached_datastream_content(issue.get_full_identifier(), "PAGES")
         pages_tree = et.fromstring(pages.decode())
         context["num_leafs"] = pages_tree.get("nb")
         context["page_width"] = pages_tree.get("imageWidth")

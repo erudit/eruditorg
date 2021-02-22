@@ -429,15 +429,19 @@ class TestIssueDetailSummary:
             ],
         }
 
-    @unittest.mock.patch("erudit.fedora.modelmixins.cache")
+    @unittest.mock.patch("erudit.fedora.cache.cache")
     @pytest.mark.parametrize(
         "is_published, expected_count",
         [
-            (False, 3),
-            (True, 3),
+            (False, 6),
+            (True, 6),
         ],
     )
-    def test_issue_caching(self, mock_cache, is_published, expected_count):
+    def test_issue_publication_does_not_influence_caching(
+        self, mock_cache, is_published, expected_count
+    ):
+        """Test that the publication status of an issue does not influence the
+        caching behaviour."""
         mock_cache.get.return_value = None
 
         article = ArticleFactory(issue__is_published=is_published)

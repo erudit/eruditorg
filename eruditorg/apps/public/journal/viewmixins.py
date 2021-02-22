@@ -150,7 +150,7 @@ class SingleArticleMixin(SolrDataMixin):
         # if this is only used for caching, it should not be accessible directly.
         self.object = None
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Article:
         # We support two IDing scheme here: full PID or localidentifier-only. If we have the full
         # PID, great! that saves us a request to Solr. If not, it's alright too, we just need to
         # fetch the full PID from Solr first.

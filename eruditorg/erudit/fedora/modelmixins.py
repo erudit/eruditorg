@@ -1,19 +1,18 @@
-import copy
+from typing import Optional, Type
+import io
 import structlog
 import requests
 
 from django.conf import settings
-from django.core.cache import cache
 from django.utils.functional import cached_property
 from lxml import etree
 from PIL import Image
-from sentry_sdk import configure_scope
 from eulfedora.util import RequestFailed
 from requests.exceptions import HTTPError, ConnectionError
+from eruditarticle.objects import EruditBaseObject
 
 from .cache import get_cached_datastream_content
 from .repository import api
-from erudit.cache import cache_set
 
 logger = structlog.getLogger(__name__)
 
@@ -47,7 +46,9 @@ class FedoraMixin:
     def fedora_model(self):
         return self.get_fedora_model()
 
-    def get_erudit_content_url(self):
+    def get_erudit_object_datastream_name(self):
+        """Returns the name of the datastream that will
+        be parsed to instanciate the EruditObject"""
         raise NotImplementedError
 
     def get_fedora_object(self):
@@ -76,37 +77,21 @@ class FedoraMixin:
     def erudit_class(self):
         return self.get_erudit_class()
 
-    def get_erudit_object(self, fedora_object=None, use_cache=True):
+    def get_erudit_object(self) -> Optional[Type[EruditBaseObject]]:
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
-
-        if use_cache:
-            fedora_xml_content_key = self.localidentifier
-            fedora_xml_content = cache.get(fedora_xml_content_key, None)
-        else:
-            fedora_xml_content_key = None
-            fedora_xml_content = None
-
-        if fedora_xml_content is not None:
-            return self.erudit_class(fedora_xml_content)
         try:
-            xml_response = requests.get(settings.FEDORA_ROOT + self.get_erudit_content_url())
-            xml_response.raise_for_status()
-            fedora_xml_content = xml_response.content
-            if use_cache:
-                cache_set(
-                    cache,
-                    fedora_xml_content_key,
-                    fedora_xml_content,
-                    settings.FEDORA_CACHE_TIMEOUT,
-                    pids=[self.pid],
-                )
-        except (HTTPError, ConnectionError):  # pragma: no cover
-            with configure_scope() as scope:
-                scope.fingerprint = ["fedora-warnings"]
-                logger.warning("fedora.exception", pid=self.pid)
+            fedora_xml_content = get_cached_datastream_content(
+                self.pid,
+                self.get_erudit_object_datastream_name(),
+                cache_key=self.localidentifier,
+            )
+            if fedora_xml_content is None:
+                raise HTTPError
+            return self.erudit_class(fedora_xml_content)
 
+        except (HTTPError, ConnectionError):  # pragma: no cover
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
                 # really often because the dataset provided by the Fedora repository
@@ -116,8 +101,6 @@ class FedoraMixin:
                 # The UNB collection *has* articles that are missing from Fedora
                 return
             raise
-
-        return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
 
     @cached_property
     def is_in_fedora(self):
@@ -143,11 +126,10 @@ class FedoraMixin:
     def fedora_is_loaded(self):
         return hasattr(self, "_erudit_object") and self._erudit_object is not None
 
-    def has_non_empty_image_datastream(self, datastream_name):
+    def has_non_empty_image_datastream(self, datastream_name: str) -> bool:
         """ Returns True if the considered fedora object has a non empty image datastream. """
         if self.fedora_object is None:
             return False
-
         try:
             content = get_cached_datastream_content(self.pid, datastream_name)
         except RequestFailed:
@@ -157,7 +139,7 @@ class FedoraMixin:
             return False
 
         # Checks the content of the image in order to detect if it contains only one single color.
-        im = Image.open(copy.copy(content))
+        im = Image.open(io.BytesIO(content))
         extrema = im.convert("L").getextrema()
         empty_image = (extrema == (0, 0)) or (extrema == (255, 255))
         im.close()
