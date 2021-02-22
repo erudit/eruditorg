@@ -2411,6 +2411,24 @@ class TestArticleDetailView:
         html = Client().get(url).content.decode()
         assert f'data-document-id="{expected_document_id}"' in html
 
+    @override_settings(CACHES=settings.LOCMEM_CACHES)
+    def test_subscription_message_is_not_cached(self):
+        client = Client()
+        article = ArticleFactory(issue__journal__open_access=True)
+        subscription = JournalAccessSubscriptionFactory(
+            type='individual',
+            user=UserFactory.create(username='foobar', password='notsecret'),
+            journals=[article.issue.journal],
+        )
+
+        client.login(username='foobar', password='notsecret')
+        response = client.get(article_detail_url(article))
+        assert "Vous êtes abonné à cette revue." in response.content.decode()
+
+        client.logout()
+        response = client.get(article_detail_url(article))
+        assert "Vous êtes abonné à cette revue." not in response.content.decode()
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, 'logo')
