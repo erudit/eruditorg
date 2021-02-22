@@ -1012,13 +1012,13 @@ class TestArticleDetailView:
 
         issue = IssueFactory.create(is_published=False)
         article = ArticleFactory.create(issue=issue)
-        with unittest.mock.patch("erudit.fedora.modelmixins.cache") as cache_mock:
+        with unittest.mock.patch("erudit.fedora.cache.cache") as cache_mock:
             cache_mock.get.return_value = None
             url = "{}?ticket={}".format(article_detail_url(article), issue.prepublication_ticket)
             response = Client().get(url)
             assert response.status_code == 200
             # Assert that the cache has not be called.
-            assert cache_mock.get.call_count == 2
+            assert cache_mock.get.call_count == 4
 
     def test_allow_ephemeral_articles(self):
         # When receiving a request for an article that doesn't exist in the DB, try querying fedora
@@ -1096,27 +1096,13 @@ class TestArticleDetailView:
     @unittest.mock.patch("erudit.fedora.cache.cache")
     @unittest.mock.patch("erudit.fedora.cache.get_datastream_file_cache")
     @unittest.mock.patch("erudit.fedora.cache.get_cached_datastream_content")
-    @pytest.mark.parametrize(
-        "is_published, expected_count",
-        [
-            (False, 1),
-            (True, 1),
-        ],
-    )
     def test_pdf_datastream_caching(
-        self,
-        mock_cache,
-        mock_get_datastream_file_cache,
-        mock_get_cached_datastream_content,
-        is_published,
-        expected_count,
+        self, mock_get_cached_datastream_content, mock_get_datastream_file_cache, mock_cache
     ):
         mock_cache.get.return_value = None
         mock_get_datastream_file_cache.return_value = mock_cache
         mock_get_cached_datastream_content.return_value = None
-
         article = ArticleFactory(
-            issue__is_published=is_published,
             issue__journal__open_access=True,
         )
         url = reverse(
@@ -1130,15 +1116,10 @@ class TestArticleDetailView:
         )
         mock_cache.get.reset_mock()
 
-        Client().get(
-            url,
-            {
-                "ticket": article.issue.prepublication_ticket,
-            },
-        )
-        assert mock_cache.get.call_count == expected_count
+        Client().get(url)
+        assert mock_cache.get.call_count == 3
 
-    @unittest.mock.patch("erudit.fedora.modelmixins.cache")
+    @unittest.mock.patch("erudit.fedora.cache.cache")
     @pytest.mark.parametrize(
         "is_published, expected_count",
         [
@@ -1641,8 +1622,7 @@ class TestArticleDetailView:
             erudit.models.journal,
             "get_cached_datastream_content",
             unittest.mock.MagicMock(
-                return_value=io.BytesIO(
-                    b"""
+                return_value=b"""
 <infoDoc>
     <im id="img-05-01.png">
         <imPlGr>
@@ -1654,7 +1634,6 @@ class TestArticleDetailView:
     </im>
 </infoDoc>
             """
-                )
             ),
         )
 

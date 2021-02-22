@@ -1,6 +1,5 @@
 import datetime as dt
 import dateutil.relativedelta as dr
-import io
 import unittest.mock
 
 import pytest
@@ -346,7 +345,7 @@ class TestIssue:
             monkeypatch.setattr(
                 modelmixins,
                 "get_cached_datastream_content",
-                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
+                unittest.mock.MagicMock(return_value=f.read()),
             )
         assert issue.has_coverpage
 
@@ -356,7 +355,7 @@ class TestIssue:
             monkeypatch.setattr(
                 modelmixins,
                 "get_cached_datastream_content",
-                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
+                unittest.mock.MagicMock(return_value=f.read()),
             )
         assert not issue.has_coverpage
 
@@ -377,7 +376,7 @@ class TestIssue:
             fedora_object = unittest.mock.MagicMock()
             fedora_object.pid = issue.pid
             fedora_object.coverpage = unittest.mock.MagicMock()
-            fedora_object.coverpage.content = io.BytesIO(f.read())
+            fedora_object.coverpage.content = f.read()
             issue.get_fedora_object = unittest.mock.MagicMock(return_value=fedora_object)
             mock_get_cached_datastream_content.return_value = fedora_object.coverpage.content
         assert issue.has_coverpage
@@ -681,13 +680,6 @@ class TestArticle:
         article = ArticleFactory(publication_allowed=False, with_pdf=True)
         assert article.pdf_url is None
 
-    @pytest.mark.parametrize("is_published", (True, False))
-    @unittest.mock.patch("erudit.fedora.cache.cache_set")
-    def test_pdf_url_is_not_cached_if_issue_is_not_published(self, mock_cache_set, is_published):
-        article = ArticleFactory(issue__is_published=is_published, pdf_url="http://example.com")
-        assert article.pdf_url == "http://example.com"
-        assert mock_cache_set.call_count == int(is_published)
-
     def test_abstracts(self):
         article = ArticleFactory(
             abstracts=[
@@ -819,15 +811,14 @@ class TestArticle:
 
     def test_can_return_its_infoimg_content_as_dictionary(self, monkeypatch):
         # Setup
-        article = ArticleFactory()
+
         import erudit.models.journal
 
         monkeypatch.setattr(
             erudit.models.journal,
             "get_cached_datastream_content",
             unittest.mock.MagicMock(
-                return_value=io.BytesIO(
-                    b"""
+                return_value=b"""
 <infoDoc>
     <originator app="testapp" date="YYYY-MM-DD" username="foobar" />
     <im id="im1">
@@ -846,10 +837,11 @@ class TestArticle:
     </im>
 </infoDoc>
             """
-                )
             ),
         )
+
         # Run & check
+        article = ArticleFactory()
         assert article.infoimg_dict == {
             "im1": {
                 "plgr": "bar.jpg",

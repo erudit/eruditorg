@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-import io
+import typing
 import random
 import requests
 import structlog
@@ -13,6 +12,7 @@ from sentry_sdk import configure_scope
 
 from ..conf import settings as erudit_settings
 from erudit.cache import cache_set
+from django_redis.cache import RedisCache
 
 logger = structlog.getLogger(__name__)
 
@@ -38,7 +38,7 @@ def cache_fedora_result(method, duration=settings.LONG_TTL):
 
     def wrapper(self, *args, **kwargs):
 
-        if not self.localidentifier or (hasattr(self, "issue") and not self.issue.is_published):
+        if not self.localidentifier:
             return method(self, *args, **kwargs)
 
         key = "fedora_result-{lang}-{localidentifier}-{method_name}".format(
@@ -62,17 +62,21 @@ def cache_fedora_result(method, duration=settings.LONG_TTL):
     return wrapper
 
 
-def get_datastream_file_cache():
+def get_datastream_file_cache() -> RedisCache:
     return caches[erudit_settings.FEDORA_FILEBASED_CACHE_NAME]
 
 
-def get_cached_datastream_content(pid, datastream_name, cache=None):
+def get_cached_datastream_content(
+    pid: str, datastream_name: str, cache_key: typing.Optional[str] = None
+) -> bytes:
     """Given a Fedora object pid and a datastream name, returns the content of the datastream.
 
     Note that this content can be cached in a file-based cache!
     """
-    cache = cache or get_datastream_file_cache()
-    content_key = f"erudit-fedora-file-{pid}-{datastream_name}"
+    if not cache_key:
+        content_key = f"erudit-fedora-file-{pid}-{datastream_name}"
+    else:
+        content_key = cache_key
 
     content = cache.get(content_key)
 
@@ -85,7 +89,7 @@ def get_cached_datastream_content(pid, datastream_name, cache=None):
                 f"objects/{pid}/datastreams/{datastream_name.upper()}/content",
             )
             response.raise_for_status()
-            content = io.BytesIO(response.content)
+            content = response.content
 
             cache_set(
                 cache,
@@ -98,5 +102,4 @@ def get_cached_datastream_content(pid, datastream_name, cache=None):
             with configure_scope() as scope:
                 scope.fingerprint = ["fedora-warnings"]
                 logger.warning("fedora.exception", pid=pid, datastream=datastream_name)
-
     return content

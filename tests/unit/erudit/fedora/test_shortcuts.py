@@ -11,15 +11,12 @@ def test_can_set_the_content_of_the_file_in_the_cache_if_it_is_not_there_already
         "/SUMMARY/content",
         "dummy",
     )
-    mock_cache = unittest.mock.MagicMock()
-    mock_cache_get = unittest.mock.MagicMock()
-    mock_cache_get.return_value = None
-    mock_cache_set = unittest.mock.MagicMock()
-    mock_cache.get = mock_cache_get
-    mock_cache.set = mock_cache_set
-    get_cached_datastream_content("erudit:erudit.foo123.bar456", "SUMMARY", cache=mock_cache)
-    assert mock_cache_get.call_count == 1
-    assert mock_cache_set.call_count == 1
+
+    with unittest.mock.patch("erudit.fedora.cache.cache") as mock_cache:
+        mock_cache.get.return_value = None
+        get_cached_datastream_content("erudit:erudit.foo123.bar456", "SUMMARY")
+        assert mock_cache.get.call_count == 1
+        assert mock_cache.set.call_count == 1
 
 
 def test_can_use_the_content_of_the_file_in_the_cache_if_applicable():
@@ -29,12 +26,9 @@ def test_can_use_the_content_of_the_file_in_the_cache_if_applicable():
         "/SUMMARY/content",
         "dummy",
     )
-    mock_cache = unittest.mock.MagicMock()
-    mock_cache_get = unittest.mock.MagicMock()
-    mock_cache_get.return_value = "dummy"
-    mock_cache_set = unittest.mock.MagicMock()
-    mock_cache.get = mock_cache_get
-    mock_cache.set = mock_cache_set
-    get_cached_datastream_content("erudit:erudit.foo123.bar456", "SUMMARY", cache=mock_cache)
-    assert mock_cache_get.call_count == 1
-    assert mock_cache_set.call_count == 0
+
+    with unittest.mock.patch("erudit.fedora.cache.cache") as mock_cache:
+        mock_cache.get.return_value = "dummy"
+        get_cached_datastream_content("erudit:erudit.foo123.bar456", "SUMMARY")
+        assert mock_cache.get.call_count == 1
+        assert mock_cache.set.call_count == 0
