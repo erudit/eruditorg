@@ -22,6 +22,7 @@ from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, SummaryArticle
 from urllib.parse import urlparse
+from eruditarticle.objects.exceptions import LiberuditarticleError
 
 from ..abstract_models import FedoraDated
 from ..conf import settings as erudit_settings
@@ -1279,8 +1280,16 @@ class Article(FedoraMixin):
 
     @property
     def is_external(self):
-        """ :returns: ``True`` if the article's parent issue is external """
-        return self.issue.is_external
+        """ :returns: ``True`` if the article's parent issue is external or it's
+            summary article has an external url """
+        if self.issue.is_external:
+            return True
+        try:
+            # If the article summary in not empty and contains the article
+            summary_article = self.issue.erudit_object.get_summary_article(self.localidentifier)
+            return summary_article.has_external_url()
+        except LiberuditarticleError:
+            return False
 
     @property
     def open_access(self):
