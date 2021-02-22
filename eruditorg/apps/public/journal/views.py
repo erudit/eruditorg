@@ -746,6 +746,7 @@ class BaseArticleDetailView(
     SingleArticleWithScholarMetadataMixin,
     ArticleViewMetricCaptureMixin,
     PrepublicationTokenRequiredMixin,
+    MetaInfoIssueMixin,
     DetailView,
 ):
     context_object_name = "article"
@@ -808,6 +809,9 @@ class BaseArticleDetailView(
             },
         )
         context["media_url_prefix"] = url[:-1]
+
+        # Issue ISSN
+        context["issn"] = self.get_issn(issue=issue)
 
         if not issue.is_published:
             context["ticket"] = issue.prepublication_ticket
@@ -1032,7 +1036,7 @@ class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
         )
 
 
-class ArticleEnwCitationView(SingleArticleMixin, DetailView):
+class ArticleEnwCitationView(SingleArticleMixin, MetaInfoIssueMixin, DetailView):
     """
     Returns the enw file of a specific article.
     """
@@ -1044,10 +1048,11 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pdf_exists"] = context["article"].has_pdf
+        context["issn"] = self.get_issn(issue=context["article"].issue)
         return context
 
 
-class ArticleRisCitationView(SingleArticleMixin, DetailView):
+class ArticleRisCitationView(SingleArticleMixin, MetaInfoIssueMixin, DetailView):
     """
     Returns the ris file of a specific article.
     """
@@ -1059,6 +1064,7 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pdf_exists"] = context["article"].has_pdf
+        context["issn"] = self.get_issn(issue=context["article"].issue)
         return context
 
 

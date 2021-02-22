@@ -72,11 +72,11 @@
 {% if article.last_page %}
 <meta name="citation_lastpage" content="{{ article.last_page }}" />
 {% endif %}
-{% if article.issue.erudit_object.issn %}
-<meta name="citation_issn" content="{{ article.issue.erudit_object.issn }}" />
+{% if issn.print %}
+<meta name="citation_issn" content="{{ issn.print }}" />
 {% endif %}
-{% if article.issue.erudit_object.issn_num %}
-<meta name="citation_issn" content="{{ article.issue.erudit_object.issn_num }}" />
+{% if issn.web %}
+<meta name="citation_issn" content="{{ issn.web }}" />
 {% endif %}
 {% if article.issue.volume %}
 <meta name="citation_volume" content="{{ article.issue.volume }}" />
