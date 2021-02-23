@@ -11,7 +11,7 @@ from erudit.solr.models import get_all_articles
 
 
 class JournalSitemap(sitemaps.Sitemap):  # pragma: no cover
-    changefreq = 'weekly'
+    changefreq = "weekly"
     i18n = True
     limit = 1000
     priority = 0.5
@@ -23,29 +23,30 @@ class JournalSitemap(sitemaps.Sitemap):  # pragma: no cover
         return obj.fedora_updated
 
     def location(self, obj):
-        return reverse('public:journal:journal_detail', args=(obj.code, ))
+        return reverse("public:journal:journal_detail", args=(obj.code,))
 
 
 class IssueSitemap(sitemaps.Sitemap):  # pragma: no cover
-    changefreq = 'never'
+    changefreq = "never"
     i18n = True
     limit = 1000
     priority = 0.5
 
     def items(self):
-        return Issue.internal_objects.select_related('journal').filter(is_published=True)
+        return Issue.internal_objects.select_related("journal").filter(is_published=True)
 
     def lastmod(self, obj):
         return obj.fedora_updated
 
     def location(self, obj):
         return reverse(
-            'public:journal:issue_detail', args=(
-                obj.journal.code, obj.volume_slug, obj.localidentifier))
+            "public:journal:issue_detail",
+            args=(obj.journal.code, obj.volume_slug, obj.localidentifier),
+        )
 
 
 class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
-    changefreq = 'never'
+    changefreq = "never"
     i18n = True
     limit = 1000
     priority = 0.5
@@ -63,35 +64,35 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
 
             @staticmethod
             def page(number):
-
                 class FakePage:
-                    object_list = results['items']
+                    object_list = results["items"]
 
                 return FakePage()
 
             @property
             def num_pages(self):
-                return int(ceil(results['hits'] / float(self.per_page)))
+                return int(ceil(results["hits"] / float(self.per_page)))
 
         return FakePaginator()
 
     @cached_property
     def results(self):
-        return get_all_articles(self.limit, getattr(self, 'page', 1))
+        return get_all_articles(self.limit, getattr(self, "page", 1))
 
     def items(self):
-        return self.results['items']
+        return self.results["items"]
 
     @staticmethod
     def lastmod(obj):
-        return dt.datetime.strptime(obj.solr_data['DateAjoutIndex'][:10], '%Y-%m-%d')
+        return dt.datetime.strptime(obj.solr_data["DateAjoutIndex"][:10], "%Y-%m-%d")
 
     def location(self, obj):
         return reverse(
-            'public:journal:article_detail', args=(
+            "public:journal:article_detail",
+            args=(
                 obj.issue.journal.code,
                 obj.issue.volume_slug,
                 obj.issue.localidentifier,
                 obj.localidentifier,
-            )
+            ),
         )

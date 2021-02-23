@@ -21,15 +21,18 @@ class LanguageCookieMiddleware(MiddlewareMixin):  # pragma: no cover
     When you visit / on a page, this middleware saves the current language in a cookie with every
     response.
     """
+
     def process_response(self, request, response):
         language = get_language()
-        if hasattr(request, 'session'):
+        if hasattr(request, "session"):
             session_language = request.session.get(LANGUAGE_SESSION_KEY, None)
             if session_language and not session_language == language:
                 request.session[LANGUAGE_SESSION_KEY] = language
                 request.session.save()
-        if settings.LANGUAGE_COOKIE_NAME in request.COOKIES and \
-                request.COOKIES[settings.LANGUAGE_COOKIE_NAME] == language:
+        if (
+            settings.LANGUAGE_COOKIE_NAME in request.COOKIES
+            and request.COOKIES[settings.LANGUAGE_COOKIE_NAME] == language
+        ):
             return response
         max_age = 365 * 24 * 60 * 60  # 10 years
         expires = dt.datetime.utcnow() + dt.timedelta(seconds=max_age)
@@ -44,6 +47,7 @@ class PolyglotLocaleMiddleware(LocaleMiddleware):
     1. Try to find the language in which the pattern exists
     2. If the pattern exists, translate it to the user's language
     """
+
     def process_response(self, request, response):
         if response.status_code == 404:
             user_lang = translation.get_language()
@@ -54,7 +58,7 @@ class PolyglotLocaleMiddleware(LocaleMiddleware):
                         resp = self.response_redirect_class(translate_url(resp.url, user_lang))
                         # We need this to have RFC2616 compatible responses if this is run after
                         # CommonMiddleware.
-                        resp['Content-Length'] = 0
+                        resp["Content-Length"] = 0
                         return resp
         return response
 
@@ -62,5 +66,5 @@ class PolyglotLocaleMiddleware(LocaleMiddleware):
 class LogHttp404Middleware(MiddlewareMixin):
     def process_response(self, request, response):
         if response.status_code == 404:
-            logger.warning('http_404', path=request.path)
+            logger.warning("http_404", path=request.path)
         return response

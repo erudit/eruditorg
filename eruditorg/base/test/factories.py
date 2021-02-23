@@ -12,8 +12,8 @@ faker = FakerFactory.create()
 
 
 class UserFactory(factory.django.DjangoModelFactory):
-    username = factory.Sequence(lambda n: 'test{}'.format(n))
-    email = factory.Sequence(lambda n: 'test{0}@example.com'.format(n))
+    username = factory.Sequence(lambda n: "test{}".format(n))
+    email = factory.Sequence(lambda n: "test{0}@example.com".format(n))
 
     class Meta:
         model = settings.AUTH_USER_MODEL
@@ -30,14 +30,14 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 
 class GroupFactory(factory.django.DjangoModelFactory):
-    name = factory.Sequence(lambda n: '{}-{}'.format(str(n), faker.job()))
+    name = factory.Sequence(lambda n: "{}-{}".format(str(n), faker.job()))
 
     class Meta:
         model = Group
 
 
 def get_authenticated_request(user=None):
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     if user:
         request.user = user
     else:
@@ -48,7 +48,7 @@ def get_authenticated_request(user=None):
 
 
 def get_anonymous_request():
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     request.user = AnonymousUser()
     request.subscriptions = UserSubscriptions()
     request.session = dict()
