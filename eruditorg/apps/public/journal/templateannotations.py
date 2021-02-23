@@ -24,8 +24,9 @@ class IssueAnnotator:
             return issue.external_url
         else:
             return reverse(
-                'public:journal:issue_detail',
-                args=(issue.journal.code, issue.volume_slug, issue.localidentifier))
+                "public:journal:issue_detail",
+                args=(issue.journal.code, issue.volume_slug, issue.localidentifier),
+            )
 
     def detail_link_attrs(self):
         result = 'href="{}"'.format(self.detail_url())

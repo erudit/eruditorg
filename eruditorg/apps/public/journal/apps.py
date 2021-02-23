@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class JournalConfig(AppConfig):
-    label = 'public_journal'
-    name = 'apps.public.journal'
+    label = "public_journal"
+    name = "apps.public.journal"

@@ -27,97 +27,101 @@ from erudit.fedora.cache import get_cached_datastream_content
 
 logger = structlog.get_logger()
 
-STATIC_ROOT = str(Path(__file__).parents[3] / 'static')
-FONTS_DIR = str(Path(STATIC_ROOT) / 'fonts')
+STATIC_ROOT = str(Path(__file__).parents[3] / "static")
+FONTS_DIR = str(Path(STATIC_ROOT) / "fonts")
 
 # NotoSerif font
-registerFont(TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf'))
-registerFont(TTFont('NotoSerif-Bold', FONTS_DIR + '/Noto/NotoSerif-Bold.ttf'))
-registerFont(TTFont('NotoSerif-Italic', FONTS_DIR + '/Noto/NotoSerif-Italic.ttf'))
-registerFont(TTFont('NotoSerif-BoldItalic', FONTS_DIR + '/Noto/NotoSerif-BoldItalic.ttf'))
+registerFont(TTFont("NotoSerif", FONTS_DIR + "/Noto/NotoSerif-Regular.ttf"))
+registerFont(TTFont("NotoSerif-Bold", FONTS_DIR + "/Noto/NotoSerif-Bold.ttf"))
+registerFont(TTFont("NotoSerif-Italic", FONTS_DIR + "/Noto/NotoSerif-Italic.ttf"))
+registerFont(TTFont("NotoSerif-BoldItalic", FONTS_DIR + "/Noto/NotoSerif-BoldItalic.ttf"))
 registerFontFamily(
-    'NotoSerif',
-    normal='NotoSerif',
-    bold='NotoSerif-Bold',
-    italic='NotoSerif-Italic',
-    boldItalic='NotoSerif-BoldItalic',
+    "NotoSerif",
+    normal="NotoSerif",
+    bold="NotoSerif-Bold",
+    italic="NotoSerif-Italic",
+    boldItalic="NotoSerif-BoldItalic",
 )
-addMapping('NotoSerif', 0, 0, 'NotoSerif')
-addMapping('NotoSerif-Bold', 1, 0, 'NotoSerif Bold')
-addMapping('NotoSerif-Italic', 0, 1, 'NotoSerif Italic')
-addMapping('NotoSerif-BoldItalic', 1, 1, 'NotoSerif Bold Italic')
+addMapping("NotoSerif", 0, 0, "NotoSerif")
+addMapping("NotoSerif-Bold", 1, 0, "NotoSerif Bold")
+addMapping("NotoSerif-Italic", 0, 1, "NotoSerif Italic")
+addMapping("NotoSerif-BoldItalic", 1, 1, "NotoSerif Bold Italic")
 
 # SpectralSC font (small caps)
-registerFont(TTFont('SpectralSC', FONTS_DIR + '/Spectral/SpectralSC-Regular.ttf'))
-registerFont(TTFont('SpectralSC-Bold', FONTS_DIR + '/Spectral/SpectralSC-Bold.ttf'))
-registerFont(TTFont('SpectralSC-Italic', FONTS_DIR + '/Spectral/SpectralSC-Italic.ttf'))
-registerFont(TTFont('SpectralSC-BoldItalic', FONTS_DIR + '/Spectral/SpectralSC-BoldItalic.ttf'))
+registerFont(TTFont("SpectralSC", FONTS_DIR + "/Spectral/SpectralSC-Regular.ttf"))
+registerFont(TTFont("SpectralSC-Bold", FONTS_DIR + "/Spectral/SpectralSC-Bold.ttf"))
+registerFont(TTFont("SpectralSC-Italic", FONTS_DIR + "/Spectral/SpectralSC-Italic.ttf"))
+registerFont(TTFont("SpectralSC-BoldItalic", FONTS_DIR + "/Spectral/SpectralSC-BoldItalic.ttf"))
 registerFontFamily(
-    'SpectralSC',
-    normal='SpectralSC',
-    bold='SpectralSC-Bold',
-    italic='SpectralSC-Italic',
-    boldItalic='SpectralSC-BoldItalic',
+    "SpectralSC",
+    normal="SpectralSC",
+    bold="SpectralSC-Bold",
+    italic="SpectralSC-Italic",
+    boldItalic="SpectralSC-BoldItalic",
 )
-addMapping('SpectralSC', 0, 0, 'SpectralSC')
-addMapping('SpectralSC-Bold', 1, 0, 'SpectralSC Bold')
-addMapping('SpectralSC-Italic', 0, 1, 'SpectralSC Italic')
-addMapping('SpectralSC-BoldItalic', 1, 1, 'SpectralSC Bold Italic')
+addMapping("SpectralSC", 0, 0, "SpectralSC")
+addMapping("SpectralSC-Bold", 1, 0, "SpectralSC Bold")
+addMapping("SpectralSC-Italic", 0, 1, "SpectralSC Italic")
+addMapping("SpectralSC-BoldItalic", 1, 1, "SpectralSC Bold Italic")
 
 # Symbola font (emojis)
-registerFont(TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf'))
-registerFontFamily('Symbola', normal='Symbola')
-addMapping('Symbola', 0, 0, 'Symbola')
+registerFont(TTFont("Symbola", FONTS_DIR + "/Symbola/Symbola.ttf"))
+registerFontFamily("Symbola", normal="Symbola")
+addMapping("Symbola", 0, 0, "Symbola")
 
 # NotoSerifCJK font (chinese, japanese, korean)
-registerFont(TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf'))
-registerFont(TTFont('NotoSerifCJKsc-Bold', FONTS_DIR + '/Noto/NotoSerifCJKsc-Bold.ttf'))
-registerFont(TTFont('NotoSerifCJKsc-Italic', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf'))
-registerFont(TTFont('NotoSerifCJKsc-BoldItalic', FONTS_DIR + '/Noto/NotoSerifCJKsc-Bold.ttf'))
+registerFont(TTFont("NotoSerifCJKsc", FONTS_DIR + "/Noto/NotoSerifCJKsc-Regular.ttf"))
+registerFont(TTFont("NotoSerifCJKsc-Bold", FONTS_DIR + "/Noto/NotoSerifCJKsc-Bold.ttf"))
+registerFont(TTFont("NotoSerifCJKsc-Italic", FONTS_DIR + "/Noto/NotoSerifCJKsc-Regular.ttf"))
+registerFont(TTFont("NotoSerifCJKsc-BoldItalic", FONTS_DIR + "/Noto/NotoSerifCJKsc-Bold.ttf"))
 registerFontFamily(
-    'NotoSerifCJKsc',
-    normal='NotoSerifCJKsc',
-    bold='NotoSerifCJKsc-Bold',
-    italic='NotoSerifCJKsc-Italic',
-    boldItalic='NotoSerifCJKsc-BoldItalic',
+    "NotoSerifCJKsc",
+    normal="NotoSerifCJKsc",
+    bold="NotoSerifCJKsc-Bold",
+    italic="NotoSerifCJKsc-Italic",
+    boldItalic="NotoSerifCJKsc-BoldItalic",
 )
-addMapping('NotoSerifCJKsc', 0, 0, 'NotoSerifCJKsc')
-addMapping('NotoSerifCJKsc-Bold', 1, 0, 'NotoSerifCJKsc Bold')
-addMapping('NotoSerifCJKsc-Italic', 0, 1, 'NotoSerifCJKsc Italic')
-addMapping('NotoSerifCJKsc-BoldItalic', 1, 1, 'NotoSerifCJKsc Bold Italic')
+addMapping("NotoSerifCJKsc", 0, 0, "NotoSerifCJKsc")
+addMapping("NotoSerifCJKsc-Bold", 1, 0, "NotoSerifCJKsc Bold")
+addMapping("NotoSerifCJKsc-Italic", 0, 1, "NotoSerifCJKsc Italic")
+addMapping("NotoSerifCJKsc-BoldItalic", 1, 1, "NotoSerifCJKsc Bold Italic")
 
 # NotoSansCanadianAboriginal font
-registerFont(TTFont(
-    'NotoSansCanadianAboriginal', FONTS_DIR + '/Noto/NotoSansCanadianAboriginal-Regular.ttf',
-))
-registerFontFamily('NotoSansCanadianAboriginal', normal='NotoSansCanadianAboriginal')
-addMapping('NotoSansCanadianAboriginal', 0, 0, 'NotoSansCanadianAboriginal')
+registerFont(
+    TTFont(
+        "NotoSansCanadianAboriginal",
+        FONTS_DIR + "/Noto/NotoSansCanadianAboriginal-Regular.ttf",
+    )
+)
+registerFontFamily("NotoSansCanadianAboriginal", normal="NotoSansCanadianAboriginal")
+addMapping("NotoSansCanadianAboriginal", 0, 0, "NotoSansCanadianAboriginal")
 
 # Amiri font (arabic)
-registerFont(TTFont('Amiri', FONTS_DIR + '/Amiri/Amiri-Regular.ttf'))
-registerFont(TTFont('Amiri-Bold', FONTS_DIR + '/Amiri/Amiri-Bold.ttf'))
-registerFont(TTFont('Amiri-Italic', FONTS_DIR + '/Amiri/Amiri-Slanted.ttf'))
-registerFont(TTFont('Amiri-BoldItalic', FONTS_DIR + '/Amiri/Amiri-BoldSlanted.ttf'))
+registerFont(TTFont("Amiri", FONTS_DIR + "/Amiri/Amiri-Regular.ttf"))
+registerFont(TTFont("Amiri-Bold", FONTS_DIR + "/Amiri/Amiri-Bold.ttf"))
+registerFont(TTFont("Amiri-Italic", FONTS_DIR + "/Amiri/Amiri-Slanted.ttf"))
+registerFont(TTFont("Amiri-BoldItalic", FONTS_DIR + "/Amiri/Amiri-BoldSlanted.ttf"))
 registerFontFamily(
-    'Amiri',
-    normal='Amiri',
-    bold='Amiri-Bold',
-    italic='Amiri-Italic',
-    boldItalic='Amiri-BoldItalic',
+    "Amiri",
+    normal="Amiri",
+    bold="Amiri-Bold",
+    italic="Amiri-Italic",
+    boldItalic="Amiri-BoldItalic",
 )
-addMapping('Amiri', 0, 0, 'Amiri')
-addMapping('Amiri-Bold', 1, 0, 'Amiri Bold')
-addMapping('Amiri-Italic', 0, 1, 'Amiri Italic')
-addMapping('Amiri-BoldItalic', 1, 1, 'Amiri Bold Italic')
+addMapping("Amiri", 0, 0, "Amiri")
+addMapping("Amiri-Bold", 1, 0, "Amiri Bold")
+addMapping("Amiri-Italic", 0, 1, "Amiri Italic")
+addMapping("Amiri-BoldItalic", 1, 1, "Amiri Bold Italic")
 
 # Dicts of supported characters in our fonts.
-noto_chars = TTFont('NotoSerif', FONTS_DIR + '/Noto/NotoSerif-Regular.ttf').face.charWidths
-cjk_chars = TTFont('NotoSerifCJKsc', FONTS_DIR + '/Noto/NotoSerifCJKsc-Regular.ttf').face.charWidths
-symbola_chars = TTFont('Symbola', FONTS_DIR + '/Symbola/Symbola.ttf').face.charWidths
+noto_chars = TTFont("NotoSerif", FONTS_DIR + "/Noto/NotoSerif-Regular.ttf").face.charWidths
+cjk_chars = TTFont("NotoSerifCJKsc", FONTS_DIR + "/Noto/NotoSerifCJKsc-Regular.ttf").face.charWidths
+symbola_chars = TTFont("Symbola", FONTS_DIR + "/Symbola/Symbola.ttf").face.charWidths
 aboriginal_chars = TTFont(
-    'NotoSansCanadianAboriginal', FONTS_DIR + '/Noto/NotoSansCanadianAboriginal-Regular.ttf',
+    "NotoSansCanadianAboriginal",
+    FONTS_DIR + "/Noto/NotoSansCanadianAboriginal-Regular.ttf",
 ).face.charWidths
-arabic_chars = TTFont('Amiri', FONTS_DIR + '/Amiri/Amiri-Regular.ttf').face.charWidths
+arabic_chars = TTFont("Amiri", FONTS_DIR + "/Amiri/Amiri-Regular.ttf").face.charWidths
 
 
 def get_coverpage(article):
@@ -131,10 +135,10 @@ def get_coverpage(article):
         leftMargin=30,
         topMargin=30,
         bottomMargin=18,
-        title=PDFString(article.title, enc='raw'),
-        author=PDFString(article.get_formatted_authors_without_suffixes(), enc='raw'),
-        creator='Érudit',
-        subject='',
+        title=PDFString(article.title, enc="raw"),
+        author=PDFString(article.get_formatted_authors_without_suffixes(), enc="raw"),
+        creator="Érudit",
+        subject="",
     )
     language = get_language()
 
@@ -157,15 +161,18 @@ def get_coverpage(article):
     # INFO
 
     # PDF creation date & time.
-    story.append(Paragraph(
-        _('Document généré le %(now_dt)s') % {
-            'now_dt': formats.date_format(
-                datetime.datetime.now(tz=timezone.get_current_timezone()),
-                'SHORT_DATETIME_FORMAT'
-            ),
-        },
-        styles['small_grey'],
-    ))
+    story.append(
+        Paragraph(
+            _("Document généré le %(now_dt)s")
+            % {
+                "now_dt": formats.date_format(
+                    datetime.datetime.now(tz=timezone.get_current_timezone()),
+                    "SHORT_DATETIME_FORMAT",
+                ),
+            },
+            styles["small_grey"],
+        )
+    )
 
     # Black line.
     story.append(medium_spacer)
@@ -179,89 +186,114 @@ def get_coverpage(article):
 
     # Journal main title.
     journal_titles = article.issue.erudit_object.get_journal_title()
-    journal_main_title = journal_titles.get('main')
-    header.append(Paragraph(
-        journal_main_title.title,
-        styles['h3'],
-    ))
+    journal_main_title = journal_titles.get("main")
+    header.append(
+        Paragraph(
+            journal_main_title.title,
+            styles["h3"],
+        )
+    )
     # Journal main subtitle.
     if journal_main_title.subtitle:
-        header.append(Paragraph(
-            journal_main_title.subtitle,
-            styles['h4'],
-        ))
+        header.append(
+            Paragraph(
+                journal_main_title.subtitle,
+                styles["h4"],
+            )
+        )
 
     # Journal parallel titles.
-    for journal_paral_title in journal_titles.get('paral'):
+    for journal_paral_title in journal_titles.get("paral"):
         if journal_main_title.title != journal_paral_title.title:
             header.append(small_spacer)
-            header.append(Paragraph(
-                journal_paral_title.title,
-                styles['h3'],
-            ))
+            header.append(
+                Paragraph(
+                    journal_paral_title.title,
+                    styles["h3"],
+                )
+            )
         # Journal parallel subtitles.
         if journal_paral_title.subtitle:
-            header.append(Paragraph(
-                journal_paral_title.subtitle,
-                styles['h4'],
-            ))
+            header.append(
+                Paragraph(
+                    journal_paral_title.subtitle,
+                    styles["h4"],
+                )
+            )
     header.append(extra_large_spacer)
 
     # Article titles.
     titles = article.erudit_object.get_titles()
-    if titles['main'].title is None and not titles['reviewed_works']:
-        header.append(Paragraph(
-            _('[Article sans titre]'),
-            styles['h1'],
-        ))
-    if titles['main'].title:
-        header.append(Paragraph(
-            clean(titles['main'].title, article=article, font_weight='bold'),
-            styles['h1'],
-        ))
-        if titles['main'].subtitle:
-            header.append(Paragraph(
-                clean(titles['main'].subtitle, article=article, font_weight='bold'),
-                styles['h1_grey'],
-            ))
-        for title in titles['paral'] + titles['equivalent']:
+    if titles["main"].title is None and not titles["reviewed_works"]:
+        header.append(
+            Paragraph(
+                _("[Article sans titre]"),
+                styles["h1"],
+            )
+        )
+    if titles["main"].title:
+        header.append(
+            Paragraph(
+                clean(titles["main"].title, article=article, font_weight="bold"),
+                styles["h1"],
+            )
+        )
+        if titles["main"].subtitle:
+            header.append(
+                Paragraph(
+                    clean(titles["main"].subtitle, article=article, font_weight="bold"),
+                    styles["h1_grey"],
+                )
+            )
+        for title in titles["paral"] + titles["equivalent"]:
             header.append(small_spacer)
-            header.append(Paragraph(
-                clean(title.title, article=article, font_weight='bold'),
-                styles['h1'] if title.subtitle else styles['h1_grey'],
-            ))
+            header.append(
+                Paragraph(
+                    clean(title.title, article=article, font_weight="bold"),
+                    styles["h1"] if title.subtitle else styles["h1_grey"],
+                )
+            )
             if title.subtitle:
-                header.append(Paragraph(
-                    clean(title.subtitle, article=article, font_weight='bold'),
-                    styles['h1_grey'],
-                ))
-    for title in titles['reviewed_works']:
+                header.append(
+                    Paragraph(
+                        clean(title.subtitle, article=article, font_weight="bold"),
+                        styles["h1_grey"],
+                    )
+                )
+    for title in titles["reviewed_works"]:
         header.append(small_spacer)
-        header.append(Paragraph(
-            clean(title, article=article, font_weight='bold'),
-            styles['h1_grey'],
-        ))
+        header.append(
+            Paragraph(
+                clean(title, article=article, font_weight="bold"),
+                styles["h1_grey"],
+            )
+        )
     header.append(large_spacer)
 
     # Article authors.
-    header.append(Paragraph(
-        clean(article.get_formatted_authors_without_suffixes(), article=article),
-        styles['h2'],
-    ))
+    header.append(
+        Paragraph(
+            clean(article.get_formatted_authors_without_suffixes(), article=article),
+            styles["h2"],
+        )
+    )
 
     # Journal path.
-    journal_path = reverse('public:journal:journal_detail', kwargs={
-        'code': article.issue.journal.code,
-    })
+    journal_path = reverse(
+        "public:journal:journal_detail",
+        kwargs={
+            "code": article.issue.journal.code,
+        },
+    )
     # Journal logo.
     journal_logo_ds = get_cached_datastream_content(
         article.issue.journal.get_full_identifier(),
-        'LOGO',
+        "LOGO",
     )
     if journal_logo_ds is not None:
         journal_logo = HyperlinkedImage(
             journal_logo_ds,
-            hyperlink='https://www.erudit.org{}'.format(journal_path),
+            hyperlink="https://www.erudit.org{}".format(journal_path),
         )
         # Resize journal logo if it's wider than 80 points.
         journal_logo._restrictSize(80, 220)
@@ -271,9 +303,13 @@ def get_coverpage(article):
         [(KeepInFrame(472, 220, header), journal_logo)],
         colWidths=(462, 90),
     )
-    header_table.setStyle(TableStyle([
-        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ]))
+    header_table.setStyle(
+        TableStyle(
+            [
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ]
+        )
+    )
     story.append(header_table)
 
     # Grey line.
@@ -290,55 +326,64 @@ def get_coverpage(article):
     # Issue themes.
     themes = article.issue.erudit_object.get_themes(formatted=True, html=True)
     if themes:
-        for index, theme in enumerate(themes[0]['names']):
-            left_column.append(Paragraph(
-                clean(theme, article=article),
-                styles['normal'] if index == 0 else styles['normal_grey'],
-            ))
+        for index, theme in enumerate(themes[0]["names"]):
+            left_column.append(
+                Paragraph(
+                    clean(theme, article=article),
+                    styles["normal"] if index == 0 else styles["normal_grey"],
+                )
+            )
         left_column.append(small_spacer)
 
     # Volume title.
-    left_column.append(Paragraph(
-        article.issue.volume_title,
-        styles['normal'],
-    ))
+    left_column.append(
+        Paragraph(
+            article.issue.volume_title,
+            styles["normal"],
+        )
+    )
     left_column.append(large_spacer)
 
     # URI & DOI.
-    left_column.append(Paragraph(
-        '{label} <link href="{url}" color="#ff4242">{url}</link>'.format(
-            label=_('URI&nbsp;:'),
-            url='https://id.erudit.org/iderudit/{path}'.format(
-                path=article.localidentifier
-            )
-        ),
-        styles['normal'],
-    ))
-    if article.doi:
-        left_column.append(Paragraph(
+    left_column.append(
+        Paragraph(
             '{label} <link href="{url}" color="#ff4242">{url}</link>'.format(
-                label=_('DOI&nbsp;:'),
-                url=article.url_doi,
+                label=_("URI&nbsp;:"),
+                url="https://id.erudit.org/iderudit/{path}".format(path=article.localidentifier),
             ),
-            styles['normal'],
-        ))
+            styles["normal"],
+        )
+    )
+    if article.doi:
+        left_column.append(
+            Paragraph(
+                '{label} <link href="{url}" color="#ff4242">{url}</link>'.format(
+                    label=_("DOI&nbsp;:"),
+                    url=article.url_doi,
+                ),
+                styles["normal"],
+            )
+        )
     left_column.append(large_spacer)
 
     # Issue summary link.
-    issue_path = reverse('public:journal:issue_detail', kwargs={
-        'journal_code': article.issue.journal.code,
-        'issue_slug': article.issue.volume_slug,
-        'localidentifier': article.issue.localidentifier,
-    })
-    left_column.append(Paragraph(
-        '<link href="{url}" color="#ff4242">{text}</link>'.format(
-            url='https://www.erudit.org{}'.format(
-                issue_path
+    issue_path = reverse(
+        "public:journal:issue_detail",
+        kwargs={
+            "journal_code": article.issue.journal.code,
+            "issue_slug": article.issue.volume_slug,
+            "localidentifier": article.issue.localidentifier,
+        },
+    )
+    left_column.append(
+        Paragraph(
+            '<link href="{url}" color="#ff4242">{text}</link>'.format(
+                url="https://www.erudit.org{}".format(issue_path),
+                text=_("Aller au sommaire du numéro"),
             ),
-            text=_('Aller au sommaire du numéro'),
-        ),
-        styles['normal'],
-    ))
+            styles["normal"],
+        )
+    )
 
     # Grey line.
     left_column.append(large_spacer)
@@ -346,53 +391,63 @@ def get_coverpage(article):
     left_column.append(large_spacer)
 
     # Publishers.
-    left_column.append(Paragraph(
-        _('Éditeur(s)'),
-        styles['normal'],
-    ))
+    left_column.append(
+        Paragraph(
+            _("Éditeur(s)"),
+            styles["normal"],
+        )
+    )
     left_column.append(medium_spacer)
     for publisher in article.erudit_object.publishers:
-        left_column.append(Paragraph(
-            publisher,
-            styles['small'],
-        ))
+        left_column.append(
+            Paragraph(
+                publisher,
+                styles["small"],
+            )
+        )
     left_column.append(large_spacer)
 
     # ISSN
     if article.issue.journal.issn_print or article.issue.journal.issn_web:
-        left_column.append(Paragraph(
-            _('ISSN'),
-            styles['normal'],
-        ))
+        left_column.append(
+            Paragraph(
+                _("ISSN"),
+                styles["normal"],
+            )
+        )
     left_column.append(medium_spacer)
     if article.issue.journal.issn_print:
-        left_column.append(Paragraph(
-            '{issn} ({label})'.format(
-                issn=article.issue.journal.issn_print,
-                label=_('imprimé'),
-            ),
-            styles['small'],
-        ))
+        left_column.append(
+            Paragraph(
+                "{issn} ({label})".format(
+                    issn=article.issue.journal.issn_print,
+                    label=_("imprimé"),
+                ),
+                styles["small"],
+            )
+        )
     if article.issue.journal.issn_web:
-        left_column.append(Paragraph(
-            '{issn} ({label})'.format(
-                issn=article.issue.journal.issn_web,
-                label=_('numérique'),
-            ),
-            styles['small'],
-        ))
+        left_column.append(
+            Paragraph(
+                "{issn} ({label})".format(
+                    issn=article.issue.journal.issn_web,
+                    label=_("numérique"),
+                ),
+                styles["small"],
+            )
+        )
     left_column.append(large_spacer)
 
     # Journal link.
-    left_column.append(Paragraph(
-        '<link href="{url}" color="#ff4242">{text}</link>'.format(
-            url='https://www.erudit.org{}'.format(
-                journal_path
+    left_column.append(
+        Paragraph(
+            '<link href="{url}" color="#ff4242">{text}</link>'.format(
+                url="https://www.erudit.org{}".format(journal_path),
+                text=_("Découvrir la revue"),
             ),
-            text=_('Découvrir la revue'),
-        ),
-        styles['normal'],
-    ))
+            styles["normal"],
+        )
+    )
 
     # Grey line.
     left_column.append(large_spacer)
@@ -400,50 +455,62 @@ def get_coverpage(article):
     left_column.append(large_spacer)
 
     cite_strings = {
-        Article.ARTICLE_DEFAULT: _('Citer cet article'),
-        Article.ARTICLE_REPORT: _('Citer ce compte rendu'),
-        Article.ARTICLE_OTHER: _('Citer ce document'),
-        Article.ARTICLE_NOTE: _('Citer cette note'),
+        Article.ARTICLE_DEFAULT: _("Citer cet article"),
+        Article.ARTICLE_REPORT: _("Citer ce compte rendu"),
+        Article.ARTICLE_OTHER: _("Citer ce document"),
+        Article.ARTICLE_NOTE: _("Citer cette note"),
     }
 
     # Cite this article.
-    left_column.append(Paragraph(
-        cite_strings.get(article.type),
-        styles['normal'],
-    ))
+    left_column.append(
+        Paragraph(
+            cite_strings.get(article.type),
+            styles["normal"],
+        )
+    )
     left_column.append(medium_spacer)
-    left_column.append(Paragraph(
-        clean(article.cite_string_apa, article=article),
-        styles['small'],
-    ))
+    left_column.append(
+        Paragraph(
+            clean(article.cite_string_apa, article=article),
+            styles["small"],
+        )
+    )
 
     # Right column.
     right_column = []
 
     # Abstracts.
     if article.html_abstract:
-        right_column.append(Paragraph(
-            _("Résumé de l'article"),
-            styles['normal'],
-        ))
+        right_column.append(
+            Paragraph(
+                _("Résumé de l'article"),
+                styles["normal"],
+            )
+        )
         right_column.append(medium_spacer)
-        soup = BeautifulSoup(article.html_abstract, features='html.parser')
-        for paragraph in soup.find_all('p'):
-            right_column.append(Paragraph(
-                clean(paragraph, article=article),
-                styles['small'],
-            ))
+        soup = BeautifulSoup(article.html_abstract, features="html.parser")
+        for paragraph in soup.find_all("p"):
+            right_column.append(
+                Paragraph(
+                    clean(paragraph, article=article),
+                    styles["small"],
+                )
+            )
             right_column.append(small_spacer)
 
     # Body table.
     body_table = Table(
         [(KeepInFrame(276, 350, left_column), KeepInFrame(276, 350, right_column))],
         colWidths=276,
-        rowHeights=350
+        rowHeights=350,
     )
-    body_table.setStyle(TableStyle([
-        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ]))
+    body_table.setStyle(
+        TableStyle(
+            [
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ]
+        )
+    )
     story.append(body_table)
 
     # -----------------------------------------------------------------------------
@@ -453,17 +520,19 @@ def get_coverpage(article):
     copyrights = []
     copyrights.append(small_spacer)
     for copyright in article.copyrights:
-        if 'text' in copyright:
-            copyrights.append(Paragraph(
-                copyright['text'],
-                styles['small'],
-            ))
+        if "text" in copyright:
+            copyrights.append(
+                Paragraph(
+                    copyright["text"],
+                    styles["small"],
+                )
+            )
             copyrights.append(small_spacer)
-        elif 'href' in copyright and 'img' in copyright:
+        elif "href" in copyright and "img" in copyright:
             try:
-                parsed = urlparse(copyright['img'])
-                path = STATIC_ROOT + '/img/licensebuttons.net/' + parsed.path
-                image = HyperlinkedImage(path, hyperlink=copyright['href'])
+                parsed = urlparse(copyright["img"])
+                path = STATIC_ROOT + "/img/licensebuttons.net/" + parsed.path
+                image = HyperlinkedImage(path, hyperlink=copyright["href"])
                 # Resize license logo if it's wider than 50 points.
                 image._restrictSize(50, 35)
                 copyrights.append(image)
@@ -474,60 +543,72 @@ def get_coverpage(article):
 
     # Policy.
     policy_urls = {
-        'fr': 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/',
-        'en': 'https://apropos.erudit.org/en/users/policy-on-use/',
+        "fr": "https://apropos.erudit.org/fr/usagers/politique-dutilisation/",
+        "en": "https://apropos.erudit.org/en/users/policy-on-use/",
     }
     statement = []
     statement.append(small_spacer)
-    statement.append(Paragraph(
-        _('Ce document est protégé par la loi sur le droit d’auteur. L’utilisation des services \
+    statement.append(
+        Paragraph(
+            _(
+                "Ce document est protégé par la loi sur le droit d’auteur. L’utilisation des services \
         d’Érudit (y compris la reproduction) est assujettie à sa politique d’utilisation que vous \
-        pouvez consulter en ligne.'),
-        styles['small'],
-    ))
+        pouvez consulter en ligne."
+            ),
+            styles["small"],
+        )
+    )
     statement.append(small_spacer)
-    statement.append(Paragraph(
-        '<link href="{url}" color="#ff4242">{url}</link>'.format(
-            url=policy_urls[language]
-        ),
-        styles['small'],
-    ))
+    statement.append(
+        Paragraph(
+            '<link href="{url}" color="#ff4242">{url}</link>'.format(url=policy_urls[language]),
+            styles["small"],
+        )
+    )
     statement.append(small_spacer)
 
     # Mission.
     mission = []
     mission.append(small_spacer)
-    mission.append(Paragraph(
-        _('Cet article est diffusé et préservé par Érudit.'),
-        styles['small'],
-    ))
+    mission.append(
+        Paragraph(
+            _("Cet article est diffusé et préservé par Érudit."),
+            styles["small"],
+        )
+    )
     mission.append(small_spacer)
-    mission.append(Paragraph(
-        _('Érudit est un consortium interuniversitaire sans but lucratif composé de l’Université de \
+    mission.append(
+        Paragraph(
+            _(
+                "Érudit est un consortium interuniversitaire sans but lucratif composé de l’Université de \
         Montréal, l’Université Laval et l’Université du Québec à Montréal. Il a pour mission la \
-        promotion et la valorisation de la recherche.'),
-        styles['small_grey'],
-    ))
+        promotion et la valorisation de la recherche."
+            ),
+            styles["small_grey"],
+        )
+    )
     mission.append(small_spacer)
-    mission.append(Paragraph(
-        '<link href="{url}" color="#ff4242">{url}</link>'.format(
-            url='https://www.erudit.org/{lang}/'.format(
-                lang=language
-            )
-        ),
-        styles['small'],
-    ))
+    mission.append(
+        Paragraph(
+            '<link href="{url}" color="#ff4242">{url}</link>'.format(
+                url="https://www.erudit.org/{lang}/".format(lang=language)
+            ),
+            styles["small"],
+        )
+    )
     mission.append(small_spacer)
 
     # Logo.
     logo = []
     logo.append(small_spacer)
-    logo.append(HyperlinkedImage(
-        STATIC_ROOT + '/img/logo-erudit.png',
-        hyperlink='https://www.erudit.org/{lang}/'.format(lang=language),
-        width=75.75,
-        height=25,
-    ))
+    logo.append(
+        HyperlinkedImage(
+            STATIC_ROOT + "/img/logo-erudit.png",
+            hyperlink="https://www.erudit.org/{lang}/".format(lang=language),
+            width=75.75,
+            height=25,
+        )
+    )
     logo.append(small_spacer)
 
     # Footer table
@@ -536,12 +617,16 @@ def get_coverpage(article):
         colWidths=271,
         rowHeights=55,
     )
-    footer_table.setStyle(TableStyle([
-        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-        ('LINEABOVE', (0, 0), (-1, 0), 1, colors.lightgrey),
-        ('LINEABOVE', (0, 1), (-1, -1), 1, colors.black),
-        ('LEFTPADDING', (0, 0), (-1, -1), 0),
-    ]))
+    footer_table.setStyle(
+        TableStyle(
+            [
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEABOVE", (0, 0), (-1, 0), 1, colors.lightgrey),
+                ("LINEABOVE", (0, 1), (-1, -1), 1, colors.black),
+                ("LEFTPADDING", (0, 0), (-1, -1), 0),
+            ]
+        )
+    )
 
     def footer_content(canvas, document):
         canvas.saveState()
@@ -557,106 +642,130 @@ def get_coverpage(article):
 
 
 def get_stylesheet(language):
-    font_name = 'NotoSerifCJKsc' if language in ['zh', 'ja', 'ko'] else 'NotoSerif'
+    font_name = "NotoSerifCJKsc" if language in ["zh", "ja", "ko"] else "NotoSerif"
     stylesheet = StyleSheet1()
-    stylesheet.add(ParagraphStyle(
-        name='normal',
-        fontName=font_name,
-        fontSize=8,
-        leading=10,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='bold',
-        parent=stylesheet['normal'],
-        fontName=f'{font_name}-Bold',
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='italic',
-        parent=stylesheet['normal'],
-        fontName=f'{font_name}-Italic',
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='bold_italic',
-        parent=stylesheet['normal'],
-        fontName=f'{font_name}-BoldItalic',
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='h1',
-        parent=stylesheet['bold'],
-        fontSize=14,
-        leading=16,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='h2',
-        parent=stylesheet['normal'],
-        fontSize=12,
-        leading=14,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='h3',
-        parent=stylesheet['bold'],
-        fontSize=12,
-        leading=14,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='h4',
-        parent=stylesheet['bold'],
-        fontSize=10,
-        leading=12,
-        textColor=colors.grey,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='small',
-        parent=stylesheet['normal'],
-        fontSize=7,
-        leading=9,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='small_grey',
-        parent=stylesheet['small'],
-        textColor=colors.grey,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='h1_grey',
-        parent=stylesheet['h1'],
-        textColor=colors.grey,
-    ))
-    stylesheet.add(ParagraphStyle(
-        name='normal_grey',
-        parent=stylesheet['normal'],
-        textColor=colors.grey,
-    ))
+    stylesheet.add(
+        ParagraphStyle(
+            name="normal",
+            fontName=font_name,
+            fontSize=8,
+            leading=10,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="bold",
+            parent=stylesheet["normal"],
+            fontName=f"{font_name}-Bold",
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="italic",
+            parent=stylesheet["normal"],
+            fontName=f"{font_name}-Italic",
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="bold_italic",
+            parent=stylesheet["normal"],
+            fontName=f"{font_name}-BoldItalic",
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="h1",
+            parent=stylesheet["bold"],
+            fontSize=14,
+            leading=16,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="h2",
+            parent=stylesheet["normal"],
+            fontSize=12,
+            leading=14,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="h3",
+            parent=stylesheet["bold"],
+            fontSize=12,
+            leading=14,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="h4",
+            parent=stylesheet["bold"],
+            fontSize=10,
+            leading=12,
+            textColor=colors.grey,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="small",
+            parent=stylesheet["normal"],
+            fontSize=7,
+            leading=9,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="small_grey",
+            parent=stylesheet["small"],
+            textColor=colors.grey,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="h1_grey",
+            parent=stylesheet["h1"],
+            textColor=colors.grey,
+        )
+    )
+    stylesheet.add(
+        ParagraphStyle(
+            name="normal_grey",
+            parent=stylesheet["normal"],
+            textColor=colors.grey,
+        )
+    )
     return stylesheet
 
 
 def clean(text, article, font_weight=None):
-    soup = text if isinstance(text, Tag) else BeautifulSoup(text, 'html.parser')
+    soup = text if isinstance(text, Tag) else BeautifulSoup(text, "html.parser")
     # Replace <span class="barre"> by <strike>
-    for node in soup.find_all('span', attrs={'class': 'barre'}):
-        del node['class']
-        node.name = 'strike'
+    for node in soup.find_all("span", attrs={"class": "barre"}):
+        del node["class"]
+        node.name = "strike"
     # Replace <span class="souligne"> by <u>
-    for node in soup.find_all('span', attrs={'class': 'souligne'}):
-        del node['class']
-        node.name = 'u'
+    for node in soup.find_all("span", attrs={"class": "souligne"}):
+        del node["class"]
+        node.name = "u"
     # Uppercase <span class="majuscule"> nodes.
-    for node in soup.find_all('span', attrs={'class': 'majuscule'}):
-        del node['class']
+    for node in soup.find_all("span", attrs={"class": "majuscule"}):
+        del node["class"]
         node.replace_with(node.text.upper())
     # Change the font of <span class="petitecap"> nodes.
-    for node in soup.find_all('span', attrs={'class': 'petitecap'}):
-        del node['class']
-        node['fontName'] = 'SpectralSC-Bold' if font_weight == 'bold' else 'SpectralSC'
+    for node in soup.find_all("span", attrs={"class": "petitecap"}):
+        del node["class"]
+        node["fontName"] = "SpectralSC-Bold" if font_weight == "bold" else "SpectralSC"
     # Remove any footnotes.
-    for node in soup.find_all('a', attrs={'class': 'norenvoi'}):
+    for node in soup.find_all("a", attrs={"class": "norenvoi"}):
         node.decompose()
     # Remove all other classes we can't transform.
-    for node in soup.find_all('span', attrs={'class': re.compile('.*')}):
-        del node['class']
+    for node in soup.find_all("span", attrs={"class": re.compile(".*")}):
+        del node["class"]
     text = str(soup)
 
     # Remove unicode variation selectors, they are not supported by our fonts.
-    text = re.sub(r'[\uFE00-\uFE0F]', '', text)
+    text = re.sub(r"[\uFE00-\uFE0F]", "", text)
 
     # Check if we have unsupported characters in Noto font.
     text_chars = {ord(c) for c in text}
@@ -668,7 +777,7 @@ def clean(text, article, font_weight=None):
         for char in chars_not_in_noto:
             if char in cjk_chars:
                 char = chr(char)
-                font_name = 'NotoSerifCJKsc-Bold' if font_weight == 'bold' else 'NotoSerifCJKsc'
+                font_name = "NotoSerifCJKsc-Bold" if font_weight == "bold" else "NotoSerifCJKsc"
                 text = text.replace(char, f'<span fontName="{font_name}">{char}</span>')
             elif char in symbola_chars:
                 char = chr(char)
@@ -693,7 +802,7 @@ def clean(text, article, font_weight=None):
                 scope.fingerprint = [article_pid]
             # If some characters are not supported by our fonts, log them.
             logger.warning(
-                'Coverpage: Unsupported characters',
+                "Coverpage: Unsupported characters",
                 unsupported_characters=unsupported_characters,
                 article_pid=article_pid,
             )
@@ -701,14 +810,13 @@ def clean(text, article, font_weight=None):
         # If we have arabic characters, we need to display it right to left (`get_display()`),
         # reshape characters based on their neighbours (`reshape()`) and set the Amiri font.
         if is_arabic:
-            font_name = 'Amiri-Bold' if font_weight == 'bold' else 'Amiri'
+            font_name = "Amiri-Bold" if font_weight == "bold" else "Amiri"
             text = get_display(reshape(f'<span fontName="{font_name}">{text}</span>'))
 
     return text
 
 
 class Line(Flowable):
-
     def __init__(self, color, width, height):
         Flowable.__init__(self)
         self.color = color
@@ -716,7 +824,7 @@ class Line(Flowable):
         self.height = height
 
     def __repr__(self):
-        return f'Line(color={self.color}, width={self.width}, height={self.height})'
+        return f"Line(color={self.color}, width={self.width}, height={self.height})"
 
     def draw(self):
         self.canv.setStrokeColor(self.color)
@@ -724,9 +832,17 @@ class Line(Flowable):
 
 
 class HyperlinkedImage(Image):
-
-    def __init__(self, filename, width=None, height=None, kind='direct', mask='auto', lazy=1,
-                 hAlign='LEFT', hyperlink=None):
+    def __init__(
+        self,
+        filename,
+        width=None,
+        height=None,
+        kind="direct",
+        mask="auto",
+        lazy=1,
+        hAlign="LEFT",
+        hyperlink=None,
+    ):
         self.hyperlink = hyperlink
         super(HyperlinkedImage, self).__init__(filename, width, height, kind, mask, lazy, hAlign)
 
