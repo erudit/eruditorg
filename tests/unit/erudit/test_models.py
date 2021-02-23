@@ -38,8 +38,8 @@ class TestJournal:
         assert journal.erudit_class == EruditJournal
 
     def test_can_return_an_appropriate_fedora_pid(self):
-        journal = JournalFactory(localidentifier='dummy139')
-        assert journal.pid == 'erudit:erudit.dummy139'
+        journal = JournalFactory(localidentifier="dummy139")
+        assert journal.pid == "erudit:erudit.dummy139"
 
     def test_can_return_its_published_issues(self):
         journal = JournalFactory()
@@ -48,14 +48,16 @@ class TestJournal:
 
         # Create an unpublished issue
         IssueFactory.create(
-            journal=journal, is_published=False,
+            journal=journal,
+            is_published=False,
             year=dt.datetime.now().year + 2,
         )
         assert set(journal.published_issues) == {issue_1, issue_2}
 
     def test_can_return_when_date_embargo_begins(self, monkeypatch):
         import erudit.conf.settings
-        monkeypatch.setattr(erudit.conf.settings, 'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS', 42)
+
+        monkeypatch.setattr(erudit.conf.settings, "SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS", 42)
         journal = JournalFactory(open_access=False)
         EXPECTED = dt.date.today() - dr.relativedelta(months=42)
         assert journal.date_embargo_begins == EXPECTED
@@ -109,23 +111,26 @@ class TestJournal:
         assert j2.current_issue == i2
 
     def test_can_return_its_letter_prefix(self):
-        journal_1 = JournalFactory.create(name='Test')
-        assert journal_1.letter_prefix == 'T'
+        journal_1 = JournalFactory.create(name="Test")
+        assert journal_1.letter_prefix == "T"
 
     def test_can_return_the_published_open_access_issues(self):
         journal = JournalFactory(open_access=False)
         embargo_date = journal.date_embargo_begins
         # inside embargo date, not published
         issue_1 = IssueFactory.create(  # noqa
-            journal=journal, is_published=True, date_published=embargo_date)
+            journal=journal, is_published=True, date_published=embargo_date
+        )
         # after embargo date, published
         issue_2 = IssueFactory.create(
-            journal=journal, is_published=True,
-            date_published=embargo_date - dr.relativedelta(days=1))
+            journal=journal,
+            is_published=True,
+            date_published=embargo_date - dr.relativedelta(days=1),
+        )
         # inside embargo date, but whitelisted
         issue_3 = IssueFactory.create(
-            journal=journal, is_published=True, date_published=embargo_date,
-            force_free_access=True)
+            journal=journal, is_published=True, date_published=embargo_date, force_free_access=True
+        )
         assert set(journal.published_open_access_issues) == {issue_2, issue_3}
 
     def test_published_issues_uses_fedora_order(self):
@@ -164,25 +169,30 @@ class TestJournal:
 
         assert list(i1.journal.published_issues.all()) == [i2, i1]
 
-    def test_first_issue_published_on_erudit_when_issues_are_not_produced_in_the_same_order_as_their_published_date(self):
+    def test_first_issue_published_on_erudit_when_issues_are_not_produced_in_the_same_order_as_their_published_date(
+        self,
+    ):
         journal = JournalFactory()
         issue_1 = IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
         issue_2 = IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
         issue_3 = IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
         assert journal.first_issue_published_on_erudit.date_published == dt.date(2015, 1, 1)
 
-    @pytest.mark.parametrize('logo, expected_has_logo', [
-        ('logo.png', True),
-        ('logo_empty.png', False),
-        (False, False),
-    ])
+    @pytest.mark.parametrize(
+        "logo, expected_has_logo",
+        [
+            ("logo.png", True),
+            ("logo_empty.png", False),
+            (False, False),
+        ],
+    )
     def test_knows_if_it_has_a_logo(self, logo, expected_has_logo):
         journal = JournalFactory()
         if logo:
             repository.api.register_datastream(
                 journal.get_full_identifier(),
-                '/LOGO/content',
-                open(settings.MEDIA_ROOT + '/' + logo, 'rb').read(),
+                "/LOGO/content",
+                open(settings.MEDIA_ROOT + "/" + logo, "rb").read(),
             )
         assert journal.has_logo == expected_has_logo
 
@@ -203,26 +213,30 @@ class TestIssue:
         assert issue.erudit_class == EruditPublication
 
     def test_can_return_its_full_identifier(self):
-        journal = JournalFactory(localidentifier='dummy139')
-        issue = IssueFactory(journal=journal, localidentifier='dummy1234')
-        assert issue.get_full_identifier() == 'erudit:erudit.dummy139.dummy1234'
+        journal = JournalFactory(localidentifier="dummy139")
+        issue = IssueFactory(journal=journal, localidentifier="dummy1234")
+        assert issue.get_full_identifier() == "erudit:erudit.dummy139.dummy1234"
 
     def test_issue_has_no_full_identifier_if_a_part_is_missing(self):
-        journal = JournalFactory(localidentifier='dummy139')
+        journal = JournalFactory(localidentifier="dummy139")
         issue = IssueFactory(journal=journal, localidentifier=None)
         assert issue.get_full_identifier() is None
 
     def test_can_return_an_appropriate_fedora_pid(self):
-        journal = JournalFactory(localidentifier='dummy139')
-        issue = IssueFactory(journal=journal, localidentifier='dummy1234')
-        assert issue.pid == 'erudit:erudit.dummy139.dummy1234'
+        journal = JournalFactory(localidentifier="dummy139")
+        issue = IssueFactory(journal=journal, localidentifier="dummy1234")
+        assert issue.pid == "erudit:erudit.dummy139.dummy1234"
 
-    @pytest.mark.parametrize('journal_type,conf_name', [
-        ('S', 'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS'),
-        ('C', 'CULTURAL_JOURNAL_EMBARGO_IN_MONTHS'),
-    ])
+    @pytest.mark.parametrize(
+        "journal_type,conf_name",
+        [
+            ("S", "SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS"),
+            ("C", "CULTURAL_JOURNAL_EMBARGO_IN_MONTHS"),
+        ],
+    )
     def test_knows_if_it_is_embargoed(self, journal_type, conf_name):
         import erudit.conf.settings
+
         ml = getattr(erudit.conf.settings, conf_name)
         journal = JournalFactory(type_code=journal_type)
         now_dt = dt.date.today()
@@ -235,26 +249,29 @@ class TestIssue:
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
         date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         issue_1 = IssueFactory.create(
-            journal=journal, year=date_issue_1.year,
-            date_published=date_issue_1)
+            journal=journal, year=date_issue_1.year, date_published=date_issue_1
+        )
         issue_2 = IssueFactory.create(
-            journal=journal, year=date_issue_2.year,
-            date_published=date_issue_2)
+            journal=journal, year=date_issue_2.year, date_published=date_issue_2
+        )
         issue_3 = IssueFactory.create(
-            journal=journal, year=date_issue_3.year,
-            date_published=date_issue_3)
+            journal=journal, year=date_issue_3.year, date_published=date_issue_3
+        )
         issue_4 = IssueFactory.create(
-            journal=journal, year=date_issue_4.year,
-            date_published=date_issue_4)
+            journal=journal, year=date_issue_4.year, date_published=date_issue_4
+        )
         issue_5 = IssueFactory.create(
-            journal=journal, year=date_issue_5.year,
-            date_published=date_issue_5)
+            journal=journal, year=date_issue_5.year, date_published=date_issue_5
+        )
         issue_6 = IssueFactory.create(
-            journal=journal, year=date_issue_1.year - 10,
-            date_published=date_issue_1)
+            journal=journal, year=date_issue_1.year - 10, date_published=date_issue_1
+        )
         issue_7 = IssueFactory.create(
-            journal=journal, year=date_issue_1.year - 10,
-            date_published=date_issue_1, force_free_access=True)
+            journal=journal,
+            year=date_issue_1.year - 10,
+            date_published=date_issue_1,
+            force_free_access=True,
+        )
         assert issue_1.embargoed
         assert issue_2.embargoed
         assert not issue_3.embargoed
@@ -265,12 +282,11 @@ class TestIssue:
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
-        journal = JournalFactory(type_code='C')
+        journal = JournalFactory(type_code="C")
         journal.last_publication_year = now_dt.year + 1
         journal.save()
         issue = IssueFactory.create(
-            journal=journal,
-            year=now_dt.year + 1, date_published=dt.date(now_dt.year + 1, 1, 1)
+            journal=journal, year=now_dt.year + 1, date_published=dt.date(now_dt.year + 1, 1, 1)
         )
         assert issue.embargoed is True
 
@@ -278,28 +294,29 @@ class TestIssue:
         now_dt = dt.datetime.now()
         journal = JournalFactory()
         j2 = JournalFactory.create(
-            type_code='C',
+            type_code="C",
             open_access=False,
-            collection=CollectionFactory.create(code='not-erudit'),
+            collection=CollectionFactory.create(code="not-erudit"),
         )
         journal.last_publication_year = now_dt.year
         journal.open_access = True
         journal.save()
         issue_1 = IssueFactory.create(
-            journal=journal, year=now_dt.year - 1,
-            date_published=dt.date(now_dt.year - 1, 3, 20))
+            journal=journal, year=now_dt.year - 1, date_published=dt.date(now_dt.year - 1, 3, 20)
+        )
         issue_2 = IssueFactory.create(
-            journal=journal, year=now_dt.year - 2,
-            date_published=dt.date(now_dt.year - 2, 3, 20))
+            journal=journal, year=now_dt.year - 2, date_published=dt.date(now_dt.year - 2, 3, 20)
+        )
         issue_3 = IssueFactory.create(
-            journal=j2, year=now_dt.year,
-            date_published=dt.date(now_dt.year, 3, 20))
+            journal=j2, year=now_dt.year, date_published=dt.date(now_dt.year, 3, 20)
+        )
         assert not issue_1.embargoed
         assert not issue_2.embargoed
         assert not issue_3.embargoed
 
     def test_current_issue_is_always_embargoed(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
         issue1 = IssueFactory(date_published=outside_embargo)
         issue2 = IssueFactory(journal=issue1.journal, date_published=outside_embargo)
@@ -310,10 +327,9 @@ class TestIssue:
 
     def test_current_issue_is_not_always_embargoed_when_next_journal(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
-        issue = IssueFactory(
-            journal__next_journal=JournalFactory(),
-            date_published=outside_embargo)
+        issue = IssueFactory(journal__next_journal=JournalFactory(), date_published=outside_embargo)
         assert not issue.embargoed
 
     def test_issue_with_roc_article_is_forced_to_free_access(self):
@@ -326,20 +342,20 @@ class TestIssue:
 
     def test_has_coverpage(self, monkeypatch):
         issue = IssueFactory(journal__open_access=True)
-        with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
+        with open(settings.MEDIA_ROOT + "/coverpage.png", "rb") as f:
             monkeypatch.setattr(
                 modelmixins,
-                'get_cached_datastream_content',
+                "get_cached_datastream_content",
                 unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
             )
         assert issue.has_coverpage
 
     def test_has_coverpage_with_empty_image(self, monkeypatch):
         issue = IssueFactory(journal__open_access=True)
-        with open(settings.MEDIA_ROOT + '/coverpage_empty.png', 'rb') as f:
+        with open(settings.MEDIA_ROOT + "/coverpage_empty.png", "rb") as f:
             monkeypatch.setattr(
                 modelmixins,
-                'get_cached_datastream_content',
+                "get_cached_datastream_content",
                 unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
             )
         assert not issue.has_coverpage
@@ -348,15 +364,15 @@ class TestIssue:
         issue = IssueFactory(journal__open_access=True)
         monkeypatch.setattr(
             modelmixins,
-            'get_cached_datastream_content',
+            "get_cached_datastream_content",
             unittest.mock.MagicMock(return_value=None),
         )
         assert not issue.has_coverpage
 
-    @pytest.mark.parametrize('is_published', (True, False))
-    @unittest.mock.patch('erudit.fedora.modelmixins.get_cached_datastream_content')
+    @pytest.mark.parametrize("is_published", (True, False))
+    @unittest.mock.patch("erudit.fedora.modelmixins.get_cached_datastream_content")
     def test_has_coverpage_use_cache(self, mock_get_cached_datastream_content, is_published):
-        with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
+        with open(settings.MEDIA_ROOT + "/coverpage.png", "rb") as f:
             issue = IssueFactory(is_published=is_published)
             fedora_object = unittest.mock.MagicMock()
             fedora_object.pid = issue.pid
@@ -368,42 +384,42 @@ class TestIssue:
         assert mock_get_cached_datastream_content.call_count == 1
 
     def test_can_return_a_slug_that_can_be_used_in_urls(self):
-        issue_1 = IssueFactory.create(
-            year=2015, volume='4', number='1', localidentifier='i1')
-        issue_2 = IssueFactory.create(
-            year=2015, volume='4', number=None, localidentifier='i2')
-        issue_3 = IssueFactory.create(
-            year=2015, volume=None, number='2', localidentifier='i3')
-        issue_4 = IssueFactory.create(
-            year=2015, volume='2-3', number='39', localidentifier='i4')
-        issue_5 = IssueFactory.create(
-            year=2015, volume=None, number=None, localidentifier='i5')
-        issue_6 = IssueFactory.create(
-            year=2015, volume='2 bis', number='39', localidentifier='i6')
-        assert issue_1.volume_slug == '2015-v4-n1'
-        assert issue_2.volume_slug == '2015-v4'
-        assert issue_3.volume_slug == '2015-n2'
-        assert issue_4.volume_slug == '2015-v2-3-n39'
-        assert issue_5.volume_slug == '2015'
-        assert issue_6.volume_slug == '2015-v2-bis-n39'
+        issue_1 = IssueFactory.create(year=2015, volume="4", number="1", localidentifier="i1")
+        issue_2 = IssueFactory.create(year=2015, volume="4", number=None, localidentifier="i2")
+        issue_3 = IssueFactory.create(year=2015, volume=None, number="2", localidentifier="i3")
+        issue_4 = IssueFactory.create(year=2015, volume="2-3", number="39", localidentifier="i4")
+        issue_5 = IssueFactory.create(year=2015, volume=None, number=None, localidentifier="i5")
+        issue_6 = IssueFactory.create(year=2015, volume="2 bis", number="39", localidentifier="i6")
+        assert issue_1.volume_slug == "2015-v4-n1"
+        assert issue_2.volume_slug == "2015-v4"
+        assert issue_3.volume_slug == "2015-n2"
+        assert issue_4.volume_slug == "2015-v2-3-n39"
+        assert issue_5.volume_slug == "2015"
+        assert issue_6.volume_slug == "2015-v2-bis-n39"
 
-    @pytest.mark.parametrize('fixture_name,expected', [
-        ('inter02349', "Affirmation autochtone"),
-        ('images1080663', "David Cronenberg / La production au Québec: Cinq cinéastes sur le divan"),  # noqa
-    ])
+    @pytest.mark.parametrize(
+        "fixture_name,expected",
+        [
+            ("inter02349", "Affirmation autochtone"),
+            (
+                "images1080663",
+                "David Cronenberg / La production au Québec: Cinq cinéastes sur le divan",
+            ),  # noqa
+        ],
+    )
     def test_can_return_its_name_with_themes(self, fixture_name, expected):
         issue = IssueFactory()
         repository.api.set_publication_xml(
             issue.get_full_identifier(),
-            open('./tests/fixtures/issue/{}.xml'.format(fixture_name), 'rb').read(),
+            open("./tests/fixtures/issue/{}.xml".format(fixture_name), "rb").read(),
         )
         assert issue.name_with_themes == expected
 
     def test_get_from_fedora_ids_can_return_ephemeral_issues(self):
         journal = JournalFactory()
-        ephemeral_pid = '{}.dummy123'.format(journal.get_full_identifier())
+        ephemeral_pid = "{}.dummy123".format(journal.get_full_identifier())
         repository.api.register_publication(ephemeral_pid)
-        issue = Issue.from_fedora_ids(journal.code, 'dummy123')
+        issue = Issue.from_fedora_ids(journal.code, "dummy123")
         assert issue.id is None
         assert issue.get_full_identifier() == ephemeral_pid
 
@@ -416,18 +432,21 @@ class TestIssue:
     def test_get_from_fedora_ids_can_raise_DoesNotExist(self):
         journal = JournalFactory()
         with pytest.raises(Issue.DoesNotExist):
-            Issue.from_fedora_ids(journal.code, 'dummy123')
+            Issue.from_fedora_ids(journal.code, "dummy123")
 
-    @pytest.mark.parametrize('first_article,second_article,is_external', [
-        # The first publication allowed article has an absolue URL so the issue is external.
-        ({'pdf_url': 'http://example.com'}, {}, True),
-        ({'html_url': 'http://example.com'}, {'html_url': '/example'}, True),
-        ({'publication_allowed': False}, {'pdf_url': 'http://example.com'}, True),
-        # The first publication allowed article has a relative URL so the issue is not external.
-        ({'pdf_url': '/example'}, {}, False),
-        ({'html_url': '/example'}, {'html_url': 'http://example.com'}, False),
-        ({'publication_allowed': False}, {'pdf_url': '/example'}, False),
-    ])
+    @pytest.mark.parametrize(
+        "first_article,second_article,is_external",
+        [
+            # The first publication allowed article has an absolue URL so the issue is external.
+            ({"pdf_url": "http://example.com"}, {}, True),
+            ({"html_url": "http://example.com"}, {"html_url": "/example"}, True),
+            ({"publication_allowed": False}, {"pdf_url": "http://example.com"}, True),
+            # The first publication allowed article has a relative URL so the issue is not external.
+            ({"pdf_url": "/example"}, {}, False),
+            ({"html_url": "/example"}, {"html_url": "http://example.com"}, False),
+            ({"publication_allowed": False}, {"pdf_url": "/example"}, False),
+        ],
+    )
     def test_is_external_from_pdf_and_html_urls(self, first_article, second_article, is_external):
         issue = IssueFactory()
         first_article = ArticleFactory(
@@ -453,7 +472,6 @@ class TestIssue:
         )
         assert not issue.is_external
 
-
     def test_is_external_if_no_articles_in_summary(self):
         # If there is no articles in the issue summary, `is_external` defaults to False.
         issue = IssueFactory()
@@ -461,35 +479,46 @@ class TestIssue:
 
     def test_is_external_from_external_url(self):
         # If the issue has an external URL, `is external` is True.
-        issue = IssueFactory(external_url='http://example.com')
+        issue = IssueFactory(external_url="http://example.com")
         assert issue.is_external
 
-    @pytest.mark.parametrize('fixture_name, language, expected_copyrights', [
-        ('images1080663', 'fr', 'Tous droits réservés © 24 images inc., 1992'),
-        ('images1080663', 'en', 'All Rights Reserved © 24 images inc., 1992'),
-        ('images1080663', 'es', 'Reservados todos los derechos © 24 images inc., 1992'),
-    ])
+    @pytest.mark.parametrize(
+        "fixture_name, language, expected_copyrights",
+        [
+            ("images1080663", "fr", "Tous droits réservés © 24 images inc., 1992"),
+            ("images1080663", "en", "All Rights Reserved © 24 images inc., 1992"),
+            ("images1080663", "es", "Reservados todos los derechos © 24 images inc., 1992"),
+        ],
+    )
     def test_copyrights(self, fixture_name, language, expected_copyrights):
         issue = IssueFactory()
         repository.api.set_publication_xml(
             issue.get_full_identifier(),
-            open('./tests/fixtures/issue/{}.xml'.format(fixture_name), 'rb').read(),
+            open("./tests/fixtures/issue/{}.xml".format(fixture_name), "rb").read(),
         )
         with override_settings(LANGUAGE_CODE=language):
             assert issue.copyrights == expected_copyrights
 
-    @pytest.mark.parametrize('fixture_name, expected_licenses', [
-        ('images1080663', []),
-        ('approchesind04155', [{
-            'href': 'http://creativecommons.org/licenses/by-sa/3.0/',
-            'img': 'http://i.creativecommons.org/l/by-sa/3.0/88x31.png',
-        }]),
-    ])
+    @pytest.mark.parametrize(
+        "fixture_name, expected_licenses",
+        [
+            ("images1080663", []),
+            (
+                "approchesind04155",
+                [
+                    {
+                        "href": "http://creativecommons.org/licenses/by-sa/3.0/",
+                        "img": "http://i.creativecommons.org/l/by-sa/3.0/88x31.png",
+                    }
+                ],
+            ),
+        ],
+    )
     def test_licenses(self, fixture_name, expected_licenses):
         issue = IssueFactory()
         repository.api.set_publication_xml(
             issue.get_full_identifier(),
-            open('./tests/fixtures/issue/{}.xml'.format(fixture_name), 'rb').read(),
+            open("./tests/fixtures/issue/{}.xml".format(fixture_name), "rb").read(),
         )
         assert issue.licenses == expected_licenses
 
@@ -498,22 +527,29 @@ class TestIssue:
         article_1 = ArticleFactory(issue=issue)
         article_2 = ArticleFactory(issue=issue)
         article_3 = ArticleFactory(issue=issue)
-        previous_article, next_article = issue.get_previous_and_next_articles(article_1.localidentifier)
+        previous_article, next_article = issue.get_previous_and_next_articles(
+            article_1.localidentifier
+        )
         assert previous_article is None
         assert next_article == article_2
 
-        previous_article, next_article = issue.get_previous_and_next_articles(article_2.localidentifier)
+        previous_article, next_article = issue.get_previous_and_next_articles(
+            article_2.localidentifier
+        )
         assert previous_article == article_1
         assert next_article == article_3
 
-        previous_article, next_article = issue.get_previous_and_next_articles(article_3.localidentifier)
+        previous_article, next_article = issue.get_previous_and_next_articles(
+            article_3.localidentifier
+        )
         assert previous_article == article_2
         assert next_article is None
 
+
 class TestArticle:
     def test_properties(self):
-        article = ArticleFactory(type='compterendu')
-        assert article.type_display == 'Compte rendu'
+        article = ArticleFactory(type="compterendu")
+        assert article.type_display == "Compte rendu"
 
     def test_only_has_fedora_object_if_collection_has_localidentifier(self):
         c1 = CollectionFactory.create(localidentifier=None)
@@ -544,11 +580,14 @@ class TestArticle:
 
     def test_knows_if_it_is_embargoed(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+
         article1 = ArticleFactory(
             issue__journal__open_access=False,
-            issue__date_published=dt.date.today() - dr.relativedelta(months=ml + 1))
+            issue__date_published=dt.date.today() - dr.relativedelta(months=ml + 1),
+        )
         article2 = ArticleFactory(
-            issue__journal=article1.issue.journal, issue__date_published=dt.date.today())
+            issue__journal=article1.issue.journal, issue__date_published=dt.date.today()
+        )
         # the 3rd article is to take the "last issue spot" in embargo rules.
         article3 = ArticleFactory(issue__journal=article1.issue.journal)
         assert not article1.embargoed
@@ -557,29 +596,32 @@ class TestArticle:
 
     def test_get_from_fedora_ids_can_return_ephemeral_issues(self):
         issue = IssueFactory()
-        ephemeral_pid = '{}.dummy123'.format(issue.get_full_identifier())
+        ephemeral_pid = "{}.dummy123".format(issue.get_full_identifier())
         repository.api.register_article(ephemeral_pid)
-        article = Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
+        article = Article.from_fedora_ids(issue.journal.code, issue.localidentifier, "dummy123")
         assert article.get_full_identifier() == ephemeral_pid
 
     def test_get_from_fedora_ids_can_raise_DoesNotExist(self):
         issue = IssueFactory()
         with pytest.raises(Article.DoesNotExist):
-            Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
+            Article.from_fedora_ids(issue.journal.code, issue.localidentifier, "dummy123")
 
-    @pytest.mark.parametrize('pdf_url,html_url,is_external', [
-        # At least one URL is absolute so `is_external` is True.
-        ('http://example.com', None, True),
-        (None, 'http://example.com', True),
-        ('/example', 'http://example.com', True),
-        ('http://example.com', '/example', True),
-        ('http://example.com', 'http://example.com', True),
-        # No URLs are absolute so `is_external` is False.
-        ('/example', None, False),
-        (None, '/example', False),
-        ('/example', '/example', False),
-        (None, None, False),
-    ])
+    @pytest.mark.parametrize(
+        "pdf_url,html_url,is_external",
+        [
+            # At least one URL is absolute so `is_external` is True.
+            ("http://example.com", None, True),
+            (None, "http://example.com", True),
+            ("/example", "http://example.com", True),
+            ("http://example.com", "/example", True),
+            ("http://example.com", "http://example.com", True),
+            # No URLs are absolute so `is_external` is False.
+            ("/example", None, False),
+            (None, "/example", False),
+            ("/example", "/example", False),
+            (None, None, False),
+        ],
+    )
     def test_is_external_from_pdf_and_html_urls(self, pdf_url, html_url, is_external):
         article = ArticleFactory(
             pdf_url=pdf_url,
@@ -599,17 +641,17 @@ class TestArticle:
 
     def test_is_external_from_external_url(self):
         # If the issue has an external URL, `is external` is True.
-        article = ArticleFactory(issue__external_url='http://example.com')
+        article = ArticleFactory(issue__external_url="http://example.com")
         assert article.is_external
 
     def test_absolute_url_when_external(self):
         # When an article is "external", its absolute_url is the value of its first "URLDocument"
         # in Solr
         article = ArticleFactory(
-            issue__external_url='http://example.com',
-            solr_attrs={'URLDocument': ['http://example.com']}
+            issue__external_url="http://example.com",
+            solr_attrs={"URLDocument": ["http://example.com"]},
         )
-        assert article.get_absolute_url() == 'http://example.com'
+        assert article.get_absolute_url() == "http://example.com"
 
     def test_pdf_url_when_no_pdf(self):
         article = ArticleFactory()
@@ -622,16 +664,16 @@ class TestArticle:
 
     def test_pdf_url_when_fedora_pdf_and_external_pdf(self):
         # fedora PDFs have priority over "urlpdf" in summary
-        article = ArticleFactory(with_pdf=True, pdf_url='http://example.com')
+        article = ArticleFactory(with_pdf=True, pdf_url="http://example.com")
         article.reset_fedora_objects()
-        assert article.pdf_url and article.pdf_url != 'http://example.com'
+        assert article.pdf_url and article.pdf_url != "http://example.com"
 
     def test_pdf_url_when_external_pdf(self):
-        article = ArticleFactory(pdf_url='http://example.com')
-        assert article.pdf_url == 'http://example.com'
+        article = ArticleFactory(pdf_url="http://example.com")
+        assert article.pdf_url == "http://example.com"
 
     def test_pdf_url_when_issue_external_pdf(self):
-        issue = IssueFactory(external_url='http://example.com')
+        issue = IssueFactory(external_url="http://example.com")
         article = ArticleFactory(issue=issue, with_pdf=True)
         assert article.pdf_url is None
 
@@ -639,81 +681,137 @@ class TestArticle:
         article = ArticleFactory(publication_allowed=False, with_pdf=True)
         assert article.pdf_url is None
 
-    @pytest.mark.parametrize('is_published', (True, False))
-    @unittest.mock.patch('erudit.fedora.cache.cache_set')
+    @pytest.mark.parametrize("is_published", (True, False))
+    @unittest.mock.patch("erudit.fedora.cache.cache_set")
     def test_pdf_url_is_not_cached_if_issue_is_not_published(self, mock_cache_set, is_published):
-        article = ArticleFactory(issue__is_published=is_published, pdf_url='http://example.com')
-        assert article.pdf_url == 'http://example.com'
+        article = ArticleFactory(issue__is_published=is_published, pdf_url="http://example.com")
+        assert article.pdf_url == "http://example.com"
         assert mock_cache_set.call_count == int(is_published)
 
     def test_abstracts(self):
-        article = ArticleFactory(abstracts=[
-            {'content': 'Resume', 'lang': 'fr'},
-            {'content': 'Abstract', 'lang': 'en'},
-        ])
+        article = ArticleFactory(
+            abstracts=[
+                {"content": "Resume", "lang": "fr"},
+                {"content": "Abstract", "lang": "en"},
+            ]
+        )
         assert article.abstracts == [
-             {'content': 'Abstract', 'lang': 'en', 'type': 'main', 'typeresume': 'resume', 'title': None},
-             {'content': 'Resume', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume', 'title': None},
+            {
+                "content": "Abstract",
+                "lang": "en",
+                "type": "main",
+                "typeresume": "resume",
+                "title": None,
+            },
+            {
+                "content": "Resume",
+                "lang": "fr",
+                "type": "equivalent",
+                "typeresume": "resume",
+                "title": None,
+            },
         ]
 
     def test_html_abstracts(self):
-        article = ArticleFactory(abstracts=[
-            {'content': 'Resume', 'lang': 'fr'},
-            {'content': 'Abstract', 'lang': 'en'},
-        ])
+        article = ArticleFactory(
+            abstracts=[
+                {"content": "Resume", "lang": "fr"},
+                {"content": "Abstract", "lang": "en"},
+            ]
+        )
         assert article.html_abstracts == [
-             {'content': '<p class="alinea"><em>Abstract</em></p>', 'lang': 'en', 'type': 'main', 'typeresume': 'resume', 'title': None},
-             {'content': '<p class="alinea"><em>Resume</em></p>', 'lang': 'fr', 'type': 'equivalent', 'typeresume': 'resume', 'title': None},
+            {
+                "content": '<p class="alinea"><em>Abstract</em></p>',
+                "lang": "en",
+                "type": "main",
+                "typeresume": "resume",
+                "title": None,
+            },
+            {
+                "content": '<p class="alinea"><em>Resume</em></p>',
+                "lang": "fr",
+                "type": "equivalent",
+                "typeresume": "resume",
+                "title": None,
+            },
         ]
 
-    @pytest.mark.parametrize('language,expected_abstract', [
-        ('fr', 'Resume'),
-        ('en', 'Abstract'),
-    ])
+    @pytest.mark.parametrize(
+        "language,expected_abstract",
+        [
+            ("fr", "Resume"),
+            ("en", "Abstract"),
+        ],
+    )
     def test_abstract(self, language, expected_abstract):
-        article = ArticleFactory(abstracts=[
-            {'content': 'Resume', 'lang': 'fr'},
-            {'content': 'Abstract', 'lang': 'en'},
-        ])
+        article = ArticleFactory(
+            abstracts=[
+                {"content": "Resume", "lang": "fr"},
+                {"content": "Abstract", "lang": "en"},
+            ]
+        )
         with override_settings(LANGUAGE_CODE=language):
             assert article.abstract == expected_abstract
 
-    @pytest.mark.parametrize('language,expected_abstract', [
-        ('fr', '<p class="alinea"><em>Resume</em></p>'),
-        ('en', '<p class="alinea"><em>Abstract</em></p>'),
-    ])
+    @pytest.mark.parametrize(
+        "language,expected_abstract",
+        [
+            ("fr", '<p class="alinea"><em>Resume</em></p>'),
+            ("en", '<p class="alinea"><em>Abstract</em></p>'),
+        ],
+    )
     def test_html_abstract(self, language, expected_abstract):
-        article = ArticleFactory(abstracts=[
-            {'content': 'Resume', 'lang': 'fr'},
-            {'content': 'Abstract', 'lang': 'en'},
-        ])
+        article = ArticleFactory(
+            abstracts=[
+                {"content": "Resume", "lang": "fr"},
+                {"content": "Abstract", "lang": "en"},
+            ]
+        )
         with override_settings(LANGUAGE_CODE=language):
             assert article.html_abstract == expected_abstract
 
-    @pytest.mark.parametrize('fixture,expected_publisher_name', [
-        ('1001948ar', 'HEC Montréal'),
-        ('1018860ar', None),
-    ])
+    @pytest.mark.parametrize(
+        "fixture,expected_publisher_name",
+        [
+            ("1001948ar", "HEC Montréal"),
+            ("1018860ar", None),
+        ],
+    )
     def test_publisher_name(self, fixture, expected_publisher_name):
         article = ArticleFactory(from_fixture=fixture)
         assert article.publisher_name == expected_publisher_name
 
     def test_cite_strings_with_untitled_article(self):
-        article = ArticleFactory(from_fixture='47130ac', issue__year='2019')
-        assert article.cite_string_mla == 'Bégin, Lise. «&nbsp;[Article sans titre].&nbsp;» <em>Inter</em>, numéro 110, supplément, hiver 2012, p.&nbsp;39–39.'
-        assert article.cite_string_apa == 'Bégin, L. (2019). [Article sans titre]. <em>Inter</em>, 39–39.'
-        assert article.cite_string_chicago == 'Bégin, Lise «&nbsp;[Article sans titre]&nbsp;». <em>Inter</em> (2019)&nbsp;: 39–39.'
+        article = ArticleFactory(from_fixture="47130ac", issue__year="2019")
+        assert (
+            article.cite_string_mla
+            == "Bégin, Lise. «&nbsp;[Article sans titre].&nbsp;» <em>Inter</em>, numéro 110, supplément, hiver 2012, p.&nbsp;39–39."
+        )
+        assert (
+            article.cite_string_apa
+            == "Bégin, L. (2019). [Article sans titre]. <em>Inter</em>, 39–39."
+        )
+        assert (
+            article.cite_string_chicago
+            == "Bégin, Lise «&nbsp;[Article sans titre]&nbsp;». <em>Inter</em> (2019)&nbsp;: 39–39."
+        )
 
     def test_cite_string_apa_with_article_report(self):
-        article = ArticleFactory(type=Article.ARTICLE_REPORT, issue__year='2019')
-        assert article.cite_string_apa == 'Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. <em>Inter</em>. https://doi.org/10.7202/009255ar'
+        article = ArticleFactory(type=Article.ARTICLE_REPORT, issue__year="2019")
+        assert (
+            article.cite_string_apa
+            == "Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. <em>Inter</em>. https://doi.org/10.7202/009255ar"
+        )
 
-    @pytest.mark.parametrize('doi, expected_url_doi', (
-        ('10.7202/009255ar', 'https://doi.org/10.7202/009255ar'),
-        ('https://doi.org/10.7202/009255ar', 'https://doi.org/10.7202/009255ar'),
-    ))
+    @pytest.mark.parametrize(
+        "doi, expected_url_doi",
+        (
+            ("10.7202/009255ar", "https://doi.org/10.7202/009255ar"),
+            ("https://doi.org/10.7202/009255ar", "https://doi.org/10.7202/009255ar"),
+        ),
+    )
     def test_url_doi(self, doi, expected_url_doi, monkeypatch):
-        monkeypatch.setattr(EruditArticle, 'doi', doi)
+        monkeypatch.setattr(EruditArticle, "doi", doi)
         article = ArticleFactory()
         assert article.url_doi == expected_url_doi
 
@@ -721,10 +819,13 @@ class TestArticle:
         # Setup
         article = ArticleFactory()
         import erudit.models.journal
+
         monkeypatch.setattr(
             erudit.models.journal,
-            'get_cached_datastream_content',
-            unittest.mock.MagicMock(return_value=io.BytesIO(b"""
+            "get_cached_datastream_content",
+            unittest.mock.MagicMock(
+                return_value=io.BytesIO(
+                    b"""
 <infoDoc>
     <originator app="testapp" date="YYYY-MM-DD" username="foobar" />
     <im id="im1">
@@ -743,19 +844,22 @@ class TestArticle:
     </im>
 </infoDoc>
             """
-        )))
+                )
+            ),
+        )
         # Run & check
         assert article.infoimg_dict == {
-            'im1': {
-                'plgr': 'bar.jpg',
-                'width': '1',
-                'height': '1',
+            "im1": {
+                "plgr": "bar.jpg",
+                "width": "1",
+                "height": "1",
             },
         }
 
 
 def test_journaltype_can_return_embargo_duration_in_days():
-    journal_type = JournalTypeFactory.create(code='S')
+    journal_type = JournalTypeFactory.create(code="S")
     from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+
     duration = dt.date.today() - (dt.date.today() - dr.relativedelta(months=ml))
     assert journal_type.embargo_duration(unit="days") == duration.days

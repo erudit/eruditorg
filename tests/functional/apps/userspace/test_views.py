@@ -9,10 +9,10 @@ pytestmark = pytest.mark.django_db
 def test_userspacehome_unprivileged():
     # An unprivileged user is redirected to her settings view
     client = logged_client()
-    url = reverse('userspace:dashboard')
+    url = reverse("userspace:dashboard")
     response = client.get(url)
     assert response.status_code == 302
-    assert response.url == reverse('public:auth:personal_data')
+    assert response.url == reverse("public:auth:personal_data")
 
 
 def test_userspacehome_editor():
@@ -21,10 +21,10 @@ def test_userspacehome_editor():
     journal = JournalFactory.create()
     journal.members.add(user)
     client = logged_client(user)
-    url = reverse('userspace:dashboard')
+    url = reverse("userspace:dashboard")
     response = client.get(url)
     assert response.status_code == 302
-    assert response.url == reverse('userspace:journal:home')
+    assert response.url == reverse("userspace:journal:home")
 
 
 def test_userspacehome_library():
@@ -33,10 +33,10 @@ def test_userspacehome_library():
     org = OrganisationFactory.create()
     org.members.add(user)
     client = logged_client(user)
-    url = reverse('userspace:dashboard')
+    url = reverse("userspace:dashboard")
     response = client.get(url)
     assert response.status_code == 302
-    assert response.url == reverse('userspace:library:home')
+    assert response.url == reverse("userspace:library:home")
 
 
 def test_userspacehome_superuser():
@@ -47,6 +47,6 @@ def test_userspacehome_superuser():
     org = OrganisationFactory.create()
     org.members.add(user)
     client = logged_client(user)
-    url = reverse('userspace:dashboard')
+    url = reverse("userspace:dashboard")
     response = client.get(url)
     assert response.status_code == 200

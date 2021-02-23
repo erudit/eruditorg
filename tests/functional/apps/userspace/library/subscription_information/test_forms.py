@@ -22,7 +22,7 @@ class TestSubscriptionInformationForm:
 
         # Fetch an image aimed to be resized
         f = open(settings.MEDIA_ROOT + "/200x200.png", "rb")
-        images_dict['200x200'] = File(f)
+        images_dict["200x200"] = File(f)
 
         self.images_dict = images_dict
 
@@ -43,11 +43,12 @@ class TestSubscriptionInformationForm:
     def test_can_resize_a_uploaded_badge(self):
         # Setup
         files_data = {
-            'badge': SimpleUploadedFile('test.jpg', self.images_dict['200x200'].read()),
+            "badge": SimpleUploadedFile("test.jpg", self.images_dict["200x200"].read()),
         }
         # Run
         form = SubscriptionInformationForm(
-            data={}, files=files_data, organisation=self.organisation)
+            data={}, files=files_data, organisation=self.organisation
+        )
         # Check
         assert form.is_valid()
         form.save()

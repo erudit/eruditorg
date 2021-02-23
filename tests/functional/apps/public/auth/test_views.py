@@ -17,15 +17,15 @@ class TestUserPersonalDataUpdateView:
         user = UserFactory()
         client = Client(logged_user=user)
         post_data = {
-            'first_name': 'Foo',
-            'last_name': 'Bar',
+            "first_name": "Foo",
+            "last_name": "Bar",
         }
-        url = reverse('public:auth:personal_data')
+        url = reverse("public:auth:personal_data")
         response = client.post(url, post_data, follow=False)
         assert response.status_code == 302
         user.refresh_from_db()
-        assert user.first_name == 'Foo'
-        assert user.last_name == 'Bar'
+        assert user.first_name == "Foo"
+        assert user.last_name == "Bar"
 
 
 class TestUserParametersUpdateView:
@@ -33,21 +33,26 @@ class TestUserParametersUpdateView:
         user = UserFactory()
         client = Client(logged_user=user)
         post_data = {
-            'username': 'foobar',
-            'email': 'xyz@example.com',
+            "username": "foobar",
+            "email": "xyz@example.com",
         }
-        url = reverse('public:auth:parameters')
+        url = reverse("public:auth:parameters")
         response = client.post(url, post_data, follow=False)
         assert response.status_code == 302
         user.refresh_from_db()
-        assert user.username == 'foobar'
-        assert user.email == 'xyz@example.com'
+        assert user.username == "foobar"
+        assert user.email == "xyz@example.com"
 
-    @pytest.mark.parametrize("profile_origin, expected", [
-        (LegacyAccountProfile.DB_ABONNEMENTS, 302),
-        (LegacyAccountProfile.DB_RESTRICTION, 403),
-    ])
-    def test_users_with_legacy_restriction_profile_cannot_change_username(self, profile_origin, expected):  # noqa
+    @pytest.mark.parametrize(
+        "profile_origin, expected",
+        [
+            (LegacyAccountProfile.DB_ABONNEMENTS, 302),
+            (LegacyAccountProfile.DB_RESTRICTION, 403),
+        ],
+    )
+    def test_users_with_legacy_restriction_profile_cannot_change_username(
+        self, profile_origin, expected
+    ):  # noqa
         user = UserFactory()
 
         profile = LegacyAccountProfileFactory(user=user)
@@ -56,17 +61,17 @@ class TestUserParametersUpdateView:
 
         client = Client(logged_user=user)
         post_data = {
-            'username': 'foobar',
-            'email': 'xyz@example.com',
+            "username": "foobar",
+            "email": "xyz@example.com",
         }
-        url = reverse('public:auth:parameters')
+        url = reverse("public:auth:parameters")
         response = client.post(url, post_data, follow=False)
         assert response.status_code == expected
 
 
 class TestUserPasswordChangeView:
-    def get_request(self, url='/'):
-        request = RequestFactory().get('/')
+    def get_request(self, url="/"):
+        request = RequestFactory().get("/")
         middleware = SessionMiddleware()
         middleware.process_request(request)
         request.session.save()
@@ -75,13 +80,13 @@ class TestUserPasswordChangeView:
     def test_can_properly_update_the_password_of_standard_users(self):
         user = UserFactory()
         client = Client(logged_user=user)
-        url = reverse('public:auth:password_change')
+        url = reverse("public:auth:password_change")
         post_data = {
-            'old_password': user._plaintext_password,
-            'new_password1': 'test',
-            'new_password2': 'test',
+            "old_password": user._plaintext_password,
+            "new_password1": "test",
+            "new_password2": "test",
         }
         response = client.post(url, post_data, follow=False)
         assert response.status_code == 302
         user.refresh_from_db()
-        assert user.check_password('test')
+        assert user.check_password("test")

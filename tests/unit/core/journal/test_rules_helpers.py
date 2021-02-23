@@ -10,15 +10,14 @@ from core.journal.rules_helpers import get_editable_journals
 
 @pytest.fixture
 def managed_collection():
-    return CollectionFactory(code='managed')
+    return CollectionFactory(code="managed")
 
 
 @pytest.mark.django_db
 class TestGetEditableJournals:
-
     @pytest.fixture(autouse=True)
     def init_settings(self, settings):
-        settings.MANAGED_COLLECTIONS = ('managed',)
+        settings.MANAGED_COLLECTIONS = ("managed",)
 
     def test_a_superuser_can_edit_everything(self, managed_collection):
         journals = JournalFactory.create_batch(2, collection=managed_collection)

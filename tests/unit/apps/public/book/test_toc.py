@@ -4,70 +4,75 @@ from pathlib import Path
 from apps.public.book.toc import find_chapter_xml, read_toc
 
 
-FIXTURE_ROOT = Path(__file__).parent / 'fixtures'
+FIXTURE_ROOT = Path(__file__).parent / "fixtures"
 
 
-@pytest.mark.parametrize('fixture, exception', (
-    ('000274li', False),
-    ('non-existent-id', True),
-))
+@pytest.mark.parametrize(
+    "fixture, exception",
+    (
+        ("000274li", False),
+        ("non-existent-id", True),
+    ),
+)
 def test_can_find_chapter_xml(fixture, exception):
     if not exception:
-        chapter_xml = find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', fixture)
-        assert chapter_xml.find('doc/field[@name="ID"]').text == '000274li'
+        chapter_xml = find_chapter_xml(FIXTURE_ROOT / "incantation" / "2018", fixture)
+        assert chapter_xml.find('doc/field[@name="ID"]').text == "000274li"
     else:
         with pytest.raises(Exception):
-            find_chapter_xml(FIXTURE_ROOT / 'incantation' / '2018', fixture)
+            find_chapter_xml(FIXTURE_ROOT / "incantation" / "2018", fixture)
 
 
 def test_can_create_book_toc_entry():
-    toc = read_toc(FIXTURE_ROOT / 'subbook')
+    toc = read_toc(FIXTURE_ROOT / "subbook")
     assert toc.entries[1].is_book
 
 
 def test_can_create_section_toc_entry():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.entries[0].level == 'h3'
-    assert toc.entries[0].title == 'Introduction'
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.entries[0].level == "h3"
+    assert toc.entries[0].title == "Introduction"
     assert toc.entries[0].is_section
 
 
 def test_can_create_chapter_toc_entry():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.entries[1].title == 'Une littérature «\xA0comme incantatoire\xA0»'
-    assert toc.entries[1].subtitle == 'Le cas exemplaire de la modernité symboliste'
-    assert toc.entries[1].pdf_path == str(FIXTURE_ROOT / 'incantation' / '2018' / '000274li.pdf')
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.entries[1].title == "Une littérature «\xA0comme incantatoire\xA0»"
+    assert toc.entries[1].subtitle == "Le cas exemplaire de la modernité symboliste"
+    assert toc.entries[1].pdf_path == str(FIXTURE_ROOT / "incantation" / "2018" / "000274li.pdf")
     assert not toc.entries[1].is_section
 
 
 def test_can_preserve_markup_in_toc_text():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.entries[2].title == 'XIX<sup>e</sup> siècle'
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.entries[2].title == "XIX<sup>e</sup> siècle"
 
 
 def test_can_extract_book_info():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.book_title == "Une littérature «\xA0comme incantatoire\xA0»\xA0: aspects "\
-        "et échos de l\u2019incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> "\
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert (
+        toc.book_title == "Une littérature «\xA0comme incantatoire\xA0»\xA0: aspects "
+        "et échos de l\u2019incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> "
         "siècle)"
-    assert toc.book_author == 'Sous la direction de Patrick Thériault'
+    )
+    assert toc.book_author == "Sous la direction de Patrick Thériault"
 
 
 def test_can_give_none_as_previous_chapter_for_first_chapter():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.previous_chapters['000274li'] is None
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.previous_chapters["000274li"] is None
 
 
 def test_can_give_previous_chapter():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.previous_chapters['000275li'].id == '000274li'
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.previous_chapters["000275li"].id == "000274li"
 
 
 def test_can_give_none_as_next_chapter_for_last_chapter():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.next_chapters['000285li'] is None
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.next_chapters["000285li"] is None
 
 
 def test_can_give_next_chapter():
-    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.next_chapters['000274li'].id == '000275li'
+    toc = read_toc(FIXTURE_ROOT / "incantation" / "2018")
+    assert toc.next_chapters["000274li"].id == "000275li"

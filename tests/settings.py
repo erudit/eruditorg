@@ -7,84 +7,77 @@ DEBUG = True
 
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-SECRET_KEY = 'insecure'
+SECRET_KEY = "insecure"
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache'
-    },
-    'files': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    "default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"},
+    "files": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
     },
 }
 
 # Not an actual setting, but can be used in some tests with @override_settings
 LOCMEM_CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
-    },
-    'files': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    "default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"},
+    "files": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     },
 }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:'
-    },
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"},
 }
 
 DATABASE_ROUTERS = [
-    'core.subscription.restriction.router.RestrictionRouter',
+    "core.subscription.restriction.router.RestrictionRouter",
 ]
 
 RESTRICTION_MODELS_ARE_MANAGED = True
 
-MANAGED_COLLECTIONS = ('erudit',)
+MANAGED_COLLECTIONS = ("erudit",)
 
-MEDIA_ROOT = os.path.join(TEST_ROOT, '_testdata/media/')
+MEDIA_ROOT = os.path.join(TEST_ROOT, "_testdata/media/")
 UPLOAD_ROOT = MEDIA_ROOT
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 INSTALLED_APPS = list(INSTALLED_APPS)
-INSTALLED_APPS.append('core.subscription.restriction')
-INSTALLED_APPS.append('tests')
+INSTALLED_APPS.append("core.subscription.restriction")
+INSTALLED_APPS.append("tests")
 
-FALLBACK_BASE_URL = 'https://retro.erudit.org/'
+FALLBACK_BASE_URL = "https://retro.erudit.org/"
 
 MIGRATION_MODULES = {
-        'auth': None,
-        'authorization': None,
-        'contenttypes': None,
-        'sessions': None,
-        'erudit': None,
-        'accounts': None,
-        'citations': None,
-        'editor': None,
-        'subscription': None,
-        'taggit': None,
-        'waffle': None,
-        'account_actions': None,
-        'resumable_uploads': None,
-        'reversion': None
+    "auth": None,
+    "authorization": None,
+    "contenttypes": None,
+    "sessions": None,
+    "erudit": None,
+    "accounts": None,
+    "citations": None,
+    "editor": None,
+    "subscription": None,
+    "taggit": None,
+    "waffle": None,
+    "account_actions": None,
+    "resumable_uploads": None,
+    "reversion": None,
 }
 
 USE_DEBUG_EMAIL = False
 
 METRICS_ACTIVATED = True
-TRACKING_INFLUXDB_HOST = 'localhost'
+TRACKING_INFLUXDB_HOST = "localhost"
 TRACKING_INFLUXDB_PORT = 8086
-TRACKING_INFLUXDB_DBNAME = 'erudit-metrics'
-TRACKING_INFLUXDB_USER = 'root'
-TRACKING_INFLUXDB_PASSWORD = 'root'
+TRACKING_INFLUXDB_DBNAME = "erudit-metrics"
+TRACKING_INFLUXDB_USER = "root"
+TRACKING_INFLUXDB_PASSWORD = "root"
 
-FEDORA_ROOT = 'http://erudit.org/'
-SOLR_ROOT = 'http://erudit.org/'
+FEDORA_ROOT = "http://erudit.org/"
+SOLR_ROOT = "http://erudit.org/"
 
 POST_OFFICE = {
-    'DEFAULT_PRIORITY': 'now',
+    "DEFAULT_PRIORITY": "now",
 }
 
-BOOKS_UPDATE_EMAILS = ['foo@bar.com', 'foo@baz.com']
+BOOKS_UPDATE_EMAILS = ["foo@bar.com", "foo@baz.com"]

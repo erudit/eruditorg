@@ -24,7 +24,7 @@ class TestAuthorizationUserView(TestCase):
         journal.save()
 
         client = Client(logged_user=self.user_non_granted)
-        url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:list", args=(journal.pk,))
 
         response = client.get(url)
         self.assertEqual(response.status_code, 403)
@@ -42,10 +42,11 @@ class TestAuthorizationUserView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
-        url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:list", args=(journal.pk,))
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -60,20 +61,21 @@ class TestAuthorizationUserView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
 
-        url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:list", args=(journal.pk,))
 
         # Run
-        response = client.get(url, {'codename': AC.can_manage_authorizations.codename})
+        response = client.get(url, {"codename": AC.can_manage_authorizations.codename})
 
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            AC.can_manage_individual_subscription.codename
-            not in response.context['authorizations'])
+            AC.can_manage_individual_subscription.codename not in response.context["authorizations"]
+        )
 
     def test_shows_the_individual_subscription_authorization_section_with_management(self):
         # Setup
@@ -86,23 +88,24 @@ class TestAuthorizationUserView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         plan = JournalManagementPlanFactory.create(max_accounts=10)
         JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
 
         client = Client(logged_user=self.user_granted)
 
-        url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:list", args=(journal.pk,))
 
         # Run
-        response = client.get(url, {'codename': AC.can_manage_authorizations.codename})
+        response = client.get(url, {"codename": AC.can_manage_authorizations.codename})
 
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            AC.can_manage_individual_subscription.codename
-            in response.context['authorizations'])
+            AC.can_manage_individual_subscription.codename in response.context["authorizations"]
+        )
 
 
 class TestAuthorizationCreateView(TestCase):
@@ -117,7 +120,7 @@ class TestAuthorizationCreateView(TestCase):
         journal.save()
 
         client = Client(logged_user=self.user_non_granted)
-        url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:create", args=(journal.pk,))
 
         response = client.get(url)
         self.assertEqual(response.status_code, 403)
@@ -135,11 +138,12 @@ class TestAuthorizationCreateView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
-        url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
-        response = client.get(url, {'codename': AC.can_manage_authorizations.codename})
+        url = reverse("userspace:journal:authorization:create", args=(journal.pk,))
+        response = client.get(url, {"codename": AC.can_manage_authorizations.codename})
         self.assertEqual(response.status_code, 200)
 
     def test_returns_an_http_404_error_if_the_codename_is_not_passed(self):
@@ -153,11 +157,12 @@ class TestAuthorizationCreateView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
 
-        url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:create", args=(journal.pk,))
 
         # Run
         response = client.get(url)
@@ -176,14 +181,15 @@ class TestAuthorizationCreateView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
 
-        url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:create", args=(journal.pk,))
 
         # Run
-        response = client.get(url, {'codename': 'dummy'})
+        response = client.get(url, {"codename": "dummy"})
 
         # Check
         self.assertEqual(response.status_code, 404)
@@ -199,15 +205,15 @@ class TestAuthorizationCreateView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
 
-        url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
+        url = reverse("userspace:journal:authorization:create", args=(journal.pk,))
 
         # Run
-        response = client.get(
-            url, {'codename': AC.can_manage_individual_subscription.codename})
+        response = client.get(url, {"codename": AC.can_manage_individual_subscription.codename})
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -232,10 +238,16 @@ class TestAuthorizationDeleteView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
-        url = reverse('userspace:journal:authorization:delete',
-                      args=(journal.pk, authorization.pk, ))
+        url = reverse(
+            "userspace:journal:authorization:delete",
+            args=(
+                journal.pk,
+                authorization.pk,
+            ),
+        )
 
         response = client.get(url)
         self.assertEqual(response.status_code, 403)
@@ -255,10 +267,16 @@ class TestAuthorizationDeleteView(TestCase):
             content_type=ct,
             user=self.user_granted,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
 
         client = Client(logged_user=self.user_granted)
-        url = reverse('userspace:journal:authorization:delete',
-                      args=(journal.pk, authorization.pk, ))
+        url = reverse(
+            "userspace:journal:authorization:delete",
+            args=(
+                journal.pk,
+                authorization.pk,
+            ),
+        )
         response = client.get(url)
         self.assertEqual(response.status_code, 200)

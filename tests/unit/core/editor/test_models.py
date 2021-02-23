@@ -10,7 +10,6 @@ pytestmark = pytest.mark.django_db
 
 
 class TestIssueSubmission:
-
     def test_version(self):
         issue = IssueSubmissionFactory.create()
         new_files_version = issue.save_version()
@@ -49,7 +48,7 @@ class TestIssueSubmission:
 
     def test_can_remove_incomplete_files_during_submission(self):
         issue = IssueSubmissionFactory.create()
-        rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=10)
+        rfile = ResumableFile.objects.create(path="dummy/path.png", filesize=42, uploadsize=10)
         issue.last_files_version.submissions.add(rfile)
         issue.submit()
         assert issue.files_versions.count() == 1
@@ -62,7 +61,7 @@ class TestIssueSubmissionWorkflow:
         issue.submit()
         issue.refuse()
 
-        issues = IssueSubmission.objects.all().order_by('id')
+        issues = IssueSubmission.objects.all().order_by("id")
         assert issues.count() == 1
         assert issues.first().files_versions.count() == 2
 
@@ -75,6 +74,6 @@ class TestProductionTeam:
     def test_emails(self):
         group = GroupFactory()
         production_team = ProductionTeamFactory(group=group)
-        user = UserFactory(email='foo@bar.com')
+        user = UserFactory(email="foo@bar.com")
         user.groups.add(group)
-        assert ProductionTeam.emails() == ['foo@bar.com']
+        assert ProductionTeam.emails() == ["foo@bar.com"]

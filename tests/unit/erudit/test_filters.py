@@ -10,18 +10,18 @@ def test_can_format_the_output_of_liberuditarticle(eruditarticle):
 
 
 def test_can_format_an_empty_list():
-    assert person_list([]) == ''
+    assert person_list([]) == ""
 
 
 def test_can_format_single_author():
-    assert person_list(['Paul']) == "Paul"
+    assert person_list(["Paul"]) == "Paul"
 
 
 def test_can_format_two_authors():
-    authors = ['Paul', 'Paul']
-    assert person_list(authors) == 'Paul et Paul'
-    assert person_list(authors) == 'Paul et Paul'
+    authors = ["Paul", "Paul"]
+    assert person_list(authors) == "Paul et Paul"
+    assert person_list(authors) == "Paul et Paul"
 
 
 def test_can_format_n_authors():
-    assert person_list(['Paul', 'Paul', 'Georges']) == 'Paul, Paul et Georges'
+    assert person_list(["Paul", "Paul", "Georges"]) == "Paul, Paul et Georges"

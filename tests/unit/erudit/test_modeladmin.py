@@ -14,7 +14,12 @@ class TestIssueAdmin:
         issue_1 = IssueFactory.create(force_free_access=False)
         issue_2 = IssueFactory.create(journal=issue_1.journal, force_free_access=False)
         issue_3 = IssueFactory.create(journal=issue_1.journal, force_free_access=False)
-        queryset = Issue.objects.filter(id__in=(issue_1.id, issue_2.id, ))
+        queryset = Issue.objects.filter(
+            id__in=(
+                issue_1.id,
+                issue_2.id,
+            )
+        )
         # Run
         IssueAdmin.force_free_access_to_true(IssueAdmin, mock.MagicMock(), queryset)
         issue_1 = Issue.objects.get(id=issue_1.id)
@@ -29,7 +34,12 @@ class TestIssueAdmin:
         issue_1 = IssueFactory.create(force_free_access=True)
         issue_2 = IssueFactory.create(journal=issue_1.journal, force_free_access=True)
         issue_3 = IssueFactory.create(journal=issue_1.journal, force_free_access=True)
-        queryset = Issue.objects.filter(id__in=(issue_1.id, issue_2.id, ))
+        queryset = Issue.objects.filter(
+            id__in=(
+                issue_1.id,
+                issue_2.id,
+            )
+        )
         # Run
         IssueAdmin.force_free_access_to_false(IssueAdmin, mock.MagicMock(), queryset)
         issue_1 = Issue.objects.get(id=issue_1.id)

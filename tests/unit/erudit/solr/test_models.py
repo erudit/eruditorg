@@ -17,11 +17,14 @@ class TestSolrDocument:
 
 @pytest.mark.django_db
 class TestArticle:
-    @pytest.mark.parametrize("issue_exist, external_url, expected_url", (
-        (False, None, None),
-        (True, None, "/fr/revues/journal/2020-issue/"),
-        (True, "https://www.exemple.com", "https://www.exemple.com"),
-    ))
+    @pytest.mark.parametrize(
+        "issue_exist, external_url, expected_url",
+        (
+            (False, None, None),
+            (True, None, "/fr/revues/journal/2020-issue/"),
+            (True, "https://www.exemple.com", "https://www.exemple.com"),
+        ),
+    )
     def test_issue_url(self, issue_exist, external_url, expected_url):
         if issue_exist:
             IssueFactory(
@@ -30,9 +33,11 @@ class TestArticle:
                 year="2020",
                 external_url=external_url,
             )
-        article = Article({
-            "ID": "article",
-            "NumeroID": "issue",
-            "RevueID": "journal",
-        })
+        article = Article(
+            {
+                "ID": "article",
+                "NumeroID": "issue",
+                "RevueID": "journal",
+            }
+        )
         assert article.issue_url == expected_url

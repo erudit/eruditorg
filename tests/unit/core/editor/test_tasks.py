@@ -17,16 +17,16 @@ from core.editor.test.factories import ProductionTeamFactory
 class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
     def test_is_able_to_remove_files_from_approved_issue_submissions_after_90_days(self):
         # Setup
-        rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
+        rfile = ResumableFile.objects.create(path="dummy/path.png", filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.submit()
         self.issue_submission.approve()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ARCHIVAL_DAY_OFFSET
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_archival_and_files_deletion()
         # Check
@@ -36,19 +36,19 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
 
     def test_sends_an_email_to_notify_the_production_team_5_days_before_removal(self):
         # Setup
-        group = Group.objects.create(name='Production team')
+        group = Group.objects.create(name="Production team")
         ProductionTeamFactory.create(group=group)
         self.user.groups.add(group)
-        rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
+        rfile = ResumableFile.objects.create(path="dummy/path.png", filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.submit()
         self.issue_submission.approve()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ARCHIVAL_DAY_OFFSET - 5
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_archival_and_files_deletion()
         # Check
@@ -58,16 +58,16 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
 
     def test_do_not_send_an_email_if_the_production_team_group_does_not_exist(self):
         # Setup
-        rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
+        rfile = ResumableFile.objects.create(path="dummy/path.png", filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.submit()
         self.issue_submission.approve()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ARCHIVAL_DAY_OFFSET - 5
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_archival_and_files_deletion()
         # Check
@@ -76,18 +76,18 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
 
     def test_do_not_send_an_email_if_the_production_team_is_empty(self):
         # Setup
-        group = Group.objects.create(name='Production team')
+        group = Group.objects.create(name="Production team")
         ProductionTeamFactory.create(group=group)
-        rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
+        rfile = ResumableFile.objects.create(path="dummy/path.png", filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.submit()
         self.issue_submission.approve()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ARCHIVAL_DAY_OFFSET - 5
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_archival_and_files_deletion()
         # Check
@@ -98,16 +98,16 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
 class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
     def test_email_production_team_about_action_needed_needs_review_issue_submissions(self):
         # Setup
-        group = Group.objects.create(name='Production team')
+        group = Group.objects.create(name="Production team")
         ProductionTeamFactory.create(group=group)
         self.user.groups.add(group)
         self.issue_submission.submit()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ACTION_NEEDED_DAY_OFFSET
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_action_needed()
         # Check
@@ -116,17 +116,17 @@ class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
 
     def test_email_production_team_about_action_needed_needs_corrections_issue_submissions(self):
         # Setup
-        group = Group.objects.create(name='Production team')
+        group = Group.objects.create(name="Production team")
         ProductionTeamFactory.create(group=group)
         self.user.groups.add(group)
         self.issue_submission.submit()
         self.issue_submission.refuse()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ACTION_NEEDED_DAY_OFFSET
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_action_needed()
         # Check
@@ -136,12 +136,12 @@ class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
     def test_do_not_send_an_email_if_the_production_team_group_does_not_exist(self):
         # Setup
         self.issue_submission.submit()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ACTION_NEEDED_DAY_OFFSET
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_action_needed()
         # Check
@@ -149,15 +149,15 @@ class TestHandleActionNeededIssueSubmissions(BaseEditorTestCase):
 
     def test_do_not_send_an_email_if_the_production_team_is_empty(self):
         # Setup
-        group = Group.objects.create(name='Production team')
+        group = Group.objects.create(name="Production team")
         ProductionTeamFactory.create(group=group)
         self.issue_submission.submit()
-        self.issue_submission._meta.get_field('date_modified').auto_now = False
+        self.issue_submission._meta.get_field("date_modified").auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(
             days=editor_settings.ACTION_NEEDED_DAY_OFFSET
         )
         self.issue_submission.save()
-        self.issue_submission._meta.get_field('date_modified').auto_now = True
+        self.issue_submission._meta.get_field("date_modified").auto_now = True
         # Run
         _handle_issue_submission_action_needed()
         # Check

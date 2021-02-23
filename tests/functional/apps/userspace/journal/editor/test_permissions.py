@@ -12,20 +12,27 @@ from core.editor.test.factories import IssueSubmissionFactory
 pytestmark = pytest.mark.django_db
 
 
-@pytest.mark.parametrize('permissions,logged_in,code', (
-    ([AC.can_manage_issuesubmission.codename], True, 200),
-    ([AC.can_manage_issuesubmission.codename], False, 302),
-    ([], True, 403),
-    ([], False, 302),
-))
-@pytest.mark.parametrize('view,use_issue_submission_args', (
-    ('userspace:journal:editor:issues', False),
-    ('userspace:journal:editor:add', False),
-    ('userspace:journal:editor:update', True),
-))
+@pytest.mark.parametrize(
+    "permissions,logged_in,code",
+    (
+        ([AC.can_manage_issuesubmission.codename], True, 200),
+        ([AC.can_manage_issuesubmission.codename], False, 302),
+        ([], True, 403),
+        ([], False, 302),
+    ),
+)
+@pytest.mark.parametrize(
+    "view,use_issue_submission_args",
+    (
+        ("userspace:journal:editor:issues", False),
+        ("userspace:journal:editor:add", False),
+        ("userspace:journal:editor:update", True),
+    ),
+)
 class TestViews:
-
-    def test_userspace_journal_permissions(self, permissions, logged_in, code, view, use_issue_submission_args):
+    def test_userspace_journal_permissions(
+        self, permissions, logged_in, code, view, use_issue_submission_args
+    ):
         user_granted = UserFactory()
         journal = JournalFactory()
         journal.members.add(user_granted)
@@ -37,28 +44,31 @@ class TestViews:
                 content_type=ct,
                 user=user_granted,
                 object_id=journal.id,
-                authorization_codename=permission)
+                authorization_codename=permission,
+            )
 
         if use_issue_submission_args:
             issue = IssueSubmissionFactory(journal=journal)
-            args = (issue.journal.pk, issue.pk, )
+            args = (
+                issue.journal.pk,
+                issue.pk,
+            )
             kwargs = {}
         else:
             args = ()
-            kwargs = {'journal_pk': journal.pk}
+            kwargs = {"journal_pk": journal.pk}
 
         url = reverse(view, args=args, kwargs=kwargs)
         response = client.get(url)
         assert response.status_code == code
 
-class TestRules:
 
+class TestRules:
     def test_user_cant_manage(self):
         issue = IssueSubmissionFactory()
         user = UserFactory()
 
-        is_granted = user.has_perm('editor.manage_issuesubmission',
-                                   issue.journal)
+        is_granted = user.has_perm("editor.manage_issuesubmission", issue.journal)
         assert not is_granted
 
     def test_user_can_manage(self):
@@ -71,23 +81,23 @@ class TestRules:
             content_type=ct,
             user=user,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_issuesubmission.codename)
+            authorization_codename=AC.can_manage_issuesubmission.codename,
+        )
         issue = IssueSubmissionFactory(journal=journal)
 
-        is_granted = user.has_perm('editor.manage_issuesubmission',
-                                   issue.journal)
+        is_granted = user.has_perm("editor.manage_issuesubmission", issue.journal)
         assert is_granted
 
     def test_superuser_can_manage(self):
         user = UserFactory(is_superuser=True)
         issue = IssueSubmissionFactory()
 
-        is_granted = user.has_perm('editor.manage_issuesubmission', issue)
+        is_granted = user.has_perm("editor.manage_issuesubmission", issue)
         assert is_granted
 
     def test_staff_can_manage(self):
         user = UserFactory(is_staff=True)
         issue = IssueSubmissionFactory()
 
-        is_granted = user.has_perm('editor.manage_issuesubmission', issue)
+        is_granted = user.has_perm("editor.manage_issuesubmission", issue)
         assert is_granted

@@ -18,8 +18,7 @@ class TestJournalInformationUpdateView(TestCase):
         journal = JournalFactory()
         user = UserFactory()
         client = Client(logged_user=user)
-        url = reverse('userspace:journal:information:update',
-                      kwargs={'journal_pk': journal.pk})
+        url = reverse("userspace:journal:information:update", kwargs={"journal_pk": journal.pk})
         # Run
         response = client.get(url)
         # Check
@@ -31,67 +30,73 @@ class TestJournalInformationUpdateView(TestCase):
         user = UserFactory()
         journal.members.add(user)
         AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-            user=user, authorization_codename=AC.can_edit_journal_information.codename)
+            content_type=ContentType.objects.get_for_model(journal),
+            object_id=journal.id,
+            user=user,
+            authorization_codename=AC.can_edit_journal_information.codename,
+        )
         client = Client(logged_user=user)
-        url = reverse('userspace:journal:information:update',
-                      kwargs={'journal_pk': journal.pk})
+        url = reverse("userspace:journal:information:update", kwargs={"journal_pk": journal.pk})
         # Run
         response_1 = client.get(url)
-        response_2 = client.get(url, {'lang': 'en'})
+        response_2 = client.get(url, {"lang": "en"})
         # Check
         self.assertEqual(response_1.status_code, 200)
         self.assertEqual(response_2.status_code, 200)
-        self.assertEqual(response_1.context['selected_language'], 'fr')
-        self.assertEqual(response_2.context['selected_language'], 'en')
+        self.assertEqual(response_1.context["selected_language"], "fr")
+        self.assertEqual(response_2.context["selected_language"], "en")
 
     def test_can_be_used_to_update_journal_information_using_the_current_lang(self):
         # Setup
         user = UserFactory()
         journal = JournalFactory(members=[user])
         AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-            user=user, authorization_codename=AC.can_edit_journal_information.codename)
+            content_type=ContentType.objects.get_for_model(journal),
+            object_id=journal.id,
+            user=user,
+            authorization_codename=AC.can_edit_journal_information.codename,
+        )
         client = Client(logged_user=user)
         post_data = {
-            'about_fr': 'Ceci est un test',
-            'contributor_set-TOTAL_FORMS': 0,
-            'contributor_set-INITIAL_FORMS':  0,
-            'contributor_set-MAX_FORMS': 1,
-            'contributor_set-MIN_FORMS': 0
-
+            "about_fr": "Ceci est un test",
+            "contributor_set-TOTAL_FORMS": 0,
+            "contributor_set-INITIAL_FORMS": 0,
+            "contributor_set-MAX_FORMS": 1,
+            "contributor_set-MIN_FORMS": 0,
         }
         formset = ContributorInlineFormset()
-        url = reverse('userspace:journal:information:update',
-                      kwargs={'journal_pk': journal.pk})
+        url = reverse("userspace:journal:information:update", kwargs={"journal_pk": journal.pk})
         # Run
         response = client.post(url, post_data, follow=False)
         # Check
         self.assertEqual(response.status_code, 302)
         info = JournalInformation.objects.get(journal=journal)
-        self.assertEqual(info.about_fr, post_data['about_fr'])
+        self.assertEqual(info.about_fr, post_data["about_fr"])
 
     def test_can_be_used_to_update_journal_information_using_a_specific_lang(self):
         # Setup
         user = UserFactory()
         journal = JournalFactory(members=[user])
         AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-            user=user, authorization_codename=AC.can_edit_journal_information.codename)
+            content_type=ContentType.objects.get_for_model(journal),
+            object_id=journal.id,
+            user=user,
+            authorization_codename=AC.can_edit_journal_information.codename,
+        )
         client = Client(logged_user=user)
         post_data = {
-            'about_en': 'This is a test',
-            'contributor_set-TOTAL_FORMS': 0,
-            'contributor_set-INITIAL_FORMS': 0,
-            'contributor_set-MAX_FORMS': 1,
-            'contributor_set-MIN_FORMS': 0
+            "about_en": "This is a test",
+            "contributor_set-TOTAL_FORMS": 0,
+            "contributor_set-INITIAL_FORMS": 0,
+            "contributor_set-MAX_FORMS": 1,
+            "contributor_set-MIN_FORMS": 0,
         }
-        url = '{}?lang=en'.format(
-            reverse('userspace:journal:information:update',
-                    kwargs={'journal_pk': journal.pk}))
+        url = "{}?lang=en".format(
+            reverse("userspace:journal:information:update", kwargs={"journal_pk": journal.pk})
+        )
         # Run
         response = client.post(url, post_data, follow=False)
         # Check
         self.assertEqual(response.status_code, 302)
         info = JournalInformation.objects.get(journal=journal)
-        self.assertEqual(info.about_en, post_data['about_en'])
+        self.assertEqual(info.about_en, post_data["about_en"])

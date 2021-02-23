@@ -5,7 +5,7 @@ from base.pdf import get_pdf_first_page
 
 
 def test_get_pdf_first_page():
-    with open('./tests/fixtures/pdf/044308ar.pdf', 'rb') as pdf:
+    with open("./tests/fixtures/pdf/044308ar.pdf", "rb") as pdf:
         content = io.BytesIO(pdf.read())
         # Original PDF has 4 pages.
         assert len(fitz.Document(stream=content, filetype="pdf")) == 4

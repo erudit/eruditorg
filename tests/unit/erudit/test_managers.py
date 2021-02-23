@@ -46,8 +46,7 @@ class TestJournalUpcomingManager:
 class TestInternalJournalManager:
     def test_returns_only_the_internal_journals(self):
         journal_1 = JournalFactory.create(
-            external_url='http://example.com',
-            redirect_to_external_url=True
+            external_url="http://example.com", redirect_to_external_url=True
         )
         JournalFactory.create()
         journals = Journal.internal_objects.all()
@@ -56,15 +55,15 @@ class TestInternalJournalManager:
 
 class TestLegacyJournalManager:
     def test_can_return_a_journal_using_its_localidentifier_or_its_code(self):
-        journal = JournalFactory.create(localidentifier='foobar42', code='foobar')
-        assert Journal.legacy_objects.get_by_id('foobar') == journal
-        assert Journal.legacy_objects.get_by_id('foobar42') == journal
+        journal = JournalFactory.create(localidentifier="foobar42", code="foobar")
+        assert Journal.legacy_objects.get_by_id("foobar") == journal
+        assert Journal.legacy_objects.get_by_id("foobar42") == journal
 
 
 class TestInternalIssueManager:
     def test_returns_only_the_internal_issues(self):
         issue_1 = IssueFactory.create(external_url=None)
-        issue_2 = IssueFactory.create(journal=issue_1.journal, external_url='http://example.com')
+        issue_2 = IssueFactory.create(journal=issue_1.journal, external_url="http://example.com")
         issues = Issue.internal_objects.all()
         assert issue_1 in issues
         assert issue_2 not in issues

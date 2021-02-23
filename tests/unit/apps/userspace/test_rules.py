@@ -31,18 +31,20 @@ def staff_user():
 class TestUserspaceAccessRule:
     def test_knows_that_an_anonymous_user_cannot_access_the_userspace(self):
         # Run & check
-        assert not AnonymousUser().has_perm('userspace.access')
+        assert not AnonymousUser().has_perm("userspace.access")
 
     def test_knows_that_a_superuser_can_access_the_userspace(self, superuser):
-        assert superuser.has_perm('userspace.access')
+        assert superuser.has_perm("userspace.access")
 
     def test_knows_that_a_staff_user_can_access_the_userspace(self, staff_user):
-       assert staff_user.has_perm('userspace.access')
+        assert staff_user.has_perm("userspace.access")
 
     def test_knows_that_a_user_without_authorization_cannot_access_the_userspace(self):
-       assert not UserFactory().has_perm('userspace.access')
+        assert not UserFactory().has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_authorization_management_authorization_can_access_the_userspace(self):  # noqa
+    def test_knows_that_a_user_with_the_authorization_management_authorization_can_access_the_userspace(
+        self,
+    ):  # noqa
         # Setup
         user = UserFactory()
         journal = JournalFactory()
@@ -51,11 +53,14 @@ class TestUserspaceAccessRule:
             content_type=ContentType.objects.get_for_model(journal),
             object_id=journal.id,
             user=user,
-            authorization_codename=AC.can_manage_authorizations.codename)
+            authorization_codename=AC.can_manage_authorizations.codename,
+        )
         # Run & check
-        assert user.has_perm('userspace.access')
+        assert user.has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_issuesubmission_management_authorization_can_access_the_userspace(self):  # noqa
+    def test_knows_that_a_user_with_the_issuesubmission_management_authorization_can_access_the_userspace(
+        self,
+    ):  # noqa
         # Setup
         user = UserFactory()
         journal = JournalFactory()
@@ -64,11 +69,14 @@ class TestUserspaceAccessRule:
             content_type=ContentType.objects.get_for_model(journal),
             object_id=journal.id,
             user=user,
-            authorization_codename=AC.can_manage_issuesubmission.codename)
+            authorization_codename=AC.can_manage_issuesubmission.codename,
+        )
         # Run & check
-        assert user.has_perm('userspace.access')
+        assert user.has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_individual_subscription_management_authorization_can_access_the_userspace(self):  # noqa
+    def test_knows_that_a_user_with_the_individual_subscription_management_authorization_can_access_the_userspace(
+        self,
+    ):  # noqa
         # Setup
         user = UserFactory()
         journal = JournalFactory()
@@ -77,11 +85,14 @@ class TestUserspaceAccessRule:
             content_type=ContentType.objects.get_for_model(journal),
             object_id=journal.id,
             user=user,
-            authorization_codename=AC.can_manage_individual_subscription.codename)
+            authorization_codename=AC.can_manage_individual_subscription.codename,
+        )
         # Run & check
-        assert user.has_perm('userspace.access')
+        assert user.has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_journal_information_edit_authorization_can_access_the_userspace(self):  # noqa
+    def test_knows_that_a_user_with_the_journal_information_edit_authorization_can_access_the_userspace(
+        self,
+    ):  # noqa
         # Setup
         user = UserFactory()
         journal = JournalFactory()
@@ -90,13 +101,14 @@ class TestUserspaceAccessRule:
             content_type=ContentType.objects.get_for_model(journal),
             object_id=journal.id,
             user=user,
-            authorization_codename=AC.can_edit_journal_information.codename)
+            authorization_codename=AC.can_edit_journal_information.codename,
+        )
         # Run & check
-        assert user.has_perm('userspace.access')
+        assert user.has_perm("userspace.access")
 
     def test_an_organisation_member_can_access_the_userspace(self):
         user = UserFactory()
         organisation = OrganisationFactory()
         organisation.members.add(user)
 
-        assert user.has_perm('userspace.access')
+        assert user.has_perm("userspace.access")

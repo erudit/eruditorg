@@ -9,18 +9,17 @@ from apps.public.site_messages.tests.utils import generate_site_messages
 
 @pytest.mark.django_db
 class TestSiteMessagesContextProcessors:
-
     @override_settings(
         FOO=True,
         BAR=False,
-        BAZ='BAZ',
+        BAZ="BAZ",
     )
     def test_active_site_messages(self):
         generate_site_messages()
 
         request = unittest.mock.MagicMock()
         context = active_site_messages(request)
-        assert [site_message for site_message in context['site_messages']] == [
-            {'id': 1, 'level': 'DEBUG', 'message': 'message 1'},
-            {'id': 10, 'level': 'CRITICAL', 'message': 'message 10'},
+        assert [site_message for site_message in context["site_messages"]] == [
+            {"id": 1, "level": "DEBUG", "message": "message 1"},
+            {"id": 10, "level": "CRITICAL", "message": "message 10"},
         ]

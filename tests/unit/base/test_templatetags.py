@@ -8,17 +8,19 @@ from django.test import RequestFactory
 
 
 class TestTransCurrentUrlTag:
-
-    @pytest.mark.parametrize('data, expected_url', (
-        ({}, '/en/journals/'),
-        ({'foo': 'bar'}, '/en/journals/?foo=bar'),
-    ))
+    @pytest.mark.parametrize(
+        "data, expected_url",
+        (
+            ({}, "/en/journals/"),
+            ({"foo": "bar"}, "/en/journals/?foo=bar"),
+        ),
+    )
     def test_can_translate_a_given_url_in_another_language(self, data, expected_url):
         factory = RequestFactory()
-        url = reverse('public:journal:journal_list')
+        url = reverse("public:journal:journal_list")
         request = factory.get(url, data=data)
         request.resolver_match = resolve(url)
         template = Template('{% load base_urls_tags %}{% trans_current_url "en" %}')
-        context = Context({'request': request})
+        context = Context({"request": request})
         rendered = template.render(context)
         assert rendered == expected_url

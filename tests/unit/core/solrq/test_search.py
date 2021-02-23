@@ -17,7 +17,7 @@ class TestSearch:
         assert isinstance(q, Query)
 
     def test_can_return_results(self, solr_client):
-        with open(FIXTURE_ROOT + '/response1.solr.json', mode='r') as fp:
+        with open(FIXTURE_ROOT + "/response1.solr.json", mode="r") as fp:
             json_content = fp.read()
         decoded = json.loads(json_content)
         solr_client.search = lambda *a, **kw: Results(decoded)
