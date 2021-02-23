@@ -32,55 +32,59 @@ def first_letter_counts(summary):
     counts = defaultdict(int)
 
     for author, count in summary.by_author:
-        m = re.search(r'\w', author)
+        m = re.search(r"\w", author)
         if m:
             counts[m.group(0).upper()] += count
 
     return sorted(counts.items())
 
 
-@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
+@method_decorator(cache_page(settings.SHORT_TTL), name="dispatch")
 class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
     """ Displays the home page of thesis repositories. """
-    template_name = 'public/thesis/home.html'
+
+    template_name = "public/thesis/home.html"
     fallback_url = "/these/"
 
     def get_context_data(self, **kwargs):
         context = super(ThesisHomeView, self).get_context_data(**kwargs)
 
         # Total number of theses for all collections
-        context['total_count'] = solr.get_thesis_count()
+        context["total_count"] = solr.get_thesis_count()
 
         # Fetches the collections associated with theses.
-        repositories = ThesisRepository.objects.all().order_by('name')
+        repositories = ThesisRepository.objects.all().order_by("name")
         repository_summaries = []
         for repository in repositories:
             theses = solr.get_theses(repository.solr_name, rows=3)
             recent_theses = list(map(Thesis, theses.solr_dicts))
-            repository_summaries.append({
-                'repository': repository,
-                'thesis_count': theses.count,
-                'recent_theses': recent_theses,
-            })
-        context['repository_summaries'] = repository_summaries
+            repository_summaries.append(
+                {
+                    "repository": repository,
+                    "thesis_count": theses.count,
+                    "recent_theses": recent_theses,
+                }
+            )
+        context["repository_summaries"] = repository_summaries
 
         return context
 
 
-@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
+@method_decorator(cache_page(settings.SHORT_TTL), name="dispatch")
 class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
     """ Displays the home page of a collection repository. """
-    context_object_name = 'repository'
-    model = ThesisRepository
-    slug_url_kwarg = 'collection_code'
-    slug_field = 'code'
-    template_name = 'public/thesis/collection_home.html'
 
-    fallback_url_format = '/these/liste.html'
+    context_object_name = "repository"
+    model = ThesisRepository
+    slug_url_kwarg = "collection_code"
+    slug_field = "code"
+    template_name = "public/thesis/collection_home.html"
+
+    fallback_url_format = "/these/liste.html"
 
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
-        querystring_dict['src'] = format_thesis_collection_code(self.get_object().code)
+        querystring_dict["src"] = format_thesis_collection_code(self.get_object().code)
         return querystring_dict
 
     def get_context_data(self, **kwargs):
@@ -90,10 +94,10 @@ class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
         recent_theses = list(map(Thesis, self.summary.solr_dicts))
 
         # Inserts recent theses into the context.
-        context['recent_theses'] = recent_theses
+        context["recent_theses"] = recent_theses
 
         # Inserts the number of theses associated with this collection into the context.
-        context['thesis_count'] = self.summary.count
+        context["thesis_count"] = self.summary.count
 
         return context
 
@@ -106,34 +110,37 @@ class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
 
 class BaseThesisListView(ListView):
     """ Base view for displaying a list of theses associated with a collection. """
-    available_tris = OrderedDict((
-        ('author_asc', _('Auteur (A–Z)')),
-        ('author_desc', _('Auteur (Z–A)')),
-        ('date_asc', _("Date de publication (croissant)")),
-        ('date_desc', _("Date de publication (décroissant)")),
-    ))
-    collection_code_url_kwarg = 'collection_code'
-    context_object_name = 'theses'
+
+    available_tris = OrderedDict(
+        (
+            ("author_asc", _("Auteur (A–Z)")),
+            ("author_desc", _("Auteur (Z–A)")),
+            ("date_asc", _("Date de publication (croissant)")),
+            ("date_desc", _("Date de publication (décroissant)")),
+        )
+    )
+    collection_code_url_kwarg = "collection_code"
+    context_object_name = "theses"
     paginate_by = 50
 
     def get_solr_sort_arg(self):
         sort_by = self.get_sort_by()
-        if sort_by == 'author_asc':
-            return ['Auteur_tri asc']
-        elif sort_by == 'author_desc':
-            return ['Auteur_tri desc']
-        elif sort_by == 'date_asc':
-            return ['AnneePublication asc', 'DateAjoutErudit asc']
-        elif sort_by == 'date_desc':
-            return ['AnneePublication desc', 'DateAjoutErudit desc']
+        if sort_by == "author_asc":
+            return ["Auteur_tri asc"]
+        elif sort_by == "author_desc":
+            return ["Auteur_tri desc"]
+        elif sort_by == "date_asc":
+            return ["AnneePublication asc", "DateAjoutErudit asc"]
+        elif sort_by == "date_desc":
+            return ["AnneePublication desc", "DateAjoutErudit desc"]
 
     def get_context_data(self, **kwargs):
         context = super(BaseThesisListView, self).get_context_data(**kwargs)
-        context['repository'] = self.repository
-        context['available_tris'] = self.available_tris
-        context['sort_by'] = self.get_sort_by()
-        context['thesis_count'] = self.summary.count
-        context['sidebar_theses'] = list(map(Thesis, self.summary.solr_dicts))
+        context["repository"] = self.repository
+        context["available_tris"] = self.available_tris
+        context["sort_by"] = self.get_sort_by()
+        context["thesis_count"] = self.summary.count
+        context["sidebar_theses"] = list(map(Thesis, self.summary.solr_dicts))
 
         return context
 
@@ -141,8 +148,8 @@ class BaseThesisListView(ListView):
         return list(map(Thesis, self.theses.solr_dicts))
 
     def get_sort_by(self):
-        sort_by = self.request.GET.get('sort_by', 'author_asc')
-        sort_by = sort_by if sort_by in self.available_tris else 'author_asc'
+        sort_by = self.request.GET.get("sort_by", "author_asc")
+        sort_by = sort_by if sort_by in self.available_tris else "author_asc"
         return sort_by
 
     def paginate_queryset(self, queryset, page_size):
@@ -160,75 +167,81 @@ class BaseThesisListView(ListView):
     @cached_property
     def repository(self):
         return get_object_or_404(
-            ThesisRepository,
-            code=self.kwargs.get(self.collection_code_url_kwarg))
+            ThesisRepository, code=self.kwargs.get(self.collection_code_url_kwarg)
+        )
 
     @cached_property
     def theses(self):
         return solr.get_theses(
-            self.repository.solr_name, rows=self.paginate_by, page=self.page_number,
-            sort=self.get_solr_sort_arg(), **self.get_extra_theses_kwargs())
+            self.repository.solr_name,
+            rows=self.paginate_by,
+            page=self.page_number,
+            sort=self.get_solr_sort_arg(),
+            **self.get_extra_theses_kwargs()
+        )
 
     @cached_property
     def summary(self):
         return solr.get_repository_summary(self.repository.solr_name)
 
 
-@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
+@method_decorator(cache_page(settings.SHORT_TTL), name="dispatch")
 class ThesisPublicationYearListView(FallbackObjectViewMixin, BaseThesisListView):
     """ Displays theses for a specific year. """
-    template_name = 'public/thesis/collection_list_per_year.html'
-    year_url_kwarg = 'publication_year'
-    fallback_url_format = '/these/liste.html'
+
+    template_name = "public/thesis/collection_list_per_year.html"
+    year_url_kwarg = "publication_year"
+    fallback_url_format = "/these/liste.html"
 
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
-        querystring_dict['src'] = format_thesis_collection_code(self.repository.code)
+        querystring_dict["src"] = format_thesis_collection_code(self.repository.code)
         return querystring_dict
 
     def get_fallback_url_format_kwargs(self):
         kwargs = {}
-        kwargs['code'] = format_thesis_collection_code(self.repository.code)
+        kwargs["code"] = format_thesis_collection_code(self.repository.code)
         return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['publication_year'] = self.kwargs.get(self.year_url_kwarg)
-        context['other_publication_years'] = list(year_counts(self.summary))
+        context["publication_year"] = self.kwargs.get(self.year_url_kwarg)
+        context["other_publication_years"] = list(year_counts(self.summary))
         return context
 
     def get_extra_theses_kwargs(self):
-        return {'year': self.kwargs.get(self.year_url_kwarg)}
+        return {"year": self.kwargs.get(self.year_url_kwarg)}
 
 
-@method_decorator(cache_page(settings.SHORT_TTL), name='dispatch')
+@method_decorator(cache_page(settings.SHORT_TTL), name="dispatch")
 class ThesisPublicationAuthorNameListView(FallbackObjectViewMixin, BaseThesisListView):
     """ Displays theses for a specific year. """
-    template_name = 'public/thesis/collection_list_per_author_name.html'
-    letter_url_kwarg = 'author_letter'
-    fallback_url_format = '/these/liste.html'
+
+    template_name = "public/thesis/collection_list_per_author_name.html"
+    letter_url_kwarg = "author_letter"
+    fallback_url_format = "/these/liste.html"
 
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
-        querystring_dict['src'] = format_thesis_collection_code(self.repository.code)
-        querystring_dict['lettre'] = self.kwargs.get(self.letter_url_kwarg).upper()
+        querystring_dict["src"] = format_thesis_collection_code(self.repository.code)
+        querystring_dict["lettre"] = self.kwargs.get(self.letter_url_kwarg).upper()
         return querystring_dict
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['author_letter'] = self.kwargs.get(self.letter_url_kwarg).upper()
-        context['other_author_letters'] = first_letter_counts(self.summary)
+        context["author_letter"] = self.kwargs.get(self.letter_url_kwarg).upper()
+        context["other_author_letters"] = first_letter_counts(self.summary)
         return context
 
     def get_extra_theses_kwargs(self):
-        return {'author_letter': self.kwargs.get(self.letter_url_kwarg)}
+        return {"author_letter": self.kwargs.get(self.letter_url_kwarg)}
 
 
 class BaseThesisCitationView(TemplateView):
     def get_context_data(self, **kwargs):
         result = super().get_context_data(**kwargs)
         try:
-            result['thesis'] = SolrDocument.from_solr_id(self.kwargs['solr_id'])
+            result["thesis"] = SolrDocument.from_solr_id(self.kwargs["solr_id"])
         except ValueError:
             raise Http404()
         return result
@@ -236,17 +249,20 @@ class BaseThesisCitationView(TemplateView):
 
 class ThesisEnwCitationView(BaseThesisCitationView):
     """ Returns the enw file of a specific thesis. """
-    content_type = 'application/x-endnote-refer'
-    template_name = 'public/thesis/citation/thesis.enw'
+
+    content_type = "application/x-endnote-refer"
+    template_name = "public/thesis/citation/thesis.enw"
 
 
 class ThesisRisCitationView(BaseThesisCitationView):
     """ Returns the ris file of a specific thesis. """
-    content_type = 'application/x-research-info-systems'
-    template_name = 'public/thesis/citation/thesis.ris'
+
+    content_type = "application/x-research-info-systems"
+    template_name = "public/thesis/citation/thesis.ris"
 
 
 class ThesisBibCitationView(BaseThesisCitationView):
     """ Returns the bib file of a specific thesis. """
-    content_type = 'application/x-bibtex'
-    template_name = 'public/thesis/citation/thesis.bib'
+
+    content_type = "application/x-bibtex"
+    template_name = "public/thesis/citation/thesis.bib"
