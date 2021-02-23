@@ -29,10 +29,13 @@ logger = logging.getLogger(__name__)
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
+
     form_class = SearchForm
-    http_method_names = ['get', ]
-    template_name = 'public/search/advanced_search.html'
-    fallback_url = '/recherche/'
+    http_method_names = [
+        "get",
+    ]
+    template_name = "public/search/advanced_search.html"
+    fallback_url = "/recherche/"
 
     def get(self, request, *args, **kwargs):
         form = self.get_form()
@@ -47,37 +50,44 @@ class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Fo
         # inserts them into the context.
         saved_searches = SavedSearchList(self.request)
         if saved_searches:
-            _saved_searches = reversed(sorted(saved_searches, key=lambda s: s['timestamp']))
+            _saved_searches = reversed(sorted(saved_searches, key=lambda s: s["timestamp"]))
             sorted_saved_searches = []
             for search in _saved_searches:
                 new_search = search.copy()
-                qsdict = QueryDict(new_search['querystring'])
-                new_search['elements'] = get_search_elements(qsdict)
+                qsdict = QueryDict(new_search["querystring"])
+                new_search["elements"] = get_search_elements(qsdict)
                 sorted_saved_searches.append(new_search)
 
-            context['saved_searches'] = sorted_saved_searches
+            context["saved_searches"] = sorted_saved_searches
 
         return context
 
     def get_form_kwargs(self):
-        kwargs = {'initial': self.get_initial(), 'prefix': self.get_prefix()}
+        kwargs = {"initial": self.get_initial(), "prefix": self.get_prefix()}
         if self.request.GET:
             MULTI = {
-                'article_types', 'publication_types', 'funds', 'disciplines', 'languages',
-                'journals',
+                "article_types",
+                "publication_types",
+                "funds",
+                "disciplines",
+                "languages",
+                "journals",
             }
-            kwargs['initial'].update(GET_as_dict(self.request.GET, MULTI))
+            kwargs["initial"].update(GET_as_dict(self.request.GET, MULTI))
         return kwargs
 
 
 class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, ContextMixin, View):
     """ Display the results associated with a search for Érudit documents. """
+
     filter_form_class = ResultsFilterForm
-    http_method_names = ['get', ]
+    http_method_names = [
+        "get",
+    ]
     options_form_class = ResultsOptionsForm
     search_form_class = SearchForm
-    template_name = 'public/search/results.html'
-    fallback_url = '/recherche/'
+    template_name = "public/search/results.html"
+    fallback_url = "/recherche/"
 
     def __init__(self):
         super().__init__()
@@ -104,8 +114,12 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         """ Returns the keyword arguments for instantiating the search form. """
         form_kwargs = {}
 
-        if self.request.method == 'GET':
-            form_kwargs.update({'data': self.request.GET, })
+        if self.request.method == "GET":
+            form_kwargs.update(
+                {
+                    "data": self.request.GET,
+                }
+            )
         return form_kwargs
 
     def get_filter_form(self, **kwargs):
@@ -117,8 +131,12 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         form_kwargs = {}
         form_kwargs.update(kwargs)
 
-        if self.request.method == 'GET':
-            form_kwargs.update({'data': self.request.GET, })
+        if self.request.method == "GET":
+            form_kwargs.update(
+                {
+                    "data": self.request.GET,
+                }
+            )
         return form_kwargs
 
     def get_options_form(self):
@@ -130,32 +148,32 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         form_kwargs = {}
 
         self.request.GET = legacy.add_correspondences_to_search_query(
-            self.request,
-            'filter_article_types',
-            self.filter_form_class.article_type_correspondence
+            self.request, "filter_article_types", self.filter_form_class.article_type_correspondence
         )
 
         self.request.GET = legacy.add_correspondences_to_search_query(
-            self.request,
-            'filter_languages',
-            self.filter_form_class.language_code_correspondence
+            self.request, "filter_languages", self.filter_form_class.language_code_correspondence
         )
 
-        if self.request.method == 'GET':
-            form_kwargs.update({'data': self.request.GET, })
+        if self.request.method == "GET":
+            form_kwargs.update(
+                {
+                    "data": self.request.GET,
+                }
+            )
         return form_kwargs
 
     def get_context_data(self, **kwargs):
         context = super(SearchResultsView, self).get_context_data(**kwargs)
-        results = context.get('results', None)
+        results = context.get("results", None)
 
         if results:
-            context['main_qterm'] = self.request.GET.get('basic_search_term', '')
-            context['start_at'] = (results['pagination']['current_page'] - 1) \
-                * results['pagination']['page_size']
-            context['search_elements'] = get_search_elements(
-                self.request.GET,
-                form=self.get_search_form()
+            context["main_qterm"] = self.request.GET.get("basic_search_term", "")
+            context["start_at"] = (results["pagination"]["current_page"] - 1) * results[
+                "pagination"
+            ]["page_size"]
+            context["search_elements"] = get_search_elements(
+                self.request.GET, form=self.get_search_form()
             )
 
         return context
@@ -166,16 +184,17 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         # that should be embedded in the final response object and a number of hits.
 
         try:
-            pagination_info, documents, aggregations_dict = filters.SolrFilter() \
-                .filter(self.request)
+            pagination_info, documents, aggregations_dict = filters.SolrFilter().filter(
+                self.request
+            )
         except PaginationOutOfBoundsException:
-            return HttpResponseRedirect(reverse('public:search:advanced_search'))
+            return HttpResponseRedirect(reverse("public:search:advanced_search"))
 
         solr_objects = [get_model_instance(document) for document in documents]
         results = {
-            'pagination': pagination_info,
-            'results': solr_objects,
-            'aggregations': aggregations_dict,
+            "pagination": pagination_info,
+            "results": solr_objects,
+            "aggregations": aggregations_dict,
         }
 
         # Initializes the filters form here in order to display it using choices generated from the
@@ -188,37 +207,46 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
                 filter_form=filter_form,
                 options_form=options_form,
                 results=results,
-                documents=results.get('results')
+                documents=results.get("results"),
             )
         )
 
     def forms_invalid(self, search_form, options_form):
         GET = self.request.GET
-        if 'basic_search_term' not in GET:
+        if "basic_search_term" not in GET:
             # This is simply a case of typing the /recherche/ url directly. We don't want to log
             # those.
             pass
-        elif 'basic_search_term' in GET and not GET.get('basic_search_term'):
+        elif "basic_search_term" in GET and not GET.get("basic_search_term"):
             # This is simply a case of clicking on homepage's search magnifier without a search
             # param. We don't want to log those, we just want to silently redirect.
             pass
         else:
             # We have some unhandled form validation here that we'd like to know about.
-            logger.error('search.form.invalid', extra={
-                'stack': True, 'search_form_errors': search_form.errors.as_json(),
-                'options_form_errors': options_form.errors.as_json()})
+            logger.error(
+                "search.form.invalid",
+                extra={
+                    "stack": True,
+                    "search_form_errors": search_form.errors.as_json(),
+                    "options_form_errors": options_form.errors.as_json(),
+                },
+            )
         return HttpResponseRedirect(
-            '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))
+            "{}?{}".format(reverse("public:search:advanced_search"), self.request.GET.urlencode())
+        )
 
 
 class SavedSearchAddView(View):
     """ Add a search's querystring to the list of saved searches associated to the current user. """
-    http_method_names = ['post', ]
+
+    http_method_names = [
+        "post",
+    ]
 
     def post(self, request):
         try:
-            querystring = request.POST.get('querystring', None)
-            results_count = request.POST.get('results_count', None)
+            querystring = request.POST.get("querystring", None)
+            results_count = request.POST.get("results_count", None)
             assert querystring is not None
             assert results_count is not None
             parsed_qstring = urlparse.parse_qsl(querystring)
@@ -237,7 +265,10 @@ class SavedSearchAddView(View):
 
 class SavedSearchRemoveView(View):
     """ Remove a saved search from the list of saved searches associated to the current user. """
-    http_method_names = ['post', ]
+
+    http_method_names = [
+        "post",
+    ]
 
     def post(self, request, uuid):
         searches = SavedSearchList(request)

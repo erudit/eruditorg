@@ -3,7 +3,7 @@ import functools
 
 
 def group_results_by_field_correspondence(aggregations, field, correspondences):
-    """ Group results count by field correspondence
+    """Group results count by field correspondence
 
     Sometimes in the indexed documents, some fields have different values
     when that shouldn't be the case. For example, in the field_values
@@ -18,6 +18,7 @@ def group_results_by_field_correspondence(aggregations, field, correspondences):
     :param correspondences: correspondence between article types
     :returns: aggregations dict with where the values of the
     """
+
     def reduce_correspondences(value, element):
         if element in aggregations[field].keys():
             count = aggregations[field][element]
@@ -27,15 +28,13 @@ def group_results_by_field_correspondence(aggregations, field, correspondences):
     for v in aggregations[field].keys():
         if v in correspondences:
             aggregations[field][v] = functools.reduce(
-                reduce_correspondences,
-                correspondences[v],
-                aggregations[field][v]
+                reduce_correspondences, correspondences[v], aggregations[field][v]
             )
 
     for replacements in correspondences.values():
         for replacement in replacements:
             if replacement in aggregations[field]:
-                del(aggregations[field][replacement])
+                del aggregations[field][replacement]
 
 
 def add_correspondences_to_search_query(request, field, correspondences):
