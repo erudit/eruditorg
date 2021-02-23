@@ -21,7 +21,7 @@ from erudit.test.factories import (
 from erudit.fedora import repository
 from eruditarticle.objects.article import EruditArticle
 from erudit.fedora.objects import ArticleDigitalObject
-from erudit.models import Article
+from erudit.models import Article, Issue
 from erudit.test.domchange import SectionTitle
 from erudit.test.solr import FakeSolrData
 from apps.public.journal.views import (
@@ -42,7 +42,6 @@ from apps.public.journal.views import (
     IssueRawCoverpageView,
     IssueRawCoverpageHDView,
     ArticleMediaView,
-    RelatedArticle,
 )
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 
@@ -1114,28 +1113,26 @@ class TestArticleDetailView:
         issue1 = IssueFactory(journal=journal)
         issue2 = IssueFactory(journal=journal)
         current_article = ArticleFactory(issue=issue1)
-        for i in range(number_related_articles):
+        for _ in range(number_related_articles):
             ArticleFactory(issue=issue2)
         view = ArticleDetailView()
         view.request = RequestFactory()
         view.request.LANGUAGE_CODE = "fr"
-        monkeypatch.setattr(Issue, "erudit_object", MockEruditObject(number_related_articles))
-        related_articles = view.get_related_articles(current_article)
+        mock_erudit_object = MockEruditObject(number_related_articles)
+        monkeypatch.setattr(Issue, "erudit_object", mock_erudit_object)
+        related_articles = view.get_related_articles(
+            current_article.issue.localidentifier, current_article.issue.journal.localidentifier
+        )
         # Check if number of articles are at most 4
         assert len(related_articles) == min(4, number_related_articles)
         # Check if all related articles are unique
-        assert len(set(article.url for article in related_articles)) == min(
+        assert len(set(article.urlhtml for article in related_articles)) == min(
             4, number_related_articles
         )
         # Check if related articles belong to the list of available articles
         for article in related_articles:
-            assert article in [
-                RelatedArticle(url="/fr/url_1", html_title="html_title_1", authors="authors_1"),
-                RelatedArticle(url="/fr/url_2", html_title="html_title_2", authors="authors_2"),
-                RelatedArticle(url="/fr/url_3", html_title="html_title_3", authors="authors_3"),
-                RelatedArticle(url="/fr/url_4", html_title="html_title_4", authors="authors_4"),
-                RelatedArticle(url="/fr/url_5", html_title="html_title_5", authors="authors_5"),
-            ]
+            assert article in mock_erudit_object.available_articles
+            # Check that SummaryArticles without title or urlhtml are not selected
             assert article.authors not in ["authors_6", "authors_7", "authors_8"]
 
 

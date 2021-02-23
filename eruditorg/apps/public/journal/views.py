@@ -4,12 +4,11 @@ from operator import attrgetter
 from PIL import Image
 from string import ascii_uppercase
 import io
-from typing import List, Optional
-from pydantic import BaseModel
+from typing import List
 
 import functools
 import pysolr
-from random import choice, sample
+from random import choice, shuffle
 import structlog
 import unicodedata
 
@@ -50,6 +49,8 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
+
+from eruditarticle.objects import SummaryArticle
 
 from erudit.utils import locale_aware_sort, qs_cache_key
 
@@ -739,12 +740,6 @@ class IssueXmlView(
         return fedora_object.xml_content
 
 
-class RelatedArticle(BaseModel):
-    url: str
-    html_title: str
-    authors: Optional[str]
-
-
 class BaseArticleDetailView(
     ArticleAccessLogMixin,
     FallbackObjectViewMixin,
@@ -826,7 +821,9 @@ class BaseArticleDetailView(
             self.render_xml_content,
             context=context,
         )
-        context["related_articles"] = self.get_related_articles(current_article)
+        context["related_articles"] = self.get_related_articles(
+            current_article.issue.localidentifier, current_article.issue.journal.localidentifier
+        )
         context["active_campaign"] = Campaign.objects.active_campaign()
 
         # A list of Fedora objects' pids to which this view's templates cache keys will
@@ -854,11 +851,10 @@ class BaseArticleDetailView(
 
         return context
 
-    def get_related_articles(self, current_article: Article) -> List[RelatedArticle]:
-        cache_key = (
-            f"get_related_articles-"
-            f"{self.request.LANGUAGE_CODE}-{current_article.issue.localidentifier}"
-        )
+    def get_related_articles(
+        self, issue_localidentifier: str, journal_localidentifier: str
+    ) -> List[SummaryArticle]:
+        cache_key = f"get_related_articles-{issue_localidentifier}"
         # Tries to fetch previously stored issue related articles
         cached_related_articles = cache.get(cache_key)
         if cached_related_articles:
@@ -867,10 +863,10 @@ class BaseArticleDetailView(
         # Fetch all journal's issues except for the current article one
         candidate_issues = (
             Issue.objects.filter(
-                journal__localidentifier=current_article.issue.journal.localidentifier,
+                journal__localidentifier=journal_localidentifier,
                 is_published=True,
             )
-            .exclude(localidentifier=current_article.issue.localidentifier)
+            .exclude(localidentifier=issue_localidentifier)
             .values_list(
                 "localidentifier",
                 flat=True,
@@ -878,27 +874,24 @@ class BaseArticleDetailView(
         )
 
         # If there are not other issues for the current journal
-        if len(candidate_issues) == 0:
+        if candidate_issues.count() == 0:
             return []
 
         # Randomly select 4 (at most) related articles from randomly selected issue
         random_issue = Issue.objects.get(localidentifier=choice(candidate_issues))
         summary_articles = random_issue.erudit_object.get_summary_articles()
+        shuffle(summary_articles)
         related_candidates = []
-        for summary_article in sample(summary_articles, k=min(4, len(summary_articles))):
+        for summary_article in summary_articles:
             url = summary_article.urlhtml if summary_article.urlhtml else summary_article.urlpdf
             # Not include articles that have missing urls or titles
             if url is not None and summary_article.html_title is not None:
-                related_candidates.append(
-                    RelatedArticle(
-                        url=f"/{self.request.LANGUAGE_CODE}{url}",
-                        html_title=summary_article.html_title,
-                        authors=summary_article.authors,
-                    )
-                )
+                related_candidates.append(summary_article)
+            if len(related_candidates) == 4:
+                break
 
-        # Store issue related articles in cache
-        cache.set(cache_key, related_candidates, settings.LONG_TTL)  # 24 hours
+        # Store issue related articles in cache for 24h.
+        cache.set(cache_key, related_candidates, settings.LONG_TTL)
 
         return related_candidates
 
