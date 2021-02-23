@@ -50,39 +50,43 @@ logger = structlog.get_logger(__name__)
 class JournalType(models.Model):
     """ The type of a Journal instance. """
 
-    name = models.CharField(max_length=255, verbose_name=_('Nom'))
+    name = models.CharField(max_length=255, verbose_name=_("Nom"))
 
-    CODE_CULTURAL, CODE_SCIENTIFIC = 'C', 'S'
+    CODE_CULTURAL, CODE_SCIENTIFIC = "C", "S"
     CODE_CHOICES = (
-        (CODE_CULTURAL, _('Culturel')),
-        (CODE_SCIENTIFIC, _('Savant')),
+        (CODE_CULTURAL, _("Culturel")),
+        (CODE_SCIENTIFIC, _("Savant")),
     )
-    code = models.SlugField(verbose_name=_('Code'), max_length=2, choices=CODE_CHOICES, unique=True)
+    code = models.SlugField(verbose_name=_("Code"), max_length=2, choices=CODE_CHOICES, unique=True)
 
-    def embargo_duration(self, unit='months'):
-        embargo_duration_in_months = erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS \
-            if self.code == 'S' \
+    def embargo_duration(self, unit="months"):
+        embargo_duration_in_months = (
+            erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS
+            if self.code == "S"
             else erudit_settings.CULTURAL_JOURNAL_EMBARGO_IN_MONTHS
+        )
 
-        if unit == 'months':
+        if unit == "months":
             return embargo_duration_in_months
-        if unit == 'days':
+        if unit == "days":
             duration = dt.date.today() - (
                 dt.date.today() - dr.relativedelta(months=embargo_duration_in_months)
             )
             return duration.days
 
     class Meta:
-        verbose_name = _('Type de revue')
-        verbose_name_plural = _('Types de revue')
-        ordering = ['name', ]
+        verbose_name = _("Type de revue")
+        verbose_name_plural = _("Types de revue")
+        ordering = [
+            "name",
+        ]
 
     def __str__(self):
         return self.name
 
 
 class Journal(FedoraMixin, FedoraDated):
-    """ The main Journal model.
+    """The main Journal model.
 
     A journal is a collection of issues. It should be associated with a collection: Érudit, Persée,
     etc. This model supports Fedora-based journals through the use of the ``localidentifier`` field.
@@ -94,27 +98,35 @@ class Journal(FedoraMixin, FedoraDated):
     ``Journal`` is part"""
 
     type = models.ForeignKey(
-        JournalType, null=False, blank=False, verbose_name=_('Type'),
+        JournalType,
+        null=False,
+        blank=False,
+        verbose_name=_("Type"),
         # 2 = Scientific
-        default=2, on_delete=models.CASCADE
+        default=2,
+        on_delete=models.CASCADE,
     )
     """ The type of the journal """
 
-    name = models.CharField(max_length=255, verbose_name=_('Nom'), help_text=_('Nom officiel'))
+    name = models.CharField(max_length=255, verbose_name=_("Nom"), help_text=_("Nom officiel"))
     """ The ``name`` of the journal """
 
     code = models.SlugField(
-        max_length=255, unique=True, verbose_name=_('Code'),
-        help_text=_('Identifiant unique (utilisé dans URL Érudit)'))
+        max_length=255,
+        unique=True,
+        verbose_name=_("Code"),
+        help_text=_("Identifiant unique (utilisé dans URL Érudit)"),
+    )
     """ The shortname of the journal """
 
     issn_print = models.CharField(
-        max_length=255, null=True, blank=True, verbose_name=_('ISSN imprimé'))
+        max_length=255, null=True, blank=True, verbose_name=_("ISSN imprimé")
+    )
     """ .. warning:: Not imported.
 
     The print ISSN of the journal """
 
-    issn_web = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('ISSN web'))
+    issn_web = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("ISSN web"))
     """ .. warning:: Not imported.
 
     The web ISSN of the journal """
@@ -125,87 +137,101 @@ class Journal(FedoraMixin, FedoraDated):
     The subtitle of the journal """
 
     localidentifier = models.CharField(
-        max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
+        max_length=100, unique=True, blank=True, null=True, verbose_name=_("Identifiant Fedora")
+    )
     """ Fedora commons identifier. Used to implement the
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
     paper = models.NullBooleanField(
-        default=None, verbose_name=_('Papier'),
-        help_text=_('Est publiée également en version papier?'))
+        default=None,
+        verbose_name=_("Papier"),
+        help_text=_("Est publiée également en version papier?"),
+    )
     """ .. warning:: Not imported.
 
     Defines whether this Journal is printed in paper or not """
 
     open_access = models.BooleanField(
-        default=False, verbose_name=_('Libre accès'),
-        help_text=_("Cette revue est en accès libre?"))
+        default=False, verbose_name=_("Libre accès"), help_text=_("Cette revue est en accès libre?")
+    )
     """ Defines whether the journal can be accessed by anyone """
 
     first_publication_year = models.PositiveIntegerField(
-        verbose_name=_('Première année de publication'), blank=True, null=True)
+        verbose_name=_("Première année de publication"), blank=True, null=True
+    )
     """ The first year when an issue of this journal has been published. """
 
     last_publication_year = models.PositiveIntegerField(
-        verbose_name=_('Dernière année de publication'), blank=True, null=True)
+        verbose_name=_("Dernière année de publication"), blank=True, null=True
+    )
     """ The last year when an issue of this journal has been published. """
 
-    external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
+    external_url = models.URLField(null=True, blank=True, verbose_name=_("URL"))
     """ External URL of the home page of the Journal """
 
     charges_apc = models.BooleanField(
         default=False,
         verbose_name=_("Frais de publication (APC)"),
-        help_text=_("Cocher si la revue facture des frais de publication (APC) aux auteurs")
+        help_text=_("Cocher si la revue facture des frais de publication (APC) aux auteurs"),
     )
 
     redirect_to_external_url = models.BooleanField(
         default=False,
         verbose_name=_("Rediriger vers l'URL externe"),
-        help_text=_("Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit")  # noqa
+        help_text=_(
+            "Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit"
+        ),
     )
     """ Redirects to the external URL of the Journal """
 
     # Status of the journal
     active = models.BooleanField(
-        default=True, verbose_name=_('Actif'),
-        help_text=_("Une revue inactive n'édite plus de numéros"))
+        default=True,
+        verbose_name=_("Actif"),
+        help_text=_("Une revue inactive n'édite plus de numéros"),
+    )
     """ Whether the Journal is active or not. An inactive journal is
     a journal that still publish issues """
 
     # The field defines the users who can interact this object (coupled with permissions)
     members = models.ManyToManyField(
-        User,
-        blank=True,
-        related_name='journals',
-        verbose_name=_('Membres')
+        User, blank=True, related_name="journals", verbose_name=_("Membres")
     )
     """ Users that are part of this journal's organization """
 
     is_new = models.BooleanField(
         default=False,
         verbose_name=_("Est une nouveauté"),
-        help_text=_("Cocher si cette revue est nouvelle sur la plateforme d'Érudit.")
+        help_text=_("Cocher si cette revue est nouvelle sur la plateforme d'Érudit."),
     )
 
     year_of_addition = models.PositiveIntegerField(
-        verbose_name=_('Année de nouveauté'),
+        verbose_name=_("Année de nouveauté"),
         blank=True,
         null=True,
-        help_text=_("Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit.")
+        help_text=_("Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit."),
     )
 
-    disciplines = models.ManyToManyField('Discipline', related_name='journals')
+    disciplines = models.ManyToManyField("Discipline", related_name="journals")
     """ The disciplines associated with the journal. """
 
     next_journal = models.ForeignKey(
-        'Journal', verbose_name=_('Revue suivante'), blank=True, null=True, related_name='+',
-        on_delete=models.CASCADE
+        "Journal",
+        verbose_name=_("Revue suivante"),
+        blank=True,
+        null=True,
+        related_name="+",
+        on_delete=models.CASCADE,
     )
     """ The journal that follows the current journal if any. """
 
     previous_journal = models.ForeignKey(
-        'Journal', verbose_name=_('Revue précédente'), blank=True, null=True, related_name='+',
-        on_delete=models.CASCADE
+        "Journal",
+        verbose_name=_("Revue précédente"),
+        blank=True,
+        null=True,
+        related_name="+",
+        on_delete=models.CASCADE,
     )
     """ The journal that precedes the current journal if any. """
 
@@ -216,16 +242,16 @@ class Journal(FedoraMixin, FedoraDated):
     managed_objects = ManagedJournalManager()
 
     class Meta:
-        verbose_name = _('Revue')
-        verbose_name_plural = _('Revues')
-        ordering = ['name']
+        verbose_name = _("Revue")
+        verbose_name_plural = _("Revues")
+        ordering = ["name"]
 
     def __str__(self):
-        return '{:s} [{:s}]'.format(self.name, self.code)
+        return "{:s} [{:s}]".format(self.name, self.code)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         # Save this journal's information to invalidate the journal's detail page template.
-        if hasattr(self, 'information'):
+        if hasattr(self, "information"):
             self.information.save()
         super().save(force_insert=False, force_update=False, using=None, update_fields=None)
 
@@ -234,9 +260,7 @@ class Journal(FedoraMixin, FedoraDated):
             return None
 
         return "{}:{}.{}".format(
-            erudit_settings.FEDORA_PIDSPACE,
-            self.collection.localidentifier,
-            self.localidentifier
+            erudit_settings.FEDORA_PIDSPACE, self.collection.localidentifier, self.localidentifier
         )
 
     def get_erudit_content_url(self):
@@ -253,7 +277,7 @@ class Journal(FedoraMixin, FedoraDated):
     def get_titles(self):
         current_issue = self.current_issue
         if not self.is_in_fedora or not current_issue:
-            titles = {'main': {'title': self.name}}
+            titles = {"main": {"title": self.name}}
         else:
 
             titles = current_issue.erudit_object.get_journal_title()
@@ -276,7 +300,7 @@ class Journal(FedoraMixin, FedoraDated):
 
     @property
     def sortable_name(self):
-        """ Returns its name without some characters in order to ease sort operations.
+        """Returns its name without some characters in order to ease sort operations.
 
         This value should not be used to display the name of the Journal instance!
         """
@@ -286,13 +310,17 @@ class Journal(FedoraMixin, FedoraDated):
     def publication_period(self):
         """ Returns the publication period of the journal. """
         if self.first_publication_year and self.last_publication_year:
-            return '{first} - {last}'.format(
-                first=self.first_publication_year, last=self.last_publication_year)
+            return "{first} - {last}".format(
+                first=self.first_publication_year, last=self.last_publication_year
+            )
 
     @property
     def embargo_in_months(self):
-        return self.type.embargo_duration() if self.type else \
-            erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
+        return (
+            self.type.embargo_duration()
+            if self.type
+            else erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
+        )
 
     @property
     def date_embargo_begins(self):
@@ -304,15 +332,15 @@ class Journal(FedoraMixin, FedoraDated):
 
     @property
     def days_not_available_from_today(self):
-        return (dt.date.today() - self.date_embargo_begins).days if self.date_embargo_begins \
-            else None
+        return (
+            (dt.date.today() - self.date_embargo_begins).days if self.date_embargo_begins else None
+        )
 
     @property
     def legacy_code(self):
-        """ Returns the code used to identify the journal in our "legacy" systems.
-        """
-        if self.code == 'cd1':
-            return 'cd'
+        """Returns the code used to identify the journal in our "legacy" systems."""
+        if self.code == "cd1":
+            return "cd"
         elif self.is_scientific():
             return self.code
         elif self.is_cultural():
@@ -321,8 +349,8 @@ class Journal(FedoraMixin, FedoraDated):
     @property
     def solr_code(self):
         result = self.legacy_code
-        if result == 'cd1':  # exception: Cahier de droit's ID in solr is "cd", not "cd1"
-            result = 'cd'
+        if result == "cd1":  # exception: Cahier de droit's ID in solr is "cd", not "cd1"
+            result = "cd"
         return result
 
     # Issues-related methods and properties
@@ -346,8 +374,8 @@ class Journal(FedoraMixin, FedoraDated):
             # a special case for RECMA (see eruditorg#1651). It's not supposed to happen
             # otherwise
             whens.append(When(localidentifier__isnull=True, then=-1))
-            whens.append(When(localidentifier='', then=-1))
-            qs = qs.order_by(Case(*whens, default=9999), '-date_published')
+            whens.append(When(localidentifier="", then=-1))
+            qs = qs.order_by(Case(*whens, default=9999), "-date_published")
         return qs
 
     @property
@@ -356,21 +384,21 @@ class Journal(FedoraMixin, FedoraDated):
         if self.date_embargo_begins:
             return self.published_issues.filter(
                 Q(date_published__lt=self.date_embargo_begins) | Q(force_free_access=True)
-            ).order_by('date_published')
+            ).order_by("date_published")
         else:
-            return self.published_issues.order_by('date_published')
+            return self.published_issues.order_by("date_published")
 
     @cached_property
     def first_issue_published_on_erudit(self):
         """ Return the first issue ever published on erudit.org """
-        return self.issues.filter(is_published=True).order_by('date_published').first()
+        return self.issues.filter(is_published=True).order_by("date_published").first()
 
     @cached_property
     def current_issue(self):
-        """ Return the journal's current issue.
+        """Return the journal's current issue.
 
         Published issues are ordered by reverse published date, hence first() to get the last one,
-        or in other words, the current issue. """
+        or in other words, the current issue."""
         return self.published_issues.first()
 
     def is_scientific(self):
@@ -384,14 +412,15 @@ class Journal(FedoraMixin, FedoraDated):
     @cached_property
     def has_logo(self):
         """ Returns a boolean indicating if the considered journal has a logo. """
-        return self.has_non_empty_image_datastream('logo')
+        return self.has_non_empty_image_datastream("logo")
 
 
 class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal. """
 
-    journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'),
-                                on_delete=models.CASCADE)
+    journal = models.ForeignKey(
+        Journal, related_name="issues", verbose_name=_("Revue"), on_delete=models.CASCADE
+    )
     """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
     _title = models.CharField(max_length=255, null=True, blank=True)
@@ -432,25 +461,27 @@ class Issue(FedoraMixin, FedoraDated):
     def html_title(self, value):
         self._html_title = value
 
-    year = models.PositiveIntegerField(verbose_name=_('Année'))
+    year = models.PositiveIntegerField(verbose_name=_("Année"))
     """ The publication year of the issue """
 
     publication_period = models.CharField(
-        max_length=255, verbose_name=_('Période de publication'), null=True, blank=True)
+        max_length=255, verbose_name=_("Période de publication"), null=True, blank=True
+    )
     """ .. deprecated:: 2.5.26
 
         Will be removed in next version.
 
     The publication period of the issue """
 
-    volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
+    volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Volume"))
     """ The volume of the issue """
 
-    number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Numéro'))
+    number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Numéro"))
     """ The number of the issue """
 
     _first_page = models.CharField(
-        max_length=16, null=True, blank=True, verbose_name=_('Première page'))
+        max_length=16, null=True, blank=True, verbose_name=_("Première page")
+    )
     """ .. deprecated:: 2.5.26
 
         Will be removed in next version.
@@ -469,7 +500,8 @@ class Issue(FedoraMixin, FedoraDated):
 
     # deprecated: will be removed shortly
     _last_page = models.CharField(
-        max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
+        max_length=16, null=True, blank=True, verbose_name=_("Dernière page")
+    )
     """ .. deprecated:: 2.5.26
 
         Will be removed in next version.
@@ -493,23 +525,27 @@ class Issue(FedoraMixin, FedoraDated):
     def last_page(self, value):
         self._last_page = value
 
-    date_published = models.DateField(verbose_name=_('Date de publication'))
+    date_published = models.DateField(verbose_name=_("Date de publication"))
     """ The publication date of the issue """
 
     external_url = models.URLField(
-        null=True, blank=True,
-        verbose_name=_('URL Externe'), help_text=_("URL du site où les numéros sont hébergés"))
+        null=True,
+        blank=True,
+        verbose_name=_("URL Externe"),
+        help_text=_("URL du site où les numéros sont hébergés"),
+    )
     """ The external URL where the ``Issue`` is hosted. """
 
-    is_published = models.BooleanField(default=False, verbose_name=_('Est publié'))
+    is_published = models.BooleanField(default=False, verbose_name=_("Est publié"))
     """ Defines if an issue is published """
 
     localidentifier = models.CharField(
-        max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
+        max_length=100, unique=True, blank=True, null=True, verbose_name=_("Identifiant Fedora")
+    )
     """ The ``Fedora`` identifier of an issue """
 
     force_free_access = models.BooleanField(
-        default=False, verbose_name=_('Contraindre en libre accès')
+        default=False, verbose_name=_("Contraindre en libre accès")
     )
     """ Defines if the issue has to be in open access despite everything """
 
@@ -517,14 +553,20 @@ class Issue(FedoraMixin, FedoraDated):
     internal_objects = InternalIssueManager()
 
     class Meta:
-        verbose_name = _('Numéro')
-        verbose_name_plural = _('Numéros')
-        ordering = ['journal', 'year', 'volume', 'number', ]
+        verbose_name = _("Numéro")
+        verbose_name_plural = _("Numéros")
+        ordering = [
+            "journal",
+            "year",
+            "volume",
+            "number",
+        ]
 
     def __str__(self):
         if self.volume and self.number and self.year:
-            return '{:s} {:s} {:s} {:s}'.format(
-                self.journal.code, str(self.year), self.volume, self.number)
+            return "{:s} {:s} {:s} {:s}".format(
+                self.journal.code, str(self.year), self.volume, self.number
+            )
         return self.journal.code
 
     def __repr__(self):
@@ -546,14 +588,11 @@ class Issue(FedoraMixin, FedoraDated):
         if not self.localidentifier or not self.journal.get_full_identifier():
             return None
 
-        return '{}.{}'.format(
-            self.journal.get_full_identifier(),
-            self.localidentifier
-        )
+        return "{}.{}".format(self.journal.get_full_identifier(), self.localidentifier)
 
     @staticmethod
     def from_fedora_ids(journal_code, localidentifier):
-        """ Returns an Issue from the DB if it exists or an ephemeral if it doesn't
+        """Returns an Issue from the DB if it exists or an ephemeral if it doesn't
 
         If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
         """
@@ -561,8 +600,8 @@ class Issue(FedoraMixin, FedoraDated):
             raise Issue.DoesNotExist()
         try:
             return Issue.objects.select_related(
-                'journal__collection',
-                'journal__type',
+                "journal__collection",
+                "journal__type",
             ).get(localidentifier=localidentifier)
         except Issue.DoesNotExist:
             try:
@@ -581,11 +620,11 @@ class Issue(FedoraMixin, FedoraDated):
 
     @staticmethod
     def from_fedora_pid(pid):
-        _, journalid, issueid = pid.split('.')
+        _, journalid, issueid = pid.split(".")
         return Issue.from_fedora_ids(journalid, issueid)
 
     def sync_with_erudit_object(self, erudit_object=None):
-        """ Copy ``erudit_object``'s values in appropriate fields in ``self``.
+        """Copy ``erudit_object``'s values in appropriate fields in ``self``.
 
         :param erudit_object: A ``EruditPublication``.
         """
@@ -605,11 +644,10 @@ class Issue(FedoraMixin, FedoraDated):
         self.html_title = erudit_object.html_theme
         pubdate = erudit_object.publication_date
         if pubdate:
-            self.date_published = dt.datetime.strptime(pubdate, '%Y-%m-%d').date()
+            self.date_published = dt.datetime.strptime(pubdate, "%Y-%m-%d").date()
         else:
             self.date_published = dt.datetime(int(self.year), 1, 1)
-        self.date_produced = erudit_object.production_date \
-            or erudit_object.publication_date
+        self.date_produced = erudit_object.production_date or erudit_object.publication_date
         try:
             first_article = next(self.get_articles_from_fedora())
         except StopIteration:
@@ -625,8 +663,9 @@ class Issue(FedoraMixin, FedoraDated):
             except Article.DoesNotExist:
                 pass
 
-    def get_previous_and_next_articles(self, current_article_localidentifier) \
-            -> typing.Tuple[typing.Optional[SummaryArticle], typing.Optional[SummaryArticle]]:
+    def get_previous_and_next_articles(
+        self, current_article_localidentifier
+    ) -> typing.Tuple[typing.Optional[SummaryArticle], typing.Optional[SummaryArticle]]:
         previous_article = None
         next_article = None
 
@@ -642,23 +681,23 @@ class Issue(FedoraMixin, FedoraDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
-        return self.has_non_empty_image_datastream('coverpage')
+        return self.has_non_empty_image_datastream("coverpage")
 
     @property
     def prepublication_ticket(self):
-        return md5(self.localidentifier.encode('utf-8')).hexdigest()
+        return md5(self.localidentifier.encode("utf-8")).hexdigest()
 
     def is_prepublication_ticket_valid(self, request_ticket):
-        """ Returns True if the issue's prepulication ticket is valid, False otherwise.
+        """Returns True if the issue's prepulication ticket is valid, False otherwise.
 
         In Tournesol, if the prepublication ticket begins with a '0', it gets stripped before it
         gets stored in the database. While we wait for this bug to get fixed in Tournesol, we should
         support tickets with a stripped leading '0'.
 
-        See https://gitlab.erudit.org/erudit/production/tournesol/Tournesol/issues/35 """
+        See https://gitlab.erudit.org/erudit/production/tournesol/Tournesol/issues/35"""
         if request_ticket is None:
             return False
-        regex = re.compile('^0*(.*)$')
+        regex = re.compile("^0*(.*)$")
         issue_ticket = re.match(regex, self.prepublication_ticket)
         request_ticket = re.match(regex, request_ticket)
         return issue_ticket.group(1) == request_ticket.group(1)
@@ -692,26 +731,23 @@ class Issue(FedoraMixin, FedoraDated):
             return self.number
         if self.is_in_fedora:
             publication_type = self.erudit_object.get_publication_type()
-            if publication_type == 'hs':
-                return _('hors-série')
-            if publication_type == 'index':
-                return _('index')
-            if publication_type == 'supp':
-                return _('suppl.')
+            if publication_type == "hs":
+                return _("hors-série")
+            if publication_type == "index":
+                return _("index")
+            if publication_type == "supp":
+                return _("suppl.")
         return None
 
     @cached_property
     @catch_and_log
     def abbreviated_volume_title(self):
-        """ For more information please refer to :meth:`~.volume_title`
+        """For more information please refer to :meth:`~.volume_title`
 
         :returns: the abbreviated volume numbering information
         """
         if self.is_in_fedora:
-            return self.erudit_object.get_volume_numbering(
-                abbreviated=True,
-                formatted=True
-            )
+            return self.erudit_object.get_volume_numbering(abbreviated=True, formatted=True)
 
         logger.warning("Issue not in fedora", localidentifier=self.localidentifier)
 
@@ -719,21 +755,27 @@ class Issue(FedoraMixin, FedoraDated):
         number = self.number
         if self.volume and number:
             return _(
-                'Vol. {volume}, n<sup>o</sup> {number}, {publication_date}'.format(
-                    volume=self.volume, number=number, publication_date=publication_period.lower()))
+                "Vol. {volume}, n<sup>o</sup> {number}, {publication_date}".format(
+                    volume=self.volume, number=number, publication_date=publication_period.lower()
+                )
+            )
         elif self.volume and not number:
             return _(
-                'Vol. {volume}, {publication_date}'.format(
-                    volume=self.volume, publication_date=publication_period.lower()))
+                "Vol. {volume}, {publication_date}".format(
+                    volume=self.volume, publication_date=publication_period.lower()
+                )
+            )
 
         return _(
-            'N<sup>o</sup> {number}, {publication_date}'.format(
-                number=number, publication_date=publication_period.lower()))
+            "N<sup>o</sup> {number}, {publication_date}".format(
+                number=number, publication_date=publication_period.lower()
+            )
+        )
 
     @cached_property
     @catch_and_log
     def volume_title(self):
-        """ Returns a title for the current issue using its volume and its number.
+        """Returns a title for the current issue using its volume and its number.
 
         If the object is present in Fedora commons, do not perform any formatting
         and let ``liberuditarticle`` format the volume_title. Otherwise, use the
@@ -750,17 +792,21 @@ class Issue(FedoraMixin, FedoraDated):
         number = self.number_for_display
         if self.volume and number:
             return _(
-                'Volume {volume}, numéro {number}, {publication_date}'.format(
-                    volume=self.volume, number=number, publication_date=publication_period))
+                "Volume {volume}, numéro {number}, {publication_date}".format(
+                    volume=self.volume, number=number, publication_date=publication_period
+                )
+            )
         elif self.volume and not number:
             return _(
-                'Volume {volume}, {publication_date}'.format(
+                "Volume {volume}, {publication_date}".format(
                     volume=self.volume, publication_date=publication_period
                 )
             )
         return _(
-            'Numéro {number}, {publication_date}'.format(
-                number=number, publication_date=publication_period))
+            "Numéro {number}, {publication_date}".format(
+                number=number, publication_date=publication_period
+            )
+        )
 
     @property
     def volume_title_with_pages(self):
@@ -773,21 +819,23 @@ class Issue(FedoraMixin, FedoraDated):
             first_page = self.first_page
             last_page = self.last_page
 
-        if first_page and last_page and (first_page != '0' and first_page != last_page):
-            return _('{title}, p. {first_page}-{last_page}').format(
-                title=self.volume_title, first_page=first_page, last_page=last_page)
-        elif first_page and first_page != '0':
-            return _('{title}, p. {first_page}').format(
-                title=self.volume_title, first_page=first_page)
+        if first_page and last_page and (first_page != "0" and first_page != last_page):
+            return _("{title}, p. {first_page}-{last_page}").format(
+                title=self.volume_title, first_page=first_page, last_page=last_page
+            )
+        elif first_page and first_page != "0":
+            return _("{title}, p. {first_page}").format(
+                title=self.volume_title, first_page=first_page
+            )
         return self.volume_title
 
     @cached_property
     def volume_slug(self):
         """ Returns a slug string containing the issue's publication year, volume and number. """
-        volume = 'v' + self.volume if self.volume else None
-        number = 'n' + self.number if self.number else None
+        volume = "v" + self.volume if self.volume else None
+        number = "n" + self.number if self.number else None
         elements = [str(self.year), volume, number]
-        return '-'.join([e for e in elements if e]).replace(" ", "-")
+        return "-".join([e for e in elements if e]).replace(" ", "-")
 
     @property
     def embargoed(self):
@@ -826,19 +874,18 @@ class Issue(FedoraMixin, FedoraDated):
             return None
 
         def _format_theme(theme):
-            if theme.get('html_subname'):
+            if theme.get("html_subname"):
                 return "{html_name}: {html_subname}".format(
-                    html_name=theme['html_name'],
-                    html_subname=theme['html_subname']
+                    html_name=theme["html_name"], html_subname=theme["html_subname"]
                 )
-            return theme['html_name']
+            return theme["html_name"]
 
         themes = list(self.erudit_object.themes.values())
         if len(themes) > 1:
             first_theme = themes.pop(0)
             return "{first_theme} / {themes}".format(
                 first_theme=_format_theme(first_theme),
-                themes=",".join(_format_theme(theme) for theme in themes)
+                themes=",".join(_format_theme(theme) for theme in themes),
             )
         if len(themes) == 1:
             return _format_theme(themes.pop())
@@ -856,7 +903,6 @@ class Issue(FedoraMixin, FedoraDated):
 
 
 def fedora_only(method):
-
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         if not self.is_in_fedora:
@@ -882,21 +928,25 @@ def fedora_only(method):
 #
 # But slowly, we'll get there.
 
+
 class Article(FedoraMixin):
     class DoesNotExist(ObjectDoesNotExist):
         pass
 
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
-        'article', 'compterendu', 'autre', 'note'
+        "article",
+        "compterendu",
+        "autre",
+        "note",
     )
     TYPE_DISPLAY = {
-        ARTICLE_DEFAULT: _('Article'),
-        ARTICLE_REPORT: _('Compte rendu'),
+        ARTICLE_DEFAULT: _("Article"),
+        ARTICLE_REPORT: _("Compte rendu"),
         ARTICLE_NOTE: pgettext("Article Note", "Note"),
-        ARTICLE_OTHER: _('Autre'),
+        ARTICLE_OTHER: _("Autre"),
     }
-    PROCESSING_FULL = 'C'
-    PROCESSING_MINIMAL = 'M'
+    PROCESSING_FULL = "C"
+    PROCESSING_MINIMAL = "M"
 
     def __init__(self, issue, localidentifier, solr_object=None):
         super().__init__()
@@ -907,7 +957,7 @@ class Article(FedoraMixin):
     def __str__(self):
         if self.title:
             return self.title
-        return _('Aucun titre')
+        return _("Aucun titre")
 
     def __repr__(self):
         return "<Article: {}>".format(self.pid)
@@ -916,7 +966,7 @@ class Article(FedoraMixin):
         return self.localidentifier is not None and self.localidentifier == other.localidentifier
 
     def __getattr__(self, name):
-        if name.startswith('_') or name in {'erudit_object', 'solr_object'}:
+        if name.startswith("_") or name in {"erudit_object", "solr_object"}:
             # Something's wrong, avoid infinite recursion
             raise AttributeError()
         if self.fedora_is_loaded():
@@ -948,10 +998,7 @@ class Article(FedoraMixin):
         if not self.localidentifier or not self.issue.get_full_identifier():
             return None
 
-        return '{}.{}'.format(
-            self.issue.get_full_identifier(),
-            self.localidentifier
-        )
+        return "{}.{}".format(self.issue.get_full_identifier(), self.localidentifier)
 
     @staticmethod
     def from_issue_and_localidentifier(issue, localidentifier):
@@ -975,6 +1022,7 @@ class Article(FedoraMixin):
     @property
     def solr_object(self):
         from ..solr.models import SolrDocument
+
         if self._solr_object is None:
             self._solr_object = SolrDocument.from_solr_id(self.solr_id)
         return self._solr_object
@@ -983,7 +1031,7 @@ class Article(FedoraMixin):
     def from_solr_object(solr_object):
         solr_data = solr_object.solr_data
         try:
-            issue = Issue.from_fedora_ids(solr_data.get('RevueID'), solr_data.get('NumeroID'))
+            issue = Issue.from_fedora_ids(solr_data.get("RevueID"), solr_data.get("NumeroID"))
         except Issue.DoesNotExist:
             raise Article.DoesNotExist()
         article = Article(issue, solr_object.localidentifier, solr_object=solr_object)
@@ -992,12 +1040,12 @@ class Article(FedoraMixin):
     @property
     def solr_id(self):
         collection_code = self.issue.journal.collection.code
-        if collection_code == 'erudit':
+        if collection_code == "erudit":
             # For the Érudit collection, we use the articleès fedora id directly
             return self.localidentifier
-        elif collection_code == 'unb':
-            return 'unb:{}'.format(self.localidentifier)
-        elif collection_code == 'persee':
+        elif collection_code == "unb":
+            return "unb:{}".format(self.localidentifier)
+        elif collection_code == "persee":
             # For Persée too, we directly use localidentifier
             return self.localidentifier
         else:
@@ -1011,7 +1059,7 @@ class Article(FedoraMixin):
 
     @property
     def url(self):
-        """ The url of the article
+        """The url of the article
 
         If the article is external, the url that has been indexed in Solr will be returned.
         Otherwise, the url of the article on the erudit platform will be returned.
@@ -1021,9 +1069,13 @@ class Article(FedoraMixin):
             return self.solr_object.url
         else:
             return reverse(
-                'public:journal:article_detail', args=(
-                    self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
-                    self.localidentifier)
+                "public:journal:article_detail",
+                args=(
+                    self.issue.journal.code,
+                    self.issue.volume_slug,
+                    self.issue.localidentifier,
+                    self.localidentifier,
+                ),
             )
 
     @property
@@ -1031,18 +1083,21 @@ class Article(FedoraMixin):
         journal = self.issue.journal
         if journal.external_url:
             return journal.external_url
-        return reverse('public:journal:journal_detail', args=(journal.code, ))
+        return reverse("public:journal:journal_detail", args=(journal.code,))
 
     @property
     def issue_url(self):
         issue = self.issue
         if issue.external_url:
             return issue.external_url
-        return reverse('public:journal:issue_detail', args=(
-            issue.journal.code,
-            issue.volume_slug,
-            issue.localidentifier,
-        ))
+        return reverse(
+            "public:journal:issue_detail",
+            args=(
+                issue.journal.code,
+                issue.volume_slug,
+                issue.localidentifier,
+            ),
+        )
 
     @property
     @cache_fedora_result
@@ -1055,32 +1110,38 @@ class Article(FedoraMixin):
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
             return None
         if self.has_pdf:
-            return reverse('public:journal:article_raw_pdf', kwargs={
-                'journal_code': self.issue.journal.code,
-                'issue_slug': self.issue.volume_slug,
-                'issue_localid': self.issue.localidentifier,
-                'localid': self.localidentifier,
-            })
+            return reverse(
+                "public:journal:article_raw_pdf",
+                kwargs={
+                    "journal_code": self.issue.journal.code,
+                    "issue_slug": self.issue.volume_slug,
+                    "issue_localid": self.issue.localidentifier,
+                    "localid": self.localidentifier,
+                },
+            )
 
         summmary_article = self.issue.erudit_object.get_summary_article(self.localidentifier)
         return summmary_article.urlpdf
 
     def cite_url(self, type):
-        return reverse('public:journal:article_{}'.format(type), kwargs={
-            'journal_code': self.issue.journal.code,
-            'issue_slug': self.issue.volume_slug,
-            'issue_localid': self.issue.localidentifier,
-            'localid': self.localidentifier,
-        })
+        return reverse(
+            "public:journal:article_{}".format(type),
+            kwargs={
+                "journal_code": self.issue.journal.code,
+                "issue_slug": self.issue.volume_slug,
+                "issue_localid": self.issue.localidentifier,
+                "localid": self.localidentifier,
+            },
+        )
 
     def cite_enw_url(self):
-        return self.cite_url('enw')
+        return self.cite_url("enw")
 
     def cite_bib_url(self):
-        return self.cite_url('bib')
+        return self.cite_url("bib")
 
     def cite_ris_url(self):
-        return self.cite_url('ris')
+        return self.cite_url("ris")
 
     # Proxies to erudit_object
     @property
@@ -1091,13 +1152,13 @@ class Article(FedoraMixin):
         return self.erudit_object.get_authors(formatted=True, style=style, suffixes=suffixes)
 
     def get_formatted_authors_mla(self):
-        return self.get_formatted_authors(style='mla')
+        return self.get_formatted_authors(style="mla")
 
     def get_formatted_authors_apa(self):
-        return self.get_formatted_authors(style='apa')
+        return self.get_formatted_authors(style="apa")
 
     def get_formatted_authors_chicago(self):
-        return self.get_formatted_authors(style='chicago')
+        return self.get_formatted_authors(style="chicago")
 
     def get_formatted_authors_without_suffixes(self):
         return self.erudit_object.get_authors(formatted=True, html=True, suffixes=False)
@@ -1118,14 +1179,14 @@ class Article(FedoraMixin):
     @catch_and_log
     def html_title(self):
         html_title = self.erudit_object.get_title(formatted=True, html=True)
-        return html_title if html_title else _('[Article sans titre]')
+        return html_title if html_title else _("[Article sans titre]")
 
     def _abstract_by_lang(self, abstracts):
         """ Returns an abstract that can be used with the current language. """
         lang = get_language()
-        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
-        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
-        _abstract = abstracts[0]['content'] if len(abstracts) else None
+        _abstracts = list(filter(lambda r: r["lang"] == lang, abstracts))
+        _abstract_lang = _abstracts[0]["content"] if len(_abstracts) else None
+        _abstract = abstracts[0]["content"] if len(abstracts) else None
         return _abstract_lang or _abstract
 
     @property
@@ -1158,26 +1219,26 @@ class Article(FedoraMixin):
     @catch_and_log
     def section_title_1(self):
         section_titles = self.erudit_object.get_section_titles(level=1)
-        return section_titles['main'] if section_titles else None
+        return section_titles["main"] if section_titles else None
 
     @property
     @catch_and_log
     def section_title_1_paral(self):
         section_titles = self.erudit_object.get_section_titles(level=1)
-        return section_titles['paral'].values() if section_titles else None
+        return section_titles["paral"].values() if section_titles else None
 
     @property
     @catch_and_log
     def section_title_2(self):
         section_titles = self.erudit_object.get_section_titles(level=2)
-        return section_titles['main'] if section_titles else None
+        return section_titles["main"] if section_titles else None
 
     @property
     @catch_and_log
     def section_title_2_paral(self):
         if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=2)
-            return section_titles['paral'].values() if section_titles else None
+            return section_titles["paral"].values() if section_titles else None
         else:
             title = next(filter(lambda s: s.level == 2 and s.paral, self._section_titles), None)
             return title.title if title else []
@@ -1186,21 +1247,21 @@ class Article(FedoraMixin):
     @catch_and_log
     def section_title_3(self):
         section_titles = self.erudit_object.get_section_titles(level=3)
-        return section_titles['main'] if section_titles else None
+        return section_titles["main"] if section_titles else None
 
     @property
     @catch_and_log
     def section_title_3_paral(self):
         section_titles = self.erudit_object.get_section_titles(level=3)
-        return section_titles['paral'].values()
+        return section_titles["paral"].values()
 
     @cached_property
     def has_pdf(self):
-        return self.has_datastream('PDF')
+        return self.has_datastream("PDF")
 
     @cached_property
     def pdf(self):
-        return get_cached_datastream_content(self.get_full_identifier(), 'PDF')
+        return get_cached_datastream_content(self.get_full_identifier(), "PDF")
 
     @cached_property
     def can_display_first_pdf_page(self):
@@ -1216,16 +1277,17 @@ class Article(FedoraMixin):
     def processing(self):
         processing = self.erudit_object.processing
         processing_mapping = {
-            'minimal': self.PROCESSING_MINIMAL,
-            '': self.PROCESSING_MINIMAL,
-            'complet': self.PROCESSING_FULL,
+            "minimal": self.PROCESSING_MINIMAL,
+            "": self.PROCESSING_MINIMAL,
+            "complet": self.PROCESSING_FULL,
         }
         try:
             return processing_mapping[processing]
         except KeyError:
             raise ValueError(
-                'Unable to determine the processing type of the article '
-                'with PID {0}'.format(self.pid))
+                "Unable to determine the processing type of the article "
+                "with PID {0}".format(self.pid)
+            )
 
     @property
     @catch_and_log
@@ -1245,7 +1307,7 @@ class Article(FedoraMixin):
         lang = get_language()
         for keywords_lang, keywords in self.keywords.items():
             if keywords_lang == lang:
-                return ','.join(keywords)
+                return ",".join(keywords)
 
     @property
     @catch_and_log
@@ -1267,7 +1329,7 @@ class Article(FedoraMixin):
         elif urlparse(doi).netloc:
             return doi
         else:
-            return f'https://doi.org/{doi}'
+            return f"https://doi.org/{doi}"
 
     @property
     def authors_display(self):
@@ -1280,8 +1342,8 @@ class Article(FedoraMixin):
 
     @property
     def is_external(self):
-        """ :returns: ``True`` if the article's parent issue is external or it's
-            summary article has an external url """
+        """:returns: ``True`` if the article's parent issue is external or it's
+        summary article has an external url"""
         if self.issue.is_external:
             return True
         try:
@@ -1348,106 +1410,116 @@ class Article(FedoraMixin):
 
     @cached_property
     def cite_string_mla(self):
-        cite_string = '{authors} {open}{title}{period}{close} <em>{journal}</em>,'.format(**{
-            'authors': self.get_formatted_authors_mla(),
-            'open': _('«&nbsp;'),
-            'title': self.html_title,
-            'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
-            'close': _('&nbsp;»'),
-            'journal': self.issue.journal_formatted_title,
-        })
+        cite_string = "{authors} {open}{title}{period}{close} <em>{journal}</em>,".format(
+            **{
+                "authors": self.get_formatted_authors_mla(),
+                "open": _("«&nbsp;"),
+                "title": self.html_title,
+                "period": "." if self.html_title and self.html_title[-1] not in ".!?" else "",
+                "close": _("&nbsp;»"),
+                "journal": self.issue.journal_formatted_title,
+            }
+        )
         if self.issue.volume_title:
-            cite_string += ' {}'.format(self.issue.volume_title.lower())
-        if cite_string[-1] != ',':
-            cite_string += ','
+            cite_string += " {}".format(self.issue.volume_title.lower())
+        if cite_string[-1] != ",":
+            cite_string += ","
         if self.first_page:
-            cite_string += ' {}&nbsp;{}–{}'.format(_('p.'), self.first_page, self.last_page)
-        if cite_string[-1] == ',':
-            cite_string = cite_string[:-1] + '.'
+            cite_string += " {}&nbsp;{}–{}".format(_("p."), self.first_page, self.last_page)
+        if cite_string[-1] == ",":
+            cite_string = cite_string[:-1] + "."
         else:
-            cite_string += '.'
+            cite_string += "."
         if self.doi:
-            cite_string += ' {}'.format(self.url_doi)
+            cite_string += " {}".format(self.url_doi)
         return cite_string
 
     @cached_property
     def cite_string_apa(self):
         if self.type == self.ARTICLE_REPORT:
-            title = '{prefix} [{title}]'.format(**{
-                'prefix': _('Compte rendu de'),
-                'title': self.html_title,
-            })
+            title = "{prefix} [{title}]".format(
+                **{
+                    "prefix": _("Compte rendu de"),
+                    "title": self.html_title,
+                }
+            )
         else:
             title = self.html_title
-        cite_string = '{authors} ({year}). {title}{period} <em>{journal}</em>,'.format(**{
-            'authors': self.get_formatted_authors_apa(),
-            'year': self.issue.year,
-            'title': title,
-            'period': '.' if self.html_title and self.html_title[-1] not in '.!?' else '',
-            'journal': self.issue.journal_formatted_title,
-        })
+        cite_string = "{authors} ({year}). {title}{period} <em>{journal}</em>,".format(
+            **{
+                "authors": self.get_formatted_authors_apa(),
+                "year": self.issue.year,
+                "title": title,
+                "period": "." if self.html_title and self.html_title[-1] not in ".!?" else "",
+                "journal": self.issue.journal_formatted_title,
+            }
+        )
         if self.issue.volume:
-            cite_string += ' <em>{}</em>'.format(self.issue.volume)
+            cite_string += " <em>{}</em>".format(self.issue.volume)
         if self.issue.number:
-            cite_string += ' ({})'.format(self.issue.number)
-        if cite_string[-1] != ',':
-            cite_string += ','
+            cite_string += " ({})".format(self.issue.number)
+        if cite_string[-1] != ",":
+            cite_string += ","
         if self.first_page:
-            cite_string += ' {}–{}'.format(self.first_page, self.last_page)
-        if cite_string[-1] == ',':
-            cite_string = cite_string[:-1] + '.'
+            cite_string += " {}–{}".format(self.first_page, self.last_page)
+        if cite_string[-1] == ",":
+            cite_string = cite_string[:-1] + "."
         else:
-            cite_string += '.'
+            cite_string += "."
         if self.doi:
-            cite_string += ' {}'.format(self.url_doi)
+            cite_string += " {}".format(self.url_doi)
         return cite_string
 
     @cached_property
     def cite_string_chicago(self):
-        cite_string = '{authors} {open}{title}{close}. <em>{journal}</em>'.format(**{
-            'authors': self.get_formatted_authors_chicago(),
-            'open': _('«&nbsp;'),
-            'title': self.html_title,
-            'close': _('&nbsp;»'),
-            'journal': self.issue.journal_formatted_title,
-        })
+        cite_string = "{authors} {open}{title}{close}. <em>{journal}</em>".format(
+            **{
+                "authors": self.get_formatted_authors_chicago(),
+                "open": _("«&nbsp;"),
+                "title": self.html_title,
+                "close": _("&nbsp;»"),
+                "journal": self.issue.journal_formatted_title,
+            }
+        )
         if self.issue.volume:
-            cite_string += ' {},'.format(self.issue.volume)
+            cite_string += " {},".format(self.issue.volume)
         if self.issue.number:
-            cite_string += ' {} {}'.format(_('n<sup>o</sup>'), self.issue.number)
-        cite_string += ' ({})'.format(self.issue.year)
+            cite_string += " {} {}".format(_("n<sup>o</sup>"), self.issue.number)
+        cite_string += " ({})".format(self.issue.year)
         if self.first_page:
-            cite_string += '&nbsp;: {}–{}'.format(self.first_page, self.last_page)
-        if cite_string[-1] == ',':
-            cite_string = cite_string[:-1] + '.'
+            cite_string += "&nbsp;: {}–{}".format(self.first_page, self.last_page)
+        if cite_string[-1] == ",":
+            cite_string = cite_string[:-1] + "."
         else:
-            cite_string += '.'
+            cite_string += "."
         if self.doi:
-            cite_string += ' {}'.format(self.url_doi)
+            cite_string += " {}".format(self.url_doi)
         return cite_string
 
     @cached_property
     def infoimg_dict(self):
         """ Returns the content of the INFOIMG datastream as a dictionary. """
-        content = get_cached_datastream_content(self.get_full_identifier(), 'INFOIMG')
+        content = get_cached_datastream_content(self.get_full_identifier(), "INFOIMG")
         if content is None:
             return {}
         infoimg = content.read()
         infoimg_tree = et.fromstring(infoimg.decode())
         infoimg_dict = OrderedDict()
-        for im_tree in infoimg_tree.findall('im'):
-            plgr_node = im_tree.find('imPlGr//nomImg')
-            dimx_node = im_tree.find('imPlGr//dimx')
-            dimy_node = im_tree.find('imPlGr//dimy')
+        for im_tree in infoimg_tree.findall("im"):
+            plgr_node = im_tree.find("imPlGr//nomImg")
+            dimx_node = im_tree.find("imPlGr//dimx")
+            dimy_node = im_tree.find("imPlGr//dimy")
             if plgr_node is None:
                 continue
-            infoimg_dict.update({
-                im_tree.get('id'): {
-                    'plgr': plgr_node.text,
-                    'width': str(int(float(dimx_node.text))) if dimx_node is not None else '',
-                    'height': str(int(float(dimy_node.text))) if dimy_node is not None else '',
-                },
-            })
+            infoimg_dict.update(
+                {
+                    im_tree.get("id"): {
+                        "plgr": plgr_node.text,
+                        "width": str(int(float(dimx_node.text))) if dimx_node is not None else "",
+                        "height": str(int(float(dimy_node.text))) if dimy_node is not None else "",
+                    },
+                }
+            )
         return infoimg_dict
 
 
@@ -1455,18 +1527,19 @@ class JournalInformation(models.Model):
     """ Stores the information related to a specific Journal instance. """
 
     journal = models.OneToOneField(
-        Journal, verbose_name=_('Journal'), related_name='information', on_delete=models.CASCADE)
+        Journal, verbose_name=_("Journal"), related_name="information", on_delete=models.CASCADE
+    )
 
     # Contact
     organisation_name = models.TextField(
-        verbose_name=_("Prénom et nom OU nom de l’organisation"),
-        blank=True)
+        verbose_name=_("Prénom et nom OU nom de l’organisation"), blank=True
+    )
     email = models.EmailField(
-        verbose_name=_("Adresse courriel pour demandes générales"),
-        blank=True)
+        verbose_name=_("Adresse courriel pour demandes générales"), blank=True
+    )
     subscription_email = models.EmailField(
-        verbose_name=_("Adresse courriel pour abonnements individuels"),
-        blank=True)
+        verbose_name=_("Adresse courriel pour abonnements individuels"), blank=True
+    )
     phone = models.TextField(verbose_name=_("Numéro de téléphone"), blank=True)
 
     frequency = models.IntegerField(
@@ -1474,7 +1547,7 @@ class JournalInformation(models.Model):
     )
 
     languages = models.ManyToManyField(
-        verbose_name=_('Langues de publication'), blank=True, to=Language
+        verbose_name=_("Langues de publication"), blank=True, to=Language
     )
 
     publishing_ethics = models.TextField(
@@ -1485,46 +1558,47 @@ class JournalInformation(models.Model):
     )
     peer_review_process = models.CharField(
         choices=(
-            ('SB', _('Simple aveugle')),
-            ('DB', _('Double aveugle')),
-            ('OR', _('Ouverte')),
+            ("SB", _("Simple aveugle")),
+            ("DB", _("Double aveugle")),
+            ("OR", _("Ouverte")),
         ),
         max_length=2,
-        verbose_name=_("Type de processus d’évaluation par les pairs"), null=True, blank=True
+        verbose_name=_("Type de processus d’évaluation par les pairs"),
+        null=True,
+        blank=True,
     )
 
     facebook_url = models.URLField(verbose_name=_("Facebook"), blank=True)
     facebook_enable_feed = models.BooleanField(
-        verbose_name=_("Afficher votre fil d’activités Facebook ?"),
-        default=False)
+        verbose_name=_("Afficher votre fil d’activités Facebook ?"), default=False
+    )
     twitter_url = models.URLField(verbose_name=_("Twitter"), blank=True)
     twitter_enable_feed = models.BooleanField(
-        verbose_name=_("Afficher votre fil d’activités Twitter ?"),
-        default=False)
+        verbose_name=_("Afficher votre fil d’activités Twitter ?"), default=False
+    )
     website_url = models.URLField(verbose_name=_("Site Web officiel"), blank=True)
 
     # Information fields
-    about = models.TextField(verbose_name=_('Revue'), blank=True, null=True)
+    about = models.TextField(verbose_name=_("Revue"), blank=True, null=True)
     editorial_policy = models.TextField(
-        verbose_name=_('Politiques de la revue'), blank=True, null=True)
-    editorial_leaders = models.ManyToManyField(
-        to="Contributor"
+        verbose_name=_("Politiques de la revue"), blank=True, null=True
     )
-    subscriptions = models.TextField(verbose_name=_('Abonnements'), blank=True, null=True)
-    team = models.TextField(verbose_name=_('Équipe'), blank=True, null=True)
-    contact = models.TextField(verbose_name=_('Coordonnées'), blank=True, null=True)
-    partners = models.TextField(verbose_name=_('Partenaires'), blank=True, null=True)
-    updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
+    editorial_leaders = models.ManyToManyField(to="Contributor")
+    subscriptions = models.TextField(verbose_name=_("Abonnements"), blank=True, null=True)
+    team = models.TextField(verbose_name=_("Équipe"), blank=True, null=True)
+    contact = models.TextField(verbose_name=_("Coordonnées"), blank=True, null=True)
+    partners = models.TextField(verbose_name=_("Partenaires"), blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, verbose_name=_("Date de modification"))
 
     def get_directors(self):
-        return self.contributor_set.all().filter(type='D')
+        return self.contributor_set.all().filter(type="D")
 
     def get_editors(self):
-        return self.contributor_set.all().filter(type='R')
+        return self.contributor_set.all().filter(type="R")
 
     class Meta:
-        verbose_name = _('Information de revue')
-        verbose_name_plural = _('Informations de revue')
+        verbose_name = _("Information de revue")
+        verbose_name_plural = _("Informations de revue")
 
     def __str__(self):
         return self.journal.name
@@ -1533,11 +1607,7 @@ class JournalInformation(models.Model):
 class Contributor(models.Model):
 
     type = models.CharField(
-        max_length=1, verbose_name=_("Type"),
-        choices=(
-            ('D', _("Direction")),
-            ('R', _("Rédaction"))
-        )
+        max_length=1, verbose_name=_("Type"), choices=(("D", _("Direction")), ("R", _("Rédaction")))
     )
     name = models.CharField(max_length=200, verbose_name=_("Prénom et nom"))
     journal_information = models.ForeignKey(JournalInformation, on_delete=models.CASCADE)

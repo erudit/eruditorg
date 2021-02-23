@@ -16,35 +16,34 @@ faker = Factory.create()
 
 class OrganisationFactory(factory.django.DjangoModelFactory):
 
-    name = factory.Sequence(lambda n: 'organization{}'.format(n))
+    name = factory.Sequence(lambda n: "organization{}".format(n))
     account_id = factory.Sequence(lambda n: n)
-    sushi_requester_id = factory.Sequence(lambda n: 'organization{}'.format(n))
+    sushi_requester_id = factory.Sequence(lambda n: "organization{}".format(n))
 
     class Meta:
-        model = 'erudit.Organisation'
+        model = "erudit.Organisation"
 
 
 class CollectionFactory(factory.django.DjangoModelFactory):
-    code = factory.Sequence(lambda n: 'col-{}'.format(n))
-    name = factory.Sequence(lambda n: 'Col{}'.format(n))
+    code = factory.Sequence(lambda n: "col-{}".format(n))
+    name = factory.Sequence(lambda n: "Col{}".format(n))
     localidentifier = factory.LazyAttribute(lambda o: o.code)
 
     class Meta:
-        model = 'erudit.Collection'
-        django_get_or_create = ('code',)
+        model = "erudit.Collection"
+        django_get_or_create = ("code",)
 
 
 class DisciplineFactory(factory.django.DjangoModelFactory):
-    code = factory.Sequence(lambda n: 'discipline-{}'.format(n))
+    code = factory.Sequence(lambda n: "discipline-{}".format(n))
     name = factory.LazyAttribute(lambda o: o.code)
 
     class Meta:
-        model = 'erudit.Discipline'
-        django_get_or_create = ('code', )
+        model = "erudit.Discipline"
+        django_get_or_create = ("code",)
 
 
 class JournalFactory(factory.django.DjangoModelFactory):
-
     @classmethod
     def create_with_issue(cls, *args, **kwargs):
         instance = cls(*args, **kwargs)
@@ -52,17 +51,18 @@ class JournalFactory(factory.django.DjangoModelFactory):
         return instance
 
     collection = factory.SubFactory(
-        CollectionFactory, code='erudit', name='Érudit', is_main_collection=True)
+        CollectionFactory, code="erudit", name="Érudit", is_main_collection=True
+    )
     type = factory.LazyAttribute(lambda o: JournalTypeFactory(code=o.type_code))
-    code = factory.Sequence(lambda n: 'journal-{}'.format(n))
-    name = factory.Sequence(lambda n: 'Revue{}'.format(n))
-    localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
+    code = factory.Sequence(lambda n: "journal-{}".format(n))
+    name = factory.Sequence(lambda n: "Revue{}".format(n))
+    localidentifier = factory.Sequence(lambda n: "journal{}".format(n))
     redirect_to_external_url = False
     last_publication_year = dt.datetime.now(tz=dt.timezone.utc).year
     fedora_updated = dt.datetime.now(tz=dt.timezone.utc)
 
     class Meta:
-        model = 'erudit.journal'
+        model = "erudit.journal"
 
     class Params:
         type_code = JournalType.CODE_SCIENTIFIC
@@ -107,8 +107,8 @@ class JournalTypeFactory(factory.django.DjangoModelFactory):
     code = JournalType.CODE_SCIENTIFIC
 
     class Meta:
-        model = 'erudit.JournalType'
-        django_get_or_create = ('code', )
+        model = "erudit.JournalType"
+        django_get_or_create = ("code",)
 
 
 class JournalInformationFactory(factory.django.DjangoModelFactory):
@@ -116,7 +116,7 @@ class JournalInformationFactory(factory.django.DjangoModelFactory):
     journal = factory.SubFactory(JournalFactory)
 
     class Meta:
-        model = 'erudit.journalinformation'
+        model = "erudit.journalinformation"
 
 
 class ContributorFactory(factory.django.DjangoModelFactory):
@@ -124,28 +124,26 @@ class ContributorFactory(factory.django.DjangoModelFactory):
     journal_information = factory.SubFactory(JournalInformationFactory)
 
     class Meta:
-        model = 'erudit.contributor'
+        model = "erudit.contributor"
 
 
 class IssueFactory(factory.django.DjangoModelFactory):
-
     @classmethod
     def create_published_after(cls, other_issue, *args, **kwargs):
-        """ Creates an issue with a publish date one day after `other_issue`, in the same journal.
-        """
-        kwargs['journal'] = other_issue.journal
-        kwargs['date_published'] = other_issue.date_published + dt.timedelta(days=1)
+        """Creates an issue with a publish date one day after `other_issue`, in the same journal."""
+        kwargs["journal"] = other_issue.journal
+        kwargs["date_published"] = other_issue.date_published + dt.timedelta(days=1)
         return cls(*args, **kwargs)
 
     journal = factory.SubFactory(JournalFactory)
-    localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
+    localidentifier = factory.Sequence(lambda n: "issue{}".format(n))
     date_published = dt.datetime.now().date()
     year = dt.datetime.now().year
     is_published = True
     fedora_updated = dt.datetime.now(tz=dt.timezone.utc)
 
     class Meta:
-        model = 'erudit.issue'
+        model = "erudit.issue"
 
     @factory.post_generation
     def post(obj, create, extracted, **kwargs):
@@ -167,8 +165,9 @@ class EmbargoedIssueFactory(IssueFactory):
 
 
 class NonEmbargoedIssueFactory(IssueFactory):
-    date_published = dt.datetime.now().date() - \
-        relativedelta(years=1 + max(months_cult, months_sc) / 12)
+    date_published = dt.datetime.now().date() - relativedelta(
+        years=1 + max(months_cult, months_sc) / 12
+    )
     year = date_published.year
     journal = factory.SubFactory(JournalFactory)
 
@@ -182,17 +181,31 @@ class OpenAccessIssueFactory(IssueFactory):
 
 class ArticleRef(Article):
     """ An article that creates its own solr/fedora references upon instantiation. """
+
     def __init__(
-            self, issue, localidentifier, from_fixture=None, title=None, type=None,
-            section_titles=None, publication_allowed=True, authors=None, add_to_fedora_issue=True,
-            with_pdf=False, pdf_url=None, html_url=None, solr_attrs=None, abstracts=None,
-            notegens=None):
+        self,
+        issue,
+        localidentifier,
+        from_fixture=None,
+        title=None,
+        type=None,
+        section_titles=None,
+        publication_allowed=True,
+        authors=None,
+        add_to_fedora_issue=True,
+        with_pdf=False,
+        pdf_url=None,
+        html_url=None,
+        solr_attrs=None,
+        abstracts=None,
+        notegens=None,
+    ):
         self.issue = issue
         self.localidentifier = localidentifier
         if self.pid is not None:
             repository.api.register_article(self.pid)
             if from_fixture:
-                xml = open('./tests/fixtures/article/{}.xml'.format(from_fixture)).read()
+                xml = open("./tests/fixtures/article/{}.xml".format(from_fixture)).read()
                 repository.api.set_article_xml(self.pid, xml)
             if any(x is not None for x in (title, section_titles, notegens, abstracts, type)):
                 with repository.api.open_article(self.pid) as wrapper:
@@ -211,7 +224,8 @@ class ArticleRef(Article):
                     self,
                     publication_allowed=publication_allowed,
                     pdf_url=pdf_url,
-                    html_url=html_url)
+                    html_url=html_url,
+                )
             if with_pdf:
                 repository.api.add_pdf_to_article(self.pid)
         super().__init__(issue, localidentifier)
@@ -224,7 +238,7 @@ class ArticleRef(Article):
 
 class ArticleFactory(factory.Factory):
     issue = factory.SubFactory(IssueFactory)
-    localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
+    localidentifier = factory.Sequence(lambda n: "article{}".format(n))
 
     class Meta:
         model = ArticleRef
@@ -237,11 +251,7 @@ class ArticleFactory(factory.Factory):
 
 class OpenAccessArticleFactory(ArticleFactory):
     issue = factory.SubFactory(
-        IssueFactory,
-        journal=factory.SubFactory(
-            JournalFactory,
-            open_access=True
-        )
+        IssueFactory, journal=factory.SubFactory(JournalFactory, open_access=True)
     )
 
 
@@ -254,23 +264,23 @@ class NonEmbargoedArticleFactory(ArticleFactory):
 
 
 class ThesisRepositoryFactory(factory.django.DjangoModelFactory):
-    code = factory.Sequence(lambda n: 'repository{}'.format(n))
-    name = factory.Sequence(lambda n: 'repository{}'.format(n))
+    code = factory.Sequence(lambda n: "repository{}".format(n))
+    name = factory.Sequence(lambda n: "repository{}".format(n))
     solr_name = factory.LazyAttribute(lambda obj: obj.name)
 
     class Meta:
-        model = 'erudit.ThesisRepository'
-        django_get_or_create = ('code',)
+        model = "erudit.ThesisRepository"
+        django_get_or_create = ("code",)
 
 
 class ThesisFactory(factory.Factory):
-    id = factory.Sequence(lambda n: 'thesis-{}'.format(n))
-    title = factory.Sequence(lambda n: 'Thèse {}'.format(n))
-    type = 'Thèses'
+    id = factory.Sequence(lambda n: "thesis-{}".format(n))
+    title = factory.Sequence(lambda n: "Thèse {}".format(n))
+    type = "Thèses"
     authors = ["{}, {}".format(faker.last_name(), faker.first_name())]
     year = faker.year()
     date_added = factory.LazyFunction(lambda: dt.datetime.now().isoformat())
-    repository = factory.SubFactory(ThesisRepositoryFactory, code='default')
+    repository = factory.SubFactory(ThesisRepositoryFactory, code="default")
     collection = factory.LazyAttribute(lambda obj: obj.repository.solr_name)
     url = faker.url()
 
@@ -279,9 +289,9 @@ class ThesisFactory(factory.Factory):
 
 
 class SolrDocumentFactory(factory.Factory):
-    id = factory.Sequence(lambda n: 'solr_id_{}'.format(n))
-    title = factory.Sequence(lambda n: 'title_{}'.format(n))
-    type = 'Article'
+    id = factory.Sequence(lambda n: "solr_id_{}".format(n))
+    title = factory.Sequence(lambda n: "title_{}".format(n))
+    type = "Article"
     authors = []
 
     class Meta:

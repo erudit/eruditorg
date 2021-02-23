@@ -20,7 +20,7 @@ class Command(BaseCommand):
 
         with open(FIXTURE_ROOT + "/erudit_libre_acces.csv", "r") as fp:
             reader = csv.reader(fp, delimiter=",", quotechar='"')
-            header = next(reader, None)  # noqa
+            next(reader, None)
             for row in reader:
                 journal_id = row[11]
                 open_access_status = row[16].lower()
@@ -41,7 +41,7 @@ class Command(BaseCommand):
                     )
         with open(FIXTURE_ROOT + "/persee_libre_acces.csv", "r") as fp:
             reader = csv.reader(fp, delimiter=",", quotechar='"')
-            header = next(reader, None)  # noqa
+            next(reader, None)
             for row in reader:
                 journal_name = row[0]
                 open_access_status = row[16].lower()

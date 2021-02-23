@@ -8,9 +8,7 @@ from django.conf import settings
 from eulfedora.api import ApiFacade
 from eulfedora.util import RequestFailed
 
-from .domchange import (
-    EruditArticleDomChanger, EruditPublicationDomChanger, EruditJournalDomChanger
-)
+from .domchange import EruditArticleDomChanger, EruditPublicationDomChanger, EruditJournalDomChanger
 
 # NOTE: This fake API is far from complete but is enough to make tests pass
 #       as they are now. We'll have to improve this as we expand testing areas.
@@ -60,7 +58,8 @@ FAKE_ISSUE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <objectDatastreams
     xmlns="http://www.fedora.info/definitions/1/0/access/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/ http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
+    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/
+    http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
     pid="{pid}"
     baseURL="http://fakeurl/">
 <datastream dsid="PAGES" label="PAGES" mimeType="text/xml" />
@@ -69,24 +68,26 @@ FAKE_ISSUE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <datastream dsid="RELS-EXT" label="Relationships" mimeType="application/rdf+xml" />
 <datastream dsid="SUMMARY" label="SUMMARY" mimeType="text/xml" />
 </objectDatastreams>
-""" # noqa
+"""
 
 FAKE_PAGE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <objectDatastreams
     xmlns="http://www.fedora.info/definitions/1/0/access/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/ http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
+    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/
+    http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
     pid="{pid}"
     baseURL="http://fakeurl/">
 <datastream dsid="IMAGE" label="IMAGE" mimeType="image/jpeg" />
 </objectDatastreams>
-""" # noqa
+"""
 
 FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <objectDatastreams
     xmlns="http://www.fedora.info/definitions/1/0/access/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/ http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
+    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/
+    ttp://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
     pid="{pid}"
     baseURL="http://fakeurl/">
 <datastream dsid="ERUDITXSD300" label="ERUDITXSD300" mimeType="text/xml"/>
@@ -95,7 +96,7 @@ FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <datastream dsid="RELS-EXT" label="Relationships" mimeType="application/rdf+xml"/>
 {extra}
 </objectDatastreams>
-"""  # noqa
+"""
 
 FAKE_EMPTY_QUERY_RESULTS = """<?xml version="1.0" encoding="UTF-8"?>
 <result xmlns="http://www.fedora.info/definitions/1/0/types/"><resultList></resultList></result>"""
@@ -114,17 +115,17 @@ class FakeResponse:
 
 
 class FakeAPI(ApiFacade):
-    BASE_URL = 'http://fakeurl/'
+    BASE_URL = "http://fakeurl/"
 
     def __init__(self):
-        super().__init__(self.BASE_URL, 'username', 'password')
+        super().__init__(self.BASE_URL, "username", "password")
         self._content_map = {}
         self._datastream_map = {}
         self._articles_with_pdf = set()
         self._query_results = {
-            'series': set(),
-            'publication': set(),
-            'unit': set(),
+            "series": set(),
+            "publication": set(),
+            "unit": set(),
         }
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
@@ -137,7 +138,7 @@ class FakeAPI(ApiFacade):
                 return content
             else:
                 # default fixture
-                with open('./tests/fixtures/journal/minimal.xml', 'rb') as xml:
+                with open("./tests/fixtures/journal/minimal.xml", "rb") as xml:
                     return xml.read()
         else:
             return None
@@ -149,7 +150,7 @@ class FakeAPI(ApiFacade):
                 return content
             else:
                 # default fixture
-                with open('./tests/fixtures/issue/minimal.xml', 'rb') as xml:
+                with open("./tests/fixtures/issue/minimal.xml", "rb") as xml:
                     return xml.read()
         else:
             return None
@@ -161,7 +162,7 @@ class FakeAPI(ApiFacade):
                 return content
             else:
                 # default fixture
-                with open('./tests/fixtures/article/009255ar.xml', 'rb') as xml:
+                with open("./tests/fixtures/article/009255ar.xml", "rb") as xml:
                     return xml.read()
         else:
             return None
@@ -169,7 +170,7 @@ class FakeAPI(ApiFacade):
     def get_article_pdf(self, pid):
         if pid in self._articles_with_pdf:
             # default fixture
-            with open('./tests/unit/apps/public/journal/fixtures/article.pdf', 'rb') as pdf:
+            with open("./tests/unit/apps/public/journal/fixtures/article.pdf", "rb") as pdf:
                 return pdf.read()
         else:
             return None
@@ -195,7 +196,7 @@ class FakeAPI(ApiFacade):
 
     def set_xml_for_pid(self, pid, xml):
         if isinstance(xml, str):
-            xml = xml.encode('utf-8')
+            xml = xml.encode("utf-8")
         self._content_map[pid] = xml
 
     set_publication_xml = set_xml_for_pid
@@ -232,23 +233,22 @@ class FakeAPI(ApiFacade):
         self.set_xml_for_pid(pid, newxml)
 
     def add_article_to_parent_publication(
-            self, article, publication_allowed=True, pdf_url=None, html_url=None):
+        self, article, publication_allowed=True, pdf_url=None, html_url=None
+    ):
         with self.open_publication(article.issue.pid) as wrapper:
             wrapper.add_article(
-                article,
-                publication_allowed=publication_allowed,
-                pdf_url=pdf_url,
-                html_url=html_url)
-            self._query_results['publication'].update({article.issue.pid})
-            self._query_results['unit'].update({article.pid})
+                article, publication_allowed=publication_allowed, pdf_url=pdf_url, html_url=html_url
+            )
+            self._query_results["publication"].update({article.issue.pid})
+            self._query_results["unit"].update({article.pid})
 
     def add_publication_to_parent_journal(self, issue, journal=None):
         if journal is None:
             journal = issue.journal
         with self.open_journal(journal.pid) as wrapper:
             wrapper.add_issue(issue)
-            self._query_results['series'].update({journal.pid})
-            self._query_results['publication'].update({issue.pid})
+            self._query_results["series"].update({journal.pid})
+            self._query_results["publication"].update({issue.pid})
 
     def add_notes_to_journal(self, notes, journal):
         with self.open_journal(journal.pid) as wrapper:
@@ -258,36 +258,36 @@ class FakeAPI(ApiFacade):
         params = params or {}
 
         if settings.FEDORA_ROOT in url:
-            url = url[len(settings.FEDORA_ROOT):]
+            url = url[len(settings.FEDORA_ROOT) :]
 
-        if url == 'objects':
-            query = params.get('query')
+        if url == "objects":
+            query = params.get("query")
             label = re.search("label='([A-Za-z]+) Erudit'", query)
             if label:
-                xml = etree.fromstring(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'))
+                xml = etree.fromstring(FAKE_EMPTY_QUERY_RESULTS.encode("utf-8"))
                 for pid in self._query_results.get(label.group(1).lower(), []):
                     xml.append(E.objectField(E.pid(pid)))
                 return FakeResponse(etree.tostring(xml), url)
-            return FakeResponse(FAKE_EMPTY_QUERY_RESULTS.encode('utf-8'), url)
+            return FakeResponse(FAKE_EMPTY_QUERY_RESULTS.encode("utf-8"), url)
         result = None
         pid = None
 
         m = re.match(r"^objects/(erudit:[\w\-.]+)(/datastreams)?(.*)", url)
         if m:
             pid, datastream, subselection = m.groups()
-            prefix, subpid = pid.split(':')
-            pidelems = subpid.split('.')
-            if len(pidelems) == 4 and re.match('^p[0-9]+$', pidelems[3]):  # page
+            prefix, subpid = pid.split(":")
+            pidelems = subpid.split(".")
+            if len(pidelems) == 4 and re.match("^p[0-9]+$", pidelems[3]):  # page
                 if not subselection:  # we want a datastream list
                     result = FAKE_PAGE_DATASTREAM_LIST.format(pid=pid).encode()
-                elif subselection == '/IMAGE/content':
-                    with open('./tests/fixtures/page/{}.jpg'.format(pidelems[3]), 'rb') as page:
+                elif subselection == "/IMAGE/content":
+                    with open("./tests/fixtures/page/{}.jpg".format(pidelems[3]), "rb") as page:
                         result = page.read()
             elif len(pidelems) == 4:  # article
                 article_xml = self.get_article_xml(pid)
                 if not article_xml:
                     # return empty response
-                    result = b''
+                    result = b""
                 elif not datastream:
                     # we're asking for the object profile
                     result = FAKE_FEDORA_PROFILE.format(
@@ -295,13 +295,13 @@ class FakeAPI(ApiFacade):
                     ).encode()
                 elif not subselection:  # we want a datastream list
                     if pid in self._articles_with_pdf:
-                        extra = "<datastream dsid=\"PDF\" label=\"PDF\" mimeType=\"application/pdf\"/>"  # noqa
+                        extra = '<datastream dsid="PDF" label="PDF" mimeType="application/pdf"/>'
                     else:
                         extra = ""
                     result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid, extra=extra).encode()
-                elif subselection == '/ERUDITXSD300/content':
-                    result = self.get_article_xml(pid) or b''
-                elif subselection == '/PDF/content':
+                elif subselection == "/ERUDITXSD300/content":
+                    result = self.get_article_xml(pid) or b""
+                elif subselection == "/PDF/content":
                     result = self.get_article_pdf(pid) or None
             elif len(pidelems) == 3:  # issue
                 if not datastream:
@@ -311,22 +311,26 @@ class FakeAPI(ApiFacade):
                     ).encode()
                 elif not subselection:  # we want a datastream list
                     result = FAKE_ISSUE_DATASTREAM_LIST.format(pid=pid).encode()
-                elif subselection == '/SUMMARY/content':
-                    result = self.get_publication_xml(pid) or b''
-                elif subselection == '/PAGES/content':
-                    with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
+                elif subselection == "/SUMMARY/content":
+                    result = self.get_publication_xml(pid) or b""
+                elif subselection == "/PAGES/content":
+                    with open(
+                        "./tests/fixtures/issue/datastream/pages/liberte03419.xml", "rb"
+                    ) as xml:
                         result = xml.read()
-                elif subselection == '/COVERPAGE/history':
-                    with open('./tests/fixtures/issue/datastream/coverpage/history', 'rb') as xml:  # noqa
+                elif subselection == "/COVERPAGE/history":
+                    with open("./tests/fixtures/issue/datastream/coverpage/history", "rb") as xml:
                         result = xml.read()
-                elif subselection == '/COVERPAGE/content':
-                    with open('./tests/fixtures/issue/datastream/coverpage/CONTENT', 'rb') as coverpage:  # noqa
+                elif subselection == "/COVERPAGE/content":
+                    with open(
+                        "./tests/fixtures/issue/datastream/coverpage/CONTENT", "rb"
+                    ) as coverpage:
                         result = coverpage.read()
             elif len(pidelems) == 2:  # journal
                 subselections = [
-                    '/PUBLICATIONS/content',
-                    '/OAISET_INFO/content',
-                    '/RELS-EXT/content',
+                    "/PUBLICATIONS/content",
+                    "/OAISET_INFO/content",
+                    "/RELS-EXT/content",
                 ]
                 if not datastream:
                     # we're asking for the object profile
@@ -336,14 +340,16 @@ class FakeAPI(ApiFacade):
                 elif not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
 
-                elif pid in self._datastream_map.keys() and \
-                        subselection in self._datastream_map[pid].keys():
+                elif (
+                    pid in self._datastream_map.keys()
+                    and subselection in self._datastream_map[pid].keys()
+                ):
                     result = self._datastream_map[pid][subselection]
-                elif subselection == '/LOGO/history':
-                    with open('./tests/fixtures/issue/datastream/coverpage/history', 'rb') as xml:  # noqa
+                elif subselection == "/LOGO/history":
+                    with open("./tests/fixtures/issue/datastream/coverpage/history", "rb") as xml:
                         result = xml.read()
                 elif subselection in subselections:
-                    result = self.get_journal_xml(pid) or b''
+                    result = self.get_journal_xml(pid) or b""
         if result is not None:
             response = FakeResponse(result, url)
             if response.status_code == 200:
@@ -355,6 +361,6 @@ class FakeAPI(ApiFacade):
                 raise RequestFailed(response)
         else:
             print("WARNING: unsupported URL for fake fedora API: {}".format(url))
-            response = FakeResponse(b'', url)
+            response = FakeResponse(b"", url)
             response.text = pid
             raise HTTPError
