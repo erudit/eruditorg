@@ -8,26 +8,26 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0098_auto_20180717_1339'),
+        ("erudit", "0098_auto_20180717_1339"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='article',
-            name='eruditdocument_ptr',
+            model_name="article",
+            name="eruditdocument_ptr",
         ),
         migrations.RemoveField(
-            model_name='article',
-            name='issue',
+            model_name="article",
+            name="issue",
         ),
         migrations.RemoveField(
-            model_name='eruditdocument',
-            name='polymorphic_ctype',
+            model_name="eruditdocument",
+            name="polymorphic_ctype",
         ),
         migrations.DeleteModel(
-            name='Article',
+            name="Article",
         ),
         migrations.DeleteModel(
-            name='EruditDocument',
+            name="EruditDocument",
         ),
     ]

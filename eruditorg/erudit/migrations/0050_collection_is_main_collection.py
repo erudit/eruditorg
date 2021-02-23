@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0049_auto_20161014_1623'),
+        ("erudit", "0049_auto_20161014_1623"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='collection',
-            name='is_main_collection',
-            field=models.BooleanField(default=False, help_text='Les fonds primaires sont hébergés en partie ou en totalité par Érudit', verbose_name='Fonds primaire'),
+            model_name="collection",
+            name="is_main_collection",
+            field=models.BooleanField(
+                default=False,
+                help_text="Les fonds primaires sont hébergés en partie ou en totalité par Érudit",
+                verbose_name="Fonds primaire",
+            ),
         ),
     ]

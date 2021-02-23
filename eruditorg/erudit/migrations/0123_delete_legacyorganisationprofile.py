@@ -6,11 +6,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0122_add_legacy_fields_to_organisation'),
+        ("erudit", "0122_add_legacy_fields_to_organisation"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='LegacyOrganisationProfile',
+            name="LegacyOrganisationProfile",
         ),
     ]

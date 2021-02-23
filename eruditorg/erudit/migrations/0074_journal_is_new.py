@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0073_article_formatted_title'),
+        ("erudit", "0073_article_formatted_title"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journal',
-            name='is_new',
-            field=models.BooleanField(default=False, help_text="Cocher si cette revue est nouvelle sur la plateforme d'Érudit.", verbose_name='Est une nouveauté'),
+            model_name="journal",
+            name="is_new",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cocher si cette revue est nouvelle sur la plateforme d'Érudit.",
+                verbose_name="Est une nouveauté",
+            ),
         ),
     ]

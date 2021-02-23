@@ -8,24 +8,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0031_auto_20160808_1613'),
+        ("erudit", "0031_auto_20160808_1613"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Affiliation',
+            name="Affiliation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='Nom')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True, verbose_name="Nom")),
             ],
             options={
-                'verbose_name': 'Affiliation',
-                'verbose_name_plural': 'Affiliations',
+                "verbose_name": "Affiliation",
+                "verbose_name_plural": "Affiliations",
             },
         ),
         migrations.AddField(
-            model_name='author',
-            name='affiliations',
-            field=models.ManyToManyField(to='erudit.Affiliation', verbose_name='Affiliations'),
+            model_name="author",
+            name="affiliations",
+            field=models.ManyToManyField(to="erudit.Affiliation", verbose_name="Affiliations"),
         ),
     ]

@@ -9,25 +9,50 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0018_article_publication_allowed_by_authors'),
+        ("erudit", "0018_article_publication_allowed_by_authors"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Thesis',
+            name="Thesis",
             fields=[
-                ('eruditdocument_ptr', models.OneToOneField(auto_created=True, on_delete=models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='erudit.EruditDocument')),
-                ('title', models.CharField(max_length=600, verbose_name='Titre')),
-                ('url', models.URLField(verbose_name='URL')),
-                ('publication_year', models.PositiveIntegerField(verbose_name='Année de publication')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Résumé')),
-                ('author', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Author', verbose_name='Auteur')),
-                ('collection', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Collection', verbose_name='Collection')),
+                (
+                    "eruditdocument_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="erudit.EruditDocument",
+                    ),
+                ),
+                ("title", models.CharField(max_length=600, verbose_name="Titre")),
+                ("url", models.URLField(verbose_name="URL")),
+                (
+                    "publication_year",
+                    models.PositiveIntegerField(verbose_name="Année de publication"),
+                ),
+                ("description", models.TextField(blank=True, null=True, verbose_name="Résumé")),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=models.deletion.CASCADE, to="erudit.Author", verbose_name="Auteur"
+                    ),
+                ),
+                (
+                    "collection",
+                    models.ForeignKey(
+                        on_delete=models.deletion.CASCADE,
+                        to="erudit.Collection",
+                        verbose_name="Collection",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Thèses',
-                'verbose_name': 'Thèse',
+                "verbose_name_plural": "Thèses",
+                "verbose_name": "Thèse",
             },
-            bases=('erudit.eruditdocument',),
+            bases=("erudit.eruditdocument",),
         ),
     ]

@@ -8,23 +8,23 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0089_thesisprovider'),
+        ("erudit", "0089_thesisprovider"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='thesis',
-            name='author',
+            model_name="thesis",
+            name="author",
         ),
         migrations.RemoveField(
-            model_name='thesis',
-            name='collection',
+            model_name="thesis",
+            name="collection",
         ),
         migrations.RemoveField(
-            model_name='thesis',
-            name='eruditdocument_ptr',
+            model_name="thesis",
+            name="eruditdocument_ptr",
         ),
         migrations.DeleteModel(
-            name='Thesis',
+            name="Thesis",
         ),
     ]

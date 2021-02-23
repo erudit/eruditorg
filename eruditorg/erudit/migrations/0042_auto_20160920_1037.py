@@ -8,18 +8,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0041_journal_redirect_to_external_url'),
+        ("erudit", "0041_journal_redirect_to_external_url"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issue',
-            name='external_url',
-            field=models.URLField(blank=True, help_text='URL du site où les numéros sont hébergés', null=True, verbose_name='URL Externe'),
+            model_name="issue",
+            name="external_url",
+            field=models.URLField(
+                blank=True,
+                help_text="URL du site où les numéros sont hébergés",
+                null=True,
+                verbose_name="URL Externe",
+            ),
         ),
         migrations.AlterField(
-            model_name='issue',
-            name='localidentifier',
-            field=models.CharField(blank=True, max_length=100, null=True, unique=True, verbose_name='Identifiant Fedora'),
+            model_name="issue",
+            name="localidentifier",
+            field=models.CharField(
+                blank=True,
+                max_length=100,
+                null=True,
+                unique=True,
+                verbose_name="Identifiant Fedora",
+            ),
         ),
     ]

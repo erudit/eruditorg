@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0062_issue_is_published'),
+        ("erudit", "0062_issue_is_published"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issue',
-            name='is_published',
-            field=models.BooleanField(default=False, verbose_name='Est publié'),
+            model_name="issue",
+            name="is_published",
+            field=models.BooleanField(default=False, verbose_name="Est publié"),
         ),
     ]

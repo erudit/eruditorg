@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0058_remove_article_subtitle'),
+        ("erudit", "0058_remove_article_subtitle"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journal',
-            name='publishers',
-            field=models.ManyToManyField(blank=True, related_name='journals', to='erudit.Publisher', verbose_name='Éditeurs'),
+            model_name="journal",
+            name="publishers",
+            field=models.ManyToManyField(
+                blank=True, related_name="journals", to="erudit.Publisher", verbose_name="Éditeurs"
+            ),
         ),
     ]

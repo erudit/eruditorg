@@ -8,9 +8,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0094_merge_20180502_1413'),
-        ('erudit', '0096_auto_20180501_1116'),
+        ("erudit", "0094_merge_20180502_1413"),
+        ("erudit", "0096_auto_20180501_1116"),
     ]
 
-    operations = [
-    ]
+    operations = []

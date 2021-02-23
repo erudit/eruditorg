@@ -16,22 +16,24 @@ from PIL import Image
 # django-machina's model fields module.
 # See: https://github.com/ellmetha/django-machina/blob/master/machina/models/fields.py#L193
 
+
 class SizeConstrainedImageField(models.ImageField):
     """
     A SizeConstrainedImageField is an ImageField whose image can be resized before being saved.
     This field also adds the capability of checking the image size, width and height a user may
     send.
     """
+
     def __init__(self, *args, **kwargs):
-        self.width = kwargs.pop('width', None)
-        self.height = kwargs.pop('height', None)
+        self.width = kwargs.pop("width", None)
+        self.height = kwargs.pop("height", None)
         # Both min_width and max_width must be provided in order to be used
-        self.min_width = kwargs.pop('min_width', None)
-        self.max_width = kwargs.pop('max_width', None)
+        self.min_width = kwargs.pop("min_width", None)
+        self.max_width = kwargs.pop("max_width", None)
         # Both min_height and max_height must be provided in order to be used
-        self.min_height = kwargs.pop('min_height', None)
-        self.max_height = kwargs.pop('max_height', None)
-        self.max_upload_size = kwargs.pop('max_upload_size', 0)
+        self.min_height = kwargs.pop("min_height", None)
+        self.max_height = kwargs.pop("max_height", None)
+        self.max_upload_size = kwargs.pop("max_upload_size", 0)
         super(SizeConstrainedImageField, self).__init__(*args, **kwargs)
 
     def clean(self, *args, **kwargs):
@@ -39,29 +41,38 @@ class SizeConstrainedImageField(models.ImageField):
         image = data.file
 
         # Controls the file size
-        if self.max_upload_size and hasattr(image, 'size'):
+        if self.max_upload_size and hasattr(image, "size"):
             if image.size > self.max_upload_size:
                 raise ValidationError(
-                    _('Files of size greater than {} are not allowed. Your file is {}').format(
-                        filesizeformat(self.max_upload_size),
-                        filesizeformat(image.size)
+                    _("Files of size greater than {} are not allowed. Your file is {}").format(
+                        filesizeformat(self.max_upload_size), filesizeformat(image.size)
                     )
                 )
 
         # Controls the image size
         image_width, image_height = get_image_dimensions(data)
-        if self.min_width and self.max_width \
-                and not self.min_width <= image_width <= self.max_width:
+        if (
+            self.min_width
+            and self.max_width
+            and not self.min_width <= image_width <= self.max_width
+        ):
             raise ValidationError(
-                _('Images of width lesser than {}px or greater than {}px or are not allowed. '
-                  'The width of your image is {}px').format(
-                    self.min_width, self.max_width, image_width))
-        if self.min_height and self.max_height \
-                and not self.min_height <= image_height <= self.max_height:
+                _(
+                    "Images of width lesser than {}px or greater than {}px or are not allowed. "
+                    "The width of your image is {}px"
+                ).format(self.min_width, self.max_width, image_width)
+            )
+        if (
+            self.min_height
+            and self.max_height
+            and not self.min_height <= image_height <= self.max_height
+        ):
             raise ValidationError(
-                _('Images of height lesser than {}px or greater than {}px or are not allowed. '
-                  'The height of your image is {}px').format(
-                    self.min_height, self.max_height, image_height))
+                _(
+                    "Images of height lesser than {}px or greater than {}px or are not allowed. "
+                    "The height of your image is {}px"
+                ).format(self.min_height, self.max_height, image_height)
+            )
 
         return data
 
@@ -71,7 +82,7 @@ class SizeConstrainedImageField(models.ImageField):
 
             # Handle the filename because the image will be converted to PNG
             filename = os.path.splitext(os.path.split(data.name)[-1])[0]
-            filename = '{}.png'.format(filename)
+            filename = "{}.png".format(filename)
 
             # Regenerate a File object
             data = SimpleUploadedFile(filename, content)
@@ -87,5 +98,5 @@ class SizeConstrainedImageField(models.ImageField):
         image.thumbnail(size, Image.ANTIALIAS)
 
         string = io.BytesIO()
-        image.save(string, format='PNG')
+        image.save(string, format="PNG")
         return string.getvalue()

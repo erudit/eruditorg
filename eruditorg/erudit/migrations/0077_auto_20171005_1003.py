@@ -8,17 +8,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0076_auto_20171005_0938'),
+        ("erudit", "0076_auto_20171005_0938"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='legacyorganisationprofile',
-            options={'verbose_name': 'Compatibilité avec la base de données restriction'},
+            name="legacyorganisationprofile",
+            options={"verbose_name": "Compatibilité avec la base de données restriction"},
         ),
         migrations.AlterField(
-            model_name='legacyorganisationprofile',
-            name='sushi_requester_id',
-            field=models.CharField(blank=True, max_length=10, null=True, verbose_name='Identifiant SUSHI'),
+            model_name="legacyorganisationprofile",
+            name="sushi_requester_id",
+            field=models.CharField(
+                blank=True, max_length=10, null=True, verbose_name="Identifiant SUSHI"
+            ),
         ),
     ]

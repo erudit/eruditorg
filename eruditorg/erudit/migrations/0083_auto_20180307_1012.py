@@ -4,11 +4,12 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
+
 def set_journaltypes(apps, schema_editor):
-    JournalType = apps.get_model('erudit', 'JournalType')
+    JournalType = apps.get_model("erudit", "JournalType")
     NAMES = [
-        ('C', 'Culturelle', 'Cultural'),
-        ('S', 'Savante', 'Scholarly'),
+        ("C", "Culturelle", "Cultural"),
+        ("S", "Savante", "Scholarly"),
     ]
     for code, name_fr, name_en in NAMES:
         jt, _ = JournalType.objects.get_or_create(code=code)
@@ -20,19 +21,19 @@ def set_journaltypes(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0082_auto_20180208_1331'),
+        ("erudit", "0082_auto_20180208_1331"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journaltype',
-            name='name_en',
-            field=models.CharField(max_length=255, null=True, verbose_name='Nom'),
+            model_name="journaltype",
+            name="name_en",
+            field=models.CharField(max_length=255, null=True, verbose_name="Nom"),
         ),
         migrations.AddField(
-            model_name='journaltype',
-            name='name_fr',
-            field=models.CharField(max_length=255, null=True, verbose_name='Nom'),
+            model_name="journaltype",
+            name="name_fr",
+            field=models.CharField(max_length=255, null=True, verbose_name="Nom"),
         ),
         migrations.RunPython(set_journaltypes),
     ]

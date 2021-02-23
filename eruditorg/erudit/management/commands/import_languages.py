@@ -13,15 +13,18 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            'filename', action='store', default=False,
-            help='Name of the file containing the Journal -> Language associations.')
+            "filename",
+            action="store",
+            default=False,
+            help="Name of the file containing the Journal -> Language associations.",
+        )
 
     def handle(self, *args, **options):
-        with open(options.get('filename'), newline='') as csvfile:
+        with open(options.get("filename"), newline="") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 shortname = row[0]
-                languages = row[12].split('/')
+                languages = row[12].split("/")
                 frequency = row[27]
                 status = row[4]
                 if status == "à paraître":
@@ -36,12 +39,12 @@ class Command(BaseCommand):
                         raise Exception
                     else:
                         for language in languages:
-                            if language == '':
-                                language = 'fr'
+                            if language == "":
+                                language = "fr"
                             info.languages.add(Language.objects.get(code=language.lower()))
                     info.save()
                 except Journal.DoesNotExist:
                     print("Journal.DoesNotExist: {}".format(row))
                 except JournalInformation.DoesNotExist:
                     print("JournalInformation.DoesNotExist: {}".format(row))
-        print(options.get('filename'))
+        print(options.get("filename"))

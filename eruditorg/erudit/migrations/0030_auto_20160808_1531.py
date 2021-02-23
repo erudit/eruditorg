@@ -9,304 +9,381 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0029_author_othername'),
+        ("erudit", "0029_author_othername"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ArticleAbstract',
+            name="ArticleAbstract",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(verbose_name='Résumé')),
-                ('language', models.CharField(max_length=10, verbose_name='Code langue')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("text", models.TextField(verbose_name="Résumé")),
+                ("language", models.CharField(max_length=10, verbose_name="Code langue")),
             ],
             options={
-                'verbose_name_plural': "Résumés d'articles",
-                'verbose_name': "Résumé d'article",
+                "verbose_name_plural": "Résumés d'articles",
+                "verbose_name": "Résumé d'article",
             },
         ),
         migrations.CreateModel(
-            name='ArticleSectionTitle',
+            name="ArticleSectionTitle",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=600, verbose_name='Titre')),
-                ('level', models.PositiveIntegerField(verbose_name='Niveau du titre section')),
-                ('paral', models.BooleanField(default=False, verbose_name='Titre parallèle')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("title", models.CharField(max_length=600, verbose_name="Titre")),
+                ("level", models.PositiveIntegerField(verbose_name="Niveau du titre section")),
+                ("paral", models.BooleanField(default=False, verbose_name="Titre parallèle")),
             ],
             options={
-                'verbose_name_plural': "Titres de sections d'articles",
-                'verbose_name': "Titre de section d'article",
+                "verbose_name_plural": "Titres de sections d'articles",
+                "verbose_name": "Titre de section d'article",
             },
         ),
         migrations.CreateModel(
-            name='Copyright',
+            name="Copyright",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=600, verbose_name='Texte du copyright')),
-                ('url', models.URLField(blank=True, null=True, verbose_name='URL du copyright')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("text", models.CharField(max_length=600, verbose_name="Texte du copyright")),
+                ("url", models.URLField(blank=True, null=True, verbose_name="URL du copyright")),
             ],
             options={
-                'verbose_name_plural': "Droits d'auteurs",
-                'verbose_name': "Droit d'auteur",
+                "verbose_name_plural": "Droits d'auteurs",
+                "verbose_name": "Droit d'auteur",
             },
         ),
         migrations.CreateModel(
-            name='IssueTheme',
+            name="IssueTheme",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('identifier', models.SlugField(blank=True, null=True, verbose_name='Identifiant du thème')),
-                ('name', models.CharField(max_length=255, verbose_name='Nom du thème')),
-                ('subname', models.CharField(blank=True, max_length=255, null=True, verbose_name='Sous-thème')),
-                ('html_name', models.CharField(blank=True, max_length=400, null=True, verbose_name='Nom du thème (HTML)')),
-                ('html_subname', models.CharField(blank=True, max_length=400, null=True, verbose_name='Sous-thème (HTML)')),
-                ('paral', models.BooleanField(default=False, verbose_name='Thème parallèle')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "identifier",
+                    models.SlugField(blank=True, null=True, verbose_name="Identifiant du thème"),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Nom du thème")),
+                (
+                    "subname",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="Sous-thème"
+                    ),
+                ),
+                (
+                    "html_name",
+                    models.CharField(
+                        blank=True, max_length=400, null=True, verbose_name="Nom du thème (HTML)"
+                    ),
+                ),
+                (
+                    "html_subname",
+                    models.CharField(
+                        blank=True, max_length=400, null=True, verbose_name="Sous-thème (HTML)"
+                    ),
+                ),
+                ("paral", models.BooleanField(default=False, verbose_name="Thème parallèle")),
             ],
             options={
-                'verbose_name_plural': 'Thèmes de numéros',
-                'verbose_name': "Thème d'un numéro",
+                "verbose_name_plural": "Thèmes de numéros",
+                "verbose_name": "Thème d'un numéro",
             },
         ),
         migrations.RemoveField(
-            model_name='basket',
-            name='journals',
+            model_name="basket",
+            name="journals",
         ),
         migrations.RemoveField(
-            model_name='contract',
-            name='journal',
+            model_name="contract",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='contract',
-            name='status',
+            model_name="contract",
+            name="status",
         ),
         migrations.RemoveField(
-            model_name='contract',
-            name='type',
+            model_name="contract",
+            name="type",
         ),
         migrations.RemoveField(
-            model_name='grant',
-            name='currency',
+            model_name="grant",
+            name="currency",
         ),
         migrations.RemoveField(
-            model_name='grant',
-            name='granting_agency',
+            model_name="grant",
+            name="granting_agency",
         ),
         migrations.RemoveField(
-            model_name='grant',
-            name='journal',
+            model_name="grant",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='indexation',
-            name='indexer',
+            model_name="indexation",
+            name="indexer",
         ),
         migrations.RemoveField(
-            model_name='indexation',
-            name='journal',
+            model_name="indexation",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='invoice',
-            name='currency',
+            model_name="invoice",
+            name="currency",
         ),
         migrations.RemoveField(
-            model_name='invoice',
-            name='journal',
+            model_name="invoice",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='journalproduction',
-            name='journal',
+            model_name="journalproduction",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='journalproduction',
-            name='production_center',
+            model_name="journalproduction",
+            name="production_center",
         ),
         migrations.RemoveField(
-            model_name='journalproduction',
-            name='production_type',
+            model_name="journalproduction",
+            name="production_type",
         ),
         migrations.DeleteModel(
-            name='Library',
+            name="Library",
         ),
         migrations.RemoveField(
-            model_name='quotation',
-            name='journal',
+            model_name="quotation",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='quotationitem',
-            name='currency',
+            model_name="quotationitem",
+            name="currency",
         ),
         migrations.RemoveField(
-            model_name='quotationitem',
-            name='quotation',
+            model_name="quotationitem",
+            name="quotation",
         ),
         migrations.RemoveField(
-            model_name='subscriptionprice',
-            name='currency',
+            model_name="subscriptionprice",
+            name="currency",
         ),
         migrations.RemoveField(
-            model_name='subscriptionprice',
-            name='journal',
+            model_name="subscriptionprice",
+            name="journal",
         ),
         migrations.RemoveField(
-            model_name='subscriptionprice',
-            name='type',
+            model_name="subscriptionprice",
+            name="type",
         ),
         migrations.RemoveField(
-            model_name='subscriptionprice',
-            name='zone',
+            model_name="subscriptionprice",
+            name="zone",
         ),
         migrations.AddField(
-            model_name='article',
-            name='doi',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name='DOI'),
+            model_name="article",
+            name="doi",
+            field=models.CharField(blank=True, max_length=50, null=True, verbose_name="DOI"),
         ),
         migrations.AddField(
-            model_name='article',
-            name='first_page',
-            field=models.CharField(blank=True, max_length=16, null=True, verbose_name='Première page'),
+            model_name="article",
+            name="first_page",
+            field=models.CharField(
+                blank=True, max_length=16, null=True, verbose_name="Première page"
+            ),
         ),
         migrations.AddField(
-            model_name='article',
-            name='html_title',
+            model_name="article",
+            name="html_title",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='article',
-            name='language',
-            field=models.CharField(default='fr', max_length=10, verbose_name='Code langue'),
+            model_name="article",
+            name="language",
+            field=models.CharField(default="fr", max_length=10, verbose_name="Code langue"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='article',
-            name='last_page',
-            field=models.CharField(blank=True, max_length=16, null=True, verbose_name='Dernière page'),
+            model_name="article",
+            name="last_page",
+            field=models.CharField(
+                blank=True, max_length=16, null=True, verbose_name="Dernière page"
+            ),
         ),
         migrations.AddField(
-            model_name='article',
-            name='ordseq',
-            field=models.PositiveIntegerField(default=0, verbose_name='Ordonnancement'),
+            model_name="article",
+            name="ordseq",
+            field=models.PositiveIntegerField(default=0, verbose_name="Ordonnancement"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='article',
-            name='publisher',
-            field=models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, to='erudit.Publisher', verbose_name='Éditeur'),
+            model_name="article",
+            name="publisher",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=models.deletion.CASCADE,
+                to="erudit.Publisher",
+                verbose_name="Éditeur",
+            ),
         ),
         migrations.AddField(
-            model_name='article',
-            name='subtitle',
+            model_name="article",
+            name="subtitle",
             field=models.CharField(blank=True, max_length=600, null=True),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='first_page',
-            field=models.CharField(blank=True, max_length=16, null=True, verbose_name='Première page'),
+            model_name="issue",
+            name="first_page",
+            field=models.CharField(
+                blank=True, max_length=16, null=True, verbose_name="Première page"
+            ),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='html_title',
+            model_name="issue",
+            name="html_title",
             field=models.CharField(blank=True, max_length=400, null=True),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='last_page',
-            field=models.CharField(blank=True, max_length=16, null=True, verbose_name='Dernière page'),
+            model_name="issue",
+            name="last_page",
+            field=models.CharField(
+                blank=True, max_length=16, null=True, verbose_name="Dernière page"
+            ),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='publication_period',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Période de publication'),
+            model_name="issue",
+            name="publication_period",
+            field=models.CharField(
+                blank=True, max_length=255, null=True, verbose_name="Période de publication"
+            ),
         ),
         migrations.AddField(
-            model_name='journal',
-            name='first_publication_year',
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Première année de publication'),
+            model_name="journal",
+            name="first_publication_year",
+            field=models.PositiveIntegerField(
+                blank=True, null=True, verbose_name="Première année de publication"
+            ),
         ),
         migrations.AddField(
-            model_name='journal',
-            name='last_publication_year',
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Dernière année de publication'),
+            model_name="journal",
+            name="last_publication_year",
+            field=models.PositiveIntegerField(
+                blank=True, null=True, verbose_name="Dernière année de publication"
+            ),
         ),
         migrations.AlterField(
-            model_name='eruditdocument',
-            name='localidentifier',
-            field=models.CharField(db_index=True, max_length=50, unique=True, verbose_name='Identifiant unique'),
+            model_name="eruditdocument",
+            name="localidentifier",
+            field=models.CharField(
+                db_index=True, max_length=50, unique=True, verbose_name="Identifiant unique"
+            ),
         ),
         migrations.AlterField(
-            model_name='issue',
-            name='year',
-            field=models.PositiveIntegerField(verbose_name='Année'),
+            model_name="issue",
+            name="year",
+            field=models.PositiveIntegerField(verbose_name="Année"),
         ),
         migrations.DeleteModel(
-            name='Basket',
+            name="Basket",
         ),
         migrations.DeleteModel(
-            name='Contract',
+            name="Contract",
         ),
         migrations.DeleteModel(
-            name='ContractStatus',
+            name="ContractStatus",
         ),
         migrations.DeleteModel(
-            name='ContractType',
+            name="ContractType",
         ),
         migrations.DeleteModel(
-            name='Currency',
+            name="Currency",
         ),
         migrations.DeleteModel(
-            name='Grant',
+            name="Grant",
         ),
         migrations.DeleteModel(
-            name='GrantingAgency',
+            name="GrantingAgency",
         ),
         migrations.DeleteModel(
-            name='Indexation',
+            name="Indexation",
         ),
         migrations.DeleteModel(
-            name='Indexer',
+            name="Indexer",
         ),
         migrations.DeleteModel(
-            name='Invoice',
+            name="Invoice",
         ),
         migrations.DeleteModel(
-            name='JournalProduction',
+            name="JournalProduction",
         ),
         migrations.DeleteModel(
-            name='ProductionCenter',
+            name="ProductionCenter",
         ),
         migrations.DeleteModel(
-            name='ProductionType',
+            name="ProductionType",
         ),
         migrations.DeleteModel(
-            name='Quotation',
+            name="Quotation",
         ),
         migrations.DeleteModel(
-            name='QuotationItem',
+            name="QuotationItem",
         ),
         migrations.DeleteModel(
-            name='SubscriptionPrice',
+            name="SubscriptionPrice",
         ),
         migrations.DeleteModel(
-            name='SubscriptionType',
+            name="SubscriptionType",
         ),
         migrations.DeleteModel(
-            name='SubscriptionZone',
+            name="SubscriptionZone",
         ),
         migrations.AddField(
-            model_name='issuetheme',
-            name='issue',
-            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='themes', to='erudit.Issue', verbose_name='Numéro'),
+            model_name="issuetheme",
+            name="issue",
+            field=models.ForeignKey(
+                on_delete=models.deletion.CASCADE,
+                related_name="themes",
+                to="erudit.Issue",
+                verbose_name="Numéro",
+            ),
         ),
         migrations.AddField(
-            model_name='articlesectiontitle',
-            name='article',
-            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='section_titles', to='erudit.Article', verbose_name='Article'),
+            model_name="articlesectiontitle",
+            name="article",
+            field=models.ForeignKey(
+                on_delete=models.deletion.CASCADE,
+                related_name="section_titles",
+                to="erudit.Article",
+                verbose_name="Article",
+            ),
         ),
         migrations.AddField(
-            model_name='articleabstract',
-            name='article',
-            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='abstracts', to='erudit.Article', verbose_name='Article'),
+            model_name="articleabstract",
+            name="article",
+            field=models.ForeignKey(
+                on_delete=models.deletion.CASCADE,
+                related_name="abstracts",
+                to="erudit.Article",
+                verbose_name="Article",
+            ),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='copyrights',
-            field=models.ManyToManyField(related_name='issues', to='erudit.Copyright', verbose_name="Droits d'auteurs"),
+            model_name="issue",
+            name="copyrights",
+            field=models.ManyToManyField(
+                related_name="issues", to="erudit.Copyright", verbose_name="Droits d'auteurs"
+            ),
         ),
     ]

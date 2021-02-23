@@ -8,23 +8,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0077_auto_20171005_1003'),
+        ("erudit", "0077_auto_20171005_1003"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='issue',
-            name='formatted_volume_title',
-            field=models.CharField(blank=True, max_length=500, null=True, verbose_name='Informations de volumaison'),
+            model_name="issue",
+            name="formatted_volume_title",
+            field=models.CharField(
+                blank=True, max_length=500, null=True, verbose_name="Informations de volumaison"
+            ),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='formatted_volume_title_en',
-            field=models.CharField(blank=True, max_length=500, null=True, verbose_name='Informations de volumaison'),
+            model_name="issue",
+            name="formatted_volume_title_en",
+            field=models.CharField(
+                blank=True, max_length=500, null=True, verbose_name="Informations de volumaison"
+            ),
         ),
         migrations.AddField(
-            model_name='issue',
-            name='formatted_volume_title_fr',
-            field=models.CharField(blank=True, max_length=500, null=True, verbose_name='Informations de volumaison'),
+            model_name="issue",
+            name="formatted_volume_title_fr",
+            field=models.CharField(
+                blank=True, max_length=500, null=True, verbose_name="Informations de volumaison"
+            ),
         ),
     ]

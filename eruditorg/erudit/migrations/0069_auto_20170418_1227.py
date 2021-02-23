@@ -8,27 +8,43 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0068_article_has_copyright_restriction'),
+        ("erudit", "0068_article_has_copyright_restriction"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='article',
-            name='has_copyright_restriction',
+            model_name="article",
+            name="has_copyright_restriction",
         ),
         migrations.AlterField(
-            model_name='article',
-            name='external_pdf_url',
-            field=models.URLField(blank=True, help_text="Renseigner si le PDF de l'article est hébergé à l'extérieur de la plateforme Érudit", null=True, verbose_name='URL PDF'),
+            model_name="article",
+            name="external_pdf_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Renseigner si le PDF de l'article est hébergé à l'extérieur de la plateforme Érudit",
+                null=True,
+                verbose_name="URL PDF",
+            ),
         ),
         migrations.AlterField(
-            model_name='article',
-            name='external_url',
-            field=models.URLField(blank=True, help_text="Renseigner si l'article est hébergé à l'extérieur de la plateforme Érudit", null=True, verbose_name='URL'),
+            model_name="article",
+            name="external_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Renseigner si l'article est hébergé à l'extérieur de la plateforme Érudit",
+                null=True,
+                verbose_name="URL",
+            ),
         ),
         migrations.AlterField(
-            model_name='eruditdocument',
-            name='localidentifier',
-            field=models.CharField(db_index=True, help_text='Identifiant Fedora du document', max_length=100, unique=True, verbose_name='Identifiant unique'),
+            model_name="eruditdocument",
+            name="localidentifier",
+            field=models.CharField(
+                db_index=True,
+                help_text="Identifiant Fedora du document",
+                max_length=100,
+                unique=True,
+                verbose_name="Identifiant unique",
+            ),
         ),
     ]

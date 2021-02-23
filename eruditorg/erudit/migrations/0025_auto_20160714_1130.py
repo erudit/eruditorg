@@ -8,18 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0024_auto_20160629_0944'),
+        ("erudit", "0024_auto_20160629_0944"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journal',
-            name='next_code',
-            field=models.SlugField(blank=True, max_length=255, null=True, verbose_name='Code revue suivante'),
+            model_name="journal",
+            name="next_code",
+            field=models.SlugField(
+                blank=True, max_length=255, null=True, verbose_name="Code revue suivante"
+            ),
         ),
         migrations.AddField(
-            model_name='journal',
-            name='previous_code',
-            field=models.SlugField(blank=True, max_length=255, null=True, verbose_name='Code revue précédente'),
+            model_name="journal",
+            name="previous_code",
+            field=models.SlugField(
+                blank=True, max_length=255, null=True, verbose_name="Code revue précédente"
+            ),
         ),
     ]

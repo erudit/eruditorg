@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0019_thesis'),
+        ("erudit", "0019_thesis"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='thesis',
-            name='oai_datestamp',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Datestamp OAI'),
+            model_name="thesis",
+            name="oai_datestamp",
+            field=models.DateTimeField(blank=True, null=True, verbose_name="Datestamp OAI"),
         ),
     ]

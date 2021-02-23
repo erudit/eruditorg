@@ -9,14 +9,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
-        ('erudit', '0022_thesis_keywords'),
+        ("contenttypes", "0002_remove_content_type_name"),
+        ("erudit", "0022_thesis_keywords"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='eruditdocument',
-            name='polymorphic_ctype',
-            field=models.ForeignKey(editable=False, null=True, on_delete=models.deletion.CASCADE, related_name='polymorphic_erudit.eruditdocument_set+', to='contenttypes.ContentType'),
+            model_name="eruditdocument",
+            name="polymorphic_ctype",
+            field=models.ForeignKey(
+                editable=False,
+                null=True,
+                on_delete=models.deletion.CASCADE,
+                related_name="polymorphic_erudit.eruditdocument_set+",
+                to="contenttypes.ContentType",
+            ),
         ),
     ]

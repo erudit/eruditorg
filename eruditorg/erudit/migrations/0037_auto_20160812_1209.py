@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0036_auto_20160812_0956'),
+        ("erudit", "0036_auto_20160812_0956"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='author',
-            name='firstname',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Prénom'),
+            model_name="author",
+            name="firstname",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Prénom"),
         ),
         migrations.AlterField(
-            model_name='author',
-            name='lastname',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Nom'),
+            model_name="author",
+            name="lastname",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Nom"),
         ),
     ]

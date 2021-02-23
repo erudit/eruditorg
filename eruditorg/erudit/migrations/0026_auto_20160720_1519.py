@@ -9,26 +9,40 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0025_auto_20160714_1130'),
+        ("erudit", "0025_auto_20160714_1130"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='journal',
-            name='next_code',
+            model_name="journal",
+            name="next_code",
         ),
         migrations.RemoveField(
-            model_name='journal',
-            name='previous_code',
+            model_name="journal",
+            name="previous_code",
         ),
         migrations.AddField(
-            model_name='journal',
-            name='next_journal',
-            field=models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, related_name='+', to='erudit.Journal', verbose_name='Revue suivante'),
+            model_name="journal",
+            name="next_journal",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=models.deletion.CASCADE,
+                related_name="+",
+                to="erudit.Journal",
+                verbose_name="Revue suivante",
+            ),
         ),
         migrations.AddField(
-            model_name='journal',
-            name='previous_journal',
-            field=models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, related_name='+', to='erudit.Journal', verbose_name='Revue précédente'),
+            model_name="journal",
+            name="previous_journal",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=models.deletion.CASCADE,
+                related_name="+",
+                to="erudit.Journal",
+                verbose_name="Revue précédente",
+            ),
         ),
     ]

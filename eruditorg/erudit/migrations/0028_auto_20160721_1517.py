@@ -8,17 +8,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0027_auto_20160721_1441'),
+        ("erudit", "0027_auto_20160721_1441"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='issue',
-            name='open_access',
+            model_name="issue",
+            name="open_access",
         ),
         migrations.AlterField(
-            model_name='journal',
-            name='open_access',
-            field=models.BooleanField(default=False, help_text='Cette revue est en accès libre?', verbose_name='Libre accès'),
+            model_name="journal",
+            name="open_access",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cette revue est en accès libre?",
+                verbose_name="Libre accès",
+            ),
         ),
     ]

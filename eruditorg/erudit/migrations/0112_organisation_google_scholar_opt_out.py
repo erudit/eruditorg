@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0111_auto_20190312_1251'),
+        ("erudit", "0111_auto_20190312_1251"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='organisation',
-            name='google_scholar_opt_out',
-            field=models.BooleanField(default=False, verbose_name='Ne pas inclure dans les programmes de Google Scholar'),
+            model_name="organisation",
+            name="google_scholar_opt_out",
+            field=models.BooleanField(
+                default=False, verbose_name="Ne pas inclure dans les programmes de Google Scholar"
+            ),
         ),
     ]

@@ -8,17 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0020_thesis_oai_datestamp'),
+        ("erudit", "0020_thesis_oai_datestamp"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='collection',
-            options={'verbose_name': 'Collection', 'verbose_name_plural': 'Collections'},
+            name="collection",
+            options={"verbose_name": "Collection", "verbose_name_plural": "Collections"},
         ),
         migrations.AddField(
-            model_name='collection',
-            name='logo',
-            field=models.ImageField(blank=True, null=True, upload_to='', verbose_name='Logo'),
+            model_name="collection",
+            name="logo",
+            field=models.ImageField(blank=True, null=True, upload_to="", verbose_name="Logo"),
         ),
     ]

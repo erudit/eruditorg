@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0104_remove_journal_issues_per_year'),
+        ("erudit", "0104_remove_journal_issues_per_year"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contributor',
-            name='role',
-            field=models.CharField(blank=True, max_length=200, null=True, verbose_name='Rôle'),
+            model_name="contributor",
+            name="role",
+            field=models.CharField(blank=True, max_length=200, null=True, verbose_name="Rôle"),
         ),
     ]

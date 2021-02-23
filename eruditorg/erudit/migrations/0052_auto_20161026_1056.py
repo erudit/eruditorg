@@ -8,18 +8,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0051_auto_20161020_1256'),
+        ("erudit", "0051_auto_20161020_1256"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='article',
-            name='bibliographic_reference',
+            model_name="article",
+            name="bibliographic_reference",
             field=models.CharField(blank=True, max_length=600, null=True),
         ),
         migrations.AlterField(
-            model_name='article',
-            name='type',
-            field=models.CharField(choices=[('article', 'Article'), ('compterendu', 'Compte rendu'), ('compterendu', 'Note'), ('autre', 'Autre')], max_length=64, verbose_name='Type'),
+            model_name="article",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    ("article", "Article"),
+                    ("compterendu", "Compte rendu"),
+                    ("compterendu", "Note"),
+                    ("autre", "Autre"),
+                ],
+                max_length=64,
+                verbose_name="Type",
+            ),
         ),
     ]
