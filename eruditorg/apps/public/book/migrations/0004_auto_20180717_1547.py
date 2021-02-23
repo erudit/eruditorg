@@ -10,18 +10,30 @@ import isbn_field.validators
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0003_auto_20180717_1541'),
+        ("book", "0003_auto_20180717_1541"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='digital_isbn',
-            field=isbn_field.fields.ISBNField(blank=True, max_length=28, null=True, validators=[isbn_field.validators.ISBNValidator], verbose_name='ISBN numérique'),
+            model_name="book",
+            name="digital_isbn",
+            field=isbn_field.fields.ISBNField(
+                blank=True,
+                max_length=28,
+                null=True,
+                validators=[isbn_field.validators.ISBNValidator],
+                verbose_name="ISBN numérique",
+            ),
         ),
         migrations.AddField(
-            model_name='book',
-            name='isbn',
-            field=isbn_field.fields.ISBNField(blank=True, max_length=28, null=True, validators=[isbn_field.validators.ISBNValidator], verbose_name='ISBN'),
+            model_name="book",
+            name="isbn",
+            field=isbn_field.fields.ISBNField(
+                blank=True,
+                max_length=28,
+                null=True,
+                validators=[isbn_field.validators.ISBNValidator],
+                verbose_name="ISBN",
+            ),
         ),
     ]

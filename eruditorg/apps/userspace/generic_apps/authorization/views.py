@@ -30,15 +30,15 @@ class AuthorizationUserView(LoginRequiredMixin, RelatedAuthorizationsMixin, List
 
         for key, label in self.get_related_authorization_choices():
             data[key] = {
-                'authorizations': self.object_list.filter(authorization_codename=key),
-                'label': label,
+                "authorizations": self.object_list.filter(authorization_codename=key),
+                "label": label,
             }
 
         return data
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['authorizations'] = self.get_authorizations_per_app()
+        data["authorizations"] = self.get_authorizations_per_app()
         return data
 
     def get_target_instance(self):
@@ -59,7 +59,7 @@ class AuthorizationCreateView(LoginRequiredMixin, RelatedAuthorizationsMixin, Cr
         """ Returns a tuple of the form (codename, label) for the considered authorization. """
         authorization_labels_dict = dict(self.get_related_authorization_choices())
         try:
-            codename = self.request.GET.get('codename', None)
+            codename = self.request.GET.get("codename", None)
             assert codename is not None
             assert codename in authorization_labels_dict
         except AssertionError:
@@ -68,18 +68,22 @@ class AuthorizationCreateView(LoginRequiredMixin, RelatedAuthorizationsMixin, Cr
 
     def get_context_data(self, **kwargs):
         context = super(AuthorizationCreateView, self).get_context_data(**kwargs)
-        context['authorization_codename'], context['authorization_label'] \
-            = self.authorization_definition
+        (
+            context["authorization_codename"],
+            context["authorization_label"],
+        ) = self.authorization_definition
         return context
 
     def get_form_kwargs(self):
         kwargs = super(AuthorizationCreateView, self).get_form_kwargs()
         authorization_def = self.authorization_definition
 
-        kwargs.update({
-            'codename': authorization_def[0],
-            'target': self.get_target_instance(),
-        })
+        kwargs.update(
+            {
+                "codename": authorization_def[0],
+                "target": self.get_target_instance(),
+            }
+        )
 
         return kwargs
 

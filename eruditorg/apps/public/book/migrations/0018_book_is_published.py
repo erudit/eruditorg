@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0017_auto_20180904_1550'),
+        ("book", "0017_auto_20180904_1550"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='is_published',
-            field=models.BooleanField(default=True, verbose_name='Est publié ?'),
+            model_name="book",
+            name="is_published",
+            field=models.BooleanField(default=True, verbose_name="Est publié ?"),
         ),
     ]

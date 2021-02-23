@@ -6,16 +6,18 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('book', '0019_book_parent_book'), ('book', '0020_auto_20190301_1723')]
+    replaces = [("book", "0019_book_parent_book"), ("book", "0020_auto_20190301_1723")]
 
     dependencies = [
-        ('book', '0018_book_is_published'),
+        ("book", "0018_book_is_published"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='parent_book',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='book.Book'),
+            model_name="book",
+            name="parent_book",
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to="book.Book"
+            ),
         ),
     ]

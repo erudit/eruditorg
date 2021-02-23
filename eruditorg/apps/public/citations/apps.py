@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class CitationsConfig(AppConfig):
-    label = 'public_citations'
-    name = 'apps.public.citations'
+    label = "public_citations"
+    name = "apps.public.citations"

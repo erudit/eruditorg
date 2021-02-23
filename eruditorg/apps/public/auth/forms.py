@@ -14,36 +14,42 @@ class AuthenticationForm(BaseAuthenticationForm):
         super(AuthenticationForm, self).__init__(*args, **kwargs)
 
         # Updates some fields
-        self.fields['username'].label = _("Nom d'utilisateur ou adresse courriel")
+        self.fields["username"].label = _("Nom d'utilisateur ou adresse courriel")
 
 
 class UserPersonalDataForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', )
+        fields = (
+            "first_name",
+            "last_name",
+        )
 
 
 class UserParametersForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', )
+        fields = (
+            "username",
+            "email",
+        )
 
     def __init__(self, *args, **kwargs):
         super(UserParametersForm, self).__init__(*args, **kwargs)
         # Updates some fields
-        self.fields['email'].required = True
+        self.fields["email"].required = True
 
     def clean_email(self):
-        email = self.cleaned_data.get('email')
+        email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
-            self.add_error('email', _('Cette adresse courriel est déjà utilisée'))
+            self.add_error("email", _("Cette adresse courriel est déjà utilisée"))
         return email
 
 
 class PasswordResetForm(BasePasswordResetForm):
     def send_mail(
-            self, subject_template_name, email_template_name, context, from_email, to_email,
-            **kwargs):
+        self, subject_template_name, email_template_name, context, from_email, to_email, **kwargs
+    ):
         """
         Overrides the  builtin `PasswordResetForm.send_mail` method to use the `core.email.Email`
         tool.
@@ -53,7 +59,7 @@ class PasswordResetForm(BasePasswordResetForm):
             html_template=email_template_name,
             subject_template=subject_template_name,
             extra_context=context,
-            tag="www-reinitialisation-mot-de-passe"
+            tag="www-reinitialisation-mot-de-passe",
         )
         email.send()
 
@@ -64,6 +70,5 @@ class PasswordResetForm(BasePasswordResetForm):
         that prevent inactive users and users with unusable passwords from
         resetting their password.
         """
-        active_users = get_user_model()._default_manager.filter(
-            email__iexact=email, is_active=True)
+        active_users = get_user_model()._default_manager.filter(email__iexact=email, is_active=True)
         return (u for u in active_users)

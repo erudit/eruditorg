@@ -8,8 +8,11 @@ from . import views
 app_name = "account_actions"
 
 urlpatterns = [
-    url(_(r'^(?P<key>[\w-]+)/$'), views.AccountActionLandingView.as_view(), name='landing'),
-    url(_(r'^(?P<key>[\w-]+)/c/$'), views.AccountActionConsumeView.as_view(), name='consume'),
-    url(_(r'^(?P<key>[\w-]+)/inscription/$'),
-        views.AccountActionRegisterView.as_view(), name='register'),
+    url(_(r"^(?P<key>[\w-]+)/$"), views.AccountActionLandingView.as_view(), name="landing"),
+    url(_(r"^(?P<key>[\w-]+)/c/$"), views.AccountActionConsumeView.as_view(), name="consume"),
+    url(
+        _(r"^(?P<key>[\w-]+)/inscription/$"),
+        views.AccountActionRegisterView.as_view(),
+        name="register",
+    ),
 ]

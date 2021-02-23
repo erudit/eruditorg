@@ -17,32 +17,35 @@ from erudit.utils import locale_aware_sort
 
 class SavedCitationListView(ListView):
     """ Show the list of saved citations associated with a specific user. """
-    available_tris = collections.OrderedDict((
-        ('author_asc', _('Auteur (A–Z)')),
-        ('author_desc', _('Auteur (Z–A)')),
-        ('year_asc', _('Année (croissant)')),
-        ('year_desc', _('Année (décroissant)')),
-        ('title_asc', _('Titre (A–Z)')),
-        ('title_desc', _('Titre (Z–A)')),
-    ))
-    context_object_name = 'documents'
+
+    available_tris = collections.OrderedDict(
+        (
+            ("author_asc", _("Auteur (A–Z)")),
+            ("author_desc", _("Auteur (Z–A)")),
+            ("year_asc", _("Année (croissant)")),
+            ("year_desc", _("Année (décroissant)")),
+            ("title_asc", _("Titre (A–Z)")),
+            ("title_desc", _("Titre (Z–A)")),
+        )
+    )
+    context_object_name = "documents"
     paginate_by = 20
-    template_name = 'public/citations/list.html'
+    template_name = "public/citations/list.html"
 
     def apply_sorting(self, objects_list):
-        sortby, asc = self.get_sort_by().split('_')
-        reverse = asc == 'desc'
+        sortby, asc = self.get_sort_by().split("_")
+        reverse = asc == "desc"
         attrname = {
-            'author': 'authors_display',
-            'year': 'publication_year',
-            'title': 'title',
-        }.get(sortby, 'title')
+            "author": "authors_display",
+            "year": "publication_year",
+            "title": "title",
+        }.get(sortby, "title")
 
         # fallback sort
         objects_list = sorted(objects_list, key=lambda d: d.localidentifier)
 
         def key(doc):
-            return str(getattr(doc, attrname, '')) or ''
+            return str(getattr(doc, attrname, "")) or ""
 
         result = locale_aware_sort(objects_list, keyfunc=key)
         if reverse:
@@ -54,17 +57,19 @@ class SavedCitationListView(ListView):
         # pages, redirect to the SavedCitationListView of the last available page
         num_pages = self.get_paginator(self.get_queryset(), self.paginate_by).num_pages
         query_params = self.request.GET.copy()
-        query_string_page_number = query_params.get('page')
+        query_string_page_number = query_params.get("page")
 
         # Check if trying to access a page number higher then the available
         try:
             if int(query_string_page_number) > num_pages:
                 # Assign last available page
-                query_params['page'] = num_pages
-                return redirect('{}?{}'.format(
-                    reverse('public:citations:list'),
-                    query_params.urlencode(),
-                ))
+                query_params["page"] = num_pages
+                return redirect(
+                    "{}?{}".format(
+                        reverse("public:citations:list"),
+                        query_params.urlencode(),
+                    )
+                )
         except (TypeError, ValueError):
             pass
 
@@ -72,16 +77,16 @@ class SavedCitationListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SavedCitationListView, self).get_context_data(**kwargs)
-        context['available_tris'] = self.available_tris
-        context['sort_by'] = self.get_sort_by()
+        context["available_tris"] = self.available_tris
+        context["sort_by"] = self.get_sort_by()
 
         # Get a list of all documents, not just the ones on the current page.
-        object_list = context['paginator'].object_list
+        object_list = context["paginator"].object_list
         counts = collections.Counter(d.corpus for d in object_list)
-        context['scientific_articles_count'] = counts.get('Article', 0)
-        context['cultural_articles_count'] = counts.get('Culturel', 0)
-        context['theses_count'] = counts.get('Thèses', 0)
-        context['total_citations_count'] = len(object_list)
+        context["scientific_articles_count"] = counts.get("Article", 0)
+        context["cultural_articles_count"] = counts.get("Culturel", 0)
+        context["theses_count"] = counts.get("Thèses", 0)
+        context["total_citations_count"] = len(object_list)
 
         return context
 
@@ -97,18 +102,21 @@ class SavedCitationListView(ListView):
         return self.apply_sorting(documents)
 
     def get_sort_by(self):
-        sort_by = self.request.GET.get('sort_by', 'title_asc')
-        sort_by = sort_by if sort_by in self.available_tris else 'title_asc'
+        sort_by = self.request.GET.get("sort_by", "title_asc")
+        sort_by = sort_by if sort_by in self.available_tris else "title_asc"
         return sort_by
 
 
 class SavedCitationAddView(MetricCaptureMixin, View):
     """ Add an Érudit document to the list of documents associated to the current user. """
-    http_method_names = ['post', ]
-    tracking_metric_name = 'erudit__citation__add'
+
+    http_method_names = [
+        "post",
+    ]
+    tracking_metric_name = "erudit__citation__add"
 
     def post(self, request):
-        solr_id = request.POST.get('document_id', '')
+        solr_id = request.POST.get("document_id", "")
         request.saved_citations.add(solr_id)
         request.saved_citations.save()
         return JsonAckResponse(saved_document_id=solr_id)
@@ -116,11 +124,14 @@ class SavedCitationAddView(MetricCaptureMixin, View):
 
 class SavedCitationRemoveView(MetricCaptureMixin, View):
     """ Remove an Érudit document from the list of documents associated to the current user. """
-    http_method_names = ['post', ]
-    tracking_metric_name = 'erudit__citation__remove'
+
+    http_method_names = [
+        "post",
+    ]
+    tracking_metric_name = "erudit__citation__remove"
 
     def post(self, request):
-        solr_id = request.POST.get('document_id', '')
+        solr_id = request.POST.get("document_id", "")
         try:
             request.saved_citations.remove(solr_id)
             request.saved_citations.save()
@@ -131,11 +142,14 @@ class SavedCitationRemoveView(MetricCaptureMixin, View):
 
 class SavedCitationBatchRemoveView(MetricCaptureMixin, View):
     """ Remove multiple Érudit documents from a list of documents. """
-    http_method_names = ['post', ]
-    tracking_metric_name = 'erudit__citation__remove'
+
+    http_method_names = [
+        "post",
+    ]
+    tracking_metric_name = "erudit__citation__remove"
 
     def post(self, request):
-        solr_ids = request.POST.getlist('document_ids', [])
+        solr_ids = request.POST.getlist("document_ids", [])
         removed_document_ids = []
         for solr_id in solr_ids:
             if solr_id in request.saved_citations:
@@ -149,7 +163,7 @@ class SavedCitationBatchRemoveView(MetricCaptureMixin, View):
 
 class BaseEruditDocumentsCitationView(TemplateView):
     def get(self, request, *args, **kwargs):
-        solr_ids = request.GET.getlist('document_ids', [])
+        solr_ids = request.GET.getlist("document_ids", [])
         if not solr_ids:
             raise Http404()
         try:
@@ -162,17 +176,20 @@ class BaseEruditDocumentsCitationView(TemplateView):
 
 class EruditDocumentsEnwCitationView(BaseEruditDocumentsCitationView):
     """ Returns the enw file of a set of Érudit documents. """
-    content_type = 'application/x-endnote-refer'
-    template_name = 'public/citations/eruditdocuments.enw'
+
+    content_type = "application/x-endnote-refer"
+    template_name = "public/citations/eruditdocuments.enw"
 
 
 class EruditDocumentsRisCitationView(BaseEruditDocumentsCitationView):
     """ Returns the ris file of a set of Érudit documents. """
-    content_type = 'application/x-research-info-systems'
-    template_name = 'public/citations/eruditdocuments.ris'
+
+    content_type = "application/x-research-info-systems"
+    template_name = "public/citations/eruditdocuments.ris"
 
 
 class EruditDocumentsBibCitationView(BaseEruditDocumentsCitationView):
     """ Returns the bib file of a set of Érudit documents. """
-    content_type = 'application/x-bibtex'
-    template_name = 'public/citations/eruditdocuments.bib'
+
+    content_type = "application/x-bibtex"
+    template_name = "public/citations/eruditdocuments.bib"

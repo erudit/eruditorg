@@ -11,7 +11,7 @@ class FallbackBaseViewMixin:
         return None
 
     def get_fallback_querystring_dict(self):
-        return {'lang': get_language()}
+        return {"lang": get_language()}
 
     def get_context_data(self, **kwargs):
         """ Adds the classic website url in context """
@@ -19,13 +19,12 @@ class FallbackBaseViewMixin:
         fallback_url = self.get_fallback_url()
         if fallback_url:
             querystring_dict = self.get_fallback_querystring_dict()
-            if 'ticket' not in querystring_dict:
+            if "ticket" not in querystring_dict:
                 return context
-            if not fallback_url.startswith('http'):
+            if not fallback_url.startswith("http"):
                 fallback_url = settings.FALLBACK_BASE_URL + fallback_url
-            context['fallback_url'] = "{fallback_url}?{querystring}".format(
-                fallback_url=fallback_url,
-                querystring=urlencode(querystring_dict)
+            context["fallback_url"] = "{fallback_url}?{querystring}".format(
+                fallback_url=fallback_url, querystring=urlencode(querystring_dict)
             )
 
         return context
@@ -55,6 +54,4 @@ class FallbackObjectViewMixin(FallbackBaseViewMixin):
         fallback_url_format = self.get_fallback_url_format()
         if not fallback_url_format:
             return None
-        return fallback_url_format.format(
-            **self.get_fallback_url_format_kwargs()
-        )
+        return fallback_url_format.format(**self.get_fallback_url_format_kwargs())

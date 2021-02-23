@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class AuthorizationConfig(AppConfig):
-    label = 'userspace_library_authorizations'
-    name = 'apps.userspace.library.authorization'
+    label = "userspace_library_authorizations"
+    name = "apps.userspace.library.authorization"

@@ -8,31 +8,141 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Campaign',
+            name="Campaign",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('active', models.BooleanField(default=False, help_text='Activer la campagne. <strong>La campagne précédente sera désactivée et remplacée par celle-ci.</strong>', verbose_name='Active')),
-                ('url', models.URLField(default='', help_text="URL du lien sur l'image", verbose_name='URL')),
-                ('url_fr', models.URLField(default='', help_text="URL du lien sur l'image", null=True, verbose_name='URL')),
-                ('url_en', models.URLField(default='', help_text="URL du lien sur l'image", null=True, verbose_name='URL')),
-                ('image', erudit.modelfields.SizeConstrainedImageField(default='', help_text="L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px.", upload_to='campaigns', verbose_name='Image')),
-                ('image_fr', erudit.modelfields.SizeConstrainedImageField(default='', help_text="L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px.", null=True, upload_to='campaigns', verbose_name='Image')),
-                ('image_en', erudit.modelfields.SizeConstrainedImageField(default='', help_text="L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px.", null=True, upload_to='campaigns', verbose_name='Image')),
-                ('title', models.CharField(default='', help_text="Attribut <em>title</em> de l'image", max_length=256, verbose_name='title')),
-                ('title_fr', models.CharField(default='', help_text="Attribut <em>title</em> de l'image", max_length=256, null=True, verbose_name='title')),
-                ('title_en', models.CharField(default='', help_text="Attribut <em>title</em> de l'image", max_length=256, null=True, verbose_name='title')),
-                ('alt', models.CharField(default='', help_text="Attribut <em>alt</em> de l'image", max_length=256, verbose_name='alt')),
-                ('alt_fr', models.CharField(default='', help_text="Attribut <em>alt</em> de l'image", max_length=256, null=True, verbose_name='alt')),
-                ('alt_en', models.CharField(default='', help_text="Attribut <em>alt</em> de l'image", max_length=256, null=True, verbose_name='alt')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "active",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Activer la campagne. <strong>La campagne précédente sera désactivée et remplacée par celle-ci.</strong>",
+                        verbose_name="Active",
+                    ),
+                ),
+                (
+                    "url",
+                    models.URLField(
+                        default="", help_text="URL du lien sur l'image", verbose_name="URL"
+                    ),
+                ),
+                (
+                    "url_fr",
+                    models.URLField(
+                        default="",
+                        help_text="URL du lien sur l'image",
+                        null=True,
+                        verbose_name="URL",
+                    ),
+                ),
+                (
+                    "url_en",
+                    models.URLField(
+                        default="",
+                        help_text="URL du lien sur l'image",
+                        null=True,
+                        verbose_name="URL",
+                    ),
+                ),
+                (
+                    "image",
+                    erudit.modelfields.SizeConstrainedImageField(
+                        default="",
+                        help_text="L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px.",
+                        upload_to="campaigns",
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "image_fr",
+                    erudit.modelfields.SizeConstrainedImageField(
+                        default="",
+                        help_text="L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px.",
+                        null=True,
+                        upload_to="campaigns",
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "image_en",
+                    erudit.modelfields.SizeConstrainedImageField(
+                        default="",
+                        help_text="L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px.",
+                        null=True,
+                        upload_to="campaigns",
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(
+                        default="",
+                        help_text="Attribut <em>title</em> de l'image",
+                        max_length=256,
+                        verbose_name="title",
+                    ),
+                ),
+                (
+                    "title_fr",
+                    models.CharField(
+                        default="",
+                        help_text="Attribut <em>title</em> de l'image",
+                        max_length=256,
+                        null=True,
+                        verbose_name="title",
+                    ),
+                ),
+                (
+                    "title_en",
+                    models.CharField(
+                        default="",
+                        help_text="Attribut <em>title</em> de l'image",
+                        max_length=256,
+                        null=True,
+                        verbose_name="title",
+                    ),
+                ),
+                (
+                    "alt",
+                    models.CharField(
+                        default="",
+                        help_text="Attribut <em>alt</em> de l'image",
+                        max_length=256,
+                        verbose_name="alt",
+                    ),
+                ),
+                (
+                    "alt_fr",
+                    models.CharField(
+                        default="",
+                        help_text="Attribut <em>alt</em> de l'image",
+                        max_length=256,
+                        null=True,
+                        verbose_name="alt",
+                    ),
+                ),
+                (
+                    "alt_en",
+                    models.CharField(
+                        default="",
+                        help_text="Attribut <em>alt</em> de l'image",
+                        max_length=256,
+                        null=True,
+                        verbose_name="alt",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Campagne',
-                'verbose_name_plural': 'Campagnes',
+                "verbose_name": "Campagne",
+                "verbose_name_plural": "Campagnes",
             },
         ),
     ]

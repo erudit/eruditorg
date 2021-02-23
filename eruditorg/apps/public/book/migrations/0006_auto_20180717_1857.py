@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0005_auto_20180717_1615'),
+        ("book", "0005_auto_20180717_1615"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='book',
-            name='contribution',
-            field=models.BooleanField(default=False, help_text='La liste des auteurs sera précédée de         la mention «&nbsp;Sous la direction de…&nbsp;».', verbose_name='Contribution des auteurs de type direction ?'),
+            model_name="book",
+            name="contribution",
+            field=models.BooleanField(
+                default=False,
+                help_text="La liste des auteurs sera précédée de         la mention «&nbsp;Sous la direction de…&nbsp;».",
+                verbose_name="Contribution des auteurs de type direction ?",
+            ),
         ),
     ]

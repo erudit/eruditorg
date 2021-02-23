@@ -8,33 +8,37 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0001_initial'),
+        ("book", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='cover',
-            field=models.ImageField(blank=True, null=True, upload_to='', verbose_name='Couverture'),
+            model_name="book",
+            name="cover",
+            field=models.ImageField(blank=True, null=True, upload_to="", verbose_name="Couverture"),
         ),
         migrations.AddField(
-            model_name='book',
-            name='publisher',
-            field=models.CharField(blank=True, max_length=200, null=True, verbose_name='Éditeur'),
+            model_name="book",
+            name="publisher",
+            field=models.CharField(blank=True, max_length=200, null=True, verbose_name="Éditeur"),
         ),
         migrations.AddField(
-            model_name='book',
-            name='subtitle',
-            field=models.CharField(blank=True, max_length=200, null=True, verbose_name='Sous-titre'),
+            model_name="book",
+            name="subtitle",
+            field=models.CharField(
+                blank=True, max_length=200, null=True, verbose_name="Sous-titre"
+            ),
         ),
         migrations.AddField(
-            model_name='book',
-            name='type',
-            field=models.CharField(blank=True, choices=[('LI', 'Livre'), ('CO', 'Actes')], max_length=2, null=True),
+            model_name="book",
+            name="type",
+            field=models.CharField(
+                blank=True, choices=[("LI", "Livre"), ("CO", "Actes")], max_length=2, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='book',
-            name='title',
-            field=models.CharField(max_length=200, verbose_name='Titre'),
+            model_name="book",
+            name="title",
+            field=models.CharField(max_length=200, verbose_name="Titre"),
         ),
     ]

@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class InformationConfig(AppConfig):
-    label = 'userspace_journal_information'
-    name = 'apps.userspace.journal.information'
+    label = "userspace_journal_information"
+    name = "apps.userspace.journal.information"

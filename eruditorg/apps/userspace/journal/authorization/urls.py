@@ -8,8 +8,11 @@ from . import views
 app_name = "authorization"
 
 urlpatterns = [
-    url(r'^$', views.AuthorizationUserView.as_view(), name='list'),
-    url(_(r'^ajout/$'), views.AuthorizationCreateView.as_view(), name='create'),
-    url(_(r'^(?P<pk>[0-9]+)/supprimer/$'),
-        views.AuthorizationDeleteView.as_view(), name='delete'),
+    url(r"^$", views.AuthorizationUserView.as_view(), name="list"),
+    url(_(r"^ajout/$"), views.AuthorizationCreateView.as_view(), name="create"),
+    url(
+        _(r"^(?P<pk>[0-9]+)/supprimer/$"),
+        views.AuthorizationDeleteView.as_view(),
+        name="delete",
+    ),
 ]

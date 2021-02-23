@@ -3,7 +3,6 @@ from django.db.models import Q
 
 
 class BookQuerySet(models.QuerySet):
-
     def published(self):
         """ Only check the top level status of the book to determine if it is published """
         return self.filter(
@@ -15,6 +14,5 @@ class BookQuerySet(models.QuerySet):
 
 
 class BooksManager(models.Manager):
-
     def get_queryset(self):
         return BookQuerySet(self.model, using=self._db)

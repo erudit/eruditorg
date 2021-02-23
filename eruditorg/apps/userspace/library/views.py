@@ -13,11 +13,11 @@ from .viewmixins import OrganisationScopeMixin
 
 
 class HomeView(LoginRequiredMixin, OrganisationScopeMixin, TemplateView):
-    template_name = 'userspace/library/home.html'
+    template_name = "userspace/library/home.html"
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['library_site_messages'] = SiteMessage.objects.library()
+        context["library_site_messages"] = SiteMessage.objects.library()
         return context
 
 
@@ -29,8 +29,8 @@ class LibrarySectionEntryPointView(LoginRequiredMixin, RedirectView):
         organisations_count = organisations_qs.count()
         if organisations_count:
             return reverse(
-                'userspace:library:home', kwargs={
-                    'organisation_pk': organisations_qs.first().pk})
+                "userspace:library:home", kwargs={"organisation_pk": organisations_qs.first().pk}
+            )
         else:
             # No Journal instance can be edited
             raise PermissionDenied

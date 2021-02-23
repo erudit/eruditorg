@@ -12,10 +12,11 @@ from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 
 class DiagnosisLandingView(
-        LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
-    menu_library = 'diagnosis'
-    permission_required = 'library.has_access_to_dashboard'
-    template_name = 'userspace/library/diagnosis/landing.html'
+    LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView
+):
+    menu_library = "diagnosis"
+    permission_required = "library.has_access_to_dashboard"
+    template_name = "userspace/library/diagnosis/landing.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -24,14 +25,14 @@ class DiagnosisLandingView(
             subscription = JournalAccessSubscription.valid_objects.institutional().get(
                 organisation=self.current_organisation
             )
-            context['journals'] = subscription.journals.all()
+            context["journals"] = subscription.journals.all()
         except JournalAccessSubscription.DoesNotExist:
-            context['journals'] = tuple()
+            context["journals"] = tuple()
 
-        context['date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        context['client_ip'] = get_ip(self.request)
-        context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
-        context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
-        context['identifier'] = self.current_organisation.account_id
-        context['institution'] = self.current_organisation.name
+        context["date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        context["client_ip"] = get_ip(self.request)
+        context["redirection_ip"] = self.request.META.get("REMOTE_ADDR")
+        context["user_agent"] = self.request.META.get("HTTP_USER_AGENT")
+        context["identifier"] = self.current_organisation.account_id
+        context["institution"] = self.current_organisation.name
         return context
