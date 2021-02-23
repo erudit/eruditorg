@@ -15,10 +15,11 @@ class DummyView(View):
     """
     Just a dummy view to use with retro-compatible urls during development.
     """
+
     def get(self, request, *args, **kwargs):  # pragma: no cover
         if settings.DEBUG:
-            return HttpResponse(request.path, content_type='text/plain')
-        return redirect('/')
+            return HttpResponse(request.path, content_type="text/plain")
+        return redirect("/")
 
 
 class RedirectRetroUrls(RedirectView, ActivateLegacyLanguageViewMixin):
