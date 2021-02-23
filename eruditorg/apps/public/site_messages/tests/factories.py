@@ -4,13 +4,11 @@ from ..models import SiteMessage, TargetSite
 
 
 class TargetSiteFactory(factory.django.DjangoModelFactory):
-
     class Meta:
         model = TargetSite
 
 
 class SiteMessageFactory(factory.django.DjangoModelFactory):
-
     class Meta:
         model = SiteMessage
 

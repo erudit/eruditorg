@@ -6,17 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('site_message', '0002_auto_20190425_1305'),
+        ("site_message", "0002_auto_20190425_1305"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='targetsite',
-            name='label',
+            model_name="targetsite",
+            name="label",
         ),
         migrations.AddField(
-            model_name='targetsite',
-            name='site',
-            field=models.CharField(choices=[('P', 'Public'), ('L', 'Tableau de bord des bibliothèques'), ('J', 'Tableau de bord des revues')], default='P', help_text='Site cible', max_length=8, verbose_name='Site cible'),
+            model_name="targetsite",
+            name="site",
+            field=models.CharField(
+                choices=[
+                    ("P", "Public"),
+                    ("L", "Tableau de bord des bibliothèques"),
+                    ("J", "Tableau de bord des revues"),
+                ],
+                default="P",
+                help_text="Site cible",
+                max_length=8,
+                verbose_name="Site cible",
+            ),
         ),
     ]

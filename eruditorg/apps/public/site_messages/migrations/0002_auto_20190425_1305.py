@@ -6,29 +6,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('site_message', '0001_initial'),
+        ("site_message", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TargetSite',
+            name="TargetSite",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('label', models.CharField(help_text='Site cible, par exemple <em>Public</em>, <em>Tableau de bord des revues</em>              ou <em>Tableau de bord des bibliothèques</em>.', max_length=64, verbose_name='Site cible')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "label",
+                    models.CharField(
+                        help_text="Site cible, par exemple <em>Public</em>, <em>Tableau de bord des revues</em>              ou <em>Tableau de bord des bibliothèques</em>.",
+                        max_length=64,
+                        verbose_name="Site cible",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Site cible',
-                'verbose_name_plural': 'Sites cibles',
+                "verbose_name": "Site cible",
+                "verbose_name_plural": "Sites cibles",
             },
         ),
         migrations.AlterField(
-            model_name='sitemessage',
-            name='setting',
-            field=models.CharField(blank=True, help_text='Si le site contient un réglage avec ce nom et que ce réglage est à             <em>True</em>, le message sera affiché.', max_length=64, null=True, verbose_name='Réglage'),
+            model_name="sitemessage",
+            name="setting",
+            field=models.CharField(
+                blank=True,
+                help_text="Si le site contient un réglage avec ce nom et que ce réglage est à             <em>True</em>, le message sera affiché.",
+                max_length=64,
+                null=True,
+                verbose_name="Réglage",
+            ),
         ),
         migrations.AddField(
-            model_name='sitemessage',
-            name='target_sites',
-            field=models.ManyToManyField(related_name='_sitemessage_target_sites_+', to='site_message.TargetSite', verbose_name='Sites cibles'),
+            model_name="sitemessage",
+            name="target_sites",
+            field=models.ManyToManyField(
+                related_name="_sitemessage_target_sites_+",
+                to="site_message.TargetSite",
+                verbose_name="Sites cibles",
+            ),
         ),
     ]
