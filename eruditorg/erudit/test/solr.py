@@ -218,11 +218,12 @@ class FakeSolrClient:
 
             return list(filter(matches, docs))
 
-        def create_results(docs, facets=[]):
+        def create_results(docs, facets=None):
             # Add facets
             facet_fields = {}
-            for facet in facets:
-                facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
+            if facets:
+                for facet in facets:
+                    facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
 
             # apply sorting
             sort_args = kwargs.get('sort')
@@ -265,7 +266,7 @@ class FakeSolrClient:
             searchvals = extract_pq_searchvals(pq)
             journal_code = searchvals['RevueAbr']
             result = []
-            for author, docs in self.authors.items():
+            for docs in self.authors.values():
                 docs = apply_filters(docs, searchvals)
                 result += [doc for doc in docs if doc.journal_code == journal_code]
             return create_results(result, facets=['AuteurNP_fac', 'TypeArticle_fac'])

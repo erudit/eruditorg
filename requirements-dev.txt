@@ -21,6 +21,7 @@ asgiref==3.3.1
 attrs==20.3.0
     # via
     #   -r requirements-test.txt
+    #   flake8-bugbear
     #   pytest
 babel==2.9.0
     # via -r requirements-test.txt
@@ -198,6 +199,12 @@ filelock==3.0.12
     #   -r requirements-test.txt
     #   tox
     #   virtualenv
+flake8-bugbear==20.11.1
+    # via -r requirements-dev.in
+flake8==3.8.4
+    # via
+    #   -r requirements-dev.in
+    #   flake8-bugbear
 future==0.18.2
     # via
     #   -r requirements-test.txt
@@ -217,6 +224,7 @@ idna==2.10
 importlib-metadata==3.4.0
     # via
     #   -r requirements-test.txt
+    #   flake8
     #   pluggy
     #   pytest
     #   tox
@@ -273,6 +281,8 @@ lxml==4.6.2
     #   liberuditarticle
     #   pikepdf
     #   sickle
+mccabe==0.6.1
+    # via flake8
 msgpack==1.0.0
     # via
     #   -r requirements-test.txt
@@ -336,6 +346,8 @@ py==1.10.0
     #   pytest
     #   pytest-forked
     #   tox
+pycodestyle==2.6.0
+    # via flake8
 pycparser==2.20
     # via
     #   -r requirements-test.txt
@@ -346,6 +358,8 @@ pycryptodome==3.9.9
     #   eulfedora
 pydantic==1.7.3
     # via -r requirements-test.txt
+pyflakes==2.2.0
+    # via flake8
 pygments==2.8.0
     # via
     #   -r requirements-test.txt

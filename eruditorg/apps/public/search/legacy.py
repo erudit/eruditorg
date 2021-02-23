@@ -24,7 +24,7 @@ def group_results_by_field_correspondence(aggregations, field, correspondences):
             return value + count
         return value
 
-    for v, c in aggregations[field].items():
+    for v in aggregations[field].keys():
         if v in correspondences:
             aggregations[field][v] = functools.reduce(
                 reduce_correspondences,
