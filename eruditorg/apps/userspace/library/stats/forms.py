@@ -6,25 +6,25 @@ from django.utils.translation import gettext_lazy as _
 current_year = dt.datetime.now().year
 
 FORMAT_CHOICES = [
-    ('csv', 'CSV'),
-    ('xml', 'XML'),
-    ('html', 'HTML'),
+    ("csv", "CSV"),
+    ("xml", "XML"),
+    ("html", "HTML"),
 ]
 
 MONTH_CHOICES = [
-    ('', ''),
-    (1, _('janvier')),
-    (2, _('février')),
-    (3, _('mars')),
-    (4, _('avril')),
-    (5, _('mai')),
-    (6, _('juin')),
-    (7, _('juillet')),
-    (8, _('août')),
-    (9, _('septembre')),
-    (10, _('octobre')),
-    (11, _('novembre')),
-    (12, _('décembre')),
+    ("", ""),
+    (1, _("janvier")),
+    (2, _("février")),
+    (3, _("mars")),
+    (4, _("avril")),
+    (5, _("mai")),
+    (6, _("juin")),
+    (7, _("juillet")),
+    (8, _("août")),
+    (9, _("septembre")),
+    (10, _("octobre")),
+    (11, _("novembre")),
+    (12, _("décembre")),
 ]
 
 
@@ -37,32 +37,31 @@ class CounterReportForm(forms.Form):
         self.form_info = form_info
         self.release = form_info.counter_release
 
-        year_choices = [('', '')] + [
-            (str(y), str(y)) for y in range(end_year, 2008, -1)
-        ]
+        year_choices = [("", "")] + [(str(y), str(y)) for y in range(end_year, 2008, -1)]
 
-        year_period_choices = [('', '')] + [
-            (str(y), str(y)) for y in range(end_year, 2010, -1)
-        ]
+        year_period_choices = [("", "")] + [(str(y), str(y)) for y in range(end_year, 2010, -1)]
 
-        self.fields['year'] = forms.TypedChoiceField(choices=year_choices, required=False,
-                                                     coerce=int)
-        self.fields['year_start'] = forms.TypedChoiceField(choices=year_period_choices,
-                                                           required=False, coerce=int)
-        self.fields['year_end'] = forms.TypedChoiceField(choices=year_period_choices,
-                                                         required=False, coerce=int)
+        self.fields["year"] = forms.TypedChoiceField(
+            choices=year_choices, required=False, coerce=int
+        )
+        self.fields["year_start"] = forms.TypedChoiceField(
+            choices=year_period_choices, required=False, coerce=int
+        )
+        self.fields["year_end"] = forms.TypedChoiceField(
+            choices=year_period_choices, required=False, coerce=int
+        )
 
     def clean(self):
         cleaned_data = super().clean()
 
-        year = cleaned_data.get('year', None)
-        month_start = cleaned_data.get('month_start', None)
-        month_end = cleaned_data.get('month_end', None)
-        year_start = cleaned_data.get('year_start', None)
-        year_end = cleaned_data.get('year_end', None)
+        year = cleaned_data.get("year", None)
+        month_start = cleaned_data.get("month_start", None)
+        month_end = cleaned_data.get("month_end", None)
+        year_start = cleaned_data.get("year_start", None)
+        year_end = cleaned_data.get("year_end", None)
 
         if not year and not all([month_start, month_end, year_start, year_end]):
-            self.add_error('year', _("Vous devez spécifier l'année ou la période"))
+            self.add_error("year", _("Vous devez spécifier l'année ou la période"))
 
         if all([month_start, month_end, year_start, year_end]):
             dstart = dt.date(int(year_start), int(month_start), 1)
@@ -70,11 +69,11 @@ class CounterReportForm(forms.Form):
 
             if dstart >= dend:
                 self.add_error(
-                    'year_start', _("La date de début doit être inférieure à la date de fin")
+                    "year_start", _("La date de début doit être inférieure à la date de fin")
                 )
 
             if dend - dt.timedelta(weeks=104) > dstart:
-                self.add_error('year_start', _("La période doit être de deux ans maximum"))
+                self.add_error("year_start", _("La période doit être de deux ans maximum"))
 
         return cleaned_data
 
@@ -82,14 +81,14 @@ class CounterReportForm(forms.Form):
         # TODO: incohérence: la date de fin est-elle incluse dans le rapport ou non ?
         #    dans tous les cas soit l'année, soit le dernier mois sont faux.
         cleaned_data = self.cleaned_data
-        year = cleaned_data.get('year', None)
+        year = cleaned_data.get("year", None)
         if year:
             return dt.date(year, 1, 1), dt.date(year, 12, 31)
 
-        month_start = cleaned_data['month_start']
-        month_end = cleaned_data['month_end']
-        year_start = cleaned_data['year_start']
-        year_end = cleaned_data['year_end']
+        month_start = cleaned_data["month_start"]
+        month_end = cleaned_data["month_end"]
+        year_start = cleaned_data["year_start"]
+        year_end = cleaned_data["year_end"]
 
         return dt.date(year_start, month_start, 1), dt.date(year_end, month_end, 1)
 
@@ -100,31 +99,27 @@ class CounterR4Form(CounterReportForm):
 
 class CounterJR1Form(CounterR4Form):
     prefix = "counter_jr1"
-    report_type = forms.CharField(
-        initial="counter-jr1", widget=forms.HiddenInput(), required=False
-    )
+    report_type = forms.CharField(initial="counter-jr1", widget=forms.HiddenInput(), required=False)
 
 
 class CounterJR1GOAForm(CounterR4Form):
     prefix = "counter_jr1_goa"
-    report_type = forms.CharField(
-        initial="counter-jr1-goa", widget=forms.HiddenInput()
-    )
+    report_type = forms.CharField(initial="counter-jr1-goa", widget=forms.HiddenInput())
 
 
 class CounterR5TRJ1Form(CounterReportForm):
     prefix = "counter_r5_trj1"
-    report_code = 'TR_J1'
+    report_code = "TR_J1"
 
 
 class CounterR5TRJ3Form(CounterReportForm):
     prefix = "counter_r5_trj3"
-    report_code = 'TR_J3'
+    report_code = "TR_J3"
 
 
 class CounterR5IRA1Form(CounterReportForm):
     prefix = "counter_r5_ira1"
-    report_code = 'IR_A1'
+    report_code = "IR_A1"
 
 
 class StatsFormInfo(typing.NamedTuple):
@@ -137,53 +132,61 @@ class StatsFormInfo(typing.NamedTuple):
 
     @property
     def submit_name(self):
-        return 'submit-{}'.format(self.code)
+        return "submit-{}".format(self.code)
 
 
 STATS_FORMS_INFO = [
     StatsFormInfo(
-        code='counter-jr1',
+        code="counter-jr1",
         form_class=CounterJR1Form,
-        tab_label=_('JR1'),
-        title=_('Journal Report 1'),
-        description=_("Nombre de requêtes réussies d’articles en texte intégral par mois et par "
-                      "revue"),
-        counter_release='R4',
+        tab_label=_("JR1"),
+        title=_("Journal Report 1"),
+        description=_(
+            "Nombre de requêtes réussies d’articles en texte intégral par mois et par " "revue"
+        ),
+        counter_release="R4",
     ),
     StatsFormInfo(
-        code='counter-jr1-goa',
+        code="counter-jr1-goa",
         form_class=CounterJR1GOAForm,
-        tab_label=_('JR1_GOA'),
-        title=_('Journal Report 1 GOA'),
-        description=_("Nombre de requêtes réussies d’articles en libre accès en texte intégral par "
-                      "mois et par revue"),
-        counter_release='R4',
+        tab_label=_("JR1_GOA"),
+        title=_("Journal Report 1 GOA"),
+        description=_(
+            "Nombre de requêtes réussies d’articles en libre accès en texte intégral par "
+            "mois et par revue"
+        ),
+        counter_release="R4",
     ),
     StatsFormInfo(
-        code='counter-r5-trj1',
+        code="counter-r5-trj1",
         form_class=CounterR5TRJ1Form,
-        tab_label=_('TR_J1'),
-        title=_('Journal Requests (Excluding OA_Gold)'),
-        description=_("Nombre de requêtes réussies d’articles en accès restreint en texte intégral "
-                      "par mois et par revue"),
-        counter_release='R5',
+        tab_label=_("TR_J1"),
+        title=_("Journal Requests (Excluding OA_Gold)"),
+        description=_(
+            "Nombre de requêtes réussies d’articles en accès restreint en texte intégral "
+            "par mois et par revue"
+        ),
+        counter_release="R5",
     ),
     StatsFormInfo(
-        code='counter-r5-trj3',
+        code="counter-r5-trj3",
         form_class=CounterR5TRJ3Form,
-        tab_label=_('TR_J3'),
-        title=_('Journal Usage by Access Type'),
-        description=_("Nombre de requêtes réussies d’articles en texte intégral "
-                      "par mois, par revue et par type d'accès"),
-        counter_release='R5',
+        tab_label=_("TR_J3"),
+        title=_("Journal Usage by Access Type"),
+        description=_(
+            "Nombre de requêtes réussies d’articles en texte intégral "
+            "par mois, par revue et par type d'accès"
+        ),
+        counter_release="R5",
     ),
     StatsFormInfo(
-        code='counter-r5-ira1',
+        code="counter-r5-ira1",
         form_class=CounterR5IRA1Form,
-        tab_label=_('IR_A1'),
-        title=_('Journal Article Requests'),
-        description=_("Nombre de requêtes réussies d’articles en texte intégral "
-                      "par mois et par article"),
-        counter_release='R5',
+        tab_label=_("IR_A1"),
+        title=_("Journal Article Requests"),
+        description=_(
+            "Nombre de requêtes réussies d’articles en texte intégral " "par mois et par article"
+        ),
+        counter_release="R5",
     ),
 ]
