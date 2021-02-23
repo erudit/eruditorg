@@ -400,8 +400,8 @@ class JournalManagementPlan(models.Model):
         default=False,
         verbose_name=_("Illimité"),
         help_text=_(
-            "Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre illimité d’individus"
-        ),  # noqa
+            "Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre illimité d’individus"  # noqa
+        ),
     )
 
     class Meta:

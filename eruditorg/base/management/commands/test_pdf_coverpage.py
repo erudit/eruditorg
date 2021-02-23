@@ -96,10 +96,10 @@ class Command(BaseCommand):
                     _, journal_code, issue_localidentifier, localidentifier = fedora_id.split(".")
                 except ValueError:
                     raise CommandError(
-                        'Invalid ID "{}", should be in the form "erudit:<collection_id>.<journal_id>.<issue_id>.<article_id>".'.format(
+                        'Invalid ID "{}", should be in the form "erudit:<collection_id>.<journal_id>.<issue_id>.<article_id>".'.format(  # noqa
                             fedora_id
                         )
-                    )  # noqa
+                    )
 
                 try:
                     article = Article.from_fedora_ids(
