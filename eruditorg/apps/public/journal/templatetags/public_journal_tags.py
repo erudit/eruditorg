@@ -10,7 +10,7 @@ register = template.Library()
 
 @register.filter
 def format_article_html_title(article):
-    """ Formats the article html title
+    """Formats the article html title
 
     Display the html_title if it exists otherwise display "untitled"
     """
@@ -22,7 +22,7 @@ def format_article_html_title(article):
 
 @register.filter
 def format_article_title(article):
-    """ Formats the article title
+    """Formats the article title
 
     Display the title if it exists otherwise display "untitled"
     """
@@ -31,7 +31,7 @@ def format_article_title(article):
 
 @register.simple_tag
 def issue_coverpage_url(issue: Issue) -> str:
-    """ Return the url of the issue's coverpage
+    """Return the url of the issue's coverpage
 
     In the future, this function will use the timestamp of the coverpage's last modified date
     to generate an url that will be permanently cacheable.
@@ -43,15 +43,16 @@ def issue_coverpage_url(issue: Issue) -> str:
     :param issue: the issue for which to return a coverpage url
     :return: the url of the issue coverpage
     """
-    issue_coverpage_url = reverse("public:journal:issue_coverpage", args=(
-        issue.journal.code, issue.volume_slug, issue.localidentifier)
+    issue_coverpage_url = reverse(
+        "public:journal:issue_coverpage",
+        args=(issue.journal.code, issue.volume_slug, issue.localidentifier),
     )
     return issue_coverpage_url
 
 
 @register.simple_tag
 def journal_logo_url(journal: Journal) -> str:
-    """ Return the url of the journal's logo
+    """Return the url of the journal's logo
 
     In the future, this function will use the timestamp of the logo's last modified date
     to generate an url that will be permanently cacheable.
@@ -63,7 +64,7 @@ def journal_logo_url(journal: Journal) -> str:
     :param journal: the journal for which to return a journal logo url
     :return: the url of the journal logo
     """
-    journal_logo_url = reverse("public:journal:journal_logo", args=(journal.code, ))
+    journal_logo_url = reverse("public:journal:journal_logo", args=(journal.code,))
     return journal_logo_url
 
 
@@ -74,18 +75,20 @@ def join_author_list(author_list):
         return ""
     first_author = author_list.pop(0)
     if not author_list:
-        return _('Avec {first_author}'.format(first_author=first_author))
+        return _("Avec {first_author}".format(first_author=first_author))
 
     last_author = author_list.pop(len(author_list) - 1)
     if not author_list:
-        return _('Avec {first_author} et {last_author}'.format(
-            first_author=first_author, last_author=last_author
-        ))
+        return _(
+            "Avec {first_author} et {last_author}".format(
+                first_author=first_author, last_author=last_author
+            )
+        )
 
-    return _('Avec {first_author}, {contributors} et {last_author}').format(
+    return _("Avec {first_author}, {contributors} et {last_author}").format(
         first_author=first_author,
         contributors=", ".join(str(author) for author in author_list),
-        last_author=last_author
+        last_author=last_author,
     )
 
 
