@@ -9,7 +9,8 @@ from core.editor.models import IssueSubmissionStatusTrack
 def register_status_track(sender, instance, name, source, target, **kwargs):
     # Registers a new track for the status of the issue submission
     status_track = IssueSubmissionStatusTrack.objects.create(
-        issue_submission=instance, status=instance.status)
+        issue_submission=instance, status=instance.status
+    )
 
     # If the IssueSubmission instance was submitted, attaches the last files version to
     # the status track.

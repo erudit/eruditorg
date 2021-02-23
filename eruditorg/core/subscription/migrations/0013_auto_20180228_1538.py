@@ -9,39 +9,63 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0012_auto_20171002_1501'),
+        ("subscription", "0012_auto_20171002_1501"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='institutionipaddressrange',
-            options={'verbose_name': 'Plage d’adresses IP d’institution', 'verbose_name_plural': 'Plages d’adresses IP d’institution'},
+            name="institutionipaddressrange",
+            options={
+                "verbose_name": "Plage d’adresses IP d’institution",
+                "verbose_name_plural": "Plages d’adresses IP d’institution",
+            },
         ),
         migrations.AlterModelOptions(
-            name='journalaccesssubscriptionperiod',
-            options={'verbose_name': 'Période d’abonnement aux revues', 'verbose_name_plural': 'Périodes d’abonnement aux revues'},
+            name="journalaccesssubscriptionperiod",
+            options={
+                "verbose_name": "Période d’abonnement aux revues",
+                "verbose_name_plural": "Périodes d’abonnement aux revues",
+            },
         ),
         migrations.AlterModelOptions(
-            name='journalmanagementplan',
-            options={'verbose_name': 'Forfait d’abonnements individuels', 'verbose_name_plural': 'Forfaits d’abonnements individuels'},
+            name="journalmanagementplan",
+            options={
+                "verbose_name": "Forfait d’abonnements individuels",
+                "verbose_name_plural": "Forfaits d’abonnements individuels",
+            },
         ),
         migrations.AlterModelOptions(
-            name='journalmanagementsubscriptionperiod',
-            options={'verbose_name': 'Période d’abonnement aux forfaits d’abonnements individuels', 'verbose_name_plural': 'Périodes d’abonnement aux forfaits d’abonnements individuels'},
+            name="journalmanagementsubscriptionperiod",
+            options={
+                "verbose_name": "Période d’abonnement aux forfaits d’abonnements individuels",
+                "verbose_name_plural": "Périodes d’abonnement aux forfaits d’abonnements individuels",
+            },
         ),
         migrations.AlterField(
-            model_name='journalmanagementplan',
-            name='is_unlimited',
-            field=models.BooleanField(default=False, help_text='Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre illimité d’individus', verbose_name='Illimité'),
+            model_name="journalmanagementplan",
+            name="is_unlimited",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre illimité d’individus",
+                verbose_name="Illimité",
+            ),
         ),
         migrations.AlterField(
-            model_name='journalmanagementplan',
-            name='max_accounts',
-            field=models.PositiveSmallIntegerField(help_text='Nombre maximal de comptes que ce forfait permet d’abonner', verbose_name='Nombre de comptes'),
+            model_name="journalmanagementplan",
+            name="max_accounts",
+            field=models.PositiveSmallIntegerField(
+                help_text="Nombre maximal de comptes que ce forfait permet d’abonner",
+                verbose_name="Nombre de comptes",
+            ),
         ),
         migrations.AlterField(
-            model_name='journalmanagementsubscriptionperiod',
-            name='subscription',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='period', to='subscription.JournalManagementSubscription', verbose_name='Abonnement'),
+            model_name="journalmanagementsubscriptionperiod",
+            name="subscription",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="period",
+                to="subscription.JournalManagementSubscription",
+                verbose_name="Abonnement",
+            ),
         ),
     ]

@@ -16,7 +16,6 @@ class IpabonneFactory(factory.django.DjangoModelFactory):
 
 
 class AbonneFactory(factory.django.DjangoModelFactory):
-
     class Meta:
         model = Abonne
 
@@ -26,7 +25,6 @@ class AbonneFactory(factory.django.DjangoModelFactory):
 
 
 class RevueFactory(factory.django.DjangoModelFactory):
-
     class Meta:
         model = Revue
 

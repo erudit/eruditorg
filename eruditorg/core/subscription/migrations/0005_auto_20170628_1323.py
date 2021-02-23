@@ -9,13 +9,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0004_institutionreferer'),
+        ("subscription", "0004_institutionreferer"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='institutionreferer',
-            name='subscription',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='referers', to='subscription.JournalAccessSubscription', verbose_name='Abonnement aux revues'),
+            model_name="institutionreferer",
+            name="subscription",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="referers",
+                to="subscription.JournalAccessSubscription",
+                verbose_name="Abonnement aux revues",
+            ),
         ),
     ]

@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('editor', '0004_issuesubmission_archived'),
+        ("editor", "0004_issuesubmission_archived"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issuesubmission',
-            name='comment',
-            field=models.TextField(blank=True, null=True, verbose_name='Commentaires'),
+            model_name="issuesubmission",
+            name="comment",
+            field=models.TextField(blank=True, null=True, verbose_name="Commentaires"),
         ),
     ]

@@ -7,13 +7,22 @@ import django_fsm
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('editor', '0008_auto_20180717_1339'),
+        ("editor", "0008_auto_20180717_1339"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issuesubmission',
-            name='status',
-            field=django_fsm.FSMField(choices=[('D', 'Brouillon'), ('S', 'En attente de validation'), ('C', 'À corriger'), ('V', 'Validé')], default='D', max_length=50),
+            model_name="issuesubmission",
+            name="status",
+            field=django_fsm.FSMField(
+                choices=[
+                    ("D", "Brouillon"),
+                    ("S", "En attente de validation"),
+                    ("C", "À corriger"),
+                    ("V", "Validé"),
+                ],
+                default="D",
+                max_length=50,
+            ),
         ),
     ]

@@ -10,34 +10,46 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0007_auto_20170914_1348'),
+        ("subscription", "0007_auto_20170914_1348"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='journalaccesssubscription',
-            name='comment',
+            model_name="journalaccesssubscription",
+            name="comment",
         ),
         migrations.RemoveField(
-            model_name='journalaccesssubscription',
-            name='title',
+            model_name="journalaccesssubscription",
+            name="title",
         ),
         migrations.RemoveField(
-            model_name='journalmanagementsubscription',
-            name='comment',
+            model_name="journalmanagementsubscription",
+            name="comment",
         ),
         migrations.RemoveField(
-            model_name='journalmanagementsubscription',
-            name='title',
+            model_name="journalmanagementsubscription",
+            name="title",
         ),
         migrations.AlterField(
-            model_name='journalaccesssubscription',
-            name='organisation',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='erudit.Organisation', verbose_name='Abonné institutionnel'),
+            model_name="journalaccesssubscription",
+            name="organisation",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="erudit.Organisation",
+                verbose_name="Abonné institutionnel",
+            ),
         ),
         migrations.AlterField(
-            model_name='journalaccesssubscription',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Abonné individuel'),
+            model_name="journalaccesssubscription",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Abonné individuel",
+            ),
         ),
     ]

@@ -5,10 +5,11 @@ from .metric import metric
 
 class MetricCaptureMixin:
     """ This mixin create an InfluxDB point when the view is executed. """
+
     tracking_metric_name = None
 
     def capture_metric(self, response):
-        """ Given a response object, returns True if the metric should be captured.
+        """Given a response object, returns True if the metric should be captured.
 
         The default implementation returns True if the response's status code is 200.
         """

@@ -28,5 +28,5 @@ class AuthorizationFactory(factory.django.DjangoModelFactory):
             content_type=journal_ct,
             user=user,
             object_id=journal.id,
-            authorization_codename=AC.can_manage_issuesubmission.codename
+            authorization_codename=AC.can_manage_issuesubmission.codename,
         )

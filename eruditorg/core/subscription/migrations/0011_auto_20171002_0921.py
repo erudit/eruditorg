@@ -8,18 +8,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0010_journalmanagementplan_unlimited_squashed_0011_auto_20171002_0900'),
+        ("subscription", "0010_journalmanagementplan_unlimited_squashed_0011_auto_20171002_0900"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journalmanagementplan',
-            name='is_unlimited',
-            field=models.BooleanField(default=False, help_text="Cocher si ce forfait d'abonnements individuels permet d'abonner un nombre illimité d'individus", verbose_name='Illimité'),
+            model_name="journalmanagementplan",
+            name="is_unlimited",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cocher si ce forfait d'abonnements individuels permet d'abonner un nombre illimité d'individus",
+                verbose_name="Illimité",
+            ),
         ),
         migrations.AlterField(
-            model_name='journalmanagementplan',
-            name='max_accounts',
-            field=models.PositiveSmallIntegerField(help_text="Nombre maximal de comptes que ce forfait permet d'abonner", verbose_name='Nombre de comptes'),
+            model_name="journalmanagementplan",
+            name="max_accounts",
+            field=models.PositiveSmallIntegerField(
+                help_text="Nombre maximal de comptes que ce forfait permet d'abonner",
+                verbose_name="Nombre de comptes",
+            ),
         ),
     ]

@@ -12,7 +12,6 @@ from .predicates import HasAuthorization
 
 # This permission assume to use a 'Journal' object to perform the perm check
 rules.add_perm(
-    'authorization.manage_authorizations',
-    is_superuser | is_staff |
-    is_journal_member & HasAuthorization(AC.can_manage_authorizations),
+    "authorization.manage_authorizations",
+    is_superuser | is_staff | is_journal_member & HasAuthorization(AC.can_manage_authorizations),
 )

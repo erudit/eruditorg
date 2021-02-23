@@ -8,7 +8,10 @@ from django.core.management.base import BaseCommand
 from erudit.models import Journal
 
 from core.subscription.models import (
-    JournalManagementSubscription, JournalAccessSubscription, Organisation, AccessBasket
+    JournalManagementSubscription,
+    JournalAccessSubscription,
+    Organisation,
+    AccessBasket,
 )
 from django.contrib.auth import get_user_model
 
@@ -19,45 +22,38 @@ end_date = datetime(month=12, day=31, year=2017)
 
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
+        parser.add_argument("--filename", action="store", dest="filename")
+
         parser.add_argument(
-            '--filename', action="store", dest="filename"
+            "--use-journal-plan",
+            action="store_true",
+            dest="use_journal_plan",
+            help="Use the journal's plan.",
         )
 
         parser.add_argument(
-            '--use-journal-plan', action='store_true', dest='use_journal_plan',
-            help="Use the journal's plan."
+            "--shortname", action="store", dest="shortname", help="Journal shortname."
         )
 
-        parser.add_argument(
-            '--shortname', action='store', dest='shortname', help='Journal shortname.'
-        )
+        parser.add_argument("--plan-id", action="store", dest="plan_id", help="Plan id.")
 
-        parser.add_argument(
-            '--plan-id', action='store', dest='plan_id', help='Plan id.'
-        )
+        parser.add_argument("--sponsor-id", action="store", dest="sponsor_id", help="Sponsor id.")
 
-        parser.add_argument(
-            '--sponsor-id', action='store', dest='sponsor_id', help='Sponsor id.'
-        )
-
-        parser.add_argument(
-            '--basket-id', action='store', dest='basket_id', help='Basket id.'
-        )
+        parser.add_argument("--basket-id", action="store", dest="basket_id", help="Basket id.")
 
     def handle(self, *args, **options):
         """
         Command dispatcher
         """
-        journal_shortname = options.get('shortname')
-        use_journal_plan = options.get('use_journal_plan')
+        journal_shortname = options.get("shortname")
+        use_journal_plan = options.get("use_journal_plan")
         sponsor_id = options.get("sponsor_id")
         plan_id = options.get("plan_id")
         filename = options.get("filename")
         basket_id = options.get("basket_id")
 
-        with open(filename, 'r', encoding="utf-8") as csv_file:
+        with open(filename, "r", encoding="utf-8") as csv_file:
             csvreader = csv.reader(csv_file, delimiter=";")
             self.subscriptions = [tuple(row) for row in csvreader]
 
@@ -85,8 +81,8 @@ class Command(BaseCommand):
                         defaults={
                             "username": email,
                             "first_name": first_name,
-                            "last_name": last_name
-                        }
+                            "last_name": last_name,
+                        },
                     )
 
                     subscription = JournalAccessSubscription(user=user)
@@ -94,10 +90,9 @@ class Command(BaseCommand):
                         if sponsor_id:
                             subscription.sponsor = Organisation.objects.get(pk=sponsor_id)
                         if plan_id:
-                            subscription.journal_management_subscription = \
-                                JournalManagementSubscription.objects.get(
-                                    pk=plan_id
-                                )
+                            subscription.journal_management_subscription = (
+                                JournalManagementSubscription.objects.get(pk=plan_id)
+                            )
                         if basket_id:
                             subscription.basket = AccessBasket.objects.get(pk=basket_id)
                         if journal_shortname:

@@ -6,8 +6,8 @@ EMAIL_TAG = "www-depot-fichier"
 
 
 class EditorConfig(AppConfig):
-    label = 'editor'
-    name = 'core.editor'
+    label = "editor"
+    name = "core.editor"
 
     def ready(self):
         from . import receivers  # noqa

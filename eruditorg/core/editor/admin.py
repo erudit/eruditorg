@@ -10,40 +10,32 @@ from .models import ProductionTeam
 
 
 class IssueSubmissionAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'journal',
-        'contact',
-        'status',
-        'date_created',
-        'date_modified',
-        'url'
-    )
-    list_filter = ('status', 'journal')
+    list_display = ("id", "journal", "contact", "status", "date_created", "date_modified", "url")
+    list_filter = ("status", "journal")
 
     def url(self, obj):
-        return format_html(
-            "<a href={}>{}</a>",
-            obj.get_absolute_url(),
-            _("Voir sur le site")
-        )
+        return format_html("<a href={}>{}</a>", obj.get_absolute_url(), _("Voir sur le site"))
 
 
 class IssueSubmissionFilesVersionAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
-        'issue_submission',
-        'files_count',
+        "id",
+        "issue_submission",
+        "files_count",
     )
 
     def files_count(self, obj):
         return obj.submissions.count()
-    files_count.short_description = _('Nombre de fichiers')
+
+    files_count.short_description = _("Nombre de fichiers")
 
 
 class ProductionTeamAdmin(admin.ModelAdmin):
-    list_display = ('identifier', 'group', )
-    filter_horizontal = ('journals', )
+    list_display = (
+        "identifier",
+        "group",
+    )
+    filter_horizontal = ("journals",)
 
     def has_add_permission(self, request):
         # There must be only one production team, we should not be able to add more.

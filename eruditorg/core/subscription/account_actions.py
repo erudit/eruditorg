@@ -11,9 +11,9 @@ from .models import JournalAccessSubscription
 
 
 class IndividualSubscriptionAction(AccountActionBase):
-    name = 'individualsubscription'
+    name = "individualsubscription"
 
-    landing_page_template_name = 'public/account_actions/individual_subscription_landing.html'
+    landing_page_template_name = "public/account_actions/individual_subscription_landing.html"
 
     def can_be_consumed(self, token, user):
         return token.can_be_consumed and not self._subscription_exists(token, user)
@@ -29,24 +29,26 @@ class IndividualSubscriptionAction(AccountActionBase):
 
     def get_extra_context(self, token, user):
         return {
-            'subscription_exists': self._subscription_exists(token, user),
+            "subscription_exists": self._subscription_exists(token, user),
         }
 
     def get_consumption_redirect_url(self, token):
         return reverse(
-            'public:journal:journal_detail',
-            kwargs={'code': token.content_object.journal.code})
+            "public:journal:journal_detail", kwargs={"code": token.content_object.journal.code}
+        )
 
     def get_consumption_success_message(self, token):
-        return _('Votre abonnement a bien été pris en compte')
+        return _("Votre abonnement a bien été pris en compte")
 
     def send_notification_email(self, token):
         email = Email(
-            [token.email, ],
-            html_template='emails/subscription/journal/new_subscription_content.html',
-            subject_template='emails/subscription/journal/new_subscription_subject.html',
-            extra_context={'token': token},
-            tag="www-subscription-nouvel-abonne"
+            [
+                token.email,
+            ],
+            html_template="emails/subscription/journal/new_subscription_content.html",
+            subject_template="emails/subscription/journal/new_subscription_subject.html",
+            extra_context={"token": token},
+            tag="www-subscription-nouvel-abonne",
         )
         email.send()
 
@@ -54,7 +56,8 @@ class IndividualSubscriptionAction(AccountActionBase):
         if user.is_authenticated:
             # Computes a boolean indicating if a subscription already exists for the current user.
             return JournalAccessSubscription.objects.filter(
-                user_id=user.id, journal_management_subscription=token.object_id).exists()
+                user_id=user.id, journal_management_subscription=token.object_id
+            ).exists()
         else:
             return False
 

@@ -8,9 +8,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('editor', '0005_auto_20161007_0900'),
-        ('editor', '0006_auto_20161028_1032'),
+        ("editor", "0005_auto_20161007_0900"),
+        ("editor", "0006_auto_20161028_1032"),
     ]
 
-    operations = [
-    ]
+    operations = []

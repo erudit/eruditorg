@@ -14,7 +14,6 @@ from ..models import IssueSubmission
 
 @pytest.mark.django_db
 class BaseEditorTestCase:
-
     @pytest.fixture(autouse=True)
     def setup(self):
         self.user = UserFactory()
@@ -34,7 +33,8 @@ class BaseEditorTestCase:
             content_type=ct,
             user=self.user,
             object_id=self.journal.id,
-            authorization_codename=AC.can_manage_issuesubmission.codename)
+            authorization_codename=AC.can_manage_issuesubmission.codename,
+        )
 
         # We need to be logged in for all the tests
         self.client = Client(logged_user=self.user)

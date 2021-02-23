@@ -23,9 +23,9 @@ class AuthorizationChecker:
         user_groups_related_name = user_model.groups.field.related_query_name()
 
         # Defines the main Authorization queryset
-        authorization_qs = Authorization.objects \
-            .filter(authorization_codename__in=self.authorization_codenames) \
-            .filter(Q(**{'group__{}'.format(user_groups_related_name): user}) | Q(user=user))
+        authorization_qs = Authorization.objects.filter(
+            authorization_codename__in=self.authorization_codenames
+        ).filter(Q(**{"group__{}".format(user_groups_related_name): user}) | Q(user=user))
 
         if obj is not None:
             if self.foreign_key:
@@ -45,9 +45,17 @@ class HasAuthorization:
     """
 
     def __new__(cls, authorization, foreign_key=None):
-        authorization_codename = authorization.codename \
-            if isinstance(authorization, AuthorizationDef) else authorization
-        return Predicate(AuthorizationChecker([authorization_codename, ], foreign_key))
+        authorization_codename = (
+            authorization.codename if isinstance(authorization, AuthorizationDef) else authorization
+        )
+        return Predicate(
+            AuthorizationChecker(
+                [
+                    authorization_codename,
+                ],
+                foreign_key,
+            )
+        )
 
 
 class HasAnyAuthorization:
@@ -59,5 +67,6 @@ class HasAnyAuthorization:
 
     def __new__(cls, authorizations, foreign_key=None):
         authorization_codenames = [
-            a.codename if isinstance(a, AuthorizationDef) else a for a in authorizations]
+            a.codename if isinstance(a, AuthorizationDef) else a for a in authorizations
+        ]
         return Predicate(AuthorizationChecker(authorization_codenames, foreign_key))

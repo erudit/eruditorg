@@ -10,13 +10,17 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0005_auto_20160705_1430'),
+        ("accounts", "0005_auto_20160705_1430"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='legacyaccountprofile',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur'),
+            model_name="legacyaccountprofile",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Utilisateur",
+            ),
         ),
     ]

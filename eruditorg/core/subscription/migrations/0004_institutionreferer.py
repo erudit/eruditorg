@@ -9,16 +9,28 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0003_auto_20160511_1417'),
+        ("subscription", "0003_auto_20160511_1417"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='InstitutionReferer',
+            name="InstitutionReferer",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('referer', models.URLField(verbose_name='URL référent')),
-                ('subscription', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='subscription.JournalAccessSubscription', verbose_name='Abonnement aux revues')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("referer", models.URLField(verbose_name="URL référent")),
+                (
+                    "subscription",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="subscription.JournalAccessSubscription",
+                        verbose_name="Abonnement aux revues",
+                    ),
+                ),
             ],
         ),
     ]

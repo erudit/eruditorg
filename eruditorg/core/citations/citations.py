@@ -6,15 +6,15 @@ from .models import SavedCitation
 class SavedCitationList(set):
     """ Stores a set of Érudit document citations. """
 
-    def __init__(self, request, name='saved-citations', *args, **kwargs):
+    def __init__(self, request, name="saved-citations", *args, **kwargs):
         super(SavedCitationList, self).__init__(*args, **kwargs)
         self.request = request
         self.name = name
 
-        if hasattr(self.request, 'user') and self.request.user.is_authenticated:
+        if hasattr(self.request, "user") and self.request.user.is_authenticated:
             # If the user is authenticated we want saved citations list items to be retrieved from
             # the database and not from the session.
-            solr_ids = self.request.user.saved_citations.values_list('solr_id', flat=True)
+            solr_ids = self.request.user.saved_citations.values_list("solr_id", flat=True)
         else:
             # Otherwise the documents IDs are retrieved in the user's session.
             solr_ids = request.session.get(self.name, [])

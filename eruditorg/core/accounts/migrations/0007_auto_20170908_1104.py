@@ -8,13 +8,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0006_auto_20160713_0913'),
+        ("accounts", "0006_auto_20160713_0913"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='legacyaccountprofile',
-            name='origin',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'Base de données Abonnements'), (2, 'Base de données Restrictions'), (4, 'Base de données Drupal')], verbose_name='Origine'),
+            model_name="legacyaccountprofile",
+            name="origin",
+            field=models.PositiveSmallIntegerField(
+                choices=[
+                    (1, "Base de données Abonnements"),
+                    (2, "Base de données Restrictions"),
+                    (4, "Base de données Drupal"),
+                ],
+                verbose_name="Origine",
+            ),
         ),
     ]

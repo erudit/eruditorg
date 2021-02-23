@@ -8,13 +8,46 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authorization', '0005_auto_20170914_1348'),
+        ("authorization", "0005_auto_20170914_1348"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='authorization',
-            name='authorization_codename',
-            field=models.CharField(choices=[('subscriptions:can_consult_royalty_reports', 'Consulter les rapports de redevances'), ('editor:can_edit_journal_information', 'Modifier la page À propos'), ('authorization:can_manage_authorizations', 'Autorisations'), ('subscriptions:can_manage_individual_subscription', 'Gérer les abonnements individuels'), ('subscriptions:can_manage_institutional_subscription', 'Gérer les abonnements institutionnels'), ('editor:can_manage_issuesubmission', 'Déposer des fichiers de production'), ('subscriptions:can_manage_organisation_members', 'Gérer les membres d’un abonnement'), ('subscriptions:can_manage_organisation_subscription_information', 'Gérer les informations d’un abonnement'), ('subscriptions:can_manage_organisation_subscription_ips', 'Gérer les adresses IP de l’abonnement'), ('editor:can_review_issuesubmission', 'Valider les numéros')], max_length=100, verbose_name='Autorisation'),
+            model_name="authorization",
+            name="authorization_codename",
+            field=models.CharField(
+                choices=[
+                    (
+                        "subscriptions:can_consult_royalty_reports",
+                        "Consulter les rapports de redevances",
+                    ),
+                    ("editor:can_edit_journal_information", "Modifier la page À propos"),
+                    ("authorization:can_manage_authorizations", "Autorisations"),
+                    (
+                        "subscriptions:can_manage_individual_subscription",
+                        "Gérer les abonnements individuels",
+                    ),
+                    (
+                        "subscriptions:can_manage_institutional_subscription",
+                        "Gérer les abonnements institutionnels",
+                    ),
+                    ("editor:can_manage_issuesubmission", "Déposer des fichiers de production"),
+                    (
+                        "subscriptions:can_manage_organisation_members",
+                        "Gérer les membres d’un abonnement",
+                    ),
+                    (
+                        "subscriptions:can_manage_organisation_subscription_information",
+                        "Gérer les informations d’un abonnement",
+                    ),
+                    (
+                        "subscriptions:can_manage_organisation_subscription_ips",
+                        "Gérer les adresses IP de l’abonnement",
+                    ),
+                    ("editor:can_review_issuesubmission", "Valider les numéros"),
+                ],
+                max_length=100,
+                verbose_name="Autorisation",
+            ),
         ),
     ]

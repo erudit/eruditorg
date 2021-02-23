@@ -9,11 +9,12 @@ logger = structlog.getLogger(__name__)
 
 
 class EmailBackend(ModelBackend):
-    """ Allows a user to login using his e-mail address or his username.
+    """Allows a user to login using his e-mail address or his username.
 
     This backend should be used instead of the builtin `django.contrib.auth.backends.ModelBackend`
     authentication backend.
     """
+
     def _get_user(self, email_or_username):
         UserModel = get_user_model()
 
@@ -24,9 +25,7 @@ class EmailBackend(ModelBackend):
                 user = UserModel.objects.get(email=email_or_username.lower())
             except UserModel.MultipleObjectsReturned:
                 logger.warning(
-                    'login.error',
-                    msg="Multiple users with e-mail address",
-                    email=email_or_username
+                    "login.error", msg="Multiple users with e-mail address", email=email_or_username
                 )
                 raise UserModel.DoesNotExist
             except ValidationError:

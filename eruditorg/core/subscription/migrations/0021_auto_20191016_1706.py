@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0020_generate_integer_ip_addresses'),
+        ("subscription", "0020_generate_integer_ip_addresses"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='institutionipaddressrange',
-            name='ip_end_int',
-            field=models.BigIntegerField(db_index=True, verbose_name='Adresse IP de fin'),
+            model_name="institutionipaddressrange",
+            name="ip_end_int",
+            field=models.BigIntegerField(db_index=True, verbose_name="Adresse IP de fin"),
         ),
         migrations.AlterField(
-            model_name='institutionipaddressrange',
-            name='ip_start_int',
-            field=models.BigIntegerField(db_index=True, verbose_name='Adresse IP de début'),
+            model_name="institutionipaddressrange",
+            name="ip_start_int",
+            field=models.BigIntegerField(db_index=True, verbose_name="Adresse IP de début"),
         ),
     ]
