@@ -8,4 +8,4 @@ class EditorConfig(AppConfig):
     name = "apps.userspace.journal.editor"
 
     def ready(self):
-        from . import receivers
+        from . import receivers  # noqa
