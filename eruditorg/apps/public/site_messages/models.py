@@ -8,26 +8,27 @@ class TargetSite(models.Model):
     """
     Target site where to display site messages.
     """
-    TARGET_SITE_PUBLIC, TARGET_SITE_LIBRARY, TARGET_SITE_JOURNAL = 'P', 'L', 'J'
+
+    TARGET_SITE_PUBLIC, TARGET_SITE_LIBRARY, TARGET_SITE_JOURNAL = "P", "L", "J"
     TARGET_SITE_CHOICES = (
-        (TARGET_SITE_PUBLIC, _('Public')),
-        (TARGET_SITE_LIBRARY, _('Tableau de bord des bibliothèques')),
-        (TARGET_SITE_JOURNAL, _('Tableau de bord des revues')),
+        (TARGET_SITE_PUBLIC, _("Public")),
+        (TARGET_SITE_LIBRARY, _("Tableau de bord des bibliothèques")),
+        (TARGET_SITE_JOURNAL, _("Tableau de bord des revues")),
     )
     site = models.CharField(
-        verbose_name=_('Site cible'),
+        verbose_name=_("Site cible"),
         choices=TARGET_SITE_CHOICES,
         blank=False,
         null=False,
         default=TARGET_SITE_PUBLIC,
         max_length=8,
-        help_text=_('Site cible'),
+        help_text=_("Site cible"),
     )
     """ The target site. """
 
     class Meta:
-        verbose_name = _('Site cible')
-        verbose_name_plural = _('Sites cibles')
+        verbose_name = _("Site cible")
+        verbose_name_plural = _("Sites cibles")
 
     def __str__(self):
         for key, site in self.TARGET_SITE_CHOICES:
@@ -40,45 +41,46 @@ class SiteMessage(models.Model):
     """
     Site message to be displayed on the targeted site.
     """
+
     label = models.CharField(
-        verbose_name=_('Libelé'),
+        verbose_name=_("Libelé"),
         blank=False,
         null=False,
-        default='',
+        default="",
         max_length=64,
         help_text=_("Pour l'administration."),
     )
     """ The administration label. """
     message = models.TextField(
-        verbose_name=_('Message'),
-        help_text=_('Message à afficher. Peut contenir du HTML.'),
+        verbose_name=_("Message"),
+        help_text=_("Message à afficher. Peut contenir du HTML."),
     )
     """ The message to be displayed. """
     level = models.CharField(
-        verbose_name=_('Niveau'),
+        verbose_name=_("Niveau"),
         choices=(
-            ('DEBUG', _('Normal (gris)')),
-            ('INFO', _('Information (vert)')),
-            ('WARNING', _('Avertissement (jaune)')),
-            ('ERROR', _('Alerte (orange)')),
-            ('CRITICAL', _('Critique (rouge)')),
+            ("DEBUG", _("Normal (gris)")),
+            ("INFO", _("Information (vert)")),
+            ("WARNING", _("Avertissement (jaune)")),
+            ("ERROR", _("Alerte (orange)")),
+            ("CRITICAL", _("Critique (rouge)")),
         ),
-        default='DEBUG',
+        default="DEBUG",
         max_length=8,
         help_text=_("Niveau du message (couleur d'affichage)."),
     )
     """ The level of the message, which will detemine it's displayed color. """
     target_sites = models.ManyToManyField(
         TargetSite,
-        verbose_name=_('Sites cibles'),
-        related_name='+',
+        verbose_name=_("Sites cibles"),
+        related_name="+",
         blank=False,
     )
     """ The targeted sites where the message should be displayed. """
     active = models.BooleanField(
-        verbose_name=_('Actif'),
+        verbose_name=_("Actif"),
         default=False,
-        help_text=_('Pour activer manuellement le message.'),
+        help_text=_("Pour activer manuellement le message."),
     )
     """ Switch to manualy activate the message. """
     start_date = models.DateTimeField(
@@ -96,20 +98,22 @@ class SiteMessage(models.Model):
     )
     """ Date and time when to stop displaying the message. """
     setting = models.CharField(
-        verbose_name=_('Réglage'),
+        verbose_name=_("Réglage"),
         blank=True,
         null=True,
         max_length=64,
-        help_text=_('Si le site contient un réglage avec ce nom et que ce réglage est à \
-            <em>True</em>, le message sera affiché.'),
+        help_text=_(
+            "Si le site contient un réglage avec ce nom et que ce réglage est à \
+            <em>True</em>, le message sera affiché."
+        ),
     )
     """ The name of a site setting to display the message if it's set to True. """
 
     objects = SiteMessageManager()
 
     class Meta:
-        verbose_name = _('Message global du site')
-        verbose_name_plural = _('Messages globaux du site')
+        verbose_name = _("Message global du site")
+        verbose_name_plural = _("Messages globaux du site")
 
     def __str__(self):
         return self.label

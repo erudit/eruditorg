@@ -5,12 +5,10 @@ from .models import SiteMessage
 
 
 class SiteMessageTranslationOptions(TranslationOptions):
-    fields = (
-        'message',
-    )
+    fields = ("message",)
     required_languages = (
-        'fr',
-        'en',
+        "fr",
+        "en",
     )
 
 
