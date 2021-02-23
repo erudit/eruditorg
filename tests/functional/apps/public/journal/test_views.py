@@ -36,7 +36,6 @@ from erudit.test.solr import FakeSolrData
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora import repository
-from erudit.solr.models import Article as SolrArticle
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -2169,7 +2168,7 @@ class TestArticleDetailView:
         journal = JournalFactory()
         issue1 = IssueFactory(journal=journal)
         issue2 = IssueFactory(journal=journal)
-        for i in range(number_related_articles):
+        for _ in range(number_related_articles):
             ArticleFactory(
                 issue=issue2,
                 add_to_fedora_issue=True,
@@ -2192,9 +2191,51 @@ class TestArticleDetailView:
             # The current article should not be in the related articles.
             assert "current_article" not in footer.decode()
 
+    def test_related_articles_internal_issues(self, monkeypatch):
+        journal = JournalFactory()
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        for _ in range(4):
+            ArticleFactory(
+                issue=issue2,
+                add_to_fedora_issue=True,
+                html_url="/internal_url",
+            )
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(issue=issue1, localidentifier="current_article")
+        # Get the response.
+        url = article_detail_url(current_article)
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, "html.parser")
+        footer = dom.find("footer", {"class": "container"})
+        # Assert that the internal relative url is present
+        assert "/internal_url" in footer.decode()
+
+    def test_related_articles_external_issues(self, monkeypatch):
+        journal = JournalFactory()
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        for _ in range(4):
+            ArticleFactory(
+                issue=issue2,
+                add_to_fedora_issue=True,
+                html_url="https://external_url/",
+            )
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(issue=issue1, localidentifier="current_article")
+        # Get the response.
+        url = article_detail_url(current_article)
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, "html.parser")
+        footer = dom.find("footer", {"class": "container"})
+        # Assert that the external absolute url is present
+        assert "https://external_url/" in footer.decode()
+
     def test_related_articles_single_issue_in_journal(self):
         issue = IssueFactory()
-        for i in range(4):
+        for _ in range(4):
             ArticleFactory(issue=issue)
         # Create the current article, which should not appear in the related articles.
         current_article = ArticleFactory(issue=issue)
