@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from account_actions.views.generic import AccountActionLandingView as BaseAccountActionLandingView
+from account_actions.views.generic import AccountActionConsumeView  # noqa
 from account_actions.views.generic import AccountActionTokenMixin
 from django.contrib import messages
 from django.contrib.auth import authenticate
