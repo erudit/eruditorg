@@ -111,7 +111,7 @@ journal_url_patterns = (
         ),
         # Issue
         url(
-            r"^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/?$",  # noqa
+            r"^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]*)/?$",
             journal_views_compat.IssueDetailRedirectView.as_view(),
             name="legacy_issue_detail",
         ),
@@ -136,7 +136,7 @@ journal_url_patterns = (
             name="legacy_issue_detail_culture",
         ),
         url(
-            r"^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/index\.html?$",  # noqa
+            r"^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/index\.html?$",
             journal_views_compat.IssueDetailRedirectView.as_view(),
             name="legacy_issue_detail_culture_index",
         ),
@@ -218,17 +218,17 @@ book_url_patterns = (
         ),
         url(
             r"^(?P<collection>[\w-]+)/(?P<book>[\w/-]+)/index\.htm$",
-            book_views_compat.BookRedirectView.as_view(),  # noqa
+            book_views_compat.BookRedirectView.as_view(),
             name="legacy_book",
         ),
         url(
             r"^(?P<collection>[\w-]+)/(?P<book>[\w/-]+)/(?P<chapter_id>\w+)/?$",
-            book_views_compat.ChapterRedirectView.as_view(),  # noqa
+            book_views_compat.ChapterRedirectView.as_view(),
             name="legacy_chapter",
         ),
         url(
             r"^(?P<collection>[\w-]+)/(?P<book>[\w/-]+)/(?P<chapter_id>\w+)\.(?P<pdf>pdf)$",
-            book_views_compat.ChapterRedirectView.as_view(),  # noqa
+            book_views_compat.ChapterRedirectView.as_view(),
             name="legacy_chapter_pdf",
         ),
     ],

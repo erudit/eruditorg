@@ -83,7 +83,7 @@ class Command(BaseCommand):
             if additional_ids is not None and custom_ids is not None:
                 raise CommandError(
                     "Cannnot use both --additional-id-list and --custom-id-list arguments."
-                )  # noqa
+                )
             elif additional_ids is not None:
                 fedora_ids = FEDORA_IDS + additional_ids.split(",")
             elif custom_ids is not None:

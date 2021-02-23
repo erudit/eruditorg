@@ -16,9 +16,9 @@ mimetypes.add_type("image/svg+xml", ".svg")
 
 
 def add_coverpage_to_pdf(coverpage, content):
-    """ Add the coverpage to the PDF
+    """Add the coverpage to the PDF
 
-    Return the resulting PDF bytes """
+    Return the resulting PDF bytes"""
     try:
         coverpage_pdf = fitz.Document(stream=coverpage, filetype="pdf")
         content_pdf = fitz.Document(stream=content, filetype="pdf")
@@ -36,8 +36,7 @@ def add_coverpage_to_pdf(coverpage, content):
 
 
 def get_pdf_first_page(content):
-    """ Return the first page of the PDF
-    """
+    """Return the first page of the PDF"""
     try:
         doc = fitz.Document(stream=content, filetype="pdf")
         first_page = fitz.Document()
