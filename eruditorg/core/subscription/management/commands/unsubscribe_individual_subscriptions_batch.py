@@ -7,9 +7,7 @@ from django.core.management.base import BaseCommand
 
 from erudit.models import Journal
 
-from core.subscription.models import (
-    JournalAccessSubscription, JournalManagementSubscription
-)
+from core.subscription.models import JournalAccessSubscription, JournalManagementSubscription
 from django.contrib.auth.models import User
 
 logger = structlog.get_logger(__name__)
@@ -19,14 +17,11 @@ end_date = datetime(month=12, day=31, year=2017)
 
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
-        parser.add_argument(
-            '--filename', action="store", dest="filename"
-        )
+        parser.add_argument("--filename", action="store", dest="filename")
 
         parser.add_argument(
-            '--shortname', action='store', dest='shortname', help='Journal shortname.'
+            "--shortname", action="store", dest="shortname", help="Journal shortname."
         )
 
     def handle(self, *args, **options):
@@ -34,8 +29,8 @@ class Command(BaseCommand):
         Command dispatcher
         """
 
-        journal_shortname = options.get('shortname')
-        filename = options.get('filename')
+        journal_shortname = options.get("shortname")
+        filename = options.get("filename")
 
         journal = None
         plan = None
@@ -50,11 +45,11 @@ class Command(BaseCommand):
             self.stdout.write("Journal {} has no plan.".format(journal_shortname))
             raise
 
-        with open(filename, 'r', encoding="utf-8") as csv_file:
+        with open(filename, "r", encoding="utf-8") as csv_file:
             csvreader = csv.reader(csv_file)
             self.subscriptions = [tuple(row) for row in csvreader]
 
-        for email, in self.subscriptions:
+        for (email,) in self.subscriptions:
             try:
                 user = User.objects.get(email=email)
                 subscription = JournalAccessSubscription.objects.get(
@@ -65,7 +60,7 @@ class Command(BaseCommand):
                     "subscription.deleted",
                     user=user.username,
                     journal=journal_shortname,
-                    plan=plan.pk
+                    plan=plan.pk,
                 )
             except User.DoesNotExist:
                 logger.error("user.doesnotexist", email=email)
@@ -80,13 +75,10 @@ class Command(BaseCommand):
                     "subscription.MultipleObjectsReturned",
                     user=user,
                     journal_management_subscription=plan.pk,
-                    deleted=deleted
+                    deleted=deleted,
                 )
 
             except JournalAccessSubscription.DoesNotExist:
                 logger.error(
-                    "subscription.doesnotexist",
-                    user=user,
-                    journal=journal_shortname,
-                    plan=plan.pk
+                    "subscription.doesnotexist", user=user, journal=journal_shortname, plan=plan.pk
                 )

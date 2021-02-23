@@ -10,51 +10,95 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0024_auto_20160629_0944'),
+        ("erudit", "0024_auto_20160629_0944"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('accounts', '0003_auto_20160516_1457'),
+        ("accounts", "0003_auto_20160516_1457"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='LegacyAccountProfile',
+            name="LegacyAccountProfile",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('origin', models.PositiveSmallIntegerField(choices=[(1, 'Base de données Abonnements'), (2, 'Base de données Restrictions'), (3, 'Base de données Mandragore')], verbose_name='Origine')),
-                ('legacy_id', models.CharField(blank=True, max_length=20, null=True, verbose_name='Identifiant original')),
-                ('synced_with_origin', models.BooleanField(default=False, verbose_name='Synchronisé avec la base de donnée originale')),
-                ('sync_date', models.DateField(blank=True, null=True, verbose_name='Date de synchronisation')),
-                ('organisation', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='erudit.Organisation', verbose_name='Organisation')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "origin",
+                    models.PositiveSmallIntegerField(
+                        choices=[
+                            (1, "Base de données Abonnements"),
+                            (2, "Base de données Restrictions"),
+                            (3, "Base de données Mandragore"),
+                        ],
+                        verbose_name="Origine",
+                    ),
+                ),
+                (
+                    "legacy_id",
+                    models.CharField(
+                        blank=True, max_length=20, null=True, verbose_name="Identifiant original"
+                    ),
+                ),
+                (
+                    "synced_with_origin",
+                    models.BooleanField(
+                        default=False, verbose_name="Synchronisé avec la base de donnée originale"
+                    ),
+                ),
+                (
+                    "sync_date",
+                    models.DateField(blank=True, null=True, verbose_name="Date de synchronisation"),
+                ),
+                (
+                    "organisation",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="erudit.Organisation",
+                        verbose_name="Organisation",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Utilisateur",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Profils de comptes utilisateur importés',
-                'verbose_name': 'Profil de compte utilisateur importé',
+                "verbose_name_plural": "Profils de comptes utilisateur importés",
+                "verbose_name": "Profil de compte utilisateur importé",
             },
         ),
         migrations.RemoveField(
-            model_name='abonnementprofile',
-            name='user',
+            model_name="abonnementprofile",
+            name="user",
         ),
         migrations.RemoveField(
-            model_name='mandragoreprofile',
-            name='user',
+            model_name="mandragoreprofile",
+            name="user",
         ),
         migrations.RemoveField(
-            model_name='restrictionprofile',
-            name='organisation',
+            model_name="restrictionprofile",
+            name="organisation",
         ),
         migrations.RemoveField(
-            model_name='restrictionprofile',
-            name='user',
+            model_name="restrictionprofile",
+            name="user",
         ),
         migrations.DeleteModel(
-            name='AbonnementProfile',
+            name="AbonnementProfile",
         ),
         migrations.DeleteModel(
-            name='MandragoreProfile',
+            name="MandragoreProfile",
         ),
         migrations.DeleteModel(
-            name='RestrictionProfile',
+            name="RestrictionProfile",
         ),
     ]

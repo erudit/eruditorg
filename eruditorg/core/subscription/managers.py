@@ -19,7 +19,8 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 
         return self.filter(
             institutionipaddressrange__ip_start_int__lte=ip_int,
-            institutionipaddressrange__ip_end_int__gte=ip_int).distinct()
+            institutionipaddressrange__ip_end_int__gte=ip_int,
+        ).distinct()
 
     def get_for_referer(self, referer):
         """ Return all the subscriptions for the given referer """
@@ -30,24 +31,24 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 
         parsed_user_referer = urlparse(referer)
 
-        if parsed_user_referer.netloc == '':
+        if parsed_user_referer.netloc == "":
             return
 
-        user_netloc = re.sub('^www.', '', parsed_user_referer.netloc)
+        user_netloc = re.sub("^www.", "", parsed_user_referer.netloc)
 
         referers_pk = self.filter(
             referers__referer__contains=user_netloc,
-        ).values_list('referers', flat=True)
+        ).values_list("referers", flat=True)
 
         for institution_referer in InstitutionReferer.objects.filter(pk__in=referers_pk):
             parsed_institution_referer = urlparse(institution_referer.referer)
 
-            institution_netloc = re.sub('^www.', '', parsed_institution_referer.netloc)
+            institution_netloc = re.sub("^www.", "", parsed_institution_referer.netloc)
 
             if (
                 # Compare full netloc
-                institution_netloc == user_netloc and
-                parsed_institution_referer.path in parsed_user_referer.path
+                institution_netloc == user_netloc
+                and parsed_institution_referer.path in parsed_user_referer.path
             ):
                 return institution_referer.subscription
 
@@ -58,24 +59,24 @@ class JournalAccessSubscriptionValidManager(models.Manager):
         return self.institutional() | self.individual()
 
     def institutional(self):
-        """ Returns all the valid institutional JournalAccessSubscription instances.
+        """Returns all the valid institutional JournalAccessSubscription instances.
 
         To be valid, an institutional subscription needs a valid JournalAccessSubscriptionPeriod.
         """
         institutional = Q(organisation__isnull=True) | Q(journals__isnull=True)
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
-        return qs.exclude(institutional).prefetch_related('journals')
+        return qs.exclude(institutional).prefetch_related("journals")
 
     def individual(self):
-        """ Returns all the valid individual JournalAccessSubscription instances.
+        """Returns all the valid individual JournalAccessSubscription instances.
 
         To be valid, an individual subscription needs a valid JournalManagementSubscriptionPeriod.
-        That's because we let the journal manage validity themselves. """
+        That's because we let the journal manage validity themselves."""
         individual = Q(
             organisation__isnull=True,
         )
         qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
-        return qs.filter(individual).prefetch_related('journals')
+        return qs.filter(individual).prefetch_related("journals")
 
     def get_for_ip_address(self, ip_address):
         """ Return all the subscriptions for the given ip address """

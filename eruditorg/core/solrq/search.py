@@ -12,6 +12,7 @@ from .query import Query
 
 class Search:
     """ Defines a convenient way to perform searches on a Solr index. """
+
     # This attribute can be used to map specific fiter names to more
     # complex expressions. It must be of the form:
     #
@@ -34,7 +35,7 @@ class Search:
     extra_params = {}
 
     def __init__(self, solr_client):
-        """ Search request to Solr.
+        """Search request to Solr.
 
         :arg solr_client: `pysolr.Solr` instance to use
         """

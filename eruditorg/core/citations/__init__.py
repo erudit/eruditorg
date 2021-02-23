@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-default_app_config = 'core.citations.apps.CitationsAppConfig'
+default_app_config = "core.citations.apps.CitationsAppConfig"

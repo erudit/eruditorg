@@ -6,24 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0017_auto_20190926_1545'),
+        ("subscription", "0017_auto_20190926_1545"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='journalaccesssubscription',
-            name='is_valid',
+            model_name="journalaccesssubscription",
+            name="is_valid",
         ),
         migrations.AddField(
-            model_name='institutionipaddressrange',
-            name='ip_end_int',
-            field=models.IntegerField(default=1, verbose_name='Adresse IP de fin'),
+            model_name="institutionipaddressrange",
+            name="ip_end_int",
+            field=models.IntegerField(default=1, verbose_name="Adresse IP de fin"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='institutionipaddressrange',
-            name='ip_start_int',
-            field=models.IntegerField(default=1, verbose_name='Adresse IP de début'),
+            model_name="institutionipaddressrange",
+            name="ip_start_int",
+            field=models.IntegerField(default=1, verbose_name="Adresse IP de début"),
             preserve_default=False,
         ),
     ]

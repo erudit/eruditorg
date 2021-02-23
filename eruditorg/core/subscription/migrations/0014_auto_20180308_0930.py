@@ -9,30 +9,49 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0083_auto_20180308_0922'),
-        ('subscription', '0013_auto_20180228_1538'),
+        ("erudit", "0083_auto_20180308_0922"),
+        ("subscription", "0013_auto_20180228_1538"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AccessBasket',
+            name="AccessBasket",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField(verbose_name='Nom')),
-                ('journals', models.ManyToManyField(related_name='_accessbasket_journals_+', to='erudit.Journal', verbose_name='Revues')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.TextField(verbose_name="Nom")),
+                (
+                    "journals",
+                    models.ManyToManyField(
+                        related_name="_accessbasket_journals_+",
+                        to="erudit.Journal",
+                        verbose_name="Revues",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Paniers de revues',
-                'verbose_name': 'Panier de revues',
+                "verbose_name_plural": "Paniers de revues",
+                "verbose_name": "Panier de revues",
             },
         ),
         migrations.RemoveField(
-            model_name='journalaccesssubscription',
-            name='collection',
+            model_name="journalaccesssubscription",
+            name="collection",
         ),
         migrations.AddField(
-            model_name='journalaccesssubscription',
-            name='basket',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='accesses', to='subscription.AccessBasket', verbose_name='Panier'),
+            model_name="journalaccesssubscription",
+            name="basket",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="accesses",
+                to="subscription.AccessBasket",
+                verbose_name="Panier",
+            ),
         ),
     ]

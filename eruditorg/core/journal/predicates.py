@@ -12,12 +12,14 @@ from .rules_helpers import get_editable_journals
 
 @rules.predicate
 def can_manage_a_journal(user):
-    return is_journal_member(user) and AuthorizationChecker([
-        AC.can_edit_journal_information,
-        AC.can_manage_authorizations,
-        AC.can_manage_issuesubmission,
-        AC.can_manage_individual_subscription,
-    ])
+    return is_journal_member(user) and AuthorizationChecker(
+        [
+            AC.can_edit_journal_information,
+            AC.can_manage_authorizations,
+            AC.can_manage_issuesubmission,
+            AC.can_manage_individual_subscription,
+        ]
+    )
 
 
 @rules.predicate

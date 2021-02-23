@@ -10,13 +10,17 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('editor', '0005_auto_20160920_1037'),
+        ("editor", "0005_auto_20160920_1037"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issuesubmission',
-            name='contact',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Personne-ressource'),
+            model_name="issuesubmission",
+            name="contact",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Personne-ressource",
+            ),
         ),
     ]

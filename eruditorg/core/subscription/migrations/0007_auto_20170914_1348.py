@@ -9,17 +9,24 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0006_journalaccesssubscription_journal_management_subscription'),
+        ("subscription", "0006_journalaccesssubscription_journal_management_subscription"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='journalaccesssubscription',
-            name='full_access',
+            model_name="journalaccesssubscription",
+            name="full_access",
         ),
         migrations.AlterField(
-            model_name='journalaccesssubscription',
-            name='journal_management_subscription',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='subscriptions', to='subscription.JournalManagementSubscription', verbose_name='Forfait'),
+            model_name="journalaccesssubscription",
+            name="journal_management_subscription",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="subscriptions",
+                to="subscription.JournalManagementSubscription",
+                verbose_name="Forfait",
+            ),
         ),
     ]

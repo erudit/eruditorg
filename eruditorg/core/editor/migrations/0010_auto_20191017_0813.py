@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('editor', '0009_auto_20190916_0919'),
+        ("editor", "0009_auto_20190916_0919"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issuesubmission',
-            name='comment',
-            field=models.TextField(blank=True, null=True, verbose_name='Commentaires sur le numéro'),
+            model_name="issuesubmission",
+            name="comment",
+            field=models.TextField(
+                blank=True, null=True, verbose_name="Commentaires sur le numéro"
+            ),
         ),
     ]

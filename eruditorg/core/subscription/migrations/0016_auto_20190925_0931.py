@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0015_remove_journalaccesssubscription_journal'),
+        ("subscription", "0015_remove_journalaccesssubscription_journal"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='institutionipaddressrange',
-            name='ip_end',
-            field=models.GenericIPAddressField(db_index=True, verbose_name='Adresse IP de fin'),
+            model_name="institutionipaddressrange",
+            name="ip_end",
+            field=models.GenericIPAddressField(db_index=True, verbose_name="Adresse IP de fin"),
         ),
         migrations.AlterField(
-            model_name='institutionipaddressrange',
-            name='ip_start',
-            field=models.GenericIPAddressField(db_index=True, verbose_name='Adresse IP de début'),
+            model_name="institutionipaddressrange",
+            name="ip_start",
+            field=models.GenericIPAddressField(db_index=True, verbose_name="Adresse IP de début"),
         ),
     ]

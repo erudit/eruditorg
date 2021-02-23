@@ -7,16 +7,19 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('subscription', '0010_journalmanagementplan_unlimited'), ('subscription', '0011_auto_20171002_0900')]
+    replaces = [
+        ("subscription", "0010_journalmanagementplan_unlimited"),
+        ("subscription", "0011_auto_20171002_0900"),
+    ]
 
     dependencies = [
-        ('subscription', '0009_auto_20170914_1407'),
+        ("subscription", "0009_auto_20170914_1407"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journalmanagementplan',
-            name='is_unlimited',
-            field=models.BooleanField(default=False, verbose_name='Illimité'),
+            model_name="journalmanagementplan",
+            name="is_unlimited",
+            field=models.BooleanField(default=False, verbose_name="Illimité"),
         ),
     ]

@@ -13,7 +13,7 @@ from django.conf import settings
 
 # The MANAGED const is set to True when testing so that we have a DB schema to put or test models
 # in it.
-MANAGED = getattr(settings, 'RESTRICTION_MODELS_ARE_MANAGED', False)
+MANAGED = getattr(settings, "RESTRICTION_MODELS_ARE_MANAGED", False)
 
 
 class Abonne(models.Model):
@@ -24,24 +24,32 @@ class Abonne(models.Model):
     referer = models.CharField(max_length=256, blank=True, null=True)
     courriel = models.CharField(max_length=256, blank=True, null=True)
     motdepasse = models.CharField(max_length=45, blank=True, null=True)
-    requesterid = models.CharField(db_column='requesterID', max_length=45, blank=True, null=True)  # Field name made lowercase.  # noqa
-    privilegeid = models.IntegerField(db_column='privilegeId', blank=True, null=True)  # Field name made lowercase.  # noqa
+    requesterid = models.CharField(
+        db_column="requesterID", max_length=45, blank=True, null=True
+    )  # Field name made lowercase.  # noqa
+    privilegeid = models.IntegerField(
+        db_column="privilegeId", blank=True, null=True
+    )  # Field name made lowercase.  # noqa
 
     class Meta:
         managed = MANAGED
-        db_table = 'abonne'
-        app_label = 'restriction'
+        db_table = "abonne"
+        app_label = "restriction"
 
 
 class Adressesip(models.Model):
-    adresseipid = models.BigIntegerField(db_column='adresseIPID', primary_key=True)  # Field name made lowercase.  # noqa
-    abonneid = models.IntegerField(db_column='AbonneID', blank=True, null=True)  # Field name made lowercase.  # noqa
+    adresseipid = models.BigIntegerField(
+        db_column="adresseIPID", primary_key=True
+    )  # Field name made lowercase.  # noqa
+    abonneid = models.IntegerField(
+        db_column="AbonneID", blank=True, null=True
+    )  # Field name made lowercase.  # noqa
     ip = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = MANAGED
-        db_table = 'adressesip'
-        app_label = 'restriction'
+        db_table = "adressesip"
+        app_label = "restriction"
 
 
 class Ipabonne(models.Model):
@@ -50,8 +58,8 @@ class Ipabonne(models.Model):
 
     class Meta:
         managed = MANAGED
-        db_table = 'ipabonne'
-        app_label = 'restriction'
+        db_table = "ipabonne"
+        app_label = "restriction"
 
 
 class Ipabonneinterval(models.Model):
@@ -61,8 +69,8 @@ class Ipabonneinterval(models.Model):
 
     class Meta:
         managed = MANAGED
-        db_table = 'ipabonneinterval'
-        app_label = 'restriction'
+        db_table = "ipabonneinterval"
+        app_label = "restriction"
 
 
 class Privilege(models.Model):
@@ -70,30 +78,32 @@ class Privilege(models.Model):
 
     class Meta:
         managed = MANAGED
-        db_table = 'privilege'
-        app_label = 'restriction'
+        db_table = "privilege"
+        app_label = "restriction"
 
 
 class Ressource(models.Model):
     libelle = models.CharField(max_length=50)
-    typeressource = models.CharField(db_column='typeRessource', max_length=10, blank=True, null=True)  # Field name made lowercase.  # noqa
+    typeressource = models.CharField(
+        db_column="typeRessource", max_length=10, blank=True, null=True
+    )  # Field name made lowercase.  # noqa
     path = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = MANAGED
-        db_table = 'ressource'
-        app_label = 'restriction'
+        db_table = "ressource"
+        app_label = "restriction"
 
 
 class Ressourceprivilege(models.Model):
-    privilegeid = models.IntegerField(db_column='privilegeId')  # Field name made lowercase.
-    ressourceid = models.IntegerField(db_column='ressourceId')  # Field name made lowercase.
+    privilegeid = models.IntegerField(db_column="privilegeId")  # Field name made lowercase.
+    ressourceid = models.IntegerField(db_column="ressourceId")  # Field name made lowercase.
 
     class Meta:
         managed = MANAGED
-        db_table = 'ressourceprivilege'
-        unique_together = (('privilegeid', 'ressourceid'),)
-        app_label = 'restriction'
+        db_table = "ressourceprivilege"
+        unique_together = (("privilegeid", "ressourceid"),)
+        app_label = "restriction"
 
 
 class Revue(models.Model):
@@ -103,16 +113,16 @@ class Revue(models.Model):
 
     class Meta:
         managed = MANAGED
-        db_table = 'revue'
-        app_label = 'restriction'
+        db_table = "revue"
+        app_label = "restriction"
 
 
 class Revueabonne(models.Model):
     abonneid = models.IntegerField()
     revueid = models.IntegerField()
-    anneeabonnement = models.IntegerField(db_column='anneeAbonnement')  # Field name made lowercase.
+    anneeabonnement = models.IntegerField(db_column="anneeAbonnement")  # Field name made lowercase.
 
     class Meta:
         managed = MANAGED
-        db_table = 'revueabonne'
-        app_label = 'restriction'
+        db_table = "revueabonne"
+        app_label = "restriction"

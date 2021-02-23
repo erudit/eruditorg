@@ -7,14 +7,17 @@ from .models import LegacyAccountProfile
 
 
 class LegacyAccountProfileAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'user__first_name', 'user__last_name', 'user__email', )
-    list_filter = ('user__is_active', 'origin', )
-    list_display = (
-        '_email',
-        '_first_name',
-        '_last_name',
-        '_origin'
+    search_fields = (
+        "id",
+        "user__first_name",
+        "user__last_name",
+        "user__email",
     )
+    list_filter = (
+        "user__is_active",
+        "origin",
+    )
+    list_display = ("_email", "_first_name", "_last_name", "_origin")
 
     def _origin(self, obj):
         for origin in LegacyAccountProfile.ORIGIN_CHOICES:
@@ -23,15 +26,18 @@ class LegacyAccountProfileAdmin(admin.ModelAdmin):
 
     def _email(self, obj):
         return obj.user.email
-    short_description = _('Courriel')
+
+    short_description = _("Courriel")
 
     def _first_name(self, obj):
         return obj.user.first_name
-    short_description = _('Prénom')
+
+    short_description = _("Prénom")
 
     def _last_name(self, obj):
         return obj.user.first_name
-    short_description = _('Nom')
+
+    short_description = _("Nom")
 
 
 admin.site.register(LegacyAccountProfile, LegacyAccountProfileAdmin)

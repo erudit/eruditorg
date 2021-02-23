@@ -9,50 +9,84 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('citations', '0001_initial'), ('citations', '0002_auto_20160629_1257'), ('citations', '0003_auto_20180405_0756'), ('citations', '0004_auto_20180410_0810')]
+    replaces = [
+        ("citations", "0001_initial"),
+        ("citations", "0002_auto_20160629_1257"),
+        ("citations", "0003_auto_20180405_0756"),
+        ("citations", "0004_auto_20180410_0810"),
+    ]
 
     initial = True
 
     dependencies = [
-        ('erudit', '0002_auto_20160414_1321'),
-        ('erudit', '0024_auto_20160629_0944'),
+        ("erudit", "0002_auto_20160414_1321"),
+        ("erudit", "0024_auto_20160629_0944"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SavedCitationList',
+            name="SavedCitationList",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
-                ('documents', models.ManyToManyField(to='erudit.EruditDocument', verbose_name='Documents Érudit')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Utilisateur",
+                    ),
+                ),
+                (
+                    "documents",
+                    models.ManyToManyField(
+                        to="erudit.EruditDocument", verbose_name="Documents Érudit"
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Listes de notices',
-                'verbose_name': 'Liste de notices',
+                "verbose_name_plural": "Listes de notices",
+                "verbose_name": "Liste de notices",
             },
         ),
         migrations.CreateModel(
-            name='SavedCitation',
+            name="SavedCitation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('solr_id', models.CharField(max_length=100)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='saved_citations', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("solr_id", models.CharField(max_length=100)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="saved_citations",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AlterUniqueTogether(
-            name='savedcitation',
-            unique_together=set([('user', 'solr_id')]),
+            name="savedcitation",
+            unique_together=set([("user", "solr_id")]),
         ),
         migrations.RemoveField(
-            model_name='savedcitationlist',
-            name='documents',
+            model_name="savedcitationlist",
+            name="documents",
         ),
         migrations.RemoveField(
-            model_name='savedcitationlist',
-            name='user',
+            model_name="savedcitationlist",
+            name="user",
         ),
         migrations.DeleteModel(
-            name='SavedCitationList',
+            name="SavedCitationList",
         ),
     ]

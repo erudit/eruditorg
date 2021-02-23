@@ -8,17 +8,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0008_auto_20170914_1356'),
+        ("subscription", "0008_auto_20170914_1356"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='journalmanagementplan',
-            options={'verbose_name': "Forfait d'abonnements individuels", 'verbose_name_plural': "Forfaits d'abonnements individuels"},
+            name="journalmanagementplan",
+            options={
+                "verbose_name": "Forfait d'abonnements individuels",
+                "verbose_name_plural": "Forfaits d'abonnements individuels",
+            },
         ),
         migrations.AlterField(
-            model_name='journalmanagementplan',
-            name='max_accounts',
-            field=models.PositiveSmallIntegerField(verbose_name='Nombre de comptes'),
+            model_name="journalmanagementplan",
+            name="max_accounts",
+            field=models.PositiveSmallIntegerField(verbose_name="Nombre de comptes"),
         ),
     ]

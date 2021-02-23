@@ -10,23 +10,61 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authorization', '0002_auto_20160405_0927'),
+        ("authorization", "0002_auto_20160405_0927"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='authorization',
-            name='authorization_codename',
-            field=models.CharField(choices=[('royalty_reports:can_consult_royalty_reports', 'Consultation des rapports de redevances'), ('editor:can_edit_journal_information', 'Éditer les informations de revues'), ('authorization:can_manage_authorizations', 'Autorisations'), ('subscriptions:can_manage_individual_subscription', 'Abonnements'), ('editor:can_manage_issuesubmission', 'Dépôt de fichiers'), ('subscriptions:can_manage_organisation_members', "Gestion des membres d'un abonnement"), ('subscriptions:can_manage_organisation_subscription_information', "Gestion des informations d'un abonnement"), ('subscriptions:can_manage_organisation_subscription_ips', "Gestion des adresses IP de l'abonnement"), ('editor:can_review_issuesubmission', 'Valider les numéros')], max_length=100, verbose_name='Autorisation'),
+            model_name="authorization",
+            name="authorization_codename",
+            field=models.CharField(
+                choices=[
+                    (
+                        "royalty_reports:can_consult_royalty_reports",
+                        "Consultation des rapports de redevances",
+                    ),
+                    ("editor:can_edit_journal_information", "Éditer les informations de revues"),
+                    ("authorization:can_manage_authorizations", "Autorisations"),
+                    ("subscriptions:can_manage_individual_subscription", "Abonnements"),
+                    ("editor:can_manage_issuesubmission", "Dépôt de fichiers"),
+                    (
+                        "subscriptions:can_manage_organisation_members",
+                        "Gestion des membres d'un abonnement",
+                    ),
+                    (
+                        "subscriptions:can_manage_organisation_subscription_information",
+                        "Gestion des informations d'un abonnement",
+                    ),
+                    (
+                        "subscriptions:can_manage_organisation_subscription_ips",
+                        "Gestion des adresses IP de l'abonnement",
+                    ),
+                    ("editor:can_review_issuesubmission", "Valider les numéros"),
+                ],
+                max_length=100,
+                verbose_name="Autorisation",
+            ),
         ),
         migrations.AlterField(
-            model_name='authorization',
-            name='group',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='auth.Group', verbose_name='Groupe'),
+            model_name="authorization",
+            name="group",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="auth.Group",
+                verbose_name="Groupe",
+            ),
         ),
         migrations.AlterField(
-            model_name='authorization',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur'),
+            model_name="authorization",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Utilisateur",
+            ),
         ),
     ]

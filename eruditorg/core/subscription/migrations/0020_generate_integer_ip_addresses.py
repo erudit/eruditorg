@@ -5,7 +5,7 @@ import ipaddress
 
 
 def generate_integer_ip_addresses(apps, schema_editor):
-    InstitutionIPAddressRange = apps.get_model('subscription', 'InstitutionIPAddressRange')
+    InstitutionIPAddressRange = apps.get_model("subscription", "InstitutionIPAddressRange")
 
     for range in InstitutionIPAddressRange.objects.all():
         range.ip_start_int = int(ipaddress.ip_address(range.ip_start))
@@ -16,9 +16,7 @@ def generate_integer_ip_addresses(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0019_auto_20191016_1658'),
+        ("subscription", "0019_auto_20191016_1658"),
     ]
 
-    operations = [
-        migrations.RunPython(generate_integer_ip_addresses)
-    ]
+    operations = [migrations.RunPython(generate_integer_ip_addresses)]

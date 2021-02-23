@@ -11,7 +11,7 @@ logger = structlog.getLogger(__name__)
 
 
 def metric(metric_name, num=1, time=None, tags=None, **kwargs):
-    """ Increments a specific metric.
+    """Increments a specific metric.
 
     This function writes a point corresponding to a specific metric into an InfluxDB database. It
     can take additional keyword arguments that will be stored into the fields associated with the
@@ -27,16 +27,16 @@ def metric(metric_name, num=1, time=None, tags=None, **kwargs):
     :type tags: dict
 
     """
-    metric_fields = {'num': num}
+    metric_fields = {"num": num}
     metric_fields.update(kwargs)
     metric_json_body = {
-        'measurement': metric_name,
-        'tags': tags or {},
-        'fields': metric_fields,
+        "measurement": metric_name,
+        "tags": tags or {},
+        "fields": metric_fields,
     }
 
     if time:
-        metric_json_body.update({'time': time})
+        metric_json_body.update({"time": time})
 
     try:
         assert metrics_settings.ACTIVATED
@@ -47,4 +47,4 @@ def metric(metric_name, num=1, time=None, tags=None, **kwargs):
         # The tracking is deactivated, so there's nothing else to do
         pass
     except ConnectionError:
-        logger.error('configuration.error', msg="InfluxDB server unavailable")
+        logger.error("configuration.error", msg="InfluxDB server unavailable")

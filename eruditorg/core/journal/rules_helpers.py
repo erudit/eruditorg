@@ -15,8 +15,7 @@ def get_editable_journals(user):
     if production_team_group.exists():
         # Get the journals for which the user is a member or the journals of the production team.
         return Journal.objects.filter(
-            Q(members=user) |
-            Q(productionteam__group__in=production_team_group)
+            Q(members=user) | Q(productionteam__group__in=production_team_group)
         )
 
     # TODO: add proper permissions checks

@@ -13,7 +13,7 @@ class ImportException(Exception):
 
 
 class Command(BaseCommand):
-    args = '<action:check_ongoing_restrictions|gen_dummy_badges>'
+    args = "<action:check_ongoing_restrictions|gen_dummy_badges>"
     help = 'Import data from the "restriction" database'
 
     def handle(self, *args, **options):
@@ -31,5 +31,5 @@ class Command(BaseCommand):
         for abonne in Abonne.objects.all():
             if not abonne.icone:
                 continue
-            im = Image.frombytes('L', (100, 100), b"\x00" * 100 * 100)
+            im = Image.frombytes("L", (100, 100), b"\x00" * 100 * 100)
             im.save(op.join(restriction_settings.ABONNE_ICONS_PATH, abonne.icone))

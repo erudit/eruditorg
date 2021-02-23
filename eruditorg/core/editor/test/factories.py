@@ -13,11 +13,11 @@ class IssueSubmissionFactory(factory.django.DjangoModelFactory):
     contact = factory.SubFactory(UserFactory)
 
     class Meta:
-        model = 'editor.IssueSubmission'
+        model = "editor.IssueSubmission"
 
 
 class ProductionTeamFactory(factory.django.DjangoModelFactory):
     group = factory.SubFactory(GroupFactory)
 
     class Meta:
-        model = 'editor.ProductionTeam'
+        model = "editor.ProductionTeam"
