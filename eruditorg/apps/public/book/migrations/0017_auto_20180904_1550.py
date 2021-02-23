@@ -8,18 +8,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0016_auto_20180822_1011'),
+        ("book", "0016_auto_20180822_1011"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='is_open_access',
-            field=models.BooleanField(default=False, verbose_name='Disponible en libre accès ?'),
+            model_name="book",
+            name="is_open_access",
+            field=models.BooleanField(default=False, verbose_name="Disponible en libre accès ?"),
         ),
         migrations.AlterField(
-            model_name='book',
-            name='path',
-            field=models.CharField(blank=True, max_length=200, null=True, verbose_name='Répertoire'),
+            model_name="book",
+            name="path",
+            field=models.CharField(
+                blank=True, max_length=200, null=True, verbose_name="Répertoire"
+            ),
         ),
     ]

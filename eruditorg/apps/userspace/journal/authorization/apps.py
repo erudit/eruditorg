@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class AuthorizationConfig(AppConfig):
-    label = 'userspace_journal_authorizations'
-    name = 'apps.userspace.journal.authorization'
+    label = "userspace_journal_authorizations"
+    name = "apps.userspace.journal.authorization"

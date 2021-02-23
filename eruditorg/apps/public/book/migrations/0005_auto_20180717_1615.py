@@ -8,19 +8,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0004_auto_20180717_1547'),
+        ("book", "0004_auto_20180717_1547"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='authors',
-            field=models.CharField(blank=True, max_length=200, null=True, verbose_name='Auteurs'),
+            model_name="book",
+            name="authors",
+            field=models.CharField(blank=True, max_length=200, null=True, verbose_name="Auteurs"),
         ),
         migrations.AddField(
-            model_name='book',
-            name='contribution',
-            field=models.BooleanField(default=True, verbose_name='Contribution des auteurs de type « direction » ?'),
+            model_name="book",
+            name="contribution",
+            field=models.BooleanField(
+                default=True, verbose_name="Contribution des auteurs de type « direction » ?"
+            ),
             preserve_default=False,
         ),
     ]

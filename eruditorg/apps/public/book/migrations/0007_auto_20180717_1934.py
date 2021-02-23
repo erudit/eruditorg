@@ -8,18 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0006_auto_20180717_1857'),
+        ("book", "0006_auto_20180717_1857"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='year',
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Année de publication'),
+            model_name="book",
+            name="year",
+            field=models.PositiveIntegerField(
+                blank=True, null=True, verbose_name="Année de publication"
+            ),
         ),
         migrations.AlterField(
-            model_name='book',
-            name='type',
-            field=models.CharField(choices=[('li', 'Livre'), ('co', 'Actes')], default='li', max_length=2),
+            model_name="book",
+            name="type",
+            field=models.CharField(
+                choices=[("li", "Livre"), ("co", "Actes")], default="li", max_length=2
+            ),
         ),
     ]

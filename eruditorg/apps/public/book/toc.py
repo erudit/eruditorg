@@ -4,12 +4,13 @@ from pathlib import Path
 
 from django.utils.text import slugify
 from lxml import etree
+
 # noinspection PyProtectedMember
 from lxml.etree import _Element as XMLElement
 
 
 def get_xml_from_file(path) -> XMLElement:
-    with open(str(path), 'rb') as file:
+    with open(str(path), "rb") as file:
         content = file.read()
     return etree.fromstring(content, parser=etree.XMLParser(recover=True))
 
@@ -19,31 +20,54 @@ def stringify_children(node):
     if node is None:
         return None
 
-    node_content = ''.join([node.text or ''] + [etree.tounicode(e) for e in node])
-    return re.sub('[ \n]+', ' ', node_content)
+    node_content = "".join([node.text or ""] + [etree.tounicode(e) for e in node])
+    return re.sub("[ \n]+", " ", node_content)
 
 
 TOCChapter = namedtuple(
-    'TOCChapter',
-    ('id', 'title', 'subtitle', 'authors', 'first_page',
-     'last_page', 'pdf_path', 'is_section', 'is_book')
+    "TOCChapter",
+    (
+        "id",
+        "title",
+        "subtitle",
+        "authors",
+        "first_page",
+        "last_page",
+        "pdf_path",
+        "is_section",
+        "is_book",
+    ),
 )
 
 TOCBook = namedtuple(
-    'TOCBook',
-    ('id', 'title', 'subtitle', 'authors', 'first_page', 'last_page',
-     'pdf_path', 'is_section', 'is_book', 'slug')
+    "TOCBook",
+    (
+        "id",
+        "title",
+        "subtitle",
+        "authors",
+        "first_page",
+        "last_page",
+        "pdf_path",
+        "is_section",
+        "is_book",
+        "slug",
+    ),
 )
 
-TOCSection = namedtuple(
-    'TOCSection',
-    ('title', 'level', 'is_section')
-)
+TOCSection = namedtuple("TOCSection", ("title", "level", "is_section"))
 
 TableOfContents = namedtuple(
-    'TableOfContents',
-    ('entries', 'book_description', 'book_title', 'book_author', 'previous_chapters',
-     'next_chapters', 'chapters')
+    "TableOfContents",
+    (
+        "entries",
+        "book_description",
+        "book_title",
+        "book_author",
+        "previous_chapters",
+        "next_chapters",
+        "chapters",
+    ),
 )
 
 
@@ -66,9 +90,15 @@ def parse_toc_chapter(href: XMLElement, book_path: Path) -> TOCChapter:
     last_page = None if last_page_element is None else last_page_element.text
     pdf_path = book_path / href
     chapter = TOCChapter(
-        id=chapter_id, title=title, subtitle=subtitle, authors=authors,
-        first_page=first_page, last_page=last_page, pdf_path=str(pdf_path), is_section=False,
-        is_book=False
+        id=chapter_id,
+        title=title,
+        subtitle=subtitle,
+        authors=authors,
+        first_page=first_page,
+        last_page=last_page,
+        pdf_path=str(pdf_path),
+        is_section=False,
+        is_book=False,
     )
     return chapter
 
@@ -76,9 +106,16 @@ def parse_toc_chapter(href: XMLElement, book_path: Path) -> TOCChapter:
 def parse_toc_book(xml: XMLElement) -> TOCBook:
     book_desc, book_title, book_author = parse_book(xml)
     return TOCBook(
-        id="", title=book_title, subtitle="", authors=book_author,
-        first_page="", last_page="", pdf_path="", is_book=True,
-        is_section=False, slug=slugify(book_title)
+        id="",
+        title=book_title,
+        subtitle="",
+        authors=book_author,
+        first_page="",
+        last_page="",
+        pdf_path="",
+        is_book=True,
+        is_section=False,
+        slug=slugify(book_title),
     )
 
 
@@ -90,27 +127,26 @@ def parse_book(xml: XMLElement) -> tuple:
 
 
 def read_toc(book_path: Path) -> TableOfContents:
-    xml = get_xml_from_file(book_path / 'index.xml')
+    xml = get_xml_from_file(book_path / "index.xml")
     book_desc, book_title, book_author = parse_book(xml)
-    toc_elements = xml.xpath('.//*[self::h3 or self::h4 or '
-                             'self::div[@class="entreetdm"]]')
+    toc_elements = xml.xpath(".//*[self::h3 or self::h4 or " 'self::div[@class="entreetdm"]]')
     toc_entries = []
 
     for toc_element in toc_elements:
-        if toc_element.tag in ('h3', 'h4'):
+        if toc_element.tag in ("h3", "h4"):
             title = stringify_children(toc_element)
             toc_entries.append(TOCSection(title=title, level=toc_element.tag, is_section=True))
         else:
             href = toc_element.find('p[@class="doc"]/a')
             if href is not None:
-                href = href.attrib['href']
-                if href[-4:] != '.pdf':
-                    raise Exception('only pdf chapters')
+                href = href.attrib["href"]
+                if href[-4:] != ".pdf":
+                    raise Exception("only pdf chapters")
                 toc_entry = parse_toc_chapter(href, book_path)
                 toc_entries.append(toc_entry)
             href = toc_element.find('p[@class="book"]/a')
             if href is not None:
-                href = href.attrib['href']
+                href = href.attrib["href"]
                 book_xml = get_xml_from_file(book_path / href)
                 toc_entries.append(parse_toc_book(book_xml))
     previous_chapters = {}
@@ -126,9 +162,15 @@ def read_toc(book_path: Path) -> TableOfContents:
         else:
             next_chapters[chapter.id] = None
 
-    return TableOfContents(entries=toc_entries, book_description=book_desc, book_title=book_title,
-                           book_author=book_author, previous_chapters=previous_chapters,
-                           next_chapters=next_chapters, chapters={c.id: c for c in chapters})
+    return TableOfContents(
+        entries=toc_entries,
+        book_description=book_desc,
+        book_title=book_title,
+        book_author=book_author,
+        previous_chapters=previous_chapters,
+        next_chapters=next_chapters,
+        chapters={c.id: c for c in chapters},
+    )
 
 
 def find_chapter_xml(book_path: Path, chapter_id: str) -> XMLElement:

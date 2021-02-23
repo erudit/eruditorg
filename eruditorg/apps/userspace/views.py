@@ -8,7 +8,7 @@ from core.journal.rules_helpers import get_editable_organisations
 
 
 class UserspaceHomeView(LoginRequiredMixin, TemplateView):
-    template_name = 'userspace/home.html'
+    template_name = "userspace/home.html"
 
     def get(self, request):
         journal_qs = get_editable_journals(self.request.user)
@@ -18,10 +18,11 @@ class UserspaceHomeView(LoginRequiredMixin, TemplateView):
 
         if journal_exists and organisation_exists:
             return self.render_to_response(
-                self.get_context_data(journals=journal_qs, organisations=organisation_qs))
+                self.get_context_data(journals=journal_qs, organisations=organisation_qs)
+            )
         elif journal_exists:
-            return HttpResponseRedirect(reverse('userspace:journal:entrypoint'))
+            return HttpResponseRedirect(reverse("userspace:journal:entrypoint"))
         elif organisation_exists:
-            return HttpResponseRedirect(reverse('userspace:library:entrypoint'))
+            return HttpResponseRedirect(reverse("userspace:library:entrypoint"))
         else:
-            return HttpResponseRedirect(reverse('public:auth:personal_data'))
+            return HttpResponseRedirect(reverse("public:auth:personal_data"))

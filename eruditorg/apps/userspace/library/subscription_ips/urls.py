@@ -8,8 +8,11 @@ from . import views
 app_name = "subscription_ips"
 
 urlpatterns = [
-    url(r'^$', views.InstitutionIPAddressRangeListView.as_view(), name='list'),
-    url(_(r'^ajout/$'), views.InstitutionIPAddressRangeCreateView.as_view(), name='create'),
-    url(_(r'^(?P<pk>[0-9]+)/supprimer/$'),
-        views.InstitutionIPAddressRangeDeleteView.as_view(), name='delete'),
+    url(r"^$", views.InstitutionIPAddressRangeListView.as_view(), name="list"),
+    url(_(r"^ajout/$"), views.InstitutionIPAddressRangeCreateView.as_view(), name="create"),
+    url(
+        _(r"^(?P<pk>[0-9]+)/supprimer/$"),
+        views.InstitutionIPAddressRangeDeleteView.as_view(),
+        name="delete",
+    ),
 ]

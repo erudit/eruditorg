@@ -14,14 +14,13 @@ from .forms import JournalInformationForm, ContributorInlineFormset
 
 
 class JournalInformationCollaboratorDeleteView(DeleteView):
-
     def get_object(self):
-        if 'contributor_id' not in self.request.POST:
+        if "contributor_id" not in self.request.POST:
             raise ValueError
-        contributor_id = self.request.POST.get('contributor_id')
+        contributor_id = self.request.POST.get("contributor_id")
         contributor = Contributor.objects.get(pk=contributor_id)
         journal = contributor.journal_information.journal
-        if not self.request.user.has_perm('journal.edit_journal_information', journal):
+        if not self.request.user.has_perm("journal.edit_journal_information", journal):
             raise PermissionError
         return contributor
 
@@ -29,22 +28,22 @@ class JournalInformationCollaboratorDeleteView(DeleteView):
         return "/"
 
 
-class JournalInformationUpdateView(
-        JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
+class JournalInformationUpdateView(JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
     """
     Displays a form to update journal information. JournalInformation instances
     can hold information in many languages. The language used to save the values
     provided by the form can be controlled using a GET parameter whose name is
     defined using the `lang_get_parameter` attribute.
     """
-    context_object_name = 'journal_info'
+
+    context_object_name = "journal_info"
     form_class = JournalInformationForm
-    lang_get_parameter = 'lang'
-    menu_journal = 'information'
+    lang_get_parameter = "lang"
+    menu_journal = "information"
     model = JournalInformation
-    permission_required = 'journal.edit_journal_information'
+    permission_required = "journal.edit_journal_information"
     raise_exception = True
-    template_name = 'userspace/journal/information/journalinformation_update.html'
+    template_name = "userspace/journal/information/journalinformation_update.html"
 
     def get_title(self):
         return _("À propos")
@@ -86,21 +85,25 @@ class JournalInformationUpdateView(
 
     def get_form_kwargs(self):
         kwargs = super(JournalInformationUpdateView, self).get_form_kwargs()
-        kwargs['language_code'] = self.selected_language
-        kwargs['request'] = self.request
+        kwargs["language_code"] = self.selected_language
+        kwargs["request"] = self.request
         return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(JournalInformationUpdateView, self).get_context_data(**kwargs)
-        context['selected_language'] = self.selected_language
-        if 'formset' in kwargs:
-            context['formset'] = kwargs['formset']
+        context["selected_language"] = self.selected_language
+        if "formset" in kwargs:
+            context["formset"] = kwargs["formset"]
         else:
-            context['formset'] = ContributorInlineFormset(instance=self.object)
+            context["formset"] = ContributorInlineFormset(instance=self.object)
         return context
 
     def get_success_url(self):
-        return '{url}?{lang_get_parameter}={lang_value}'.format(
-            url=reverse('userspace:journal:information:update',
-                        kwargs={'journal_pk': self.current_journal.pk}),
-            lang_get_parameter=self.lang_get_parameter, lang_value=self.selected_language)
+        return "{url}?{lang_get_parameter}={lang_value}".format(
+            url=reverse(
+                "userspace:journal:information:update",
+                kwargs={"journal_pk": self.current_journal.pk},
+            ),
+            lang_get_parameter=self.lang_get_parameter,
+            lang_value=self.selected_language,
+        )

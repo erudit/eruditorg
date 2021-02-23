@@ -4,5 +4,5 @@ from django.apps import AppConfig
 
 
 class JournalConfig(AppConfig):
-    label = 'userspace_library'
-    name = 'apps.userspace.library'
+    label = "userspace_library"
+    name = "apps.userspace.library"

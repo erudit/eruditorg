@@ -8,20 +8,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0015_auto_20180808_0836'),
+        ("book", "0015_auto_20180808_0836"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='slug',
-            field=models.SlugField(default='', max_length=200),
+            model_name="book",
+            name="slug",
+            field=models.SlugField(default="", max_length=200),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='bookcollection',
-            name='slug',
-            field=models.SlugField(default='', max_length=200),
+            model_name="bookcollection",
+            name="slug",
+            field=models.SlugField(default="", max_length=200),
             preserve_default=False,
         ),
     ]

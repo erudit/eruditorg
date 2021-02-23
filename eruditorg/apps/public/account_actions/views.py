@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from account_actions.views.generic import AccountActionLandingView as BaseAccountActionLandingView
-from account_actions.views.generic import AccountActionConsumeView  # noqa
+from account_actions.views.generic import AccountActionConsumeView
 from account_actions.views.generic import AccountActionTokenMixin
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -22,29 +22,29 @@ class AccountActionRegisterView(PermissionRequiredMixin, AccountActionTokenMixin
     Allows to create a User account using an account action token. The considered can only create
     an account if the token can be consumed.
     """
+
     form_class = AccountActionRegisterForm
     raise_exception = True
-    template_name = 'public/account_actions/register.html'
+    template_name = "public/account_actions/register.html"
 
     def form_valid(self, form):
         response = super(AccountActionRegisterView, self).form_valid(form)
 
         # We log the user in
         new_authenticated_user = authenticate(
-            username=form.cleaned_data['email'],
-            password=form.cleaned_data['password1'])
+            username=form.cleaned_data["email"], password=form.cleaned_data["password1"]
+        )
         login(self.request, new_authenticated_user)
 
         return response
 
     def get_form_kwargs(self):
         kwargs = super(AccountActionRegisterView, self).get_form_kwargs()
-        kwargs.update({'token': self.token})
+        kwargs.update({"token": self.token})
         return kwargs
 
     def get_success_url(self):
-        messages.success(
-            self.request, self.action.get_consumption_success_message(self.token))
+        messages.success(self.request, self.action.get_consumption_success_message(self.token))
         return self.action.get_consumption_redirect_url(self.token)
 
     def has_permission(self):

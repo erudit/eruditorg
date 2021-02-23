@@ -9,18 +9,12 @@ from core.subscription.predicates import can_manage_an_organisation
 
 # This permission assume to use a 'Journal' object to perform the perm check
 rules.add_perm(
-    'userspace.access',
-    is_authenticated & (
-        is_superuser |
-        is_staff |
-        can_manage_a_journal |
-        can_manage_an_organisation
-    ),
+    "userspace.access",
+    is_authenticated
+    & (is_superuser | is_staff | can_manage_a_journal | can_manage_an_organisation),
 )
 
 rules.add_perm(
-    'userspace.staff_access',
-    is_authenticated & (
-        is_superuser | is_staff
-    ),
+    "userspace.staff_access",
+    is_authenticated & (is_superuser | is_staff),
 )

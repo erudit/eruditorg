@@ -9,18 +9,25 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book', '0008_bookcollection'),
+        ("book", "0008_bookcollection"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='collection',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='book.BookCollection'),
+            model_name="book",
+            name="collection",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="book.BookCollection",
+            ),
         ),
         migrations.AlterField(
-            model_name='bookcollection',
-            name='description',
-            field=models.TextField(blank=True, max_length=1500, null=True, verbose_name='Description de la collection'),
+            model_name="bookcollection",
+            name="description",
+            field=models.TextField(
+                blank=True, max_length=1500, null=True, verbose_name="Description de la collection"
+            ),
         ),
     ]
