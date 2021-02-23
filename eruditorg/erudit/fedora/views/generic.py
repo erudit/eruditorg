@@ -26,7 +26,10 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
     The FedoraFileDatastreamView CBV can be used to expose Fedora file datastreams
     through Django views.
     """
-    http_method_names = ['get', ]
+
+    http_method_names = [
+        "get",
+    ]
 
     # The following attributes should be specified on each subclass
     content_type = None
@@ -51,8 +54,9 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         """
         if self.fedora_object_class is None:
             raise ImproperlyConfigured(
-                '{cls} is missing a Fedora object. Define {cls}.fedora_object_class '
-                'or override {cls}.get_fedora_object().'.format(cls=self.__class__.__name__))
+                "{cls} is missing a Fedora object. Define {cls}.fedora_object_class "
+                "or override {cls}.get_fedora_object().".format(cls=self.__class__.__name__)
+            )
         if self._fedora_object_pid is None:
             return None
         return self.fedora_object_class(api, self._fedora_object_pid)
@@ -71,10 +75,11 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
             obj = self.get_object()
         except ImproperlyConfigured:
             raise ImproperlyConfigured(
-                '{cls} is missing a PID. Define {cls}.model or {cls}.get_object() '
-                'if you want the PID to be retrieved from a Fedora-based Django model. '
-                'Override {cls}.get_fedora_object_pid() if you want to generate the PID '
-                'by yourself.'.format(cls=self.__class__.__name__))
+                "{cls} is missing a PID. Define {cls}.model or {cls}.get_object() "
+                "if you want the PID to be retrieved from a Fedora-based Django model. "
+                "Override {cls}.get_fedora_object_pid() if you want to generate the PID "
+                "by yourself.".format(cls=self.__class__.__name__)
+            )
         return obj.pid
 
     def write_to_response(self, fedora_object):
@@ -84,8 +89,9 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         """
         if self.datastream_name is None:
             raise ImproperlyConfigured(
-                '{cls} is missing a datastream. Define {cls}.datastream_name '
-                'or override {cls}.get_datastream_content().'.format(cls=self.__class__.__name__))
+                "{cls} is missing a datastream. Define {cls}.datastream_name "
+                "or override {cls}.get_datastream_content().".format(cls=self.__class__.__name__)
+            )
         try:
             content = self.get_datastream_content(fedora_object)
         except RequestFailed:  # pragma: no cover
@@ -96,7 +102,7 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         except ConnectionError:
             # This means that the Fedora repository can not be accessed ; this
             # error should be logged.
-            logger.error('configuration.error', msg="Fedora repository unavailable")
+            logger.error("configuration.error", msg="Fedora repository unavailable")
             raise Http404
 
         response = self.get_response_object(fedora_object)
@@ -124,8 +130,9 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         """
         if self.content_type is None:
             raise ImproperlyConfigured(
-                '{cls} is missing a content type. '
-                'Define {cls}.content_type.'.format(cls=self.__class__.__name__))
+                "{cls} is missing a content type. "
+                "Define {cls}.content_type.".format(cls=self.__class__.__name__)
+            )
         return self.content_type
 
     def get_datastream_content(self, fedora_object):
@@ -147,7 +154,7 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         """
         Writes the content of the Fedora datastream to the HttpResponse object.
         """
-        response.write(content.read() if hasattr(content, 'read') else content)
+        response.write(content.read() if hasattr(content, "read") else content)
 
     @property
     def _fedora_object_pid(self):

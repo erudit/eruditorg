@@ -11,7 +11,7 @@ logger = structlog.getLogger(__name__)
 
 def get_pids(query):
     """ Returns the PIDS corresponding to a given Fedora query. """
-    ns_type = {'type': 'http://www.fedora.info/definitions/1/0/types/'}
+    ns_type = {"type": "http://www.fedora.info/definitions/1/0/types/"}
     pids = []
     session_token = None
     remaining_pids = True
@@ -23,8 +23,8 @@ def get_pids(query):
         response = api.findObjects(query, chunksize=1000, session_token=session_token)
         # Tries to fetch the PIDs by parsing the response
         tree = et.fromstring(response.content)
-        pid_nodes = tree.findall('.//type:pid', ns_type)
-        session_token = tree.find('./type:listSession//type:token', ns_type)
+        pid_nodes = tree.findall(".//type:pid", ns_type)
+        session_token = tree.find("./type:listSession//type:token", ns_type)
         _pids = [n.text for n in pid_nodes]
         pids.extend(_pids)
 
@@ -45,10 +45,11 @@ def is_issue_published_in_fedora(issue_pid, journal=None, journal_pid=None):
         return False
     else:
         publications_tree = remove_xml_namespaces(
-            et.fromstring(fedora_journal.publications.content.serialize()))
-        xml_issue_nodes = publications_tree.findall('.//numero')
+            et.fromstring(fedora_journal.publications.content.serialize())
+        )
+        xml_issue_nodes = publications_tree.findall(".//numero")
         for issue_node in xml_issue_nodes:
-            if issue_node.get('pid') == issue_pid:
+            if issue_node.get("pid") == issue_pid:
                 return True
     return False
 
@@ -61,15 +62,15 @@ def get_unimported_issues_pids(include_unpublished_issues=False):
 
     missing_issues = []
     for issue_pid in issue_pids:
-        pid_parts = issue_pid.split('.')
+        pid_parts = issue_pid.split(".")
         issue_localidentifier = pid_parts[-1]
 
-        journal_pid = ".".join(pid_parts[:len(pid_parts) - 1])
+        journal_pid = ".".join(pid_parts[: len(pid_parts) - 1])
         try:
             Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
             is_published = is_issue_published_in_fedora(issue_pid, journal_pid=journal_pid)
-            if is_published or (not is_issue_published_in_fedora and include_unpublished_issues):  # noqa
+            if is_published or (not is_issue_published_in_fedora and include_unpublished_issues):
                 missing_issues.append(issue_pid)
                 logger.info("issue.unimported", pid=issue_pid, published_in_fedora=is_published)
     return missing_issues
@@ -81,7 +82,7 @@ def localidentifier_from_pid(pid):
 
 
 def get_journal_issue_pids_to_sync(journal, published_in_fedora_pids):
-    """ Returns a list of issue pids in need for synchronization for a given journal.
+    """Returns a list of issue pids in need for synchronization for a given journal.
 
     Those issues are either:
         * published in fedora but not on www

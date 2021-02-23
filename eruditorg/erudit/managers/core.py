@@ -2,7 +2,6 @@ from django.db import models
 
 
 class JournalCollectionManager(models.Manager):
-
     def get_queryset(self):
         """ Returns all collections associated with journals. """
         qs = super().get_queryset()

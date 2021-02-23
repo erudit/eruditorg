@@ -22,23 +22,23 @@ from erudit.solr.models import Article
 
 
 SOLR2DOC = {
-    'ID': 'id',
-    'NumeroID': 'issue_localidentifier',
-    'RevueID': 'journal_code',
-    'AuteurNP_fac': 'authors',
-    'Auteur_tri': 'authors',
-    'Titre_fr': 'title',
-    'TexteComplet': 'title',
-    'Corpus_fac': 'type',
-    'TypeArticle_fac': 'article_type',
-    'TitreCollection_fac': 'collection',
-    'RevueAbr': 'journal_code',
-    'AnneePublication': 'year',
-    'DateAjoutErudit': 'date_added',
-    'Fonds_fac': 'collection',
-    'Editeur': 'collection',
-    'Annee': 'year',
-    'Langue': 'language',
+    "ID": "id",
+    "NumeroID": "issue_localidentifier",
+    "RevueID": "journal_code",
+    "AuteurNP_fac": "authors",
+    "Auteur_tri": "authors",
+    "Titre_fr": "title",
+    "TexteComplet": "title",
+    "Corpus_fac": "type",
+    "TypeArticle_fac": "article_type",
+    "TitreCollection_fac": "collection",
+    "RevueAbr": "journal_code",
+    "AnneePublication": "year",
+    "DateAjoutErudit": "date_added",
+    "Fonds_fac": "collection",
+    "Editeur": "collection",
+    "Annee": "year",
+    "Langue": "language",
 }
 
 
@@ -51,8 +51,15 @@ class SolrDocument:
         # values that are returned as-is in as_result
         self.solr_attrs = solr_attrs
         OPTIONAL_ARGS = [
-            'article_type', 'journal_code', 'collection', 'year', 'date_added', 'repository',
-            'issue_localidentifier', 'language']
+            "article_type",
+            "journal_code",
+            "collection",
+            "year",
+            "date_added",
+            "repository",
+            "issue_localidentifier",
+            "language",
+        ]
         for attr in OPTIONAL_ARGS:
             val = kwargs.get(attr)
             if isinstance(val, int):
@@ -70,8 +77,8 @@ class SolrDocument:
                 authors = [a.format_name() for a in authors]
             authors = authors or []
         article_type = erudit_article.article_type
-        if article_type == 'compterendu':
-            article_type = 'Compte rendu'
+        if article_type == "compterendu":
+            article_type = "Compte rendu"
         journal = article.issue.journal
         title = erudit_article.get_formatted_title()
         return SolrDocument(
@@ -79,12 +86,13 @@ class SolrDocument:
             journal_code=journal.code,
             issue_localidentifier=article.issue.localidentifier,
             title=title,
-            type='Article' if article.issue.journal.is_scientific() else 'Culturel',
+            type="Article" if article.issue.journal.is_scientific() else "Culturel",
             article_type=article_type,
             authors=authors,
             year=str(article.issue.year),
             collection=journal.collection.name,
-            solr_attrs=solr_attrs)
+            solr_attrs=solr_attrs,
+        )
 
     def as_result(self):
         result = {}
@@ -105,17 +113,17 @@ class FakeSolrResults:
             facet_fields = {}
         self.hits = len(docs)
         if rows:
-            docs = list(docs)[:int(rows)]
+            docs = list(docs)[: int(rows)]
         self.docs = [d.as_result() for d in docs]
         self.facets = {
-            'facet_fields': facet_fields,
+            "facet_fields": facet_fields,
         }
 
 
 def unescape(s):
     if s.startswith('"') and s.endswith('"'):
         s = s[1:-1]
-    return s.replace('\\-', '-')
+    return s.replace("\\-", "-")
 
 
 def normalize_pq(pq):
@@ -143,7 +151,7 @@ def matches_pattern(pq, pattern):
     if not isinstance(pq, pclass):
         return False
     for k, v in pattrs.items():
-        if k != 'flags' and getattr(pq, k) != v:
+        if k != "flags" and getattr(pq, k) != v:
             return False
     if pchildren:
         # Order doesn't matter for children matching
@@ -156,7 +164,7 @@ def matches_pattern(pq, pattern):
                 return False
         for child in pchildren:
             child_attrs = child[1]
-            if 'optional' not in child_attrs.get('flags', set()):
+            if "optional" not in child_attrs.get("flags", set()):
                 return False
         return True
     else:
@@ -200,7 +208,7 @@ class FakeSolrClient:
 
         def apply_filters(docs, searchvals):
             def val_matches(docval, searchval):
-                if searchval.endswith('*'):
+                if searchval.endswith("*"):
                     if docval.startswith(searchval[:-1]):
                         return True
                 elif docval == searchval:
@@ -226,61 +234,69 @@ class FakeSolrClient:
                     facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
 
             # apply sorting
-            sort_args = kwargs.get('sort')
+            sort_args = kwargs.get("sort")
             if sort_args:
                 if isinstance(sort_args, str):
                     sort_args = [sort_args]
                 for sort_arg in reversed(sort_args):
                     field_name, order = sort_arg.split()
-                    if field_name == 'score':
+                    if field_name == "score":
                         # we don't support that, skip
                         continue
-                    reverse = order == 'desc'
+                    reverse = order == "desc"
                     sortattr = SOLR2DOC[field_name]
                     docs = sorted(docs, key=attrgetter(sortattr), reverse=reverse)
 
-            return FakeSolrResults(docs=docs, facet_fields=facet_fields, rows=kwargs.get('rows'))
+            return FakeSolrResults(docs=docs, facet_fields=facet_fields, rows=kwargs.get("rows"))
 
-        q = kwargs.get('q') or args[0]
-        fq = kwargs.get('fq')
+        q = kwargs.get("q") or args[0]
+        fq = kwargs.get("fq")
         if fq:
-            q = '{} AND {}'.format(q, fq)
-        q = q.replace('\\', '')
+            q = "{} AND {}".format(q, fq)
+        q = q.replace("\\", "")
         pq = normalize_pq(parser.parse(q))
-        my_pattern = (SearchField, {'name': 'ID'}, [])
+        my_pattern = (SearchField, {"name": "ID"}, [])
         if matches_pattern(pq, my_pattern):
             searchvals = extract_pq_searchvals(pq)
-            solr_id = searchvals['ID']
+            solr_id = searchvals["ID"]
             try:
                 return create_results(docs=[self.by_id[solr_id]])
             except KeyError:
                 return FakeSolrResults()
 
-        my_pattern1 = (SearchField, {'name': 'RevueAbr'}, [])
-        my_pattern2 = (AndOperation, {}, [
-            (SearchField, {'name': 'RevueAbr'}, []),
-            (SearchField, {'name': 'TypeArticle_fac'}, []),
-        ])
+        my_pattern1 = (SearchField, {"name": "RevueAbr"}, [])
+        my_pattern2 = (
+            AndOperation,
+            {},
+            [
+                (SearchField, {"name": "RevueAbr"}, []),
+                (SearchField, {"name": "TypeArticle_fac"}, []),
+            ],
+        )
         if matches_pattern(pq, my_pattern1) or matches_pattern(pq, my_pattern2):
             # letter list or article types, return facets
             searchvals = extract_pq_searchvals(pq)
-            journal_code = searchvals['RevueAbr']
+            journal_code = searchvals["RevueAbr"]
             result = []
             for docs in self.authors.values():
                 docs = apply_filters(docs, searchvals)
                 result += [doc for doc in docs if doc.journal_code == journal_code]
-            return create_results(result, facets=['AuteurNP_fac', 'TypeArticle_fac'])
+            return create_results(result, facets=["AuteurNP_fac", "TypeArticle_fac"])
 
-        my_pattern = (AndOperation, {}, [
-            (SearchField, {'name': 'RevueAbr'}, []),
-            (SearchField, {'name': 'AuteurNP_fac'}, []),
-            (SearchField, {'name': 'TypeArticle_fac', 'flags': {'optional'}}, []),
-        ])
+        my_pattern = (
+            AndOperation,
+            {},
+            [
+                (SearchField, {"name": "RevueAbr"}, []),
+                (SearchField, {"name": "AuteurNP_fac"}, []),
+                (SearchField, {"name": "TypeArticle_fac", "flags": {"optional"}}, []),
+            ],
+        )
         if matches_pattern(pq, my_pattern):
             # query for articles with matching author names
             searchvals = extract_pq_searchvals(pq)
-            journal_code = searchvals['RevueAbr']
-            first_letter = searchvals['AuteurNP_fac'][:1]
+            journal_code = searchvals["RevueAbr"]
+            first_letter = searchvals["AuteurNP_fac"][:1]
             result = []
             for author, docs in self.authors.items():
                 if author.startswith(first_letter):
@@ -289,16 +305,20 @@ class FakeSolrClient:
                         result.append(doc)
             return create_results(docs=result)
 
-        my_pattern1 = (SearchField, {'name': 'TexteComplet'}, [])
-        my_pattern2 = (AndOperation, {}, [
-            (SearchField, {'name': 'TexteComplet'}, []),
-            (SearchField, {'name': 'TypeArticle_fac', 'flags': {'optional'}}, []),
-        ])
+        my_pattern1 = (SearchField, {"name": "TexteComplet"}, [])
+        my_pattern2 = (
+            AndOperation,
+            {},
+            [
+                (SearchField, {"name": "TexteComplet"}, []),
+                (SearchField, {"name": "TypeArticle_fac", "flags": {"optional"}}, []),
+            ],
+        )
         if matches_pattern(pq, my_pattern1) or matches_pattern(pq, my_pattern2):
             # free-text query. For now, we perform a very simple search on title
             searchvals = extract_pq_searchvals(pq)
-            searched_words = set(searchvals['TexteComplet'].lower().split())
-            del searchvals['TexteComplet']
+            searched_words = set(searchvals["TexteComplet"].lower().split())
+            del searchvals["TexteComplet"]
             result = []
             docs = self.by_id.values()
             docs = apply_filters(docs, searchvals)
@@ -314,7 +334,7 @@ class FakeSolrClient:
             result = []
             docs = self.by_id.values()
             docs = apply_filters(docs, searchvals)
-            facets = kwargs.get('facet.field', ['AnneePublication', 'AuteurNP_fac'])
+            facets = kwargs.get("facet.field", ["AnneePublication", "AuteurNP_fac"])
             return create_results(docs=docs, facets=facets)
 
         print("Unexpected query {} {}".format(q, repr(pq)))
@@ -335,7 +355,7 @@ class FakeSolrData:
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
         return {
-            'disciplines': [],
-            'languages': [],
-            'journals': [],
+            "disciplines": [],
+            "languages": [],
+            "journals": [],
         }

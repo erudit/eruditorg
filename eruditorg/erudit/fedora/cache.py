@@ -18,7 +18,7 @@ logger = structlog.getLogger(__name__)
 
 
 def cache_fedora_result(method, duration=settings.LONG_TTL):
-    """ Cache the result of a method called on a FedoraMixin object
+    """Cache the result of a method called on a FedoraMixin object
 
     Assumes that the method is bound to a FedoraMixin object, or at least that the object has a
     ``localidentifier`` attribute.
@@ -35,15 +35,14 @@ def cache_fedora_result(method, duration=settings.LONG_TTL):
     :param duration: expected duration of result cache
     :return: the decorated method
     """
+
     def wrapper(self, *args, **kwargs):
 
-        if not self.localidentifier or (hasattr(self, 'issue') and not self.issue.is_published):
+        if not self.localidentifier or (hasattr(self, "issue") and not self.issue.is_published):
             return method(self, *args, **kwargs)
 
         key = "fedora_result-{lang}-{localidentifier}-{method_name}".format(
-            lang=get_language(),
-            localidentifier=self.localidentifier,
-            method_name=method.__name__
+            lang=get_language(), localidentifier=self.localidentifier, method_name=method.__name__
         )
 
         val = cache.get(key)
@@ -59,6 +58,7 @@ def cache_fedora_result(method, duration=settings.LONG_TTL):
                 pids=[self.pid],
             )
         return val
+
     return wrapper
 
 
@@ -67,20 +67,20 @@ def get_datastream_file_cache():
 
 
 def get_cached_datastream_content(pid, datastream_name, cache=None):
-    """ Given a Fedora object pid and a datastream name, returns the content of the datastream.
+    """Given a Fedora object pid and a datastream name, returns the content of the datastream.
 
     Note that this content can be cached in a file-based cache!
     """
     cache = cache or get_datastream_file_cache()
-    content_key = f'erudit-fedora-file-{pid}-{datastream_name}'
+    content_key = f"erudit-fedora-file-{pid}-{datastream_name}"
 
     content = cache.get(content_key)
 
     if content is None:
         try:
             response = requests.get(
-                settings.FEDORA_ROOT + \
-                # TODO: We will be able to remove the upper() call when we will get rid of
+                settings.FEDORA_ROOT
+                +  # TODO: We will be able to remove the upper() call when we will get rid of
                 # eulfedora's DigitalObjects.
                 f"objects/{pid}/datastreams/{datastream_name.upper()}/content",
             )
@@ -96,7 +96,7 @@ def get_cached_datastream_content(pid, datastream_name, cache=None):
             )
         except (HTTPError, ConnectionError):  # pragma: no cover
             with configure_scope() as scope:
-                scope.fingerprint = ['fedora-warnings']
+                scope.fingerprint = ["fedora-warnings"]
                 logger.warning("fedora.exception", pid=pid, datastream=datastream_name)
 
     return content

@@ -23,6 +23,7 @@ class FedoraMixin:
     The FedoraMixin defines a common way to associate Django models and its
     instances to eulfedora's models and Erudit's objects'
     """
+
     def get_full_identifier(self):
         """
         Returns the full identifier of the considered object. By default the FedoraMixin
@@ -57,7 +58,7 @@ class FedoraMixin:
         if not self.get_full_identifier():
             return None
 
-        if getattr(self, '_fedora_object', None) is None:
+        if getattr(self, "_fedora_object", None) is None:
             self._fedora_object = self.fedora_model(api, self.pid)
         return self._fedora_object
 
@@ -103,7 +104,7 @@ class FedoraMixin:
                 )
         except (HTTPError, ConnectionError):  # pragma: no cover
             with configure_scope() as scope:
-                scope.fingerprint = ['fedora-warnings']
+                scope.fingerprint = ["fedora-warnings"]
                 logger.warning("fedora.exception", pid=self.pid)
 
             if settings.DEBUG:
@@ -111,7 +112,7 @@ class FedoraMixin:
                 # really often because the dataset provided by the Fedora repository
                 # is not complete.
                 return
-            elif hasattr(self, 'issue') and self.issue.journal.collection.code == 'unb':
+            elif hasattr(self, "issue") and self.issue.journal.collection.code == "unb":
                 # The UNB collection *has* articles that are missing from Fedora
                 return
             raise
@@ -120,7 +121,7 @@ class FedoraMixin:
 
     @cached_property
     def is_in_fedora(self):
-        """ Checks if an objet is present in fedora
+        """Checks if an objet is present in fedora
 
         The presence of a full_identifier is not sufficient to determine if the object
         is present in fedora. Some articles have Fedora ids but are _not_ in Fedora."""
@@ -140,7 +141,7 @@ class FedoraMixin:
         self._erudit_object = None
 
     def fedora_is_loaded(self):
-        return hasattr(self, '_erudit_object') and self._erudit_object is not None
+        return hasattr(self, "_erudit_object") and self._erudit_object is not None
 
     def has_non_empty_image_datastream(self, datastream_name):
         """ Returns True if the considered fedora object has a non empty image datastream. """
@@ -157,7 +158,7 @@ class FedoraMixin:
 
         # Checks the content of the image in order to detect if it contains only one single color.
         im = Image.open(copy.copy(content))
-        extrema = im.convert('L').getextrema()
+        extrema = im.convert("L").getextrema()
         empty_image = (extrema == (0, 0)) or (extrema == (255, 255))
         im.close()
 

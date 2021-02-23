@@ -2,7 +2,7 @@ import pytest
 import locale
 
 try:
-    locale.setlocale(locale.LC_COLLATE, 'fr_CA.UTF-8')
+    locale.setlocale(locale.LC_COLLATE, "fr_CA.UTF-8")
 except locale.Error:
     has_fr_ca = False
 else:

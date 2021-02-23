@@ -1,2 +1,2 @@
-from .core import *   # noqa
+from .core import *  # noqa
 from .journal import *  # noqa

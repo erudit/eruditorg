@@ -69,13 +69,13 @@ class Command(BaseCommand):
 
         parser.add_argument(
             "--issue-pid", action="store", dest="issue_pid", help="Issue PID to manually import."
-        )  # noqa
+        )
 
         parser.add_argument(
             "--import-missing",
             action="store_true",
             dest="import_missing",
-            help="Import missing issues.",  # noqa
+            help="Import missing issues.",
         )
         parser.add_argument(
             "--mdate",

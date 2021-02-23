@@ -10,8 +10,4 @@ def person_list(authors):
     last_author = authors.pop()
     if len(authors) == 0:
         return last_author
-    return "{} {} {}".format(
-        ", ".join(authors),
-        _("et"),
-        last_author
-    )
+    return "{} {} {}".format(", ".join(authors), _("et"), last_author)

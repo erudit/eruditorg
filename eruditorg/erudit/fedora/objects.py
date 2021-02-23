@@ -8,22 +8,31 @@ from eulxml.xmlmap import XmlObject
 
 from sentry_sdk import configure_scope
 
-MODEL_PID_PREFIX = 'info:fedora/erudit-model:'
+MODEL_PID_PREFIX = "info:fedora/erudit-model:"
 
 
 class JournalDigitalObject(models.DigitalObject):
     """ Fedora objectf of a Journal """
-    CONTENT_MODELS = [MODEL_PID_PREFIX + 'seriesCModel', ]
-    publications = models.XmlDatastream('PUBLICATIONS', 'Publications', XmlObject)
+
+    CONTENT_MODELS = [
+        MODEL_PID_PREFIX + "seriesCModel",
+    ]
+    publications = models.XmlDatastream("PUBLICATIONS", "Publications", XmlObject)
     name = models.Relation(oains.setName)
-    logo = models.FileDatastream('LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
-    oaiset_info = models.XmlDatastream('OAISET_INFO', 'OAISET Info', XmlObject)
-    publications = models.XmlDatastream('PUBLICATIONS', 'Publications', XmlObject)
-    rels_ext = models.XmlDatastream('RELS-EXT', 'RELS Ext', XmlObject)
+    logo = models.FileDatastream(
+        "LOGO",
+        "Logo",
+        defaults={
+            "mimetype": "image/jpeg",
+        },
+    )
+    oaiset_info = models.XmlDatastream("OAISET_INFO", "OAISET Info", XmlObject)
+    publications = models.XmlDatastream("PUBLICATIONS", "Publications", XmlObject)
+    rels_ext = models.XmlDatastream("RELS-EXT", "RELS Ext", XmlObject)
 
     @property
     def xml_content(self):
-        """ Returns the XML content of the publications.
+        """Returns the XML content of the publications.
 
         The XML content comes from the ``PUBLICATIONS`` datastream.
         """
@@ -33,18 +42,30 @@ class JournalDigitalObject(models.DigitalObject):
 class PublicationDigitalObject(models.DigitalObject):
     """ Fedora object of an :py:class:`Issue <erudit.models.core.Issue>` """
 
-    CONTENT_MODELS = [MODEL_PID_PREFIX + 'publicationCModel', ]
-    publication = models.XmlDatastream('PUBLICATION', 'Publication', XmlObject)
-    summary = models.XmlDatastream('SUMMARY', 'Summary', XmlObject)
+    CONTENT_MODELS = [
+        MODEL_PID_PREFIX + "publicationCModel",
+    ]
+    publication = models.XmlDatastream("PUBLICATION", "Publication", XmlObject)
+    summary = models.XmlDatastream("SUMMARY", "Summary", XmlObject)
     coverpage = models.FileDatastream(
-        'COVERPAGE', 'Coverpage', defaults={'mimetype': 'image/jpeg', })
+        "COVERPAGE",
+        "Coverpage",
+        defaults={
+            "mimetype": "image/jpeg",
+        },
+    )
     coverpage_hd = models.FileDatastream(
-        'COVERPAGE_HD', 'Coverpage HD', defaults={'mimetype': 'image/jpeg', })
-    pages = models.XmlDatastream('PAGES', 'Pages', XmlObject)
+        "COVERPAGE_HD",
+        "Coverpage HD",
+        defaults={
+            "mimetype": "image/jpeg",
+        },
+    )
+    pages = models.XmlDatastream("PAGES", "Pages", XmlObject)
 
     @property
     def xml_content(self):
-        """ Returns the XML content of the publication.
+        """Returns the XML content of the publication.
 
         The XML content comes from the ``SUMMARY`` datastream.
         """
@@ -54,16 +75,24 @@ class PublicationDigitalObject(models.DigitalObject):
 class ArticleDigitalObject(models.DigitalObject):
     """ Fedora object of an article """
 
-    CONTENT_MODELS = [MODEL_PID_PREFIX + 'unitCModel', ]
-    erudit_xsd201 = models.XmlDatastream('ERUDITXSD201', 'Erudit XSD201', XmlObject)
-    erudit_xsd300 = models.XmlDatastream('ERUDITXSD300', 'Erudit XSD300', XmlObject)
-    infoimg = models.XmlDatastream('INFOIMG', 'INFOIMG', XmlObject)
-    unit = models.XmlDatastream('UNIT', 'Unit', XmlObject)
-    pdf = models.FileDatastream('PDF', 'PDF', defaults={'mimetype': 'application/pdf', })
+    CONTENT_MODELS = [
+        MODEL_PID_PREFIX + "unitCModel",
+    ]
+    erudit_xsd201 = models.XmlDatastream("ERUDITXSD201", "Erudit XSD201", XmlObject)
+    erudit_xsd300 = models.XmlDatastream("ERUDITXSD300", "Erudit XSD300", XmlObject)
+    infoimg = models.XmlDatastream("INFOIMG", "INFOIMG", XmlObject)
+    unit = models.XmlDatastream("UNIT", "Unit", XmlObject)
+    pdf = models.FileDatastream(
+        "PDF",
+        "PDF",
+        defaults={
+            "mimetype": "application/pdf",
+        },
+    )
 
     @property
     def xml_content(self):
-        """ Return the XML content of the article
+        """Return the XML content of the article
 
         An Article object contains datastreams for one or more of the
         following schema specifications.
@@ -89,9 +118,9 @@ class ArticleDigitalObject(models.DigitalObject):
         .. _liberuditarticle: http://www.github.com/erudit/liberuditarticle/
         """
         try:
-            if 'ERUDITXSD300' in self.ds_list:
+            if "ERUDITXSD300" in self.ds_list:
                 return self.erudit_xsd300.content.serialize()
-            elif 'ERUDITXSD201' in self.ds_list:
+            elif "ERUDITXSD201" in self.ds_list:
                 return self.erudit_xsd201.content.serialize()
         except XMLSyntaxError:
             with configure_scope() as scope:
@@ -102,11 +131,16 @@ class ArticleDigitalObject(models.DigitalObject):
 class MediaDigitalObject(models.DigitalObject):
     """ Fedora object of a media file. """
 
-    CONTENT_MODELS = [MODEL_PID_PREFIX + 'mediaCModel', ]
-    content = models.FileDatastream('CONTENT', 'CONTENT')
+    CONTENT_MODELS = [
+        MODEL_PID_PREFIX + "mediaCModel",
+    ]
+    content = models.FileDatastream("CONTENT", "CONTENT")
 
 
 class PageDigitalObject(models.DigitalObject):
     """ Fedora object of a Page """
-    CONTENT_MODELS = [MODEL_PID_PREFIX + 'pageCModel', ]
-    image = models.FileDatastream('IMAGE', 'Image', defaults={'mimetype': 'image/jpeg'})
+
+    CONTENT_MODELS = [
+        MODEL_PID_PREFIX + "pageCModel",
+    ]
+    image = models.FileDatastream("IMAGE", "Image", defaults={"mimetype": "image/jpeg"})
