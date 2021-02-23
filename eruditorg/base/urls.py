@@ -53,7 +53,7 @@ urlpatterns = [
     url(
         _(r"^couverture/(?P<localidentifier>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg"),
         vary_on_headers("accept-encoding")(IssueRawCoverpageView.as_view()),
-        name="issue_coverpage_cdn",  # noqa
+        name="issue_coverpage_cdn",
     ),
     url(
         _(r"^logo/(?P<code>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg"),
