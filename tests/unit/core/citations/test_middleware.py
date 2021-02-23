@@ -16,7 +16,7 @@ pytestmark = pytest.mark.django_db
 def test_associates_the_citation_list_to_the_request_object():
     issue = IssueFactory.create()
     article = ArticleFactory.create(issue=issue)
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     request.user = AnonymousUser()
     middleware = SessionMiddleware()
     middleware.process_request(request)

@@ -19,7 +19,7 @@ class TestFedoraFileDatastreamView:
         class MyView(FedoraFileDatastreamView):
             pass
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
 
         # Run & check
         with pytest.raises(ImproperlyConfigured):
@@ -30,7 +30,7 @@ class TestFedoraFileDatastreamView:
         class MyView(FedoraFileDatastreamView):
             fedora_object_class = JournalDigitalObject
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
 
         # Run & check
         with pytest.raises(ImproperlyConfigured):
@@ -42,7 +42,7 @@ class TestFedoraFileDatastreamView:
             model = Journal
 
         journal = JournalFactory()
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
 
         with pytest.raises(ImproperlyConfigured):
             MyView.as_view()(request, pk=journal.pk)
@@ -50,11 +50,11 @@ class TestFedoraFileDatastreamView:
     def test_raises_if_the_datastream_name_is_not_defined(self):
         # Setup
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
+            content_type = "image/jpeg"
             fedora_object_class = JournalDigitalObject
             model = Journal
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
         journal = JournalFactory()
 
         # Run & check
@@ -64,12 +64,12 @@ class TestFedoraFileDatastreamView:
     def test_raises_if_the_datastream_is_not_defined_on_the_digital_object(self):
         # Setup
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'dummy'
+            content_type = "image/jpeg"
+            datastream_name = "dummy"
             fedora_object_class = JournalDigitalObject
             model = Journal
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
         journal = JournalFactory()
 
         # Run & check
@@ -79,19 +79,19 @@ class TestFedoraFileDatastreamView:
     def test_raises_if_the_datastream_does_not_have_content(self):
         # Setup
         class Dummy:
-            logo = 'dummy'
-            pid = 'pid'
+            logo = "dummy"
+            pid = "pid"
 
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'logo'
+            content_type = "image/jpeg"
+            datastream_name = "logo"
             fedora_object_class = JournalDigitalObject
             model = Journal
 
             def get_fedora_object(self):
                 return Dummy()
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
         journal = JournalFactory()
 
         # Run & check
@@ -105,20 +105,20 @@ class TestFedoraFileDatastreamView:
 
         journal = JournalFactory()
         view = MyView()
-        view.kwargs = {'pk': journal.pk}
+        view.kwargs = {"pk": journal.pk}
 
         pid = view.get_fedora_object_pid()
         assert pid == journal.pid
 
-    @unittest.mock.patch.object(JournalDigitalObject, 'logo')
+    @unittest.mock.patch.object(JournalDigitalObject, "logo")
     def test_raises_http_404_if_the_datastream_cannot_be_retrieved(self, mock_logo):
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'logo'
+            content_type = "image/jpeg"
+            datastream_name = "logo"
             fedora_object_class = JournalDigitalObject
             model = Journal
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
         journal = JournalFactory()
         mock_logo.exists = False
 
@@ -127,25 +127,25 @@ class TestFedoraFileDatastreamView:
 
     def test_generates_a_response_with_the_appropriate_content_type(self):
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'logo'
+            content_type = "image/jpeg"
+            datastream_name = "logo"
             fedora_object_class = JournalDigitalObject
             model = Journal
 
             def get_datastream_content(self, fedora_object):
-                return 'dummy'
+                return "dummy"
 
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
         journal = JournalFactory()
 
         response = MyView.as_view()(request, pk=journal.pk)
-        assert response['Content-Type'] == 'image/jpeg'
+        assert response["Content-Type"] == "image/jpeg"
 
     def test_raises_http_404_if_the_datastream_cannot_be_retrieved_on_the_erudit_object(self):
         # Setup
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'dstream'
+            content_type = "image/jpeg"
+            datastream_name = "dstream"
             fedora_object_class = JournalDigitalObject
             model = Journal
 
@@ -166,8 +166,8 @@ class TestFedoraFileDatastreamView:
     def test_get_fedora_object_handles_none_pid(self):
         # When the PID is None, we get a None fedora object.
         class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'dstream'
+            content_type = "image/jpeg"
+            datastream_name = "dstream"
             fedora_object_class = JournalDigitalObject
             model = Journal
 

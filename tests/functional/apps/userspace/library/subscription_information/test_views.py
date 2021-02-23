@@ -26,8 +26,8 @@ class TestSubscriptionInformationUpdateView:
     def setup(self):
         self.client = Client()
 
-        self.user = UserFactory.create(username='foobar')
-        self.user.set_password('notsecret')
+        self.user = UserFactory.create(username="foobar")
+        self.user.set_password("notsecret")
         self.user.save()
 
         self.organisation = OrganisationFactory.create()
@@ -37,14 +37,15 @@ class TestSubscriptionInformationUpdateView:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=self.subscription,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
 
         # Set up some images used for doing image tests
         images_dict = {}
 
         # Fetch an image aimed to be resized
         f = open(settings.MEDIA_ROOT + "/200x200.png", "rb")
-        images_dict['200x200'] = File(f)
+        images_dict["200x200"] = File(f)
 
         self.images_dict = images_dict
 
@@ -65,10 +66,14 @@ class TestSubscriptionInformationUpdateView:
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_subscriptions_information(self):
         # Setup
         self.organisation.members.clear()
-        self.client.login(username=self.user.username, password='notsecret')
+        self.client.login(username=self.user.username, password="notsecret")
 
-        url = reverse('userspace:library:subscription_information:update', kwargs={
-            'organisation_pk': self.organisation.pk, })
+        url = reverse(
+            "userspace:library:subscription_information:update",
+            kwargs={
+                "organisation_pk": self.organisation.pk,
+            },
+        )
 
         # Run
         response = self.client.get(url)
@@ -80,16 +85,22 @@ class TestSubscriptionInformationUpdateView:
         # Setup
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_subscription_information.codename)
+            object_id=self.organisation.id,
+            user=self.user,
+            authorization_codename=AC.can_manage_organisation_subscription_information.codename,
+        )
 
-        self.client.login(username=self.user.username, password='notsecret')
+        self.client.login(username=self.user.username, password="notsecret")
         post_data = {
-            'badge': SimpleUploadedFile('test.jpg', self.images_dict['200x200'].read()),
+            "badge": SimpleUploadedFile("test.jpg", self.images_dict["200x200"].read()),
         }
 
-        url = reverse('userspace:library:subscription_information:update', kwargs={
-            'organisation_pk': self.organisation.pk, })
+        url = reverse(
+            "userspace:library:subscription_information:update",
+            kwargs={
+                "organisation_pk": self.organisation.pk,
+            },
+        )
 
         # Run
         response = self.client.post(url, post_data, follow=False)

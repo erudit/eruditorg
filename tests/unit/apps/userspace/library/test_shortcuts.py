@@ -14,7 +14,6 @@ from apps.userspace.library.shortcuts import get_managed_organisations, get_last
 
 @pytest.mark.django_db
 class TestGetLastValidSubscriptionShortcut:
-
     def test_can_return_the_last_valid_subscription(self):
         organisation = OrganisationFactory()
         subscription = JournalAccessSubscriptionFactory(organisation=organisation, post__valid=True)
@@ -27,7 +26,9 @@ class TestGetLastValidSubscriptionShortcut:
 
     def test_can_return_the_last_valid_subscription_even_if_an_invalid_one_is_more_recent(self):
         organisation = OrganisationFactory()
-        valid_subscription = JournalAccessSubscriptionFactory(organisation=organisation, post__valid=True)
+        valid_subscription = JournalAccessSubscriptionFactory(
+            organisation=organisation, post__valid=True
+        )
         invalid_subscription = JournalAccessSubscriptionFactory(organisation=organisation)
         assert get_last_valid_subscription(organisation) == valid_subscription
 
@@ -48,8 +49,14 @@ class TestGetManagedOrganisationsShortcut:
         user_1 = UserFactory.create(is_superuser=True)
         user_2 = UserFactory.create(is_staff=True)
         # Run & check
-        assert list(get_managed_organisations(user_1)) == [org_1, org_2, ]
-        assert list(get_managed_organisations(user_2)) == [org_1, org_2, ]
+        assert list(get_managed_organisations(user_1)) == [
+            org_1,
+            org_2,
+        ]
+        assert list(get_managed_organisations(user_2)) == [
+            org_1,
+            org_2,
+        ]
 
     def test_can_return_only_organisations_that_have_the_considered_users_in_their_members(self):
         # Setup
@@ -65,14 +72,19 @@ class TestGetManagedOrganisationsShortcut:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription_1,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription_2,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription_3,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         # Run & check
-        assert list(get_managed_organisations(user)) == [org_1, ]
+        assert list(get_managed_organisations(user)) == [
+            org_1,
+        ]

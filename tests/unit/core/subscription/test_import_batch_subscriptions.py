@@ -8,7 +8,7 @@ from core.subscription.models import JournalAccessSubscription
 from erudit.test.factories import JournalFactory, OrganisationFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 
-FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
+FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), "fixtures")
 
 
 @pytest.mark.django_db
@@ -20,11 +20,10 @@ def test_can_import_batch_to_journal_plan():
         "import_individual_subscriptions_batch",
         *[],
         **{
-            'filename': FIXTURE_ROOT + '/subscriptions.csv',
-            'shortname': journal.code,
-            'use_journal_plan': True
+            "filename": FIXTURE_ROOT + "/subscriptions.csv",
+            "shortname": journal.code,
+            "use_journal_plan": True,
         }
-
     )
 
     assert get_user_model().objects.count() == 5
@@ -44,12 +43,11 @@ def test_can_import_with_parameters():
         "import_individual_subscriptions_batch",
         *[],
         **{
-            'filename': FIXTURE_ROOT + '/subscriptions.csv',
-            'shortname': journal.code,
-            'sponsor_id': organisation.pk,
-            'plan_id': journal_management_subscription.pk,
+            "filename": FIXTURE_ROOT + "/subscriptions.csv",
+            "shortname": journal.code,
+            "sponsor_id": organisation.pk,
+            "plan_id": journal_management_subscription.pk,
         }
-
     )
 
     assert get_user_model().objects.count() == 5

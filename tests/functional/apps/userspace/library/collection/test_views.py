@@ -32,18 +32,19 @@ class TestCollectionViews:
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
 
-        JournalAccessSubscriptionFactory.create(
-            organisation=self.organisation,
-            post__valid=True
-        )
+        JournalAccessSubscriptionFactory.create(organisation=self.organisation, post__valid=True)
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_collection_information(self):
         # Setup
         self.organisation.members.clear()
-        self.client.login(username=self.user.username, password='default')
+        self.client.login(username=self.user.username, password="default")
 
-        url = reverse('userspace:library:collection:landing', kwargs={
-            'organisation_pk': self.organisation.pk, })
+        url = reverse(
+            "userspace:library:collection:landing",
+            kwargs={
+                "organisation_pk": self.organisation.pk,
+            },
+        )
 
         # Run
         response = self.client.get(url)
@@ -52,10 +53,14 @@ class TestCollectionViews:
         assert response.status_code == 403
 
     def test_can_be_accessed_by_an_organisation_member(self):
-        self.client.login(username=self.user.username, password='default')
+        self.client.login(username=self.user.username, password="default")
 
-        url = reverse('userspace:library:collection:landing', kwargs={
-            'organisation_pk': self.organisation.pk, })
+        url = reverse(
+            "userspace:library:collection:landing",
+            kwargs={
+                "organisation_pk": self.organisation.pk,
+            },
+        )
 
         # Run
         response = self.client.get(url)

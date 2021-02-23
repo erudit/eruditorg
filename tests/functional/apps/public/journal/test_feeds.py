@@ -14,25 +14,33 @@ from apps.public.journal.feeds import LatestJournalArticlesFeed
 
 pytestmark = pytest.mark.django_db
 
+
 class TestLatestIssuesFeed:
     def test_can_return_all_the_issues_published_since_a_specific_date(self):
         issue1 = IssueFactory.create(date_published=dt.datetime.now())
         issue2 = IssueFactory.create(
-            journal=issue1.journal, date_published=dt.datetime.now() - dt.timedelta(days=20))
+            journal=issue1.journal, date_published=dt.datetime.now() - dt.timedelta(days=20)
+        )
         IssueFactory.create(
-            journal=issue1.journal, date_published=dt.datetime.now() - dt.timedelta(days=110))
+            journal=issue1.journal, date_published=dt.datetime.now() - dt.timedelta(days=110)
+        )
         # Don't show unpublished issues
         IssueFactory.create(
-            journal=issue1.journal, date_published=dt.datetime.now(), is_published=False)
-        request = RequestFactory().get('/')
+            journal=issue1.journal, date_published=dt.datetime.now(), is_published=False
+        )
+        request = RequestFactory().get("/")
         feed = LatestIssuesFeed().get_feed(None, request)
         assert len(feed.items) == 2
-        URL = reverse('public:journal:issue_detail',
-            args=[issue1.journal.code, issue1.volume_slug, issue1.localidentifier])
-        assert URL in feed.items[0]['link']
-        URL = reverse('public:journal:issue_detail',
-            args=[issue2.journal.code, issue2.volume_slug, issue2.localidentifier])
-        assert URL in feed.items[1]['link']
+        URL = reverse(
+            "public:journal:issue_detail",
+            args=[issue1.journal.code, issue1.volume_slug, issue1.localidentifier],
+        )
+        assert URL in feed.items[0]["link"]
+        URL = reverse(
+            "public:journal:issue_detail",
+            args=[issue2.journal.code, issue2.volume_slug, issue2.localidentifier],
+        )
+        assert URL in feed.items[1]["link"]
 
 
 class TestLatestJournalArticlesFeed:
@@ -43,26 +51,28 @@ class TestLatestJournalArticlesFeed:
         ArticleFactory.create(issue=issue1)
         article1 = ArticleFactory.create(issue=issue2)
         article2 = ArticleFactory.create(issue=issue2)
-        request = RequestFactory().get('/')
+        request = RequestFactory().get("/")
         f = LatestJournalArticlesFeed()
         f.get_object(request, journal.code)
         feed = f.get_feed(None, request)
         assert len(feed.items) == 2
         URL = reverse(
-            'public:journal:article_detail',
+            "public:journal:article_detail",
             args=[
                 article1.issue.journal.code,
                 article1.issue.volume_slug,
                 article1.issue.localidentifier,
-                article1.localidentifier
-            ])
-        assert URL in feed.items[0]['link']
+                article1.localidentifier,
+            ],
+        )
+        assert URL in feed.items[0]["link"]
         URL = reverse(
-            'public:journal:article_detail',
+            "public:journal:article_detail",
             args=[
                 article2.issue.journal.code,
                 article2.issue.volume_slug,
                 article2.issue.localidentifier,
-                article2.localidentifier
-            ])
-        assert URL in feed.items[1]['link']
+                article2.localidentifier,
+            ],
+        )
+        assert URL in feed.items[1]["link"]

@@ -7,16 +7,27 @@ from django.contrib.auth import get_user_model
 from erudit.models import Organisation
 from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod, InstitutionReferer
+from core.subscription.models import (
+    JournalAccessSubscription,
+    JournalAccessSubscriptionPeriod,
+    InstitutionReferer,
+)
 from core.subscription.restriction.models import Revueabonne
-from core.subscription.test.factories import JournalAccessSubscriptionFactory, InstitutionIPAddressRange
+from core.subscription.test.factories import (
+    JournalAccessSubscriptionFactory,
+    InstitutionIPAddressRange,
+)
 from core.subscription.restriction.test.factories import (
-    AbonneFactory, RevueFactory, RevueabonneFactory, IpabonneFactory
+    AbonneFactory,
+    RevueFactory,
+    RevueabonneFactory,
+    IpabonneFactory,
 )
 from core.subscription.management.commands import import_restrictions
 
 from core.accounts.test.factories import LegacyAccountProfileFactory
 from erudit.test.factories import JournalFactory
+
 
 @pytest.mark.django_db
 def test_import_subscriber():
@@ -34,9 +45,10 @@ def test_import_subscriber():
     assert org.name == abonne1.abonne
     assert org.account_id == str(abonne1.abonneid)
     assert org.sushi_requester_id == abonne1.requesterid
-    assert accprofile.user.username == 'restriction-{}'.format(abonne1.abonneid)
+    assert accprofile.user.username == "restriction-{}".format(abonne1.abonneid)
     assert accprofile.user.email == abonne1.courriel
     assert accprofile.legacy_id == str(abonne1.abonneid)
+
 
 @pytest.mark.django_db
 def test_import_journal():
@@ -46,9 +58,8 @@ def test_import_journal():
     abonne1 = AbonneFactory.create()
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
     RevueabonneFactory.create(
-        abonneid=abonne1.abonneid,
-        revueid=revue1.revueid,
-        anneeabonnement=2018)
+        abonneid=abonne1.abonneid, revueid=revue1.revueid, anneeabonnement=2018
+    )
 
     subscription_qs = Revueabonne.objects
     command = import_restrictions.Command()
@@ -61,9 +72,10 @@ def test_import_journal():
     assert sub.journals.filter(pk=journal1.pk).exists()
     assert sub.organisation.name == abonne1.abonne
 
+
 @pytest.mark.django_db
 def test_assign_user_to_existing_organisation():
-    """ If an organisation has the LegacyOrganisationId of the restriction user to import,
+    """If an organisation has the LegacyOrganisationId of the restriction user to import,
     add the created user to this organisation"""
     org = OrganisationFactory()
     journal1 = JournalFactory.create()
@@ -71,9 +83,8 @@ def test_assign_user_to_existing_organisation():
     abonne1.abonneid = org.account_id
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
     sub1 = RevueabonneFactory.create(
-        abonneid=abonne1.abonneid,
-        revueid=revue1.revueid,
-        anneeabonnement=2018)
+        abonneid=abonne1.abonneid, revueid=revue1.revueid, anneeabonnement=2018
+    )
 
     subscription_qs = Revueabonne.objects
     command = import_restrictions.Command()
@@ -82,6 +93,7 @@ def test_assign_user_to_existing_organisation():
     # test that no new organisation has been created
     assert Organisation.objects.count() == 1
     assert Organisation.objects.first().members.count() == 1
+
 
 @pytest.mark.django_db
 def test_import_can_rename_organisation():
@@ -95,9 +107,8 @@ def test_import_can_rename_organisation():
 
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
     sub1 = RevueabonneFactory.create(
-        abonneid=abonne1.abonneid,
-        revueid=revue1.revueid,
-        anneeabonnement=2018)
+        abonneid=abonne1.abonneid, revueid=revue1.revueid, anneeabonnement=2018
+    )
 
     subscription_qs = Revueabonne.objects
     command = import_restrictions.Command()
@@ -106,6 +117,7 @@ def test_import_can_rename_organisation():
     assert Organisation.objects.count() == 1
     organisation = Organisation.objects.first()
     assert organisation.name == "new name"
+
 
 @pytest.mark.django_db
 def test_user_email_is_updated_when_updated_at_the_source():
@@ -119,9 +131,8 @@ def test_user_email_is_updated_when_updated_at_the_source():
     journal = JournalFactory()
     revue1 = RevueFactory.create(titrerevabr=journal.code)
     RevueabonneFactory.create(
-        abonneid=abonne.abonneid,
-        revueid=revue1.revueid,
-        anneeabonnement=2018)
+        abonneid=abonne.abonneid, revueid=revue1.revueid, anneeabonnement=2018
+    )
 
     subscription_qs = Revueabonne.objects
     command = import_restrictions.Command()
@@ -141,7 +152,8 @@ def test_import_deletions():
     sub1 = RevueabonneFactory.create(
         abonneid=abonne1.abonneid,
         revueid=revue1.revueid,
-        anneeabonnement=datetime.datetime.now().year)
+        anneeabonnement=datetime.datetime.now().year,
+    )
 
     assert JournalAccessSubscriptionPeriod.objects.count() == 0
     call_command("import_restrictions", *[], **{})
@@ -166,10 +178,7 @@ def test_delete_existing_subscriptions():
 
     JournalAccessSubscriptionFactory(valid=True, type="individual")
 
-    organisation_profile = LegacyAccountProfileFactory(
-        legacy_id=1179,
-        organisation=organisation
-    )
+    organisation_profile = LegacyAccountProfileFactory(legacy_id=1179, organisation=organisation)
 
     subscription = JournalAccessSubscriptionFactory(
         organisation=organisation,
@@ -198,10 +207,7 @@ def test_existing_organisation_is_renamed_properly():
     abonne1.save()
     revue1 = RevueFactory.create(titrerevabr=JournalFactory())
 
-    sub1 = RevueabonneFactory.create(
-        abonneid=abonne1.abonneid,
-        revueid=revue1.revueid
-    )
+    sub1 = RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
 
     call_command("import_restrictions", *[], **{})
     assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
@@ -212,6 +218,7 @@ def test_existing_organisation_is_renamed_properly():
     call_command("import_restrictions", *[], **{})
     assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
 
+
 @pytest.mark.django_db
 def test_can_skip_subscribers_with_no_email():
     journal = JournalFactory()
@@ -221,31 +228,26 @@ def test_can_skip_subscribers_with_no_email():
     IpabonneFactory.create(abonneid=abonne1.pk)
     revue1 = RevueFactory.create(titrerevabr=journal.code)
 
-    sub1 = RevueabonneFactory.create(
-        abonneid=abonne1.abonneid,
-        revueid=revue1.revueid
-    )
+    sub1 = RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
 
-    call_command("import_restrictions", *[], **{'dry_run': False})
+    call_command("import_restrictions", *[], **{"dry_run": False})
 
     assert LegacyAccountProfile.objects.count() == 0
     assert JournalAccessSubscriptionPeriod.objects.count() == 0
 
+
 @pytest.mark.django_db
 def test_dry_run_mode_does_not_create_anything():
     journal = JournalFactory()
-    abonne1 = AbonneFactory.create(referer='http://www.erudit.org/')
+    abonne1 = AbonneFactory.create(referer="http://www.erudit.org/")
     abonne1.save()
 
     IpabonneFactory.create(abonneid=abonne1.pk)
     revue1 = RevueFactory.create(titrerevabr=journal.code)
 
-    sub1 = RevueabonneFactory.create(
-        abonneid=abonne1.abonneid,
-        revueid=revue1.revueid
-    )
+    sub1 = RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
 
-    call_command("import_restrictions", *[], **{'dry_run': True})
+    call_command("import_restrictions", *[], **{"dry_run": True})
 
     assert get_user_model().objects.count() == 0
     assert InstitutionReferer.objects.count() == 0

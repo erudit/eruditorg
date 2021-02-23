@@ -13,13 +13,13 @@ pytestmark = pytest.mark.django_db
 
 
 def authorize_user_on_journal(user, journal):
-    ct = ContentType.objects.get(
-        app_label="erudit", model="journal")
+    ct = ContentType.objects.get(app_label="erudit", model="journal")
     Authorization.objects.create(
         content_type=ct,
         user=user,
         object_id=journal.id,
-        authorization_codename=AC.can_manage_issuesubmission.codename)
+        authorization_codename=AC.can_manage_issuesubmission.codename,
+    )
 
 
 def test_contact_filter():
@@ -34,9 +34,9 @@ def test_contact_filter():
     journal_not_in.members.add(user2)
     journal_not_in.save()
 
-    data = {'user': user, 'journal': journal_in}
+    data = {"user": user, "journal": journal_in}
 
     form = IssueSubmissionForm(**data)
-    choices = [c[0] for c in form.fields['contact'].choices]
+    choices = [c[0] for c in form.fields["contact"].choices]
     assert user.id in choices
     assert user2.id not in choices

@@ -13,7 +13,6 @@ class MockRedisKeyTagging(RedisKeyTagging):
 
 
 class TestEruditCacheClient:
-
     @pytest.mark.parametrize("redis", (Mock(), MockRedisKeyTagging()))
     @pytest.mark.parametrize("timeout", (0, 10, -1, None, DEFAULT_TIMEOUT))
     @pytest.mark.parametrize("pids", ([], ["tag"]))

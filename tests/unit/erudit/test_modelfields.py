@@ -16,6 +16,7 @@ from tests.models import DummyModel
 # unit tests.
 # See: https://github.com/ellmetha/django-machina/blob/master/tests/unit/core/test_fields.py#L137
 
+
 @pytest.mark.django_db
 class TestSizeConstrainedImageField:
     @pytest.yield_fixture(autouse=True)
@@ -25,19 +26,19 @@ class TestSizeConstrainedImageField:
 
         # Fetch an image aimed to be resized
         f = open(settings.MEDIA_ROOT + "/to_be_resized_image.png", "rb")
-        images_dict['to_be_resized_image'] = File(f)
+        images_dict["to_be_resized_image"] = File(f)
 
         # Fetch a big image
         f = open(settings.MEDIA_ROOT + "/too_large_image.jpg", "rb")
-        images_dict['too_large_image'] = File(f)
+        images_dict["too_large_image"] = File(f)
 
         # Fetch a wide image
         f = open(settings.MEDIA_ROOT + "/too_wide_image.jpg", "rb")
-        images_dict['too_wide_image'] = File(f)
+        images_dict["too_wide_image"] = File(f)
 
         # Fetch a high image
         f = open(settings.MEDIA_ROOT + "/too_high_image.jpg", "rb")
-        images_dict['too_high_image'] = File(f)
+        images_dict["too_high_image"] = File(f)
 
         self.images_dict = images_dict
 
@@ -63,8 +64,8 @@ class TestSizeConstrainedImageField:
         # Setup
         test = DummyModel()
         # Run
-        field = test._meta.get_field('resized_image')
-        field.save_form_data(test, self.images_dict['to_be_resized_image'])
+        field = test._meta.get_field("resized_image")
+        field.save_form_data(test, self.images_dict["to_be_resized_image"])
         test.full_clean()
         test.save()
         # Check
@@ -74,8 +75,12 @@ class TestSizeConstrainedImageField:
     def test_should_not_accept_images_with_incorrect_sizes_or_dimensions(self):
         # Setup
         test = DummyModel()
-        field = test._meta.get_field('validated_image')
-        invalid_images = ['too_large_image', 'too_wide_image', 'too_high_image', ]
+        field = test._meta.get_field("validated_image")
+        invalid_images = [
+            "too_large_image",
+            "too_wide_image",
+            "too_high_image",
+        ]
         # Run & check
         for img in invalid_images:
             field.save_form_data(test, self.images_dict[img])

@@ -21,10 +21,10 @@ class TestIssueSubmissionManager:
 
         # Archived issue, should not be returned by eminent_archival().
         archived_issue = IssueSubmissionFactory(status=IssueSubmission.VALID, archived=True)
-        archived_issue._meta.get_field('date_modified').auto_now = False
+        archived_issue._meta.get_field("date_modified").auto_now = False
         archived_issue.date_modified = old_dt
         archived_issue.save()
-        archived_issue._meta.get_field('date_modified').auto_now = True
+        archived_issue._meta.get_field("date_modified").auto_now = True
 
         # Issues recently modified, should not be returned by eminent_archival().
         new_issues = [IssueSubmissionFactory(status=status) for status in statuses]
@@ -33,10 +33,10 @@ class TestIssueSubmissionManager:
         # eminent_archival() if they are validated.
         old_issues = [IssueSubmissionFactory(status=status) for status in statuses]
         for issue in old_issues:
-            issue._meta.get_field('date_modified').auto_now = False
+            issue._meta.get_field("date_modified").auto_now = False
             issue.date_modified = old_dt
             issue.save()
-            issue._meta.get_field('date_modified').auto_now = True
+            issue._meta.get_field("date_modified").auto_now = True
 
         # Expected issues, which have been modified three months ago and are validated.
         expected_eminent_archival_issues = filter(lambda i: i.status == statuses[3], old_issues)
@@ -55,10 +55,10 @@ class TestIssueSubmissionManager:
 
         # Archived issue, should not be returned by eminent_archival().
         archived_issue = IssueSubmissionFactory(status=IssueSubmission.VALID, archived=True)
-        archived_issue._meta.get_field('date_modified').auto_now = False
+        archived_issue._meta.get_field("date_modified").auto_now = False
         archived_issue.date_modified = old_dt
         archived_issue.save()
-        archived_issue._meta.get_field('date_modified').auto_now = True
+        archived_issue._meta.get_field("date_modified").auto_now = True
 
         # Issues recently modified, should not be returned by eminent_archival().
         new_issues = [IssueSubmissionFactory(status=status) for status in statuses]
@@ -67,10 +67,10 @@ class TestIssueSubmissionManager:
         # validated.
         old_issues = [IssueSubmissionFactory(status=status) for status in statuses]
         for issue in old_issues:
-            issue._meta.get_field('date_modified').auto_now = False
+            issue._meta.get_field("date_modified").auto_now = False
             issue.date_modified = old_dt
             issue.save()
-            issue._meta.get_field('date_modified').auto_now = True
+            issue._meta.get_field("date_modified").auto_now = True
 
         # Expected issues, which have been modified three months ago and are validated.
         expected_ready_for_archival_issues = filter(lambda i: i.status == statuses[3], old_issues)
@@ -94,10 +94,10 @@ class TestIssueSubmissionManager:
         old_issues = [IssueSubmissionFactory(status=status) for status in statuses]
         old_dt = tz.now() - dt.timedelta(days=editor_settings.ACTION_NEEDED_DAY_OFFSET)
         for issue in old_issues:
-            issue._meta.get_field('date_modified').auto_now = False
+            issue._meta.get_field("date_modified").auto_now = False
             issue.date_modified = old_dt
             issue.save()
-            issue._meta.get_field('date_modified').auto_now = True
+            issue._meta.get_field("date_modified").auto_now = True
 
         # Expected issues, which have been modified two weeks ago and are submitted or in needs
         # corrections.

@@ -14,10 +14,9 @@ def test_can_resolve_the_current_url_for_another_journal():
     journal1 = JournalFactory()
     journal2 = JournalFactory()
     factory = RequestFactory()
-    base_url = reverse(
-        'userspace:journal:information:update', kwargs={'journal_pk': journal1.pk})
+    base_url = reverse("userspace:journal:information:update", kwargs={"journal_pk": journal1.pk})
     request = factory.get(base_url)
     request.resolver_match = resolve(base_url)
-    url = journal_url({'request': request}, journal2)
-    EXPECTED = reverse('userspace:journal:information:update', kwargs={'journal_pk': journal2.pk})
+    url = journal_url({"request": request}, journal2)
+    EXPECTED = reverse("userspace:journal:information:update", kwargs={"journal_pk": journal2.pk})
     assert url == EXPECTED

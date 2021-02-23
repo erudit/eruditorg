@@ -7,7 +7,6 @@ from apps.public.views import HomeView
 
 @pytest.mark.django_db
 class TestHomeView:
-
     def test_latest_issues_order(self):
         journal_1 = JournalFactory()
         journal_2 = JournalFactory()
@@ -20,7 +19,7 @@ class TestHomeView:
         context = view.get_context_data()
         # Make sure that issues from one journal published on the same
         # day as other issues from another journal are not mixed.
-        assert context['latest_issues'] == {
+        assert context["latest_issues"] == {
             issue_2.localidentifier: [issue_2],
             issue_4.localidentifier: [issue_4],
             issue_1.localidentifier: [issue_1],
@@ -46,7 +45,7 @@ class TestHomeView:
         context = view.get_context_data()
 
         # Make sure that retrospective issues (older than last year) are grouped together.
-        assert context['latest_issues'] == {
+        assert context["latest_issues"] == {
             issue_1.localidentifier: [issue_1],
             journal.localidentifier: [issue_2, issue_3, issue_5],
             issue_4.localidentifier: [issue_4],

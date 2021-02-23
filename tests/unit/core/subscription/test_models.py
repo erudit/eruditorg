@@ -33,11 +33,13 @@ class TestJournalAccessSubscription:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription_1,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription_2,
             start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         # Run & check
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
@@ -47,7 +49,9 @@ class TestJournalAccessSubscription:
         assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INDIVIDUAL
 
     def test_knows_it_is_an_institutional_subscription(self):
-        subscription = JournalAccessSubscriptionFactory(organisation=OrganisationFactory(), user=None)
+        subscription = JournalAccessSubscriptionFactory(
+            organisation=OrganisationFactory(), user=None
+        )
         assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INSTITUTIONAL
 
     def test_knows_its_underlying_journals(self):
@@ -68,7 +72,6 @@ class TestJournalAccessSubscription:
 
 @pytest.mark.django_db
 class TestUserSubscriptions:
-
     def test_the_first_subscription_is_the_active_subscription(self):
         from core.subscription.models import UserSubscriptions
 
@@ -80,47 +83,59 @@ class TestUserSubscriptions:
 
 @pytest.mark.django_db
 class TestInstitutionReferer:
-
     def _subscribe_referer(self, referer=None):
         subscription = JournalAccessSubscriptionFactory(post__valid=True)
-        institution_referer = InstitutionRefererFactory(
-            subscription=subscription,
-            referer=referer
-        )
+        institution_referer = InstitutionRefererFactory(subscription=subscription, referer=referer)
         return institution_referer
 
-    @pytest.mark.parametrize('subscription_referer', ('https://erudit.org', ))
-    @pytest.mark.parametrize('user_referer', ('https://www.erudit.org', 'http://www.erudit.org', 'http://www.erudit.org/some/path'))
+    @pytest.mark.parametrize("subscription_referer", ("https://erudit.org",))
+    @pytest.mark.parametrize(
+        "user_referer",
+        ("https://www.erudit.org", "http://www.erudit.org", "http://www.erudit.org/some/path"),
+    )
     def test_can_find_an_institution_referer_by_netloc(self, user_referer, subscription_referer):
         institution_referer = self._subscribe_referer(referer=subscription_referer)
-        assert JournalAccessSubscription.valid_objects.get_for_referer(user_referer) == institution_referer.subscription  # noqa
+        assert (
+            JournalAccessSubscription.valid_objects.get_for_referer(user_referer)
+            == institution_referer.subscription
+        )  # noqa
 
-    @pytest.mark.parametrize('referer,should_find', [
-        ("http://www.topsecurity.org/bulletproofauthenticationmechanism", True),
-        ("http://www.topsecurity.org/", False),
-        ('http://proxy.www.topsecurity.org', True),
-        ("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123", True)
-
-    ])
+    @pytest.mark.parametrize(
+        "referer,should_find",
+        [
+            ("http://www.topsecurity.org/bulletproofauthenticationmechanism", True),
+            ("http://www.topsecurity.org/", False),
+            ("http://proxy.www.topsecurity.org", True),
+            ("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123", True),
+        ],
+    )
     def test_can_find_an_institution_referer_by_netloc_and_path(self, referer, should_find):
         institution_referer = self._subscribe_referer(referer=referer)
         assert (
-            JournalAccessSubscription.valid_objects.get_for_referer(referer) == institution_referer.subscription  # noqa
+            JournalAccessSubscription.valid_objects.get_for_referer(referer)
+            == institution_referer.subscription  # noqa
             or not should_find
         )
 
-    @pytest.mark.parametrize('referer', (
-        "http://externalservice.com:2049/login?url='allo'",
-        "https://externalservice.com:2049/login?url='allo'"
-        )
+    @pytest.mark.parametrize(
+        "referer",
+        (
+            "http://externalservice.com:2049/login?url='allo'",
+            "https://externalservice.com:2049/login?url='allo'",
+        ),
     )
     def test_can_find_an_institution_referer_with_netloc_port_path_and_querystring(self, referer):
         institution_referer = self._subscribe_referer(referer=referer)
-        assert JournalAccessSubscription.valid_objects.get_for_referer(referer) == institution_referer.subscription  # noqa
+        assert (
+            JournalAccessSubscription.valid_objects.get_for_referer(referer)
+            == institution_referer.subscription
+        )  # noqa
 
     def test_can_only_find_institution_referer_when_path_fully_match(self):
         institution_referer = self._subscribe_referer(referer="http://www.erudit.org.proxy.com/")
-        assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/")  # noqa
+        assert not JournalAccessSubscription.valid_objects.get_for_referer(
+            "http://www.erudit.org/"
+        )  # noqa
 
 
 @pytest.mark.django_db
@@ -134,22 +149,22 @@ class TestInstitutionIPAddressRange:
         # Run & check
         with pytest.raises(ValidationError):
             ip_range = InstitutionIPAddressRangeFactory.build(
-                subscription=self.subscription,
-                ip_start='192.168.1.3', ip_end='192.168.1.2')
+                subscription=self.subscription, ip_start="192.168.1.3", ip_end="192.168.1.2"
+            )
             ip_range.clean()
 
     def test_can_return_the_list_of_corresponding_ip_addresses(self):
         # Setup
         ip_range = InstitutionIPAddressRangeFactory.build(
-            subscription=self.subscription,
-            ip_start='192.168.1.3', ip_end='192.168.1.5')
+            subscription=self.subscription, ip_start="192.168.1.3", ip_end="192.168.1.5"
+        )
         # Run
         ip_addresses = ip_range.ip_addresses
         # Check
         assert ip_addresses == [
-            ipaddress.ip_address('192.168.1.3'),
-            ipaddress.ip_address('192.168.1.4'),
-            ipaddress.ip_address('192.168.1.5'),
+            ipaddress.ip_address("192.168.1.3"),
+            ipaddress.ip_address("192.168.1.4"),
+            ipaddress.ip_address("192.168.1.5"),
         ]
 
 
@@ -162,7 +177,8 @@ class TestJournalAccessSubscriptionPeriod:
         period = JournalAccessSubscriptionPeriodFactory.build(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         # Run & check
         with pytest.raises(ValidationError):
             period.clean()
@@ -174,11 +190,13 @@ class TestJournalAccessSubscriptionPeriod:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=14))
+            end=now_dt + dt.timedelta(days=14),
+        )
         period = JournalAccessSubscriptionPeriodFactory.build(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=12))
+            end=now_dt + dt.timedelta(days=12),
+        )
         # Run & check
         with pytest.raises(ValidationError):
             period.clean()
@@ -190,11 +208,13 @@ class TestJournalAccessSubscriptionPeriod:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=9),
-            end=now_dt + dt.timedelta(days=11))
+            end=now_dt + dt.timedelta(days=11),
+        )
         period = JournalAccessSubscriptionPeriodFactory.build(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=14))
+            end=now_dt + dt.timedelta(days=14),
+        )
         # Run & check
         with pytest.raises(ValidationError):
             period.clean()
@@ -206,11 +226,13 @@ class TestJournalAccessSubscriptionPeriod:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=11))
+            end=now_dt + dt.timedelta(days=11),
+        )
         period = JournalAccessSubscriptionPeriodFactory.build(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=12))
+            end=now_dt + dt.timedelta(days=12),
+        )
         # Run & check
         with pytest.raises(ValidationError):
             period.clean()
@@ -222,11 +244,13 @@ class TestJournalAccessSubscriptionPeriod:
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=11),
-            end=now_dt + dt.timedelta(days=15))
+            end=now_dt + dt.timedelta(days=15),
+        )
         period = JournalAccessSubscriptionPeriodFactory.build(
             subscription=subscription,
             start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=12))
+            end=now_dt + dt.timedelta(days=12),
+        )
         # Run & check
         with pytest.raises(ValidationError):
             period.clean()
@@ -240,27 +264,30 @@ class TestJournalManagementSubscription:
         now_dt = dt.datetime.now()
         plan = JournalManagementPlanFactory.create(max_accounts=10)
 
-        subscription_1 = JournalManagementSubscriptionFactory.create(
-            journal=journal, plan=plan)
-        subscription_2 = JournalManagementSubscriptionFactory.create(
-            journal=journal, plan=plan)
+        subscription_1 = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
+        subscription_2 = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
 
         JournalManagementSubscriptionPeriodFactory.create(
             subscription=subscription_1,
             start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         JournalManagementSubscriptionPeriodFactory.create(
             subscription=subscription_2,
             start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+            end=now_dt + dt.timedelta(days=8),
+        )
         # Run & check
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
 
-    @pytest.mark.parametrize("email,firstname,lastname", (
-        ('test@test.com', 'First', 'Name'),
-        ('test2@test.com', None, None),
-    ))
+    @pytest.mark.parametrize(
+        "email,firstname,lastname",
+        (
+            ("test@test.com", "First", "Name"),
+            ("test2@test.com", None, None),
+        ),
+    )
     def test_can_subscribe_email(self, email, firstname, lastname):
         plan = JournalManagementPlanFactory(is_unlimited=True)
         subscription = JournalManagementSubscriptionFactory.create(plan=plan)
@@ -272,20 +299,24 @@ class TestJournalManagementSubscription:
             user__email=email,
             user__username=email,
             journals=subscription.journal,
-            journal_management_subscription=subscription
+            journal_management_subscription=subscription,
         ).exists()
 
     def test_unlimited_plans_are_never_full(self):
         plan = JournalManagementPlanFactory(is_unlimited=True)
         subscription = JournalManagementSubscriptionFactory.create(plan=plan)
-        JournalAccessSubscriptionFactory.create_batch(50, journal_management_subscription=subscription)
+        JournalAccessSubscriptionFactory.create_batch(
+            50, journal_management_subscription=subscription
+        )
         assert not subscription.is_full
 
     def test_can_count_subscriptions_to_know_if_its_full(self):
         plan = JournalManagementPlanFactory.create(max_accounts=5)
         subscription = JournalManagementSubscriptionFactory.create(plan=plan)
 
-        JournalAccessSubscriptionFactory.create_batch(4, journal_management_subscription=subscription)
+        JournalAccessSubscriptionFactory.create_batch(
+            4, journal_management_subscription=subscription
+        )
         assert not subscription.is_full
         JournalAccessSubscriptionFactory.create(journal_management_subscription=subscription)
         assert subscription.is_full
@@ -311,5 +342,7 @@ class TestJournalManagementSubscription:
         AccountActionTokenFactory.create_batch(4, content_object=subscription)
 
         assert not subscription.is_full
-        JournalAccessSubscriptionFactory.create_batch(4, journal_management_subscription=subscription)
+        JournalAccessSubscriptionFactory.create_batch(
+            4, journal_management_subscription=subscription
+        )
         assert subscription.is_full

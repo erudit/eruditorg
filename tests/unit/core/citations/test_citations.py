@@ -17,7 +17,7 @@ def test_can_add_new_articles():
     issue = IssueFactory.create()
     article_1 = ArticleFactory.create(issue=issue)
     article_2 = ArticleFactory.create(issue=issue)
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     middleware = SessionMiddleware()
     middleware.process_request(request)
     citation_list = SavedCitationList(request)
@@ -31,7 +31,7 @@ def test_can_remove_articles():
     issue = IssueFactory.create()
     article_1 = ArticleFactory.create(issue=issue)
     article_2 = ArticleFactory.create(issue=issue)
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     middleware = SessionMiddleware()
     middleware.process_request(request)
     citation_list = SavedCitationList(request)
@@ -45,20 +45,20 @@ def test_can_remove_articles():
 def test_can_save_the_set_of_articles_to_the_session():
     issue = IssueFactory.create()
     article = ArticleFactory.create(issue=issue)
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     request.user = AnonymousUser()
     middleware = SessionMiddleware()
     middleware.process_request(request)
     citation_list = SavedCitationList(request)
     citation_list.add(article)
     citation_list.save()
-    assert request.session['saved-citations'] == [article.solr_id]
+    assert request.session["saved-citations"] == [article.solr_id]
 
 
 def test_can_associate_the_article_to_the_registered_users():
     issue = IssueFactory.create()
     article = ArticleFactory.create(issue=issue)
-    request = RequestFactory().get('/')
+    request = RequestFactory().get("/")
     request.user = UserFactory.create()
     middleware = SessionMiddleware()
     middleware.process_request(request)

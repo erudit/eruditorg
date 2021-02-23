@@ -21,6 +21,7 @@ class TestRegisterStatusTrackReceiver(BaseEditorTestCase):
         assert tracks.count() == 1
         assert tracks.first().status == IssueSubmission.SUBMITTED
         files_versions = IssueSubmissionFilesVersion.objects.filter(
-            issue_submission=self.issue_submission)
+            issue_submission=self.issue_submission
+        )
         assert files_versions.count() == 1
         assert tracks.first().files_version == files_versions.first()
