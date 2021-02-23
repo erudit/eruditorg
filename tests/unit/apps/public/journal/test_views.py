@@ -484,6 +484,22 @@ class TestIssueDetailSummary:
         # Back issues should be ordered by year, volume & number, and should not include current one
         assert list(context['back_issues']) == [issue_5, issue_4, issue_3, issue_2]
 
+    @pytest.mark.parametrize('is_external,expected_url', (
+        (False, '/fr/revues/journal/2021-issue/article/'),
+        (True, 'solr_url')
+    ))
+    def test_generated_url_when_some_articles_in_issue_are_external(
+        self, is_external, expected_url, monkeypatch
+    ):
+        class MockSolrObject:
+            url = 'solr_url'
+
+        issue = IssueFactory(localidentifier='issue', journal__code='journal', year='2021')
+        issue.is_external = is_external
+        article = ArticleFactory(issue=issue, localidentifier='article')
+        monkeypatch.setattr(Article, 'solr_object', MockSolrObject())
+        assert article.get_absolute_url() == expected_url
+
 
 class TestIssueReaderView:
 
