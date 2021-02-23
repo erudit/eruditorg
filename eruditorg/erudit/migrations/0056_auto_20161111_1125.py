@@ -8,12 +8,14 @@ from django.db.models import Q
 
 def make_persee_and_unb_scientific(apps, schema_editor):
 
-    Journal = apps.get_model('erudit', 'Journal')
-    JournalType = apps.get_model('erudit', 'JournalType')
+    Journal = apps.get_model("erudit", "Journal")
+    JournalType = apps.get_model("erudit", "JournalType")
 
     try:
-        type_scientific = JournalType.objects.get(code='S')
-        unb_and_persee = Q(collection__code='unb') | Q(collection__code='persee') | Q(collection__code='nrc')
+        type_scientific = JournalType.objects.get(code="S")
+        unb_and_persee = (
+            Q(collection__code="unb") | Q(collection__code="persee") | Q(collection__code="nrc")
+        )
         Journal.objects.filter(unb_and_persee).update(type=type_scientific)
     except JournalType.DoesNotExist:
         return
@@ -22,9 +24,7 @@ def make_persee_and_unb_scientific(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0055_remove_article_title'),
+        ("erudit", "0055_remove_article_title"),
     ]
 
-    operations = [
-        migrations.RunPython(make_persee_and_unb_scientific)
-    ]
+    operations = [migrations.RunPython(make_persee_and_unb_scientific)]

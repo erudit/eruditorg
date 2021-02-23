@@ -4,11 +4,12 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
+
 def populate_thesis_providers(apps, schema_editor):
-    ThesisProvider = apps.get_model('erudit', 'ThesisProvider')
-    Collection = apps.get_model('erudit', 'Collection')
-    Thesis = apps.get_model('erudit', 'Thesis')
-    collection_ids = Thesis.objects.values_list('collection_id', flat=True)
+    ThesisProvider = apps.get_model("erudit", "ThesisProvider")
+    Collection = apps.get_model("erudit", "Collection")
+    Thesis = apps.get_model("erudit", "Thesis")
+    collection_ids = Thesis.objects.values_list("collection_id", flat=True)
     collections = Collection.objects.filter(id__in=collection_ids)
     for collection in collections.all():
         tp = ThesisProvider.objects.create(
@@ -22,22 +23,30 @@ def populate_thesis_providers(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0088_remove_article_copyrights'),
+        ("erudit", "0088_remove_article_copyrights"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ThesisProvider',
+            name="ThesisProvider",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code', models.CharField(max_length=10, unique=True, verbose_name='Code')),
-                ('name', models.CharField(max_length=200, verbose_name='Nom')),
-                ('solr_name', models.CharField(db_index=True, max_length=200, verbose_name='Nom dans Solr')),
-                ('logo', models.ImageField(blank=True, verbose_name='Logo')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("code", models.CharField(max_length=10, unique=True, verbose_name="Code")),
+                ("name", models.CharField(max_length=200, verbose_name="Nom")),
+                (
+                    "solr_name",
+                    models.CharField(db_index=True, max_length=200, verbose_name="Nom dans Solr"),
+                ),
+                ("logo", models.ImageField(blank=True, verbose_name="Logo")),
             ],
             options={
-                'verbose_name_plural': 'Éditeurs de thèses',
-                'verbose_name': 'Éditeur de thèses',
+                "verbose_name_plural": "Éditeurs de thèses",
+                "verbose_name": "Éditeur de thèses",
             },
         ),
         migrations.RunPython(populate_thesis_providers, reverse_code=migrations.RunPython.noop),

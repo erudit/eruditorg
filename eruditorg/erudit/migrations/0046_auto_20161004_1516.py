@@ -8,23 +8,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0045_auto_20161004_1400'),
+        ("erudit", "0045_auto_20161004_1400"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='issuecontributor',
-            name='role_name',
-            field=models.CharField(blank=True, max_length=255, verbose_name='Rôle du contributeur'),
+            model_name="issuecontributor",
+            name="role_name",
+            field=models.CharField(blank=True, max_length=255, verbose_name="Rôle du contributeur"),
         ),
         migrations.AlterField(
-            model_name='issuecontributor',
-            name='role_name_en',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Rôle du contributeur'),
+            model_name="issuecontributor",
+            name="role_name_en",
+            field=models.CharField(
+                blank=True, max_length=255, null=True, verbose_name="Rôle du contributeur"
+            ),
         ),
         migrations.AlterField(
-            model_name='issuecontributor',
-            name='role_name_fr',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Rôle du contributeur'),
+            model_name="issuecontributor",
+            name="role_name_fr",
+            field=models.CharField(
+                blank=True, max_length=255, null=True, verbose_name="Rôle du contributeur"
+            ),
         ),
     ]

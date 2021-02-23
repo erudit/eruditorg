@@ -8,26 +8,26 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0090_auto_20180501_0719'),
+        ("erudit", "0090_auto_20180501_0719"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='author',
-            name='affiliations',
+            model_name="author",
+            name="affiliations",
         ),
         migrations.RemoveField(
-            model_name='author',
-            name='organisation',
+            model_name="author",
+            name="organisation",
         ),
         migrations.RemoveField(
-            model_name='article',
-            name='authors',
+            model_name="article",
+            name="authors",
         ),
         migrations.DeleteModel(
-            name='Affiliation',
+            name="Affiliation",
         ),
         migrations.DeleteModel(
-            name='Author',
+            name="Author",
         ),
     ]

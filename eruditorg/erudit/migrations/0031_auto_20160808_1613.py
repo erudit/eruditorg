@@ -10,43 +10,78 @@ import taggit.managers
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
-        ('erudit', '0030_auto_20160808_1531'),
+        ("contenttypes", "0002_remove_content_type_name"),
+        ("erudit", "0030_auto_20160808_1531"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='KeywordTag',
+            name="KeywordTag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True, verbose_name='Name')),
-                ('slug', models.SlugField(max_length=100, unique=True, verbose_name='Slug')),
-                ('language', models.CharField(blank=True, max_length=10, null=True, verbose_name='Code langue')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, unique=True, verbose_name="Name")),
+                ("slug", models.SlugField(max_length=100, unique=True, verbose_name="Slug")),
+                (
+                    "language",
+                    models.CharField(
+                        blank=True, max_length=10, null=True, verbose_name="Code langue"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Mot-clé',
-                'verbose_name_plural': 'Mots-clés',
+                "verbose_name": "Mot-clé",
+                "verbose_name_plural": "Mots-clés",
             },
         ),
         migrations.CreateModel(
-            name='KeywordTaggedWhatever',
+            name="KeywordTaggedWhatever",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('object_id', models.IntegerField(db_index=True, verbose_name='Object id')),
-                ('content_type', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='erudit_keywordtaggedwhatever_tagged_items', to='contenttypes.ContentType', verbose_name='Content type')),
-                ('tag', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='erudit_keywordtaggedwhatever_items', to='erudit.KeywordTag')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("object_id", models.IntegerField(db_index=True, verbose_name="Object id")),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=models.deletion.CASCADE,
+                        related_name="erudit_keywordtaggedwhatever_tagged_items",
+                        to="contenttypes.ContentType",
+                        verbose_name="Content type",
+                    ),
+                ),
+                (
+                    "tag",
+                    models.ForeignKey(
+                        on_delete=models.deletion.CASCADE,
+                        related_name="erudit_keywordtaggedwhatever_items",
+                        to="erudit.KeywordTag",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.RemoveField(
-            model_name='thesis',
-            name='keywords',
+            model_name="thesis",
+            name="keywords",
         ),
         migrations.AddField(
-            model_name='eruditdocument',
-            name='keywords',
-            field=taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='erudit.KeywordTaggedWhatever', to='erudit.KeywordTag', verbose_name='Tags'),
+            model_name="eruditdocument",
+            name="keywords",
+            field=taggit.managers.TaggableManager(
+                help_text="A comma-separated list of tags.",
+                through="erudit.KeywordTaggedWhatever",
+                to="erudit.KeywordTag",
+                verbose_name="Tags",
+            ),
         ),
     ]

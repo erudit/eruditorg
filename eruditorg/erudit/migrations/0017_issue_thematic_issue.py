@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0016_article_type'),
+        ("erudit", "0016_article_type"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='issue',
-            name='thematic_issue',
-            field=models.BooleanField(default=False, verbose_name='Numéro thématique'),
+            model_name="issue",
+            name="thematic_issue",
+            field=models.BooleanField(default=False, verbose_name="Numéro thématique"),
         ),
     ]

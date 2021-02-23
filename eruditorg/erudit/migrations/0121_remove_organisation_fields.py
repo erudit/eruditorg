@@ -6,28 +6,28 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0120_remove_journal_special_open_access_opt_in'),
+        ("erudit", "0120_remove_journal_special_open_access_opt_in"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='organisation',
-            name='city',
+            model_name="organisation",
+            name="city",
         ),
         migrations.RemoveField(
-            model_name='organisation',
-            name='country',
+            model_name="organisation",
+            name="country",
         ),
         migrations.RemoveField(
-            model_name='organisation',
-            name='postal_code',
+            model_name="organisation",
+            name="postal_code",
         ),
         migrations.RemoveField(
-            model_name='organisation',
-            name='province',
+            model_name="organisation",
+            name="province",
         ),
         migrations.RemoveField(
-            model_name='organisation',
-            name='street',
+            model_name="organisation",
+            name="street",
         ),
     ]

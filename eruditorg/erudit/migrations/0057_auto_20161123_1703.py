@@ -9,26 +9,47 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0056_auto_20161111_1125'),
+        ("erudit", "0056_auto_20161111_1125"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ArticleSubtitle',
+            name="ArticleSubtitle",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(blank=True, max_length=600, null=True, verbose_name='Titre')),
-                ('language', models.CharField(blank=True, max_length=10, null=True, verbose_name='Code langue')),
-                ('paral', models.BooleanField(default=False, verbose_name='Titre parallèle')),
-                ('article', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='subtitles', to='erudit.Article', verbose_name='Article')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(blank=True, max_length=600, null=True, verbose_name="Titre"),
+                ),
+                (
+                    "language",
+                    models.CharField(
+                        blank=True, max_length=10, null=True, verbose_name="Code langue"
+                    ),
+                ),
+                ("paral", models.BooleanField(default=False, verbose_name="Titre parallèle")),
+                (
+                    "article",
+                    models.ForeignKey(
+                        on_delete=models.deletion.CASCADE,
+                        related_name="subtitles",
+                        to="erudit.Article",
+                        verbose_name="Article",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': "Sous-titres d'articles",
-                'verbose_name': "Sous-titre d'article",
+                "verbose_name_plural": "Sous-titres d'articles",
+                "verbose_name": "Sous-titre d'article",
             },
         ),
         migrations.AlterModelOptions(
-            name='articletitle',
-            options={'verbose_name': "Titre d'article", 'verbose_name_plural': "Titres d'articles"},
+            name="articletitle",
+            options={"verbose_name": "Titre d'article", "verbose_name_plural": "Titres d'articles"},
         ),
     ]

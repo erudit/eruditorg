@@ -8,16 +8,19 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0092_auto_20180501_0915'),
+        ("erudit", "0092_auto_20180501_0915"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='ThesisProvider',
-            new_name='ThesisRepository',
+            old_name="ThesisProvider",
+            new_name="ThesisRepository",
         ),
         migrations.AlterModelOptions(
-            name='thesisrepository',
-            options={'verbose_name': 'Dépôt institutionnel', 'verbose_name_plural': 'Dépôts institutionnels'},
+            name="thesisrepository",
+            options={
+                "verbose_name": "Dépôt institutionnel",
+                "verbose_name_plural": "Dépôts institutionnels",
+            },
         ),
     ]

@@ -9,37 +9,55 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0102_journalinformation_frequency'),
+        ("erudit", "0102_journalinformation_frequency"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Contributor',
+            name="Contributor",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.CharField(choices=[('D', 'Direction'), ('R', 'Rédaction')], max_length=1, verbose_name='Type')),
-                ('name', models.CharField(max_length=200, verbose_name='Prénom et nom')),
-                ('role', models.CharField(max_length=200, verbose_name='Rôle')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[("D", "Direction"), ("R", "Rédaction")],
+                        max_length=1,
+                        verbose_name="Type",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, verbose_name="Prénom et nom")),
+                ("role", models.CharField(max_length=200, verbose_name="Rôle")),
             ],
         ),
         migrations.AlterField(
-            model_name='journalinformation',
-            name='frequency',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Fréquence de publication (numéros par année)'),
+            model_name="journalinformation",
+            name="frequency",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Fréquence de publication (numéros par année)"
+            ),
         ),
         migrations.AlterField(
-            model_name='journalinformation',
-            name='languages',
-            field=models.ManyToManyField(blank=True, to='erudit.Language', verbose_name='Langues de publication'),
+            model_name="journalinformation",
+            name="languages",
+            field=models.ManyToManyField(
+                blank=True, to="erudit.Language", verbose_name="Langues de publication"
+            ),
         ),
         migrations.AddField(
-            model_name='contributor',
-            name='journal_information',
-            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.JournalInformation'),
+            model_name="contributor",
+            name="journal_information",
+            field=models.ForeignKey(
+                on_delete=models.deletion.CASCADE, to="erudit.JournalInformation"
+            ),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='editorial_leaders',
-            field=models.ManyToManyField(to='erudit.Contributor'),
+            model_name="journalinformation",
+            name="editorial_leaders",
+            field=models.ManyToManyField(to="erudit.Contributor"),
         ),
     ]

@@ -9,10 +9,10 @@ def format_editor(editor):
     person_name = editor.format_name()
     role = editor.role
     if role:
-        if 'fr' in role:
-            role_name = role['fr']
-        elif 'fr' in role:
-            role_name = role['en']
+        if "fr" in role:
+            role_name = role["fr"]
+        elif "fr" in role:
+            role_name = role["en"]
         else:
             return person_name
         return "{} ({})".format(person_name, role_name)

@@ -9,15 +9,27 @@ from ..models import Language
 
 
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('code', 'name', )
+    list_display = (
+        "code",
+        "name",
+    )
     fieldsets = [
-        ('Identification', {
-            'fields': (
-                ('name', 'is_main_collection',),
-                ('code', 'localidentifier',),
-                ('logo', ),
-            )
-        }),
+        (
+            "Identification",
+            {
+                "fields": (
+                    (
+                        "name",
+                        "is_main_collection",
+                    ),
+                    (
+                        "code",
+                        "localidentifier",
+                    ),
+                    ("logo",),
+                )
+            },
+        ),
     ]
 
 
@@ -26,9 +38,9 @@ class DisciplineAdmin(TranslationAdmin):
 
 
 class OrganisationAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
+    search_fields = ("name",)
 
-    filter_horizontal = ('members',)
+    filter_horizontal = ("members",)
 
 
 admin.site.register(Organisation, OrganisationAdmin)

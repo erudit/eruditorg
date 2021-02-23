@@ -8,23 +8,23 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0109_auto_20181123_1427'),
+        ("erudit", "0109_auto_20181123_1427"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='issue',
-            old_name='first_page',
-            new_name='_first_page',
+            model_name="issue",
+            old_name="first_page",
+            new_name="_first_page",
         ),
         migrations.RenameField(
-            model_name='issue',
-            old_name='html_title',
-            new_name='_html_title',
+            model_name="issue",
+            old_name="html_title",
+            new_name="_html_title",
         ),
         migrations.RenameField(
-            model_name='issue',
-            old_name='last_page',
-            new_name='_last_page',
+            model_name="issue",
+            old_name="last_page",
+            new_name="_last_page",
         ),
     ]

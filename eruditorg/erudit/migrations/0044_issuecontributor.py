@@ -9,20 +9,39 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0043_auto_20160921_0843'),
+        ("erudit", "0043_auto_20160921_0843"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IssueContributor',
+            name="IssueContributor",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('firstname', models.CharField(max_length=255, verbose_name='Prénom du contributeur')),
-                ('lastname', models.CharField(max_length=255, verbose_name='Nom du contributeur')),
-                ('role_name', models.CharField(max_length=255, verbose_name='Rôle du contributeur')),
-                ('is_director', models.NullBooleanField(verbose_name='Est un directeur')),
-                ('is_editor', models.NullBooleanField(verbose_name='Est un rédacteur')),
-                ('issue', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='contributors', to='erudit.Issue', verbose_name='Numéro')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "firstname",
+                    models.CharField(max_length=255, verbose_name="Prénom du contributeur"),
+                ),
+                ("lastname", models.CharField(max_length=255, verbose_name="Nom du contributeur")),
+                (
+                    "role_name",
+                    models.CharField(max_length=255, verbose_name="Rôle du contributeur"),
+                ),
+                ("is_director", models.NullBooleanField(verbose_name="Est un directeur")),
+                ("is_editor", models.NullBooleanField(verbose_name="Est un rédacteur")),
+                (
+                    "issue",
+                    models.ForeignKey(
+                        on_delete=models.deletion.CASCADE,
+                        related_name="contributors",
+                        to="erudit.Issue",
+                        verbose_name="Numéro",
+                    ),
+                ),
             ],
         ),
     ]

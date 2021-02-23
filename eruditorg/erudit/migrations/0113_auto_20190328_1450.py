@@ -7,13 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0112_organisation_google_scholar_opt_out'),
+        ("erudit", "0112_organisation_google_scholar_opt_out"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journal',
-            name='type',
-            field=models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='erudit.JournalType', verbose_name='Type'),
+            model_name="journal",
+            name="type",
+            field=models.ForeignKey(
+                default=2,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="erudit.JournalType",
+                verbose_name="Type",
+            ),
         ),
     ]

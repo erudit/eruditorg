@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0115_journalinformation_updated'),
+        ("erudit", "0115_journalinformation_updated"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journal',
-            name='charges_apc',
-            field=models.BooleanField(default=False, help_text='Cocher si la revue charge des frais de publications (APC) aux auteurs', verbose_name='Frais de publication (APC)'),
+            model_name="journal",
+            name="charges_apc",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cocher si la revue charge des frais de publications (APC) aux auteurs",
+                verbose_name="Frais de publication (APC)",
+            ),
         ),
     ]

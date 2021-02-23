@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0039_journal_website_url'),
+        ("erudit", "0039_journal_website_url"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='article',
-            name='external_pdf_url',
-            field=models.URLField(blank=True, null=True, verbose_name='URL PDF'),
+            model_name="article",
+            name="external_pdf_url",
+            field=models.URLField(blank=True, null=True, verbose_name="URL PDF"),
         ),
     ]

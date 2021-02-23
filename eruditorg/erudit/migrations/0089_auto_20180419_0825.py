@@ -8,53 +8,61 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0088_remove_article_copyrights'),
+        ("erudit", "0088_remove_article_copyrights"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journalinformation',
-            name='email',
-            field=models.EmailField(blank=True, max_length=254, verbose_name='Adresse courriel'),
+            model_name="journalinformation",
+            name="email",
+            field=models.EmailField(blank=True, max_length=254, verbose_name="Adresse courriel"),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='facebook_enable_feed',
-            field=models.BooleanField(default=False, verbose_name='Afficher votre fil d’activités Facebook ?'),
+            model_name="journalinformation",
+            name="facebook_enable_feed",
+            field=models.BooleanField(
+                default=False, verbose_name="Afficher votre fil d’activités Facebook ?"
+            ),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='facebook_url',
-            field=models.URLField(blank=True, verbose_name='Facebook'),
+            model_name="journalinformation",
+            name="facebook_url",
+            field=models.URLField(blank=True, verbose_name="Facebook"),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='organisation_name',
-            field=models.TextField(blank=True, verbose_name='Prénom et nom OU nom de l’organisation'),
+            model_name="journalinformation",
+            name="organisation_name",
+            field=models.TextField(
+                blank=True, verbose_name="Prénom et nom OU nom de l’organisation"
+            ),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='phone',
-            field=models.TextField(blank=True, verbose_name='Numéro de téléphone'),
+            model_name="journalinformation",
+            name="phone",
+            field=models.TextField(blank=True, verbose_name="Numéro de téléphone"),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='subscription_email',
-            field=models.EmailField(blank=True, max_length=254, verbose_name='Adresse courriel pour abonnements'),
+            model_name="journalinformation",
+            name="subscription_email",
+            field=models.EmailField(
+                blank=True, max_length=254, verbose_name="Adresse courriel pour abonnements"
+            ),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='twitter_enable_feed',
-            field=models.BooleanField(default=False, verbose_name='Afficher votre fil d’activités Twitter ?'),
+            model_name="journalinformation",
+            name="twitter_enable_feed",
+            field=models.BooleanField(
+                default=False, verbose_name="Afficher votre fil d’activités Twitter ?"
+            ),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='twitter_url',
-            field=models.URLField(blank=True, verbose_name='Twitter'),
+            model_name="journalinformation",
+            name="twitter_url",
+            field=models.URLField(blank=True, verbose_name="Twitter"),
         ),
         migrations.AddField(
-            model_name='journalinformation',
-            name='website_url',
-            field=models.URLField(blank=True, verbose_name='Site Web officiel'),
+            model_name="journalinformation",
+            name="website_url",
+            field=models.URLField(blank=True, verbose_name="Site Web officiel"),
         ),
     ]

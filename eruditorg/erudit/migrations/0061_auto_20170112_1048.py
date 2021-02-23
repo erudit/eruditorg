@@ -9,13 +9,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0060_merge_20170112_1048'),
+        ("erudit", "0060_merge_20170112_1048"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journal',
-            name='members',
-            field=models.ManyToManyField(blank=True, related_name='journals', to=settings.AUTH_USER_MODEL, verbose_name='Membres'),
+            model_name="journal",
+            name="members",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="journals",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Membres",
+            ),
         ),
     ]

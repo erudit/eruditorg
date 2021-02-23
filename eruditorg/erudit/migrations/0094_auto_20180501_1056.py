@@ -8,15 +8,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0093_auto_20180501_0947'),
+        ("erudit", "0093_auto_20180501_0947"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='issuetheme',
-            name='issue',
+            model_name="issuetheme",
+            name="issue",
         ),
         migrations.DeleteModel(
-            name='IssueTheme',
+            name="IssueTheme",
         ),
     ]

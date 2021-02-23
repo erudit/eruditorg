@@ -8,17 +8,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0069_auto_20170418_1227'),
+        ("erudit", "0069_auto_20170418_1227"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='article',
-            name='publication_allowed_by_authors',
+            model_name="article",
+            name="publication_allowed_by_authors",
         ),
         migrations.AddField(
-            model_name='article',
-            name='publication_allowed',
-            field=models.BooleanField(default=True, verbose_name="Publication autorisée par le titulaire du droit d'auteur"),
+            model_name="article",
+            name="publication_allowed",
+            field=models.BooleanField(
+                default=True,
+                verbose_name="Publication autorisée par le titulaire du droit d'auteur",
+            ),
         ),
     ]

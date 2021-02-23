@@ -8,14 +8,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0056_auto_20161111_1125'),
+        ("erudit", "0056_auto_20161111_1125"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journaltype',
-            name='name',
-            field=models.CharField(default='N', max_length=255, verbose_name='Nom'),
+            model_name="journaltype",
+            name="name",
+            field=models.CharField(default="N", max_length=255, verbose_name="Nom"),
             preserve_default=False,
         ),
     ]

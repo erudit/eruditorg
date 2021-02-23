@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0119_journal_special_open_access_opt_in'),
+        ("erudit", "0119_journal_special_open_access_opt_in"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='journal',
-            name='special_open_access_opt_in',
+            model_name="journal",
+            name="special_open_access_opt_in",
         ),
     ]

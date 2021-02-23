@@ -9,24 +9,26 @@ import erudit.modelfields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0014_merge'),
+        ("erudit", "0014_merge"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='event',
-            name='author',
+            model_name="event",
+            name="author",
         ),
         migrations.RemoveField(
-            model_name='event',
-            name='target_content_type',
+            model_name="event",
+            name="target_content_type",
         ),
         migrations.AlterField(
-            model_name='organisation',
-            name='badge',
-            field=erudit.modelfields.SizeConstrainedImageField(blank=True, null=True, upload_to='organisation_badges', verbose_name='Badge'),
+            model_name="organisation",
+            name="badge",
+            field=erudit.modelfields.SizeConstrainedImageField(
+                blank=True, null=True, upload_to="organisation_badges", verbose_name="Badge"
+            ),
         ),
         migrations.DeleteModel(
-            name='Event',
+            name="Event",
         ),
     ]

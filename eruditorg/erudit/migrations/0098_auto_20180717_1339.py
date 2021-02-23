@@ -8,18 +8,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0097_merge_20180503_1022'),
+        ("erudit", "0097_merge_20180503_1022"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journalinformation',
-            name='email',
-            field=models.EmailField(blank=True, max_length=254, verbose_name='Adresse courriel pour demandes générales'),
+            model_name="journalinformation",
+            name="email",
+            field=models.EmailField(
+                blank=True, max_length=254, verbose_name="Adresse courriel pour demandes générales"
+            ),
         ),
         migrations.AlterField(
-            model_name='journalinformation',
-            name='subscription_email',
-            field=models.EmailField(blank=True, max_length=254, verbose_name='Adresse courriel pour abonnements individuels'),
+            model_name="journalinformation",
+            name="subscription_email",
+            field=models.EmailField(
+                blank=True,
+                max_length=254,
+                verbose_name="Adresse courriel pour abonnements individuels",
+            ),
         ),
     ]

@@ -11,21 +11,22 @@ logger = logging.getLogger(__name__)
 # Mind your order! Longer stopwords should come first to avoid shorter ones applying first.
 # (example: "Les" has to come before "Le").
 STOPWORDS = [r"the\s", r"les\s", r"le\s", r"la\s", r"l'", r"l’"]
-RE_STOPPREFIXES = re.compile(r'^({})'.format('|'.join(STOPWORDS)), re.IGNORECASE)
+RE_STOPPREFIXES = re.compile(r"^({})".format("|".join(STOPWORDS)), re.IGNORECASE)
 
 
-def strip_stopwords_prefix(name, lang='fr'):
-    if lang == 'fr':
-        name = RE_STOPPREFIXES.sub('', name)
+def strip_stopwords_prefix(name, lang="fr"):
+    if lang == "fr":
+        name = RE_STOPPREFIXES.sub("", name)
     return name
 
 
-def get_sort_key_func(lang='fr'):
-    """ Returns a sort key func appropriate for sorting names in eruditorg.
+def get_sort_key_func(lang="fr"):
+    """Returns a sort key func appropriate for sorting names in eruditorg.
 
     WARNING: this sorting is locale-aware. Before calling this, make sure that you set the proper
     locale. You can also sort your list through locale_aware_sort() which does this.
     """
+
     def get_sort_key(name):
         name = strip_stopwords_prefix(name, lang)
         return locale.strxfrm(name.strip())
@@ -33,8 +34,8 @@ def get_sort_key_func(lang='fr'):
     return get_sort_key
 
 
-def locale_aware_sort(elems, keyfunc=None, localename='fr_CA.UTF-8'):
-    """ Sorts elems with get_sort_key() under the localename context.
+def locale_aware_sort(elems, keyfunc=None, localename="fr_CA.UTF-8"):
+    """Sorts elems with get_sort_key() under the localename context.
 
     keyfunc should return the "raw" value to sort. get_sort_key() will be applied to that raw
     value before sorting.
@@ -62,7 +63,7 @@ def locale_aware_sort(elems, keyfunc=None, localename='fr_CA.UTF-8'):
 
 
 def pairify(iterable):
-    """ Pair every two items of a list into a tuple.
+    """Pair every two items of a list into a tuple.
 
     Useful for solr facets.
 
@@ -72,11 +73,12 @@ def pairify(iterable):
 
 
 class PaginatedAlready:
-    """ Mocks django's Paginator object to wrap items that are *already* paginated.
+    """Mocks django's Paginator object to wrap items that are *already* paginated.
 
     You will usually want to use this in templates to re-use a standard paginated template
     without needing to modify it.
     """
+
     def __init__(self, paginate_by, total_count, page_number):
         self.paginate_by = paginate_by
         self.total_count = total_count
@@ -111,7 +113,6 @@ class PaginatedAlready:
 
 
 def catch_and_log(func):
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -124,7 +125,7 @@ def catch_and_log(func):
 
 
 def qs_cache_key(qs: models.QuerySet) -> str:
-    """ Build a cache key using the primary key of all the objects in the queryset
+    """Build a cache key using the primary key of all the objects in the queryset
 
     The cache key will change whenever the queryset changes. This is useful in the case where
     you want to burst the cache whenever the children of an object changes.

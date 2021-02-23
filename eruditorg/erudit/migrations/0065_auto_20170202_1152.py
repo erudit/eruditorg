@@ -6,15 +6,14 @@ from django.db import migrations
 
 
 def remove_persee_localidentifiers(apps, schema_editor):
-    Journal = apps.get_model('erudit', 'Journal')
-    Journal.objects.filter(collection__code='persee').update(localidentifier=None)
+    Journal = apps.get_model("erudit", "Journal")
+    Journal.objects.filter(collection__code="persee").update(localidentifier=None)
+
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0064_remove_article_bibliographic_reference'),
+        ("erudit", "0064_remove_article_bibliographic_reference"),
     ]
 
-    operations = [
-        migrations.RunPython(remove_persee_localidentifiers)
-    ]
+    operations = [migrations.RunPython(remove_persee_localidentifiers)]

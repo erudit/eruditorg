@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0118_journal_year_of_addition'),
+        ("erudit", "0118_journal_year_of_addition"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journal',
-            name='special_open_access_opt_in',
-            field=models.BooleanField(default=False, verbose_name='Opt-in pour un libre accès spécial durant la crise de la COVID-19'),
+            model_name="journal",
+            name="special_open_access_opt_in",
+            field=models.BooleanField(
+                default=False,
+                verbose_name="Opt-in pour un libre accès spécial durant la crise de la COVID-19",
+            ),
         ),
     ]

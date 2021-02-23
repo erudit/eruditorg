@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0072_remove_article_publisher'),
+        ("erudit", "0072_remove_article_publisher"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='article',
-            name='formatted_title',
+            model_name="article",
+            name="formatted_title",
             field=models.CharField(blank=True, max_length=1000, null=True),
         ),
     ]

@@ -8,29 +8,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0105_auto_20181113_1608'),
+        ("erudit", "0105_auto_20181113_1608"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='issue',
-            name='oai_datestamp',
+            model_name="issue",
+            name="oai_datestamp",
         ),
         migrations.RemoveField(
-            model_name='issue',
-            name='special_issue',
+            model_name="issue",
+            name="special_issue",
         ),
         migrations.RemoveField(
-            model_name='issue',
-            name='thematic_issue',
+            model_name="issue",
+            name="thematic_issue",
         ),
         migrations.RemoveField(
-            model_name='journal',
-            name='oai_datestamp',
+            model_name="journal",
+            name="oai_datestamp",
         ),
         migrations.AlterField(
-            model_name='thesisrepository',
-            name='solr_name',
-            field=models.CharField(db_index=True, help_text='Saisir la valeur du champs Editeur de Solr', max_length=200, verbose_name='Nom dans Solr'),
+            model_name="thesisrepository",
+            name="solr_name",
+            field=models.CharField(
+                db_index=True,
+                help_text="Saisir la valeur du champs Editeur de Solr",
+                max_length=200,
+                verbose_name="Nom dans Solr",
+            ),
         ),
     ]

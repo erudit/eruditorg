@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0067_auto_20170413_1351'),
+        ("erudit", "0067_auto_20170413_1351"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='article',
-            name='has_copyright_restriction',
-            field=models.BooleanField(default=False, help_text="Cocher si le titulaire du droit d'auteur n'autorise pas la diffusion de cet article sur la plateforme.", verbose_name="Diffusion restreinte par le titulaire du droit d'auteur"),
+            model_name="article",
+            name="has_copyright_restriction",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cocher si le titulaire du droit d'auteur n'autorise pas la diffusion de cet article sur la plateforme.",
+                verbose_name="Diffusion restreinte par le titulaire du droit d'auteur",
+            ),
         ),
     ]

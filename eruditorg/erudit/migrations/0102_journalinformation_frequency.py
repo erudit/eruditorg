@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0101_auto_20181026_1513'),
+        ("erudit", "0101_auto_20181026_1513"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journalinformation',
-            name='frequency',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Fréquence de publication'),
+            model_name="journalinformation",
+            name="frequency",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Fréquence de publication"
+            ),
         ),
     ]

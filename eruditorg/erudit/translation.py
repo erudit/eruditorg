@@ -9,27 +9,27 @@ from .models import Language
 
 class JournalInformationTranslationOptions(TranslationOptions):
     fields = (
-        'about', 'editorial_policy', 'subscriptions', 'team',
-        'contact', 'partners', 'publishing_ethics', 'instruction_for_authors',
+        "about",
+        "editorial_policy",
+        "subscriptions",
+        "team",
+        "contact",
+        "partners",
+        "publishing_ethics",
+        "instruction_for_authors",
     )
 
 
 class DisciplineTranslationOptions(TranslationOptions):
-    fields = (
-        'name',
-    )
+    fields = ("name",)
 
 
 class JournalTypeTranslationOptions(TranslationOptions):
-    fields = (
-        'name',
-    )
+    fields = ("name",)
 
 
 class LanguageTranslationOptions(TranslationOptions):
-    fields = (
-        'name',
-    )
+    fields = ("name",)
 
 
 translator.register(JournalInformation, JournalInformationTranslationOptions)

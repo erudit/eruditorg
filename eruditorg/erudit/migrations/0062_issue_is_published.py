@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0061_auto_20170112_1048'),
+        ("erudit", "0061_auto_20170112_1048"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='issue',
-            name='is_published',
+            model_name="issue",
+            name="is_published",
             field=models.BooleanField(default=False),
         ),
     ]

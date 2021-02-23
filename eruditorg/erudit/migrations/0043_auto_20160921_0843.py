@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0042_auto_20160920_1037'),
+        ("erudit", "0042_auto_20160920_1037"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='journal',
-            name='redirect_to_external_url',
-            field=models.BooleanField(default=False, help_text='Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit', verbose_name="Rediriger vers l'URL externe"),
+            model_name="journal",
+            name="redirect_to_external_url",
+            field=models.BooleanField(
+                default=False,
+                help_text="Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit",
+                verbose_name="Rediriger vers l'URL externe",
+            ),
         ),
     ]

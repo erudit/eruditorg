@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0028_auto_20160721_1517'),
+        ("erudit", "0028_auto_20160721_1517"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='author',
-            name='othername',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Autre nom'),
+            model_name="author",
+            name="othername",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Autre nom"),
         ),
     ]

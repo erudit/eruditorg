@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0044_issuecontributor'),
+        ("erudit", "0044_issuecontributor"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='issuecontributor',
-            name='role_name_en',
-            field=models.CharField(max_length=255, null=True, verbose_name='Rôle du contributeur'),
+            model_name="issuecontributor",
+            name="role_name_en",
+            field=models.CharField(max_length=255, null=True, verbose_name="Rôle du contributeur"),
         ),
         migrations.AddField(
-            model_name='issuecontributor',
-            name='role_name_fr',
-            field=models.CharField(max_length=255, null=True, verbose_name='Rôle du contributeur'),
+            model_name="issuecontributor",
+            name="role_name_fr",
+            field=models.CharField(max_length=255, null=True, verbose_name="Rôle du contributeur"),
         ),
     ]

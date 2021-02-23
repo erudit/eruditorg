@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0033_article_copyrights'),
+        ("erudit", "0033_article_copyrights"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='affiliation',
-            name='name',
-            field=models.CharField(max_length=600, verbose_name='Nom'),
+            model_name="affiliation",
+            name="name",
+            field=models.CharField(max_length=600, verbose_name="Nom"),
         ),
     ]

@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0117_auto_20190905_1546'),
+        ("erudit", "0117_auto_20190905_1546"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='journal',
-            name='year_of_addition',
-            field=models.PositiveIntegerField(blank=True, help_text="Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit.", null=True, verbose_name='Année de nouveauté'),
+            model_name="journal",
+            name="year_of_addition",
+            field=models.PositiveIntegerField(
+                blank=True,
+                help_text="Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit.",
+                null=True,
+                verbose_name="Année de nouveauté",
+            ),
         ),
     ]

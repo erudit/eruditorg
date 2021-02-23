@@ -9,27 +9,54 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0052_auto_20161026_1056'),
+        ("erudit", "0052_auto_20161026_1056"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ArticleTitle',
+            name="ArticleTitle",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=600, verbose_name='Titre', blank=True, null=True)),
-                ('language', models.CharField(max_length=10, blank=True, null=True, verbose_name='Code langue')),
-                ('paral', models.BooleanField(default=False, verbose_name='Titre parallèle')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(max_length=600, verbose_name="Titre", blank=True, null=True),
+                ),
+                (
+                    "language",
+                    models.CharField(
+                        max_length=10, blank=True, null=True, verbose_name="Code langue"
+                    ),
+                ),
+                ("paral", models.BooleanField(default=False, verbose_name="Titre parallèle")),
             ],
         ),
         migrations.AlterField(
-            model_name='article',
-            name='type',
-            field=models.CharField(choices=[('article', 'Article'), ('compterendu', 'Compte rendu'), ('note', 'Note'), ('autre', 'Autre')], max_length=64, verbose_name='Type'),
+            model_name="article",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    ("article", "Article"),
+                    ("compterendu", "Compte rendu"),
+                    ("note", "Note"),
+                    ("autre", "Autre"),
+                ],
+                max_length=64,
+                verbose_name="Type",
+            ),
         ),
         migrations.AddField(
-            model_name='articletitle',
-            name='article',
-            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='titles', to='erudit.Article', verbose_name='Article'),
+            model_name="articletitle",
+            name="article",
+            field=models.ForeignKey(
+                on_delete=models.deletion.CASCADE,
+                related_name="titles",
+                to="erudit.Article",
+                verbose_name="Article",
+            ),
         ),
     ]

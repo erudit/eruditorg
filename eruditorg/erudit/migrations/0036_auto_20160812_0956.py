@@ -8,23 +8,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0035_auto_20160811_1442'),
+        ("erudit", "0035_auto_20160811_1442"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='eruditdocument',
-            name='localidentifier',
-            field=models.CharField(db_index=True, max_length=100, unique=True, verbose_name='Identifiant unique'),
+            model_name="eruditdocument",
+            name="localidentifier",
+            field=models.CharField(
+                db_index=True, max_length=100, unique=True, verbose_name="Identifiant unique"
+            ),
         ),
         migrations.AlterField(
-            model_name='issue',
-            name='localidentifier',
-            field=models.CharField(max_length=100, unique=True, verbose_name='Identifiant Fedora'),
+            model_name="issue",
+            name="localidentifier",
+            field=models.CharField(max_length=100, unique=True, verbose_name="Identifiant Fedora"),
         ),
         migrations.AlterField(
-            model_name='journal',
-            name='localidentifier',
-            field=models.CharField(blank=True, max_length=100, null=True, unique=True, verbose_name='Identifiant Fedora'),
+            model_name="journal",
+            name="localidentifier",
+            field=models.CharField(
+                blank=True,
+                max_length=100,
+                null=True,
+                unique=True,
+                verbose_name="Identifiant Fedora",
+            ),
         ),
     ]
