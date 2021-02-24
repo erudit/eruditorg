@@ -37,6 +37,7 @@ def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
         coverpage_pdf.pages.extend(content_pdf.pages)
         coverpage_pdf.save(output)
         coverpage_pdf.close()
+        content_pdf.close()
         output.seek(0)
         return output.read()
 
