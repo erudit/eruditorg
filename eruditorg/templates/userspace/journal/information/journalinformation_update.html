@@ -55,7 +55,6 @@
           <p class="col-sm-9">
             {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
           </p>
-          {% include field_template with field=form.organisation_name only %}
           {% include field_template with field=form.phone type="tel" autocomplete="tel" only %}
           {% include field_template with field=form.email type="email" autocomplete="email" only %}
           {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
