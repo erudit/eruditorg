@@ -4,7 +4,6 @@ from core.subscription.models import JournalAccessSubscription
 from core.subscription.test.factories import (
     JournalAccessSubscriptionFactory,
     JournalManagementSubscriptionFactory,
-    ValidJournalAccessSubscriptionPeriodFactory,
 )
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 

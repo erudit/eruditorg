@@ -1,4 +1,3 @@
-import pysolr
 import pytest
 
 from erudit.solr.models import Article, SolrDocument

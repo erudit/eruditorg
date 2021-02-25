@@ -17,7 +17,7 @@ class TestSearchResultsView:
         monkeypatch.setattr(SearchForm, "solr_data", FakeSolrData())
 
     def test_search_results_can_cite_thesis(self, solr_client):
-        thesis = ThesisFactory()
+        ThesisFactory()
 
         doc = SolrDocumentFactory(
             title="Thèse",

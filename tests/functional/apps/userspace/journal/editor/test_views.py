@@ -1,10 +1,8 @@
 import pytest
 import os
-import unittest.mock
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.messages.middleware import MessageMiddleware
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import mail
 from django.urls import reverse
@@ -23,9 +21,7 @@ from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
 from erudit.test.factories import JournalFactory
 
-from apps.userspace.journal.editor.views import IssueSubmissionApproveView
 from apps.userspace.journal.editor.views import IssueSubmissionCreate
-from apps.userspace.journal.editor.views import IssueSubmissionRefuseView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), "fixtures")
 

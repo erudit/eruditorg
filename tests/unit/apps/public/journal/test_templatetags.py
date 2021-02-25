@@ -1,8 +1,5 @@
 import pytest
 
-from unittest import mock
-from datetime import datetime
-
 from erudit.test.factories import IssueFactory, JournalFactory
 
 from apps.public.journal.templatetags.public_journal_tags import (

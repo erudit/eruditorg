@@ -11,8 +11,6 @@ from apps.public.book.models import (
 
 from apps.public.book.test.factories import BookFactory, BookCollectionFactory
 
-from waffle.models import Flag
-
 
 @pytest.fixture
 def book():

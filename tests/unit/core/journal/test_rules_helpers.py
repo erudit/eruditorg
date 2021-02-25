@@ -1,7 +1,7 @@
 import pytest
 
 from erudit.models import Journal
-from base.test.factories import UserFactory, GroupFactory
+from base.test.factories import UserFactory
 from erudit.test.factories import JournalFactory, CollectionFactory
 from core.editor.test.factories import ProductionTeamFactory
 

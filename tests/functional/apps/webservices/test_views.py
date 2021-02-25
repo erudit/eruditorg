@@ -52,8 +52,8 @@ class TestRestrictionsView:
     def test_embargo_duration(self):
         journal_scientific = JournalFactory.create(type_code=JournalType.CODE_SCIENTIFIC)
         journal_cultural = JournalFactory.create(type_code=JournalType.CODE_CULTURAL)
-        embargoed_issue_scientific = EmbargoedIssueFactory(journal=journal_scientific)
-        embargoed_issue_cultural = EmbargoedIssueFactory(journal=journal_cultural)
+        EmbargoedIssueFactory(journal=journal_scientific)
+        EmbargoedIssueFactory(journal=journal_cultural)
 
         url = reverse("webservices:restrictions")
         response = Client().get(url)
@@ -124,7 +124,6 @@ class TestRestrictionsByJournalView:
         assert len(whitelisted_issues) == 2
         assert issues_element.attrib["whitelisted_count"] == str(len(whitelisted_issues))
 
-        issue_element = issues_element[0]
         assert issues_element[0].attrib["embargoed"] == "True"
         assert issues_element[1].attrib["embargoed"] == "True"
         assert issues_element[2].attrib["embargoed"] == "True"

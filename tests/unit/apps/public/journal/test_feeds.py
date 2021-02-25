@@ -34,12 +34,12 @@ class TestLatestIssuesFeed:
             journal__name="journal2",
         )
         # Unpublished issue, should not appear in the RSS
-        issue3 = IssueFactory(
+        IssueFactory(
             is_published=False,
             localidentifier="isssue3",
         )
         # Older than 90 days issue, should not appear in the RSS
-        issue4 = IssueFactory(
+        IssueFactory(
             date_published=now.date() - datetime.timedelta(91),
             localidentifier="isssue4",
         )
@@ -62,13 +62,19 @@ class TestLatestIssuesFeed:
         assert "<language>fr</language>" in rss
         # Check the feed's image
         assert (
-            "<image><url>/static/img/logo-erudit.png</url><title>Érudit</title><link>https://erudit.org</link></image>"
-            in rss
+            "<image><url>/static/img/logo-erudit.png</url><title>Érudit</title>"
+            "<link>https://erudit.org</link></image>" in rss
         )
 
         # Check the feed's items order
         assert (
-            "<item><title>Inter, Numéro 110, supplément, hiver 2012</title><link>http://example.com/fr/revues/journal1/{year}-isssue1/</link><pubDate>{pubdate1}</pubDate><guid>http://example.com/fr/revues/journal1/{year}-isssue1/</guid></item><item><title>Inter, Numéro 110, supplément, hiver 2012</title><link>http://example.com/fr/revues/journal2/{year}-isssue2/</link><pubDate>{pubdate2}</pubDate><guid>http://example.com/fr/revues/journal2/{year}-isssue2/</guid></item>".format(
+            "<item><title>Inter, Numéro 110, supplément, hiver 2012</title>"
+            "<link>http://example.com/fr/revues/journal1/{year}-isssue1/</link>"
+            "<pubDate>{pubdate1}</pubDate><guid>http://example.com/fr/revues/journal1/"
+            "{year}-isssue1/</guid></item><item><title>Inter, Numéro 110, supplément, hiver 2012"
+            "</title><link>http://example.com/fr/revues/journal2/{year}-isssue2/</link>"
+            "<pubDate>{pubdate2}</pubDate><guid>http://example.com/fr/revues/journal2/"
+            "{year}-isssue2/</guid></item>".format(
                 year=now.year,
                 pubdate1=self._get_pubdate(issue1.date_published),
                 pubdate2=self._get_pubdate(issue2.date_published),
@@ -96,15 +102,15 @@ class TestLatestJournalArticlesFeed:
             year="2012",
             localidentifier="current_issue",
         )
-        old_article = ArticleFactory(
+        ArticleFactory(
             issue=old_issue,
             localidentifier="old_article",
         )
-        article1 = ArticleFactory(
+        ArticleFactory(
             issue=current_issue,
             localidentifier="article1",
         )
-        article2 = ArticleFactory(
+        ArticleFactory(
             issue=current_issue,
             localidentifier="article2",
         )
@@ -137,12 +143,22 @@ class TestLatestJournalArticlesFeed:
         assert "<language>fr</language>" in rss
         # Check the feed's image
         assert (
-            "<image><url>/static/img/logo-erudit.png</url><title>Érudit</title><link>https://erudit.org</link></image>"
-            in rss
+            "<image><url>/static/img/logo-erudit.png</url><title>Érudit</title>"
+            "<link>https://erudit.org</link></image>" in rss
         )
 
         # Check the feed's items order
-        assert "<item><title>Robert Southey, Writing and Romanticism</title><link>http://example.com/fr/revues/journal/2012-current_issue/article1/</link><description>Lynda Pratt</description><guid>http://example.com/fr/revues/journal/2012-current_issue/article1/</guid></item><item><title>Robert Southey, Writing and Romanticism</title><link>http://example.com/fr/revues/journal/2012-current_issue/article2/</link><description>Lynda Pratt</description><guid>http://example.com/fr/revues/journal/2012-current_issue/article2/</guid></item>"
+        assert (
+            "<item><title>Robert Southey, Writing and Romanticism</title>"
+            "<link>http://example.com/fr/revues/journal/2012-current_issue/article1/</link>"
+            "<description>Lynda Pratt</description>"
+            "<guid>http://example.com/fr/revues/journal/2012-current_issue/article1/</guid>"
+            "</item><item><title>Robert Southey, Writing and Romanticism</title>"
+            "<link>http://example.com/fr/revues/journal/2012-current_issue/article2/</link>"
+            "<description>Lynda Pratt</description>"
+            "<guid>http://example.com/fr/revues/journal/2012-current_issue/article2/</guid></item>"
+            in rss
+        )
 
         # Check that old issues and articles are not included
         assert "old_issue" not in rss

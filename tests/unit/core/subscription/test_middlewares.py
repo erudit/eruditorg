@@ -189,7 +189,7 @@ class TestSubscriptionMiddleware:
         article = EmbargoedArticleFactory()
 
         # Create a subscription that has both an ip address range and a referer
-        ip_subscription = JournalAccessSubscriptionFactory(
+        JournalAccessSubscriptionFactory(
             journals=[article.issue.journal],
             post__valid=True,
             post__ip_start="1.1.1.1",

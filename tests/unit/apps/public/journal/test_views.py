@@ -5,7 +5,7 @@ import pytest
 import unittest.mock
 
 from django.http import Http404
-from django.test import Client, TestCase, override_settings, RequestFactory
+from django.test import Client, override_settings, RequestFactory
 from django.urls import reverse
 
 from apps.public.journal.article_access_log import ArticleAccessType
@@ -21,7 +21,7 @@ from erudit.test.factories import (
 from erudit.fedora import repository
 from eruditarticle.objects.article import EruditArticle
 from erudit.fedora.objects import ArticleDigitalObject
-from erudit.models import Article, Issue, Journal
+from erudit.models import Article
 from erudit.test.domchange import SectionTitle
 from erudit.test.solr import FakeSolrData
 from apps.public.journal.views import (
@@ -113,9 +113,9 @@ class TestJournalDetailView:
         self,
     ):
         journal = JournalFactory()
-        issue_1 = IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
-        issue_2 = IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
-        issue_3 = IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
+        IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
+        IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
+        IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
         url = reverse(
             "public:journal:journal_detail",
             kwargs={
@@ -165,8 +165,9 @@ class TestJournalDetailView:
         )
         html = Client().get(url).content.decode()
         assert (
-            'Cette revue a cessé de publier ses numéros sur Érudit depuis 2016, vous pouvez consulter les numéros subséquents sur <a href="https://www.cairn.info/revue-recma.htm">Cairn</a>'
-            in html
+            "Cette revue a cessé de publier ses numéros sur Érudit depuis 2016, vous pouvez "
+            "consulter les numéros subséquents sur "
+            '<a href="https://www.cairn.info/revue-recma.htm">Cairn</a>' in html
         )
 
     @pytest.mark.parametrize(
@@ -179,7 +180,7 @@ class TestJournalDetailView:
     def test_journal_base_cache_key(self, with_issue, expected_cache_key):
         journal = JournalFactory(code="journal_code")
         if with_issue:
-            issue = IssueFactory(journal=journal, localidentifier="issue_localidentifier")
+            IssueFactory(journal=journal, localidentifier="issue_localidentifier")
         view = JournalDetailView()
         view.object = journal
         view.journal = journal
@@ -213,13 +214,15 @@ class TestIssueDetailSummary:
                     "level": 1,
                     "type": "subsection",
                     "titles": {
-                        "main": "La recherche qualitative aujourd’hui. 30 ans de diffusion et de réflexion",
+                        "main": "La recherche qualitative aujourd’hui. 30 ans de diffusion et de "
+                        "réflexion",
                         "paral": [],
                     },
                     "notegens": [
                         {
                             "content": [
-                                "Sous la direction de Frédéric Deschenaux, Chantal Royer et Colette Baribeau"
+                                "Sous la direction de Frédéric Deschenaux, Chantal Royer et "
+                                "Colette Baribeau"
                             ],
                             "scope": "surtitre",
                             "type": "edito",
@@ -448,7 +451,7 @@ class TestIssueDetailSummary:
         )
         mock_cache.get.reset_mock()
 
-        response = Client().get(
+        Client().get(
             url,
             {
                 "ticket": article.issue.prepublication_ticket,
@@ -472,8 +475,8 @@ class TestIssueDetailSummary:
         html = response.content.decode()
         # Check that there's only one space between the main title and the '/'.
         assert (
-            "Inaugural Lecture of the FR Scott Professor&nbsp;/ Conférence inaugurale du Professeur FR Scott"
-            in html
+            "Inaugural Lecture of the FR Scott Professor&nbsp;/ Conférence inaugurale du "
+            "Professeur FR Scott" in html
         )
 
     def test_issue_detail_view_with_untitled_article(self):
@@ -496,8 +499,9 @@ class TestIssueDetailSummary:
         response = Client().get(url)
         html = response.content.decode()
         assert (
-            '<h6 class="bib-record__title">\n    \n    <a href="/fr/revues/journal/2000-issue/article/"\n    \n    title="Lire l\'article">\n    [Article sans titre]\n    </a>\n  </h6>'
-            in html
+            '<h6 class="bib-record__title">\n    \n    '
+            '<a href="/fr/revues/journal/2000-issue/article/"\n    \n    '
+            'title="Lire l\'article">\n    [Article sans titre]\n    </a>\n  </h6>' in html
         )
 
     def test_article_authors_are_not_displayed_with_suffixes(self):
@@ -515,8 +519,9 @@ class TestIssueDetailSummary:
         html = Client().get(url).content.decode()
         # Check that authors' suffixes are not displayed on the issue detail view.
         assert (
-            '<p class="bib-record__authors col-sm-9">\n      Mélissa Beaudoin, Stéphane Potvin, Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, André Ngamini-Ngui et Alexandre Dumais\n    </p>'
-            in html
+            '<p class="bib-record__authors col-sm-9">\n      Mélissa Beaudoin, Stéphane Potvin, '
+            "Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, André Ngamini-Ngui "
+            "et Alexandre Dumais\n    </p>" in html
         )
 
     def test_article_authors_html_display(self):
@@ -577,7 +582,7 @@ class TestIssueDetailSummary:
 
     def test_issue_detail_back_issues(self):
         journal = JournalFactory()
-        issue_1 = IssueFactory(journal=journal, year="2019", volume="1", number="1")
+        IssueFactory(journal=journal, year="2019", volume="1", number="1")
         issue_2 = IssueFactory(journal=journal, year="2019", volume="1", number="2")
         issue_3 = IssueFactory(journal=journal, year="2019", volume="2", number="1")
         issue_4 = IssueFactory(journal=journal, year="2019", volume="2", number="2")
@@ -659,12 +664,14 @@ class TestIssueReaderPageView:
             # Only the 5 first pages should be accessible for embargoed published issues.
             ("1", False, True, False, 200, ""),
             ("6", False, True, False, 302, "/static/img/bookreader/restriction.jpg"),
-            # All pages should be accessible for unpublished issues when a prepublication ticket is provided.
+            # All pages should be accessible for unpublished issues when a prepublication ticket is
+            # provided.
             ("1", True, False, True, 200, ""),
             ("6", True, False, True, 200, ""),
             ("1", False, False, True, 200, ""),
             ("6", False, False, True, 200, ""),
-            # No pages should be accessible for unpublished issues when no prepublication ticket is provided.
+            # No pages should be accessible for unpublished issues when no prepublication ticket is
+            # provided.
             ("1", True, False, False, 302, "/fr/revues/journal/"),
             ("6", True, False, False, 302, "/fr/revues/journal/"),
             ("1", False, False, False, 302, "/fr/revues/journal/"),
@@ -841,26 +848,26 @@ class TestRenderArticleTemplateTag:
         # table of content and not stripped when displayed as section titles.
         assert '<a href="#s1n1">Titre</a>' in ret
         assert (
-            '<h2>Titre<a href="#no1" id="re1no1" class="norenvoi" title="Note 1, avec espace entre deux marquages">[1]</a>\n</h2>'
-            in ret
+            '<h2>Titre<a href="#no1" id="re1no1" class="norenvoi" title="Note 1, avec espace entre '
+            'deux marquages">[1]</a>\n</h2>' in ret
         )
 
         assert '<a href="#s1n2"><strong>Titre gras</strong></a>' in ret
         assert (
-            '<h2><strong>Titre gras<a href="#no2" id="re1no2" class="norenvoi" title="Lien à encoder">[2]</a></strong></h2>'
-            in ret
+            '<h2><strong>Titre gras<a href="#no2" id="re1no2" class="norenvoi" title="Lien à '
+            'encoder">[2]</a></strong></h2>' in ret
         )
 
         assert '<a href="#s1n3"><em>Titre italique</em></a>' in ret
         assert (
-            '<h2><em>Titre italique<a href="#no3" id="re1no3" class="norenvoi" title="Lien déjà encodé">[3]</a></em></h2>'
-            in ret
+            '<h2><em>Titre italique<a href="#no3" id="re1no3" class="norenvoi" title="Lien déjà '
+            'encodé">[3]</a></em></h2>' in ret
         )
 
         assert '<a href="#s1n4"><span class="petitecap">Titre petitecap</span></a>' in ret
         assert (
-            '<h2><span class="petitecap">Titre petitecap<a href="#no4" id="re1no4" class="norenvoi" title="">[4]</a></span></h2>'
-            in ret
+            '<h2><span class="petitecap">Titre petitecap<a href="#no4" id="re1no4" '
+            'class="norenvoi" title="">[4]</a></span></h2>' in ret
         )
 
     def test_space_between_two_tags(self):
@@ -877,7 +884,8 @@ class TestRenderArticleTemplateTag:
 
         # Check that the blockquote is displayed before the second paragraph.
         assert (
-            '<blockquote class="bloccitation ">\n<p class="alinea">Citation</p>\n<cite class="source">Source</cite>\n</blockquote>\n<p class="alinea">Paragraphe</p>'
+            '<blockquote class="bloccitation ">\n<p class="alinea">Citation</p>\n'
+            '<cite class="source">Source</cite>\n</blockquote>\n<p class="alinea">Paragraphe</p>'
             in ret
         )
 
@@ -919,15 +927,16 @@ class TestRenderArticleTemplateTag:
         ret = self.render_article_detail_html("1053504ar.xml")
         # There should be an hyphen between multiple months and no coma between month and year.
         assert (
-            '<p class="refpapier"><span class="volumaison"><span class="nonumero">Numéro 179</span>, Janvier–Avril 2018</span>, p. 1–2</p>'
-            in ret
+            '<p class="refpapier"><span class="volumaison"><span class="nonumero">Numéro 179'
+            "</span>, Janvier–Avril 2018</span>, p. 1–2</p>" in ret
         )
 
     def test_volumaison_with_multiple_numbers(self):
         ret = self.render_article_detail_html("1067490ar.xml")
         # There should be an hyphen between multiple numbers and a coma between numbers and period.
         assert (
-            '<p class="refpapier"><span class="volumaison"><span class="volume">Volume\xa028</span>, <span class="nonumero">Numéro\xa02–3</span>, Printemps 2018</span>, p.\xa07–9'
+            '<p class="refpapier"><span class="volumaison"><span class="volume">Volume\xa028'
+            '</span>, <span class="nonumero">Numéro\xa02–3</span>, Printemps 2018</span>, p.\xa07–9'
             in ret
         )
 
@@ -943,8 +952,13 @@ class TestRenderArticleTemplateTag:
         ret = self.render_article_detail_html("1058157ar.xml")
         # Check that titreparal and sstitreparal are in the right order.
         assert (
-            '<h1 class="doc-head__title">\n<span class="titre">Introduction au dossier spécial</span><span class="sstitre">À la découverte du lien organisationnel : avez-vous lu A. O. Hirschman ?</span><span class="titreparal">Introduction to the special section</span><span class="sstitreparal">Exploring the Organizational Link: Have You Read A. O.\n        Hirschman?</span><span class="titreparal">Introducción Dossier Especial</span><span class="sstitreparal">Descubriendo las relaciones organizativas: ¿leyó a A.O.\n        Hirschman?</span>\n</h1>'
-            in ret
+            '<h1 class="doc-head__title">\n<span class="titre">Introduction au dossier spécial'
+            '</span><span class="sstitre">À la découverte du lien organisationnel : avez-vous lu '
+            'A. O. Hirschman ?</span><span class="titreparal">Introduction to the special '
+            'section</span><span class="sstitreparal">Exploring the Organizational Link: Have You '
+            'Read A. O.\n        Hirschman?</span><span class="titreparal">Introducción Dossier '
+            'Especial</span><span class="sstitreparal">Descubriendo las relaciones organizativas: '
+            "¿leyó a A.O.\n        Hirschman?</span>\n</h1>" in ret
         )
 
 
@@ -993,7 +1007,7 @@ class TestGoogleScholarSubscriberJournalsView:
         self, google_scholar_opt_out, subscription_id, expected_journal_ids
     ):
         journal_1 = JournalFactory(localidentifier="journal_1")
-        journal_2 = JournalFactory(localidentifier="journal_2")
+        JournalFactory(localidentifier="journal_2")
         JournalAccessSubscriptionFactory(
             pk=1,
             post__journals=[journal_1],
@@ -1221,4 +1235,4 @@ class TestArticleMediaView:
         }
         view.get_object = unittest.mock.MagicMock(return_value=article)
         view.get_datastream_content(unittest.mock.MagicMock())
-        assert mock_get_cached_datastream_content.call_count == True
+        assert mock_get_cached_datastream_content.call_count

@@ -103,8 +103,8 @@ def test_will_propagate_prepublication_ticket_received_in_querystring_for_articl
     article = ArticleFactory(
         issue__volume="1", issue__number="1", issue__year=1000, issue__is_published=False
     )
-    issue = article.issue  # type: Issue
-    journal = issue.journal  # type: Journal
+    issue = article.issue
+    journal = issue.journal
 
     legacy_url = "/revue/{journal_code}/1000/v1/n1/{article_localidentifier}.html".format(
         journal_code=journal.code, article_localidentifier=article.localidentifier

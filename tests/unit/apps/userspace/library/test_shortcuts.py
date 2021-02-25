@@ -29,7 +29,7 @@ class TestGetLastValidSubscriptionShortcut:
         valid_subscription = JournalAccessSubscriptionFactory(
             organisation=organisation, post__valid=True
         )
-        invalid_subscription = JournalAccessSubscriptionFactory(organisation=organisation)
+        JournalAccessSubscriptionFactory(organisation=organisation)
         assert get_last_valid_subscription(organisation) == valid_subscription
 
 

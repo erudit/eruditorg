@@ -3,8 +3,6 @@ import pytest
 
 import unittest.mock
 
-from django.core.cache import cache
-from django.test import TestCase
 from eruditarticle.objects import EruditArticle
 
 from erudit.fedora import repository
@@ -35,7 +33,7 @@ class TestFedoraMixin:
         obj.get_erudit_content_url = (
             lambda: "objects/erudit:erudit.journal.issue.article/datastreams/ERUDITXSD300/content"
         )
-        assert obj.is_in_fedora == False
+        assert not obj.is_in_fedora
 
     def test_can_return_the_pid_of_the_object(self):
         # Setup

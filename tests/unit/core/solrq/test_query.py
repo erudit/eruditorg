@@ -143,4 +143,4 @@ class TestQuery:
         # Setup
         query = Query(self.search)
         # Run & check
-        assert query.filter(Q(foo="bar : baz"), safe=True)._q == "(foo:bar \: baz)"
+        assert query.filter(Q(foo="bar : baz"), safe=True)._q == "(foo:bar \\: baz)"

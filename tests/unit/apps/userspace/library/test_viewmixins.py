@@ -13,7 +13,6 @@ from django.views.generic import TemplateView
 from base.test.factories import UserFactory
 from erudit.test.factories import OrganisationFactory
 
-from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 

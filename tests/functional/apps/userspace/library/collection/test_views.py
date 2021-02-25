@@ -1,24 +1,12 @@
-# -*- coding: utf-8 -*-
 import pytest
 
-import datetime as dt
-from unittest import mock
-
-from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
-from django.core.files import File
-from django.core.files.images import get_image_dimensions
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from django.test.client import Client
 
 from erudit.test.factories import OrganisationFactory
 
 from base.test.factories import UserFactory
-from core.authorization.defaults import AuthorizationConfig as AC
-from core.authorization.test.factories import AuthorizationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 
 @pytest.mark.django_db

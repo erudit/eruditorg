@@ -6,7 +6,6 @@ from base.test.factories import UserFactory
 from base.test.testcases import Client
 from erudit.models import JournalInformation
 from erudit.test.factories import JournalFactory
-from apps.userspace.journal.information.forms import ContributorInlineFormset
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
@@ -64,7 +63,6 @@ class TestJournalInformationUpdateView(TestCase):
             "contributor_set-MAX_FORMS": 1,
             "contributor_set-MIN_FORMS": 0,
         }
-        formset = ContributorInlineFormset()
         url = reverse("userspace:journal:information:update", kwargs={"journal_pk": journal.pk})
         # Run
         response = client.post(url, post_data, follow=False)
