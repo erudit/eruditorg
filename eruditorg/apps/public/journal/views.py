@@ -65,7 +65,7 @@ from .viewmixins import (
     ArticleAccessLogMixin,
     ArticleViewMetricCaptureMixin,
     ContentAccessCheckMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     PrepublicationTokenRequiredMixin,
     SingleArticleMixin,
     SingleArticleWithScholarMetadataMixin,
@@ -205,7 +205,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 class JournalDetailView(
     SingleJournalMixin,
     ContentAccessCheckMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     DetailView,
 ):
     """
@@ -284,6 +284,11 @@ class JournalDetailView(
             journal_info=journal_info,
             issue=current_issue,
         )
+        # ISSN
+        context["issn"] = self.get_issn(
+            journal=self.object,
+            issue=current_issue,
+        )
 
         # Generate a cache key based on the forced free access issues queryset so that the cache is
         # invalidated when the queryset changes.
@@ -302,7 +307,7 @@ class JournalDetailView(
         return context
 
 
-class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView):
+class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateView):
     """
     Displays a list of authors associated with a specific journal.
     """
@@ -405,6 +410,11 @@ class JournalAuthorsListView(SingleJournalMixin, ContributorsMixin, TemplateView
             journal_info=journal_info,
             issue=context["current_issue"],
         )
+        # ISSN
+        context["issn"] = self.get_issn(
+            journal=self.journal,
+            issue=context["current_issue"],
+        )
 
         return context
 
@@ -424,7 +434,7 @@ class IssueDetailView(
     FallbackObjectViewMixin,
     ContentAccessCheckMixin,
     PrepublicationTokenRequiredMixin,
-    ContributorsMixin,
+    MetaInfoIssueMixin,
     DetailView,
 ):
     """
@@ -551,6 +561,8 @@ class IssueDetailView(
 
         # Directors & editors.
         context["contributors"] = self.get_contributors(issue=self.object)
+        # ISSN
+        context["issn"] = self.get_issn(issue=self.object)
 
         # Generate a cache key based on the list of articles so that the cache is not used when a
         # new article is added (or removed).
@@ -734,6 +746,7 @@ class BaseArticleDetailView(
     SingleArticleWithScholarMetadataMixin,
     ArticleViewMetricCaptureMixin,
     PrepublicationTokenRequiredMixin,
+    MetaInfoIssueMixin,
     DetailView,
 ):
     context_object_name = "article"
@@ -796,6 +809,9 @@ class BaseArticleDetailView(
             },
         )
         context["media_url_prefix"] = url[:-1]
+
+        # Issue ISSN
+        context["issn"] = self.get_issn(issue=issue)
 
         if not issue.is_published:
             context["ticket"] = issue.prepublication_ticket
@@ -1020,7 +1036,7 @@ class IdEruditArticleRedirectView(RedirectView, SolrDataMixin):
         )
 
 
-class ArticleEnwCitationView(SingleArticleMixin, DetailView):
+class ArticleEnwCitationView(SingleArticleMixin, MetaInfoIssueMixin, DetailView):
     """
     Returns the enw file of a specific article.
     """
@@ -1032,10 +1048,11 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pdf_exists"] = context["article"].has_pdf
+        context["issn"] = self.get_issn(issue=context["article"].issue)
         return context
 
 
-class ArticleRisCitationView(SingleArticleMixin, DetailView):
+class ArticleRisCitationView(SingleArticleMixin, MetaInfoIssueMixin, DetailView):
     """
     Returns the ris file of a specific article.
     """
@@ -1047,6 +1064,7 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pdf_exists"] = context["article"].has_pdf
+        context["issn"] = self.get_issn(issue=context["article"].issue)
         return context
 
 

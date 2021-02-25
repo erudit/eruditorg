@@ -6,10 +6,10 @@
 %V {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}
 %N {% if article.issue.number %}{{ article.issue.number }}{% endif %}
 %P {% if article.first_page and article.last_page %}{{ article.first_page }}-{{ article.last_page }}{% endif %}
-{% if article.issue.journal.issn_print %}
-%@ {{ article.issue.journal.issn_print }}
-{% elif article.issue.journal.issn_web %}
-%@ {{ article.issue.journal.issn_web }}
+{% if issn.print %}
+%@ {{ issn.print }}
+{% elif issn.web %}
+%@ {{ issn.web }}
 {% endif %}
 %D {{ article.issue.year }}
 %I {{ article.publisher_name|safe }}

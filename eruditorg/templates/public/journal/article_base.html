@@ -12,40 +12,40 @@
 {# The article.issue.is_published and LANGUAGE_CODE arguments are used to generate the cache key hash. #}
 {% cache LONG_TTL "public_article_base_metatags" article.localidentifier article.issue.is_published LANGUAGE_CODE 'v1' %}
 <!-- Facebook / Open Graph -->
-<meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{{ citation_title_metadata }} – {{ article.issue.journal_formatted_title }}">
-<meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="{{ language_code }}_CA">
+<meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="{{ citation_title_metadata }} – {{ article.issue.journal_formatted_title }}"/>
+<meta property="og:site_name" content="Érudit"/>
+<meta property="og:locale" content="{{ language_code }}_CA"/>
 {% if article.issue.has_coverpage %}
-<meta property="og:image" content="{% issue_coverpage_url article.issue %}">
+<meta property="og:image" content="{% issue_coverpage_url article.issue %}"/>
 {% elif article.issue.journal.has_logo %}
-<meta property="og:image" content="{% journal_logo_url article.issue.journal %}">
+<meta property="og:image" content="{% journal_logo_url article.issue.journal %}"/>
 {% endif %}
-<meta property="og:description" content="{% blocktrans with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
+<meta property="og:description" content="{% blocktrans with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}"/>
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@eruditorg">
-<meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{{ citation_title_metadata }} – {{ article.issue.journal_formatted_title }} – Érudit">
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ article.issue.journal_formatted_title }}">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@eruditorg"/>
+<meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}"/>
+<meta name="twitter:title" content="{{ citation_title_metadata }} – {{ article.issue.journal_formatted_title }} – Érudit"/>
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ article.issue.journal_formatted_title }}"/>
 {% if article.issue.has_coverpage %}
-<meta name="twitter:image" content="{% issue_coverpage_url article.issue %}">
+<meta name="twitter:image" content="{% issue_coverpage_url article.issue %}"/>
 {% elif article.issue.journal.has_logo %}
-<meta name="twitter:image" content="{% journal_logo_url article.issue.journal %}">
+<meta name="twitter:image" content="{% journal_logo_url article.issue.journal %}"/>
 {% endif %}
-<meta name="twitter:description" content="{% blocktrans with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
+<meta name="twitter:description" content="{% blocktrans with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}"/>
 {% if not article.issue.is_published %}
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex"/>
 {% endif %}
 <!-- Google Scholar -->
 {% if citation_title_metadata %}
-<meta name="citation_title" content="{{ citation_title_metadata }}">
+<meta name="citation_title" content="{{ citation_title_metadata }}"/>
 {% endif %}
-<meta name="citation_journal_title" content="{{ citation_journal_title_metadata }}">
-<meta name="citation_journal_abbrev" content="{{ article.issue.journal.code }}">
-<meta name="citation_online_date" content="{{ article.issue.date_published|date:'Y/m/d' }}">
+<meta name="citation_journal_title" content="{{ citation_journal_title_metadata }}"/>
+<meta name="citation_journal_abbrev" content="{{ article.issue.journal.code }}"/>
+<meta name="citation_online_date" content="{{ article.issue.date_published|date:'Y/m/d' }}"/>
 <meta name="citation_abstract_html_url" content="https://id.erudit.org/iderudit/{{ article.localidentifier }}" />
 {% for author in article.authors %}
 {% if author.firstname and author.lastname %}
@@ -72,11 +72,11 @@
 {% if article.last_page %}
 <meta name="citation_lastpage" content="{{ article.last_page }}" />
 {% endif %}
-{% if article.issue.journal.issn_print %}
-<meta name="citation_issn" content="{{ article.issue.journal.issn_print }}" />
+{% if issn.print %}
+<meta name="citation_issn" content="{{ issn.print }}" />
 {% endif %}
-{% if article.issue.journal.issn_web %}
-<meta name="citation_issn" content="{{ article.issue.journal.issn_web }}" />
+{% if issn.web %}
+<meta name="citation_issn" content="{{ issn.web }}" />
 {% endif %}
 {% if article.issue.volume %}
 <meta name="citation_volume" content="{{ article.issue.volume }}" />

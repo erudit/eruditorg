@@ -164,13 +164,13 @@
           {% endfor %}
           {% endif %}
 
-          {% if meta_info_issue.erudit_object.issn or meta_info_issue.erudit_object.issn_num %}
+          {% if issn %}
           <dt>{% trans "ISSN" %}</dt>
-          {% if meta_info_issue.erudit_object.issn %}
-          <dd>{{ meta_info_issue.erudit_object.issn }} ({% trans "imprimé" %})</dd>
+          {% if issn.print %}
+          <dd>{{ issn.print }} ({% trans "imprimé" %})</dd>
           {% endif %}
-          {% if meta_info_issue.erudit_object.issn_num %}
-          <dd>{{ meta_info_issue.erudit_object.issn_num }} ({% trans "numérique" %})</dd>
+          {% if issn.web %}
+          <dd>{{ issn.web }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
           {% endif %}
