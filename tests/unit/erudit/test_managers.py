@@ -73,8 +73,8 @@ class TestJournalCollectionManager:
     def test_returns_only_collections_associated_with_journals(self):
         collection_1 = CollectionFactory()
         collection_2 = CollectionFactory()
-        collection_3 = CollectionFactory()
-        collection_4 = CollectionFactory()
-        journal_1 = JournalFactory(collection=collection_1)
-        journal_2 = JournalFactory(collection=collection_2)
+        CollectionFactory()
+        CollectionFactory()
+        JournalFactory(collection=collection_1)
+        JournalFactory(collection=collection_2)
         assert list(Collection.journal_collections.all()) == [collection_1, collection_2]

@@ -133,7 +133,7 @@ class TestContentAccessCheckMixin:
     def test_can_grant_access_to_an_article_if_it_is_not_embargoed(self, single_article_view):
         # Setup
         article = NonEmbargoedArticleFactory.create()
-        issue_embargoed = EmbargoedIssueFactory(journal=article.issue.journal)
+        EmbargoedIssueFactory(journal=article.issue.journal)
 
         view = single_article_view()
         view.object = article
@@ -164,7 +164,7 @@ class TestContentAccessCheckMixin:
         # Run # check
         assert view.content_access_granted
 
-    def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(
+    def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(  # noqa
         self, single_article_view
     ):  # noqa
         # Setup
@@ -209,7 +209,7 @@ class TestContentAccessCheckMixin:
         # Run # check
         assert view.content_access_granted
 
-    def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(
+    def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(  # noqa
         self, single_article_view
     ):  # noqa
         # Setup
@@ -309,7 +309,7 @@ class TestContentAccessCheckMixin:
     def test_inserts_a_flag_into_the_context(self, single_article_view):
         # Setup
         article = NonEmbargoedArticleFactory.create()
-        issue_embargoed = EmbargoedIssueFactory(journal=article.issue.journal)
+        EmbargoedIssueFactory(journal=article.issue.journal)
         anonymous_request = get_anonymous_request()
 
         view = single_article_view()
@@ -331,7 +331,7 @@ class TestContentAccessCheckMixin:
     def test_can_grant_access_to_an_issue_if_prepublication_ticket_start_with_zeros(
         self, issue_localidentifier, number_of_zeros, single_article_view
     ):
-        # Create an article from an issue with a prepublication ticket starting with one or more '0'.
+        # Create an article from an issue with a prepublication ticket starting with one or more '0'
         article = ArticleFactory(
             issue__is_published=False,
             issue__localidentifier=issue_localidentifier,
@@ -344,11 +344,11 @@ class TestContentAccessCheckMixin:
             "/", {"ticket": article.issue.prepublication_ticket[number_of_zeros:]}
         )
         # Run # check
-        assert view.content_access_granted == True
+        assert view.content_access_granted
 
     @pytest.mark.parametrize("ticket_provided, access_granted", ((False, False), (True, True)))
     @pytest.mark.parametrize("View", (ArticleRawPdfView, ArticleXmlView))
-    def test_cannot_grant_access_to_an_unpublished_article_pdf_and_xml_if_no_prepublication_ticket_is_provided(
+    def test_cannot_grant_access_to_an_unpublished_article_pdf_and_xml_if_no_prepublication_ticket_is_provided(  # noqa
         self, ticket_provided, access_granted, View
     ):
         article = ArticleFactory(issue__is_published=False)

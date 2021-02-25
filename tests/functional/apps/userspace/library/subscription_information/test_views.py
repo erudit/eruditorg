@@ -59,7 +59,7 @@ class TestSubscriptionInformationUpdateView:
 
         try:
             self.organisation.badge.delete()
-        except:
+        except Exception:
             pass
         self.organisation.delete()
 

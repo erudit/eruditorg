@@ -27,7 +27,7 @@ class TestIssueSubmissionManager:
         archived_issue._meta.get_field("date_modified").auto_now = True
 
         # Issues recently modified, should not be returned by eminent_archival().
-        new_issues = [IssueSubmissionFactory(status=status) for status in statuses]
+        [IssueSubmissionFactory(status=status) for status in statuses]
 
         # Issues modified three months ago (minus five days), should be returned by
         # eminent_archival() if they are validated.
@@ -61,7 +61,7 @@ class TestIssueSubmissionManager:
         archived_issue._meta.get_field("date_modified").auto_now = True
 
         # Issues recently modified, should not be returned by eminent_archival().
-        new_issues = [IssueSubmissionFactory(status=status) for status in statuses]
+        [IssueSubmissionFactory(status=status) for status in statuses]
 
         # Issues modified three months ago, should be returned by ready_for_archival() if they are
         # validated.
@@ -87,7 +87,7 @@ class TestIssueSubmissionManager:
         ]
 
         # Issues recently modified, should not be returned by action_needed().
-        new_issues = [IssueSubmissionFactory(status=status) for status in statuses]
+        [IssueSubmissionFactory(status=status) for status in statuses]
 
         # Issues modified two weeks ago, should be returned by action_needed() if they are submitted
         # or in needs corrections.

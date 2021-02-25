@@ -82,7 +82,7 @@ def test_assign_user_to_existing_organisation():
     abonne1 = AbonneFactory.create()
     abonne1.abonneid = org.account_id
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
-    sub1 = RevueabonneFactory.create(
+    RevueabonneFactory.create(
         abonneid=abonne1.abonneid, revueid=revue1.revueid, anneeabonnement=2018
     )
 
@@ -106,7 +106,7 @@ def test_import_can_rename_organisation():
     abonne1.abonneid = organisation.account_id
 
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
-    sub1 = RevueabonneFactory.create(
+    RevueabonneFactory.create(
         abonneid=abonne1.abonneid, revueid=revue1.revueid, anneeabonnement=2018
     )
 
@@ -178,7 +178,7 @@ def test_delete_existing_subscriptions():
 
     JournalAccessSubscriptionFactory(valid=True, type="individual")
 
-    organisation_profile = LegacyAccountProfileFactory(legacy_id=1179, organisation=organisation)
+    LegacyAccountProfileFactory(legacy_id=1179, organisation=organisation)
 
     subscription = JournalAccessSubscriptionFactory(
         organisation=organisation,
@@ -207,7 +207,7 @@ def test_existing_organisation_is_renamed_properly():
     abonne1.save()
     revue1 = RevueFactory.create(titrerevabr=JournalFactory())
 
-    sub1 = RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
+    RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
 
     call_command("import_restrictions", *[], **{})
     assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
@@ -228,7 +228,7 @@ def test_can_skip_subscribers_with_no_email():
     IpabonneFactory.create(abonneid=abonne1.pk)
     revue1 = RevueFactory.create(titrerevabr=journal.code)
 
-    sub1 = RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
+    RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
 
     call_command("import_restrictions", *[], **{"dry_run": False})
 
@@ -245,7 +245,7 @@ def test_dry_run_mode_does_not_create_anything():
     IpabonneFactory.create(abonneid=abonne1.pk)
     revue1 = RevueFactory.create(titrerevabr=journal.code)
 
-    sub1 = RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
+    RevueabonneFactory.create(abonneid=abonne1.abonneid, revueid=revue1.revueid)
 
     call_command("import_restrictions", *[], **{"dry_run": True})
 

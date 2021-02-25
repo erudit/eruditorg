@@ -68,6 +68,6 @@ def test_catch_and_log(caplog):
 @pytest.mark.django_db
 def test_qs_cache_key():
     journal = JournalFactory()
-    issues = IssueFactory.create_batch(5, journal=journal)
+    IssueFactory.create_batch(5, journal=journal)
     cache_key = qs_cache_key(journal.issues.all())
     assert cache_key == "1,2,3,4,5"

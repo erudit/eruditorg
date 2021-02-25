@@ -1,6 +1,5 @@
 import datetime as dt
 import pytest
-from unittest import mock
 
 from django.core.management import call_command
 from erudit.fedora import repository
@@ -28,7 +27,7 @@ def test_import_journals_from_fedora(kwargs):
         journal__localidentifier="journal_test", is_published=True, add_to_fedora_journal=True
     )
     # Issue no longer in fedora & already unpublished, should stay unpublished.
-    issue_2 = IssueFactory(journal=issue_1.journal, is_published=False, add_to_fedora_journal=False)
+    IssueFactory(journal=issue_1.journal, is_published=False, add_to_fedora_journal=False)
     # Issue in fedora but unpublished, should be published.
     issue_3 = IssueFactory(journal=issue_1.journal, is_published=False, add_to_fedora_journal=True)
     # Issue no longer in fedora but still published, should be unpublished.

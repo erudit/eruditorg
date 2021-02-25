@@ -42,7 +42,7 @@ class TestUserspaceAccessRule:
     def test_knows_that_a_user_without_authorization_cannot_access_the_userspace(self):
         assert not UserFactory().has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_authorization_management_authorization_can_access_the_userspace(
+    def test_knows_that_a_user_with_the_authorization_management_authorization_can_access_the_userspace(  # noqa
         self,
     ):  # noqa
         # Setup
@@ -58,7 +58,7 @@ class TestUserspaceAccessRule:
         # Run & check
         assert user.has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_issuesubmission_management_authorization_can_access_the_userspace(
+    def test_knows_that_a_user_with_the_issuesubmission_management_authorization_can_access_the_userspace(  # noqa
         self,
     ):  # noqa
         # Setup
@@ -74,7 +74,7 @@ class TestUserspaceAccessRule:
         # Run & check
         assert user.has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_individual_subscription_management_authorization_can_access_the_userspace(
+    def test_knows_that_a_user_with_the_individual_subscription_management_authorization_can_access_the_userspace(  # noqa
         self,
     ):  # noqa
         # Setup
@@ -90,7 +90,7 @@ class TestUserspaceAccessRule:
         # Run & check
         assert user.has_perm("userspace.access")
 
-    def test_knows_that_a_user_with_the_journal_information_edit_authorization_can_access_the_userspace(
+    def test_knows_that_a_user_with_the_journal_information_edit_authorization_can_access_the_userspace(  # noqa
         self,
     ):  # noqa
         # Setup

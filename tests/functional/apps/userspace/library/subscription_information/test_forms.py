@@ -36,7 +36,7 @@ class TestSubscriptionInformationForm:
 
         try:
             self.organisation.badge.delete()
-        except:
+        except Exception:
             pass
         self.organisation.delete()
 

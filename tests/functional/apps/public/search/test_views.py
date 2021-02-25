@@ -1,11 +1,9 @@
 from lxml import etree
 
-from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.urls import reverse
 from django.test import RequestFactory
-from django.test.utils import override_settings
 from django.utils.timezone import now
 import pytest
 

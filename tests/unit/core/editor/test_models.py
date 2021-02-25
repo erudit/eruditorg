@@ -73,7 +73,7 @@ class TestProductionTeam:
 
     def test_emails(self):
         group = GroupFactory()
-        production_team = ProductionTeamFactory(group=group)
+        ProductionTeamFactory(group=group)
         user = UserFactory(email="foo@bar.com")
         user.groups.add(group)
         assert ProductionTeam.emails() == ["foo@bar.com"]

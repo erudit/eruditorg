@@ -68,27 +68,27 @@ class TestJournal:
 
     def test_can_return_its_first_issue_published_on_erudit(self):
         journal = JournalFactory()
-        first_unpublished_issue = IssueFactory(
+        IssueFactory(
             journal=journal,
             is_published=False,
         )
         first_issue_published_on_erudit = IssueFactory(
             journal=journal,
         )
-        current_issue = IssueFactory(
+        IssueFactory(
             journal=journal,
         )
         assert journal.first_issue_published_on_erudit == first_issue_published_on_erudit
 
     def test_can_return_its_current_issue(self):
         journal = JournalFactory()
-        first_issue_published_on_erudit = IssueFactory(
+        IssueFactory(
             journal=journal,
         )
         current_issue = IssueFactory(
             journal=journal,
         )
-        last_unpublished_issue = IssueFactory(
+        IssueFactory(
             journal=journal,
             is_published=False,
         )
@@ -169,13 +169,13 @@ class TestJournal:
 
         assert list(i1.journal.published_issues.all()) == [i2, i1]
 
-    def test_first_issue_published_on_erudit_when_issues_are_not_produced_in_the_same_order_as_their_published_date(
+    def test_first_issue_published_on_erudit_when_issues_are_not_produced_in_the_same_order_as_their_published_date(  # noqa
         self,
     ):
         journal = JournalFactory()
-        issue_1 = IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
-        issue_2 = IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
-        issue_3 = IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
+        IssueFactory(journal=journal, date_published=dt.date(2019, 1, 1))
+        IssueFactory(journal=journal, date_published=dt.date(2015, 1, 1))
+        IssueFactory(journal=journal, date_published=dt.date(2017, 1, 1))
         assert journal.first_issue_published_on_erudit.date_published == dt.date(2015, 1, 1)
 
     @pytest.mark.parametrize(
@@ -462,11 +462,11 @@ class TestIssue:
     def test_is_external_if_no_publication_allowed(self):
         # If there is no publication allowed articles, `is_external` defaults to False.
         issue = IssueFactory()
-        first_article = ArticleFactory(
+        ArticleFactory(
             issue=issue,
             publication_allowed=False,
         )
-        second_article = ArticleFactory(
+        ArticleFactory(
             issue=issue,
             publication_allowed=False,
         )
@@ -785,7 +785,8 @@ class TestArticle:
         article = ArticleFactory(from_fixture="47130ac", issue__year="2019")
         assert (
             article.cite_string_mla
-            == "Bégin, Lise. «&nbsp;[Article sans titre].&nbsp;» <em>Inter</em>, numéro 110, supplément, hiver 2012, p.&nbsp;39–39."
+            == "Bégin, Lise. «&nbsp;[Article sans titre].&nbsp;» <em>Inter</em>, numéro 110, "
+            "supplément, hiver 2012, p.&nbsp;39–39."
         )
         assert (
             article.cite_string_apa
@@ -800,7 +801,8 @@ class TestArticle:
         article = ArticleFactory(type=Article.ARTICLE_REPORT, issue__year="2019")
         assert (
             article.cite_string_apa
-            == "Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. <em>Inter</em>. https://doi.org/10.7202/009255ar"
+            == "Pratt, L. (2019). Compte rendu de [Robert Southey, Writing and Romanticism]. "
+            "<em>Inter</em>. https://doi.org/10.7202/009255ar"
         )
 
     @pytest.mark.parametrize(

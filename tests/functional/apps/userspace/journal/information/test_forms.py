@@ -1,4 +1,3 @@
-import datetime
 import json
 import pytest
 import reversion
@@ -93,7 +92,6 @@ class TestJournalInformationForm:
         request.user = UserFactory(username="Dougie")
         form = JournalInformationForm(form_data, instance=info, language_code="fr", request=request)
         info = form.save()
-        now = datetime.datetime.now()
         email = Email.objects.first()
         # Check that a notification email has been sent to comptes@erudit.org.
         assert email.to == [settings.ACCOUNT_EMAIL]

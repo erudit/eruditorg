@@ -1,5 +1,3 @@
-import pytest
-
 from erudit.templatetags.model_formatters import person_list, format_editor
 
 

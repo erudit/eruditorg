@@ -19,7 +19,6 @@ from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 from core.subscription.test.factories import JournalManagementSubscriptionPeriodFactory
 from core.subscription.test.factories import InstitutionRefererFactory
-from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
 from core.subscription.test.factories import AccessBasketFactory
 
 
@@ -132,7 +131,7 @@ class TestInstitutionReferer:
         )  # noqa
 
     def test_can_only_find_institution_referer_when_path_fully_match(self):
-        institution_referer = self._subscribe_referer(referer="http://www.erudit.org.proxy.com/")
+        self._subscribe_referer(referer="http://www.erudit.org.proxy.com/")
         assert not JournalAccessSubscription.valid_objects.get_for_referer(
             "http://www.erudit.org/"
         )  # noqa

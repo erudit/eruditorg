@@ -10,21 +10,20 @@ import unittest.mock
 import subprocess
 import itertools
 from hashlib import md5
-from unittest.mock import PropertyMock
 
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory
 from django.conf import settings
 from django.test.utils import override_settings
 import pytest
 
 from apps.public.journal.viewmixins import SolrDataMixin
 from core.subscription.test.utils import generate_casa_token
-from erudit.models import JournalType, Issue, Article, Journal
+from erudit.models import JournalType, Issue, Article
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
@@ -36,14 +35,12 @@ from erudit.test.factories import JournalInformationFactory
 from erudit.test.solr import FakeSolrData
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import ArticleDigitalObject
-from erudit.fedora.objects import MediaDigitalObject
 from erudit.fedora import repository
 from erudit.solr.models import Article as SolrArticle
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.models import UserSubscriptions
-from core.subscription.test.factories import JournalManagementSubscriptionFactory
 from core.metrics.conf import settings as metrics_settings
 
 from apps.public.journal.views import ArticleMediaView
@@ -266,7 +263,7 @@ class TestJournalListView:
         assert set(response.context["journals"]) == {j1, j2, j3}
 
     def test_new_journal_titles_are_not_uppercased(self):
-        journal = JournalFactory(is_new=True, name="Enjeux et société")
+        JournalFactory(is_new=True, name="Enjeux et société")
         url = reverse("public:journal:journal_list")
         html = self.client.get(url).content.decode()
         dom = BeautifulSoup(html, "html.parser")
@@ -275,7 +272,7 @@ class TestJournalListView:
         assert "Enjeux Et Société" not in journals_list.decode()
 
     def test_journal_year_of_addition_is_displayed(self):
-        journal = JournalFactory(is_new=True, year_of_addition="2020")
+        JournalFactory(is_new=True, year_of_addition="2020")
         url = reverse("public:journal:journal_list")
         html = self.client.get(url).content.decode()
         dom = BeautifulSoup(html, "html.parser")
@@ -771,7 +768,7 @@ class TestIssueDetailView:
     @pytest.mark.parametrize("publication_allowed", (True, False))
     def test_publication_allowed_article(self, publication_allowed):
         issue = IssueFactory(journal__open_access=True)
-        article = ArticleFactory(issue=issue, publication_allowed=publication_allowed)
+        ArticleFactory(issue=issue, publication_allowed=publication_allowed)
         url = reverse(
             "public:journal:issue_detail",
             kwargs={
@@ -1133,7 +1130,7 @@ class TestArticleDetailView:
         )
         mock_cache.get.reset_mock()
 
-        response = Client().get(
+        Client().get(
             url,
             {
                 "ticket": article.issue.prepublication_ticket,
@@ -1167,7 +1164,7 @@ class TestArticleDetailView:
         )
         mock_cache.get.reset_mock()
 
-        response = Client().get(
+        Client().get(
             url,
             {
                 "ticket": article.issue.prepublication_ticket,
@@ -1367,7 +1364,8 @@ class TestArticleDetailView:
             ("public:journal:article_biblio", "009256ar", 1, 0),
             ("public:journal:article_summary", "009256ar", 1, 0),
             ("public:journal:article_detail", "009256ar", 1, 0),
-            # Retro minimal treatment articles should only display a bibliography in article_biblio view
+            # Retro minimal treatment articles should only display a bibliography in article_biblio
+            # view
             ("public:journal:article_biblio", "1058447ar", 1, 0),
             ("public:journal:article_summary", "1058447ar", 0, 1),
             ("public:journal:article_detail", "1058447ar", 0, 1),
@@ -1484,7 +1482,7 @@ class TestArticleDetailView:
             localidentifier="issue",
             year="2000",
         )
-        prev = ArticleFactory(
+        ArticleFactory(
             from_fixture="1054008ar",
             localidentifier="prev_article",
             issue=issue,
@@ -1591,7 +1589,8 @@ class TestArticleDetailView:
         dom = BeautifulSoup(html, "html.parser")
         grfigure = dom.find("div", {"class": "grfigure", "id": "gf1"})
 
-        # Check that the source is displayed under both figures 1 & 2 which are in the same figure group.
+        # Check that the source is displayed under both figures 1 & 2 which are in the same figure
+        # group.
         fi1 = grfigure.find("figure", {"id": "fi1"}).decode()
         fi2 = grfigure.find("figure", {"id": "fi2"}).decode()
         assert (
@@ -2243,16 +2242,17 @@ class TestArticleDetailView:
     @pytest.mark.parametrize(
         "with_pdf, pages, has_abstracts, open_access, expected_result",
         (
-            # If there's no PDF, there's no need to include `can_display_first_pdf_page` in the context.
+            # If there's no PDF, there's no need to include `can_display_first_pdf_page` in the
+            # context.
             (False, [], False, True, False),
-            # If the article has abstracts, there's no need to include `can_display_first_pdf_page` in
-            # the context.
+            # If the article has abstracts, there's no need to include `can_display_first_pdf_page`
+            # in the context.
             (True, [1, 2], True, True, False),
             # If content access is granted, `can_display_first_pdf_page` should always be True.
             (True, [1], False, True, True),
             (True, [1, 2], False, True, True),
-            # If content access is not granted, `can_display_first_pdf_page` should only be True if the
-            # PDF has more than one page.
+            # If content access is not granted, `can_display_first_pdf_page` should only be True if
+            # the PDF has more than one page.
             (True, [1], False, False, False),
             (True, [1, 2], False, False, True),
         ),
@@ -2634,8 +2634,8 @@ class TestArticleDetailView:
                 "1062105ar",
                 [
                     '<h2><span class="majuscule">Introduction</span></h2>',
-                    '<h2><span class="majuscule">1. La mesure de la mobilitÉ sociale en France et     '
-                    "au QuÉbec</span></h2>",
+                    '<h2><span class="majuscule">1. La mesure de la mobilitÉ sociale en France '
+                    "et     au QuÉbec</span></h2>",
                     '<h2><span class="majuscule">2. MÉthodes</span></h2>',
                     "<h3>2.1 Présentation des deux enquêtes et des variables professionnelles     "
                     "sélectionnées</h3>",
@@ -2643,10 +2643,11 @@ class TestArticleDetailView:
                     "professionnelles</h3>",
                     "<h4><em>2.2.1 Genre et niveau de     compétences</em></h4>",
                     "<h4><em>2.2.2 Catégories     socioprofessionnelles</em></h4>",
-                    '<h2><span class="majuscule">3. Évolution de la structure socioprofessionnelle     '
-                    "des emplois et transmissions professionnelles au sein des     lignÉes</span></h2>",
-                    "<h3>3.1 Répartition des positions socioprofessionnelles dans les lignées des     "
-                    "générations enquêtées</h3>",
+                    '<h2><span class="majuscule">3. Évolution de la structure '
+                    "socioprofessionnelle     des emplois et transmissions professionnelles au "
+                    "sein des     lignÉes</span></h2>",
+                    "<h3>3.1 Répartition des positions socioprofessionnelles dans les lignées "
+                    "des     générations enquêtées</h3>",
                     "<h3>3.2 Transmissions professionnelles dans les lignées</h3>",
                     '<h2><span class="majuscule">Conclusion</span></h2>',
                 ],
@@ -2779,9 +2780,9 @@ class TestArticleDetailView:
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
         assert (
-            '<h2 id="biblio-1">Bibliographie sélective<a href="#no49" id="re1no49" class="norenvoi" '
-            'title="La bibliographie recense exclusivement les travaux cités dans l’article. '
-            "En complément, la base de données des logiciels et projets (cf.\xa0note 2) "
+            '<h2 id="biblio-1">Bibliographie sélective<a href="#no49" id="re1no49" '
+            'class="norenvoi" title="La bibliographie recense exclusivement les travaux cités dans '
+            "l’article. En complément, la base de données des logiciels et projets (cf.\xa0note 2) "
             'propose pour l’ensemble des logicie[…]">[49]</a>\n</h2>' in html
         )
         assert '<li><a href="#biblio-1">Bibliographie sélective</a></li>' in html
@@ -2841,7 +2842,7 @@ class TestArticleDetailView:
     def test_subscription_message_is_not_cached(self):
         client = Client()
         article = ArticleFactory(issue__journal__open_access=True)
-        subscription = JournalAccessSubscriptionFactory(
+        JournalAccessSubscriptionFactory(
             type="individual",
             user=UserFactory.create(username="foobar", password="notsecret"),
             journals=[article.issue.journal],

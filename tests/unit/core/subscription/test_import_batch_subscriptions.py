@@ -14,7 +14,7 @@ FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), "fixtures")
 @pytest.mark.django_db
 def test_can_import_batch_to_journal_plan():
     journal = JournalFactory()
-    journal_management_subscription = JournalManagementSubscriptionFactory(journal=journal)
+    JournalManagementSubscriptionFactory(journal=journal)
 
     call_command(
         "import_individual_subscriptions_batch",
