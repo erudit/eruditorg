@@ -124,7 +124,7 @@ aboriginal_chars = TTFont(
 arabic_chars = TTFont("Amiri", FONTS_DIR + "/Amiri/Amiri-Regular.ttf").face.charWidths
 
 
-def get_coverpage(article):
+def get_coverpage(article: Article) -> io.BytesIO:
     pdf_buffer = io.BytesIO()
 
     template = SimpleDocTemplate(
@@ -292,7 +292,7 @@ def get_coverpage(article):
     )
     if journal_logo_ds is not None:
         journal_logo = HyperlinkedImage(
-            journal_logo_ds,
+            io.BytesIO(journal_logo_ds),
             hyperlink="https://www.erudit.org{}".format(journal_path),
         )
         # Resize journal logo if it's wider than 80 points.

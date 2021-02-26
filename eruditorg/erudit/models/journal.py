@@ -263,8 +263,8 @@ class Journal(FedoraMixin, FedoraDated):
             erudit_settings.FEDORA_PIDSPACE, self.collection.localidentifier, self.localidentifier
         )
 
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/PUBLICATIONS/content"
+    def get_erudit_object_datastream_name(self):
+        return "PUBLICATIONS"
 
     def get_fedora_model(self):
         return JournalDigitalObject
@@ -575,8 +575,8 @@ class Issue(FedoraMixin, FedoraDated):
     # Fedora-related methods and properties
     # --
 
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/SUMMARY/content"
+    def get_erudit_object_datastream_name(self):
+        return "SUMMARY"
 
     def get_fedora_model(self):
         return PublicationDigitalObject
@@ -985,8 +985,8 @@ class Article(FedoraMixin):
     # Fedora-related methods and properties
     # --
 
-    def get_erudit_content_url(self):
-        return f"objects/{self.pid}/datastreams/ERUDITXSD300/content"
+    def get_erudit_object_datastream_name(self):
+        return "ERUDITXSD300"
 
     def get_fedora_model(self):
         return ArticleDigitalObject
@@ -1499,10 +1499,9 @@ class Article(FedoraMixin):
     @cached_property
     def infoimg_dict(self):
         """ Returns the content of the INFOIMG datastream as a dictionary. """
-        content = get_cached_datastream_content(self.get_full_identifier(), "INFOIMG")
-        if content is None:
+        infoimg = get_cached_datastream_content(self.get_full_identifier(), "INFOIMG")
+        if infoimg is None:
             return {}
-        infoimg = content.read()
         infoimg_tree = et.fromstring(infoimg.decode())
         infoimg_dict = OrderedDict()
         for im_tree in infoimg_tree.findall("im"):

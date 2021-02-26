@@ -15,10 +15,11 @@ mimetypes.add_type("font/ttf", ".ttf")
 mimetypes.add_type("image/svg+xml", ".svg")
 
 
-def add_coverpage_to_pdf(coverpage, content):
+def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
     """Add the coverpage to the PDF
 
     Return the resulting PDF bytes"""
+    content = BytesIO(content)
     try:
         with fitz.Document(stream=coverpage, filetype="pdf") as coverpage_pdf:
             with fitz.Document(stream=content, filetype="pdf") as content_pdf:
@@ -28,17 +29,20 @@ def add_coverpage_to_pdf(coverpage, content):
 
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
+        coverpage.seek(0)
+        content.seek(0)
         output = BytesIO()
         coverpage_pdf = pikepdf.open(coverpage)
         content_pdf = pikepdf.open(content)
         coverpage_pdf.pages.extend(content_pdf.pages)
         coverpage_pdf.save(output)
         coverpage_pdf.close()
+        content_pdf.close()
         output.seek(0)
         return output.read()
 
 
-def get_pdf_first_page(content):
+def get_pdf_first_page(content: bytes) -> bytes:
     """Return the first page of the PDF"""
     try:
         with fitz.Document(stream=content, filetype="pdf") as doc:
