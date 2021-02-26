@@ -1530,9 +1530,6 @@ class JournalInformation(models.Model):
     )
 
     # Contact
-    organisation_name = models.TextField(
-        verbose_name=_("Prénom et nom OU nom de l’organisation"), blank=True
-    )
     email = models.EmailField(
         verbose_name=_("Adresse courriel pour demandes générales"), blank=True
     )

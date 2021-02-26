@@ -30,7 +30,6 @@ class JournalInformationForm(forms.ModelForm):
     # would likely be a mistake because you'll notice that when you do that, the contents of the
     # i18n fields will be blank.
     non_i18n_field_names = [
-        "organisation_name",
         "email",
         "subscription_email",
         "languages",
@@ -47,7 +46,6 @@ class JournalInformationForm(forms.ModelForm):
     class Meta:
         model = JournalInformation
         fields = [
-            "organisation_name",
             "email",
             "subscription_email",
             "languages",
