@@ -150,7 +150,7 @@ django-waffle==2.0.0
     # via -r requirements-test.txt
 django-widget-tweaks==1.4.8
     # via -r requirements-test.txt
-django==3.0.11
+django==3.0.13
     # via
     #   -r requirements-test.txt
     #   django-account-actions
@@ -428,7 +428,7 @@ redis==3.5.3
     #   -r requirements-test.txt
     #   django-redis
     #   redis-key-tagging
-reportlab==3.5.56
+reportlab==3.5.59
     # via -r requirements-test.txt
 requests-toolbelt==0.9.1
     # via
