@@ -32,18 +32,17 @@ def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
         coverpage.seek(0)
         content.seek(0)
         output = BytesIO()
-        coverpage_pdf = pikepdf.open(coverpage)
-        content_pdf = pikepdf.open(content)
-        coverpage_pdf.pages.extend(content_pdf.pages)
-        coverpage_pdf.save(output)
-        coverpage_pdf.close()
-        content_pdf.close()
+        with pikepdf.open(coverpage) as coverpage_pdf:
+            with pikepdf.open(content) as content_pdf:
+                coverpage_pdf.pages.extend(content_pdf.pages)
+                coverpage_pdf.save(output)
         output.seek(0)
         return output.read()
 
 
 def get_pdf_first_page(content: bytes) -> bytes:
     """Return the first page of the PDF"""
+    content = BytesIO(content)
     try:
         with fitz.Document(stream=content, filetype="pdf") as doc:
             with fitz.Document() as first_page:
@@ -53,10 +52,10 @@ def get_pdf_first_page(content: bytes) -> bytes:
 
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
+        content.seek(0)
         output = BytesIO()
-        pdf = pikepdf.open(content)
-        del pdf.pages[1:]
-        pdf.save(output)
+        with pikepdf.open(content) as pdf:
+            del pdf.pages[1:]
+            pdf.save(output)
         output.seek(0)
-        pdf.close()
         return output.read()
