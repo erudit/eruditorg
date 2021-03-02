@@ -150,7 +150,7 @@ django-waffle==2.0.0
     # via -r requirements-test.txt
 django-widget-tweaks==1.4.8
     # via -r requirements-test.txt
-django==3.0.11
+django==3.0.13
     # via
     #   -r requirements-test.txt
     #   django-account-actions
