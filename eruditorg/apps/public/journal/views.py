@@ -1220,7 +1220,7 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
 
     def get_content_type(self, fedora_object):
         content = self.get_datastream_content(fedora_object)
-        im = Image.open(copy.copy(content))
+        im = Image.open(io.BytesIO(content))
         return Image.MIME[im.format]
 
 
