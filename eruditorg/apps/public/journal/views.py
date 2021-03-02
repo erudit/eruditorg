@@ -6,7 +6,6 @@ from string import ascii_uppercase
 import io
 from typing import List
 
-import copy
 import functools
 import pysolr
 import random
