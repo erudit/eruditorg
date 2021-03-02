@@ -3350,7 +3350,7 @@ class TestArticleMediaView:
             monkeypatch.setattr(
                 ArticleMediaView,
                 "get_datastream_content",
-                unittest.mock.MagicMock(return_value=io.BytesIO(f.read())),
+                unittest.mock.MagicMock(return_value=f.read()),
             )
         response = ArticleMediaView.as_view()(
             RequestFactory().get("/"),
