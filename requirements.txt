@@ -199,7 +199,7 @@ redis==3.5.3
     # via
     #   django-redis
     #   redis-key-tagging
-reportlab==3.5.59
+reportlab==3.5.56
     # via -r requirements.in
 requests-toolbelt==0.9.1
     # via eulfedora
