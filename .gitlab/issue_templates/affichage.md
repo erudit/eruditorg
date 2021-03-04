@@ -12,5 +12,5 @@
 
 /label ~Support 
 /label ~EquipeProd
-/label ~"CQ - Prod" 
+/label ~ControleQualite
 /label ~"À trier" 
