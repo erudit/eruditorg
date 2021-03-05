@@ -715,7 +715,7 @@ class TestIssueReaderPageView:
         issue = IssueFactory(localidentifier="issue", is_published=is_published)
         view = IssueReaderPageView()
         view.kwargs = {"localidentifier": issue.localidentifier, "page": 1}
-        view.get_datastream_content(unittest.mock.MagicMock())
+        view.get_datastream_content()
         assert mock_get_cached_datastream_content.call_count == 1
 
 
@@ -728,7 +728,7 @@ class TestIssueRawCoverpageView:
         issue = IssueFactory(localidentifier="issue", is_published=is_published)
         view = IssueRawCoverpageView()
         view.kwargs = {"localidentifier": issue.localidentifier}
-        view.get_datastream_content(unittest.mock.MagicMock())
+        view.get_datastream_content()
         assert mock_get_cached_datastream_content.call_count == 1
 
 
@@ -741,7 +741,7 @@ class TestIssueRawCoverpageHDView:
         issue = IssueFactory(localidentifier="issue", is_published=is_published)
         view = IssueRawCoverpageHDView()
         view.kwargs = {"localidentifier": issue.localidentifier}
-        view.get_datastream_content(unittest.mock.MagicMock())
+        view.get_datastream_content()
         assert mock_get_cached_datastream_content.call_count == 1
 
 
@@ -783,8 +783,8 @@ class TestIssueXmlView:
         # The Issue XML view should be accessible if the issue is published or if a prepublication
         # ticket is provided.
         if is_published or ticket:
-            with open("./tests/fixtures/issue/minimal.xml", mode="r") as xml:
-                assert response.content.decode() in xml.read()
+            with open("./tests/fixtures/issue/minimal.xml", mode="rb") as xml:
+                assert response.content in xml.read()
         # The Issue XML view should redirect to the journal detail view if the issue is not
         # published and a prepublication ticket is not provided.
         else:
@@ -1295,5 +1295,5 @@ class TestArticleMediaView:
             "journal_code": article.issue.journal.code,
         }
         view.get_object = unittest.mock.MagicMock(return_value=article)
-        view.get_datastream_content(unittest.mock.MagicMock())
+        view.get_datastream_content()
         assert mock_get_cached_datastream_content.call_count

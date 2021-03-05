@@ -412,7 +412,7 @@ class Journal(FedoraMixin, FedoraDated):
     @cached_property
     def has_logo(self):
         """ Returns a boolean indicating if the considered journal has a logo. """
-        return self.has_non_empty_image_datastream("logo")
+        return self.has_non_empty_image_datastream("LOGO")
 
 
 class Issue(FedoraMixin, FedoraDated):
@@ -681,7 +681,7 @@ class Issue(FedoraMixin, FedoraDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
-        return self.has_non_empty_image_datastream("coverpage")
+        return self.has_non_empty_image_datastream("COVERPAGE")
 
     @property
     def prepublication_ticket(self):

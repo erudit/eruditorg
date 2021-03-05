@@ -1122,8 +1122,8 @@ class TestArticleDetailView:
     @pytest.mark.parametrize(
         "is_published, expected_count",
         [
-            (False, 2),
-            (True, 2),
+            (False, 3),
+            (True, 3),
         ],
     )
     def test_xml_datastream_caching(self, mock_cache, is_published, expected_count):

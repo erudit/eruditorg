@@ -39,11 +39,6 @@ from rules.contrib.views import PermissionRequiredMixin
 from lxml import etree as et
 
 from erudit.fedora.cache import get_cached_datastream_content
-from erudit.fedora.objects import ArticleDigitalObject
-from erudit.fedora.objects import JournalDigitalObject
-from erudit.fedora.objects import MediaDigitalObject
-from erudit.fedora.objects import PageDigitalObject
-from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Discipline
 from erudit.models import Article
@@ -427,8 +422,7 @@ class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
 
     content_type = "image/jpeg"
-    datastream_name = "logo"
-    fedora_object_class = JournalDigitalObject
+    datastream_name = "LOGO"
     model = Journal
 
 
@@ -639,8 +633,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     """
 
     content_type = "image/jpeg"
-    datastream_name = "coverpage"
-    fedora_object_class = PublicationDigitalObject
+    datastream_name = "COVERPAGE"
     model = Issue
 
     def get_object(self):
@@ -653,8 +646,7 @@ class IssueRawCoverpageHDView(FedoraFileDatastreamView):
     """
 
     content_type = "image/jpeg"
-    datastream_name = "coverpage_hd"
-    fedora_object_class = PublicationDigitalObject
+    datastream_name = "COVERPAGE_HD"
     model = Issue
 
     def get_object(self):
@@ -706,13 +698,12 @@ class IssueReaderPageView(
 
     model = Issue
     content_type = "image/jpeg"
-    fedora_object_class = PageDigitalObject
-    datastream_name = "image"
+    datastream_name = "IMAGE"
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs["localidentifier"])
 
-    def get_fedora_object_pid(self):
+    def get_object_pid(self):
         issue = self.get_object()
         return "{}.p{}".format(issue.pid, self.kwargs["page"])
 
@@ -730,14 +721,10 @@ class IssueXmlView(
     """ Displays an Issue raw XML. """
 
     content_type = "application/xml"
-    datastream_name = "summary"
-    fedora_object_class = PublicationDigitalObject
+    datastream_name = "SUMMARY"
 
     def get_object(self, queryset=None):
         return get_object_or_404(Issue, localidentifier=self.kwargs["localidentifier"])
-
-    def get_datastream_content(self, fedora_object):
-        return fedora_object.xml_content
 
 
 class BaseArticleDetailView(
@@ -1114,10 +1101,6 @@ class ArticleFormatDownloadView(
     def get_content(self):
         return self.get_object()
 
-    def get_fedora_object_pid(self):
-        article = self.get_content()
-        return article.pid
-
     def get_permission_object(self):
         return self.get_content()
 
@@ -1131,13 +1114,9 @@ class ArticleFormatDownloadView(
 
 class ArticleXmlView(ArticleFormatDownloadView):
     content_type = "application/xml"
-    datastream_name = "erudit_xsd300"
-    fedora_object_class = ArticleDigitalObject
+    datastream_name = "ERUDITXSD300"
     raise_exception = True
     tracking_view_type = "xml"
-
-    def get_datastream_content(self, fedora_object):
-        return fedora_object.xml_content
 
     def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
@@ -1152,8 +1131,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     """
 
     content_type = "application/pdf"
-    datastream_name = "pdf"
-    fedora_object_class = ArticleDigitalObject
+    datastream_name = "PDF"
     raise_exception = True
     tracking_view_type = "pdf"
 
@@ -1161,8 +1139,8 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         coverpage = get_coverpage(self.get_object())
         response.content = add_coverpage_to_pdf(coverpage, content)
 
-    def get_response_object(self, fedora_object):
-        response = super(ArticleFormatDownloadView, self).get_response_object(fedora_object)
+    def get_response_object(self):
+        response = super().get_response_object()
         if "embed" not in self.request.GET:
             response["Content-Disposition"] = "inline; filename={}.pdf".format(
                 self.kwargs["localid"]
@@ -1191,20 +1169,15 @@ class ArticleRawPdfFirstPageView(
     """
 
     content_type = "application/pdf"
-    datastream_name = "pdf"
-    fedora_object_class = ArticleDigitalObject
+    datastream_name = "PDF"
     raise_exception = True
     tracking_view_type = "pdf"
 
     def get_content(self):
         return self.get_object()
 
-    def get_fedora_object_pid(self):
-        article = self.get_content()
-        return article.pid
-
-    def get_response_object(self, fedora_object):
-        response = super(ArticleRawPdfFirstPageView, self).get_response_object(fedora_object)
+    def get_response_object(self):
+        response = super().get_response_object()
         if "embed" not in self.request.GET:
             response["Content-Disposition"] = "attachment; filename={}.pdf".format(
                 self.kwargs["localid"]
@@ -1236,16 +1209,15 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     Returns an image file embedded in the INFOIMG datastream.
     """
 
-    datastream_name = "content"
-    fedora_object_class = MediaDigitalObject
+    datastream_name = "CONTENT"
 
-    def get_fedora_object_pid(self):
+    def get_object_pid(self):
         article = self.get_object()
         issue_pid = article.issue.pid
         return "{0}.{1}".format(issue_pid, self.kwargs["media_localid"])
 
-    def get_content_type(self, fedora_object):
-        content = self.get_datastream_content(fedora_object)
+    def get_content_type(self):
+        content = self.get_datastream_content()
         im = Image.open(io.BytesIO(content))
         return Image.MIME[im.format]
 

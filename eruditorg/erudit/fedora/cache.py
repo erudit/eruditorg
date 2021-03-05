@@ -83,10 +83,7 @@ def get_cached_datastream_content(
     if content is None:
         try:
             response = requests.get(
-                settings.FEDORA_ROOT
-                +  # TODO: We will be able to remove the upper() call when we will get rid of
-                # eulfedora's DigitalObjects.
-                f"objects/{pid}/datastreams/{datastream_name.upper()}/content",
+                settings.FEDORA_ROOT + f"objects/{pid}/datastreams/{datastream_name}/content",
             )
             response.raise_for_status()
             content = response.content
