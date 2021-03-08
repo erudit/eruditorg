@@ -319,21 +319,6 @@ class SolrData:
         else:
             return None
 
-    def get_journal_related_articles(
-        self, journal_code: str, current_article_localidentifier: str
-    ) -> List[Article]:
-        params = {
-            "fq": [
-                f'RevueAbr:"{journal_code}"',
-                f"-ID:{current_article_localidentifier}",
-                "Corpus_fac:Article",
-            ],
-            "facet": "false",
-            "rows": 500,
-        }
-        results = self.client.search("*:*", **params)
-        return [Article(doc) for doc in results.docs]
-
     def get_search_form_facets(self) -> Dict[str, List[Tuple[str, str]]]:
         results = cache.get("advanced_search_form_solr_facets")
         if results is None:

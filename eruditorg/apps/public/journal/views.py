@@ -8,7 +8,7 @@ from typing import List
 
 import functools
 import pysolr
-import random
+from random import choice, shuffle
 import structlog
 import unicodedata
 
@@ -33,6 +33,7 @@ from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from django.db.models import Prefetch
+from django.core.cache import cache
 
 from rules.contrib.views import PermissionRequiredMixin
 from lxml import etree as et
@@ -48,6 +49,8 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
+
+from eruditarticle.objects import SummaryArticle
 
 from erudit.utils import locale_aware_sort, qs_cache_key
 
@@ -818,9 +821,8 @@ class BaseArticleDetailView(
             self.render_xml_content,
             context=context,
         )
-        context["related_articles"] = functools.partial(
-            self.get_related_articles,
-            current_article=current_article,
+        context["related_articles"] = self.get_related_articles(
+            current_article.issue.localidentifier, current_article.issue.journal.localidentifier
         )
         context["active_campaign"] = Campaign.objects.active_campaign()
 
@@ -849,24 +851,49 @@ class BaseArticleDetailView(
 
         return context
 
-    def get_related_articles(self, current_article: Article) -> List[Article]:
-        related_candidates = self.solr_data.get_journal_related_articles(
-            current_article.issue.journal.code,
-            current_article.localidentifier,
+    def get_related_articles(
+        self, issue_localidentifier: str, journal_localidentifier: str
+    ) -> List[SummaryArticle]:
+        cache_key = f"get_related_articles-{issue_localidentifier}"
+        # Tries to fetch previously stored issue related articles
+        cached_related_articles = cache.get(cache_key)
+        if cached_related_articles:
+            return cached_related_articles
+
+        # Fetch all journal's issues except for the current article one
+        candidate_issues = (
+            Issue.objects.filter(
+                journal__localidentifier=journal_localidentifier,
+                is_published=True,
+            )
+            .exclude(localidentifier=issue_localidentifier)
+            .values_list(
+                "localidentifier",
+                flat=True,
+            )
         )
-        # return 4 randomly — at most
-        random.shuffle(related_candidates)
-        related_articles = []
-        # calls to Article.from_solr_object are expensive, so create only selected articles
-        for candidate in related_candidates:
-            if len(related_articles) == 4:
+
+        # If there are not other issues for the current journal
+        if candidate_issues.count() == 0:
+            return []
+
+        # Randomly select 4 (at most) related articles from randomly selected issue
+        random_issue = Issue.objects.get(localidentifier=choice(candidate_issues))
+        summary_articles = random_issue.erudit_object.get_summary_articles()
+        shuffle(summary_articles)
+        related_candidates = []
+        for summary_article in summary_articles:
+            url = summary_article.urlhtml if summary_article.urlhtml else summary_article.urlpdf
+            # Not include articles that have missing urls or titles
+            if url is not None and summary_article.html_title is not None:
+                related_candidates.append(summary_article)
+            if len(related_candidates) == 4:
                 break
-            try:
-                related_articles.append(Article.from_solr_object(candidate))
-            except Article.DoesNotExist:
-                # This might happen for UNB articles with ID mismatch between Solr & Fedora.
-                pass
-        return related_articles
+
+        # Store issue related articles in cache for 24h.
+        cache.set(cache_key, related_candidates, settings.LONG_TTL)
+
+        return related_candidates
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):

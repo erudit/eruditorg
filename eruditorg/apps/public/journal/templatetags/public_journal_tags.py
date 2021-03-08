@@ -1,32 +1,10 @@
 from django import template
 from django.urls import reverse
-from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
 from erudit.models import Issue, Journal
 
 register = template.Library()
-
-
-@register.filter
-def format_article_html_title(article):
-    """Formats the article html title
-
-    Display the html_title if it exists otherwise display "untitled"
-    """
-    if article.html_title:
-        return mark_safe(article.html_title)
-    else:
-        return _("[Article sans titre]")
-
-
-@register.filter
-def format_article_title(article):
-    """Formats the article title
-
-    Display the title if it exists otherwise display "untitled"
-    """
-    return article.title if article.title else _("[Article sans titre]")
 
 
 @register.simple_tag

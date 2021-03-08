@@ -21,7 +21,7 @@ from erudit.test.factories import (
 from erudit.fedora import repository
 from eruditarticle.objects.article import EruditArticle
 from erudit.fedora.objects import ArticleDigitalObject
-from erudit.models import Article
+from erudit.models import Article, Issue
 from erudit.test.domchange import SectionTitle
 from erudit.test.solr import FakeSolrData
 from apps.public.journal.views import (
@@ -1077,6 +1077,63 @@ class TestArticleDetailView:
         monkeypatch.setattr(Article, "publication_allowed", publication_allowed)
         monkeypatch.setattr(Article, "processing", processing)
         assert ArticleDetailView().get_access_type() == expected_access_type
+
+    @pytest.mark.parametrize("number_related_articles", (0, 3, 4, 5))
+    def test_get_related_articles(self, number_related_articles, monkeypatch):
+
+        # Used to mock "SummaryArticle" from liberuditarticle
+        class MockSummaryArticle:
+            def __init__(self, urlhtml=None, html_title=None, authors=None):
+                self.urlhtml = urlhtml
+                self.html_title = html_title
+                self.authors = authors
+
+        # Used to mock the "erudit_object" from Issue
+        class MockEruditObject:
+            available_articles = [
+                MockSummaryArticle("/url_1", "html_title_1", "authors_1"),
+                MockSummaryArticle("/url_2", "html_title_2", "authors_2"),
+                MockSummaryArticle("/url_3", "html_title_3", "authors_3"),
+                MockSummaryArticle("/url_4", "html_title_4", "authors_4"),
+                MockSummaryArticle("/url_5", "html_title_5", "authors_5"),
+                MockSummaryArticle(urlhtml="/url_6", authors="authors_6"),
+                MockSummaryArticle(html_title="html_title_7", authors="authors_7"),
+                MockSummaryArticle(authors="authors_8"),
+            ]
+
+            def __init__(self, nb_related_articles):
+                # Select a slice of "available_articles" to account for cases with less then
+                # 4 available related articles
+                self.related_articles = self.available_articles[:nb_related_articles]
+
+            def get_summary_articles(self):
+                return self.related_articles
+
+        journal = JournalFactory()
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        current_article = ArticleFactory(issue=issue1)
+        for _ in range(number_related_articles):
+            ArticleFactory(issue=issue2)
+        view = ArticleDetailView()
+        view.request = RequestFactory()
+        view.request.LANGUAGE_CODE = "fr"
+        mock_erudit_object = MockEruditObject(number_related_articles)
+        monkeypatch.setattr(Issue, "erudit_object", mock_erudit_object)
+        related_articles = view.get_related_articles(
+            current_article.issue.localidentifier, current_article.issue.journal.localidentifier
+        )
+        # Check if number of articles are at most 4
+        assert len(related_articles) == min(4, number_related_articles)
+        # Check if all related articles are unique
+        assert len(set(article.urlhtml for article in related_articles)) == min(
+            4, number_related_articles
+        )
+        # Check if related articles belong to the list of available articles
+        for article in related_articles:
+            assert article in mock_erudit_object.available_articles
+            # Check that SummaryArticles without title or urlhtml are not selected
+            assert article.authors not in ["authors_6", "authors_7", "authors_8"]
 
 
 class TestArticleSummaryView:

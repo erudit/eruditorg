@@ -36,7 +36,6 @@ from erudit.test.solr import FakeSolrData
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora import repository
-from erudit.solr.models import Article as SolrArticle
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -2164,59 +2163,90 @@ class TestArticleDetailView:
             "musicale,           1935</span></em>)</a></li>"
         )
 
-    def test_related_articles(self, monkeypatch):
+    @pytest.mark.parametrize("number_related_articles", (0, 3, 4, 5))
+    def test_related_articles_multiple_issues_in_journal(self, number_related_articles):
         journal = JournalFactory()
-        article_1 = ArticleFactory(issue__journal=journal)
-        article_2 = ArticleFactory(issue__journal=journal)
-        article_3 = ArticleFactory(issue__journal=journal)
-        article_4 = ArticleFactory(issue__journal=journal)
-        # Mock return value for get_journal_related_articles().
-        journal_related_articles = []
-        for article in [article_1, article_2, article_3, article_4]:
-            journal_related_articles.append(
-                SolrArticle(
-                    {
-                        "RevueID": article.issue.journal.localidentifier,
-                        "NumeroID": article.issue.localidentifier,
-                        "ID": article.localidentifier,
-                    }
-                )
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        for _ in range(number_related_articles):
+            ArticleFactory(
+                issue=issue2,
+                add_to_fedora_issue=True,
+                html_url="/test_url",
             )
-        # Simulate a Solr result with an issue that is not in Fedora.
-        journal_related_articles.append(
-            SolrArticle(
-                {
-                    "RevueID": journal.localidentifier,
-                    "NumeroID": "not_in_fedora",
-                    "ID": "not_in_fedora",
-                }
-            )
-        )
-        # Patch get_journal_related_articles() so it returns our mocked return value.
-        monkeypatch.setattr(
-            FakeSolrData,
-            "get_journal_related_articles",
-            unittest.mock.Mock(
-                return_value=journal_related_articles,
-            ),
-        )
         # Create the current article, which should not appear in the related articles.
-        current_article = ArticleFactory(
-            issue__journal=journal,
-            localidentifier="current_article",
-        )
+        current_article = ArticleFactory(issue=issue1, localidentifier="current_article")
         # Get the response.
         url = article_detail_url(current_article)
         html = Client().get(url).content
         # Get the HTML.
         dom = BeautifulSoup(html, "html.parser")
         footer = dom.find("footer", {"class": "container"})
-        # There should only be 4 related articles.
-        assert len(footer.find_all("article")) == 4
-        # The current article should not be in the related articles.
-        assert "current_article" not in footer.decode()
-        # An article with no issue should not be in related articles.
-        assert "not_in_fedora" not in footer.decode()
+        if number_related_articles == 0:
+            # Since there are no related articles there is no footer
+            assert footer is None
+        else:
+            # There should be 4 (or less) related articles in the footer
+            assert len(footer.find_all("article")) == min(4, number_related_articles)
+            # The current article should not be in the related articles.
+            assert "current_article" not in footer.decode()
+
+    def test_related_articles_internal_issues(self, monkeypatch):
+        journal = JournalFactory()
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        for _ in range(4):
+            ArticleFactory(
+                issue=issue2,
+                add_to_fedora_issue=True,
+                html_url="/internal_url",
+            )
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(issue=issue1, localidentifier="current_article")
+        # Get the response.
+        url = article_detail_url(current_article)
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, "html.parser")
+        footer = dom.find("footer", {"class": "container"})
+        # Assert that the internal relative url is present
+        assert "/internal_url" in footer.decode()
+
+    def test_related_articles_external_issues(self, monkeypatch):
+        journal = JournalFactory()
+        issue1 = IssueFactory(journal=journal)
+        issue2 = IssueFactory(journal=journal)
+        for _ in range(4):
+            ArticleFactory(
+                issue=issue2,
+                add_to_fedora_issue=True,
+                html_url="https://external_url/",
+            )
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(issue=issue1, localidentifier="current_article")
+        # Get the response.
+        url = article_detail_url(current_article)
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, "html.parser")
+        footer = dom.find("footer", {"class": "container"})
+        # Assert that the external absolute url is present
+        assert "https://external_url/" in footer.decode()
+
+    def test_related_articles_single_issue_in_journal(self):
+        issue = IssueFactory()
+        for _ in range(4):
+            ArticleFactory(issue=issue)
+        # Create the current article, which should not appear in the related articles.
+        current_article = ArticleFactory(issue=issue)
+        # Get the response.
+        url = article_detail_url(current_article)
+        html = Client().get(url).content
+        # Get the HTML.
+        dom = BeautifulSoup(html, "html.parser")
+        footer = dom.find("footer", {"class": "container"})
+        # Since there is only one issue we don't have related issues
+        assert footer is None
 
     @pytest.mark.parametrize(
         "with_pdf, pages, has_abstracts, open_access, expected_result",

@@ -1,6 +1,6 @@
-{% load public_journal_tags %}TY  - JOUR
+TY  - JOUR
 ID  - {{ article.localidentifier }}
-T1  - {{ article|format_article_title|safe }}
+T1  - {{ article.title|safe }}
 {% spaceless %}{% for author in article.authors %}{% if author.firstname and author.lastname %}
 A1  - {{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}A1  - {{ author.othername|safe }}{% endif %}{% endfor %}{% endspaceless %}
 JO  - {{ article.issue.journal_formatted_title }}
