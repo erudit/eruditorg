@@ -11,8 +11,6 @@ from eruditarticle.objects import EruditArticle
 
 from erudit.models import Issue, Article
 from erudit.fedora import modelmixins
-from erudit.fedora.objects import JournalDigitalObject
-from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora import repository
 from erudit.test.factories import (
     ArticleFactory,
@@ -28,10 +26,6 @@ pytestmark = pytest.mark.django_db
 
 
 class TestJournal:
-    def test_can_return_the_associated_eulfedora_model(self):
-        journal = JournalFactory()
-        assert journal.fedora_model == JournalDigitalObject
-
     def test_can_return_the_associated_erudit_class(self):
         journal = JournalFactory()
         assert journal.erudit_class == EruditJournal
@@ -203,10 +197,6 @@ class TestJournal:
 
 
 class TestIssue:
-    def test_can_return_the_associated_eulfedora_model(self):
-        issue = IssueFactory()
-        assert issue.fedora_model == PublicationDigitalObject
-
     def test_can_return_the_associated_erudit_class(self):
         issue = IssueFactory()
         assert issue.erudit_class == EruditPublication
@@ -373,12 +363,7 @@ class TestIssue:
     def test_has_coverpage_use_cache(self, mock_get_cached_datastream_content, is_published):
         with open(settings.MEDIA_ROOT + "/coverpage.png", "rb") as f:
             issue = IssueFactory(is_published=is_published)
-            fedora_object = unittest.mock.MagicMock()
-            fedora_object.pid = issue.pid
-            fedora_object.coverpage = unittest.mock.MagicMock()
-            fedora_object.coverpage.content = f.read()
-            issue.get_fedora_object = unittest.mock.MagicMock(return_value=fedora_object)
-            mock_get_cached_datastream_content.return_value = fedora_object.coverpage.content
+            mock_get_cached_datastream_content.return_value = f.read()
         assert issue.has_coverpage
         assert mock_get_cached_datastream_content.call_count == 1
 
@@ -658,13 +643,11 @@ class TestArticle:
 
     def test_pdf_url_when_fedora_pdf(self):
         article = ArticleFactory(with_pdf=True)
-        article.reset_fedora_objects()
         assert article.pdf_url
 
     def test_pdf_url_when_fedora_pdf_and_external_pdf(self):
         # fedora PDFs have priority over "urlpdf" in summary
         article = ArticleFactory(with_pdf=True, pdf_url="http://example.com")
-        article.reset_fedora_objects()
         assert article.pdf_url and article.pdf_url != "http://example.com"
 
     def test_pdf_url_when_external_pdf(self):

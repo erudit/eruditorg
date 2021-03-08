@@ -1,26 +1,20 @@
 from typing import Optional, Type
 import io
-import structlog
 import requests
 
 from django.conf import settings
 from django.utils.functional import cached_property
 from lxml import etree
 from PIL import Image
-from eulfedora.util import RequestFailed
 from requests.exceptions import HTTPError, ConnectionError
 from eruditarticle.objects import EruditBaseObject
 
 from .cache import get_cached_datastream_content
-from .repository import api
-
-logger = structlog.getLogger(__name__)
 
 
 class FedoraMixin:
     """
-    The FedoraMixin defines a common way to associate Django models and its
-    instances to eulfedora's models and Erudit's objects'
+    The FedoraMixin defines a common way to associate Django models to its Erudit's object.
     """
 
     def get_full_identifier(self):
@@ -36,36 +30,10 @@ class FedoraMixin:
     def pid(self):
         return self.get_full_identifier()
 
-    def get_fedora_model(self):
-        """
-        Returns the eulfedora's model associated with the considered Django model.
-        """
-        raise NotImplementedError
-
-    @property
-    def fedora_model(self):
-        return self.get_fedora_model()
-
     def get_erudit_object_datastream_name(self):
         """Returns the name of the datastream that will
         be parsed to instanciate the EruditObject"""
         raise NotImplementedError
-
-    def get_fedora_object(self):
-        """
-        Returns the eulfedora's object associated with the considered Django object.
-        """
-
-        if not self.get_full_identifier():
-            return None
-
-        if getattr(self, "_fedora_object", None) is None:
-            self._fedora_object = self.fedora_model(api, self.pid)
-        return self._fedora_object
-
-    @cached_property
-    def fedora_object(self):
-        return self.get_fedora_object()
 
     def get_erudit_class(self):
         """
@@ -81,26 +49,12 @@ class FedoraMixin:
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
-        try:
-            fedora_xml_content = get_cached_datastream_content(
-                self.pid,
-                self.get_erudit_object_datastream_name(),
-                cache_key=self.localidentifier,
-            )
-            if fedora_xml_content is None:
-                raise HTTPError
-            return self.erudit_class(fedora_xml_content)
-
-        except (HTTPError, ConnectionError):  # pragma: no cover
-            if settings.DEBUG:
-                # In DEBUG mode RequestFailed or ConnectionError errors can occur
-                # really often because the dataset provided by the Fedora repository
-                # is not complete.
-                return
-            elif hasattr(self, "issue") and self.issue.journal.collection.code == "unb":
-                # The UNB collection *has* articles that are missing from Fedora
-                return
-            raise
+        fedora_xml_content = get_cached_datastream_content(
+            self.pid,
+            self.get_erudit_object_datastream_name(),
+            cache_key=self.localidentifier,
+        )
+        return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
 
     @cached_property
     def is_in_fedora(self):
@@ -108,10 +62,7 @@ class FedoraMixin:
 
         The presence of a full_identifier is not sufficient to determine if the object
         is present in fedora. Some articles have Fedora ids but are _not_ in Fedora."""
-        try:
-            return bool(self.get_full_identifier() and self.erudit_object)
-        except (HTTPError, ConnectionError):
-            return False
+        return bool(self.get_full_identifier() and self.erudit_object)
 
     @cached_property
     def erudit_object(self):
@@ -119,22 +70,12 @@ class FedoraMixin:
             self._erudit_object = self.get_erudit_object()
         return self._erudit_object
 
-    def reset_fedora_objects(self):
-        self._fedora_object = None
-        self._erudit_object = None
-
     def fedora_is_loaded(self):
         return hasattr(self, "_erudit_object") and self._erudit_object is not None
 
     def has_non_empty_image_datastream(self, datastream_name: str) -> bool:
         """ Returns True if the considered fedora object has a non empty image datastream. """
-        if self.fedora_object is None:
-            return False
-        try:
-            content = get_cached_datastream_content(self.pid, datastream_name)
-        except RequestFailed:
-            return False
-
+        content = get_cached_datastream_content(self.pid, datastream_name)
         if not content:
             return False
 
@@ -147,6 +88,7 @@ class FedoraMixin:
         return not empty_image
 
     def has_datastream(self, datastream_name):
+        """ Returns True if the considered fedora object has a given datastream. """
         try:
             response = requests.get(
                 settings.FEDORA_ROOT + f"objects/{self.pid}/datastreams",
