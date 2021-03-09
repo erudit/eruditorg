@@ -1,3 +1,4 @@
+import logging
 import os
 
 from base.settings.base import *  # noqa
@@ -81,3 +82,11 @@ POST_OFFICE = {
 }
 
 BOOKS_UPDATE_EMAILS = ["foo@bar.com", "foo@baz.com"]
+
+MIDDLEWARE = tuple(m for m in MIDDLEWARE if m != "whitenoise.middleware.WhiteNoiseMiddleware")
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.MD5PasswordHasher",
+]
+
+logging.disable(logging.CRITICAL)

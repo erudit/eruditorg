@@ -1,3 +1,4 @@
+import logging
 import pytest
 from erudit.utils import locale_aware_sort, get_sort_key_func, pairify, catch_and_log, qs_cache_key
 from erudit.test import needs_fr_ca
@@ -57,6 +58,8 @@ def test_pairify():
 
 
 def test_catch_and_log(caplog):
+    logging.disable(logging.NOTSET)
+
     @catch_and_log
     def zerodiv():
         return 1 / 0
