@@ -62,16 +62,10 @@ server to use the Barracuda file format by adding these lines in your `my.cnf`:
     [mysqld]
     innodb_file_format = Barracuda 
 
-## Creating settings_env.py
+## Creating .env file
 
-Copy `eruditorg/base/settings/setting_env.py.sample` into `eruditorg/base/settings/settings_env.py`
-and edit this file with credentials to Érudit's Solr and Fedora instances. You can also override
-base settings in it.
-
-The default configuration connects to database `eruditorg` with user `root` and no password.
-If you do not want this, and would rather use a password, follow the
-[mariadb documentation](https://mariadb.com/kb/en/mariadb/set-password/) on how to create a user
-and update the `settings_env.py` file accordingly.
+Copy `.env.sample` into `.env` and edit this file with credentials to Érudit's Solr and Fedora
+instances.
 
 ## Django
 
@@ -117,12 +111,8 @@ You will then be able to build the docoumentation using the `Makefile` in the `d
 
 You can run the tests with:
 
-    $ tox
+    $ PYTHONPATH=".:./eruditorg/" pytest tests/
 
-Tests are ran with pytest. You can pass arguments to pytest through tox with `--`. For example, if
-you want to run tests using 4 cores in parallel and stopping at the first failure, you would run:
-
-    $ tox -- -x -n4
 
 # Documentation
 
