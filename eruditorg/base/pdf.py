@@ -21,12 +21,10 @@ def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
     Return the resulting PDF bytes"""
     content = BytesIO(content)
     try:
-        with fitz.Document(stream=coverpage, filetype="pdf") as coverpage_pdf:
-            with fitz.Document(stream=content, filetype="pdf") as content_pdf:
-                coverpage_pdf.insertPDF(content_pdf)
-                doc = coverpage_pdf.write()
-                return doc
-
+        coverpage_pdf = fitz.Document(stream=coverpage, filetype="pdf")
+        content_pdf = fitz.Document(stream=content, filetype="pdf")
+        coverpage_pdf.insertPDF(content_pdf)
+        return coverpage_pdf.write()
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
         coverpage.seek(0)
@@ -36,7 +34,6 @@ def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
         content_pdf = pikepdf.open(content)
         coverpage_pdf.pages.extend(content_pdf.pages)
         coverpage_pdf.save(output)
-        coverpage_pdf.close()
         output.seek(0)
         return output.read()
 
@@ -44,12 +41,10 @@ def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
 def get_pdf_first_page(content: bytes) -> bytes:
     """Return the first page of the PDF"""
     try:
-        with fitz.Document(stream=content, filetype="pdf") as doc:
-            with fitz.Document() as first_page:
-                first_page.insertPDF(doc, to_page=0)
-                doc = first_page.write()
-                return doc
-
+        doc = fitz.Document(stream=content, filetype="pdf")
+        first_page = fitz.Document()
+        first_page.insertPDF(doc, to_page=0)
+        return first_page.write()
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
         output = BytesIO()
@@ -57,5 +52,4 @@ def get_pdf_first_page(content: bytes) -> bytes:
         del pdf.pages[1:]
         pdf.save(output)
         output.seek(0)
-        pdf.close()
         return output.read()
