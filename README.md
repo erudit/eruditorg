@@ -109,10 +109,19 @@ You will then be able to build the docoumentation using the `Makefile` in the `d
 
 # Running the tests
 
-You can run the tests with:
+You can run the tests with pytest:
 
     $ PYTHONPATH=".:./eruditorg/" pytest tests/
 
+# Black and flake8
+
+Black is configured in `pyproject.toml`. You can run it with:
+
+    $ black eruditorg/ tests/
+
+Flake8 is configured in `.flake8`. You can run it with:
+
+    # flake8 eruditorg/ tests/
 
 # Documentation
 
