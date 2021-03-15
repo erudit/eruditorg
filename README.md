@@ -34,11 +34,13 @@ On Ubuntu 18.04, requirements can be installed with:
 
 ## Setup the virtualenv
 
-This step is taken care of by the Makefile, so:
+With virtualenvwrapper, create a virtualenv with:
 
-    $ make
+    $ mkvirtualenv <your_virtualenv_name>
 
-will create the virtualenv and install python dependencies in it.
+Then install development python dependencies in it:
+
+    $ pip-sync requirements-dev.txt
 
 ## Database
 
