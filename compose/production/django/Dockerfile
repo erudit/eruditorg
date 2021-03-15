@@ -1,4 +1,4 @@
-FROM node:10-buster as client-builder
+FROM node:14-buster as client-builder
 
 WORKDIR /app
 COPY package* /app/
