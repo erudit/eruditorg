@@ -74,14 +74,26 @@ class FedoraMixin:
         return hasattr(self, "_erudit_object") and self._erudit_object is not None
 
     def has_non_empty_image_datastream(self, datastream_name: str) -> bool:
-        """ Returns True if the considered fedora object has a non empty image datastream. """
+        """Returns True if the considered fedora object has a non empty image datastream.
+
+        Returns False tf the considered image datastream is not is Fedora.
+
+        Returns False if the considered image datastream is in Fedora but is empty (one color only).
+
+        To check if the image is empty (one color only), we convert it to greyscale and get the
+        minimum and maximum pixel values. If the minimum and maximum pixel values are both white or
+        both black, we consider the image as being empty.
+        """
         content = get_cached_datastream_content(self.pid, datastream_name)
         if not content:
             return False
 
         # Checks the content of the image in order to detect if it contains only one single color.
         im = Image.open(io.BytesIO(content))
+        # Convert the image to greyscale ("L") and get the minimum & maximum pixel values.
         extrema = im.convert("L").getextrema()
+        # If the minimum & maximum pixel values are both white or both black, we consider the image
+        # as being empty.
         empty_image = (extrema == (0, 0)) or (extrema == (255, 255))
         im.close()
 
