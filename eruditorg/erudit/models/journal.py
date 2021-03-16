@@ -14,7 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.db import models
 from django.db.models import Q, Case, When
-from django.utils.functional import cached_property
+from django.utils.functional import cached_property, Promise
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _, pgettext
 from django.utils.text import slugify
@@ -1165,7 +1165,7 @@ class Article(FedoraMixin):
 
     @property
     @catch_and_log
-    def title(self):
+    def title(self) -> typing.Union[str, Promise]:
         if self.fedora_is_loaded():
             title = self.erudit_object.get_title(formatted=True, html=False)
         else:

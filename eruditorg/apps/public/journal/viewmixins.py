@@ -177,9 +177,7 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
-        context["citation_title_metadata"] = (
-            article.title if article.title else _("[Article sans titre]")
-        )
+        context["citation_title_metadata"] = article.title
         context[
             "citation_journal_title_metadata"
         ] = article.erudit_object.get_formatted_journal_title()
