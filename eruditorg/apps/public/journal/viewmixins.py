@@ -12,10 +12,12 @@ from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from ipware import get_client_ip
 from prometheus_client import Counter
+from typing import List, Optional
 
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
+from erudit.models import JournalInformation
 from erudit.solr.models import (
     SolrData,
     get_solr_data,
@@ -281,6 +283,24 @@ class MetaInfoIssueMixin:
             issn["web"] = journal.issn_web
 
         return issn
+
+    def get_langcodes(
+        self,
+        current_issue: Optional[Issue] = None,
+        journal_information: Optional[JournalInformation] = None,
+    ) -> List[str]:
+        """Get the journal's langcodes either from the current issue's XML or from the journal
+        information's model."""
+        langcodes = current_issue.erudit_object.get_languages() if current_issue else []
+        if not langcodes and journal_information:
+            for language in journal_information.main_languages:
+                if language == "F":
+                    langcodes.append("fr")
+                else:
+                    langcodes.append("en")
+            for language in journal_information.other_languages.all():
+                langcodes.append(language.code)
+        return langcodes
 
 
 class ArticleAccessLogMixin:

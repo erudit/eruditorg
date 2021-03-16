@@ -1,6 +1,5 @@
 export class JournalInformationFormController {
   init() {
-    $('#id_languages').select2();
     this.contributor_fieldset = $('fieldset[name="contributors"]');
     this.set_formset_state();
   }

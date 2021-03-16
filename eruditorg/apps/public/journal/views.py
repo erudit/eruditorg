@@ -301,6 +301,9 @@ class JournalDetailView(
             self.object.pid,
         ] + [issue.pid for issue in issues]
 
+        # Get the languages information from last published issue ("current_issue")
+        context["journal_languages"] = self.get_langcodes(current_issue, journal_info)
+
         return context
 
 
@@ -413,6 +416,9 @@ class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateVie
             issue=context["current_issue"],
         )
 
+        # Get the languages information from last published issue ("current_issue")
+        context["journal_languages"] = self.get_langcodes(context["current_issue"], journal_info)
+
         return context
 
 
@@ -524,7 +530,7 @@ class IssueDetailView(
         try:
             context["journal_info"] = self.object.journal.information
         except ObjectDoesNotExist:
-            pass
+            context["journal_info"] = None
 
         titles = self.object.erudit_object.get_journal_title()
         context["main_title"] = titles["main"]
@@ -576,6 +582,10 @@ class IssueDetailView(
             self.object.journal.pid,
             self.object.pid,
         ] + [article.pid for article in articles]
+
+        # Get the languages information from last published issue ("current_issue")
+        current_issue = self.object.journal.current_issue
+        context["journal_languages"] = self.get_langcodes(current_issue, context["journal_info"])
 
         return context
 

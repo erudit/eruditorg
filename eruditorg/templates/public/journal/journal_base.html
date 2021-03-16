@@ -205,17 +205,18 @@
             {% endif %}
           </dd>
 
-          {% if journal.information.languages.all|length > 0 %}
+          {% if journal_languages %}
           <dt>
-            {% blocktrans count journal.languages.all|length as disciplines_count %}
+            {% blocktrans count journal_languages|length as languages_count %}
             Langue
             {% plural %}
             Langues
             {% endblocktrans %}
           </dt>
 
-            {% for language in journal.information.languages.all %}
-            <dd>{{ language }}</dd>
+            {% for lang_code in journal_languages %}
+            {% get_language_info for lang_code as lang %}
+            <dd>{{ lang.name_translated }}</dd>
             {% endfor %}
           {% endif %}
 

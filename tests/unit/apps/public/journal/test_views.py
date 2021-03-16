@@ -434,7 +434,7 @@ class TestIssueDetailSummary:
         "is_published, expected_count",
         [
             (False, 6),
-            (True, 6),
+            (True, 7),
         ],
     )
     def test_issue_publication_does_not_influence_caching(

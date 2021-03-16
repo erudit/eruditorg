@@ -13,6 +13,7 @@ from ..models import Issue
 from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
+from ..models import Language
 
 
 JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
@@ -214,7 +215,20 @@ class IssueAdmin(admin.ModelAdmin):
         return self.readonly_fields + ("is_published",)
 
 
+class JournalInformationAdminForm(forms.ModelForm):
+    class Meta:
+        model = JournalInformation
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Exclude French & English from other_languages field. These languages are set in the
+        # main_languages field.
+        self.fields["other_languages"].queryset = Language.objects.exclude(id__in=[1, 2])
+
+
 class JournalInformationAdmin(CompareVersionAdmin, TranslationAdmin):
+    form = JournalInformationAdminForm
     compare_exclude = JOURNAL_INFORMATION_COMPARE_EXCLUDE
 
 

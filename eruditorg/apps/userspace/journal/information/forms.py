@@ -32,7 +32,6 @@ class JournalInformationForm(forms.ModelForm):
     non_i18n_field_names = [
         "email",
         "subscription_email",
-        "languages",
         "phone",
         "facebook_url",
         "facebook_enable_feed",
@@ -48,7 +47,6 @@ class JournalInformationForm(forms.ModelForm):
         fields = [
             "email",
             "subscription_email",
-            "languages",
             "phone",
             "facebook_url",
             "facebook_enable_feed",
