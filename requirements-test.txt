@@ -168,7 +168,6 @@ feedparser==6.0.2
     # via -r requirements.txt
 filelock==3.0.12
     # via
-    #   tox
     #   virtualenv
 future==0.18.2
     # via
@@ -190,7 +189,6 @@ importlib-metadata==3.4.0
     # via
     #   pluggy
     #   pytest
-    #   tox
     #   virtualenv
 importlib-resources==5.1.0
     # via virtualenv
@@ -240,7 +238,6 @@ openpyxl==3.0.5
 packaging==20.9
     # via
     #   pytest
-    #   tox
 parso==0.8.1
     # via jedi
 pexpect==4.8.0
@@ -258,7 +255,6 @@ pillow==8.0.1
 pluggy==0.13.1
     # via
     #   pytest
-    #   tox
 ply==3.11
     # via
     #   -r requirements.txt
@@ -276,7 +272,6 @@ py==1.10.0
     # via
     #   pytest
     #   pytest-forked
-    #   tox
 pycparser==2.20
     # via
     #   -r requirements.txt
@@ -400,7 +395,6 @@ six==1.15.0
     #   python-dateutil
     #   rdflib
     #   structlog
-    #   tox
     #   traitlets
     #   virtualenv
 sqlparse==0.4.1
@@ -423,9 +417,6 @@ tinycss2==1.1.0
 toml==0.10.2
     # via
     #   pytest
-    #   tox
-tox==3.22.0
-    # via -r requirements-test.in
 traitlets==4.3.3
     # via ipython
 typing-extensions==3.7.4.3
@@ -437,7 +428,6 @@ urllib3==1.26.2
     #   requests
     #   sentry-sdk
 virtualenv==20.4.2
-    # via tox
 wcwidth==0.2.5
     # via prompt-toolkit
 webencodings==0.5.1

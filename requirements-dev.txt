@@ -11,6 +11,7 @@ apipkg==1.5
 appdirs==1.4.4
     # via
     #   -r requirements-test.txt
+    #   black
     #   virtualenv
 arabic-reshaper==2.1.1
     # via -r requirements-test.txt
@@ -31,6 +32,8 @@ backcall==0.2.0
     #   ipython
 beautifulsoup4==4.6.1
     # via -r requirements-test.txt
+black==20.8b1
+    # via -r requirements-dev.in
 cairocffi==1.2.0
     # via
     #   -r requirements-test.txt
@@ -52,7 +55,9 @@ chardet==3.0.4
     #   -r requirements-test.txt
     #   requests
 click==7.1.2
-    # via pip-tools
+    # via
+    #   black
+    #   pip-tools
 codecov==2.1.11
     # via -r requirements-test.txt
 colorama==0.4.4
@@ -197,7 +202,6 @@ feedparser==6.0.2
 filelock==3.0.12
     # via
     #   -r requirements-test.txt
-    #   tox
     #   virtualenv
 flake8-bugbear==20.11.1
     # via -r requirements-dev.in
@@ -227,7 +231,6 @@ importlib-metadata==3.4.0
     #   flake8
     #   pluggy
     #   pytest
-    #   tox
     #   virtualenv
 importlib-resources==5.1.0
     # via
@@ -287,6 +290,8 @@ msgpack==1.0.0
     # via
     #   -r requirements-test.txt
     #   influxdb
+mypy-extensions==0.4.3
+    # via black
 mysqlclient==2.0.1
     # via -r requirements-test.txt
 openpyxl==3.0.5
@@ -295,11 +300,12 @@ packaging==20.9
     # via
     #   -r requirements-test.txt
     #   pytest
-    #   tox
 parso==0.8.1
     # via
     #   -r requirements-test.txt
     #   jedi
+pathspec==0.8.1
+    # via black
 pexpect==4.8.0
     # via
     #   -r requirements-test.txt
@@ -322,7 +328,6 @@ pluggy==0.13.1
     # via
     #   -r requirements-test.txt
     #   pytest
-    #   tox
 ply==3.11
     # via
     #   -r requirements-test.txt
@@ -345,7 +350,6 @@ py==1.10.0
     #   -r requirements-test.txt
     #   pytest
     #   pytest-forked
-    #   tox
 pycodestyle==2.6.0
     # via flake8
 pycparser==2.20
@@ -428,6 +432,8 @@ redis==3.5.3
     #   -r requirements-test.txt
     #   django-redis
     #   redis-key-tagging
+regex==2020.11.13
+    # via black
 reportlab==3.5.56
     # via -r requirements-test.txt
 requests-toolbelt==0.9.1
@@ -478,7 +484,6 @@ six==1.15.0
     #   python-dateutil
     #   rdflib
     #   structlog
-    #   tox
     #   traitlets
     #   virtualenv
 sqlparse==0.4.1
@@ -504,17 +509,18 @@ tinycss2==1.1.0
 toml==0.10.2
     # via
     #   -r requirements-test.txt
+    #   black
     #   pytest
-    #   tox
-tox==3.22.0
-    # via -r requirements-test.txt
 traitlets==4.3.3
     # via
     #   -r requirements-test.txt
     #   ipython
+typed-ast==1.4.2
+    # via black
 typing-extensions==3.7.4.3
     # via
     #   -r requirements-test.txt
+    #   black
     #   importlib-metadata
 urllib3==1.26.2
     # via
@@ -525,7 +531,6 @@ urllib3==1.26.2
 virtualenv==20.4.2
     # via
     #   -r requirements-test.txt
-    #   tox
 wcwidth==0.2.5
     # via
     #   -r requirements-test.txt

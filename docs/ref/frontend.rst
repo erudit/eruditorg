@@ -1,33 +1,14 @@
 Développement front-end
 =======================
 
-La façon facile
----------------
-
-Pour compiler les assets de production, la façon facile est de faire:
-
-::
-
-    make assets
-
-Si on préfère se compliquer la vie, on peut continuer à lire.
-
-Configuration de Gulp
+Configuration de npm
 ---------------------
 
-1. Installer les dépendances Node au moyen de ``npm`` :
+Installer les dépendances Node au moyen de ``npm`` :
 
 ::
 
     npm install
-
-2. Configurer l'environnement Gulp
-
-À partir du fichier fourni dans le dépôt
-
-::
-
-    cp ./tools/static/.env.json.sample ./tools/static/.env.json
 
 
 Compilation des assets
@@ -87,7 +68,7 @@ Il est ensuite nécessaire de démarrer un micro serveur chargé de servir les f
 
     npm run gulp -- webpack-dev-server
 
-Enfin, il faut ajouter le paramètre suivant au fichier de configuration local ``settings_env.py`` :
+Enfin, il faut ajouter le paramètre suivant au fichier de configuration local ``.env`` :
 
 ::
 
