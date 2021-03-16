@@ -5,14 +5,12 @@ import requests
 import structlog
 
 from django.conf import settings
-from django.core.cache import caches, cache
+from django.core.cache import cache
 from django.utils.translation import get_language
 from requests.exceptions import HTTPError, ConnectionError
 from sentry_sdk import configure_scope
 
-from ..conf import settings as erudit_settings
 from erudit.cache import cache_set
-from django_redis.cache import RedisCache
 
 logger = structlog.getLogger(__name__)
 
@@ -62,16 +60,10 @@ def cache_fedora_result(method, duration=settings.LONG_TTL):
     return wrapper
 
 
-def get_datastream_file_cache() -> RedisCache:
-    return caches[erudit_settings.FEDORA_FILEBASED_CACHE_NAME]
-
-
 def get_cached_datastream_content(
     pid: str, datastream_name: str, cache_key: typing.Optional[str] = None
 ) -> bytes:
     """Given a Fedora object pid and a datastream name, returns the content of the datastream.
-
-    Note that this content can be cached in a file-based cache!
     """
     if not cache_key:
         content_key = f"erudit-fedora-file-{pid}-{datastream_name}"
