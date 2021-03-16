@@ -62,33 +62,73 @@ def cache_fedora_result(method, duration=settings.LONG_TTL):
 
 def get_cached_datastream_content(
     pid: str, datastream_name: str, cache_key: typing.Optional[str] = None
-) -> bytes:
-    """Given a Fedora object pid and a datastream name, returns the content of the datastream.
+) -> typing.Optional[bytes]:
     """
-    if not cache_key:
-        content_key = f"erudit-fedora-file-{pid}-{datastream_name}"
-    else:
-        content_key = cache_key
+    Given an object pid and a datastream name, returns the content of the datastream.
 
+    The content may be fetched from the cache, if it was previously cached, or directly from Fedora.
+
+    If the content was not already cached, it will now be cached using the optional cache key
+    argument, if provided, or with a unique generated a cache key using the object pid and the
+    datastream name.
+
+    If the content is not found (404 HTTPError), this function will return None.
+
+    If there is a client error (4xx HTTPError) other than a 404, this function will raise the
+    exception.
+
+    If there is a server error (5xx HTTPError) or if there is a ConnectionError, this function
+    will raise the exception.
+    """
+    content_key = f"erudit-fedora-file-{pid}-{datastream_name}" if not cache_key else cache_key
     content = cache.get(content_key)
 
-    if content is None:
-        try:
-            response = requests.get(
-                settings.FEDORA_ROOT + f"objects/{pid}/datastreams/{datastream_name}/content",
-            )
-            response.raise_for_status()
-            content = response.content
+    # If content is already cached, return it.
+    if content is not None:
+        return content
 
-            cache_set(
-                cache,
-                content_key,
-                content,
-                settings.FEDORA_CACHE_TIMEOUT,
-                pids=[pid],
-            )
-        except (HTTPError, ConnectionError):  # pragma: no cover
+    try:
+        # Otherwise, get the content from Fedora and cache it for future use.
+        response = requests.get(
+            settings.FEDORA_ROOT + f"objects/{pid}/datastreams/{datastream_name}/content",
+        )
+        response.raise_for_status()
+        content = response.content
+
+        cache_set(
+            cache,
+            content_key,
+            content,
+            settings.FEDORA_CACHE_TIMEOUT,
+            pids=[pid],
+        )
+        return content
+
+    except HTTPError as e:
+        # If the content is not found, return None.
+        if e.response.status_code == 404:
             with configure_scope() as scope:
-                scope.fingerprint = ["fedora-warnings"]
-                logger.warning("fedora.exception", pid=pid, datastream=datastream_name)
-    return content
+                scope.fingerprint = ["fedora.warning"]
+                logger.warning("fedora.warning", message=str(e))
+            return None
+
+        # If there is a client error, raise a HTTPError.
+        elif 400 <= e.response.status_code < 500:
+            with configure_scope() as scope:
+                scope.fingerprint = ["fedora.client-error"]
+                logger.error("fedora.client-error", message=str(e))
+            raise
+
+        # If there is a server error, raise a HTTPError.
+        elif 500 <= e.response.status_code < 600:
+            with configure_scope() as scope:
+                scope.fingerprint = ["fedora.server-error"]
+                logger.error("fedora.server-error", message=str(e))
+            raise
+
+    except ConnectionError as e:
+        # If Fedora is unreachable, raise a ConnectionError.
+        with configure_scope() as scope:
+            scope.fingerprint = ["fedora.connection-error"]
+            logger.error("fedora.connection-error", message=str(e))
+        raise

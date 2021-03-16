@@ -6,7 +6,6 @@ from requests.exceptions import HTTPError
 
 from django.conf import settings
 from eulfedora.api import ApiFacade
-from eulfedora.util import RequestFailed
 
 from .domchange import EruditArticleDomChanger, EruditPublicationDomChanger, EruditJournalDomChanger
 
@@ -111,7 +110,7 @@ class FakeResponse:
 
     def raise_for_status(self):
         if self.status_code != 200:
-            raise HTTPError
+            raise HTTPError(f"{self.status_code}: {self.url}", response=self)
 
 
 class FakeAPI(ApiFacade):
@@ -354,13 +353,11 @@ class FakeAPI(ApiFacade):
             response = FakeResponse(result, url)
             if response.status_code == 200:
                 return response
-            response.text = pid
-            if response.status_code == 404:
-                raise HTTPError
             else:
-                raise RequestFailed(response)
+                raise HTTPError(f"{response.status_code}: {url}", response=response)
         else:
-            print("WARNING: unsupported URL for fake fedora API: {}".format(url))
             response = FakeResponse(b"", url)
-            response.text = pid
-            raise HTTPError
+            raise HTTPError(
+                f"WARNING: unsupported URL for fake fedora API: {url}",
+                response=response,
+            )
