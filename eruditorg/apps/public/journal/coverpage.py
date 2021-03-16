@@ -135,7 +135,7 @@ def get_coverpage(article: Article) -> io.BytesIO:
         leftMargin=30,
         topMargin=30,
         bottomMargin=18,
-        title=PDFString(article.title, enc="raw"),
+        title=PDFString(str(article.title), enc="raw"),
         author=PDFString(article.get_formatted_authors_without_suffixes(), enc="raw"),
         creator="Érudit",
         subject="",
