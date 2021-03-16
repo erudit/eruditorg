@@ -1537,10 +1537,6 @@ class JournalInformation(models.Model):
         verbose_name=_("Fréquence de publication (numéros par année)"), blank=True, null=True
     )
 
-    languages = models.ManyToManyField(
-        verbose_name=_("Langues de publication"), blank=True, to=Language, related_name="languages"
-    )
-
     main_languages = models.CharField(
         choices=(
             ("F", _("Français")),
