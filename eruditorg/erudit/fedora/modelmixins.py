@@ -1,6 +1,7 @@
 from typing import Optional
 import io
 import requests
+import structlog
 
 from django.conf import settings
 from django.utils.functional import cached_property
@@ -8,8 +9,11 @@ from lxml import etree
 from PIL import Image
 from requests.exceptions import HTTPError, ConnectionError
 from eruditarticle.objects import EruditBaseObject
+from sentry_sdk import configure_scope
 
 from .cache import get_cached_datastream_content
+
+logger = structlog.getLogger(__name__)
 
 
 class FedoraMixin:
@@ -110,5 +114,32 @@ class FedoraMixin:
             xml = etree.fromstring(response.content)
             datastream = xml.find(f"datastream[@dsid='{datastream_name}']", namespaces=xml.nsmap)
             return datastream is not None
-        except (HTTPError, ConnectionError):
-            return False
+
+        except HTTPError as e:
+            # If the content is not found, return False.
+            if e.response.status_code == 404:
+                with configure_scope() as scope:
+                    scope.fingerprint = ["fedora.warning"]
+                    logger.warning("fedora.warning", message=str(e))
+                return False
+
+            # If there's a client error, raise a HTTPError.
+            elif 400 <= e.response.status_code < 500:
+                with configure_scope() as scope:
+                    scope.fingerprint = ["fedora.client-error"]
+                    logger.error("fedora.client-error", message=str(e))
+                raise
+
+            # If there's a server error, raise a HTTPError.
+            elif 500 <= e.response.status_code < 600:
+                with configure_scope() as scope:
+                    scope.fingerprint = ["fedora.server-error"]
+                    logger.error("fedora.server-error", message=str(e))
+                raise
+
+        except ConnectionError as e:
+            # If Fedora is unreachable, raise a ConnectionError.
+            with configure_scope() as scope:
+                scope.fingerprint = ["fedora.connection-error"]
+                logger.error("fedora.connection-error", message=str(e))
+            raise
