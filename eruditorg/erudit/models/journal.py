@@ -1538,7 +1538,25 @@ class JournalInformation(models.Model):
     )
 
     languages = models.ManyToManyField(
-        verbose_name=_("Langues de publication"), blank=True, to=Language
+        verbose_name=_("Langues de publication"), blank=True, to=Language, related_name="languages"
+    )
+
+    main_languages = models.CharField(
+        choices=(
+            ("F", _("Français")),
+            ("A", _("Anglais")),
+            ("FA", _("Français / Anglais")),
+            ("AF", _("Anglais / Français")),
+        ),
+        max_length=2,
+        verbose_name=_("Langue(s) principale(s) de publication"),
+        default="F",
+    )
+
+    other_languages = models.ManyToManyField(
+        verbose_name=_("Autre(s) langue(s) de publication"),
+        blank=True,
+        to=Language,
     )
 
     publishing_ethics = models.TextField(
