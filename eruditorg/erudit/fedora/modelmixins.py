@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional
 import io
 import requests
 
@@ -45,7 +45,7 @@ class FedoraMixin:
     def erudit_class(self):
         return self.get_erudit_class()
 
-    def get_erudit_object(self) -> Optional[Type[EruditBaseObject]]:
+    def get_erudit_object(self) -> Optional[EruditBaseObject]:
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
