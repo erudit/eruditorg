@@ -1093,13 +1093,9 @@ class TestArticleDetailView:
         assert b"barmedia/" not in response.content
 
     @unittest.mock.patch("erudit.fedora.cache.cache")
-    @unittest.mock.patch("erudit.fedora.cache.get_datastream_file_cache")
     @unittest.mock.patch("erudit.fedora.cache.get_cached_datastream_content")
-    def test_pdf_datastream_caching(
-        self, mock_get_cached_datastream_content, mock_get_datastream_file_cache, mock_cache
-    ):
+    def test_pdf_datastream_caching(self, mock_get_cached_datastream_content, mock_cache):
         mock_cache.get.return_value = None
-        mock_get_datastream_file_cache.return_value = mock_cache
         mock_get_cached_datastream_content.return_value = None
         article = ArticleFactory(
             issue__journal__open_access=True,
@@ -1122,8 +1118,8 @@ class TestArticleDetailView:
     @pytest.mark.parametrize(
         "is_published, expected_count",
         [
-            (False, 2),
-            (True, 2),
+            (False, 3),
+            (True, 3),
         ],
     )
     def test_xml_datastream_caching(self, mock_cache, is_published, expected_count):

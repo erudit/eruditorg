@@ -27,9 +27,6 @@ from eruditarticle.objects.exceptions import LiberuditarticleError
 from ..abstract_models import FedoraDated
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
-from ..fedora.objects import ArticleDigitalObject
-from ..fedora.objects import JournalDigitalObject
-from ..fedora.objects import PublicationDigitalObject
 from ..fedora.cache import cache_fedora_result
 from ..fedora.cache import get_cached_datastream_content
 from ..fedora.utils import localidentifier_from_pid
@@ -266,9 +263,6 @@ class Journal(FedoraMixin, FedoraDated):
     def get_erudit_object_datastream_name(self):
         return "PUBLICATIONS"
 
-    def get_fedora_model(self):
-        return JournalDigitalObject
-
     def get_erudit_class(self):
         return EruditJournal
 
@@ -412,7 +406,7 @@ class Journal(FedoraMixin, FedoraDated):
     @cached_property
     def has_logo(self):
         """ Returns a boolean indicating if the considered journal has a logo. """
-        return self.has_non_empty_image_datastream("logo")
+        return self.has_non_empty_image_datastream("LOGO")
 
 
 class Issue(FedoraMixin, FedoraDated):
@@ -578,9 +572,6 @@ class Issue(FedoraMixin, FedoraDated):
     def get_erudit_object_datastream_name(self):
         return "SUMMARY"
 
-    def get_fedora_model(self):
-        return PublicationDigitalObject
-
     def get_erudit_class(self):
         return EruditPublication
 
@@ -681,7 +672,7 @@ class Issue(FedoraMixin, FedoraDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
-        return self.has_non_empty_image_datastream("coverpage")
+        return self.has_non_empty_image_datastream("COVERPAGE")
 
     @property
     def prepublication_ticket(self):
@@ -987,9 +978,6 @@ class Article(FedoraMixin):
 
     def get_erudit_object_datastream_name(self):
         return "ERUDITXSD300"
-
-    def get_fedora_model(self):
-        return ArticleDigitalObject
 
     def get_erudit_class(self):
         return EruditArticle

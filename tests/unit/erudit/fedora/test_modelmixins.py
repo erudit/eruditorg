@@ -7,7 +7,6 @@ from eruditarticle.objects import EruditArticle
 
 from erudit.fedora import repository
 from erudit.fedora.modelmixins import FedoraMixin
-from erudit.fedora.objects import ArticleDigitalObject
 from erudit.test.factories import ArticleFactory, IssueFactory, JournalFactory
 
 
@@ -19,9 +18,6 @@ class DummyModel(FedoraMixin):
 
     def get_erudit_object_datastream_name(self):
         return "ERUDITXSD300"
-
-    def get_fedora_model(self):
-        return ArticleDigitalObject
 
     def get_erudit_class(self):
         return EruditArticle
@@ -40,20 +36,6 @@ class TestFedoraMixin:
         assert obj.get_full_identifier() == "erudit:erudit.ae49.ae3958.045074ar"
         assert obj.pid == "erudit:erudit.ae49.ae3958.045074ar"
 
-    def test_can_return_the_eulfedora_model(self):
-        # Setup
-        obj = DummyModel()
-        # Run & check
-        assert obj.get_fedora_model() == ArticleDigitalObject
-        assert obj.fedora_model == ArticleDigitalObject
-
-    def test_can_return_the_eulfedora_object(self):
-        # Setup
-        obj = DummyModel()
-        # Run & check
-        assert isinstance(obj.get_fedora_object(), ArticleDigitalObject)
-        assert isinstance(obj.fedora_object, ArticleDigitalObject)
-
     def test_can_return_the_erudit_class(self):
         # Setup
         obj = DummyModel()
@@ -61,56 +43,30 @@ class TestFedoraMixin:
         assert obj.get_erudit_class() == EruditArticle
         assert obj.erudit_class == EruditArticle
 
-    @unittest.mock.patch.object(ArticleDigitalObject, "erudit_xsd300")
-    @unittest.mock.patch.object(ArticleDigitalObject, "_get_datastreams")
-    def test_can_return_the_erudit_object(self, mock_ds, mock_xsd300):
+    def test_can_return_the_erudit_object(self):
         # Setup
-        mock_ds.return_value = [
-            "ERUDITXSD300",
-        ]  # noqa
-        mock_xsd300.content = unittest.mock.MagicMock()
-        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value="<article></article>")
         obj = DummyModel()
         # Run & check
-        assert isinstance(obj.get_erudit_object(), EruditArticle)
         assert isinstance(obj.erudit_object, EruditArticle)
 
     @unittest.mock.patch("erudit.fedora.cache.cache")
-    @unittest.mock.patch.object(ArticleDigitalObject, "erudit_xsd300")
-    @unittest.mock.patch.object(ArticleDigitalObject, "_get_datastreams")
-    def test_can_set_the_xml_content_in_the_cache_if_it_is_not_there_already(
-        self, mock_ds, mock_xsd300, mock_cache
-    ):
+    def test_can_set_the_xml_content_in_the_cache_if_it_is_not_there_already(self, mock_cache):
         # Setup
-        mock_ds.return_value = [
-            "ERUDITXSD300",
-        ]  # noqa
-        mock_xsd300.content = unittest.mock.MagicMock()
-        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value="<article></article>")
         mock_cache.get.return_value = None
         obj = DummyModel()
         # Run
-        dummy = obj.erudit_object, EruditArticle  # noqa
+        obj.erudit_object
         # Check
         assert mock_cache.get.call_count == 1
         assert mock_cache.set.call_count == 1
 
     @unittest.mock.patch("erudit.fedora.cache.cache")
-    @unittest.mock.patch.object(ArticleDigitalObject, "erudit_xsd300")
-    @unittest.mock.patch.object(ArticleDigitalObject, "_get_datastreams")
-    def test_can_fetch_the_xml_content_from_the_cache_if_applicable(
-        self, mock_ds, mock_xsd300, mock_cache
-    ):
+    def test_can_fetch_the_xml_content_from_the_cache_if_applicable(self, mock_cache):
         # Setup
-        mock_ds.return_value = [
-            "ERUDITXSD300",
-        ]  # noqa
-        mock_xsd300.content = unittest.mock.MagicMock()
-        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value="<article></article>")
         mock_cache.get.return_value = "<article></article>"
         obj = DummyModel()
         # Run
-        dummy = obj.erudit_object, EruditArticle  # noqa
+        obj.erudit_object
         # Check
         assert mock_cache.get.call_count == 1
         assert mock_cache.set.call_count == 0
