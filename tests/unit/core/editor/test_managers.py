@@ -27,7 +27,7 @@ class TestIssueSubmissionManager:
         archived_issue._meta.get_field("date_modified").auto_now = True
 
         # Issues recently modified, should not be returned by eminent_archival().
-        [IssueSubmissionFactory(status=status) for status in statuses]
+        IssueSubmissionFactory(status=IssueSubmission.VALID)
 
         # Issues modified three months ago (minus five days), should be returned by
         # eminent_archival() if they are validated.
@@ -39,12 +39,14 @@ class TestIssueSubmissionManager:
             issue._meta.get_field("date_modified").auto_now = True
 
         # Expected issues, which have been modified three months ago and are validated.
-        expected_eminent_archival_issues = filter(lambda i: i.status == statuses[3], old_issues)
+        expected_eminent_archival_issues = filter(
+            lambda i: i.status == IssueSubmission.VALID, old_issues
+        )
 
         eminent_archival = IssueSubmission.objects.eminent_archival()
         assert list(eminent_archival) == list(expected_eminent_archival_issues)
 
-    def test_reday_for_archival(self):
+    def test_ready_for_archival(self):
         old_dt = tz.now() - dt.timedelta(days=editor_settings.ARCHIVAL_DAY_OFFSET)
         statuses = [
             IssueSubmission.DRAFT,
@@ -61,7 +63,7 @@ class TestIssueSubmissionManager:
         archived_issue._meta.get_field("date_modified").auto_now = True
 
         # Issues recently modified, should not be returned by eminent_archival().
-        [IssueSubmissionFactory(status=status) for status in statuses]
+        IssueSubmissionFactory(status=IssueSubmission.VALID)
 
         # Issues modified three months ago, should be returned by ready_for_archival() if they are
         # validated.
@@ -73,7 +75,9 @@ class TestIssueSubmissionManager:
             issue._meta.get_field("date_modified").auto_now = True
 
         # Expected issues, which have been modified three months ago and are validated.
-        expected_ready_for_archival_issues = filter(lambda i: i.status == statuses[3], old_issues)
+        expected_ready_for_archival_issues = filter(
+            lambda i: i.status == IssueSubmission.VALID, old_issues
+        )
 
         ready_for_archival = IssueSubmission.objects.ready_for_archival()
         assert list(ready_for_archival) == list(expected_ready_for_archival_issues)
@@ -87,7 +91,7 @@ class TestIssueSubmissionManager:
         ]
 
         # Issues recently modified, should not be returned by action_needed().
-        [IssueSubmissionFactory(status=status) for status in statuses]
+        IssueSubmissionFactory(status=IssueSubmission.VALID)
 
         # Issues modified two weeks ago, should be returned by action_needed() if they are submitted
         # or in needs corrections.
