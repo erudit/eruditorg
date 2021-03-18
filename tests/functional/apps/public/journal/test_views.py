@@ -2899,6 +2899,14 @@ class TestArticleDetailView:
         for i, issn in enumerate(issn_metas):
             assert issn.decode() == expected[i]
 
+    def test_display_untitled_article_if_article_has_no_title(self):
+        article = ArticleFactory(
+            from_fixture="1023079ar",
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        assert '<span class="titre">[Article sans titre]</span>' in html
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, "logo")

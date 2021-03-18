@@ -544,7 +544,7 @@
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
       <xsl:choose>
-        <xsl:when test="normalize-space() = '&#160;'">
+        <xsl:when test="current() = '' or normalize-space() = '&#160;'">
           <xsl:text>{% trans "[Article sans titre]" %}</xsl:text>
         </xsl:when>
         <xsl:otherwise>
