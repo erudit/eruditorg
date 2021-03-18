@@ -780,6 +780,17 @@ class TestArticle:
             "<em>Inter</em>. https://doi.org/10.7202/009255ar"
         )
 
+    def test_cite_string_apa_no_space_between_issue_volume_and_number(self):
+        article = ArticleFactory(
+            from_fixture="1075385ar", issue__year="2020", issue__volume="45", issue__number="2"
+        )
+        assert (
+            article.cite_string_apa
+            == "Rousseau, C. (2020). Un numéro thématique sur la santé mentale des immigrants "
+            "et réfugiés. <em>Inter</em>, <em>45</em>(2), 11–18. "
+            "https://doi.org/10.7202/1075385ar"
+        )
+
     @pytest.mark.parametrize(
         "doi, expected_url_doi",
         (
