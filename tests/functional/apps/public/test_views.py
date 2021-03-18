@@ -72,10 +72,10 @@ class TestHomeView:
 
     def test_sitemaps(self):
         journal = JournalFactory()
-        issues = IssueFactory.create_batch(100, journal=journal)
+        issues = IssueFactory.create_batch(5, journal=journal)
         for issue in issues:
             ArticleFactory.create_batch(
-                11, issue=issue, solr_attrs={"DateAjoutIndex": "2018-09-21T20:16:50.149Z"}
+                5, issue=issue, solr_attrs={"DateAjoutIndex": "2018-09-21T20:16:50.149Z"}
             )
         url = reverse("sitemaps", kwargs={"section": "article"})
         response = Client().get(url)

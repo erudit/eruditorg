@@ -30,7 +30,7 @@ class TestEruditSearchResultsView:
     def test_can_return_erudit_documents(self):
         issue = IssueFactory.create(date_published=now())
         localidentifiers = []
-        for i in range(0, 50):
+        for i in range(0, 5):
             lid = "lid-{0}".format(i)
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid, title="foo")
@@ -38,7 +38,7 @@ class TestEruditSearchResultsView:
         url = reverse("public:search:results")
         response = Client().get(url, data={"basic_search_term": "foo"})
         results = response.context["results"]
-        assert results["pagination"]["count"] == 50
+        assert results["pagination"]["count"] == 5
 
     def test_can_return_erudit_documents_not_in_database(self, solr_client):
         doc = SolrDocumentFactory(title="foo")
