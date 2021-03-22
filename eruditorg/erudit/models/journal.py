@@ -3,8 +3,10 @@ import dateutil.relativedelta as dr
 import lxml.etree as et
 from collections import OrderedDict
 from hashlib import md5
+from io import BytesIO
 from functools import wraps
 import structlog
+import pikepdf
 import fitz
 import typing
 import re
@@ -1254,11 +1256,15 @@ class Article(FedoraMixin):
 
     @cached_property
     def can_display_first_pdf_page(self):
-        if self.has_pdf:
-            pdf = fitz.Document(stream=self.pdf, filetype="pdf")
-            return len(pdf) > 1
-        else:
+        if not self.has_pdf:
             return False
+        try:
+            with fitz.Document(stream=self.pdf, filetype="pdf") as pdf:
+                return len(pdf) > 1
+        except RuntimeError:
+            logger.error("RuntimeError in fitz", exc_info=True)
+            with pikepdf.open(BytesIO(self.pdf)) as pdf:
+                return len(pdf.pages) > 1
 
     @property
     @catch_and_log

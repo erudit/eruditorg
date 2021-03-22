@@ -124,7 +124,7 @@ aboriginal_chars = TTFont(
 arabic_chars = TTFont("Amiri", FONTS_DIR + "/Amiri/Amiri-Regular.ttf").face.charWidths
 
 
-def get_coverpage(article: Article) -> io.BytesIO:
+def get_coverpage(article: Article) -> bytes:
     pdf_buffer = io.BytesIO()
 
     template = SimpleDocTemplate(
@@ -638,7 +638,7 @@ def get_coverpage(article: Article) -> io.BytesIO:
     # BUILD COVERPAGE
 
     template.build(story, onFirstPage=footer_content)
-    return pdf_buffer
+    return pdf_buffer.getvalue()
 
 
 def get_stylesheet(language):

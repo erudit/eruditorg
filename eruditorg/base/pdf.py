@@ -15,41 +15,43 @@ mimetypes.add_type("font/ttf", ".ttf")
 mimetypes.add_type("image/svg+xml", ".svg")
 
 
-def add_coverpage_to_pdf(coverpage: BytesIO, content: bytes) -> bytes:
+def add_coverpage_to_pdf(coverpage: bytes, content: bytes) -> bytes:
     """Add the coverpage to the PDF
 
     Return the resulting PDF bytes"""
-    content = BytesIO(content)
     try:
-        coverpage_pdf = fitz.Document(stream=coverpage, filetype="pdf")
-        content_pdf = fitz.Document(stream=content, filetype="pdf")
-        coverpage_pdf.insertPDF(content_pdf)
-        return coverpage_pdf.write()
+        with fitz.Document(stream=coverpage, filetype="pdf") as coverpage_pdf, fitz.Document(
+            stream=content, filetype="pdf"
+        ) as content_pdf:
+            coverpage_pdf.insertPDF(content_pdf)
+            doc = coverpage_pdf.write()
+            return doc
+
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
-        coverpage.seek(0)
-        content.seek(0)
         output = BytesIO()
-        coverpage_pdf = pikepdf.open(coverpage)
-        content_pdf = pikepdf.open(content)
-        coverpage_pdf.pages.extend(content_pdf.pages)
-        coverpage_pdf.save(output)
-        output.seek(0)
-        return output.read()
+        with pikepdf.open(BytesIO(coverpage)) as coverpage_pdf, pikepdf.open(
+            BytesIO(content)
+        ) as content_pdf:
+            coverpage_pdf.pages.extend(content_pdf.pages)
+            coverpage_pdf.save(output)
+        return output.getvalue()
 
 
 def get_pdf_first_page(content: bytes) -> bytes:
     """Return the first page of the PDF"""
     try:
-        doc = fitz.Document(stream=content, filetype="pdf")
-        first_page = fitz.Document()
-        first_page.insertPDF(doc, to_page=0)
-        return first_page.write()
+        with fitz.Document() as first_page, fitz.Document(
+            stream=content, filetype="pdf"
+        ) as content_pdf:
+            first_page.insertPDF(content_pdf, to_page=0)
+            doc = first_page.write()
+            return doc
+
     except RuntimeError:
         logger.error("RuntimeError in fitz", exc_info=True)
         output = BytesIO()
-        pdf = pikepdf.open(content)
-        del pdf.pages[1:]
-        pdf.save(output)
-        output.seek(0)
-        return output.read()
+        with pikepdf.open(BytesIO(content)) as pdf:
+            del pdf.pages[1:]
+            pdf.save(output)
+        return output.getvalue()
