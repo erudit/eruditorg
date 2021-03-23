@@ -72,10 +72,7 @@ def get_cached_datastream_content(
     argument, if provided, or with a unique generated a cache key using the object pid and the
     datastream name.
 
-    If the content is not found (404 HTTPError), this function will return None.
-
-    If there is a client error (4xx HTTPError) other than a 404, this function will raise the
-    exception.
+    If there is a client error (4xx HTTPError), this function will return None.
 
     If there is a server error (5xx HTTPError) or if there is a ConnectionError, this function
     will raise the exception.
@@ -105,19 +102,12 @@ def get_cached_datastream_content(
         return content
 
     except HTTPError as e:
-        # If the content is not found, return None.
-        if e.response.status_code == 404:
+        # If there is a client error, return None.
+        if 400 <= e.response.status_code < 500:
             with configure_scope() as scope:
                 scope.fingerprint = ["fedora.warning"]
                 logger.warning("fedora.warning", message=str(e))
             return None
-
-        # If there is a client error, raise a HTTPError.
-        elif 400 <= e.response.status_code < 500:
-            with configure_scope() as scope:
-                scope.fingerprint = ["fedora.client-error"]
-                logger.error("fedora.client-error", message=str(e))
-            raise
 
         # If there is a server error, raise a HTTPError.
         elif 500 <= e.response.status_code < 600:
