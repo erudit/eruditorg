@@ -116,19 +116,12 @@ class FedoraMixin:
             return datastream is not None
 
         except HTTPError as e:
-            # If the content is not found, return False.
-            if e.response.status_code == 404:
+            # If there's a client error, return False
+            if 400 <= e.response.status_code < 500:
                 with configure_scope() as scope:
                     scope.fingerprint = ["fedora.warning"]
                     logger.warning("fedora.warning", message=str(e))
                 return False
-
-            # If there's a client error, raise a HTTPError.
-            elif 400 <= e.response.status_code < 500:
-                with configure_scope() as scope:
-                    scope.fingerprint = ["fedora.client-error"]
-                    logger.error("fedora.client-error", message=str(e))
-                raise
 
             # If there's a server error, raise a HTTPError.
             elif 500 <= e.response.status_code < 600:
