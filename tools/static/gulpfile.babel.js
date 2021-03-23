@@ -122,6 +122,10 @@ var webpackConfig = {
       js_dir + '/issue_submission.js',
       sass_dir + '/issue_submission.scss',
     ],
+    library_stats: [
+      js_dir + '/library_stats.js',
+      sass_dir + '/library_stats.scss',
+    ],
   },
   output: {
     filename: 'js/[name].js',
@@ -316,9 +320,11 @@ gulp.task('webpack-dev-server', function(callback) {
       js_dir + '/issue_submission.js',
       js_dir + '/journal_info.js',
       js_dir + '/library_connection.js',
+      js_dir + '/library_stats.js',
       js_dir + '/userspace.js',
       sass_dir + '/authorizations.scss',
       sass_dir + '/issue_submission.scss',
+      sass_dir + '/library_stats.scss',
       sass_dir + '/userspace.scss',
       'webpack-dev-server/client?' + WEBPACK_URL,
       'webpack/hot/only-dev-server',

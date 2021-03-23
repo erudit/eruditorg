@@ -88,6 +88,8 @@ env = environ.Env(
     WEBPACK_DEV_SERVER_URL=(str, ""),
     BOOKS_UPDATE_EMAILS=(list, []),
     CSRF_FAILURE_VIEW=(str, "apps.public.views.forbidden_view"),
+    COUNTER_R5_FIRST_AVAILABLE_MONTH=(str, "2017-05-01"),
+    COUNTER_R5_AVAILABLE_AFTER=(int, 28),
 )
 environ.Env.read_env(str(ROOT_DIR / ".env"))
 
@@ -552,6 +554,11 @@ REDIS_INDEX = env("REDIS_INDEX")
 ELASTICSEARCH_STATS_INDEX = env("ELASTICSEARCH_STATS_INDEX")
 ELASTICSEARCH_STATS_HOST = env("ELASTICSEARCH_STATS_HOST")
 ELASTICSEARCH_STATS_PORT = env("ELASTICSEARCH_STATS_PORT")
+# number of days after which last month's data is available as a counter R5 report
+COUNTER_R5_AVAILABLE_AFTER = env("COUNTER_R5_AVAILABLE_AFTER")
+# First month for which counter R5 data is available
+COUNTER_R5_FIRST_AVAILABLE_MONTH = env("COUNTER_R5_FIRST_AVAILABLE_MONTH")
+
 SESSION_ENGINE = env("SESSION_ENGINE")
 
 # Help for lazyloading issue coverpages.

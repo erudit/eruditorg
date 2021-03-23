@@ -9,11 +9,17 @@ class TargetSite(models.Model):
     Target site where to display site messages.
     """
 
-    TARGET_SITE_PUBLIC, TARGET_SITE_LIBRARY, TARGET_SITE_JOURNAL = "P", "L", "J"
+    TARGET_SITE_PUBLIC, TARGET_SITE_LIBRARY, TARGET_SITE_JOURNAL, TARGET_SITE_LIBRARY_STATISTICS = (
+        "P",
+        "L",
+        "J",
+        "S",
+    )
     TARGET_SITE_CHOICES = (
         (TARGET_SITE_PUBLIC, _("Public")),
-        (TARGET_SITE_LIBRARY, _("Tableau de bord des bibliothèques")),
         (TARGET_SITE_JOURNAL, _("Tableau de bord des revues")),
+        (TARGET_SITE_LIBRARY, _("Tableau de bord des bibliothèques")),
+        (TARGET_SITE_LIBRARY_STATISTICS, _("Tableau de bord des bibliothèques - Consultations")),
     )
     site = models.CharField(
         verbose_name=_("Site cible"),

@@ -4,39 +4,27 @@
   <ul class="nav-tabs" role="tablist">
   {% for form in forms %}
     <li role="presentation" class="{% if active_form.prefix == form.prefix %}active{% endif %}">
-      <a href="#{{ form.prefix }}" aria-controls="{{ form.prefix }}" role="tab" data-toggle="tab">{{ form.form_info.tab_label }} ({{ form.release }})</a></li>
+      <a href="#{{ form.prefix }}" aria-controls="{{ form.prefix }}" role="tab" data-toggle="tab">{{ form.tab_label }} ({{ form.counter_release }})</a></li>
   {% endfor %}
   </ul>
 
   <div class="tab-content">
   {% for form in forms %}
     <section role="tabpanel" class="tab-pane{% if active_form.prefix == form.prefix %} active{% endif %}" id="{{ form.prefix }}">
-      <h2>{% trans "COUNTER" %} {{ form.form_info.counter_release }} <br> {{ form.form_info.title }}</h2>
+      <h2>{% trans "COUNTER" %} {{ form.counter_release }} <br> {{ form.title }}</h2>
       <div class="row">
         <div class="col-md-7">
-          <p>{{ form.form_info.description }}</p>
+          <p>{{ form.description }}</p>
         </div>
       </div>
       {% for error in form.errors.values %}
       {{ error }}
       {% endfor %}
-      <form method="get">
+      <form method="get" class="counter">
         {{ form.report_type }}
+        {{ form.period_type }}
 
-        <fieldset>
-          <h3>
-            {% trans "Période" %}
-          </h3>
-
-          <div class="row form-group">
-            <div class="col-xs-6 col-md-4">
-              <label for="{{ form.year.auto_id }}">{% trans "Par année" %}</label>
-              {{ form.year }}
-            </div>
-          </div>
-
-          <div class="separator"><strong>{% trans "ou" %}</strong></div>
-
+        <fieldset class="period" id="{{ form.prefix }}-monthly">
           <div class="row form-group">
             <div class="col-sm-3 col-md-4">
               <h4>{% trans "Début" %}</h4>
@@ -73,6 +61,16 @@
             </div>
           </div>
         </fieldset>
+
+        <fieldset class="period" id="{{ form.prefix }}-annual" style="display: none;">
+          <div class="row form-group">
+            <div class="col-xs-6 col-md-4">
+              <label for="{{ form.year.auto_id }}">{% trans "Année" %}</label>
+              {{ form.year }}
+            </div>
+          </div>
+        </fieldset>
+
         {% if form.format %}
         <fieldset>
           <h3>{% trans "Format" %}</h3>
@@ -85,7 +83,7 @@
         </fieldset>
         {% endif %}
 
-        <button id="submit-id-submit" class="btn btn-primary" name="{{ form.form_info.submit_name }}" type="submit">{% trans 'Télécharger' %}</button>
+        <button id="{{ form.prefix }}-submit" class="btn btn-primary" name="{{ form.submit_name }}" type="submit">{% trans 'Télécharger' %}</button>
       </form>
 
     </section>

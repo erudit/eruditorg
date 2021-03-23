@@ -62,7 +62,7 @@ codecov==2.1.11
     # via -r requirements-test.txt
 colorama==0.4.4
     # via -r requirements-test.txt
-counter-r5-elasticsearch==0.11
+counter-r5-elasticsearch==0.17
     # via -r requirements-test.txt
 coverage==5.4
     # via
@@ -173,7 +173,7 @@ django==3.0.13
     #   django-reversion-compare
     #   django-taggit
     #   jsonfield
-elasticsearch==7.10.0
+elasticsearch==7.11.0
     # via
     #   -r requirements-test.txt
     #   counter-r5-elasticsearch

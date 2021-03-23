@@ -1,3 +1,4 @@
+import datetime as dt
 import pytest
 
 from django.test.client import Client
@@ -5,11 +6,12 @@ from django.urls import reverse
 
 from apps.userspace.library.stats.forms import (
     CounterJR1Form,
-    StatsFormInfo,
+    DatesRange,
 )
+
 from apps.userspace.library.stats.views import (
     get_stats_form,
-    compute_end_year,
+    compute_r4_end_month,
 )
 from erudit.test.factories import OrganisationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -45,35 +47,33 @@ class TestLibraryUserspaceViews:
 
 class TestGetStatsForm:
     def test_can_bind_form_if_submitted(self):
-        form_info = StatsFormInfo(
-            form_class=CounterJR1Form,
-            code="formcode",
-            tab_label="",
-            title="",
-            description="",
-            counter_release="R4",
+        """If counter report form was submitted, then get_stats_form should bind it with the request
+        data."""
+        form, is_submitted = get_stats_form(
+            CounterJR1Form,
+            {CounterJR1Form.submit_name(): ""},
+            DatesRange(dt.date(2019, 1, 1), dt.date(2019, 12, 1)),
         )
-        form, is_submitted = get_stats_form(form_info, {form_info.submit_name: ""}, 2019)
         assert form.is_bound
         assert is_submitted
 
     def test_wont_bind_form_if_not_submitted(self):
-        form_info = StatsFormInfo(
-            form_class=CounterJR1Form,
-            code="formcode",
-            tab_label="",
-            title="",
-            description="",
-            counter_release="R4",
+        """If counter report form wasn't submitted, then get_stats_form shouldn't bind it. """
+        form, is_submitted = get_stats_form(
+            CounterJR1Form, {"year": "2019"}, DatesRange(dt.date(2019, 1, 1), dt.date(2019, 12, 1))
         )
-        form, is_submitted = get_stats_form(form_info, {"year": "2019"}, 2019)
         assert not form.is_bound
         assert not is_submitted
 
 
 @pytest.mark.parametrize(
-    "current_year,last_sub_year,expected",
-    ((2019, None, 2019), (2019, 2018, 2018), (2019, 2020, 2019)),
+    "now,last_sub_year,expected",
+    (
+        (dt.date(2019, 1, 1), None, dt.date(2018, 12, 1)),
+        (dt.date(2019, 1, 1), 2018, dt.date(2018, 12, 1)),
+        (dt.date(2019, 1, 1), 2020, dt.date(2018, 12, 1)),
+        (dt.date(2019, 5, 1), 2020, dt.date(2019, 4, 1)),
+    ),
 )
-def test_compute_end_year(current_year, last_sub_year, expected):
-    assert compute_end_year(current_year, last_sub_year) == expected
+def test_compute_end_month(now, last_sub_year, expected):
+    assert compute_r4_end_month(now, last_sub_year) == expected

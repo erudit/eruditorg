@@ -1,7 +1,24 @@
 {% extends "userspace/library/base.html" %}
-{% load i18n waffle_tags %}
+{% load i18n static waffle_tags %}
 
 {% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/library_stats.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
+
+{% block scripts %}
+{{ block.super }}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<script src="{% static 'js/library_stats.js' %}"></script>
+{% endif %}
+{% endblock scripts %}
+
+{% block body_id %}statistics{% endblock body_id %}
+{% block data_controller %}userspace:library:stats:landing{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
 <li xmlns="https://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
@@ -12,24 +29,49 @@
 {% endblock %}
 
 {% block section_intro %}
+{% if library_statistics_site_messages %}
+<div class="site-messages userspace">
+  {% for site_message in library_statistics_site_messages %}
+  <div id="site-message-{{ site_message.id }}" class="alert alert-dismissible site-message-{{ site_message.level.lower }}">
+    <p>
+      {{ site_message.message|safe }}
+    </p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  </div>
+ {% endfor %}
+</div>
+{% endif %}
 {% blocktrans %}
-<p>Cette section vous donne accès aux statistiques de consultation de votre établissement pour les différentes revues souscrites. Les rapports disponibles respectent la norme COUNTER (R4), et nous mettons à votre disposition les rapports JR1 et JR1 GOA, aux formats CSV, XML ou HTML, par année d’abonnement ou pour la période de votre choix.</p>
+<p>Cette section vous donne accès aux statistiques de consultation de votre
+  établissement pour les différentes revues souscrites. Les rapports disponibles
+  respectent la norme COUNTER (R4), et nous mettons à votre disposition les
+  rapports JR1 et JR1 GOA, aux formats CSV, XML ou HTML, par année d’abonnement
+  ou pour la période de votre choix.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
 {% block section_aside %}
 {% blocktrans %}
-<p>Notez que les revues du fonds <strong>Centre for Digital Scholarship</strong> ne sont pas incluses dans ces rapports, car elles ne sont pas hébergées sur nos serveurs&nbsp;; il nous est impossible de compiler ces statistiques de consultation.</p>
-<p>Consultez <a href="https://www.erudit.org/fr/revues/?collections=unb" target="_blank" title="Voir la liste des revues Centre for Digital Scholarship">la liste des titres concernés ici</a>.</p>
+<p>Notez que les revues du fonds <strong>Centre for Digital Scholarship</strong>
+  ne sont pas incluses dans ces rapports, car elles ne sont pas hébergées sur
+  nos serveurs&nbsp;; il nous est impossible de compiler ces statistiques de
+  consultation.</p>
+<p>Consultez <a href="https://www.erudit.org/fr/revues/?collections=unb"
+                target="_blank" title="Voir la liste des revues Centre for Digital Scholarship">
+  la liste des titres concernés ici</a>.
+</p>
 {% endblocktrans %}
 {% endblock %}
 
 {% block content_main %}
 {% if last_valid_subscription %}
     {% flag "CounterR5" %}
-        {% include "userspace/library/stats/stats_forms_partial.html" with active_form=releases.R5.active_form forms=releases.R5.forms only %}
+        {% with forms=forms.R5|add:forms.R4 %}
+            {% include "userspace/library/stats/stats_forms_partial.html" with active_form=submitted_form|default:forms.0 forms=forms only %}
+        {% endwith %}
+    {% else %}
+        {% include "userspace/library/stats/stats_forms_partial.html" with active_form=submitted_form|default:forms.R4.0 forms=forms.R4 only %}
     {% endflag %}
-   {% include "userspace/library/stats/stats_forms_partial.html" with active_form=releases.R4.active_form forms=releases.R4.forms only %}
 {% else %}
 <section>
   <div class="glory">

@@ -53,3 +53,8 @@ class SiteMessageManager(Manager):
         from .models import TargetSite
 
         return self.active().filter(target_sites__site=TargetSite.TARGET_SITE_LIBRARY)
+
+    def library_statistics(self):
+        from .models import TargetSite
+
+        return self.active().filter(target_sites__site=TargetSite.TARGET_SITE_LIBRARY_STATISTICS)
