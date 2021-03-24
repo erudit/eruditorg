@@ -63,4 +63,4 @@ python-bidi>=0.4
 structlog-sentry>=1.2
 gunicorn>=20.0.0
 whitenoise>=5.0.0
-counter-r5-elasticsearch==0.17
+counter-r5-elasticsearch==0.18
