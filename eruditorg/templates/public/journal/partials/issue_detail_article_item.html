@@ -15,10 +15,10 @@
       </a>
     </li>
     {% endswitch %}
-    {% if article.pdf_url %}
+    {% if article.urlpdf %}
     <li>
       <a class="tool-btn"
-         href="{{ article.pdf_url }}{% if not article.issue.is_published and ticket %}?ticket={{ticket}}{% endif %}"
+         href="{% url 'public:journal:article_raw_pdf' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
          title="{% trans 'Télécharger' %}"
          target="_blank">
         <span class="toolbox-pdf">PDF</span>
@@ -27,7 +27,7 @@
     {% endif %}
     {% if article.processing == 'C' %}
     <li>
-      <a class="tool-btn" href="{{ article.get_absolute_url }}{% if ticket %}?ticket={{ticket}}{% endif %}" {% if article.is_external %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+      <a class="tool-btn" href="{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
         <span class="toolbox-html">HTML</span>
       </a>
     </li>
@@ -42,8 +42,8 @@
     {% endif %}
     {% spaceless %}
 
-    <a href="{{ article.get_absolute_url }}{% if not article.issue.is_published and ticket %}?ticket={{ticket}}{% endif %}"
-    {% if article.is_external %}target="_blank"{% endif %}
+    <a href="{% if not article.has_external_url %}{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% else %}/{{ LANGUAGE_CODE }}{% if article.urlhtml %}{{ article.urlhtml }}{% else %}{{ article.urlpdf }}{% endif %}{% endif %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
+    {% if article.has_external_url %}target="_blank"{% endif %}
     title="{% blocktrans %}Lire l'article{% endblocktrans %}">
     {{ article.html_title|safe }}
     </a>
