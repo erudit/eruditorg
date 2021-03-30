@@ -472,6 +472,24 @@ class TestJournalDetailView:
             assert "Note pour journal" not in html
             assert "Note pour previous_journal" in html
 
+    @pytest.mark.parametrize(
+        "issue_count, expected_string",
+        (
+            (1, "numéro"),
+            (2, "numéros"),
+        ),
+    )
+    def test_pluralizarion_of_issue_count(self, issue_count, expected_string):
+        journal = JournalFactory()
+        IssueFactory.create_batch(journal=journal, size=issue_count)
+        html = Client().get(journal_detail_url(journal)).content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        h2 = dom.find("section", {"id": "back-issues-section"}).find("h2")
+        assert (
+            h2.decode() == "<h2>\n        \n        "
+            f"Historique de la revue ({issue_count}\xa0{expected_string})\n        \n      </h2>"
+        )
+
 
 class TestJournalAuthorsListView:
     def test_provides_only_authors_for_the_first_available_letter_by_default(self):
@@ -916,6 +934,24 @@ class TestIssueDetailView:
         assert (
             '<p><a href="http://creativecommons.org/licenses/by-nc-sa/'
             '3.0/deed.fr_CA" target="_blank">' in html
+        )
+
+    @pytest.mark.parametrize(
+        "article_count, expected_string",
+        (
+            (1, "article"),
+            (2, "articles"),
+        ),
+    )
+    def test_pluralizarion_of_article_count(self, article_count, expected_string):
+        issue = IssueFactory()
+        ArticleFactory.create_batch(issue=issue, size=article_count)
+        html = Client().get(issue_detail_url(issue)).content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        h2 = dom.find("header", {"class": "main-header"}).find("h2")
+        assert (
+            h2.decode() == '<h2 class="toc__title">\n      \n      '
+            f"Sommaire ({article_count}\xa0{expected_string})\n      \n    </h2>"
         )
 
 

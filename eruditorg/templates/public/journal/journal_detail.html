@@ -203,7 +203,13 @@
     {% cache LONG_TTL "public_journal_detail_back_issues" journal.code content_access_granted free_access_cache_key LANGUAGE_CODE journal.fedora_updated %}
     {% if issues %}
     <section role="tabpanel" class="tab-pane" id="back-issues-section">
-      <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
+      <h2>
+        {% blocktrans count counter=issues|length %}
+        Historique de la revue (1&nbsp;numéro)
+        {% plural %}
+        Historique de la revue ({{ counter }}&nbsp;numéros)
+        {% endblocktrans %}
+      </h2>
       {% if journal.collection.code == 'erudit' %}
       <div class="alert alert-info">
         <p><i class="icon ion-ios-information-circle alert-info-icon"></i>
