@@ -187,7 +187,11 @@
     </div>
     {% endif %}
     <h2 class="toc__title">
-      {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})
+      {% blocktrans count counter=articles|length %}
+      Sommaire (1&nbsp;article)
+      {% plural %}
+      Sommaire ({{ counter }}&nbsp;articles)
+      {% endblocktrans %}
     </h2>
     {% if issue.is_external %}
     <div class="alert alert-info">
