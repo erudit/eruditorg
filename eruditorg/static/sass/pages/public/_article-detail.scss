@@ -290,6 +290,7 @@ $article-toolbar-width: 80px;
     p, li {
       font-size: 14px;
       line-height: 1.45;
+      word-break: break-word;
     }
 
     li:not([class]), li:not([class]) > p {
