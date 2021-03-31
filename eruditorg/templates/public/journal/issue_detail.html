@@ -108,7 +108,14 @@
 {% trans "inconnu" as i18n_unknown %}
 <div id="id_articles_saved_citation_list_metadata">
   {% for article in articles %}
-  <div id="article-{{ article.localidentifier }}" data-document-id="{{ article.solr_id }}" {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}></div>
+  {% if issue.journal.collection.code == "unb" %}
+  {# To be removed when we get rid of the UNB collection. #}
+  {% with solr_id="unb:"|add:article.localidentifier %}
+  <div id="article-{{ article.localidentifier }}" data-document-id="{{ solr_id }}" {% if solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}></div>
+  {% endwith %}
+  {% else %}
+  <div id="article-{{ article.localidentifier }}" data-document-id="{{ article.localidentifier }}" {% if article.localidentifier in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}></div>
+  {% endif %}
   {% endfor %}
 </div>
 
