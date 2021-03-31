@@ -75,8 +75,9 @@ def get_r4_report_response(form: CounterR4Form, organisation: Organisation) -> H
         "id": organisation.account_id,
         "beginPeriod": dstart.strftime("%Y-%m-%d"),
         "endPeriod": dend.strftime("%Y-%m-%d"),
-        "isGoldOpenAccess": form.is_gold_open_access,
     }
+    if form.is_gold_open_access:
+        report_arguments["isGoldOpenAccess"] = True
     # by default, the format is CSV
     report_format = report_arguments["format"]
     url = settings.ERUDIT_COUNTER_BACKEND_URL
