@@ -20,9 +20,9 @@ from erudit.test.factories import (
 )
 from erudit.fedora import repository
 from eruditarticle.objects.article import EruditArticle
+from eruditarticle.objects.publication import SummaryArticle
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.models import Article, Issue
-from erudit.test.domchange import SectionTitle
 from erudit.test.solr import FakeSolrData
 from apps.public.journal.views import (
     JournalDetailView,
@@ -199,12 +199,54 @@ class TestJournalAuthorsListView:
 
 
 class TestIssueDetailSummary:
-    def test_generate_sections_tree_with_scope_surtitre(self):
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_generate_sections_tree_with_scope_surtitre(self, mock_get_summary_articles):
+        """Tests that a notegen with a surtitre scope is only be displayed on the first level on
+        the section tree.
+        """
         view = IssueDetailView()
-        article_1 = ArticleFactory(from_fixture="1059644ar")
-        article_2 = ArticleFactory(from_fixture="1059645ar")
-        article_3 = ArticleFactory(from_fixture="1059646ar")
-        sections_tree = view.generate_sections_tree([article_1, article_2, article_3])
+        article_1 = SummaryArticle(
+            localidentifier="article1",
+            processing="complet",
+            section_title_1={
+                "main": "La recherche qualitative aujourd’hui. 30 ans de diffusion et de "
+                "réflexion",
+                "paral": {},
+            },
+            section_title_2={"main": "Introduction", "paral": {}},
+            notegens=[
+                {
+                    "content": [
+                        "Sous la direction de Frédéric Deschenaux, Chantal Royer et Colette "
+                        "Baribeau",
+                    ],
+                    "scope": "surtitre",
+                    "type": "edito",
+                }
+            ],
+        )
+        article_2 = SummaryArticle(
+            localidentifier="article2",
+            processing="complet",
+            section_title_1={
+                "main": "La recherche qualitative aujourd’hui. 30 ans de diffusion et de "
+                "réflexion",
+                "paral": {},
+            },
+        )
+        article_3 = SummaryArticle(
+            localidentifier="article3",
+            processing="complet",
+            section_title_1={
+                "main": "La recherche qualitative aujourd’hui. 30 ans de diffusion et de "
+                "réflexion",
+                "paral": {},
+            },
+        )
+        mock_get_summary_articles.return_value = [article_1, article_2, article_3]
+        issue = IssueFactory()
+        articles = issue.erudit_object.get_summary_articles()
+        sections_tree = view.generate_sections_tree(articles[:3])
         assert sections_tree == {
             "level": 0,
             "type": "subsection",
@@ -252,12 +294,29 @@ class TestIssueDetailSummary:
             ],
         }
 
-    def test_can_generate_section_tree_with_contiguous_articles(self):
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_can_generate_section_tree_with_contiguous_articles(self, mock_get_summary_articles):
+        """Tests that contiguous articles, that is consecutive articles at the same level, are
+        grouped together on the section tree.
+        """
         view = IssueDetailView()
-        article_1 = ArticleFactory()
-        article_2 = ArticleFactory()
-        article_3 = ArticleFactory(section_titles=[SectionTitle(1, False, "section 1")])
-        sections_tree = view.generate_sections_tree([article_1, article_2, article_3])
+        article_1 = SummaryArticle(
+            localidentifier="article1",
+            processing="complet",
+        )
+        article_2 = SummaryArticle(
+            localidentifier="article2",
+            processing="complet",
+        )
+        article_3 = SummaryArticle(
+            localidentifier="article3",
+            processing="complet",
+            section_title_1={"main": "section 1", "paral": {}},
+        )
+        mock_get_summary_articles.return_value = [article_1, article_2, article_3]
+        issue = IssueFactory()
+        articles = issue.erudit_object.get_summary_articles()
+        sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
             "titles": {"paral": None, "main": None},
             "level": 0,
@@ -274,17 +333,23 @@ class TestIssueDetailSummary:
             "type": "subsection",
         }
 
-    def test_can_generate_section_tree_with_three_levels(self):
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_can_generate_section_tree_with_three_levels(self, mock_get_summary_articles):
+        """Tests that an article with three levels of section titles is displayed in the third
+        level on the section tree.
+        """
         view = IssueDetailView()
-        article = ArticleFactory(
-            section_titles=[
-                SectionTitle(1, False, "section 1"),
-                SectionTitle(2, False, "section 2"),
-                SectionTitle(3, False, "section 3"),
-            ]
+        article = SummaryArticle(
+            localidentifier="article3",
+            processing="complet",
+            section_title_1={"main": "section 1", "paral": {}},
+            section_title_2={"main": "section 2", "paral": {}},
+            section_title_3={"main": "section 3", "paral": {}},
         )
-
-        sections_tree = view.generate_sections_tree([article])
+        mock_get_summary_articles.return_value = [article]
+        issue = IssueFactory()
+        articles = issue.erudit_object.get_summary_articles()
+        sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
             "type": "subsection",
             "level": 0,
@@ -318,19 +383,34 @@ class TestIssueDetailSummary:
             ],
         }
 
-    def test_can_generate_section_tree_with_non_contiguous_articles(self):
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_can_generate_section_tree_with_non_contiguous_articles(
+        self, mock_get_summary_articles
+    ):
+        """Tests that non contiguous articles, that is consecutive articles at different levels,
+        are on different levels on the section tree.
+        """
         view = IssueDetailView()
-        articles = [
-            ArticleFactory(section_titles=[SectionTitle(1, False, "section 1")]),
-            ArticleFactory(
-                section_titles=[
-                    SectionTitle(1, False, "section 1"),
-                    SectionTitle(2, False, "section 1.1"),
-                ]
+        mock_get_summary_articles.return_value = [
+            SummaryArticle(
+                localidentifier="article1",
+                processing="complet",
+                section_title_1={"main": "section 1", "paral": {}},
             ),
-            ArticleFactory(section_titles=[SectionTitle(1, False, "section 1")]),
+            SummaryArticle(
+                localidentifier="article2",
+                processing="complet",
+                section_title_1={"main": "section 1", "paral": {}},
+                section_title_2={"main": "section 1.1", "paral": {}},
+            ),
+            SummaryArticle(
+                localidentifier="article3",
+                processing="complet",
+                section_title_1={"main": "section 1", "paral": {}},
+            ),
         ]
-
+        issue = IssueFactory()
+        articles = issue.erudit_object.get_summary_articles()
         sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
             "type": "subsection",
@@ -361,27 +441,29 @@ class TestIssueDetailSummary:
             ],
         }
 
-    def test_can_generate_section_tree_with_notegens(self):
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_can_generate_section_tree_with_notegens(self, mock_get_summary_articles):
+        """Tests that notegens with different scopes are displayed at the right level on the
+        section tree.
+        """
         view = IssueDetailView()
-        articles = [
-            ArticleFactory(
-                section_titles=[
-                    SectionTitle(1, False, "Section 1"),
-                ],
-                notegens=[
-                    {"content": "Note surtitre", "scope": "surtitre", "type": "edito"},
-                ],
+        mock_get_summary_articles.return_value = [
+            SummaryArticle(
+                localidentifier="article1",
+                processing="complet",
+                section_title_1={"main": "Section 1", "paral": {}},
+                notegens=[{"content": ["Note surtitre"], "scope": "surtitre", "type": "edito"}],
             ),
-            ArticleFactory(
-                section_titles=[
-                    SectionTitle(1, False, "Section 1"),
-                    SectionTitle(2, False, "Section 2"),
-                ],
-                notegens=[
-                    {"content": "Note surtitre2", "scope": "surtitre2", "type": "edito"},
-                ],
+            SummaryArticle(
+                localidentifier="article2",
+                processing="complet",
+                section_title_1={"main": "Section 1", "paral": {}},
+                section_title_2={"main": "Section 2", "paral": {}},
+                notegens=[{"content": ["Note surtitre2"], "scope": "surtitre2", "type": "edito"}],
             ),
         ]
+        issue = IssueFactory()
+        articles = issue.erudit_object.get_summary_articles()
         sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
             "level": 0,
@@ -433,8 +515,8 @@ class TestIssueDetailSummary:
     @pytest.mark.parametrize(
         "is_published, expected_count",
         [
-            (False, 6),
-            (True, 7),
+            (False, 4),
+            (True, 5),
         ],
     )
     def test_issue_publication_does_not_influence_caching(
@@ -463,16 +545,25 @@ class TestIssueDetailSummary:
         )
         assert mock_cache.get.call_count == expected_count
 
-    def test_main_title_and_paral_title(self):
-        article = ArticleFactory(
-            from_fixture="1058197ar",
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_main_title_and_paral_title(self, mock_get_summary_articles):
+        issue = IssueFactory()
+        article = SummaryArticle(
+            localidentifier="article1",
+            processing="complet",
+            section_title_1={
+                "main": "Inaugural Lecture of the FR Scott Professor",
+                "paral": {},
+            },
         )
+        article.section_title_1["paral"]["fr"] = "Conférence inaugurale du Professeur FR Scott"
+        mock_get_summary_articles.return_value = [article]
         url = reverse(
             "public:journal:issue_detail",
             kwargs={
-                "journal_code": article.issue.journal.code,
-                "issue_slug": article.issue.volume_slug,
-                "localidentifier": article.issue.localidentifier,
+                "journal_code": issue.journal.code,
+                "issue_slug": issue.volume_slug,
+                "localidentifier": issue.localidentifier,
             },
         )
         response = Client().get(url)
@@ -508,16 +599,22 @@ class TestIssueDetailSummary:
             'title="Lire l\'article">\n    [Article sans titre]\n    </a>\n  </h6>' in html
         )
 
-    def test_article_authors_are_not_displayed_with_suffixes(self):
-        article = ArticleFactory(
-            from_fixture="1058611ar",
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_article_authors_are_not_displayed_with_suffixes(self, mock_get_summary_articles):
+        issue = IssueFactory()
+        article = SummaryArticle(
+            localidentifier="article1",
+            processing="complet",
+            authors="Mélissa Beaudoin, Stéphane Potvin, Laura Dellazizzo, Maëlle Surprenant, "
+            "Alain Lesage, Alain Vanasse, André Ngamini-Ngui et Alexandre Dumais",
         )
+        mock_get_summary_articles.return_value = [article]
         url = reverse(
             "public:journal:issue_detail",
             kwargs={
-                "journal_code": article.issue.journal.code,
-                "issue_slug": article.issue.volume_slug,
-                "localidentifier": article.issue.localidentifier,
+                "journal_code": issue.journal.code,
+                "issue_slug": issue.volume_slug,
+                "localidentifier": issue.localidentifier,
             },
         )
         html = Client().get(url).content.decode()
@@ -528,16 +625,22 @@ class TestIssueDetailSummary:
             "et Alexandre Dumais\n    </p>" in html
         )
 
-    def test_article_authors_html_display(self):
-        article = ArticleFactory(
-            from_fixture="1070658ar",
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_article_authors_html_display(self, mock_get_summary_articles):
+        issue = IssueFactory()
+        article = SummaryArticle(
+            localidentifier="article1",
+            processing="complet",
+            authors="Le Comité exécutif de la <em>Revue québécoise de psychologie</em> (Suzanne "
+            "Léveillée, Julie Maheux, Gaëtan Tremblay, Carolanne Vignola-Lévesque)",
         )
+        mock_get_summary_articles.return_value = [article]
         url = reverse(
             "public:journal:issue_detail",
             kwargs={
-                "journal_code": article.issue.journal.code,
-                "issue_slug": article.issue.volume_slug,
-                "localidentifier": article.issue.localidentifier,
+                "journal_code": issue.journal.code,
+                "issue_slug": issue.volume_slug,
+                "localidentifier": issue.localidentifier,
             },
         )
         html = Client().get(url).content.decode()
