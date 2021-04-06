@@ -12,24 +12,22 @@ appdirs==1.4.4
     # via black
 arabic-reshaper==2.1.3
     # via -r requirements-test.txt
-asgiref==3.3.1
+asgiref==3.3.4
     # via
     #   -r requirements-test.txt
     #   django
-attrs==20.3.0
+attrs==21.2.0
     # via
     #   -r requirements-test.txt
     #   flake8-bugbear
     #   pytest
-babel==2.9.0
+babel==2.9.1
     # via -r requirements-test.txt
 backcall==0.2.0
-    # via
-    #   -r requirements-test.txt
-    #   ipython
+    # via ipython
 beautifulsoup4==4.6.1
     # via -r requirements-test.txt
-black==20.8b1
+black==21.5b1
     # via -r requirements-dev.in
 cairocffi==1.2.0
     # via
@@ -51,7 +49,7 @@ chardet==4.0.0
     # via
     #   -r requirements-test.txt
     #   requests
-click==7.1.2
+click==8.0.1
     # via
     #   black
     #   pip-tools
@@ -61,7 +59,7 @@ colorama==0.4.4
     # via -r requirements-test.txt
 counter-r5-elasticsearch==0.18
     # via -r requirements-test.txt
-coverage==5.5
+coverage[toml]==5.5
     # via
     #   -r requirements-test.txt
     #   codecov
@@ -80,9 +78,9 @@ dataclasses==0.8
     #   black
     #   counter-r5-elasticsearch
     #   pydantic
-decorator==4.4.2
+decorator==5.0.9
     # via
-    #   -r requirements-test.txt
+    #   ipdb
     #   ipython
     #   traitlets
 defusedxml==0.7.1
@@ -91,7 +89,7 @@ defusedxml==0.7.1
     #   cairosvg
 diff-match-patch==20200713
     # via -r requirements-test.txt
-django-account-actions==0.1.2
+django-account-actions==0.1.4
     # via -r requirements-test.txt
 django-admin-rangefilter==0.3.12
     # via -r requirements-test.txt
@@ -99,14 +97,11 @@ django-adv-cache-tag==1.1.3
     # via -r requirements-test.txt
 django-ckeditor==6.0.0
     # via -r requirements-test.txt
-django-debug-toolbar-line-profiler==0.6.1
-    # via -r requirements-dev.in
 django-debug-toolbar-template-timings==0.9
     # via -r requirements-dev.in
 django-debug-toolbar==3.2.1
     # via
     #   -r requirements-dev.in
-    #   django-debug-toolbar-line-profiler
     #   django-debug-toolbar-template-timings
 django-easy-pjax==1.3.0
     # via -r requirements-test.txt
@@ -124,7 +119,7 @@ django-js-asset==1.2.2
     #   django-ckeditor
 django-js-reverse==0.9.1
     # via -r requirements-test.txt
-django-modeltranslation==0.16.2
+django-modeltranslation==0.17.1
     # via -r requirements-test.txt
 django-polymorphic==3.0.0
     # via -r requirements-test.txt
@@ -134,17 +129,17 @@ django-prometheus==2.1.0
     # via -r requirements-test.txt
 django-redis==4.12.1
     # via -r requirements-test.txt
-django-resumable-uploads==1.0.12
+django-resumable-uploads==1.0.13
     # via -r requirements-test.txt
 django-reversion==3.0.9
     # via -r requirements-test.txt
-django-taggit==1.3.0
+django-taggit==1.4.0
     # via -r requirements-test.txt
-django-waffle==2.1.0
+django-waffle==2.2.0
     # via -r requirements-test.txt
 django-widget-tweaks==1.4.8
     # via -r requirements-test.txt
-django==3.0.14
+django==3.2.3
     # via
     #   -r requirements-test.txt
     #   django-account-actions
@@ -161,15 +156,15 @@ django==3.0.14
     #   django-reversion
     #   django-taggit
     #   jsonfield
-elasticsearch==7.12.0
+elasticsearch==7.13.0
     # via
     #   -r requirements-test.txt
     #   counter-r5-elasticsearch
-et-xmlfile==1.0.1
+et-xmlfile==1.1.0
     # via
     #   -r requirements-test.txt
     #   openpyxl
-eulfedora==1.7.5
+eulfedora==1.7.6
     # via -r requirements-test.txt
 eulxml==1.1.6
     # via
@@ -181,15 +176,15 @@ execnet==1.8.0
     #   pytest-xdist
 factory-boy==3.2.0
     # via -r requirements-test.txt
-faker==6.6.2
+faker==8.2.1
     # via
     #   -r requirements-test.txt
     #   factory-boy
 feedparser==6.0.2
     # via -r requirements-test.txt
-flake8-bugbear==21.3.2
+flake8-bugbear==21.4.3
     # via -r requirements-dev.in
-flake8==3.9.0
+flake8==3.9.2
     # via
     #   -r requirements-dev.in
     #   flake8-bugbear
@@ -197,7 +192,7 @@ future==0.18.2
     # via
     #   -r requirements-test.txt
     #   arabic-reshaper
-gunicorn==20.0.4
+gunicorn==20.1.0
     # via -r requirements-test.txt
 html2text==2020.1.16
     # via -r requirements-test.txt
@@ -209,10 +204,12 @@ idna==2.10
     # via
     #   -r requirements-test.txt
     #   requests
-importlib-metadata==3.7.3
+importlib-metadata==4.0.1
     # via
     #   -r requirements-test.txt
+    #   click
     #   flake8
+    #   pep517
     #   pluggy
     #   pytest
 influxdb==5.3.1
@@ -221,35 +218,26 @@ iniconfig==1.1.1
     # via
     #   -r requirements-test.txt
     #   pytest
-ipdb==0.13.7
-    # via
-    #   -r requirements-dev.in
-    #   -r requirements-test.txt
+ipdb==0.13.8
+    # via -r requirements-dev.in
 ipython-genutils==0.2.0
-    # via
-    #   -r requirements-test.txt
-    #   traitlets
+    # via traitlets
 ipython==7.16.1
     # via
     #   -r requirements-dev.in
-    #   -r requirements-test.txt
     #   ipdb
 isodate==0.6.0
     # via
     #   -r requirements-test.txt
     #   rdflib
 jedi==0.18.0
-    # via
-    #   -r requirements-test.txt
-    #   ipython
+    # via ipython
 jsonfield==3.1.0
     # via
     #   -r requirements-test.txt
     #   django-post-office
 liberuditarticle==0.2.74
     # via -r requirements-test.txt
-line-profiler==3.1.0
-    # via django-debug-toolbar-line-profiler
 luqum==0.11.0
     # via -r requirements-test.txt
 lxml==4.6.3
@@ -275,31 +263,25 @@ packaging==20.9
     # via
     #   -r requirements-test.txt
     #   pytest
-parso==0.8.1
-    # via
-    #   -r requirements-test.txt
-    #   jedi
+parso==0.8.2
+    # via jedi
 pathspec==0.8.1
     # via black
 pep517==0.10.0
     # via pip-tools
 pexpect==4.8.0
-    # via
-    #   -r requirements-test.txt
-    #   ipython
+    # via ipython
 pickleshare==0.7.5
-    # via
-    #   -r requirements-test.txt
-    #   ipython
-pikepdf==2.11.4
+    # via ipython
+pikepdf==2.12.1
     # via -r requirements-test.txt
-pillow==8.1.2
+pillow==8.2.0
     # via
     #   -r requirements-test.txt
     #   cairosvg
     #   pikepdf
     #   reportlab
-pip-tools==6.0.1
+pip-tools==6.1.0
     # via -r requirements-dev.in
 pluggy==0.13.1
     # via
@@ -310,18 +292,14 @@ ply==3.11
     #   -r requirements-test.txt
     #   eulxml
     #   luqum
-prometheus-client==0.9.0
+prometheus-client==0.10.1
     # via
     #   -r requirements-test.txt
     #   django-prometheus
 prompt-toolkit==3.0.18
-    # via
-    #   -r requirements-test.txt
-    #   ipython
+    # via ipython
 ptyprocess==0.7.0
-    # via
-    #   -r requirements-test.txt
-    #   pexpect
+    # via pexpect
 py==1.10.0
     # via
     #   -r requirements-test.txt
@@ -337,15 +315,13 @@ pycryptodome==3.10.1
     # via
     #   -r requirements-test.txt
     #   eulfedora
-pydantic==1.8.1
+pydantic==1.8.2
     # via -r requirements-test.txt
-pyflakes==2.3.0
+pyflakes==2.3.1
     # via flake8
-pygments==2.8.1
-    # via
-    #   -r requirements-test.txt
-    #   ipython
-pymupdf==1.18.10
+pygments==2.9.0
+    # via ipython
+pymupdf==1.18.13
     # via -r requirements-test.txt
 pyparsing==2.4.7
     # via
@@ -362,9 +338,9 @@ pysocks==1.7.1
     #   requests
 pysolr==3.9.0
     # via -r requirements-test.txt
-pytest-cov==2.11.1
+pytest-cov==2.12.0
     # via -r requirements-test.txt
-pytest-django==4.1.0
+pytest-django==4.3.0
     # via -r requirements-test.txt
 pytest-forked==1.3.0
     # via
@@ -372,7 +348,7 @@ pytest-forked==1.3.0
     #   pytest-xdist
 pytest-xdist==2.2.1
     # via -r requirements-test.txt
-pytest==6.2.2
+pytest==6.2.4
     # via
     #   -r requirements-test.txt
     #   pytest-cov
@@ -409,7 +385,7 @@ redis==3.5.3
     #   -r requirements-test.txt
     #   django-redis
     #   redis-key-tagging
-regex==2021.3.17
+regex==2021.4.4
     # via black
 reportlab==3.5.56
     # via -r requirements-test.txt
@@ -430,9 +406,9 @@ roman==3.3
     # via
     #   -r requirements-test.txt
     #   liberuditarticle
-rules==2.2
+rules==3.0
     # via -r requirements-test.txt
-sentry-sdk==1.0.0
+sentry-sdk==1.1.0
     # via
     #   -r requirements-test.txt
     #   structlog-sentry
@@ -446,10 +422,9 @@ simplejson==3.17.2
     # via
     #   -r requirements-test.txt
     #   django-resumable-uploads
-six==1.15.0
+six==1.16.0
     # via
     #   -r requirements-test.txt
-    #   django-debug-toolbar-line-profiler
     #   django-isbn-field
     #   django-modeltranslation
     #   eulfedora
@@ -485,19 +460,21 @@ toml==0.10.2
     # via
     #   -r requirements-test.txt
     #   black
+    #   coverage
     #   ipdb
+    #   pep517
     #   pytest
 traitlets==4.3.3
-    # via
-    #   -r requirements-test.txt
-    #   ipython
-typed-ast==1.4.2
+    # via ipython
+typed-ast==1.4.3
     # via black
-typing-extensions==3.7.4.3
+typing-extensions==3.10.0.0
     # via
     #   -r requirements-test.txt
+    #   asgiref
     #   black
     #   importlib-metadata
+    #   liberuditarticle
     #   pydantic
     #   structlog
 urllib3==1.26.4
@@ -507,9 +484,7 @@ urllib3==1.26.4
     #   requests
     #   sentry-sdk
 wcwidth==0.2.5
-    # via
-    #   -r requirements-test.txt
-    #   prompt-toolkit
+    # via prompt-toolkit
 webencodings==0.5.1
     # via
     #   -r requirements-test.txt
@@ -521,6 +496,7 @@ zipp==3.4.1
     # via
     #   -r requirements-test.txt
     #   importlib-metadata
+    #   pep517
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
