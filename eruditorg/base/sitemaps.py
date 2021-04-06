@@ -65,7 +65,11 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
             @staticmethod
             def page(number):
                 class FakePage:
-                    object_list = results["items"]
+                    object_list = [
+                        (item, lang_code)
+                        for lang_code in self._languages()
+                        for item in results["items"]
+                    ]
 
                 return FakePage()
 
