@@ -1,21 +1,21 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n waffle_tags %}
 
-{% block title %}{% trans "Abonnements individuels" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Abonnements individuels" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements individuels" %}</a></li>
+<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% translate "Abonnements individuels" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Abonnements individuels" %}
+{% translate "Abonnements individuels" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Le service d’abonnement individuel est pour l’instant offert uniquement aux revues savantes. Le service d’abonnement individuel vous permet d’offrir ou de commercialiser des accès pour des usagers individuels au contenu restreint de votre revue (12 derniers mois de publication).</p>
 <p>Pour bénéficier de ce service, consultez le document de présentation ou communiquez avec Érudit à l’adresse <a href="mailto:client@erudit.org?subject=Abonnements individuels">client@erudit.org</a>.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
@@ -23,30 +23,30 @@
 {% flag "NEW_USERSPACE" %}
 <section>
   <h2>
-    {% blocktrans count view.get_queryset.count as count %}
+    {% blocktranslate count view.get_queryset.count as count %}
     {{ count }} abonné individuel
     {% plural %}
     {{ count }} abonnés individuels
-    {% endblocktrans %}
+    {% endblocktranslate %}
   </h2>
   <div class="row">
     <p class="col-md-12">
-      <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Créer</strong> un <br>abonnement" %}</a>
-      <a href="{% url 'userspace:journal:subscription:delete_by_email' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Supprimer</strong> un <br>abonnement" %}</a>
-      <a href="{% url 'userspace:journal:subscription:batch_subscribe' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Abonner</strong> <br>en lot" %}</a>
-      <a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Désabonner</strong> <br>en lot" %}</a>
+      <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-secondary">{% translate "<strong>Créer</strong> un <br>abonnement" %}</a>
+      <a href="{% url 'userspace:journal:subscription:delete_by_email' scope_current_journal.pk %}" class="btn btn-secondary">{% translate "<strong>Supprimer</strong> un <br>abonnement" %}</a>
+      <a href="{% url 'userspace:journal:subscription:batch_subscribe' scope_current_journal.pk %}" class="btn btn-secondary">{% translate "<strong>Abonner</strong> <br>en lot" %}</a>
+      <a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-secondary">{% translate "<strong>Désabonner</strong> <br>en lot" %}</a>
     </p>
   </div>
 </section>
 <br><br><br>
 <section>
-  <h2>{% trans "Liste des abonnés" %}</h2>
+  <h2>{% translate "Liste des abonnés" %}</h2>
   <div class="table">
     <ul class="table-header">
       <li class="row clearfix">
-        <span class="col-sm-4">{% trans "Usager" %}</span>
-        <span class="col-sm-4">{% trans "Date de création" %}</span>
-        <span class="col-sm-4">{% trans "Supprimer" %}</span>
+        <span class="col-sm-4">{% translate "Usager" %}</span>
+        <span class="col-sm-4">{% translate "Date de création" %}</span>
+        <span class="col-sm-4">{% translate "Supprimer" %}</span>
       </li>
     </ul>
     <ul class="table-body">
@@ -56,9 +56,9 @@
            class="clearfix table-row">
           <span class="col-sm-4">{{ subscription.user.get_full_name|default:subscription.user.username }}</span>
           <span class="col-sm-4">
-            {% blocktrans trimmed with created=subscription.created|date:"SHORT_DATE_FORMAT" %}
+            {% blocktranslate trimmed with created=subscription.created|date:"SHORT_DATE_FORMAT" %}
             {{ created }}
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </span>
           <span class="col-sm-4">
             <a href="{% url 'userspace:journal:subscription:delete' journal_pk=scope_current_journal.pk pk=subscription.pk %}">
@@ -82,16 +82,16 @@
 
 {% if pending_subscriptions %}
 <section>
-  <h2>{% trans "Abonnements en attente" %}</h2>
+  <h2>{% translate "Abonnements en attente" %}</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
         <th>#</th>
-        <th>{% trans "Adresse courriel" %}</th>
-        <th>{% trans "Prénom" %}</th>
-        <th>{% trans "Nom" %}</th>
-        <th>{% trans "Date d'expiration" %}</th>
-        <th>{% trans "Actions" %}</th>
+        <th>{% translate "Adresse courriel" %}</th>
+        <th>{% translate "Prénom" %}</th>
+        <th>{% translate "Nom" %}</th>
+        <th>{% translate "Date d'expiration" %}</th>
+        <th>{% translate "Actions" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -104,8 +104,8 @@
         <td>{{ psubscription.expiration_date }}</td>
         <td>
           <span class="actions pull-right">
-            <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" class="btn" title="{% trans 'Supprimer' %}">
-              {% trans "Supprimer" %}
+            <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" class="btn" title="{% translate 'Supprimer' %}">
+              {% translate "Supprimer" %}
             </a>
           </span>
         </td>

@@ -2,32 +2,32 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Logo institutionnel" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Logo institutionnel" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:subscription_information:update' organisation_pk=scope_current_organisation.pk %}">{% trans "Logo institutionnel" %}</a></li>
+<li><a href="{% url 'userspace:library:subscription_information:update' organisation_pk=scope_current_organisation.pk %}">{% translate "Logo institutionnel" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Logo institutionnel" %}
+{% translate "Logo institutionnel" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Cette section affiche le logo associé à votre bibliothèque le cas échéant, qui apparaît sous la mention <em>«&nbsp;Votre accès est offert par&nbsp;»</em> chaque fois qu’un de vos usagers se connecte à notre plateforme via votre réseau informatique.</p>
 
 <p>Pour mettre à jour ce logo, téléversez un nouveau fichier ci-dessous. </p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block section_aside %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Le badge ne doit pas excéder <strong>140x140 pixels</strong> et sera automatiquement redimensionné dans le cas contraire. Les formats acceptés sont <strong>PNG, JPG ou GIF</strong>.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock %}
 
 {% block content_main %}
-<h2>{% trans "Mise à jour de votre badge" %}</h2>
+<h2>{% translate "Mise à jour de votre badge" %}</h2>
 
 <form  class="form-vertical" enctype="multipart/form-data" method="post" action="">{% csrf_token %}
   {% if form.non_field_errors %}
@@ -49,8 +49,8 @@
   </div>
   <div class="form-group">
     <div class="controls">
-      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
-      <input id="submit-id-reset" class="btn" name="reset" value="{% trans 'Annuler' %}" type="reset"></input>
+      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% translate 'Valider' %}" type="submit"></input>
+      <input id="submit-id-reset" class="btn" name="reset" value="{% translate 'Annuler' %}" type="reset"></input>
     </div>
   </div>
 </form>

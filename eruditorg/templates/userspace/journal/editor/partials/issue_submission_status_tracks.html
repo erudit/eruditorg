@@ -1,13 +1,13 @@
 {% load i18n %}
 
 <hr>
-<h2>{% trans "Historique" %}</h2>
+<h2>{% translate "Historique" %}</h2>
 <div class="table">
   <ul class="table-header">
     <li class="row">
-      <span class="col-sm-2">{% trans "Date" %}</span>
-      <span class="col-sm-5">{% trans "Statut" %}</span>
-      <span class="col-sm-5">{% trans "Commentaires" %}</span>
+      <span class="col-sm-2">{% translate "Date" %}</span>
+      <span class="col-sm-5">{% translate "Statut" %}</span>
+      <span class="col-sm-5">{% translate "Commentaires" %}</span>
     </li>
   </ul>
   <ul class="table-body">
@@ -15,15 +15,15 @@
     <li class="row table-row-wrapper">
       <div class="clearfix table-row">
         <div class="col-sm-2">
-          {% blocktrans trimmed with date=track.created|date:"SHORT_DATE_FORMAT" time=track.created|date:"H:i" %}
+          {% blocktranslate trimmed with date=track.created|date:"SHORT_DATE_FORMAT" time=track.created|date:"H:i" %}
           {{ date }}<br> {{ time }}
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </div>
         <div class="col-sm-5">
           <p><span class="status-indicator-{% if track.status == 'C' %}error{% elif track.status == 'S' %}warning{% elif track.status == 'V' %}success{% endif %}"></span><strong>{{ track.get_status_display }}</strong>.</p>
 
           {% if track.files_version and track.files_version.submissions.exists %}
-          {% trans "Fichier&nbsp;:" %}
+          {% translate "Fichier&nbsp;:" %}
           <ul class="unstyled">
           {% for f in track.files_version.submissions.all %}
             {% if f.is_complete %}
@@ -34,7 +34,7 @@
               </li>
             {% else %}
               <li>
-                {{ f.get_filename }} ({% trans "partiellement téléversé" %})
+                {{ f.get_filename }} ({% translate "partiellement téléversé" %})
               </li>
             {% endif %}
           {% endfor %}

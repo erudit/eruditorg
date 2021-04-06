@@ -2,59 +2,59 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans trimmed with organisation_name=token.content_object.name  %}
+{% blocktranslate trimmed with organisation_name=token.content_object.name  %}
   {{ organisation_name }}
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock title %}
 
 {% block content %}
 <main>
   <div class="container">
     <h2>
-      {% blocktrans trimmed with organisation_name=token.content_object.name  %}
+      {% blocktranslate trimmed with organisation_name=token.content_object.name  %}
         {{ organisation_name }}
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </h2>
     {% if token.is_expired %}
       <div class="alert">
-        <p><strong>{% trans "Impossible de rejoindre l’organisation." %}</strong></p>
-        {% trans "Ce lien a expiré." %}
+        <p><strong>{% translate "Impossible de rejoindre l’organisation." %}</strong></p>
+        {% translate "Ce lien a expiré." %}
       </div>
     {% elif token.is_consumed %}
       <div class="alert">
-        <p><strong>{% trans "Impossible de rejoindre l’organisation." %}</strong></p>
-        {% trans "Ce lien a déjà été utilisé." %}
+        <p><strong>{% translate "Impossible de rejoindre l’organisation." %}</strong></p>
+        {% translate "Ce lien a déjà été utilisé." %}
       </div>
     {% elif token.is_canceled %}
       <div class="alert">
-        <p><strong>{% trans "Impossible de rejoindre l’organisation." %}</strong></p>
-        {% trans "Ce lien n'est plus valide." %}
+        <p><strong>{% translate "Impossible de rejoindre l’organisation." %}</strong></p>
+        {% translate "Ce lien n'est plus valide." %}
       </div>
     {% elif subscription_exists %}
       <div class="alert">
-        <p><strong>{% trans "Impossible de rejoindre l’organisation." %}</strong></p>
-        {% trans "Vous faîtes déjà partie de cette organisation avec ce compte." %}
+        <p><strong>{% translate "Impossible de rejoindre l’organisation." %}</strong></p>
+        {% translate "Vous faîtes déjà partie de cette organisation avec ce compte." %}
       </div>
     {% else %}
       <br><br>
       <p>
-        {% blocktrans trimmed with organisation_name=token.content_object.name  %}
+        {% blocktranslate trimmed with organisation_name=token.content_object.name  %}
           Voulez-vous rejoindre l’organisation <strong>{{ organisation_name }}</strong>&nbsp;?
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </p>
       <br><br>
       {% if request.user.is_authenticated %}
       <form method="post" action="{% url 'public:account_actions:consume' key=token.key %}">
         {% csrf_token %}
-        {% trans "Rejoindre" as subscribe_text %}
+        {% translate "Rejoindre" as subscribe_text %}
         <input type="submit" value="{{ subscribe_text }}" class="btn btn-primary" />
       </form>
       {% else %}
-      <p>{% trans "Vous devez vous identifier pour rejoindre cette organisation." %}</p>
+      <p>{% translate "Vous devez vous identifier pour rejoindre cette organisation." %}</p>
       <br />
-      <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-primary">{% trans "S’identifier" %}</a>
+      <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-primary">{% translate "S’identifier" %}</a>
       <br />
-      <a href="{% url 'public:account_actions:register' key=token.key %}" class="btn btn-primary">{% trans "Créer un compte" %}</a>
+      <a href="{% url 'public:account_actions:register' key=token.key %}" class="btn btn-primary">{% translate "Créer un compte" %}</a>
       {% endif %}
     {% endif %}
   </div>

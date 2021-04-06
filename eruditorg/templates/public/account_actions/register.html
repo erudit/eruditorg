@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Inscription" %}{% endblock title %}
+{% block title %}{% translate "Inscription" %}{% endblock title %}
 
 {% block content %}
 <div class="container-fluid">
@@ -9,7 +9,7 @@
     <aside class="col-lg-6 col-sm-8 col-xs-12 col-centered">
       <div class="panel">
         <header class="panel-heading">
-          <h2 class="panel-title text-center">{% trans "Inscription" %}</h2>
+          <h2 class="panel-title text-center">{% translate "Inscription" %}</h2>
         </header>
         <div class="panel-body">
           <form action="" id="id_signup_form" method="post">
@@ -26,14 +26,14 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_first_name">{% trans "Prénom" %}</label>
+                  <label for="id_first_name">{% translate "Prénom" %}</label>
                   {{ form.first_name }}
                   <div class="alert alert-error-text">{{ form.first_name.errors.as_text }}</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_last_name">{% trans "Nom" %}</label>
+                  <label for="id_last_name">{% translate "Nom" %}</label>
                   {{ form.last_name }}
                   <div class="alert alert-error-text">{{ form.last_name.errors.as_text }}</div>
                 </div>
@@ -42,7 +42,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="id_email">{% trans "Adresse courriel" %}</label>
+                  <label for="id_email">{% translate "Adresse courriel" %}</label>
                   {{ form.email }}
                   <div class="alert alert-error-text">{{ form.email.errors.as_text }}</div>
                 </div>
@@ -65,7 +65,7 @@
               </div>
             </div>
             <div class="form-group text-center">
-              <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Inscription" %}</button>
+              <button type="submit" class="btn btn-primary" id="submit-id-submit">{% translate "Inscription" %}</button>
             </div>
           </form>
         </div>

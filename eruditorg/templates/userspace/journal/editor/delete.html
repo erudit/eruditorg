@@ -2,20 +2,20 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Supprimer un dépôt" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Supprimer un dépôt" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
-<li><a href="#">{% trans 'Supprimer' %} {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% translate "Dépôt de fichiers" %}</a></li>
+<li><a href="#">{% translate 'Supprimer' %} {{ object.year }}, {% if object.volume %}{% translate "vol." %} {{ object.volume }},{% endif %} {% translate "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Supprimer un dépôt" %}
+{% translate "Supprimer un dépôt" %}
 {% endblock %}
 
 {% block section_intro %}
 <p>
-  {% blocktrans %}Vous allez supprimer l’ensemble des fichiers téléchargés dans le dossier <em>{{ object }}</em>. Voulez-vous poursuivre&nbsp;? {% endblocktrans %}
+  {% blocktranslate %}Vous allez supprimer l’ensemble des fichiers téléchargés dans le dossier <em>{{ object }}</em>. Voulez-vous poursuivre&nbsp;? {% endblocktranslate %}
 </p>
 {% endblock section_intro %}
 
@@ -23,8 +23,8 @@
 <div class="col-sm-8 col-md-6">
   <form action="" method="post">{% csrf_token %}
     <input type="hidden" name="post" value="yes" />
-    <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% trans "Non" %}</a>
+    <input type="submit" value="{% translate "Oui" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% translate "Non" %}</a>
   </form>
 </div>
 {% endblock content_main %}

@@ -2,15 +2,15 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Créer un abonnement" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Créer un abonnement" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="#">{% trans "Créer un abonnement" %}</a></li>
+<li><a href="#">{% translate "Créer un abonnement" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
 {{ block.super }}
-<h2>{% trans "Créer un abonnement" %}</h2>
+<h2>{% translate "Créer un abonnement" %}</h2>
 <form  class="form-vertical" method="post" action="">{% csrf_token %}
   {% if form.non_field_errors %}
   <div class="col-xs-12">
@@ -42,7 +42,7 @@
   </div>
   <div class="form-group">
     <div class="controls">
-      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
+      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% translate 'Valider' %}" type="submit"></input>
     </div>
   </div>
 </form>

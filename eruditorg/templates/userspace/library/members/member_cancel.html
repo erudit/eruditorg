@@ -1,22 +1,22 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Annuler une demande" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Annuler une demande" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">{% trans "Membres" %}</a></li>
-<li><a href="#">{% trans "Annuler une demande" %}</a></li>
+<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">{% translate "Membres" %}</a></li>
+<li><a href="#">{% translate "Annuler une demande" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Annuler une demande" %}
+{% translate "Annuler une demande" %}
 {% endblock %}
 
 {% block section_intro %}
 <p>
-{% blocktrans trimmed with email=object.email %}
+{% blocktranslate trimmed with email=object.email %}
   Voulez-vous annuler la demande d’ajout de membre envoyée à <strong>{{ email }}</strong>&nbsp;?
-{% endblocktrans %}
+{% endblocktranslate %}
 </p>
 {% endblock section_intro %}
 
@@ -24,8 +24,8 @@
 <div class="col-sm-8 col-md-6">
   <form action="" method="post">{% csrf_token %}
     <input type="hidden" name="post" value="yes" />
-    <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-    <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% trans "Non" %}</a>
+    <input type="submit" value="{% translate "Oui" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% translate "Non" %}</a>
   </form>
 </div>
 {% endblock content_main %}

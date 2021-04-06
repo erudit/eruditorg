@@ -1,9 +1,9 @@
 {% extends "public/base.html" %}
 {% load adv_cache i18n static widget_tweaks %}
 
-{% block title %}{% trans "Revues par ordre alphabétique" %}{% endblock title %}
+{% block title %}{% translate "Revues par ordre alphabétique" %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans %}Découvrez la liste alphabétique des revues savantes et culturelles en sciences humaines et sociales d'Érudit et de ses partenaires.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate %}Découvrez la liste alphabétique des revues savantes et culturelles en sciences humaines et sociales d'Érudit et de ses partenaires.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -23,7 +23,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
-      "name": "{% trans 'Revues' %}"
+      "name": "{% translate 'Revues' %}"
     }
   }]
 }
@@ -50,7 +50,7 @@
 {% block body_data_attributes %} data-spy="scroll" data-target="#id_journal_list_body" data-offset="180"{% endblock body_data_attributes %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
+<li><a href="{% url 'public:journal:journal_list' %}">{% translate "Revues" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -60,18 +60,18 @@
   <div class="row">
     <div class="col-sm-8">
       <header class="main-header">
-        <h1>{% trans "Revues par ordre alphabétique" %} ({{ journal_count }})</h1>
+        <h1>{% translate "Revues par ordre alphabétique" %} ({{ journal_count }})</h1>
         <div class="main-header__intro">
-          {% blocktrans %}
+          {% blocktranslate %}
           <p>Découvrez la liste des revues savantes et culturelles diffusées par Érudit et ses partenaires (<a href="https://www.nrcresearchpress.com/" title="Site de NRC Research Press" target="_blank">NRC Research Press</a>, <a href="https://www.persee.fr/" title="Site de Persée" target="_blank">Persée</a>, <a href="https://digitalscholarship.lib.unb.ca/" title="Site de Centre for Digital Scholarship" target="_blank">Centre for Digital Scholarship</a>).</p>
           <p>Les numéros courants sont disponibles en libre accès ou en accès restreint selon le modèle de diffusion de la revue. L’ensemble des archives est offert en libre accès (après la dernière année de publication pour les revues savantes et les trois dernières années de publications pour les revues culturelles). Pour plus d’informations à propos de nos collections, communiquez avec l’équipe d’Érudit à l’adresse <a href="mailto:info@erudit.org?subject=Collections%20d’Érudit">info@erudit.org</a>.</p>
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </div>
       </header>
     </div>
     <div class="col-sm-4">
       <nav class="nav-btn">
-        <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines" class="btn btn-secondary">{% trans "Revues par disciplines" %}</a>
+        <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines" class="btn btn-secondary">{% translate "Revues par disciplines" %}</a>
       </nav>
     </div>
   </div>
@@ -80,12 +80,12 @@
         <aside class="col-md-3 col-lg-2 sidebar-block filters">
           <form id="filter_form" action="#" method="get" class="akkordion">
             <h2 class="akkordion-title filter-title" aria-expanded="false" aria-controls="filter-form-content">
-              {% trans "Filtres" %}
+              {% translate "Filtres" %}
               <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
             </h2>
             <div id="filter-form-content" class="akkordion-content akkordion-active" aria-labelledby="filter_form">
               <div class="form-group">
-                <h3 class="sr-only">{% trans "Par type d'accès" %}</h3>
+                <h3 class="sr-only">{% translate "Par type d'accès" %}</h3>
                 <div id="div_id_{{ filter_form.open_access.html_name }}" class="checkbox">
                   {{ filter_form.open_access|add_class:'form-control' }}
                   <label for="{{ filter_form.open_access.auto_id }}" class="control-label">
@@ -114,7 +114,7 @@
               </div>
 
               <div class="form-action">
-                <button type="submit" class="btn btn-primary">{% trans "Filtrer" %}</button>
+                <button type="submit" class="btn btn-primary">{% translate "Filtrer" %}</button>
               </div>
             </div>
           </form>
@@ -125,22 +125,22 @@
           {% endnocache %}
         </aside>
         <nav class="col-md-9 col-lg-offset-1 list-header">
-          <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
+          <h2 class="sr-only">{% translate 'Par lettre' %}</h2>
           <div id="items_menu">
             <ul class="nav alpha-nav">
               {% for objects_group in sorted_objects %}
               {% if not objects_group.key %}
-              <li><a href="#section-void">{% trans "Autres" %}</a></li>
+              <li><a href="#section-void">{% translate "Autres" %}</a></li>
               {% else %}
               <li><a href="#section-{{ objects_group.key }}">{{ objects_group.name }}</a></li>
               {% endif %}
               {% endfor %}
             </ul>
             <ul class="row list-headings hidden-xs">
-              <li class="col-sm-6">{% trans "Revue" %}</li>
-              <li class="col-sm-2">{% trans "Type" %}</li>
-              <li class="col-sm-3">{% trans "Fonds" %}</li>
-              <li class="col-sm-1">{% trans "Accès" %}</li>
+              <li class="col-sm-6">{% translate "Revue" %}</li>
+              <li class="col-sm-2">{% translate "Type" %}</li>
+              <li class="col-sm-3">{% translate "Fonds" %}</li>
+              <li class="col-sm-1">{% translate "Accès" %}</li>
             </ul>
           </div>
         </nav>
@@ -154,7 +154,7 @@
               <div class="row">
                 <div class="col-sm-6 journal-title">
                   {% with journal.get_titles as titles %}
-                  <span class="journal-name">{{ titles.main.title}}{% if journal.is_new %} <span class="new-journal-tag">({% trans 'nouveauté' %}{% if journal.year_of_addition %}{% blocktrans with year=journal.year_of_addition %} {{ year }}{% endblocktrans %}{% endif %})</span>{% endif %}</span>
+                  <span class="journal-name">{{ titles.main.title}}{% if journal.is_new %} <span class="new-journal-tag">({% translate 'nouveauté' %}{% if journal.year_of_addition %}{% blocktranslate with year=journal.year_of_addition %} {{ year }}{% endblocktranslate %}{% endif %})</span>{% endif %}</span>
                   {% if titles.main.subtitle %}
                   <span class="journal-subtitle">{{ titles.main.subtitle }}</span>
                   {% endif %}
@@ -170,16 +170,16 @@
                   {% if journal.previous_journal or journal.next_journal %}
                   <div class="journal-history">
                     {% if journal.previous_journal %}
-                    {% trans "Précédé de" %} <strong>{{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}</strong>
+                    {% translate "Précédé de" %} <strong>{{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% translate '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}</strong>
                     {% endif %}
                     {% if journal.next_journal %}
-                    {% trans "Suivi de" %} <strong>{{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}</strong>
+                    {% translate "Suivi de" %} <strong>{{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% translate '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}</strong>
                     {% endif %}
                   </div>
                   {% endif %}
                 </div>
                 <div class="col-sm-2 journal-type">
-                  {% if journal.type.code == 'S' %}<span>{% trans "Savante" %}</span>{% elif journal.type.code == 'C' %}<span>{% trans "Culturelle" %}</span>{% endif %}
+                  {% if journal.type.code == 'S' %}<span>{% translate "Savante" %}</span>{% elif journal.type.code == 'C' %}<span>{% translate "Culturelle" %}</span>{% endif %}
                 </div>
                 <div class="col-sm-3 col-xs-8 journal-collection">
                   <span>{{ journal.collection.name }}</span>
@@ -195,9 +195,9 @@
         {% empty %}
         <div class="alert alert-info">
           <p class="text-center">
-            {% trans "Aucune revue ne correspond à cette combinaison de filtres&nbsp;!" %}
+            {% translate "Aucune revue ne correspond à cette combinaison de filtres&nbsp;!" %}
             <br><br>
-            <a href="{% url 'public:journal:journal_list' %}">{% trans "Retourner à la liste complète des revues." %}</a>
+            <a href="{% url 'public:journal:journal_list' %}">{% translate "Retourner à la liste complète des revues." %}</a>
           </p>
         </div>
         {% endfor %}

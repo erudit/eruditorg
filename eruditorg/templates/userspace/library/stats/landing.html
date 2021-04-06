@@ -1,7 +1,7 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n static waffle_tags %}
 
-{% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Consultations" %} {{ block.super }}{% endblock title %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -21,11 +21,11 @@
 {% block data_controller %}userspace:library:stats:landing{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
-<li xmlns="https://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+<li xmlns="https://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% translate "Consultations" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Consultations" %}
+{% translate "Consultations" %}
 {% endblock %}
 
 {% block section_intro %}
@@ -41,17 +41,17 @@
  {% endfor %}
 </div>
 {% endif %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Cette section vous donne accès aux statistiques de consultation de votre
   établissement pour les différentes revues souscrites. Les rapports disponibles
   respectent la norme COUNTER (R4), et nous mettons à votre disposition les
   rapports JR1 et JR1 GOA, aux formats CSV, XML ou HTML, par année d’abonnement
   ou pour la période de votre choix.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block section_aside %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Notez que les revues du fonds <strong>Centre for Digital Scholarship</strong>
   ne sont pas incluses dans ces rapports, car elles ne sont pas hébergées sur
   nos serveurs&nbsp;; il nous est impossible de compiler ces statistiques de
@@ -60,7 +60,7 @@
                 target="_blank" title="Voir la liste des revues Centre for Digital Scholarship">
   la liste des titres concernés ici</a>.
 </p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock %}
 
 {% block content_main %}
@@ -75,7 +75,7 @@
 {% else %}
 <section>
   <div class="glory">
-    {% blocktrans %}Vous n'avez jamais été abonné à la plateforme érudit{% endblocktrans %}
+    {% blocktranslate %}Vous n'avez jamais été abonné à la plateforme érudit{% endblocktranslate %}
   </div>
 </section>
 {% endif %}

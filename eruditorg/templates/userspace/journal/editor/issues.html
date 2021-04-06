@@ -2,20 +2,20 @@
 {% load i18n static %}
 {% load rules %}
 
-{% block title %}{% trans "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block body_id %}issue_submission{% endblock body_id %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% translate "Dépôt de fichiers" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Dépôt de fichiers" %}
+{% translate "Dépôt de fichiers" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Cet espace vous permet d’envoyer vos fichiers de production et de vérifier leur statut&nbsp;:</p>
 <ul class="unstyled">
   <li><span class="status-indicator-error"></span>Brouillon</li>
@@ -23,7 +23,7 @@
   <li><span class="status-indicator-error"></span>À corriger</li>
   <li><span class="status-indicator-success"></span>Validé</li>
 </ul>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
@@ -31,18 +31,18 @@
 {# List of past submissions #}
 <div class="row">
   <div class="col-md-8">
-    <h2>{% trans 'Historique' %}</h2>
+    <h2>{% translate 'Historique' %}</h2>
   </div>
   <div class="col-md-4 text-right">
-    <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">&plus;&nbsp;{% trans "Déposer" %}</a>
+    <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">&plus;&nbsp;{% translate "Déposer" %}</a>
   </div>
 </div>
 <div class="table">
   <ul class="table-header">
     <li class="row">
-      <span class="col-sm-4">{% trans "Numéro" %}</span>
-      <span class="col-sm-4">{% trans "Date d’ajout" %}</span>
-      <span class="col-sm-4">{% trans "Statut" %}</span>
+      <span class="col-sm-4">{% translate "Numéro" %}</span>
+      <span class="col-sm-4">{% translate "Date d’ajout" %}</span>
+      <span class="col-sm-4">{% translate "Statut" %}</span>
     </li>
   </ul>
   <ul class="table-body">

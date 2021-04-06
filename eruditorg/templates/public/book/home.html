@@ -8,28 +8,28 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block title %}{% trans "Livres et actes" %}{% endblock title %}
+{% block title %}{% translate "Livres et actes" %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans %}Livres et actes{% endblocktrans %}">
+<meta property="og:title" content="{% blocktranslate %}Livres et actes{% endblocktranslate %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta property="og:description" content="{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{% trans 'Livres et actes' %} – Érudit">
+<meta name="twitter:title" content="{% translate 'Livres et actes' %} – Érudit">
 <meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
-<meta name="twitter:description" content="{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% translate 'Illustration « Cultivez votre savoir »' %}">
+<meta name="twitter:description" content="{% blocktranslate %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -50,7 +50,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:home' %}",
-      "name": "{% trans 'Livres et actes' %}"
+      "name": "{% translate 'Livres et actes' %}"
     }
   }]
 }
@@ -62,7 +62,7 @@
 {% block data_controller %}public:book:book_home{% endblock data_controller %}
 
 {% block breadcrumb %}
-{{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
+{{ block.super }} <li><a href="{% url 'public:book:home' %}">{% translate "Livres et actes" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -72,13 +72,13 @@
     <div class="row">
       <div class="col-sm-6 col-md-8">
         <header class="page-header-main">
-          <h1>{% trans "Livres et actes" %} ({{ books_count }} {% trans 'titres' %})</h1>
+          <h1>{% translate "Livres et actes" %} ({{ books_count }} {% translate 'titres' %})</h1>
         </header>
         <div class="page-intro">
-          {% blocktrans %}
+          {% blocktranslate %}
           <p>Parcourez les différentes collections de livres et actes de colloques que nous diffusons sur la plateforme.</p>
           <p>Publié par des éditeurs scientifiques, des centres de recherche ou encore par des sociétés savantes, l’ensemble des titres est disponible en libre accès <span class="erudicon erudicon-open-access"></span>.</p>
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
     <div class="container">
       <ul class="row alternating-row__list">
         <li class="col-xs-6 col-sm-3 col-md-2 alternating-row__list-item">
-          <h3 class="alternating-row__list-title"><strong>{{ collection|safe }} ({{ collection.books.all|length }} {% trans 'titres' %})&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a></strong></h3>
+          <h3 class="alternating-row__list-title"><strong>{{ collection|safe }} ({{ collection.books.all|length }} {% translate 'titres' %})&nbsp;<a href="#top" class="scroll-top" title="{% translate 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a></strong></h3>
         </li>
         {% for book in collection.books.all %}
         <li class="col-xs-6 col-sm-3 col-md-2 alternating-row__list-item">
@@ -104,7 +104,7 @@
               {% endif %}
             </h4>
             {% if book.authors %}
-            <p class="card__metadata">{% if book.contribution %}{% trans "Sous la direction de" %} {% endif %}{{ book.authors|safe }}</p>
+            <p class="card__metadata">{% if book.contribution %}{% translate "Sous la direction de" %} {% endif %}{{ book.authors|safe }}</p>
             {% endif %}
             {% if book.cover %}
             <div class="row">
@@ -115,7 +115,7 @@
                   data-aspectratio="{{ book.cover.width }}/{{ book.cover.height }}"
                   width="75"
                   class="lazyload img-responsive card__figure"
-                  alt="{% trans 'Couverture de' %} {{ book.title }}"
+                  alt="{% translate 'Couverture de' %} {{ book.title }}"
                 />
               </div>
             </div>

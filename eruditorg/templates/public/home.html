@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load adv_cache i18n static waffle_tags public_journal_tags %}
 
-{% block title %}{% trans "Cultivez votre savoir" %}{% endblock title %}
+{% block title %}{% translate "Cultivez votre savoir" %}{% endblock title %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -44,25 +44,25 @@
 {% block body_id %}homepage{% endblock body_id %}
 
 {% block content %}
-{% trans "inconnu" as i18n_unknown %}
+{% translate "inconnu" as i18n_unknown %}
 {% cache LONG_TTL "public" "home" LANGUAGE_CODE "v1" %}
 <main>
-  <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
+  <h1 class="sr-only">{% translate "Accueil d’Érudit" %}</h1>
   {# SEARCH #}
   <header class="home-header">
     <div class="container">
       <div class="row">
         <section class="col-sm-8 col-md-6 home-search">
-          <h3 class="sr-only">{% trans "Effectuer une recherche simple" %}</h3>
+          <h3 class="sr-only">{% translate "Effectuer une recherche simple" %}</h3>
           <form action="{% url 'public:search:results' %}" class="home-search__form" id="id-search" method="get">
-            <label for="basic-search" class="home-search__label">{% trans "Recherche" %}</label>
+            <label for="basic-search" class="home-search__label">{% translate "Recherche" %}</label>
             <div class="input-group">
               <input type="hidden" name="funds" value="Érudit">
               <input type="hidden" name="funds" value="UNB">
-              <input name="basic_search_term" id="basic-search" type="search" class="home-search__input" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
+              <input name="basic_search_term" id="basic-search" type="search" class="home-search__input" placeholder="{% translate "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
               <div class="home-search__addon">
                 <button type="submit" class="home-search__btn">
-                  <span class="sr-only">{% trans "Rechercher" %}</span>
+                  <span class="sr-only">{% translate "Rechercher" %}</span>
                   <i class="icon ion-ios-search"></i>
                 </button>
               </div>
@@ -70,13 +70,13 @@
           </form>
           <div class="row">
             <div class="col-xs-6">
-              <a href="{% url 'public:journal:journal_list' %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Revues" %}</strong></a><br/>
-              <a href="{% url 'public:book:home' %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Livres et actes" %}</strong></a><br/>
-              <a href="{% url 'public:thesis:home' %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Thèses et mémoires" %}</strong></a><br/>
-              <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}"><strong><span class="arrow arrow-bar is-right"></span> {% trans "Rapports de recherche" %}</strong></a>
+              <a href="{% url 'public:journal:journal_list' %}"><strong><span class="arrow arrow-bar is-right"></span> {% translate "Revues" %}</strong></a><br/>
+              <a href="{% url 'public:book:home' %}"><strong><span class="arrow arrow-bar is-right"></span> {% translate "Livres et actes" %}</strong></a><br/>
+              <a href="{% url 'public:thesis:home' %}"><strong><span class="arrow arrow-bar is-right"></span> {% translate "Thèses et mémoires" %}</strong></a><br/>
+              <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}"><strong><span class="arrow arrow-bar is-right"></span> {% translate "Rapports de recherche" %}</strong></a>
             </div>
             <div class="col-xs-6 text-right">
-              <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
+              <a href="{% url 'public:search:advanced_search' %}">{% translate "Recherche avancée" %}</a>
             </div>
           </div>
         </section>
@@ -88,7 +88,7 @@
   {% if latest_issues %}
   <section class="home-issues">
     <div class="container">
-      <h2 class="home-issues__title">{% trans "Derniers numéros" %}</h2>
+      <h2 class="home-issues__title">{% translate "Derniers numéros" %}</h2>
       <ul class="home-issues__list">
         {% for issues in latest_issues.values %}
         {% with issue=issues.0 %}
@@ -98,16 +98,16 @@
           <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
           {% if issue.journal.has_logo %}
           <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal_formatted_title }}">
-            <img src="{% journal_logo_url issue.journal %}" alt="{% blocktrans with journal_name=issue.journal_formatted_title %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
+            <img src="{% journal_logo_url issue.journal %}" alt="{% blocktranslate with journal_name=issue.journal_formatted_title %}Logo de la revue {{ journal_name }}{% endblocktranslate %}" class="img-responsive home-issues__img"/>
           </a>
           {% endif %}
           <h3>
             <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal_formatted_title }}">
-              <span class="home-issues__theme">{% blocktrans with count=issues|length %}{{ count }} numéros rétrospectifs{% endblocktrans %}</span>
+              <span class="home-issues__theme">{% blocktranslate with count=issues|length %}{{ count }} numéros rétrospectifs{% endblocktranslate %}</span>
             </a>
             <br/>
             <span class="home-issues__journal">
-              {% trans "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal_formatted_title }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal_formatted_title }}</a>
+              {% translate "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal_formatted_title }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal_formatted_title }}</a>
             </span>
           </h3>
         </li>
@@ -117,11 +117,11 @@
           <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
           {% if issue.has_coverpage %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal_formatted_title }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% issue_coverpage_url issue %}" alt="{% blocktrans with journal_name=issue.journal_formatted_title issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive  home-issues__img">
+            <img src="{% issue_coverpage_url issue %}" alt="{% blocktranslate with journal_name=issue.journal_formatted_title issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktranslate %}" class="img-responsive  home-issues__img">
           </a>
           {% elif issue.journal.has_logo %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal_formatted_title }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% journal_logo_url issue.journal %}" alt="{% blocktrans with journal_name=issue.journal_formatted_title %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
+            <img src="{% journal_logo_url issue.journal %}" alt="{% blocktranslate with journal_name=issue.journal_formatted_title %}Logo de la revue {{ journal_name }}{% endblocktranslate %}" class="img-responsive home-issues__img"/>
           </a>
           {% endif %}
           <h3>
@@ -131,7 +131,7 @@
             </a>
             <br/>
             <span class="home-issues__journal">
-              {% trans "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal_formatted_title }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal_formatted_title }}</a>
+              {% translate "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal_formatted_title }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal_formatted_title }}</a>
             </span>
           </h3>
         </li>
@@ -140,7 +140,7 @@
         {% endfor %}
       </ul>
       <p>
-        <a href="{% url 'public:journal:journal_list' %}" class="btn home-issues__btn">{% trans "Voir toutes les revues" %}</a>
+        <a href="{% url 'public:journal:journal_list' %}" class="btn home-issues__btn">{% translate "Voir toutes les revues" %}</a>
       </p>
     </div>
   </section>
@@ -150,7 +150,7 @@
   <section class="home-journals">
     {% if new_journals %}
     <div class="container">
-      <h2>{% trans "Nouvelles revues" %}</h2>
+      <h2>{% translate "Nouvelles revues" %}</h2>
       <ul>
         {% for journal in new_journals %}
         <li>
@@ -159,7 +159,7 @@
           {% if journal.information.about %}
           <p>{{ journal.information.about|striptags|safe|truncatewords:25 }}</p>
           {% endif %}
-          <p><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.formatted_title }}">{% trans "En savoir plus" %}</a></p>
+          <p><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.formatted_title }}">{% translate "En savoir plus" %}</a></p>
         </li>
         {% endfor %}
       </ul>
@@ -173,7 +173,7 @@
   {% if latest_news %}
   <section class="home-news">
     <div class="container home-news__content">
-      <h2>{% trans "Actualités" %}</h2>
+      <h2>{% translate "Actualités" %}</h2>
 
       <ul class="row home-news__list">
         {% for entry in latest_news %}
@@ -181,13 +181,13 @@
           <p class="category-tag">{{ entry.category }}</p>
           <h3 class="home-news__title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
           <p class="home-news__summary">{{ entry.summary|safe|truncatewords_html:30 }}</p>
-          <p><a href="{{ entry.link }}" class="home-news__link" target="_blank">{% trans "Lire la suite" %}</a></p>
+          <p><a href="{{ entry.link }}" class="home-news__link" target="_blank">{% translate "Lire la suite" %}</a></p>
           <time class="home-news__date" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
         </li>
         {% endfor %}
       </ul>
 
-      <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn home-news__btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
+      <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn home-news__btn">{% translate "Toutes les nouvelles d'Érudit" %}</a>
     </div>
   </section>
   {% endif %}
@@ -201,29 +201,29 @@
           <h2 class="home-about__title">erudit.<br/>org</h2>
         </div>
         <div class="col-sm-6">
-          <p class="home-about__desc">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="https://apropos.erudit.org" target="_blank" class="home-about__link">{% trans "En savoir plus" %}</a></p>
+          <p class="home-about__desc">{% translate "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="https://apropos.erudit.org" target="_blank" class="home-about__link">{% translate "En savoir plus" %}</a></p>
         </div>
       </div>
       <ul class="row home-about__users">
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/bibliotheques/' %}" target="_blank">{% trans "Bibliothécaires" %}</a></h3>
-          <p>{% blocktrans %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktrans %}</p>
-          <p><a href="{% trans 'https://apropos.erudit.org/fr/bibliotheques/' %}" target="_blank" class="home-about__link">{% trans "Abonnez-vous" %}</a></p>
+          <h3 class="home-about__users-title"><a href="{% translate 'https://apropos.erudit.org/fr/bibliotheques/' %}" target="_blank">{% translate "Bibliothécaires" %}</a></h3>
+          <p>{% blocktranslate %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktranslate %}</p>
+          <p><a href="{% translate 'https://apropos.erudit.org/fr/bibliotheques/' %}" target="_blank" class="home-about__link">{% translate "Abonnez-vous" %}</a></p>
         </li>
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/editeurs/' %}" target="_blank">{% trans "Éditeurs" %}</a></h3>
-          <p>{% blocktrans %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktrans %}</p>
-          <p><a href="{% trans 'https://apropos.erudit.org/fr/editeurs/' %}" target="_blank" class="home-about__link">{% trans "Publiez avec nous" %}</a></p>
+          <h3 class="home-about__users-title"><a href="{% translate 'https://apropos.erudit.org/fr/editeurs/' %}" target="_blank">{% translate "Éditeurs" %}</a></h3>
+          <p>{% blocktranslate %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktranslate %}</p>
+          <p><a href="{% translate 'https://apropos.erudit.org/fr/editeurs/' %}" target="_blank" class="home-about__link">{% translate "Publiez avec nous" %}</a></p>
         </li>
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/chercheurs/' %}" target="_blank">{% trans "Chercheurs" %}</a></h3>
-          <p>{% blocktrans %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktrans %}</p>
-          <p><a href="{% trans 'https://apropos.erudit.org/fr/chercheurs/' %}" target="_blank" class="home-about__link">{% trans "Explorez nos données" %}</a></p>
+          <h3 class="home-about__users-title"><a href="{% translate 'https://apropos.erudit.org/fr/chercheurs/' %}" target="_blank">{% translate "Chercheurs" %}</a></h3>
+          <p>{% blocktranslate %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktranslate %}</p>
+          <p><a href="{% translate 'https://apropos.erudit.org/fr/chercheurs/' %}" target="_blank" class="home-about__link">{% translate "Explorez nos données" %}</a></p>
         </li>
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/usagers/' %}" target="_blank">{% trans "Utilisateurs" %}</a></h3>
-          <p>{% blocktrans %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktrans %}</p>
-          <p><a href="{% trans 'https://apropos.erudit.org/fr/usagers/' %}" target="_blank" class="home-about__link">{% trans "Repérez des articles" %}</a></p>
+          <h3 class="home-about__users-title"><a href="{% translate 'https://apropos.erudit.org/fr/usagers/' %}" target="_blank">{% translate "Utilisateurs" %}</a></h3>
+          <p>{% blocktranslate %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktranslate %}</p>
+          <p><a href="{% translate 'https://apropos.erudit.org/fr/usagers/' %}" target="_blank" class="home-about__link">{% translate "Repérez des articles" %}</a></p>
         </li>
       </ul>
     </div>

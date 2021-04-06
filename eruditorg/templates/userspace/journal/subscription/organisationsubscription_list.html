@@ -1,26 +1,26 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n waffle_tags %}
 
-{% block title %}{% trans "Abonnements institutionnels" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Abonnements institutionnels" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
+<li><a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% translate "Abonnements" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Abonnements institutionnels" %}
+{% translate "Abonnements institutionnels" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Cette page vous présente la liste des institutions abonnées à votre revue sur Érudit, avec le type d’abonnement (panier ou nom du consortium). À noter que les revues en libre accès complet ne présentent pas de données sur cette page.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
 {{ block.super }}
 <section>
-<h2>{% trans "Institutions abonnées par année" %}</h2>
+<h2>{% translate "Institutions abonnées par année" %}</h2>
 <ul>
   {% for year, link in view.get_subscriptions_archive_years %}
     <li><a href="{{ link }}">{{ year }}</li>

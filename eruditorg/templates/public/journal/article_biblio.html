@@ -1,9 +1,9 @@
 {% extends "public/journal/article_base.html" %}
 {% load erudit_cache_tag i18n static %}
 
-{% block title %}{% trans 'Bibliographie.' %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate 'Bibliographie.' %} {{ block.super }}{% endblock title %}
 
-{% block meta_description %}{% trans 'Bibliographie.' %} {{ block.super }}{% endblock meta_description %}
+{% block meta_description %}{% translate 'Bibliographie.' %} {{ block.super }}{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -23,7 +23,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
-      "name": "{% trans 'Revues' %}"
+      "name": "{% translate 'Revues' %}"
     }
   },{
     "@type": "ListItem",
@@ -51,7 +51,7 @@
     "position": 6,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_biblio' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
-      "name": "{% trans 'Bibliographie' %}"
+      "name": "{% translate 'Bibliographie' %}"
     }
   }]
 }
@@ -61,7 +61,7 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li>
-  <a href="{% url 'public:journal:article_biblio' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{% trans 'Bibliographie' %}</a>
+  <a href="{% url 'public:journal:article_biblio' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{% translate 'Bibliographie' %}</a>
 </li>
 {% endblock breadcrumb %}
 

@@ -2,15 +2,15 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Créer une plage d’adresses IP" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Créer une plage d’adresses IP" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% trans "Plages d'adresses IP" %}</a></li>
-<li><a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}">{% trans "Créer une plage d’adresses IP" %}</a></li>
+<li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% translate "Plages d'adresses IP" %}</a></li>
+<li><a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}">{% translate "Créer une plage d’adresses IP" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Créer une plage d’adresses IP" %}
+{% translate "Créer une plage d’adresses IP" %}
 {% endblock %}
 
 {% block content_main %}
@@ -39,8 +39,8 @@
     </div>
     <div class="form-group">
       <div class="controls">
-        <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
-        <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% trans "Annuler" %}</a>
+        <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% translate 'Valider' %}" type="submit"></input>
+        <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% translate "Annuler" %}</a>
       </div>
     </div>
   </form>

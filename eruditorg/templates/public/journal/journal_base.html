@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load erudit_cache_tag i18n model_formatters waffle_tags public_journal_tags %}
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
+<li><a href="{% url 'public:journal:journal_list' %}">{% translate "Revues" %}</a></li>
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal_formatted_title }}</a></li>
 {% endblock breadcrumb %}
 
@@ -20,7 +20,7 @@
 {% endblock scripts %}
 
 {% block content %}
-{% trans "inconnu" as i18n_unknown %}
+{% translate "inconnu" as i18n_unknown %}
 <div class="container">
   <div class="row">
     {# Main content #}
@@ -33,14 +33,14 @@
     {% cache LONG_TTL "public_journal_base_journal_meta" primary_cache_key directors_cache_key editors_cache_key LANGUAGE_CODE cache_version %}
     {# Journal information sidebar #}
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
-      <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>
+      <h2 class="sr-only">{% translate "Plus d’informations" %}</h2>
 
       {# Current and back issues #}
       {% block aside_issue %}
       <section class="sidebar-block clearfix">
         {% if journal.published_issues.exists %}
         {% if current_issue %}
-        <h2>{% trans "Dernier numéro" %}</h2>
+        <h2>{% translate "Dernier numéro" %}</h2>
         <p>
           <a href="{% url 'public:journal:issue_detail' current_issue.journal.code current_issue.volume_slug current_issue.localidentifier %}">
             {% if current_issue.html_title %}
@@ -66,9 +66,9 @@
         {% endif %}
         {% endif %}
         {% else %}
-        <h2>-> {% trans 'Numéros à venir' %}</h2>
+        <h2>-> {% translate 'Numéros à venir' %}</h2>
         <div class="alert alert-info">
-          <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
+          <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% translate 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
         </div>
         {% endif %}
       </section>
@@ -76,18 +76,18 @@
 
       {# Explore this journal #}
       <section class="sidebar-block">
-        <h2>{% trans "Explorer" %}</h2>
+        <h2>{% translate "Explorer" %}</h2>
         <ul class="journal-explore">
           <li class="search-journal">
             <div class="search-box">
               <form action="{% url 'public:search:results' %}" method="get">
-                <label for="journal-search">{% trans "Rechercher dans la revue" %}</label>
+                <label for="journal-search">{% translate "Rechercher dans la revue" %}</label>
                 <div class="input-group">
-                  <input type="search" class="form-control" name="basic_search_term" id="journal-search" placeholder="{% trans "Recherchez par mot-clé…" %}">
+                  <input type="search" class="form-control" name="basic_search_term" id="journal-search" placeholder="{% translate "Recherchez par mot-clé…" %}">
                   <input type="hidden" name="journals" value="{{ journal.solr_code }}">
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-secondary">
-                      <span class="sr-only">{% trans 'Rechercher' %}</span>
+                      <span class="sr-only">{% translate 'Rechercher' %}</span>
                       <i class="icon ion-ios-search"></i>
                     </button>
                   </span>
@@ -96,56 +96,56 @@
             </div>
           </li>
           {% block aside_authors_list %}
-          <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a></li>
+          <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% translate "Index des auteurs" %}</a></li>
           {% endblock aside_authors_list %}
-          <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a></li>
+          <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% translate 'Fil RSS' %}</a></li>
           {% if journal_info.website_url %}
-          <li><a href="{{ journal_info.website_url }}" target="_blank" rel="noopener noreferrer">{% trans "Site web" %}</a></li>
+          <li><a href="{{ journal_info.website_url }}" target="_blank" rel="noopener noreferrer">{% translate "Site web" %}</a></li>
           {% endif %}
         </ul>
       </section>
 
       {# journal meta infos #}
       <section class="sidebar-block">
-        <h2>{% trans "Fiche" %}</h2>
+        <h2>{% translate "Fiche" %}</h2>
 
         <dl>
 
           {% if journal.type.code == 'S' %}
-          <dt>{% trans "Évalué par les pairs" %}</dt>
-          <dd>{% trans "Oui" %}
-            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+          <dt>{% translate "Évalué par les pairs" %}</dt>
+          <dd>{% translate "Oui" %}
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% translate 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
             </span>
             {% if journal.information.peer_review_process %}({{ journal.information.get_peer_review_process_display }}){% endif %}
           </dd>
           {% if not journal.charges_apc %}
-          <dt>{% trans "Frais de publication (<em>APC</em>)" %}</dt>
-          <dd>{% trans "Non" %}</dd>
+          <dt>{% translate "Frais de publication (<em>APC</em>)" %}</dt>
+          <dd>{% translate "Non" %}</dd>
           {% endif %}
           {% endif %}
 
-          <dt>{% trans "Politique d'accès" %}</dt>
+          <dt>{% translate "Politique d'accès" %}</dt>
           {% if journal.open_access %}
-          <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="erudicon erudicon-open-access"></span></span></dd>
+          <dd>{% translate "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% translate 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="erudicon erudicon-open-access"></span></span></dd>
           {% else %}
-          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><i class="icon ion-ios-help-circle"></i></span></dd>
+          <dd>{% translate "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% translate 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><i class="icon ion-ios-help-circle"></i></span></dd>
           {% endif %}
 
-          <dt>{% trans "Archivage numérique" %}</dt>
-          <dd>{% trans "Oui&nbsp;: avec" %} <a href="https://www.portico.org/" target="_blank">Portico</a></dd>
+          <dt>{% translate "Archivage numérique" %}</dt>
+          <dd>{% translate "Oui&nbsp;: avec" %} <a href="https://www.portico.org/" target="_blank">Portico</a></dd>
 
           {% if meta_info_issue %}
 
           {% if contributors.directors %}
-            <dt>{% trans "Direction" %}</dt>
+            <dt>{% translate "Direction" %}</dt>
             {% for director in contributors.directors %}
               <dd>{{ director.name }}{% if director.role %} ({{ director.role|join:" - " }}){% endif %}</dd>
             {% endfor %}
           {% endif %}
 
           {% if contributors.editors %}
-            <dt>{% trans "Rédaction" %}</dt>
+            <dt>{% translate "Rédaction" %}</dt>
             {% for editor in contributors.editors %}
               <dd>{{ editor.name }}{% if editor.role %} ({{ editor.role|join:" - " }}){% endif %}</dd>
             {% endfor %}
@@ -153,11 +153,11 @@
 
           {% if meta_info_issue.erudit_object.publishers %}
           <dt>
-            {% blocktrans count total=meta_info_issue.erudit_object.publishers|length %}
+            {% blocktranslate count total=meta_info_issue.erudit_object.publishers|length %}
             Éditeur
             {% plural %}
             Éditeurs
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </dt>
           {% for publisher in meta_info_issue.erudit_object.publishers %}
           <dd>{{ publisher }}</dd>
@@ -165,53 +165,53 @@
           {% endif %}
 
           {% if issn %}
-          <dt>{% trans "ISSN" %}</dt>
+          <dt>{% translate "ISSN" %}</dt>
           {% if issn.print %}
-          <dd>{{ issn.print }} ({% trans "imprimé" %})</dd>
+          <dd>{{ issn.print }} ({% translate "imprimé" %})</dd>
           {% endif %}
           {% if issn.web %}
-          <dd>{{ issn.web }} ({% trans "numérique" %})</dd>
+          <dd>{{ issn.web }} ({% translate "numérique" %})</dd>
           {% endif %}
           {% endif %}
           {% endif %}
 
           {% if journal.information.frequency %}
-          <dt>{% trans "Fréquence de publication" %}</dt>
+          <dt>{% translate "Fréquence de publication" %}</dt>
           <dd>
-            {% blocktrans count issues_per_year=journal.information.frequency %}
+            {% blocktranslate count issues_per_year=journal.information.frequency %}
             {{ issues_per_year }} numéro par année
             {% plural %}
             {{ issues_per_year }} numéros par année
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </dd>
           {% endif %}
 
           {% if journal.publication_period %}
-          <dt>{% trans "Période de publication" %}</dt>
-          <dd>{{ journal.publication_period }} <span class="hint--top hint--no-animate" data-hint="{% trans 'Numéros disponibles sur la plateforme Érudit' %}"><i class="icon ion-ios-help-circle"></i></span></dd>
+          <dt>{% translate "Période de publication" %}</dt>
+          <dd>{{ journal.publication_period }} <span class="hint--top hint--no-animate" data-hint="{% translate 'Numéros disponibles sur la plateforme Érudit' %}"><i class="icon ion-ios-help-circle"></i></span></dd>
           {% endif %}
 
           {% if journal.first_issue_published_on_erudit %}
-          <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
+          <dt>{% translate "Disponible dans Érudit depuis" %}</dt>
           <dd>{{ journal.first_issue_published_on_erudit.date_published|date:"Y" }}</dd>
           {% endif %}
 
-          <dt>{% trans "Type de support" %}</dt>
+          <dt>{% translate "Type de support" %}</dt>
           <dd>
             {% if journal.paper %}
-            {% trans "Numérique et papier" %}
+            {% translate "Numérique et papier" %}
             {% else %}
-            {% trans "Numérique" %}
+            {% translate "Numérique" %}
             {% endif %}
           </dd>
 
           {% if journal_languages %}
           <dt>
-            {% blocktrans count journal_languages|length as languages_count %}
+            {% blocktranslate count journal_languages|length as languages_count %}
             Langue
             {% plural %}
             Langues
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </dt>
 
             {% for lang_code in journal_languages %}
@@ -222,11 +222,11 @@
 
           {% if journal.disciplines.all|length > 0 %}
           <dt>
-            {% blocktrans count journal.disciplines.all|length as disciplines_count %}
+            {% blocktranslate count journal.disciplines.all|length as disciplines_count %}
             Discipline
             {% plural %}
             Disciplines
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </dt>
           <dd>
             {% for discipline in journal.disciplines.all %}
@@ -236,11 +236,11 @@
           {% endif %}
 
           {% if journal.previous_journal %}
-          <dt>{% trans "Revue précédée de…" %}</dt>
+          <dt>{% translate "Revue précédée de…" %}</dt>
           <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.formatted_title }}</a></dd>
           {% endif %}
           {% if journal.next_journal %}
-          <dt>{% trans "Revue suivie de…" %}</dt>
+          <dt>{% translate "Revue suivie de…" %}</dt>
           <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.formatted_title }}</a></dd>
           {% endif %}
 
@@ -253,7 +253,7 @@
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
               data-src="{% journal_logo_url journal %}"
-              alt="{% trans 'Logo pour'%} {{ journal_formatted_title }}"
+              alt="{% translate 'Logo pour'%} {{ journal_formatted_title }}"
               class="lazyload img-responsive journal_logo"
             />
           </a>
@@ -263,20 +263,20 @@
 
       {% if journal_info.email or journal_info.subscription_email or journal_info.phone %}
       <section class="sidebar-block">
-        <h2>{% trans "Coordonnées" %}</h2>
+        <h2>{% translate "Coordonnées" %}</h2>
         <dl>
           {% if journal_info.email %}
-          <dt>{% trans "Courriel général" %}</dt>
-          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal_formatted_title|urlencode }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
+          <dt>{% translate "Courriel général" %}</dt>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal_formatted_title|urlencode }}%20–%20{% translate 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
           {% endif %}
 
           {% if journal_info.subscription_email %}
-          <dt>{% trans "Pour abonnements individuels" %}</dt>
-          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal_formatted_title|urlencode }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
+          <dt>{% translate "Pour abonnements individuels" %}</dt>
+          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal_formatted_title|urlencode }}%20–%20{% translate 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
           {% endif %}
 
           {% if journal_info.phone %}
-          <dt>{% trans "Téléphone" %}</dt>
+          <dt>{% translate "Téléphone" %}</dt>
           <dd><a href="tel:{{ journal_info.phone }}">{{ journal_info.phone }}</a></dd>
           {% endif %}
         </dl>
@@ -285,7 +285,7 @@
 
       {% if journal_info.facebook_url or journal_info.twitter_url %}
       <section class="sidebar-block">
-        <h2>{% trans 'Sur les réseaux sociaux' %}</h2>
+        <h2>{% translate 'Sur les réseaux sociaux' %}</h2>
         {% if journal_info.twitter_url %}
         <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal_formatted_title }}</a> <script async src="https://platform.twitter.com/widgets.js"></script>
         {% endif %}
@@ -297,7 +297,7 @@
 
       {% if journal_info.partners %}
       <section class="sidebar-block">
-        <h2>{% trans "Partenaires" %}</h2>
+        <h2>{% translate "Partenaires" %}</h2>
         {{ journal_info.partners|safe }}
       </section>
       {% endif %}
@@ -306,13 +306,13 @@
       {# because it has to vary based on the current user subscription. #}
       {% nocache %}
       <section class="sidebar-block">
-        <h2>{% trans "Accès" %}</h2>
+        <h2>{% translate "Accès" %}</h2>
         {% if content_access_granted and subscription_type == 'individual' %}
-        <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
+        <p><em>{% translate "Vous êtes abonné à cette revue." %}</em></p>
         {% endif %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
         <p>
-          <a href="{% trans 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
+          <a href="{% translate 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">{% translate "Politique et licence d’utilisation" %}</a>
         </p>
       </section>
       {% endnocache %}

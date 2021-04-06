@@ -5,23 +5,23 @@
 {% block title %}{{ question }} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
-<li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% translate "Dépôt de fichiers" %}</a></li>
+<li><a href="#">{{ object.year }}, {% if object.volume %}{% translate "vol." %} {{ object.volume }},{% endif %} {% translate "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Approbation des fichiers" %}
+{% translate "Approbation des fichiers" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans trimmed with question=question %}
+{% blocktranslate trimmed with question=question %}
 <h2>Rappel</h2>
 <ul>
   <li>Faire le backup des fichiers</li>
   <li>Ajouter le numéro au calendrier de production</li>
   <li>Assigner le numéro à un ou une technicienne</li>
 </ul>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
@@ -40,8 +40,8 @@
     <br />
     {% endif %}
     <input type="hidden" name="post" value="yes" />
-    <input type="submit" value="{% trans "Approuver" %}" class="btn btn-primary" />
-    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
+    <input type="submit" value="{% translate "Approuver" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% translate "Retour" %}</a>
   </form>
 </div>
 {% endblock content_main %}

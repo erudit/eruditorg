@@ -70,7 +70,7 @@
           </xsl:if>
           <xsl:if test="liminaire/grauteur/auteur/contribution or liminaire/grauteur/auteur/affiliation or liminaire/grauteur/auteur/courriel or liminaire/grauteur/auteur/siteweb or liminaire/grauteur/auteur/nompers/suffixe">
             <div class="akkordion doc-head__more-info" data-akkordion-single="true">
-              <p class="akkordion-title">{% trans '…plus d’informations' %} <span class="icon ion-ios-arrow-down"></span></p>
+              <p class="akkordion-title">{% translate '…plus d’informations' %} <span class="icon ion-ios-arrow-down"></span></p>
               <ul class="akkordion-content unstyled">
                 <xsl:apply-templates select="liminaire/grauteur/auteur" mode="affiliations"/>
               </ul>
@@ -84,28 +84,28 @@
                 <div>
                   <p>
                     <strong>
-                    {% trans "L’accès à cet article est réservé aux abonnés." %}
+                    {% translate "L’accès à cet article est réservé aux abonnés." %}
                     {% if article.abstracts %}
-                    {% trans "Seul le résumé sera affiché." %}
+                    {% translate "Seul le résumé sera affiché." %}
                     {% elif article.processing == 'C' %}
-                    {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
+                    {% translate "Seuls les 600 premiers mots du texte seront affichés." %}
                     {% elif can_display_first_pdf_page %}
-                    {% trans "Seule la première page du PDF sera affichée." %}
+                    {% translate "Seule la première page du PDF sera affichée." %}
                     {% endif %}
                     </strong>
                   </p>
-                  <p>{% trans "Options d’accès&#160;:" %}</p>
+                  <p>{% translate "Options d’accès&#160;:" %}</p>
                   <ul>
-                    <li><p>{% trans "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”." %}</p></li>
-                    <li><p>{% trans "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. <a href='https://www.erudit.org/fr/compte/connexion/'>Connectez-vous</a> si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel." %}</p></li>
+                    <li><p>{% translate "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”." %}</p></li>
+                    <li><p>{% translate "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. <a href='https://www.erudit.org/fr/compte/connexion/'>Connectez-vous</a> si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel." %}</p></li>
                   </ul>
                   <p>
-                    {% blocktrans trimmed with code=article.issue.journal.code %}
+                    {% blocktranslate trimmed with code=article.issue.journal.code %}
                     Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les derniers numéros de cette revue sont sous restriction. <a href="https://www.erudit.org/fr/revues/{{ code }}/#back-issues">L’ensemble des numéros antérieurs</a> est consultable librement sur la plateforme.
-                    {% endblocktrans %}
+                    {% endblocktranslate %}
                   </p>
-                  <a class="btn btn-primary" target="_blank" href="{% trans 'https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform' %}">
-                    {% trans "Options d’accès" %}
+                  <a class="btn btn-primary" target="_blank" href="{% translate 'https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform' %}">
+                    {% translate "Options d’accès" %}
                   </a>
                 </div>
               </div>
@@ -113,7 +113,7 @@
               {% if not article.publication_allowed %}
               <div class="alert">
                 <p>
-                  {% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}
+                  {% translate 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}
                 </p>
               </div>
               {% endif %}
@@ -123,7 +123,7 @@
 
         <!-- issue cover image or journal logo -->
         <div class="col-md-3">
-          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal_formatted_title %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
+          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktranslate with journal=article.issue.journal_formatted_title %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktranslate %}">
             {% if article.issue.has_coverpage %}
             <div class="doc-head__img coverpage">
               {# The image's src is a transparent pixel placeholder. #}
@@ -134,7 +134,7 @@
                 width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
                 height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
                 class="lazyload img-responsive"
-                alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal_formatted_title }}"
+                alt="{% translate 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal_formatted_title }}"
               />
             </div>
             {% elif article.issue.journal.has_logo %}
@@ -144,13 +144,13 @@
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                 data-src="{% journal_logo_url article.issue.journal %}"
                 class="lazyload img-responsive"
-                alt="{% trans 'Logo de' %} {{ article.issue.journal_formatted_title }}"
+                alt="{% translate 'Logo de' %} {{ article.issue.journal_formatted_title }}"
               />
             </div>
             {% endif %}
           </a>
           {% if not display_full_article and article.publication_allowed %}
-          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
+          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% translate "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
         </div>
       </div>
@@ -160,15 +160,15 @@
         <div class="col-sm-6 doc-head__metadata">
           <xsl:apply-templates select="liminaire/erratum"/>
           <xsl:apply-templates select="admin/histpapier"/>
-          <p>{% trans "Diffusion numérique&#160;" %}: {{ article.issue.date_published }}</p>
+          <p>{% translate "Diffusion numérique&#160;" %}: {{ article.issue.date_published }}</p>
           <dl class="mono-space idpublic">
             <dt>URI</dt>
             <dd>
-              <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
+              <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier l'URI de cet article.{% endblocktranslate %}">
                 <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
                   https://id.erudit.org/iderudit/{{ article.localidentifier }}
-                  <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-                  <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+                  <span class="clipboard-msg clipboard-success">{% translate "adresse copiée" %}</span>
+                  <span class="clipboard-msg clipboard-error">{% translate "une erreur s'est produite" %}</span>
                 </a>
               </span>
             </dd>
@@ -176,11 +176,11 @@
             {% if article.url_doi %}
               <dt>DOI</dt>
               <dd>
-                <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
+                <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier le DOI de cet article.{% endblocktranslate %}">
                   <a href="{{ article.url_doi }}" class="clipboard-data">
                     {{ article.url_doi }}
-                    <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-                    <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+                    <span class="clipboard-msg clipboard-success">{% translate "adresse copiée" %}</span>
+                    <span class="clipboard-msg clipboard-error">{% translate "une erreur s'est produite" %}</span>
                   </a>
                 </span>
               </dd>
@@ -191,18 +191,18 @@
         <!-- journal metadata -->
         <div class="col-sm-6 doc-head__metadata">
           <p>
-            {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
+            {% blocktranslate %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktranslate %}
             <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal_formatted_title }}</a>
             {# Peer review seal #}
             {% if article.issue.journal.type.code == 'S' and article.erudit_object.get_article_type == 'article' %}
             <xsl:text>&#160;</xsl:text>
-            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% translate 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
             </span>
             {% endif %}
           </p>
           <xsl:if test="../article/@typeart = 'compterendu'">
-            <p><small>{% trans "Ce document est le compte-rendu d'une autre oeuvre tel qu'un livre ou un film. L'oeuvre originale discutée ici n'est pas disponible sur cette plateforme." %}</small></p>
+            <p><small>{% translate "Ce document est le compte-rendu d'une autre oeuvre tel qu'un livre ou un film. L'oeuvre originale discutée ici n'est pas disponible sur cette plateforme." %}</small></p>
           </xsl:if>
           <p class="refpapier">
             <xsl:apply-templates select="admin/numero" mode="refpapier"/>
@@ -213,7 +213,7 @@
           </p>
           {% nocache %}
           {% if content_access_granted and subscription_type == 'individual' %}
-          <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
+          <p><strong>{% translate "Vous êtes abonné à cette revue." %}</strong></p>
           {% endif %}
           {% endnocache %}
           <xsl:apply-templates select="admin/droitsauteur"/>
@@ -230,17 +230,17 @@
         <!-- article outline -->
         {% if article.publication_allowed %}
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents">
-          <h2>{% trans "Plan de l’article" %}</h2>
+          <h2>{% translate "Plan de l’article" %}</h2>
           <ul class="unstyled">
             <li>
               <a href="#article-header">
-                <em>{% trans "Retour au début" %}</em>
+                <em>{% translate "Retour au début" %}</em>
               </a>
             </li>
             {% if display_abstracts %}
             <xsl:if test="//resume">
               <li>
-                <a href="#resume">{% trans "Résumé" %}</a>
+                <a href="#resume">{% translate "Résumé" %}</a>
               </li>
             </xsl:if>
             {% endif %}
@@ -256,8 +256,8 @@
             {% if article.processing == 'M' and article.localidentifier and article.publication_allowed %}
               {% if content_access_granted and display_full_article or not article.abstracts and display_abstracts and can_display_first_pdf_page %}
               <li>
-                <a href="#pdf-viewer" id="pdf-viewer-menu-link">{% trans 'Texte intégral (PDF)' %}</a>
-                <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" id="pdf-download-menu-link" target="_blank">{% trans 'Texte intégral (PDF)' %}</a>
+                <a href="#pdf-viewer" id="pdf-viewer-menu-link">{% translate 'Texte intégral (PDF)' %}</a>
+                <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" id="pdf-download-menu-link" target="_blank">{% translate 'Texte intégral (PDF)' %}</a>
               </li>
               {% endif %}
             {% endif %}
@@ -311,12 +311,12 @@
             {% if content_access_granted and display_full_article %}
             <xsl:if test="//figure">
               <li>
-                <a href="#figures">{% trans "Liste des figures" %}</a>
+                <a href="#figures">{% translate "Liste des figures" %}</a>
               </li>
             </xsl:if>
             <xsl:if test="//tableau">
               <li>
-                <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
+                <a href="#tableaux">{% translate "Liste des tableaux" %}</a>
               </li>
             </xsl:if>
             {% endif %}
@@ -333,7 +333,7 @@
           {% nocache %}
           {% if content_access_granted and subscription_type == 'individual' %}
           <div class="text-center">
-            <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
+            <p><em>{% translate "Vous êtes abonné à cette revue." %}</em></p>
           </div>
           {% endif %}
           {% endnocache %}
@@ -348,11 +348,11 @@
         <!-- toolbox -->
         {% if article.publication_allowed %}
         <aside class="pull-right toolbox-wrapper">
-          <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
+          <h2 class="sr-only">{% translate "Boîte à outils" %}</h2>
           {% spaceless %}
           <ul class="unstyled toolbox">
             <li class="hidden-md hidden-lg">
-              <a class="scroll-top tool-btn tool-top" href="#top" title="{% trans 'Retourner en haut de la page' %}" aria-label="{% trans 'Retourner en haut de la page' %}">
+              <a class="scroll-top tool-btn tool-top" href="#top" title="{% translate 'Retourner en haut de la page' %}" aria-label="{% translate 'Retourner en haut de la page' %}">
                 <i class="icon ion-ios-arrow-up toolbox-top"></i>
               </a>
             </li>
@@ -361,11 +361,11 @@
             <li>
               <a class="tool-btn" id="tool-citation-save-{{ article.localidentifier }}" data-citation-save="#article-{{ article.localidentifier }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <i class="icon ion-ios-bookmark toolbox-save"></i>
-                <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                <span class="tools-label">{% translate "Sauvegarder" %}</span>
               </a>
               <a class="tool-btn saved" id="tool-citation-remove-{{ article.localidentifier }}" data-citation-remove="#article-{{ article.localidentifier }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <i class="icon ion-ios-bookmark toolbox-save"></i>
-                <span class="tools-label">{% trans "Supprimer" %}</span>
+                <span class="tools-label">{% translate "Supprimer" %}</span>
               </a>
             </li>
             {% endswitch %}
@@ -373,14 +373,14 @@
             <li>
               <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}">
                 <span class="toolbox-pdf">PDF</span>
-                <span class="tools-label">{% trans "Télécharger" %}</span>
+                <span class="tools-label">{% translate "Télécharger" %}</span>
               </a>
             </li>
             {% endif %}
             <li>
               <a class="tool-btn tool-cite inline" data-modal-id="#id_cite_modal_{{ article.localidentifier|slugify }}">
                 <i class="icon ion-ios-quote toolbox-cite"></i>
-                <span class="tools-label">{% trans "Citer cet article" %}</span>
+                <span class="tools-label">{% translate "Citer cet article" %}</span>
               </a>
             </li>
             <li>
@@ -389,7 +389,7 @@
                   {{ article.title|escape }}
                 </xsl:attribute>
                 <i class="icon ion-ios-share-alt toolbox-share"></i>
-                <span class="tools-label">{% trans "Partager" %}</span>
+                <span class="tools-label">{% translate "Partager" %}</span>
               </a>
             </li>
           </ul>
@@ -404,7 +404,7 @@
         <!-- abstracts & keywords -->
         <xsl:if test="//resume | //grmotcle">
           <section id="resume" role="complementary" class="article-section grresume">
-            <h2 class="sr-only">{% trans 'Résumés' %}</h2>
+            <h2 class="sr-only">{% translate 'Résumés' %}</h2>
             <xsl:for-each select="//resume">
               <!-- if the abstract is the main one, make sure it appears first -->
               <xsl:sort select="number(contains(/article/@lang, @lang)) * -1"/>
@@ -432,14 +432,14 @@
           {% if article.processing == 'C' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
-            <h2 class="sr-only">{% trans "Corps de l’article" %}</h2>
+            <h2 class="sr-only">{% translate "Corps de l’article" %}</h2>
             <xsl:apply-templates select="//corps"/>
           </section>
           {% elif article.localidentifier %}
           <section id="pdf">
             <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
             <div id="pdf-download" class="text-center alert-warning">
-              <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% trans 'Télécharger' %}</a></p>
+              <p>{% translate 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% translate 'Télécharger' %}</a></p>
             </div>
           </section>
           {% endif %}
@@ -467,7 +467,7 @@
         {% if content_access_granted and display_full_article %}
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
-            <h2>{% trans "Liste des figures" %}</h2>
+            <h2>{% translate "Liste des figures" %}</h2>
             <xsl:for-each select="//grfigure | //figure[name(..) != 'grfigure']">
               <xsl:apply-templates select=".">
                 <xsl:with-param name="mode" select="'liste'"/>
@@ -478,7 +478,7 @@
 
         <xsl:if test="//tableau">
           <section id="tableaux" class="article-section tableaux" role="complementary">
-            <h2>{% trans "Liste des tableaux" %}</h2>
+            <h2>{% translate "Liste des tableaux" %}</h2>
             <xsl:for-each select="//grtableau | //tableau[name(..) != 'grtableau']">
               <xsl:apply-templates select=".">
                 <xsl:with-param name="mode" select="'liste'"/>
@@ -526,10 +526,10 @@
   <!-- article type -->
   <xsl:template match="@typeart">
     <xsl:choose>
-      <xsl:when test="$typeudoc = 'article'">{% trans "Un article" %}</xsl:when>
-      <xsl:when test="$typeudoc = 'compterendu'">{% trans "Un compte rendu" %}</xsl:when>
-      <xsl:when test="$typeudoc = 'note'">{% trans "Une note" %}</xsl:when>
-      <xsl:otherwise>{% trans "Un document" %}</xsl:otherwise>
+      <xsl:when test="$typeudoc = 'article'">{% translate "Un article" %}</xsl:when>
+      <xsl:when test="$typeudoc = 'compterendu'">{% translate "Un compte rendu" %}</xsl:when>
+      <xsl:when test="$typeudoc = 'note'">{% translate "Une note" %}</xsl:when>
+      <xsl:otherwise>{% translate "Un document" %}</xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
@@ -545,7 +545,7 @@
     <span class="{name()}">
       <xsl:choose>
         <xsl:when test="current() = '' or normalize-space() = '&#160;'">
-          <xsl:text>{% trans "[Article sans titre]" %}</xsl:text>
+          <xsl:text>{% translate "[Article sans titre]" %}</xsl:text>
         </xsl:when>
         <xsl:otherwise>
           <xsl:apply-templates select="."/>
@@ -600,7 +600,7 @@
       </xsl:choose>
       <xsl:choose>
         <xsl:when test="position() = last()-1">
-          <xsl:text> {% trans 'et' %} </xsl:text>
+          <xsl:text> {% translate 'et' %} </xsl:text>
         </xsl:when>
         <xsl:when test="position() != last()">
           <xsl:text>, </xsl:text>
@@ -667,9 +667,9 @@
   <xsl:template match="article/liminaire/erratum">
     <xsl:for-each select=".">
       <p class="{name()}">
-        {% blocktrans %}
+        {% blocktranslate %}
         --> Voir l’<a href="{@href}"><strong>erratum</strong></a> concernant cet article
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </p>
     </xsl:for-each>
   </xsl:template>
@@ -700,7 +700,7 @@
 
   <xsl:template match="numero/volume">
     <span class="{name()}">
-      <xsl:text>{% blocktrans %}Volume&#160;{% endblocktrans %}</xsl:text>
+      <xsl:text>{% blocktranslate %}Volume&#160;{% endblocktranslate %}</xsl:text>
       <xsl:value-of select="."/>
     </span>
   </xsl:template>
@@ -708,7 +708,7 @@
   <xsl:template match="numero/nonumero[1]">
     <!-- template for first occurence of nonumero only; this allows the display of issues like Numéro 3-4 or Numéro 1-2-3 -->
     <span class="{name()}">
-      <xsl:text>{% blocktrans %}Numéro&#160;{% endblocktrans %}</xsl:text>
+      <xsl:text>{% blocktranslate %}Numéro&#160;{% endblocktranslate %}</xsl:text>
       <!-- check if there are nonumero siblings -->
       <xsl:for-each select="parent::numero/nonumero">
         <xsl:value-of select="."/>
@@ -730,7 +730,7 @@
       <xsl:text>, </xsl:text>
       <xsl:choose>
         <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
-        <xsl:otherwise>{% trans 'p.' %}&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
+        <xsl:otherwise>{% translate 'p.' %}&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
       </xsl:choose>
     </xsl:if>
   </xsl:template>
@@ -871,7 +871,7 @@
     <xsl:element name="sup">
       <xsl:if test="@traitementparticulier = 'oui'">
         <xsl:attribute name="class">
-          <xsl:text>{% trans "special" %}</xsl:text>
+          <xsl:text>{% translate "special" %}</xsl:text>
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="syntaxe_texte_affichage">
@@ -884,7 +884,7 @@
     <xsl:element name="sub">
       <xsl:if test="@traitementparticulier">
         <xsl:attribute name="class">
-          <xsl:text>{% trans "special" %}</xsl:text>
+          <xsl:text>{% translate "special" %}</xsl:text>
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="syntaxe_texte_affichage">
@@ -1142,7 +1142,7 @@
       <xsl:if test="titre">
         <xsl:element name="h3">
           <xsl:if test="titre/@traitementparticulier">
-            <xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
+            <xsl:attribute name="class">{% translate "special" %}</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates select="titre"/>
         </xsl:element>
@@ -1155,7 +1155,7 @@
       <xsl:if test="titre">
         <xsl:element name="h4">
           <xsl:if test="titre/@traitementparticulier">
-            <xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
+            <xsl:attribute name="class">{% translate "special" %}</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates select="titre"/>
         </xsl:element>
@@ -1168,7 +1168,7 @@
       <xsl:if test="titre">
         <xsl:element name="h5">
           <xsl:if test="titre/@traitementparticulier">
-            <xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
+            <xsl:attribute name="class">{% translate "special" %}</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates select="titre"/>
         </xsl:element>
@@ -1181,7 +1181,7 @@
       <xsl:if test="titre">
         <xsl:element name="h6">
           <xsl:if test="titre/@traitementparticulier">
-            <xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
+            <xsl:attribute name="class">{% translate "special" %}</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates select="titre"/>
         </xsl:element>
@@ -1195,7 +1195,7 @@
         <xsl:element name="h6">
           <xsl:attribute name="class">h7</xsl:attribute>
           <xsl:if test="titre/@traitementparticulier">
-            <xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
+            <xsl:attribute name="class">{% translate "special" %}</xsl:attribute>
           </xsl:if>
           <xsl:apply-templates select="titre"/>
         </xsl:element>
@@ -1338,7 +1338,7 @@
       </div>
       <xsl:if test="not($mode)">
         <p class="voirliste">
-          <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::grfigure">figures</xsl:if><xsl:if test="self::grtableau">tableaux</xsl:if>{% endblocktrans %}</a>
+          <a href="#li{@id}">{% blocktranslate %}-> Voir la liste des <xsl:if test="self::grfigure">figures</xsl:if><xsl:if test="self::grtableau">tableaux</xsl:if>{% endblocktranslate %}</a>
         </p>
       </xsl:if>
     </div>
@@ -1385,7 +1385,7 @@
       </div>
       <xsl:if test="not($mode) and name(..) != 'grfigure' and name(..) != 'grtableau'">
         <p class="voirliste">
-          <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
+          <a href="#li{@id}">{% blocktranslate %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktranslate %}</a>
         </p>
       </xsl:if>
     </figure>
@@ -1396,7 +1396,7 @@
     <xsl:if test="position() != 1">
       <figcaption>
         <p class="no-continuation">
-          <xsl:apply-templates select="../no"/>&#160;<span>{% trans '(suite)' %}</span>
+          <xsl:apply-templates select="../no"/>&#160;<span>{% translate '(suite)' %}</span>
         </p>
       </figcaption>
     </xsl:if>
@@ -1699,7 +1699,7 @@
     <xsl:variable name="nomAud" select="@*[local-name()='href']"/>
     <audio class="media-object" id="{@id}" preload="metadata" controls="controls">
       <source src="https://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}" />
-      <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à jour.' %}</em></p>
+      <p><em>{% translate 'Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à jour.' %}</em></p>
     </audio>
   </xsl:template>
 
@@ -1710,7 +1710,7 @@
     <div class="embed-responsive" style="padding-bottom: {$padding-bottom}%">
       <video class="embed-responsive-item" id="{@id}" preload="metadata" controls="controls">
         <source src="https://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4" />
-        <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
+        <p><em>{% translate 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
       </video>
     </div>
   </xsl:template>
@@ -2261,7 +2261,7 @@
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
     <section class="{name()} col-xs-12">
-      <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
+      <h2 class="sr-only">{% translate 'Parties annexes' %}</h2>
       {% if content_access_granted and display_full_article %}
       <xsl:apply-templates select="grannexe"/>
       <xsl:apply-templates select="merci"/>
@@ -2522,7 +2522,7 @@
     <xsl:element name="sup">
       <xsl:if test="@traitementparticulier = 'oui'">
         <xsl:attribute name="class">
-          <xsl:text>{% trans "special" %}</xsl:text>
+          <xsl:text>{% translate "special" %}</xsl:text>
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="syntaxe_texte_affichage">
@@ -2535,7 +2535,7 @@
     <xsl:element name="sub">
       <xsl:if test="@traitementparticulier">
         <xsl:attribute name="class">
-          <xsl:text>{% trans "special" %}</xsl:text>
+          <xsl:text>{% translate "special" %}</xsl:text>
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="syntaxe_texte_affichage">
@@ -2574,7 +2574,7 @@
     <xsl:param name="suffixes"/>
     <xsl:if test="$nompers[@typenompers = 'pseudonyme']">
       <xsl:text> </xsl:text>
-      <xsl:text>{% trans "alias" %}</xsl:text>
+      <xsl:text>{% translate "alias" %}</xsl:text>
       <xsl:text> </xsl:text>
     </xsl:if>
     <xsl:if test="$nompers/prefixe/node()">

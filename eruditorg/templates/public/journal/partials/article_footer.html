@@ -3,7 +3,7 @@
 {% with articles=related_articles %}
 {% if articles %}
 <footer class="container">
-  <h2>{% trans "Autres articles de cette revue" %}</h2>
+  <h2>{% translate "Autres articles de cette revue" %}</h2>
   <div class="row">
     {% get_current_language as LANGUAGE_CODE %}
     {% for related_article in articles %}
@@ -11,7 +11,7 @@
       <a href="{% if not related_article.has_external_url %}/{{ LANGUAGE_CODE }}{% endif %}{% if related_article.urlhtml %}{{ related_article.urlhtml }}{% else %}{{ related_article.urlpdf }}{% endif %}" class="card">
         <h3 class="card__title">{{ related_article.html_title|safe }}</h3>
         {% if related_article.authors %}
-        <p class="card__metadata">{% trans 'Par' %} {{ related_article.authors }}</p>
+        <p class="card__metadata">{% translate 'Par' %} {{ related_article.authors }}</p>
         {% endif %}
       </a>
     </article>

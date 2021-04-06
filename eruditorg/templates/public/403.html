@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "403. Permission refusée" %}{% endblock title %}
+{% block title %}{% translate "403. Permission refusée" %}{% endblock title %}
 
 {% block meta_tags %}<meta name="robots" content="noindex">{% endblock %}
 
@@ -11,7 +11,7 @@
 <main class="glory">
   <div class="container">
     <header class="main-header">
-      <h1>{% trans "Permission refusée" %}</h1>
+      <h1>{% translate "Permission refusée" %}</h1>
     </header>
     <div class="ascii-error">
       <pre>
@@ -30,9 +30,9 @@ d8eeeee88888eer 48888X   88888  :@88N   '8888N
     </div>
     <p>
       {% url 'public:home' as home %}
-      {% blocktrans %}
+      {% blocktranslate %}
       L’accès à cette page vous est refusé. Veuillez vérifier l’adresse ou retourner à la <a href="{{ home }}">page d’accueil</a>. <br/> Pour plus d'informations, communiquez avec nous à l'adresse&nbsp;: <a href="mailto:info@erudit.org?subject=Erreur 403 - erudit.org">info@erudit.org</a>.
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </p>
   </div>
 </main>

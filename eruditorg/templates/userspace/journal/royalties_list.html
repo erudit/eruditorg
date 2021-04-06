@@ -1,19 +1,19 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Rapport de redevances" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Rapport de redevances" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:royalty_reports' journal_pk=scope_current_journal.pk %}">{% trans "Rapports de redevances" %}</a></li>
+<li><a href="{% url 'userspace:journal:royalty_reports' journal_pk=scope_current_journal.pk %}">{% translate "Rapports de redevances" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Redevances" %}
+{% translate "Redevances" %}
 {% endblock %}
 
 {% block content_main %}
 <section class="akkordion" data-akkordion-single="true">
-    <h2 class="akkordion-title">{% trans "Rapports de redevances" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <h2 class="akkordion-title">{% translate "Rapports de redevances" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
     <div class="akkordion-content">
         {% for year, files in view.get_royalties_reports.items %}
         <hr />
@@ -37,7 +37,7 @@
 <hr />
 <hr />
 <section class="akkordion" data-akkordion-single="true">
-    <h2 class="akkordion-title">{% trans "Avis de dépôts" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <h2 class="akkordion-title">{% translate "Avis de dépôts" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
     <div class="akkordion-content">
         {% for year, files in view.get_deposit_notices.items %}
         <hr />

@@ -1,7 +1,7 @@
 {% extends "public/search/base.html" %}
 {% load adv_cache i18n static widget_tweaks %}
 
-{% block title %}{% trans "Résultats de recherche" %}{% endblock title %}
+{% block title %}{% translate "Résultats de recherche" %}{% endblock title %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -28,7 +28,7 @@
 
 {% block breadcrumb %}
 {{ block.super }}
-<li><a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a></li>
+<li><a href="{{ request.get_full_path }}">{% translate "Résultats" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -40,34 +40,34 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h1>{% trans "Résultats de recherche" %}</h1>
+          <h1>{% translate "Résultats de recherche" %}</h1>
           <div class="main-header__intro">
             {% if results.results %}
             <p>
-              {% blocktrans trimmed count counter=results.pagination.count %}
+              {% blocktranslate trimmed count counter=results.pagination.count %}
               <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
               {% plural %}
               <strong>{{ counter }}</strong> résultats trouvés pour la requête&nbsp;:
-              {% endblocktrans %}
+              {% endblocktranslate %}
             </p>
             {% else %}
-            <p><strong>0</strong> {% trans "résultat trouvé pour la requête&nbsp;:" %}</p>
+            <p><strong>0</strong> {% translate "résultat trouvé pour la requête&nbsp;:" %}</p>
             {% endif %}
             {% if search_elements %}
             <p class="search-query">
               {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
             </p>
             {% endif %}
-            <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
+            <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% translate "Modifier la requête" %}</a></p>
           </div>
         </div>
         {% if results.results %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
-            <a href="#" id="id_save_search" class="btn btn-secondary">{% trans "Sauvegarder ces résultats" %}</a>
+            <a href="#" id="id_save_search" class="btn btn-secondary">{% translate "Sauvegarder ces résultats" %}</a>
             {% url 'public:search:advanced_search' as advanced_search %}
-            {% blocktrans %}
+            {% blocktranslate %}
             <p>Voir mon <a href="{{ advanced_search }}#search-history"><strong>historique</strong></a></p>
-            {% endblocktrans %}
+            {% endblocktranslate %}
         </div>
         {% endif %}
       </div>
@@ -82,7 +82,7 @@
         {# Filter form #}
         <form action="{% url 'public:search:results' %}" id="id-search" class="result-search-form" method="get">
           <aside class="col-md-3">
-            <h2>{% trans "Filtres" %}</h2>
+            <h2>{% translate "Filtres" %}</h2>
             {# Search form #}
             <div class="hidden">
                 {{ search_form.basic_search_term }}
@@ -129,7 +129,7 @@
               {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
               {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_funds %}
               <div class="form-action text-right">
-                <button type="submit" class="btn btn-primary">{% trans "Filtrer" %}</button>
+                <button type="submit" class="btn btn-primary">{% translate "Filtrer" %}</button>
               </div>
             </fieldset>
             {% endif %}
@@ -137,7 +137,7 @@
 
           {# Number of results and sort options #}
           <aside class="col-md-8 col-md-offset-1">
-            <h2 class="sr-only">{% trans "Options de tris" %}</h2>
+            <h2 class="sr-only">{% translate "Options de tris" %}</h2>
             <fieldset class="results-options">
               <div class="row">
                   <div class="col-xs-6 col-md-4 col-md-offset-4">
@@ -164,11 +164,11 @@
         </form>
         {# Search results #}
         <section id="search-results" class="col-md-8 col-md-offset-1 search-results">
-          <h2 class="sr-only">{% trans "Documents repérés" %}</h2>
+          <h2 class="sr-only">{% translate "Documents repérés" %}</h2>
           {% include "public/search/partials/results_pagination.html" %}
           {% csrf_token %}
           <ol class="results">
-            {% trans "inconnu" as i18n_unknown %}
+            {% translate "inconnu" as i18n_unknown %}
             {% for document in results.results %}
             <li class="row result" id="document-{{ forloop.counter }}" data-document-id="{{ document.solr_id }}" {% if document.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
@@ -190,28 +190,28 @@
                   <p class="col-sm-8">
                     {# metadata for articles #}
                     {% if document.document_type == 'generic' %}
-                      <em><a href="{{ document.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ document.series_display }}</a></em> ({{ document.collection_display }})
+                      <em><a href="{{ document.journal_url }}" title="{% translate 'Consulter la revue' %}">{{ document.series_display }}</a></em> ({{ document.collection_display }})
                       <br/>
                     {% endif %}
 
                     {% if document.document_type == 'article' %}
                     {% with article=document %}
                       {% if article.type == 'autre' or article.type == 'Autre' %}
-                        {% trans 'Document' %}
+                        {% translate 'Document' %}
                       {% else %}
                         <strong>{{ article.type_display }}</strong>
                       {% endif %}
                       {# document type for articles #}
-                      {% if article.type == 'note' or article.type == 'Note' %}{% trans 'publiée' %}{% else %}{% trans 'publié' %}{% endif %}
+                      {% if article.type == 'note' or article.type == 'Note' %}{% translate 'publiée' %}{% else %}{% translate 'publié' %}{% endif %}
                       {# journal type and collection #}
-                      {% trans "dans" %}
+                      {% translate "dans" %}
 
                       {% if document.journal_url %}
-                      <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series_display }}</a></em>
+                      <em><a href="{{ article.journal_url }}" title="{% translate 'Consulter la revue' %}">{{ article.series_display }}</a></em>
                       {% else %}
                       <em>{{ document.series_display }}</em>
                       {% endif %}
-                      ({% if article.journal_type == 'C' %}{% trans "culturelle" %}{% elif article.journal_type == 'S' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection_display }})
+                      ({% if article.journal_type == 'C' %}{% translate "culturelle" %}{% elif article.journal_type == 'S' %}{% translate "savante" %}{% endif %}, {% translate "fonds" %} {{ article.collection_display }})
                       <br/>
                       {# issue theme #}
                     {% endwith %}
@@ -220,22 +220,22 @@
                     {% if document.series_display %}{{ document.series_display }}{% endif %}
                     {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}
-                      {% trans "Thèse" %} {% trans "déposée à" %}
+                      {% translate "Thèse" %} {% translate "déposée à" %}
                       {{ document.collection_display }}
                     {# metadata for books #}
                     {% elif document.document_type == 'book' %}
                       {% if document.pages %}
-                        <span>{% if document.series_display %}{{ document.series_display }}, {% endif %}{% if document.volume %}{% trans "Volume" %} {{ document.volume }}, {% endif %}{% if document.year %}{{ document.year }}, {% endif %}{{ document.pages }}</span>
+                        <span>{% if document.series_display %}{{ document.series_display }}, {% endif %}{% if document.volume %}{% translate "Volume" %} {{ document.volume }}, {% endif %}{% if document.year %}{{ document.year }}, {% endif %}{{ document.pages }}</span>
                       {% endif %}
                     {% endif %}
 
                   </p>
                   <p class="col-sm-8">
                     {% if document.volume %}
-                    <span>{% trans "Volume" %} {{ document.volume }}, </span>
+                    <span>{% translate "Volume" %} {{ document.volume }}, </span>
                     {% endif %}
                     {% if document.numero %}
-                    <span>{% trans "Numéro" %} {{ document.numero }}, </span>
+                    <span>{% translate "Numéro" %} {{ document.numero }}, </span>
                     {% endif %}
                     {% if document.year %}
                     <span>{{ document.year }}</span>
@@ -245,11 +245,11 @@
                     {# publication date for all document types #}
                     {% if document.document_type == 'article' %}
                     {% if document.issue_url %}
-                    <a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">
-                      {% trans "Année de diffusion :" %} {{ document.publication_year|safe }}
+                    <a href="{{ document.issue_url }}" title="{% translate 'Consulter le numéro' %}">
+                      {% translate "Année de diffusion :" %} {{ document.publication_year|safe }}
                     </a>
                     {% else %}
-                    {% trans "Année de diffusion :" %} {{ document.publication_year|safe }}
+                    {% translate "Année de diffusion :" %} {{ document.publication_year|safe }}
                     {% endif %}
                     {% endif %}
                   </p>
@@ -258,7 +258,7 @@
                   {% if document.issue_title %}
                   <p class="col-xs-12 issue-theme">
                     {% if document.issue_url %}
-                    <a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
+                    <a href="{{ document.issue_url }}" title="{% translate 'Consulter le numéro thématique' %}">
                       {{ document.issue_title|safe }}
                     </a>
                     {% else %}
@@ -272,7 +272,7 @@
                 {% if document.abstract or document.keywords %}
                 <div class="akkordion" data-akkordion-single="true">
                   <div class="akkordion-title abstract-title">
-                    {% trans "Plus d’information" %}
+                    {% translate "Plus d’information" %}
                     <i class="icon ion-ios-arrow-down"></i>
                   </div>
                   <div class="summary-content akkordion-content abstract">
@@ -287,7 +287,7 @@
                     {% endif %}
                     {% if document.keywords_display %}
                     <p>
-                      <strong>{% trans "Mots-clés&nbsp;:" %}</strong>
+                      <strong>{% translate "Mots-clés&nbsp;:" %}</strong>
                       {{ document.keywords_display }}
                     </p>
                     {% endif %}
@@ -306,25 +306,25 @@
                   <li>
                     <a class="tool-btn" id="tool-citation-save-{{ forloop.counter }}" data-citation-save="#document-{{ forloop.counter }}"{% if document.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                       <i class="icon ion-ios-bookmark toolbox-save"></i>
-                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                      <span class="tools-label">{% translate "Sauvegarder" %}</span>
                     </a>
                     <a class="tool-btn saved" id="tool-citation-remove-{{ forloop.counter }}" data-citation-remove="#document-{{ forloop.counter }}"{% if not document.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                       <i class="icon ion-ios-bookmark toolbox-save"></i>
-                      <span class="tools-label">{% trans "Supprimer" %}</span>
+                      <span class="tools-label">{% translate "Supprimer" %}</span>
                     </a>
                   </li>
                   {% if document.ajax_citation_modal_url %}
                   <li>
                     <a href="{{ document.ajax_citation_modal_url }}" class="tool-btn tool-cite ajax" id="{{ document.localidentifier|slugify }}">
                       <i class="icon ion-ios-quote toolbox-cite"></i>
-                      <span class="tools-label">{% trans "Citer cet article" %}</span>
+                      <span class="tools-label">{% translate "Citer cet article" %}</span>
                     </a>
                   </li>
                   {% elif document.document_type != 'article' %}
                   <li>
                     <a class="tool-btn tool-cite inline" data-modal-id="#id_cite_modal_{{ document.localidentifier|slugify }}" id="{{ document.localidentifier|slugify }}">
                       <i class="icon ion-ios-quote toolbox-cite"></i>
-                      <span class="tools-label">{% trans "Citer ce document" %}</span>
+                      <span class="tools-label">{% translate "Citer ce document" %}</span>
                     </a>
                   </li>
                   {% endif %}
@@ -335,16 +335,16 @@
                   <li>
                     <a class="tool-btn tool-download" data-href="{{ pdf_url }}">
                       <span class="toolbox-pdf">PDF</span>
-                      <span class="tools-label">{% trans "Télécharger" %}</span>
+                      <span class="tools-label">{% translate "Télécharger" %}</span>
                     </a>
                   </li>
                   {% endif %}
                   {% endwith %}
                   {% if document.processing == 'C' %}
                   <li>
-                    <a class="tool-btn" href="{{ document.url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                    <a class="tool-btn" href="{{ document.url }}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
                       <span class="toolbox-html">HTML</span>
-                      <span class="tools-label">{% trans "Lire en texte intégral" %}</span>
+                      <span class="tools-label">{% translate "Lire en texte intégral" %}</span>
                     </a>
                   </li>
                   {% endif %}
@@ -369,9 +369,9 @@
       {% else %}
       {# No results found #}
         <section class="col-xs-12 no-results">
-          <h3>{% trans "Aucun document trouvé&nbsp;!" %}</h3>
+          <h3>{% translate "Aucun document trouvé&nbsp;!" %}</h3>
           <p>
-            <a href="{% url 'public:search:advanced_search' %}" class="btn btn-primary">{% trans "Effectuer une nouvelle recherche" %}</a>
+            <a href="{% url 'public:search:advanced_search' %}" class="btn btn-primary">{% translate "Effectuer une nouvelle recherche" %}</a>
           </p>
         </section>
       {% endif %}

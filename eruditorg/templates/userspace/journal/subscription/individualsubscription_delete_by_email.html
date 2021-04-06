@@ -2,15 +2,15 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Supprimer un abonnement par courriel" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Supprimer un abonnement par courriel" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="#">{% trans "Supprimer un abonnement par courriel" %}</a></li>
+<li><a href="#">{% translate "Supprimer un abonnement par courriel" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
 {{ block.super }}
-<h2>{% trans "Supprimer un abonnement par courriel" %}</h2>
+<h2>{% translate "Supprimer un abonnement par courriel" %}</h2>
 <form  class="form-vertical" method="post" action="">{% csrf_token %}
   {% if form.non_field_errors %}
   <div class="col-xs-12">
@@ -28,7 +28,7 @@
   </div>
   <div class="form-group">
     <div class="controls">
-      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Supprimer' %}" type="submit"></input>
+      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% translate 'Supprimer' %}" type="submit"></input>
     </div>
   </div>
 </form>

@@ -1,16 +1,16 @@
 {% extends "public/auth/base_profile_edit.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans 'Modification du compte' %}{% endblock title %}
+{% block title %}{% translate 'Modification du compte' %}{% endblock title %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:auth:parameters' %}">{% trans "Modification du compte" %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:auth:parameters' %}">{% translate "Modification du compte" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class="row">
   <div class="col-xs-12">
-    <h2>{% trans "Modification du compte" %}</h2>
+    <h2>{% translate "Modification du compte" %}</h2>
   </div>
   <div class="col-xs-12">
     <form action="{% url 'public:auth:parameters' %}" id="id-login-form" method="post">
@@ -28,7 +28,7 @@
         {% endif %}
       </div>
       <div class="text-right">
-        <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+        <button type="submit" class="btn btn-primary" id="submit-id-submit">{% translate "Enregistrer" %}</button>
       </div>
     </form>
   </div>

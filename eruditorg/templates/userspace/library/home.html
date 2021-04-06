@@ -3,14 +3,14 @@
 
 {% block body_id %}dashboard-home{% endblock body_id %}
 
-{% block title %}{% trans "Tableau de bord" %} &ndash; {{ scope_current_organisation.name }}{% endblock title %}
+{% block title %}{% translate "Tableau de bord" %} &ndash; {{ scope_current_organisation.name }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:dashboard' %}">{% trans "Tableau de bord" %}</a></li>
+<li><a href="{% url 'userspace:dashboard' %}">{% translate "Tableau de bord" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Tableau de bord" %}
+{% translate "Tableau de bord" %}
 {% endblock %}
 
 {% block section_intro %}
@@ -27,7 +27,7 @@
 </div>
 {% endif %}
 
-{% blocktrans %}
+{% blocktranslate %}
 <p>Bienvenue dans le Tableau de bord de votre bibliothèque sur Érudit&nbsp;!</p>
 
 <p>Vous avez accès ici à tous les services et informations qui concernent l’abonnement aux revues d’Érudit souscrit par votre établissement&nbsp;: statistiques de consultation, plages d’adresses IP, logo institutionnel, gestion des collections, notices, etc.</p>
@@ -38,22 +38,22 @@
   <br>Bien cordialement,
   <br><br>L’équipe d’Érudit.
 </p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
-<h2><small>{% trans "Communiquer avec l’équipe d’Érudit" %}</small></h2>
+<h2><small>{% translate "Communiquer avec l’équipe d’Érudit" %}</small></h2>
 <ul class="unstyled row">
 
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans with organisation=scope_current_organisation.name %}
+        {% blocktranslate with organisation=scope_current_organisation.name %}
         Abonnements, consultations et accès&nbsp;:<br>
         Émilie Chouinard, <br>Chargée des partenariats<br>
         <a href="mailto:emilie.chouinard@erudit.org?subject=Tableau%20de%20bord%20–%20{{ organisation }}">emilie.chouinard@erudit.org</a><br>
         <a href="tel:1-514-343-6111,16563">+1 514-343-6111 poste 16563</a>
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </small>
     </p>
   </li>
@@ -61,9 +61,9 @@
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans with organisation=scope_current_organisation.name %}
+        {% blocktranslate with organisation=scope_current_organisation.name %}
         Pour toute autre question, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau%20de%20bord%20–%20{{ organisation }}">info@erudit.org</a>.
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </small>
     </p>
   </li>

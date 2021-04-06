@@ -10,30 +10,30 @@
 
 {% block body_id %}authorizations{% endblock body_id %}
 
-{% block title %}{% trans "Autorisations" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Autorisations" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% trans "Autorisations" %}</a></li>
+<li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% translate "Autorisations" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Autorisations" %}
+{% translate "Autorisations" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Cette section permet la gestion des autorisations pour modifier la page <em>À propos</em> et déposer des fichiers de production.</p>
 
 <p>Le nom et courriel des personnes autorisées à effectuer ces tâches doivent être transmis à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau de bord éditeur - Ajout d’un nouveau membre">edition@erudit.org</a>. La possibilité de donner une ou ces deux autorisations sera ensuite activée.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
 <ul class="authorizations-header">
   <li class="row">
-    <span class="col-xs-5 col-xs-offset-2">{% trans "Usager" %}</span>
-    <span class="col-xs-2">{% trans "Date <br>d’ajout" %}</span>
-    <span class="col-xs-2">{% trans "Dernière <br>connexion" %}</span>
+    <span class="col-xs-5 col-xs-offset-2">{% translate "Usager" %}</span>
+    <span class="col-xs-2">{% translate "Date <br>d’ajout" %}</span>
+    <span class="col-xs-2">{% translate "Dernière <br>connexion" %}</span>
   </li>
 </ul>
 
@@ -43,7 +43,7 @@
     {# Section title #}
     <div class="authorization-label">
       <h2 class="row">
-        <span class="col-xs-6">{% trans app_authorizations.label %}</span>
+        <span class="col-xs-6">{% translate app_authorizations.label %}</span>
       </h2>
     </div>
 
@@ -58,7 +58,7 @@
         <li class="col-xs-2">{{ auth.user.date_joined|date:"SHORT_DATE_FORMAT" }}</li>
         <li class="col-xs-2">{{ auth.user.last_login|date:"SHORT_DATE_FORMAT" }}</li>
         <li class="col-xs-1 authorization-delete">
-          <a href="{% url 'userspace:journal:authorization:delete' auth.pk %}" title="{% trans 'Supprimer cet usager' %}">
+          <a href="{% url 'userspace:journal:authorization:delete' auth.pk %}" title="{% translate 'Supprimer cet usager' %}">
             <i class="icon ion-ios-close"></i>
           </a>
         </li>
@@ -66,8 +66,8 @@
     </div>
     {% empty %}
     <p class="authorization-user">
-      {% trans "Aucun usager n’a été autorisé à modifier cette section." %}
-      <a href='{% url "userspace:journal:authorization:create" scope_current_journal.pk %}?codename={{ choice }}'>{% trans "Ajouter un accès." %}</a>
+      {% translate "Aucun usager n’a été autorisé à modifier cette section." %}
+      <a href='{% url "userspace:journal:authorization:create" scope_current_journal.pk %}?codename={{ choice }}'>{% translate "Ajouter un accès." %}</a>
     </p>
     {% endfor %}
 

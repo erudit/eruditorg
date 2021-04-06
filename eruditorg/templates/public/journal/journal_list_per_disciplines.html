@@ -1,9 +1,9 @@
 {% extends "public/base.html" %}
 {% load adv_cache i18n static public_journal_tags %}
 
-{% block title %}{% trans "Revues par disciplines" %}{% endblock title %}
+{% block title %}{% translate "Revues par disciplines" %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans %}Découvrez la liste par discipline en sciences humaines et sociales des revues savantes et culturelles d'Érudit et de ses partenaires.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate %}Découvrez la liste par discipline en sciences humaines et sociales des revues savantes et culturelles d'Érudit et de ses partenaires.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -23,7 +23,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
-      "name": "{% trans 'Revues' %}"
+      "name": "{% translate 'Revues' %}"
     }
   }]
 }
@@ -49,7 +49,7 @@
 {% block data_controller %}public:journal:journal_list_per_disciplines{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% trans "Revues" %}</a></li>
+<li><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% translate "Revues" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -60,11 +60,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8">
-            <h1>{% trans "Revues par disciplines" %}</h1>
+            <h1>{% translate "Revues par disciplines" %}</h1>
           </div>
           <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6">
             <nav class="text-right nav-btn">
-              <a href="{% url 'public:journal:journal_list' %}?sorting=name" class="btn btn-secondary">{% trans "Revues par ordre alphabétique" %}</a>
+              <a href="{% url 'public:journal:journal_list' %}?sorting=name" class="btn btn-secondary">{% translate "Revues par ordre alphabétique" %}</a>
             </nav>
           </div>
         </div>
@@ -73,7 +73,7 @@
             <ul class="discipline-nav">
               {% for objects_group in sorted_objects %}
                 {% if not objects_group.key %}
-                  <li><a href="#section-void">{% trans "Autres" %}</a></li>
+                  <li><a href="#section-void">{% translate "Autres" %}</a></li>
                 {% else %}
                   <li><a href="#{{ objects_group.key }}">{{ objects_group.name }}</a></li>
                 {% endif %}
@@ -92,11 +92,11 @@
           <div class="col-xs-12 title">
             <h2>
               {% if not objects_group.key %}
-                {% trans "Autres" %}
+                {% translate "Autres" %}
               {% else %}
                 {{ objects_group.name }}
               {% endif %}
-              <a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a>
+              <a href="#top" class="scroll-top" title="{% translate 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a>
             </h2>
           </div>
         </div>
@@ -109,11 +109,11 @@
           <h3 class="alternating-row__list-title {% if collection_group.key.code == "erudit" %}collection-erudit{% endif %}">
             <strong>{{ collection_group.key.name }} ({{ collection_group.objects|length }})</strong>
             {% if collection_group.key.code == "persee" %}
-            <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues de la collection Persée redirigent vers la plateforme du partenaire.' %}">
+            <span class="hint--bottom hint--no-animate" data-hint="{% translate 'Les revues de la collection Persée redirigent vers la plateforme du partenaire.' %}">
               <i class="icon ion-ios-help-circle"></i>
             </span>
             {% elif collection_group.key.code == "nrc" %}
-            <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues de la collection NRC Research Press redirigent vers la plateforme du partenaire.' %}">
+            <span class="hint--bottom hint--no-animate" data-hint="{% translate 'Les revues de la collection NRC Research Press redirigent vers la plateforme du partenaire.' %}">
               <i class="icon ion-ios-help-circle"></i>
             </span>
             {% endif %}
@@ -143,7 +143,7 @@
                 <img
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                   data-src="{% journal_logo_url journal %}"
-                  alt="{% trans 'Logo pour'%} {{ journal.formatted_title }}"
+                  alt="{% translate 'Logo pour'%} {{ journal.formatted_title }}"
                   class="lazyload img-responsive card__figure"
                 />
               </div>

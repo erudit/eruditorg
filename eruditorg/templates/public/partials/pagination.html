@@ -1,7 +1,7 @@
 {% load base_urls_tags i18n %}
 
 <nav class="pagination">
-  <h3 class="sr-only">{% trans "Pagination" %}</h3>
+  <h3 class="sr-only">{% translate "Pagination" %}</h3>
   {% if page_obj.number > 1 %}
   <a href="{% get_full_path_with_overrides page=1 %}"><i class="icon ion-ios-arrow-back"></i><i class="icon ion-ios-arrow-back"></i></a>
   {% endif %}
@@ -9,9 +9,9 @@
   <a href="{% get_full_path_with_overrides page=page_obj.previous_page_number %}"><i class="icon ion-ios-arrow-back"></i></a>
   {% endif %}
   <span class="page-position">
-  {% blocktrans trimmed with current_page=page_obj.number page_count=paginator.num_pages %}
+  {% blocktranslate trimmed with current_page=page_obj.number page_count=paginator.num_pages %}
     Page {{ current_page }} de {{ page_count }}
-  {% endblocktrans %}
+  {% endblocktranslate %}
   </span>
   {% if page_obj.has_next %}
   <a href="{% get_full_path_with_overrides page=page_obj.next_page_number %}"><i class="icon ion-ios-arrow-forward"></i></a>

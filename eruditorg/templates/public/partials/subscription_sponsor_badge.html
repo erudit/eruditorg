@@ -5,7 +5,7 @@
 {# The organisation badge is cached forever or until the organisation name or badge is modified. #}
 {% cache LONG_TTL "public_journal_base_organisation" organisation.id organisation.name organisation.badge LANGUAGE_CODE "v1" %}
   <div class="text-center subscription-sponsor">
-    <p>{% trans "Votre accès est offert par" %}</p>
+    <p>{% translate "Votre accès est offert par" %}</p>
     {% if organisation.badge %}
       {# The image's src is a transparent pixel placeholder. #}
       <img

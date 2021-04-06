@@ -2,14 +2,14 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Numéros sans activité depuis plus de deux semaines" %}
+{% translate "Numéros sans activité depuis plus de deux semaines" %}
 {% endblock subject %}
 
 {% block content %}
-<p>{% trans "Bonjour," %}</p>
-<p>{% trans "Les numéros suivants n'ont pas eu d'activité depuis plus de deux semaines&nbsp;:" %}</p>
+<p>{% translate "Bonjour," %}</p>
+<p>{% translate "Les numéros suivants n'ont pas eu d'activité depuis plus de deux semaines&nbsp;:" %}</p>
 {% if submitted %}
-<p><strong>{% trans "En attente de validation" %}</strong></p>
+<p><strong>{% translate "En attente de validation" %}</strong></p>
 <ul>
 {% for journal_name, issues in submitted.items %}
   <li>{{ journal_name }}
@@ -23,7 +23,7 @@
 </ul>
 {% endif %}
 {% if needs_corrections %}
-<p><strong>{% trans "À corriger" %}</strong></p>
+<p><strong>{% translate "À corriger" %}</strong></p>
 <ul>
 {% for journal_name, issues in needs_corrections.items %}
   <li>{{ journal_name }}
@@ -40,15 +40,15 @@
 
 {% block cta %}
 {% url 'userspace:dashboard' as cta_url %}
-{% trans "Accéder au tableau de bord" as cta_text %}
+{% translate "Accéder au tableau de bord" as cta_text %}
 {% with cta_url=cta_url cta_text=cta_text %}
 {{ block.super }}
 {% endwith %}
 {% endblock cta %}
 
 {% block signature %}
-{% trans 'L’Équipe Érudit' %}<br>
-{% blocktrans %}
+{% translate 'L’Équipe Érudit' %}<br>
+{% blocktranslate %}
 <a href="mailto:info@erudit.org?subject=Suppression de fichiers déposés" style="color:#ff4242; text-decoration:underline;">info@erudit.org</a>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock signature %}

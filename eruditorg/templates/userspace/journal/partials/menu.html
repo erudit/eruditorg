@@ -19,7 +19,7 @@
   <li class="sidenav-item{% if menu_journal == 'information' %} active{% endif %}">
     <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}">
       <i class="icon ion-ios-book sidenav-icon"></i>
-      <span class="sidenav-label">{% trans "À propos" %}</span>
+      <span class="sidenav-label">{% translate "À propos" %}</span>
     </a>
   </li>
   {% endif %}
@@ -27,7 +27,7 @@
   <li class="sidenav-item{% if menu_journal == 'editor' %} active{% endif %}">
     <a href="{% url 'userspace:journal:editor:issues' journal_pk=scope_current_journal.pk %}">
       <i class="icon ion-ios-cloud-upload sidenav-icon"></i>
-      <span class="sidenav-label">{% trans "Dépôt" %}</span>
+      <span class="sidenav-label">{% translate "Dépôt" %}</span>
     </a>
   </li>
   {% endif %}
@@ -35,7 +35,7 @@
   <li class="sidenav-item{% if menu_journal == 'royalty_reports' %} active{% endif %}">
     <a href="{% url 'userspace:journal:royalty_reports' journal_pk=scope_current_journal.pk %}">
       <i class="icon ion-logo-usd sidenav-icon"></i>
-      <span class="sidenav-label">{% trans "Redevances" %}</span>
+      <span class="sidenav-label">{% translate "Redevances" %}</span>
     </a>
   </li>
   {% endif %}
@@ -49,15 +49,15 @@
     {% endif %}
     >
       <i class="icon ion-ios-people sidenav-icon"></i>
-      <span class="sidenav-label">{% trans "Abonnements" %}</span>
+      <span class="sidenav-label">{% translate "Abonnements" %}</span>
     </a>
   </li>
   {% endif %}
   <li class="sidenav-item">
-    <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Pour accéder à vos rapports statistiques, vous devez vous connecter à un site externe qui requiert des identifiants distincts. Pour plus d’informations, veuillez nous contacter à l’adresse edition@erudit.org.' %}">
+    <span class="hint--bottom hint--no-animate" data-hint="{% translate 'Pour accéder à vos rapports statistiques, vous devez vous connecter à un site externe qui requiert des identifiants distincts. Pour plus d’informations, veuillez nous contacter à l’adresse edition@erudit.org.' %}">
       <a href="https://secur.erudit.org/statusage/index.php" target="_blank">
         <i class="icon ion-ios-analytics sidenav-icon"></i>
-        <span class="sidenav-label">{% trans "Consultations" %}</span>
+        <span class="sidenav-label">{% translate "Consultations" %}</span>
       </a>
     </span>
   </li>
@@ -65,7 +65,7 @@
   <li class="sidenav-item{% if menu_journal == 'authorization' %} active{% endif %}">
     <a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">
       <i class="icon ion-ios-lock sidenav-icon"></i>
-      <span class="sidenav-label">{% trans "Autorisations" %}</span>
+      <span class="sidenav-label">{% translate "Autorisations" %}</span>
     </a>
   </li>
   {% endif %}

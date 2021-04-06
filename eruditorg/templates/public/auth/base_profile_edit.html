@@ -9,7 +9,7 @@
 {% endblock stylesheets %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:auth:personal_data' %}">{% translate "Paramètres" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_wrapper %}
@@ -18,14 +18,14 @@
     <div class="col-md-3 col-xs-12">
       <nav class="sidenav">
         <header>
-          <h1 class="title">{% trans "Paramètres" %}</h1>
+          <h1 class="title">{% translate "Paramètres" %}</h1>
         </header>
         <ul>
-          <li class="sidenav-item{% if menu_account == "personal" %} active{% endif %}"><a href="{% url 'public:auth:personal_data' %}">{% trans "Informations personnelles" %}</a></li>
+          <li class="sidenav-item{% if menu_account == "personal" %} active{% endif %}"><a href="{% url 'public:auth:personal_data' %}">{% translate "Informations personnelles" %}</a></li>
           {% if can_modify_account %}
-          <li class="sidenav-item{% if menu_account == "parameters" %} active{% endif %}"><a href="{% url 'public:auth:parameters' %}">{% trans "Compte" %}</a></li>
+          <li class="sidenav-item{% if menu_account == "parameters" %} active{% endif %}"><a href="{% url 'public:auth:parameters' %}">{% translate "Compte" %}</a></li>
           {% endif %}
-          <li class="sidenav-item{% if menu_account == "password" %} active{% endif %}"><a href="{% url 'public:auth:password_change' %}">{% trans "Mot de passe" %}</a></li>
+          <li class="sidenav-item{% if menu_account == "password" %} active{% endif %}"><a href="{% url 'public:auth:password_change' %}">{% translate "Mot de passe" %}</a></li>
         </ul>
       </nav>
     </div>

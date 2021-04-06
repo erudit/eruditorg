@@ -26,7 +26,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
-      "name": "{% trans 'Thèses et mémoires' %}"
+      "name": "{% translate 'Thèses et mémoires' %}"
     }
   },{
     "@type": "ListItem",
@@ -45,7 +45,7 @@
 
 {% block breadcrumb %}
 {{ block.super }}
-<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
+<li><a href="{% url 'public:thesis:home' %}">{% translate "Thèses et mémoires" %}</a></li>
 <li><a href="{% url 'public:thesis:collection_home' repository.code %}">{{ repository.name }}</a></li>
 {% endblock breadcrumb %}
 
@@ -69,7 +69,7 @@
             width="{{ repository.logo.width }}"
             height="{{ repository.logo.height }}"
             class="lazyload img-responsive"
-            alt="{% trans 'Logo pour'%} {{ repository.name }}"
+            alt="{% translate 'Logo pour'%} {{ repository.name }}"
           />
         </span>
         {% endif %}
@@ -79,14 +79,14 @@
 
   <section class="row">
     <div class="col-sm-9 col-md-8 main-content">
-      <h2>{% trans "Liste complète" %}</h2>
+      <h2>{% translate "Liste complète" %}</h2>
       <div class="alert alert-info">
-        <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% trans 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
+        <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% translate 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
       </div>
       <div class="actions-wrapper">
         <div id="div_id_sort_by" class="form-group">
           <div class="controls">
-            <label class="control-label" for="sort_by">{% trans "Trier par" %}</label>
+            <label class="control-label" for="sort_by">{% translate "Trier par" %}</label>
             &nbsp;
             <select id="sort_by" onChange="window.location.href=this.value">
               {% for sort_option in available_tris.items %}
@@ -102,17 +102,17 @@
         <li class="thesis row">
           <div class="col-xs-11">
             <div class="thesis-author"><strong>{{ thesis.authors_display }}</strong></div>
-            <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
+            <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% translate 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
             {% if thesis.description or thesis.keywords %}
             <div class="thesis-description">
               {% if thesis.description %}
               <p class="thesis-abstract">
-                {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}"><strong><span class="arrow arrow-bar is-right"></span>&nbsp;{% trans 'Lire la suite' %}</strong></a>
+                {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% translate 'Consulter cette thèse' %}"><strong><span class="arrow arrow-bar is-right"></span>&nbsp;{% translate 'Lire la suite' %}</strong></a>
               </p>
               {% endif %}
               {% if thesis.keywords %}
               <p class="keywords">
-                <span><strong>{% trans "Mots-clés&nbsp;:" %}</strong></span>
+                <span><strong>{% translate "Mots-clés&nbsp;:" %}</strong></span>
                 <span>{{ thesis.keywords }}</span>
               </p>
               {% endif %}
@@ -126,15 +126,15 @@
     </div>
     <aside class="col-sm-3 col-md-offset-1 repository-meta">
       <div class="sidebar-block">
-        <h2>{% trans "Fiche" %}</h2>
+        <h2>{% translate "Fiche" %}</h2>
         <dl>
-          <dt>{% trans "Nombre de documents" %}</dt>
+          <dt>{% translate "Nombre de documents" %}</dt>
           <dd>{{ thesis_count|intcomma }}</dd>
           {% block inner_list_switcher %}{% endblock inner_list_switcher %}
         </dl>
       </div>
       <div class="sidebar-block">
-        <h3>{% trans "En un coup d’œil" %}</h3>
+        <h3>{% translate "En un coup d’œil" %}</h3>
         <ul class="random-theses">
           {% for thesis in sidebar_theses %}
           <li>

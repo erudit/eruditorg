@@ -1,7 +1,7 @@
 {% extends "public/search/base.html" %}
 {% load i18n static widget_tweaks %}
 
-{% block title %}{% trans "Recherche avancée" %}{% endblock title %}
+{% block title %}{% translate "Recherche avancée" %}{% endblock title %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -17,7 +17,7 @@
 {% endif %}
 {% endblock scripts %}
 
-{% block meta_description %}{% blocktrans %}Effectuez une recherche avancée dans le corpus Érudit à l'aide d'opérateurs booléens et de filtres.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate %}Effectuez une recherche avancée dans le corpus Érudit à l'aide d'opérateurs booléens et de filtres.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block body_class %}{{ block.super }} advanced_search{% endblock body_class %}
 {% block body_id %}advanced_search{% endblock body_id %}
@@ -30,12 +30,12 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-7 col-xs-12">
-          <h1>{% trans "Recherche avancée" %}</h1>
+          <h1>{% translate "Recherche avancée" %}</h1>
           <div class="main-header__intro">
-            {% blocktrans %}
+            {% blocktranslate %}
             <p>Affinez votre recherche dans le corpus de documents offerts sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres disponibles.</p>
             <p>Vous pouvez obtenir de l’aide dans votre recherche en consultant notre <a href="https://youtu.be/C0SMrOnXy9c" target="_blank">tutoriel vidéo</a> ou notre <a href="https://www.erudit.org/public/documents/Guide_recherche.pdf?utm_source=platform_guide&utm_campaign=rechercheavancee" target="_blank">guide en ligne</a>. Vous pouvez également nous envoyer vos commentaires à l’aide de l’outil <em>Votre avis</em> à droite de cette page.</p>
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </div>
         </div>
       </div>
@@ -43,28 +43,28 @@
   </header>
 
   <section>
-    <h2 class="sr-only">{% trans "Formulaire de recherche" %}</h2>
+    <h2 class="sr-only">{% translate "Formulaire de recherche" %}</h2>
     <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form main-content" method="get">
       <fieldset class="glory">
         <div class="container">
           <div class="row">
-            <h2 class="sr-only">{% trans 'Par mots-clés' %}</h2>
+            <h2 class="sr-only">{% translate 'Par mots-clés' %}</h2>
             <div class="col-xs-5 col-md-6 col-md-offset-1 search-term">
               <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
                 <div class="controls">
-                  <label for="id_{{ form.basic_search_term.html_name }}">{% trans 'Mots-clés' %}</label>
+                  <label for="id_{{ form.basic_search_term.html_name }}">{% translate 'Mots-clés' %}</label>
                   {{ form.basic_search_term|add_class:'form-control' }}
                   {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
                 <div class="alert advanced-search-popup-error" style="display:none;">
-                  {% trans "Vous devez saisir une expression ou des mots-clés." %}
+                  {% translate "Vous devez saisir une expression ou des mots-clés." %}
                 </div>
               </div>
             </div>
             <div class="col-xs-5 col-md-3 search-field">
               <div id="div_id_{{ form.basic_search_field.html_name }}" class="form-group{% if form.basic_search_field.errors %} has-error{% endif %}">
                 <div class="controls">
-                  <label for="{{ form.basic_search_field.auto_id }}">{% trans 'Dans…' %}</label>
+                  <label for="{{ form.basic_search_field.auto_id }}">{% translate 'Dans…' %}</label>
                   {{ form.basic_search_field|add_class:'form-control' }}
                   {% for error in form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
@@ -83,7 +83,7 @@
               <a href="#" id="id_add_q_field" class="btn btn-secondary add-btn">&plus;</a>
             </div>
             <div class="col-xs-6 col-xs-pull-2 col-md-5 col-md-pull-1 text-right">
-              <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
+              <button type="submit" class="btn btn-primary">{% translate "Rechercher" %}</button>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
       <fieldset class="container filters">
         <div class="row">
           <div class="col-xs-12">
-            <h2>{% trans "Filtres" %}</h2>
+            <h2>{% translate "Filtres" %}</h2>
           </div>
         </div>
         <div class="row">
@@ -121,7 +121,7 @@
           </div>
           <div class="col-sm-6 filter-years">
             <div id="div_id_years">
-              <label class="control-label">{% trans "Année ou intervalle d'années" %}</label>
+              <label class="control-label">{% translate "Année ou intervalle d'années" %}</label>
               <div class="row">
                 <div class="col-xs-6 year-start">
                   <label for="{{ form.pub_year_start.auto_id }}">{{ form.pub_year_start.label }}</label>
@@ -141,7 +141,7 @@
             </div>
           </div>
           <div class="col-sm-6 filter-btn text-right">
-            <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
+            <button type="submit" class="btn btn-primary">{% translate "Rechercher" %}</button>
           </div>
         </div>
       </fieldset>
@@ -152,17 +152,17 @@
   <section id="search-history" class="container main-content search-history">
     <header class="row">
       <div class="col-md-12">
-        <h2>{% trans "Historique des recherches sauvegardées" %}</h2>
+        <h2>{% translate "Historique des recherches sauvegardées" %}</h2>
       </div>
     </header>
     <table>
       <thead>
         <tr>
           <th>n<sup>o</sup></th>
-          <th>{% trans "Requête" %}</th>
-          <th>{% trans "Résultats" %}</th>
-          <th>{% trans "Supprimer" %}</th>
-          <th>{% trans "Relancer" %}</th>
+          <th>{% translate "Requête" %}</th>
+          <th>{% translate "Résultats" %}</th>
+          <th>{% translate "Supprimer" %}</th>
+          <th>{% translate "Relancer" %}</th>
         </tr>
       </thead>
       <tbody>

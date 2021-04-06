@@ -1,32 +1,32 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load humanize i18n %}
 
-{% block title %}{% blocktrans with year=publication_year repository=repository.name %}Thèses et mémoires publiés en {{ year }}{% endblocktrans %} – {{ repository }}{% endblock title %}
+{% block title %}{% blocktranslate with year=publication_year repository=repository.name %}Thèses et mémoires publiés en {{ year }}{% endblocktranslate %} – {{ repository }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiés en {{ year }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiés en {{ year }} sur la plateforme Érudit.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktranslate with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktranslate %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if repository.logo %}
 <meta property="og:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
+<meta name="twitter:title" content="{% translate 'Thèses et mémoires' %} – Érudit">
 {% if repository.logo %}
 <meta name="twitter:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ repository.name }}">
-<meta name="twitter:description" content="{% blocktrans with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% translate 'Logo pour' %} {{ repository.name }}">
+<meta name="twitter:description" content="{% blocktranslate with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block structured_data_breadcrumb_tail %}
@@ -45,12 +45,12 @@
 {% endblock breadcrumb %}
 
 {% block inner_title %}
-{% blocktrans with year=publication_year %}Thèses et mémoires publiés en {{ year }}{% endblocktrans %}
+{% blocktranslate with year=publication_year %}Thèses et mémoires publiés en {{ year }}{% endblocktranslate %}
 {% endblock inner_title %}
 
 {% block inner_list_switcher %}
 <dt>
-  <label for="switch_year">{% trans "Parcourir d'autres années" %}</label>
+  <label for="switch_year">{% translate "Parcourir d'autres années" %}</label>
 </dt>
 <dd>
   <select id="switch_year" onChange="window.location.href=this.value">

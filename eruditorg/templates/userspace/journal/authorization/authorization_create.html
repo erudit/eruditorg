@@ -10,22 +10,22 @@
 
 {% block body_id %}authorizations{% endblock body_id %}
 
-{% block title %}{% trans "Ajouter un accès" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Ajouter un accès" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% trans "Autorisations" %}</a></li>
-<li><a href="#">{% trans "Ajouter un accès" %}</a></li>
+<li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% translate "Autorisations" %}</a></li>
+<li><a href="#">{% translate "Ajouter un accès" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Ajouter un accès" %}
+{% translate "Ajouter un accès" %}
 {% endblock %}
 
 {% block section_intro %}
 <p>
-  {% blocktrans trimmed with authorization_label=authorization_label %}
+  {% blocktranslate trimmed with authorization_label=authorization_label %}
   Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation suivante&nbsp;: <strong>{{ authorization_label }}</strong>
-  {% endblocktrans %}
+  {% endblocktranslate %}
 </p>
 {% endblock section_intro %}
 
@@ -46,7 +46,7 @@
         <div class="input-group">
           {{ form.user|add_class:'form-control' }}
           <div class="input-group-addon">
-            <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Valider' %}</button>
+            <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% translate 'Valider' %}</button>
           </div>
         </div>
         {% for error in form.user.errors %}<p class="error">{{ error }}</p>{% endfor %}

@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Approbation des fichiers déposés" %}
+{% translate "Approbation des fichiers déposés" %}
 {% endblock subject %}
 
 {% block content %}
-<p>{% trans "Bonjour," %}</p>
-{% blocktrans with journal=issue.journal %}
+<p>{% translate "Bonjour," %}</p>
+{% blocktranslate with journal=issue.journal %}
 <p>Les fichiers du numéro {{ issue }} de la revue {{ journal }} ont été approuvés par l’équipe de production. Le travail de mise en ligne débutera sous peu.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% if comment %}
-<p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
+<p><strong>{% translate "Commentaires&nbsp;:" %}</strong></p>
 <p><em>{{ comment }}</em></p>
 {% endif %}
 {% endblock content %}
@@ -19,10 +19,10 @@
 {% block cta %}{% endblock cta %}
 
 {% block signature %}
-{% blocktrans %}
+{% blocktranslate %}
 Hocine Chehab<br>
 Chargé d’édition numérique<br>
 <a href="mailto:edition@erudit.org?subject=Approbation de fichiers" style="color:#ff4242; text-decoration:underline;">edition@erudit.org</a><br>
 <a href="tel:+15143436111p44607" style="color:#ff4242; text-decoration:underline;">+1 514-343-6111 poste 44607</a>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock signature %}

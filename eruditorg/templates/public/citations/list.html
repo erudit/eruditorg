@@ -1,9 +1,9 @@
 {% extends "public/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Ma bibliothèque" %}{% endblock title %}
+{% block title %}{% translate "Ma bibliothèque" %}{% endblock title %}
 
-{% block meta_description %}{% trans 'Sauvegardez et téléchargez des notices d’articles en sciences humaines et sociales pour EndNote, Zotero, RefWorks, BibTeX et Mendeley sur la plateforme Érudit.' %}{% endblock meta_description %}
+{% block meta_description %}{% translate 'Sauvegardez et téléchargez des notices d’articles en sciences humaines et sociales pour EndNote, Zotero, RefWorks, BibTeX et Mendeley sur la plateforme Érudit.' %}{% endblock meta_description %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -23,7 +23,7 @@
 {% block data_controller %}public:citations:list{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'public:citations:list' %}">{% trans "Ma bibliothèque" %}</a></li>
+<li><a href="{% url 'public:citations:list' %}">{% translate "Ma bibliothèque" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -31,40 +31,40 @@
   <div class="row">
     <header class="col-md-8 clearfix main-header">
       <h1>
-        <span>{% trans "Ma bibliothèque" %}</span>
+        <span>{% translate "Ma bibliothèque" %}</span>
       </h1>
       <div class="main-header__intro">
-        {% blocktrans %}
+        {% blocktranslate %}
         <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<i class="icon ion-ios-bookmark toolbox-save"></i>.</p>
         <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<i class="icon ion-ios-quote toolbox-cite"></i>.</p>
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </div>
     </header>
 
     <aside class="col-md-4">
-      <h2>{% trans "Contenu" %}</h2>
+      <h2>{% translate "Contenu" %}</h2>
       {% if scientific_articles_count %}
       <p data-scientific-article-count="{{ scientific_articles_count }}">
-        {% blocktrans count counter=scientific_articles_count %}{{ counter }} article savant{% plural %}{{ counter }} articles savants{% endblocktrans %}
+        {% blocktranslate count counter=scientific_articles_count %}{{ counter }} article savant{% plural %}{{ counter }} articles savants{% endblocktranslate %}
       </p>
       {% endif %}
       {% if cultural_articles_count %}
       <p data-cultural-article-count="{{ cultural_articles_count }}">
-        {% blocktrans count counter=cultural_articles_count %}{{ counter }} article culturel{% plural %}{{ counter }} articles culturels{% endblocktrans %}
+        {% blocktranslate count counter=cultural_articles_count %}{{ counter }} article culturel{% plural %}{{ counter }} articles culturels{% endblocktranslate %}
       </p>
       {% endif %}
       {% if theses_count %}
       <p data-thesis-count="{{ theses_count }}">
-        {% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses et mémoires{% endblocktrans %}
+        {% blocktranslate count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses et mémoires{% endblocktranslate %}
       </p>
       {% endif %}
       {% if not scientific_articles_count and not cultural_articles_count and not theses_count %}
-      <p>{% trans "0 document" %}</p>
+      <p>{% translate "0 document" %}</p>
       {% endif %}
       <br/><br/>
-      <h2>{% trans "Tri" %}</h2>
+      <h2>{% translate "Tri" %}</h2>
       <div id="div_id_sort_by">
-        <label for="sort_by" class="sr-only">{% trans "Trier par…" %}</label>
+        <label for="sort_by" class="sr-only">{% translate "Trier par…" %}</label>
         <select id="sort_by" onChange="window.location.href=this.value">
           {% for sort_option in available_tris.items %}
           <option value="?sort_by={{ sort_option.0}}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
@@ -74,34 +74,34 @@
     </aside>
 
     <section class="col-md-8 clearfix main-content documents-list-wrapper">
-      {% blocktrans count counter=total_citations_count %}
+      {% blocktranslate count counter=total_citations_count %}
       <h2><span class="total-documents">{{ counter }}</span> notice sauvegardée</h2>
       {% plural %}
       <h2><span class="total-documents">{{ counter }}</span> notices sauvegardées</h2>
-      {% endblocktrans %}
+      {% endblocktranslate %}
 
       {% if documents %}
       {% include "public/partials/pagination.html" %}
       <div class="documents-wrapper">
         <div class="row documents-head">
-          <h3 class="text-center">{% trans "Actions en lot" %}</h3>
+          <h3 class="text-center">{% translate "Actions en lot" %}</h3>
           <div class="col-xs-4 checkbox">
             <input type="checkbox" name="select-all-on-current-page" class="form-control" id="select-all-on-current-page">
-            <label><span for="select-all-on-current-page">{% trans "Sélectionner toute la page" %}</span></label>
+            <label><span for="select-all-on-current-page">{% translate "Sélectionner toute la page" %}</span></label>
           </div>
           <div class="col-xs-4 saved-citations">
-            <strong data-selection-count>{% trans "Aucun document sélectionné" %}</strong>
+            <strong data-selection-count>{% translate "Aucun document sélectionné" %}</strong>
           </div>
           <div class="col-xs-4">
             <ul id="id_selection_tools" class="toolbox toolbox-compact toolbox-horizontal pull-right" style="display:none;">
               {% spaceless %}
               <li>
-                <a class="tool-btn remove-selection" href="#" title="{% trans 'Supprimer les notices sélectionnées' %}">
+                <a class="tool-btn remove-selection" href="#" title="{% translate 'Supprimer les notices sélectionnées' %}">
                   <i class="icon ion-ios-close toolbox-remove"></i>
                 </a>
               </li>
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite-inline>
+                <a class="tool-btn" href="#" title="{% translate 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite-inline>
                   <i class="icon ion-ios-quote toolbox-cite"></i>
                 </a>
               </li>
@@ -110,8 +110,8 @@
           </div>
           <div class="col-xs-12">
             <p>
-              <a id="select-all-across-all-pages" style="display: none;" href="#">{% blocktrans %}Sélectionner les {{ total_citations_count }} notices sauvegardées{% endblocktrans %}</a>
-              <a id="unselect-all" style="display: none;" href="#">{% blocktrans %}Effacer la sélection{% endblocktrans %}</a>
+              <a id="select-all-across-all-pages" style="display: none;" href="#">{% blocktranslate %}Sélectionner les {{ total_citations_count }} notices sauvegardées{% endblocktranslate %}</a>
+              <a id="unselect-all" style="display: none;" href="#">{% blocktranslate %}Effacer la sélection{% endblocktranslate %}</a>
             </p>
           </div>
         </div>
@@ -127,26 +127,26 @@
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
               {% spaceless %}
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Supprimer' %}" data-remove>
+                <a class="tool-btn" href="#" title="{% translate 'Supprimer' %}" data-remove>
                   <i class="icon ion-ios-close toolbox-remove"></i>
                 </a>
               </li>
               {% if document.can_cite and document.ajax_citation_modal_url %}
               <li>
-                <a class="tool-btn" href="{{ document.ajax_citation_modal_url }}" title="{% trans 'Citer' %}" data-cite-ajax>
+                <a class="tool-btn" href="{{ document.ajax_citation_modal_url }}" title="{% translate 'Citer' %}" data-cite-ajax>
                   <i class="icon ion-ios-quote toolbox-cite"></i>
                 </a>
               </li>
               {% endif %}
               {% if document.pdf_url %}
               <li>
-                <a class="tool-btn" href="{{ document.pdf_url }}" title="{% trans 'Télécharger' %}" target="_blank">
+                <a class="tool-btn" href="{{ document.pdf_url }}" title="{% translate 'Télécharger' %}" target="_blank">
                   <span class="toolbox-pdf">PDF</span>
                 </a>
               </li>
               {% endif %}
               <li>
-                <a class="tool-btn" href="{{ document.url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                <a class="tool-btn" href="{{ document.url }}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
                   <span class="toolbox-html">HTML</span>
                 </a>
               </li>
@@ -171,7 +171,7 @@
               </div>
               <div class="checkbox">
                 <input type="checkbox" name="select-document-{{ document.id }}" class="form-control" id="select-document-{{ document.id }}">
-                <label for="select-document-{{ document.id }}"><em>{% trans "Sélectionner" %}</em></label>
+                <label for="select-document-{{ document.id }}"><em>{% translate "Sélectionner" %}</em></label>
               </div>
             </div>
           </li>
@@ -181,17 +181,17 @@
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
               {% spaceless %}
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Supprimer' %}" data-remove>
+                <a class="tool-btn" href="#" title="{% translate 'Supprimer' %}" data-remove>
                   <i class="icon ion-ios-close toolbox-remove"></i>
                 </a>
               </li>
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite-inline>
+                <a class="tool-btn" href="#" title="{% translate 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite-inline>
                   <i class="icon ion-ios-quote toolbox-cite"></i>
                 </a>
               </li>
               <li>
-                <a class="tool-btn" href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank">
+                <a class="tool-btn" href="{{ document.url }}" title="{% translate 'Télécharger' %}" target="_blank">
                   <span class="toolbox-pdf">PDF</span>
                 </a>
               </li>
@@ -214,15 +214,15 @@
               </div>
               <div class="checkbox">
                 <input type="checkbox" name="select-document-{{ document.id }}" class="form-control" id="select-document-{{ document.id }}">
-                <label for="select-document-{{ document.id }}"><em>{% trans "Sélectionner" %}</em></label>
+                <label for="select-document-{{ document.id }}"><em>{% translate "Sélectionner" %}</em></label>
               </div>
             </div>
 
             <div class="mfp-hide">
               <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
+                <h4 class="modal-header">{% translate "Outils de citation" %}</h4>
                 <div class="modal-body">
-                  <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
+                  <p><strong>{% translate "Exporter la notice de ce document" %}</strong></p>
                   <div class="row">
                     <p class="col-xs-4">
                       <a href="{% url 'public:thesis:thesis_citation_ris' document.localidentifier %}" class="btn btn-secondary cite-export">
@@ -234,7 +234,7 @@
                       <a href="{% url 'public:thesis:thesis_citation_enw' document.localidentifier %}" class="btn btn-secondary cite-export">
                         <span class="show cite-export-title">ENW</span>
                       </a>
-                      <br/><br/>EndNote {% trans '(version X9.1 et +)' %}, Zotero
+                      <br/><br/>EndNote {% translate '(version X9.1 et +)' %}, Zotero
                     </p>
                     <p class="col-xs-4">
                       <a href="{% url 'public:thesis:thesis_citation_bib' document.localidentifier %}" class="btn btn-secondary cite-export">
@@ -264,9 +264,9 @@
       {% include "public/partials/pagination.html" %}
       <div class="mfp-hide">
         <div id="id_cite_selection_modal" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-          <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+          <h2 class="modal-header">{% translate "Outils de citation" %}</h2>
           <div class="modal-body">
-            <p><strong>{% trans "Exporter les notices sélectionnées" %}</strong></p>
+            <p><strong>{% translate "Exporter les notices sélectionnées" %}</strong></p>
             <p>
               <a href="#" id="export_citation_ris" class="btn btn-primary cite-export">
                 <span class="show cite-export-title">.RIS</span>
@@ -277,7 +277,7 @@
               <a href="#" id="export_citation_enw" class="btn btn-primary cite-export">
                 <span class="show cite-export-title">.ENW</span>
               </a>
-              EndNote {% trans '(version X9.1 et +)' %}, Zotero
+              EndNote {% translate '(version X9.1 et +)' %}, Zotero
             </p>
             <p>
               <a href="#" id="export_citation_bib" class="btn btn-primary cite-export">
@@ -290,7 +290,7 @@
       </div>
       {% else %}
       <div class="alert alert-info">
-        <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% trans "Aucune notice&nbsp;!" %} <br/></br>{% blocktrans %}Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-page&nbsp;<i class="icon ion-ios-bookmark toolbox-save"></i>.{% endblocktrans %}</p>
+        <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% translate "Aucune notice&nbsp;!" %} <br/></br>{% blocktranslate %}Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-page&nbsp;<i class="icon ion-ios-bookmark toolbox-save"></i>.{% endblocktranslate %}</p>
       </div>
       {% endif %}
     </section>

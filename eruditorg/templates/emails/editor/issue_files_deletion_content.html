@@ -2,12 +2,12 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Suppression de fichiers déposés" %}
+{% translate "Suppression de fichiers déposés" %}
 {% endblock subject %}
 
 {% block content %}
-<p>{% trans "Bonjour," %}</p>
-<p>{% trans "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:" %}</p>
+<p>{% translate "Bonjour," %}</p>
+<p>{% translate "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:" %}</p>
 <ul>
 {% for journal_name, issues in issue_submissions.items %}
   <li>{{ journal_name }}
@@ -19,20 +19,20 @@
   </li>
 {% endfor %}
 </ul>
-<p>{% trans "Assurez-vous d’en avoir une copie." %}</p>
+<p>{% translate "Assurez-vous d’en avoir une copie." %}</p>
 {% endblock content %}
 
 {% block cta %}
 {% url 'userspace:dashboard' as cta_url %}
-{% trans "Accéder au tableau de bord" as cta_text %}
+{% translate "Accéder au tableau de bord" as cta_text %}
 {% with cta_url=cta_url cta_text=cta_text %}
 {{ block.super }}
 {% endwith %}
 {% endblock cta %}
 
 {% block signature %}
-{% trans 'L’Équipe Érudit' %}<br>
-{% blocktrans %}
+{% translate 'L’Équipe Érudit' %}<br>
+{% blocktranslate %}
 <a href="mailto:info@erudit.org?subject=Suppression de fichiers déposés" style="color:#ff4242; text-decoration:underline;">info@erudit.org</a>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock signature %}

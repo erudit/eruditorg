@@ -895,7 +895,7 @@
                       <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;" width="100%">
                         <tbody>
                           <tr>
-                            <td class="mcnImageContent" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;" valign="top"><a href="http://{{ site.domain }}" title="{% trans 'Se rendre sur le site d’Érudit' %}" target="_blank"><img align="center" alt="{% trans 'Logo d’Érudit' %}" class="mcnImage" src="{% static 'img/email/logotype-600x150.png' %}" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" width="600"></a></td>
+                            <td class="mcnImageContent" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;" valign="top"><a href="http://{{ site.domain }}" title="{% translate 'Se rendre sur le site d’Érudit' %}" target="_blank"><img align="center" alt="{% translate 'Logo d’Érudit' %}" class="mcnImage" src="{% static 'img/email/logotype-600x150.png' %}" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" width="600"></a></td>
                           </tr>
                         </tbody>
                       </table>
@@ -961,7 +961,7 @@
                                   </tr>
                                 </table>
                                 <p>
-                                {% blocktrans %}Le bouton ne fonctionne pas ? Veuillez copier-coller cet url dans votre navigateur :{% endblocktrans %}
+                                {% blocktranslate %}Le bouton ne fonctionne pas ? Veuillez copier-coller cet url dans votre navigateur :{% endblocktranslate %}
                                 <a href="{{ cta_url }}" style="color:#ff4242; text-decoration:underline;">{{ cta_url }}</a>
                                 </p>
 
@@ -1241,7 +1241,7 @@
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;" align="center" valign="top">
-                              <a href="http://{{ site.domain }}" target="_blank" style="color:#ff4242; text-decoration:underline;">{% blocktrans with sitename=site.name %}{{ sitename }}{% endblocktrans %}</a>
+                              <a href="http://{{ site.domain }}" target="_blank" style="color:#ff4242; text-decoration:underline;">{% blocktranslate with sitename=site.name %}{{ sitename }}{% endblocktranslate %}</a>
                             </td>
                           </tr>
                         </tbody>

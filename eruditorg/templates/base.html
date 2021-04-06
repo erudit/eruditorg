@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock title %} – Érudit</title>
-    <meta name="description" content="{% block meta_description %}{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}{% endblock meta_description %}">
+    <meta name="description" content="{% block meta_description %}{% blocktranslate %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktranslate %}{% endblock meta_description %}">
 
     {% block link_rel_tags %}
       {% for language in LANGUAGES %}
@@ -62,16 +62,16 @@
     <meta property="og:site_name" content="Érudit">
     <meta property="og:locale" content="{{ language_code }}_CA">
     <meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
-    <meta property="og:description" content="{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}">
+    <meta property="og:description" content="{% blocktranslate %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktranslate %}">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@eruditorg">
-    <meta name="twitter:title" content="{% trans 'Cultivez votre savoir' %}">
+    <meta name="twitter:title" content="{% translate 'Cultivez votre savoir' %}">
     <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
     <meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
-    <meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
-    <meta name="twitter:description" content="{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}">
+    <meta name="twitter:image:alt" content="{% translate 'Illustration « Cultivez votre savoir »' %}">
+    <meta name="twitter:description" content="{% blocktranslate %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktranslate %}">
     {% endblock meta_tags %}
 
     {% block structured_data %}
@@ -118,25 +118,25 @@
         {# Érudit logo #}
         <div class="navbar-header pull-left">
           <h1 class="header-logo">
-            <a href="/" id="title" title="{% trans 'Aller à l’accueil' %}" aria-label="{% trans 'Aller à l’accueil' %}" class="header-logo__link">
-              <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg header-logo__img" alt="{% trans 'Logo d’Érudit' %}" />
+            <a href="/" id="title" title="{% translate 'Aller à l’accueil' %}" aria-label="{% translate 'Aller à l’accueil' %}" class="header-logo__link">
+              <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg header-logo__img" alt="{% translate 'Logo d’Érudit' %}" />
             </a>
           </h1>
         </div>
 
         {# Search bar triggers (open / close) #}
         <div class="pull-right nav-search-triggers">
-          <a href="#" data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__open " title="{% trans 'Effectuer une recherche simple' %}">
+          <a href="#" data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__open " title="{% translate 'Effectuer une recherche simple' %}">
             <i class="icon ion-ios-search nav-search-triggers__icon"></i>
           </a>
-          <a data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__close" title="{% trans 'Fermer la recherche simple (touche Échap)' %}">
+          <a data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__close" title="{% translate 'Fermer la recherche simple (touche Échap)' %}">
             <i class="icon ion-ios-close nav-search-triggers__icon"></i>
           </a>
         </div>
 
         {# Hamburger menu on mobile / tablet viewports #}
         <div class="pull-right nav-menu-trigger">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-nav" aria-label="{% trans 'Basculer le menu principal' %}">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-nav" aria-label="{% translate 'Basculer le menu principal' %}">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -144,27 +144,27 @@
         </div>
 
         {# Menu items #}
-        <nav class="pull-right nav-menu" aria-expanded="false" aria-label="{% trans 'Menu principal' %}">
-          <h2 class="sr-only">{% trans 'Menu principal' %}</h2>
+        <nav class="pull-right nav-menu" aria-expanded="false" aria-label="{% translate 'Menu principal' %}">
+          <h2 class="sr-only">{% translate 'Menu principal' %}</h2>
           <ul id="main-nav" class="navbar-nav collapse navbar-collapse nav-menu__list">
             {% block mainnav %}
             {% block inner_nav %}{% endblock inner_nav %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="#" class="hidden-xs hidden-sm nav-menu__link">{% trans "Types de publications" %}<i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
+              <a href="#" class="hidden-xs hidden-sm nav-menu__link">{% translate "Types de publications" %}<i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
               <ul class="nav-submenu">
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
+                  <a href="{% url 'public:journal:journal_list' %}" title="{% translate 'Index des revues' %}">{% translate "Revues" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a>
+                  <a href="{% url 'public:thesis:home' %}" title="{% translate 'Index des dépôts institutionnels' %}">{% translate "Thèses et mémoires" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:book:home' %}" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
+                  <a href="{% url 'public:book:home' %}" title="{% translate 'Index des livres et actes' %}">{% translate "Livres et actes" %}</a>
                 </li>
                 {% switch "maintenance" %}
                 {% else %}
                 <li class="nav-submenu__item">
-                  <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a>
+                  <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% translate 'Index des rapports de recherche' %}" target="_blank">{% translate "Rapports de recherche" %}</a>
                 </li>
                 {% endswitch %}
               </ul>
@@ -173,52 +173,52 @@
             {% else %}
             {% if request.user.is_anonymous %}
             <li class="nav-menu__item">
-              <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="nav-menu__link" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
-                {% trans "Connexion" %}
+              <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="nav-menu__link" id="login-modal" title="{% translate 'Se connecter au tableau de bord' %}">
+                {% translate "Connexion" %}
               </a>
             </li>
             {% else %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="hidden-xs hidden-sm nav-menu__link">{% trans "Mon compte" %} <i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
+              <a href="{% url 'userspace:dashboard' %}"  title="{% translate 'Accéder à au tableau de bord' %}" class="hidden-xs hidden-sm nav-menu__link">{% translate "Mon compte" %} <i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
               <ul class="nav-submenu">
                 {% has_perm 'userspace.access' request.user as can_access_userspace %}
                 {% if can_access_userspace %}
                 <li class="nav-submenu__item">
-                  <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}"><span class="hidden-md hidden-lg">{% trans "Mon compte" %} - </span>{% trans "Tableau de bord" %}</a>
+                  <a href="{% url 'userspace:dashboard' %}" title="{% translate 'Accéder à au tableau de bord' %}"><span class="hidden-md hidden-lg">{% translate "Mon compte" %} - </span>{% translate "Tableau de bord" %}</a>
                 </li>
                 {% endif %}
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}"><span class="hidden-md hidden-lg">{% trans "Mon compte" %} - </span>{% trans "Paramètres" %}</a>
+                  <a href="{% url 'public:auth:personal_data' %}" title="{% translate 'Modifier mes paramètres' %}"><span class="hidden-md hidden-lg">{% translate "Mon compte" %} - </span>{% translate "Paramètres" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="{% url 'public:auth:logout' %}?next={{ request.get_full_path|urlencode }}" title="{% trans 'Se déconnecter' %}"><span class="hidden-md hidden-lg">{% trans "Mon compte" %} - </span>{% trans "Déconnexion" %}</a>
+                  <a href="{% url 'public:auth:logout' %}?next={{ request.get_full_path|urlencode }}" title="{% translate 'Se déconnecter' %}"><span class="hidden-md hidden-lg">{% translate "Mon compte" %} - </span>{% translate "Déconnexion" %}</a>
                 </li>
               </ul>
             </li>
             {% endif %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="nav-menu__link" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
+              <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="nav-menu__link" title="{% blocktranslate %}À propos d’Érudit{% endblocktranslate %}">{% translate "À propos" %} <i class="icon ion-ios-arrow-down nav-menu__caret"></i></a>
               <ul class="hidden-xs hidden-sm nav-submenu">
                 <li class="nav-submenu__item">
-                  <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
+                  <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% translate 'À propos d’Érudit' %}">{% translate "Érudit" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="https://www.coalition-publi.ca/{% if LANGUAGE_CODE == 'fr' %}le-projet{% endif %}" target="_blank" title="{% trans 'À propos de la Coalition Publica' %}">{% trans "Coalition Publica" %}</a>
+                  <a href="https://www.coalition-publi.ca/{% if LANGUAGE_CODE == 'fr' %}le-projet{% endif %}" target="_blank" title="{% translate 'À propos de la Coalition Publica' %}">{% translate "Coalition Publica" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="https://co-shs.ca/" target="_blank" title="{% trans 'À propos du projet CO.SHS' %}">{% trans "CO.SHS" %}</a>
+                  <a href="https://co-shs.ca/" target="_blank" title="{% translate 'À propos du projet CO.SHS' %}">{% translate "CO.SHS" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="https://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% trans 'À propos de nos partenariats' %}">{% trans "Partenariat" %}</a>
+                  <a href="https://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% translate 'À propos de nos partenariats' %}">{% translate "Partenariat" %}</a>
                 </li>
                 <li class="nav-submenu__item">
-                  <a href="https://www.erudit.org/rapport/2020/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter le rapport annuel' %}">{% trans "Rapport annuel" %}</a>
+                  <a href="https://www.erudit.org/rapport/2020/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% translate 'Consulter le rapport annuel' %}">{% translate "Rapport annuel" %}</a>
                 </li>
               </ul>
             </li>
             {% endswitch %}
             <li class="nav-menu__item">
-              <a href="{% url 'public:search:advanced_search' %}" class="nav-menu__link" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
+              <a href="{% url 'public:search:advanced_search' %}" class="nav-menu__link" title="{% translate 'Effectuer une recherche avancée' %}">{% translate "Recherche avancée" %}</a>
             </li>
             <li class="nav-menu__item nav-menu__item_has-submenu">
               {% get_current_language as LANGUAGE_CODE %}
@@ -238,9 +238,9 @@
             {% switch "maintenance" %}
             {% else %}
             <li class="nav-menu__item">
-              <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="nav-menu__link">
+              <a href="{% url 'public:citations:list' %}" title="{% translate 'Voir ma bibliothèque' %}" class="nav-menu__link">
                 <i class="icon ion-ios-bookmark hidden-xs hidden-sm nav-menu__icon"></i>
-                <span class="hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
+                <span class="hidden-md hidden-lg">{% translate 'Ma bibliothèque' %}</span>
               </a>
             </li>
             {% endswitch %}
@@ -251,9 +251,9 @@
         {# Simple search form #}
         <div class="nav-search">
           <form id="search-form" action="{% url 'public:search:results' %}" class="navbar-form nav-search__form" method="get">
-              <label for="basic_search_term" class="nav-search__label sr-only">{% trans "Recherche simple" %}</label>
+              <label for="basic_search_term" class="nav-search__label sr-only">{% translate "Recherche simple" %}</label>
             <div class="nav-search__input-group">
-              <input name="basic_search_term" id="basic_search_term" type="search" class="search-terms nav-search__input" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
+              <input name="basic_search_term" id="basic_search_term" type="search" class="search-terms nav-search__input" placeholder="{% translate 'Par auteur, titre, mots-clés...' %}">
               <input type="hidden" name="funds" value="Érudit">
               <input type="hidden" name="funds" value="UNB">
               <button type="submit" class="btn btn-secondary nav-search__btn">
@@ -266,7 +266,7 @@
 
   </header>
     <nav id="breadcrumb" class="container-fluid breadcrumb">
-      <h2 class="hidden">{% trans "Fil d'Ariane" %}</h2>
+      <h2 class="hidden">{% translate "Fil d'Ariane" %}</h2>
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -294,9 +294,9 @@
     {% switch "alert" %}
     <div class="alert alert-dismissible maintenance">
       <p>
-        {% blocktrans %}
+        {% blocktranslate %}
         L'accès à la plateforme Érudit connaît actuellement un ralentissement, dû à un incident chez notre prestataire technique. Nous sommes désolés de ce désagrément et collaborons activement à rétablir le service. L'information sera mise à jour sur notre page<a href="https://twitter.com/eruditorg">Twitter</a>
-        {% endblocktrans %}
+        {% endblocktranslate %}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </p>
     </div>
@@ -324,7 +324,7 @@
     {% block footer %}
     <footer id="site-footer">
       <div class="text-center">
-        <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top"><span class="arrow arrow-bar is-top"></span></a>
+        <a href="#top" title="{% translate 'Retourner en haut' %}" class="scroll-top"><span class="arrow arrow-bar is-top"></span></a>
       </div>
       <div id="footer-nav" class="container">
         <div class="row">
@@ -332,11 +332,11 @@
             <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" class="newsletter-form" name="mc-embedded-subscribe-form" target="_blank">
               <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
               <fieldset>
-                <label for="mce-EMAIL">{% trans "Abonnez-vous à notre infolettre&nbsp;:" %}</label>
+                <label for="mce-EMAIL">{% translate "Abonnez-vous à notre infolettre&nbsp;:" %}</label>
                 <div class="input-group">
                   <div class="input-group-btn">
-                    <input type="email" value="" name="EMAIL" required id="mce-EMAIL" placeholder="{% trans "nom@courriel.com" %}" class="required email">
-                    <input type="submit" value="{% blocktrans %}S'inscrire{% endblocktrans %}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-dark">
+                    <input type="email" value="" name="EMAIL" required id="mce-EMAIL" placeholder="{% translate "nom@courriel.com" %}" class="required email">
+                    <input type="submit" value="{% blocktranslate %}S'inscrire{% endblocktranslate %}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-dark">
                   </div>
                 </div>
               </fieldset>
@@ -345,23 +345,23 @@
           <div class="col-sm-3">
             <ul class="unstyled footer-nav--about">
               <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                <a href="{% trans 'https://apropos.erudit.org/fr/' %}" target="_blank">
-                  {% trans "À propos" %}
+                <a href="{% translate 'https://apropos.erudit.org/fr/' %}" target="_blank">
+                  {% translate "À propos" %}
                 </a>
               </li>
               <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                <a href="{% trans 'https://apropos.erudit.org/fr/usagers/foire-aux-questions/' %}" target="_blank">
-                  {% trans "Aide" %}
+                <a href="{% translate 'https://apropos.erudit.org/fr/usagers/foire-aux-questions/' %}" target="_blank">
+                  {% translate "Aide" %}
                 </a>
               </li>
               <li>
-                <a href="{% trans 'https://www.erudit.org/public/documents/Guide_recherche.pdf' %}" target="_blank">
-                  {% trans "Guide de recherche" %}
+                <a href="{% translate 'https://www.erudit.org/public/documents/Guide_recherche.pdf' %}" target="_blank">
+                  {% translate "Guide de recherche" %}
                 </a>
               </li>
               <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                <a href="{% trans 'https://apropos.erudit.org/fr/erudit/contact/' %}" target="_blank">
-                  {% trans "Nous contacter" %}
+                <a href="{% translate 'https://apropos.erudit.org/fr/erudit/contact/' %}" target="_blank">
+                  {% translate "Nous contacter" %}
                 </a>
               </li>
             </ul>
@@ -370,22 +370,22 @@
             <ul class="unstyled footer-nav--publication-types">
               <li>
                 <a href="{% url 'public:journal:journal_list' %}">
-                  {% trans "Revues" %}
+                  {% translate "Revues" %}
                 </a>
               </li>
               <li>
                 <a href="{% url 'public:thesis:home' %}">
-                  {% trans "Thèses et mémoires" %}
+                  {% translate "Thèses et mémoires" %}
                 </a>
               </li>
               <li>
                 <a href="{% url 'public:book:home' %}">
-                  {% trans "Livres et actes" %}
+                  {% translate "Livres et actes" %}
                 </a>
               </li>
               <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                <a href="{% trans 'https://depot.erudit.org/?locale=fr' %}" target="_blank">
-                  {% trans "Rapports de recherche" %}
+                <a href="{% translate 'https://depot.erudit.org/?locale=fr' %}" target="_blank">
+                  {% translate "Rapports de recherche" %}
                 </a>
               </li>
             </ul>
@@ -399,12 +399,12 @@
               <img
                 src="{% static 'svg/logo-erudit.svg' %}"
                 class="inline-svg logo-erudit"
-                alt="{% trans 'Logo d’Érudit' %}"
+                alt="{% translate 'Logo d’Érudit' %}"
               />
-              <span class="erudit-headline">{% trans "Cultivez votre savoir." %}</span>
+              <span class="erudit-headline">{% translate "Cultivez votre savoir." %}</span>
             </div>
             <div class="col-sm-3 footer-legal--socials">
-              <p>{% trans "Suivez-nous&nbsp;:" %}</p>
+              <p>{% translate "Suivez-nous&nbsp;:" %}</p>
               <ul class="social-icons inline">
                 <li>
                   <a href="https://www.facebook.com/%C3%89rudit-141469165320/" title="Facebook">
@@ -434,11 +434,11 @@
               </ul>
             </div>
             <div class="col-sm-3 footer-legal--coalition-publica">
-              <a href="{% trans 'https://www.coalition-publi.ca/le-projet' %}" title="Coalition Publica" target="_blank">
+              <a href="{% translate 'https://www.coalition-publi.ca/le-projet' %}" title="Coalition Publica" target="_blank">
                 <img
                   src="{% static 'svg/logo-coalition.svg' %}"
                   class="inline-svg logo-coalition"
-                  alt="{% trans 'Coalition Publica' %}"
+                  alt="{% translate 'Coalition Publica' %}"
                 />
               </a>
             </div>
@@ -448,25 +448,25 @@
             <div class="col-sm-9">
               <ul class="unstyled inline footer-legal--policies">
                 <li>
-                  <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique de confidentialité" %}">
-                    {% trans "Politique de confidentialité" %}
+                  <a href="{% translate 'https://www.iubenda.com/privacy-policy/79766356' %}" class="iubenda-nostyle iubenda-embed " title="{% translate "Politique de confidentialité" %}">
+                    {% translate "Politique de confidentialité" %}
                   </a>
                 </li>
                 <li>
-                  <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique relative aux cookies" %}">
-                    {% trans "Politique relative aux cookies" %}
+                  <a href="{% translate 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}" class="iubenda-nostyle iubenda-embed " title="{% translate "Politique relative aux cookies" %}">
+                    {% translate "Politique relative aux cookies" %}
                   </a>
                 </li>
                 <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                  <a href="{% trans 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">
-                    {% trans "Politique et licence d’utilisation" %}
+                  <a href="{% translate 'https://apropos.erudit.org/fr/usagers/politique-dutilisation/' %}" target="_blank">
+                    {% translate "Politique et licence d’utilisation" %}
                   </a>
                 </li>
               </ul>
             </div>
             <div class="col-sm-3">
               <p>
-                © {% now "Y" %} {% trans "Consortium Érudit" %}
+                © {% now "Y" %} {% translate "Consortium Érudit" %}
               </p>
             </div>
           </div>
@@ -498,10 +498,10 @@
         }
       },
       "content": {
-        "message": "{% trans 'erudit.org  utilise des cookies (« témoins de connexion ») à des fins de statistiques et d’amélioration de l’expérience utilisateur. Ces données sont anonymes. En poursuivant votre visite, vous acceptez l’utilisation de ces cookies, que vous pourrez désactiver en tout temps dans votre fureteur web.' %}",
-        "dismiss": "{% trans 'J’ai compris' %}",
-        "link": "{% trans 'En savoir plus' %}",
-        "href": "{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}"
+        "message": "{% translate 'erudit.org  utilise des cookies (« témoins de connexion ») à des fins de statistiques et d’amélioration de l’expérience utilisateur. Ces données sont anonymes. En poursuivant votre visite, vous acceptez l’utilisation de ces cookies, que vous pourrez désactiver en tout temps dans votre fureteur web.' %}",
+        "dismiss": "{% translate 'J’ai compris' %}",
+        "link": "{% translate 'En savoir plus' %}",
+        "href": "{% translate 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}"
       },
       "position": "bottom-right"
     })});

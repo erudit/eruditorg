@@ -3,7 +3,7 @@
 
 {% block title %}{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal_formatted_title }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with journal=issue.journal_formatted_title volume_title=issue.volume_title|lower %}Consultez le {{ volume_title }} de la revue {{ journal }} sur Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate with journal=issue.journal_formatted_title volume_title=issue.volume_title|lower %}Consultez le {{ volume_title }} de la revue {{ journal }} sur Érudit.{% endblocktranslate %} {% translate 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -16,20 +16,20 @@
 {% elif issue.journal.has_logo %}
 <meta property="og:image" content="{% journal_logo_url issue.journal %}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with journal=issue.journal_formatted_title %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
+<meta property="og:description" content="{% blocktranslate with journal=issue.journal_formatted_title %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktranslate %} {% translate 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{% if issue.title %}{{ issue.title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal_formatted_title }} – Érudit">
-<meta name="twitter:image:alt" content="{% if issue.has_coverpage %}{% trans 'Couverture pour ce numéro de la revue' %}{% else %}{% trans 'Logo pour' %}{% endif %} {{ issue.journal_formatted_title }}">
+<meta name="twitter:image:alt" content="{% if issue.has_coverpage %}{% translate 'Couverture pour ce numéro de la revue' %}{% else %}{% translate 'Logo pour' %}{% endif %} {{ issue.journal_formatted_title }}">
 {% if issue.has_coverpage %}
 <meta name="twitter:image" content="{% issue_coverpage_url issue %}">
 {% elif issue.journal.has_logo %}
 <meta name="twitter:image" content="{% journal_logo_url issue.journal %}">
 {% endif %}
-<meta name="twitter:description" content="{% blocktrans with journal=issue.journal_formatted_title %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
+<meta name="twitter:description" content="{% blocktranslate with journal=issue.journal_formatted_title %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktranslate %} {% translate 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 {% if not issue.is_published %}
 <meta name="robots" content="noindex">
 {% endif %}
@@ -67,7 +67,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
-      "name": "{% trans 'Revues' %}"
+      "name": "{% translate 'Revues' %}"
     }
   },{
     "@type": "ListItem",
@@ -105,7 +105,7 @@
 
 {% block inner_main %}
 {% csrf_token %}
-{% trans "inconnu" as i18n_unknown %}
+{% translate "inconnu" as i18n_unknown %}
 <div id="id_articles_saved_citation_list_metadata">
   {% for article in articles %}
   {% if issue.journal.collection.code == "unb" %}
@@ -129,11 +129,11 @@
 <main class="col-sm-8 col-md-7">
   <header class="main-header">
     <p class="main-header__meta">
-      <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">
+      <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% translate 'Consulter la revue' %}">
         {{ main_title.title }}
         {# Peer review seal #}
         {% if issue.journal.type.code == 'S' %}
-        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+        <span class="hint--bottom-left hint--no-animate" data-hint="{% translate 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
           <i class="icon ion-ios-checkmark-circle"></i>
         </span>
         {% endif %}
@@ -157,7 +157,7 @@
       <span class="issue-number">{{ issue.volume_title }}
         {# Embargoed / locked issue #}
         {% if issue.embargoed and not content_access_granted %}
-        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement.' %}">
+        <span class="hint--bottom-left hint--no-animate" data-hint="{% translate 'L’accès aux numéros courants de cette revue nécessite un abonnement.' %}">
           <i class="icon ion-ios-lock"></i>
         </span>
         {% endif %}
@@ -170,16 +170,16 @@
       {% endfor %}
       {% if theme.editors %}
       <span class="theme-guest-editor">
-        {% trans 'Sous la direction de' %} {{ theme.editors|person_list|safe }}
+        {% translate 'Sous la direction de' %} {{ theme.editors|person_list|safe }}
       </span>
       {% endif %}
       {% endfor %}
       {% if guest_editors %}
-      <span class="theme-guest-editor">{% trans 'Sous la direction de' %} {{ guest_editors|person_list|safe }}</span>
+      <span class="theme-guest-editor">{% translate 'Sous la direction de' %} {{ guest_editors|person_list|safe }}</span>
       {% endif %}
     </h1>
     {% if reader_url%}
-    <p><a href="{{ reader_url }}{% if not issue.is_published and ticket %}?ticket={{ ticket }}{% endif %}" class="btn btn-secondary">{% trans 'Feuilleter ce numéro' %}</a></p>
+    <p><a href="{{ reader_url }}{% if not issue.is_published and ticket %}?ticket={{ ticket }}{% endif %}" class="btn btn-secondary">{% translate 'Feuilleter ce numéro' %}</a></p>
     {% endif %}
     {% if notegens %}
     <div class="row">
@@ -194,15 +194,15 @@
     </div>
     {% endif %}
     <h2 class="toc__title">
-      {% blocktrans count counter=articles|length %}
+      {% blocktranslate count counter=articles|length %}
       Sommaire (1&nbsp;article)
       {% plural %}
       Sommaire ({{ counter }}&nbsp;articles)
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </h2>
     {% if issue.is_external %}
     <div class="alert alert-info">
-      <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</p>
+      <p><i class="icon ion-ios-information-circle alert-info-icon"></i> {% translate 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</p>
     </div>
     {% endif %}
   </header>
@@ -215,7 +215,7 @@
         <img
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
           data-src="{{ license.img }}"
-          alt="{% trans 'License' %}"
+          alt="{% translate 'License' %}"
           class="lazyload"
         />
       </a></p>
@@ -228,7 +228,7 @@
           <img
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
             data-src="{{ copyright.img }}"
-            alt="{% trans 'License' %}"
+            alt="{% translate 'License' %}"
             class="lazyload"
           />
         </a></p>
@@ -242,7 +242,7 @@
 {% block aside_issue %}
 <div class="sidebar-block clearfix latest-issue">
   <h2>
-    <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">
+    <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% translate 'Consulter la revue' %}">
       {{ main_title.title }}
       {% if main_title.subtitle %}
       <br />
@@ -261,7 +261,7 @@
     </a>
   </h2>
   <p>{{ issue.volume_title_with_pages }}</p>
-  <p>{% trans "Diffusion numérique" %} : {{ issue.date_published }}</p>
+  <p>{% translate "Diffusion numérique" %} : {{ issue.date_published }}</p>
   {% if issue.has_coverpage %}
   <div>
     {# The image's src is a transparent pixel placeholder. #}
@@ -271,14 +271,14 @@
       data-aspectratio="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}/{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
       width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
       height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
-      alt="{% trans 'Couverture de' %} {% if issue.title %}{{ issue.title|safe }}, {% endif %}{{ issue.volume_title_with_pages }} {{ issue.journal_formatted_title }}"
+      alt="{% translate 'Couverture de' %} {% if issue.title %}{{ issue.title|safe }}, {% endif %}{{ issue.volume_title_with_pages }} {{ issue.journal_formatted_title }}"
       class="lazyload img-responsive issue-cover"
     />
   </div>
   {% endif %}
   <p>
-    <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
-      {% trans "Voir tous les numéros" %}
+    <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% translate 'Historique de la revue' %}">
+      {% translate "Voir tous les numéros" %}
     </a>
   </p>
 </div>
@@ -294,7 +294,7 @@
 <section class="back-issues">
   <div class="container">
     <header class="back-issues--header col-xs-12">
-      <h3>{% trans "Anciens numéros de" %} <em>{{ issue.journal_formatted_title }}</em></h3>
+      <h3>{% translate "Anciens numéros de" %} <em>{{ issue.journal_formatted_title }}</em></h3>
     </header>
     <div class="row">
       {% for back_issue in back_issues %}
@@ -308,7 +308,7 @@
             data-aspectratio="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}/{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
             width="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.width }}"
             height="{{ ISSUE_COVERPAGE_AVERAGE_SIZE.height }}"
-            alt="{% trans 'Couverture représentant ' %}{% if back_issue.title %}{% trans 'la thématique ' %}{{ back_issue.title|safe }}{% else %}{% trans 'le ' %}{{ back_issue.volume_title }}{% endif %}"
+            alt="{% translate 'Couverture représentant ' %}{% if back_issue.title %}{% translate 'la thématique ' %}{{ back_issue.title|safe }}{% else %}{% translate 'le ' %}{{ back_issue.volume_title }}{% endif %}"
             class="lazyload img-responsive card__figure"
           />
           {% endif %}

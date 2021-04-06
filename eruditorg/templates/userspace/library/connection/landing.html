@@ -11,18 +11,18 @@
 {% block body_id %}connection{% endblock body_id %}
 {% block data_controller %}userspace:library:connection:landing{% endblock data_controller %}
 
-{% block title %}{% trans "Paramètres de connexion" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Paramètres de connexion" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Paramètres de connexion" %}</a></li>
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% translate "Paramètres de connexion" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Paramètres de connexion" %}
+{% translate "Paramètres de connexion" %}
 {% endblock %}
 
 {% block section_intro %}
-<p>{% trans "Vous trouverez dans cette section les paramètres de connexion nécessaires à la configuration de vos outils pour l’utilisation des protocoles SUSHI et Z39.50 / SRU/SRW en lien avec les ressources d’Érudit, ainsi que la configuration recommandée si vous utilisez EZproxy." %}</p>
+<p>{% translate "Vous trouverez dans cette section les paramètres de connexion nécessaires à la configuration de vos outils pour l’utilisation des protocoles SUSHI et Z39.50 / SRU/SRW en lien avec les ressources d’Érudit, ainsi que la configuration recommandée si vous utilisez EZproxy." %}</p>
 {% endblock section_intro %}
 
 {% block content_main %}
@@ -30,58 +30,58 @@
 {% flag "CounterR5" %}
 
 <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "SUSHI (Z39.93-2014)" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <h2 class="akkordion-title">{% translate "SUSHI (Z39.93-2014)" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
     <div class="row">
       <div class="col-md-12">
-        <p>{% trans "Le protocole SUSHI (NISO Z39.93-2014) vous permet d’automatiser la collecte de vos statistiques de consultation COUNTER. Utilisez les paramètres de connexion ci-dessous pour récupérer les statistiques de consultation de votre établissement sur la plateforme Érudit." %}</p>
+        <p>{% translate "Le protocole SUSHI (NISO Z39.93-2014) vous permet d’automatiser la collecte de vos statistiques de consultation COUNTER. Utilisez les paramètres de connexion ci-dessous pour récupérer les statistiques de consultation de votre établissement sur la plateforme Érudit." %}</p>
       </div>
     </div>
 
     {% if sushi_requester_id %}
     <div class="glory">
       <dl class="row index-card">
-        <dt class="col-sm-6">{% trans "Sushi Requester ID" %}</dt>
+        <dt class="col-sm-6">{% translate "Sushi Requester ID" %}</dt>
         <dd class="col-sm-6">
-          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier cette information.{% endblocktranslate %}">
             <span data-clipboard-text="{{ sushi_requester_id }}" class="clipboard-data">
               <span class="ion-ios-copy-outline clipboard-icon"></span>
               {{ sushi_requester_id }}
-              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
-              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+              <span class="clipboard-msg clipboard-success">{% translate "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% translate "une erreur s’est produite" %}</span>
             </span>
           </span>
         </dd>
 
-        <dt class="col-sm-6">{% trans "ID référence client" %}</dt>
+        <dt class="col-sm-6">{% translate "ID référence client" %}</dt>
         <dd class="col-sm-6">
-          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier cette information.{% endblocktranslate %}">
             <span data-clipboard-text="{{ id_client }}" class="clipboard-data">
               <span class="ion-ios-copy-outline clipboard-icon"></span>
               {{ id_client }}
-              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
-              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+              <span class="clipboard-msg clipboard-success">{% translate "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% translate "une erreur s’est produite" %}</span>
             </span>
           </span>
         </dd>
 
-        <dt class="col-sm-6">{% trans "URL" %}</dt>
+        <dt class="col-sm-6">{% translate "URL" %}</dt>
         <dd class="col-sm-6">
-          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier cette information.{% endblocktranslate %}">
             <span data-clipboard-text="{{ sushi_url }}" class="clipboard-data">
               <span class="ion-ios-copy-outline clipboard-icon"></span>
               {{ sushi_url }}
-              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
-              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+              <span class="clipboard-msg clipboard-success">{% translate "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% translate "une erreur s’est produite" %}</span>
             </span>
           </span>
         </dd>
       </dl>
     </div>
     {% else %}
-    {% blocktrans with organisation=scope_current_organisation.name %}
+    {% blocktranslate with organisation=scope_current_organisation.name %}
     <p>Vous n’avez aucun compte. Veuillez nous contacter par courriel à l’adresse <a href="mailto:client@erudit.org?subject=Aucun%20compte%20SUSHI%20–%20{{ organisation }}">client@erudit.org</a>.</p>
-    {% endblocktrans %}
+    {% endblocktranslate %}
     {% endif %}
   </div>
 </section>
@@ -91,48 +91,48 @@
 {% endflag %}
 
 <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Z39.50&nbsp;/ SRU/SRW" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <h2 class="akkordion-title">{% translate "Z39.50&nbsp;/ SRU/SRW" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
     <div class="row">
       <div class="col-md-12">
-        <p>{% trans "Utilisez les paramètres de connexion ci-dessous pour interroger notre moteur de recherche via le protocole Z39.50. Nous supportons actuellement les requêtes dans les 7 champs suivants&nbsp;: titre, sujet, auteur, éditeur, année de publication, ISBN, ISSN (ISSN papier seulement)." %}</p>
+        <p>{% translate "Utilisez les paramètres de connexion ci-dessous pour interroger notre moteur de recherche via le protocole Z39.50. Nous supportons actuellement les requêtes dans les 7 champs suivants&nbsp;: titre, sujet, auteur, éditeur, année de publication, ISBN, ISSN (ISSN papier seulement)." %}</p>
       </div>
     </div>
 
     <div class="glory">
       <dl class="row index-card">
-        <dt class="col-sm-6">{% trans "Serveur" %}</dt>
+        <dt class="col-sm-6">{% translate "Serveur" %}</dt>
         <dd class="col-sm-6">
-          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier cette information.{% endblocktranslate %}">
             <span data-clipboard-text="{{ z3950_host }}" class="clipboard-data">
               <i class="icon ion-copy clipboard-icon"></i>
               {{ z3950_host }}
-              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
-              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+              <span class="clipboard-msg clipboard-success">{% translate "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% translate "une erreur s’est produite" %}</span>
             </span>
           </span>
         </dd>
 
-        <dt class="col-sm-6">{% trans "Port" %}</dt>
+        <dt class="col-sm-6">{% translate "Port" %}</dt>
         <dd class="col-sm-6">
-          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier cette information.{% endblocktranslate %}">
             <span data-clipboard-text="{{ z3950_port }}" class="clipboard-data">
               <i class="icon ion-copy clipboard-icon"></i>
               {{ z3950_port }}
-              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
-              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+              <span class="clipboard-msg clipboard-success">{% translate "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% translate "une erreur s’est produite" %}</span>
             </span>
           </span>
         </dd>
 
-        <dt class="col-sm-6">{% trans "Base de données" %} </dt>
+        <dt class="col-sm-6">{% translate "Base de données" %} </dt>
         <dd class="col-sm-6">
-          <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span class="hint--top hint--no-animate" data-hint="{% blocktranslate %}Cliquez pour copier cette information.{% endblocktranslate %}">
             <span data-clipboard-text="{{ z3950_database }}" class="clipboard-data">
               <i class="icon ion-copy clipboard-icon"></i>
               {{ z3950_database }}
-              <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
-              <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+              <span class="clipboard-msg clipboard-success">{% translate "copié" %}</span>
+              <span class="clipboard-msg clipboard-error">{% translate "une erreur s’est produite" %}</span>
             </span>
           </span>
         </dd>
@@ -144,11 +144,11 @@
 <hr />
 
 <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Stanza recommandée pour EZproxy" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <h2 class="akkordion-title">{% translate "Stanza recommandée pour EZproxy" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
     <div class="row">
       <div class="col-md-12">
-        <p>{% trans "Si vous utilisez le service EZproxy d'OCLC, voici la stanza que nous recommandons d'utiliser pour accéder aux ressources d'Érudit." %}</p>
+        <p>{% translate "Si vous utilisez le service EZproxy d'OCLC, voici la stanza que nous recommandons d'utiliser pour accéder aux ressources d'Érudit." %}</p>
         <ul>
           <li>URL https://www.erudit.org</li>
           <li>HJ https://depot.erudit.org/</li>

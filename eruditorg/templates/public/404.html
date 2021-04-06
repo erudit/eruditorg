@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "404. Page non trouvée" %}{% endblock title %}
+{% block title %}{% translate "404. Page non trouvée" %}{% endblock title %}
 
 {% block meta_tags %}<meta name="robots" content="noindex">{% endblock %}
 
@@ -11,7 +11,7 @@
 <main class="glory">
   <div class="container">
     <header class="main-header">
-      <h1>{% trans "Page non trouvée" %}</h1>
+      <h1>{% translate "Page non trouvée" %}</h1>
     </header>
     <div class="ascii-error">
       <pre>
@@ -30,9 +30,9 @@ d8eeeee88888eer 48888X   88888  d8eeeee88888eer
     </div>
     <p>
       {% url 'public:home' as home %}
-      {% blocktrans %}
+      {% blocktranslate %}
       Cette page est introuvable&nbsp;! Veuillez vérifier l’adresse ou retourner à la <a href="{{ home }}">page d’accueil</a>.
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </p>
   </div>
 </main>
