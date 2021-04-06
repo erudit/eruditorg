@@ -1,12 +1,12 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from .views import RestrictionsView, RestrictionsByJournalView
 
 app_name = "webservices"
 
 urlpatterns = [
-    url(r"^restrictions/$", RestrictionsView.as_view(), name="restrictions"),
-    url(
+    re_path(r"^restrictions/$", RestrictionsView.as_view(), name="restrictions"),
+    re_path(
         r"^restrictionsByJournal/(?P<journal_code>\w+)/$",
         RestrictionsByJournalView.as_view(),
         name="restrictionsByJournal",

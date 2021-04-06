@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url
+from django.urls import re_path
 
 from apps.userspace.library.stats import views
 
 app_name = "stats"
 
 urlpatterns = [
-    url(r"^$", views.StatsLandingView.as_view(), name="landing"),
+    re_path(r"^$", views.StatsLandingView.as_view(), name="landing"),
 ]

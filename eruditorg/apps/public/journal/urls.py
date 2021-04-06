@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include
-from django.conf.urls import url
+from django.urls import include, re_path
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.clickjacking import xframe_options_exempt
 
@@ -11,23 +10,27 @@ from . import views_compat
 
 journal_urlpatterns = (
     [
-        url(_(r"^revues/$"), views.JournalListView.as_view(), name="journal_list"),
-        url(_(r"^rss\.xml$"), feeds.LatestIssuesFeed(), name="latest_issues_rss"),
+        re_path(_(r"^revues/$"), views.JournalListView.as_view(), name="journal_list"),
+        re_path(_(r"^rss\.xml$"), feeds.LatestIssuesFeed(), name="latest_issues_rss"),
         # Statistic page for total and per journal number of articles.
-        url(_(r"^revues/statistiques/$"), views.JournalStatisticsView.as_view(), name="statistics"),
+        re_path(
+            _(r"^revues/statistiques/$"), views.JournalStatisticsView.as_view(), name="statistics"
+        ),
         # Journal URLs
-        url(
+        re_path(
             _(r"^revues/(?P<code>[\w-]+)/"),
             include(
                 [
-                    url(r"^$", views.JournalDetailView.as_view(), name="journal_detail"),
-                    url(_(r"^logo\.jpg$"), views.JournalRawLogoView.as_view(), name="journal_logo"),
-                    url(
+                    re_path(r"^$", views.JournalDetailView.as_view(), name="journal_detail"),
+                    re_path(
+                        _(r"^logo\.jpg$"), views.JournalRawLogoView.as_view(), name="journal_logo"
+                    ),
+                    re_path(
                         _(r"^auteurs/$"),
                         views.JournalAuthorsListView.as_view(),
                         name="journal_authors_list",
                     ),
-                    url(
+                    re_path(
                         r"^rss\.xml$",
                         feeds.LatestJournalArticlesFeed(),
                         name="journal_articles_rss",
@@ -36,29 +39,31 @@ journal_urlpatterns = (
             ),
         ),
         # Issue URLs
-        url(
+        re_path(
             _(
                 r"^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<localidentifier>[\w-]+)/"  # noqa
             ),
             include(
                 [
-                    url(r"^$", views.IssueDetailView.as_view(), name="issue_detail"),
-                    url(
+                    re_path(r"^$", views.IssueDetailView.as_view(), name="issue_detail"),
+                    re_path(
                         _(r"^coverpage\.jpg$"),
                         views.IssueRawCoverpageView.as_view(),
                         name="issue_coverpage",
                     ),
-                    url(
+                    re_path(
                         _(r"^coverpage-hd\.jpg$"),
                         views.IssueRawCoverpageHDView.as_view(),
                         name="issue_coverpage_hd",
                     ),
-                    url(
+                    re_path(
                         _(r"^feuilletage/"),
                         include(
                             [
-                                url(r"^$", views.IssueReaderView.as_view(), name="issue_reader"),
-                                url(
+                                re_path(
+                                    r"^$", views.IssueReaderView.as_view(), name="issue_reader"
+                                ),
+                                re_path(
                                     r"^(?P<page>[\d]+).jpg$",
                                     views.IssueReaderPageView.as_view(),
                                     name="issue_reader_page",
@@ -69,55 +74,57 @@ journal_urlpatterns = (
                 ]
             ),
         ),
-        url(
+        re_path(
             _(
                 r"^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<localidentifier>[\w-]+)"  # noqa
             ),
             include(
                 [
-                    url(r"^\.xml$", views.IssueXmlView.as_view(), name="issue_raw_xml"),
+                    re_path(r"^\.xml$", views.IssueXmlView.as_view(), name="issue_raw_xml"),
                 ]
             ),
         ),
         # Article URLs
-        url(
+        re_path(
             _(
                 r"^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)/"  # noqa
             ),
             include(
                 [
-                    url(r"^$", views.ArticleDetailView.as_view(), name="article_detail"),
-                    url(
+                    re_path(r"^$", views.ArticleDetailView.as_view(), name="article_detail"),
+                    re_path(
                         _(r"^resume/$"), views.ArticleSummaryView.as_view(), name="article_summary"
                     ),
-                    url(_(r"^biblio/$"), views.ArticleBiblioView.as_view(), name="article_biblio"),
-                    url(_(r"^plan/$"), views.ArticleTocView.as_view(), name="article_toc"),
-                    url(
+                    re_path(
+                        _(r"^biblio/$"), views.ArticleBiblioView.as_view(), name="article_biblio"
+                    ),
+                    re_path(_(r"^plan/$"), views.ArticleTocView.as_view(), name="article_toc"),
+                    re_path(
                         _(r"^media/(?P<media_localid>[\.\w-]+)$"),
                         views.ArticleMediaView.as_view(),
                         name="article_media",
                     ),
-                    url(
+                    re_path(
                         _(r"^premierepage\.pdf$"),
                         xframe_options_exempt(views.ArticleRawPdfFirstPageView.as_view()),
                         name="article_raw_pdf_firstpage",
                     ),
-                    url(
+                    re_path(
                         r"^citation\.enw$",
                         views.ArticleEnwCitationView.as_view(),
                         name="article_citation_enw",
                     ),
-                    url(
+                    re_path(
                         r"^citation\.ris$",
                         views.ArticleRisCitationView.as_view(),
                         name="article_citation_ris",
                     ),
-                    url(
+                    re_path(
                         r"^citation\.bib$",
                         views.ArticleBibCitationView.as_view(),
                         name="article_citation_bib",
                     ),
-                    url(
+                    re_path(
                         r"^ajax-citation-modal$",
                         views.ArticleAjaxCitationModalView.as_view(),
                         name="article_ajax_citation_modal",
@@ -125,41 +132,41 @@ journal_urlpatterns = (
                 ]
             ),
         ),
-        url(
+        re_path(
             _(
                 r"^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)"  # noqa
             ),
             include(
                 [
-                    url(r"^\.html$", views_compat.ArticleDetailRedirectView.as_view()),
-                    url(r"^\.xml$", views.ArticleXmlView.as_view(), name="article_raw_xml"),
-                    url(
+                    re_path(r"^\.html$", views_compat.ArticleDetailRedirectView.as_view()),
+                    re_path(r"^\.xml$", views.ArticleXmlView.as_view(), name="article_raw_xml"),
+                    re_path(
                         r"^\.pdf$",
                         xframe_options_exempt(views.ArticleRawPdfView.as_view()),
                         name="article_raw_pdf",
                     ),
-                    url(r"^\.enw$", views.ArticleEnwCitationView.as_view(), name="article_enw"),
-                    url(r"^\.ris$", views.ArticleRisCitationView.as_view(), name="article_ris"),
-                    url(r"^\.bib$", views.ArticleBibCitationView.as_view(), name="article_bib"),
+                    re_path(r"^\.enw$", views.ArticleEnwCitationView.as_view(), name="article_enw"),
+                    re_path(r"^\.ris$", views.ArticleRisCitationView.as_view(), name="article_ris"),
+                    re_path(r"^\.bib$", views.ArticleBibCitationView.as_view(), name="article_bib"),
                 ]
             ),
         ),
-        url(
+        re_path(
             r"^iderudit/(?P<localid>[\w-]+)/$",
             views.IdEruditArticleRedirectView.as_view(),
             name="iderudit_article_detail",
         ),
         # Redirect URLs
-        url(
+        re_path(
             _(r"^redirection/"),
             include(
                 [
-                    url(
+                    re_path(
                         _(r"^revue/(?P<code>[\w-]+)/$"),
                         views.JournalExternalURLRedirectView.as_view(),
                         name="journal_external_redirect",
                     ),
-                    url(
+                    re_path(
                         _(r"^numero/(?P<localidentifier>[\w-]+)/$"),
                         views.IssueExternalURLRedirectView.as_view(),
                         name="issue_external_redirect",
@@ -173,15 +180,15 @@ journal_urlpatterns = (
 
 google_scholar_urlpatterns = (
     [
-        url(
+        re_path(
             r"^subscribers\.xml$", views.GoogleScholarSubscribersView.as_view(), name="subscribers"
         ),
-        url(
+        re_path(
             r"^subscriber_journals\.xml$",
             views.GoogleScholarSubscriberJournalsView.as_view(),
             name="subscriber_journals_erudit",
         ),
-        url(
+        re_path(
             r"^subscriber_journals_(?P<subscription_id>[0-9]+)\.xml$",
             views.GoogleScholarSubscriberJournalsView.as_view(),
             name="subscriber_journals",

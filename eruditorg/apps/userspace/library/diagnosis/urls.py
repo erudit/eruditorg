@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import re_path
 from . import views
 
 app_name = "diagnosis"
 
 urlpatterns = [
-    url(r"^$", views.DiagnosisLandingView.as_view(), name="landing"),
+    re_path(r"^$", views.DiagnosisLandingView.as_view(), name="landing"),
 ]

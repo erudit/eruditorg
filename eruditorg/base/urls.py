@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
 from django.contrib import admin
@@ -28,52 +28,52 @@ sitemaps_dict = {
 
 
 urlpatterns = [
-    url(r"^index\.html$", RedirectView.as_view(pattern_name="public:home")),
-    url(
+    re_path(r"^index\.html$", RedirectView.as_view(pattern_name="public:home")),
+    re_path(
         r"^robots\.txt$",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
         name="robots-txt",
     ),
-    url(
+    re_path(
         r"^sitemap\.xml$",
         sitemap_views.index,
         {"sitemaps": sitemaps_dict, "sitemap_url_name": "sitemaps"},
         name="sitemap",
     ),
-    url(
+    re_path(
         r"^sitemap-(?P<section>.+)\.xml$",
         cache_page(settings.LONG_TTL)(sitemap_views.sitemap),
         {"sitemaps": sitemaps_dict},
         name="sitemaps",
     ),
     # Google Scholar URLs
-    url(r"^scholar/", include(google_scholar_urlpatterns)),
+    re_path(r"^scholar/", include(google_scholar_urlpatterns)),
     # CRKN ipunb service.
-    url(r"^ws/crkn/ipunb.xml", CrknIpUnbView.as_view(), name="crkn_ipunb"),
-    url(
+    re_path(r"^ws/crkn/ipunb.xml", CrknIpUnbView.as_view(), name="crkn_ipunb"),
+    re_path(
         _(r"^couverture/(?P<localidentifier>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg"),
         vary_on_headers("accept-encoding")(IssueRawCoverpageView.as_view()),
         name="issue_coverpage_cdn",
     ),
-    url(
+    re_path(
         _(r"^logo/(?P<code>[\w-]+)/(?P<last_modified_date>[\w-]+).jpg"),
         JournalRawLogoView.as_view(),
         name="journal_logo_cdn",
     ),
     # Compatibility URLs
-    url("^", include(urls_compat.urlpatterns)),
+    re_path("^", include(urls_compat.urlpatterns)),
 ]
 
 if settings.EXPOSE_OPENMETRICS:
     urlpatterns.append(
-        url("^prometheus/", include("django_prometheus.urls")),
+        re_path("^prometheus/", include("django_prometheus.urls")),
     )
 
 urlpatterns += i18n_patterns(
-    url(r"^jsi18n/$", JavaScriptCatalog.as_view(packages=["base"]), name="javascript-catalog"),
-    url(r"^jsreverse/$", js_reverse_views.urls_js, name="js_reverse"),
-    url(r"^" + settings.ADMIN_URL, admin.site.urls),
-    url(
+    re_path(r"^jsi18n/$", JavaScriptCatalog.as_view(packages=["base"]), name="javascript-catalog"),
+    re_path(r"^jsreverse/$", js_reverse_views.urls_js, name="js_reverse"),
+    re_path(r"^" + settings.ADMIN_URL, admin.site.urls),
+    re_path(
         r"^upload/",
         include(
             (
@@ -83,9 +83,9 @@ urlpatterns += i18n_patterns(
         ),
     ),
     # Apps
-    url(_(r"^espace-utilisateur/"), include("apps.userspace.urls")),
-    url(r"^webservices/", include("apps.webservices.urls")),
-    url(r"^", include(public_urlpatterns)),
+    re_path(_(r"^espace-utilisateur/"), include("apps.userspace.urls")),
+    re_path(r"^webservices/", include("apps.webservices.urls")),
+    re_path(r"^", include(public_urlpatterns)),
 )
 
 # In DEBUG mode, serve media files through Django.
@@ -98,16 +98,16 @@ if settings.DEBUG:
     media_url = settings.MEDIA_URL.lstrip("/").rstrip("/")
     urlpatterns += [
         # Test 503, 500, 404 and 403 pages
-        url(r"^403/$", TemplateView.as_view(template_name="public/403.html")),
-        url(r"^404/$", TemplateView.as_view(template_name="public/404.html")),
-        url(r"^500/$", TemplateView.as_view(template_name="public/500.html")),
-        url(r"^503/$", TemplateView.as_view(template_name="public/503.html")),
-        url(r"^%s/(?P<path>.*)$" % media_url, serve, {"document_root": settings.MEDIA_ROOT}),
+        re_path(r"^403/$", TemplateView.as_view(template_name="public/403.html")),
+        re_path(r"^404/$", TemplateView.as_view(template_name="public/404.html")),
+        re_path(r"^500/$", TemplateView.as_view(template_name="public/500.html")),
+        re_path(r"^503/$", TemplateView.as_view(template_name="public/503.html")),
+        re_path(r"^%s/(?P<path>.*)$" % media_url, serve, {"document_root": settings.MEDIA_ROOT}),
     ]
     import debug_toolbar
 
     urlpatterns = [
-        url(r"^__debug__/", include(debug_toolbar.urls)),
+        re_path(r"^__debug__/", include(debug_toolbar.urls)),
     ] + urlpatterns
 
 
