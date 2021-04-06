@@ -113,7 +113,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
 
 class DryRun(transaction.Atomic):
     def __init__(self, using=None, savepoint=True, dry_run=False):
-        super().__init__(using, savepoint)
+        super().__init__(using, savepoint, durable=False)
         self.dry_run = dry_run
 
     def __enter__(self):
