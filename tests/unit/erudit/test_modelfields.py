@@ -19,7 +19,7 @@ from tests.models import DummyModel
 
 @pytest.mark.django_db
 class TestSizeConstrainedImageField:
-    @pytest.yield_fixture(autouse=True)
+    @pytest.fixture(autouse=True)
     def setup(self):
         # Set up some images used for doing image tests
         images_dict = {}
