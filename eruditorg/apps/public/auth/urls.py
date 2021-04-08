@@ -14,7 +14,7 @@ urlpatterns = [
     # Sign in / sign out
     re_path(
         _(r"^connexion/$"),
-        auth_views.LoginView.as_view(
+        views.LoginView.as_view(
             template_name="public/auth/login.html", authentication_form=forms.AuthenticationForm
         ),
         name="login",

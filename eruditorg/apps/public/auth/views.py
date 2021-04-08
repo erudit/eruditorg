@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -105,3 +106,10 @@ class UserPasswordChangeView(CanModifyAccountMixin, LoginRequiredMixin, MenuItem
         messages.success(self.request, _("Votre mot de passe a été mis à jour avec succès"))
         update_session_auth_hash(self.request, form.user)
         return super(UserPasswordChangeView, self).form_valid(form)
+
+
+class LoginView(auth_views.LoginView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_ajax"] = self.request.headers.get("x-requested-with") == "XMLHttpRequest"
+        return context

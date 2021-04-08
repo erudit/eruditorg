@@ -25,7 +25,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-{% if request.is_ajax %}
+{% if is_ajax %}
 <div class="modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
   <h2 class="modal-header">{% translate "Connexion à votre compte" %}</h2>
   <div class="modal-body">
