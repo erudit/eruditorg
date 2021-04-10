@@ -42,6 +42,7 @@ env = environ.Env(
     MAILCHIMP_ACTION_URL=(str, None),
     DEFAULT_FROM_EMAIL=(str, "info@erudit.org"),
     DEBUG_EMAIL_ADDRESS=(str, "info@erudit.org"),
+    USE_DEBUG_EMAIL=(bool, False),
     FEDORA_ROOT=(str, None),
     FEDORA_USER=(str, None),
     FEDORA_PASSWORD=(str, None),
@@ -337,6 +338,7 @@ BOOKS_UPDATE_EMAILS = env("BOOKS_UPDATE_EMAILS")
 # Addresses
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 DEBUG_EMAIL_ADDRESS = env("DEBUG_EMAIL_ADDRESS")
+USE_DEBUG_EMAIL = env("USE_DEBUG_EMAIL")
 
 TECH_EMAIL = "tech@erudit.org"
 PUBLISHER_EMAIL = "edition@erudit.org"
