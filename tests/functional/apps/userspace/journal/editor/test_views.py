@@ -1,14 +1,11 @@
 import pytest
 import os
 
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import mail
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from django.test import RequestFactory
 from lxml import etree
 from resumable_uploads.models import ResumableFile
 
@@ -20,8 +17,6 @@ from core.authorization.test.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
 from erudit.test.factories import JournalFactory
-
-from apps.userspace.journal.editor.views import IssueSubmissionCreate
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), "fixtures")
 
@@ -123,7 +118,11 @@ class TestIssueSubmissionView:
         args["year"] = "2016"
         args["number"] = "01"
         response = client.post(url, data=args)
-        assert response.status_code == 200
+        assert response.status_code == 302
+        assert response.url == reverse(
+            "userspace:journal:editor:detail",
+            kwargs={"journal_pk": issue_submission.journal.pk, "pk": issue_submission.pk},
+        )
 
     def test_logged_add_journalsubmission(self):
         """ Logged users should be able to see journal submissions """
@@ -196,28 +195,6 @@ class TestIssueSubmissionView:
         root = etree.HTML(response.content)
 
         assert len(root.cssselect("#id_submissions")) > 0
-
-    def test_user_can_only_select_journal_contacts(self, user_can_edit_journal):
-        """Test list of contacts
-
-        Make sure the list contains all the contacts of the publisher
-        and only that"""
-        user, journal = user_can_edit_journal
-
-        request = RequestFactory().get(reverse("userspace:journal:editor:add"), args=(journal.pk,))
-        request.user = user
-        middleware = SessionMiddleware()
-        middleware.process_request(request)
-        request.session.save()
-        view = IssueSubmissionCreate(request=request, journal_pk=journal.pk)
-        view.current_journal = journal
-        form = view.get_form()
-
-        user_contacts = set(User.objects.filter(journals__in=user.journals.all()).distinct())
-
-        form_contacts = set(form.fields["contact"].queryset)
-
-        assert user_contacts == form_contacts
 
     def test_can_update_an_issue_submission_even_if_it_is_submitted(self, user_can_edit_journal):
         # Setup
