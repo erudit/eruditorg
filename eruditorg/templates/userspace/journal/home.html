@@ -49,6 +49,9 @@
         Hocine Chehab, <br>Chargé d’édition numérique<br>
         <a href="mailto:hocine.chehab@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">hocine.chehab@erudit.org</a><br>
         <a href="tel:1-514-343-6111,44607">+1 514-343-6111 poste 44607</a>
+        <br><br>Jessica Clark, <br>Coordinatrice du project<br>Coalition Publica<br>
+        <a href="mailto:jessica.clark@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">jessica.clark@erudit.org</a><br>
+        <a href="tel:1-613-277-0363">+1 613-277-0363</a>
         {% endblocktrans %}
       </small>
     </p>
@@ -79,15 +82,12 @@
       </small>
     </p>
   </li>
-
-  <li>
-    <p>
-      <small>
-        {% blocktrans with journal=scope_current_journal.formatted_title  %}
-        Pour toutes autres questions, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">info@erudit.org</a>.
-        {% endblocktrans %}
-      </small>
-    </p>
-  </li>
 </ul>
+<p>
+  <small>
+    {% blocktrans with journal=scope_current_journal.formatted_title  %}
+    Pour toutes autres questions, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">info@erudit.org</a>.
+    {% endblocktrans %}
+  </small>
+</p>
 {% endblock content_main %}
