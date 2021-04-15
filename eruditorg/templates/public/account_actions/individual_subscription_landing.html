@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans trimmed with journal=token.content_object.name  %}
-  Abonnement à la revue {{ journal }}
+{% blocktrans trimmed with journal=token.content_object.journal.formatted_title  %}
+  Abonnement à {{ journal }}
 {% endblocktrans %}
 {% endblock title %}
 
@@ -12,8 +12,8 @@
   <div class="row">
     <div class="col-md-12">
       <h2>
-        {% blocktrans trimmed with journal=token.content_object.name  %}
-          Abonnement à la revue {{ journal }}
+        {% blocktrans trimmed with journal=token.content_object.journal.formatted_title  %}
+          Abonnement à {{ journal }}
         {% endblocktrans %}
       </h2>
       {% if token.is_expired %}
@@ -36,31 +36,40 @@
           <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Vous êtes déjà abonné à cette revue avec ce compte." %}
         </div>
+      {% elif request.user.is_authenticated and request.user.email != token.email %}
+        <div class="alert">
+          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
+          {% trans "Votre compte est configuré avec une adresse courriel différente, veuillez demander un changement d'adresse courriel à l'éditeur." %}
+        </div>
       {% else %}
-        <p>
-          {% blocktrans trimmed with journal=token.content_object.name  %}
-            Voulez-vous vous abonner à la revue <strong>{{ journal }}</strong> ?
-          {% endblocktrans %}
-        </p>
-        <br />
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated and request.user.email == token.email %}
+          <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
               <form method="post" action="{% url 'public:account_actions:consume' key=token.key %}">
                 {% csrf_token %}
-                {% trans "S'abonner" as subscribe_text %}
-                <input type="submit" value="{{ subscribe_text }}" class="btn btn-block btn-primary" />
+                <input type="submit" value="{% trans "Activer votre abonnement" %}" class="btn btn-block btn-primary" />
               </form>
             </div>
           </div>
-        {% else %}
-          <p>{% trans "Vous devez vous identifier pour vous abonner à cette revue." %}</p>
+        {% elif user_exists %}
+          <p>
+            {% blocktrans trimmed with email=token.email %}
+              Il y a déjà un compte associé à l'adresse courriel <strong>{{ email }}</strong>, veuillez vous identifier pour activer votre abonnement à cette revue.
+            {% endblocktrans %}
+          </p>
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
               <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-primary">{% trans "S'identifier" %}</a>
             </div>
           </div>
+        {% else %}
+          <p>
+            {% blocktrans trimmed with email=token.email %}
+              Il n'y a pas de compte associé à l'adresse courriel <strong>{{ email }}</strong>, veuillez vous créer un compte pour activer votre abonnement à cette revue.
+            {% endblocktrans %}
+          </p>
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">

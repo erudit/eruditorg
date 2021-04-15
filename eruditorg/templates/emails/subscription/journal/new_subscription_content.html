@@ -8,24 +8,24 @@ Abonnement / Subscription
 {% block content %}
 <p>Bonjour,</p>
 <p>
-  L'éditeur de <strong>{{ token.content_object.journal.formatted_title }}</strong> vous envoie un abonnement à sa revue sur erudit.org. Veuillez cliquer sur le lien suivant pour l'accepter.
+  L'éditeur de <strong>{{ token.content_object.journal.formatted_title }}</strong> vous envoie un abonnement à sa revue sur erudit.org. Veuillez cliquer sur le lien suivant pour l'activer.
 </p>
 <p>
-  Vous avez jusqu'au <strong>{{ token.expiration_date|date:"SHORT_DATETIME_FORMAT" }}</strong> pour accepter l'abonnement.
+  Vous avez jusqu'au <strong>{{ token.expiration_date|date:"SHORT_DATETIME_FORMAT" }}</strong> pour activer votre abonnement. Cette action est requise une seule fois.
 </p>
 <hr>
 <p>Hi,</p>
 <p>
-  The publisher of <strong>{{ token.content_object.journal.formatted_title }}</strong> is sending you a subscription to their journal on erudit.org. Click the following link to accept it.
+  The publisher of <strong>{{ token.content_object.journal.formatted_title }}</strong> is sending you a subscription to their journal on erudit.org. Click the following link to activate it.
 </p>
 <p>
-  You have until <strong>{{ token.expiration_date|date:"SHORT_DATETIME_FORMAT" }}</strong> to accept the subscription.
+  You have until <strong>{{ token.expiration_date|date:"SHORT_DATETIME_FORMAT" }}</strong> to activate your subscription. This action is required only once.
 </p>
 {% endblock content %}
 
 {% block cta %}
 {% url 'public:account_actions:landing' key=token.key as action_url %}
-{% with cta_url="http://"|add:site.domain|add:action_url cta_text="Accepter l’abonnement / Accept subscription" %}
+{% with cta_url="http://"|add:site.domain|add:action_url cta_text="Activer votre abonnement / Activate your subscription" %}
 {{ block.super }}
 {% endwith %}
 {% endblock cta %}
