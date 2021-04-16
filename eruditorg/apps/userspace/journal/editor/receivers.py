@@ -1,6 +1,6 @@
 from django.dispatch import receiver
 
-from core.editor.models import ProductionTeam
+from core.editor.utils import get_production_teams_groups
 from core.email import Email
 from django.conf import settings
 from core.editor.apps import EMAIL_TAG
@@ -14,7 +14,9 @@ def send_production_team_email(sender, issue_submission, transition_name, reques
     if not issue_submission.is_submitted:
         return
 
-    emails = ProductionTeam.emails()
+    emails = []
+    for production_team_group in get_production_teams_groups(journal=issue_submission.journal):
+        emails += list(production_team_group.user_set.values_list("email", flat=True))
     if not emails:
         return
 
