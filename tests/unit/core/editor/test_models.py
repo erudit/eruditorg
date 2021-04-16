@@ -1,9 +1,8 @@
 import pytest
 from resumable_uploads.models import ResumableFile
 
-from base.test.factories import GroupFactory, UserFactory
-from core.editor.models import IssueSubmission, ProductionTeam
-from core.editor.test.factories import IssueSubmissionFactory, ProductionTeamFactory
+from core.editor.models import IssueSubmission
+from core.editor.test.factories import IssueSubmissionFactory
 
 
 pytestmark = pytest.mark.django_db
@@ -64,16 +63,3 @@ class TestIssueSubmissionWorkflow:
         issues = IssueSubmission.objects.all().order_by("id")
         assert issues.count() == 1
         assert issues.first().files_versions.count() == 2
-
-
-class TestProductionTeam:
-    def test_load(self):
-        production_team = ProductionTeamFactory()
-        assert ProductionTeam.load() == production_team
-
-    def test_emails(self):
-        group = GroupFactory()
-        ProductionTeamFactory(group=group)
-        user = UserFactory(email="foo@bar.com")
-        user.groups.add(group)
-        assert ProductionTeam.emails() == ["foo@bar.com"]

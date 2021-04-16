@@ -1,5 +1,3 @@
-import structlog
-
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.urls import reverse
@@ -10,9 +8,6 @@ from django.utils.translation import gettext_lazy as _
 from django_fsm import FSMField, transition
 
 from .managers import IssueSubmissionManager
-
-
-logger = structlog.getLogger(__name__)
 
 
 class IssueSubmission(models.Model):
@@ -233,33 +228,3 @@ class ProductionTeam(models.Model):
     class Meta:
         verbose_name = _("Équipe de production")
         verbose_name_plural = _("Équipes de production")
-
-    def save(self, *args, **kwargs):
-        # There must be only one production team, we should not be able to add more.
-        if self.pk is None:
-            pass
-        # We must still be able to modify it.
-        super().save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        # There must be a production team, we should not be able to delete it.
-        pass
-
-    @classmethod
-    def load(cls):
-        """ Get the production team. """
-        production_team = cls.objects.all().first()
-        if production_team is None:
-            logger.error("email.error", msg="There is no production team")
-        return production_team
-
-    @classmethod
-    def emails(cls):
-        """ Get the production team emails. """
-        production_team = cls.load()
-        if production_team is None:
-            return None
-        emails = production_team.group.user_set.values_list("email", flat=True)
-        if emails is None:
-            logger.error("email.error", msg="The production team is empty.")
-        return list(emails)
