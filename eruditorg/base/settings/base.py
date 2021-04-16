@@ -60,6 +60,7 @@ env = environ.Env(
     SUBSCRIPTION_EXPORTS_ROOT=(str, None),
     BOOKS_DIRECTORY=(str, None),
     RESTRICTION_ABONNE_ICONS_PATH=(str, None),
+    EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER=(str, "production-montreal"),
     SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS=(int, 12),
     CULTURAL_JOURNAL_EMBARGO_IN_MONTHS=(int, 36),
     DJANGO_LOG_DIRECTORY=(str, None),
@@ -449,6 +450,10 @@ METRICS_ACTIVATED = False
 
 SUBSCRIPTION_EXPORTS_ROOT = env("SUBSCRIPTION_EXPORTS_ROOT")
 BOOKS_DIRECTORY = env("BOOKS_DIRECTORY")
+
+# Editor
+# -----------------------------------------------------------------------------
+EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER = env("EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER")
 
 # Logging settings
 # -----------------------------------------------------------------------------
