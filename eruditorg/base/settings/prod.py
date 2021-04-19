@@ -5,6 +5,8 @@ import structlog
 from structlog_sentry import SentryJsonProcessor
 
 
+FALLBACK_BASE_URL = "https://retro.erudit.org/"
+
 # Metrics
 # -----------------------------------------------------------------------------
 METRICS_ACTIVATED = False
