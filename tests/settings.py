@@ -81,6 +81,8 @@ POST_OFFICE = {
     "DEFAULT_PRIORITY": "now",
 }
 
+EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER = "main-production-team"
+
 BOOKS_UPDATE_EMAILS = ["foo@bar.com", "foo@baz.com"]
 
 MIDDLEWARE = tuple(m for m in MIDDLEWARE if m != "whitenoise.middleware.WhiteNoiseMiddleware")
