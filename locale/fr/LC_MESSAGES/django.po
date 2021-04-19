@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 10:55-0400\n"
+"POT-Creation-Date: 2021-04-19 09:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1940,7 +1940,7 @@ msgid ""
 "Cette période est en conflit avec une autre période pour cet abonnement."
 msgstr ""
 
-#: core/subscription/account_actions.py:41
+#: core/subscription/account_actions.py:43
 msgid "Votre abonnement a bien été pris en compte"
 msgstr ""
 
@@ -3261,7 +3261,8 @@ msgstr ""
 
 #: templates/emails/subscription/journal/new_subscription_subject.html:2
 #, python-format
-msgid "[Érudit] Abonnement à la revue %(journal_name)s\n"
+msgid ""
+"[Érudit] Abonnement à %(journal_name)s — activez avant le %(deadline)s\n"
 msgstr ""
 
 #: templates/public/20_years.html:4 templates/public/20_years.html:6
@@ -3993,13 +3994,14 @@ msgstr ""
 #: templates/public/account_actions/individual_subscription_landing.html:5
 #: templates/public/account_actions/individual_subscription_landing.html:15
 #, python-format
-msgid "Abonnement à la revue %(journal)s"
+msgid "Abonnement à %(journal)s"
 msgstr ""
 
 #: templates/public/account_actions/individual_subscription_landing.html:21
 #: templates/public/account_actions/individual_subscription_landing.html:26
 #: templates/public/account_actions/individual_subscription_landing.html:31
 #: templates/public/account_actions/individual_subscription_landing.html:36
+#: templates/public/account_actions/individual_subscription_landing.html:41
 msgid "Abonnement impossible."
 msgstr ""
 
@@ -4019,24 +4021,37 @@ msgstr ""
 msgid "Vous êtes déjà abonné à cette revue avec ce compte."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:41
-#, python-format
-msgid "Voulez-vous vous abonner à la revue <strong>%(journal)s</strong> ?"
+#: templates/public/account_actions/individual_subscription_landing.html:42
+msgid ""
+"Votre compte est configuré avec une adresse courriel différente, veuillez "
+"demander un changement d'adresse courriel à l'éditeur."
 msgstr ""
 
 #: templates/public/account_actions/individual_subscription_landing.html:51
-msgid "S'abonner"
+msgid "Activer votre abonnement"
 msgstr ""
 
 #: templates/public/account_actions/individual_subscription_landing.html:57
-msgid "Vous devez vous identifier pour vous abonner à cette revue."
+#, python-format
+msgid ""
+"Il y a déjà un compte associé à l'adresse courriel <strong>%(email)s</"
+"strong>, veuillez vous identifier pour activer votre abonnement à cette "
+"revue."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:61
+#: templates/public/account_actions/individual_subscription_landing.html:64
 msgid "S'identifier"
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:67
+#: templates/public/account_actions/individual_subscription_landing.html:69
+#, python-format
+msgid ""
+"Il n'y a pas de compte associé à l'adresse courriel <strong>%(email)s</"
+"strong>, veuillez vous créer un compte pour activer votre abonnement à cette "
+"revue."
+msgstr ""
+
+#: templates/public/account_actions/individual_subscription_landing.html:76
 #: templates/public/account_actions/organisation_membership_landing.html:57
 msgid "Créer un compte"
 msgstr ""

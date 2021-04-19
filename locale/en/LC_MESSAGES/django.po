@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 10:55-0400\n"
+"POT-Creation-Date: 2021-04-19 09:12-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -1994,7 +1994,7 @@ msgid ""
 "Cette période est en conflit avec une autre période pour cet abonnement."
 msgstr "This period conflicts with another period for this subscription."
 
-#: core/subscription/account_actions.py:41
+#: core/subscription/account_actions.py:43
 msgid "Votre abonnement a bien été pris en compte"
 msgstr "Your subscription has been taken into account."
 
@@ -3328,8 +3328,9 @@ msgstr "[Érudit] Join the Organization %(organisation_name)s"
 
 #: templates/emails/subscription/journal/new_subscription_subject.html:2
 #, python-format
-msgid "[Érudit] Abonnement à la revue %(journal_name)s\n"
-msgstr "[Érudit] Subscribe to %(journal_name)s\n"
+msgid "[Érudit] Abonnement à %(journal_name)s — activez avant le %(deadline)s\n"
+msgstr ""
+"[Érudit] Subscription to %(journal_name)s — activate before %(deadline)s\n"
 
 #: templates/public/20_years.html:4 templates/public/20_years.html:6
 #: templates/public/20_years.html:33 templates/public/20_years.html:49
@@ -3990,13 +3991,14 @@ msgstr ""
 #: templates/public/account_actions/individual_subscription_landing.html:5
 #: templates/public/account_actions/individual_subscription_landing.html:15
 #, python-format
-msgid "Abonnement à la revue %(journal)s"
-msgstr "Subscribe to the Journal %(journal)s"
+msgid "Abonnement à %(journal)s"
+msgstr "Subscription to %(journal)s"
 
 #: templates/public/account_actions/individual_subscription_landing.html:21
 #: templates/public/account_actions/individual_subscription_landing.html:26
 #: templates/public/account_actions/individual_subscription_landing.html:31
 #: templates/public/account_actions/individual_subscription_landing.html:36
+#: templates/public/account_actions/individual_subscription_landing.html:41
 msgid "Abonnement impossible."
 msgstr "Cannot subscribe"
 
@@ -4006,7 +4008,7 @@ msgstr "This subscription link has expired."
 
 #: templates/public/account_actions/individual_subscription_landing.html:27
 msgid "Ce lien d'abonnement a déjà été utilisé."
-msgstr "This subscription link is already in use."
+msgstr "This subscription link has already been used."
 
 #: templates/public/account_actions/individual_subscription_landing.html:32
 msgid "Ce lien d'abonnement n'est plus valide."
@@ -4016,24 +4018,45 @@ msgstr "This subscription link is no longer valid."
 msgid "Vous êtes déjà abonné à cette revue avec ce compte."
 msgstr "You are already subscribed to this journal with this account."
 
-#: templates/public/account_actions/individual_subscription_landing.html:41
-#, python-format
-msgid "Voulez-vous vous abonner à la revue <strong>%(journal)s</strong> ?"
-msgstr "Do you wish to subscribe to the journal <strong>%(journal)s</strong>?"
+#: templates/public/account_actions/individual_subscription_landing.html:42
+msgid ""
+"Votre compte est configuré avec une adresse courriel différente, veuillez "
+"demander un changement d'adresse courriel à l'éditeur."
+msgstr ""
+"Your account is associated with a different email address, please request a "
+"change of email address from the editor."
 
 #: templates/public/account_actions/individual_subscription_landing.html:51
-msgid "S'abonner"
-msgstr "Subscribe"
+msgid "Activer votre abonnement"
+msgstr "Activate your Subscription"
 
 #: templates/public/account_actions/individual_subscription_landing.html:57
-msgid "Vous devez vous identifier pour vous abonner à cette revue."
-msgstr "You must log in to subscribe to this journal."
+#, python-format
+msgid ""
+"Il y a déjà un compte associé à l'adresse courriel "
+"<strong>%(email)s</strong>, veuillez vous identifier pour activer votre "
+"abonnement à cette revue."
+msgstr ""
+"There is already an account associated with the email address "
+"<strong>%(email)s</strong>, you must log in to activate your subscription to"
+" this journal."
 
-#: templates/public/account_actions/individual_subscription_landing.html:61
+#: templates/public/account_actions/individual_subscription_landing.html:64
 msgid "S'identifier"
 msgstr "Log In"
 
-#: templates/public/account_actions/individual_subscription_landing.html:67
+#: templates/public/account_actions/individual_subscription_landing.html:69
+#, python-format
+msgid ""
+"Il n'y a pas de compte associé à l'adresse courriel "
+"<strong>%(email)s</strong>, veuillez vous créer un compte pour activer votre"
+" abonnement à cette revue."
+msgstr ""
+"There is no account associated with the email address "
+"<strong>%(email)s</strong>, please create an account to activate your "
+"subscription to this journal."
+
+#: templates/public/account_actions/individual_subscription_landing.html:76
 #: templates/public/account_actions/organisation_membership_landing.html:57
 msgid "Créer un compte"
 msgstr "Create an Account"
