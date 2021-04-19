@@ -2,6 +2,7 @@
 
 from account_actions.action_base import AccountActionBase
 from account_actions.action_pool import actions
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -30,6 +31,7 @@ class IndividualSubscriptionAction(AccountActionBase):
     def get_extra_context(self, token, user):
         return {
             "subscription_exists": self._subscription_exists(token, user),
+            "user_exists": User.objects.filter(email=token.email).exists(),
         }
 
     def get_consumption_redirect_url(self, token):
