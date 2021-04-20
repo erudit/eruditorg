@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 09:12-0400\n"
+"POT-Creation-Date: 2021-04-20 08:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -345,11 +345,11 @@ msgstr ""
 msgid "^export\\.bib$"
 msgstr ""
 
-#: apps/public/citations/views.py:23 apps/public/thesis/views.py:105
+#: apps/public/citations/views.py:23 apps/public/thesis/views.py:116
 msgid "Auteur (A–Z)"
 msgstr ""
 
-#: apps/public/citations/views.py:24 apps/public/thesis/views.py:106
+#: apps/public/citations/views.py:24 apps/public/thesis/views.py:117
 msgid "Auteur (Z–A)"
 msgstr ""
 
@@ -617,18 +617,18 @@ msgstr ""
 msgid "Nombre de consultations d'articles sous embargo par type d'abonnement"
 msgstr ""
 
-#: apps/public/journal/views.py:927
+#: apps/public/journal/views.py:993
 #: templates/public/journal/partials/issue_detail_article_item.html:68
 msgid "Notice"
 msgstr ""
 
-#: apps/public/journal/views.py:946 apps/public/search/forms.py:33
+#: apps/public/journal/views.py:1012 apps/public/search/forms.py:33
 #: templates/public/journal/article_biblio.html:54
 #: templates/public/journal/article_biblio.html:64
 msgid "Bibliographie"
 msgstr ""
 
-#: apps/public/journal/views.py:963
+#: apps/public/journal/views.py:1029
 #: templates/public/journal/article_toc.html:54
 #: templates/public/journal/article_toc.html:64
 msgid "Plan complet de l’article"
@@ -715,7 +715,7 @@ msgid "Articles culturels"
 msgstr ""
 
 #: apps/public/search/forms.py:63 templates/base.html:159
-#: templates/base.html:378 templates/public/home.html:75
+#: templates/base.html:391 templates/public/home.html:75
 #: templates/public/thesis/collection_home.html:31
 #: templates/public/thesis/collection_home.html:57
 #: templates/public/thesis/collection_home.html:77
@@ -730,7 +730,7 @@ msgid "Thèses et mémoires"
 msgstr ""
 
 #: apps/public/search/forms.py:66 templates/base.html:167
-#: templates/base.html:388 templates/public/home.html:76
+#: templates/base.html:401 templates/public/home.html:76
 msgid "Rapports de recherche"
 msgstr ""
 
@@ -798,9 +798,9 @@ msgstr ""
 msgid "Langues"
 msgstr ""
 
-#: apps/public/search/forms.py:213 core/editor/models.py:231
+#: apps/public/search/forms.py:213 core/editor/models.py:226
 #: core/subscription/models.py:91 core/subscription/models.py:142
-#: erudit/models/journal.py:245 templates/base.html:156 templates/base.html:373
+#: erudit/models/journal.py:245 templates/base.html:156 templates/base.html:386
 #: templates/public/home.html:73 templates/public/journal/article_base.html:142
 #: templates/public/journal/article_biblio.html:26
 #: templates/public/journal/article_detail.html:31
@@ -882,11 +882,11 @@ msgstr ""
 msgid "Premier auteur (Z–A)"
 msgstr ""
 
-#: apps/public/search/forms.py:418 apps/public/thesis/views.py:107
+#: apps/public/search/forms.py:418 apps/public/thesis/views.py:118
 msgid "Date de publication (croissant)"
 msgstr ""
 
-#: apps/public/search/forms.py:419 apps/public/thesis/views.py:108
+#: apps/public/search/forms.py:419 apps/public/thesis/views.py:119
 msgid "Date de publication (décroissant)"
 msgstr ""
 
@@ -925,11 +925,11 @@ msgstr ""
 msgid " {op} (Publié jusqu'à {end})"
 msgstr ""
 
-#: apps/public/search/views.py:253
+#: apps/public/search/views.py:256
 msgid "Querystring incorrecte"
 msgstr ""
 
-#: apps/public/search/views.py:275
+#: apps/public/search/views.py:278
 msgid "Cette recherche n'est pas sauvegardée"
 msgstr ""
 
@@ -1266,7 +1266,7 @@ msgid "^supprimer_collaborateur$"
 msgstr ""
 
 #: apps/userspace/journal/information/views.py:49 templates/base.html:200
-#: templates/base.html:349
+#: templates/base.html:362
 #: templates/public/journal/journal_authors_list.html:155
 #: templates/public/journal/journal_detail.html:165
 #: templates/public/journal/journal_detail.html:180
@@ -1743,14 +1743,14 @@ msgstr ""
 msgid "Consulter les rapports de redevances"
 msgstr ""
 
-#: core/authorization/models.py:16 core/editor/models.py:177
-#: core/editor/models.py:212 core/subscription/abstract_models.py:12
+#: core/authorization/models.py:16 core/editor/models.py:172
+#: core/editor/models.py:207 core/subscription/abstract_models.py:12
 #: templates/userspace/journal/subscription/individualsubscription_list.html:47
 msgid "Date de création"
 msgstr ""
 
-#: core/authorization/models.py:19 core/editor/models.py:52
-#: core/editor/models.py:213 core/subscription/abstract_models.py:13
+#: core/authorization/models.py:19 core/editor/models.py:47
+#: core/editor/models.py:208 core/subscription/abstract_models.py:13
 #: erudit/models/journal.py:1596
 msgid "Date de modification"
 msgstr ""
@@ -1761,7 +1761,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: core/authorization/models.py:36 core/editor/models.py:227
+#: core/authorization/models.py:36 core/editor/models.py:222
 msgid "Groupe"
 msgstr ""
 
@@ -1785,32 +1785,32 @@ msgstr ""
 msgid "Nombre de fichiers"
 msgstr ""
 
-#: core/editor/models.py:27
+#: core/editor/models.py:22
 msgid "Brouillon"
 msgstr ""
 
-#: core/editor/models.py:28
+#: core/editor/models.py:23
 #: templates/emails/editor/issue_submission_action_needed_content.html:12
 msgid "En attente de validation"
 msgstr ""
 
-#: core/editor/models.py:29
+#: core/editor/models.py:24
 #: templates/emails/editor/issue_submission_action_needed_content.html:26
 msgid "À corriger"
 msgstr ""
 
-#: core/editor/models.py:30
+#: core/editor/models.py:25
 msgid "Validé"
 msgstr ""
 
-#: core/editor/models.py:35 core/subscription/models.py:301
+#: core/editor/models.py:30 core/subscription/models.py:301
 #: erudit/models/journal.py:244 erudit/models/journal.py:418
 #: erudit/models/journal.py:1587
 #: templates/public/journal/journal_list_per_names.html:140
 msgid "Revue"
 msgstr ""
 
-#: core/editor/models.py:37 erudit/models/journal.py:460
+#: core/editor/models.py:32 erudit/models/journal.py:460
 #: templates/userspace/journal/editor/detail.html:39
 #: templates/userspace/library/stats/stats_forms_partial.html:39
 #: templates/userspace/library/stats/stats_forms_partial.html:57
@@ -1818,101 +1818,101 @@ msgstr ""
 msgid "Année"
 msgstr ""
 
-#: core/editor/models.py:39 erudit/models/journal.py:472
+#: core/editor/models.py:34 erudit/models/journal.py:472
 #: templates/public/search/results.html:224
 #: templates/userspace/journal/editor/detail.html:42
 msgid "Volume"
 msgstr ""
 
-#: core/editor/models.py:41 erudit/models/journal.py:475
+#: core/editor/models.py:36 erudit/models/journal.py:475
 #: erudit/models/journal.py:552
 #: templates/userspace/journal/editor/detail.html:45
 #: templates/userspace/journal/editor/issues.html:43
 msgid "Numéro"
 msgstr ""
 
-#: core/editor/models.py:46
+#: core/editor/models.py:41
 msgid "Date de l'envoi"
 msgstr ""
 
-#: core/editor/models.py:56 templates/userspace/journal/editor/detail.html:47
+#: core/editor/models.py:51 templates/userspace/journal/editor/detail.html:47
 msgid "Personne-ressource"
 msgstr ""
 
-#: core/editor/models.py:59
+#: core/editor/models.py:54
 msgid "Commentaires sur le numéro"
 msgstr ""
 
-#: core/editor/models.py:62
+#: core/editor/models.py:57
 msgid "Archivé"
 msgstr ""
 
-#: core/editor/models.py:69 core/editor/models.py:209
+#: core/editor/models.py:64 core/editor/models.py:204
 msgid "Envoi de numéro"
 msgstr ""
 
-#: core/editor/models.py:70
+#: core/editor/models.py:65
 msgid "Envois de numéros"
 msgstr ""
 
-#: core/editor/models.py:77
+#: core/editor/models.py:72
 msgid " vol. {},"
 msgstr ""
 
-#: core/editor/models.py:78
+#: core/editor/models.py:73
 msgid "n° {}"
 msgstr ""
 
-#: core/editor/models.py:123
+#: core/editor/models.py:118
 #: templates/userspace/journal/editor/issuesubmission_approve.html:43
 msgid "Approuver"
 msgstr ""
 
-#: core/editor/models.py:136
+#: core/editor/models.py:131
 msgid "Demander des corrections"
 msgstr ""
 
-#: core/editor/models.py:174
+#: core/editor/models.py:169
 msgid "Changements de statut"
 msgstr ""
 
-#: core/editor/models.py:178
+#: core/editor/models.py:173
 msgid "statut"
 msgstr ""
 
-#: core/editor/models.py:181
+#: core/editor/models.py:176
 msgid "Version des fichiers"
 msgstr ""
 
-#: core/editor/models.py:189
+#: core/editor/models.py:184
 msgid "Commentaire"
 msgstr ""
 
-#: core/editor/models.py:195
+#: core/editor/models.py:190
 msgid "Changement de statut d'un envoi de numéro"
 msgstr ""
 
-#: core/editor/models.py:196
+#: core/editor/models.py:191
 msgid "Changements de statut d'envois de numéro"
 msgstr ""
 
-#: core/editor/models.py:220
+#: core/editor/models.py:215
 msgid "Version de fichiers d'un envoi de numéro"
 msgstr ""
 
-#: core/editor/models.py:221
+#: core/editor/models.py:216
 msgid "Versions de fichiers d'envois de numéro"
 msgstr ""
 
-#: core/editor/models.py:229 erudit/models/core.py:12
+#: core/editor/models.py:224 erudit/models/core.py:12
 msgid "Identifiant"
 msgstr ""
 
-#: core/editor/models.py:234
+#: core/editor/models.py:229
 msgid "Équipe de production"
 msgstr ""
 
-#: core/editor/models.py:235
+#: core/editor/models.py:230
 msgid "Équipes de production"
 msgstr ""
 
@@ -2733,7 +2733,7 @@ msgstr ""
 msgid "Aller à l’accueil"
 msgstr ""
 
-#: templates/base.html:122 templates/base.html:402
+#: templates/base.html:122 templates/base.html:415
 #: templates/base_email.html:898 templates/public/brand_assets.html:141
 msgid "Logo d’Érudit"
 msgstr ""
@@ -2766,7 +2766,7 @@ msgstr ""
 msgid "Index des livres et actes"
 msgstr ""
 
-#: templates/base.html:162 templates/base.html:383
+#: templates/base.html:162 templates/base.html:396
 #: templates/public/book/book_detail.html:53
 #: templates/public/book/book_detail.html:72
 #: templates/public/book/chapter_detail.html:53
@@ -2841,7 +2841,7 @@ msgstr ""
 msgid "À propos de la Coalition Publica"
 msgstr ""
 
-#: templates/base.html:206 templates/base.html:441
+#: templates/base.html:206 templates/base.html:454
 msgid "Coalition Publica"
 msgstr ""
 
@@ -2912,97 +2912,106 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/base.html:327 templates/public/book/home.html:94
+#: templates/base.html:309
+#, python-format
+msgid ""
+"\n"
+"        Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="
+"\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
+"        "
+msgstr ""
+
+#: templates/base.html:340 templates/public/book/home.html:94
 #: templates/public/journal/journal_detail.html:248
 #: templates/public/journal/journal_list_per_disciplines.html:99
 msgid "Retourner en haut"
 msgstr ""
 
-#: templates/base.html:335
+#: templates/base.html:348
 msgid "Abonnez-vous à notre infolettre&nbsp;:"
 msgstr ""
 
-#: templates/base.html:338
+#: templates/base.html:351
 msgid "nom@courriel.com"
 msgstr ""
 
-#: templates/base.html:339
+#: templates/base.html:352
 msgid "S'inscrire"
 msgstr ""
 
-#: templates/base.html:348
+#: templates/base.html:361
 msgid "https://apropos.erudit.org/fr/"
 msgstr ""
 
-#: templates/base.html:353
+#: templates/base.html:366
 msgid "https://apropos.erudit.org/fr/usagers/foire-aux-questions/"
 msgstr ""
 
-#: templates/base.html:354
+#: templates/base.html:367
 msgid "Aide"
 msgstr ""
 
-#: templates/base.html:358
+#: templates/base.html:371
 msgid "https://www.erudit.org/public/documents/Guide_recherche.pdf"
 msgstr ""
 
-#: templates/base.html:359
+#: templates/base.html:372
 msgid "Guide de recherche"
 msgstr ""
 
-#: templates/base.html:363
+#: templates/base.html:376
 msgid "https://apropos.erudit.org/fr/erudit/contact/"
 msgstr ""
 
-#: templates/base.html:364
+#: templates/base.html:377
 msgid "Nous contacter"
 msgstr ""
 
-#: templates/base.html:387
+#: templates/base.html:400
 msgid "https://depot.erudit.org/?locale=fr"
 msgstr ""
 
-#: templates/base.html:404
+#: templates/base.html:417
 msgid "Cultivez votre savoir."
 msgstr ""
 
-#: templates/base.html:407
+#: templates/base.html:420
 msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
-#: templates/base.html:437
+#: templates/base.html:450
 msgid "https://www.coalition-publi.ca/le-projet"
 msgstr ""
 
-#: templates/base.html:451
+#: templates/base.html:464
 msgid "https://www.iubenda.com/privacy-policy/79766356"
 msgstr ""
 
-#: templates/base.html:451 templates/base.html:452
+#: templates/base.html:464 templates/base.html:465
 msgid "Politique de confidentialité"
 msgstr ""
 
-#: templates/base.html:456 templates/base.html:504
+#: templates/base.html:469 templates/base.html:517
 msgid "https://www.iubenda.com/privacy-policy/79766356/cookie-policy"
 msgstr ""
 
-#: templates/base.html:456 templates/base.html:457
+#: templates/base.html:469 templates/base.html:470
 msgid "Politique relative aux cookies"
 msgstr ""
 
-#: templates/base.html:461 templates/public/journal/journal_base.html:315
+#: templates/base.html:474 templates/public/journal/journal_base.html:315
 msgid "https://apropos.erudit.org/fr/usagers/politique-dutilisation/"
 msgstr ""
 
-#: templates/base.html:462 templates/public/journal/journal_base.html:315
+#: templates/base.html:475 templates/public/journal/journal_base.html:315
 msgid "Politique et licence d’utilisation"
 msgstr ""
 
-#: templates/base.html:469
+#: templates/base.html:482
 msgid "Consortium Érudit"
 msgstr ""
 
-#: templates/base.html:501
+#: templates/base.html:514
 msgid ""
 "erudit.org  utilise des cookies (« témoins de connexion ») à des fins de "
 "statistiques et d’amélioration de l’expérience utilisateur. Ces données sont "
@@ -3010,11 +3019,11 @@ msgid ""
 "cookies, que vous pourrez désactiver en tout temps dans votre fureteur web."
 msgstr ""
 
-#: templates/base.html:502
+#: templates/base.html:515
 msgid "J’ai compris"
 msgstr ""
 
-#: templates/base.html:503 templates/public/home.html:162
+#: templates/base.html:516 templates/public/home.html:162
 #: templates/public/home.html:204
 msgid "En savoir plus"
 msgstr ""
@@ -6916,15 +6925,15 @@ msgid ""
 msgstr ""
 
 #: templates/userspace/library/connection/landing.html:33
-msgid "SUSHI"
+msgid "SUSHI (Z39.93-2014)"
 msgstr ""
 
 #: templates/userspace/library/connection/landing.html:37
 msgid ""
-"Le protocole SUSHI vous permet d’automatiser la collecte de vos statistiques "
-"de consultation COUNTER. Utilisez les paramètres de connexion ci-dessous "
-"pour récupérer les statistiques de consultation de votre établissement sur "
-"la plateforme Érudit."
+"Le protocole SUSHI (NISO Z39.93-2014) vous permet d’automatiser la collecte "
+"de vos statistiques de consultation COUNTER. Utilisez les paramètres de "
+"connexion ci-dessous pour récupérer les statistiques de consultation de "
+"votre établissement sur la plateforme Érudit."
 msgstr ""
 
 #: templates/userspace/library/connection/landing.html:44
