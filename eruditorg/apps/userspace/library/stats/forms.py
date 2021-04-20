@@ -238,9 +238,7 @@ class CounterR5IRA1Form(CounterR5Form):
     code = "counter-r5-ira1"
     tab_label = _("IR_A1")
     title = "Journal Article Requests"
-    description = _(
-        "Rapports sur les requêtes d’articles de revue au niveau de l’article."
-    )
+    description = _("Rapports sur les requêtes d’articles de revue au niveau de l’article.")
     prefix = "counter_r5_ira1"
     report_code = "IR_A1"
 
