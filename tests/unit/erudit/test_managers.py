@@ -71,8 +71,8 @@ class TestInternalIssueManager:
 
 class TestJournalCollectionManager:
     def test_returns_only_collections_associated_with_journals(self):
-        collection_1 = CollectionFactory()
-        collection_2 = CollectionFactory()
+        collection_1 = CollectionFactory(code="collection_1")
+        collection_2 = CollectionFactory(code="collection_2")
         CollectionFactory()
         CollectionFactory()
         JournalFactory(collection=collection_1)
