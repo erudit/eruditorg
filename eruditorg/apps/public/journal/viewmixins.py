@@ -224,6 +224,20 @@ class ArticleViewMetricCaptureMixin:
 
 
 class MetaInfoIssueMixin:
+    def get_cache_version(
+        self, journal_info: Optional[JournalInformation] = None, issue: Optional[Issue] = None
+    ) -> str:
+        """Generate a cache version for caching template fragments.
+
+        Since those template fragments display informations about the journal information and the
+        current issue, we need a cache version that invalidates the cache when one of those two
+        objects is updated. To do that, we concatenate the updated timestamp of both objects, if
+        provided, to generate the cache version.
+        """
+        journal_info_updated = str(journal_info.updated.timestamp() if journal_info else None)
+        issue_fedora_updated = str(issue.fedora_updated.timestamp() if issue else None)
+        return f"{journal_info_updated}-{issue_fedora_updated}"
+
     def get_contributors(self, journal_info=None, issue=None):
         contributors = {
             "directors": [],

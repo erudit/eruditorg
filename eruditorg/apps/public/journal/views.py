@@ -226,9 +226,7 @@ class JournalDetailView(
             context["editors_cache_key"] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             journal_info = None
-            # If the journal does not have a journal info, simulate one so the cache template tag
-            # does have something to use to generate the cache key.
-            context["journal_info"] = {"updated": None}
+            context["journal_info"] = None
             context["directors_cache_key"] = None
             context["editors_cache_key"] = None
 
@@ -258,8 +256,6 @@ class JournalDetailView(
             # If we have a current issue, use its localidentifier for the cache key.
             context["primary_cache_key"] = current_issue.localidentifier
         else:
-            # If the journal does not have any issue yet, simulate one so the cache template tag
-            # does have something to use to generate the cache key.
             context["main_title"] = dict(
                 title=self.object.name,
                 subtitle=self.object.subtitle,
@@ -269,12 +265,15 @@ class JournalDetailView(
 
             context["journal_formatted_title"] = self.object.formatted_title
 
-            context["meta_info_issue"] = {
-                "localidentifier": None,
-                "fedora_updated": None,
-            }
+            context["meta_info_issue"] = None
             # If we don't have a current issue, use the journal code for the cache key.
             context["primary_cache_key"] = self.journal.code
+
+        # The cache version is the updated time of the current issue and the journal info.
+        context["cache_version"] = self.get_cache_version(
+            journal_info=journal_info,
+            issue=current_issue,
+        )
 
         # Directors & editors.
         context["contributors"] = self.get_contributors(
@@ -382,12 +381,7 @@ class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateVie
             context["primary_cache_key"] = context["current_issue"].localidentifier
             context["journal_formatted_title"] = context["current_issue"].journal_formatted_title
         else:
-            # If the journal does not have any issue yet, simulate one so the cache template tag
-            # does have something to use to generate the cache key.
-            context["meta_info_issue"] = {
-                "localidentifier": None,
-                "fedora_updated": None,
-            }
+            context["meta_info_issue"] = None
             # If we don't have a current issue, use the journal code for the cache key.
             context["primary_cache_key"] = self.journal.code
             context["journal_formatted_title"] = self.journal.formatted_title
@@ -402,8 +396,15 @@ class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateVie
             context["editors_cache_key"] = qs_cache_key(journal_info.get_editors())
         except ObjectDoesNotExist:
             journal_info = None
+            context["journal_info"] = None
             context["directors_cache_key"] = None
             context["editors_cache_key"] = None
+
+        # The cache version is the updated time of the current issue and the journal info.
+        context["cache_version"] = self.get_cache_version(
+            journal_info=journal_info,
+            issue=context["current_issue"],
+        )
 
         # Directors & editors.
         context["contributors"] = self.get_contributors(
@@ -531,6 +532,12 @@ class IssueDetailView(
             context["journal_info"] = self.object.journal.information
         except ObjectDoesNotExist:
             context["journal_info"] = None
+
+        # The cache version is the updated time of the current issue and the journal info.
+        context["cache_version"] = self.get_cache_version(
+            journal_info=context["journal_info"],
+            issue=self.object,
+        )
 
         titles = self.object.erudit_object.get_journal_title()
         context["main_title"] = titles["main"]

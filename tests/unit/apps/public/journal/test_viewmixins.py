@@ -1,3 +1,4 @@
+import datetime
 import pytest
 import unittest.mock
 
@@ -368,6 +369,36 @@ class TestContentAccessCheckMixin:
 
 
 class TestMetaInfoIssueMixin:
+    @pytest.mark.parametrize(
+        "journal_info, issue, expected_cache_version",
+        (
+            (True, True, "1609477200.0-1609477200.0"),
+            (True, False, "1609477200.0-None"),
+            (False, True, "None-1609477200.0"),
+            (False, False, "None-None"),
+        ),
+    )
+    def test_get_version(self, journal_info, issue, expected_cache_version):
+        if journal_info:
+            journal_info = JournalInformationFactory()
+            journal_info._meta.get_field("updated").auto_now = False
+            journal_info.updated = datetime.datetime(2021, 1, 1, 0, 0)
+            journal_info.save()
+            journal_info._meta.get_field("updated").auto_now = True
+        else:
+            journal_info = None
+        if issue:
+            issue = IssueFactory()
+            issue._meta.get_field("fedora_updated").auto_now = False
+            issue.fedora_updated = datetime.datetime(2021, 1, 1, 0, 0)
+            issue.save()
+            issue._meta.get_field("fedora_updated").auto_now = True
+        else:
+            issue = None
+
+        mixin = MetaInfoIssueMixin()
+        assert mixin.get_cache_version(journal_info, issue) == expected_cache_version
+
     @pytest.mark.parametrize(
         "use_journal_info, use_issue, expected_contributors",
         (

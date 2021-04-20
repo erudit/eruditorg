@@ -64,6 +64,13 @@ def issue_detail_url(issue):
     )
 
 
+def journal_authors_list_url(journal):
+    return reverse(
+        "public:journal:journal_authors_list",
+        args=[journal.code],
+    )
+
+
 def article_detail_url(article):
     return reverse(
         "public:journal:article_detail",
@@ -345,7 +352,7 @@ class TestJournalDetailView:
         assert response_1.status_code == response_2.status_code == 200
 
         assert response_1.context["journal_info"] == journal_info
-        assert response_2.context["journal_info"] == {"updated": None}
+        assert response_2.context["journal_info"] is None
 
     def test_can_display_when_issues_have_a_space_in_their_number(self, monkeypatch):
         monkeypatch.setattr(Issue, "erudit_object", unittest.mock.MagicMock())
@@ -489,6 +496,36 @@ class TestJournalDetailView:
             h2.decode() == "<h2>\n        \n        "
             f"Historique de la revue ({issue_count}\xa0{expected_string})\n        \n      </h2>"
         )
+
+    @pytest.mark.parametrize(
+        "get_url, is_journal",
+        (
+            (journal_detail_url, True),
+            (journal_authors_list_url, True),
+            (issue_detail_url, False),
+        ),
+    )
+    @override_settings(CACHES=settings.LOCMEM_CACHES)
+    def test_journal_info_changes_refreshes_journal_base_html_template_cache(
+        self, get_url, is_journal
+    ):
+        # Add publishing frequency information to journal information
+        journal_info = JournalInformationFactory(frequency=1)
+        issue = IssueFactory(journal=journal_info.journal)
+
+        url = get_url(journal_info.journal if is_journal else issue)
+
+        # Check if publishing frequency information is in html
+        resp = Client().get(url)
+        assert "1 numéro par année" in resp.content.decode()
+
+        # Update publishing frequency information
+        journal_info.frequency = 2
+        journal_info.save()
+
+        # Check if publishing frequency information was updated in html (refreshed cache)
+        resp = Client().get(url)
+        assert "2 numéros par année" in resp.content.decode()
 
 
 class TestJournalAuthorsListView:
