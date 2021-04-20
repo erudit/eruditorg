@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 08:56-0400\n"
+"POT-Creation-Date: 2021-04-20 10:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1537,42 +1537,28 @@ msgstr ""
 msgid "TR_J1"
 msgstr ""
 
-#: apps/userspace/library/stats/forms.py:217
-msgid "Journal Requests (Excluding OA_Gold)"
-msgstr ""
-
 #: apps/userspace/library/stats/forms.py:219
 msgid ""
-"Nombre de requêtes réussies d’articles en accès restreint en texte intégral "
-"par mois et par revue"
+"Rapports d’utilisation sur le contenu de revues excluant les revues en libre "
+"accès doré."
 msgstr ""
 
-#: apps/userspace/library/stats/forms.py:228
+#: apps/userspace/library/stats/forms.py:227
 msgid "TR_J3"
 msgstr ""
 
-#: apps/userspace/library/stats/forms.py:229
-msgid "Journal Usage by Access Type"
-msgstr ""
-
-#: apps/userspace/library/stats/forms.py:231
+#: apps/userspace/library/stats/forms.py:230
 msgid ""
-"Nombre de requêtes réussies d’articles en texte intégral par mois, par revue "
-"et par type d'accès"
+"Rapports d’utilisation sur le contenu de revues, pour tous les types de "
+"mesures, répartis par type d’accès."
 msgstr ""
 
-#: apps/userspace/library/stats/forms.py:240
+#: apps/userspace/library/stats/forms.py:239
 msgid "IR_A1"
 msgstr ""
 
-#: apps/userspace/library/stats/forms.py:241
-msgid "Journal Article Requests"
-msgstr ""
-
-#: apps/userspace/library/stats/forms.py:243
-msgid ""
-"Nombre de requêtes réussies d’articles en texte intégral par mois et par "
-"article"
+#: apps/userspace/library/stats/forms.py:242
+msgid "Rapports sur les requêtes d’articles de revue au niveau de l’article."
 msgstr ""
 
 #: apps/userspace/library/subscription_information/forms.py:19
