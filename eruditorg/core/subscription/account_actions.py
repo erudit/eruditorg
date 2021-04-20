@@ -31,7 +31,7 @@ class IndividualSubscriptionAction(AccountActionBase):
     def get_extra_context(self, token, user):
         return {
             "subscription_exists": self._subscription_exists(token, user),
-            "user_exists": User.objects.filter(email=token.email).exists(),
+            "user_exists": User.objects.filter(email=token.email).exists() if token else False,
         }
 
     def get_consumption_redirect_url(self, token):
