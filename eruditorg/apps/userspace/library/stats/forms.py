@@ -214,10 +214,9 @@ class CounterR5Form(CounterReportForm):
 class CounterR5TRJ1Form(CounterR5Form):
     code = "counter-r5-trj1"
     tab_label = _("TR_J1")
-    title = _("Journal Requests (Excluding OA_Gold)")
+    title = "Journal Requests (Excluding OA_Gold)"
     description = _(
-        "Nombre de requêtes réussies d’articles en accès restreint en texte intégral "
-        "par mois et par revue"
+        "Rapports d’utilisation sur le contenu de revues excluant les revues en libre accès doré."
     )
     prefix = "counter_r5_trj1"
     report_code = "TR_J1"
@@ -226,10 +225,10 @@ class CounterR5TRJ1Form(CounterR5Form):
 class CounterR5TRJ3Form(CounterR5Form):
     code = "counter-r5-trj3"
     tab_label = _("TR_J3")
-    title = _("Journal Usage by Access Type")
+    title = "Journal Usage by Access Type"
     description = _(
-        "Nombre de requêtes réussies d’articles en texte intégral "
-        "par mois, par revue et par type d'accès"
+        "Rapports d’utilisation sur le contenu de revues, pour tous les types de mesures, "
+        "répartis par type d’accès."
     )
     prefix = "counter_r5_trj3"
     report_code = "TR_J3"
@@ -238,9 +237,9 @@ class CounterR5TRJ3Form(CounterR5Form):
 class CounterR5IRA1Form(CounterR5Form):
     code = "counter-r5-ira1"
     tab_label = _("IR_A1")
-    title = _("Journal Article Requests")
+    title = "Journal Article Requests"
     description = _(
-        "Nombre de requêtes réussies d’articles en texte intégral par mois et par article"
+        "Rapports sur les requêtes d’articles de revue au niveau de l’article."
     )
     prefix = "counter_r5_ira1"
     report_code = "IR_A1"
