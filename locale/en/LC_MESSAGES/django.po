@@ -1541,11 +1541,11 @@ msgstr "December"
 
 #: apps/userspace/library/stats/forms.py:76
 msgid "Période mensuelle"
-msgstr ""
+msgstr "Monthly Reporting Period"
 
 #: apps/userspace/library/stats/forms.py:77
 msgid "Période annuelle"
-msgstr ""
+msgstr "Yearly Reporting Period"
 
 #: apps/userspace/library/stats/forms.py:128
 msgid "La date de début doit être inférieure à la date de fin"
