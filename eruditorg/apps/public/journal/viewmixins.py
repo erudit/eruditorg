@@ -235,7 +235,9 @@ class MetaInfoIssueMixin:
         provided, to generate the cache version.
         """
         journal_info_updated = str(journal_info.updated.timestamp() if journal_info else None)
-        issue_fedora_updated = str(issue.fedora_updated.timestamp() if issue else None)
+        issue_fedora_updated = str(
+            issue.fedora_updated.timestamp() if issue and issue.fedora_updated else None
+        )
         return f"{journal_info_updated}-{issue_fedora_updated}"
 
     def get_contributors(self, journal_info=None, issue=None):
