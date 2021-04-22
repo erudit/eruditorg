@@ -259,6 +259,71 @@ class TestIndividualJournalAccessSubscriptionCreateView(TestCase):
         self.assertEqual(mail.outbox[0].to[0], post_data["email"])
 
 
+class TestIndividualJournalAccessSubscriptionDeleteByEmailView:
+    def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
+        journal = JournalFactory()
+        client = Client(logged_user=UserFactory())
+        url = reverse(
+            "userspace:journal:subscription:delete_by_email", kwargs={"journal_pk": journal.pk}
+        )
+
+        # Run
+        response = client.get(url)
+
+        # Check
+        assert response.status_code == 403
+
+    def test_can_delete_subscription_by_email(self):
+        journal = JournalFactory()
+        subscriptions_manager_user = UserFactory()
+        user_1 = UserFactory()
+        user_2 = UserFactory()
+        journal.members.add(subscriptions_manager_user)
+        Authorization.authorize_user(
+            subscriptions_manager_user, journal, AC.can_manage_individual_subscription
+        )
+
+        # Subscription manager
+        subscription = JournalManagementSubscriptionFactory.create(
+            journal=journal, plan__max_accounts=2
+        )
+
+        # User subscriptions
+        subscription_1 = JournalAccessSubscriptionFactory.create(
+            user=user_1, journal_management_subscription=subscription
+        )
+        subscription_2 = JournalAccessSubscriptionFactory.create(
+            user=user_2, journal_management_subscription=subscription
+        )
+
+        # Delete `user_1` by it's email
+        post_data = {
+            "email": user_1.email,
+        }
+
+        client = Client(logged_user=subscriptions_manager_user)
+        url = reverse(
+            "userspace:journal:subscription:delete_by_email", kwargs={"journal_pk": journal.pk}
+        )
+        response = client.post(url, post_data, follow=False)
+        redirect_url = reverse(
+            "userspace:journal:subscription:delete",
+            kwargs={
+                "journal_pk": journal.pk,
+                "pk": subscription_1.pk,
+            },
+        )
+
+        # Redirect to be deleted at `IndividualJournalAccessSubscriptionDeleteView`
+        assert response.status_code == 302
+        assert response.url == redirect_url
+        client.post(response.url, follow=False)
+
+        # Check if only `user_1` was deleted
+        assert subscription_1 not in subscription.subscriptions.get_queryset()
+        assert subscription_2 in subscription.subscriptions.get_queryset()
+
+
 class TestIndividualJournalAccessSubscriptionDeleteView:
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
         user = UserFactory.create()

@@ -30,8 +30,9 @@
     {% endblocktrans %}
   </h2>
   <div class="row">
-    <p class="col-md-8">
+    <p class="col-md-12">
       <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Créer</strong> un <br>abonnement" %}</a>
+      <a href="{% url 'userspace:journal:subscription:delete_by_email' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Supprimer</strong> un <br>abonnement" %}</a>
       <a href="{% url 'userspace:journal:subscription:batch_subscribe' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Abonner</strong> <br>en lot" %}</a>
       <a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "<strong>Désabonner</strong> <br>en lot" %}</a>
     </p>
