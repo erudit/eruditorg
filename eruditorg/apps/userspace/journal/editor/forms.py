@@ -9,11 +9,6 @@ from resumable_uploads.models import ResumableFile
 from core.editor.models import IssueSubmission
 
 
-class ContactModelChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        return "{fullname}".format(fullname=obj.get_full_name() or obj.username)
-
-
 class IssueSubmissionForm(forms.ModelForm):
 
     required_css_class = "required"
@@ -25,19 +20,13 @@ class IssueSubmissionForm(forms.ModelForm):
             "year",
             "volume",
             "number",
-            "contact",
             "comment",
         ]
-
-        field_classes = {
-            "contact": ContactModelChoiceField,
-        }
 
     def disable_form(self):
         """ Disable all the fields of this form """
         fields = (
             "year",
-            "contact",
             "number",
             "volume",
             "comment",
@@ -53,16 +42,9 @@ class IssueSubmissionForm(forms.ModelForm):
         kwargs.setdefault("label_suffix", "")
         super(IssueSubmissionForm, self).__init__(*args, **kwargs)
 
-        self.populate_select(self.user)
+        self.instance.contact = self.user
 
         self.instance.journal = self.journal
-
-    def populate_select(self, user):
-        journals_members = self.journal.members.all()
-        member_first = journals_members.first()
-        self.fields["contact"].queryset = journals_members
-        if member_first:
-            self.fields["contact"].initial = member_first.id
 
 
 class IssueSubmissionUploadForm(IssueSubmissionForm):
@@ -72,7 +54,6 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
             "year",
             "volume",
             "number",
-            "contact",
             "comment",
             "submissions",
         )
