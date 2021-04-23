@@ -2723,7 +2723,7 @@
               <xsl:when test="@lang = 'es'">Palabras clave:</xsl:when>
               <xsl:when test="@lang = 'de'">Stichworte:</xsl:when>
               <xsl:when test="@lang = 'pt'">Palavras chaves:</xsl:when>
-              <xsl:when test="@lang = 'it'">Parole chiave</xsl:when>
+              <xsl:when test="@lang = 'it'">Parole chiave:</xsl:when>
             </xsl:choose>
           </xsl:element>
         </xsl:element>
