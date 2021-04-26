@@ -1,4 +1,4 @@
-import CiteModal from '../../../modules/Cite';
+import { InlineCiteModal } from '../../../modules/Cite';
 
 export default {
   init() {
@@ -163,7 +163,7 @@ export default {
 
     // Initializes the citation modals
     $('a[data-cite]').each(function(){
-      new CiteModal($(this));
+      new InlineCiteModal($(this));
     });
   },
 };

@@ -9,6 +9,7 @@ import pytest
 
 from base.test.testcases import Client, extract_post_args
 from erudit.fedora import repository
+from erudit.models.journal import Article
 from erudit.test.factories import ArticleFactory, IssueFactory, SolrDocumentFactory
 from erudit.test.solr import FakeSolrData
 
@@ -87,11 +88,9 @@ class TestEruditSearchResultsView:
         )
         assert response.status_code == 200
 
-    def test_renders_keywords(self, solr_client):
+    def test_renders_keywords(self, solr_client, monkeypatch):
+        monkeypatch.setattr(Article, "keywords", ["aybabtu"])
         article = ArticleFactory(title="foo")
-        with repository.api.open_article(article.pid) as wrapper:
-            wrapper.set_title("foo")
-            wrapper.add_keywords("fr", ["aybabtu"])
         solr_client.add_article(article)
         url = reverse("public:search:results")
         response = Client().get(

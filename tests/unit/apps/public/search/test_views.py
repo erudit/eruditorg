@@ -40,8 +40,15 @@ class TestSearchResultsView:
         assert len(results.find_all("li", {"class": "result"})) == 1
 
     def test_search_results_citation_modal(self, solr_client):
-        # Article in Fedora, citation tools should be displayed.
-        ArticleFactory(localidentifier="foo", title="foo")
+        # Article in Fedora, citation tools should be not displayed, but we should have the URL to
+        # get it with AJAX.
+        ArticleFactory(
+            localidentifier="foo",
+            title="foo",
+            issue__localidentifier="issue",
+            issue__year="2021",
+            issue__journal__code="journal",
+        )
         # Search result not in Fedora, citation tools should not be displayed.
         doc = SolrDocumentFactory(id="bar", title="foo bar")
         solr_client.add_document(doc)
@@ -56,7 +63,8 @@ class TestSearchResultsView:
         assert len(results.find_all("li", {"class": "result"})) == 2
         # The search result which is in fedora should display the citation tools.
         assert (
-            "Citer cet article" in results.find("a", {"data-modal-id": "#id_cite_modal_foo"}).text
+            results.find("a", {"id": "foo"}).attrs["href"]
+            == "/fr/revues/journal/2021-issue/foo/ajax-citation-modal"
         )
         # The search result which is not in fedora should not display the citation tools.
         assert results.find("a", {"data-modal-id": "#id_cite_modal_bar"}) is None
@@ -66,11 +74,19 @@ class TestSearchResultsView:
 
         article = ArticleFactory(localidentifier="foo", title="foo")
 
-        url = reverse("public:search:results")
-        response = Client().get(url, data={"basic_search_term": "foo"})
+        # Search results citation modal window is populated with AJAX.
+        url = reverse(
+            "public:journal:article_ajax_citation_modal",
+            kwargs={
+                "journal_code": article.issue.journal.code,
+                "issue_slug": article.issue.volume_slug,
+                "issue_localid": article.issue.localidentifier,
+                "localid": article.localidentifier,
+            },
+        )
+        response = Client().get(url)
         html = response.content.decode()
-        dom = BeautifulSoup(html, "html.parser")
-        search_result_citation_tools = dom.find("div", {"id": "id_cite_modal_foo"})
+        citation_modal = BeautifulSoup(html, "html.parser")
 
         url = reverse(
             "public:journal:article_detail",
@@ -86,4 +102,4 @@ class TestSearchResultsView:
         dom = BeautifulSoup(html, "html.parser")
         article_detail_citation_tools = dom.find("div", {"id": "id_cite_modal_foo"})
 
-        assert search_result_citation_tools == article_detail_citation_tools
+        assert article_detail_citation_tools in citation_modal

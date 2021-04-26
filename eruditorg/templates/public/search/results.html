@@ -206,7 +206,11 @@
                       {# journal type and collection #}
                       {% trans "dans" %}
 
+                      {% if document.journal_url %}
                       <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series_display }}</a></em>
+                      {% else %}
+                      <em>{{ document.series_display }}</em>
+                      {% endif %}
                       ({% if article.journal_type == 'C' %}{% trans "culturelle" %}{% elif article.journal_type == 'S' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection_display }})
                       <br/>
                       {# issue theme #}
@@ -287,6 +291,7 @@
               <div class="toolbox-wrapper">
                 <ul class="toolbox toolbox-compact">
                   {% if document.can_cite %}
+                  {% if document.document_type != 'article' or document.ajax_citation_modal_url %}
                   <li>
                     <a class="tool-btn" id="tool-citation-save-{{ forloop.counter }}" data-citation-save="#document-{{ forloop.counter }}"{% if document.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                       <i class="icon ion-ios-bookmark toolbox-save"></i>
@@ -297,12 +302,22 @@
                       <span class="tools-label">{% trans "Supprimer" %}</span>
                     </a>
                   </li>
+                  {% if document.ajax_citation_modal_url %}
                   <li>
-                    <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ document.localidentifier|slugify }}">
+                    <a href="{{ document.ajax_citation_modal_url }}" class="tool-btn tool-cite ajax" id="{{ document.localidentifier|slugify }}">
                       <i class="icon ion-ios-quote toolbox-cite"></i>
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
                   </li>
+                  {% elif document.document_type != 'article' %}
+                  <li>
+                    <a class="tool-btn tool-cite inline" data-modal-id="#id_cite_modal_{{ document.localidentifier|slugify }}" id="{{ document.localidentifier|slugify }}">
+                      <i class="icon ion-ios-quote toolbox-cite"></i>
+                      <span class="tools-label">{% trans "Citer ce document" %}</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% endif %}
                   {% endif %}
                   {% with pdf_url=document.pdf_url %}
                   {% if pdf_url %}
@@ -325,12 +340,14 @@
                 </ul>
 
                 {# Modal window #}
-                <div class="hidden">
-                  {% if document.can_cite %}
+                <div class="mfp-hide">
+                  {# The citation modal window is loaded by AJAX for article search results. #}
+                  {# For other types of search results, include the citation modal window. #}
+                  {% if document.can_cite and document.document_type != 'article' %}
                     {% with article=document %}
                       {% include "public/journal/partials/article_citation_modal_content.html" %}
                     {% endwith %}
-                  {% endif %} {# document.can_cite #}
+                  {% endif %}
                 </div>
               </div>
             </li>

@@ -3,6 +3,9 @@
 <div id="id_cite_modal_{{ article.localidentifier|slugify }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
   <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
   <div class="modal-body">
+    {% if not article.can_cite %}
+    <h3>{% trans "Non disponible pour cet article" %}</h3>
+    {% else %}
     {% if article|get_class == 'Article' %}
     <h3>{% trans "Citer cet article" %}</h3>
     <dl class="cite-modal--style-list">
@@ -45,5 +48,6 @@
         <br><br>BibTeX, JabRef, Mendeley, Zotero
       </p>
     </div>
+    {% endif %}
   </div>
 </div>

@@ -37,6 +37,7 @@ SOLR2DOC = {
     "Editeur": "collection",
     "Annee": "year",
     "Langue": "language",
+    "MotsCles": "keywords",
 }
 
 
@@ -57,6 +58,7 @@ class SolrDocument:
             "repository",
             "issue_localidentifier",
             "language",
+            "keywords",
         ]
         for attr in OPTIONAL_ARGS:
             val = kwargs.get(attr)
@@ -90,6 +92,7 @@ class SolrDocument:
             year=str(article.issue.year),
             collection=journal.collection.name,
             solr_attrs=solr_attrs,
+            keywords=article.keywords,
         )
 
     def as_result(self):

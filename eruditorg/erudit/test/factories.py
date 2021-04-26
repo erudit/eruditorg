@@ -141,6 +141,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
     year = dt.datetime.now().year
     is_published = True
     fedora_updated = dt.datetime.now(tz=dt.timezone.utc)
+    fedora_created = dt.datetime.now(tz=dt.timezone.utc)
 
     class Meta:
         model = "erudit.issue"
@@ -293,6 +294,8 @@ class SolrDocumentFactory(factory.Factory):
     title = factory.Sequence(lambda n: "title_{}".format(n))
     type = "Article"
     authors = []
+    journal_code = factory.Sequence(lambda n: "journal_code_{}".format(n))
+    issue_localidentifier = factory.Sequence(lambda n: "issue_id_{}".format(n))
 
     class Meta:
         model = SolrDocument

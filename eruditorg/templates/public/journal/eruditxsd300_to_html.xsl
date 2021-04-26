@@ -378,7 +378,7 @@
             </li>
             {% endif %}
             <li>
-              <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.localidentifier|slugify }}">
+              <a class="tool-btn tool-cite inline" data-modal-id="#id_cite_modal_{{ article.localidentifier|slugify }}">
                 <i class="icon ion-ios-quote toolbox-cite"></i>
                 <span class="tools-label">{% trans "Citer cet article" %}</span>
               </a>
