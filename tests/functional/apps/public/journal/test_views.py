@@ -12,6 +12,7 @@ import itertools
 from hashlib import md5
 
 from django.contrib.auth.models import AnonymousUser
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
@@ -19,6 +20,7 @@ from django.test import Client
 from django.test import RequestFactory
 from django.conf import settings
 from django.test.utils import override_settings
+from eruditarticle.objects.publication import SummaryArticle
 import pytest
 
 from apps.public.journal.viewmixins import SolrDataMixin
@@ -782,33 +784,47 @@ class TestIssueDetailView:
         # The embargo lock icon should only be displayed on embargoed issues.
         assert (b"ion-ios-lock" in response.content) == expected_lock
 
-    def test_article_items_are_not_cached_for_unpublished_issues(self):
-        issue = IssueFactory(is_published=False)
-        article = ArticleFactory(issue=issue, title="thisismyoldtitle")
-
-        url = issue_detail_url(issue)
-        resp = Client().get(url, {"ticket": issue.prepublication_ticket})
-        assert "thisismyoldtitle" in resp.content.decode("utf-8")
-
-        with repository.api.open_article(article.pid) as wrapper:
-            wrapper.set_title("thisismynewtitle")
-        resp = Client().get(url, {"ticket": issue.prepublication_ticket})
-        assert "thisismynewtitle" in resp.content.decode("utf-8")
-
     @override_settings(CACHES=settings.LOCMEM_CACHES)
-    def test_article_items_are_cached_for_published_issues(self, monkeypatch):
-        monkeypatch.setattr(Issue, "has_coverpage", False)
-        issue = IssueFactory(is_published=True)
-        article = ArticleFactory(issue=issue, title="thisismyoldtitle")
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    @pytest.mark.parametrize("is_published", (True, False))
+    def test_article_items_are_cached_for_published_and_unpublished_issues(
+        self, mock_get_summary_articles, is_published, monkeypatch
+    ):
+        """Tests that articles on published or unpublished issue detail pages are cached.
 
+        Whether an issue is published or not, the articles displayed on the issue detail page
+        should always be cached.
+        """
+        # Create a published or unpublished issue.
+        issue = IssueFactory(is_published=is_published)
+
+        # Mock a SummaryArticle with a title to test for.
+        article = SummaryArticle(
+            localidentifier="article1",
+            processing="complet",
+            html_title="thisismyoldtitle",
+        )
+        mock_get_summary_articles.return_value = [article]
+
+        # Send a request for the issue detail page so that the article is cached.
         url = issue_detail_url(issue)
-        resp = Client().get(url)
-        assert "thisismyoldtitle" in resp.content.decode("utf-8")
-
-        with repository.api.open_article(article.pid) as wrapper:
-            wrapper.set_title("thisismynewtitle")
         resp = Client().get(url, {"ticket": issue.prepublication_ticket})
-        assert "thisismyoldtitle" in resp.content.decode("utf-8")
+
+        # Check that the expected article title is displayed.
+        assert "thisismyoldtitle" in resp.content.decode()
+
+        # Set a new article title.
+        article.html_title = "thisismynewtitle"
+        mock_get_summary_articles.return_value = [article]
+
+        # The old title should be displayed since it was cached.
+        resp = Client().get(url, {"ticket": issue.prepublication_ticket})
+        assert "thisismyoldtitle" in resp.content.decode()
+
+        # With the cache cleared, the new title should be displayed.
+        cache.clear()
+        resp = Client().get(url, {"ticket": issue.prepublication_ticket})
+        assert "thisismynewtitle" in resp.content.decode()
 
     def test_can_return_404_when_issue_doesnt_exist(self):
         issue = IssueFactory(
@@ -843,6 +859,7 @@ class TestIssueDetailView:
             assert not summary_link
 
     @override_settings(CACHES=settings.LOCMEM_CACHES)
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
     @pytest.mark.parametrize(
         "language_code, expected_link",
         (
@@ -860,23 +877,29 @@ class TestIssueDetailView:
     )
     def test_article_pdf_url_is_cache_with_the_right_language(
         self,
+        mock_get_summary_articles,
         language_code,
         expected_link,
     ):
-        article = ArticleFactory(
-            issue__journal__code="journal",
-            issue__year="2000",
-            issue__localidentifier="issue",
-            localidentifier="article",
-            with_pdf=True,
+        issue = IssueFactory(
+            journal__code="journal",
+            year="2000",
+            localidentifier="issue",
         )
+        mock_get_summary_articles.return_value = [
+            SummaryArticle(
+                localidentifier="article",
+                processing="complet",
+                urlpdf="/url.pdf",
+            ),
+        ]
         with override_settings(LANGUAGE_CODE=language_code):
             url = reverse(
                 "public:journal:issue_detail",
                 kwargs={
-                    "journal_code": article.issue.journal.code,
-                    "issue_slug": article.issue.volume_slug,
-                    "localidentifier": article.issue.localidentifier,
+                    "journal_code": issue.journal.code,
+                    "issue_slug": issue.volume_slug,
+                    "localidentifier": issue.localidentifier,
                 },
             )
             html = Client().get(url).content.decode()
@@ -899,7 +922,8 @@ class TestIssueDetailView:
             },
         )
         html = Client().get(url).content.decode()
-        dom = BeautifulSoup(html, "html.parser")
+        # Use lxml parser to avoid closing </br> tags being added to the html.
+        dom = BeautifulSoup(html, "lxml")
         title1 = dom.find("p", {"class": "main-header__meta"}).decode()
         assert (
             title1 == '<p class="main-header__meta">\n'

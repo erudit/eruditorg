@@ -7,7 +7,6 @@ from eruditarticle.utils import remove_xml_namespaces
 
 
 Author = namedtuple("Author", "firstname lastname othername")
-SectionTitle = namedtuple("SectionTitle", "level paral title")
 
 
 class BaseDomChanger:

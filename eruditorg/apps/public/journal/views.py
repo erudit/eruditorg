@@ -552,7 +552,7 @@ class IssueDetailView(
         context["notegens"] = self.object.erudit_object.get_notegens_edito(html=True)
         context["guest_editors"] = None if len(guest_editors) == 0 else guest_editors
         context["themes"] = self.object.erudit_object.get_themes(formatted=True, html=True)
-        articles = list(self.object.get_articles_from_fedora())
+        articles = self.object.erudit_object.get_summary_articles()
         context["articles_per_section"] = self.generate_sections_tree(articles)
         context["articles"] = articles
         # If this is a cultural journal, we need the URL for the issue reader.
@@ -588,7 +588,7 @@ class IssueDetailView(
         context["cache_pids"] = [
             self.object.journal.pid,
             self.object.pid,
-        ] + [article.pid for article in articles]
+        ] + [f"{self.object.pid}.{article.localidentifier}" for article in articles]
 
         # Get the languages information from last published issue ("current_issue")
         current_issue = self.object.journal.current_issue
@@ -621,19 +621,15 @@ class IssueDetailView(
                     }
                 )
             else:
-                title_paral = getattr(articles[0], "section_title_" + str(level + 1) + "_paral")
-                # liberuditarticle returns an `odict_value()` wrapper around the list. We just want
-                # to make sure that this wrapper doesn't cause problems down the line. Force list.
-                title_paral = list(title_paral)
                 sub_tree = self.generate_sections_tree(
                     articles,
                     level=level + 1,
-                    title=title,
-                    title_paral=title_paral,
+                    title=title["main"],
+                    title_paral=list(title["paral"].values()),
                 )
                 notegens = [
                     notegen
-                    for notegen in articles[0].get_notegens()
+                    for notegen in articles[0].notegens
                     if notegen["scope"] == "surtitre"
                     and level == 0
                     or notegen["scope"] == "surtitre2"

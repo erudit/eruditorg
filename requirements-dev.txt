@@ -253,7 +253,7 @@ jsonfield==3.1.0
     # via
     #   -r requirements-test.txt
     #   django-post-office
-liberuditarticle==0.2.71
+liberuditarticle==0.2.72
     # via -r requirements-test.txt
 line-profiler==3.1.0
     # via django-debug-toolbar-line-profiler
