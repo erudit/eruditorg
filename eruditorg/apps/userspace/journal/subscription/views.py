@@ -92,15 +92,6 @@ class IndividualJournalAccessSubscriptionCreateView(JournalSubscriptionMixin, Cr
                 request, *args, **kwargs
             )
         except JournalManagementSubscription.DoesNotExist:  # pragma: no cover
-            logger.error(
-                "Unable to find the management subscription of the following journal: {}".format(
-                    self.current_journal.name
-                ),
-                exc_info=True,
-                extra={
-                    "request": self.request,
-                },
-            )
             messages.warning(
                 self.request,
                 _("Vous ne pouvez pas gérer les abonnements de votre revue"),
