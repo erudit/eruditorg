@@ -620,9 +620,9 @@ class TestIssueDetailSummary:
         html = Client().get(url).content.decode()
         # Check that authors' suffixes are not displayed on the issue detail view.
         assert (
-            '<p class="bib-record__authors col-sm-9">\n      Mélissa Beaudoin, Stéphane Potvin, '
-            "Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, André Ngamini-Ngui "
-            "et Alexandre Dumais\n    </p>" in html
+            '<p class="bib-record__authors col-sm-9">\n    \n      Mélissa Beaudoin, '
+            "Stéphane Potvin, Laura Dellazizzo, Maëlle Surprenant, Alain Lesage, Alain Vanasse, "
+            "André Ngamini-Ngui et Alexandre Dumais\n    \n    </p>" in html
         )
 
     @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
@@ -646,9 +646,9 @@ class TestIssueDetailSummary:
         html = Client().get(url).content.decode()
         # Check that authors are displayed with html.
         assert (
-            '<p class="bib-record__authors col-sm-9">\n      Le Comité exécutif de la '
+            '<p class="bib-record__authors col-sm-9">\n    \n      Le Comité exécutif de la '
             "<em>Revue québécoise de psychologie</em> (Suzanne Léveillée, Julie Maheux, "
-            "Gaëtan Tremblay, Carolanne Vignola-Lévesque)\n    </p>" in html
+            "Gaëtan Tremblay, Carolanne Vignola-Lévesque)\n    \n    </p>" in html
         )
 
     @pytest.mark.parametrize(

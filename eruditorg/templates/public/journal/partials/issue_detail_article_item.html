@@ -50,11 +50,11 @@
     {% endspaceless %}
   </h6>
   <div class="bib-record__metadata row">
-    {% if article.authors %}
     <p class="bib-record__authors col-sm-9">
+    {% if article.authors %}
       {{ article.authors|safe }}
-    </p>
     {% endif %}
+    </p>
     <p class="bib-record__pages col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}
       {% if first_page and last_page and first_page != last_page %}
