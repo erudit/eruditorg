@@ -56,3 +56,7 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class JournalAccessSubscriptionDeleteByEmailForm(forms.Form):
+    email = forms.EmailField(label=_("Courriel"))

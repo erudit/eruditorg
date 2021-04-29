@@ -8,7 +8,6 @@ from account_actions.test.factories import AccountActionTokenFactory
 from django.conf import settings
 from django.core import mail
 from django.urls import reverse
-from django.test import TestCase
 from faker import Factory
 
 from base.test.factories import UserFactory
@@ -165,7 +164,7 @@ def test_list_archive_years(monkeypatch, tmpdir):
     assert view.get_subscriptions_archive_years() == EXPECTED
 
 
-class TestIndividualJournalAccessSubscriptionCreateView(TestCase):
+class TestIndividualJournalAccessSubscriptionCreateView:
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
         journal = JournalFactory()
         client = Client(logged_user=UserFactory())
@@ -175,7 +174,7 @@ class TestIndividualJournalAccessSubscriptionCreateView(TestCase):
         response = client.get(url)
 
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_create_an_account_action_for_the_subscription(self):
         journal = JournalFactory()
@@ -197,14 +196,14 @@ class TestIndividualJournalAccessSubscriptionCreateView(TestCase):
 
         response = client.post(url, post_data, follow=False)
 
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
         tokens = AccountActionToken.objects.all()
-        self.assertEqual(tokens.count(), 1)
+        assert tokens.count() == 1
         stoken = tokens.first()
-        self.assertEqual(stoken.content_object, subscription)
-        self.assertEqual(stoken.email, post_data["email"])
-        self.assertEqual(stoken.first_name, post_data["first_name"])
-        self.assertEqual(stoken.last_name, post_data["last_name"])
+        assert stoken.content_object == subscription
+        assert stoken.email == post_data["email"]
+        assert stoken.first_name == post_data["first_name"]
+        assert stoken.last_name == post_data["last_name"]
 
     def test_cannot_allow_the_creation_of_subscription_if_the_plan_limit_has_been_reached(self):
         journal = JournalFactory()
@@ -230,7 +229,7 @@ class TestIndividualJournalAccessSubscriptionCreateView(TestCase):
 
         response = client.get(url)
 
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
 
     def test_triggers_the_sending_of_a_notification_email(self):
         journal = JournalFactory()
@@ -254,9 +253,74 @@ class TestIndividualJournalAccessSubscriptionCreateView(TestCase):
         response = client.post(url, post_data, follow=False)
 
         # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].to[0], post_data["email"])
+        assert response.status_code == 302
+        assert len(mail.outbox) == 1
+        assert mail.outbox[0].to[0] == post_data["email"]
+
+
+class TestIndividualJournalAccessSubscriptionDeleteByEmailView:
+    def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
+        journal = JournalFactory()
+        client = Client(logged_user=UserFactory())
+        url = reverse(
+            "userspace:journal:subscription:delete_by_email", kwargs={"journal_pk": journal.pk}
+        )
+
+        # Run
+        response = client.get(url)
+
+        # Check
+        assert response.status_code == 403
+
+    def test_can_delete_subscription_by_email(self):
+        journal = JournalFactory()
+        subscriptions_manager_user = UserFactory()
+        user_1 = UserFactory()
+        user_2 = UserFactory()
+        journal.members.add(subscriptions_manager_user)
+        Authorization.authorize_user(
+            subscriptions_manager_user, journal, AC.can_manage_individual_subscription
+        )
+
+        # Subscription manager
+        subscription = JournalManagementSubscriptionFactory.create(
+            journal=journal, plan__max_accounts=2
+        )
+
+        # User subscriptions
+        subscription_1 = JournalAccessSubscriptionFactory.create(
+            user=user_1, journal_management_subscription=subscription
+        )
+        subscription_2 = JournalAccessSubscriptionFactory.create(
+            user=user_2, journal_management_subscription=subscription
+        )
+
+        # Delete `user_1` by it's email
+        post_data = {
+            "email": user_1.email,
+        }
+
+        client = Client(logged_user=subscriptions_manager_user)
+        url = reverse(
+            "userspace:journal:subscription:delete_by_email", kwargs={"journal_pk": journal.pk}
+        )
+        response = client.post(url, post_data, follow=False)
+        redirect_url = reverse(
+            "userspace:journal:subscription:delete",
+            kwargs={
+                "journal_pk": journal.pk,
+                "pk": subscription_1.pk,
+            },
+        )
+
+        # Redirect to be deleted at `IndividualJournalAccessSubscriptionDeleteView`
+        assert response.status_code == 302
+        assert response.url == redirect_url
+        client.post(response.url, follow=False)
+
+        # Check if only `user_1` was deleted
+        assert subscription_1 not in subscription.subscriptions.get_queryset()
+        assert subscription_2 in subscription.subscriptions.get_queryset()
 
 
 class TestIndividualJournalAccessSubscriptionDeleteView:
@@ -303,7 +367,7 @@ class TestIndividualJournalAccessSubscriptionDeleteView:
         assert not JournalAccessSubscription.objects.exists()
 
 
-class TestIndividualJournalAccessSubscriptionCancelView(TestCase):
+class TestIndividualJournalAccessSubscriptionCancelView:
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
         # Setup
         journal = JournalFactory()
@@ -324,7 +388,7 @@ class TestIndividualJournalAccessSubscriptionCancelView(TestCase):
         response = client.get(url)
 
         # Check
-        self.assertEqual(response.status_code, 403)
+        assert response.status_code == 403
 
     def test_can_cancel_an_action_token(self):
         journal = JournalFactory()
@@ -348,9 +412,9 @@ class TestIndividualJournalAccessSubscriptionCancelView(TestCase):
 
         response = client.post(url, follow=False)
 
-        self.assertEqual(response.status_code, 302)
+        assert response.status_code == 302
         token.refresh_from_db()
-        self.assertTrue(token.is_canceled)
+        assert token.is_canceled
 
 
 # Batch subscribe

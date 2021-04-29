@@ -17,6 +17,11 @@ urlpatterns = [
         name="create",
     ),
     url(
+        _(r"^individuel/supprimer-par-courriel/"),
+        views.IndividualJournalAccessSubscriptionDeleteByEmailView.as_view(),
+        name="delete_by_email",
+    ),
+    url(
         _(r"^individuel/supprimer/(?P<pk>[0-9]+)/$"),
         views.IndividualJournalAccessSubscriptionDeleteView.as_view(),
         name="delete",

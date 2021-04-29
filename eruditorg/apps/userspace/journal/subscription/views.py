@@ -14,7 +14,7 @@ from django.urls import reverse
 from django.core.validators import EmailValidator
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import gettext as _, ngettext
-from django.views.generic import CreateView, DeleteView, ListView, View, TemplateView
+from django.views.generic import CreateView, DeleteView, ListView, View, TemplateView, FormView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
@@ -28,6 +28,7 @@ from ..viewmixins import JournalScopePermissionRequiredMixin
 from ..views import journal_reports_path, BaseReportsDownload
 
 from .forms import JournalAccessSubscriptionCreateForm
+from .forms import JournalAccessSubscriptionDeleteByEmailForm
 
 logger = structlog.getLogger(__name__)
 
@@ -91,15 +92,6 @@ class IndividualJournalAccessSubscriptionCreateView(JournalSubscriptionMixin, Cr
                 request, *args, **kwargs
             )
         except JournalManagementSubscription.DoesNotExist:  # pragma: no cover
-            logger.error(
-                "Unable to find the management subscription of the following journal: {}".format(
-                    self.current_journal.name
-                ),
-                exc_info=True,
-                extra={
-                    "request": self.request,
-                },
-            )
             messages.warning(
                 self.request,
                 _("Vous ne pouvez pas gérer les abonnements de votre revue"),
@@ -122,6 +114,66 @@ class IndividualJournalAccessSubscriptionCreateView(JournalSubscriptionMixin, Cr
     def get_success_url(self):
         messages.success(self.request, _("L'abonnement a été créé avec succès"))
         return reverse("userspace:journal:subscription:list", args=(self.current_journal.pk,))
+
+
+class IndividualJournalAccessSubscriptionDeleteByEmailView(JournalSubscriptionMixin, FormView):
+    form_class = JournalAccessSubscriptionDeleteByEmailForm
+    template_name = "userspace/journal/subscription/individualsubscription_delete_by_email.html"
+
+    def get(self, request, *args, **kwargs):
+        """ Check if the current journal has the subscription management functionality enabled. """
+        try:
+            JournalManagementSubscription.objects.get(journal=self.current_journal)
+            return super().get(request, *args, **kwargs)
+        except JournalManagementSubscription.DoesNotExist:  # pragma: no cover
+            messages.warning(
+                self.request,
+                _("Vous ne pouvez pas gérer les abonnements de votre revue"),
+            )
+            return HttpResponseRedirect(
+                reverse(
+                    "userspace:journal:subscription:list",
+                    args=(self.current_journal.pk,),
+                )
+            )
+
+    def post(self, request, *args, **kwargs):
+        """Delete the subscription from the journal subscriptions list, if it exists,
+        based on the subscribed user email ."""
+        management_subscription = JournalManagementSubscription.objects.get(
+            journal=self.current_journal
+        )
+        # Find the subscription to be deleted by matching the form entered email with an
+        # existing email in the subscriptions list
+        email = self.get_form().data["email"]
+        try:
+            # Email found. Go to individual subscription deletion view
+            journal_access_subscription = management_subscription.subscriptions.get(
+                user__email=email
+            )
+            return HttpResponseRedirect(
+                reverse(
+                    "userspace:journal:subscription:delete",
+                    kwargs={
+                        "journal_pk": self.current_journal.pk,
+                        "pk": journal_access_subscription.pk,
+                    },
+                )
+            )
+        except JournalAccessSubscription.DoesNotExist:
+            # Email not found in subscriptions list. Show warning and reload unsubscription form
+            messages.warning(
+                self.request,
+                _(
+                    "Le courriel rentré ne correspond à aucun abonné existant. "
+                    "Veuillez réessayer"
+                ),
+            )
+            return HttpResponseRedirect(
+                reverse(
+                    "userspace:journal:subscription:delete_by_email",
+                )
+            )
 
 
 class IndividualJournalAccessSubscriptionDeleteView(JournalSubscriptionMixin, DeleteView):
