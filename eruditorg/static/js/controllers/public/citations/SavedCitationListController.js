@@ -1,4 +1,4 @@
-import { InlineCiteModal } from '../../../modules/Cite';
+import { InlineCiteModal, AjaxCiteModal } from '../../../modules/Cite';
 
 export default {
   init() {
@@ -161,9 +161,13 @@ export default {
       window.location.href = export_url;
     });
 
-    // Initializes the citation modals
-    $('a[data-cite]').each(function(){
+    // Initializes the citation modals for thesis
+    $('a[data-cite-inline]').each(function(){
       new InlineCiteModal($(this));
+    });
+    // Initializes the citation modals for articles
+    $('a[data-cite-ajax]').each(function(){
+      new AjaxCiteModal($(this));
     });
   },
 };
