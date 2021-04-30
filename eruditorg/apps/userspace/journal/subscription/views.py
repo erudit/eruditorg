@@ -164,9 +164,7 @@ class IndividualJournalAccessSubscriptionDeleteByEmailView(JournalSubscriptionMi
             # Email not found in subscriptions list. Show warning and reload unsubscription form
             messages.warning(
                 self.request,
-                _(
-                    "Le courriel ne correspond à aucun abonné. Veuillez réessayer"
-                ),
+                _("Le courriel ne correspond à aucun abonné. Veuillez réessayer"),
             )
             return HttpResponseRedirect(
                 reverse(
