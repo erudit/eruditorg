@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 10:45-0400\n"
+"POT-Creation-Date: 2021-04-30 11:42-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: apps/public/account_actions/forms.py:10
 #: templates/public/account_actions/register.html:45
 #: templates/public/auth/password_reset_form.html:18
-#: templates/userspace/journal/subscription/individualsubscription_list.html:89
+#: templates/userspace/journal/subscription/individualsubscription_list.html:90
 msgid "Adresse courriel"
 msgstr "Email address"
 
@@ -640,18 +640,18 @@ msgstr "^issue/(?P<localidentifier>[\\w-]+)/$"
 msgid "Nombre de consultations d'articles sous embargo par type d'abonnement"
 msgstr ""
 
-#: apps/public/journal/views.py:993
-#: templates/public/journal/partials/issue_detail_article_item.html:68
+#: apps/public/journal/views.py:996
+#: templates/public/journal/partials/issue_detail_article_item.html:70
 msgid "Notice"
 msgstr "Record"
 
-#: apps/public/journal/views.py:1012 apps/public/search/forms.py:33
+#: apps/public/journal/views.py:1015 apps/public/search/forms.py:33
 #: templates/public/journal/article_biblio.html:54
 #: templates/public/journal/article_biblio.html:64
 msgid "Bibliographie"
 msgstr "Bibliography"
 
-#: apps/public/journal/views.py:1029
+#: apps/public/journal/views.py:1032
 #: templates/public/journal/article_toc.html:54
 #: templates/public/journal/article_toc.html:64
 msgid "Plan complet de l’article"
@@ -1151,17 +1151,17 @@ msgstr "This access has been removed successfully. "
 msgid "^(?P<pk>[0-9]+)/supprimer/$"
 msgstr "^(?P<pk>[0-9]+)/delete/$"
 
-#: apps/userspace/journal/editor/forms.py:82
-#: templates/userspace/journal/editor/form.html:115
+#: apps/userspace/journal/editor/forms.py:63
+#: templates/userspace/journal/editor/form.html:111
 msgid "Fichier"
 msgstr "File"
 
-#: apps/userspace/journal/editor/forms.py:90
+#: apps/userspace/journal/editor/forms.py:71
 msgid "Commentaires sur le fichier"
 msgstr ""
 
-#: apps/userspace/journal/editor/forms.py:134
-#: templates/userspace/journal/editor/detail.html:49
+#: apps/userspace/journal/editor/forms.py:115
+#: templates/userspace/journal/editor/detail.html:47
 #: templates/userspace/journal/editor/partials/issue_submission_status_tracks.html:10
 msgid "Commentaires"
 msgstr "Comments"
@@ -1324,7 +1324,8 @@ msgstr ""
 msgid "À propos"
 msgstr "About"
 
-#: apps/userspace/journal/subscription/forms.py:21 core/accounts/admin.py:30
+#: apps/userspace/journal/subscription/forms.py:21
+#: apps/userspace/journal/subscription/forms.py:62 core/accounts/admin.py:30
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:60
 #: templates/userspace/library/members/member_list.html:37
 #: templates/userspace/library/members/member_list.html:76
@@ -1334,7 +1335,7 @@ msgstr "Email"
 #: apps/userspace/journal/subscription/forms.py:22 core/accounts/admin.py:35
 #: templates/public/account_actions/register.html:29
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:61
-#: templates/userspace/journal/subscription/individualsubscription_list.html:90
+#: templates/userspace/journal/subscription/individualsubscription_list.html:91
 msgid "Prénom"
 msgstr "First Name"
 
@@ -1345,7 +1346,7 @@ msgstr "First Name"
 #: erudit/models/journal.py:110
 #: templates/public/account_actions/register.html:36
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:62
-#: templates/userspace/journal/subscription/individualsubscription_list.html:91
+#: templates/userspace/journal/subscription/individualsubscription_list.html:92
 msgid "Nom"
 msgstr "Last Name"
 
@@ -1366,72 +1367,81 @@ msgid "^individuel/abonner/"
 msgstr "^individual/subscribe/"
 
 #: apps/userspace/journal/subscription/urls.py:20
+msgid "^individuel/supprimer-par-courriel/"
+msgstr "^individual/delete-by-email/"
+
+#: apps/userspace/journal/subscription/urls.py:25
 msgid "^individuel/supprimer/(?P<pk>[0-9]+)/$"
 msgstr "^individual/remove/(?P<pk>[0-9]+)/$"
 
-#: apps/userspace/journal/subscription/urls.py:25
+#: apps/userspace/journal/subscription/urls.py:30
 msgid "^individuel/annuler/(?P<pk>[0-9]+)/$"
 msgstr "^individual/cancel/(?P<pk>[0-9]+)/$"
 
-#: apps/userspace/journal/subscription/urls.py:30
+#: apps/userspace/journal/subscription/urls.py:35
 msgid "^individuel/abonner-en-lot/"
 msgstr "^individual/batch-subscribe/"
 
-#: apps/userspace/journal/subscription/urls.py:35
+#: apps/userspace/journal/subscription/urls.py:40
 msgid "^individuel/supprimer-en-lot/"
 msgstr "^individual/batch-remove/"
 
-#: apps/userspace/journal/subscription/urls.py:40
+#: apps/userspace/journal/subscription/urls.py:45
 msgid "^institutionnel/$"
 msgstr "^institutional/$"
 
-#: apps/userspace/journal/subscription/urls.py:45
+#: apps/userspace/journal/subscription/urls.py:50
 msgid "^institutionnel/exports/$"
 msgstr "^institutional/exports/$"
 
-#: apps/userspace/journal/subscription/urls.py:50
+#: apps/userspace/journal/subscription/urls.py:55
 msgid "^institutionnel/exports/telecharger/$"
 msgstr "^institutional/exports/download/$"
 
-#: apps/userspace/journal/subscription/views.py:81
+#: apps/userspace/journal/subscription/views.py:82
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
 msgstr ""
 "You have reached the maximum number of subscriptions for this journal."
 
-#: apps/userspace/journal/subscription/views.py:105
+#: apps/userspace/journal/subscription/views.py:97
+#: apps/userspace/journal/subscription/views.py:131
 msgid "Vous ne pouvez pas gérer les abonnements de votre revue"
 msgstr "You may not manage subscriptions for your journal"
 
-#: apps/userspace/journal/subscription/views.py:123
+#: apps/userspace/journal/subscription/views.py:115
 msgid "L'abonnement a été créé avec succès"
 msgstr "Subscription successfully created."
 
-#: apps/userspace/journal/subscription/views.py:138
+#: apps/userspace/journal/subscription/views.py:168
+msgid "Le courriel ne correspond à aucun abonné. Veuillez réessayer"
+msgstr "The email does not correspond to any subscriber. Try again"
+
+#: apps/userspace/journal/subscription/views.py:189
 msgid "L'abonnement a été supprimé avec succès"
 msgstr "Subscription successfully deleted."
 
-#: apps/userspace/journal/subscription/views.py:162
+#: apps/userspace/journal/subscription/views.py:213
 msgid "La proposition d'abonnement a été annulée avec succès"
 msgstr "Subscription offer successfully cancelled."
 
-#: apps/userspace/journal/subscription/views.py:225
+#: apps/userspace/journal/subscription/views.py:276
 msgid "{} invitation d'abonnement a été envoyée avec succès."
 msgid_plural "{} invitations d'abonnement ont été envoyées avec succès."
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/userspace/journal/subscription/views.py:246
+#: apps/userspace/journal/subscription/views.py:297
 msgid ""
 "Vous tentez d'abonner {} personnes alors qu'il reste {} places à votre "
 "forfait."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:251
-#: apps/userspace/journal/subscription/views.py:317
+#: apps/userspace/journal/subscription/views.py:302
+#: apps/userspace/journal/subscription/views.py:368
 msgid "Le CSV fourni n'est pas du bon format."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:298
+#: apps/userspace/journal/subscription/views.py:349
 msgid "{} abonnement a été supprimé avec succès."
 msgid_plural "{} abonnements ont été supprimé avec succès."
 msgstr[0] ""
@@ -1612,7 +1622,7 @@ msgstr ""
 msgid "IR_A1"
 msgstr ""
 
-#: apps/userspace/library/stats/forms.py:242
+#: apps/userspace/library/stats/forms.py:241
 msgid "Rapports sur les requêtes d’articles de revue au niveau de l’article."
 msgstr "Reports on journal article requests at the article level."
 
@@ -1788,7 +1798,7 @@ msgstr "Access royalty reports"
 
 #: core/authorization/models.py:16 core/editor/models.py:172
 #: core/editor/models.py:207 core/subscription/abstract_models.py:12
-#: templates/userspace/journal/subscription/individualsubscription_list.html:47
+#: templates/userspace/journal/subscription/individualsubscription_list.html:48
 msgid "Date de création"
 msgstr "Date of creation"
 
@@ -1878,7 +1888,7 @@ msgstr "Issue"
 msgid "Date de l'envoi"
 msgstr "Date Sent"
 
-#: core/editor/models.py:51 templates/userspace/journal/editor/detail.html:47
+#: core/editor/models.py:51
 msgid "Personne-ressource"
 msgstr "Contact person"
 
@@ -4180,7 +4190,7 @@ msgstr "Update Your Account"
 #: templates/public/auth/password_change.html:63
 #: templates/public/auth/password_reset_confirm.html:30
 #: templates/public/auth/personal_data.html:38
-#: templates/userspace/journal/editor/form.html:130
+#: templates/userspace/journal/editor/form.html:126
 msgid "Enregistrer"
 msgstr "Save"
 
@@ -4273,8 +4283,8 @@ msgstr "This book is available in open access. "
 
 #: templates/public/book/book_detail.html:93
 #: templates/public/book/home.html:107
-#: templates/public/journal/issue_detail.html:166
-#: templates/public/journal/issue_detail.html:171
+#: templates/public/journal/issue_detail.html:173
+#: templates/public/journal/issue_detail.html:178
 msgid "Sous la direction de"
 msgstr "Guest-edited by"
 
@@ -4291,7 +4301,7 @@ msgstr "Read this chapter"
 #: templates/public/book/chapter_detail.html:118
 #: templates/public/book/home.html:118
 #: templates/public/journal/eruditxsd300_to_html.xsl:137
-#: templates/public/journal/issue_detail.html:267
+#: templates/public/journal/issue_detail.html:274
 msgid "Couverture de"
 msgstr "Cover of"
 
@@ -4335,7 +4345,7 @@ msgstr "A chapter from the publication"
 #: templates/public/journal/journal_detail.html:153
 #: templates/public/journal/journal_list_per_names.html:173
 #: templates/public/journal/journal_list_per_names.html:176
-#: templates/public/journal/partials/issue_detail_article_item.html:78
+#: templates/public/journal/partials/issue_detail_article_item.html:80
 #: templates/userspace/journal/base.html:15
 msgid "&nbsp;:"
 msgstr ":"
@@ -4711,11 +4721,12 @@ msgstr "Cite selected records"
 #: templates/public/search/advanced_search.html:164
 #: templates/public/search/results.html:297
 #: templates/userspace/journal/editor/delete.html:9
-#: templates/userspace/journal/editor/detail.html:58
+#: templates/userspace/journal/editor/detail.html:56
 #: templates/userspace/journal/subscription/individualsubscription_batch_delete.html:45
-#: templates/userspace/journal/subscription/individualsubscription_list.html:48
-#: templates/userspace/journal/subscription/individualsubscription_list.html:106
+#: templates/userspace/journal/subscription/individualsubscription_delete_by_email.html:31
+#: templates/userspace/journal/subscription/individualsubscription_list.html:49
 #: templates/userspace/journal/subscription/individualsubscription_list.html:107
+#: templates/userspace/journal/subscription/individualsubscription_list.html:108
 #: templates/userspace/library/members/member_list.html:39
 #: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:8
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:53
@@ -5097,7 +5108,7 @@ msgid "<xsl:apply-templates select=\"../article/@typeart\"/> de la revue"
 msgstr "<xsl:apply-templates select=\"../article/@typeart\"/> of the journal"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:199
-#: templates/public/journal/issue_detail.html:129
+#: templates/public/journal/issue_detail.html:136
 #: templates/public/journal/journal_base.html:117
 #: templates/public/journal/journal_detail.html:108
 msgid ""
@@ -5130,7 +5141,7 @@ msgid "Retour au début"
 msgstr "Back to top"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:243
-#: templates/public/journal/partials/issue_detail_article_item.html:75
+#: templates/public/journal/partials/issue_detail_article_item.html:77
 msgid "Résumé"
 msgstr "Abstract"
 
@@ -5293,23 +5304,23 @@ msgstr "Read this issue of the journal %(journal)s on Érudit."
 msgid "Couverture pour ce numéro de la revue"
 msgstr "Cover for this issue"
 
-#: templates/public/journal/issue_detail.html:125
-#: templates/public/journal/issue_detail.html:238
+#: templates/public/journal/issue_detail.html:132
+#: templates/public/journal/issue_detail.html:245
 #: templates/public/journal/journal_authors_list.html:155
 #: templates/public/search/results.html:193
 #: templates/public/search/results.html:209
 msgid "Consulter la revue"
 msgstr "Consult this journal"
 
-#: templates/public/journal/issue_detail.html:153
+#: templates/public/journal/issue_detail.html:160
 msgid "L’accès aux numéros courants de cette revue nécessite un abonnement."
 msgstr "Access to current issues of this journal requires a subscription."
 
-#: templates/public/journal/issue_detail.html:175
+#: templates/public/journal/issue_detail.html:182
 msgid "Feuilleter ce numéro"
 msgstr "Browse this issue"
 
-#: templates/public/journal/issue_detail.html:190
+#: templates/public/journal/issue_detail.html:197
 #, python-format
 msgid ""
 "\n"
@@ -5328,7 +5339,7 @@ msgstr[1] ""
 "      Table of contents (%(counter)s&nbsp;articles)\n"
 "      "
 
-#: templates/public/journal/issue_detail.html:198
+#: templates/public/journal/issue_detail.html:205
 msgid ""
 "La lecture de ces articles nécessite une redirection vers le site de la "
 "revue."
@@ -5336,36 +5347,36 @@ msgstr ""
 "You will be redirected to the journal's website in order to read these "
 "articles."
 
-#: templates/public/journal/issue_detail.html:211
-#: templates/public/journal/issue_detail.html:224
+#: templates/public/journal/issue_detail.html:218
+#: templates/public/journal/issue_detail.html:231
 msgid "License"
 msgstr "License"
 
-#: templates/public/journal/issue_detail.html:257
+#: templates/public/journal/issue_detail.html:264
 msgid "Diffusion numérique"
 msgstr "Digital Publication"
 
-#: templates/public/journal/issue_detail.html:273
+#: templates/public/journal/issue_detail.html:280
 msgid "Historique de la revue"
 msgstr "Back issues"
 
-#: templates/public/journal/issue_detail.html:274
+#: templates/public/journal/issue_detail.html:281
 msgid "Voir tous les numéros"
 msgstr "See all issues"
 
-#: templates/public/journal/issue_detail.html:290
+#: templates/public/journal/issue_detail.html:297
 msgid "Anciens numéros de"
 msgstr "Back issues of"
 
-#: templates/public/journal/issue_detail.html:304
+#: templates/public/journal/issue_detail.html:311
 msgid "Couverture représentant "
 msgstr "Cover for"
 
-#: templates/public/journal/issue_detail.html:304
+#: templates/public/journal/issue_detail.html:311
 msgid "la thématique "
 msgstr "the thematic issue"
 
-#: templates/public/journal/issue_detail.html:304
+#: templates/public/journal/issue_detail.html:311
 msgid "le "
 msgstr ""
 
@@ -5866,17 +5877,17 @@ msgstr "By"
 msgid "Lire l'article"
 msgstr "Read this article"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:59
+#: templates/public/journal/partials/issue_detail_article_item.html:61
 #, python-format
 msgid "p.&nbsp;%(first_page)s–%(last_page)s"
 msgstr "pp.&nbsp;%(first_page)s–%(last_page)s"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:61
+#: templates/public/journal/partials/issue_detail_article_item.html:63
 #, python-format
 msgid "p.&nbsp;%(page)s"
 msgstr "p.&nbsp;%(page)s"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:67
+#: templates/public/journal/partials/issue_detail_article_item.html:69
 msgid "Voir la notice"
 msgstr "See this article's record"
 
@@ -6287,7 +6298,7 @@ msgstr ""
 "<p>The name and email of persons authorized to carry out these tasks must be sent to <a href=\"mailto:edition@erudit.org?subject=Publisher's Dashboard - Addition of a new member\">edition@erudit.org</a>. After that, authorizations for one or both of these tasks can be granted.</p>\n"
 
 #: templates/userspace/journal/authorization/authorization_user.html:34
-#: templates/userspace/journal/subscription/individualsubscription_list.html:46
+#: templates/userspace/journal/subscription/individualsubscription_list.html:47
 #: templates/userspace/library/authorization/authorization_user.html:34
 #: templates/userspace/library/members/member_list.html:36
 msgid "Usager"
@@ -6369,11 +6380,11 @@ msgstr "Issue Details"
 msgid "Statut"
 msgstr "Status"
 
-#: templates/userspace/journal/editor/detail.html:50
+#: templates/userspace/journal/editor/detail.html:48
 msgid "[Non renseigné]"
 msgstr "[Not specified]"
 
-#: templates/userspace/journal/editor/detail.html:59
+#: templates/userspace/journal/editor/detail.html:57
 msgid "Modifier"
 msgstr "Edit"
 
@@ -6461,8 +6472,8 @@ msgstr "Link footnote references to footnotes."
 msgid "Veuillez remplir les champs obligatoires."
 msgstr "Please fill in the required fields."
 
-#: templates/userspace/journal/editor/form.html:126
-#: templates/userspace/journal/editor/form.html:128
+#: templates/userspace/journal/editor/form.html:122
+#: templates/userspace/journal/editor/form.html:124
 #: templates/userspace/library/authorization/authorization_create.html:51
 #: templates/userspace/library/members/member_list.html:78
 #: templates/userspace/library/subscription_information/update.html:53
@@ -6894,6 +6905,12 @@ msgstr "Confirm cancellation of the subscription?"
 msgid "Voulez-vous supprimer l'abonnement de <strong>%(name)s</strong> ?"
 msgstr "Do wish to delete the subscription to <strong>%(name)s</strong>?"
 
+#: templates/userspace/journal/subscription/individualsubscription_delete_by_email.html:5
+#: templates/userspace/journal/subscription/individualsubscription_delete_by_email.html:8
+#: templates/userspace/journal/subscription/individualsubscription_delete_by_email.html:13
+msgid "Supprimer un abonnement par courriel"
+msgstr "Delete a subscription by email"
+
 #: templates/userspace/journal/subscription/individualsubscription_list.html:15
 msgid ""
 "\n"
@@ -6926,31 +6943,35 @@ msgid "<strong>Créer</strong> un <br>abonnement"
 msgstr "<strong>Create</strong> a <br>subscription"
 
 #: templates/userspace/journal/subscription/individualsubscription_list.html:35
+msgid "<strong>Supprimer</strong> un <br>abonnement"
+msgstr "<strong>Delete</strong> a <br>subscription"
+
+#: templates/userspace/journal/subscription/individualsubscription_list.html:36
 msgid "<strong>Abonner</strong> <br>en lot"
 msgstr "Batch <br><strong>subscription</strong>"
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:36
+#: templates/userspace/journal/subscription/individualsubscription_list.html:37
 msgid "<strong>Désabonner</strong> <br>en lot"
 msgstr "Batch <br><strong>cancellation</strong>"
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:42
+#: templates/userspace/journal/subscription/individualsubscription_list.html:43
 msgid "Liste des abonnés"
 msgstr "List of subscribers"
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:58
+#: templates/userspace/journal/subscription/individualsubscription_list.html:59
 #, python-format
 msgid "%(created)s"
 msgstr "%(created)s"
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:84
+#: templates/userspace/journal/subscription/individualsubscription_list.html:85
 msgid "Abonnements en attente"
 msgstr "Subscriptions pending"
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:92
+#: templates/userspace/journal/subscription/individualsubscription_list.html:93
 msgid "Date d'expiration"
 msgstr "Expiry date"
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:93
+#: templates/userspace/journal/subscription/individualsubscription_list.html:94
 msgid "Actions"
 msgstr "Actions"
 

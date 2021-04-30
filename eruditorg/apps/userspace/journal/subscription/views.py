@@ -165,8 +165,7 @@ class IndividualJournalAccessSubscriptionDeleteByEmailView(JournalSubscriptionMi
             messages.warning(
                 self.request,
                 _(
-                    "Le courriel rentré ne correspond à aucun abonné existant. "
-                    "Veuillez réessayer"
+                    "Le courriel ne correspond à aucun abonné. Veuillez réessayer"
                 ),
             )
             return HttpResponseRedirect(
