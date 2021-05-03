@@ -105,7 +105,7 @@ django-debug-toolbar-line-profiler==0.6.1
     # via -r requirements-dev.in
 django-debug-toolbar-template-timings==0.9
     # via -r requirements-dev.in
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
     # via
     #   -r requirements-dev.in
     #   django-debug-toolbar-line-profiler
@@ -150,7 +150,7 @@ django-waffle==2.1.0
     # via -r requirements-test.txt
 django-widget-tweaks==1.4.8
     # via -r requirements-test.txt
-django==3.0.13
+django==3.0.14
     # via
     #   -r requirements-test.txt
     #   django-account-actions
@@ -298,7 +298,7 @@ pickleshare==0.7.5
     # via
     #   -r requirements-test.txt
     #   ipython
-pikepdf==2.9.1
+pikepdf==2.11.4
     # via -r requirements-test.txt
 pillow==8.1.2
     # via
