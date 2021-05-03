@@ -1090,6 +1090,7 @@
         <xsl:choose>
           <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Bibliography</xsl:when>
           <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Bibliografía</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'it'">Bibliografia</xsl:when>
           <xsl:otherwise>Bibliographie</xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -1097,6 +1098,7 @@
         <xsl:choose>
           <xsl:when test="ancestor::partiesann[1]/@lang = 'en'">Bibliographies</xsl:when>
           <xsl:when test="ancestor::partiesann[1]/@lang = 'es'">Bibliografias</xsl:when>
+          <xsl:when test="ancestor::partiesann[1]/@lang = 'it'">Bibliografie</xsl:when>
           <xsl:otherwise>Bibliographies</xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
