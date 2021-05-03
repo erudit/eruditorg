@@ -20,7 +20,6 @@ env = environ.Env(
     SENTRY_ENVIRONMENT=(str, "default"),
     SECRET_KEY=(str, None),
     ADMIN_URL=(str, "admin/"),
-    FALLBACK_BASE_URL=(str, "http://retro.erudit.org/"),
     ALLOWED_HOSTS=(list, []),
     USE_DOCKER=(str, "no"),
     INTERNAL_IPS=(list, ["127.0.0.1"]),
@@ -110,7 +109,6 @@ if env("USE_DOCKER") == "yes":
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
 ADMIN_URL = env("ADMIN_URL")
-FALLBACK_BASE_URL = env("FALLBACK_BASE_URL")
 MANAGED_COLLECTIONS = env("MANAGED_COLLECTIONS")
 
 # Static and media files

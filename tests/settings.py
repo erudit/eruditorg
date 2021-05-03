@@ -46,8 +46,6 @@ INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.append("core.subscription.restriction")
 INSTALLED_APPS.append("tests")
 
-FALLBACK_BASE_URL = "https://retro.erudit.org/"
-
 MIGRATION_MODULES = {
     "auth": None,
     "authorization": None,

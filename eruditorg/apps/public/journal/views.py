@@ -52,7 +52,6 @@ from erudit.utils import locale_aware_sort, qs_cache_key
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
 from core.metrics.metric import metric
 from core.subscription.models import JournalAccessSubscription, InstitutionIPAddressRange
-from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 from apps.public.campaign.models import Campaign
 
 from .article_access_log import ArticleAccessType
@@ -77,7 +76,7 @@ from .coverpage import get_coverpage
 logger = structlog.get_logger(__name__)
 
 
-class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
+class JournalListView(ListView):
     """
     Displays a list of Journal instances.
     """
@@ -85,8 +84,6 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
     context_object_name = "journals"
     filter_form_class = JournalListFilterForm
     model = Journal
-
-    fallback_url = "/revue"
 
     def apply_sorting(self, objects):
         if self.sorting == "name":
@@ -434,7 +431,6 @@ class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
 
 
 class IssueDetailView(
-    FallbackObjectViewMixin,
     ContentAccessCheckMixin,
     PrepublicationTokenRequiredMixin,
     MetaInfoIssueMixin,
@@ -457,35 +453,6 @@ class IssueDetailView(
         if object.external_url:
             return redirect(self.object.external_url)
         return super().dispatch(*args, **kwargs)
-
-    def get_fallback_querystring_dict(self):
-        querystring_dict = super().get_fallback_querystring_dict()
-        obj = self.get_object()
-        if not obj.is_published:
-            querystring_dict["ticket"] = obj.prepublication_ticket
-        return querystring_dict
-
-    def get_fallback_url_format(self):
-        obj = self.get_object()
-        if obj.journal.type and obj.journal.type.code == "S":
-            return "/revue/{code}/{year}/v{volume}/n{number}/index.html"
-        else:
-            return "/culture/{journal_li}/{issue_li}/index.html"
-
-    def get_fallback_url_format_kwargs(self):
-        issue = self.get_object()
-        if issue.journal.type and issue.journal.type.code == "S":
-            return {
-                "code": issue.journal.code,
-                "year": issue.year,
-                "volume": issue.volume,
-                "number": issue.number,
-            }
-        else:
-            return {
-                "journal_li": issue.journal.localidentifier,
-                "issue_li": issue.localidentifier,
-            }
 
     def get_object(self, queryset=None):
         if self.object is not None:
@@ -742,7 +709,6 @@ class IssueXmlView(
 
 class BaseArticleDetailView(
     ArticleAccessLogMixin,
-    FallbackObjectViewMixin,
     ContentAccessCheckMixin,
     SingleArticleWithScholarMetadataMixin,
     ArticleViewMetricCaptureMixin,
@@ -937,39 +903,7 @@ class ArticleDetailView(BaseArticleDetailView):
     Displays an Article page.
     """
 
-    fallback_url_format = "/revue/{code}/{year}/v{volume}/n{number}/{article_pid}.html"
     template_name = "public/journal/article_detail.html"
-
-    def get_fallback_querystring_dict(self):
-        querystring_dict = super().get_fallback_querystring_dict()
-        obj = self.get_object()
-        if not obj.issue.is_published:
-            querystring_dict["ticket"] = obj.issue.prepublication_ticket
-        return querystring_dict
-
-    def get_fallback_url_format(self):
-        obj = self.get_object()
-        if obj.issue.journal.type and obj.issue.journal.type.code == "S":
-            return "/revue/{code}/{year}/v{volume}/n{number}/{article_li}.html"
-        else:
-            return "/culture/{journal_li}/{issue_li}/{article_li}.html"
-
-    def get_fallback_url_format_kwargs(self):
-        obj = self.get_object()
-        if obj.issue.journal.type and obj.issue.journal.type.code == "S":
-            return {
-                "code": obj.issue.journal.code,
-                "year": obj.issue.year,
-                "volume": obj.issue.volume,
-                "number": obj.issue.number,
-                "article_li": obj.localidentifier,
-            }
-        else:
-            return {
-                "journal_li": obj.issue.journal.localidentifier,
-                "issue_li": obj.issue.localidentifier,
-                "article_li": obj.localidentifier,
-            }
 
     def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()

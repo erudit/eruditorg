@@ -300,19 +300,6 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </p>
     </div>
-    {% else %}
-    {% block classic_website_fallback %}
-    {% if fallback_url %}
-    <div class="alert alert-dismissible fallback">
-      <p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {% blocktrans %}
-        Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="{{ fallback_url }}" target="_blank">Retour à l’ancien site</a>
-        {% endblocktrans %}
-      </p>
-    </div>
-    {% endif %}
-    {% endblock classic_website_fallback %}
     {% endswitch %}
     {% endblock header %}
 
