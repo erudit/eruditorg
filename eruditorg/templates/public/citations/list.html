@@ -86,8 +86,8 @@
         <div class="row documents-head">
           <h3 class="text-center">{% trans "Actions en lot" %}</h3>
           <div class="col-xs-4 checkbox">
-            <input type="checkbox" name="select-all" class="form-control" id="select-all">
-            <label><span for="select-all">{% trans "Tout sélectionner" %}</span></label>
+            <input type="checkbox" name="select-all-on-current-page" class="form-control" id="select-all-on-current-page">
+            <label><span for="select-all-on-current-page">{% trans "Sélectionner toute la page" %}</span></label>
           </div>
           <div class="col-xs-4 saved-citations">
             <strong data-selection-count>{% trans "Aucun document sélectionné" %}</strong>
@@ -107,6 +107,12 @@
               </li>
               {% endspaceless %}
             </ul>
+          </div>
+          <div class="col-xs-12">
+            <p>
+              <a id="select-all-across-all-pages" style="display: none;" href="#">{% blocktrans %}Sélectionner les {{ total_citations_count }} notices sauvegardées{% endblocktrans %}</a>
+              <a id="unselect-all" style="display: none;" href="#">{% blocktrans %}Effacer la sélection{% endblocktrans %}</a>
+            </p>
           </div>
         </div>
 
@@ -242,6 +248,16 @@
             </div>
           </li>
           {% endif %}
+          {% endfor %}
+        </ol>
+        <ol class="hidden hidden-bib-records">
+          {% for document_id in document_ids_not_on_page %}
+          <li data-document-id="{{ document_id }}" class="bib-record">
+            <div class="checkbox">
+              <input type="checkbox" name="{{ document_id }}">
+              <label for="{{ document_id }}">{{ document_id }}</label>
+            </div>
+          </li>
           {% endfor %}
         </ol>
       </div>

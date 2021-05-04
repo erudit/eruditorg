@@ -87,6 +87,9 @@ class SavedCitationListView(ListView):
         context["cultural_articles_count"] = counts.get("Culturel", 0)
         context["theses_count"] = counts.get("Thèses", 0)
         context["total_citations_count"] = len(object_list)
+        context["document_ids_not_on_page"] = [
+            doc.solr_id for doc in object_list if doc not in context["page_obj"].object_list
+        ]
 
         return context
 
