@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 11:42-0400\n"
+"POT-Creation-Date: 2021-05-04 15:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,18 @@ msgstr ""
 
 #: static/js/issue_reader.js:20
 msgid "Retour au sommaire"
+msgstr ""
+
+#: static/js/modules/Cite.js:17 static/js/modules/Cite.js:39
+msgid "Chargement en cours"
+msgstr ""
+
+#: static/js/modules/Cite.js:18 static/js/modules/Cite.js:40
+msgid "Fermer (Esc)"
+msgstr ""
+
+#: static/js/modules/Cite.js:37
+msgid "Outils de citation non disponibles pour cet article."
 msgstr ""
 
 #: static/js/modules/IssueReader.js:149
