@@ -102,10 +102,13 @@ class TestJournalInformationForm:
         html = BeautifulSoup(email.html_message, "html.parser")
         del_tags = html.find_all("del")
         ins_tags = html.find_all("ins")
+        unchanged_tags = html.find_all("span")
         assert len(del_tags) == 1
         assert len(ins_tags) == 1
-        assert del_tags[0].decode() == "<del>- Premier test</del>"
-        assert ins_tags[0].decode() == "<ins>+ Deuxième test</ins>"
+        assert len(unchanged_tags) == 1
+        assert del_tags[0].decode() == '<del style="background:#ffe6e6;">Premier</del>'
+        assert ins_tags[0].decode() == '<ins style="background:#e6ffe6;">Deuxième</ins>'
+        assert unchanged_tags[0].decode() == "<span> test</span>"
 
     @pytest.mark.parametrize(
         "language_code",

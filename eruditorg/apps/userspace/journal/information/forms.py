@@ -1,13 +1,13 @@
 import reversion
 
 from ckeditor.widgets import CKEditorWidget
+from diff_match_patch import diff_match_patch
 from django import forms
 from django.conf import settings
 from django.db.models import ManyToManyField
 from django.forms.models import fields_for_model
 from django.utils.translation import gettext as _
 from django.forms import inlineformset_factory
-from reversion_compare.mixins import CompareMixin
 
 from core.email import Email
 from erudit.models import JournalInformation, Contributor
@@ -183,15 +183,36 @@ class JournalInformationForm(forms.ModelForm):
     def send_revision_email(self, obj):
         queryset = reversion.models.Version.objects.get_for_object(obj)
         if queryset.count() > 1:
+            dmp = diff_match_patch()
             current_version = queryset[0]
             previous_version = queryset[1]
-            compare_mixin = CompareMixin()
-            compare_data, _ = compare_mixin.compare(obj, previous_version, current_version)
-            compare_data = [
-                data
-                for data in compare_data
-                if data["field"].name not in JOURNAL_INFORMATION_COMPARE_EXCLUDE
-            ]
+            compare_data = []
+            for field_name in current_version.field_dict.keys():
+                if field_name in JOURNAL_INFORMATION_COMPARE_EXCLUDE:
+                    continue
+                # Generate diffs between current and previous versions.
+                diffs = dmp.diff_main(
+                    str(previous_version.field_dict.get(field_name)),
+                    str(current_version.field_dict.get(field_name)),
+                )
+                # diff_main() returns a list of tuples of differences. The first element of the
+                # tuples is either 1 (insertion), -1 (deletion) or 0 (equality), and the second
+                # element is the affected text.
+                # If there is no differences in a field, diff_main() will return a list with only
+                # one tuple with 0 (equality) as the first element and the unchanged field value as
+                # the second element.
+                # So, if there's only one element in the diffs, there is no differences and we
+                # should skip that field.
+                if len(diffs) <= 1:
+                    continue
+                # Make the diffs more human readable.
+                dmp.diff_cleanupSemantic(diffs)
+                compare_data.append(
+                    {
+                        "field": self._meta.model._meta.get_field(field_name),
+                        "diff": dmp.diff_prettyHtml(diffs),
+                    }
+                )
             email = Email(
                 recipient=settings.ACCOUNT_EMAIL,
                 html_template="emails/information/journal_information_new_revision_content.html",

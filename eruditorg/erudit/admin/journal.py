@@ -7,7 +7,7 @@ from django.utils import timezone as tz
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 from django import forms
-from reversion_compare.admin import CompareVersionAdmin
+from reversion.admin import VersionAdmin
 
 from ..models import Issue
 from ..models import Journal
@@ -29,6 +29,9 @@ JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
     "team",
     # Exclude the auto_now date field.
     "updated",
+    # Exclude ID fields.
+    "id",
+    "journal_id",
 ]
 
 
@@ -227,9 +230,8 @@ class JournalInformationAdminForm(forms.ModelForm):
         self.fields["other_languages"].queryset = Language.objects.exclude(id__in=[1, 2])
 
 
-class JournalInformationAdmin(CompareVersionAdmin, TranslationAdmin):
+class JournalInformationAdmin(VersionAdmin, TranslationAdmin):
     form = JournalInformationAdminForm
-    compare_exclude = JOURNAL_INFORMATION_COMPARE_EXCLUDE
 
 
 class JournalTypeAdmin(TranslationAdmin):
