@@ -1037,6 +1037,26 @@ class ArticleBibCitationView(SingleArticleMixin, DetailView):
     template_name = "public/journal/citation/article.bib"
 
 
+class ArticleAjaxCitationModalView(SingleArticleMixin, DetailView):
+    """
+    Returns the citation modal window.
+
+    This view is used in the search results and is called with AJAX.
+    """
+
+    context_object_name = "article"
+    template_name = "public/journal/partials/article_citation_modal_content.html"
+
+    def get_object(self, queryset=None) -> Article:
+        try:
+            return super().get_object(queryset)
+        except Http404:
+            logger.warning(
+                "Trying to cite an article that is not in Fedora",
+                localidentifier=self.kwargs.get("localid"),
+            )
+
+
 class ArticleFormatDownloadView(
     ArticleAccessLogMixin,
     ArticleViewMetricCaptureMixin,

@@ -1,4 +1,5 @@
 from typing import (
+    Any,
     List,
     Dict,
     Tuple,
@@ -7,7 +8,7 @@ from typing import (
 
 from django.conf import settings
 from django.urls import reverse
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.core.cache import cache
 import pysolr
 
@@ -154,9 +155,11 @@ class SolrDocument:
         return _("(Sans titre)")
 
 
-class Article(SolrDocument):
+class BaseArticle(SolrDocument):
+    """ Common methods for ExternalArticle & InternalArticle classes. """
+
     @property
-    def article_type(self):
+    def article_type(self) -> str:
         if "TypeArticle_fac" not in self.solr_data:
             return "article"
         article_type = self.solr_data["TypeArticle_fac"]
@@ -168,17 +171,34 @@ class Article(SolrDocument):
         }.get(article_type, "article")
 
     @property
-    def type_display(self):
+    def type_display(self) -> str:
         article_type = self.article_type
         return erudit_models.Article.TYPE_DISPLAY.get(article_type, article_type)
 
     @property
-    def journal_type(self):
-        # TODO: check this, why is this always 'S' ?
+    def keywords(self) -> List[str]:
+        return self.solr_data.get("MotsCles", [])
+
+    @property
+    def keywords_display(self) -> str:
+        return ", ".join(self.keywords)
+
+    @property
+    def abstract(self) -> Optional[str]:
+        lang = get_language()
+        return self.solr_data.get(f"Resume_{lang}", None)
+
+
+class ExternalArticle(BaseArticle):
+    """ External articles are those from the Persée & NRC collections. """
+
+    @property
+    def journal_type(self) -> str:
+        # All journals from the Persée & NRC collections are `scientific` journals.
         return "S"
 
     @property
-    def journal_url(self):
+    def journal_url(self) -> str:
         localidentifier = self.solr_data["RevueID"]
         if self.solr_data["Fonds_fac"] == "Persée":
             localidentifier = "persee" + localidentifier
@@ -188,24 +208,105 @@ class Article(SolrDocument):
         return reverse("public:journal:journal_detail", args=(journal.code,))
 
     @property
-    def issue_url(self):
-        try:
-            issue = erudit_models.Issue.from_fedora_ids(
-                self.solr_data["RevueID"],
-                self.solr_data["NumeroID"],
-            )
-        except erudit_models.Issue.DoesNotExist:
-            return None
-        if issue.external_url:
-            return issue.external_url
+    def issue_url(self) -> None:
+        # We do not have URLs for issues from the Persée & NRC collections.
+        return None
+
+    @property
+    def can_cite(self) -> bool:
+        # We cannot cite articles from the Persée & NRC collections.
+        return False
+
+
+class InternalArticle(BaseArticle):
+    """ Internal articles are those from the Érudit & UNB collections. """
+
+    def __init__(self, solr_data: Dict[str, Any], issue: erudit_models.Issue) -> None:
+        super().__init__(solr_data)
+        self.issue = issue
+
+    @property
+    def journal_type(self) -> str:
+        return self.issue.journal.type.code
+
+    @property
+    def journal_url(self) -> str:
+        if self.issue.journal.external_url:
+            return self.issue.journal.external_url
+        return reverse("public:journal:journal_detail", args=(self.issue.journal.code,))
+
+    @property
+    def issue_url(self) -> str:
+        if self.issue.external_url:
+            return self.issue.external_url
         return reverse(
             "public:journal:issue_detail",
             args=(
-                issue.journal.code,
-                issue.volume_slug,
-                issue.localidentifier,
+                self.issue.journal.code,
+                self.issue.volume_slug,
+                self.issue.localidentifier,
             ),
         )
+
+    @property
+    def url(self) -> str:
+        if self.issue.external_url:
+            return super().url
+        return reverse(
+            "public:journal:article_detail",
+            args=(
+                self.issue.journal.code,
+                self.issue.volume_slug,
+                self.issue.localidentifier,
+                self.localidentifier,
+            ),
+        )
+
+    @property
+    def pdf_url(self) -> Optional[str]:
+        if self.issue.external_url:
+            return None
+        return reverse(
+            "public:journal:article_raw_pdf",
+            args=(
+                self.issue.journal.code,
+                self.issue.volume_slug,
+                self.issue.localidentifier,
+                self.localidentifier,
+            ),
+        )
+
+    @property
+    def ajax_citation_modal_url(self) -> Optional[str]:
+        if self.issue.external_url:
+            return None
+        return reverse(
+            "public:journal:article_ajax_citation_modal",
+            args=(
+                self.issue.journal.code,
+                self.issue.volume_slug,
+                self.issue.localidentifier,
+                self.localidentifier,
+            ),
+        )
+
+    @property
+    def can_cite(self) -> bool:
+        """
+        Whether we can use the citation tools with this article.
+
+        We can use the citation tools if the article is in Fedora, but we cannot know for sure if
+        an article is in Fedora without making a request to Fedora and that's what we are trying to
+        avoid here to make the search results faster.
+
+        Most of our articles that have an issue in Fedora are also in Fedora (even UNB articles).
+        So we can have a good idea whether we can cite an article if the issue has a value in the
+        `fedora_created` field.
+
+        If we get a rare case (if ever) where an article is not in Fedora, the citation tools will
+        simply say that it's not available for this article and the citation view will log it.
+        """
+        return bool(self.issue.fedora_created)
 
 
 class Thesis(SolrDocument):
@@ -248,12 +349,10 @@ def get_model_instance(solr_data):
         return Thesis(solr_data)
     elif generic.document_type == "article":
         try:
-            return erudit_models.Article.from_solr_object(Article(solr_data))
-        except erudit_models.Article.DoesNotExist:
-            # The only case where this can happen is if we don't have a parent Issue. Otherwise,
-            # even when erudit_models.Article referes to an article that isn't in fedora, it's
-            # supposed to do fine.
-            return Article(solr_data)
+            issue = erudit_models.Issue.from_fedora_ids(solr_data["RevueID"], solr_data["NumeroID"])
+            return InternalArticle(solr_data, issue)
+        except erudit_models.Issue.DoesNotExist:
+            return ExternalArticle(solr_data)
     else:
         return SolrDocument(solr_data)
 

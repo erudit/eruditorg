@@ -101,7 +101,7 @@
                 </a>
               </li>
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite>
+                <a class="tool-btn" href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite-inline>
                   <i class="icon ion-ios-quote toolbox-cite"></i>
                 </a>
               </li>
@@ -116,7 +116,7 @@
           {% widthratio page_obj.number|add:"-1" 1 paginator.per_page as doc_count_offset %}
 
           {% if document.document_type == 'article' %}
-          <li data-document-id="{{ document.solr_id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="bib-record">
+          <li data-document-id="{{ document.solr_id }}" data-document-type="{% if document.journal_type == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="bib-record">
 
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
               {% spaceless %}
@@ -125,20 +125,22 @@
                   <i class="icon ion-ios-close toolbox-remove"></i>
                 </a>
               </li>
-              {% if document.can_cite %}
+              {% if document.can_cite and document.ajax_citation_modal_url %}
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite>
+                <a class="tool-btn" href="{{ document.ajax_citation_modal_url }}" title="{% trans 'Citer' %}" data-cite-ajax>
                   <i class="icon ion-ios-quote toolbox-cite"></i>
                 </a>
               </li>
               {% endif %}
+              {% if document.pdf_url %}
               <li>
                 <a class="tool-btn" href="{{ document.pdf_url }}" title="{% trans 'Télécharger' %}" target="_blank">
                   <span class="toolbox-pdf">PDF</span>
                 </a>
               </li>
+              {% endif %}
               <li>
-                <a class="tool-btn" href="{{ document.get_absolute_url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                <a class="tool-btn" href="{{ document.url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
                   <span class="toolbox-html">HTML</span>
                 </a>
               </li>
@@ -147,8 +149,8 @@
 
             <p class="bib-record__type">{{ document.document_type }}</p>
             <h3 class="bib-record__title bib-record__counter" data-record-counter="{{ doc_count_offset|add:forloop.counter }}">
-              <a href="{{ document.get_absolute_url }}" target="_blank">
-                {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
+              <a href="{{ document.url }}" target="_blank">
+                {{ document.title }}
               </a>
             </h3>
 
@@ -158,7 +160,7 @@
                   {{ document.authors_display }}
                 </div>
                 <div class="col-xs-6 text-right">
-                  {{ document.issue.journal_formatted_title }}, {{ document.issue.year }}
+                  {{ document.series_display }}, {{ document.publication_year }}
                 </div>
               </div>
               <div class="checkbox">
@@ -166,66 +168,6 @@
                 <label for="select-document-{{ document.id }}"><em>{% trans "Sélectionner" %}</em></label>
               </div>
             </div>
-
-            {% if document.can_cite %}
-            <div class="hidden">
-              <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
-                <div class="modal-body">
-                  <dl class="cite-modal--style-list">
-                    <dt>MLA</dt>
-                    <dd class="cite-mla">
-                      {{ document.authors_mla }}
-                      {% trans '«&nbsp;' %}{{ document.title }}.{% trans '&nbsp;»' %}
-                      <em>{{ document.issue.journal_formatted_title }}</em>, {{ document.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
-                    </dd>
-
-                    <dt>APA</dt>
-                    <dd class="cite-apa">
-                      {{ document.authors_apa }}
-                      ({{ document.issue.year }}).
-                      {{ document.title }}
-                      <em>{{ document.issue.journal_formatted_title }}</em>,
-                      {% if document.issue.volume %}<em>{{ document.issue.volume }}</em>{% endif %}{% if document.issue.number %}({{ document.issue.number }}){% endif %},
-                      {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
-                    </dd>
-
-                    <dt>Chicago</dt>
-                    <dd class="cite-chicago">
-                      {{ document.authors_chicago }}
-                      {% trans '«&nbsp;' %}{{ document.title }}{% trans '&nbsp;»' %}.
-                      <em>{{ document.issue.journal_formatted_title }}</em>
-                      {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}{% trans 'n<sup>o</sup>' %} {{ document.issue.number }}{% endif %}
-                      ({{ document.issue.year }}){% trans '&nbsp;:' %} {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
-                    </dd>
-                  </dl>
-
-                  <hr />
-                  <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
-                  <div class="row">
-                    <p class="col-xs-4">
-                      <a href="{{ document.cite_ris_url }}" class="btn btn-secondary cite-export">
-                        <span class="show cite-export-title">RIS</span>
-                      </a>
-                      <br/><br/>EndNote, Papers, Reference Manager, RefWorks, Zotero
-                    </p>
-                    <p class="col-xs-4">
-                      <a href="{{ document.cite_enw_url }}" class="btn btn-secondary cite-export">
-                        <span class="show cite-export-title">ENW</span>
-                      </a>
-                      <br/><br/>EndNote {% trans '(version X9.1 et +)' %}, Zotero
-                    </p>
-                    <p class="col-xs-4">
-                      <a href="{{ document.cite_bib_url }}" class="btn btn-secondary cite-export">
-                        <span class="show cite-export-title">BIB</span>
-                      </a>
-                      <br/><br/>BibTeX, JabRef, Mendeley, Zotero
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
           </li>
 
           {% elif document.document_type == 'thesis' %}
@@ -238,7 +180,7 @@
                 </a>
               </li>
               <li>
-                <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite>
+                <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite-inline>
                   <i class="icon ion-ios-quote toolbox-cite"></i>
                 </a>
               </li>
@@ -261,7 +203,7 @@
                   {{ document.authors_display }}
                 </div>
                 <div class="col-xs-6 text-right">
-                  {{ document.collection }}, {{ document.publication_year }}
+                  {{ document.collection_display }}, {{ document.publication_year }}
                 </div>
               </div>
               <div class="checkbox">
@@ -270,7 +212,7 @@
               </div>
             </div>
 
-            <div class="hidden">
+            <div class="mfp-hide">
               <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                 <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
                 <div class="modal-body">
@@ -304,7 +246,7 @@
         </ol>
       </div>
       {% include "public/partials/pagination.html" %}
-      <div class="hidden">
+      <div class="mfp-hide">
         <div id="id_cite_selection_modal" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
           <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
           <div class="modal-body">

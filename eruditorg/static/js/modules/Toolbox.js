@@ -1,4 +1,4 @@
-import CiteModal from './Cite';
+import { InlineCiteModal, AjaxCiteModal } from './Cite';
 import ShareModal from './Share';
 
 class Toolbox {
@@ -13,7 +13,8 @@ class Toolbox {
     this.el.on('click', '.tool-download', this.download);
 
     // Initializes modals
-    this.citation = new CiteModal( this.el.find('.tool-cite') );
+    this.citation = new InlineCiteModal( this.el.find('.tool-cite.inline') );
+    this.citation = new AjaxCiteModal( this.el.find('.tool-cite.ajax') );
     this.share = new ShareModal( this.el.find('.tool-share') );
   }
 

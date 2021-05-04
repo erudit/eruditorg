@@ -117,6 +117,11 @@ journal_urlpatterns = (
                         views.ArticleBibCitationView.as_view(),
                         name="article_citation_bib",
                     ),
+                    url(
+                        r"^ajax-citation-modal$",
+                        views.ArticleAjaxCitationModalView.as_view(),
+                        name="article_ajax_citation_modal",
+                    ),
                 ]
             ),
         ),
