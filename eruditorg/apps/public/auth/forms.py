@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationFo
 from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils.translation import gettext_lazy as _
 from core.email import Email
 
@@ -72,3 +74,63 @@ class PasswordResetForm(BasePasswordResetForm):
         """
         active_users = get_user_model()._default_manager.filter(email__iexact=email, is_active=True)
         return (u for u in active_users)
+
+    def save(
+        self,
+        domain_override=None,
+        subject_template_name="emails/auth/password_reset_registered_email_subject.txt",
+        email_template_name="emails/auth/password_reset_registered_email.html",
+        use_https=False,
+        token_generator=default_token_generator,
+        from_email=None,
+        request=None,
+        html_email_template_name=None,
+        extra_email_context=None,
+    ):
+        """
+        If the email belongs to a registered user, generate a one-use only link for resetting
+        password and send it to the user. If the email does not belong to a registered user,
+        send an email to that email address informing that the password reset failed.
+        """
+        email = self.cleaned_data["email"]
+        try:
+            # Registered user
+            # Check if there are any registered users for the entered email
+            next(self.get_users(email))
+            return super().save(
+                domain_override,
+                subject_template_name,
+                email_template_name,
+                use_https,
+                token_generator,
+                from_email,
+                request,
+                html_email_template_name,
+                extra_email_context,
+            )
+        except StopIteration:
+            # Unregistered user
+            if not domain_override:
+                current_site = get_current_site(request)
+                site_name = current_site.name
+                domain = current_site.domain
+            else:
+                site_name = domain = domain_override
+            context = {
+                "email": email,
+                "domain": domain,
+                "site_name": site_name,
+                "uid": None,
+                "user": None,
+                "token": None,
+                "protocol": "https" if use_https else "http",
+                **(extra_email_context or {}),
+            }
+            self.send_mail(
+                "emails/auth/password_reset_unregistered_email_subject.txt",
+                "emails/auth/password_reset_unregistered_email.html",
+                context,
+                from_email,
+                email,
+                html_email_template_name=html_email_template_name,
+            )

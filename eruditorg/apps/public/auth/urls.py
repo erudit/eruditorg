@@ -35,8 +35,8 @@ urlpatterns = [
         _(r"^mot-de-passe/reinitialisation/$"),
         auth_views.PasswordResetView.as_view(
             template_name="public/auth/password_reset_form.html",
-            email_template_name="emails/auth/password_reset_email.html",
-            subject_template_name="emails/auth/password_reset_subject.txt",
+            email_template_name="emails/auth/password_reset_registered_email.html",
+            subject_template_name="emails/auth/password_reset_registered_email_subject.txt",
             form_class=forms.PasswordResetForm,
             success_url=reverse_lazy("public:auth:password_reset_done"),
         ),

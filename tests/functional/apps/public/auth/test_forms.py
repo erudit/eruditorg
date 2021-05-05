@@ -34,8 +34,8 @@ class TestPasswordResetForm:
         assert form.is_valid()
         form.save(
             domain_override=None,
-            subject_template_name="emails/auth/password_reset_subject.txt",
-            email_template_name="emails/auth/password_reset_email.html",
+            subject_template_name="emails/auth/password_reset_registered_email_subject.txt",
+            email_template_name="emails/auth/password_reset_registered_email.html",
             use_https=False,
             token_generator=default_token_generator,
             from_email=None,
@@ -44,6 +44,34 @@ class TestPasswordResetForm:
         )
         assert len(mail.outbox) == 1
         assert mail.outbox[0].to[0] == "foobar@example.com"
+        assert (
+            "Veuillez cliquer sur le bouton suivant afin d’en choisir un nouveau :"
+            in mail.outbox[0].body
+        )
+
+    def test_send_unregistered_user_failed_password_reset_email(self):
+        form_data = {
+            "email": "foobar@example.com",
+        }
+        # Run & check
+        form = PasswordResetForm(form_data)
+        assert form.is_valid()
+        form.save(
+            domain_override=None,
+            subject_template_name="emails/auth/password_reset_registered_email_subject.txt",
+            email_template_name="emails/auth/password_reset_registered_email.html",
+            use_https=False,
+            token_generator=default_token_generator,
+            from_email=None,
+            request=None,
+            html_email_template_name=None,
+        )
+        assert len(mail.outbox) == 1
+        assert mail.outbox[0].to[0] == "foobar@example.com"
+        assert (
+            "cette adresse courriel ne figure pas\ndans notre base de données"
+            in mail.outbox[0].body
+        )
 
 
 @pytest.mark.django_db
