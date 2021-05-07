@@ -1015,6 +1015,26 @@ class TestIssueDetailView:
             f"Sommaire ({article_count}\xa0{expected_string})\n      \n    </h2>"
         )
 
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_link_to_external_url_for_articles_belonging_to_external_issues(
+        self, mock_get_summary_articles
+    ):
+        issue = IssueFactory()
+        # Mock a SummaryArticle with a title to test for.
+        article = SummaryArticle(
+            localidentifier="article",
+            processing="complet",
+            urlhtml="https://test/",
+        )
+        mock_get_summary_articles.return_value = [article]
+        html = Client().get(issue_detail_url(issue)).content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        a = dom.find("h6", {"class": "bib-record__title"}).find("a")
+        assert (
+            a.decode() == '<a href="https://test/" target="_blank" title="Lire l\'article">'
+            "\n    None\n    </a>"
+        )
+
 
 class TestArticleDetailView:
     @pytest.fixture(autouse=True)
