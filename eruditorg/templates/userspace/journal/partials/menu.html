@@ -61,16 +61,6 @@
       </a>
     </span>
   </li>
-  {% if scope_current_journal.type.code == 'S' %}
-    <li class="sidenav-item">
-      <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous devez vous connecter à un site externe pour accéder à OJS. L’identifiant et le mot de passe de ce service sont différents de celui de votre Espace éditeur. Si vous ne les connaissez pas, vous pouvez communiquer avec Érudit à l’adresse edition@erudit.org.' %}">
-        <a href="https://www.erudit.org/ojs/index.php/{{ scope_current_journal.code }}/login" target="_blank">
-          <i class="icon ion-ios-create sidenav-icon"></i>
-          <span class="sidenav-label">{% trans "Manuscrits" %}</span>
-        </a>
-      </span>
-    </li>
-  {% endif %}
   {% if can_manage_authorizations %}
   <li class="sidenav-item{% if menu_journal == 'authorization' %} active{% endif %}">
     <a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">
