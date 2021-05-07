@@ -126,8 +126,6 @@ humanfriendly==9.1
     # via django-resumable-uploads
 idna==2.10
     # via requests
-influxdb==5.3.1
-    # via -r requirements.in
 isodate==0.6.0
     # via rdflib
 jsonfield==3.1.0
@@ -141,7 +139,6 @@ lxml==4.6.3
     #   pikepdf
     #   sickle
 msgpack==1.0.2
-    # via influxdb
 mysqlclient==2.0.3
     # via -r requirements.in
 openpyxl==3.0.7
@@ -180,14 +177,12 @@ python-dateutil==2.8.1
     # via
     #   counter-r5-elasticsearch
     #   eulfedora
-    #   influxdb
 python-stdnum==1.16
     # via django-isbn-field
 pytz==2021.1
     # via
     #   babel
     #   django
-    #   influxdb
 rdflib==5.0.0
     # via eulfedora
 redis-key-tagging==0.0.6
@@ -204,7 +199,6 @@ requests[socks]==2.25.1
     # via
     #   -r requirements.in
     #   eulfedora
-    #   influxdb
     #   pysolr
     #   requests-toolbelt
     #   sickle
@@ -228,7 +222,6 @@ six==1.16.0
     #   django-modeltranslation
     #   eulfedora
     #   eulxml
-    #   influxdb
     #   liberuditarticle
     #   python-bidi
     #   python-dateutil

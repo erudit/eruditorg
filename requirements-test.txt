@@ -174,8 +174,6 @@ importlib-metadata==4.5.0
     # via
     #   pluggy
     #   pytest
-influxdb==5.3.1
-    # via -r requirements.txt
 iniconfig==1.1.1
     # via pytest
 isodate==0.6.0
@@ -200,7 +198,6 @@ lxml==4.6.3
 msgpack==1.0.2
     # via
     #   -r requirements.txt
-    #   influxdb
 mysqlclient==2.0.3
     # via -r requirements.txt
 openpyxl==3.0.7
@@ -280,7 +277,6 @@ python-dateutil==2.8.1
     #   counter-r5-elasticsearch
     #   eulfedora
     #   faker
-    #   influxdb
 python-stdnum==1.16
     # via
     #   -r requirements.txt
@@ -290,7 +286,6 @@ pytz==2021.1
     #   -r requirements.txt
     #   babel
     #   django
-    #   influxdb
 rdflib==5.0.0
     # via
     #   -r requirements.txt
@@ -313,7 +308,6 @@ requests[socks]==2.25.1
     #   -r requirements.txt
     #   codecov
     #   eulfedora
-    #   influxdb
     #   pysolr
     #   requests-toolbelt
     #   sickle
@@ -344,7 +338,6 @@ six==1.16.0
     #   django-modeltranslation
     #   eulfedora
     #   eulxml
-    #   influxdb
     #   isodate
     #   liberuditarticle
     #   python-bidi

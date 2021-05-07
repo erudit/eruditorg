@@ -50,7 +50,6 @@ from eruditarticle.objects import SummaryArticle
 from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
-from core.metrics.metric import metric
 from core.subscription.models import JournalAccessSubscription, InstitutionIPAddressRange
 from apps.public.campaign.models import Campaign
 
@@ -1334,17 +1333,6 @@ class BaseExternalURLRedirectView(RedirectView):
 
         obj = get_object_or_404(
             self.model.objects.filter(external_url__isnull=False), **filter_arguments
-        )
-
-        # Tracks the redirection
-        metric(
-            "erudit__journal__{0}_redirect".format(self.model._meta.model_name.lower()),
-            tags={
-                "collection": self.get_collection(obj).code,
-            },
-            **{
-                "localidentifier": obj.localidentifier,
-            },
         )
         return obj.external_url
 

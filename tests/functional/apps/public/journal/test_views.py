@@ -39,7 +39,6 @@ from erudit.fedora import repository
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.models import UserSubscriptions
-from core.metrics.conf import settings as metrics_settings
 
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
@@ -1117,7 +1116,6 @@ class TestArticleDetailView:
         # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
         # argument here is a parametrization argument which causes this test to run for each
         # fixture we have.
-        monkeypatch.setattr(metrics_settings, "ACTIVATED", False)
         monkeypatch.setattr(Article, "get_erudit_object", lambda *a, **kw: eruditarticle)
         journal = JournalFactory.create(open_access=True)
         issue = IssueFactory.create(
