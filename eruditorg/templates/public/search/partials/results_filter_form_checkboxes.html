@@ -5,6 +5,9 @@
 <div class="akkordion filter" data-akkordion-single="true">
   <span class="filter-label akkordion-title">{{ field.label }} {% if field.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ field.help_text }}"><i class="icon ion-ios-help-circle"></i></span>{% endif %} <i class="icon ion-ios-arrow-down caret"></i></span>
   <div class="controls akkordion-content {% if field.value %}akkordion-active{% endif %}">
+    <div class="remove-filters invisible text-right">
+      <button type="button" class="btn btn-link">{% translate "Enlever les filtres" %}</button>
+    </div>
     {% for choice in field.field.choices %}
     {# wrap in accordion after 10th #}
     {% if forloop.counter == 11 %}
