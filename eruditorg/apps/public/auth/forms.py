@@ -73,7 +73,7 @@ class PasswordResetForm(BasePasswordResetForm):
         resetting their password.
         """
         active_users = get_user_model()._default_manager.filter(email__iexact=email, is_active=True)
-        return (u for u in active_users)
+        return [u for u in active_users]
 
     def save(
         self,
@@ -93,10 +93,9 @@ class PasswordResetForm(BasePasswordResetForm):
         send an email to that email address informing that the password reset failed.
         """
         email = self.cleaned_data["email"]
-        try:
+        if self.get_users(email):
             # Registered user
             # Check if there are any registered users for the entered email
-            next(self.get_users(email))
             return super().save(
                 domain_override,
                 subject_template_name,
@@ -108,7 +107,7 @@ class PasswordResetForm(BasePasswordResetForm):
                 html_email_template_name,
                 extra_email_context,
             )
-        except StopIteration:
+        else:
             # Unregistered user
             if not domain_override:
                 current_site = get_current_site(request)
