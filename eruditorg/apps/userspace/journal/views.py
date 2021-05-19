@@ -79,7 +79,8 @@ class BaseReportsDownload(JournalScopePermissionRequiredMixin, View):
         root_path = journal_reports_path(self.current_journal.code)
         path = os.path.normpath(os.path.join(root_path, subpath))
         # Twart attempts to access upper filesystem files. Error out so it shows in sentry.
-        assert path.startswith(os.path.join(root_path, self.AUTHORIZED_SUBPATH))
+        if not path.startswith(os.path.join(root_path, self.AUTHORIZED_SUBPATH)):
+            raise ValueError("Path should be a prefix of AUTHORIZED_SUBPATH")
         if not os.path.exists(path):
             raise Http404()
         with open(path, "rb") as fp:
