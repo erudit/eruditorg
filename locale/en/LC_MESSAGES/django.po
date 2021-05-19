@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# David Cormier <david.cormier@erudit.org>, 2016
 # Maxime Turcotte <maxime.turcotte@erudit.org>, 2021
+# David Cormier <david.cormier@erudit.org>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 15:38-0400\n"
+"POT-Creation-Date: 2021-05-19 11:19-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
-"Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
+"Last-Translator: David Cormier <david.cormier@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1750,7 +1750,7 @@ msgstr "Object"
 #: templates/userspace/journal/authorization/authorization_user.html:13
 #: templates/userspace/journal/authorization/authorization_user.html:16
 #: templates/userspace/journal/authorization/authorization_user.html:20
-#: templates/userspace/journal/partials/menu.html:78
+#: templates/userspace/journal/partials/menu.html:68
 #: templates/userspace/library/authorization/authorization_confirm_delete.html:7
 #: templates/userspace/library/authorization/authorization_create.html:15
 #: templates/userspace/library/authorization/authorization_user.html:13
@@ -6718,13 +6718,13 @@ msgstr "Royalties"
 
 #: templates/userspace/journal/partials/menu.html:57
 msgid ""
-"Vous devez vous connecter à un site externe pour accéder à vos rapports "
-"statistiques. L’identifiant et le mot de passe correspondent à ceux de votre"
-" ancien Espace éditeur sur Érudit."
+"Pour accéder à vos rapports statistiques, vous devez vous connecter à un "
+"site externe qui requiert des identifiants distincts. Pour plus "
+"d’informations, veuillez nous contacter à l’adresse edition@erudit.org."
 msgstr ""
-"You have to log in an external website for accessing your statistics report."
-" Your login and password are those of your old Publisher Space on Érudit. "
-"For more information, please contact edition@erudit.org."
+"To access your statistics, you must log into an external website with a "
+"separate username and password. For more information, please contact "
+"edition@erudit.org"
 
 #: templates/userspace/journal/partials/menu.html:60
 #: templates/userspace/library/partials/menu.html:24
@@ -6733,21 +6733,6 @@ msgstr ""
 #: templates/userspace/library/stats/landing.html:28
 msgid "Consultations"
 msgstr "Statistics"
-
-#: templates/userspace/journal/partials/menu.html:66
-msgid ""
-"Vous devez vous connecter à un site externe pour accéder à OJS. "
-"L’identifiant et le mot de passe de ce service sont différents de celui de "
-"votre Espace éditeur. Si vous ne les connaissez pas, vous pouvez communiquer"
-" avec Érudit à l’adresse edition@erudit.org."
-msgstr ""
-"You have to log in an external website for accessing your OJS account. Your "
-"login and password are different of your old Publisher Space on Érudit. For "
-"more information, please contact edition@erudit.org."
-
-#: templates/userspace/journal/partials/menu.html:69
-msgid "Manuscrits"
-msgstr "Manucripts"
 
 #: templates/userspace/journal/royalties_list.html:4
 msgid "Rapport de redevances"
