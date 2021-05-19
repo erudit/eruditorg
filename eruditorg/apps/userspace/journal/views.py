@@ -90,7 +90,7 @@ class BaseReportsDownload(JournalScopePermissionRequiredMixin, View):
 
 class RoyaltyReportsDownload(BaseReportsDownload):
     permission_required = "subscription.consult_royalty_reports"
-    AUTHORIZED_SUBPATH = "Abonnements/Rapports"
+    AUTHORIZED_SUBPATH = "Abonnements"
 
 
 class RoyaltiesListView(JournalScopePermissionRequiredMixin, MenuItemMixin, TemplateView):
