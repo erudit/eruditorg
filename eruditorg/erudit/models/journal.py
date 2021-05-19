@@ -1270,11 +1270,18 @@ class Article(FedoraMixin):
 
     @cached_property
     def has_pdf(self):
-        return self.has_datastream("PDF")
+        return self.has_datastream("PDF") or self.has_datastream("PDF_ERUDIT")
+
+    @cached_property
+    def pdf_datastream_name(self):
+        if not self.has_datastream("PDF") and self.has_datastream("PDF_ERUDIT"):
+            return "PDF_ERUDIT"
+        else:
+            return "PDF"
 
     @cached_property
     def pdf(self):
-        return get_cached_datastream_content(self.get_full_identifier(), "PDF")
+        return get_cached_datastream_content(self.get_full_identifier(), self.pdf_datastream_name)
 
     @cached_property
     def can_display_first_pdf_page(self):

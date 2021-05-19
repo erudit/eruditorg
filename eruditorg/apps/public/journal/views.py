@@ -1141,7 +1141,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
 
     @property
     def datastream_name(self) -> str:
-        return "PDF"
+        return self.object.pdf_datastream_name
 
     def write_datastream_content(self, response, content):
         coverpage = get_coverpage(self.get_object())
@@ -1185,7 +1185,7 @@ class ArticleRawPdfFirstPageView(
 
     @property
     def datastream_name(self) -> str:
-        return "PDF"
+        return self.object.pdf_datastream_name
 
     def get_content(self):
         return self.get_object()

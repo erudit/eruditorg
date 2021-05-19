@@ -196,6 +196,7 @@ class ArticleRef(Article):
         authors=None,
         add_to_fedora_issue=True,
         with_pdf=False,
+        with_pdf_erudit=False,
         pdf_url=None,
         html_url=None,
         solr_attrs=None,
@@ -230,6 +231,8 @@ class ArticleRef(Article):
                 )
             if with_pdf:
                 repository.api.add_pdf_to_article(self.pid)
+            if with_pdf_erudit:
+                repository.api.add_pdf_erudit_to_article(self.pid)
         super().__init__(issue, localidentifier)
         if self.pid is not None and self.issue.is_published:
             solr_client = pysolr.Solr()
@@ -249,6 +252,11 @@ class ArticleFactory(factory.Factory):
     def with_pdf(obj, create, extracted, **kwargs):
         if obj.localidentifier and extracted:
             repository.api.register_article(obj.pid, with_pdf=True)
+
+    @factory.post_generation
+    def with_pdf_erudit(obj, create, extracted, **kwargs):
+        if obj.localidentifier and extracted:
+            repository.api.register_article(obj.pid, with_pdf_erudit=True)
 
 
 class OpenAccessArticleFactory(ArticleFactory):

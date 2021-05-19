@@ -3044,29 +3044,60 @@ class TestArticleDetailView:
 
 class TestArticleRawPdfView:
     def test_can_retrieve_the_pdf_of_existing_articles(self):
-        journal = JournalFactory()
-        issue = IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1000)
+        article = ArticleFactory(with_pdf=True, issue__journal__open_access=True)
+        url = reverse(
+            "public:journal:article_raw_pdf",
+            args=(
+                article.issue.journal_id,
+                article.issue.volume_slug,
+                article.issue.localidentifier,
+                article.localidentifier,
+            ),
         )
-        IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue, with_pdf=True)
-        journal_id = journal.localidentifier
-        issue_id = issue.localidentifier
-        article_id = article.localidentifier
-        url = article_raw_pdf_url(article)
-        request = RequestFactory().get(url)
-        request.user = AnonymousUser()
-        request.session = {}
-        request.subscriptions = UserSubscriptions()
+        response = Client().get(url)
 
-        response = ArticleRawPdfView.as_view()(
-            request,
-            journal_code=journal_id,
-            issue_slug=issue.volume_slug,
-            issue_localid=issue_id,
-            localid=article_id,
+        assert response.status_code == 200
+        assert response["Content-Type"] == "application/pdf"
+
+    @pytest.mark.parametrize(
+        "has_pdf_journal, has_pdf_erudit, expected_text",
+        [
+            (True, True, "Arborescences"),
+            (True, False, "Arborescences"),
+            (False, True, "Criminologie"),
+        ],
+    )
+    def test_select_journal_produced_pdf_or_erudit_produced_pdf(
+        self,
+        has_pdf_journal,
+        has_pdf_erudit,
+        expected_text,
+    ):
+        # The "Arborecences" pdf was produced by the journal, so we expect to find the word
+        # "Arborescences" in the pdf header. The same goes to "Criminologie" that was produced
+        # by Érudit. Both words appear only in their correspondent articles.
+        article = ArticleFactory(
+            with_pdf=has_pdf_journal,
+            with_pdf_erudit=has_pdf_erudit,
+            issue__journal__open_access=True,
         )
+        url = reverse(
+            "public:journal:article_raw_pdf",
+            args=(
+                article.issue.journal_id,
+                article.issue.volume_slug,
+                article.issue.localidentifier,
+                article.localidentifier,
+            ),
+        )
+        response = Client().get(url)
 
+        with fitz.open(stream=io.BytesIO(response.content), filetype="pdf") as f:
+            pdf_text = ""
+            for page in f:
+                pdf_text += page.getText()
+
+        assert expected_text in pdf_text
         assert response.status_code == 200
         assert response["Content-Type"] == "application/pdf"
 

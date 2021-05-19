@@ -103,25 +103,24 @@ class FedoraMixin:
 
         return not empty_image
 
-    def has_datastream(self, datastream_name):
-        """ Returns True if the considered fedora object has a given datastream. """
+    @cached_property
+    def datastream_list(self) -> Optional[etree._Element]:
+        """ Returns the xml list of datastreams of the considered fedora object. """
         try:
             response = requests.get(
                 settings.FEDORA_ROOT + f"objects/{self.pid}/datastreams",
                 {"format": "xml"},
             )
             response.raise_for_status()
-            xml = etree.fromstring(response.content)
-            datastream = xml.find(f"datastream[@dsid='{datastream_name}']", namespaces=xml.nsmap)
-            return datastream is not None
+            return etree.fromstring(response.content)
 
         except HTTPError as e:
-            # If there's a client error, return False
+            # If there's a client error, return None
             if 400 <= e.response.status_code < 500:
                 with configure_scope() as scope:
                     scope.fingerprint = ["fedora.warning"]
                     logger.warning("fedora.warning", message=str(e))
-                return False
+                return None
 
             # If there's a server error, raise a HTTPError.
             elif 500 <= e.response.status_code < 600:
@@ -136,3 +135,12 @@ class FedoraMixin:
                 scope.fingerprint = ["fedora.connection-error"]
                 logger.error("fedora.connection-error", message=str(e))
             raise
+
+    def has_datastream(self, datastream_name: str) -> bool:
+        """ Returns True if the considered fedora object has a given datastream. """
+        if self.datastream_list is not None:
+            xml = self.datastream_list
+            datastream = xml.find(f"datastream[@dsid='{datastream_name}']", namespaces=xml.nsmap)
+            return datastream is not None
+        else:
+            return False
