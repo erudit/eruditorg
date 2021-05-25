@@ -79,7 +79,8 @@ class BaseReportsDownload(JournalScopePermissionRequiredMixin, View):
         root_path = journal_reports_path(self.current_journal.code)
         path = os.path.normpath(os.path.join(root_path, subpath))
         # Twart attempts to access upper filesystem files. Error out so it shows in sentry.
-        assert path.startswith(os.path.join(root_path, self.AUTHORIZED_SUBPATH))
+        if not path.startswith(os.path.join(root_path, self.AUTHORIZED_SUBPATH)):
+            raise ValueError("Path should be a prefix of AUTHORIZED_SUBPATH")
         if not os.path.exists(path):
             raise Http404()
         with open(path, "rb") as fp:
@@ -89,7 +90,7 @@ class BaseReportsDownload(JournalScopePermissionRequiredMixin, View):
 
 class RoyaltyReportsDownload(BaseReportsDownload):
     permission_required = "subscription.consult_royalty_reports"
-    AUTHORIZED_SUBPATH = "Abonnements/Rapports"
+    AUTHORIZED_SUBPATH = "Abonnements"
 
 
 class RoyaltiesListView(JournalScopePermissionRequiredMixin, MenuItemMixin, TemplateView):
@@ -105,11 +106,14 @@ class RoyaltiesListView(JournalScopePermissionRequiredMixin, MenuItemMixin, Temp
         try:
             toppath = os.path.join(root_path, subpath)
             for root, _dirs, files in os.walk(toppath):
+
                 for filename in files:
                     path = root[len(toppath) + 1 :].split("/")
                     year = path.pop(0)
                     label = " - ".join(path + [filename])
-                    result[year].append({"root": root, "filename": filename, "label": label})
+                    result[year].append(
+                        {"root": f"{subpath}/{year}", "filename": filename, "label": label}
+                    )
             result = {k: v for k, v in sorted(result.items(), reverse=True)}
         except FileNotFoundError:
             pass
