@@ -2,24 +2,24 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Maxime Turcotte <maxime.turcotte@erudit.org>, 2021
 # David Cormier <david.cormier@erudit.org>, 2021
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 11:19-0400\n"
+"POT-Creation-Date: 2021-05-25 15:11-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: David Cormier <david.cormier@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/public/account_actions/forms.py:10
@@ -83,12 +83,8 @@ msgid "^mot-de-passe/reinitialisation/termine/$"
 msgstr "^password/reset/done/$"
 
 #: apps/public/auth/urls.py:54
-msgid ""
-"^reinitialisation/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-"
-"Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"
-msgstr ""
-"^reset/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-"
-"Za-z]{1,20})/$"
+msgid "^reinitialisation/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"
+msgstr "^reset/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"
 
 #: apps/public/auth/urls.py:63
 msgid "^reinitialisation/termine/$"
@@ -118,8 +114,7 @@ msgstr ""
 msgid "Supprimer les couvertures"
 msgstr ""
 
-#: apps/public/book/admin.py:110
-#: templates/public/journal/journal_base.html:116
+#: apps/public/book/admin.py:110 templates/public/journal/journal_base.html:116
 #: templates/userspace/journal/authorization/authorization_confirm_delete.html:26
 #: templates/userspace/journal/editor/delete.html:26
 #: templates/userspace/journal/subscription/individualsubscription_cancel.html:24
@@ -131,8 +126,7 @@ msgstr ""
 msgid "Oui"
 msgstr "Yes"
 
-#: apps/public/book/admin.py:111
-#: templates/public/journal/journal_base.html:124
+#: apps/public/book/admin.py:111 templates/public/journal/journal_base.html:124
 #: templates/userspace/journal/authorization/authorization_confirm_delete.html:27
 #: templates/userspace/journal/editor/delete.html:27
 #: templates/userspace/journal/subscription/individualsubscription_cancel.html:25
@@ -232,9 +226,7 @@ msgid "Contribution des auteurs de type direction ?"
 msgstr ""
 
 #: apps/public/book/models.py:131
-msgid ""
-"La liste des auteurs sera précédée de         la mention «&nbsp;Sous la "
-"direction de…&nbsp;»."
+msgid "La liste des auteurs sera précédée de         la mention «&nbsp;Sous la direction de…&nbsp;»."
 msgstr "The list of authors will be preceded by «&nbsp;Edited by…&nbsp;»."
 
 #: apps/public/book/models.py:147
@@ -262,25 +254,19 @@ msgid "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/$"
 msgstr "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/$"
 
 #: apps/public/book/urls.py:16
-msgid ""
-"^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)/$"
-msgstr ""
-"^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)/$"
+msgid "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)/$"
+msgstr "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)/$"
 
 #: apps/public/book/urls.py:21
-msgid ""
-"^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)\\.pdf$"
-msgstr ""
-"^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)\\.pdf$"
+msgid "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)\\.pdf$"
+msgstr "^(?P<collection_slug>[-\\w]+)/(?P<slug>[-\\w]+)/(?P<chapter_id>[a-z0-9]+)\\.pdf$"
 
 #: apps/public/campaign/models.py:11
 msgid "Active"
 msgstr ""
 
 #: apps/public/campaign/models.py:13
-msgid ""
-"Activer la campagne. <strong>La campagne précédente sera désactivée et "
-"remplacée par celle-ci.</strong>"
+msgid "Activer la campagne. <strong>La campagne précédente sera désactivée et remplacée par celle-ci.</strong>"
 msgstr ""
 
 #: apps/public/campaign/models.py:19 erudit/models/journal.py:168
@@ -297,9 +283,7 @@ msgid "Image"
 msgstr ""
 
 #: apps/public/campaign/models.py:28
-msgid ""
-"L'image doit avoir une largeur exacte de 267px et une hauteur maximale de "
-"450px."
+msgid "L'image doit avoir une largeur exacte de 267px et une hauteur maximale de 450px."
 msgstr ""
 
 #: apps/public/campaign/models.py:39
@@ -378,7 +362,7 @@ msgstr "Title (A–Z)"
 msgid "Titre (Z–A)"
 msgstr "Title (Z–A)"
 
-#: apps/public/citations/views.py:139
+#: apps/public/citations/views.py:142
 msgid "Ce document n'est pas présent dans les notices"
 msgstr "This document does not exist in the records."
 
@@ -453,29 +437,16 @@ msgid "Résumé de l'article"
 msgstr "Article abstract"
 
 #: apps/public/journal/coverpage.py:554
-msgid ""
-"Ce document est protégé par la loi sur le droit d’auteur. L’utilisation des "
-"services         d’Érudit (y compris la reproduction) est assujettie à sa "
-"politique d’utilisation que vous         pouvez consulter en ligne."
-msgstr ""
-"This document is protected by copyright law. Use of the services of Érudit "
-"(including reproduction) is subject to its terms and conditions, which can "
-"be viewed online."
+msgid "Ce document est protégé par la loi sur le droit d’auteur. L’utilisation des services         d’Érudit (y compris la reproduction) est assujettie à sa politique d’utilisation que vous         pouvez consulter en ligne."
+msgstr "This document is protected by copyright law. Use of the services of Érudit (including reproduction) is subject to its terms and conditions, which can be viewed online."
 
 #: apps/public/journal/coverpage.py:575
 msgid "Cet article est diffusé et préservé par Érudit."
 msgstr "This article is disseminated and preserved by Érudit."
 
 #: apps/public/journal/coverpage.py:583
-msgid ""
-"Érudit est un consortium interuniversitaire sans but lucratif composé de "
-"l’Université de         Montréal, l’Université Laval et l’Université du "
-"Québec à Montréal. Il a pour mission la         promotion et la valorisation"
-" de la recherche."
-msgstr ""
-"Érudit is a non-profit inter-university consortium of the Université de "
-"Montréal, Université Laval, and the Université du Québec à Montréal. Its "
-"mission is to promote and disseminate research."
+msgid "Érudit est un consortium interuniversitaire sans but lucratif composé de l’Université de         Montréal, l’Université Laval et l’Université du Québec à Montréal. Il a pour mission la         promotion et la valorisation de la recherche."
+msgstr "Érudit is a non-profit inter-university consortium of the Université de Montréal, Université Laval, and the Université du Québec à Montréal. Its mission is to promote and disseminate research."
 
 #: apps/public/journal/feeds.py:25 apps/public/journal/feeds.py:87
 msgid "Syndication d'Érudit"
@@ -495,40 +466,24 @@ msgid "Par type"
 msgstr "By type"
 
 #: apps/public/journal/forms.py:13 apps/public/search/forms.py:197
-msgid ""
-"Les revues savantes publient des articles scientifiques révisés par les "
-"pairs ; les revues culturelles présentent des articles dans les domaines "
-"artistique, littéraire et socioculturel."
-msgstr ""
-"Scholarly journals publish peer-reviewed scientific articles; cultural "
-"journals publish articles in the artistic, literary, and sociocultural "
-"fields."
+msgid "Les revues savantes publient des articles scientifiques révisés par les pairs ; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel."
+msgstr "Scholarly journals publish peer-reviewed scientific articles; cultural journals publish articles in the artistic, literary, and sociocultural fields."
 
 #: apps/public/journal/forms.py:19
 msgid "Par fonds"
 msgstr "By collection"
 
 #: apps/public/journal/forms.py:22 apps/public/search/forms.py:184
-msgid ""
-"Les revues diffusées sur Érudit sont consultables directement sur la "
-"plateforme ; les revues des collections Persée et NRC Research Press "
-"redirigent vers la plateforme du partenaire."
-msgstr ""
-"Journals disseminated on Érudit can be consulted directly on our platform; "
-"journals from the Persée and NRC Research Press collections are redirected "
-"to the respective partner platform."
+msgid "Les revues diffusées sur Érudit sont consultables directement sur la plateforme ; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire."
+msgstr "Journals disseminated on Érudit can be consulted directly on our platform; journals from the Persée and NRC Research Press collections are redirected to the respective partner platform."
 
 #: apps/public/journal/forms.py:28
 msgid "Par discipline"
 msgstr "By discipline"
 
 #: apps/public/journal/forms.py:31
-msgid ""
-"Cliquez sur la boîte suivante afin de voir la liste complète des disciplines"
-" OU recherchez en saisissant le terme."
-msgstr ""
-"Click on the following field to see the full list of disciplines OR search "
-"the list by entering keywords. "
+msgid "Cliquez sur la boîte suivante afin de voir la liste complète des disciplines OU recherchez en saisissant le terme."
+msgstr "Click on the following field to see the full list of disciplines OR search the list by entering keywords. "
 
 #: apps/public/journal/templatetags/public_journal_tags.py:56
 #, python-brace-format
@@ -570,10 +525,8 @@ msgid "^auteurs/$"
 msgstr "^authors/$"
 
 #: apps/public/journal/urls.py:41
-msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)/"
-msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)/"
+msgid "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)/"
+msgstr "^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)/"
 
 #: apps/public/journal/urls.py:47
 msgid "^coverpage\\.jpg$"
@@ -588,16 +541,12 @@ msgid "^feuilletage/"
 msgstr "^browse/"
 
 #: apps/public/journal/urls.py:74
-msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)"
-msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)"
+msgid "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)"
+msgstr "^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)"
 
 #: apps/public/journal/urls.py:85
-msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
-msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
+msgid "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
+msgstr "^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
 
 #: apps/public/journal/urls.py:91
 msgid "^resume/$"
@@ -620,10 +569,8 @@ msgid "^premierepage\\.pdf$"
 msgstr "^firstpage\\.pdf$"
 
 #: apps/public/journal/urls.py:130
-msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
-msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
+msgid "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
+msgstr "^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
 
 #: apps/public/journal/urls.py:154
 msgid "^redirection/"
@@ -824,9 +771,8 @@ msgstr "Languages"
 
 #: apps/public/search/forms.py:213 core/editor/models.py:226
 #: core/subscription/models.py:91 core/subscription/models.py:142
-#: erudit/models/journal.py:245 templates/base.html:156
-#: templates/base.html:373 templates/public/home.html:73
-#: templates/public/journal/article_base.html:142
+#: erudit/models/journal.py:245 templates/base.html:156 templates/base.html:373
+#: templates/public/home.html:73 templates/public/journal/article_base.html:142
 #: templates/public/journal/article_biblio.html:26
 #: templates/public/journal/article_detail.html:31
 #: templates/public/journal/article_summary.html:26
@@ -1061,12 +1007,8 @@ msgid "Réglage"
 msgstr "Setting"
 
 #: apps/public/site_messages/models.py:112
-msgid ""
-"Si le site contient un réglage avec ce nom et que ce réglage est à"
-"             <em>True</em>, le message sera affiché."
-msgstr ""
-"If the site contains a setting with this name and this setting is set to "
-"<em>True</em>, the message will be displayed."
+msgid "Si le site contient un réglage avec ce nom et que ce réglage est à             <em>True</em>, le message sera affiché."
+msgstr "If the site contains a setting with this name and this setting is set to <em>True</em>, the message will be displayed."
 
 #: apps/public/site_messages/models.py:121
 msgid "Message global du site"
@@ -1225,12 +1167,8 @@ msgstr "Issue successfully approved."
 
 #: apps/userspace/journal/editor/views.py:322
 #, python-brace-format
-msgid ""
-"Le numéro a été approuvé avec succès. Veuillez noter que le numéro sera "
-"archivé le {archive_date}. Les fichiers de production seront supprimés."
-msgstr ""
-"Issue successfully approved. Please note that the issue will be archived on "
-"{archive_date}. Production files will be deleted."
+msgid "Le numéro a été approuvé avec succès. Veuillez noter que le numéro sera archivé le {archive_date}. Les fichiers de production seront supprimés."
+msgstr "Issue successfully approved. Please note that the issue will be archived on {archive_date}. Production files will be deleted."
 
 #: apps/userspace/journal/editor/views.py:332
 msgid "Les corrections ont été transmises avec succès"
@@ -1241,70 +1179,32 @@ msgid "La soumission a été supprimée avec succès"
 msgstr "Submission successfully deleted."
 
 #: apps/userspace/journal/information/forms.py:114
-msgid ""
-"<p>Décrivez :</p><ul><li>les objectifs,             <li>les champs "
-"d’étude</li> <li>et l’historique de votre revue.</li></ul>"
-msgstr ""
-"<p>Describe:</p><ul><li>The goals,<li>The fields of study </li><li>and the "
-"journal's history.</li></ul>"
+msgid "<p>Décrivez :</p><ul><li>les objectifs,             <li>les champs d’étude</li> <li>et l’historique de votre revue.</li></ul>"
+msgstr "<p>Describe:</p><ul><li>The goals,<li>The fields of study </li><li>and the journal's history.</li></ul>"
 
 #: apps/userspace/journal/information/forms.py:118
-msgid ""
-"<p>Présentez :</p><ul><li>le comité éditorial,</li>            <li>le "
-"conseil d’administration,</li><li>le comité scientifique             "
-"international (incluant l’affiliation institutionnelle de chacun"
-"             de ses membres).</li></ul>"
-msgstr ""
-"Describe the editorial committee, the board of directors, the international "
-"scientific committee (including the institutional affiliation of each of its"
-" members)."
+msgid "<p>Présentez :</p><ul><li>le comité éditorial,</li>            <li>le conseil d’administration,</li><li>le comité scientifique             international (incluant l’affiliation institutionnelle de chacun             de ses membres).</li></ul>"
+msgstr "Describe the editorial committee, the board of directors, the international scientific committee (including the institutional affiliation of each of its members)."
 
 #: apps/userspace/journal/information/forms.py:124
-msgid ""
-"<p>Présentez :</p><ul><li>la             politique éditoriale,</li><li>le "
-"processus de révision par les pairs</li>             <li>et la politique de "
-"droits d’auteur, incluant votre licence de             diffusion.</li></ul>"
-msgstr ""
-"<p>Present:</p><ul><li>the editorial policy,</li><li>the peer review "
-"process</li> and the copyright policy, including your distribution "
-"rights.<li></ul>"
+msgid "<p>Présentez :</p><ul><li>la             politique éditoriale,</li><li>le processus de révision par les pairs</li>             <li>et la politique de droits d’auteur, incluant votre licence de             diffusion.</li></ul>"
+msgstr "<p>Present:</p><ul><li>the editorial policy,</li><li>the peer review process</li> and the copyright policy, including your distribution rights.<li></ul>"
 
 #: apps/userspace/journal/information/forms.py:130
-msgid ""
-"<p>Décrivez :</p><ul><li>la             politique anti-plagiat,</li><li>ou "
-"tout autre élément se rapportant aux règles             d’éthique.</li></ul>"
-msgstr ""
-"<p>Describe: </p><ul><li>the anti-plagiarism policy, </li><li> or any other "
-"element relevant to the ethical policy.</li></ul>"
+msgid "<p>Décrivez :</p><ul><li>la             politique anti-plagiat,</li><li>ou tout autre élément se rapportant aux règles             d’éthique.</li></ul>"
+msgstr "<p>Describe: </p><ul><li>the anti-plagiarism policy, </li><li> or any other element relevant to the ethical policy.</li></ul>"
 
 #: apps/userspace/journal/information/forms.py:135
-msgid ""
-"<p>Décrivez :</p><ul><li>le             contrat auteur-revue (s’il y a "
-"lieu)</li><li>et les instructions aux auteurs pour la             soumission"
-" d’articles à la revue.</li></ul>"
-msgstr ""
-"<p>Describe:</p><ul><li>the contributor-journal contract (if "
-"applicable)</li>and the instructions for article submission.<li></ul>"
+msgid "<p>Décrivez :</p><ul><li>le             contrat auteur-revue (s’il y a lieu)</li><li>et les instructions aux auteurs pour la             soumission d’articles à la revue.</li></ul>"
+msgstr "<p>Describe:</p><ul><li>the contributor-journal contract (if applicable)</li>and the instructions for article submission.<li></ul>"
 
 #: apps/userspace/journal/information/forms.py:140
-msgid ""
-"<p>Décrivez les             modalités d’abonnements numérique et papier de "
-"votre revue, et présentez les             coordonnées des personnes-"
-"ressources.</p>"
-msgstr ""
-"Describe the subscription procedures for the digital and print editions of "
-"your journal (contact information)."
+msgid "<p>Décrivez les             modalités d’abonnements numérique et papier de votre revue, et présentez les             coordonnées des personnes-ressources.</p>"
+msgstr "Describe the subscription procedures for the digital and print editions of your journal (contact information)."
 
 #: apps/userspace/journal/information/forms.py:145
-msgid ""
-"<p>Présentez les partenaires             de votre revue (Organismes "
-"subventionnaires, départements ou             associations) qui soutiennent "
-"votre revue.</p><p>Vous pouvez insérer le             logo de ces "
-"partenaires et/ou un lien vers leur site.</p>"
-msgstr ""
-"Introduce the partners (funding agencies, departments or associations) that "
-"support your journal. You can display their logos and/or a link to their "
-"website."
+msgid "<p>Présentez les partenaires             de votre revue (Organismes subventionnaires, départements ou             associations) qui soutiennent votre revue.</p><p>Vous pouvez insérer le             logo de ces partenaires et/ou un lien vers leur site.</p>"
+msgstr "Introduce the partners (funding agencies, departments or associations) that support your journal. You can display their logos and/or a link to their website."
 
 #: apps/userspace/journal/information/urls.py:11
 msgid "^$"
@@ -1401,8 +1301,7 @@ msgstr "^institutional/exports/download/$"
 
 #: apps/userspace/journal/subscription/views.py:82
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
-msgstr ""
-"You have reached the maximum number of subscriptions for this journal."
+msgstr "You have reached the maximum number of subscriptions for this journal."
 
 #: apps/userspace/journal/subscription/views.py:97
 #: apps/userspace/journal/subscription/views.py:131
@@ -1432,9 +1331,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: apps/userspace/journal/subscription/views.py:295
-msgid ""
-"Vous tentez d'abonner {} personnes alors qu'il reste {} places à votre "
-"forfait."
+msgid "Vous tentez d'abonner {} personnes alors qu'il reste {} places à votre forfait."
 msgstr ""
 
 #: apps/userspace/journal/subscription/views.py:300
@@ -1477,10 +1374,8 @@ msgid "Une proposition existe déjà pour cette adresse courriel"
 msgstr "An offer already exists for this email address."
 
 #: apps/userspace/library/members/forms.py:39
-msgid ""
-"Un utilisateur avec cette adresse courriel est déjà membre de l'organisation"
-msgstr ""
-"A user with this email address is already a member of the organization."
+msgid "Un utilisateur avec cette adresse courriel est déjà membre de l'organisation"
+msgstr "A user with this email address is already a member of the organization."
 
 #: apps/userspace/library/members/urls.py:14
 msgid "^supprimer/(?P<pk>[0-9]+)/$"
@@ -1575,9 +1470,7 @@ msgid "Journal Report 1"
 msgstr ""
 
 #: apps/userspace/library/stats/forms.py:190
-msgid ""
-"Nombre de requêtes réussies d’articles en texte intégral par mois et par "
-"revue"
+msgid "Nombre de requêtes réussies d’articles en texte intégral par mois et par revue"
 msgstr "Number of Successful Full-Text Article Requests by Month and Journal "
 
 #: apps/userspace/library/stats/forms.py:199
@@ -1589,35 +1482,24 @@ msgid "Journal Report 1 GOA"
 msgstr ""
 
 #: apps/userspace/library/stats/forms.py:202
-msgid ""
-"Nombre de requêtes réussies d’articles en libre accès en texte intégral par "
-"mois et par revue"
-msgstr ""
-"Number of Successful Gold Open Access Full-Text Article Requests by Month "
-"and Journal "
+msgid "Nombre de requêtes réussies d’articles en libre accès en texte intégral par mois et par revue"
+msgstr "Number of Successful Gold Open Access Full-Text Article Requests by Month and Journal "
 
 #: apps/userspace/library/stats/forms.py:216
 msgid "TR_J1"
 msgstr ""
 
 #: apps/userspace/library/stats/forms.py:219
-msgid ""
-"Rapports d’utilisation sur le contenu de revues excluant les revues en libre"
-" accès doré."
-msgstr ""
-"Reports on usage of journal content, excluding Gold Open Access content."
+msgid "Rapports d’utilisation sur le contenu de revues excluant les revues en libre accès doré."
+msgstr "Reports on usage of journal content, excluding Gold Open Access content."
 
 #: apps/userspace/library/stats/forms.py:227
 msgid "TR_J3"
 msgstr ""
 
 #: apps/userspace/library/stats/forms.py:230
-msgid ""
-"Rapports d’utilisation sur le contenu de revues, pour tous les types de "
-"mesures, répartis par type d’accès."
-msgstr ""
-"Reports on usage of journal content for all metric types, broken down by "
-"access type."
+msgid "Rapports d’utilisation sur le contenu de revues, pour tous les types de mesures, répartis par type d’accès."
+msgstr "Reports on usage of journal content for all metric types, broken down by access type."
 
 #: apps/userspace/library/stats/forms.py:239
 msgid "IR_A1"
@@ -1628,12 +1510,8 @@ msgid "Rapports sur les requêtes d’articles de revue au niveau de l’article
 msgstr "Reports on journal article requests at the article level."
 
 #: apps/userspace/library/subscription_information/forms.py:19
-msgid ""
-"Le badge ne doit pas excéder 140x140 pixels et sera automatiquement "
-"redimensionné dans le cas contraire."
-msgstr ""
-"The badge must not exceed 140x140 pixels and will be automatically resized "
-"where necessary."
+msgid "Le badge ne doit pas excéder 140x140 pixels et sera automatiquement redimensionné dans le cas contraire."
+msgstr "The badge must not exceed 140x140 pixels and will be automatically resized where necessary."
 
 #: apps/userspace/library/subscription_information/views.py:34
 msgid "Le logo institutionnel a été mis à jour avec succès."
@@ -1680,8 +1558,7 @@ msgid "^bibliotheque/"
 msgstr "^library/"
 
 #: base/urls.py:54
-msgid ""
-"^couverture/(?P<localidentifier>[\\w-]+)/(?P<last_modified_date>[\\w-]+).jpg"
+msgid "^couverture/(?P<localidentifier>[\\w-]+)/(?P<last_modified_date>[\\w-]+).jpg"
 msgstr ""
 
 #: base/urls.py:59
@@ -1984,14 +1861,11 @@ msgid "Date de fin"
 msgstr "End Date"
 
 #: core/subscription/abstract_models.py:38
-msgid ""
-"La date de début d'une période d'abonnement ne doit pas être supérieure à la"
-" date de fin."
+msgid "La date de début d'une période d'abonnement ne doit pas être supérieure à la date de fin."
 msgstr "Start date of subscription period must not be greater than end date."
 
 #: core/subscription/abstract_models.py:60
-msgid ""
-"Cette période est en conflit avec une autre période pour cet abonnement."
+msgid "Cette période est en conflit avec une autre période pour cet abonnement."
 msgstr "This period conflicts with another period for this subscription."
 
 #: core/subscription/account_actions.py:43
@@ -2134,9 +2008,8 @@ msgid "Abonnements aux forfaits d'abonnements individuels"
 msgstr "Subscriptions to the individual subscription packages"
 
 #: core/subscription/models.py:394 erudit/models/core.py:57
-#: erudit/models/core.py:94 erudit/models/core.py:105
-#: erudit/models/core.py:125 erudit/models/journal.py:59
-#: erudit/models/journal.py:116
+#: erudit/models/core.py:94 erudit/models/core.py:105 erudit/models/core.py:125
+#: erudit/models/journal.py:59 erudit/models/journal.py:116
 msgid "Code"
 msgstr "Code"
 
@@ -2149,12 +2022,8 @@ msgid "Illimité"
 msgstr "Unlimited"
 
 #: core/subscription/models.py:403
-msgid ""
-"Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre "
-"illimité d’individus"
-msgstr ""
-"Check if this individual subscription package allows an unlimited number of "
-"subscribers"
+msgid "Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre illimité d’individus"
+msgstr "Check if this individual subscription package allows an unlimited number of subscribers"
 
 #: core/subscription/models.py:408
 msgid "Forfait d’abonnements individuels"
@@ -2209,15 +2078,11 @@ msgid "Files of size greater than {} are not allowed. Your file is {}"
 msgstr ""
 
 #: erudit/modelfields.py:61
-msgid ""
-"Images of width lesser than {}px or greater than {}px or are not allowed. "
-"The width of your image is {}px"
+msgid "Images of width lesser than {}px or greater than {}px or are not allowed. The width of your image is {}px"
 msgstr ""
 
 #: erudit/modelfields.py:72
-msgid ""
-"Images of height lesser than {}px or greater than {}px or are not allowed. "
-"The height of your image is {}px"
+msgid "Images of height lesser than {}px or greater than {}px or are not allowed. The height of your image is {}px"
 msgstr ""
 
 #: erudit/models/core.py:17
@@ -2357,9 +2222,7 @@ msgid "Rediriger vers l'URL externe"
 msgstr "Redirect to external URL"
 
 #: erudit/models/journal.py:181
-msgid ""
-"Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme "
-"Érudit"
+msgid "Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit"
 msgstr "Check if this journal’s issues are not hosted on Érudit"
 
 #: erudit/models/journal.py:190
@@ -2379,8 +2242,7 @@ msgid "Année de nouveauté"
 msgstr "Year of addition"
 
 #: erudit/models/journal.py:211
-msgid ""
-"Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit."
+msgid "Année durant laquelle cette revue sera ajoutée sur la plateforme d'Érudit."
 msgstr ""
 
 #: erudit/models/journal.py:219
@@ -2613,8 +2475,7 @@ msgstr "Subscriptions"
 msgid "Équipe"
 msgstr "Team"
 
-#: erudit/models/journal.py:1594
-#: templates/public/journal/journal_base.html:266
+#: erudit/models/journal.py:1594 templates/public/journal/journal_base.html:266
 #: templates/public/journal/journal_detail.html:183
 #: templates/userspace/journal/information/journalinformation_update.html:53
 msgid "Coordonnées"
@@ -2633,13 +2494,11 @@ msgstr "Journal information"
 msgid "Informations de revue"
 msgstr "Journal informations"
 
-#: erudit/models/journal.py:1615
-#: templates/public/journal/journal_base.html:141
+#: erudit/models/journal.py:1615 templates/public/journal/journal_base.html:141
 msgid "Direction"
 msgstr "Managing editor(s)"
 
-#: erudit/models/journal.py:1615
-#: templates/public/journal/journal_base.html:148
+#: erudit/models/journal.py:1615 templates/public/journal/journal_base.html:148
 msgid "Rédaction"
 msgstr "Editor(s)"
 
@@ -2770,12 +2629,8 @@ msgid "(Sans titre)"
 msgstr "(Untitled)"
 
 #: templates/base.html:16 templates/base.html:65 templates/base.html:74
-msgid ""
-"Découvrez nos collections de documents en sciences humaines et sociales : "
-"revues, livres et actes, thèses, rapports de recherche."
-msgstr ""
-"Érudit provides access to documents in social sciences and humanities: "
-"journals, books and proceedings, theses, and research reports."
+msgid "Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche."
+msgstr "Érudit provides access to documents in social sciences and humanities: journals, books and proceedings, theses, and research reports."
 
 #: templates/base.html:70 templates/public/home.html:4
 msgid "Cultivez votre savoir"
@@ -3059,15 +2914,8 @@ msgid "Consortium Érudit"
 msgstr "Érudit Consortium"
 
 #: templates/base.html:501
-msgid ""
-"erudit.org  utilise des cookies (« témoins de connexion ») à des fins de "
-"statistiques et d’amélioration de l’expérience utilisateur. Ces données sont"
-" anonymes. En poursuivant votre visite, vous acceptez l’utilisation de ces "
-"cookies, que vous pourrez désactiver en tout temps dans votre fureteur web."
-msgstr ""
-"erudit.org uses cookies for statistical and user experience purposes. These "
-"data are anonymous. By continuing, you are agreeing to our use of cookies. "
-"You can, however, turn them off in your browser settings."
+msgid "erudit.org  utilise des cookies (« témoins de connexion ») à des fins de statistiques et d’amélioration de l’expérience utilisateur. Ces données sont anonymes. En poursuivant votre visite, vous acceptez l’utilisation de ces cookies, que vous pourrez désactiver en tout temps dans votre fureteur web."
+msgstr "erudit.org uses cookies for statistical and user experience purposes. These data are anonymous. By continuing, you are agreeing to our use of cookies. You can, however, turn them off in your browser settings."
 
 #: templates/base.html:502
 msgid "J’ai compris"
@@ -3083,11 +2931,8 @@ msgid "Se rendre sur le site d’Érudit"
 msgstr "Go to Érudit’s website"
 
 #: templates/base_email.html:964
-msgid ""
-"Le bouton ne fonctionne pas ? Veuillez copier-coller cet url dans votre "
-"navigateur :"
-msgstr ""
-"The button does not work? Please copy and paste this URL into your browser:"
+msgid "Le bouton ne fonctionne pas ? Veuillez copier-coller cet url dans votre navigateur :"
+msgstr "The button does not work? Please copy and paste this URL into your browser:"
 
 #: templates/base_email.html:1244
 #, python-format
@@ -3110,17 +2955,11 @@ msgstr "Hi,"
 
 #: templates/emails/auth/password_reset_email.html:11
 #, python-format
-msgid ""
-"Vous avez demandé de réinitialiser le mot de passe de votre compte sur <a "
-"href=\"%(site_name)s\" style=\"color:#ff4242; text-"
-"decoration:underline;\">%(site_name)s</a>."
-msgstr ""
-"You have asked to reset your account password on <a href=\"%(site_name)s\" "
-"style=\"color:#ff4242; text-decoration:underline;\">%(site_name)s</a>."
+msgid "Vous avez demandé de réinitialiser le mot de passe de votre compte sur <a href=\"%(site_name)s\" style=\"color:#ff4242; text-decoration:underline;\">%(site_name)s</a>."
+msgstr "You have asked to reset your account password on <a href=\"%(site_name)s\" style=\"color:#ff4242; text-decoration:underline;\">%(site_name)s</a>."
 
 #: templates/emails/auth/password_reset_email.html:13
-msgid ""
-"Veuillez cliquer sur le bouton suivant afin d’en choisir un nouveau&nbsp;: "
+msgid "Veuillez cliquer sur le bouton suivant afin d’en choisir un nouveau&nbsp;: "
 msgstr "Please click the button below to reset your password:"
 
 #: templates/emails/auth/password_reset_email.html:17
@@ -3147,12 +2986,8 @@ msgid "Suppression de fichiers déposés"
 msgstr "Submitted files to be deleted"
 
 #: templates/emails/editor/issue_files_deletion_content.html:10
-msgid ""
-"Les fichiers de production des numéros suivants seront supprimés de votre "
-"compte dans cinq jours&nbsp;:"
-msgstr ""
-"We wanted to let you know that the production files for the following issues"
-" will be deleted from your account in 5 days:"
+msgid "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:"
+msgstr "We wanted to let you know that the production files for the following issues will be deleted from your account in 5 days:"
 
 #: templates/emails/editor/issue_files_deletion_content.html:22
 msgid "Assurez-vous d’en avoir une copie."
@@ -3181,9 +3016,7 @@ msgid "Numéros sans activité depuis plus de deux semaines"
 msgstr ""
 
 #: templates/emails/editor/issue_submission_action_needed_content.html:10
-msgid ""
-"Les numéros suivants n'ont pas eu d'activité depuis plus de deux "
-"semaines&nbsp;:"
+msgid "Les numéros suivants n'ont pas eu d'activité depuis plus de deux semaines&nbsp;:"
 msgstr ""
 
 #: templates/emails/editor/issue_submission_action_needed_subject.html:3
@@ -3287,9 +3120,7 @@ msgstr "[Érudit] New files sent"
 
 #: templates/emails/information/journal_information_new_revision_content.html:3
 #, python-format
-msgid ""
-"Modification faite par <strong>%(user)s</strong> le "
-"<strong>%(date)s</strong> à <strong>%(time)s</strong>."
+msgid "Modification faite par <strong>%(user)s</strong> le <strong>%(date)s</strong> à <strong>%(time)s</strong>."
 msgstr ""
 
 #: templates/emails/information/journal_information_new_revision_subject.html:2
@@ -3302,12 +3133,8 @@ msgstr "Join an organization"
 
 #: templates/emails/organisation/new_member_content.html:10
 #, python-format
-msgid ""
-"Une proposition vous a été envoyée afin de rejoindre l’organisation "
-"<strong>%(organisation_name)s</strong>."
-msgstr ""
-"An offer has been sent to you to join the organization "
-"<strong>%(organisation_name)s</strong>."
+msgid "Une proposition vous a été envoyée afin de rejoindre l’organisation <strong>%(organisation_name)s</strong>."
+msgstr "An offer has been sent to you to join the organization <strong>%(organisation_name)s</strong>."
 
 #: templates/emails/organisation/new_member_content.html:14
 msgid "Veuillez cliquer sur le lien suivant pour l’accepter"
@@ -3325,8 +3152,7 @@ msgstr "[Érudit] Join the Organization %(organisation_name)s"
 #: templates/emails/subscription/journal/new_subscription_subject.html:2
 #, python-format
 msgid "[Érudit] Abonnement à %(journal_name)s — activez avant le %(deadline)s\n"
-msgstr ""
-"[Érudit] Subscription to %(journal_name)s — activate before %(deadline)s\n"
+msgstr "[Érudit] Subscription to %(journal_name)s — activate before %(deadline)s\n"
 
 #: templates/public/20_years.html:4 templates/public/20_years.html:6
 #: templates/public/20_years.html:33 templates/public/20_years.html:49
@@ -4015,12 +3841,8 @@ msgid "Vous êtes déjà abonné à cette revue avec ce compte."
 msgstr "You are already subscribed to this journal with this account."
 
 #: templates/public/account_actions/individual_subscription_landing.html:42
-msgid ""
-"Votre compte est configuré avec une adresse courriel différente, veuillez "
-"demander un changement d'adresse courriel à l'éditeur."
-msgstr ""
-"Your account is associated with a different email address, please request a "
-"change of email address from the editor."
+msgid "Votre compte est configuré avec une adresse courriel différente, veuillez demander un changement d'adresse courriel à l'éditeur."
+msgstr "Your account is associated with a different email address, please request a change of email address from the editor."
 
 #: templates/public/account_actions/individual_subscription_landing.html:51
 msgid "Activer votre abonnement"
@@ -4028,14 +3850,8 @@ msgstr "Activate your Subscription"
 
 #: templates/public/account_actions/individual_subscription_landing.html:57
 #, python-format
-msgid ""
-"Il y a déjà un compte associé à l'adresse courriel "
-"<strong>%(email)s</strong>, veuillez vous identifier pour activer votre "
-"abonnement à cette revue."
-msgstr ""
-"There is already an account associated with the email address "
-"<strong>%(email)s</strong>, you must log in to activate your subscription to"
-" this journal."
+msgid "Il y a déjà un compte associé à l'adresse courriel <strong>%(email)s</strong>, veuillez vous identifier pour activer votre abonnement à cette revue."
+msgstr "There is already an account associated with the email address <strong>%(email)s</strong>, you must log in to activate your subscription to this journal."
 
 #: templates/public/account_actions/individual_subscription_landing.html:64
 msgid "S'identifier"
@@ -4043,14 +3859,8 @@ msgstr "Log In"
 
 #: templates/public/account_actions/individual_subscription_landing.html:69
 #, python-format
-msgid ""
-"Il n'y a pas de compte associé à l'adresse courriel "
-"<strong>%(email)s</strong>, veuillez vous créer un compte pour activer votre"
-" abonnement à cette revue."
-msgstr ""
-"There is no account associated with the email address "
-"<strong>%(email)s</strong>, please create an account to activate your "
-"subscription to this journal."
+msgid "Il n'y a pas de compte associé à l'adresse courriel <strong>%(email)s</strong>, veuillez vous créer un compte pour activer votre abonnement à cette revue."
+msgstr "There is no account associated with the email address <strong>%(email)s</strong>, please create an account to activate your subscription to this journal."
 
 #: templates/public/account_actions/individual_subscription_landing.html:76
 #: templates/public/account_actions/organisation_membership_landing.html:57
@@ -4088,11 +3898,8 @@ msgstr "You have already joined this organization with this account."
 
 #: templates/public/account_actions/organisation_membership_landing.html:41
 #, python-format
-msgid ""
-"Voulez-vous rejoindre l’organisation "
-"<strong>%(organisation_name)s</strong>&nbsp;?"
-msgstr ""
-"Join the following organization: <strong>%(organisation_name)s</strong>?"
+msgid "Voulez-vous rejoindre l’organisation <strong>%(organisation_name)s</strong>&nbsp;?"
+msgstr "Join the following organization: <strong>%(organisation_name)s</strong>?"
 
 #: templates/public/account_actions/organisation_membership_landing.html:49
 msgid "Rejoindre"
@@ -4134,25 +3941,13 @@ msgid "L’espace <em>Mon compte</em> permet l’accès&nbsp;:"
 msgstr "An account provides:"
 
 #: templates/public/auth/login.html:40 templates/public/auth/login.html:94
-msgid ""
-"à leur tableau de bord pour les <strong>bibliothécaires</strong> des "
-"institutions partenaires ou abonnées et pour les <strong>responsables des "
-"revues</strong> diffusées sur Érudit."
-msgstr ""
-"A helpful dashboard for <strong>librarians</strong> at partner or subscriber"
-" institutions, and <strong>managers of journals</strong> published on "
-"Érudit."
+msgid "à leur tableau de bord pour les <strong>bibliothécaires</strong> des institutions partenaires ou abonnées et pour les <strong>responsables des revues</strong> diffusées sur Érudit."
+msgstr "A helpful dashboard for <strong>librarians</strong> at partner or subscriber institutions, and <strong>managers of journals</strong> published on Érudit."
 
 #: templates/public/auth/login.html:41
 #, python-format
-msgid ""
-"aux contenus restreints d’une revue pour les <strong>abonnés "
-"individuels</strong>. Pour s’abonner à une revue spécifique, merci de "
-"contacter directement <a href=\"\"%(journal_list)s>la revue</a>."
-msgstr ""
-"Access to a journal’s restricted content for <strong>individual "
-"subscribers</strong>. If you would like to subscribe to a specific journal, "
-"please contact <a href=\"%(journal_list)s\">the journal</a> directly."
+msgid "aux contenus restreints d’une revue pour les <strong>abonnés individuels</strong>. Pour s’abonner à une revue spécifique, merci de contacter directement <a href=\"\"%(journal_list)s>la revue</a>."
+msgstr "Access to a journal’s restricted content for <strong>individual subscribers</strong>. If you would like to subscribe to a specific journal, please contact <a href=\"%(journal_list)s\">the journal</a> directly."
 
 #: templates/public/auth/login.html:68 templates/public/auth/login.html:122
 msgid "Mot de passe oublié&nbsp;?"
@@ -4160,14 +3955,8 @@ msgstr "Forgot your password?"
 
 #: templates/public/auth/login.html:95
 #, python-format
-msgid ""
-"aux contenus restreints d’une revue pour les <strong>abonnés "
-"individuels.</strong> Pour s’abonner à une revue spécifique, merci de "
-"contacter directement <a href=\"%(journal_list)s\">la revue</a>."
-msgstr ""
-"Access to a journal’s restricted content for <strong>individual "
-"subscribers</strong>. If you would like to subscribe to a specific journal, "
-"please contact <a href=\"%(journal_list)s\">the journal</a> directly."
+msgid "aux contenus restreints d’une revue pour les <strong>abonnés individuels.</strong> Pour s’abonner à une revue spécifique, merci de contacter directement <a href=\"%(journal_list)s\">la revue</a>."
+msgstr "Access to a journal’s restricted content for <strong>individual subscribers</strong>. If you would like to subscribe to a specific journal, please contact <a href=\"%(journal_list)s\">the journal</a> directly."
 
 #: templates/public/auth/parameters.html:4
 #: templates/public/auth/parameters.html:7
@@ -4199,8 +3988,7 @@ msgid "Retourner à la page d'accueil"
 msgstr "Return to homepage"
 
 #: templates/public/auth/password_reset_complete.html:6
-msgid ""
-"Votre mot de passe a été modifié. Vous pouvez maintenant vous authentifier."
+msgid "Votre mot de passe a été modifié. Vous pouvez maintenant vous authentifier."
 msgstr "Your password has been changed. You may now log in.  "
 
 #: templates/public/auth/password_reset_confirm.html:10
@@ -4216,38 +4004,24 @@ msgid "Confirmation du nouveau mot de passe"
 msgstr "Confirm New Password"
 
 #: templates/public/auth/password_reset_confirm.html:35
-msgid ""
-"Ce lien de réinitialisation de mot de passe est invalide ou a expiré. "
-"Veuillez en générer un nouveau en cliquant sur le bouton ci-bas."
-msgstr ""
-"This link to reset your password has expired or is invalid. Please generate "
-"a new one by clicking on the following button:"
+msgid "Ce lien de réinitialisation de mot de passe est invalide ou a expiré. Veuillez en générer un nouveau en cliquant sur le bouton ci-bas."
+msgstr "This link to reset your password has expired or is invalid. Please generate a new one by clicking on the following button:"
 
 #: templates/public/auth/password_reset_confirm.html:40
 msgid "Réinitialiser votre mot de passe"
 msgstr "Reset your password"
 
 #: templates/public/auth/password_reset_done.html:5
-msgid ""
-"Vous recevrez les directives pour réinitialiser votre mot de passe par "
-"courriel."
+msgid "Vous recevrez les directives pour réinitialiser votre mot de passe par courriel."
 msgstr "You will receive instructions by email to reset your password."
 
 #: templates/public/auth/password_reset_done.html:6
-msgid ""
-"Si vous ne recevez pas de message, vérifiez que vous avez saisi l'adresse "
-"avec laquelle vous vous êtes enregistré."
-msgstr ""
-"If you do not receive a message, make sure you have correctly entered the "
-"address you signed up with."
+msgid "Si vous ne recevez pas de message, vérifiez que vous avez saisi l'adresse avec laquelle vous vous êtes enregistré."
+msgstr "If you do not receive a message, make sure you have correctly entered the address you signed up with."
 
 #: templates/public/auth/password_reset_form.html:8
-msgid ""
-"Saisissez votre adresse courriel ci-dessous et nous vous enverrons les "
-"instructions pour en créer un nouveau."
-msgstr ""
-"Enter your email address below and we will send you instructions to create a"
-" new password."
+msgid "Saisissez votre adresse courriel ci-dessous et nous vous enverrons les instructions pour en créer un nouveau."
+msgstr "Enter your email address below and we will send you instructions to create a new password."
 
 #: templates/public/auth/password_reset_form.html:23
 msgid "Réinitialiser"
@@ -4376,9 +4150,7 @@ msgstr "Full text (PDF)"
 
 #: templates/public/book/home.html:13 templates/public/book/home.html:23
 #: templates/public/book/home.html:32
-msgid ""
-"Consultez notre collection de livres et d’actes de colloques en sciences "
-"humaines et sociales."
+msgid "Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales."
 msgstr "Explore our books and proceedings in social sciences and humanities."
 
 #: templates/public/book/home.html:75 templates/public/book/home.html:94
@@ -4403,11 +4175,8 @@ msgid "Logo et identité"
 msgstr "Logo and brand assets"
 
 #: templates/public/brand_assets.html:6
-msgid ""
-"Consultez le guide de style d’Érudit : logo, palette de couleurs, identité."
-msgstr ""
-"Find out more about Érudit's brand guidelines: logo, colour scheme and "
-"graphics.  "
+msgid "Consultez le guide de style d’Érudit : logo, palette de couleurs, identité."
+msgstr "Find out more about Érudit's brand guidelines: logo, colour scheme and graphics.  "
 
 #: templates/public/brand_assets.html:59
 msgid ""
@@ -4435,9 +4204,7 @@ msgid "Couleurs et illustrations"
 msgstr "Colours and graphics"
 
 #: templates/public/brand_assets.html:78
-msgid ""
-"La charte graphique d’Érudit repose sur l’utilisation de 3 couleurs: le "
-"rouge, le bleu et le gris."
+msgid "La charte graphique d’Érudit repose sur l’utilisation de 3 couleurs: le rouge, le bleu et le gris."
 msgstr "Érudit's palette is composed of 3 colours: red, blue and grey. "
 
 #: templates/public/brand_assets.html:90
@@ -4488,12 +4255,8 @@ msgstr ""
 "These graphics are available on request."
 
 #: templates/public/brand_assets.html:145
-msgid ""
-"Un espace de sécurité doit toujours être préservé autour du logo. La taille "
-"de cet espace est équivalente à la taille de l’accent du logo."
-msgstr ""
-"Please keep a clearspace around the logo. The minimum clearspace must be "
-"equivalent to the height of the acute accent in the logo. "
+msgid "Un espace de sécurité doit toujours être préservé autour du logo. La taille de cet espace est équivalente à la taille de l’accent du logo."
+msgstr "Please keep a clearspace around the logo. The minimum clearspace must be equivalent to the height of the acute accent in the logo. "
 
 #: templates/public/brand_assets.html:147
 #: templates/public/brand_assets.html:148
@@ -4505,8 +4268,7 @@ msgid "Version standard"
 msgstr "Standard logo"
 
 #: templates/public/brand_assets.html:153
-msgid ""
-"L’utilisation du logo rouge et au complet est celle qui est privilégiée."
+msgid "L’utilisation du logo rouge et au complet est celle qui est privilégiée."
 msgstr "We favour the use of the red, full-size logotype."
 
 #: templates/public/brand_assets.html:155
@@ -4518,14 +4280,8 @@ msgid "Déclinaisons de couleurs"
 msgstr "Colour variations"
 
 #: templates/public/brand_assets.html:160
-msgid ""
-"En fonction de son utilisation, le logo peut se décliner en 3 couleurs: "
-"rouge, blanc et noir. Afin de conserver son uniformité, le logo ne doit pas "
-"comprendre d’autres combinaisons de couleurs."
-msgstr ""
-"The Érudit logo can be used in red, white or black, but never in any other "
-"colours. In order to maintain its consistency, the logo may not be displayed"
-" with other colour combinations. "
+msgid "En fonction de son utilisation, le logo peut se décliner en 3 couleurs: rouge, blanc et noir. Afin de conserver son uniformité, le logo ne doit pas comprendre d’autres combinaisons de couleurs."
+msgstr "The Érudit logo can be used in red, white or black, but never in any other colours. In order to maintain its consistency, the logo may not be displayed with other colour combinations. "
 
 #: templates/public/brand_assets.html:162
 msgid "Logo d’Érudit blanc sur fond rouge"
@@ -4548,12 +4304,8 @@ msgid "Versions abrégées (symbole)"
 msgstr "Condensed version (icon)"
 
 #: templates/public/brand_assets.html:171
-msgid ""
-"Le logo peut être utilisé en version abrégée lorsque le logo standard ne "
-"peut être affiché."
-msgstr ""
-"The condensed version may be used when the standard, full-sized logo can not"
-" be displayed. "
+msgid "Le logo peut être utilisé en version abrégée lorsque le logo standard ne peut être affiché."
+msgstr "The condensed version may be used when the standard, full-sized logo can not be displayed. "
 
 #: templates/public/brand_assets.html:173
 msgid "Symbole d’Érudit rouge sur fond blanc"
@@ -4606,13 +4358,8 @@ msgid ""
 msgstr ""
 
 #: templates/public/citations/list.html:6
-msgid ""
-"Sauvegardez et téléchargez des notices d’articles en sciences humaines et "
-"sociales pour EndNote, Zotero, RefWorks, BibTeX et Mendeley sur la "
-"plateforme Érudit."
-msgstr ""
-"Save and download article records for EndNote, Zotero, RefWorks, BibTeX and "
-"Mendeley on Érudit. "
+msgid "Sauvegardez et téléchargez des notices d’articles en sciences humaines et sociales pour EndNote, Zotero, RefWorks, BibTeX et Mendeley sur la plateforme Érudit."
+msgstr "Save and download article records for EndNote, Zotero, RefWorks, BibTeX and Mendeley on Érudit. "
 
 #: templates/public/citations/list.html:37
 msgid ""
@@ -4686,8 +4433,10 @@ msgid "Actions en lot"
 msgstr "Batch modifications"
 
 #: templates/public/citations/list.html:90
-msgid "Tout sélectionner"
-msgstr "Select all"
+#, fuzzy
+#| msgid "Retourner en haut de la page"
+msgid "Sélectionner toute la page"
+msgstr "Return to top"
 
 #: templates/public/citations/list.html:93
 msgid "Aucun document sélectionné"
@@ -4701,8 +4450,17 @@ msgstr "Delete selected records"
 msgid "Citer les notices sélectionnées"
 msgstr "Cite selected records"
 
-#: templates/public/citations/list.html:124
-#: templates/public/citations/list.html:178
+#: templates/public/citations/list.html:113
+#, python-format
+msgid "Sélectionner les %(total_citations_count)s notices sauvegardées"
+msgstr ""
+
+#: templates/public/citations/list.html:114
+msgid "Effacer la sélection"
+msgstr ""
+
+#: templates/public/citations/list.html:130
+#: templates/public/citations/list.html:184
 #: templates/public/journal/eruditxsd300_to_html.xsl:368
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:164
@@ -4720,13 +4478,13 @@ msgstr "Cite selected records"
 msgid "Supprimer"
 msgstr "Delete"
 
-#: templates/public/citations/list.html:130
-#: templates/public/citations/list.html:183
+#: templates/public/citations/list.html:136
+#: templates/public/citations/list.html:189
 msgid "Citer"
 msgstr "Cite"
 
-#: templates/public/citations/list.html:137
-#: templates/public/citations/list.html:188
+#: templates/public/citations/list.html:143
+#: templates/public/citations/list.html:194
 #: templates/public/journal/eruditxsd300_to_html.xsl:376
 #: templates/public/journal/eruditxsd300_to_html.xsl:442
 #: templates/public/journal/partials/issue_detail_article_item.html:22
@@ -4735,51 +4493,46 @@ msgstr "Cite"
 msgid "Télécharger"
 msgstr "Download"
 
-#: templates/public/citations/list.html:143
+#: templates/public/citations/list.html:149
 #: templates/public/journal/partials/issue_detail_article_item.html:30
 #: templates/public/search/results.html:334
 msgid "Lire l'article en texte intégral"
 msgstr "Read the full text"
 
-#: templates/public/citations/list.html:168
-#: templates/public/citations/list.html:211
+#: templates/public/citations/list.html:174
+#: templates/public/citations/list.html:217
 msgid "Sélectionner"
 msgstr "Select"
 
-#: templates/public/citations/list.html:217
-#: templates/public/citations/list.html:251
+#: templates/public/citations/list.html:223
+#: templates/public/citations/list.html:267
 #: templates/public/journal/partials/article_citation_modal_content.html:4
 msgid "Outils de citation"
 msgstr "Citation Tools"
 
-#: templates/public/citations/list.html:219
+#: templates/public/citations/list.html:225
 msgid "Exporter la notice de ce document"
 msgstr "Export record for this document"
 
-#: templates/public/citations/list.html:231
-#: templates/public/citations/list.html:264
+#: templates/public/citations/list.html:237
+#: templates/public/citations/list.html:280
 #: templates/public/journal/partials/article_citation_modal_content.html:42
 msgid "(version X9.1 et +)"
 msgstr "(version X9.1 and above)"
 
-#: templates/public/citations/list.html:253
+#: templates/public/citations/list.html:269
 msgid "Exporter les notices sélectionnées"
 msgstr "Export selected records"
 
-#: templates/public/citations/list.html:277
+#: templates/public/citations/list.html:293
 msgid "Aucune notice&nbsp;!"
 msgstr "No saved records!"
 
-#: templates/public/citations/list.html:277
-msgid ""
-"Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-"
-"page&nbsp;<i class=\"icon ion-ios-bookmark toolbox-save\"></i>."
-msgstr ""
-"Download articles and other documents with the bookmark icon&nbsp;<i "
-"class=\"icon ion-ios-bookmark toolbox-save\"></i>."
+#: templates/public/citations/list.html:293
+msgid "Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-page&nbsp;<i class=\"icon ion-ios-bookmark toolbox-save\"></i>."
+msgstr "Download articles and other documents with the bookmark icon&nbsp;<i class=\"icon ion-ios-bookmark toolbox-save\"></i>."
 
-#: templates/public/home.html:47
-#: templates/public/journal/issue_detail.html:108
+#: templates/public/home.html:47 templates/public/journal/issue_detail.html:108
 #: templates/public/journal/journal_base.html:23
 #: templates/public/search/results.html:171
 msgid "inconnu"
@@ -4844,14 +4597,8 @@ msgid "Toutes les nouvelles d'Érudit"
 msgstr "See all the news"
 
 #: templates/public/home.html:204
-msgid ""
-"Érudit offre l'accès à de nombreuses collections de documents en sciences "
-"humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de "
-"recherche."
-msgstr ""
-"Érudit provides access to many document collections in the social sciences "
-"and humanities: journals, books and proceedings, theses, and research "
-"reports."
+msgid "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche."
+msgstr "Érudit provides access to many document collections in the social sciences and humanities: journals, books and proceedings, theses, and research reports."
 
 #: templates/public/home.html:209 templates/public/home.html:211
 msgid "https://apropos.erudit.org/fr/bibliotheques/"
@@ -4862,8 +4609,7 @@ msgid "Bibliothécaires"
 msgstr "Librarians"
 
 #: templates/public/home.html:210
-msgid ""
-"Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers."
+msgid "Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers."
 msgstr "Provide high-quality content to your patrons."
 
 #: templates/public/home.html:211
@@ -4920,18 +4666,13 @@ msgstr "Find articles"
 
 #: templates/public/journal/article_base.html:6
 #, python-format
-msgid ""
-"%(article)s. Un article de la revue %(journal)s (%(volume_title)s) diffusée "
-"par la plateforme Érudit. "
-msgstr ""
-"%(article)s. An article from journal %(journal)s (%(volume_title)s), on "
-"Érudit."
+msgid "%(article)s. Un article de la revue %(journal)s (%(volume_title)s) diffusée par la plateforme Érudit. "
+msgstr "%(article)s. An article from journal %(journal)s (%(volume_title)s), on Érudit."
 
 #: templates/public/journal/article_base.html:25
 #: templates/public/journal/article_base.html:38
 #, python-format
-msgid ""
-"Un article de la revue %(journal)s, diffusée par la plateforme Érudit. "
+msgid "Un article de la revue %(journal)s, diffusée par la plateforme Érudit. "
 msgstr "An article from %(journal)s, on Érudit."
 
 #: templates/public/journal/article_base.html:32
@@ -4993,54 +4734,21 @@ msgid "Options d’accès&#160;:"
 msgstr "Access options:"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:99
-msgid ""
-"via un accès institutionnel. Si vous êtes membre de l’une des 1200 "
-"bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires"
-" et collégiales, bibliothèques publiques, centres de recherche, etc.), vous "
-"pouvez vous connecter au portail de ressources numériques de votre "
-"bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire "
-"part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton "
-"“Options d’accès”."
-msgstr ""
-"Institutional access. If you are a member of one of Érudit's 1,200 library "
-"subscribers or partners (university and college libraries, public libraries,"
-" research centers, etc.), you can log in through your library's digital "
-"resource portal. If your institution is not a subscriber, you can let them "
-"know that you are interested in Érudit and this journal by clicking on the "
-"\"Access options\" button."
+msgid "via un accès institutionnel. Si vous êtes membre de l’une des 1200 bibliothèques abonnées ou partenaires d’Érudit (bibliothèques universitaires et collégiales, bibliothèques publiques, centres de recherche, etc.), vous pouvez vous connecter au portail de ressources numériques de votre bibliothèque. Si votre institution n’est pas abonnée, vous pouvez lui faire part de votre intérêt pour Érudit et cette revue en cliquant sur le bouton “Options d’accès”."
+msgstr "Institutional access. If you are a member of one of Érudit's 1,200 library subscribers or partners (university and college libraries, public libraries, research centers, etc.), you can log in through your library's digital resource portal. If your institution is not a subscriber, you can let them know that you are interested in Érudit and this journal by clicking on the \"Access options\" button."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:100
-msgid ""
-"via un accès individuel. Certaines revues proposent un abonnement individuel"
-" numérique. <a href='https://www.erudit.org/fr/compte/connexion/'>Connectez-"
-"vous</a> si vous possédez déjà un abonnement, ou cliquez sur le bouton "
-"“Options d’accès” pour obtenir plus d’informations sur l’abonnement "
-"individuel."
-msgstr ""
-"Individual access. Some journals offer individual digital subscriptions. <a "
-"href=\"https://www.erudit.org/en/account/login/\">Log in</a> if you already "
-"have a subscription or click on the “Access options” button for details "
-"about individual subscriptions."
+msgid "via un accès individuel. Certaines revues proposent un abonnement individuel numérique. <a href='https://www.erudit.org/fr/compte/connexion/'>Connectez-vous</a> si vous possédez déjà un abonnement, ou cliquez sur le bouton “Options d’accès” pour obtenir plus d’informations sur l’abonnement individuel."
+msgstr "Individual access. Some journals offer individual digital subscriptions. <a href=\"https://www.erudit.org/en/account/login/\">Log in</a> if you already have a subscription or click on the “Access options” button for details about individual subscriptions."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:103
 #, python-format
-msgid ""
-"Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les "
-"derniers numéros de cette revue sont sous restriction. <a "
-"href=\"https://www.erudit.org/fr/revues/%(code)s/#back-issues\">L’ensemble "
-"des numéros antérieurs</a> est consultable librement sur la plateforme."
-msgstr ""
-"As part of Érudit's commitment to open access, only the most recent issues "
-"of this journal are restricted. <a "
-"href=\"https://www.erudit.org/en/journals/%(code)s/#back-issues\">All of its"
-" archives</a> can be freely consulted on the platform."
+msgid "Dans le cadre de l’engagement d’Érudit en faveur du libre accès, seuls les derniers numéros de cette revue sont sous restriction. <a href=\"https://www.erudit.org/fr/revues/%(code)s/#back-issues\">L’ensemble des numéros antérieurs</a> est consultable librement sur la plateforme."
+msgstr "As part of Érudit's commitment to open access, only the most recent issues of this journal are restricted. <a href=\"https://www.erudit.org/en/journals/%(code)s/#back-issues\">All of its archives</a> can be freely consulted on the platform."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:107
-msgid ""
-"https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform"
-msgstr ""
-"https://docs.google.com/forms/d/e/1FAIpQLSfgf8N6PF5fd8oEtqycKAOXTt-"
-"HgsEsrBSGNbgGFmrWmDXBfg/viewform"
+msgid "https://docs.google.com/forms/d/e/1FAIpQLSeheftSehE4RDvrSHBnSYDJ5bqknfuDX4Aed9bmomGgaK3_5w/viewform"
+msgstr "https://docs.google.com/forms/d/e/1FAIpQLSfgf8N6PF5fd8oEtqycKAOXTt-HgsEsrBSGNbgGFmrWmDXBfg/viewform"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:108
 msgid "Options d’accès"
@@ -5048,8 +4756,7 @@ msgstr "Access options"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:116
 #: templates/public/journal/partials/issue_detail_article_item.html:40
-msgid ""
-"Le contenu de ce document est inaccessible en raison du droit d’auteur."
+msgid "Le contenu de ce document est inaccessible en raison du droit d’auteur."
 msgstr "This document's content is inaccessible due to copyright reasons. "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:126
@@ -5095,20 +4802,12 @@ msgstr "<xsl:apply-templates select=\"../article/@typeart\"/> of the journal"
 #: templates/public/journal/issue_detail.html:136
 #: templates/public/journal/journal_base.html:117
 #: templates/public/journal/journal_detail.html:108
-msgid ""
-"Tous les articles de cette revue sont soumis à un processus d’évaluation par"
-" les pairs."
-msgstr ""
-"All articles in this journal are selected through a peer review process. "
+msgid "Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs."
+msgstr "All articles in this journal are selected through a peer review process. "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:205
-msgid ""
-"Ce document est le compte-rendu d'une autre oeuvre tel qu'un livre ou un "
-"film. L'oeuvre originale discutée ici n'est pas disponible sur cette "
-"plateforme."
-msgstr ""
-"This article is a review of another work such as a book or a film. The "
-"original work discussed here is not available on this platform."
+msgid "Ce document est le compte-rendu d'une autre oeuvre tel qu'un livre ou un film. L'oeuvre originale discutée ici n'est pas disponible sur cette plateforme."
+msgstr "This article is a review of another work such as a book or a film. The original work discussed here is not available on this platform."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:216
 #: templates/public/journal/eruditxsd300_to_html.xsl:336
@@ -5222,40 +4921,24 @@ msgid "special"
 msgstr "special"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1341
-msgid ""
-"-> Voir la liste des <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if"
-" test=\"self::grtableau\">tableaux</xsl:if>"
-msgstr ""
-"-> See the list of <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if "
-"test=\"self::grtableau\">tables</xsl:if>"
+msgid "-> Voir la liste des <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if test=\"self::grtableau\">tableaux</xsl:if>"
+msgstr "-> See the list of <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if test=\"self::grtableau\">tables</xsl:if>"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1388
-msgid ""
-"-> Voir la liste des <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if "
-"test=\"self::tableau\">tableaux</xsl:if>"
-msgstr ""
-"-> See the list of <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if "
-"test=\"self::tableau\">tables</xsl:if>"
+msgid "-> Voir la liste des <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if test=\"self::tableau\">tableaux</xsl:if>"
+msgstr "-> See the list of <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if test=\"self::tableau\">tables</xsl:if>"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1399
 msgid "(suite)"
 msgstr "(continuation)"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1702
-msgid ""
-"Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
-"jour."
-msgstr ""
-"Your browser does not support audio files. Please update it for optimal "
-"viewing of this site. "
+msgid "Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à jour."
+msgstr "Your browser does not support audio files. Please update it for optimal viewing of this site. "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1713
-msgid ""
-"Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
-"jour."
-msgstr ""
-"Your browser does not support video files. Please update it for optimal "
-"viewing of this site. "
+msgid "Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour."
+msgstr "Your browser does not support video files. Please update it for optimal viewing of this site. "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:2264
 msgid "Parties annexes"
@@ -5279,9 +4962,7 @@ msgstr "Discipline: "
 #: templates/public/journal/issue_detail.html:19
 #: templates/public/journal/issue_detail.html:32
 #, python-format
-msgid ""
-"Consultez le sommaire de ce numéro de la revue %(journal)s sur la plateforme"
-" Érudit."
+msgid "Consultez le sommaire de ce numéro de la revue %(journal)s sur la plateforme Érudit."
 msgstr "Read this issue of the journal %(journal)s on Érudit."
 
 #: templates/public/journal/issue_detail.html:26
@@ -5324,12 +5005,8 @@ msgstr[1] ""
 "      "
 
 #: templates/public/journal/issue_detail.html:205
-msgid ""
-"La lecture de ces articles nécessite une redirection vers le site de la "
-"revue."
-msgstr ""
-"You will be redirected to the journal's website in order to read these "
-"articles."
+msgid "La lecture de ces articles nécessite une redirection vers le site de la revue."
+msgstr "You will be redirected to the journal's website in order to read these articles."
 
 #: templates/public/journal/issue_detail.html:218
 #: templates/public/journal/issue_detail.html:231
@@ -5376,12 +5053,8 @@ msgstr "Index of authors"
 #: templates/public/journal/journal_authors_list.html:25
 #: templates/public/journal/journal_authors_list.html:36
 #, python-format
-msgid ""
-"Explorez la liste des auteurs par ordre alphabétique et par type de "
-"publication de la revue %(journal)s sur la plateforme Érudit."
-msgstr ""
-"Look up authors published by the journal %(journal)s by alphabetical order "
-"and by publication type on Érudit. "
+msgid "Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue %(journal)s sur la plateforme Érudit."
+msgstr "Look up authors published by the journal %(journal)s by alphabetical order and by publication type on Érudit. "
 
 #: templates/public/journal/journal_authors_list.html:98
 msgid "Par type d’article"
@@ -5443,8 +5116,7 @@ msgid "Numéros à venir"
 msgstr "Issues pending"
 
 #: templates/public/journal/journal_base.html:71
-msgid ""
-"L’intégration de cette revue à la plateforme est en cours de finalisation."
+msgid "L’intégration de cette revue à la plateforme est en cours de finalisation."
 msgstr "This journal’s content integration is being finalized."
 
 #: templates/public/journal/journal_base.html:79
@@ -5485,23 +5157,16 @@ msgstr "Available in open access"
 
 #: templates/public/journal/journal_base.html:130
 #: templates/public/journal/journal_detail.html:113
-msgid ""
-"Les numéros courants et les archives de cette revue sont disponibles en "
-"libre accès."
-msgstr ""
-"Current and archived issues of this journal are available in open access."
+msgid "Les numéros courants et les archives de cette revue sont disponibles en libre accès."
+msgstr "Current and archived issues of this journal are available in open access."
 
 #: templates/public/journal/journal_base.html:132
 msgid "Accès restreint"
 msgstr "Restricted Access"
 
 #: templates/public/journal/journal_base.html:132
-msgid ""
-"L’accès aux numéros courants de cette revue nécessite un abonnement, tandis "
-"que l’ensemble de ses archives est disponible en libre accès."
-msgstr ""
-"Access to current issues of this journal requires a subscription, but all of"
-" its archived issues are available in open access. "
+msgid "L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès."
+msgstr "Access to current issues of this journal requires a subscription, but all of its archived issues are available in open access. "
 
 #: templates/public/journal/journal_base.html:135
 msgid "Archivage numérique"
@@ -5717,12 +5382,8 @@ msgid "Revues par disciplines"
 msgstr "Journals by discipline"
 
 #: templates/public/journal/journal_list_per_disciplines.html:6
-msgid ""
-"Découvrez la liste par discipline en sciences humaines et sociales des "
-"revues savantes et culturelles d'Érudit et de ses partenaires."
-msgstr ""
-"Look up, by discipline, scholarly and cultural journals in social sciences "
-"and humanities. A service provided Érudit and its partners."
+msgid "Découvrez la liste par discipline en sciences humaines et sociales des revues savantes et culturelles d'Érudit et de ses partenaires."
+msgstr "Look up, by discipline, scholarly and cultural journals in social sciences and humanities. A service provided Érudit and its partners."
 
 #: templates/public/journal/journal_list_per_disciplines.html:67
 #: templates/public/journal/journal_list_per_names.html:4
@@ -5731,28 +5392,16 @@ msgid "Revues par ordre alphabétique"
 msgstr "Journals by alphabetical order"
 
 #: templates/public/journal/journal_list_per_disciplines.html:112
-msgid ""
-"Les revues de la collection Persée redirigent vers la plateforme du "
-"partenaire."
-msgstr ""
-"Journals from the Persée collection are redirected to the partner's "
-"platform."
+msgid "Les revues de la collection Persée redirigent vers la plateforme du partenaire."
+msgstr "Journals from the Persée collection are redirected to the partner's platform."
 
 #: templates/public/journal/journal_list_per_disciplines.html:116
-msgid ""
-"Les revues de la collection NRC Research Press redirigent vers la plateforme"
-" du partenaire."
-msgstr ""
-"Journals from the NRC Research Press collection are redirected to the "
-"partner's platform."
+msgid "Les revues de la collection NRC Research Press redirigent vers la plateforme du partenaire."
+msgstr "Journals from the NRC Research Press collection are redirected to the partner's platform."
 
 #: templates/public/journal/journal_list_per_names.html:6
-msgid ""
-"Découvrez la liste alphabétique des revues savantes et culturelles en "
-"sciences humaines et sociales d'Érudit et de ses partenaires."
-msgstr ""
-"Look up, in alphabetical order, scholarly and cultural journals in social "
-"sciences and humanities. A service provided Érudit and its partners. "
+msgid "Découvrez la liste alphabétique des revues savantes et culturelles en sciences humaines et sociales d'Érudit et de ses partenaires."
+msgstr "Look up, in alphabetical order, scholarly and cultural journals in social sciences and humanities. A service provided Érudit and its partners. "
 
 #: templates/public/journal/journal_list_per_names.html:65
 #, python-format
@@ -5895,9 +5544,7 @@ msgid "Votre accès est offert par"
 msgstr "Your access is provided by"
 
 #: templates/public/search/advanced_search.html:20
-msgid ""
-"Effectuez une recherche avancée dans le corpus Érudit à l'aide d'opérateurs "
-"booléens et de filtres."
+msgid "Effectuez une recherche avancée dans le corpus Érudit à l'aide d'opérateurs booléens et de filtres."
 msgstr "Search in Érudit's corpus using boolean operators and filters. "
 
 #: templates/public/search/advanced_search.html:35
@@ -5969,8 +5616,7 @@ msgstr "Search Results"
 #: templates/public/search/results.html:47
 #, python-format
 msgid "<strong>%(counter)s</strong> résultat trouvé pour la requête&nbsp;:"
-msgid_plural ""
-"<strong>%(counter)s</strong> résultats trouvés pour la requête&nbsp;:"
+msgid_plural "<strong>%(counter)s</strong> résultats trouvés pour la requête&nbsp;:"
 msgstr[0] "<strong>%(counter)s</strong> result found for the query:"
 msgstr[1] "<strong>%(counter)s</strong> results found for the query:"
 
@@ -6082,9 +5728,7 @@ msgstr "%(repository)s’s theses and dissertations"
 #: templates/public/thesis/collection_home.html:25
 #: templates/public/thesis/collection_home.html:36
 #, python-format
-msgid ""
-"Accédez aux thèses et mémoires du dépôt institutionnel de %(repository)s sur"
-" la plateforme Érudit."
+msgid "Accédez aux thèses et mémoires du dépôt institutionnel de %(repository)s sur la plateforme Érudit."
 msgstr "Access %(repository)s's theses and dissertations on Érudit."
 
 #: templates/public/thesis/collection_home.html:90
@@ -6110,12 +5754,8 @@ msgid "Liste complète"
 msgstr "Full list"
 
 #: templates/public/thesis/collection_list_base.html:84
-msgid ""
-"La lecture de ces thèses nécessite une redirection vers le site du dépôt "
-"institutionnel."
-msgstr ""
-"You will be redirected to the institution’s website in order to read these "
-"documents. "
+msgid "La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel."
+msgstr "You will be redirected to the institution’s website in order to read these documents. "
 
 #: templates/public/thesis/collection_list_base.html:89
 msgid "Trier par"
@@ -6138,12 +5778,8 @@ msgstr "At a glance"
 #: templates/public/thesis/collection_list_per_author_name.html:18
 #: templates/public/thesis/collection_list_per_author_name.html:29
 #, python-format
-msgid ""
-"Consultez les thèses et mémoires de %(repository)s par auteur commençant par"
-" %(letter)s sur la plateforme Érudit."
-msgstr ""
-"Find %(repository)s's theses and dissertations on Érudit. Authors by name: "
-"%(letter)s. "
+msgid "Consultez les thèses et mémoires de %(repository)s par auteur commençant par %(letter)s sur la plateforme Érudit."
+msgstr "Find %(repository)s's theses and dissertations on Érudit. Authors by name: %(letter)s. "
 
 #: templates/public/thesis/collection_list_per_author_name.html:38
 #: templates/public/thesis/collection_list_per_author_name.html:44
@@ -6164,22 +5800,14 @@ msgstr "Theses and dissertations published in %(year)s"
 
 #: templates/public/thesis/collection_list_per_year.html:6
 #, python-format
-msgid ""
-"Consultez les thèses et mémoires de %(repository)s publiés en %(year)s sur "
-"la plateforme Érudit."
-msgstr ""
-"Look up %(repository)s’s theses and dissertations published in %(year)s on "
-"Érudit."
+msgid "Consultez les thèses et mémoires de %(repository)s publiés en %(year)s sur la plateforme Érudit."
+msgstr "Look up %(repository)s’s theses and dissertations published in %(year)s on Érudit."
 
 #: templates/public/thesis/collection_list_per_year.html:18
 #: templates/public/thesis/collection_list_per_year.html:29
 #, python-format
-msgid ""
-"Consultez les thèses et mémoires de %(repository)s publiées en %(year)s sur "
-"la plateforme Érudit."
-msgstr ""
-"Look up %(repository)s’s theses and dissertations published in %(year)s on "
-"Érudit."
+msgid "Consultez les thèses et mémoires de %(repository)s publiées en %(year)s sur la plateforme Érudit."
+msgstr "Look up %(repository)s’s theses and dissertations published in %(year)s on Érudit."
 
 #: templates/public/thesis/collection_list_per_year.html:53
 msgid "Parcourir d'autres années"
@@ -6187,9 +5815,7 @@ msgstr "Browse other years"
 
 #: templates/public/thesis/home.html:13 templates/public/thesis/home.html:23
 #: templates/public/thesis/home.html:32
-msgid ""
-"Consultez les dépôts de thèses et mémoires de plusieurs universités "
-"canadiennes sur la plateforme Érudit."
+msgid "Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit."
 msgstr "Look up Canadian universities' theses and dissertations on Érudit."
 
 #: templates/public/thesis/home.html:78
@@ -6257,12 +5883,8 @@ msgstr "Add access"
 
 #: templates/userspace/journal/authorization/authorization_create.html:26
 #, python-format
-msgid ""
-"Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation "
-"suivante&nbsp;: <strong>%(authorization_label)s</strong>"
-msgstr ""
-"Please select a user to whom you’d like to grant access for the following "
-"action: <strong>%(authorization_label)s</strong>"
+msgid "Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation suivante&nbsp;: <strong>%(authorization_label)s</strong>"
+msgstr "Please select a user to whom you’d like to grant access for the following action: <strong>%(authorization_label)s</strong>"
 
 #: templates/userspace/journal/authorization/authorization_create.html:49
 #: templates/userspace/journal/subscription/individualsubscription_create.html:45
@@ -6352,9 +5974,7 @@ msgstr "No."
 
 #: templates/userspace/journal/editor/delete.html:18
 #, python-format
-msgid ""
-"Vous allez supprimer l’ensemble des fichiers téléchargés dans le dossier "
-"<em>%(object)s</em>. Voulez-vous poursuivre&nbsp;? "
+msgid "Vous allez supprimer l’ensemble des fichiers téléchargés dans le dossier <em>%(object)s</em>. Voulez-vous poursuivre&nbsp;? "
 msgstr "Delete all files downloaded in the <em>%(object)s</em> folder? "
 
 #: templates/userspace/journal/editor/detail.html:28
@@ -6397,12 +6017,8 @@ msgid "Dépôt du numéro&nbsp;:"
 msgstr ""
 
 #: templates/userspace/journal/editor/form.html:61
-msgid ""
-"Afin de réduire les délais de production de vos numéros et ainsi réduire les"
-" coûts qui y sont reliés, ne pas oublier de&nbsp;:"
-msgstr ""
-"To reduce the production time of your issues and thereby reduce related "
-"costs, do not forget to:"
+msgid "Afin de réduire les délais de production de vos numéros et ainsi réduire les coûts qui y sont reliés, ne pas oublier de&nbsp;:"
+msgstr "To reduce the production time of your issues and thereby reduce related costs, do not forget to:"
 
 #: templates/userspace/journal/editor/form.html:63
 msgid "Incorporer les polices des fichiers PDF;"
@@ -6413,20 +6029,12 @@ msgid "Séparer les fichiers PDF article par article;"
 msgstr "Separate PDF files article by article;"
 
 #: templates/userspace/journal/editor/form.html:65
-msgid ""
-"Nommer les articles selon leur ordre d’apparition dans le numéro "
-"(<em>article1</em>, <em>article2</em>&hellip;);"
-msgstr ""
-"Name the articles according to their order of appearance in the number "
-"(<em>article1</em>, <em>article2</em>&hellip;);"
+msgid "Nommer les articles selon leur ordre d’apparition dans le numéro (<em>article1</em>, <em>article2</em>&hellip;);"
+msgstr "Name the articles according to their order of appearance in the number (<em>article1</em>, <em>article2</em>&hellip;);"
 
 #: templates/userspace/journal/editor/form.html:66
-msgid ""
-"Nommer les figures et tableaux selon le numéro de l’article et leur ordre "
-"d’apparition dans l'article (<em>image01-01.jpg</em>);"
-msgstr ""
-"Name the figures and tables according to the article number and their order "
-"of appearance in the article (<em>image01-01.jpg</em>);"
+msgid "Nommer les figures et tableaux selon le numéro de l’article et leur ordre d’apparition dans l'article (<em>image01-01.jpg</em>);"
+msgstr "Name the figures and tables according to the article number and their order of appearance in the article (<em>image01-01.jpg</em>);"
 
 #: templates/userspace/journal/editor/form.html:67
 msgid "Supprimer les marques de coupes dans les fichiers PDF;"
@@ -6437,20 +6045,12 @@ msgid "Compresser tous les fichiers dans un dossier ZIP avant de le déposer."
 msgstr "Compress all files in a ZIP folder before uploading."
 
 #: templates/userspace/journal/editor/form.html:71
-msgid ""
-"Pour que vos articles s’affichent correctement sur la plateforme, veuillez "
-"effectuer les balisages suivants lors de la mise en page&nbsp;:"
-msgstr ""
-"In order for your articles to display correctly on the platform, please make"
-" the following markups during layout:"
+msgid "Pour que vos articles s’affichent correctement sur la plateforme, veuillez effectuer les balisages suivants lors de la mise en page&nbsp;:"
+msgstr "In order for your articles to display correctly on the platform, please make the following markups during layout:"
 
 #: templates/userspace/journal/editor/form.html:73
-msgid ""
-"Baliser les liens et les courriels dans les affiliations, le corps du texte "
-"et les références bibliographiques;"
-msgstr ""
-"Mark links and emails in affiliations, body text and bibliographic "
-"references;"
+msgid "Baliser les liens et les courriels dans les affiliations, le corps du texte et les références bibliographiques;"
+msgstr "Mark links and emails in affiliations, body text and bibliographic references;"
 
 #: templates/userspace/journal/editor/form.html:74
 msgid "Lier les appels de notes aux notes de bas de page."
@@ -6494,13 +6094,8 @@ msgid "Approbation des fichiers"
 msgstr "File Approval"
 
 #: templates/userspace/journal/editor/issuesubmission_approve.html:17
-msgid ""
-"<h2>Rappel</h2> <ul> <li>Faire le backup des fichiers</li> <li>Ajouter le "
-"numéro au calendrier de production</li> <li>Assigner le numéro à un ou une "
-"technicienne</li> </ul>"
-msgstr ""
-"<h2>Reminder</h2> <ul> <li>Backup files</li> <li>Add the issue to the "
-"production schedule</li> <li>Assign the issue to a technician </li> </ul>"
+msgid "<h2>Rappel</h2> <ul> <li>Faire le backup des fichiers</li> <li>Ajouter le numéro au calendrier de production</li> <li>Assigner le numéro à un ou une technicienne</li> </ul>"
+msgstr "<h2>Reminder</h2> <ul> <li>Backup files</li> <li>Add the issue to the production schedule</li> <li>Assign the issue to a technician </li> </ul>"
 
 #: templates/userspace/journal/editor/issuesubmission_approve.html:44
 #: templates/userspace/journal/editor/issuesubmission_refuse.html:40
@@ -6650,13 +6245,8 @@ msgid "Informations générales"
 msgstr "General information "
 
 #: templates/userspace/journal/information/journalinformation_update.html:56
-msgid ""
-"Les coordonnées de la revue seront affichées sur le site pour orienter les "
-"usagers concernant certaines demandes, notamment les abonnements "
-"individuels."
-msgstr ""
-"Your journal contact details will be displayed on the website to guide users"
-" looking for information regarding, for example, individual subscriptions. "
+msgid "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels."
+msgstr "Your journal contact details will be displayed on the website to guide users looking for information regarding, for example, individual subscriptions. "
 
 #: templates/userspace/journal/information/journalinformation_update.html:65
 msgid "Liens"
@@ -6700,12 +6290,8 @@ msgid ""
 msgstr ""
 
 #: templates/userspace/journal/information/journalinformation_update.html:144
-msgid ""
-"Vous pouvez décrire en détail les informations suivantes dans cette "
-"section&nbsp;:"
-msgstr ""
-"You can describe in details the following information in this section&nbsp;:"
-" "
+msgid "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:"
+msgstr "You can describe in details the following information in this section&nbsp;: "
 
 #: templates/userspace/journal/partials/menu.html:30
 msgid "Dépôt"
@@ -6717,14 +6303,8 @@ msgid "Redevances"
 msgstr "Royalties"
 
 #: templates/userspace/journal/partials/menu.html:57
-msgid ""
-"Pour accéder à vos rapports statistiques, vous devez vous connecter à un "
-"site externe qui requiert des identifiants distincts. Pour plus "
-"d’informations, veuillez nous contacter à l’adresse edition@erudit.org."
-msgstr ""
-"To access your statistics, you must log into an external website with a "
-"separate username and password. For more information, please contact "
-"edition@erudit.org"
+msgid "Pour accéder à vos rapports statistiques, vous devez vous connecter à un site externe qui requiert des identifiants distincts. Pour plus d’informations, veuillez nous contacter à l’adresse edition@erudit.org."
+msgstr "To access your statistics, you must log into an external website with a separate username and password. For more information, please contact edition@erudit.org"
 
 #: templates/userspace/journal/partials/menu.html:60
 #: templates/userspace/library/partials/menu.html:24
@@ -6775,8 +6355,7 @@ msgstr[1] ""
 #: templates/userspace/journal/subscription/individualsubscription_batch_delete.html:32
 #, python-format
 msgid "%(count)s courriel a été ignoré parce qu'il n'était pas abonné."
-msgid_plural ""
-"%(count)s courriels ont été ignorés parce qu'ils n'étaient pas abonnés."
+msgid_plural "%(count)s courriels ont été ignorés parce qu'ils n'étaient pas abonnés."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -6787,16 +6366,11 @@ msgstr "Continue?"
 
 #: templates/userspace/journal/subscription/individualsubscription_batch_delete.html:50
 #, python-format
-msgid ""
-"Aucun des %(count)s courriels soumis n'était abonné. Il n'y a rien à "
-"supprimer."
+msgid "Aucun des %(count)s courriels soumis n'était abonné. Il n'y a rien à supprimer."
 msgstr ""
 
 #: templates/userspace/journal/subscription/individualsubscription_batch_delete.html:55
-msgid ""
-"Veuillez téléverser un fichier CSV qui contient une adresse courriel par "
-"ligne. Chaque courriel contenu dans ce fichier sera, après confirmation, "
-"désabonné de la revue."
+msgid "Veuillez téléverser un fichier CSV qui contient une adresse courriel par ligne. Chaque courriel contenu dans ce fichier sera, après confirmation, désabonné de la revue."
 msgstr ""
 
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:4
@@ -6814,8 +6388,7 @@ msgstr[1] ""
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:32
 #, python-format
 msgid "%(count)s courriel a été ignoré parce qu'il était déjà abonné."
-msgid_plural ""
-"%(count)s courriels ont été ignorés parce qu'ils étaient déjà abonnés."
+msgid_plural "%(count)s courriels ont été ignorés parce qu'ils étaient déjà abonnés."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -6829,21 +6402,15 @@ msgstr "Subscribe"
 
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:53
 #, python-format
-msgid ""
-"Tous les %(count)s courriels soumis étaient abonnés. Il n'y a rien à "
-"abonner."
+msgid "Tous les %(count)s courriels soumis étaient abonnés. Il n'y a rien à abonner."
 msgstr ""
 
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:58
-msgid ""
-"Veuillez téléverser un fichier CSV qui contient ces champs (séparées par des"
-" \\"
+msgid "Veuillez téléverser un fichier CSV qui contient ces champs (séparées par des \\"
 msgstr ""
 
 #: templates/userspace/journal/subscription/individualsubscription_batch_subscribe.html:65
-msgid ""
-"Les instructions pour accéder à la revue seront envoyées à chaque adresse "
-"courriel de ce fichier."
+msgid "Les instructions pour accéder à la revue seront envoyées à chaque adresse courriel de ce fichier."
 msgstr ""
 
 #: templates/userspace/journal/subscription/individualsubscription_cancel.html:4
@@ -6854,12 +6421,8 @@ msgstr "Confirm cancellation of the subscription offer"
 
 #: templates/userspace/journal/subscription/individualsubscription_cancel.html:18
 #, python-format
-msgid ""
-"Voulez-vous annuler la proposition d'abonnement envoyée à "
-"<strong>%(email)s</strong> ?"
-msgstr ""
-"Do you wish to cancel the subscription offer sent to "
-"<strong>%(email)s</strong>?"
+msgid "Voulez-vous annuler la proposition d'abonnement envoyée à <strong>%(email)s</strong> ?"
+msgstr "Do you wish to cancel the subscription offer sent to <strong>%(email)s</strong>?"
 
 #: templates/userspace/journal/subscription/individualsubscription_create.html:5
 #: templates/userspace/journal/subscription/individualsubscription_create.html:8
@@ -6962,12 +6525,8 @@ msgstr "Institutional subscribers per year"
 
 #: templates/userspace/library/authorization/authorization_create.html:25
 #, python-format
-msgid ""
-"Veuillez sélectionner l’utilisateur auquel ajouter l'autorisation "
-"suivante&nbsp;: <strong>%(authorization_label)s</strong>"
-msgstr ""
-"Please select a user to whom you’d like to grant access for the following "
-"action: <strong>%(authorization_label)s</strong>"
+msgid "Veuillez sélectionner l’utilisateur auquel ajouter l'autorisation suivante&nbsp;: <strong>%(authorization_label)s</strong>"
+msgstr "Please select a user to whom you’d like to grant access for the following action: <strong>%(authorization_label)s</strong>"
 
 #: templates/userspace/library/authorization/authorization_user.html:24
 #: templates/userspace/library/members/member_list.html:15
@@ -7008,25 +6567,16 @@ msgid "Notices MARC"
 msgstr "MARC records"
 
 #: templates/userspace/library/collection/landing.html:27
-msgid ""
-"Les notices MARC sont téléchargeables aux formats MARC 21 (français ou "
-"anglais) et UNIMARC."
-msgstr ""
-"MARC records can be downloaded in MARC21 (French or English) or UNIMARC "
-"formats."
+msgid "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou anglais) et UNIMARC."
+msgstr "MARC records can be downloaded in MARC21 (French or English) or UNIMARC formats."
 
 #: templates/userspace/library/collection/landing.html:47
 msgid "Listes des titres dynamiques KBART"
 msgstr ""
 
 #: templates/userspace/library/collection/landing.html:51
-msgid ""
-"Les listes de titres dynamiques exposent les métadonnées décrivant l’état "
-"des collections sur la plateforme Érudit et sont conformes aux "
-"recommandations KBART (NISO RP-9-2014)."
-msgstr ""
-"Dynamic title lists provide metadata that describe the status of collections"
-" on the Érudit platform and are KBART-compliant (NISO RP-9-2014)."
+msgid "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit et sont conformes aux recommandations KBART (NISO RP-9-2014)."
+msgstr "Dynamic title lists provide metadata that describe the status of collections on the Érudit platform and are KBART-compliant (NISO RP-9-2014)."
 
 #: templates/userspace/library/collection/landing.html:60
 msgid "Toutes les revues / All Journals"
@@ -7044,31 +6594,16 @@ msgid "Paramètres de connexion"
 msgstr "Connection settings"
 
 #: templates/userspace/library/connection/landing.html:25
-msgid ""
-"Vous trouverez dans cette section les paramètres de connexion nécessaires à "
-"la configuration de vos outils pour l’utilisation des protocoles SUSHI et "
-"Z39.50 / SRU/SRW en lien avec les ressources d’Érudit, ainsi que la "
-"configuration recommandée si vous utilisez EZproxy."
-msgstr ""
-"This section describes the connection settings required to configure your "
-"tools to use the SUSHI and Z39.50 / SRU/SRW protocols for Érudit resources, "
-"as well as the recommended configuration when using EZproxy."
+msgid "Vous trouverez dans cette section les paramètres de connexion nécessaires à la configuration de vos outils pour l’utilisation des protocoles SUSHI et Z39.50 / SRU/SRW en lien avec les ressources d’Érudit, ainsi que la configuration recommandée si vous utilisez EZproxy."
+msgstr "This section describes the connection settings required to configure your tools to use the SUSHI and Z39.50 / SRU/SRW protocols for Érudit resources, as well as the recommended configuration when using EZproxy."
 
 #: templates/userspace/library/connection/landing.html:33
 msgid "SUSHI (Z39.93-2014)"
 msgstr "SUSHI (Z39.93-2014)"
 
 #: templates/userspace/library/connection/landing.html:37
-msgid ""
-"Le protocole SUSHI (NISO Z39.93-2014) vous permet d’automatiser la collecte "
-"de vos statistiques de consultation COUNTER. Utilisez les paramètres de "
-"connexion ci-dessous pour récupérer les statistiques de consultation de "
-"votre établissement sur la plateforme Érudit."
-msgstr ""
-"The SUSHI protocol lets you automate the harvesting of electronic resource "
-"usage data. Use the connection settings below to collect your institutions's"
-" COUNTER reports on the Érudit platform using the SUSHI protocol (NISO "
-"Z39.93-2014)."
+msgid "Le protocole SUSHI (NISO Z39.93-2014) vous permet d’automatiser la collecte de vos statistiques de consultation COUNTER. Utilisez les paramètres de connexion ci-dessous pour récupérer les statistiques de consultation de votre établissement sur la plateforme Érudit."
+msgstr "The SUSHI protocol lets you automate the harvesting of electronic resource usage data. Use the connection settings below to collect your institutions's COUNTER reports on the Érudit platform using the SUSHI protocol (NISO Z39.93-2014)."
 
 #: templates/userspace/library/connection/landing.html:44
 msgid "Sushi Requester ID"
@@ -7121,16 +6656,8 @@ msgid "Z39.50&nbsp;/ SRU/SRW"
 msgstr "Z39.50&nbsp;/ SRU/SRW"
 
 #: templates/userspace/library/connection/landing.html:98
-msgid ""
-"Utilisez les paramètres de connexion ci-dessous pour interroger notre moteur"
-" de recherche via le protocole Z39.50. Nous supportons actuellement les "
-"requêtes dans les 7 champs suivants&nbsp;: titre, sujet, auteur, éditeur, "
-"année de publication, ISBN, ISSN (ISSN papier seulement)."
-msgstr ""
-"Use the connection settings below to send requests to our search engine "
-"using the Z39.50 protocol. We currently support search requests for the "
-"following seven fields: title, subject, author, publisher, year of "
-"publication, isbn, issn (print issn only)."
+msgid "Utilisez les paramètres de connexion ci-dessous pour interroger notre moteur de recherche via le protocole Z39.50. Nous supportons actuellement les requêtes dans les 7 champs suivants&nbsp;: titre, sujet, auteur, éditeur, année de publication, ISBN, ISSN (ISSN papier seulement)."
+msgstr "Use the connection settings below to send requests to our search engine using the Z39.50 protocol. We currently support search requests for the following seven fields: title, subject, author, publisher, year of publication, isbn, issn (print issn only)."
 
 #: templates/userspace/library/connection/landing.html:104
 msgid "Serveur"
@@ -7149,12 +6676,8 @@ msgid "Stanza recommandée pour EZproxy"
 msgstr "Recommended stanza for EZproxy"
 
 #: templates/userspace/library/connection/landing.html:151
-msgid ""
-"Si vous utilisez le service EZproxy d'OCLC, voici la stanza que nous "
-"recommandons d'utiliser pour accéder aux ressources d'Érudit."
-msgstr ""
-"If you are using OCLC's EZproxy service, here is the recommended stanza to "
-"access Érudit's resources."
+msgid "Si vous utilisez le service EZproxy d'OCLC, voici la stanza que nous recommandons d'utiliser pour accéder aux ressources d'Érudit."
+msgstr "If you are using OCLC's EZproxy service, here is the recommended stanza to access Érudit's resources."
 
 #: templates/userspace/library/diagnosis/landing.html:7
 #: templates/userspace/library/diagnosis/landing.html:10
@@ -7310,12 +6833,8 @@ msgstr "Cancel a request"
 
 #: templates/userspace/library/members/member_cancel.html:17
 #, python-format
-msgid ""
-"Voulez-vous annuler la demande d’ajout de membre envoyée à "
-"<strong>%(email)s</strong>&nbsp;?"
-msgstr ""
-"Cancel your request to add <strong>%(email)s</strong> as a member of this "
-"organization?"
+msgid "Voulez-vous annuler la demande d’ajout de membre envoyée à <strong>%(email)s</strong>&nbsp;?"
+msgstr "Cancel your request to add <strong>%(email)s</strong> as a member of this organization?"
 
 #: templates/userspace/library/members/member_create.html:5
 #: templates/userspace/library/members/member_create.html:9
@@ -7331,8 +6850,7 @@ msgstr "Remove a member"
 
 #: templates/userspace/library/members/member_delete.html:17
 #, python-format
-msgid ""
-"Voulez-vous supprimer <strong>%(name)s</strong> de l’organisation&nbsp;?"
+msgid "Voulez-vous supprimer <strong>%(name)s</strong> de l’organisation&nbsp;?"
 msgstr "Remove <strong>%(name)s</strong> from this organization?"
 
 #: templates/userspace/library/members/member_list.html:25
@@ -7475,13 +6993,8 @@ msgstr "Delete an IP address range"
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:17
 #, python-format
-msgid ""
-"Vous allez supprimer la page d’adresses IP suivante&nbsp;: "
-"<br><br><strong>%(subscription)s <br>%(ip_start)s &ndash; "
-"%(ip_end)s</strong>. <br><br>Voulez-vous poursuivre&nbsp;?"
-msgstr ""
-"Delete the following IP address range: <br><br><strong>%(subscription)s "
-"<br>%(ip_start)s &ndash; %(ip_end)s</strong>?"
+msgid "Vous allez supprimer la page d’adresses IP suivante&nbsp;: <br><br><strong>%(subscription)s <br>%(ip_start)s &ndash; %(ip_end)s</strong>. <br><br>Voulez-vous poursuivre&nbsp;?"
+msgstr "Delete the following IP address range: <br><br><strong>%(subscription)s <br>%(ip_start)s &ndash; %(ip_end)s</strong>?"
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:17
 msgid ""
@@ -7505,13 +7018,12 @@ msgid "Plages d’adresses enregistrées"
 msgstr "Registered IP address ranges"
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:41
-msgid ""
-"Les plages d’adresses IP suivantes <strong>ne sont pas actuellement actives "
-"pour vos usagers</strong>. Nous les affichons à titre d’information."
-msgstr ""
-"The following IP address ranges <strong>are not currently active for your "
-"users</strong>. They are displayed for your information. "
+msgid "Les plages d’adresses IP suivantes <strong>ne sont pas actuellement actives pour vos usagers</strong>. Nous les affichons à titre d’information."
+msgstr "The following IP address ranges <strong>are not currently active for your users</strong>. They are displayed for your information. "
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:66
 msgid "Supprimer cette plage d’adresses IP"
 msgstr "Delete this IP address range"
+
+#~ msgid "Tout sélectionner"
+#~ msgstr "Select all"

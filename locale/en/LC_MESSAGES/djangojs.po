@@ -2,50 +2,50 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Maxime Turcotte <maxime.turcotte@erudit.org>, 2021
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 11:19-0400\n"
+"POT-Creation-Date: 2021-05-25 15:11-0400\n"
 "PO-Revision-Date: 2019-07-17 14:52+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:12
+#: static/js/controllers/public/citations/SavedCitationListController.js:13
 msgid "%(count)s document sélectionné"
 msgid_plural "%(count)s documents sélectionnés"
 msgstr[0] "%(count)s document selected"
 msgstr[1] "%(count)s documents selected"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:32
+#: static/js/controllers/public/citations/SavedCitationListController.js:41
 msgid "%(count)s article savant"
 msgid_plural "%(count)s articles savants"
 msgstr[0] "%(count)s scholary article"
 msgstr[1] "%(count)s scholary articles"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:34
+#: static/js/controllers/public/citations/SavedCitationListController.js:43
 msgid "%(count)s article culturel"
 msgid_plural "%(count)s articles culturels"
 msgstr[0] "%(count)s cultural article"
 msgstr[1] "%(count)s cultural articles"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:36
+#: static/js/controllers/public/citations/SavedCitationListController.js:45
 msgid "%(count)s thèse"
 msgid_plural "%(count)s thèses"
 msgstr[0] "%(count)s thesis"
 msgstr[1] "%(count)s theses"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:121
+#: static/js/controllers/public/citations/SavedCitationListController.js:174
 msgid "Voulez-vous vraiment supprimer votre sélection ?"
 msgstr "Are you sure you want to delete your selection?"
 
@@ -54,9 +54,7 @@ msgid "Résultats sauvegardés !"
 msgstr "Search results saved!"
 
 #: static/js/controllers/userspace/editor/FormController.js:16
-msgid ""
-"Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr "
-"?"
+msgid "Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"
 msgstr "Some of your files are not completely uploaded. Are you sure?"
 
 #: static/js/issue_reader.js:17
