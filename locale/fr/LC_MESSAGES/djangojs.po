@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 11:19-0400\n"
+"POT-Creation-Date: 2021-05-25 15:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:12
+#: static/js/controllers/public/citations/SavedCitationListController.js:13
 msgid "%(count)s document sélectionné"
 msgid_plural "%(count)s documents sélectionnés"
 msgstr[0] ""
 msgstr[1] ""
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:32
+#: static/js/controllers/public/citations/SavedCitationListController.js:41
 msgid "%(count)s article savant"
 msgid_plural "%(count)s articles savants"
 msgstr[0] ""
 msgstr[1] ""
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:34
+#: static/js/controllers/public/citations/SavedCitationListController.js:43
 msgid "%(count)s article culturel"
 msgid_plural "%(count)s articles culturels"
 msgstr[0] ""
 msgstr[1] ""
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:36
+#: static/js/controllers/public/citations/SavedCitationListController.js:45
 msgid "%(count)s thèse"
 msgid_plural "%(count)s thèses"
 msgstr[0] ""
 msgstr[1] ""
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:121
+#: static/js/controllers/public/citations/SavedCitationListController.js:174
 msgid "Voulez-vous vraiment supprimer votre sélection ?"
 msgstr ""
 
@@ -51,8 +51,7 @@ msgid "Résultats sauvegardés !"
 msgstr ""
 
 #: static/js/controllers/userspace/editor/FormController.js:16
-msgid ""
-"Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"
+msgid "Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"
 msgstr ""
 
 #: static/js/issue_reader.js:17

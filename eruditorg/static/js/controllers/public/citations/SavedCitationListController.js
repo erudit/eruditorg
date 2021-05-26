@@ -6,13 +6,22 @@ export default {
      * Update the text that displays the total count of selected documents.
      */
     function updateDocumentSelectionCount() {
-      let documentsSelectedCount = $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').length;
+      // Count all selected documents, even those that are hidden.
+      let documentsSelectedCount = $('.bib-records, .hidden-bib-records').find('.checkbox input[type=checkbox]:checked').length;
       let gettextContext = {count: documentsSelectedCount, };
 
       let fmts = ngettext('%(count)s document sélectionné', '%(count)s documents sélectionnés', gettextContext.count);
       let s = interpolate(fmts, gettextContext, true);
       $('.saved-citations strong').text(s);
-      if (documentsSelectedCount) { $('#id_selection_tools').show(); } else { $('#id_selection_tools').hide(); }
+      if (documentsSelectedCount) {
+        $('#id_selection_tools').show();
+      } else {
+        $('#id_selection_tools').hide();
+        // If there is no more selected document, uncheck `#select-all-on-current-page` checkbox and hide
+        // `#select-all-across-all-pages` link.
+        $('#select-all-on-current-page').prop('checked', false);
+        $('#select-all-across-all-pages').hide();
+      }
     }
 
     /*
@@ -55,7 +64,7 @@ export default {
      * Reload page if all documents were removed from the page
      */
     function reloadPageIfAllDocumentsRemoved() {
-      if ($('.bib-record').length === 0) location.reload();
+      if ($('.bib-records .bib-record').length === 0) location.reload();
     }
 
     /*
@@ -84,29 +93,65 @@ export default {
      */
     function getSelectedDocumentIds() {
       var documentIds = new Array();
-      $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').each(function() {
+      // Get all selected document IDs, even those that are hidden.
+      $('.bib-records, .hidden-bib-records').find('.checkbox input[type=checkbox]:checked').each(function() {
         let $document = $(this).parents('li\.bib-record');
         documentIds.push($document.data('document-id'));
       });
       return documentIds;
     }
 
-    $('.documents-head input[type=checkbox]').on('change', function(ev) {
-      if ($(this).is(':checked')) {
-        // Check all the checkboxes associated with each document
-        $('#citations_list .bib-records .checkbox input[type=checkbox]').each(function() {
-          $(this).prop('checked', true);
-        });
-      } else {
-        // Uncheck all the checkboxes associated with each document
-        $('#citations_list .bib-records .checkbox input[type=checkbox]').each(function() {
-          $(this).prop('checked', false);
-        });
-      }
-      $('#citations_list .bib-records .checkbox input[type=checkbox]').change();
+    $('#select-all-across-all-pages').on('click', function(ev) {
+      // Select all documents, even those that are hidden.
+      $('.bib-records, .hidden-bib-records').find('.checkbox input[type=checkbox]').prop('checked', true);
+      $(this).hide()
+      $('#unselect-all').show();
+      updateDocumentSelectionCount();
+      ev.preventDefault();
     });
 
-    $('#citations_list .bib-records .checkbox input[type=checkbox]').on('change', updateDocumentSelectionCount);
+    $('#unselect-all').on('click', function(ev) {
+      // Unselect all documents, even those that are hidden.
+      $('.bib-records, .hidden-bib-records').find('.checkbox input[type=checkbox]').prop('checked', false);
+      $('#select-all-on-current-page').prop('checked', false);
+      $(this).hide()
+      updateDocumentSelectionCount();
+      ev.preventDefault();
+    });
+
+    $('#select-all-on-current-page').on('change', function(ev) {
+      if ($(this).is(':checked')) {
+        // If this checkbox is checked, show the `#select-all-across-all-pages` link if there are
+        // citation not on current page.
+        if ($('.hidden-bib-records .checkbox').length) {
+          $('#select-all-across-all-pages').show();
+        }
+        // Select all documents on current page.
+        $('.bib-records .checkbox input[type=checkbox]').prop('checked', true);
+        // Make sure hidden documents are not selected.
+        $('.hidden-bib-records .checkbox input[type=checkbox]').prop('checked', false);
+      } else {
+        // If this checkbox is not checked, hide the `#select-all-across-all-pages` and
+        // `#unselect-all` links.
+        $('#select-all-across-all-pages, #unselect-all').hide();
+        // Unselect all documents, even those that are hidden.
+        $('.bib-records, .hidden-bib-records').find('.checkbox input[type=checkbox]').prop('checked', false);
+      }
+      updateDocumentSelectionCount();
+    });
+
+    $('#citations_list .bib-records .checkbox input[type=checkbox]').on('change', function(ev) {
+      if ($(this).not(':checked')) {
+        // If a citation is unselected, unselect all hidden documents.
+        $('.hidden-bib-records').find('.checkbox input[type=checkbox]').prop('checked', false);
+        // Show the `#select-all-across-all-pages` link if there are citation not on current page.
+        if ($('.hidden-bib-records .checkbox').length) {
+          $('#select-all-across-all-pages').show();
+        }
+        $('#unselect-all').hide();
+      }
+      updateDocumentSelectionCount();
+    });
 
     $('a[data-remove]').click(function(ev) {
       ev.preventDefault();
@@ -129,10 +174,11 @@ export default {
         data: { document_ids: documentIds },
         traditional: true
       }).done(function() {
-        $('.documents-head input[type=checkbox]').prop('checked', false);  // Uncheck '#select-all' checkbox
-        $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').each(function() {
+        $('#select-all-on-current-page').prop('checked', false);
+        $('#select-all-across-all-pages, #unselect-all').hide();
+        $('.bib-records, .hidden-bib-records').find('.checkbox input[type=checkbox]:checked').each(function() {
+          $(this).prop('checked', false);
           let $document = $(this).parents('li\.bib-record');
-          $document.find('.checkbox input[type=checkbox]').prop('checked', false);  // Uncheck checkbox
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();
