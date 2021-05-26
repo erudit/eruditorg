@@ -56,7 +56,7 @@ reportlab==3.5.56
 colorama>=0.4.1
 django-adv-cache-tag>=1.1.0
 django-reversion>=3.0.4
-django-reversion-compare>=0.8.6
+diff-match-patch>=20200713
 pydantic>=1.2
 arabic-reshaper>=2.0
 python-bidi>=0.4

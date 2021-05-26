@@ -214,10 +214,7 @@ INSTALLED_APPS = (
     "rangefilter",
     "adv_cache_tag",
     "reversion",
-    "reversion_compare",
 )
-
-ADD_REVERSION_ADMIN = True
 
 if EXPOSE_OPENMETRICS:
     INSTALLED_APPS = INSTALLED_APPS + ("django_prometheus",)
