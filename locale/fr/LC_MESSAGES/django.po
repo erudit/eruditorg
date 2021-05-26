@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 15:11-0400\n"
+"POT-Creation-Date: 2021-05-26 10:24-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1698,7 +1698,7 @@ msgstr ""
 msgid "Impossible de changer l'autorisation liée à un objet en particulier"
 msgstr ""
 
-#: core/editor/admin.py:17 erudit/admin/journal.py:210
+#: core/editor/admin.py:17 erudit/admin/journal.py:213
 msgid "Voir sur le site"
 msgstr ""
 
@@ -2039,15 +2039,15 @@ msgstr ""
 msgid "Date de modification sur Fedora"
 msgstr ""
 
-#: erudit/admin/journal.py:187
+#: erudit/admin/journal.py:190
 msgid "Contraindre les numéros sélectionnés en libre d'accès"
 msgstr ""
 
-#: erudit/admin/journal.py:195
+#: erudit/admin/journal.py:198
 msgid "Ne pas contraindre ces numéros au libre accès"
 msgstr ""
 
-#: erudit/admin/journal.py:212
+#: erudit/admin/journal.py:215
 msgid "Voir le numéro sur le site"
 msgstr ""
 

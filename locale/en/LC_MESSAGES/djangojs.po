@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 15:11-0400\n"
+"POT-Creation-Date: 2021-05-26 10:24-0400\n"
 "PO-Revision-Date: 2019-07-17 14:52+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -45,7 +45,7 @@ msgid_plural "%(count)s thèses"
 msgstr[0] "%(count)s thesis"
 msgstr[1] "%(count)s theses"
 
-#: static/js/controllers/public/citations/SavedCitationListController.js:174
+#: static/js/controllers/public/citations/SavedCitationListController.js:166
 msgid "Voulez-vous vraiment supprimer votre sélection ?"
 msgstr "Are you sure you want to delete your selection?"
 
