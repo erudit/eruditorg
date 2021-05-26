@@ -23,7 +23,7 @@
                 <ul>
                 {% for file in files %}
                     <li>
-                        <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
+                        <a href="{% url 'userspace:journal:reports_download' journal_pk=scope_current_journal.pk %}?subpath={{ file.root }}/{{ file.filename }}">
                             {{ file.label }}
                         </a>
                     </li>
@@ -47,7 +47,7 @@
                 <ul>
                 {% for file in files %}
                     <li>
-                        <a href="{% url 'userspace:journal:reports_download' %}?subpath={{ file.root }}/{{ file.filename }}">
+                        <a href="{% url 'userspace:journal:reports_download' journal_pk=scope_current_journal.pk %}?subpath={{ file.root }}/{{ file.filename }}">
                             {{ file.label }}
                         </a>
                     </li>
