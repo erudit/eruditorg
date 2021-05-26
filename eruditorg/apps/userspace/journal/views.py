@@ -108,11 +108,13 @@ class RoyaltiesListView(JournalScopePermissionRequiredMixin, MenuItemMixin, Temp
             for root, _dirs, files in os.walk(toppath):
 
                 for filename in files:
-                    path = root[len(toppath) + 1 :].split("/")
-                    year = path.pop(0)
-                    label = " - ".join(path + [filename])
+                    year, path = root[len(toppath) + 1 :].split("/")
                     result[year].append(
-                        {"root": f"{subpath}/{year}", "filename": filename, "label": label}
+                        {
+                            "root": f"{subpath}/{year}/{path}",
+                            "filename": filename,
+                            "label": f"{path} - {filename}",
+                        }
                     )
             result = {k: v for k, v in sorted(result.items(), reverse=True)}
         except FileNotFoundError:
