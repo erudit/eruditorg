@@ -12,12 +12,16 @@
     .checkbox {
       padding-left: 31px;
     }
-    
+
   }
 
   .saved-citations {
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  #select-all-across-all-pages, #unselect-all {
+    color: $coral-red;
   }
 
 }
