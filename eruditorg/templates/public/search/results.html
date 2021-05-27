@@ -230,15 +230,26 @@
                     {% endif %}
 
                   </p>
+                  <p class="col-sm-8">
+                    {% if document.volume %}
+                    <span>{% trans "Volume" %} {{ document.volume }}, </span>
+                    {% endif %}
+                    {% if document.numero %}
+                    <span>{% trans "Numéro" %} {{ document.numero }}, </span>
+                    {% endif %}
+                    {% if document.year %}
+                    <span>{{ document.year }}</span>
+                    {% endif %}
+                  </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
                     {% if document.document_type == 'article' %}
                     {% if document.issue_url %}
                     <a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">
-                      {{ document.publication_year|safe }}
+                      {% trans "Année de diffusion :" %} {{ document.publication_year|safe }}
                     </a>
                     {% else %}
-                    {{ document.publication_year|safe }}
+                    {% trans "Année de diffusion :" %} {{ document.publication_year|safe }}
                     {% endif %}
                     {% endif %}
                   </p>

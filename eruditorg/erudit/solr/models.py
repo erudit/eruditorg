@@ -81,7 +81,9 @@ class SolrDocument:
 
     @property
     def year(self):
-        return self.solr_data["Annee"][0] if "Annee" in self.solr_data else None
+        return (
+            "-".join(self.solr_data["Annee"][0].split(" ")) if "Annee" in self.solr_data else None
+        )
 
     @property
     def publication_year(self):
@@ -105,7 +107,7 @@ class SolrDocument:
 
     @property
     def volume(self):
-        return self.solr_data.get("Volume")
+        return "-".join(self.solr_data.get("Volume")) if "Volume" in self.solr_data else None
 
     @property
     def series_display(self):
@@ -126,7 +128,7 @@ class SolrDocument:
 
     @property
     def numero(self):
-        return self.solr_data.get("Numero")
+        return "-".join(self.solr_data.get("Numero")) if "Numero" in self.solr_data else None
 
     @property
     def pages(self):
