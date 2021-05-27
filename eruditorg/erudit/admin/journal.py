@@ -39,6 +39,18 @@ JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
 class JournalDisciplineInline(admin.TabularInline):
     model = Journal.disciplines.through
 
+    def get_field_queryset(self, db, db_field, request):
+        if db_field.name == "discipline":
+            # Filter the discipline field's queryset based on the parent journal's type.
+            if request._obj:
+                return db_field.remote_field.model._default_manager.using(db).filter(
+                    type__code=request._obj.type.code
+                )
+            # If there is no parent journal (during journal creation), return an empty queryset.
+            else:
+                return db_field.remote_field.model._default_manager.using(db).none()
+        return super().get_field_queryset(db, db_field, request)
+
 
 class JournalForm(forms.ModelForm):
     fields = "all"
@@ -154,6 +166,11 @@ class JournalAdmin(admin.ModelAdmin):
     ]
 
     inlines = (JournalDisciplineInline,)
+
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        # Save the journal object on the request to have access to it in `JournalDisciplineInline`.
+        request._obj = obj
+        return super().get_form(request, obj, change, **kwargs)
 
 
 class IssueAdmin(admin.ModelAdmin):
