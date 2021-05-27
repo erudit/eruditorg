@@ -48,6 +48,19 @@
 
     }
 
+    // Make sidebar filters scrollable (on short screens)
+    .scrollable {
+      &.filters {
+        overflow-y: scroll;
+        bottom: 0;
+      }
+
+    }
+
+    #filter_form {
+      padding-bottom: 10px;
+    }
+
     // sticky elements
     .sticky {
       position: fixed;
