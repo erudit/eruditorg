@@ -14,6 +14,7 @@ from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
 from ..models import Language
+from ..models import Discipline
 
 
 JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
@@ -238,8 +239,13 @@ class JournalTypeAdmin(TranslationAdmin):
     pass
 
 
+class DisciplineAdmin(TranslationAdmin):
+    pass
+
+
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.unregister(JournalType)
 admin.site.register(JournalType, JournalTypeAdmin)
+admin.site.register(Discipline, DisciplineAdmin)

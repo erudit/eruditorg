@@ -1,8 +1,6 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
 
 from ..models import Collection
-from ..models import Discipline
 from ..models import JournalType
 from ..models import Organisation
 from ..models import Language
@@ -33,10 +31,6 @@ class CollectionAdmin(admin.ModelAdmin):
     ]
 
 
-class DisciplineAdmin(TranslationAdmin):
-    pass
-
-
 class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
@@ -47,4 +41,3 @@ admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(JournalType)
 admin.site.register(Language)
 admin.site.register(Collection, CollectionAdmin)
-admin.site.register(Discipline, DisciplineAdmin)
