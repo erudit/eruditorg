@@ -3020,6 +3020,30 @@ class TestArticleDetailView:
         html = Client().get(url).content.decode()
         assert '<span class="titre">[Article sans titre]</span>' in html
 
+    def test_display_organistion_members(self):
+        article = ArticleFactory(from_fixture="1077218ar")
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        authors = dom.find_all("li", {"class": "auteur-affiliation"})
+        assert (
+            authors[3].decode()
+            == '<li class="auteur-affiliation"><p><strong>Regroupement des Directrices de soins '
+            "d’établissements\n        psychiatriques</strong><br/>"
+            "<strong>Céline\n      Pilon</strong><br/>"
+            "CH Institut Philippe-Pinel, responsable du dossier<br/>"
+            "<strong>Diane\n      Benoît</strong><br/>"
+            "CH Louis-H. Lafontaine<br/>"
+            "<strong>Louise\n      Bérubé</strong><br/>"
+            "CH Robert-Giffard<br/>"
+            "<strong>Monique\n      Bissonnette</strong><br/>"
+            "CH Rivière-des-Prairies<br/>"
+            "<strong>Robyne\n      Kershaw-Bellemare</strong><br/>"
+            "Hôpital Douglas<br/>"
+            "<strong>Louise\n      Letarte</strong><br/>"
+            "CH Pierre-Janet</p></li>"
+        )
+
 
 class TestArticleRawPdfView:
     @unittest.mock.patch.object(JournalDigitalObject, "logo")
