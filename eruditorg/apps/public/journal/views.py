@@ -1141,6 +1141,10 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
 
     @property
     def datastream_name(self) -> str:
+        # When we embed the PDF view into the HTML view, we pass the PDF datastream name in the GET
+        # parameters to avoid making two calls to Fedora via the `datastream_list` property.
+        if self.request.GET.get("ds_name") in ["PDF", "PDF_ERUDIT"]:
+            return self.request.GET.get("ds_name")
         return self.object.pdf_datastream_name
 
     def write_datastream_content(self, response, content):
@@ -1185,6 +1189,10 @@ class ArticleRawPdfFirstPageView(
 
     @property
     def datastream_name(self) -> str:
+        # When we embed the PDF view into the HTML view, we pass the PDF datastream name in the GET
+        # parameters to avoid making two calls to Fedora via the `datastream_list` property.
+        if self.request.GET.get("ds_name") in ["PDF", "PDF_ERUDIT"]:
+            return self.request.GET.get("ds_name")
         return self.object.pdf_datastream_name
 
     def get_content(self):

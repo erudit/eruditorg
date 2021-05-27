@@ -1338,8 +1338,8 @@ class TestArticleDetailView:
         # published.
         assert (
             '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?'
-            'embed&amp;ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" type="application/pdf" '
-            'style="width: 100%; height: 700px;"></object>' in html
+            'embed&amp;ds_name=PDF&amp;ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" '
+            'type="application/pdf" style="width: 100%; height: 700px;"></object>' in html
         )
         # Check that the PDF download link URL has the prepublication ticket if the issue is not
         # published.
@@ -1371,8 +1371,9 @@ class TestArticleDetailView:
         # Check that the embeded PDF URL does not have the prepublication ticket if the issue is
         # published.
         assert (
-            '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?'
-            'embed" type="application/pdf" style="width: 100%; height: 700px;"></object>' in html
+            '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?embed&amp;'
+            'ds_name=PDF" type="application/pdf" style="width: 100%; height: 700px;"></object>'
+            in html
         )
         # Check that the PDF download link URL does not have the prepublication ticket if the issue
         # is published.

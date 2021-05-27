@@ -437,7 +437,7 @@
           </section>
           {% elif article.localidentifier %}
           <section id="pdf">
-            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
+            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed&amp;ds_name={{ article.pdf_datastream_name }}{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
             <div id="pdf-download" class="text-center alert-warning">
               <p>{% translate 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}" class="btn btn-secondary" target="_blank">{% translate 'Télécharger' %}</a></p>
             </div>
@@ -452,7 +452,7 @@
           </section>
           {% elif can_display_first_pdf_page %}
           <section id="first-pdf-page">
-            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
+            <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed&amp;ds_name={{ article.pdf_datastream_name }}{% if not article.issue.is_published %}&amp;ticket={{ article.issue.prepublication_ticket }}{% endif %}" type="application/pdf" style="width: 100%; height: 700px;"></object>
           </section>
           {% endif %}
         {% endif %}
