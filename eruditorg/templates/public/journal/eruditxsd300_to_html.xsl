@@ -614,16 +614,16 @@
     <xsl:for-each select=".">
       <li class="auteur-affiliation">
         <p>
-          <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations"/>
+          <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb | membre/nompers | membre/affiliation/alinea" mode="affiliations"/>
         </p>
       </li>
     </xsl:for-each>
   </xsl:template>
 
-  <xsl:template match="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations">
+  <xsl:template match="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb | membre/nompers | membre/affiliation/alinea" mode="affiliations">
     <xsl:for-each select=".">
       <xsl:choose>
-        <xsl:when test="self::nompers">
+        <xsl:when test="self::nompers | self::membre/nompers">
           <strong>
             <xsl:call-template name="element_nompers_affichage">
               <xsl:with-param name="nompers" select="self::nompers[1]"/>
