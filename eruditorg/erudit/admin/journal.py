@@ -240,7 +240,14 @@ class JournalTypeAdmin(TranslationAdmin):
 
 
 class DisciplineAdmin(TranslationAdmin):
-    pass
+    list_display = [
+        "name",
+        "type",
+    ]
+
+    list_filter = [
+        "type",
+    ]
 
 
 admin.site.register(Journal, JournalAdmin)
