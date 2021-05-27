@@ -28,9 +28,13 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         "get",
     ]
 
-    # The following attributes should be specified on each subclass
-    content_type = None
-    datastream_name = None
+    @property
+    def content_type(self) -> str:
+        raise NotImplementedError
+
+    @property
+    def datastream_name(self) -> str:
+        raise NotImplementedError
 
     def get(self, request, **kwargs):
         return self.write_to_response()
@@ -61,11 +65,6 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         Writes the content of the fedora object's datastream to an HttpResponse object
         and return it.
         """
-        if self.datastream_name is None:
-            raise ImproperlyConfigured(
-                "{cls} is missing a datastream. Define {cls}.datastream_name "
-                "or override {cls}.get_datastream_content().".format(cls=self.__class__.__name__)
-            )
         content = self.get_datastream_content()
         response = self.get_response_object()
         self.write_datastream_content(response, content)
@@ -78,24 +77,8 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
 
         This method can be overriden in order to add extra headers if applicable.
         """
-        content_type = self.get_content_type()
-        response = HttpResponse(content_type=content_type)
+        response = HttpResponse(content_type=self.content_type)
         return response
-
-    def get_content_type(self):
-        """
-        Returns the content type that will be used to return the content of the file.
-
-        By default this requires `self.content_type` to be specified but
-        subclasses can override this method to change this. This method can also be overriden
-        in order to add extra headers if applicable.
-        """
-        if self.content_type is None:
-            raise ImproperlyConfigured(
-                "{cls} is missing a content type. "
-                "Define {cls}.content_type.".format(cls=self.__class__.__name__)
-            )
-        return self.content_type
 
     def get_datastream_content(self):
         """

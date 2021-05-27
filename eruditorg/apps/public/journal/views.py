@@ -425,9 +425,15 @@ class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     Returns the image file associated with a Journal instance.
     """
 
-    content_type = "image/jpeg"
-    datastream_name = "LOGO"
     model = Journal
+
+    @property
+    def content_type(self) -> str:
+        return "image/jpeg"
+
+    @property
+    def datastream_name(self) -> str:
+        return "LOGO"
 
 
 class IssueDetailView(
@@ -612,9 +618,15 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     Returns the image file associated with an Issue instance.
     """
 
-    content_type = "image/jpeg"
-    datastream_name = "COVERPAGE"
     model = Issue
+
+    @property
+    def content_type(self) -> str:
+        return "image/jpeg"
+
+    @property
+    def datastream_name(self) -> str:
+        return "COVERPAGE"
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs["localidentifier"])
@@ -625,9 +637,15 @@ class IssueRawCoverpageHDView(FedoraFileDatastreamView):
     Returns the image file associated with an Issue instance.
     """
 
-    content_type = "image/jpeg"
-    datastream_name = "COVERPAGE_HD"
     model = Issue
+
+    @property
+    def content_type(self) -> str:
+        return "image/jpeg"
+
+    @property
+    def datastream_name(self) -> str:
+        return "COVERPAGE_HD"
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs["localidentifier"])
@@ -677,8 +695,14 @@ class IssueReaderPageView(
     """
 
     model = Issue
-    content_type = "image/jpeg"
-    datastream_name = "IMAGE"
+
+    @property
+    def content_type(self) -> str:
+        return "image/jpeg"
+
+    @property
+    def datastream_name(self) -> str:
+        return "IMAGE"
 
     def get_object(self):
         return get_object_or_404(Issue, localidentifier=self.kwargs["localidentifier"])
@@ -700,8 +724,13 @@ class IssueXmlView(
 ):
     """ Displays an Issue raw XML. """
 
-    content_type = "application/xml"
-    datastream_name = "SUMMARY"
+    @property
+    def content_type(self) -> str:
+        return "application/xml"
+
+    @property
+    def datastream_name(self) -> str:
+        return "SUMMARY"
 
     def get_object(self, queryset=None):
         return get_object_or_404(Issue, localidentifier=self.kwargs["localidentifier"])
@@ -1080,10 +1109,16 @@ class ArticleFormatDownloadView(
 
 
 class ArticleXmlView(ArticleFormatDownloadView):
-    content_type = "application/xml"
-    datastream_name = "ERUDITXSD300"
     raise_exception = True
     tracking_view_type = "xml"
+
+    @property
+    def content_type(self) -> str:
+        return "application/xml"
+
+    @property
+    def datastream_name(self) -> str:
+        return "ERUDITXSD300"
 
     def get_access_type(self) -> ArticleAccessType:
         article = self.get_object()
@@ -1097,10 +1132,16 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     Returns the PDF file associated with an article.
     """
 
-    content_type = "application/pdf"
-    datastream_name = "PDF"
     raise_exception = True
     tracking_view_type = "pdf"
+
+    @property
+    def content_type(self) -> str:
+        return "application/pdf"
+
+    @property
+    def datastream_name(self) -> str:
+        return "PDF"
 
     def write_datastream_content(self, response, content):
         coverpage = get_coverpage(self.get_object())
@@ -1135,10 +1176,16 @@ class ArticleRawPdfFirstPageView(
     Returns the PDF file associated with an article.
     """
 
-    content_type = "application/pdf"
-    datastream_name = "PDF"
     raise_exception = True
     tracking_view_type = "pdf"
+
+    @property
+    def content_type(self) -> str:
+        return "application/pdf"
+
+    @property
+    def datastream_name(self) -> str:
+        return "PDF"
 
     def get_content(self):
         return self.get_object()
@@ -1176,17 +1223,20 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     Returns an image file embedded in the INFOIMG datastream.
     """
 
-    datastream_name = "CONTENT"
+    @property
+    def content_type(self):
+        content = self.get_datastream_content()
+        im = Image.open(io.BytesIO(content))
+        return Image.MIME[im.format]
+
+    @property
+    def datastream_name(self) -> str:
+        return "CONTENT"
 
     def get_object_pid(self):
         article = self.get_object()
         issue_pid = article.issue.pid
         return "{0}.{1}".format(issue_pid, self.kwargs["media_localid"])
-
-    def get_content_type(self):
-        content = self.get_datastream_content()
-        im = Image.open(io.BytesIO(content))
-        return Image.MIME[im.format]
 
 
 @method_decorator(cache_page(settings.LONG_TTL), name="dispatch")
