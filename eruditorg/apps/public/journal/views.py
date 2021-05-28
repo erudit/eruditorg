@@ -316,16 +316,12 @@ class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateVie
     def init_get_parameters(self, request):
         """ Initializes and verify GET parameters. """
         self.letter = request.GET.get("letter", None)
-        try:
-            assert self.letter is not None
+        if self.letter is not None:
             self.letter = str(self.letter).upper()
-            assert len(self.letter) == 1 and "A" <= self.letter <= "Z"
-        except AssertionError:
-            self.letter = None
+            if len(self.letter) != 1 or not ("A" <= self.letter <= "Z"):
+                self.letter = None
         self.article_type = request.GET.get("article_type", None)
-        try:
-            assert self.article_type in (Article.ARTICLE_DEFAULT, Article.ARTICLE_REPORT)
-        except AssertionError:
+        if self.article_type not in (Article.ARTICLE_DEFAULT, Article.ARTICLE_REPORT):
             self.article_type = None
 
     def get_solr_article_type(self):

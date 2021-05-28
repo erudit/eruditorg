@@ -241,15 +241,14 @@ class SavedSearchAddView(View):
     ]
 
     def post(self, request):
+        querystring = request.POST.get("querystring", None)
+        results_count = request.POST.get("results_count", None)
+        if querystring is None or results_count is None:
+            return JsonErrorResponse(gettext("Querystring incorrecte"))
         try:
-            querystring = request.POST.get("querystring", None)
-            results_count = request.POST.get("results_count", None)
-            assert querystring is not None
-            assert results_count is not None
-            parsed_qstring = urlparse.parse_qsl(querystring)
-            assert parsed_qstring
+            urlparse.parse_qsl(querystring, strict_parsing=True)
             results_count = int(results_count)
-        except (AssertionError, ValueError):
+        except ValueError:
             return JsonErrorResponse(gettext("Querystring incorrecte"))
 
         # Inserts the search into the saved searches set

@@ -28,10 +28,8 @@ class Command(BaseCommand):
             scheme, netloc, path, _, _, _ = urlparse(url.strip())
             _u = urlunparse(("http", current_site.domain, path, None, None, None))
             requests.get(_u)
-            try:
-                r = requests.get(_u)
-                assert r.status_code == 200
-            except AssertionError:
+            r = requests.get(_u)
+            if r.status_code != 200:
                 self.stdout.write(
                     self.style.ERROR(
                         "Unable to access: {url} - "
