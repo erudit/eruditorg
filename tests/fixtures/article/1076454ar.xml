@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1076454ar" typeart="article" lang="fr" ordseq="8" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1076454ar</idpublic></infoarticle><revue id="captures04164" lang="fr en"><titrerev>Captures</titrerev><sstitrerev>Figures, théories et pratiques de l'imaginaire</sstitrerev><titrerevabr>captures</titrerevabr><idissnnum>2371-1930</idissnnum><directeur sexe="masculin"><fonction lang="fr">Directeur</fonction><nompers><prenom>Vincent</prenom><nomfamille>Lavoie</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Sylvain</prenom><nomfamille>David</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Sophie</prenom><nomfamille>Marcotte</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Michaël</prenom><nomfamille>Trahan</nomfamille></nompers></redacteurchef></revue><numero id="captures05961"><volume>5</volume><nonumero>2</nonumero><pub><periode>Novembre</periode><annee>2020</annee></pub><pubnum><date typedate="publication">2021-04-14</date></pubnum><grtheme id="th1"><theme>Fictions du numérique</theme></grtheme><notegen lang="fr" porteenoteg="numero" typenoteg="edito"><alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://revuecaptures.org/publication/volume-5-num%C3%A9ro-2" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Accédez à ce numéro sur le site de la revue</liensimple></alinea></notegen></numero><editeur><nomorg>Figura, Centre de recherche sur le texte et l'imaginaire</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur> © <nomorg>Captures</nomorg>, 2021</droitsauteur><droitsauteur><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="https://creativecommons.org/licenses/by-nc-nd/4.0/" xlink:actuate="onRequest" xlink:show="replace" xlink:type="simple"><objetmedia flot="ligne"><image typeimage="forme" xlink:href="http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" xlink:actuate="onLoad" xlink:show="embed" xlink:type="simple"/></objetmedia></liensimple></droitsauteur></admin><liminaire><grtitre><surtitre>Fictions du numérique</surtitre>
+                <titre>Apparaître-disparaître dans l’hyperspectacle. <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage></titre>
+                
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Catherine</prenom><nomfamille>Cyr</nomfamille></nompers></auteur></grauteur><notegen typenoteg="edito"><alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="http://revuecaptures.org/article-dune-publication/appara%C3%AEtre-dispara%C3%AEtre-dans-l%E2%80%99hyperspectacle" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">Accédez à cet article sur le site de la revue</liensimple></alinea></notegen><resume typeresume="resume" lang="fr"><alinea><marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, de l’auteur québécois Guillaume Corbeil, transpose au théâtre l’univers des réseaux sociaux. Cet article aborde les modalités textuelles et scéniques à travers lesquelles s’exprime, dans la pièce, la performance de soi sur les plateformes numériques, cette performance s’actualisant dans la tension, permanente, entre sur-représentation et dissolution abrasive.</alinea></resume><resume typeresume="resume" lang="en"><alinea><marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, by Quebec author Guillaume Corbeil, transposes the world of social networks to the theatre. This article discusses the textual and scenic modalities through which the performance of the self on these digital platforms is expressed in the play, this performance being actualized in the permanent tension between over-representation and abrasive dissolution.</alinea></resume></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no><alinea>Facebook. Instagram. Twitter. Les réseaux sociaux, toutes plateformes confondues, ont conquis « [e]n à peine quelques années […] une place centrale au sein des différents usages de l’Internet » (Cardon, 2011: 141). Ces espaces qui, selon le sociologue français Dominique Cardon, sont caractérisés par une participation active des individus à la création et au partage de contenus, mobilisent habituellement des discours et des imaginaires centrés sur les idées de monstration et de performance de soi. Et si, dans le mouvement même de la spectacularisation du « je » s’affirmait aussi une négation de l’individualité, puissamment dissolvante? Cette cohabitation de dynamiques contraires se manifeste de façon marquée, à travers diverses formes d’érosion du personnage théâtral, dans <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle).</marquage> Écrite par Guillaume Corbeil et mise en scène par Claude Poissant<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi>, cette pièce, créée à Montréal par le Théâtre PàP en février 2013, matérialise, à l’écrit comme à la scène, une tension entre sur-représentation et dissolution de soi.</alinea></para><para id="pa2"><no>2</no><alinea>Petite excursion — en trois temps — dans cet espace de clignotement entre surenchère et soustraction.</alinea></para><figure id="fi1">
+		<legende lang="fr">
+					<alinea>Jérémie Battaglia, <marquage typemarq="italique">Laurence
+						Dauphinais, Francis Ducharme, Julie Carrier-Prévost, Mickaël Gouin et Eve
+						Pressault dans</marquage> Cinq visages pour Camille Brunelle (2013),
+						Guillaume Corbeil (texte) et Claude Poissant (mise en scène), <marquage typemarq="italique">Cinq visages pour Camille Brunelle</marquage>, Montréal,
+						Production du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre PÀP</liensimple>, 2013,
+						Photographie numérique | 5286 x 3524 px</alinea>
+				</legende>
+		<objetmedia flot="bloc">
+			<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="figure" xlink:type="simple"></image>
+		</objetmedia>
+		<source>©<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:type="simple" xlink:href="https://jeremiebattaglia.com/fr/">Jérémie
+					Battaglia</liensimple></source>
+	</figure></section1><section1 id="s1n2"><no>2</no><titre>Un personnage spectralisé</titre><para id="pa3"><no>3</no><alinea>Le théâtre contemporain est hanté par la question de l’absence. Ou, plutôt, par celle de la représentation de l’absence. C’est ce qu’Élisabeth Angel-Perez désigne comme « la tentation spectrale » de l’art. Elle écrit : « Figurer le corps absent, sculpter l’absence, mettre en signes l’irreprésentable est un des traits les plus marquants de l’art contemporain et du théâtre en particulier. » (2006: 1) S’appuyant notamment sur les travaux de Jacques Derrida et de Georges Didi-Huberman, la chercheuse trace les contours d’une « spectropoétique » de la scène, soit une pensée de la dramaturgie et des arts du spectacle vivant qui s’attache aux pratiques et aux formes exigeant d’imaginer un invisible, une absence, ou encore une présence qui, paradoxalement, se donne à voir à travers son effritement, sa disparition.</alinea></para><para id="pa4"><no>4</no><alinea>Au coeur de cette entreprise de spectralisation se tient le personnage théâtral. Traditionnellement support du logos et vecteur de l’action, instance énonciative sur laquelle repose, dans le texte puis à la scène, le déplié de la fiction dramatique, le personnage s’est souvent trouvé mis à mal depuis la crise du drame qui a ébranlé ses assises à la fin du XIX<exposant>e</exposant> siècle. En effet, la suppression du personnage au théâtre n’est pas une lubie contemporaine. Elle trouve ses racines dans cette crise, laquelle a d’abord touché le théâtre européen avant de trouver écho, plus tardivement, dans la dramaturgie québécoise — crise qui a aussi, et c’est une de ses marques importantes, fait émerger le personnage en tant que représentation d’un sujet éclaté. L’avènement de ce dernier dans les dramaturgies de la fin du XIX<exposant>e</exposant> siècle et du début du XX<exposant>e</exposant> siècle — pensons aux textes de Maeterlinck, Ibsen, Tchekhov — s’affirme, faut-il le rappeler, comme l’un des signes manifestes de la crise du drame. Jean-Pierre Sarrazac résume :</alinea>
+				<bloccitation>
+					<alinea>[C]ette crise, qui éclate dans les années 1880, est une réponse aux
+						rapports nouveaux qu’entretient l’homme avec le monde, avec la société.
+						Cette relation nouvelle se place sous le signe de la <marquage typemarq="italique">séparation</marquage>. L’homme du
+						XX<exposant>e</exposant> siècle […] est un homme séparé. Séparé des
+						autres […], séparé du corps social qui pourtant le prend en étau, séparé de
+						Dieu et des puissances invisibles et symboliques… Séparé de lui-même, clivé,
+						éclaté, mis en pièces.</alinea>
+					<source>2010: 8-9</source>
+				</bloccitation></para><para id="pa5"><no>5</no><alinea>Dans le texte dramatique, cet éclatement du sujet, qui signe, avec l’amenuisement de la fable et de l’action dramatique, l’effondrement du modèle aristotélicien, prendra diverses formes. Par exemple, chez Maeterlinck, le dispositif choral sera le mode de représentation privilégié d’une individualité clivée, morcelée. Comme le souligne Julie Sermon, par ce changement paradigmatique, le personnage théâtral se voit désormais, et de plus en plus, « privé de son continuum identitaire, substantiel, actanciel » (2012: 32). Sa voix, qui n’est plus arrimée à un être de fiction aux contours précis, ni conditionnée par une stricte progression fabulaire, devient volatile, inassignable.</alinea></para><para id="pa6"><no>6</no><alinea>Cet éclatement du sujet prendra de l’ampleur dans les dramaturgies du XX<exposant>e</exposant> et du début du XXI<exposant>e</exposant> siècle. Cette mise en morceaux peut, bien sûr, se lire à l’aune des rapports que l’individu contemporain entretient avec l’espace social, un espace — réel ou numérique — qui, tout à la fois, dissout, fragmente et multiplie les possibles identitaires. Se dérobant à une stricte saisie diachronique, mais tirant sa source de l’avènement de la société de consommation et des nouvelles formes de médiatisation, le sujet émergeant de cette individualité en éclats signerait, pour Jean Baudrillard, « l’annulation de la personne » (2009 [1970]: 125). Sur les réseaux sociaux, qui constituent le dernier jalon de ces nouvelles formes de médiatisation, l’effritement du sujet se manifeste à travers la multiplication, la mouvance et l’impermanence des différents agrégats de données qui composent l’identité numérique. Celle-ci se définit, selon Olivier Ertzscheid, comme « la collection des traces (écrits, contenus audios ou vidéos, messages sur des forums, identifiants de connexion, etc.) que nous laissons derrière nous, consciemment ou inconsciemment, au fil de nos navigations sur le réseau et le reflet de cet ensemble de traces, tel qu’il apparaît “remixé” par les moteurs de recherche » (2018 [2013]: 23-24). Cette identité, qui s’accompagne de la « réputation numérique » — ce que les autres disent et répandent à propos du sujet — est, pour le chercheur, nécessairement plurielle, « subjective et fluctuante » (24-25). Disséminées sur différentes plateformes Web, les identités numériques se composent, se décomposent et se recomposent au gré de pratiques qui accumulent, mettent en écho ou en friction ces assemblages de traces changeants et éphémères. Déjà éclatée, l’individualité qui s’y expose et s’y donne en représentation — une forme de théâtralité ne sous-tend-elle pas toujours ces pratiques? — rompt encore davantage avec l’idée, déjà passablement affaiblie, d’un sujet unifié, aux contours stables et précis. Les identités numériques qui s’affichent sur les réseaux sociaux de l’Internet, dans leurs mouvements permanents, ne coïncident pas avec la « personne ». Paradoxalement, par déplacements et accumulations, elles effacent plutôt celle-ci ou s’y substituent partiellement et fugitivement.</alinea></para><figure id="fi2">
+				<legende lang="fr">
+					<alinea>Jérémie Battaglia, <marquage typemarq="italique">Laurence Dauphinais,
+						Francis Ducharme, Mickaël Gouin et Eve Pressault dans</marquage> Cinq
+						visages pour Camille Brunelle (2013), Guillaume Corbeil (texte) et Claude
+						Poissant (mise en scène), <marquage typemarq="italique">Cinq visages pour
+						Camille Brunelle</marquage>, Montréal, Production du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre
+						PÀP</liensimple>, 2013, Photographie numérique | 3369 x 2246 px</alinea>
+				</legende>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="figure" xlink:type="simple"></image>
+				</objetmedia>
+				<source>©<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:type="simple" xlink:href="https://jeremiebattaglia.com/fr/">Jérémie
+					Battaglia</liensimple></source>
+			</figure><para id="pa7"><no>7</no><alinea>Sans nécessairement mobiliser les imaginaires des réseaux sociaux, une part du théâtre contemporain, qui s’attache à mettre à mal ou à éliminer le personnage, rend compte de cet éclatement, voire de cette « annulation de la personne<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi> ». Empruntant des voies différentes, convoquant directement l’univers des plateformes numériques dans le matériau textuel ou scénique, d’autres formes dramatiques et théâtrales actuelles cherchent aujourd’hui non à effacer complètement le personnage mais à le défaire, le déplacer, le dissoudre, dans un va-et-vient entre dématérialisation et recomposition<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>. Observons à travers quels dispositifs dramaturgiques et scéniques se met en place, dans <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, cette étrange petite danse de l’irrésolution.</alinea></para></section1><section1 id="s1n3"><no>3</no><titre>Le texte : déclinaisons chorales</titre><para id="pa8"><no>8</no><alinea>En 2013, avec sa pièce <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, l’auteur québécois Guillaume Corbeil entame une démarche qu’il poursuivra avec <marquage typemarq="italique">Tu iras la chercher</marquage> (2014b) et qu’il reprendra dans <marquage typemarq="italique">Unité modèle</marquage> (2016a). À travers cette trilogie qu’il intitule « Les colonies de l’image » (2016b), l’auteur s’attache à explorer, au moyen de dispositifs d’énonciation particuliers, les rapports entre parole, identité, discours et procédés de médiatisation. Dans <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, par le prisme des réseaux sociaux, Facebook notamment, qui constituent l’espace de la fiction, il élabore une réflexion critique sur la médiatisation de soi. Une sur-médiatisation, en fait, qui transforme l’intimité en une extimité, soit, selon Serge Tisseron, un mouvement amenant chacun·e à se révéler à autrui, dans l’espace public, par le dévoilement de fragments de soi habituellement méconnus des autres et relevant jusqu’alors de la vie intérieure (2001). Notons que, pour Cardon, une grande part du succès des plateformes de socialisation numériques tient justement à ces pratiques de dévoilement, « au fait que les personnes y exposent différents traits de leur personnalité » (2011: 142). Il explique :</alinea>
+				<bloccitation>
+					<alinea>Ce phénomène renvoie à deux dynamiques des processus d’individualisation
+						observables dans les sociétés contemporaines : un processus de <marquage typemarq="italique">subjectivation</marquage>, qui conduit les personnes à
+						extérioriser leur identité dans des signes qui témoignent moins d’un statut
+						incorporé et acquis que d’une capacité à faire (écrire, photographier,
+						créer…); et un processus de <marquage typemarq="italique">simulation</marquage>, qui les conduit à endosser une diversité de rôles
+						exprimant des facettes multiples, et plus ou moins réalistes, de leur
+						personnalité.</alinea>
+					<source>142</source>
+				</bloccitation></para><para id="pa9"><no>9</no><alinea>Selon le chercheur, l’exposition de soi constitue ainsi « la principale technique relationnelle » (142) utilisée sur les réseaux sociaux. Toutefois, souligne-t-il, « loin d’être des données objectives, attestées, vérifiables et calculables, le patchwork désordonné et proliférant de signes identitaires produit sur les réseaux sociaux est tissé de jeux, de parodies, de pastiches, d’allusions et d’exagérations » (142). Ce sont ces formes identitaires composites, diversement traversées par des dynamiques liées au devenir-sujet et à la simulation, qui habitent <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>. Mais, si l’entreprise de subjectivation semble à l’avant-plan du discours des personnages, on verra que celle-ci repose sur un paradoxe. Plus les locuteurs de la pièce se dévoilent, cherchant par la parole à se singulariser, plus leurs contours s’effritent et plus leurs identités se diluent dans une parole à la forme et au contenu hautement formaté.</alinea></para><para id="pa10"><no>10</no><alinea>Ainsi, la pièce s’ouvre avec les personnages désignés par les chiffres Un, Deux, Trois, Quatre et Cinq — une absence d’identité nominale déjà éloquente — livrant, à travers une adresse sans destinataire précis, de longues énumérations qui tracent de leurs identités une sorte de cartographie de surface. Par le biais d’une anaphore insistante — tous les énoncés commencent, en empruntant la forme des écritures profilaires, par « J’aime » ou par « J’ai lu » ou « J’ai vu » —, la parole déferle, procède par répétition-variation et effet-miroir. Rapidement, bien que cette parole laisse percer ça et là de petites saillies d’individualité, une forme d’homogénéité discursive apparaît. Les personnages deviennent indiscernables les uns des autres :</alinea>
+				<bloccitation>
+					<verbatim typeverb="forme">
+						<bloc>
+							<ligne>DEUX : J’aime Corey Hart </ligne>
+							<ligne>J’aime The Beach Boys </ligne>
+							<ligne>J’aime The Rolling Stones </ligne>
+							<ligne>J’aime The Yardbirds</ligne>
+						</bloc>
+						<bloc>
+							<ligne>CINQ : J’aime Eric Clapton</ligne>
+						</bloc>
+						<bloc>
+							<ligne>QUATRE : J’aime Jeff Beck</ligne>
+						</bloc>
+						<bloc>
+							<ligne>TROIS : J’aime Jimi Hendrix</ligne>
+							<ligne>J’aime The Kinks</ligne>
+						</bloc>
+						<bloc>
+							<ligne>DEUX : J’aime The Velvet Underground</ligne>
+						</bloc>
+						<bloc>
+							<ligne>TROIS : J’aime Lou Reed</ligne>
+						</bloc>
+						<bloc>
+							<ligne>QUATRE : J’aime Nico</ligne>
+						</bloc>
+						<bloc>
+							<ligne>UN : J’aime Janis Joplin </ligne>
+							<ligne>J’aime Cat Stevens </ligne>
+							<ligne>J’aime Bob Dylan </ligne>
+							<ligne>J’aime Johnny Cash</ligne>
+						</bloc>
+						<source>2013: 22</source>
+					</verbatim>
+				</bloccitation></para><para id="pa11"><no>11</no><alinea>Quel dispositif énonciatif est à l’oeuvre dans ce tableau (et dans la pièce tout entière) et que met-il de l’avant? Guillaume Corbeil, à l’instar de plusieurs dramaturges contemporain·e·s, déploie ici un dispositif choral, c’est-à-dire un système d’énonciation qui rappelle le choeur antique et qui laisse supposer, à voir sa présence marquée sur nos scènes, que ce dernier ferait retour dans le théâtre contemporain. Or, à observer avec attention les multiples formes adoptées par ce dispositif, on remarque, comme le souligne Jean-Pierre Sarrazac, que la choralité se présente aujourd’hui comme « une structure […] nouvelle qui n’est pas la reprise du choeur mais, plutôt, sa déconstruction, sa dispersion, sa diaspora » (2003: 28).</alinea></para><para id="pa12"><no>12</no><alinea>En effet, alors que le choeur de la tragédie grecque se donnait comme une représentation de la cité harmonieuse et unifiée (idéale), la choralité, dans sa géométrie actuelle, offre plutôt à voir et à entendre un choeur discordant, ou encore, ainsi que l’affirme Christophe Triau, elle se pose comme un « effet fantôme du choeur » (2003 : 5). Aussi, le dispositif choral, s’il donne d’abord l’illusion de l’identique ou de la multiplication du même, « assume aussi un effritement » (6) : la choralité s’établit à travers une fuite permanente où « la totalité est promise à la diffraction » (8), à la brisure. Ainsi, selon la définition proposée par Martin Mégevand :</alinea>
+				<bloccitation>
+					<alinea>On entend par choralité cette disposition particulière des voix qui ne
+						relève ni du dialogue, ni du monologue; qui, requérant une pluralité […]
+						contourne les principes du dialogisme […] au profit d’une rhétorique de la
+						dispersion (atomisation, parataxe, éclatement) ou du tressage entre
+						différentes paroles qui se répondent musicalement (étoilement,
+						superposition, échos, effets de polyphonie).</alinea>
+					<source>2005 : 37</source>
+				</bloccitation></para><figure id="fi3">
+				<legende lang="fr">
+					<alinea>Jérémie Battaglia, <marquage typemarq="italique">Laurence Dauphinais,
+						Francis Ducharme, Julie Carrier-Prévost, Mickaël Gouin et Eve Pressault
+						dans</marquage> Cinq visages pour Camille Brunelle (2013), Guillaume Corbeil
+						(texte) et Claude Poissant (mise en scène), <marquage typemarq="italique">Cinq visage pour Camille Brunelle</marquage>, Montréal, Production
+						du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre PÀP</liensimple>, 2013, Image numérique | 2732 x 1821 px</alinea>
+				</legende>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="figure" xlink:type="simple"></image>
+				</objetmedia>
+				<source>©<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:type="simple" xlink:href="https://jeremiebattaglia.com/fr/">Jérémie
+					Battaglia</liensimple></source>
+			</figure><para id="pa13"><no>13</no><alinea>Pour ce chercheur, « évoquer la choralité d’un dispositif, c’est d’abord l’envisager sous l’angle de la diffraction des paroles et des voix dans un ensemble réfractaire à toute totalisation stylistique, esthétique ou symbolique ». En ce sens, pour lui, la choralité est « l’inverse du choeur » (37-38).</alinea></para><para id="pa14"><no>14</no><alinea>Dans <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, cette choralité est mise au service de la représentation de ce que Marie-Christine Lesage et Audrey-Anne Cyr ont identifié, dans la pièce, comme un imaginaire de l’hyperspectacle. Citant les travaux des sociologues français Éric Maigret et Éric Macé sur les cultures médiatiques, les chercheuses rappellent que nous sommes dans l’hyperspectacle lorsque :</alinea>
+				<bloccitation>
+					<alinea>[A]u lieu de « subir » passivement les programmes médiatiques, les
+						individus fabriquent et diffusent en masse des images, pensent en fonction
+						de l’image, s’expriment et portent un regard réflexif sur le monde des
+						images, agissent et se montrent en fonction de l’image qu’ils veulent voir
+						projetée d’eux.</alinea>
+					<source>Maigret et Macé, 2005: 275, cités dans Lesage et Cyr, 2013 : 40</source>
+				</bloccitation></para><para id="pa15"><no>15</no><alinea>Cela revient à dire que « les individus ne font pas que subir le système médiatique, ils s’en servent afin de se mettre eux-mêmes en scène » (Lesage et Cyr, 2013: 40).</alinea></para><para id="pa16"><no>16</no><alinea>Les cinq locuteurs de <marquage typemarq="italique">Nous voir nous</marquage> prennent activement part à cette logique de l’hyperspectacle et de la mise en scène de soi. Par ses effets de répétition, d’échos, et d’accumulation, la parole chorale reproduit cet imaginaire de la surenchère où le « toujours plus » est noué à la médiatisation, voire à la marchandisation de soi. Comme le posent Lesage et Cyr,</alinea>
+				<bloccitation>
+					<alinea>la pièce illustre les conséquences ultimes de ce système, qui mène à
+						l’hyperspectacularisation du moi, chacun mettant en ligne et en image tout
+						ce qu’il vit, de manière à fabriquer et à diffuser une certaine marque de
+						commerce de soi.</alinea>
+					<source>41</source>
+				</bloccitation></para><para id="pa17"><no>17</no><alinea>Or, cette hyperspectacularisation du moi se fait à travers des dynamiques énonciatives qui, elles, tendent plutôt à standardiser les constructions identitaires. Dans la pièce, Un, Deux, Trois, Quatre et Cinq se soumettent aux injonctions normatives qui dictent la forme des échanges interindividuels et qui en formatent les contenus. Les longues litanies qui se superposent ou se font écho uniformisent, ironiquement et de façon abrasive, les discours animés par une tentative de singularisation. La parole chorale, bien que réfractaire à l’unisson du choeur, ici, aplanit le personnage, le sérialise, en fait la composante interchangeable d’un système qui admet peu la différence. Il n’y a d’ailleurs pas, dans la pièce, d’extériorité à ce système où l’hypermédiatisation du moi se poursuit au-delà de la mort. Par exemple, à la toute fin de la pièce, après le décès de l’un des locuteurs, les autres poursuivent son processus de spectacularisation en intégrant le personnage, et leur rapport à celui-ci, à leur propre système énonciatif<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi>. Hypermédiatisé, mais vide de toute substance propre, le personnage se fond ainsi dans la parole de l’autre qui, tout à la fois, l’efface en prenant sa place et le maintient au coeur du système.</alinea></para><para id="pa18"><no>18</no><alinea>Pris au filet du dispositif choral, dépourvu de la dimension singularisante de sa parole, le personnage, dans <marquage typemarq="italique">Nous voir nous</marquage>, se pose comme une entité évanescente, une construction aux contours flous, difficilement discernable des autres locuteurs. Ce personnage indistinct est à rapprocher, selon moi, de la notion d’« impersonnage » proposée par Jean-Pierre Sarrazac :</alinea>
+				<bloccitation>
+					<alinea>L’impersonnage se présente à nous comme le lieu de passage et de
+						métamorphose de tous les visages, de tous les masques (« nus ») qui font la
+						vie d’un homme [<marquage typemarq="italique">sic</marquage>]. Cet
+						impersonnage est, au sens musilien, « sans qualités ». Ce qui signifie
+						paradoxalement qu’il est pourvu de mille qualités mais d’aucune unité ni
+						substance identitaire. Que, dès lors, il paraît voué à ce nomadisme et à ce
+						caméléonisme — changer de place en place d’identité — qui l’oblige à jouer
+						tous les rôles, ce qui lui permet de ne se dérober à aucun.</alinea>
+					<source>2001: 48</source>
+				</bloccitation></para><para id="pa19"><no>19</no><alinea>Construction inassignable, l’impersonnage rend compte, dans sa forme même, du morcellement identitaire contemporain, de cet éclatement, voire de cette « suppression de la personne » que j’évoquais plus haut. Fondu dans le système choral, cet impersonnage, traversé par une parole répétitive et migratrice, est une construction volatile dont l’identité est impossible à épingler tant elle n’a de cesse de se défaire, de se recomposer, puis de se dissoudre à nouveau. Dans la pièce de Guillaume Corbeil, cette inassignabilité du personnage contraste fortement avec l’hyperspectacularisation du moi. À travers les longues énumérations qui tracent les contours mouvants de son identité, dans le flot des images qui le mettent en scène, cherchant à le faire exister et à le maintenir dans le regard de l’Autre, le personnage se réifie, se transforme en objet paradoxalement vidé de toute substance. Comme l’a remarqué Hervé Guay : « Ici, l’assentiment à sa propre transformation en objet par l’autre et le renoncement à son statut de sujet vont de pair, et ceci même si rarement des personnages ont autant abusé du “je” et du “moi” dans une pièce. » (2013: 92)</alinea></para><para id="pa20"><no>20</no><alinea>Par ailleurs, bien que ce « moi », tout évanescent soit-il, s’affiche au coeur de la fiction, les identités numériques qui s’y rattachent ne deviennent véritablement signifiantes qu’à travers les formes de relations qu’elles engagent les unes avec les autres. Dans l’entretissage de leurs échanges, Un, Deux, Trois, Quatre et Cinq investissent en effet des formes d’expression qui ne sont pas uniquement narcissiques, mais bien, avant tout, relationnelles. Comme l’affirme Cardon, sur les réseaux sociaux,</alinea>
+				<bloccitation>
+					<alinea>[l]e souci de distinction et de différenciation à l’égard des autres qui
+						s’affiche par la mise en scène de signes identitaires sert avant tout à
+						relier. En ce sens, […] la construction de l’autonomie est fondamentalement
+						<marquage typemarq="italique">relationnelle</marquage>. Lorsque les
+						nouvelles pratiques de l’Internet sont regardées dans leur seule dimension
+						identitaire, elles apparaissent comme des formes exacerbées
+						d’intensification du rapport à soi. Replacée dans le système d’échange
+						qu’elle suscite, cette exhibition prend des colorations multiples qui ne
+						peuvent se réduire au calcul, à l’opportunisme ou à un rapport aliéné à
+						soi […].</alinea>
+					<source>2011: 144</source>
+				</bloccitation></para><para id="pa21"><no>21</no><alinea>Dès lors, dans la pièce de Corbeil, même si le dispositif choral tend à « avaler » le personnage, les formes d’énonciation privilégiées — en particulier les anaphores, reprises, répétitions-variations — n’ont de cesse de le maintenir présent à autrui, à travers des logiques de connectivité qui produisent, intensifient ou métamorphosent les rapports interindividuels. Partiellement dématérialisé, dessaisi de lui-même, le personnage à la subjectivité précaire s’affirme, malgré tout, à travers les mots et les images qui le relient aux autres. Entre disparition et persistance de soi, sa posture, encore une fois, se fait ambivalente.</alinea></para></section1><section1 id="s1n4"><no>4</no><titre>La scène : un espace de réverbération</titre><objet id="ob1" typeobj="video">
+				<legende lang="fr">
+					<alinea>Guillaume Corbeil et Claude Poissant, L’espace d’une page Facebook dans <marquage typemarq="italique">Cinq visages pour Camille Brunelle</marquage> (2013),
+						Extrait de Guillaume Corbeil (texte) et Claude Poissant (mise en
+						scène), <marquage typemarq="italique">Cinq visage pour Camille
+						Brunelle</marquage>, Montréal, Production du Théâtre PÀP, 2013, Vidéo
+						numérique 1280 x 720 px, 2 min 40 s | 00:18:57-00:22:07</alinea>
+				</legende>
+		<objetmedia flot="bloc">
+			<video xmlns:xlink="http://www.w3.org/1999/xlink" id="vi1" xlink:type="simple" xlink:href="1076454arv001.mpeg" xlink:show="embed" xlink:actuate="onRequest" dimx="1280px" dimy="720px" taille="33.3Mo" typemime="video/mpeg" desc="Durée : 02:40 min."></video>
+		</objetmedia>
+				<source>Avec l'aimable autorisation du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls10" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre PÀP</liensimple></source></objet><para id="pa22"><no>22</no><alinea>Une autre forme de dématérialisation, en écho à ce renoncement partiel au statut de sujet, a été privilégiée lors de la création à la scène de la pièce. Dans la mise en scène de Claude Poissant, l’indifférenciation individuelle s’estompe quelque peu — chacun des locuteurs est interprété par un acteur ou une actrice avec des caractéristiques physiques et vocales distinctes —, et ce qui se trouve dématérialisé, c’est surtout l’espace de la fiction. Le metteur en scène a évité l’écueil d’une représentation mimétique des plateformes numériques en privilégiant plutôt une évocation en creux, un déplacement et diverses formes de métaphorisation de ces espaces et de leurs modalités d’échanges. Ainsi, le dispositif scénographique, un plateau dénué de mobilier, mais jonché de vêtements parmi lesquels évoluent les interprètes, évoque-t-il le contenu énonciatif de certains tableaux de la pièce, en particulier le premier, dans lequel sont énumérées les préférences de chacun·e en matière de mode. Dégagés de leur fonction usuelle, les vêtements répandus sur le sol forment des archipels mouvants, leur configuration changeant au gré des mouvements des acteurs et des actrices qui les enjambent ou les piétinent. Petits morceaux d’étoffe inertes, inhabités, ils disent à la fois l’absence et l’accumulation : l’absence des corps, celle racontée par les images des amoncellements de vêtements appartenant aux disparu·e·s et aux défunt·e·s; l’accumulation des atours et des artifices, signes d’une différenciation individuatrice, ou du désir de celle-ci, manifeste, on l’a vu, dans les longues litanies de l’hyperspectacularisation de soi. Vide et surenchère indissociés, indissociables, composent ici une nouvelle dialectique qui régit le dispositif d’énonciation et se trouve réverbérée, déclinée à l’infini sur le plateau.</alinea></para><para id="pa23"><no>23</no><alinea>Cette logique de réverbération affecte également un autre dispositif scénique d’importance dans <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage> : celui de l’écran. Ici encore, Claude Poissant n’a pas cherché la représentation imitative des interfaces numériques, mais a opéré un déplacement en privilégiant une évocation amplificatrice d’une composante importante du texte de Corbeil. En effet, l’écran est sur-présent dans l’oeuvre dramatique, en particulier dans les deuxième et troisième tableaux où les (im)personnages relatent, à travers une énonciation qui atténue ou brouille les marques de temporalité, les hauts faits de leur soirée. Dans le texte, chaque affirmation est suivie du mot « photo » entre parenthèses, l’image venant dès lors redoubler le contenu énonciatif :</alinea>
+				<bloccitation>
+					<verbatim typeverb="forme">
+						<bloc>
+							<ligne>UN : Mon taxi qui arrive</ligne>
+						</bloc>
+						<bloc>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi qui descends de la voiture</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi qui grimace</ligne>
+							<ligne><marquage typemarq="italique">(Photo de photo)</marquage></ligne>
+							<ligne>Moi qui ris en regardant la photo de ma grimace</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Le doorman</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>La file au vestiaire</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Enfin mon tour</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi qui jase avec le barman</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi qui bois une bière</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Le DJ</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+						</bloc>
+						<bloc>
+							<ligne>Il était tellement beau!</ligne>
+						</bloc>
+						<bloc>
+							<ligne>TROIS : Je le connais bien </ligne>
+							<ligne>Je pense pas que ça soit un gars pour toi</ligne>
+						</bloc>
+						<bloc>
+							<ligne><marquage typemarq="italique">Photo</marquage></ligne>
+						</bloc>
+						<bloc>
+							<ligne>CINQ : Un premier verre</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Les gars</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi avec les gars</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi avec les gars sur la terrasse</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi qui bois un shooter sur la terrasse avec les gars</ligne>
+						</bloc>
+						<bloc>
+							<ligne><marquage typemarq="italique">Photo</marquage></ligne>
+						</bloc>
+						<bloc>
+							<ligne>TROIS : Moi assise au bar</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Un homme qui me paye un verre</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Moi qui lui souris</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Lui qui me donne son numéro de téléphone</ligne>
+							<ligne><marquage typemarq="italique">(Photo)</marquage></ligne>
+							<ligne>Son numéro de téléphone dans les poubelles</ligne>
+						</bloc>
+						<bloc>
+							<ligne><marquage typemarq="italique">Sourire </marquage></ligne>
+							<ligne><marquage typemarq="italique">Photo</marquage></ligne>
+						</bloc>
+						<bloc>
+							<ligne>CINQ : Moi et Camille Brunelle</ligne>
+						</bloc>
+					</verbatim>
+					<source>35-37</source>
+				</bloccitation></para><figure id="fi4">
+				<legende lang="fr">
+					<alinea>Jérémie Battaglia, <marquage typemarq="italique">Laurence Dauphinais,
+						Francis Ducharme, Julie Carrier-Prévost, Mickaël Gouin et Eve Pressault
+						dans </marquage>Cinq visages pour Camille Brunelle (2013), Guillaume Corbeil
+						(texte) et Claude Poissant (mise en scène), <marquage typemarq="italique">Cinq visages pour Camille Brunelle</marquage>, Montréal, Production
+						du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls11" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre PÀP</liensimple>, 2013, Photographie numérique | 3273 x
+						2182 px</alinea>
+				</legende>
+				<objetmedia flot="bloc">
+					<image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="figure" xlink:type="simple"></image>
+				</objetmedia>
+				<source>©<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls12" xlink:type="simple" xlink:href="https://jeremiebattaglia.com/fr/">Jérémie
+					Battaglia</liensimple>  </source>
+			</figure><para id="pa24"><no>24</no><alinea>Dans la mise en scène, la photographie prend une place rayonnante. Ici, comme sur divers réseaux sociaux, elle n’agit pas seulement comme appui ou mise en écho du discours, mais elle tend plutôt à le supplanter. Tirant sa source de la parole, l’image prend sur la scène un espace démesuré : le mur du fond, vide lors du premier tableau, est par la suite occupé par un écran géant qui, jusqu’à la fin du spectacle, surplombe les acteurs et les actrices, lesquel·le·s apparaissent dès lors minuscules sous la surface de projection où défilent les photographies. Sur celles-ci, sont reconnaissables les interprètes de la pièce dans les divers lieux — bar, galerie, taxi — d’une soirée arrosée semblable à toutes les autres (était-ce hier? aujourd’hui?). Puis, d’autres visages s’accumulent, en écho à l’énumération des noms et des prénoms<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi>, une répétition-variation de plus en plus rapide et étourdissante, qui rappelle le rythme hypnotique du déferlement des images sur une plateforme numérique lorsque l’oeil surfe sur des images et que la main clique avec la souris ou le pavé tactile : une suite infinie d’images effleurées furtivement. Ces projections écraniques, dans leur forme, ne représentent aucune des composantes d’une interface numérique (curseur, barre de défilement, icônes, etc.), mais dans leur agencement, dans leur défilement, dans leur rapport avec les mots (bientôt avalés, supplantés), dans leur trajectoire dramaturgique, elles inscrivent pleinement la représentation dans l’espace imaginaire de Facebook ou d’Instagram — ou des deux à la fois, possibilité et privilège de l’ubiquité théâtrale.</alinea></para><para id="pa25"><no>25</no><alinea>Enfin, l’espace d’une page Facebook est également évoqué, dans la mise en scène, par la représentation des modalités d’échanges. À travers le travail vocal et gestuel des interprètes, Claude Poissant transpose au plateau les possibilités discursives, mais aussi les contraintes de la plateforme. Dans le rythme et le ton de l’énonciation, dans le jeu des regards, dans la chorégraphie des corps, il investit de façon évocatrice — et critique — les codes d’expression de l’interface, laquelle est régulée par une ergonomie particulière, des algorithmes précis, des règles d’utilisation et des fonctionnalités connues. Ces dernières sont ingénieusement convoquées dans le spectacle. Par exemple, l’icône du « pouce levé » qui, sur Internet, et en particulier sur Facebook, indique l’approbation, est transformée en signe vocal dans la pièce. Ainsi, venant appuyer certaines affirmations visiblement consensuelles au sujet d’oeuvres « aimées », « lues » ou « vues », le commentaire « hmmm » est émis à l’unisson par l’ensemble du groupe, qui forme en ces instants précis un véritable choeur. Lorsque l’énoncé rencontre un degré d’approbation élevé, le volume de l’onomatopée augmente et sa durée est étirée, signifiant que le signe « j’aime » s’est provisoirement mué en « j’adore ». Quand l’onomatopée retrouve son format court, on comprend que le temps de l’adoration et de l’aura d’exceptionnalité nimbant l’élément mis de l’avant est révolu. Un effet comique se dégage indéniablement de cette transposition, mais, au-delà de celui-ci, pointent, encore une fois, les marques de cette tension entre désir de singularisation et conformité à diverses injonctions normatives, seules garantes, auprès du groupe, de la valeur de ceux qui le composent. Cette tension se trouve d’ailleurs redoublée dans le spectacle par le travail chorégraphique, en particulier dans les premiers tableaux où les corps oscillent souvent entre une gestualité uniforme, presque dansée, et des mouvements individuels qui expriment une brisure, une tentative de différenciation.</alinea></para></section1><section1 id="s1n5"><no>5</no><titre>Les modalités d’une présence au monde</titre><objet id="ob2" typeobj="video">
+				<legende lang="fr">
+					<alinea>Guillaume Corbeil et Claude Poissant, Désir de singularisation et de conformité
+						dans <marquage typemarq="italique">Cinq visages pour Camille
+						Brunelle</marquage> (2013), Extrait de Guillaume Corbeil (texte) et Claude
+						Poissant (mise en scène), <marquage typemarq="italique">Cinq visage pour
+						Camille Brunelle</marquage>, Montréal, Production du Théâtre PÀP, 2013,
+						Vidéo numérique 1280 x 720 px, 2 min 55 s | 00:08:26-00:11:21</alinea>
+				</legende>
+		<objetmedia flot="bloc">
+			<video xmlns:xlink="http://www.w3.org/1999/xlink" id="vi2" xlink:type="simple" xlink:href="1076454arv002.mpeg" xlink:show="embed" xlink:actuate="onRequest" dimx="1280px" dimy="720px" taille="23.2Mo" typemime="video/mpeg" desc="Durée : 02:55 min."></video>
+		</objetmedia>
+				<source>Avec l'aimable autorisation du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls13" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre PÀP</liensimple></source></objet><para id="pa26"><no>26</no><alinea>Alors que j’abordais récemment cette pièce dans un cours portant sur la dramaturgie contemporaine, un étudiant s’était exclamé : « Mais madame, cette pièce, c’est vraiment du vieux <marquage typemarq="italique">stock</marquage>… c’est, genre, 2013! » Avait suivi une discussion animée sur ce qui avait changé et ce qui s’était maintenu, dans l’univers des réseaux sociaux et des plateformes numériques centrées sur diverses formes d’échanges et d’interactions, depuis l’époque antédiluvienne de la création de la pièce. Étaient ressorties de nos échanges les incontournables avancées technologiques, la création davantage marquée de sous-communautés aux frontières mouvantes ou de provisoires « tribus », pour reprendre un terme cher au philosophe Michel Maffesoli (2000), et l’accentuation des phénomènes de transmission virale — pensons à la création, au partage et à la diffusion des mèmes. Nous avions également constaté la persistance aigüe de l’hyperspectacularisation du moi, nouée à l’effritement de l’individualité, dans nos pratiques d’interactions numériques. Cette dynamique ambivalente est d’ailleurs celle observée par Cardon qui, tout en reconnaissant la dimension possiblement émancipatoire et subjectivante des réseaux sociaux, remarque que ceux-ci, « en augmentant la compétition entre des individus en quête de reconnaissance, […] contribuent aussi à uniformiser les manières de se présenter, de se singulariser et d’agir les uns envers les autres » (2011: 147).</alinea></para><objet id="ob3" typeobj="video">
+				<legende lang="fr">
+					<alinea>Guillaume Corbeil et Claude Poissant, Impermanence et inventivité
+						dans <marquage typemarq="italique">Cinq visages pour Camille
+						Brunelle</marquage> (2013), Extrait de Guillaume Corbeil (texte) et Claude
+						Poissant (mise en scène), <marquage typemarq="italique">Cinq visage pour
+						Camille Brunelle</marquage>, Montréal, Production du Théâtre PÀP, 2013,
+						Vidéo numérique 1280 x 720 px, 2 min 51 s | 01:03:32-01:06:24 </alinea>
+				</legende>
+				<objetmedia flot="bloc">
+					<video xmlns:xlink="http://www.w3.org/1999/xlink" id="vi3" xlink:type="simple" xlink:href="1076454arv003.mpeg" xlink:show="embed" xlink:actuate="onRequest" dimx="1280px" dimy="720px" taille="80.2Mo" typemime="video/mpeg" desc="Durée : 02:51 min."></video>
+				</objetmedia>
+				<source>Avec l'aimable autorisation du <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls14" xlink:type="simple" xlink:href="https://theatrepap.com/">Théâtre PÀP</liensimple></source>
+			</objet><para id="pa27"><no>27</no><alinea>Par ailleurs, à la reconnaissance de cette ambivalence, et faisant saillie dans la discussion, s’était ajoutée la conscience de la part de performance et d’invention de soi que mobilisent nos pratiques numériques. « Le monde d’aujourd’hui est un monde de l’hyperproximité, de la connexion permanente, de l’informatique nomade et ubiquitaire », nous rappelle Ertzscheid (2018: 38-39). Dans ce monde, soutient-il, il revient aux usagers et usagères des plateformes numériques de prendre une part active à la construction et au maintien de leurs multiples agrégats identitaires même si ceux-ci, par différents phénomènes de migration, de transformation, de porosité et de percolation entre les divers lieux, échappent en partie à celles et ceux qui les façonnent<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi>. Bien sûr, je ne suis pas sociologue des médias et je ne saurais tirer de nos échanges, mis en écho ici avec la pensée de spécialistes des identités numériques et avec les remarques autopoïétiques de l’auteur de la pièce, une réflexion générale. Il me plaît toutefois d’observer dans <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>, à travers les dispositifs d’énonciation et d’écriture scénique privilégiés par Corbeil et par Poissant, et surtout à travers le traitement du personnage dans la pièce, l’expression de nos actuelles modalités de présence au monde. Que nous disent, au fond, ces élaborations fictionnelles? Si l’on résiste à brandir ici l’épouvantail de la superficialité et de la perte d’authenticité, il est loisible de reconnaître dans celles-ci, certes, l’impermanence et la fragilité de nos constructions identitaires, mais aussi l’inventivité, voire la théâtralité qu’elles instillent dans nos vies.</alinea></para></section1></corps><partiesann lang="fr"><grbiblio><biblio><refbiblio id="rb1">Angel-Perez, Élisabeth. 2006. « Spectropoétique de la scène. Modalités du spectral dans quelques pièces du théâtre anglais contemporain ». <marquage typemarq="italique">Sillages critiques</marquage>, no 8 « La lettre et le fantôme ». <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls15" xlink:href="https://journals.openedition.org/sillagescritiques/558" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://journals.openedition.org/sillagescritiques/558</liensimple>. Consultée le 27 avril 2020.</refbiblio><refbiblio id="rb2">Baudrillard, Jean. 2009 [1970]. <marquage typemarq="italique">La société de consommation, ses mythes, ses structures</marquage>. Paris : Denoël, 317 p.</refbiblio><refbiblio id="rb3">Cardon, Dominique. 2011. « Réseaux sociaux de l'Internet ». <marquage typemarq="italique">Communications</marquage>, no 88 « Cultures du numérique », Le Seuil, p. 141-148.</refbiblio><refbiblio id="rb4">Corbeil, Guillaume. 2013. <marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille Brunelle)</marquage>. Montréal : Leméac, 120 p.</refbiblio><refbiblio id="rb5">Corbeil, Guillaume. 2014a. « Se reconnaître dans ce qui n'est pas soi ». <marquage typemarq="italique">Jeu</marquage>, no 153, p. 21-25.</refbiblio><refbiblio id="rb6">Corbeil, Guillaume. 2014b. <marquage typemarq="italique">Tu iras la chercher</marquage>. Montréal : Leméac, 46 p.</refbiblio><refbiblio id="rb7">Corbeil, Guillaume. 2016a. <marquage typemarq="italique">Unité modèle</marquage>. Montréal : Atelier 10, 109 p.</refbiblio><refbiblio id="rb8">Corbeil, Guillaume. 2016b. « Les colonies de l'image ». <marquage typemarq="italique">Mot d’auteur, programme de la pièce “Unité modèle”</marquage>. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls16" xlink:href="https://theatredaujourdhui.qc.ca/unitemodele" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://theatredaujourdhui.qc.ca/unitemodele</liensimple>. Consultée le 17 novembre 2020.</refbiblio><refbiblio id="rb9">Ertzscheid, Olivier. 2018 [2013]. <marquage typemarq="italique">Qu’est-ce que l’identité numérique? Enjeux, outils, méthodologies</marquage>, nouvelle édition. Marseille : OpenEdition Press. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls17" xlink:href="http://books.openedition.org/oep/332" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://books.openedition.org/oep/332</liensimple>. Consultée le 30 juillet 2020.</refbiblio><refbiblio id="rb10">Guay, Hervé. 2013. « Modèle, quand tu nous tiens ». <marquage typemarq="italique">Spirales</marquage>, no 245, p. 91-93.</refbiblio><refbiblio id="rb11">Lesage, Marie-Christine et Audrey-Anne Cyr. 2013. « Critique théâtralisée des esthétiques marchandes. Les dramaturgies performatives d’Olivier Choinière et de Guillaume Corbeil ». <marquage typemarq="italique">Voix et Images</marquage>, vol. 39, no 1, p. 29-44.</refbiblio><refbiblio id="rb12">Maffesoli, Michel. 2000. <marquage typemarq="italique">Le temps des tribus. Le déclin de l’individualisme dans les sociétés postmodernes</marquage>. Paris : La Table ronde, « La petite vermillon », 352 p.</refbiblio><refbiblio id="rb13">Maigret, Éric et Éric Macé (dir.). 2005. <marquage typemarq="italique">Penser les médiacultures. Nouvelles pratiques et nouvelles approches de la représentation du monde</marquage>. Paris : Armand Colin, « Médiacultures », 192 p.</refbiblio><refbiblio id="rb14">Mégevand, Martin. 2005. « Choralité », dans Jean-Pierre Ryngaert (dir.), <marquage typemarq="italique">Nouveaux territoires du dialogue</marquage>. Arles : Actes Sud-Papiers, p. 36-40.</refbiblio><refbiblio id="rb15">Saint-Pierre, Christian (dir.). 2014. Dossier « Réseaux sociaux ». <marquage typemarq="italique">Jeu</marquage>, no 153, p. 13-53.</refbiblio><refbiblio id="rb16">Sarrazac, Jean-Pierre. 2001. « L’impersonnage. En relisant “La crise du personnage” ». <marquage typemarq="italique">Études théâtrales</marquage>, no 20 « Jouer le monde. La scène et le travail de l'imaginaire », p. 41-50.</refbiblio><refbiblio id="rb17">Sarrazac, Jean-Pierre. 2003. « Choralité. Note sur le postdramatique ». <marquage typemarq="italique">Alternatives théâtrales</marquage>, no 76-77, p. 28-29.</refbiblio><refbiblio id="rb18">Sarrazac, Jean-Pierre (dir.). 2010. <marquage typemarq="italique">Lexique du drame moderne et contemporain</marquage>. Belval : Circé, « Circé poche », 288 p.</refbiblio><refbiblio id="rb19">Sermon, Julie et Jean-Pierre Ryngaert. 2012. <marquage typemarq="italique">Théâtres du XXI</marquage><exposant><marquage typemarq="italique">e</marquage></exposant><marquage typemarq="italique"> siècle. Commencements</marquage>. Paris : Armand Colin, 256 p.</refbiblio><refbiblio id="rb20">Tisseron, Serge. 2001. <marquage typemarq="italique">L’intimité surexposée</marquage>. Paris : Ramsay, 180 p.</refbiblio><refbiblio id="rb21">Triau, Christophe. 2003. « Choralités diffractées. La communauté en creux ». <marquage typemarq="italique">Alternatives théâtrales</marquage>, no 76-77, p. 5-11.</refbiblio></biblio></grbiblio><grnote>
+			<note id="no1">
+				<no>1</no>
+				<alinea>La production théâtrale porte uniquement le titre <marquage typemarq="italique">Cinq visages pour Camille Brunelle</marquage>.</alinea>
+			</note>
+			<note id="no2">
+				<no>2</no>
+				<alinea>Je réfère en particulier aux expériences théâtrales fondées sur l’absence
+					d’interprètes (humains ou marionnettiques) sur le plateau. Pensons, par exemple,
+					aux pièces <marquage typemarq="italique">Les objets parlent</marquage> de
+					l’auteur et metteur en scène québécois Jean-Pierre Ronfard (1986) ou à <marquage typemarq="italique">33 tours et quelques secondes</marquage> des dramaturges
+					originaires du Liban Lina Saneh et Rabih Mroué (2012).</alinea>
+			</note>
+			<note id="no3">
+				<no>3</no>
+				<alinea>Parmi ces pièces, retenons, notamment, les productions québécoises <marquage typemarq="italique">Le ishow</marquage>, un spectacle des Petites cellules
+					chaudes (2012), <marquage typemarq="italique">Nom de domaine</marquage> de
+					l’auteur Olivier Choinière (2012) et <marquage typemarq="italique">Noyades</marquage>, une création pour jeune public de Jean-François Guilbault
+					et Andréanne Joubert (2014). Ces productions sont abordées, parmi d’autres, dans
+					l’intéressant dossier thématique « Réseaux sociaux » préparé par Christian
+					Saint-Pierre pour la revue <marquage typemarq="italique">Jeu</marquage> (2014).</alinea>
+			</note>
+			<note id="no4">
+				<no>4</no>
+				<alinea>S’étendant bien souvent d’avant la naissance à après la mort, « [l]’identité
+					numérique dépasse aujourd’hui les frontières de notre temps biologique », nous
+					rappelle Ertzscheid (2018 [2013]: 35). Sur Facebook, par exemple, le profil
+					d’une personne décédée peut « être gelé et transformé en un “mémorial numérique”
+					sur lequel les […] “amis” peuvent venir déposer des messages » (36). Dans
+					<marquage typemarq="italique">Nous voir nous (Cinq visages pour Camille
+					Brunelle)</marquage>, alors que Guillaume Corbeil reproduit, en les détournant
+					et en les amplifiant, les pratiques de gestion des identités numériques
+					<marquage typemarq="italique">post-mortem</marquage>, ce « mémorial » se fait
+					espace de dévoration symbolique du personnage disparu, son image et sa parole
+					étant incorporées par les autres, reprises, transformées et disséminées dans
+					leur propres constructions discursives et identitaires.</alinea>
+			</note>
+			<note id="no5">
+				<no>5</no>
+				<alinea>Cette énumération évoque, bien sûr, la liste d’ami·e·s qui, selon Cardon,
+					constitue « le principal outil de navigation » (2011: 142) des réseaux sociaux
+					et à partir de laquelle se construisent des espaces de sociabilité marqués par
+					divers degrés de proximité entre les participant·e·s.</alinea>
+			</note>
+			<note id="no6">
+				<no>6</no>
+				<alinea>Pour Guillaume Corbeil, cette dimension inventive et performative des
+					identités virtuelles se trouve au coeur des espaces de sociabilités numériques,
+					entendus comme des lieux de « mise en scène de soi et de récits grandiloquents à
+					la gloire de celui ou celle que nous voudrions être, une autre personne
+					complètement qui a l’avantage de ne pas être celle que nous subissons jour après
+					jour, mais d’avoir été créée par nous » (2014a: 25).</alinea>
+			</note>
+		</grnote></partiesann></article>

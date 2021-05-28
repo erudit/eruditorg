@@ -2723,7 +2723,7 @@ class TestArticleDetailView:
         url = article_detail_url(article)
         html = Client().get(url).content.decode()
         dom = BeautifulSoup(html, "html.parser")
-        media_object = dom.find("div", {"class": "media"})
+        media_object = dom.find("figure", {"class": "objet"})
         assert media_object.find("cite", {"class": "source"}).text == "Courtesy of La compagnie"
 
     def test_media_object_padding_bottom_based_on_aspect_ratio(self):
@@ -3043,6 +3043,24 @@ class TestArticleDetailView:
             "<strong>Louise\n      Letarte</strong><br/>"
             "CH Pierre-Janet</p></li>"
         )
+
+    @pytest.mark.parametrize(
+        "fixture, section_id, expected_title, expected_count",
+        (
+            ("1076454ar", "videos", "<h2>Liste des vidéos</h2>", 3),
+            ("1058476ar", "audios", "<h2>Liste des fichiers audio</h2>", 3),
+        ),
+    )
+    def test_display_list_of_videos_and_audio_files(
+        self, fixture, section_id, expected_title, expected_count
+    ):
+        article = ArticleFactory(from_fixture=fixture, issue__journal__open_access=True)
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        videos = dom.find("section", {"id": section_id})
+        assert videos.find("h2").decode() == expected_title
+        assert len(videos.find_all("figure")) == expected_count
 
 
 class TestArticleRawPdfView:

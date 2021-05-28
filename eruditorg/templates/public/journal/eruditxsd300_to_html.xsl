@@ -319,6 +319,16 @@
                 <a href="#tableaux">{% translate "Liste des tableaux" %}</a>
               </li>
             </xsl:if>
+            <xsl:if test="//objet[@typeobj='video']">
+              <li>
+                <a href="#videos">{% translate "Liste des vidéos" %}</a>
+              </li>
+            </xsl:if>
+            <xsl:if test="//objet[@typeobj='audio']">
+              <li>
+                <a href="#audios">{% translate "Liste des fichiers audio" %}</a>
+              </li>
+            </xsl:if>
             {% endif %}
           </ul>
           {% switch "maintenance" %}
@@ -480,6 +490,28 @@
           <section id="tableaux" class="article-section tableaux" role="complementary">
             <h2>{% translate "Liste des tableaux" %}</h2>
             <xsl:for-each select="//grtableau | //tableau[name(..) != 'grtableau']">
+              <xsl:apply-templates select=".">
+                <xsl:with-param name="mode" select="'liste'"/>
+              </xsl:apply-templates>
+            </xsl:for-each>
+          </section>
+        </xsl:if>
+
+        <xsl:if test="//objet[@typeobj='video']">
+          <section id="videos" class="article-section videos" role="complementary">
+            <h2>{% translate "Liste des vidéos" %}</h2>
+            <xsl:for-each select="//objet[@typeobj='video']">
+              <xsl:apply-templates select=".">
+                <xsl:with-param name="mode" select="'liste'"/>
+              </xsl:apply-templates>
+            </xsl:for-each>
+          </section>
+        </xsl:if>
+
+        <xsl:if test="//objet[@typeobj='audio']">
+          <section id="audios" class="article-section audios" role="complementary">
+            <h2>{% translate "Liste des fichiers audio" %}</h2>
+            <xsl:for-each select="//objet[@typeobj='audio']">
               <xsl:apply-templates select=".">
                 <xsl:with-param name="mode" select="'liste'"/>
               </xsl:apply-templates>
@@ -1345,7 +1377,7 @@
   </xsl:template>
 
   <!-- figures & tables -->
-  <xsl:template match="tableau | figure">
+  <xsl:template match="tableau | figure | objet[@typeobj='video'] | objet[@typeobj='audio']">
     <xsl:param name="mode"/>
     <xsl:variable name="id">
       <xsl:choose>
@@ -1385,7 +1417,13 @@
       </div>
       <xsl:if test="not($mode) and name(..) != 'grfigure' and name(..) != 'grtableau'">
         <p class="voirliste">
-          <a href="#li{@id}">{% blocktranslate %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktranslate %}</a>
+          <a href="#li{@id}">
+            {% blocktranslate %}-> Voir la liste des
+            <xsl:if test="self::figure">figures</xsl:if>
+            <xsl:if test="self::tableau">tableaux</xsl:if>
+            <xsl:if test="self::objet[@typeobj='video']">vidéos</xsl:if>
+            <xsl:if test="self::objet[@typeobj='audio']">fichiers audio</xsl:if>
+            {% endblocktranslate %}</a>
         </p>
       </xsl:if>
     </figure>
