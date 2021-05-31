@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 10:24-0400\n"
+"POT-Creation-Date: 2021-05-31 08:35-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -431,7 +431,7 @@ msgstr "Explore this journal"
 #: apps/public/journal/coverpage.py:458
 #: templates/public/journal/eruditxsd300_to_html.xsl:383
 #: templates/public/journal/partials/article_citation_modal_content.html:10
-#: templates/public/search/results.html:309
+#: templates/public/search/results.html:320
 msgid "Citer cet article"
 msgstr "Cite this article"
 
@@ -440,7 +440,7 @@ msgid "Citer ce compte rendu"
 msgstr "Cite this review"
 
 #: apps/public/journal/coverpage.py:460
-#: templates/public/search/results.html:316
+#: templates/public/search/results.html:327
 msgid "Citer ce document"
 msgstr "Cite this document"
 
@@ -1874,12 +1874,13 @@ msgstr "Year"
 
 #: core/editor/models.py:34 erudit/models/journal.py:472
 #: templates/public/search/results.html:228
+#: templates/public/search/results.html:235
 #: templates/userspace/journal/editor/detail.html:42
 msgid "Volume"
 msgstr "Volume"
 
 #: core/editor/models.py:36 erudit/models/journal.py:475
-#: erudit/models/journal.py:552
+#: erudit/models/journal.py:552 templates/public/search/results.html:238
 #: templates/userspace/journal/editor/detail.html:45
 #: templates/userspace/journal/editor/issues.html:43
 msgid "Numéro"
@@ -2760,12 +2761,12 @@ msgstr ""
 msgid "Chinois"
 msgstr "Chinese"
 
-#: erudit/solr/models.py:137
+#: erudit/solr/models.py:139
 #, python-brace-format
 msgid "Pages {firstpage}-{lastpage}"
 msgstr "Pages {firstpage}-{lastpage}"
 
-#: erudit/solr/models.py:155
+#: erudit/solr/models.py:157
 msgid "(Sans titre)"
 msgstr "(Untitled)"
 
@@ -4715,7 +4716,7 @@ msgstr "Clear selection"
 #: templates/public/journal/eruditxsd300_to_html.xsl:368
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:164
-#: templates/public/search/results.html:302
+#: templates/public/search/results.html:313
 #: templates/userspace/journal/editor/delete.html:9
 #: templates/userspace/journal/editor/detail.html:56
 #: templates/userspace/journal/subscription/individualsubscription_batch_delete.html:45
@@ -4739,14 +4740,14 @@ msgstr "Cite"
 #: templates/public/journal/eruditxsd300_to_html.xsl:376
 #: templates/public/journal/eruditxsd300_to_html.xsl:442
 #: templates/public/journal/partials/issue_detail_article_item.html:22
-#: templates/public/search/results.html:327
+#: templates/public/search/results.html:338
 #: templates/userspace/library/stats/stats_forms_partial.html:86
 msgid "Télécharger"
 msgstr "Download"
 
 #: templates/public/citations/list.html:149
 #: templates/public/journal/partials/issue_detail_article_item.html:30
-#: templates/public/search/results.html:334
+#: templates/public/search/results.html:345
 msgid "Lire l'article en texte intégral"
 msgstr "Read the full text"
 
@@ -5163,7 +5164,7 @@ msgstr "Return to top"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:364
 #: templates/public/journal/partials/issue_detail_article_item.html:10
-#: templates/public/search/results.html:298
+#: templates/public/search/results.html:309
 #: templates/userspace/journal/information/journalinformation_update.html:167
 msgid "Sauvegarder"
 msgstr "Save"
@@ -6050,32 +6051,37 @@ msgstr "Thesis"
 msgid "déposée à"
 msgstr "submitted to"
 
-#: templates/public/search/results.html:237
+#: templates/public/search/results.html:248
 msgid "Consulter le numéro"
 msgstr "Read this issue"
 
-#: templates/public/search/results.html:250
+#: templates/public/search/results.html:249
+#: templates/public/search/results.html:252
+msgid "Année de diffusion :"
+msgstr "Digital publication year:"
+
+#: templates/public/search/results.html:261
 msgid "Consulter le numéro thématique"
 msgstr "Consult this thematic issue"
 
-#: templates/public/search/results.html:264
+#: templates/public/search/results.html:275
 msgid "Plus d’information"
 msgstr "More information"
 
-#: templates/public/search/results.html:279
+#: templates/public/search/results.html:290
 #: templates/public/thesis/collection_list_base.html:115
 msgid "Mots-clés&nbsp;:"
 msgstr "Keywords:"
 
-#: templates/public/search/results.html:336
+#: templates/public/search/results.html:347
 msgid "Lire en texte intégral"
 msgstr "Read the full text"
 
-#: templates/public/search/results.html:361
+#: templates/public/search/results.html:372
 msgid "Aucun document trouvé&nbsp;!"
 msgstr "No documents found!"
 
-#: templates/public/search/results.html:363
+#: templates/public/search/results.html:374
 msgid "Effectuer une nouvelle recherche"
 msgstr "New search"
 
