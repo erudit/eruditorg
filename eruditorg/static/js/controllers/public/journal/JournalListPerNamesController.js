@@ -60,14 +60,15 @@ export default {
   },
 
   scrollableFilters: function() {
-    // If the filters form height is greater than the window size minus the
+    // If the filters aside height is greater than the window size minus the
     // top navigation bar (60px) and a small padding (10px), it means the
     // filter is not fully visible.
     // So, we make the filters form sidebar scrollable
-    if ($(window).height() - 70 < $('#filter_form').height()) {
-      $('aside.filters').addClass('scrollable');
+    var asideFilters = $('aside.filters')
+    if ($(window).height() - 70 < asideFilters.height()) {
+      asideFilters.addClass('scrollable');
     } else {
-      $('aside.filters').removeClass('scrollable');
+      asideFilters.removeClass('scrollable');
     }
 
   },
