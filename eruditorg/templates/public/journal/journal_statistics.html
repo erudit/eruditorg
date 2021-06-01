@@ -1,16 +1,16 @@
 {% extends "public/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Nombre d'articles" %}{% endblock title %}
+{% block title %}{% translate "Nombre d'articles" %}{% endblock title %}
 {% block breadcrumb %}
 {{ block.super }}
-<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
+<li><a href="{% url 'public:journal:journal_list' %}">{% translate "Revues" %}</a></li>
 {% endblock breadcrumb %}
 {% block content %}
 <div class="container">
   <div class="row">
-    <h1>{% trans "Nombre d'articles" %}</h1>
+    <h1>{% translate "Nombre d'articles" %}</h1>
     <hr />
-    <h2>{% trans "Par type" %}</h2>
+    <h2>{% translate "Par type" %}</h2>
     <dl>
       {% for journal_type in journal_types %}
       <dt>{{ journal_type.0 }}&#160;:</dt>
@@ -19,7 +19,7 @@
     </dl>
     <br />
     <hr />
-    <h2>{% trans "Par revue" %}</h2>
+    <h2>{% translate "Par revue" %}</h2>
     <dl>
       {% for journal in journals %}
       <dt>{{ journal.0 }}&#160;:</dt>

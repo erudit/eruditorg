@@ -27,6 +27,7 @@ class TestPolyglotLocaleMiddleware:
         response = mock.MagicMock(HttpResponse, autospec=True)
         response.status_code = 404
         response.has_header.return_value = False
+        response.headers = {}
         response = middleware.process_response(request, response)
         assert response.status_code == 302
         assert response.url == dest_url
@@ -40,5 +41,6 @@ class TestPolyglotLocaleMiddleware:
         response = mock.MagicMock(HttpResponse, autospec=True)
         response.status_code = 404
         response.has_header.return_value = False
+        response.headers = {}
         response = middleware.process_response(request, response)
         assert translation.get_language() == language

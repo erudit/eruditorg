@@ -10,7 +10,7 @@
 
 {% block title %}{{ chapter.title|striptags }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta property="og:description" content="{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
@@ -28,8 +28,8 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{{ chapter.title|striptags }} – Érudit">
 <meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
-<meta name="twitter:description" content="{% blocktrans with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% translate 'Illustration « Cultivez votre savoir »' %}">
+<meta name="twitter:description" content="{% blocktranslate with title=book.title|striptags %}Un chapitre du livre {{ title }}{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -50,7 +50,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:home' %}",
-      "name": "{% trans 'Livres et actes' %}"
+      "name": "{% translate 'Livres et actes' %}"
     }
   },{
     "@type": "ListItem",
@@ -80,7 +80,7 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li>
-  <a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a>
+  <a href="{% url 'public:book:home' %}">{% translate "Livres et actes" %}</a>
 </li>
 <li>
   <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ book.title }}</a>
@@ -115,25 +115,25 @@
           width="{{ book.cover.width }}"
           height="{{ book.cover.height }}"
           class="lazyload img-responsive lightbox doc-head__img"
-          alt="{% trans 'Couverture de' %} {{ book.title }}"
+          alt="{% translate 'Couverture de' %} {{ book.title }}"
         />
       </div>
       {% endif %}
     </div>
     <div class="row">
       <div class="col-sm-6 doc-head__metadata">
-        <p>{% trans 'Un chapitre de l’ouvrage' %}
-          <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ book.title|safe }}{% if book.subtitle %}{% trans '&nbsp;:' %} {{ book.subtitle|safe }}{% endif %}</a>, {{ book.year }}
+        <p>{% translate 'Un chapitre de l’ouvrage' %}
+          <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ book.title|safe }}{% if book.subtitle %}{% translate '&nbsp;:' %} {{ book.subtitle|safe }}{% endif %}</a>, {{ book.year }}
         </p>
       </div>
       <div class="col-sm-6 doc-head__metadata">
         <dl>
           {% if book.isbn %}
-          <dt>{% trans "ISBN papier&nbsp;:" %}</dt>
+          <dt>{% translate "ISBN papier&nbsp;:" %}</dt>
           <dd>{{ book.isbn }}</dd>
           {% endif %}
           {% if book.digital_isbn %}
-          <dt>{% trans "ISBN numérique&nbsp;:" %}</dt>
+          <dt>{% translate "ISBN numérique&nbsp;:" %}</dt>
           <dd>{{ book.digital_isbn }}</dd>
           {% endif %}
         </dl>
@@ -147,21 +147,21 @@
 
   <nav class="row toc-nav">
     <h3 class="sr-only">
-      {% trans "Feuilleter les chapitres de cet ouvrage" %}
+      {% translate "Feuilleter les chapitres de cet ouvrage" %}
     </h3>
     <div class="hidden-xs col-sm-4">
       {% if previous_chapter %}
-      <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=previous_chapter.id %}" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}">
+      <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=previous_chapter.id %}" class="toc-nav__prev" title="{% translate 'Chapitre précédent' %}">
         <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
         <h4 class="toc-nav__title">
           {{ previous_chapter.title|striptags }}
         </h4>
       </a>
       {% else %}
-      <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__prev" title="{% trans 'Aller à la table des matières' %}">
+      <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__prev" title="{% translate 'Aller à la table des matières' %}">
         <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
         <h4 class="toc-nav__title">
-          <em>{% trans '[Début de l’ouvrage] <br>Retour à la table des matières' %}</em>
+          <em>{% translate '[Début de l’ouvrage] <br>Retour à la table des matières' %}</em>
         </h4>
       </a>
       {% endif %}
@@ -169,17 +169,17 @@
 
     <div class="hidden-xs col-sm-offset-4 col-sm-4">
       {% if next_chapter %}
-      <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=next_chapter.id %}" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}">
+      <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=next_chapter.id %}" class="toc-nav__next" title="{% translate 'Chapitre suivant' %}">
         <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
         <h4 class="toc-nav__title">
           {{ next_chapter.title|striptags }}
         </h4>
       </a>
       {% else %}
-      <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__next" title="{% trans 'Aller à la table des matières' %}">
+      <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__next" title="{% translate 'Aller à la table des matières' %}">
         <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
         <h4 class="toc-nav__title">
-          <em>{% trans '[Fin de l’ouvrage] <br>Retour à la table des matières' %}</em>
+          <em>{% translate '[Fin de l’ouvrage] <br>Retour à la table des matières' %}</em>
         </h4>
       </a>
       {% endif %}
@@ -187,7 +187,7 @@
   </nav>
 
   <section>
-    <h2 class="sr-only">{% trans 'Texte intégral en PDF' %}</h2>
+    <h2 class="sr-only">{% translate 'Texte intégral en PDF' %}</h2>
     <iframe
       src="{% url 'public:book:chapter_pdf' collection_slug=book.collection.slug slug=book.slug chapter_id=chapter.id %}"
       style="width: 100%; height: 95vh; border: 0;">

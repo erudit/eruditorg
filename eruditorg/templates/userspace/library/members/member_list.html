@@ -1,42 +1,42 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Membres" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Membres" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">{% trans "Membres" %}</a></li>
+<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">{% translate "Membres" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Membres" %}
+{% translate "Membres" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
 
 <p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
 <div class="row">
   <div class="col-md-8">
-    <h2>{% trans "Membres de l’organisation actifs" %}</h2>
+    <h2>{% translate "Membres de l’organisation actifs" %}</h2>
   </div>
   <div class="col-md-4 text-right">
-    <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">&plus;&nbsp;{% trans "Ajouter" %}</a>
+    <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">&plus;&nbsp;{% translate "Ajouter" %}</a>
   </div>
 </div>
 
 <div class="table">
   <ul class="table-header">
     <li class="row">
-      <span class="col-sm-1">{% trans "n<sup>o</sup>" %}</span>
-      <span class="col-sm-3">{% trans "Usager" %}</span>
-      <span class="col-sm-3">{% trans "Courriel" %}</span>
-      <span class="col-sm-3">{% trans "Dernière <br>connexion" %}</span>
-      <span class="col-sm-2">{% trans "Supprimer" %}</span>
+      <span class="col-sm-1">{% translate "n<sup>o</sup>" %}</span>
+      <span class="col-sm-3">{% translate "Usager" %}</span>
+      <span class="col-sm-3">{% translate "Courriel" %}</span>
+      <span class="col-sm-3">{% translate "Dernière <br>connexion" %}</span>
+      <span class="col-sm-2">{% translate "Supprimer" %}</span>
     </li>
   </ul>
   <ul class="table-body">
@@ -48,7 +48,7 @@
         <span class="col-sm-3"><a href="mailto:{{ member.email }}">{{ member.email }}</a></span>
         <span class="col-sm-3">{{ member.last_login|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
-          <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}" title="{% trans 'Supprimer ce membre' %}">
+          <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}" title="{% translate 'Supprimer ce membre' %}">
             <i class="icon ion-ios-close table-row-delete"></i>
           </a>
         </span>
@@ -57,8 +57,8 @@
     {% empty %}
     <li class="table-row-wrapper">
       <p class="row table-row">
-        {% trans "Aucun usager n’a été ajouté aux membres de votre organisation." %}
-        <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}">{% trans "Ajouter un membre." %}</a>
+        {% translate "Aucun usager n’a été ajouté aux membres de votre organisation." %}
+        <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}">{% translate "Ajouter un membre." %}</a>
       </p>
     </li>
     {% endfor %}
@@ -67,15 +67,15 @@
 
 {% if pending_members %}
 <br><br><br>
-<h2>{% trans "En attente d’acceptation" %}</h2>
+<h2>{% translate "En attente d’acceptation" %}</h2>
 
 <div class="table">
   <ul class="table-header">
     <li class="row">
-      <span class="col-sm-1">{% trans "n<sup>o</sup>" %}</span>
-      <span class="col-sm-5">{% trans "Courriel" %}</span>
-      <span class="col-sm-4">{% trans "Date <br>d’expiration" %}</span>
-      <span class="col-sm-2">{% trans "Annuler" %}</span>
+      <span class="col-sm-1">{% translate "n<sup>o</sup>" %}</span>
+      <span class="col-sm-5">{% translate "Courriel" %}</span>
+      <span class="col-sm-4">{% translate "Date <br>d’expiration" %}</span>
+      <span class="col-sm-2">{% translate "Annuler" %}</span>
     </li>
   </ul>
   <ul class="table-body">
@@ -88,7 +88,7 @@
         </span>
         <span class="col-sm-4">{{ pmember.expiration_date|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
-          <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" title="{% trans 'Supprimer ce membre' %}">
+          <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" title="{% translate 'Supprimer ce membre' %}">
             <i class="icon ion-ios-close table-row-delete"></i>
           </a>
         </span>

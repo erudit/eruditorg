@@ -10,7 +10,7 @@
 
 {% block title %}{{ book.title|striptags }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with pub=book.publisher year=book.year author=toc.book_author %}Consultez cet ouvrage publié par {{ pub }} ({{ year }}). {{ author }}.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate with pub=book.publisher year=book.year author=toc.book_author %}Consultez cet ouvrage publié par {{ pub }} ({{ year }}). {{ author }}.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta property="og:description" content="{% blocktrans with pub=book.publisher year=book.year author=toc.book_author %}Consultez cet ouvrage publié par {{ pub }} ({{ year }}). {{ author }}.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate with pub=book.publisher year=book.year author=toc.book_author %}Consultez cet ouvrage publié par {{ pub }} ({{ year }}). {{ author }}.{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
@@ -28,8 +28,8 @@
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{{ book.title|striptags }} – Érudit">
 <meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
-<meta name="twitter:description" content="{% blocktrans with pub=book.publisher year=book.year author=toc.book_author %}Consultez cet ouvrage publié par {{ pub }} ({{ year }}). {{ author }}.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% translate 'Illustration « Cultivez votre savoir »' %}">
+<meta name="twitter:description" content="{% blocktranslate with pub=book.publisher year=book.year author=toc.book_author %}Consultez cet ouvrage publié par {{ pub }} ({{ year }}). {{ author }}.{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -50,7 +50,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:home' %}",
-      "name": "{% trans 'Livres et actes' %}"
+      "name": "{% translate 'Livres et actes' %}"
     }
   },{
     "@type": "ListItem",
@@ -69,7 +69,7 @@
 {% block data_controller %}public:book:book_detail{% endblock data_controller %}
 
 {% block breadcrumb %}
-{{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
+{{ block.super }} <li><a href="{% url 'public:book:home' %}">{% translate "Livres et actes" %}</a></li>
 <li><a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ toc.book_title|safe }}</a></li>
 {% endblock breadcrumb %}
 
@@ -84,13 +84,13 @@
           <h1 class="row book-title">
             <span class="col-xs-10 col-sm-11">{{ toc.book_title|safe }}</span>
             {% if book.is_open_access %}
-            <span class="hint--bottom-left hint--no-animate text-right col-xs-2 col-sm-1" data-hint="{% trans 'Cet ouvrage est disponible en libre accès.' %}">
+            <span class="hint--bottom-left hint--no-animate text-right col-xs-2 col-sm-1" data-hint="{% translate 'Cet ouvrage est disponible en libre accès.' %}">
               <span class="erudicon erudicon-open-access"></span>
             </span>
             {% endif %}
           </h1>
         {% if toc.book_author %}
-          <p class="book-authors">{% if book.contribution %}{% trans "Sous la direction de" %} {% endif %}{{ toc.book_author }}</p>
+          <p class="book-authors">{% if book.contribution %}{% translate "Sous la direction de" %} {% endif %}{{ toc.book_author }}</p>
         {% endif %}
         {% if toc.book_description %}
         <div class="main-header__intro">
@@ -100,7 +100,7 @@
       </header>
 
       <section class="toc">
-        <h2 class="toc__title">{% trans "Table des matières" %}</h2>
+        <h2 class="toc__title">{% translate "Table des matières" %}</h2>
         {% for entry in toc.entries %}
           {# Section title #}
           {% if entry.is_section %}
@@ -112,7 +112,7 @@
           {% elif entry.is_book %}
           <div class="bib-record">
             <h5 class="bib-record__title">
-              <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=entry.slug %}" title="{% trans 'Lire le chapitre' %}">{{ entry.title }}</a>
+              <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=entry.slug %}" title="{% translate 'Lire le chapitre' %}">{{ entry.title }}</a>
             </h5>
           </div>
           {% else %}
@@ -122,7 +122,7 @@
             </ul>
 
             <h5 class="bib-record__title">
-              <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=entry.id %}" title="{% trans 'Lire le chapitre' %}">
+              <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=entry.id %}" title="{% translate 'Lire le chapitre' %}">
                 <span>{{ entry.title|safe }}</span>{% if entry.subtitle %}<span>{{ entry.subtitle|safe }}</span>{% endif %}
               </a>
             </h5>
@@ -150,7 +150,7 @@
 
       {% if book.cover %}
       <div class="sidebar-block">
-        <h2>{% trans "Couverture" %}</h2>
+        <h2>{% translate "Couverture" %}</h2>
         <img
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
           data-srcset="{{ book.cover.url }} {{ book.cover.width }}w"
@@ -158,33 +158,33 @@
           width="{{ book.cover.width }}"
           height="{{ book.cover.height }}"
           class="lazyload img-responsive"
-          alt="{% trans 'Couverture de' %} {{ book.title }}"
+          alt="{% translate 'Couverture de' %} {{ book.title }}"
         />
       </div>
       {% endif %}
 
       <div class="sidebar-block">
-        <h2>{% trans "Fiche" %}</h2>
+        <h2>{% translate "Fiche" %}</h2>
 
         <dl class="journal-meta--list">
-          <dt>{% trans "Collection" %}</dt>
+          <dt>{% translate "Collection" %}</dt>
           <dd>{{ book.collection }}</dd>
 
-          <dt>{% trans "Année de publication" %}</dt>
+          <dt>{% translate "Année de publication" %}</dt>
           <dd>{{ book.year }}</dd>
 
-          <dt>{% trans "Éditeur" %}</dt>
+          <dt>{% translate "Éditeur" %}</dt>
           <dd>
             {% if book.publisher_url %}<a href="{{ book.publisher_url }}" target="_blank" rel="noopener">{% endif %}
             {{ book.publisher }}
             {% if book.publisher_url %}</a>{% endif %}
           </dd>
 
-          <dt>{% trans "ISBN" %}</dt>
-          {% if book.isbn %}<dd>{{ book.isbn }} {% trans '(papier)' %}</dd>{% endif %}
-          {% if book.digital_isbn %}<dd>{{ book.digital_isbn }} {% trans '(numérique)' %}</dd>{% endif %}
+          <dt>{% translate "ISBN" %}</dt>
+          {% if book.isbn %}<dd>{{ book.isbn }} {% translate '(papier)' %}</dd>{% endif %}
+          {% if book.digital_isbn %}<dd>{{ book.digital_isbn }} {% translate '(numérique)' %}</dd>{% endif %}
 
-          <dt>{% trans "Droit d’auteur" %}</dt>
+          <dt>{% translate "Droit d’auteur" %}</dt>
           <dd>{{ book.copyright }}</dd>
         </dl>
       </div>

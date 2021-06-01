@@ -8,4 +8,3 @@ codecov>=2.1.4
 factory-boy>=2.12.0
 Faker>=4.1.0
 luqum>=0.8.1
-ipdb>=0.8.1

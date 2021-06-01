@@ -13,7 +13,7 @@ from apps.userspace.library.subscription_information.forms import SubscriptionIn
 
 @pytest.mark.django_db
 class TestSubscriptionInformationForm:
-    @pytest.yield_fixture(autouse=True)
+    @pytest.fixture(autouse=True)
     def setup(self):
         self.organisation = OrganisationFactory.create()
 

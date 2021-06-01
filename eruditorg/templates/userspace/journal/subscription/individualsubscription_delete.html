@@ -1,28 +1,28 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Confirmer la suppression de l'abonnement ?" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Confirmer la suppression de l'abonnement ?" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="#">{% trans "Confirmer la suppression de l'abonnement ?" %}</a></li>
+<li><a href="#">{% translate "Confirmer la suppression de l'abonnement ?" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
 {{ block.super }}
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">{% trans "Confirmer la suppression de l'abonnement ?" %}</h3>
+    <h3 class="panel-title">{% translate "Confirmer la suppression de l'abonnement ?" %}</h3>
   </div>
   <div class="panel-body">
     <div class="warning-message">
-      {% blocktrans trimmed with name=subscription.user.get_full_name|default:subscription.user.username %}
+      {% blocktranslate trimmed with name=subscription.user.get_full_name|default:subscription.user.username %}
       Voulez-vous supprimer l'abonnement de <strong>{{ name }}</strong> ?
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </div>
     <form action="" method="post">{% csrf_token %}
       <input type="hidden" name="post" value="yes" />
-      <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-      <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}" class="btn btn-link">{% trans "Non" %}</a>
+      <input type="submit" value="{% translate "Oui" %}" class="btn btn-primary" />
+      <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}" class="btn btn-link">{% translate "Non" %}</a>
     </form>
   </div>
 </div>

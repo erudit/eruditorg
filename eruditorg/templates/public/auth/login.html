@@ -1,7 +1,7 @@
 {% extends "public/base.html"|pjax:request %}
 {% load i18n static %}
 
-{% block title %}{% trans 'Connexion' %}{% endblock title %}
+{% block title %}{% translate 'Connexion' %}{% endblock title %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -21,13 +21,13 @@
 {% block data_controller %}public:login{% endblock data_controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:auth:login' %}">{% trans "Connexion" %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:auth:login' %}">{% translate "Connexion" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
-{% if request.is_ajax %}
+{% if is_ajax %}
 <div class="modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-  <h2 class="modal-header">{% trans "Connexion à votre compte" %}</h2>
+  <h2 class="modal-header">{% translate "Connexion à votre compte" %}</h2>
   <div class="modal-body">
     <form action="{% url 'public:auth:login' %}" id="id-login-form" method="post">
 
@@ -35,10 +35,10 @@
 
       <div class="col-xs-12">
         {% url 'public:journal:journal_list' as journal_list %}
-        <p>{% blocktrans %}L’espace <em>Mon compte</em> permet l’accès&nbsp;:{% endblocktrans %}</p>
+        <p>{% blocktranslate %}L’espace <em>Mon compte</em> permet l’accès&nbsp;:{% endblocktranslate %}</p>
         <ul>
-          <li>{% blocktrans %}à leur tableau de bord pour les <strong>bibliothécaires</strong> des institutions partenaires ou abonnées et pour les <strong>responsables des revues</strong> diffusées sur Érudit.{% endblocktrans %}</li>
-          <li>{% blocktrans %}aux contenus restreints d’une revue pour les <strong>abonnés individuels</strong>. Pour s’abonner à une revue spécifique, merci de contacter directement <a href=""{{ journal_list }}>la revue</a>.{% endblocktrans %}</li>
+          <li>{% blocktranslate %}à leur tableau de bord pour les <strong>bibliothécaires</strong> des institutions partenaires ou abonnées et pour les <strong>responsables des revues</strong> diffusées sur Érudit.{% endblocktranslate %}</li>
+          <li>{% blocktranslate %}aux contenus restreints d’une revue pour les <strong>abonnés individuels</strong>. Pour s’abonner à une revue spécifique, merci de contacter directement <a href=""{{ journal_list }}>la revue</a>.{% endblocktranslate %}</li>
         </ul>
         <hr>
       </div>
@@ -52,27 +52,27 @@
       {% endif %}
 
       <div class="form-group">
-        <label for="id_username">{% trans "Nom d'utilisateur ou adresse courriel" %}</label>
+        <label for="id_username">{% translate "Nom d'utilisateur ou adresse courriel" %}</label>
         {{ form.username }}
         {% if form.username.errors %}<div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>{% endif %}
       </div>
 
       <div class="form-group">
-        <label for="id_password">{% trans "Mot de passe" %}</label>
+        <label for="id_password">{% translate "Mot de passe" %}</label>
         {{ form.password }}
         {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
       </div>
 
       <div class="form-group">
         <p class="text-right">
-          <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+          <small><a href="{% url 'public:auth:password_reset' %}">{% translate "Mot de passe oublié&nbsp;?" %}</a></small>
         </p>
       </div>
 
       <input type="hidden" name="next" value="{{ next }}" />
 
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
+        <button type="submit" class="btn btn-primary" id="submit-id-submit">{% translate "Connexion" %}</button>
       </div>
     </form>
   </div>
@@ -82,17 +82,17 @@
   <div class="row">
     <div class="panel col-lg-4 col-sm-6 col-xs-12 col-centered">
       <header class="panel-heading">
-        <h2 class="panel-title text-center">{% trans "Connexion à votre compte" %}</h2>
+        <h2 class="panel-title text-center">{% translate "Connexion à votre compte" %}</h2>
       </header>
       <div class="panel-body">
         <form action="{% url 'public:auth:login' %}" id="id-login-form" method="post">
           {% csrf_token %}
 
           <div class="col-xs-12">
-            <p>{% blocktrans %}L’espace <em>Mon compte</em> permet l’accès&nbsp;:{% endblocktrans %}</p>
+            <p>{% blocktranslate %}L’espace <em>Mon compte</em> permet l’accès&nbsp;:{% endblocktranslate %}</p>
             <ul>
-              <li>{% blocktrans %}à leur tableau de bord pour les <strong>bibliothécaires</strong> des institutions partenaires ou abonnées et pour les <strong>responsables des revues</strong> diffusées sur Érudit.{% endblocktrans %}</li>
-              <li>{% blocktrans %}aux contenus restreints d’une revue pour les <strong>abonnés individuels.</strong> Pour s’abonner à une revue spécifique, merci de contacter directement <a href="{{ journal_list }}">la revue</a>.{% endblocktrans %}</li>
+              <li>{% blocktranslate %}à leur tableau de bord pour les <strong>bibliothécaires</strong> des institutions partenaires ou abonnées et pour les <strong>responsables des revues</strong> diffusées sur Érudit.{% endblocktranslate %}</li>
+              <li>{% blocktranslate %}aux contenus restreints d’une revue pour les <strong>abonnés individuels.</strong> Pour s’abonner à une revue spécifique, merci de contacter directement <a href="{{ journal_list }}">la revue</a>.{% endblocktranslate %}</li>
             </ul>
             <hr>
           </div>
@@ -106,27 +106,27 @@
           {% endif %}
 
           <div class="form-group">
-            <label for="id_username">{% trans "Nom d'utilisateur ou adresse courriel" %}</label>
+            <label for="id_username">{% translate "Nom d'utilisateur ou adresse courriel" %}</label>
             {{ form.username }}
             {% if form.username.errors %}<div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>{% endif %}
           </div>
 
           <div class="form-group">
-            <label for="id_password">{% trans "Mot de passe" %}</label>
+            <label for="id_password">{% translate "Mot de passe" %}</label>
             {{ form.password }}
             {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
           </div>
 
           <div class="form-group">
             <p class="text-right">
-              <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+              <small><a href="{% url 'public:auth:password_reset' %}">{% translate "Mot de passe oublié&nbsp;?" %}</a></small>
             </p>
           </div>
 
           <input type="hidden" name="next" value="{{ next }}" />
 
           <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
+            <button type="submit" class="btn btn-primary" id="submit-id-submit">{% translate "Connexion" %}</button>
           </div>
         </div>
       </div>

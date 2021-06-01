@@ -3,10 +3,4 @@
 import django.dispatch
 
 
-userspace_post_transition = django.dispatch.Signal(
-    providing_args=[
-        "issue_submission",
-        "transition_name",
-        "request",
-    ]
-)
+userspace_post_transition = django.dispatch.Signal()

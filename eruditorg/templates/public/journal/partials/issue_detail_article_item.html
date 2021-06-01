@@ -7,10 +7,10 @@
     {% switch "maintenance" %}
     {% else %}
     <li>
-      <a class="tool-btn" href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.localidentifier }}">
+      <a class="tool-btn" href="#" title="{% translate 'Sauvegarder' %}" data-citation-save="#article-{{ article.localidentifier }}">
         <i class="icon ion-ios-bookmark toolbox-save"></i>
       </a>
-      <a class="tool-btn saved" href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.localidentifier }}">
+      <a class="tool-btn saved" href="#" title="{% translate 'Supprimer' %}" data-citation-remove="#article-{{ article.localidentifier }}">
         <i class="icon ion-ios-bookmark toolbox-save"></i>
       </a>
     </li>
@@ -19,7 +19,7 @@
     <li>
       <a class="tool-btn"
          href="{% url 'public:journal:article_raw_pdf' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
-         title="{% trans 'Télécharger' %}"
+         title="{% translate 'Télécharger' %}"
          target="_blank">
         <span class="toolbox-pdf">PDF</span>
       </a>
@@ -27,7 +27,7 @@
     {% endif %}
     {% if article.processing == 'complet' %}
     <li>
-      <a class="tool-btn" href="{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+      <a class="tool-btn" href="{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
         <span class="toolbox-html">HTML</span>
       </a>
     </li>
@@ -37,14 +37,14 @@
   {% endif %}
   <h6 class="bib-record__title">
     {% if not article.accessible %}
-    <span class="hint--top-right hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}">
+    <span class="hint--top-right hint--no-animate" data-hint="{% translate 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}">
     <i class="icon ion-ios-help-circle"></i></span>
     {% endif %}
     {% spaceless %}
 
     <a href="{% if not article.has_external_url %}{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% else %}{% if article.urlhtml %}{{ article.urlhtml }}{% else %}{{ article.urlpdf }}{% endif %}{% endif %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
     {% if article.has_external_url %}target="_blank"{% endif %}
-    title="{% blocktrans %}Lire l'article{% endblocktrans %}">
+    title="{% blocktranslate %}Lire l'article{% endblocktranslate %}">
     {{ article.html_title|safe }}
     </a>
     {% endspaceless %}
@@ -58,26 +58,26 @@
     <p class="bib-record__pages col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}
       {% if first_page and last_page and first_page != last_page %}
-      {% blocktrans trimmed with first_page=first_page last_page=last_page %}p.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
+      {% blocktranslate trimmed with first_page=first_page last_page=last_page %}p.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktranslate %}
       {% elif first_page and first_page != "0" %}
-      {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
+      {% blocktranslate trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktranslate %}
       {% endif %}
       {% endwith %}
     </p>
     {% if issue.journal.collection.code == 'erudit' and article.accessible %}
     <p class="bib-record__record-link col-sm-3 pull-right">
-      <a href="{% url 'public:journal:article_summary' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktrans %}Voir la notice{% endblocktrans %}">
-        {% trans "Notice" %}
+      <a href="{% url 'public:journal:article_summary' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktranslate %}Voir la notice{% endblocktranslate %}">
+        {% translate "Notice" %}
       </a>
     </p>
     {% endif %}
     {% if article.abstracts %}
     <div class="bib-record__abstract col-xs-9">
       <div class="affiliations akkordion" data-akkordion-single="true">
-        <a class="affiliations-label akkordion-title">{% trans 'Résumé' %} <i class="icon ion-ios-arrow-down"></i></a>
+        <a class="affiliations-label akkordion-title">{% translate 'Résumé' %} <i class="icon ion-ios-arrow-down"></i></a>
         <div class="akkordion-content unstyled">
           {% for abstract in article.abstracts %}
-          <br><p class="abstract-lang"><strong>{{ abstract.lang|upper }}{% trans '&nbsp;:' %}</strong></p>
+          <br><p class="abstract-lang"><strong>{{ abstract.lang|upper }}{% translate '&nbsp;:' %}</strong></p>
           {{ abstract.content|safe }}
           {% endfor %}
         </div>

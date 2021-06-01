@@ -3,7 +3,7 @@
 
 {% block title %}{{ journal.formatted_title }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -15,18 +15,18 @@
 {% if journal.has_logo %}
 <meta property="og:image" content="{% journal_logo_url journal %}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta name="twitter:title" content="{{ journal.formatted_title }} – Érudit">
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ journal.formatted_title }}">
+<meta name="twitter:image:alt" content="{% translate 'Logo pour' %} {{ journal.formatted_title }}">
 {% if journal.has_logo %}
 <meta name="twitter:image" content="{% journal_logo_url journal %}">
 {% endif %}
-<meta name="twitter:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
+<meta name="twitter:description" content="{% blocktranslate with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block stylesheets %}
@@ -61,7 +61,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
-      "name": "{% trans 'Revues' %}"
+      "name": "{% translate 'Revues' %}"
     }
   },{
     "@type": "ListItem",
@@ -105,12 +105,12 @@
           {# Peer review seal & access type #}
           <span class="col-xs-2 col-sm-3 text-right">
             {% if journal.type.code == 'S' %}
-            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% translate 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
               <i class="icon ion-ios-checkmark-circle"></i>
             </span>
             {% endif %}
             {% if journal.open_access %}
-            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% translate 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
               <span class="erudicon erudicon-open-access"></span>
             </span>
             {% endif %}
@@ -121,14 +121,14 @@
         {# Directors and editors #}
         <p>
         {% if contributors.directors %}
-          {% trans "Direction&nbsp;:" %}
+          {% translate "Direction&nbsp;:" %}
           {% for director in contributors.directors %}
             {{ director.name }}{% if director.role %} ({{ director.role|join:" - " }}){% endif %}{% if not forloop.last %}, {% endif %}
           {% endfor %}
         {% endif %}
         {% if contributors.directors and contributors.editors %}/{% endif %}
         {% if contributors.editors %}
-          {% trans "Rédaction&nbsp;:" %}
+          {% translate "Rédaction&nbsp;:" %}
           {% for editor in contributors.editors %}
             {{ editor.name }}{% if editor.role %} ({{ editor.role|join:" - " }}){% endif %}{% if not forloop.last %}, {% endif %}
           {% endfor %}
@@ -139,18 +139,18 @@
         {% if journal.previous_journal or journal.next_journal %}
         <p>
           {% if journal.previous_journal %}
-          <span>{% trans "Revue précédée de" %}</span>
+          <span>{% translate "Revue précédée de" %}</span>
           <strong>
             <a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">
-              {{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
+              {{ journal.previous_journal.formatted_title }}{% if journal.previous_journal.subtitle %}{% translate '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
             </a>
           </strong>
           {% endif %}
           {% if journal.next_journal %}
-          <span>{% trans "Revue suivie de" %}</span>
+          <span>{% translate "Revue suivie de" %}</span>
           <strong>
             <a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">
-              {{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
+              {{ journal.next_journal.formatted_title }}{% if journal.next_journal.subtitle %}{% translate '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
             </a>
           </strong>
           {% endif %}
@@ -162,25 +162,25 @@
 
   {% if journal_info or issues %}
   <ul class="nav-tabs" role="tablist">
-    {% if journal_info.about %}<li role="presentation" id="journal-info-about-li"><a href="#journal-info-about-section" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
+    {% if journal_info.about %}<li role="presentation" id="journal-info-about-li"><a href="#journal-info-about-section" role="tab" data-toggle="tab">{% translate "À propos" %}</a></li>{% endif %}
 
     {% nocache %}
-    {% if issues %}<li role="presentation" id="back-issues-li"><a href="#back-issues-section" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
+    {% if issues %}<li role="presentation" id="back-issues-li"><a href="#back-issues-section" role="tab" data-toggle="tab">{% translate "Numéros" %}</a></li>{% endif %}
     {% endnocache %}
 
-    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation" id="journal-info-editorial_policy-li"><a href="#journal-info-editorial_policy-section" role="tab" data-toggle="tab">{% trans "Politique éditoriale et éthique" %}</a></li>{% endif %}
+    {% if journal_info.editorial_policy or journal_info.publishing_ethics %}<li role="presentation" id="journal-info-editorial_policy-li"><a href="#journal-info-editorial_policy-section" role="tab" data-toggle="tab">{% translate "Politique éditoriale et éthique" %}</a></li>{% endif %}
 
-    {% if journal_info.team %}<li role="presentation" id="journal-info-team-li"><a href="#journal-info-team-section" role="tab" data-toggle="tab">{% trans "Comité de rédaction" %}</a></li>{% endif %}
+    {% if journal_info.team %}<li role="presentation" id="journal-info-team-li"><a href="#journal-info-team-section" role="tab" data-toggle="tab">{% translate "Comité de rédaction" %}</a></li>{% endif %}
 
   </ul>
 
   <div class="tab-content">
     {% if journal_info.about %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-about-section">
-      <h2 class="sr-only">{% trans "À propos" %}</h2>
+      <h2 class="sr-only">{% translate "À propos" %}</h2>
       {{ journal_info.about|safe }}
       <section>
-        <h2 class="sr-only">{% trans "Coordonnées" %}</h2>
+        <h2 class="sr-only">{% translate "Coordonnées" %}</h2>
         {% if journal_info.contact %}{{ journal_info.contact|safe }}{% endif %}
       </section>
 
@@ -204,18 +204,18 @@
     {% if issues %}
     <section role="tabpanel" class="tab-pane" id="back-issues-section">
       <h2>
-        {% blocktrans count counter=issues|length %}
+        {% blocktranslate count counter=issues|length %}
         Historique de la revue (1&nbsp;numéro)
         {% plural %}
         Historique de la revue ({{ counter }}&nbsp;numéros)
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </h2>
       {% if journal.collection.code == 'erudit' %}
       <div class="alert alert-info">
         <p><i class="icon ion-ios-information-circle alert-info-icon"></i>
-          {% blocktrans %}
+          {% blocktranslate %}
             L’archivage pérenne des articles sur Érudit est assuré par <a href="https://www.portico.org/" target="_blank">Portico</a>.
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </p>
       </div>
       {% endif %}
@@ -245,7 +245,7 @@
       </ul>
       {% if issues|length > 50 %}
       <div class="text-center">
-        <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a>
+        <a href="#back-issues" class="scroll-issues" title="{% translate 'Retourner en haut' %}"><span class="arrow arrow-bar is-top"></span></a>
       </div>
       {% endif %}
     </section>
@@ -255,7 +255,7 @@
 
     {% if journal_info.editorial_policy or journal_info.publishing_ethics or journal_info.instruction_for_authors %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-editorial_policy-section">
-      <h2 class="sr-only">{% trans "Politique éditoriale et éthique" %}</h2>
+      <h2 class="sr-only">{% translate "Politique éditoriale et éthique" %}</h2>
       {% if journal_info.editorial_policy %}
       {{ journal_info.editorial_policy|safe }}
       {% endif %}
@@ -267,7 +267,7 @@
       {% if journal_info.instruction_for_authors %}
       <hr/>
       <section class="journal-info-block">
-        <h2 class="sr-only">{% trans "Instruction pour les auteurs" %}</h2>
+        <h2 class="sr-only">{% translate "Instruction pour les auteurs" %}</h2>
         {{ journal_info.instruction_for_authors|safe }}
       </section>
       {% endif %}
@@ -276,7 +276,7 @@
 
     {% if journal_info.team %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-team-section">
-      <h2 class="sr-only">{% trans "Comité de rédaction" %}</h2>
+      <h2 class="sr-only">{% translate "Comité de rédaction" %}</h2>
       {{ journal_info.team|safe }}
     </section>
     {% endif %}

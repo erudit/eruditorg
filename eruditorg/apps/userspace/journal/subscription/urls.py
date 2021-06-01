@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.utils.translation import gettext_lazy as _
 
 from . import views
@@ -6,52 +6,52 @@ from . import views
 app_name = "subscription"
 
 urlpatterns = [
-    url(
+    re_path(
         _(r"^individuel/$"),
         views.IndividualJournalAccessSubscriptionListView.as_view(),
         name="list",
     ),
-    url(
+    re_path(
         _(r"^individuel/abonner/"),
         views.IndividualJournalAccessSubscriptionCreateView.as_view(),
         name="create",
     ),
-    url(
+    re_path(
         _(r"^individuel/supprimer-par-courriel/"),
         views.IndividualJournalAccessSubscriptionDeleteByEmailView.as_view(),
         name="delete_by_email",
     ),
-    url(
+    re_path(
         _(r"^individuel/supprimer/(?P<pk>[0-9]+)/$"),
         views.IndividualJournalAccessSubscriptionDeleteView.as_view(),
         name="delete",
     ),
-    url(
+    re_path(
         _(r"^individuel/annuler/(?P<pk>[0-9]+)/$"),
         views.IndividualJournalAccessSubscriptionCancelView.as_view(),
         name="cancel",
     ),
-    url(
+    re_path(
         _(r"^individuel/abonner-en-lot/"),
         views.JournalIndividualSubscriptionBatchSubscribe.as_view(),
         name="batch_subscribe",
     ),
-    url(
+    re_path(
         _(r"^individuel/supprimer-en-lot/"),
         views.JournalIndividualSubscriptionBatchDelete.as_view(),
         name="batch_delete",
     ),
-    url(
+    re_path(
         _(r"^institutionnel/$"),
         views.JournalOrganisationSubscriptionList.as_view(),
         name="org_list",
     ),
-    url(
+    re_path(
         _(r"^institutionnel/exports/$"),
         views.JournalOrganisationSubscriptionExport.as_view(),
         name="org_export",
     ),
-    url(
+    re_path(
         _(r"^institutionnel/exports/telecharger/$"),
         views.JournalOrganisationSubscriptionExportDownload.as_view(),
         name="org_export_download",

@@ -3,14 +3,14 @@
 
 {% block body_id %}dashboard-home{% endblock body_id %}
 
-{% block title %}{% trans "Tableau de bord" %} &ndash; {{ scope_current_journal.formatted_title }}{% endblock title %}
+{% block title %}{% translate "Tableau de bord" %} &ndash; {{ scope_current_journal.formatted_title }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:dashboard' %}">{% trans "Tableau de bord" %}</a></li>
+<li><a href="{% url 'userspace:dashboard' %}">{% translate "Tableau de bord" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Tableau de bord" %}
+{% translate "Tableau de bord" %}
 {% endblock %}
 
 {% block section_intro %}
@@ -27,7 +27,7 @@
 </div>
 {% endif %}
 
-{% blocktrans with journal=scope_current_journal.formatted_title %}
+{% blocktranslate with journal=scope_current_journal.formatted_title %}
 <p>Bienvenue dans le Tableau de bord de votre revue sur Érudit&nbsp;!</p>
 
 <p>Vous avez accès ici à tous les services et informations qui concernent la production et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des institutions abonnées, statistiques, rapports de redevances, etc.</p>
@@ -35,16 +35,16 @@
 <p>Pour toute question, vous pouvez consulter le <a href="https://www.erudit.org/public/documents/Guide_tableaudebord_revues.pdf" target="_blank">guide d’utilisation du Tableau de bord</a>, ou encore communiquer avec nous à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">edition@erudit.org</a>.</p>
 
 <p><br>Bien cordialement, <br><br>L’équipe d’Érudit.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
-<h2><small>{% trans "Communiquer avec des membres de l’équipe d’Érudit" %}</small></h2>
+<h2><small>{% translate "Communiquer avec des membres de l’équipe d’Érudit" %}</small></h2>
 <ul class="unstyled row">
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans with journal=scope_current_journal.formatted_title %}
+        {% blocktranslate with journal=scope_current_journal.formatted_title %}
         Édition et production numérique&nbsp;:<br>
         Hocine Chehab, <br>Chargé d’édition numérique<br>
         <a href="mailto:hocine.chehab@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">hocine.chehab@erudit.org</a><br>
@@ -52,7 +52,7 @@
         <br><br>Jessica Clark, <br>Coordinatrice du project<br>Coalition Publica<br>
         <a href="mailto:jessica.clark@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">jessica.clark@erudit.org</a><br>
         <a href="tel:1-613-277-0363">+1 613-277-0363</a>
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </small>
     </p>
   </li>
@@ -60,12 +60,12 @@
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans with journal=scope_current_journal.formatted_title %}
+        {% blocktranslate with journal=scope_current_journal.formatted_title %}
         Abonnements, redevances et partenariats&nbsp;:<br>
         Émilie Chouinard, <br>Chargée des partenariats<br>
         <a href="mailto:emilie.chouinard@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">emilie.chouinard@erudit.org</a><br>
         <a href="tel:1-514-343-6111,16563">+1 514-343-6111 poste 16563</a>
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </small>
     </p>
   </li>
@@ -73,21 +73,21 @@
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans with journal=scope_current_journal.formatted_title %}
+        {% blocktranslate with journal=scope_current_journal.formatted_title %}
         Communications et promotion de votre revue numérique&nbsp;:<br>
         Gwendal Henry, <br>Chargé de communication<br>
         <a href="mailto:gwendal.henry@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">gwendal.henry@erudit.org</a><br>
         <a href="tel:1-514-343-6111,2723">+1 514-343-6111 poste 2723</a>
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </small>
     </p>
   </li>
 </ul>
 <p>
   <small>
-    {% blocktrans with journal=scope_current_journal.formatted_title  %}
+    {% blocktranslate with journal=scope_current_journal.formatted_title  %}
     Pour toutes autres questions, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">info@erudit.org</a>.
-    {% endblocktrans %}
+    {% endblocktranslate %}
   </small>
 </p>
 {% endblock content_main %}

@@ -9,28 +9,28 @@
 {% endblock scripts %}
 
 {% block data_controller %}userspace:journalinformation:update{% endblock %}
-{% block title %}{% trans "À propos" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "À propos" %} {{ block.super }}{% endblock title %}
 
 {% block extrahead %}
   {{ form.media.css }}
 {% endblock extrahead %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}">{% trans "À propos" %}</a></li>
+<li><a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}">{% translate "À propos" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "À propos de la revue" %}
+{% translate "À propos de la revue" %}
 {% endblock %}
 
 {% block section_intro %}
   {% if form.errors or formset.errors %}
-  {% trans "Veuillez corriger les erreurs dans le formulaire" %}
+  {% translate "Veuillez corriger les erreurs dans le formulaire" %}
   {% endif %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>La page <em>À propos</em> est la vitrine de votre revue sur Érudit&nbsp;: c’est ici que vous pourrez présenter votre publication, sa ligne éditoriale, son équipe, bref, tous les éléments que vous considérez importants. Il est ainsi recommandé de rédiger du contenu pour chacune des sections, tant en français qu’en anglais.</p>
 <p>Cette page sera consultée par des lecteurs qui souhaiteront mieux connaître votre revue, mais aussi par de potentiels auteurs, des agrégateurs et des bibliothécaires.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
@@ -47,13 +47,13 @@
 
   {% with field_template="userspace/journal/information/partials/info_single_field.html" %}
   <section class="akkordion" data-akkordion-single="true">
-    <h2 class="akkordion-title">{% trans "Informations générales" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <h2 class="akkordion-title">{% translate "Informations générales" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
     <div class="akkordion-content">
       <fieldset>
-        <legend>{% trans "Coordonnées" %}</legend>
+        <legend>{% translate "Coordonnées" %}</legend>
         <div class="row">
           <p class="col-sm-9">
-            {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
+            {% translate "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
           </p>
           {% include field_template with field=form.phone type="tel" autocomplete="tel" only %}
           {% include field_template with field=form.email type="email" autocomplete="email" only %}
@@ -62,12 +62,12 @@
       </fieldset>
       <hr/>
       <fieldset>
-        <legend>{% trans "Liens" %}</legend>
+        <legend>{% translate "Liens" %}</legend>
         <div class="row">
           <p class="col-sm-9">
-            {% blocktrans %}
+            {% blocktranslate %}
             Les informations saisies seront disponibles publiquement, dans la page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
           {% include field_template with field=form.facebook_url type="url" autocomplete="url" icon="ion-social-facebook" only %}
           {% include field_template with field=form.twitter_url type="url" autocomplete="url" icon="ion-social-twitter" only %}
@@ -80,16 +80,16 @@
   <hr />
 
   <section class="akkordion" data-akkordion-single="true">
-    <h2 class="akkordion-title">{% trans "Gestion de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <h2 class="akkordion-title">{% translate "Gestion de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
     <div class="akkordion-content">
       <fieldset name="contributors" data-form-url="{% url "userspace:journal:information:delete_contributor" journal_pk=scope_current_journal.pk %}">
         {{ formset.management_form }}
-        <legend>{% trans "Rôles de direction et de rédaction" %}</legend>
+        <legend>{% translate "Rôles de direction et de rédaction" %}</legend>
         <div class="row">
           <p class="col-sm-9">
-            {% blocktrans %}
+            {% blocktranslate %}
             Mettez à jour les contributeurs principaux et personnes responsables de la direction et de la rédaction de la revue. Vous pouvez saisir un rôle ou un titre pour chaque personne, par exemple&nbsp;: <em>Rédactrice en chef</em>, <em>Coordonnatrice à la rédaction</em>, <em>Coordonnateur éditorial</em>, <em>Directeur adjoint</em>.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
         </div>
         {% for line in formset %}
@@ -106,16 +106,16 @@
           </div>
         </div>
         {% endfor %}
-        <button type="button" class="btn btn-secondary" id="button-add-contributor">{% trans "Ajouter un contributeur" %}</button>
+        <button type="button" class="btn btn-secondary" id="button-add-contributor">{% translate "Ajouter un contributeur" %}</button>
       </fieldset>
       <hr/>
       <fieldset>
-        <legend>{% trans "Administration et légal" %}</legend>
+        <legend>{% translate "Administration et légal" %}</legend>
         <div class="row">
           <p class="col-sm-9">
-            {% blocktrans %}
+            {% blocktranslate %}
             Saisissez ici les informations liées à l’administration, l’aspect légal et le processus de publication de votre revue.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
           {% include field_template with select_field=form.peer_review_process  col_xs=12 col_sm=6 col_md=6 only %}
         </div>
@@ -131,7 +131,7 @@
   <hr />
 
   <section class="akkordion" data-akkordion-single="true">
-    <h2 class="akkordion-title">{% trans "À propos de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+    <h2 class="akkordion-title">{% translate "À propos de la revue" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
     <div class="akkordion-content">
       <ul class="tabs">
         {% for langcode, langname in LANGUAGES %}
@@ -141,7 +141,7 @@
         {% endfor %}
       </ul>
 
-      <p>{% trans "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:" %}</p>
+      <p>{% translate "Vous pouvez décrire en détail les informations suivantes dans cette section&nbsp;:" %}</p>
 
       <hr>
 
@@ -164,7 +164,7 @@
   <hr />
 
   <div class="text-right">
-    <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Sauvegarder' %}</button>
+    <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% translate 'Sauvegarder' %}</button>
   </div>
 </form>
 {% endblock content_main %}

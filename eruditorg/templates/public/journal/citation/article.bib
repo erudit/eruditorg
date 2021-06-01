@@ -1,7 +1,7 @@
 {% load i18n %}
 @article{{ '{' }}{{ article.localidentifier }},
   title="{{ article.title|safe }}",
-  author="{% for author in article.authors %}{% if not forloop.first %}{% trans ' ; ' %}{% endif %}{% if author.firstname and author.lastname %}{{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}{{ author.othername|safe }}{% endif %}{% endfor %}",
+  author="{% for author in article.authors %}{% if not forloop.first %}{% translate ' ; ' %}{% endif %}{% if author.firstname and author.lastname %}{{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}{{ author.othername|safe }}{% endif %}{% endfor %}",
   journal="{{ article.issue.journal_formatted_title }}",
   {% if article.issue.volume %}volume="{{ article.issue.volume }}",{% endif %}
   {% if article.issue.number %}number="{{ article.issue.number }}",{% endif %}

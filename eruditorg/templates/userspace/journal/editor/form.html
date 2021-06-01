@@ -12,11 +12,11 @@
 
 {% block title %}
 {% if object.pk %}
-{% trans "Modifer" %} {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }} –
+{% translate "Modifer" %} {{ object.year }}, {% if object.volume %}{% translate "vol." %} {{ object.volume }},{% endif %} {% translate "n°" %} {{ object.number }} –
 {% else %}
-{% trans "Soumission" %} –
+{% translate "Soumission" %} –
 {% endif %}
-{% trans "Dépôt de fichiers" %}
+{% translate "Dépôt de fichiers" %}
 {{ block.super }}
 {% endblock title %}
 
@@ -38,40 +38,40 @@
 {% endblock footerscript %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% translate "Dépôt de fichiers" %}</a></li>
 {% if object.pk %}
-<li><a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n<sup>o</sup>" %} {{ object.number }}</a></li>
-<li><a href="#">{% trans "Modification" %}</a></li>
+<li><a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}">{{ object.year }}, {% if object.volume %}{% translate "vol." %} {{ object.volume }},{% endif %} {% translate "n<sup>o</sup>" %} {{ object.number }}</a></li>
+<li><a href="#">{% translate "Modification" %}</a></li>
 {% else %}
-<li><a href="#">{% trans "Nouveau dépôt" %}</a></li>
+<li><a href="#">{% translate "Nouveau dépôt" %}</a></li>
 {% endif %}
 {% endblock breadcrumb %}
 
 {% block section_title %}
 {% if object.pk %}
-  {% trans 'Dépôt du numéro&nbsp;:' %}<br>
-  {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n<sup>o</sup>" %} {{ object.number }}
+  {% translate 'Dépôt du numéro&nbsp;:' %}<br>
+  {{ object.year }}, {% if object.volume %}{% translate "vol." %} {{ object.volume }},{% endif %} {% translate "n<sup>o</sup>" %} {{ object.number }}
 {% else %}
-  {% trans "Déposer des fichiers de production" %}
+  {% translate "Déposer des fichiers de production" %}
 {% endif %}
 {% endblock %}
 
 {% block section_intro %}
 {% if object.pk %}
-<p>{% trans "Afin de réduire les délais de production de vos numéros et ainsi réduire les coûts qui y sont reliés, ne pas oublier de&nbsp;:" %}</p>
+<p>{% translate "Afin de réduire les délais de production de vos numéros et ainsi réduire les coûts qui y sont reliés, ne pas oublier de&nbsp;:" %}</p>
 <ol>
-  <li>{% trans "Incorporer les polices des fichiers PDF;" %}</li>
-  <li>{% trans "Séparer les fichiers PDF article par article;" %}</li>
-  <li>{% trans "Nommer les articles selon leur ordre d’apparition dans le numéro (<em>article1</em>, <em>article2</em>&hellip;);" %}</li>
-  <li>{% trans "Nommer les figures et tableaux selon le numéro de l’article et leur ordre d’apparition dans l'article (<em>image01-01.jpg</em>);" %}</li>
-  <li>{% trans "Supprimer les marques de coupes dans les fichiers PDF;" %}</li>
-  <li>{% trans "Compresser tous les fichiers dans un dossier ZIP avant de le déposer." %}</li>
+  <li>{% translate "Incorporer les polices des fichiers PDF;" %}</li>
+  <li>{% translate "Séparer les fichiers PDF article par article;" %}</li>
+  <li>{% translate "Nommer les articles selon leur ordre d’apparition dans le numéro (<em>article1</em>, <em>article2</em>&hellip;);" %}</li>
+  <li>{% translate "Nommer les figures et tableaux selon le numéro de l’article et leur ordre d’apparition dans l'article (<em>image01-01.jpg</em>);" %}</li>
+  <li>{% translate "Supprimer les marques de coupes dans les fichiers PDF;" %}</li>
+  <li>{% translate "Compresser tous les fichiers dans un dossier ZIP avant de le déposer." %}</li>
 </ol>
 <br>
-<p>{% trans "Pour que vos articles s’affichent correctement sur la plateforme, veuillez effectuer les balisages suivants lors de la mise en page&nbsp;:" %}</p>
+<p>{% translate "Pour que vos articles s’affichent correctement sur la plateforme, veuillez effectuer les balisages suivants lors de la mise en page&nbsp;:" %}</p>
 <ul>
-  <li>{% trans "Baliser les liens et les courriels dans les affiliations, le corps du texte et les références bibliographiques;" %}</li>
-  <li>{% trans "Lier les appels de notes aux notes de bas de page." %}</li>
+  <li>{% translate "Baliser les liens et les courriels dans les affiliations, le corps du texte et les références bibliographiques;" %}</li>
+  <li>{% translate "Lier les appels de notes aux notes de bas de page." %}</li>
 </ul>
 {% endif %}
 {% endblock section_intro %}
@@ -83,11 +83,11 @@
   {% if form.errors %}
   <div class="row">
     <div class="col-xs-12">
-      <p class="alert">{% trans "Veuillez remplir les champs obligatoires." %}</p>
+      <p class="alert">{% translate "Veuillez remplir les champs obligatoires." %}</p>
     </div>
   </div>
   {% endif %}
-  <h2>{% trans "Informations du numéro" %}</h2>
+  <h2>{% translate "Informations du numéro" %}</h2>
   <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
     {{ form.year.label_tag }}
     {{ form.year }}
@@ -108,7 +108,7 @@
   </div>
 
   {% if object.pk and not object.archived and not object.is_validated %}
-  <h2>{% trans "Fichier" %}</h2>
+  <h2>{% translate "Fichier" %}</h2>
   {{ form.submissions }}
   <label for="{{ form.file_comment.name }}">{{ form.file_comment.label }}</label>
   {{ form.file_comment }}
@@ -119,11 +119,11 @@
   <div class="form-group text-right">
     {% if not object.archived and not object.is_validated %}
     {% if object.pk %}
-      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% trans "Annuler" %}</a>
+      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% translate "Annuler" %}</a>
     {% else %}
-      <a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}" class="btn">{% trans "Annuler" %}</a>
+      <a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}" class="btn">{% translate "Annuler" %}</a>
     {% endif %}
-    <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+    <button type="submit" class="btn btn-primary" id="submit-id-submit">{% translate "Enregistrer" %}</button>
     {% endif %}
   </div>
 

@@ -2,29 +2,29 @@
 {% load i18n %}
 {% load waffle_tags %}
 
-{% block title %}{% trans "Collections" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Collections" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Collections" context "dashboard" %}</a></li>
+<li><a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">{% translate "Collections" context "dashboard" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Collections" context "dashboard" %}
+{% translate "Collections" context "dashboard" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Vous trouverez dans cette section différents outils de gestion de collections telles que les notices MARC et les listes de titres dynamiques conformes aux recommandations KBART.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
 <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Notices MARC" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <h2 class="akkordion-title">{% translate "Notices MARC" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
     <div class="row">
       <div class="col-md-7">
-        <p>{% trans "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou anglais) et UNIMARC." %}</p>
+        <p>{% translate "Les notices MARC sont téléchargeables aux formats MARC 21 (français ou anglais) et UNIMARC." %}</p>
       </div>
     </div>
     <div class="row">
@@ -44,11 +44,11 @@
 <hr />
 
 <section class="akkordion" data-akkordion-single="true">
-  <h2 class="akkordion-title">{% trans "Listes des titres dynamiques KBART" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
+  <h2 class="akkordion-title">{% translate "Listes des titres dynamiques KBART" %}<i class="icon ion-ios-arrow-down caret"></i></h2>
   <div class="akkordion-content">
     <div class="row">
       <div class="col-md-7">
-        <p>{% trans "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit et sont conformes aux recommandations KBART (NISO RP-9-2014)." %}</p>
+        <p>{% translate "Les listes de titres dynamiques exposent les métadonnées décrivant l’état des collections sur la plateforme Érudit et sont conformes aux recommandations KBART (NISO RP-9-2014)." %}</p>
       </div>
     </div>
 
@@ -57,13 +57,13 @@
     <section>
       {% if baskets %}
       <ul>
-      <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type=allJournals">{% trans "Toutes les revues / All Journals" %} - {% now 'Y' %}</a></li>
+      <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type=allJournals">{% translate "Toutes les revues / All Journals" %} - {% now 'Y' %}</a></li>
       {% for basket in baskets.values %}
         <li><a href="{{ kbart2014_download_url }}?year={% now 'Y' %}&type={{ basket.title_for_kbart }}">{{ basket.title }}</a></li>
       {% endfor %}
       </ul>
       {% else %}
-        <p><em>{% trans "Non disponble" %}</em></p>
+        <p><em>{% translate "Non disponble" %}</em></p>
       {% endif %}
     </section>
   </div>

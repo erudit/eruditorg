@@ -2,26 +2,26 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Rejoindre une organisation" %}
+{% translate "Rejoindre une organisation" %}
 {% endblock subject %}
 
 {% block content %}
   <p>
-  {% blocktrans trimmed with organisation_name=token.content_object.name %}
+  {% blocktranslate trimmed with organisation_name=token.content_object.name %}
     Une proposition vous a été envoyée afin de rejoindre l’organisation <strong>{{ organisation_name }}</strong>.
-  {% endblocktrans %}
+  {% endblocktranslate %}
   </p>
-  <p>{% trans "Veuillez cliquer sur le lien suivant pour l’accepter" %}</p>
+  <p>{% translate "Veuillez cliquer sur le lien suivant pour l’accepter" %}</p>
 {% endblock content %}
 
 {% block cta %}
 {% url 'public:account_actions:landing' key=token.key as action_url %}
-{% trans "Accepter la proposition" as cta_text %}
+{% translate "Accepter la proposition" as cta_text %}
 {% with cta_url="http://"|add:site.domain|add:action_url %}
 {{ block.super }}
 {% endwith %}
 {% endblock cta %}
 
 {% block signature %}
-{% trans 'L’Équipe Érudit' %}
+{% translate 'L’Équipe Érudit' %}
 {% endblock signature %}

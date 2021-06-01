@@ -1,9 +1,9 @@
 {% extends "public/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Logo et identité" %}{% endblock title %}
+{% block title %}{% translate "Logo et identité" %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans %}Consultez le guide de style d’Érudit : logo, palette de couleurs, identité.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate %}Consultez le guide de style d’Érudit : logo, palette de couleurs, identité.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -30,7 +30,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:brand_assets' %}",
-      "name": "{% trans 'Logo et identité' %}"
+      "name": "{% translate 'Logo et identité' %}"
     }
   }]
 }
@@ -41,7 +41,7 @@
 {% block body_id %}brand-assets{% endblock body_id %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'public:brand_assets' %}">{% trans "Logo et identité" %}</a></li>
+<li><a href="{% url 'public:brand_assets' %}">{% translate "Logo et identité" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -50,19 +50,19 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h1>{% trans "Logo et identité" %}</h1>
+          <h1>{% translate "Logo et identité" %}</h1>
         </div>
       </div>
       <div class="row">
         <div class="col-md-8 main-header__intro">
           <p>
-            {% blocktrans %}
+            {% blocktranslate %}
             Retrouvez sur cette page tous les éléments visuels d’Érudit ainsi que les façons de les utiliser en accord avec notre image de marque.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
           <nav class="nav-btn">
-            <a href="{% trans 'https://www.erudit.org/public/documents/Erudit_guidedestyle.pdf' %}" class="btn btn-secondary">{% trans "Télécharger en PDF" %}</a>
-            <a href="https://www.erudit.org/public/documents/Erudit_logos.zip" class="btn btn-secondary">{% trans "Télécharger les logos" %}</a>
+            <a href="{% translate 'https://www.erudit.org/public/documents/Erudit_guidedestyle.pdf' %}" class="btn btn-secondary">{% translate "Télécharger en PDF" %}</a>
+            <a href="https://www.erudit.org/public/documents/Erudit_logos.zip" class="btn btn-secondary">{% translate "Télécharger les logos" %}</a>
           </nav>
         </div>
       </div>
@@ -72,10 +72,10 @@
     {# Colour palette #}
     <div class="row main-block block-palette">
       <div class="col-md-4">
-        <h2>{% trans 'Couleurs et illustrations' %}</h2>
+        <h2>{% translate 'Couleurs et illustrations' %}</h2>
       </div>
       <div class="col-md-offset-1 col-md-7">
-        <p>{% trans 'La charte graphique d’Érudit repose sur l’utilisation de 3 couleurs: le rouge, le bleu et le gris.' %}</p>
+        <p>{% translate 'La charte graphique d’Érudit repose sur l’utilisation de 3 couleurs: le rouge, le bleu et le gris.' %}</p>
         <div id="palette">
           <div class="palette-red"></div>
           <div class="palette-secondary">
@@ -87,9 +87,9 @@
           <thead>
             <tr>
               <th scope="col">&nbsp;</th>
-              <th scope="col">{% trans 'Rouge' %} <span class="palette-swatch-red"></span></th>
-              <th scope="col">{% trans 'Bleu' %} <span class="palette-swatch-blue"></span></th>
-              <th scope="col">{% trans 'Gris' %} <span class="palette-swatch-grey"></span></th>
+              <th scope="col">{% translate 'Rouge' %} <span class="palette-swatch-red"></span></th>
+              <th scope="col">{% translate 'Bleu' %} <span class="palette-swatch-blue"></span></th>
+              <th scope="col">{% translate 'Gris' %} <span class="palette-swatch-grey"></span></th>
             </tr>
           </thead>
           <tbody>
@@ -112,25 +112,25 @@
             </tr>
           </tbody>
         </table>
-        {% blocktrans %}
+        {% blocktranslate %}
         <p>Ces couleurs sont utilisées dans nos illustrations et respectent les règles suivantes&nbsp;:</p>
         <ol>
           <li>La portion de vide (blanc) doit idéalement représenter environ ½ à ⅓ de la surface.</li>
           <li>Il doit toujours y avoir une prédominance de rouge par rapport au bleu dans les compositions.</li>
           <li>Lorsqu’un visuel autre que les formes abstraites est requis, utiliser un aplat de rouge.</li>
         </ol>
-        {% endblocktrans %}
+        {% endblocktranslate %}
         <p>
-          <img src="{% static 'img/brand/illustration-01.jpg' %}" class="palette-illustration" alt="{% trans 'Composition abstraite Érudit' %}" />
-          <img src="{% static 'img/brand/illustration-02.jpg' %}" class="palette-illustration" alt="{% trans 'Composition abstraite Érudit' %}" />
-          <img src="{% static 'img/brand/illustration-03.jpg' %}" class="palette-illustration" alt="{% trans 'Composition abstraite Érudit' %}" />
-          <img src="{% static 'img/brand/illustration-04.jpg' %}" class="palette-illustration" alt="{% trans 'Composition abstraite Érudit' %}" />
+          <img src="{% static 'img/brand/illustration-01.jpg' %}" class="palette-illustration" alt="{% translate 'Composition abstraite Érudit' %}" />
+          <img src="{% static 'img/brand/illustration-02.jpg' %}" class="palette-illustration" alt="{% translate 'Composition abstraite Érudit' %}" />
+          <img src="{% static 'img/brand/illustration-03.jpg' %}" class="palette-illustration" alt="{% translate 'Composition abstraite Érudit' %}" />
+          <img src="{% static 'img/brand/illustration-04.jpg' %}" class="palette-illustration" alt="{% translate 'Composition abstraite Érudit' %}" />
         </p>
 
         <p>
-          {% blocktrans %}
+          {% blocktranslate %}
           Les illustrations sont disponibles sur demande.
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </p>
       </div>
     </div>
@@ -138,41 +138,41 @@
     {# Érudit's logo #}
     <div class="row main-block block-logo">
       <div class="col-md-4">
-        <h2>{% trans 'Logo d’Érudit' %}</h2>
+        <h2>{% translate 'Logo d’Érudit' %}</h2>
       </div>
       <div class="col-md-offset-1 col-md-7">
         <p>
-          {% trans 'Un espace de sécurité doit toujours être préservé autour du logo. La taille de cet espace est équivalente à la taille de l’accent du logo.' %}
+          {% translate 'Un espace de sécurité doit toujours être préservé autour du logo. La taille de cet espace est équivalente à la taille de l’accent du logo.' %}
           <br><br>
-          <img src="{% static 'img/brand/logo-clearspace-01.png' %}" class="logo-clearspace" alt="{% trans 'Espace de sécurité du logo d’Érudit' %}" />
-          <img src="{% static 'img/brand/logo-clearspace-02.png' %}" class="logo-clearspace" alt="{% trans 'Espace de sécurité du logo d’Érudit' %}" />
+          <img src="{% static 'img/brand/logo-clearspace-01.png' %}" class="logo-clearspace" alt="{% translate 'Espace de sécurité du logo d’Érudit' %}" />
+          <img src="{% static 'img/brand/logo-clearspace-02.png' %}" class="logo-clearspace" alt="{% translate 'Espace de sécurité du logo d’Érudit' %}" />
         </p>
 
-        <h3>{% trans 'Version standard' %}</h3>
+        <h3>{% translate 'Version standard' %}</h3>
         <p>
-          {% trans 'L’utilisation du logo rouge et au complet est celle qui est privilégiée.' %}
+          {% translate 'L’utilisation du logo rouge et au complet est celle qui est privilégiée.' %}
           <br><br>
-          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-standard" alt="{% trans 'Logo d’Érudit standard' %}" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-standard" alt="{% translate 'Logo d’Érudit standard' %}" />
         </p>
 
-        <h3>{% trans 'Déclinaisons de couleurs' %}</h3>
+        <h3>{% translate 'Déclinaisons de couleurs' %}</h3>
         <p>
-          {% trans 'En fonction de son utilisation, le logo peut se décliner en 3 couleurs: rouge, blanc et noir. Afin de conserver son uniformité, le logo ne doit pas comprendre d’autres combinaisons de couleurs.' %}
+          {% translate 'En fonction de son utilisation, le logo peut se décliner en 3 couleurs: rouge, blanc et noir. Afin de conserver son uniformité, le logo ne doit pas comprendre d’autres combinaisons de couleurs.' %}
           <br><br>
-          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-white-bg-red" alt="{% trans 'Logo d’Érudit blanc sur fond rouge' %}" />
-          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-white-bg-blue" alt="{% trans 'Logo d’Érudit blanc sur fond bleu' %}" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-white-bg-red" alt="{% translate 'Logo d’Érudit blanc sur fond rouge' %}" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-white-bg-blue" alt="{% translate 'Logo d’Érudit blanc sur fond bleu' %}" />
           <br>
-          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-red-bg-white" alt="{% trans 'Logo d’Érudit rouge sur fond blanc' %}" />
-          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-black-bg-white" alt="{% trans 'Logo d’Érudit noir sur fond blanc' %}" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-red-bg-white" alt="{% translate 'Logo d’Érudit rouge sur fond blanc' %}" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg logo-black-bg-white" alt="{% translate 'Logo d’Érudit noir sur fond blanc' %}" />
         </p>
 
-        <h3>{% trans 'Versions abrégées (symbole)' %}</h3>
+        <h3>{% translate 'Versions abrégées (symbole)' %}</h3>
         <p>
-          {% trans 'Le logo peut être utilisé en version abrégée lorsque le logo standard ne peut être affiché.' %}
+          {% translate 'Le logo peut être utilisé en version abrégée lorsque le logo standard ne peut être affiché.' %}
           <br><br>
-          <img src="{% static 'svg/symbole-erudit.svg' %}" class="inline-svg symbol-red-bg-white" alt="{% trans 'Symbole d’Érudit rouge sur fond blanc' %}" />
-          <img src="{% static 'svg/symbole-erudit.svg' %}" class="inline-svg symbol-white-bg-red" alt="{% trans 'Symbole d’Érudit blanc sur fond rouge' %}" />
-          <img src="{% static 'svg/symbole-erudit.svg' %}" class="inline-svg symbol-black-bg-white" alt="{% trans 'Symbole d’Érudit noir sur fond blanc' %}" />
+          <img src="{% static 'svg/symbole-erudit.svg' %}" class="inline-svg symbol-red-bg-white" alt="{% translate 'Symbole d’Érudit rouge sur fond blanc' %}" />
+          <img src="{% static 'svg/symbole-erudit.svg' %}" class="inline-svg symbol-white-bg-red" alt="{% translate 'Symbole d’Érudit blanc sur fond rouge' %}" />
+          <img src="{% static 'svg/symbole-erudit.svg' %}" class="inline-svg symbol-black-bg-white" alt="{% translate 'Symbole d’Érudit noir sur fond blanc' %}" />
         </p>
       </div>
     </div>
@@ -180,13 +180,13 @@
     {# Font and typography #}
     <div class="row main-block block-font">
       <div class="col-md-4">
-        <h2>{% trans 'Police' %}</h2>
+        <h2>{% translate 'Police' %}</h2>
       </div>
       <div class="col-md-offset-1 col-md-7">
         <p>
-          {% blocktrans %}
+          {% blocktranslate %}
           Érudit utilise la police de caractère Maax pour ses communications imprimées et numériques, en deux graisses&nbsp;: «&nbsp;regular&nbsp;» et «&nbsp;bold&nbsp;».
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </p>
         <table class="table-font">
           <thead>
@@ -223,9 +223,9 @@
           </tbody>
         </table>
         <p>
-          {% blocktrans %}
+          {% blocktranslate %}
           Lorsque l’utilisation de cette police n’est pas possible, utiliser une police linéale («&nbsp;sans sérif&nbsp;»)&nbsp;: Arial, Helvetica.
-          {% endblocktrans %}
+          {% endblocktranslate %}
         </p>
       </div>
     </div>
@@ -233,17 +233,17 @@
     {# Credits and contact #}
     <div class="row main-block block-credits">
       <div class="col-md-4">
-        <h2>{% trans 'Crédits et coordonnées' %}</h2>
+        <h2>{% translate 'Crédits et coordonnées' %}</h2>
       </div>
       <div class="col-md-offset-1 col-md-7">
-        {% blocktrans %}
+        {% blocktranslate %}
         <p>L’identité d’Érudit et ce guide de style ont été établis par le studio montréalais <a href="https://wedge.work/" target="_blank">Wedge</a>.</p>
 
         <p>La police Maax a été créé par la <a href="https://www.205.tf/" target="_blank">fonderie 205</a>.</p>
 
         <p>Pour toute information complémentaire, communiquez avec Gwendal Henry, chargé de communication d’Érudit&nbsp;: <a href="mailto:gwendal.henry@erudit.org?subject=Identité d’Érudit">gwendal.henry@erudit.org</a>.</p>
 
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </div>
     </div>
 

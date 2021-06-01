@@ -141,7 +141,8 @@ class Journal(FedoraMixin, FedoraDated):
     """ Fedora commons identifier. Used to implement the
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
-    paper = models.NullBooleanField(
+    paper = models.BooleanField(
+        null=True,
         default=None,
         verbose_name=_("Papier"),
         help_text=_("Est publiée également en version papier?"),

@@ -5,12 +5,12 @@
 {% block title %}{{ question }} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
-<li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% translate "Dépôt de fichiers" %}</a></li>
+<li><a href="#">{{ object.year }}, {% if object.volume %}{% translate "vol." %} {{ object.volume }},{% endif %} {% translate "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Demande de corrections" %}
+{% translate "Demande de corrections" %}
 {% endblock %}
 
 {% block section_intro %}
@@ -36,7 +36,7 @@
   <br />
   {% endif %}
   <input type="hidden" name="post" value="yes" />
-  <input type="submit" value="{% trans "Envoyer" %}" class="btn btn-primary" />
-  <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
+  <input type="submit" value="{% translate "Envoyer" %}" class="btn btn-primary" />
+  <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% translate "Retour" %}</a>
 </form>
 {% endblock content_main %}

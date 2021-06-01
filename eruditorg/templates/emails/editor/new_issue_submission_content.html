@@ -2,29 +2,29 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Confirmation d’un nouveau dépôt de fichiers" %}
+{% translate "Confirmation d’un nouveau dépôt de fichiers" %}
 {% endblock subject %}
 
 {% block content %}
-<p>{% trans "Bonjour," %}</p>
-{% blocktrans with fullname=issue.contact.get_full_name journal=issue.journal %}
+<p>{% translate "Bonjour," %}</p>
+{% blocktranslate with fullname=issue.contact.get_full_name journal=issue.journal %}
 <p>{{ fullname }} de la revue {{ journal }} a transmis des fichiers de production du numéro {{ issue }}.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock content %}
 
 {% block cta %}
 {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
-{% trans "Consulter les fichiers déposés" as cta_text %}
+{% translate "Consulter les fichiers déposés" as cta_text %}
 {% with cta_url="http://"|add:site.domain|add:issue_url cta_text=cta_text %}
 {{ block.super }}
 {% endwith %}
 {% endblock cta %}
 
 {% block signature %}
-{% blocktrans %}
+{% blocktranslate %}
 Hocine Chehab<br>
 Chargé d’édition numérique<br>
 <a href="mailto:edition@erudit.org?subject=Nouveau dépôt de fichiers" style="color:#ff4242; text-decoration:underline;">edition@erudit.org</a><br>
 <a href="tel:+15143436111p44607" style="color:#ff4242; text-decoration:underline;">+1 514-343-6111 poste 44607</a>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock signature %}

@@ -9,10 +9,10 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block title %}{{ issue }} – {% trans "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
+{% block title %}{{ issue }} – {% translate "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% translate "Dépôt de fichiers" %}</a></li>
 <li><a href="#">{{ issue }}</a></li>
 {% endblock breadcrumb %}
 
@@ -25,27 +25,27 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h2>{% trans "Informations du numéro" %}</h2>
+    <h2>{% translate "Informations du numéro" %}</h2>
   </div>
 </div>
 
 {# Issue submission metadata #}
 <dl class="row submission-detail-metadata">
-  <dt class="col-sm-3">{% trans "Statut" %}</dt>
+  <dt class="col-sm-3">{% translate "Statut" %}</dt>
   <dd class="col-sm-9">
     <span class="status-indicator-{% if issue.status == 'D' or issue.status == 'C' %}error{% elif issue.status == 'S' %}warning{% elif issue.status == 'V' %}success{% endif %}"></span>
     {{ issue.get_status_display }}
   </dd>
-  <dt class="col-sm-3">{% trans "Année" %}</dt>
+  <dt class="col-sm-3">{% translate "Année" %}</dt>
   <dd class="col-sm-9">{{ issue.year }}</dd>
   {% if issue.volume %}
-  <dt class="col-sm-3">{% trans "Volume" %}</dt>
+  <dt class="col-sm-3">{% translate "Volume" %}</dt>
   <dd class="col-sm-9">{{ issue.volume }}</dd>
   {% endif %}
-  <dt class="col-sm-3">{% trans "Numéro" %}</dt>
+  <dt class="col-sm-3">{% translate "Numéro" %}</dt>
   <dd class="col-sm-9">{{ issue.number }}</dd>
-  <dt class="col-sm-3">{% trans "Commentaires" %}</dt>
-  <dd class="col-sm-9">{% if issue.comment %}{{ issue.comment }}{% else %}{% trans '[Non renseigné]' %}{% endif %}</dd>
+  <dt class="col-sm-3">{% translate "Commentaires" %}</dt>
+  <dd class="col-sm-9">{% if issue.comment %}{{ issue.comment }}{% else %}{% translate '[Non renseigné]' %}{% endif %}</dd>
 </dl>
 
 <hr>
@@ -53,8 +53,8 @@
 <div class="form-group text-right">
   {# Delete & Edit buttons #}
   {% if can_manage_issuesubmission and not issue.is_validated %}
-  <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk issue.pk %}" class="btn">{% trans "Supprimer" %}</a>
-  <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary">{% trans "Modifier" %}</a>
+  <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk issue.pk %}" class="btn">{% translate "Supprimer" %}</a>
+  <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary">{% translate "Modifier" %}</a>
   {% endif %}
   {# Approve & Refuse buttons #}
   {% for t in transitions %}

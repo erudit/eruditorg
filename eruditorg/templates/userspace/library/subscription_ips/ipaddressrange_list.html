@@ -3,42 +3,42 @@
 {% load rules %}
 
 
-{% block title %}{% trans "Adresses IP" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Adresses IP" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}">{% trans "Adresses IP" %}</a></li>
+<li><a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}">{% translate "Adresses IP" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Adresses IP" %}
+{% translate "Adresses IP" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
+{% blocktranslate %}
 <p>Vous trouverez ci-dessous les plages d’adresses IP actuellement enregistrées pour votre établissement et qui permettent à vos usagers d’accéder aux revues souscrites.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block section_aside %}
-{% blocktrans with organisation=scope_current_organisation.name %}
+{% blocktranslate with organisation=scope_current_organisation.name %}
 <p>Pour nous faire part de changements dans ces adresses IP, merci de communiquer avec nous à <a href="mailto:client@erudit.org?subject=Changement%20d’adresses%20IP%20–%20{{ organisation }}">client@erudit.org</a>.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock %}
 
 {% block content_main %}
 {% has_perm 'has_staff_access' request.user as has_staff_access %}
 <div class="row">
   <div class="col-md-8">
-    <h2>{% trans "Plages d’adresses enregistrées" %}</h2>
+    <h2>{% translate "Plages d’adresses enregistrées" %}</h2>
   </div>
   {% if has_staff_access %}
   <div class="col-md-4 text-right">
-    <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">&plus;&nbsp;{% trans "Ajouter" %}</a>
+    <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">&plus;&nbsp;{% translate "Ajouter" %}</a>
   </div>
   {% endif %}
   {% if not has_active_subscription %}
   <div class="col-md-8">
-    <p>{% trans "Les plages d’adresses IP suivantes <strong>ne sont pas actuellement actives pour vos usagers</strong>. Nous les affichons à titre d’information." %}</p>
+    <p>{% translate "Les plages d’adresses IP suivantes <strong>ne sont pas actuellement actives pour vos usagers</strong>. Nous les affichons à titre d’information." %}</p>
   </div>
   {% endif %}
 </div>
@@ -47,10 +47,10 @@
 <div class="table{% if not has_active_subscription %} glory{% endif %}">
   <ul class="table-header">
     <li class="row">
-      <span class="{% if has_staff_access %}col-sm-3{% else %}col-sm-6{% endif %}">{% trans "Titre" %}</span>
-      <span class="col-sm-3">{% trans "Début" %}</span>
-      <span class="col-sm-3">{% trans "Fin" %}</span>
-      {% if has_staff_access %}<span class="col-sm-3">{% trans "Supprimer" %}</span>{% endif %}
+      <span class="{% if has_staff_access %}col-sm-3{% else %}col-sm-6{% endif %}">{% translate "Titre" %}</span>
+      <span class="col-sm-3">{% translate "Début" %}</span>
+      <span class="col-sm-3">{% translate "Fin" %}</span>
+      {% if has_staff_access %}<span class="col-sm-3">{% translate "Supprimer" %}</span>{% endif %}
     </li>
   </ul>
 
@@ -63,7 +63,7 @@
         <span class="col-sm-3">{{ ip_range.ip_end }}</span>
         {% if has_staff_access %}
         <span class="col-sm-3">
-          <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
+          <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% translate 'Supprimer cette plage d’adresses IP' %}">
             <i class="icon ion-ios-close table-row-delete"></i>
           </a>
         </span>

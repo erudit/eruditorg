@@ -2,14 +2,14 @@
 
 <nav class="row toc-nav">
   <h3 class="sr-only">
-    {% trans "Feuilleter les articles de ce numéro" %}
+    {% translate "Feuilleter les articles de ce numéro" %}
   </h3>
   <div class="hidden-xs col-sm-4">
     {% if previous_article %}
     <a
       href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=previous_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
       class="toc-nav__prev"
-      title="{% trans 'Article précédent' %}">
+      title="{% translate 'Article précédent' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
       <h4 class="toc-nav__title">
         {{ previous_article.html_title|safe }}
@@ -19,10 +19,10 @@
     <a
       href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
       class="toc-nav__prev"
-      title="{% trans 'Aller au sommaire' %}">
+      title="{% translate 'Aller au sommaire' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-left"></span></span>
       <h4 class="toc-nav__title">
-        <em>{% trans '[Début du numéro] <br/>Retour au sommaire' %}</em>
+        <em>{% translate '[Début du numéro] <br/>Retour au sommaire' %}</em>
       </h4>
     </a>
     {% endif %}
@@ -33,7 +33,7 @@
     <a
       href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=next_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
       class="toc-nav__next"
-      title="{% trans 'Article suivant' %}">
+      title="{% translate 'Article suivant' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
       <h4 class="toc-nav__title">
         {{ next_article.html_title|safe }}
@@ -43,10 +43,10 @@
     <a
       href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
       class="toc-nav__next"
-      title="{% trans 'Aller au sommaire' %}">
+      title="{% translate 'Aller au sommaire' %}">
       <span class="toc-nav__arrow"><span class="arrow arrow-bar is-right"></span></span>
       <h4 class="toc-nav__title">
-        <em>{% trans '[Fin du numéro] <br/>Retour au sommaire' %}</em>
+        <em>{% translate '[Fin du numéro] <br/>Retour au sommaire' %}</em>
       </h4>
     </a>
     {% endif %}

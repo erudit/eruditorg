@@ -4,52 +4,52 @@
 {% block body_id %}diagnosis{% endblock body_id %}
 {% block data_controller %}userspace:library:diagnosis:landing{% endblock data_controller %}
 
-{% block title %}{% trans "Diagnostic" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Diagnostic" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Diagnostic" %}</a></li>
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% translate "Diagnostic" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Diagnostic" %}
+{% translate "Diagnostic" %}
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans with organisation=scope_current_organisation.name %}
+{% blocktranslate with organisation=scope_current_organisation.name %}
 <p>Cette section met à votre disposition des outils qui vous seront utiles si vous rencontrez des difficultés d’accès. Merci de partager avec nous les informations recueillies par courriel à l’adresse <a href="mailto:client@erudit.org?subject=Diagnostic%20–%20{{ organisation }}">client@erudit.org</a> afin de nous aider à résoudre la situation.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock section_intro %}
 
 {% block content_main %}
 <section>
-  <h2>{% trans "Votre connexion" %}</h2>
+  <h2>{% translate "Votre connexion" %}</h2>
   <div class="row">
     <div class="col-md-7">
       {% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk as ip_address_url %}
-      {% blocktrans with organisation=scope_current_organisation.name %}
+      {% blocktranslate with organisation=scope_current_organisation.name %}
       <p>Les informations ci-dessous permettront de confirmer que l’adresse IP que vous utilisez lorsque vous rencontrez des difficultés d’accès est bien enregistrée dans votre profil.</p>
 
       <p>Vous pouvez également consulter la section <em><a href="{{ ip_address_url }}">Adresses IP</a></em> pour voir la liste complète des adresses enregistrées pour votre établissement. Si ces informations sont incorrectes ou incomplètes, merci de communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Diagnostic%20–%20Adresses%20IP%20–%20{{ organisation }}">client@erudit.org</a>.</p>
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </div>
   </div>
 
   <div class="glory">
     <dl class="row index-card">
-      <dt class="col-sm-6">{% trans "Date&nbsp;:" %} </dt>
+      <dt class="col-sm-6">{% translate "Date&nbsp;:" %} </dt>
       <dd class="col-sm-6">{{ date }}<br></dd>
 
-      <dt class="col-sm-6">{% trans "Adresse IP du client&nbsp;:" %} </dt>
+      <dt class="col-sm-6">{% translate "Adresse IP du client&nbsp;:" %} </dt>
       <dd class="col-sm-6">{{ client_ip }}<br></dd>
 
-      <dt class="col-sm-6">{% trans "Adresse IP de redirection&nbsp;:" %} </dt>
+      <dt class="col-sm-6">{% translate "Adresse IP de redirection&nbsp;:" %} </dt>
       <dd class="col-sm-6">{{ redirection_ip }}<br></dd>
 
-      <dt class="col-sm-6">{% trans "Navigateur&nbsp;:" %} </dt>
+      <dt class="col-sm-6">{% translate "Navigateur&nbsp;:" %} </dt>
       <dd class="col-sm-6">{{ user_agent }}<br></dd>
 
-      <dt class="col-sm-6">{% trans "Institution et identifiant&nbsp;:" %} </dt>
-      <dd class="col-sm-6">{{ institution }} [{% if identifier %}{{ identifier }}{% else %}<em>{% trans "Aucun identifiant" %}</em>{% endif %}]</dd>
+      <dt class="col-sm-6">{% translate "Institution et identifiant&nbsp;:" %} </dt>
+      <dd class="col-sm-6">{{ institution }} [{% if identifier %}{{ identifier }}{% else %}<em>{% translate "Aucun identifiant" %}</em>{% endif %}]</dd>
     </dl>
   </div>
 </section>
@@ -57,14 +57,14 @@
 <hr>
 
 <section>
-  <h2>{% trans "Vos abonnements" %} ({{ journals|length }} {% trans "revue" %}{{ journals|pluralize:",s" }})</h2>
+  <h2>{% translate "Vos abonnements" %} ({{ journals|length }} {% translate "revue" %}{{ journals|pluralize:",s" }})</h2>
   <div class="row">
     <div class="col-md-7">
-      {% blocktrans with organisation=scope_current_organisation.name %}
+      {% blocktranslate with organisation=scope_current_organisation.name %}
       <p>Vous trouverez ci-dessous la liste des titres pour lesquels votre établissement détient un accès actif pour l’année en cours.</p>
 
       <p>Si les informations affichées diffèrent de celles dont vous disposez, merci de communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Diagnostic%20–%20Informations%20d’abonnements%20–%20{{ organisation }}">client@erudit.org</a>.</p>
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </div>
   </div>
 
@@ -76,7 +76,7 @@
     {% endfor %}
     </ol>
     {% else %}
-      {% trans "Aucun abonnement en cours." %}
+      {% translate "Aucun abonnement en cours." %}
     {% endif %}
   </div>
 </section>

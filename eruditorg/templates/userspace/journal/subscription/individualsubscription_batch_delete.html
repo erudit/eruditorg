@@ -1,10 +1,10 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Suppression en lot" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Suppression en lot" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="#">{% trans "Suppression en lot" %}</a></li>
+<li><a href="#">{% translate "Suppression en lot" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
@@ -17,50 +17,50 @@
 </p>
 <ul>
 {% for line, email in errors %}
-    <li>{% trans "Ligne" %} {{ line }}: {{ email }}</li>
+    <li>{% translate "Ligne" %} {{ line }}: {{ email }}</li>
 {% endfor %}
 </ul>
 </div>
 {% endif %}
 {% if todelete %}
-    <p>{% blocktrans trimmed count count=todelete|length %}
+    <p>{% blocktranslate trimmed count count=todelete|length %}
         Vous allez supprimer {{ count }} abonnement de cette revue.
     {% plural %}
         Vous allez supprimer {{ count }} abonnements de cette revue.
-    {% endblocktrans %}</p>
+    {% endblocktranslate %}</p>
     {% if ignored %}
-    <p>{% blocktrans trimmed count count=ignored|length %}
+    <p>{% blocktranslate trimmed count count=ignored|length %}
         {{ count }} courriel a été ignoré parce qu'il n'était pas abonné.
     {% plural %}
         {{ count }} courriels ont été ignorés parce qu'ils n'étaient pas abonnés.
-    {% endblocktrans %}</p>
+    {% endblocktranslate %}</p>
     {% endif %}
-    <p>{% trans "Continuer?" %}</p>
+    <p>{% translate "Continuer?" %}</p>
 
     <form method="POST">
         {% csrf_token %}
         {% for subscription in todelete %}
         <input type="hidden" name="todelete" value="{{ subscription.pk }}">
         {% endfor %}
-        <input class="btn btn-primary" type="submit" value="{% trans "Supprimer" %}">
+        <input class="btn btn-primary" type="submit" value="{% translate "Supprimer" %}">
     </form>
 {% else %}
     {% if ignored %}
     <div class="alert alert-warning">
-    <p>{% blocktrans trimmed with count=ignored|length %}
+    <p>{% blocktranslate trimmed with count=ignored|length %}
         Aucun des {{ count }} courriels soumis n'était abonné. Il n'y a rien à supprimer.
-    {% endblocktrans %}</p>
+    {% endblocktranslate %}</p>
     </div>
     {% endif %}
-    <p>{% blocktrans trimmed %}
+    <p>{% blocktranslate trimmed %}
         Veuillez téléverser un fichier CSV qui contient une adresse courriel
         par ligne. Chaque courriel contenu dans ce fichier sera, après
         confirmation, désabonné de la revue.
-    {% endblocktrans %}</p>
+    {% endblocktranslate %}</p>
     <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="csvfile" required>
-        <input class="btn btn-primary" type="submit" value="{% trans "Envoyer" %}">
+        <input class="btn btn-primary" type="submit" value="{% translate "Envoyer" %}">
     </form>
 {% endif %}
 {% endblock content_main %}

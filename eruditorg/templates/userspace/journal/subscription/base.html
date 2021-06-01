@@ -4,11 +4,11 @@
 {% block title %}{{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
+<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% translate "Abonnements" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Abonnements" %}
+{% translate "Abonnements" %}
 {% endblock %}
 
 {% block content_main %}
@@ -18,12 +18,12 @@
 
   {% if can_manage_institutional_subscription %}
   <li class="tabs__item{% if view.is_org_view %} tabs__item_active{% endif %}">
-    <a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Institutionnels" %}</a>
+    <a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% translate "Institutionnels" %}</a>
   </li>
   {% endif %}
   {% if can_manage_individual_subscription %}
   <li class="tabs__item{% if not view.is_org_view %} tabs__item_active{% endif %}">
-    <a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Individuels" %}</a>
+    <a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% translate "Individuels" %}</a>
   </li>
   {% endif %}
 </ul>

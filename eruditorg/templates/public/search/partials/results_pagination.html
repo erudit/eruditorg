@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <nav>
-  <h3 class="sr-only">{% trans 'Pagination' %}</h3>
+  <h3 class="sr-only">{% translate 'Pagination' %}</h3>
   <div class="pagination">
     {% if results.pagination.links.first %}
     <a href="{{ results.pagination.links.first }}"><i class="icon ion-ios-arrow-back"></i><i class="icon ion-ios-arrow-back"></i></a>
@@ -10,9 +10,9 @@
     <a href="{{ results.pagination.links.previous }}"><i class="icon ion-ios-arrow-back"></i></a>
     {% endif %}
     <span class="page-position">
-    {% blocktrans trimmed with current_page=results.pagination.current_page page_count=results.pagination.num_pages %}
+    {% blocktranslate trimmed with current_page=results.pagination.current_page page_count=results.pagination.num_pages %}
       Page {{ current_page }} de {{ page_count }}
-    {% endblocktrans %}
+    {% endblocktranslate %}
     </span>
     {% if results.pagination.links.next %}
     <a href="{{ results.pagination.links.next }}"><i class="icon ion-ios-arrow-forward"></i></a>

@@ -2,34 +2,34 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Demande de modification de fichiers" %}
+{% translate "Demande de modification de fichiers" %}
 {% endblock subject %}
 
 {% block content %}
-<p>{% trans "Bonjour," %}</p>
-{% blocktrans %}
+<p>{% translate "Bonjour," %}</p>
+{% blocktranslate %}
 <p>Vous avez des modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% if comment %}
-<p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
+<p><strong>{% translate "Commentaires&nbsp;:" %}</strong></p>
 <p><em>{{ comment }}</em></p>
 {% endif %}
-<p>{% trans "Nous vous remercions de votre précieuse collaboration." %}</p>
+<p>{% translate "Nous vous remercions de votre précieuse collaboration." %}</p>
 {% endblock content %}
 
 {% block cta %}
 {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
-{% trans "Modifier mon dépôt" as cta_text %}
+{% translate "Modifier mon dépôt" as cta_text %}
 {% with cta_url="http://"|add:site.domain|add:issue_url cta_text=cta_text %}
 {{ block.super }}
 {% endwith %}
 {% endblock cta %}
 
 {% block signature %}
-{% blocktrans %}
+{% blocktranslate %}
 Hocine Chehab<br>
 Chargé d’édition numérique<br>
 <a href="mailto:edition@erudit.org?subject=Modification de fichiers" style="color:#ff4242; text-decoration:underline;">edition@erudit.org</a><br>
 <a href="tel:+15143436111p44607" style="color:#ff4242; text-decoration:underline;">+1 514-343-6111 poste 44607</a>
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock signature %}

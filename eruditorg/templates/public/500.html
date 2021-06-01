@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "500. Erreur inconnue" %}{% endblock title %}
+{% block title %}{% translate "500. Erreur inconnue" %}{% endblock title %}
 
 {% block meta_tags %}<meta name="robots" content="noindex">{% endblock %}
 
@@ -11,7 +11,7 @@
 <main class="glory">
   <div class="container">
     <header class="main-header">
-      <h1>{% trans "Erreur inconnue" %}</h1>
+      <h1>{% translate "Erreur inconnue" %}</h1>
     </header>
     <div class="ascii-error">
       <pre>
@@ -30,9 +30,9 @@
     </div>
     <p>
       {% url 'public:home' as home %}
-      {% blocktrans %}
+      {% blocktranslate %}
       Il y a eu une erreur interne du serveur&nbsp;! Retourner à la <a href="{{ home }}">page d’accueil</a>. <br/>Si le problème persiste, veuillez communiquer avec nous à l'adresse&nbsp;: <a href="mailto:info@erudit.org?subject=Erreur 500 - erudit.org">info@erudit.org</a>.
-      {% endblocktrans %}
+      {% endblocktranslate %}
     </p>
   </div>
 </main>

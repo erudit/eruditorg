@@ -1,7 +1,8 @@
 -r requirements-test.txt  # include test/prod packages
 
 django-debug-toolbar>=1.8
-django-debug-toolbar-line-profiler>=0.6.1
+# Commented until https://github.com/pyutils/line_profiler/pull/78
+#django-debug-toolbar-line-profiler>=0.6.1
 django-debug-toolbar-template-timings>=0.6.6
 ipdb>=0.8.1
 ipython>=4.0.0

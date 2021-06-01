@@ -2,9 +2,9 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans trimmed with journal=token.content_object.journal.formatted_title  %}
+{% blocktranslate trimmed with journal=token.content_object.journal.formatted_title  %}
   Abonnement à {{ journal }}
-{% endblocktrans %}
+{% endblocktranslate %}
 {% endblock title %}
 
 {% block content %}
@@ -12,34 +12,34 @@
   <div class="row">
     <div class="col-md-12">
       <h2>
-        {% blocktrans trimmed with journal=token.content_object.journal.formatted_title  %}
+        {% blocktranslate trimmed with journal=token.content_object.journal.formatted_title  %}
           Abonnement à {{ journal }}
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </h2>
       {% if token.is_expired %}
         <div class="alert">
-          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
-          {% trans "Ce lien d'abonnement a expiré." %}
+          <p><strong>{% translate "Abonnement impossible." %}</strong></p>
+          {% translate "Ce lien d'abonnement a expiré." %}
         </div>
       {% elif token.is_consumed %}
         <div class="alert">
-          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
-          {% trans "Ce lien d'abonnement a déjà été utilisé." %}
+          <p><strong>{% translate "Abonnement impossible." %}</strong></p>
+          {% translate "Ce lien d'abonnement a déjà été utilisé." %}
         </div>
       {% elif token.is_canceled %}
         <div class="alert">
-          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
-          {% trans "Ce lien d'abonnement n'est plus valide." %}
+          <p><strong>{% translate "Abonnement impossible." %}</strong></p>
+          {% translate "Ce lien d'abonnement n'est plus valide." %}
         </div>
       {% elif subscription_exists %}
         <div class="alert">
-          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
-          {% trans "Vous êtes déjà abonné à cette revue avec ce compte." %}
+          <p><strong>{% translate "Abonnement impossible." %}</strong></p>
+          {% translate "Vous êtes déjà abonné à cette revue avec ce compte." %}
         </div>
       {% elif request.user.is_authenticated and request.user.email != token.email %}
         <div class="alert">
-          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
-          {% trans "Votre compte est configuré avec une adresse courriel différente, veuillez demander un changement d'adresse courriel à l'éditeur." %}
+          <p><strong>{% translate "Abonnement impossible." %}</strong></p>
+          {% translate "Votre compte est configuré avec une adresse courriel différente, veuillez demander un changement d'adresse courriel à l'éditeur." %}
         </div>
       {% else %}
         {% if request.user.is_authenticated and request.user.email == token.email %}
@@ -48,32 +48,32 @@
             <div class="col-md-8 col-md-offset-2 text-center">
               <form method="post" action="{% url 'public:account_actions:consume' key=token.key %}">
                 {% csrf_token %}
-                <input type="submit" value="{% trans "Activer votre abonnement" %}" class="btn btn-block btn-primary" />
+                <input type="submit" value="{% translate "Activer votre abonnement" %}" class="btn btn-block btn-primary" />
               </form>
             </div>
           </div>
         {% elif user_exists %}
           <p>
-            {% blocktrans trimmed with email=token.email %}
+            {% blocktranslate trimmed with email=token.email %}
               Il y a déjà un compte associé à l'adresse courriel <strong>{{ email }}</strong>, veuillez vous identifier pour activer votre abonnement à cette revue.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-              <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-primary">{% trans "S'identifier" %}</a>
+              <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-primary">{% translate "S'identifier" %}</a>
             </div>
           </div>
         {% else %}
           <p>
-            {% blocktrans trimmed with email=token.email %}
+            {% blocktranslate trimmed with email=token.email %}
               Il n'y a pas de compte associé à l'adresse courriel <strong>{{ email }}</strong>, veuillez vous créer un compte pour activer votre abonnement à cette revue.
-            {% endblocktrans %}
+            {% endblocktranslate %}
           </p>
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-              <a href="{% url 'public:account_actions:register' key=token.key %}" class="btn btn-block btn-primary">{% trans "Créer un compte" %}</a>
+              <a href="{% url 'public:account_actions:register' key=token.key %}" class="btn btn-block btn-primary">{% translate "Créer un compte" %}</a>
             </div>
           </div>
         {% endif %}

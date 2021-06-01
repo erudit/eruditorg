@@ -3,7 +3,7 @@
 
 {% block title %}{{ citation_title_metadata|truncatechars:50 }} – {{ article.issue.journal_formatted_title }}{% endblock title %}
 
-{% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal_formatted_title article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktranslate with journal=article.issue.journal_formatted_title article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 {# If the issue is published, the article metatags will be cached for one day. #}
@@ -22,20 +22,20 @@
 {% elif article.issue.journal.has_logo %}
 <meta property="og:image" content="{% journal_logo_url article.issue.journal %}"/>
 {% endif %}
-<meta property="og:description" content="{% blocktrans with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}"/>
+<meta property="og:description" content="{% blocktranslate with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktranslate %}"/>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:site" content="@eruditorg"/>
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}"/>
 <meta name="twitter:title" content="{{ citation_title_metadata }} – {{ article.issue.journal_formatted_title }} – Érudit"/>
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ article.issue.journal_formatted_title }}"/>
+<meta name="twitter:image:alt" content="{% translate 'Logo pour' %} {{ article.issue.journal_formatted_title }}"/>
 {% if article.issue.has_coverpage %}
 <meta name="twitter:image" content="{% issue_coverpage_url article.issue %}"/>
 {% elif article.issue.journal.has_logo %}
 <meta name="twitter:image" content="{% journal_logo_url article.issue.journal %}"/>
 {% endif %}
-<meta name="twitter:description" content="{% blocktrans with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}"/>
+<meta name="twitter:description" content="{% blocktranslate with journal=article.issue.journal_formatted_title %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktranslate %}"/>
 {% if not article.issue.is_published %}
 <meta name="robots" content="noindex"/>
 {% endif %}
@@ -139,7 +139,7 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li>
-  <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+  <a href="{% url 'public:journal:journal_list' %}">{% translate "Revues" %}</a>
 </li>
 <li>
   <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal_formatted_title }}</a>

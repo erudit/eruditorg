@@ -1,22 +1,22 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Supprimer une plage d’adresses IP" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Supprimer une plage d’adresses IP" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% trans "Plages d'adresses IP" %}</a></li>
-<li><a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}">{% trans "Supprimer" %} {{ ip_range.ip_start }} &ndash; {{ ip_range.ip_end }}</a></li>
+<li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% translate "Plages d'adresses IP" %}</a></li>
+<li><a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}">{% translate "Supprimer" %} {{ ip_range.ip_start }} &ndash; {{ ip_range.ip_end }}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Supprimer une plage d’adresses IP" %}
+{% translate "Supprimer une plage d’adresses IP" %}
 {% endblock %}
 
 {% block section_intro %}
 <p>
-  {% blocktrans trimmed with ip_start=ip_range.ip_start ip_end=ip_range.ip_end subscription=ip_range.subscription %}
+  {% blocktranslate trimmed with ip_start=ip_range.ip_start ip_end=ip_range.ip_end subscription=ip_range.subscription %}
   Vous allez supprimer la page d’adresses IP suivante&nbsp;: <br><br><strong>{{ subscription }} <br>{{ ip_start }} &ndash; {{ ip_end }}</strong>. <br><br>Voulez-vous poursuivre&nbsp;?
-  {% endblocktrans %}
+  {% endblocktranslate %}
 </p>
 {% endblock section_intro %}
 
@@ -24,8 +24,8 @@
 <div class="col-sm-8 col-md-6">
   <form action="" method="post">{% csrf_token %}
     <input type="hidden" name="post" value="yes" />
-    <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-    <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% trans "Non" %}</a>
+    <input type="submit" value="{% translate "Oui" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% translate "Non" %}</a>
   </form>
 </div>
 {% endblock content_main %}

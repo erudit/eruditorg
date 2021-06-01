@@ -1,22 +1,22 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Supprimer un accès" %} {{ block.super }}{% endblock title %}
+{% block title %}{% translate "Supprimer un accès" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:authorization:list' %}">{% trans "Autorisations" %}</a></li>
-<li><a href="#">{% trans "Supprimer un accès" %}</a></li>
+<li><a href="{% url 'userspace:library:authorization:list' %}">{% translate "Autorisations" %}</a></li>
+<li><a href="#">{% translate "Supprimer un accès" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Supprimer un accès" %}
+{% translate "Supprimer un accès" %}
 {% endblock %}
 
 {% block section_intro %}
 <p>
-{% blocktrans trimmed with name=object.user.get_full_name|default:object.user.username %}
+{% blocktranslate trimmed with name=object.user.get_full_name|default:object.user.username %}
   Voulez-vous supprimer l’accès de <strong>{{ name }}</strong>&nbsp;?
-{% endblocktrans %}
+{% endblocktranslate %}
 </p>
 {% endblock section_intro %}
 
@@ -24,8 +24,8 @@
 <div class="col-sm-8 col-md-6">
   <form action="" method="post">{% csrf_token %}
     <input type="hidden" name="post" value="yes" />
-    <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-    <a href="{% url 'userspace:library:authorization:list' %}" class="btn">{% trans "Non" %}</a>
+    <input type="submit" value="{% translate "Oui" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:library:authorization:list' %}" class="btn">{% translate "Non" %}</a>
   </form>
 </div>
 {% endblock content_main %}

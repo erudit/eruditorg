@@ -3,7 +3,7 @@
 <div id="id_qblock_{{ qnb }}" class="row form-row qblock" style="{{ style }}" data-q-id="{{ qnb }}" data-q-used="false">
   <div class="col-xs-12 col-md-1">
     <div id="div_id_{{ qoperator_field.html_name }}" class="form-group{% if qoperator_field.errors %} has-error{% endif %} operator">
-      <label for="id_{{ qoperator_field.html_name }}" class="sr-only">{% trans 'Opérateur booléen' %}</label>
+      <label for="id_{{ qoperator_field.html_name }}" class="sr-only">{% translate 'Opérateur booléen' %}</label>
       {{ qoperator_field|add_class:'form-control' }}
       {% for error in qoperator_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
     </div>
@@ -11,7 +11,7 @@
   <div class="col-xs-5 col-md-6 search-term">
     <div id="div_id_{{ qterm_field.html_name }}" class="form-group{% if qterm_field.errors %} has-error{% endif %}">
       <div class="controls">
-        <label for="id_{{ qterm_field.html_name }}" class="sr-only">{% trans 'Mots-clés' %}</label>
+        <label for="id_{{ qterm_field.html_name }}" class="sr-only">{% translate 'Mots-clés' %}</label>
         {{ qterm_field|add_class:'form-control' }}
         {% for error in qterm_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
       </div>
@@ -20,14 +20,14 @@
   <div class="col-xs-5 col-md-3 search-field">
     <div id="div_id_{{ qfield_field.html_name }}" class="form-group{% if qfield_field.errors %} has-error{% endif %}">
       <div class="controls">
-        <label for="id_{{ qfield_field.html_name }}" class="sr-only">{% trans 'Dans…' %}</label>
+        <label for="id_{{ qfield_field.html_name }}" class="sr-only">{% translate 'Dans…' %}</label>
         {{ qfield_field|add_class:'form-control' }}
         {% for error in qfield_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
       </div>
     </div>
   </div>
   <div class="col-xs-2 col-sm-1 remove-btn">
-    <a href="#" class="remove-qbox" title="{% trans 'Supprimer ce champ' %}">
+    <a href="#" class="remove-qbox" title="{% translate 'Supprimer ce champ' %}">
       <i class="icon ion-ios-close"></i>
     </a>
   </div>

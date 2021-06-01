@@ -1,13 +1,13 @@
 {% load i18n public_journal_tags %}
 
 <div id="id_cite_modal_{{ article.localidentifier|slugify }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+  <h2 class="modal-header">{% translate "Outils de citation" %}</h2>
   <div class="modal-body">
     {% if not article.can_cite %}
-    <h3>{% trans "Non disponible pour cet article" %}</h3>
+    <h3>{% translate "Non disponible pour cet article" %}</h3>
     {% else %}
     {% if article|get_class == 'Article' %}
-    <h3>{% trans "Citer cet article" %}</h3>
+    <h3>{% translate "Citer cet article" %}</h3>
     <dl class="cite-modal--style-list">
       <dt><strong>MLA</strong></dt>
       <dd id="id_cite_mla_{{ article.localidentifier }}" class="cite-mla">
@@ -27,7 +27,7 @@
     <hr />
     {% endif %}
 
-    <h3>{% trans "Exporter la notice de ce article" %}</h3>
+    <h3>{% translate "Exporter la notice de ce article" %}</h3>
     <div class="row">
       <p class="col-xs-4">
         <a href="{{ article.cite_ris_url }}" class="btn btn-secondary cite-export">
@@ -39,7 +39,7 @@
         <a href="{{ article.cite_enw_url }}" class="btn btn-secondary cite-export">
           <span class="show cite-export-title">ENW</span>
         </a>
-        <br><br>EndNote {% trans '(version X9.1 et +)' %}, Zotero
+        <br><br>EndNote {% translate '(version X9.1 et +)' %}, Zotero
       </p>
       <p class="col-xs-4">
         <a href="{{ article.cite_bib_url }}" class="btn btn-secondary cite-export">

@@ -8,28 +8,28 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block title %}{% trans "Thèses et mémoires" %}{% endblock title %}
+{% block title %}{% translate "Thèses et mémoires" %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% trans 'Thèses et mémoires' %}">
+<meta property="og:title" content="{% translate 'Thèses et mémoires' %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta property="og:description" content="{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
+<meta name="twitter:title" content="{% translate 'Thèses et mémoires' %} – Érudit">
 <meta name="twitter:image" content="{% static 'img/illustration-erudit.png' %}">
-<meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
-<meta name="twitter:description" content="{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% translate 'Illustration « Cultivez votre savoir »' %}">
+<meta name="twitter:description" content="{% blocktranslate %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes sur la plateforme Érudit.{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -50,7 +50,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
-      "name": "{% trans 'Thèses et mémoires' %}"
+      "name": "{% translate 'Thèses et mémoires' %}"
     }
   }]
 }
@@ -62,7 +62,7 @@
 {% block data_controller %}public:thesis:thesis_home{% endblock data_controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:thesis:home' %}">{% translate "Thèses et mémoires" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -70,22 +70,22 @@
   <header class="row main-header">
     <div class="col-md-8">
       <h1>
-        {% trans "Thèses et mémoires" %}
-        <span class="thesis-count">{{ total_count|intcomma }} {% trans "documents" %}</span>
+        {% translate "Thèses et mémoires" %}
+        <span class="thesis-count">{{ total_count|intcomma }} {% translate "documents" %}</span>
       </h1>
       <div class="main-header__intro">
         {% url 'public:search:advanced_search' as advanced_search %}
-        {% blocktrans %}
+        {% blocktranslate %}
         <p>Érudit offre un accès centralisé aux dépôts de thèses et mémoires de plusieurs universités canadiennes. La recherche peut être effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de ceux-ci à partir de l’<a href="{{ advanced_search }}">outil de recherche avancée</a>&nbsp;; la consultation du document nécessite cependant une redirection vers la plateforme de l’institution d’attache.</p>
         <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt à l’université correspondante.</p>
-        {% endblocktrans %}
+        {% endblocktranslate %}
       </div>
     </div>
   </header>
 
   <section class="main-content">
     <header class="row">
-      <h2>{% trans "Par dépôt institutionnel" %}</h2>
+      <h2>{% translate "Par dépôt institutionnel" %}</h2>
     </header>
 
     <ul class="repositories row">
@@ -101,8 +101,8 @@
               width="{{ summary.repository.logo.width }}"
               height="{{ summary.repository.logo.height }}"
               class="lazyload img-responsive"
-              title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}"
-              alt="{% blocktrans with summary.repository.name as name %}Logo {{ name }}{% endblocktrans %}"
+              title="{% blocktranslate with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktranslate %}"
+              alt="{% blocktranslate with summary.repository.name as name %}Logo {{ name }}{% endblocktranslate %}"
             />
           </span>
           {% endif %}
@@ -113,11 +113,11 @@
           </a>
         </h3>
         <div class="thesis-count">
-          {{ summary.thesis_count|intcomma }} {% trans "documents" %}
+          {{ summary.thesis_count|intcomma }} {% translate "documents" %}
         </div>
         {% if summary.recent_theses %}
         <div class="recent-theses">
-          <h4>{% trans "Dernièrement diffusées" %}</h4>
+          <h4>{% translate "Dernièrement diffusées" %}</h4>
           {% for thesis in summary.recent_theses %}
           <a href="{{ thesis.url }}" class="thesis" target="_blank">{{ thesis.title }}</a>
           {% endfor %}

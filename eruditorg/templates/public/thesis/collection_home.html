@@ -8,32 +8,32 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block title %}{% blocktrans with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktrans %}{% endblock title %}
+{% block title %}{% blocktranslate with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktranslate %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with repository=repository.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ repository }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktranslate with repository=repository.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ repository }} sur la plateforme Érudit.{% endblocktranslate %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktranslate with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktranslate %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if repository.logo %}
 <meta property="og:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with repository=repository.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ repository }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktranslate with repository=repository.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ repository }} sur la plateforme Érudit.{% endblocktranslate %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="https://{{ request.get_host }}{{ request.get_full_path }}">
-<meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
+<meta name="twitter:title" content="{% translate 'Thèses et mémoires' %} – Érudit">
 {% if repository.logo %}
 <meta name="twitter:image" content="https://{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ repository.name }}">
-<meta name="twitter:description" content="{% blocktrans with repository=repository.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ repository }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% translate 'Logo pour' %} {{ repository.name }}">
+<meta name="twitter:description" content="{% blocktranslate with repository=repository.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ repository }} sur la plateforme Érudit.{% endblocktranslate %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -54,7 +54,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
-      "name": "{% trans 'Thèses et mémoires' %}"
+      "name": "{% translate 'Thèses et mémoires' %}"
     }
   },{
     "@type": "ListItem",
@@ -74,7 +74,7 @@
 
 {% block breadcrumb %}
 {{ block.super }}
-<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
+<li><a href="{% url 'public:thesis:home' %}">{% translate "Thèses et mémoires" %}</a></li>
 <li><a href="{% url 'public:thesis:collection_home' repository.code %}">{{ repository.name }}</a></li>
 {% endblock breadcrumb %}
 
@@ -87,7 +87,7 @@
           <h1>
             {{ repository.name }}
             <span class="thesis-count">
-              {{ thesis_count|intcomma }} {% trans "documents" %}
+              {{ thesis_count|intcomma }} {% translate "documents" %}
             </span>
           </h1>
         </div>
@@ -101,7 +101,7 @@
               width="{{ repository.logo.width }}"
               height="{{ repository.logo.height }}"
               class="lazyload img-responsive"
-              alt="{% trans 'Logo pour' %} {{ repository.name }}"
+              alt="{% translate 'Logo pour' %} {{ repository.name }}"
             />
           </span>
           {% endif %}
@@ -109,7 +109,7 @@
       </div>
       <section class="row recent-theses">
         <div class="col-md-3">
-          <h2>{% trans "Dernièrement diffusées" %}</h2>
+          <h2>{% translate "Dernièrement diffusées" %}</h2>
         </div>
         {% for thesis in recent_theses %}
         <div class="thesis col-md-3">
@@ -128,7 +128,7 @@
   <section class="container main-content">
     <div class="row">
       <div class="col-md-6">
-        <h2>{% trans "Par année" %}</h2>
+        <h2>{% translate "Par année" %}</h2>
         <ul class="theses-list">
         {% for year, count in view.by_publication_year %}
           <li>
@@ -138,7 +138,7 @@
       </ul>
       </div>
       <div class="col-md-6">
-        <h2>{% trans "Par nom d'auteur" %}</h2>
+        <h2>{% translate "Par nom d'auteur" %}</h2>
         <ul class="theses-list">
         {% for letter, count in view.by_author_first_letter %}
           <li>

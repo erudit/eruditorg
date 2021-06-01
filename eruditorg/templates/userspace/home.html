@@ -1,22 +1,22 @@
 {% extends "userspace/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Choix de l'espace de gestion" %}{% endblock title %}
+{% block title %}{% translate "Choix de l'espace de gestion" %}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:dashboard' %}">{% trans "Tableau de bord" %}</a></li>
+<li><a href="{% url 'userspace:dashboard' %}">{% translate "Tableau de bord" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1>{% trans "Choix de l'espace de gestion" %}</h1>
+      <h1>{% translate "Choix de l'espace de gestion" %}</h1>
       {% if journals %}
-        <a href="{% url 'userspace:journal:entrypoint' %}" class="btn btn-secondary">{% trans "Gestion des revues" %}</a>
+        <a href="{% url 'userspace:journal:entrypoint' %}" class="btn btn-secondary">{% translate "Gestion des revues" %}</a>
       {% endif %}
       {% if organisations %}
-        <a href="{% url 'userspace:library:entrypoint' %}" class="btn btn-secondary">{% trans "Gestion des bibliothèques" %}</a>
+        <a href="{% url 'userspace:library:entrypoint' %}" class="btn btn-secondary">{% translate "Gestion des bibliothèques" %}</a>
       {% endif %}
     </div>
   </div>
