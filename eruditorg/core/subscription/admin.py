@@ -101,7 +101,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
         (
             None,
             {
-                "fields": ("sponsor", "journal_management_subscription"),
+                "fields": ("sponsor", "journal_management_subscription", "referer"),
             },
         ),
         (

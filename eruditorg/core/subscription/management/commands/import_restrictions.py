@@ -13,7 +13,6 @@ from erudit.models import Journal
 from erudit.models import Organisation
 
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import InstitutionReferer
 from core.accounts.shortcuts import get_or_create_legacy_user
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
@@ -289,7 +288,6 @@ class Command(BaseCommand):
             ).get()
             subscription.journals.clear()
             subscription.journalaccesssubscriptionperiod_set.all().delete()
-            subscription.referers.all().delete()
             subscription.institutionipaddressrange_set.all().delete()
         except JournalAccessSubscription.DoesNotExist:
             pass
@@ -372,12 +370,8 @@ class Command(BaseCommand):
             # --
 
             if restriction_subscriber.referer:
-                referer, created = InstitutionReferer.objects.get_or_create(
-                    subscription=subscription, referer=restriction_subscriber.referer
-                )
-
-                if created:
-                    logger.info("referer.created", referer=restriction_subscriber.referer)
+                subscription.referer = restriction_subscriber.referer
+                subscription.save()
 
             # creates the IP whitelist associated with the subscription
             # --

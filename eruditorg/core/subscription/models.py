@@ -160,6 +160,9 @@ class JournalAccessSubscription(AbstractSubscription):
         on_delete=models.CASCADE,
     )
 
+    # Referer
+    referer = models.URLField(verbose_name=_("URL référent"), null=True, blank=True)
+
     objects = models.Manager()
     valid_objects = JournalAccessSubscriptionValidManager()
 

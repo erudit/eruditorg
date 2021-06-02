@@ -24,8 +24,6 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 
     def get_for_referer(self, referer):
         """ Return all the subscriptions for the given referer """
-        from .models import InstitutionReferer
-
         if not referer:
             return
 
@@ -36,12 +34,10 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 
         user_netloc = re.sub("^www.", "", parsed_user_referer.netloc)
 
-        referers_pk = self.filter(
-            referers__referer__contains=user_netloc,
-        ).values_list("referers", flat=True)
+        referer_subscription = self.filter(referer__contains=user_netloc).first()
 
-        for institution_referer in InstitutionReferer.objects.filter(pk__in=referers_pk):
-            parsed_institution_referer = urlparse(institution_referer.referer)
+        if referer_subscription:
+            parsed_institution_referer = urlparse(referer_subscription.referer)
 
             institution_netloc = re.sub("^www.", "", parsed_institution_referer.netloc)
 
@@ -50,7 +46,7 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
                 institution_netloc == user_netloc
                 and parsed_institution_referer.path in parsed_user_referer.path
             ):
-                return institution_referer.subscription
+                return referer_subscription
 
 
 class JournalAccessSubscriptionValidManager(models.Manager):
