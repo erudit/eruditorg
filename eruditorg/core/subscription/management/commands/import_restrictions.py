@@ -369,9 +369,8 @@ class Command(BaseCommand):
             # create the subscription referer
             # --
 
-            if restriction_subscriber.referer:
-                subscription.referer = restriction_subscriber.referer
-                subscription.save()
+            subscription.referer = restriction_subscriber.referer
+            subscription.save()
 
             # creates the IP whitelist associated with the subscription
             # --

@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 
 from erudit.models import Journal
 from .models import InstitutionIPAddressRange
-from .models import InstitutionReferer
 from .models import JournalAccessSubscription
 from .models import JournalAccessSubscriptionPeriod
 from .models import JournalManagementPlan
@@ -15,10 +14,6 @@ from .models import AccessBasket
 
 class JournalAccessSubscriptionPeriodInline(admin.TabularInline):
     model = JournalAccessSubscriptionPeriod
-
-
-class InstitutionRefererInline(admin.TabularInline):
-    model = InstitutionReferer
 
 
 class InstitutionIPAddressRangeForm(forms.ModelForm):
@@ -139,7 +134,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     get_user.short_description = _("Utilisateur")
 
     search_fields = ("organisation__name", "user__email")
-    inlines = [JournalAccessSubscriptionPeriodInline, InstitutionRefererInline]
+    inlines = [JournalAccessSubscriptionPeriodInline]
     filter_horizontal = ("journals",)
     list_display = (
         "pk",
