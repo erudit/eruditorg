@@ -13,7 +13,7 @@ export default {
     this.saved_citations.init();
 
     // Handles the save of the search parameters
-    $('#id_save_search').click(function(ev) {
+    $('#id_save_search').on('click', function(ev) {
       let $form = $('form#id-search');
       $.ajax({
         type: 'POST',
@@ -26,7 +26,7 @@ export default {
       ev.preventDefault();
     });
 
-    $('#id_page_size,#id_sort_by').change(function(ev) {
+    $('#id_page_size,#id_sort_by').on('change', function() {
       let $form = $('form#id-search');
       window.location.href = '?' + $form.serialize();
     });
