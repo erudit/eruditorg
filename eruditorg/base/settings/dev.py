@@ -3,10 +3,6 @@ from .base import *  # noqa
 ACTIVATE_DEBUG_TOOLBAR = env("ACTIVATE_DEBUG_TOOLBAR")
 
 
-ALLOWED_HOSTS = [
-    "localhost",
-]
-
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 
