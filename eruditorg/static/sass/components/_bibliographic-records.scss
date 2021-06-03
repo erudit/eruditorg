@@ -16,6 +16,21 @@
 
 }
 
+// Add a border to the `ol` following a `section` to indicate the end of that `section`
+section + ol {
+  border-top: 1px solid $dark-grey;
+}
+
+// Remove borders for `akkordion-title` menus (avoid borders superposition)
+.akkordion {
+
+  h2.akkordion-title,
+  h3.akkordion-title {
+    border-bottom: none;
+  }
+
+}
+
 .bib-record {
   padding: 1.5em 0;
   margin: 0;
