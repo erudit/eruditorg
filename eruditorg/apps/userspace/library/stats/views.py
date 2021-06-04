@@ -1,6 +1,6 @@
 import datetime as dt
 from functools import singledispatch
-from typing import Type, Tuple, Optional
+from typing import Type, Tuple
 from io import StringIO
 
 import requests
@@ -9,7 +9,6 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 
-from apps.userspace.library.shortcuts import get_last_year_of_subscription
 from erudit.models import Organisation
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,16 +28,9 @@ from .forms import (
 from counter_r5 import CounterR5Report, CounterR5Config
 
 
-def compute_r4_end_month(
-    today: dt.date,
-    last_year_of_subscription: Optional[int],
-) -> dt.date:
+def compute_r4_end_month(today: dt.date) -> dt.date:
     # first day of the previous month
-    last_complete_month = (today.replace(day=1) - dt.timedelta(days=1)).replace(day=1)
-    if last_year_of_subscription is None or last_year_of_subscription > last_complete_month.year:
-        return last_complete_month
-    else:
-        return dt.date(last_year_of_subscription, 12, 1)
+    return (today.replace(day=1) - dt.timedelta(days=1)).replace(day=1)
 
 
 def get_stats_form(
@@ -149,13 +141,10 @@ class StatsLandingView(
     def get_context_data(self, **kwargs):
         context = super(StatsLandingView, self).get_context_data(**kwargs)
         today = dt.date.today()
-        last_year_of_subscription = get_last_year_of_subscription(self.current_organisation)
         r5_config = get_counter_r5_config()
 
         available_ranges = {
-            "R4": DatesRange(
-                dt.date(2010, 1, 1), compute_r4_end_month(today, last_year_of_subscription)
-            ),
+            "R4": DatesRange(dt.date(2010, 1, 1), compute_r4_end_month(today)),
             "R5": DatesRange(
                 r5_config.first_available_month, r5_config.get_last_available_month(today)
             ),

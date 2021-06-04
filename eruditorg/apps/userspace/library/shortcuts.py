@@ -1,23 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod
+from core.subscription.models import JournalAccessSubscription
 from erudit.models import Organisation
-
-
-def get_last_year_of_subscription(organisation):
-    if not organisation:
-        raise ValueError("Organisation is required")
-    period = (
-        JournalAccessSubscriptionPeriod.objects.filter(subscription__organisation=organisation)
-        .order_by("-end")
-        .first()
-    )
-
-    if not period:
-        return None
-
-    return int(period.end.strftime("%Y"))
 
 
 def get_last_valid_subscription(organisation):
