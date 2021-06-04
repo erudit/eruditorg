@@ -1,7 +1,5 @@
 import pytest
 
-import datetime as dt
-
 from django.contrib.contenttypes.models import ContentType
 
 from base.test.factories import UserFactory
@@ -10,7 +8,6 @@ from erudit.test.factories import OrganisationFactory, JournalFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 
@@ -87,15 +84,7 @@ class TestManageOrganisationSubscriptionIpsRule:
             authorization_codename=AC.can_manage_organisation_subscription_ips.codename,
         )
         organisation.members.add(user)
-        subscription = JournalAccessSubscriptionFactory.create(
-            organisation=organisation, post__valid=True
-        )
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt - dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=11),
-        )
+        JournalAccessSubscriptionFactory.create(organisation=organisation, post__valid=True)
         # Run & check
         assert user.has_perm("subscription.manage_organisation_subscription_ips", organisation)
 

@@ -174,14 +174,6 @@ class JournalAccessSubscription(AbstractSubscription):
         dest = self.user if self.user else self.organisation
         return _("{} - Accès multiples").format(dest)
 
-    @cached_property
-    def is_ongoing(self):
-        """ Returns a boolean indicating if the subscription is ongoing or not. """
-        nowd = dt.datetime.now().date()
-        return JournalAccessSubscriptionPeriod.objects.filter(
-            subscription=self, start__lte=nowd, end__gte=nowd
-        ).exists()
-
     def get_subscription_type(self):
         if self.organisation is not None:
             return JournalAccessSubscription.TYPE_INSTITUTIONAL
@@ -226,18 +218,6 @@ class JournalAccessSubscription(AbstractSubscription):
         if self.basket_id:
             journals |= self.basket.journals.all()
         return journals.distinct().order_by("name")
-
-
-class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
-    """ Defines a period in which a user or an organisation is allowed to access journals. """
-
-    subscription = models.ForeignKey(
-        JournalAccessSubscription, verbose_name=_("Abonnement"), on_delete=models.CASCADE
-    )
-
-    class Meta:
-        verbose_name = _("Période d’abonnement aux revues")
-        verbose_name_plural = _("Périodes d’abonnement aux revues")
 
 
 class InstitutionIPAddressRange(models.Model):

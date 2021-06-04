@@ -67,9 +67,7 @@ class Command(BaseCommand):
                 .order_by("?")
                 .first()
             )
-            subscription_id = (
-                subscription.id if subscription is not None and subscription.is_ongoing else None
-            )
+            subscription_id = subscription.id if subscription is not None else None
             dtime = start + dt.timedelta(seconds=random.randint(0, total_seconds))
             metric(
                 "erudit__journal__article_view",

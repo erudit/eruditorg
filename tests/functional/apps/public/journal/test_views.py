@@ -418,7 +418,6 @@ class TestJournalDetailView:
         subscription = JournalAccessSubscriptionFactory(
             type="individual",
             user=self.user,
-            valid=True,
         )
         self.client.login(username="foobar", password="notsecret")
         url = journal_detail_url(subscription.journal_management_subscription.journal)

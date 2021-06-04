@@ -12,20 +12,15 @@ def get_last_valid_subscription(organisation):
         .filter(
             organisation=organisation,
         )
-        .order_by("-journalaccesssubscriptionperiod__end")
         .first()
     )
 
     if subscription:
         return subscription
 
-    subscription = (
-        JournalAccessSubscription.objects.filter(
-            organisation=organisation,
-        )
-        .order_by("-journalaccesssubscriptionperiod__end")
-        .first()
-    )
+    subscription = JournalAccessSubscription.objects.filter(
+        organisation=organisation,
+    ).first()
 
     return subscription
 

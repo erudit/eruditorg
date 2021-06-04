@@ -16,7 +16,6 @@ from core.accounts.models import LegacyAccountProfile
 from core.accounts.shortcuts import get_or_create_legacy_user
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
-from core.subscription.models import JournalAccessSubscriptionPeriod
 
 from core.subscription.restriction.conf import settings as restriction_settings
 from core.subscription.restriction.models import (
@@ -35,7 +34,6 @@ class ImportException(Exception):
 created_objects = {
     "subscription": 0,
     "user": 0,
-    "period": 0,
     "iprange": 0,
 }
 
@@ -51,7 +49,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
     This function will determine the set of subscriptions present in eruditorg, the
     set of subscriptions present in restriction, and diff them to find the set of
     subscriptions that are present in eruditorg but not in restriction. It will then
-    update them to delete all their journals and subscription periods.
+    update them to delete all their journals.
 
     :param year: the year for which stale subscriptions should be deleted
     :param logger: the logger to use
@@ -91,14 +89,6 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
             organisation__in=orgs_with_subscription_and_no_revueabonne
         )
     )
-
-    # Delete their periods
-    nowd = dt.datetime.now()
-    JournalAccessSubscriptionPeriod.objects.filter(
-        subscription__in=stale_subscriptions,
-        start__lte=nowd,
-        end__gte=nowd,
-    ).delete()
 
     for subscription in stale_subscriptions:
         logger.info(
@@ -287,7 +277,6 @@ class Command(BaseCommand):
                 organisation=restriction_profile.organisation
             ).get()
             subscription.journals.clear()
-            subscription.journalaccesssubscriptionperiod_set.all().delete()
             subscription.institutionipaddressrange_set.all().delete()
         except JournalAccessSubscription.DoesNotExist:
             pass
@@ -336,35 +325,6 @@ class Command(BaseCommand):
         if not subscription.journals.filter(pk=journal.pk):
             subscription.journals.add(journal)
             logger.info("subscription.add_journal", journal_pk=journal.pk)
-
-        # creates the subscription period
-        # --
-        if subscription.pk not in self.created_subscriptions:
-            self.created_subscriptions.add(subscription.pk)
-            start_date = dt.date(restriction_subscription.anneeabonnement, 1, 1)
-            end_date = dt.date(restriction_subscription.anneeabonnement + 1, 1, 1)
-            subscription_period, created = JournalAccessSubscriptionPeriod.objects.get_or_create(
-                subscription=subscription, start=start_date, end=end_date
-            )
-
-            if created:
-                created_objects["period"] += 1
-                logger.info(
-                    "subscriptionperiod.created",
-                    pk=subscription_period.pk,
-                    start=start_date,
-                    end=end_date,
-                )
-
-            try:
-                subscription_period.clean()
-            except ValidationError:
-                # We are saving multiple periods for multiple journals under the same subscription
-                # instance so period validation errors can happen.
-                logger.error("subscriptionperiod.validationerror")
-                raise
-            else:
-                subscription_period.save()
 
             # create the subscription referer
             # --

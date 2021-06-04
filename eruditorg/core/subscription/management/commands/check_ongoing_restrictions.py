@@ -8,7 +8,6 @@ from django.db.models import Q
 from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
-from core.subscription.models import JournalAccessSubscriptionPeriod
 
 from core.subscription.restriction.models import (
     Abonne,
@@ -118,20 +117,7 @@ class Command(BaseCommand):
             "instance (ID: {1})".format(journal_code, restriction_subscription.pk)
         )
 
-        # STEP 4: checks that the subscription period is properly registered.
-        # --
-
-        dstart = dt.date(restriction_subscription.anneeabonnement, 2, 1)
-        dend = dt.date(restriction_subscription.anneeabonnement + 1, 2, 1)
-        period_exists = JournalAccessSubscriptionPeriod.objects.filter(
-            subscription=subscription, start__lte=dstart, end__gte=dend
-        ).exists()
-        assert period_exists, (
-            "Unable to find a valid period associated with the JournalAccessSubscription "
-            "instance for the restriction (ID: {0})".format(restriction_subscription.pk)
-        )
-
-        # STEP 5: checks that the IP associated with the restriction are whitelisted.
+        # STEP 4: checks that the IP associated with the restriction are whitelisted.
         # --
 
         restriction_subscriber_ips_set1 = Ipabonne.objects.filter(

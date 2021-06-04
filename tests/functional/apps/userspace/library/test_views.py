@@ -37,9 +37,7 @@ class TestLibraryUserspaceViews:
         client.login(username=member.username, password="notsecret")
 
         if subscription_status_valid in (True, False):
-            JournalAccessSubscriptionFactory(
-                valid=subscription_status_valid, organisation=organisation
-            )
+            JournalAccessSubscriptionFactory(organisation=organisation)
         url = reverse("userspace:library:home", kwargs={"organisation_pk": organisation.pk})
         resp = client.get(url)
         assert resp.status_code == 200

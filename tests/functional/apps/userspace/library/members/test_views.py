@@ -1,5 +1,3 @@
-import datetime as dt
-
 from account_actions.models import AccountActionToken
 from account_actions.test.factories import AccountActionTokenFactory
 from django.contrib.contenttypes.models import ContentType
@@ -15,7 +13,6 @@ from erudit.test.factories import OrganisationFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 faker = Factory.create()
 
@@ -27,12 +24,6 @@ class TestOrganisationMemberListView(TestCase):
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
         # Setup
@@ -91,12 +82,6 @@ class TestOrganisationMemberCreateView(TestCase):
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
         # Setup
@@ -171,12 +156,6 @@ class TestOrganisationMemberDeleteView(TestCase):
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
 
     def test_cannot_be_accessed_by_a_user_who_is_not_staff(self):
         # Setup
@@ -228,12 +207,6 @@ class TestOrganisationMemberCancelView(TestCase):
         super(TestOrganisationMemberCancelView, self).setUp()
         self.organisation = OrganisationFactory.create()
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
 
     def test_cannot_be_accessed_by_a_user_who_is_not_staff(self):
         # Setup

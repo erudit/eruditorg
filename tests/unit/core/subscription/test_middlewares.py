@@ -1,5 +1,4 @@
 import unittest
-import datetime as dt
 
 import pytest
 from django.contrib.auth.models import AnonymousUser
@@ -13,7 +12,6 @@ from erudit.test.factories import EmbargoedArticleFactory, JournalFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.test.utils import generate_casa_token
 
 pytestmark = pytest.mark.django_db
@@ -22,14 +20,8 @@ pytestmark = pytest.mark.django_db
 class TestSubscriptionMiddleware:
     def test_associates_institution_subscription_to_request(self):
         # Setup
-        now_dt = dt.datetime.now()
         organisation = OrganisationFactory.create()
         subscription = JournalAccessSubscriptionFactory(organisation=organisation, post__valid=True)
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
         InstitutionIPAddressRangeFactory.create(
             subscription=subscription, ip_start="192.168.1.2", ip_end="192.168.1.4"
         )
