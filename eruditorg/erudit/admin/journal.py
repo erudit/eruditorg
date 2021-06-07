@@ -257,7 +257,6 @@ class JournalTypeAdmin(TranslationAdmin):
 
 
 class DisciplineAdmin(TranslationAdmin):
-
     def get_types(self, obj):
         return ", ".join([t.name for t in obj.type.all()])
 
