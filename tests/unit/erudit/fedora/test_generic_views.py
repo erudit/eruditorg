@@ -1,7 +1,6 @@
 import unittest.mock
 
 import pytest
-from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.test import RequestFactory
 
@@ -16,8 +15,13 @@ class TestFedoraFileDatastreamView:
     def test_raises_if_the_django_object_can_not_be_retrieved(self):
         # Setup
         class MyView(FedoraFileDatastreamView):
-            content_type = "application/xml"
-            datastream_name = "SUMMARY"
+            @property
+            def content_type(self) -> str:
+                return "application/xml"
+
+            @property
+            def datastream_name(self) -> str:
+                return "SUMMARY"
 
             def get_object_pid(self):
                 return "erudit:erudit.foo123.bar456"
@@ -30,26 +34,32 @@ class TestFedoraFileDatastreamView:
 
     def test_raises_if_the_content_type_is_not_defined(self):
         class MyView(FedoraFileDatastreamView):
-            datastream_name = "PUBLICATIONS"
             model = Journal
+
+            @property
+            def datastream_name(self) -> str:
+                return "PUBLICATIONS"
 
         journal = JournalFactory()
         request = RequestFactory().get("/")
 
-        with pytest.raises(ImproperlyConfigured):
+        with pytest.raises(NotImplementedError):
             MyView.as_view()(request, pk=journal.pk)
 
     def test_raises_if_the_datastream_name_is_not_defined(self):
         # Setup
         class MyView(FedoraFileDatastreamView):
-            content_type = "image/jpeg"
             model = Journal
+
+            @property
+            def content_type(self) -> str:
+                return "image/jpeg"
 
         request = RequestFactory().get("/")
         journal = JournalFactory()
 
         # Run & check
-        with pytest.raises(ImproperlyConfigured):
+        with pytest.raises(NotImplementedError):
             MyView.as_view()(request, pk=journal.pk)
 
     def test_can_return_the_object_pid(self):
@@ -65,9 +75,15 @@ class TestFedoraFileDatastreamView:
 
     def test_raises_http_404_if_the_datastream_cannot_be_retrieved(self):
         class MyView(FedoraFileDatastreamView):
-            content_type = "image/jpeg"
-            datastream_name = "LOGO"
             model = Journal
+
+            @property
+            def content_type(self) -> str:
+                return "image/jpeg"
+
+            @property
+            def datastream_name(self) -> str:
+                return "LOGO"
 
         request = RequestFactory().get("/")
         journal = JournalFactory()
@@ -77,9 +93,15 @@ class TestFedoraFileDatastreamView:
 
     def test_generates_a_response_with_the_appropriate_content_type(self):
         class MyView(FedoraFileDatastreamView):
-            content_type = "image/jpeg"
-            datastream_name = "LOGO"
             model = Journal
+
+            @property
+            def content_type(self) -> str:
+                return "image/jpeg"
+
+            @property
+            def datastream_name(self) -> str:
+                return "LOGO"
 
             def get_datastream_content(self):
                 return "dummy"
@@ -95,9 +117,15 @@ class TestFedoraFileDatastreamView:
     ):
         # Setup
         class MyView(FedoraFileDatastreamView):
-            content_type = "image/jpeg"
-            datastream_name = "DSTREAM"
             model = Journal
+
+            @property
+            def content_type(self) -> str:
+                return "image/jpeg"
+
+            @property
+            def datastream_name(self) -> str:
+                return "DSTREAM"
 
         journal = JournalFactory()
         view = MyView()

@@ -7,7 +7,6 @@ import io
 import os
 import fitz
 import unittest.mock
-import subprocess
 import itertools
 from hashlib import md5
 
@@ -35,8 +34,6 @@ from erudit.test.factories import OpenAccessIssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.test.solr import FakeSolrData
-from erudit.fedora.objects import JournalDigitalObject
-from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora import repository
 
 from base.test.factories import UserFactory
@@ -1341,8 +1338,8 @@ class TestArticleDetailView:
         # published.
         assert (
             '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?'
-            'embed&amp;ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" type="application/pdf" '
-            'style="width: 100%; height: 700px;"></object>' in html
+            'embed&amp;ds_name=PDF&amp;ticket=0aae4c8f3cc35693d0cbbe631f2e8b52" '
+            'type="application/pdf" style="width: 100%; height: 700px;"></object>' in html
         )
         # Check that the PDF download link URL has the prepublication ticket if the issue is not
         # published.
@@ -1374,8 +1371,9 @@ class TestArticleDetailView:
         # Check that the embeded PDF URL does not have the prepublication ticket if the issue is
         # published.
         assert (
-            '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?'
-            'embed" type="application/pdf" style="width: 100%; height: 700px;"></object>' in html
+            '<object id="pdf-viewer" data="/fr/revues/journal/2000-issue/602354ar.pdf?embed&amp;'
+            'ds_name=PDF" type="application/pdf" style="width: 100%; height: 700px;"></object>'
+            in html
         )
         # Check that the PDF download link URL does not have the prepublication ticket if the issue
         # is published.
@@ -3046,39 +3044,61 @@ class TestArticleDetailView:
 
 
 class TestArticleRawPdfView:
-    @unittest.mock.patch.object(JournalDigitalObject, "logo")
-    @unittest.mock.patch.object(ArticleDigitalObject, "pdf")
-    @unittest.mock.patch.object(subprocess, "check_call")
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_pdf, mock_logo):
-        with open(os.path.join(FIXTURE_ROOT, "dummy.pdf"), "rb") as f:
-            mock_pdf.content = io.BytesIO()
-            mock_pdf.content.write(f.read())
-        with open(os.path.join(FIXTURE_ROOT, "logo.jpg"), "rb") as f:
-            mock_logo.content = io.BytesIO()
-            mock_logo.content.write(f.read())
-        journal = JournalFactory()
-        issue = IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1000)
+    def test_can_retrieve_the_pdf_of_existing_articles(self):
+        article = ArticleFactory(with_pdf=True, issue__journal__open_access=True)
+        url = reverse(
+            "public:journal:article_raw_pdf",
+            args=(
+                article.issue.journal_id,
+                article.issue.volume_slug,
+                article.issue.localidentifier,
+                article.localidentifier,
+            ),
         )
-        IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue, with_pdf=True)
-        journal_id = journal.localidentifier
-        issue_id = issue.localidentifier
-        article_id = article.localidentifier
-        url = article_raw_pdf_url(article)
-        request = RequestFactory().get(url)
-        request.user = AnonymousUser()
-        request.session = {}
-        request.subscriptions = UserSubscriptions()
+        response = Client().get(url)
 
-        response = ArticleRawPdfView.as_view()(
-            request,
-            journal_code=journal_id,
-            issue_slug=issue.volume_slug,
-            issue_localid=issue_id,
-            localid=article_id,
+        assert response.status_code == 200
+        assert response["Content-Type"] == "application/pdf"
+
+    @pytest.mark.parametrize(
+        "has_pdf_journal, has_pdf_erudit, expected_text",
+        [
+            (True, True, "Arborescences"),
+            (True, False, "Arborescences"),
+            (False, True, "Criminologie"),
+        ],
+    )
+    def test_select_journal_produced_pdf_or_erudit_produced_pdf(
+        self,
+        has_pdf_journal,
+        has_pdf_erudit,
+        expected_text,
+    ):
+        # The "Arborecences" pdf was produced by the journal, so we expect to find the word
+        # "Arborescences" in the pdf header. The same goes to "Criminologie" that was produced
+        # by Érudit. Both words appear only in their correspondent articles.
+        article = ArticleFactory(
+            with_pdf=has_pdf_journal,
+            with_pdf_erudit=has_pdf_erudit,
+            issue__journal__open_access=True,
         )
+        url = reverse(
+            "public:journal:article_raw_pdf",
+            args=(
+                article.issue.journal_id,
+                article.issue.volume_slug,
+                article.issue.localidentifier,
+                article.localidentifier,
+            ),
+        )
+        response = Client().get(url)
 
+        with fitz.open(stream=io.BytesIO(response.content), filetype="pdf") as f:
+            pdf_text = ""
+            for page in f:
+                pdf_text += page.getText()
+
+        assert expected_text in pdf_text
         assert response.status_code == 200
         assert response["Content-Type"] == "application/pdf"
 
@@ -3097,8 +3117,6 @@ class TestArticleRawPdfView:
         response = Client().get(url)
         assert response.status_code == 404
 
-    @unittest.mock.patch.object(ArticleDigitalObject, "pdf")
-    @unittest.mock.patch.object(subprocess, "check_call")
     @pytest.mark.parametrize(
         "pages, expected_exception",
         [
@@ -3108,12 +3126,9 @@ class TestArticleRawPdfView:
         ],
     )
     def test_can_retrieve_the_firstpage_pdf_of_existing_articles(
-        self, mock_check_call, mock_pdf, pages, expected_exception, monkeypatch
+        self, pages, expected_exception, monkeypatch
     ):
         monkeypatch.setattr(fitz.Document, "__len__", lambda p: len(pages))
-        with open(os.path.join(FIXTURE_ROOT, "dummy.pdf"), "rb") as f:
-            mock_pdf.content = io.BytesIO()
-            mock_pdf.content.write(f.read())
         journal = JournalFactory()
         issue = IssueFactory.create(
             journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1000)

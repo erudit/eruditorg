@@ -121,6 +121,7 @@ class FakeAPI(ApiFacade):
         self._content_map = {}
         self._datastream_map = {}
         self._articles_with_pdf = set()
+        self._articles_with_pdf_erudit = set()
         self._query_results = {
             "series": set(),
             "publication": set(),
@@ -174,13 +175,23 @@ class FakeAPI(ApiFacade):
         else:
             return None
 
-    def register_pid(self, pid, with_pdf=False):
+    def get_article_pdf_erudit(self, pid):
+        if pid in self._articles_with_pdf_erudit:
+            # default fixture
+            with open("./tests/unit/apps/public/journal/fixtures/article_erudit.pdf", "rb") as pdf:
+                return pdf.read()
+        else:
+            return None
+
+    def register_pid(self, pid, with_pdf=False, with_pdf_erudit=False):
         # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
         # but for when you don't really care about the contents.
         if pid not in self._content_map:
             self._content_map[pid] = None
         if with_pdf:
             self._articles_with_pdf.add(pid)
+        if with_pdf_erudit:
+            self._articles_with_pdf_erudit.add(pid)
 
     def register_datastream(self, pid, datastream_id, datastream_content):
         if pid not in self._datastream_map.keys():
@@ -192,6 +203,9 @@ class FakeAPI(ApiFacade):
 
     def add_pdf_to_article(self, pid):
         self._articles_with_pdf.add(pid)
+
+    def add_pdf_erudit_to_article(self, pid):
+        self._articles_with_pdf_erudit.add(pid)
 
     def set_xml_for_pid(self, pid, xml):
         if isinstance(xml, str):
@@ -295,6 +309,8 @@ class FakeAPI(ApiFacade):
                 elif not subselection:  # we want a datastream list
                     if pid in self._articles_with_pdf:
                         extra = '<datastream dsid="PDF" label="PDF" mimeType="application/pdf"/>'
+                    elif pid in self._articles_with_pdf_erudit:
+                        extra = '<datastream dsid="PDF_ERUDIT" label="PDF_ERUDIT" mimeType="application/pdf"/>'  # noqa
                     else:
                         extra = ""
                     result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid, extra=extra).encode()
@@ -302,6 +318,8 @@ class FakeAPI(ApiFacade):
                     result = self.get_article_xml(pid) or b""
                 elif subselection == "/PDF/content":
                     result = self.get_article_pdf(pid) or None
+                elif subselection == "/PDF_ERUDIT/content":
+                    result = self.get_article_pdf_erudit(pid) or None
             elif len(pidelems) == 3:  # issue
                 if not datastream:
                     # we're asking for the object profile
