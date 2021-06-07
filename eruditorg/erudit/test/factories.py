@@ -37,7 +37,6 @@ class CollectionFactory(factory.django.DjangoModelFactory):
 class DisciplineFactory(factory.django.DjangoModelFactory):
     code = factory.Sequence(lambda n: "discipline-{}".format(n))
     name = factory.LazyAttribute(lambda o: o.code)
-    type = factory.LazyAttribute(lambda o: JournalTypeFactory(code=JournalType.CODE_SCIENTIFIC))
 
     class Meta:
         model = "erudit.Discipline"
