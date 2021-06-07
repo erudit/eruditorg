@@ -13,7 +13,7 @@ export default {
     this.saved_citations.init();
 
     // Handles the save of the search parameters
-    $('#id_save_search').click(function(ev) {
+    $('#id_save_search').on('click', function(ev) {
       let $form = $('form#id-search');
       $.ajax({
         type: 'POST',
@@ -26,9 +26,45 @@ export default {
       ev.preventDefault();
     });
 
-    $('#id_page_size,#id_sort_by').change(function(ev) {
+    $('#id_page_size,#id_sort_by').on('change', function() {
       let $form = $('form#id-search');
       window.location.href = '?' + $form.serialize();
+    });
+
+    // For each akkordion submenu we show and hide the `Remove filters` button inside
+    // the submenu and also uncheck all checked checkboxes if the user clicks the button
+    $('.akkordion.filter').each(function() {
+
+      // The current akkordion submenu
+      var submenu = $(this);
+
+      // Add listeners to every checkbox in the akkordion submenu to listen to changes
+      submenu.find(':checkbox').on('change', function() {
+        if ($(this).prop('checked')) {
+          // Show `Remove filters` button if any checkbox checked
+          submenu.find('.remove-filters').removeClass('invisible');
+        } else {
+          // If no checkboxes checked, hide `Remove filters` button
+          if (submenu.find(':checked').length == 0) {
+            submenu.find('.remove-filters').addClass('invisible');
+          }
+        }
+      });
+
+      // Add listener to the `Remove filters` button to uncheck all checked checkboxes in the
+      // current akkordion submenu. After unchecking checkboxes, hide `Remove filters` button
+      submenu.find('button').on('click', function() {
+        submenu.find(':checkbox').prop('checked', false);
+        submenu.find('.remove-filters').addClass('invisible');
+      });
+
+      // At page load, show `Remove filters` button in an akkordion submenu
+      // if any checkbox checked
+      $(document).ready(function() {
+        if (submenu.find(':checked').length != 0) {
+          submenu.find('.remove-filters').removeClass('invisible');
+        }
+      });
     });
   },
 
