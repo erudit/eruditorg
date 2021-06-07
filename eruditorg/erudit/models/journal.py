@@ -84,6 +84,27 @@ class JournalType(models.Model):
         return self.name
 
 
+class Discipline(models.Model):
+    """ A simple discipline. """
+
+    name = models.CharField(max_length=255, verbose_name=_("Nom"))
+    code = models.CharField(max_length=255, unique=True, verbose_name=_("Code"))
+    type = models.ForeignKey(
+        JournalType,
+        null=False,
+        blank=False,
+        verbose_name=_("Type"),
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name = _("Discipline")
+        verbose_name_plural = _("Disciplines")
+
+    def __str__(self):
+        return self.name
+
+
 class Journal(FedoraMixin, FedoraDated):
     """The main Journal model.
 

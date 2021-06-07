@@ -87,20 +87,6 @@ class Collection(models.Model):
         return self.name
 
 
-class Discipline(models.Model):
-    """ A simple discipline. """
-
-    name = models.CharField(max_length=255, verbose_name=_("Nom"))
-    code = models.CharField(max_length=255, unique=True, verbose_name=_("Code"))
-
-    class Meta:
-        verbose_name = _("Discipline")
-        verbose_name_plural = _("Disciplines")
-
-    def __str__(self):
-        return self.name
-
-
 class ThesisRepository(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name=_("Code"))
     name = models.CharField(max_length=200, verbose_name=_("Nom"))

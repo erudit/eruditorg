@@ -14,6 +14,7 @@ from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
 from ..models import Language
+from ..models import Discipline
 
 
 JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
@@ -37,6 +38,18 @@ JOURNAL_INFORMATION_COMPARE_EXCLUDE = [
 
 class JournalDisciplineInline(admin.TabularInline):
     model = Journal.disciplines.through
+
+    def get_field_queryset(self, db, db_field, request):
+        if db_field.name == "discipline":
+            # Filter the discipline field's queryset based on the parent journal's type.
+            if request._obj:
+                return db_field.remote_field.model._default_manager.using(db).filter(
+                    type__code=request._obj.type.code
+                )
+            # If there is no parent journal (during journal creation), return an empty queryset.
+            else:
+                return db_field.remote_field.model._default_manager.using(db).none()
+        return super().get_field_queryset(db, db_field, request)
 
 
 class JournalForm(forms.ModelForm):
@@ -154,6 +167,11 @@ class JournalAdmin(admin.ModelAdmin):
 
     inlines = (JournalDisciplineInline,)
 
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        # Save the journal object on the request to have access to it in `JournalDisciplineInline`.
+        request._obj = obj
+        return super().get_form(request, obj, change, **kwargs)
+
 
 class IssueAdmin(admin.ModelAdmin):
     list_display = (
@@ -238,8 +256,20 @@ class JournalTypeAdmin(TranslationAdmin):
     pass
 
 
+class DisciplineAdmin(TranslationAdmin):
+    list_display = [
+        "name",
+        "type",
+    ]
+
+    list_filter = [
+        "type",
+    ]
+
+
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.unregister(JournalType)
 admin.site.register(JournalType, JournalTypeAdmin)
+admin.site.register(Discipline, DisciplineAdmin)
