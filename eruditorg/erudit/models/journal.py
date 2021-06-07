@@ -89,12 +89,10 @@ class Discipline(models.Model):
 
     name = models.CharField(max_length=255, verbose_name=_("Nom"))
     code = models.CharField(max_length=255, unique=True, verbose_name=_("Code"))
-    type = models.ForeignKey(
+    type = models.ManyToManyField(
         JournalType,
-        null=False,
         blank=False,
         verbose_name=_("Type"),
-        on_delete=models.CASCADE,
     )
 
     class Meta:
