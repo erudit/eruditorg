@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-08 10:20-0400\n"
+"POT-Creation-Date: 2021-06-08 17:54-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -388,7 +388,7 @@ msgstr "Document generated on %(now_dt)s"
 
 #: apps/public/journal/coverpage.py:230 erudit/models/journal.py:1183
 #: erudit/models/journal.py:1193
-#: templates/public/journal/eruditxsd300_to_html.xsl:548
+#: templates/public/journal/eruditxsd300_to_html.xsl:580
 msgid "[Article sans titre]"
 msgstr "[Untitled article]"
 
@@ -428,7 +428,7 @@ msgid "Découvrir la revue"
 msgstr "Explore this journal"
 
 #: apps/public/journal/coverpage.py:458
-#: templates/public/journal/eruditxsd300_to_html.xsl:383
+#: templates/public/journal/eruditxsd300_to_html.xsl:393
 #: templates/public/journal/partials/article_citation_modal_content.html:10
 #: templates/public/search/results.html:320
 msgid "Citer cet article"
@@ -2493,7 +2493,7 @@ msgid "&nbsp;»"
 msgstr "\""
 
 #: erudit/models/journal.py:1450
-#: templates/public/journal/eruditxsd300_to_html.xsl:733
+#: templates/public/journal/eruditxsd300_to_html.xsl:765
 msgid "p."
 msgstr "p."
 
@@ -2652,7 +2652,7 @@ msgid "Rôle"
 msgstr "Role"
 
 #: erudit/models/utils.py:13
-#: templates/public/journal/eruditxsd300_to_html.xsl:603
+#: templates/public/journal/eruditxsd300_to_html.xsl:635
 msgid "et"
 msgstr "and"
 
@@ -4755,7 +4755,7 @@ msgstr "Clear selection"
 
 #: templates/public/citations/list.html:130
 #: templates/public/citations/list.html:184
-#: templates/public/journal/eruditxsd300_to_html.xsl:368
+#: templates/public/journal/eruditxsd300_to_html.xsl:378
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:164
 #: templates/public/search/results.html:313
@@ -4779,8 +4779,8 @@ msgstr "Cite"
 
 #: templates/public/citations/list.html:143
 #: templates/public/citations/list.html:194
-#: templates/public/journal/eruditxsd300_to_html.xsl:376
-#: templates/public/journal/eruditxsd300_to_html.xsl:442
+#: templates/public/journal/eruditxsd300_to_html.xsl:386
+#: templates/public/journal/eruditxsd300_to_html.xsl:452
 #: templates/public/journal/partials/issue_detail_article_item.html:22
 #: templates/public/search/results.html:338
 #: templates/userspace/library/stats/stats_forms_partial.html:86
@@ -5163,7 +5163,7 @@ msgstr ""
 "original work discussed here is not available on this platform."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:216
-#: templates/public/journal/eruditxsd300_to_html.xsl:336
+#: templates/public/journal/eruditxsd300_to_html.xsl:346
 #: templates/public/journal/journal_base.html:311
 msgid "Vous êtes abonné à cette revue."
 msgstr "You are subscribed to this journal."
@@ -5187,63 +5187,73 @@ msgid "Texte intégral (PDF)"
 msgstr "Full text (PDF)"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:314
-#: templates/public/journal/eruditxsd300_to_html.xsl:470
+#: templates/public/journal/eruditxsd300_to_html.xsl:480
 msgid "Liste des figures"
 msgstr "List of figures"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:319
-#: templates/public/journal/eruditxsd300_to_html.xsl:481
+#: templates/public/journal/eruditxsd300_to_html.xsl:491
 msgid "Liste des tableaux"
 msgstr "List of tables"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:351
+#: templates/public/journal/eruditxsd300_to_html.xsl:324
+#: templates/public/journal/eruditxsd300_to_html.xsl:502
+msgid "Liste des vidéos"
+msgstr "List of videos"
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:329
+#: templates/public/journal/eruditxsd300_to_html.xsl:513
+msgid "Liste des fichiers audio"
+msgstr "List of audio files"
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:361
 msgid "Boîte à outils"
 msgstr "Toolbox"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:355
+#: templates/public/journal/eruditxsd300_to_html.xsl:365
 msgid "Retourner en haut de la page"
 msgstr "Return to top"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:364
+#: templates/public/journal/eruditxsd300_to_html.xsl:374
 #: templates/public/journal/partials/issue_detail_article_item.html:10
 #: templates/public/search/results.html:309
 #: templates/userspace/journal/information/journalinformation_update.html:167
 msgid "Sauvegarder"
 msgstr "Save"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:392
+#: templates/public/journal/eruditxsd300_to_html.xsl:402
 msgid "Partager"
 msgstr "Share"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:407
+#: templates/public/journal/eruditxsd300_to_html.xsl:417
 msgid "Résumés"
 msgstr "Abstracts"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:435
+#: templates/public/journal/eruditxsd300_to_html.xsl:445
 msgid "Corps de l’article"
 msgstr "Article body"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:442
+#: templates/public/journal/eruditxsd300_to_html.xsl:452
 msgid "Veuillez télécharger l’article en PDF pour le lire."
 msgstr "Download the article in PDF to read it."
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:529
+#: templates/public/journal/eruditxsd300_to_html.xsl:561
 msgid "Un article"
 msgstr "An article"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:530
+#: templates/public/journal/eruditxsd300_to_html.xsl:562
 msgid "Un compte rendu"
 msgstr "A review"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:531
+#: templates/public/journal/eruditxsd300_to_html.xsl:563
 msgid "Une note"
 msgstr "A note"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:532
+#: templates/public/journal/eruditxsd300_to_html.xsl:564
 msgid "Un document"
 msgstr "A document"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:670
+#: templates/public/journal/eruditxsd300_to_html.xsl:702
 msgid ""
 "\n"
 "        --> Voir l’<a href=\"{@href}\"><strong>erratum</strong></a> concernant cet article\n"
@@ -5253,27 +5263,27 @@ msgstr ""
 "        --> See the <a href=\"{@href}\"><strong>erratum</strong></a> for this article\n"
 "        "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:703
+#: templates/public/journal/eruditxsd300_to_html.xsl:735
 msgid "Volume&#160;"
 msgstr "Volume&#160;"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:711
+#: templates/public/journal/eruditxsd300_to_html.xsl:743
 msgid "Numéro&#160;"
 msgstr "Issue&#160;"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:874
-#: templates/public/journal/eruditxsd300_to_html.xsl:887
-#: templates/public/journal/eruditxsd300_to_html.xsl:1145
-#: templates/public/journal/eruditxsd300_to_html.xsl:1158
-#: templates/public/journal/eruditxsd300_to_html.xsl:1171
-#: templates/public/journal/eruditxsd300_to_html.xsl:1184
-#: templates/public/journal/eruditxsd300_to_html.xsl:1198
-#: templates/public/journal/eruditxsd300_to_html.xsl:2525
-#: templates/public/journal/eruditxsd300_to_html.xsl:2538
+#: templates/public/journal/eruditxsd300_to_html.xsl:906
+#: templates/public/journal/eruditxsd300_to_html.xsl:919
+#: templates/public/journal/eruditxsd300_to_html.xsl:1177
+#: templates/public/journal/eruditxsd300_to_html.xsl:1190
+#: templates/public/journal/eruditxsd300_to_html.xsl:1203
+#: templates/public/journal/eruditxsd300_to_html.xsl:1216
+#: templates/public/journal/eruditxsd300_to_html.xsl:1230
+#: templates/public/journal/eruditxsd300_to_html.xsl:2563
+#: templates/public/journal/eruditxsd300_to_html.xsl:2576
 msgid "special"
 msgstr "special"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1341
+#: templates/public/journal/eruditxsd300_to_html.xsl:1373
 msgid ""
 "-> Voir la liste des <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if"
 " test=\"self::grtableau\">tableaux</xsl:if>"
@@ -5281,19 +5291,27 @@ msgstr ""
 "-> See the list of <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if "
 "test=\"self::grtableau\">tables</xsl:if>"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1388
+#: templates/public/journal/eruditxsd300_to_html.xsl:1421
 msgid ""
-"-> Voir la liste des <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if "
-"test=\"self::tableau\">tableaux</xsl:if>"
+"-> Voir la liste des\n"
+"            <xsl:if test=\"self::figure\">figures</xsl:if>\n"
+"            <xsl:if test=\"self::tableau\">tableaux</xsl:if>\n"
+"            <xsl:if test=\"self::objet[@typeobj='video']\">vidéos</xsl:if>\n"
+"            <xsl:if test=\"self::objet[@typeobj='audio']\">fichiers audio</xsl:if>\n"
+"            "
 msgstr ""
-"-> See the list of <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if "
-"test=\"self::tableau\">tables</xsl:if>"
+"-> See the list of\n"
+"            <xsl:if test=\"self::figure\">figures</xsl:if>\n"
+"            <xsl:if test=\"self::tableau\">tables</xsl:if>\n"
+"            <xsl:if test=\"self::objet[@typeobj='video']\">videos</xsl:if>\n"
+"            <xsl:if test=\"self::objet[@typeobj='audio']\">audio files</xsl:if>\n"
+"            "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1399
+#: templates/public/journal/eruditxsd300_to_html.xsl:1437
 msgid "(suite)"
 msgstr "(continuation)"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1702
+#: templates/public/journal/eruditxsd300_to_html.xsl:1740
 msgid ""
 "Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
 "jour."
@@ -5301,7 +5319,7 @@ msgstr ""
 "Your browser does not support audio files. Please update it for optimal "
 "viewing of this site. "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1713
+#: templates/public/journal/eruditxsd300_to_html.xsl:1751
 msgid ""
 "Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
 "jour."
@@ -5309,11 +5327,11 @@ msgstr ""
 "Your browser does not support video files. Please update it for optimal "
 "viewing of this site. "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2264
+#: templates/public/journal/eruditxsd300_to_html.xsl:2302
 msgid "Parties annexes"
 msgstr "Appendices "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2577
+#: templates/public/journal/eruditxsd300_to_html.xsl:2615
 msgid "alias"
 msgstr "alias"
 
