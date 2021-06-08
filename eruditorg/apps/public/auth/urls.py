@@ -50,9 +50,7 @@ urlpatterns = [
         name="password_reset_done",
     ),
     re_path(
-        _(
-            r"^reinitialisation/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"  # noqa
-        ),
+        _(r"^reinitialisation/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]+-[0-9A-Za-z]+)/$"),
         auth_views.PasswordResetConfirmView.as_view(
             template_name="public/auth/password_reset_confirm.html",
             success_url=reverse_lazy("public:auth:password_reset_complete"),
