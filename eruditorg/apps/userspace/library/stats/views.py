@@ -108,7 +108,7 @@ def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> H
 
     f = StringIO()
     report.write_csv(f)
-    response = HttpResponse(f.getvalue(), content_type="application/csv")
+    response = HttpResponse(f.getvalue(), content_type="application/csv; charset=utf-8-sig")
     filename = (
         f"{organisation_id}-{begin_date.strftime('%Y-%m-%d')}-{end_date.strftime('%Y-%m-%d')}"
     )
