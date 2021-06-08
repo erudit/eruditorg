@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1058476ar" typeart="article" lang="fr" ordseq="11" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1058476ar</idpublic></infoarticle><revue id="im118" lang="fr en"><titrerev>Intermédialités</titrerev><sstitrerev>Histoire et théorie des arts, des lettres et des techniques</sstitrerev><titrerevparal lang="en">Intermediality</titrerevparal><sstitrerevparal lang="en">History and Theory of the Arts, Literature and Technologies</sstitrerevparal><titrerevabr>im</titrerevabr><idissnnum>1920-3136</idissnnum><directeur sexe="feminin"><fonction lang="fr">Directrice</fonction><nompers><prenom>Marion</prenom><nomfamille>Froger</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Nathalie</prenom><nomfamille>Casemajor</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Sophie</prenom><nomfamille>Toupin</nomfamille></nompers></redacteurchef></revue><numero id="im04484"><nonumero>32</nonumero><pub><periode>Automne</periode><annee>2018</annee></pub><pubnum><date typedate="publication">2019-04-02</date></pubnum><grtheme id="th1"><theme>cacher</theme><themeparal lang="en">concealing</themeparal></grtheme></numero><editeur><nomorg>Revue intermédialités</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur>Tous droits réservés © <nomorg>Revue Intermédialités</nomorg>, 2019</droitsauteur></admin><liminaire><grtitre><surtitre>Artiste invitée</surtitre><surtitreparal lang="en">Guest Artist</surtitreparal>
+      <titre>Caché-e — Away from Keyboard</titre>
+      
+    </grtitre><grauteur><auteur id="au1"><nompers>
+        <prenom>Julie</prenom>
+        
+        <nomfamille>Morel</nomfamille>
+        </nompers><siteweb><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://julie.incident.net" xlink:type="simple">http://julie.incident.net</liensimple></siteweb></auteur></grauteur><resume typeresume="resume" lang="fr">
+      <alinea>Mes productions artistiques sont, dans la majorité des cas, créées ou réceptionnées
+        par le biais d’un ordinateur et appelées à générer plusieurs versions, et cela sur
+        différents supports et médiums. Chaque nouvelle version prolonge ou remplace l’objet
+        précédent, qui tend à exister en flux entre ses multiples représentations.</alinea>
+    </resume><resume typeresume="resume" lang="en">
+      <alinea>In general, my artistic productions are created or received through acomputer and
+        called upon to generate several versions on differentsupports and media. Each new version
+        extends or replaces the previousobject, which tends to exist in a flow between its
+        multiplerepresentations.</alinea>
+    </resume></liminaire><corps><section1 id="s1n1"><no>1</no><alinea>Les pistes sonores créées pour « Partition » sont intégrées dans la
+        version PDF au format mp3 et accessibles via votre application de lecture de PDF. Ces pistes
+        sont également disponibles au format mp3 dans la version HTML.</alinea><alinea>Extrait sonore 1</alinea><objet id="ob1" typeobj="audio">
+        <objetmedia flot="bloc">
+          <audio xmlns:xlink="http://www.w3.org/1999/xlink" id="ad1" xlink:type="simple" xlink:show="embed" xlink:actuate="onRequest" typemime="audio/mpeg" desc="Durée : 2:22 min." xlink:href="piste01.mp3"></audio>
+        </objetmedia>
+      </objet><alinea>Extrait sonore 2</alinea><objet id="ob2" typeobj="audio">
+        <objetmedia flot="bloc">
+          <audio xmlns:xlink="http://www.w3.org/1999/xlink" id="ad2" xlink:type="simple" xlink:show="embed" xlink:actuate="onRequest" typemime="audio/mpeg" desc="Durée : 3:57 min." xlink:href="piste02.mp3"></audio>
+        </objetmedia>
+      </objet><alinea>Extrait sonore 3</alinea><objet id="ob3" typeobj="audio">
+        <objetmedia flot="bloc">
+          <audio xmlns:xlink="http://www.w3.org/1999/xlink" id="ad3" xlink:type="simple" xlink:show="embed" xlink:actuate="onRequest" typemime="audio/mpeg" desc="Durée : 3:41 min." xlink:href="piste03.mp3"></audio>
+        </objetmedia>
+      </objet></section1></corps><partiesann lang="fr">
+    <grnotebio>
+      <notebio id="nb1" idrefs="au1" lang="fr">
+        <alinea>Transversale, la pratique de <marquage typemarq="gras"><marquage typemarq="petitecap">Julie
+          Morel</marquage></marquage> est alimentée par une volonté d'interroger les relations
+          quotidiennes qu'entretient l'homme avec la technologie, notamment au travers du langage.
+          Ses propositions plastiques et graphiques, souvent liées à l'histoire de l'art conceptuel,
+          sont dirigées vers la textualité : le texte en tant qu'il est écrit. Elle explore ainsi
+          diverses formes et champs de l'écriture : la littérature, la traduction, le code
+          informatique, le commentaire et le métalangage, la partition. Elle expose régulièrement
+          son travail dans des institutions (Centre Pompidou, Centre d'art de Neuchâtel, Glasgow
+          Sculpture Studio, New Orleans Contemporary Art Center) ou des structures indépendantes
+          (White Space – Zürich, Le Bon Accueil – Rennes, Basekamp Gallery – Philadelphie, la
+          Chambre Blanche – Québec). Elle est en résidence à la Gaîté Lyrique et au Centre d'art de
+          la Maison populaire en 2012-2013, lauréate de la Villa Médici Hors les Murs en 2016 (New
+          York – Chicago), lauréate d'une bourse Fulbright (Scholar-in-Residence) à Loyola
+          University en 2016-2017 (Nouvelle-Orléans) et artiste en résidence à l'UQÀM en 2017-2018.
+          Chargée de cours à l'ÉNSBA en 2001-2003, elle est aujourd'hui enseignante titulaire à
+          l'ÉESAB. En 2016-2017, elle a été invitée à Science Po. Paris, à l'University of South
+          Florida, à Parson (Paris) pour présenter son travail et pour enseigner. Elle vit et
+          travaille à Briant (Bourgogne, France) et à La Nouvelle-Orléans (États-Unis).</alinea>
+      </notebio>
+    </grnotebio>
+  </partiesann><partiesann lang="en">
+    <grnotebio>
+      <notebio id="nb2" idrefs="au1" lang="en">
+        <alinea><marquage typemarq="gras"><marquage typemarq="petitecap">Julie Morel</marquage></marquage> is an
+          interdisciplinary artist from Lyon, France who lives between New Orleans and France. Her
+          work often refers to the history of Conceptual art and plays with text in its written and
+          visual forms. Morel explores the intersection of contemporary and digital art, often
+          focusing on the Internet as a place, object, and medium for creation. Her practice
+          includes installations, online projects, artist books and publications, drawings, and
+          videos. She has explored various written fields, such as literature, translation, computer
+          code, meta-language, and musical scores. Morel has exhibited her work internationally, in
+          both institutional and alternative spaces, such as the Pompidou Centre, Glasgow Sculpture
+          Studio, Neuchâtel Art Centre, White Space in Zurich, and Le bon accueil in Rennes. In the
+          United States, she has shown her work at the Basekamp Gallery in Philadelphia and at New
+          Orleans' Contemporary Art Center. She was a 2016 recipient of the Villa Medici's Hors les
+          murs Grant (New York and Chicago), a 2016 Fulbright Scholar-in-Residence at Loyola
+          University, New Orleans, and a 2017 invited artist at the University of Quebec in
+          Montreal. Since 2004, she has taught studio practice at the École européene supérieure
+          d’art de Bretagne.</alinea>
+      </notebio>
+    </grnotebio>
+  </partiesann></article>
