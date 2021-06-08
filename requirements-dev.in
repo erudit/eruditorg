@@ -10,3 +10,4 @@ pip-tools
 flake8
 flake8-bugbear
 black
+bleach>=3.3.0
