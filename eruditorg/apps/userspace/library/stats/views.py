@@ -46,7 +46,7 @@ def get_stats_form(
     request_data: dict,
     available_range: DatesRange,
 ) -> Tuple[CounterReportForm, bool]:
-    """Create a counter report request form and initialize it if it has been submitted. """
+    """Create a counter report request form and initialize it if it has been submitted."""
 
     # There is one form for each type for counter report, but only one can be submitted at a time.
     # If this form was submitted then the submit button name will be in the HTTP GET request's data.
@@ -110,7 +110,8 @@ def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> H
     report.write_csv(f)
     response = HttpResponse(f.getvalue(), content_type="application/csv; charset=utf-8-sig")
     filename = (
-        f"{organisation_id}-{begin_date.strftime('%Y-%m-%d')}-{end_date.strftime('%Y-%m-%d')}"
+        f"{form.report_code}-{organisation_id}-"
+        f"{begin_date.strftime('%Y-%m-%d')}-{end_date.strftime('%Y-%m-%d')}"
     )
     response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
     return response
