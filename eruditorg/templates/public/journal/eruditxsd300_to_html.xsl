@@ -1689,6 +1689,14 @@
   <xsl:template match="equation">
     <xsl:variable name="valeurID" select="@id"/>
     <aside class="equation">
+      <!-- Les légendes du type `titre` et `sstitre` -->
+      <xsl:if test="legende">
+        <div class="legende">
+          <xsl:for-each select="legende/titre | legende/sstitre">
+            <xsl:apply-templates select="."/>
+          </xsl:for-each>
+        </div>
+      </xsl:if>
       <!-- Les numéros -->
       <xsl:for-each select="no">
         <span class="no">
@@ -1701,11 +1709,11 @@
       <xsl:for-each        select="node()[ name() = 'alinea' or name() = 'bloccitation' or name() = 'listenonord' or name() = 'listeord' or name() = 'listerelation' or        name() = 'objetmedia' or        name() = 'refbiblio' or        name() = 'verbatim']">
         <xsl:apply-templates select="."/>
       </xsl:for-each>
-      <!-- Les légendes -->
+      <!-- Les autres types de légendes que `titre` et `sstitre` -->
       <xsl:if test="legende">
         <div class="legende">
           <xsl:for-each select="legende">
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="*[not(self::titre or self::sstitre)]"/>
           </xsl:for-each>
         </div>
       </xsl:if>
