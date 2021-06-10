@@ -1381,6 +1381,7 @@ class JournalStatisticsView(PermissionRequiredMixin, TemplateView):
                 "Corpus_fac",
                 "RevueAbr",
             ],
+            "facet.limit": -1,
             "rows": 0,
         }
         results = solr.search("*:*", **search_kwargs)
