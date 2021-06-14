@@ -7,10 +7,7 @@ from django.contrib.auth import get_user_model
 from erudit.models import Organisation
 from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import (
-    JournalAccessSubscription,
-    JournalAccessSubscriptionPeriod,
-)
+from core.subscription.models import JournalAccessSubscription
 from core.subscription.restriction.models import Revueabonne
 from core.subscription.test.factories import (
     JournalAccessSubscriptionFactory,
@@ -154,12 +151,10 @@ def test_import_deletions():
         anneeabonnement=datetime.datetime.now().year,
     )
 
-    assert JournalAccessSubscriptionPeriod.objects.count() == 0
     call_command("import_restrictions", *[], **{})
     subscription = JournalAccessSubscription.objects.first()
 
     assert subscription.journals.count() == 1
-    assert subscription.journalaccesssubscriptionperiod_set.count() == 1
 
     sub1.delete()
     call_command("import_restrictions", *[], **{})
@@ -175,13 +170,12 @@ def test_delete_existing_subscriptions():
 
     organisation = OrganisationFactory()
 
-    JournalAccessSubscriptionFactory(valid=True, type="individual")
+    JournalAccessSubscriptionFactory(type="individual")
 
     LegacyAccountProfileFactory(legacy_id=1179, organisation=organisation)
 
     subscription = JournalAccessSubscriptionFactory(
         organisation=organisation,
-        valid=True,
     )
     subscription.journals.add(journal)
     subscription.save()
@@ -193,7 +187,7 @@ def test_delete_existing_subscriptions():
 
 @pytest.mark.django_db
 def test_import_deletion_will_not_modify_individual_subscriptions():
-    individual_subscription = JournalAccessSubscriptionFactory(valid=True, type="individual")
+    individual_subscription = JournalAccessSubscriptionFactory(type="individual")
     assert individual_subscription.journals.count() == 1
     call_command("import_restrictions", *[], **{})
     assert individual_subscription.journals.count() == 1
@@ -232,7 +226,6 @@ def test_can_skip_subscribers_with_no_email():
     call_command("import_restrictions", *[], **{"dry_run": False})
 
     assert LegacyAccountProfile.objects.count() == 0
-    assert JournalAccessSubscriptionPeriod.objects.count() == 0
 
 
 @pytest.mark.django_db
@@ -250,7 +243,6 @@ def test_dry_run_mode_does_not_create_anything():
 
     assert get_user_model().objects.count() == 0
     assert LegacyAccountProfile.objects.count() == 0
-    assert JournalAccessSubscriptionPeriod.objects.count() == 0
     assert Organisation.objects.count() == 0
     assert JournalAccessSubscription.objects.count() == 0
     assert InstitutionIPAddressRange.objects.count() == 0

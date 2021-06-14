@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
-
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
@@ -17,7 +15,6 @@ from base.test.factories import UserFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 
 @pytest.mark.django_db
@@ -33,12 +30,6 @@ class TestSubscriptionInformationUpdateView:
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
 
         # Set up some images used for doing image tests
         images_dict = {}

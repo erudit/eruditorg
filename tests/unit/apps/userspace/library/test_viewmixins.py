@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-import datetime as dt
-
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import PermissionDenied
 from django.urls import resolve
@@ -14,7 +12,6 @@ from base.test.factories import UserFactory
 from erudit.test.factories import OrganisationFactory
 
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 from apps.userspace.library.viewmixins import OrganisationScopeMixin
 
@@ -58,26 +55,6 @@ class TestOrganisationScopeMixin:
         assert list(response.context_data["scope_user_organisations"]) == [
             self.organisation,
         ]
-
-    def test_can_set_last_year_of_subscription_in_context(self):
-        organisation = OrganisationFactory()
-        organisation.members.add(self.user)
-        subscription = JournalAccessSubscriptionFactory(organisation=organisation)
-        JournalAccessSubscriptionPeriodFactory(
-            subscription=subscription,
-            start=dt.datetime(year=2020, month=1, day=1),
-            end=dt.datetime(year=2020, month=12, day=31),
-        )
-
-        url = reverse("userspace:library:home", kwargs={"organisation_pk": organisation.pk})
-
-        request = self.get_request(url)
-        my_view = MyView.as_view()
-
-        # Run
-        response = my_view(request, organisation_pk=organisation.pk)
-        assert response.status_code == 200
-        assert response.context_data["last_year_of_subscription"] == 2020
 
     def test_redirects_to_the_scoped_url_if_the_organisation_id_is_not_present_in_the_url(self):
         # Setup

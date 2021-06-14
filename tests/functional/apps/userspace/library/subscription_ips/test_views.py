@@ -20,9 +20,7 @@ class TestInstitutionIPAddressRangeListView(TestCase):
         self.user.is_staff = True
         self.user.save()
         self.organisation.members.add(self.user)
-        self.subscription = JournalAccessSubscriptionFactory.create(
-            valid=True, organisation=self.organisation
-        )
+        self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
 
     def test_cannot_be_accessed_by_a_user_who_is_not_in_the_organisation(self):
         # Setup
@@ -138,9 +136,7 @@ class TestInstitutionIPAddressRangeDeleteView(TestCase):
         self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
-        self.subscription = JournalAccessSubscriptionFactory.create(
-            valid=True, organisation=self.organisation
-        )
+        self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
 
         self.ip_range = InstitutionIPAddressRangeFactory.create(
             subscription=self.subscription, ip_start="10.0.0.0", ip_end="11.0.0.0"

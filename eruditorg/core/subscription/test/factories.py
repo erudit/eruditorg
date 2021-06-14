@@ -11,7 +11,6 @@ from erudit.test.factories import OrganisationFactory
 
 from ..models import InstitutionIPAddressRange
 from ..models import JournalAccessSubscription
-from ..models import JournalAccessSubscriptionPeriod
 from ..models import JournalManagementPlan
 from ..models import JournalManagementSubscription
 from ..models import JournalManagementSubscriptionPeriod
@@ -42,7 +41,6 @@ class JournalAccessSubscriptionFactory(factory.django.DjangoModelFactory):
     def post(obj, create, extracted, **kwargs):
 
         if kwargs.get("valid", False):
-            ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
             journal = JournalFactory()
             obj.journals.add(journal)
             obj.save()
@@ -88,40 +86,6 @@ class JournalAccessSubscriptionFactory(factory.django.DjangoModelFactory):
                 obj.journal_management_subscription = JournalManagementSubscription.objects.filter(
                     journal=journal
                 ).first()
-
-    @factory.post_generation
-    def valid(obj, create, extracted, **kwargs):
-        if extracted:
-            if obj.journal_management_subscription is not None:
-                ValidJournalManagementSubscriptionPeriodFactory(
-                    subscription=obj.journal_management_subscription
-                )
-            period = ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
-            period.save()
-
-    @factory.post_generation
-    def expired(obj, create, extracted, **kwargs):
-        if extracted:
-            ExpiredJournalAccessSubscriptionPeriodFactory(subscription=obj)
-
-
-class JournalAccessSubscriptionPeriodFactory(factory.django.DjangoModelFactory):
-    subscription = factory.SubFactory(JournalAccessSubscriptionFactory)
-
-    class Meta:
-        model = JournalAccessSubscriptionPeriod
-
-
-class ValidJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPeriodFactory):
-
-    start = dt.datetime.now() - dt.timedelta(days=10)
-    end = dt.datetime.now() + dt.timedelta(days=10)
-
-
-class ExpiredJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPeriodFactory):
-
-    start = dt.datetime.now() - dt.timedelta(days=10)
-    end = dt.datetime.now() - dt.timedelta(days=5)
 
 
 class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):

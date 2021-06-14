@@ -37,9 +37,7 @@ class TestLibraryUserspaceViews:
         client.login(username=member.username, password="notsecret")
 
         if subscription_status_valid in (True, False):
-            JournalAccessSubscriptionFactory(
-                valid=subscription_status_valid, organisation=organisation
-            )
+            JournalAccessSubscriptionFactory(organisation=organisation)
         url = reverse("userspace:library:home", kwargs={"organisation_pk": organisation.pk})
         resp = client.get(url)
         assert resp.status_code == 200
@@ -67,13 +65,11 @@ class TestGetStatsForm:
 
 
 @pytest.mark.parametrize(
-    "now,last_sub_year,expected",
+    "now,expected",
     (
-        (dt.date(2019, 1, 1), None, dt.date(2018, 12, 1)),
-        (dt.date(2019, 1, 1), 2018, dt.date(2018, 12, 1)),
-        (dt.date(2019, 1, 1), 2020, dt.date(2018, 12, 1)),
-        (dt.date(2019, 5, 1), 2020, dt.date(2019, 4, 1)),
+        (dt.date(2019, 1, 1), dt.date(2018, 12, 1)),
+        (dt.date(2019, 5, 1), dt.date(2019, 4, 1)),
     ),
 )
-def test_compute_end_month(now, last_sub_year, expected):
-    assert compute_r4_end_month(now, last_sub_year) == expected
+def test_compute_end_month(now, expected):
+    assert compute_r4_end_month(now) == expected

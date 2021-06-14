@@ -13,7 +13,6 @@ from core.subscription.models import JournalAccessSubscription
 from .shortcuts import (
     get_managed_organisations,
     get_last_valid_subscription,
-    get_last_year_of_subscription,
 )
 
 
@@ -46,9 +45,6 @@ class OrganisationScopeMixin:
         )
 
         context["last_valid_subscription"] = get_last_valid_subscription(self.current_organisation)
-        context["last_year_of_subscription"] = get_last_year_of_subscription(
-            self.current_organisation
-        )
         context["scope_user_organisations"] = self.user_organisations
         context["force_scope_switch_to_pattern_name"] = self.force_scope_switch_to_pattern_name
         return context

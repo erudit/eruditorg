@@ -14,7 +14,6 @@ from base.test.factories import UserFactory
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 from core.subscription.test.factories import JournalManagementSubscriptionPeriodFactory
@@ -23,25 +22,6 @@ from core.subscription.test.factories import AccessBasketFactory
 
 @pytest.mark.django_db
 class TestJournalAccessSubscription:
-    def test_knows_if_it_is_ongoing_or_not(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription_1 = JournalAccessSubscriptionFactory.create()
-        subscription_2 = JournalAccessSubscriptionFactory.create()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_1,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_2,
-            start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
-        # Run & check
-        assert subscription_1.is_ongoing
-        assert not subscription_2.is_ongoing
-
     def test_knows_it_is_an_individual_subscription(self):
         subscription = JournalAccessSubscriptionFactory(user=UserFactory(), organisation=None)
         assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INDIVIDUAL
@@ -151,94 +131,6 @@ class TestInstitutionIPAddressRange:
             ipaddress.ip_address("192.168.1.4"),
             ipaddress.ip_address("192.168.1.5"),
         ]
-
-
-@pytest.mark.django_db
-class TestJournalAccessSubscriptionPeriod:
-    def test_cannot_clean_an_incoherent_period(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription = JournalAccessSubscriptionFactory.create()
-        period = JournalAccessSubscriptionPeriodFactory.build(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
-        # Run & check
-        with pytest.raises(ValidationError):
-            period.clean()
-
-    def test_cannot_clean_a_period_that_has_a_larger_concurrent_period(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription = JournalAccessSubscriptionFactory.create()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=14),
-        )
-        period = JournalAccessSubscriptionPeriodFactory.build(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=12),
-        )
-        # Run & check
-        with pytest.raises(ValidationError):
-            period.clean()
-
-    def test_cannot_clean_a_period_that_has_an_inner_concurrent_period(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription = JournalAccessSubscriptionFactory.create()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=9),
-            end=now_dt + dt.timedelta(days=11),
-        )
-        period = JournalAccessSubscriptionPeriodFactory.build(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=14),
-        )
-        # Run & check
-        with pytest.raises(ValidationError):
-            period.clean()
-
-    def test_cannot_clean_a_period_that_has_an_older_concurrent_period(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription = JournalAccessSubscriptionFactory.create()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=8),
-            end=now_dt + dt.timedelta(days=11),
-        )
-        period = JournalAccessSubscriptionPeriodFactory.build(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=12),
-        )
-        # Run & check
-        with pytest.raises(ValidationError):
-            period.clean()
-
-    def test_cannot_clean_a_period_that_has_a_younger_concurrent_period(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription = JournalAccessSubscriptionFactory.create()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=11),
-            end=now_dt + dt.timedelta(days=15),
-        )
-        period = JournalAccessSubscriptionPeriodFactory.build(
-            subscription=subscription,
-            start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=12),
-        )
-        # Run & check
-        with pytest.raises(ValidationError):
-            period.clean()
 
 
 @pytest.mark.django_db

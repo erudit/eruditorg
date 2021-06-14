@@ -1,5 +1,4 @@
 import pytest
-import datetime as dt
 
 from django.contrib.auth.models import AnonymousUser
 
@@ -7,7 +6,6 @@ from erudit.test.factories import OrganisationFactory
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 from apps.userspace.library.shortcuts import get_managed_organisations, get_last_valid_subscription
 
@@ -65,25 +63,9 @@ class TestGetManagedOrganisationsShortcut:
         org_3 = OrganisationFactory.create()
         user = UserFactory.create()
         org_1.members.add(user)
-        subscription_1 = JournalAccessSubscriptionFactory.create(organisation=org_1)
-        subscription_2 = JournalAccessSubscriptionFactory.create(organisation=org_2)
-        subscription_3 = JournalAccessSubscriptionFactory.create(organisation=org_3)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_1,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_2,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_3,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8),
-        )
+        JournalAccessSubscriptionFactory.create(organisation=org_1)
+        JournalAccessSubscriptionFactory.create(organisation=org_2)
+        JournalAccessSubscriptionFactory.create(organisation=org_3)
         # Run & check
         assert list(get_managed_organisations(user)) == [
             org_1,
