@@ -31,7 +31,7 @@ chardet==4.0.0
     #   requests
 colorama==0.4.4
     # via -r requirements.in
-counter-r5-elasticsearch==0.18
+counter-r5-elasticsearch==0.19
     # via -r requirements.in
 cssselect2==0.4.1
     # via cairosvg

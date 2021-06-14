@@ -59,7 +59,7 @@ codecov==2.1.11
     # via -r requirements-test.txt
 colorama==0.4.4
     # via -r requirements-test.txt
-counter-r5-elasticsearch==0.18
+counter-r5-elasticsearch==0.19
     # via -r requirements-test.txt
 coverage==5.5
     # via
