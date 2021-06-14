@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1077786ar" typeart="article" lang="en" ordseq="7" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1077786ar</idpublic><pagination>
+            <ppage>88</ppage>
+            <dpage>106</dpage>
+            
+            
+            
+        </pagination></infoarticle><revue id="mi115" lang="fr en es"><titrerev>Management international</titrerev><titrerevparal lang="en">International Management</titrerevparal><titrerevparal lang="es">Gestiòn Internacional</titrerevparal><titrerevabr>mi</titrerevabr><idissn>1206-1697</idissn><idissnnum>1918-9222</idissnnum><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Chantal</prenom><nomfamille>Hervieux</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Bouchra</prenom><nomfamille>M’Zali</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur en chef</fonction><nompers><prenom>Patrick</prenom><nomfamille>Cohendet</nomfamille></nompers></redacteurchef><redacteurchef typerc="regulier" sexe="masculin"><fonction lang="fr">Rédacteur en chef</fonction><nompers><prenom>Bachir</prenom><nomfamille>Mazouz</nomfamille></nompers></redacteurchef></revue><numero id="mi06083"><volume>25</volume><nonumero>2</nonumero><pub><annee>2021</annee></pub><pubnum><date typedate="publication">2021-05-27</date></pubnum><grtheme id="th1"><theme>La Responsabilité Sociale de L’entreprise comme système ordonné dans un environnement chaotique</theme><themeparal lang="en">Corporate Social Responsibility as an Orderly System in a Chaotic Environment</themeparal><themeparal lang="es">La responsabilidad social de la empresa como sistema ordenado en un entorno caótico</themeparal></grtheme></numero><editeur><nomorg>HEC Montréal</nomorg></editeur><editeur><nomorg>Université Paris Dauphine</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur> © <nomorg>Management international / International Management / Gestión Internacional</nomorg>, 2021</droitsauteur></admin><liminaire><grtitre><surtitre>La Responsabilité Sociale de L’entreprise comme système ordonné dans un environnement chaotique</surtitre><surtitreparal lang="en">Corporate Social Responsibility as an Orderly System in a Chaotic Environment</surtitreparal><surtitreparal lang="es">La responsabilidad social de la empresa como sistema ordenado en un entorno caótico</surtitreparal>
+                <titre>Do Sustainability Reports Make Sense for Asset Selection?</titre>
+                <titreparal lang="fr">Les rapports de responsabilité sont-ils pertinents pour la sélection d’actifs ?</titreparal><titreparal lang="es">¿Son pertinentes los reportes de responsabilidad para la selección de los activos financieros?</titreparal>
+        </grtitre><grauteur><auteur id="au1"><nompers><prenom>Julien</prenom><nomfamille>Lachuer</nomfamille></nompers><affiliation><alinea>Université de Rennes, CNRS, CREM-UMR 6211, F-35000 Rennes, France</alinea></affiliation></auteur><auteur id="au2"><nompers><prenom>Jean-Jacques</prenom><nomfamille>Lilti</nomfamille></nompers><affiliation><alinea>Université de Rennes, CNRS, CREM-UMR 6211, F-35000 Rennes, France</alinea></affiliation></auteur></grauteur><resume typeresume="resume" lang="en"><alinea>The purpose of this article is to determine whether the discourse in sustainability reports and in the CEOs’ opening speech is likely to provide relevant information to asset managers. Our results show that greenwashing and entrenchment strategies from executives are detrimental to the social and financial performance of portfolios. Thus, our study combines lexical analysis with data on financial performance and level of responsibility. The methodology developed enables us to reveal what is not said and to establish a reading grid that limits the risk of informational asymmetry.</alinea></resume><resume typeresume="resume" lang="fr"><alinea>Cet article a pour objectif de déterminer si les discours présents dans les rapports de responsabilité et dans l’introduction, faite par les PDG, sont susceptibles d’offrir des informations pertinentes aux gestionnaires d’actifs. Nos résultats mettent en évidence que des stratégies de Greenwashing et d’enracinement de la part des dirigeants sont nuisibles à la performance sociale et financière du portefeuille. Ainsi, notre étude conjugue à l’analyse lexicale des données relatives à la performance financière et au niveau de responsabilité. La méthodologie développée nous permet de révéler le non-dit et d’établir une grille de lecture limitant le risque d’asymétrie d’informations.</alinea></resume><resume typeresume="resume" lang="es"><alinea>El objetivo de este artículo es de examinar si esta previsible que los discursos en los reportes de responsabilidad y en la introducción, hecha por los directores generales, ofrezcan información relevante por la selección de los activos financieros. Nuestros resultados muestran que las estrategias de “Greenwhashing” y de arraigo de los directores van en detrimento del rendimiento social y financiero de la empresa. Así pues, nuestro estudio combina un análisis léxico de los datos relativos a los resultados financieros y el nivel de responsabilidad. La metodología desarrollada nos permite revelar lo que no se dice y establecer una cuadrícula de lectura que limita el riesgo de información asimétrica.</alinea></resume><grmotcle lang="en"><motcle>Speech Analysis</motcle><motcle>Financial Performance</motcle><motcle>Corporate Social Responsibility</motcle><motcle>Responsible Scoring</motcle><motcle>Assets Selection</motcle></grmotcle><grmotcle lang="fr"><motcle>Analyse de discours</motcle><motcle>Performance financière</motcle><motcle>Responsabilité Sociale des Entreprises</motcle><motcle>notation responsable</motcle><motcle>choix d’actifs</motcle></grmotcle><grmotcle lang="es"><motcle>Análisis del discurso</motcle><motcle>rendimiento financiero</motcle><motcle>responsabilidad social de la empresa</motcle><motcle>rating responsable</motcle><motcle>selección de activos financieros</motcle></grmotcle></liminaire><corps><section1 id="s1n1"><no>1</no><para id="pa1"><no>1</no>
+        <alinea>According to the U.S. Forum for Sustainable and Responsible Investment (US SIF),
+          socially responsible assets reached $12 billion in the United States in 2018, an increase
+          of 38% in comparison to 2016<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi>. Most of this growth is
+          related to asset managers’ interest in environmental, social and governance (ESG)
+          criteria. This is due to the desire to meet the new ethical requirements of their
+          customers, but also extends beyond that. Indeed, the incorporation of corporate social
+          responsibility (CSR) criteria into asset management is not a new idea. It is justified
+          financially by the need to diversify the available information and to limit information
+          asymmetries (Bouslah <marquage typemarq="italique">et al., </marquage>2013). The objective
+          is to limit sharp losses in value (Godfrey <marquage typemarq="italique">et al.,</marquage> 2009) and focus investments on good assets that have not yet been
+          evaluated by the market (Edmans, 2011). Moreover, socially responsible portfolios seem to
+          perform better than traditional funds (Shalchian <marquage typemarq="italique">et al.,</marquage> 2018).</alinea>
+      </para><para id="pa2"><no>2</no>
+        <alinea>Responsible information is a major issue for asset management. This objective is met
+          by the development of sustainability reports, such as the Global Reporting Initiative
+          (GRI) report, which proposes a homogeneity of reporting practices for corporate
+          responsibility policies. This report summarizes the company’s economic, social and
+          environmental information, grouping it by the notion of overall performance. However, this
+          homogenization does not render the discourse meaningless. In fact, the actors will,
+          through language, try to make objective their very subjective view of corporate social
+          responsibility (Berger and Luckmann, 1966). These reports are therefore not aimed at
+          objectivity. They are the result of choice in the treatment of CSR dimensions. Thus, GRI
+          reports are subject to the inherent problems of speeches. Its purpose is to influence the
+          company’s image. The firm strives to legitimize its actions by creating meaning, so that
+          its activities are considered in referenced frameworks. Discourse is never objective, even
+          if it allows the exchange of information. It aims to transform the perception of the
+          receiver, to modify his belief system and his behavioral attitude. Sustainability reports
+          are not similar to “<marquage typemarq="italique">household stories</marquage>” nor
+          “<marquage typemarq="italique">engagement stories,</marquage>” but rather to a story of
+          legitimization (D’Almeida, 2006, p. 27). The company justifies its actions with discourses
+          addressed to the appropriate stakeholders (Preston and Post, 1981), which is similar to a
+          “<marquage typemarq="italique">license to operate</marquage>” (Igalens, 2007, p. 131). The
+          analysis of sustainability reports is then defined as a measure of social discourse rather
+          than a measure of social performance (Ullmann, 1985).</alinea>
+      </para><para id="pa3"><no>3</no>
+        <alinea>There is also a paradox in the sustainability reports in regard to the notion of
+          overall performance. This notion is often put forward but rarely verified. As a result,
+          even though responsible communications target all stakeholders, they are mainly directed
+          towards shareholders and financial actors who are likely to use ESG information
+          (Arvidsson, 2010). Overall performance does not induce an intrinsic link between social
+          performance and financial performance. The effects of CSR on the financial performance
+          strongly depends on managers’ intentions. The latter is likely to develop greenwashing and
+          entrenchment strategies, which must be detected in the discourse.</alinea>
+      </para><para id="pa4"><no>4</no>
+        <alinea>Discourse analysis in sustainability reports can enable asset managers to obtain
+          information that can affect the performance of their portfolio. In fact, the “negative
+          screening” approach is still prevalent in socially responsible mutual funds (Kotsantonis
+          <marquage typemarq="italique">et al.,</marquage> 2016), and the second common sustainable
+          strategy involves a combination of ESG integration. However, “negative screening”
+          strategies lead to a limitation of the universe of asset investments. Consequently, if we
+          follow the financial theory, the financial performance of the portfolio will be lower.
+          Today’s investment strategies seem to be evolving -- <marquage typemarq="italique">“Investors seem to be looking at a more balanced approach in which firms meet an SR
+          criteria based on their overall profile rather than a simple exclusionary policy”
+          </marquage>(Berry and Junkus, 2013, p. 718).</alinea>
+      </para><para id="pa5"><no>5</no>
+        <alinea>The aim of this study is to allow investors to identify, in the sustainability
+          reports, lexical fields that reveal the company’s intentions and real involvement. Indeed,
+          <marquage typemarq="italique">“Only a relatively small subset of the ESG data is what
+          might be described as material and hence value-relevant for each industry”</marquage>
+          (Kotsantonis <marquage typemarq="italique">et al.,</marquage> 2016, p. 11). It is then
+          necessary to take an interest in the responsible discourse of the company in order to
+          understand the firm’s motivations for implementing a CSR approach. This research aims to
+          be integrated into positive screening and in active analysis of ownership, which will
+          become increasingly important in the future (Amel-Zadeh and Zarafaim, 2018, p. 15). It
+          takes into consideration that, <marquage typemarq="italique">“Full integration and
+          engagement are considered more beneficial and are driven by relevance to investment
+          performance”</marquage> (Amel-Zadeh and Zarafaim, 2018, p. 1). In order to highlight the
+          existing subjectivities in the responsible discourse, we suggest combining the lexical
+          analysis with an objective measurement of the corporate social responsibility and
+          financial performance of the firm. To our knowledge, there are no articles that have
+          compared the lexical fields of the company sustainability reports with the level of
+          sustainability and the financial performance of the firm. Our results confirm the interest
+          of considering these discourses in order to better guide asset choices.</alinea>
+      </para></section1><section1 id="s1n2"><no>2</no><titre>Review and Hypothesis</titre><section2 id="s2n1"><no>2.
+				1</no><titre>The Search for Legitimacy</titre><para id="pa6"><no>6</no>
+        <alinea>CSR is a legitimized construction, supported through communication (Chaudri, 2016,
+          p. 423). It remains a strong link between communication and action in all organizational
+          processes because saying is doing and because actions speak (Christensen <marquage typemarq="italique">et al.,</marquage> 2011, p. 460; Schoeneborn and Trittin, 2013).
+          According to Forman and Argenti (2005), there remains a strong connection between the
+          communications of a company and the implementation of its strategy. As a result, the way
+          in which a company speaks about itself and its communications practices is not neutral and
+          is an activity that contributes to the adoption of organizational reality (Christensen
+          <marquage typemarq="italique">et al.,</marquage> 2011, p. 461). The organization’s
+          rhetoric is intended to influence the actors in order to create support for the firm’s
+          practices while undermining opposition to them (Conrad and Poole, 2005, p. 410).</alinea>
+      </para><para id="pa7"><no>7</no>
+        <alinea>Communication on corporate social responsibility is made up of three predominant
+          perspectives: the instrumental approach, the relational approach, and the constructivist
+          approach (Chaudri, 2016). Each of the approaches is present in the sustainability reports.
+          Beyond the return on investment, companies mainly seek to keep their legitimacy (Capron
+          and Quairel, 2004). Elements of structuring and language have already been highlighted in
+          previous research. Most of them share the principles of legitimacy theory (Lindblom, 1994;
+          Deegan, 2002). They argue that organizations seek to be perceived as acting in accordance
+          with the norms of the society in which they operate. Igalens (2007) put forward the
+          organization’s search for credibility. Sustainability reports are not advertising, but the
+          same rules apply to sustainability advertising and reporting.</alinea>
+      </para><para id="pa8"><no>8</no>
+        <alinea>The paradox set by the notion of global performance has a significant impact on the
+          subjectivity and information that flows from sustainability reports. There is, for
+          example, a strong use of doublespeak, where the speaker rarely offers a review of the
+          past. Attarça and Jacquot (2005), through an analysis of the managers’ speeches at 85
+          French, German and English companies, reveal that the language of CSR strives to give a
+          positive image of the company. There is a tendency to conceal the constraints and
+          difficulties, most often conveying the illusion of commitment. The concealment of negative
+          elements is a preponderant feature of sustainability reporting. Cho <marquage typemarq="italique">et al.,</marquage> (2010) found that companies with the lowest
+          environmental performance highlight positive information while hiding that which could be
+          seen as negative. These companies are trying to benefit from stakeholders’
+          impressions.</alinea>
+      </para><para id="pa9"><no>9</no>
+        <alinea>The sustainability report matches with a selective valuation of certain dimensions
+          of corporate social responsibility. The paradox that exists between the notion of
+          corporate social responsibility and business objectives leads to the occultation of
+          problematic dimensions. Only themes that enhance the company’s value are present.
+          Communication is most often symbolic or substantial. This often makes corporate social
+          behavior disconnected from the company’s strategy (Attarça and Jacquot, 2005). Corporate
+          social responsibility is most often approached as a juxtaposed and non-integrated issue.
+          As a result, companies’ CSR commitments are made relative to their economic opportunities.
+          The different strategies for disclosing non-financial information serves a variety of
+          purposes which guide the discourse in sustainability reports. Thus, we make the hypothesis
+          that CSR discourse can reveal the real corporate strategies.</alinea>
+        <alinea><marquage typemarq="italique"><marquage typemarq="gras">H1: According to the CSR
+          level and financial performance, the lexical field is dissimilar within the discourse of
+          sustainability reports.</marquage></marquage></alinea>
+      </para></section2><section2 id="s2n2"><no>2.
+				2</no><titre>The Hidden Strategies</titre><para id="pa10"><no>10</no>
+        <alinea>We also assume that the purpose of the CSR discourse is to conceal breaches of
+          corporate responsibility. The company will seek to embellish the situation, highlighting
+          some activities while concealing the most negative points. Speeches can disguise
+          entrenchment strategies from executive managers. In this case, it would be costly for an
+          investor to contribute to these companies on the basis of ESG criteria. This hypothesis is
+          based on the agency theory concept of Jensen and Meckling (1976), in which managers tend
+          to take private benefits at shareholder expense (Jiao, 2010). CSR would then be the
+          expression of managerial opportunism (Kim <marquage typemarq="italique">et al.,</marquage>
+          2012), and would constitute a significant cost in resource diversification for the firm
+          (Cordeiro and Sarkis, 1997). Thus, there is an over-investment in CSR activities by
+          managers whose goal is to build a reputation as a “good citizen” among stakeholders
+          (Barnea and Rubin, 2010; Harjoto and Jo, 2011). CSR is then considered as an opportunistic
+          and costly measurement for the company and its shareholders. According to Friedman (1970),
+          it is seen as an agency problem, a hypocrisy that seeks to develop an image, equivalent to
+          fraud among stakeholders. It is not surprising that some authors theoretically support the
+          existence of a negative relationship between corporate social performance and financial
+          performance. Improving a firm’s responsibility increases the company’s costs and leads to
+          a decrease in its competitive advantages (Odgen and Watson, 1999; Lu <marquage typemarq="italique">et al.,</marquage> 2013).</alinea>
+      </para><para id="pa11"><no>11</no>
+        <alinea>The discourse is supposed to be consistent with the firm’s level of responsibility
+          and performance. Indeed, CSR approaches are a set of choices that reflect the company’s
+          values (Chin <marquage typemarq="italique">et al.,</marquage> 2013). It is therefore
+          likely that the themes of responsible discourse can inform us about the firm’s overall
+          performance. This link is not direct, but in the context of the variety of CSR objectives,
+          it is likely that the responsible discourse will reveal the real motivations of managers.
+          In addition, the impact of CSR on financial performance seems to be particularly related
+          to the types of responsible investments made. Following the stakeholder theory, and more
+          particularly the distinction made by Agle <marquage typemarq="italique">et al.,</marquage>
+          (2008) between primary and secondary stakeholders, we can, through discourse, reveal the
+          differences in purpose. Indeed, the primary stakeholders are in a contractual relationship
+          with the company, which makes them essential to economic activity. Secondary stakeholders
+          do not have contractual relationships and are therefore not critical to the development of
+          the company’s activities and profitability. As a result, responsibility is most often
+          approached as a problem alongside and not part of the objective of profit
+          maximization.</alinea>
+      </para><para id="pa12"><no>12</no>
+        <alinea>Thus, the discourse used in responsibility reports can be linked to the strategies
+          chosen by management. The choices made in the discourse reflect the strategic choices and,
+          consequently, the speech objectives correspond to a level of responsibility and financial
+          performance. Only a few speeches are thus in line with maximizing investors’ interests. We
+          believe that this discourse should reveal the company’s deep strategy through the presence
+          or absence of certain lexical fields.</alinea>
+        <alinea><marquage typemarq="italique"><marquage typemarq="gras">H2: Entrenchment and
+          greenwashing can be revealed through the lexical fields used in sustainability
+          reports.</marquage></marquage></alinea>
+      </para></section2></section1><section1 id="s1n3"><no>3</no><titre>Data and Methodology Framework</titre><section2 id="s2n3"><no>3.
+				1</no><titre>Sample</titre><para id="pa13"><no>13</no>
+        <alinea>Our lexical analysis focuses on 53 sustainability reports and 125 opening statements
+          of CEOs from S&amp;P 500 companies in 2012. The responsibility reports reviewed refer to
+          the year 2012, however, the calculation of the level of responsible and financial
+          performance is calculated over a five-year period between 2008 and 2012. The objective is
+          to smooth out performance measures, knowing that the discourse is built over the years and
+          is established as a reflection of past performance. The period studied follows the
+          subprime mortgage crisis. This crisis has greatly highlighted the excesses of the
+          financial sector and reminded us of the importance of responsibility criteria in
+          investment strategies. During this period, interest in responsible information has
+          increased significantly, through the considerable development of responsible rating
+          agencies. This enthusiasm has not dried up since then. Thus, this period of economic
+          slowdown is likely to encourage interest in responsibility and thus allow us to see a
+          strong link between the discourse and the firm’s overall performance. This link has since
+          increased, particularly with the recent consideration of the United Nation’s sustainable
+          development objectives. In addition, we assume that the results obtained will remain
+          relevant for the following years. Indeed, according to Kotsantonis <marquage typemarq="italique">et al.,</marquage> (2016), <marquage typemarq="italique">“Since the
+          mid-1990s, the positive correlation patterns in primary studies have been stable over
+          time”</marquage> (p. 226).</alinea>
+      </para><para id="pa14"><no>14</no>
+        <alinea>The GRI reports have been retrieved from the Bloomberg data platform and refer to
+          the GRI 3.1 standard in effect in 2012. In order to conduct our research, we used the
+          semantic analysis software “Alceste.” It allows the extraction of classes of meaning made
+          up of words and sentences. The software is a word dictionary while also defining the root
+          and frequency of the words used. The terms we will find in the classes correspond to the
+          root of several words. For example, <marquage typemarq="italique">measure (9), measured
+          (3), measurement (1), measurements (1) and measures (3)</marquage> will give the root
+          <marquage typemarq="italique">measure</marquage>. It will then be counted as present
+          17 times.</alinea>
+      </para><para id="pa15"><no>15</no>
+        <alinea>The software subdivides the corpus into homogeneous texts containing a sufficient
+          number of words. This results in a classification of the segments according to the
+          strongest opposition. Thus, the extracted classes give us a basis for the analysis of the
+          corpus. According to Seignour (2011), semantic software makes it possible to reveal
+          variations that are not visible on reading and is a valuable help for analysis. No
+          interpretation is performed by this type of software. It is up to the researcher to
+          decipher each class. To do this, the words are sorted by Chi2 levels and an examination of
+          the terms with the highest level of Chi2 allows us to interpret the classes defined by the
+          analysis.</alinea>
+      </para><para id="pa16"><no>16</no>
+        <alinea>The main interest of this software is to give characteristics to the corpora. It is
+          a “star line” in which we have defined the level of CSR, the level of financial
+          performance, the name and the sector of the firm. These characteristics allow us to define
+          the profiles relating to each class of speech. This methodology is innovative in financial
+          research. In fact, we combine lexical analysis with data relating to the level of CSR and
+          financial performance. Through this approach we manage to make the link with traditional
+          financial theories. It also helps us to create a better analysis through the presence and
+          absence of lexical classes. Thus, the use of Alceste software makes it possible to
+          identify the topics covered in an objective manner (Platet-Pierrot and Giodano-Spring,
+          2011).</alinea>
+      </para></section2><section2 id="s2n4"><no>3.
+				2</no><titre>CSR Measurement</titre><para id="pa17"><no>17</no>
+        <alinea>Data on the level of social, societal and environmental responsibility are taken
+          from the MSCI ESG STATS database (formerly KLD Research and Analytics Inc.)<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi>. For each company, the agency reports on seven dimensions
+          relating to the social, environmental and societal aspects. It includes community
+          relations, corporate governance, diversity, employee relations, environment, human rights
+          and product quality. All of these dimensions are detailed in Table 1 <marquage typemarq="italique">“KLD CSR dimensions.”</marquage> There are two types of variables that
+          are binary noted. The first one is similar to strengths. The other is similar to
+          weaknesses and more particularly to extra-financial risk (concerns). With the exception of
+          controversial areas, all dimensions will be included in our ratings and equally weighted
+          in an aggregate strength score, weaknesses score and global CSR score. We will adopt a
+          methodology similar to Oikonomou <marquage typemarq="italique">et al., </marquage>(2012)
+          and do not consider CSR dimensions separately.</alinea>
+        <equation id="eq1">
+          <no>(1)</no>
+          <legende lang="en">
+            <titre>Equation 1: Dimension Score</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="equation pleine grandeur" xlink:href="2181030.jpg" dimx="313" dimy="35" id="im1" typeimage="equation" xlink:type="simple"/>
+            <texte>Dimension Score = Dimensions variables ∑n i = 1n</texte>
+          </objetmedia>
+        </equation>
+      </para><para id="pa18"><no>18</no>
+        <alinea>Two scores will be calculated. The first score is related to the company’s level of
+          strength and therefore to its positive externalities on stakeholders. The second reflects
+          the company’s extra-financial risk, and therefore its weaknesses.</alinea>
+        <equation id="eq2">
+          <no>(2)</no>
+          <legende lang="en">
+            <titre>Equation 2: Corporate social responsibility score (strength)</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="equation pleine grandeur" xlink:href="2181031.jpg" dimx="352" dimy="54" id="im2" typeimage="equation" xlink:type="simple"/>
+            <texte>Corporate Social responsibility Score:= (GOVs+COMs+DIVs+EMPs+EMVs+HUMs+PROs)
+              7</texte>
+          </objetmedia>
+        </equation>
+        <equation id="eq3">
+          <no>(3)</no>
+          <legende lang="en">
+            <titre>Equation 3: Corporate social irresponsibility score (weakness)</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="equation pleine grandeur" xlink:href="2181032.jpg" dimx="355" dimy="53" id="im3" typeimage="equation" xlink:type="simple"/>
+            <texte>Corporate Social Irresponsibility Score:= (GOVc+COMc+DIVc+EMPc+EMVc+HUMc+PROs)
+              7</texte>
+          </objetmedia>
+        </equation>
+      </para><para id="pa19"><no>19</no>
+        <alinea>The scores of responsibility (Strengths) and irresponsibility (Weaknesses) are both
+          positives. An overall score (CSR) is also calculated by comparing the two scores.</alinea>
+        <equation id="eq4">
+          <no>(4)</no>
+          <legende lang="en">
+            <titre>Equation 4: CSR overall score</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="equation pleine grandeur" xlink:href="2181033.jpg" dimx="332" dimy="37" id="im4" typeimage="equation" xlink:type="simple"/>
+            <texte>CSR SCORE = Corporate Social Responsibility Score - Corporate Social
+              Irresponsibility Score</texte>
+          </objetmedia>
+        </equation>
+      </para><para id="pa20"><no>20</no>
+        <alinea>In order to obtain ratings that best reflect the company’s past, each CSR rating
+          corresponds to the average of the firm’s ratings between 2008 and 2012. Two levels of
+          strengths and weaknesses are possible: a high or low strength and a high or low weakness.
+          Regarding the level of overall responsibility, three levels were selected. Overall
+          responsibility can be defined as low, medium or high. These levels are determined by
+          comparing the firms in our analysis.</alinea>
+      </para></section2><section2 id="s2n5"><no>3.
+				3</no><titre>Financial performance measurement</titre><para id="pa21"><no>21</no>
+        <alinea>Financial performance is defined as the average Sharpe ratio<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi> between 2008 and 2012. This average allows us to smooth the profitability, and
+          thus avoid short-term effects. Financial performance is defined as low, medium or high,
+          depending on the firm’s performance compared to all firms present in the S&amp;P 500 index
+          throughout this five-year period.</alinea>
+        <equation id="eq5">
+          <no>(5)</no>
+          <legende lang="en">
+            <titre>Equation 5 : Profitability measurement</titre>
+            <alinea>With:</alinea>
+            <alinea><marquage typemarq="italique">S</marquage><indice><marquage typemarq="italique">i</marquage></indice> <marquage typemarq="italique">= Sharpe
+              Ratio</marquage></alinea>
+            <alinea><marquage typemarq="italique">R</marquage><indice><marquage typemarq="italique">i</marquage></indice> <marquage typemarq="italique">= return of the asset
+              </marquage></alinea>
+            <alinea><marquage typemarq="italique">R</marquage><indice><marquage typemarq="italique">f</marquage></indice> <marquage typemarq="italique">= risk-free
+              rate</marquage></alinea>
+            <alinea>σ<indice><marquage typemarq="italique">i</marquage></indice> <marquage typemarq="italique">= Strandard deviation of the asset’s excess return
+              5</marquage></alinea>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="equation pleine grandeur" xlink:href="2181034.jpg" dimx="91" dimy="44" id="im5" typeimage="equation" xlink:type="simple"/>
+            <texte>Si = (Ri - Rf ) σi (5)</texte>
+          </objetmedia>
+        </equation>
+      </para><tableau id="ta1">
+        <no><marquage typemarq="majuscule">Table 1</marquage></no>
+        <legende lang="en">
+          <titre>KLD CSR Dimension composition</titre>
+          <sstitre><marquage typemarq="italique">Here we find the different dimensions of KLD rating
+            used to calculate the level of responsibility score</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im6" typeimage="tableau" xlink:type="simple"/>
+          <texte>KLD IndicatorsDimensionsBinary indicatorsGovernance(GOV)Strengths(GOVs)Managers
+            compensation levelLevel of transparencyDisclosure levelOther
+            strengthsConcerns(GOVc)Accounting issuesLow level of disclosureOther
+            concernsCommunity(COM)Strengths(COMs)Generous givingInnovative GivingSupport for
+            housingOther strengthsConcerns(COMc)Investments controversiesNegative economic impactTax
+            disputesOther concernsKLD IndicatorsDimensionsBinary
+            indicatorsDiversity(DIV)Strengths(DIVs)CEOPromotionBoard of directorsFamily
+            benefitsWomen/minority contractingEmployment of the disabledOther
+            strengthsConcerns(DIVc)ControversiesOther concernsEmployment(EMP)Strengths(EMPs)Union
+            relation strengthCash profit sharingInvolvementStrong retirement benefitsOther
+            strengthsConcerns(EMPc)Union relation concernHealt and safety concernWorkforce
+            reductionOther concernsEnvironment(ENV)Strengths(ENVs)Beneficial Products and
+            servicesPollution preventionRecyclingAlternative fuelsOther
+            strengthsConcerns(ENVc)Hazardous WasteRegulatory ProblemsOzone depleting
+            chemicalsSubstantial emissionsAgricultural chemicalsOther
+            concernsHumanity(HUM)Strengths(HUMs)Contact with indegenous peoplesCompliance with
+            labour lawOther strengthsConcerns(HUMc)Other
+            concernsProduct(PRO)Strengths(PROs)QualityR&amp;D innovationBenefits to economically
+            disadvantagedOther strengthsConcerns(PROc)Product safetyMarketing / Contracting
+            controversyAntitrustOther concerns</texte>
+        </objetmedia>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im7" typeimage="tableau" xlink:type="simple"/>
+        </objetmedia>
+      </tableau><para id="pa22"><no>22</no>
+        <alinea>This financial performance measurement is interesting because it allows investors to
+          measure the return of an investment compared to its risk. The profitability is compared
+          here to the level of the risk-free rate and the volatility of the asset. In the context of
+          CSR information disclosure, we suggest that the vocabulary used in sustainability reports
+          intend to improve the financial performance of the company by an increase of its appraisal
+          on the market.</alinea>
+      </para></section2></section1><section1 id="s1n4"><no>4</no><titre>Results</titre><section2 id="s2n6"><no>4.
+				1</no><titre>Sustainability Reports</titre><para id="pa23"><no>23</no>
+        <alinea>Our lexical analysis exploits more than 90% of the Initial Context Unit (ICU). This
+          percentage is very significant as a value higher than 60% is a reasonable result for an
+          analysis. The analysis of the discourses present in the sustainability reports refers us
+          to the use of five distinct word classes, which we group into three major topics. The
+          classes are named according to the highest levels of Chi2. Each class is also
+          distinguished by a heterogeneous CSR and financial performance. Each major topic targets
+          particular stakeholders and specific dimensions of sustainability. The characteristics
+          related to the text provide us with information on the overall level of performance of
+          firms. These characteristics allow us to answer the hypotheses established beforehand. The
+          analysis of the full report relates three major topics, the first one corresponding to an
+          ethical and governance approach which we have named <marquage typemarq="italique">“conventional discourse.”</marquage> The second is a human and community resources
+          approach we have called the “<marquage typemarq="italique">compensatory
+          discourse.</marquage>” Finally, there is also a discourse related to production and sales
+          processes, which we have named “technical discourse.” </alinea>
+      </para><figure id="fi1">
+        <no><marquage typemarq="majuscule">graph 1</marquage></no>
+        <legende lang="en">
+          <titre>Class distribution</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im8" typeimage="figure" xlink:type="simple"/>
+        </objetmedia>
+      </figure><tableau id="ta2">
+        <no><marquage typemarq="majuscule">Table 2</marquage></no>
+        <legende lang="en">
+          <titre>Class name identified in sustainability reports</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im9" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class identifiedPercentage of textual unitsClass nameClass 125.89%Ethics and
+            governanceClass 220.73%Relation with communitiesClass 326.93%Employees and skillsClass
+            415.67%Reduction of materials consumptionClass 510.78%Waste reduction and reuse</texte>
+        </objetmedia>
+      </tableau></section2><section2 id="s2n7"><no>4.
+				2</no><titre>Conventional Discourse</titre><para id="pa24"><no>24</no>
+        <alinea>Text Class 1, related to ethics and governance, includes the roots of words such as
+          <marquage typemarq="italique">“police, law, govern, ethical, safe etc.”</marquage> Here,
+          the company mainly understands CSR as complying with the law and as the implementation of
+          a governance policy. The preponderance of this discourse in sustainability reports is
+          characteristic of financially successful firms, through the presence of the <marquage typemarq="italique">“fie_perf_high”</marquage> characteristic (Chi2 = 12). The link
+          between this type of discourse and good financial performance is consistent with financial
+          theory, since good governance limits agency costs and compliance with ethical rules
+          reduces the risk of fines for non-compliance with standards.</alinea>
+      </para><para id="pa25"><no>25</no>
+        <alinea>Nevertheless, a discourse on this topic remains rather conventional and does not
+          seem proactive in terms of responsibility. It is therefore not surprising that this class
+          of discourse is symptomatic of firms with little responsibility, particularly because of a
+          high level of weakness with the presence of the characteristics CSR_low (Chi2 = 6) and
+          weakness_high (Chi2 = 5). The occurrence of these discourse characteristics shows that
+          these companies have not extended their notion of responsibility to simple governance
+          criteria. Companies are therefore neglecting the other dimensions of CSR. The prevalence
+          of a discourse based on ethics and governance does not show that firms are globally
+          efficient, both in terms of financial and responsible performance. However, while this
+          discourse is a good starting point for the management of the company, it will have to be
+          complemented by an additional sustainability approach to be taken into account by
+          responsible investors.</alinea>
+        <bloccitation>
+          <alinea>“In 2012, looking at Cummins’ new customer care facility, meeting with key company
+            personnel to review strategy. The board monitors a number of issues, including: the
+            performance of the company; the performance of senior management; compliance with all
+            applicable laws and regulations; communications and relationships with stakeholders; and
+            the effectiveness of internal controls and risk management practices. Cummins’ board of
+            directors has six standing committees: the audit committee; the compensation committee;
+            the executive committee; the finance committee; the governance and nominating committee
+            and the safety committee.”</alinea>
+          <source>Firm n° 52</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“Natural disasters, including losses due to failures to comply with laws and
+            regulations. The company uses an operational risk framework to identify, measure,
+            monitor and report inherent and emerging operational risks. It is responsible for
+            implementation and adherence to this policy, and for performing periodic assessment of
+            the company and brand health based on internal and external assessments. Business
+            leaders across the company are responsible for ensuring that reputation risk
+            implications of transactions, business activities and management practices are
+            appropriately considered and relevant subject matter experts are engaged as needed. The
+            American Express political action committee is a fund supported solely by the voluntary
+            contributions of American Express employees.”.</alinea>
+          <source>Firm n° 18</source>
+        </bloccitation>
+      </para><tableau id="ta3">
+        <no><marquage typemarq="majuscule">Table 3</marquage></no>
+        <legende lang="en">
+          <titre>Textual class 1 “Ethics &amp; Governance”</titre>
+          <sstitre><marquage typemarq="italique">Here we find the result of the analysis performed
+            by the Alceste software. The most important characteristics are ordered by Chi 2
+            level</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im10" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class 1: Ethics &amp; GovernanceCurrent wordsLevel of Chi2NumberMissing wordsLevel
+            of Chi2NumberPolic905699Energ-19951Code666452Emission-17113Issue632584School-1316Law580332Educat-11758Govern513581Audit492401Standard487557safe4701031Ethical450233Current
+            firms: Cummins; American Express; TJX;
+            AbbotRisk440570Stakehold422387Committee413356Report395651Current characteristicsMissing
+            characteristicsMining_sector185388Finance_sector-81342Fie_perf_high12569Indus_prod_sector-23599Retail_sector12658Csr_medium-11634Csr_low6648Weakness_high51283</texte>
+        </objetmedia>
+      </tableau><section3 id="s3n1"><no>4.
+				2.
+				1</no><titre>Compensatory Discourses</titre><para id="pa26"><no>26</no>
+        <alinea>The compensatory topic includes two classes of discussion, the Class 2
+          “Community” and Class 3 “Employees and Skills.” The first one relates to philanthropy and
+          includes the roots of words such as <marquage typemarq="italique">“community, grant,
+          donate, disaster, children, etc. “</marquage> The second relates to the diversity and
+          protection of employees, and includes references to <marquage typemarq="italique">“care,
+          women, skill, people, workforce, etc.”</marquage> These two classes of discourse focus on
+          a relational approach, either with secondary stakeholders, through communities, or with
+          primary stakeholders, such as employees. However, these two lexical fields are
+          characteristic of firms that are not very responsible and financially inefficient. The
+          predominance of this type of discourse in sustainability reports will therefore not be a
+          preferred choice for an investor.</alinea>
+      </para><para id="pa27"><no>27</no>
+        <alinea>Firstly, the philanthropic discourse is characterized by an average but never high
+          financial performance. The analysis concludes that there is no strong financial
+          performance feature revealed by an absence of the characteristic “<marquage typemarq="italique">fie_perf_high</marquage>” (Chi2 = -48). Philanthropic expenses are
+          often decorrelated to the firm’s activities due to possible entrenchment strategies from
+          managers, the latter seeking the rallying of the stakeholders to his cause in order to
+          keep his place in the organization. The positive opinion of the stakeholders towards it is
+          likely to influence shareholders. In fact, philanthropy refers to secondary stakeholders
+          and is not expected to have a positive impact on financial performance<marquage typemarq="gras">. </marquage>Because philanthropy is seen as a waste of corporate
+          resources, it is likely to be seen as an entrenchment strategy. Moreover, the level of CSR
+          is not higher, the level of responsibility remains average and this discourse is not
+          indicative of a high level of responsibility, due to the absence of the “<marquage typemarq="italique">CSR_high</marquage>” variables (Chi2 = -68) and “<marquage typemarq="italique">Strength_high</marquage>” (Chi2 = -37). The predominance of this
+          discourse in sustainability reports raises the question of entrenchment strategy from the
+          leaders. The very average level of the responsibility score corresponds more to
+          greenwashing than to a real internal involvement of managers. At least there is no
+          willingness to improve financial performance through CSR tools.</alinea>
+        <bloccitation>
+          <alinea>“$500,000 donations to the American Red Cross, along with contributions to Habitat
+            for Humanity and the Boys &amp; Girls Clubs of America to help communities rebuild. As
+            the holidays approached, 35 Lowe’s stores in Sandy-impacted communities in New York and
+            New Jersey took time out to fill another critical need. Lowe’s heroes handed out more
+            than 22,000 free family-style Thanksgiving dinners to local families. New Jersey Gov.
+            Chris Christie and his family helped distribute the holiday meals at Lowe’s in Toms
+            River, N.J., and members of his administration also volunteered to pass out dinners at
+            20 Lowe’s stores throughout the state.”</alinea>
+          <source>Firm n° 9</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“$75,000 to support the local relief efforts of the American Red Cross when
+            Hurricane Sandy devastated the eastern United States, leaving millions of Americans
+            without homes, power or access to basic needs.”</alinea>
+          <source>Firm n° 28</source>
+        </bloccitation>
+      </para><tableau id="ta4">
+        <no><marquage typemarq="majuscule">Table 4</marquage></no>
+        <legende lang="en">
+          <titre>Textual class 2 "Community"</titre>
+          <sstitre><marquage typemarq="italique">Here we find the result of the analysis performed
+            by the Alceste software. The most important characteristics are ordered by Chi 2
+            level</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im11" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class 2: CommunityCurrent wordsLevel of Chi2NumberMissing wordsLevel
+            of Chi2NumberVolunteer668456Use-185107Communit517977Environmental-18063Grant512273Manage-17366Donate503181Business-173159Charit466181Energy-16036Fundation453364Emission-1521Disaster446202Current
+            firms: Lowe; Kroger; Clorox;
+            CitiChildren435280School363370Housing340154Nonprofit318193Current characteristicsMissing
+            characteristicsFinance_sector289660CSR_high-68550CSR_medium253834CSR_low-56360Strength_low37591Fie_perf_high-48306Retail_sector29490Strength_high-371153Fie_perf_medium28961</texte>
+        </objetmedia>
+      </tableau><para id="pa28"><no>28</no>
+        <alinea>Secondly, the consideration of human capital in the company discourse suggests the
+          existence of possible weaknesses and poor financial performance. Indeed, our analysis
+          reveals that firms that talk mainly about their employees are characterized by strong
+          weaknesses (Chi2 = 24), a low level of CSR (Chi2 = 22) and a relatively poor financial
+          performance. The missing characteristics confirm these results by the notable absence of
+          <marquage typemarq="italique">“weakness_low”</marquage> and <marquage typemarq="italique">“fie_perf_high.”</marquage> Employees are one of the primary stakeholders, and their
+          consideration should have a positive impact on financial performance (Edmans, 2011;
+          Huselid, 1995). But the choice of discourse is not intrinsically linked to reality,
+          particularly with regard to the consideration of employees. The choice of discourse used
+          remains subjective and it seems that the preponderance of a discourse about employees
+          reveals companies that are not very responsible and possibly not financially efficient
+          with Chi2 levels for financial performance being low. The prevalence of such a discourse
+          therefore does not follow the facts, which also suggests a possible greenwashing strategy
+          on the part of leaders.</alinea>
+      </para><para id="pa29"><no>29</no>
+        <alinea>It is therefore highly possible that companies that are not very responsible will
+          promote this dimension of CSR without really being responsible. The strong presence in the
+          sustainable reports for this discourse does not allow us to identify implicit strategies.
+          This will require an analysis of the CEO’s speech.</alinea>
+        <bloccitation>
+          <alinea>“Suppliers? Another way in which PNC demonstrates its commitment to strengthening
+            the communities and businesses in each region we serve is through our supplier diversity
+            program, which offers qualified minority, women-owned, veteran, lesbian, gay, bisexual
+            or transgender and small and disadvantaged business enterprises the opportunity to
+            provide products and services to us. Through our diverse supply base, PNC is exposed to
+            the varying perspectives, unique skills and innovative thinking that is needed to
+            enhance our business success.”</alinea>
+          <source>Firm n° 26</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“The National Association of Women MBAs, the National Society of Hispanic MBAs and
+            the annual Reaching Out lesbian, gay bisexual and transgender MBA. Development: Humana
+            has initiatives in place to develop women for leadership roles. Our Women in Leadership
+            legacy program provides development opportunities and career coaching. Women engage in
+            collaborative learning and network with a community of leaders. The legacy program
+            expands the women in leadership opportunity to new leadership levels and creates an
+            avenue for graduates to serve in advocate coaching roles.”</alinea>
+          <source>Firm n° 48</source>
+        </bloccitation>
+      </para><tableau id="ta5">
+        <no><marquage typemarq="majuscule">Table 5</marquage></no>
+        <legende lang="en">
+          <titre>Textual class 3 "Employees and skills"</titre>
+          <sstitre><marquage typemarq="italique">Here we find the result of the analysis performed
+            by the Alceste software. The most important characteristics are ordered by Chi 2
+            level</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im12" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class 3: Employees and skillsCurrent wordsLevel of Chi2NumberMissing wordsLevel
+            of Chi2NumberCare545658Emission-1987Diverse385288Energ-19062Women366441Use-171186Skill348325Environmental-168123Experience234255Compli-1569Learn219355Water-14721People215481Current
+            firms:Microsoft; PNC; Humana;
+            CignaLesbian18694Gay18496Recruit178117Workforce167176Current characteristicsMissing
+            characteristicsFinance_sector50634Retail_sector-27438Weakness_high241387Weakness_low-24878CSR_low22712Mining_sector-21175Fie_perf_low2641CSR_medium-10666Fie_perf_mediumFie_perf_high-3500</texte>
+        </objetmedia>
+      </tableau><para id="pa30"><no>30</no>
+        <alinea>Finally, the presence of these topics in the discourse may overcompensate for the
+          truly poor level of CSR. Nevertheless, it’s essential to avoid firms that focus their
+          discourse on philanthropic actions and excessive employee rhetoric. These conclusions are
+          confirmed in our second analysis of CEO discourse.</alinea>
+      </para></section3><section3 id="s3n2"><no>4.
+				2.
+				2</no><titre>Technical Discourse</titre><para id="pa31"><no>31</no>
+        <alinea>Our analysis reveals a third type of discourse relating to the production process.
+          The lexical Class 4, called “Reduction of Material Consumption,” and Class 5, named “Waste
+          Reduction and Reuse,” focus on developing technical terms. However, these two classes are
+          strongly distinguished by their aim, with Class 4 being limited to the simple reduction of
+          negative externalities while Class 5 emphasizes a proactive and integrated vision of
+          CSR.</alinea>
+      </para><para id="pa32"><no>32</no>
+        <alinea>Firstly, Class 4 -- “Reduction of Material Consumption” -- aims to limit negative
+          externalities related to pollution and features the keywords, <marquage typemarq="italique">“energy, emissions, gas, reduce, consumption, cost.”</marquage> This
+          class is indicative of companies that have limited their negative externalities through
+          low weakness (Chi2 = 9). For some, these firms even seem proactive through the presence of
+          muscular strength-related characteristics. However, this concerns companies that may or
+          may not be globally responsible. The absence of “<marquage typemarq="italique">CSR_medium</marquage>” reveals that firms using this discourse can be using two
+          strategies, either reducing weaknesses, or in a proactive logic that improves the overall
+          level of CSR by involving real strengths. Finally, it seems that this discourse is mainly
+          present in firms that are under-performing financially. It may then be that the choice of
+          CSR strategy is constrained by the sector or the company’s history. CSR would not be
+          chosen but indirectly imposed.</alinea>
+        <bloccitation>
+          <alinea>“In 2011, Ryder made a major new commitment to alternative vehicle technology with
+            our purchase of 240 new heavy-duty natural gas trucks for deployment in customer fleets
+            in Arizona, California, and Michigan. Natural gas generates fewer greenhouse gas
+            emissions than diesel fuel. There is an abundant supply of natural gas in North America,
+            where the great majority of our operations are located, which substantially reduces
+            costs and environmental impacts compared to fuels produced from imported oil.”</alinea>
+          <source>Firm n° 35</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“Operations: carbon footprint in 2012. Our carbon footprint, scope 1 and 2
+            emissions from the greenhouse gas protocol, totaled 176,604 tonnes co2 equivalent. These
+            calculations are based on: actual data covering 86 percent of total floor space in 2012,
+            estimated impact based on average energy per square foot for the remaining 14 percent.
+            Bureau Veritas conducted an independent verification of our 2012 greenhouse gas, GHG,
+            emissions. Bureau Veritas GHG emissions verification statement examined employee
+            business travel, our commercial air travel, rail travel, car rentals and
+            business.”</alinea>
+          <source>Firm n° 47</source>
+        </bloccitation>
+      </para><tableau id="ta6">
+        <no><marquage typemarq="majuscule">Table 6</marquage></no>
+        <legende lang="en">
+          <titre>Textual class 4 "Consumption"</titre>
+          <sstitre><marquage typemarq="italique">Here we find the result of the analysis performed
+            by the Alceste software. The most important characteristics are ordered by Chi 2
+            level</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im13" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class 4: ConsumptionCurrent wordsLevel of Chi2NumberMissing wordsLevel
+            of Chi2NumberEnerg21091286Communit-19757Emission1813708Organ-13245Gas1204537Health-12429Efficien1012361Care-1099Power877409Support-103112Electric863259Train-8929Reduce688414Current
+            firms : Ryder; Autodesk; Oracle;
+            CaterpillarConsumption623199Greenhouse537188Cost399253Vehicle319198Current
+            characteristicsMissing
+            characteristicsIndus_prod_sect75551Retail_sector-53204Weakness_low9618Finance_sector-40211Services_sect9194Csr_medium-13366Mining_sector5158Weakness_high-9700Csr_low4396Strength_low-4341Strength_high4977Csr_high2554Fie_perf_low1373</texte>
+        </objetmedia>
+      </tableau><para id="pa33"><no>33</no>
+        <alinea>However, an investor seeking CSR performance should not focus his choices on this
+          apparent technicality of the discourse. Indeed, CSR does not always seem to be implemented
+          in all the company’s processes. As a result, it would be more interesting to invest in
+          another technical discourse whose perspective is more proactive. Lexical Class 5 -- “Waste
+          Reduction and Reuse” -- is focused on the reuse of waste within the production process. It
+          contains key word roots such as <marquage typemarq="italique">“recycle, waste, material,
+          reuse, minimize, etc.”</marquage> This lexical field is characterized by firms with high
+          levels of CSR, many strengths and a notable absence of weaknesses. These companies have
+          strongly integrated the responsibility process into their strategy and production process.
+          The integration of CSR concerns into the company’s activities reflects a really high
+          financial performance. The significant lack of “<marquage typemarq="italique">CSR_medium</marquage>” (Chi2 = -55) and “<marquage typemarq="italique">fie_perf_low</marquage>” (Chi2 = -10) characteristics confirms the interest for an
+          investor to select firms that use such a discourse.</alinea>
+        <bloccitation>
+          <alinea>“We estimate, conservatively, that we’ve kept tens of millions of plastic bags out
+            of landfills with our decision and our customers’ willingness to reuse shopping bags. To
+            illustrate how individual actions can add up to big numbers, our customers filled more
+            than 70 million reusable bags with groceries in 2011. In 2009, Whole Foods Market became
+            the first national retailer to use Forest Stewardship Council certified paper grocery
+            bags. These paper bags close the loop with 100 percent post-consumer reclaimed material
+            and can be tracked throughout the supply chain from post-consumer waste through
+            processing and distribution to the customers toting groceries.”</alinea>
+          <source>Firm n° 114</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“By shipping store cardboard bales to our distribution centers and consolidating
+            them there, we’re able to maximize recycling revenue by shipping the consolidated bales
+            directly to a paper processor. Lowe’s backhauled more than 75,000 tons of cardboard and
+            pallets from stores to RDCs in 2012. Our stores also send their used boxes and wood
+            spacers to select RDCs, which reuse them to transport freight that’s not
+            palletized.”</alinea>
+          <source>Firm n° 9</source>
+        </bloccitation>
+      </para><para id="pa34"><no>34</no>
+        <alinea>We note that the industrial production sector strongly characterizes discourse
+          classes three and four. For a responsible investor, it is advisable to favor companies
+          that speak closer to Class 5, “Waste Reduction and Reuse,” than Class 4, “Reduction of
+          Material Consumption.”</alinea>
+      </para><tableau id="ta7">
+        <no><marquage typemarq="majuscule">Table 7</marquage></no>
+        <legende lang="en">
+          <titre>Textual class 5 "Waste reduction and reuse"</titre>
+          <sstitre><marquage typemarq="italique">Here we find the result of the analysis performed
+            by the Alceste software. The most important characteristics are ordered by Chi 2
+            level</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im14" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class 5: Waste reduction and reuseCurrent wordsLevel of Chi2NumberMissing
+            wordsLevel
+            of Chi2NumberRecycl1740514Communit-11247Material1339424Support-8466Waste1273546Leader-8014Product651857Business-6692Use604630Train-6019Recycle47879People-5918Reuse467100Current
+            firms:Whole Foods Market; Xerox;
+            ColgateManufactur336185Water278170Raw26743Reduc219149Current characteristicsMissing
+            characteristicsIndus_prod_sector125434Finance_sector-14960CSR_high90496Csr_medium-55192Fie_perf_high59304Strength_low-35179Strength_high35727Weakness_high-29439Weakness_low29467Fie_perf_medium-14395Retail_sector17260Fie_perf_low-10207</texte>
+        </objetmedia>
+      </tableau><figure id="fi2">
+        <no><marquage typemarq="majuscule">graph 2</marquage></no>
+        <legende lang="en">
+          <titre>Factor analysis of correlation of the different classes of speeches</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im15" typeimage="figure" xlink:type="simple"/>
+        </objetmedia>
+      </figure><para id="pa35"><no>35</no>
+        <alinea>The semantic analysis of all sustainability reports reveals heterogeneous lexical
+          fields depending on the level of CSR and financial performance. The various communications
+          refer to the consideration of the legitimization strategies of Hahn and Lülfs (2014). The
+          need for the company to legitimize its actions by the use of lexical terms which refer to
+          governance, ethics, philanthropy and human resources is most often linked to a poor CSR
+          performance. It is also necessary to avoid entrenchment strategies, often detectable by an
+          abundance of philanthropic and human resources themes. The standardized discourse of the
+          GRI does not appear to be totally homogeneous in 2012. Through the discourse used,
+          companies indirectly provide information on the integration of their corporate social
+          responsibility into the organization. The asset manager can then look for dissonances in
+          the speeches in order to select the most responsible and financially efficient assets.
+          However, it may also be interesting to analyze the CEO’s discourse in order to better
+          identify the strategy behind responsible investment.</alinea>
+      </para></section3><section3 id="s3n3"><no>4.
+				2.
+				3</no><titre>CEO Discourse</titre><para id="pa36"><no>36</no>
+        <alinea>In order to complete our analysis, we suggest a dissociated examination of the
+          opening speech of the CEO in the GRI reports. Indeed, Conaway and Wardrope (2010) have
+          discovered that CEOs communicate information about the company culture and become
+          particular cultural rhetoricians. The CEO’s opening speech to the GRI is free and
+          succinct, which forces him to make choices in the construction of his communication.
+          Platet-Pierrot and Giordano-Spring (2011) have already been able to analyse the executive
+          discourse. We have performed a similar analysis on 125 opening speeches from S&amp;P 500
+          firms in 2012. Nevertheless, unlike the article by Platet-Pierrot and Giordano-Spring
+          (2011), we added features that reflect the level of CSR and financial performance. Our
+          results follow and complete our precedent conclusion. We reveal the presence of three
+          distinct lexical classes, characterized by heterogeneous responsible and financial
+          performances. These are summarized in Table 8 below.</alinea>
+      </para><tableau id="ta8">
+        <no><marquage typemarq="majuscule">Table 8</marquage></no>
+        <legende lang="en">
+          <titre>Synthesis of the lexical fields present in the CEO discourses</titre>
+          <sstitre><marquage typemarq="italique">The table above shows the names of the classes we
+            have defined following the results of the analysis. We also find the characteristics
+            that define each of the classes, as well as the missing characteristics. The latter are
+            particularly important</marquage></sstitre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im16" typeimage="tableau" xlink:type="simple"/>
+          <texte>Class numberClass 1Class 2Class 3Total text unit23.55%15.89%60.56%Class
+            nameReleases and consumptionReport to the communityLong term performanceCurrent
+            wordsEmission; Energ; Reduce; Gas; Water; Waste; Efficienc; Recycle; NaturalEducat;
+            Vounteer; Student; Nonprofit; Donate; Veteran; CareWorld; Business; Sustain; Company;
+            Shareholder; Future; Value; Long; GrowthCurrent characteristicsCSR _low; Fie_perf_low;
+            Strength_low; Transport_sector; Mining_sectorStrengh_high; CSR_high; Fie_perf_low;
+            Finance_sector; Retail_sectorCSR_medium; Fie_perf_medium; Strength_high;
+            Finance_sectorMissing characteristicsStrenght_high; CSR_medium; Fie_perf_mediumCSR_low;
+            Fie_perf_high; Strengh_low; Weakness_lowCSR_low; Fie_perf_low; Strength_lowCurrent
+            firmsEcolab; Apache; Union Pacific; IntelOracle; Cisco; Cigna; MotorolaOxy; Lilly;
+            Merk</texte>
+        </objetmedia>
+      </tableau></section3><section3 id="s3n4"><no>4.
+				2.
+				4</no><titre>Technical Discourse</titre><para id="pa37"><no>37</no>
+        <alinea>The technical discourse, transcribed in Class 1, is called “Releases and
+          Consumption.” It echoes the limitation of polluting emissions through keywords such as
+          <marquage typemarq="italique">“emission, energy, reduce, waste, greenhouse, reduction,
+          etc.”</marquage> CEOs using this type of discourse lead low-responsibility firms, the
+          strength score is generally low and the overall level of responsibility is also low.
+          Moreover the financial performance of these firms seems to be low. These companies do not
+          seem proactive in terms of CSR and the use of this lexical field fills the gaps of
+          incomplete CSR across all dimensions. We assume that these firms only seek to limit
+          negative externalities. These reductions granted by the firm do not seem sufficient to
+          make it a socially responsible company. This technical approach is materialized by the
+          disclosure of figures that are supposed to bring credibility to CSR actions.</alinea>
+        <bloccitation>
+          <alinea>“Our North Sea and Egypt regions have substantially reduced emissions and costs by
+            replacing fuel oil with clean-burning natural gas to generate electricity.” </alinea>
+          <source>Firm n° 1</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“Reducing packaging waste and transportation costs for customers in additional
+            industries by replacing liquid chemistries with solids, employing Ecolab’s peracetic
+            acid chemistry in our energy services division to remove iron and microorganisms from
+            the water produced in shale gas recovery.”</alinea>
+          <source>Firm n° 102</source>
+        </bloccitation>
+      </para><para id="pa38"><no>38</no>
+        <alinea>This technical approach in the CEOs’ discourse hides a low overall CSR. There is
+          only a limitation of pre-existing negative externalities to the activity, whereas
+          responsibility is defined above all as a proactive attitude. Firms whose CEOs use this
+          lexical field for the most part should not be retained by investors concerned about the
+          level of CSR. This speech is not a guarantee of an increased corporate social
+          responsibility because it lacks a strong strategic consideration. The responsibility
+          report then becomes a style effect aimed to improve the brand image.</alinea>
+      </para></section3><section3 id="s3n5"><no>4.
+				2.
+				5</no><titre>Entrenchment Discourse</titre><para id="pa39"><no>39</no>
+        <alinea>The analysis of the CEO’s speech also reveals a recurrence of the lexical field
+          related to philanthropic acts. This speech refers to Class 2, called “Report to the
+          Community.” It contains terms related to education - <marquage typemarq="italique">“educate, student, school, etc.”</marquage> and <marquage typemarq="italique">“nonprofit,
+          grant, charity, contribute, veteran, etc.”</marquage> The promotion of charitable actions
+          is part of an approach to improve the level of CSR and they are similar to strengths. This
+          is confirmed by the presence of companies with a high level of strength (Chi2 = 9) and an
+          equally high level of overall CSR. However, these firms are characterized by poor
+          financial performance (Chi2 = 7), unlike the strategic discourse which presents firms that
+          perform better financially for an equivalent level of corporate social
+          responsibility.</alinea>
+      </para><para id="pa40"><no>40</no>
+        <alinea>The emphasis on philanthropic acts in the opening speech of leaders reveals a
+          strategy of entrenchment. We assume that the low financial performance of the company
+          encourages executives to put in place actions that can help them safeguard their position
+          on the assumption that the expenses directed towards the community will be a good way to
+          keep their jobs. They allow employees to become involved through philanthropic projets so
+          the firm and its manager will be valued and benefit from a positive image in the media.
+          This strategy can then compensate for the poor results. Highlighting philanthropic
+          activities may reveal entrenchment strategy, especially since these activities are not
+          related to stakeholders who suffer from the firm’s negative externalities.</alinea>
+      </para><para id="pa41"><no>41</no>
+        <alinea>We also note that firms in the financial sector are highly represented in this
+          class. Soana’s (2011) work advocated the development of community activities to improve
+          overall performance in this industry. Nevertheless, the predominance of this type of
+          discourse in the executive director’s message does not necessarily seem to lead to a
+          strong financial performance, unlike the third class of “Long-Term Performance” speech.
+          Indeed, the latter is strongly present in this area as well. In this sector, it is
+          therefore preferable to invest in firms with a dominant strategic discourse. At an equal
+          level of responsibility, the latter shows an increased financial performance.</alinea>
+        <bloccitation>
+          <alinea>“Through actions like our partnerships with the Wounded Warriors project and
+            Student Veterans of America, we are empowering veterans through education and helping
+            provide them with workforce resources and skills.”</alinea>
+          <source>Firm n° 118</source>
+        </bloccitation>
+        <bloccitation>
+          <alinea>“16 million dollars in charitable contributions. We also launched the Center for
+            the Urban Child, an innovative initiative to help reduce children’s health disparities
+            in Philadelphia.”</alinea>
+          <source>Firm n° 34</source>
+        </bloccitation>
+      </para></section3><section3 id="s3n6"><no>4.
+				2.
+				6</no><titre>Strategic Discourse</titre><para id="pa42"><no>42</no>
+        <alinea>This speech relates a CSR policy integrated into the company’s long-term strategy.
+          It corresponds to text unit Class 3, “Long-Term Performance.” The executives of these
+          firms adopt a vocabulary related to the long-term performance of the company - “<marquage typemarq="italique">business, sustain, shareholder, value, etc</marquage>.” This approach
+          focuses on value and shareholders. This lexical field is characterized by high-CSR firms
+          with a high level of strength. These characteristics are confirmed by the visible absence
+          of low CSR. In addition, this speech concerns companies whose financial performance in
+          recent years has been relatively strong, compared to the sample selected.</alinea>
+        <bloccitation>
+          <alinea>“It is the right thing to do and it makes good business sense. Activities
+            mentioned in this report highligh our commitment to achieving sustained top performance
+            while conducting our business in accordance with high standards and values.”</alinea>
+          <source>Firm n° 117</source>
+        </bloccitation>
+      </para><para id="pa43"><no>43</no>
+        <alinea>The analysis of the CEO’s introduction speech reveals that it would be preferable
+          for an investor to select firms whose introduction speech is oriented towards the
+          long-term performance of the firm. CSR must be to the benefit of the company through a
+          better integration of its processes and actions within civil society. Our results suggest
+          that any lexical addition related to pollution control or philanthropy does not indicate
+          greater responsibility or increased financial performance -- on the contrary.</alinea>
+      </para></section3></section2></section1><section1 id="s1n5"><no>5</no><titre>Conclusion</titre><para id="pa44"><no>44</no>
+        <alinea>We have shown that sustainable reporting is a valuable source of information. The
+          analysis of these reports makes it possible to complete the informational need,
+          particularly on the managerial approach, for new positive screening strategies in
+          responsible asset selection, which will become increasingly important in the future. The
+          objective is to define the optimal trade-off between social responsibility and other
+          investment criteria (Berry, and Junkus, 2013, p. 708). Our analysis shows innovative
+          results due to the contribution of objective criteria in our discourse analysis. We have
+          revealed that the discourse in the sustainability reports and in the opening speech made
+          by the CEO is different according to the level of financial performance and the level of
+          CSR. These results confirm our first hypothesis, H1, that the analysis of the discourse in
+          the sustainability reports with regard to the firm’s overall performance level contains
+          information that is of substantial interest to investors. In addition, we were able to
+          partially respond positively to our second hypothesis, H2, that the emphasis on some
+          dimensions of CSR in the discourse seems not to be in line with the objectives of
+          maximizing shareholder value. The additional analysis of CEO discourse helps us to improve
+          our results and seems essential to the understanding of the managers’ CSR
+          strategy.</alinea>
+      </para><para id="pa45"><no>45</no>
+        <alinea>Our results suggest that it is better to invest in firms that integrate their
+          corporate social responsibility discourse into their production processes and within their
+          long-term financial strategy. The presence of other speeches will be less consistent with
+          the search for overall performance. Philanthropic discourses most often seek to compensate
+          for high levels of weakness or possible entrenchment strategy. Speeches relating to
+          technicality, where the reader is fed with quantitative data, are also not a guarantee of
+          a high CSR level. Finally, the use of lexical fields close to the notions of respect for
+          law and governance suggests a company that will be financially efficient but does not have
+          a proactive stance in its CSR approach. These companies can be considered as followers and
+          do not invest in material CSR engagement. These results are consistent with Odell and Ali
+          (2016), <marquage typemarq="italique">“That CSR often manifests itself in charitable
+          efforts that are relatively independent of the core business, such as building health
+          clinics or supporting schools. These ambitions are often noble, and they can be good for
+          public relations, but they are not always value-enhancing, and studies have shown that
+          many are value-destroying for shareholders”</marquage> (p. 100). Investors will then have
+          to assume a cost related to the implementation of philanthropic actions. Our results are
+          also in line with the conclusions of Igalens (2007); Kim <marquage typemarq="italique">et al.,</marquage> (2012); Platet-Pierrot and Giordano-Spring (2011). Finally, the main
+          finding relates that the discourse within responsibility reports may reveal itself to be
+          an internal moderator of the CSP and CFP relationship, in the sense of Grewatsch and
+          Kleindienst (2017). Indeed, from an instrumental CSR perspective, the involvement of
+          managers is crucial, and the discourse might reveal if firms properly manage CSR
+          expenditures to improve their financial performance. The reading of the sustainability
+          reports gives us information on the company’s use and perception of the CSR notion. It is
+          essential to avoid entrenchment strategy from managers and greenwashing. Thus, we strongly
+          encourage the use of these reports. This free and available information can be used to
+          complement asset selection methods when building financially efficient and socially
+          responsible portfolios.</alinea>
+      </para><para id="pa46"><no>46</no>
+        <alinea>As an extension of this study, it could be interesting to develop, on the one hand,
+          a longitudinal approach to identify fashion effects in speeches and to avoid possible
+          biases related to the choice of our analysis period. In fact, the link between CSR and
+          financial performance seems to be stronger during bearish markets (Ducassy, 2013). On the
+          other hand, it could also be interesting to develop the idea of an internal moderator of
+          the discourse employed, seeking to measure this effect in a direct and not implicit way.
+          Finally, it could be enlightening to focus on a particular sector in order to better
+          understand the link between the discourse, the level of CSR and the financial performance,
+          as suggested in Shalchian <marquage typemarq="italique">et al.,</marquage> (2015). This
+          would make it possible to develop a complete model for selecting financially responsible
+          and efficient assets and to be part of a more balanced approach based on the overall
+          responsible profile rather than a simple exclusionary policy.</alinea>
+      </para></section1></corps><partiesann lang="en"><grnotebio><notebio id="nb1" idrefs="au1" lang="en"><nompers><prenom>Julien</prenom><nomfamille>Lachuer</nomfamille></nompers><alinea>[No biographical note available for this author]</alinea></notebio><notebio id="nb2" idrefs="au2" lang="en"><nompers><prenom>Jean-Jacques</prenom><nomfamille>Lilti</nomfamille></nompers><alinea>[No biographical note available for this author]</alinea></notebio></grnotebio><grbiblio><biblio><refbiblio id="rb1"><marquage typemarq="petitecap">Agle</marquage>, Bradeley R.; <marquage typemarq="petitecap">Donardson</marquage>, Thomas; <marquage typemarq="petitecap">Freeman</marquage>, R. Edward; <marquage typemarq="petitecap">Jensen</marquage>, Michael C.; <marquage typemarq="petitecap">Mitchell</marquage>, Ronald K.; <marquage typemarq="petitecap">Wood</marquage>, Donna J. (2008). “Dialogue: Toward Superior Stakeholder Theory,”, <marquage typemarq="italique">Business Ethics Quarterly, </marquage>Vol<marquage typemarq="italique">. </marquage>18, N° 2, p. 153-190.</refbiblio>
+<refbiblio id="rb2"><marquage typemarq="petitecap">Amel</marquage>-<marquage typemarq="petitecap">Zadeh</marquage>, Amir; <marquage typemarq="petitecap">Serafeim</marquage>, George (2018). “Why and How Investors Use ESG Information: Evidence from a Global Survey,” <marquage typemarq="italique">Financial Analysts Journal,</marquage> Vol. 74, N° 3, p. 1-17.</refbiblio>
+<refbiblio id="rb3"><marquage typemarq="petitecap">Attarça</marquage>, Mourad; <marquage typemarq="petitecap">Jacquot</marquage>, Thierry (2005). “La représentation de la responsabilité sociale des entreprises: une confrontation entre les approches théoriques et les visions managériales,” Angers, <marquage typemarq="italique">XIV</marquage><exposant><marquage typemarq="italique">ème</marquage></exposant><marquage typemarq="italique"> Conférence Internationale de Management Stratégique</marquage>.</refbiblio>
+<refbiblio id="rb4"><marquage typemarq="petitecap">Arvidsson</marquage>, Susanne (2010). “Communication of Corporate Social Responsibility: A Study of the Views of Management Teams in Large Companies,” <marquage typemarq="italique">Journal of Business Ethics</marquage>, Vol. 96, p. 339-354.</refbiblio>
+<refbiblio id="rb5"><marquage typemarq="petitecap">Barnea</marquage>, Amir; <marquage typemarq="petitecap">Rubin</marquage>, Amir (2010). “Corporate Social Responsibility as a Conflict Between Shareholders,” <marquage typemarq="italique">Journal of Business Ethics</marquage>, Vol. 97, N° 1, p. 71-86.</refbiblio>
+<refbiblio id="rb6"><marquage typemarq="petitecap">Berry</marquage>, Thomas C.; <marquage typemarq="petitecap">Junkus</marquage>, Joan C. (2012). “Socially Responsible Investing: An Investor Perspective,” <marquage typemarq="italique">Journal of Business Ethics</marquage>, Vol. 112, N° 4, p. 707-720.</refbiblio>
+<refbiblio id="rb7"><marquage typemarq="petitecap">Bouslah</marquage>, Kais; <marquage typemarq="petitecap">Kryzanowski</marquage>, Lawrence; <marquage typemarq="petitecap">M’Zali</marquage>, Bouchra (2013). “The Impact of the Dimensions of Social Performance on Firm Risk,” <marquage typemarq="italique">Journal of Banking &amp; Finance</marquage>, Vol. 37, N° 4, p. 1258-1273.</refbiblio>
+<refbiblio id="rb8"><marquage typemarq="petitecap">Bouten</marquage>, Lies; <marquage typemarq="petitecap">Cho</marquage>, Charles H.; <marquage typemarq="petitecap">Michelon</marquage>, Giovanna; <marquage typemarq="petitecap">Roberts</marquage>, Robin W. (2018). “CSR Performance Proxies in Large-Sample Studies: Umbrella Advocates, Construct Clarity and the Validity Police”, <marquage typemarq="italique">SSRN</marquage>, 76 p.</refbiblio>
+<refbiblio id="rb9"><marquage typemarq="petitecap">Berger</marquage>, Peter L.; <marquage typemarq="petitecap">Luckmann</marquage>, Thomas (1966). “<marquage typemarq="italique">The Social Construction of Social Reality: A Treatise in the Sociology of Knowledge</marquage>,” New York: Anchor Books, p. 240.</refbiblio>
+<refbiblio id="rb10"><marquage typemarq="petitecap">Capron</marquage>, Michel; <marquage typemarq="petitecap">Quairel</marquage>-<marquage typemarq="petitecap">Lanoizelée</marquage>, Françoise (2004)<marquage typemarq="italique">. Mythes et réalités de l’entreprise responsable</marquage>, Paris, La Découverte, p. 252.</refbiblio>
+<refbiblio id="rb11"><marquage typemarq="petitecap">Chatterji</marquage>, Aaron K.; <marquage typemarq="petitecap">Levine</marquage> David I.; <marquage typemarq="petitecap">Toffel</marquage>, Michael W. (2009). “How Well Do Social Ratings Actually Measure Corporate Social Responsibility?”, <marquage typemarq="italique">Journal of Economics &amp; Management Strategy, </marquage>Vol. 18, N° 1, p. 125-169.</refbiblio>
+<refbiblio id="rb12"><marquage typemarq="petitecap">Chaudhri</marquage>, Vidhi (2016). “Corporate Social Responsibility and the Communication Imperative: Perspectives From CSR Managers,” <marquage typemarq="italique">International Journal of Business Communication, </marquage>Vol. 43, N° 4, p. 419-442.</refbiblio>
+<refbiblio id="rb13"><marquage typemarq="petitecap">Chin</marquage>, M. K.; <marquage typemarq="petitecap">Hambrick</marquage>, Donald C.; <marquage typemarq="petitecap">Trevino</marquage>, Linda K. (2013), “Political Ideologies of CEOs: The Influence of Executives’ Values on Corporate Social Responsibility,” <marquage typemarq="italique">Administrative Science Quarterly</marquage>, Vol. 58, N° 2, p. 197-232</refbiblio>
+<refbiblio id="rb14"><marquage typemarq="petitecap">Cho</marquage>, Charles H.; <marquage typemarq="petitecap">Roberts</marquage>, Robin W.; <marquage typemarq="petitecap">Patten</marquage>, Dennis M.; (2010). “The Language of U.S. Corporate Environmental Disclosure,” <marquage typemarq="italique">Accounting, Organizations and Society</marquage>, Vol. 35, N° 4, p. 431-443.</refbiblio>
+<refbiblio id="rb15"><marquage typemarq="petitecap">Christensen</marquage>, Lars T.; <marquage typemarq="petitecap">Morsing</marquage>, Mette; <marquage typemarq="petitecap">Thyssen</marquage>, Ole (2011). “The Polyphony of Corporate Social Responsibility: Deconstructing Accountability and Transparency in the Context of Identity and Hypocrisy.” In G. Cheney, S. May, and D. Munshi (Eds.) <marquage typemarq="italique">The Handbook of Communication</marquage> <marquage typemarq="italique">Ethics</marquage>, New York, NY: Routledge Curzon, p. 457-474.</refbiblio>
+<refbiblio id="rb16"><marquage typemarq="petitecap">Conaway</marquage>, Roger N.; <marquage typemarq="petitecap">Wardrope</marquage>, William J. (2010). “Do Their Words Really Matter? Thematic Analysis of U.S. and Latin American CEO Letters,” <marquage typemarq="italique">Journal of Business Communication</marquage>, Vol. 47, N° 2, p. 141-168</refbiblio>
+<refbiblio id="rb17"><marquage typemarq="petitecap">Conrad</marquage>, Charles; Poole, <marquage typemarq="petitecap">Marshall</marquage> Scott (2005). <marquage typemarq="italique">“</marquage>Strategic Organizational Communication: In a Global Economy,<marquage typemarq="italique">” </marquage>Belmont, CA, 6th Eds. Thomson Wadsworth.</refbiblio>
+<refbiblio id="rb18"><marquage typemarq="petitecap">Cordeiro</marquage>, James J.; <marquage typemarq="petitecap">Sarkis</marquage>, Joseph (1997). “Environmental proactivism and firm performance: evidence from security analyst earnings forecasts,” <marquage typemarq="italique">Business Strategy and the Environment</marquage>, Vol. 6, p. 104-114.</refbiblio>
+<refbiblio id="rb19"><marquage typemarq="petitecap">D’Almeida</marquage>, Nicole (2006). La Perspective Narratologique en Organisations, dans De la Broise P. et Lamarche T. Eds., <marquage typemarq="italique">Responsabilité Sociale: Vers une Nouvelle Communication des Entreprises?</marquage>, Paris, Presses Universitaires du Septentrion, p. 27-39.</refbiblio>
+<refbiblio id="rb20"><marquage typemarq="petitecap">Deegan</marquage>, Craig (2002). “The Legitimizing Effect of Social and Environmental Disclosures – A Theoretical Foundation,” <marquage typemarq="italique">Accounting, Auditing &amp; Accountability Journal</marquage>, Vol. 15, N° 3, p. 282-311.</refbiblio>
+<refbiblio id="rb21"><marquage typemarq="petitecap">Ducassy</marquage>, Isabelle (2013). “Does Corporate Social Responsibility Pay Off in Times of Crisis? An Alternate Perspective on the Relationship Between Financial and Corporate Social Performance,” <marquage typemarq="italique">Corporate Social Responsibility and Environment Management, </marquage>Vol. 20, p. 157-167.</refbiblio>
+<refbiblio id="rb22"><marquage typemarq="petitecap">Edmans</marquage>, Alex (2011). “Does the Stock Market Fully Value Intangibles? Employee Satisfaction and Equity Prices,” <marquage typemarq="italique">Journal of Financial Economics,</marquage> Vol. 101, N° 3, p. 621-640.</refbiblio>
+<refbiblio id="rb23"><marquage typemarq="petitecap">Forman</marquage>, Janis; <marquage typemarq="petitecap">Argenti</marquage>, Paul A. (2005). “How Corporate Communication Influences Strategy Implementation, Reputation and the Corporate Brand: An Exploratory Qualitative Study,” <marquage typemarq="italique">Corporate Reputation Review</marquage>, Vol. 8, N° 3, p. 245-264.</refbiblio>
+<refbiblio id="rb24"><marquage typemarq="petitecap">Godfrey</marquage>, Paul C.; <marquage typemarq="petitecap">Merrill</marquage>, Craig B.; <marquage typemarq="petitecap">Hansen</marquage>, Jared M. (2009). “The Relationship Between Corporate Social Responsibility and Shareholder Value: An Empirical Test of the Risk Management Hypothesis,” <marquage typemarq="italique">Strategic Management Journal</marquage>, Vol. 30, N° 4, p. 425-445.</refbiblio>
+<refbiblio id="rb25"><marquage typemarq="petitecap">Grewatsch</marquage>, Sylvia; <marquage typemarq="petitecap">Kleindienst</marquage>, Ingo (2017). “When Does It Pay to be Good? Moderators and Mediators in the Corporate Sustainability - Corporate Financial Performance Relationship: A Critical Review,” J<marquage typemarq="italique">ournal of Business Ethics</marquage>, Vol. 145, p. 383-416.</refbiblio>
+<refbiblio id="rb26"><marquage typemarq="petitecap">Hahn</marquage>, R.,; Lülfs, R. (2014). “Legitimizing Negative Aspects in GRI-Oriented Sustainability Reporting: A Qualitative Analysis of Corporate Disclosure Strategies,” <marquage typemarq="italique">Journal of Business Ethics, </marquage>Vol. 123, N° 3, p. 402.</refbiblio>
+<refbiblio id="rb27"><marquage typemarq="petitecap">Harjoto</marquage>, Maretno A.; Jo, Hoje (2011). “Corporate Governance and CSR Nexus,” <marquage typemarq="italique">Journal of Business Ethics</marquage>, Vol. 100, N° 1, p. 45-67.</refbiblio>
+<refbiblio id="rb28"><marquage typemarq="petitecap">Huselid</marquage>, Mark A. (1995). “The Impact of Human Resource Management Practices on Turnover, Productivity, and Coporate Financial Performance,” <marquage typemarq="italique">Academy of Management Journal, </marquage>Vol. 38, N° 3, p. 635-672.</refbiblio>
+<refbiblio id="rb29"><marquage typemarq="petitecap">Igalens</marquage>, Jacques (2007). “L’analyse du discours de la responsabilité sociale de l’entreprise à travers les rapports annuels de développement durable d’entreprises françaises du CAC 40,” <marquage typemarq="italique">Finance Contrôle Stratégie</marquage>, Vol. 10, N° 2, p. 129-155.</refbiblio>
+<refbiblio id="rb30"><marquage typemarq="petitecap">Jensen</marquage>, Michael C.; <marquage typemarq="petitecap">Meckling</marquage>, William H. (1976). “Theory of the Firm: Managerial Behavior, Agency Costs and Ownership Structure,” <marquage typemarq="italique">Journal of Financial Economics</marquage>, Vol. 3, N° 4, p. 305-360.</refbiblio>
+<refbiblio id="rb31"><marquage typemarq="petitecap">Jiao</marquage>, Yawen (2010). “Stakeholder Welfare and Firm Value,” <marquage typemarq="italique">Journal of Banking &amp; Finance</marquage>, Vol. 34, N° 10, p. 2549-2561.</refbiblio>
+<refbiblio id="rb32">Kim, Yongtae; <marquage typemarq="petitecap">Park</marquage>, Myung S.; <marquage typemarq="petitecap">Wier</marquage>, Benson (2012). “Is Earnings Quality Associated with Corporate Social Responsibility?”, <marquage typemarq="italique">The Accounting Review</marquage>, Vol. 87, N° 3, p. 761-796.</refbiblio>
+<refbiblio id="rb33"><marquage typemarq="petitecap">Kotsantonis</marquage>, Sakis; <marquage typemarq="petitecap">Pinney</marquage>, Chris; <marquage typemarq="petitecap">Serafaim</marquage>, George (2016). “ESG Integration in Investment Management: Myths and Realities,” <marquage typemarq="italique">Journal of Applied Corporate Finance, </marquage>Vol. 28, N° 2, p. 10-16.</refbiblio>
+<refbiblio id="rb34"><marquage typemarq="petitecap">Lindblom</marquage>, C. K. (1994). “The implications of Organizational Legitimacy for Corporate Social Performance and Disclosure,” <marquage typemarq="italique">Paper presented at the Critical Perspectives on Accounting Conference,</marquage> New-York.</refbiblio>
+<refbiblio id="rb35"><marquage typemarq="petitecap">Lu</marquage>, Wen-Min; <marquage typemarq="petitecap">Wang</marquage>, Wei-Kang; <marquage typemarq="petitecap">Lee</marquage>, Hsiao-Lan (2013). “The relationship between corporate social responsibility and corporate performance: Evidence from the U.S. semiconductor industry,” <marquage typemarq="italique">International Journal of Production Research</marquage>, Vol. 51, N° 19, p. 5683-5695.</refbiblio>
+<refbiblio id="rb36"><marquage typemarq="petitecap">Odgen</marquage>, Stuart; <marquage typemarq="petitecap">Watson</marquage>, Robert (1999). “Corporate Performance and Stakeholder Management: Balancing Shareholder and Customer Interests in the U.K. Privatized Water Industry,” <marquage typemarq="italique">Academy of Management Journal</marquage>, Vol. 42, N° 5, p. 526-538.</refbiblio>
+<refbiblio id="rb37"><marquage typemarq="petitecap">Odell</marquage>, Jamieson; <marquage typemarq="petitecap">Ali</marquage>, Usman (2016). “ESG Investing in Emerging and Frontier Markets,” <marquage typemarq="italique">Journal of Applied Corporate Finance</marquage>, Vol. 28, N° 2, p. 96-101.</refbiblio>
+<refbiblio id="rb38"><marquage typemarq="petitecap">Oikonomou</marquage>, Ioannis; <marquage typemarq="petitecap">Brooks</marquage>, Chris; <marquage typemarq="petitecap">Pavelin</marquage>, Stephen (2012). “The Impact of Corporate Social Performance on Financial Risk and Utility: A Longitudinal Analysis,” <marquage typemarq="italique">Financial Management</marquage>, Vol. 41, N° 2, p. 483-515.</refbiblio>
+<refbiblio id="rb39"><marquage typemarq="petitecap">Platet</marquage>-<marquage typemarq="petitecap">Pierrot</marquage>, François; G<marquage typemarq="petitecap">iordano-Spring</marquage>, Sophie (2011). “Des entreprises responsables: à l’égard de qui et à quel propos? Une étude du message du président de sociétés cotées françaises,” <marquage typemarq="italique">Revue Management et Avenir</marquage>, Vol. 45, p. 62-79.</refbiblio>
+<refbiblio id="rb40"><marquage typemarq="petitecap">Preston</marquage>, Lee E; <marquage typemarq="petitecap">Post</marquage>, James E. (1981). “Private Management and Public Policy,” <marquage typemarq="italique">California Management Review</marquage>, Vol. 23, N° 3, p. 56-62.</refbiblio>
+<refbiblio id="rb41"><marquage typemarq="petitecap">Shalchian</marquage>, Homayoon; <marquage typemarq="petitecap">Kais</marquage>, Bouslah; <marquage typemarq="petitecap">M’Zali</marquage>, Bouchra (2015). “A Multi-Dimensional Analysis of Corporate Social Responsibility: Different Signals in Different Industries,” <marquage typemarq="italique">Journal of Financial Risk Management</marquage>, Vol. 4, p. 90-107.</refbiblio>
+<refbiblio id="rb42"><marquage typemarq="petitecap">Shalchian</marquage>, Homayoon; <marquage typemarq="petitecap">M’Zali</marquage>, Bouchra; <marquage typemarq="petitecap">Tebini</marquage>, Hager (2018). “A Multi-Dimensional Analysis of Corporate Social Responsibility: The Liquidity Risk Factor,” <marquage typemarq="italique">Journal of Financial Risk Management</marquage>, Vol. 7, p. 241-253.</refbiblio>
+<refbiblio id="rb43"><marquage typemarq="petitecap">Schoeneborn</marquage>, Dennis; <marquage typemarq="petitecap">Trittin</marquage>, Hannah (2013). “Transcending Transmission: Towards a Constitutive Perspective on CSR Communication,” <marquage typemarq="italique">Corporate Communications: An International Journal</marquage>, Vol. 18, N° 2, p. 193-211.</refbiblio>
+<refbiblio id="rb44"><marquage typemarq="petitecap">Seignour</marquage>, Amélie (2011). “Méthode d’analyse des discours. l’exemple de l’allocution d’un dirigeant d’entreprise publique,” <marquage typemarq="italique">Revue Française de Gestion</marquage>, Vol. 37, N° 211, p. 29-45.</refbiblio>
+<refbiblio id="rb45"><marquage typemarq="petitecap">Soana</marquage>, Maria-Gaia (2011). “The Relationship Between Corporate Social Performance and Corporate Financial Performance in the Banking Sector,” <marquage typemarq="italique">Journal of Business Ethics</marquage>, Vol. 104, N° 1, p. 133-148.</refbiblio>
+<refbiblio id="rb46"><marquage typemarq="petitecap">Ullmann</marquage>, Arieh A. (1985). “Data in Search of a Theory: A Critical Examination of the Relationships Among Social Performance, Social Disclosure, and Economic Performance of U.S. Firms,” <marquage typemarq="italique">Academy of Management Review</marquage>, Vol. 10, N° 3, p. 540-557.</refbiblio>
+<refbiblio id="rb47"><marquage typemarq="petitecap">Waddock</marquage>, Sandra A. (2003). “Myths and Realities of Social Investing,” <marquage typemarq="italique">Organization &amp; Environment,</marquage> Vol. 16, N° 3, p. 369-380.</refbiblio></biblio></grbiblio><grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:type="simple" xlink:href="https://www.ussif.org/blog_home.asp?Display=118">https://www.ussif.org/blog_home.asp?Display=118</liensimple>, consulted on 1 December
+          2018.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>This database is considered as a reference in the measurement of companies’ ESG
+          criteria, <marquage typemarq="italique">“the de facto research standard at the
+          moment”</marquage> Waddock (2003, p. 369) and more recently by Chatterji, <marquage typemarq="italique">et al.</marquage>, (2009) or Bouten, <marquage typemarq="italique">et
+          al.</marquage>, (2018). According to Chim, <marquage typemarq="italique">et
+          al</marquage>., (2013) the KLD database is less problematic and less subjective than other
+          measures of level of responsibility.</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>To ensure the robustness of our results, other financial performance measures have
+          been used, such as the Treynor and Sortino ratios. Due to a very high correlation, greater
+          than 0.87, our results did not show significant differences. We therefore preferred the
+          use of the Sharpe ratio that takes into account the overall risk of assets, knowing that
+          it’s difficult to responsibly diversify financial portfolios due to a more restrictive
+          universe of available assets.</alinea>
+      </note>
+    </grnote></partiesann><partiesann lang="fr"><grnotebio><notebio id="nb3" idrefs="au1" lang="fr"><alinea><marquage typemarq="gras">Julien Lachuer</marquage> : Maître de conférences en science de gestion contrôle de gestion - finance</alinea></notebio><notebio id="nb4" idrefs="au2" lang="fr"><alinea><marquage typemarq="gras">Jean-Jacques Lilti</marquage> : Professeur des Universités</alinea></notebio></grnotebio></partiesann><partiesann lang="es"><grnotebio><notebio id="nb5" idrefs="au1" lang="es"><alinea><marquage typemarq="gras">Julien Lachuer</marquage>: Profesor titular de control de gestión de la ciencia de la administración - finanzas</alinea></notebio><notebio id="nb6" idrefs="au2" lang="es"><alinea><marquage typemarq="gras">Jean-Jacques Lilti</marquage>: Profesor titular</alinea></notebio></grnotebio></partiesann></article>

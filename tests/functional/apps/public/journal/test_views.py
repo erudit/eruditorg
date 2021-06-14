@@ -1716,6 +1716,40 @@ class TestArticleDetailView:
             "des figures</a></p>"
         )
 
+    def test_equation_caption_position(self):
+        article = ArticleFactory(
+            from_fixture="1077786ar",
+            localidentifier="article",
+            issue__year="2021",
+            issue__localidentifier="issue",
+            issue__journal__code="journal",
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        response = Client().get(url)
+        html = response.content.decode()
+        # Check that the type `titre` captions are displayed above the equation and that the
+        # type `alinea` are displayed bellow
+        assert (
+            '<aside class="equation">'
+            '<div class="legende"><p class="legende"><strong class="titre">'
+            "Equation 5 : Profitability measurement</strong></p></div>\n"
+            '<span class="no">(5)</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA'
+            'EAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="/fr/'
+            'revues/journal/2021-issue/article/media/2181034.jpg 91w" data-aspectratio="2.06818181'
+            '8181818" width="91" height="44" class="lazyload" id="im5" alt="equation: equation ple'
+            'ine grandeur">'
+            '<div class="legende">\n<p class="alinea">With:</p>\n'
+            '<p class="alinea"><em>S</em><sub><em>i</em></sub> <em>= Sharpe\n'
+            "              Ratio</em></p>\n"
+            '<p class="alinea"><em>R</em><sub><em>i</em></sub> <em>= return of the asset\n'
+            "              </em></p>\n"
+            '<p class="alinea"><em>R</em><sub><em>f</em></sub> <em>= risk-free\n'
+            "              rate</em></p>\n"
+            '<p class="alinea">σ<sub><em>i</em></sub> <em>= Strandard deviation of the asset’s'
+            " excess return\n              5</em></p>\n</div></aside>" in html
+        )
+
     def test_figure_with_float_dimensions(self, monkeypatch):
         article = ArticleFactory(
             from_fixture="1068859ar",
