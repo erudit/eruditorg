@@ -102,8 +102,7 @@ class SubscriptionMiddleware:
 
         referer = self._get_user_referer_for_subscription(request)
 
-        if active_subscription and active_subscription.referers.filter(referer=referer):
-            referer = active_subscription.referers.first()
+        if active_subscription and active_subscription.referer == referer:
             logger.info(
                 '{url} {method} {path} {protocol} - {client_port} - {client_ip} "{user_agent}" "{referer_url}" {code} {size} {referer_access}'.format(  # noqa
                     url=request.get_raw_uri(),
@@ -116,7 +115,7 @@ class SubscriptionMiddleware:
                     referer_url=request.META.get("HTTP_REFERER"),
                     code=response.status_code,
                     size="",
-                    referer_access=referer.referer,
+                    referer_access=active_subscription.referer,
                 )
             )
 

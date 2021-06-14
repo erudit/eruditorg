@@ -18,7 +18,6 @@ from core.subscription.test.factories import JournalAccessSubscriptionPeriodFact
 from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 from core.subscription.test.factories import JournalManagementSubscriptionPeriodFactory
-from core.subscription.test.factories import InstitutionRefererFactory
 from core.subscription.test.factories import AccessBasketFactory
 
 
@@ -68,36 +67,16 @@ class TestJournalAccessSubscription:
         assert sub.provides_access_to(journal=j2)
         assert not sub.provides_access_to(journal=j3)
 
-
-@pytest.mark.django_db
-class TestUserSubscriptions:
-    def test_the_first_subscription_is_the_active_subscription(self):
-        from core.subscription.models import UserSubscriptions
-
-        subs = UserSubscriptions()
-        subscription = JournalAccessSubscriptionFactory()
-        subs.add_subscription(subscription)
-        assert subs.active_subscription == subscription
-
-
-@pytest.mark.django_db
-class TestInstitutionReferer:
-    def _subscribe_referer(self, referer=None):
-        subscription = JournalAccessSubscriptionFactory(post__valid=True)
-        institution_referer = InstitutionRefererFactory(subscription=subscription, referer=referer)
-        return institution_referer
-
     @pytest.mark.parametrize("subscription_referer", ("https://erudit.org",))
     @pytest.mark.parametrize(
         "user_referer",
         ("https://www.erudit.org", "http://www.erudit.org", "http://www.erudit.org/some/path"),
     )
     def test_can_find_an_institution_referer_by_netloc(self, user_referer, subscription_referer):
-        institution_referer = self._subscribe_referer(referer=subscription_referer)
-        assert (
-            JournalAccessSubscription.valid_objects.get_for_referer(user_referer)
-            == institution_referer.subscription
-        )  # noqa
+        subscription = JournalAccessSubscriptionFactory(
+            post__valid=True, referer=subscription_referer
+        )
+        assert JournalAccessSubscription.valid_objects.get_for_referer(user_referer) == subscription
 
     @pytest.mark.parametrize(
         "referer,should_find",
@@ -109,10 +88,9 @@ class TestInstitutionReferer:
         ],
     )
     def test_can_find_an_institution_referer_by_netloc_and_path(self, referer, should_find):
-        institution_referer = self._subscribe_referer(referer=referer)
+        subscription = JournalAccessSubscriptionFactory(post__valid=True, referer=referer)
         assert (
-            JournalAccessSubscription.valid_objects.get_for_referer(referer)
-            == institution_referer.subscription  # noqa
+            JournalAccessSubscription.valid_objects.get_for_referer(referer) == subscription
             or not should_find
         )
 
@@ -124,17 +102,25 @@ class TestInstitutionReferer:
         ),
     )
     def test_can_find_an_institution_referer_with_netloc_port_path_and_querystring(self, referer):
-        institution_referer = self._subscribe_referer(referer=referer)
-        assert (
-            JournalAccessSubscription.valid_objects.get_for_referer(referer)
-            == institution_referer.subscription
-        )  # noqa
+        subscription = JournalAccessSubscriptionFactory(post__valid=True, referer=referer)
+        assert JournalAccessSubscription.valid_objects.get_for_referer(referer) == subscription
 
     def test_can_only_find_institution_referer_when_path_fully_match(self):
-        self._subscribe_referer(referer="http://www.erudit.org.proxy.com/")
-        assert not JournalAccessSubscription.valid_objects.get_for_referer(
-            "http://www.erudit.org/"
-        )  # noqa
+        JournalAccessSubscriptionFactory(
+            post__valid=True, referer="http://www.erudit.org.proxy.com/"
+        )
+        assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/")
+
+
+@pytest.mark.django_db
+class TestUserSubscriptions:
+    def test_the_first_subscription_is_the_active_subscription(self):
+        from core.subscription.models import UserSubscriptions
+
+        subs = UserSubscriptions()
+        subscription = JournalAccessSubscriptionFactory()
+        subs.add_subscription(subscription)
+        assert subs.active_subscription == subscription
 
 
 @pytest.mark.django_db

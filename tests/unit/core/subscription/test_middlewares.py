@@ -70,7 +70,7 @@ class TestSubscriptionMiddleware:
         )
 
         referer_subscription = JournalAccessSubscriptionFactory(
-            post__valid=True, post__referers=["http://www.umontreal.ca"]
+            post__valid=True, referer="http://www.umontreal.ca"
         )
 
         request = get_anonymous_request()
@@ -115,7 +115,7 @@ class TestSubscriptionMiddleware:
         request.COOKIES["HTTP_REFERER"] = "http://www.umontreal.ca"
 
         subscription = JournalAccessSubscriptionFactory(
-            post__valid=True, post__referers=["http://www.umontreal.ca"]
+            post__valid=True, referer="http://www.umontreal.ca"
         )
 
         middleware = SubscriptionMiddleware()
@@ -134,7 +134,7 @@ class TestSubscriptionMiddleware:
         request.META["HTTP_REFERER"] = "http://www.umontreal.ca"
 
         subscription = JournalAccessSubscriptionFactory(
-            post__valid=True, post__referers=["http://www.umontreal.ca"]
+            post__valid=True, referer="http://www.umontreal.ca"
         )
 
         middleware = SubscriptionMiddleware()
@@ -159,7 +159,7 @@ class TestSubscriptionMiddleware:
         JournalAccessSubscriptionFactory(
             journals=[article.issue.journal],
             post__valid=True,
-            post__referers=["http://www.umontreal.ca"],
+            referer="http://www.umontreal.ca",
         )
 
         middleware = SubscriptionMiddleware()
@@ -194,7 +194,7 @@ class TestSubscriptionMiddleware:
             post__valid=True,
             post__ip_start="1.1.1.1",
             post__ip_end="1.1.1.1",
-            post__referers=["http://umontreal.ca"],
+            referer="http://umontreal.ca",
         )
 
         request = get_anonymous_request()
@@ -218,7 +218,7 @@ class TestSubscriptionMiddleware:
         subscription = JournalAccessSubscriptionFactory(
             journals=[article.issue.journal],
             post__valid=True,
-            post__referers=["http://www.umontreal.ca"],
+            referer="http://www.umontreal.ca",
         )
 
         middleware = SubscriptionMiddleware()

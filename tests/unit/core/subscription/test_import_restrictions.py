@@ -10,7 +10,6 @@ from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import (
     JournalAccessSubscription,
     JournalAccessSubscriptionPeriod,
-    InstitutionReferer,
 )
 from core.subscription.restriction.models import Revueabonne
 from core.subscription.test.factories import (
@@ -239,7 +238,7 @@ def test_can_skip_subscribers_with_no_email():
 @pytest.mark.django_db
 def test_dry_run_mode_does_not_create_anything():
     journal = JournalFactory()
-    abonne1 = AbonneFactory.create(referer="http://www.erudit.org/")
+    abonne1 = AbonneFactory.create()
     abonne1.save()
 
     IpabonneFactory.create(abonneid=abonne1.pk)
@@ -250,7 +249,6 @@ def test_dry_run_mode_does_not_create_anything():
     call_command("import_restrictions", *[], **{"dry_run": True})
 
     assert get_user_model().objects.count() == 0
-    assert InstitutionReferer.objects.count() == 0
     assert LegacyAccountProfile.objects.count() == 0
     assert JournalAccessSubscriptionPeriod.objects.count() == 0
     assert Organisation.objects.count() == 0
