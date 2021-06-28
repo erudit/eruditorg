@@ -352,7 +352,7 @@ class ArticleAccessLogMixin:
 
         username = request.user.username if request.user else ""
 
-        client_ip, _ = get_client_ip(request, proxy_order="right-most")
+        client_ip, _ = get_client_ip(request)
         article_access_log = ArticleAccessLog(
             # apache
             timestamp=timezone.now(),
