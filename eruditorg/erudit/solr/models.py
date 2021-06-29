@@ -127,6 +127,10 @@ class SolrDocument:
         return urls[0] if urls else None
 
     @property
+    def external_url(self):
+        return self.url and "id.erudit.org" not in self.url
+
+    @property
     def numero(self):
         return "-".join(self.solr_data.get("Numero")) if "Numero" in self.solr_data else None
 
@@ -350,6 +354,8 @@ def get_model_instance(solr_data):
     if generic.document_type == "thesis":
         return Thesis(solr_data)
     elif generic.document_type == "article":
+        if generic.external_url:
+            return ExternalArticle(solr_data)
         try:
             issue = erudit_models.Issue.from_fedora_ids(solr_data["RevueID"], solr_data["NumeroID"])
             return InternalArticle(solr_data, issue)

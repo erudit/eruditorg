@@ -15,7 +15,7 @@
       </a>
     </li>
     {% endswitch %}
-    {% if article.urlpdf %}
+    {% if not article.has_external_url and article.urlpdf %}
     <li>
       <a class="tool-btn"
          href="{% url 'public:journal:article_raw_pdf' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
@@ -25,7 +25,7 @@
       </a>
     </li>
     {% endif %}
-    {% if article.processing == 'complet' %}
+    {% if not article.has_external_url and article.processing == 'complet' %}
     <li>
       <a class="tool-btn" href="{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
         <span class="toolbox-html">HTML</span>
