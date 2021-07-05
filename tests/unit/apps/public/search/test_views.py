@@ -1,4 +1,5 @@
 import pytest
+import unittest
 
 from bs4 import BeautifulSoup
 from django.test import Client
@@ -7,6 +8,7 @@ from django.urls import reverse
 from apps.public.journal.viewmixins import SolrDataMixin
 from apps.public.search.forms import SearchForm
 from erudit.test.factories import ArticleFactory, SolrDocumentFactory, ThesisFactory
+from erudit.test.fedora import FakeAPI
 from erudit.test.solr import FakeSolrData
 
 
@@ -103,3 +105,11 @@ class TestSearchResultsView:
         article_detail_citation_tools = dom.find("div", {"id": "id_cite_modal_foo"})
 
         assert article_detail_citation_tools in citation_modal
+
+    def test_search_results_do_not_call_fedora(self):
+        ArticleFactory(title="foo")
+        with unittest.mock.patch("erudit.fedora.cache.requests") as mock_requests:
+            fake_api = FakeAPI()
+            mock_requests.get.side_effect = fake_api.get
+            Client().get(reverse("public:search:results"), data={"basic_search_term": "foo"})
+            assert mock_requests.get.call_count == 0
