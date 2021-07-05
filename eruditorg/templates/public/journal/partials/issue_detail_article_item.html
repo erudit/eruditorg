@@ -15,7 +15,17 @@
       </a>
     </li>
     {% endswitch %}
-    {% if not article.has_external_url and article.urlpdf %}
+    {% if article.urlpdf %}
+    {% if article.has_external_url %}
+    <li>
+      <a class="tool-btn"
+         href="{{ article.urlpdf }}"
+         title="{% translate 'Télécharger' %}"
+         target="_blank">
+        <span class="toolbox-pdf">PDF</span>
+      </a>
+    </li>
+    {% else %}
     <li>
       <a class="tool-btn"
          href="{% url 'public:journal:article_raw_pdf' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
@@ -25,9 +35,16 @@
       </a>
     </li>
     {% endif %}
+    {% endif %}
     {% if not article.has_external_url and article.processing == 'complet' %}
     <li>
       <a class="tool-btn" href="{% url 'public:journal:article_detail' issue.journal.code issue.volume_slug issue.localidentifier article.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
+        <span class="toolbox-html">HTML</span>
+      </a>
+    </li>
+    {% elif article.urlhtml %}
+    <li>
+      <a class="tool-btn" href="{{ article.urlhtml }}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
         <span class="toolbox-html">HTML</span>
       </a>
     </li>
