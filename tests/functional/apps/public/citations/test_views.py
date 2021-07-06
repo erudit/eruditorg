@@ -168,6 +168,18 @@ class TestSavedCitationListView:
         assert 'data-document-id="t2"' in html
 
 
+def test_can_cite_article_in_fedora(solr_client):
+    article = ArticleFactory()
+    solr_client.add_article(article)
+    user = UserFactory()
+    user.saved_citations.create(solr_id=article.solr_id)
+    client = Client(logged_user=user)
+    url = reverse("public:citations:list")
+    response = client.get(url)
+    assert b"data-document-id" in response.content
+    assert b'title="Citer"' in response.content
+
+
 def test_cannot_cite_article_not_in_fedora(solr_client):
     doc = SolrDocumentFactory()
     solr_client.add_document(doc)
@@ -177,7 +189,40 @@ def test_cannot_cite_article_not_in_fedora(solr_client):
     url = reverse("public:citations:list")
     response = client.get(url)
     assert b"data-document-id" in response.content
-    assert b"id_cite_modal_" not in response.content
+    assert b'title="Citer"' not in response.content
+
+
+@pytest.mark.parametrize(
+    "is_internal, presence_in_html",
+    (
+        (True, lambda x, y: x in y),
+        (False, lambda x, y: x not in y),
+    ),
+)
+def test_solr_internal_and_external_articles_display_pdf_icon(
+    is_internal, presence_in_html, solr_client
+):
+    """
+    Test 1: Article in Fedora (internal) displays `PDF` icon
+    Test 2: Article not in Fedora (external) does not display `PDF` icon
+    """
+    if is_internal:
+        # Add article to Fedora
+        article = ArticleFactory()
+        solr_client.add_article(article)
+    else:
+        # External article
+        article = SolrDocumentFactory()
+        solr_client.add_document(article)
+    user = UserFactory()
+    user.saved_citations.create(solr_id=article.solr_id if is_internal else article.id)
+    client = Client(logged_user=user)
+    url = reverse("public:citations:list")
+    response = client.get(url)
+    pdf_html = (
+        b'title="T\xc3\xa9l\xc3\xa9charger" target="_blank"><span class="toolbox-pdf">PDF</span>'
+    )
+    assert presence_in_html(pdf_html, response.content)
 
 
 @pytest.mark.parametrize(

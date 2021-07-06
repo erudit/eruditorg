@@ -1031,6 +1031,80 @@ class TestIssueDetailView:
             "\n    None\n    </a>"
         )
 
+    @pytest.mark.parametrize(
+        "key_1, value_1, key_2, value_2, key_3, value_3, html_string, presence_in_html",
+        (
+            (
+                "localidentifier",
+                "article",
+                "processing",
+                "complet",
+                "urlpdf",
+                "https://test/",
+                '<a class="tool-btn"\n         href="https://test/"\n         title="Télécharger"'
+                '\n         target="_blank"><span class="toolbox-pdf">PDF</span></a>',
+                lambda x, y: x in y,
+            ),
+            (
+                "localidentifier",
+                "article",
+                "processing",
+                "complet",
+                "urlhtml",
+                "https://test/",
+                '<a class="tool-btn"\n         href="https://test/"\n         title="Télécharger"'
+                '\n         target="_blank"><span class="toolbox-pdf">PDF</span></a>',
+                lambda x, y: x not in y,
+            ),
+            (
+                "localidentifier",
+                "article",
+                "processing",
+                "complet",
+                "urlhtml",
+                "https://test/",
+                '<a class="tool-btn" href="https://test/" title="Lire l\'article en texte '
+                'intégral"><span class="toolbox-html">HTML</span></a>',
+                lambda x, y: x in y,
+            ),
+            (
+                "localidentifier",
+                "article",
+                "processing",
+                "complet",
+                "urlpdf",
+                "https://test/",
+                '<a class="tool-btn" href="https://test/" title="Lire l\'article en texte '
+                'intégral"><span class="toolbox-html">HTML</span></a>',
+                lambda x, y: x not in y,
+            ),
+        ),
+    )
+    @unittest.mock.patch("eruditarticle.objects.publication.EruditPublication.get_summary_articles")
+    def test_article_html_and_pdf_icons_display_for_external_articles(
+        self,
+        mock_get_summary_articles,
+        key_1,
+        value_1,
+        key_2,
+        value_2,
+        key_3,
+        value_3,
+        html_string,
+        presence_in_html,
+    ):
+        """
+        Test 1: External article with `urlpdf` displays `PDF` icon
+        Test 2: External article without `urlpdf` does not display `PDF` icon
+        Test 3: External article with `urlhtml` displays `HTML` icon
+        Test 4: External article without `urlhtml` does not display `HTML` icon
+        """
+        issue = IssueFactory()
+        article = SummaryArticle(**{key_1: value_1, key_2: value_2, key_3: value_3})
+        mock_get_summary_articles.return_value = [article]
+        html = Client().get(issue_detail_url(issue)).content.decode()
+        assert presence_in_html(html_string, html)
+
 
 class TestArticleDetailView:
     @pytest.fixture(autouse=True)

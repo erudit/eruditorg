@@ -113,3 +113,43 @@ class TestSearchResultsView:
             mock_requests.get.side_effect = fake_api.get
             Client().get(reverse("public:search:results"), data={"basic_search_term": "foo"})
             assert mock_requests.get.call_count == 0
+
+    @pytest.mark.parametrize(
+        "is_internal, html_string, presence_in_html",
+        (
+            (
+                True,
+                '<a class="tool-btn tool-download" data-href="/fr/revues/journal/2021-issue/foo.pd'
+                'f">\n                      <span class="toolbox-pdf">PDF</span>\n                '
+                '      <span class="tools-label">Télécharger</span>\n                    </a>',
+                lambda x, y: x in y,
+            ),
+            (
+                False,
+                '<span class="toolbox-pdf">PDF</span>\n                      <span class="tools-la'
+                'bel">Télécharger</span>\n                    </a>',
+                lambda x, y: x not in y,
+            ),
+        ),
+    )
+    def test_search_results_internal_and_external_articles_display_pdf_icon(
+        self, is_internal, html_string, presence_in_html, solr_client
+    ):
+        """
+        Test 1: Article in Fedora (internal) displays `PDF` icon
+        Test 2: Article not in Fedora (external) does not display `PDF` icon
+        """
+        # Add article to Fedora and Solr. PDF icon should be displayed.
+        if is_internal:
+            ArticleFactory(
+                localidentifier="foo",
+                title="foo",
+                issue__localidentifier="issue",
+                issue__year="2021",
+                issue__journal__code="journal",
+            )
+        else:
+            SolrDocumentFactory(id="bar", title="foo bar")
+        url = reverse("public:search:results")
+        response = Client().get(url, data={"basic_search_term": "foo"})
+        assert presence_in_html(html_string, response.content.decode())
