@@ -2086,6 +2086,27 @@ class TestArticleDetailView:
         # Industrial Relations).
         assert expected_result in citation
 
+    def test_display_multilingual_abstract_and_keywords_titles(self):
+        article = ArticleFactory(
+            from_fixture="1078477ar",
+            localidentifier="article",
+            issue__year="2021",
+            issue__localidentifier="issue",
+            issue__journal__code="journal",
+            issue__journal__open_access=True,
+        )
+        url = article_detail_url(article)
+        html = Client().get(url).content.decode()
+        # Check that all the `Abstract` and `Keywords` titles are displayed
+        assert "<h3>Abstract</h3>" in html
+        assert "<strong>Keywords:</strong>" in html
+        assert "<h3>Résumé</h3>" in html
+        assert "<strong>Mots-clés :</strong>" in html
+        assert "<h3>Abstrakti</h3>" in html
+        assert "<strong>Nyckelord:\n              </strong>" in html
+        assert "<h3>Abstrakt</h3>" in html
+        assert "<strong>Avainsanat:\n              </strong>" in html
+
     def test_doi_with_extra_space(self):
         article = ArticleFactory(
             from_fixture="1009368ar",
