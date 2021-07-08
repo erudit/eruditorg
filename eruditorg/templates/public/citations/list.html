@@ -145,11 +145,13 @@
                 </a>
               </li>
               {% endif %}
+              {% if document.processing == 'C' %}
               <li>
                 <a class="tool-btn" href="{{ document.url }}" title="{% blocktranslate %}Lire l'article en texte intégral{% endblocktranslate %}">
                   <span class="toolbox-html">HTML</span>
                 </a>
               </li>
+              {% endif %}
               {% endspaceless %}
             </ul>
 
