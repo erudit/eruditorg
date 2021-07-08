@@ -222,6 +222,20 @@ def get_coverpage(article: Article) -> bytes:
             )
     header.append(extra_large_spacer)
 
+    # Erratum.
+    erratum_url = article.issue.erudit_object.get_erratum_url()
+    if erratum_url is not None:
+        header.append(
+            Paragraph(
+                _(
+                    '--&gt; Voir l’<a href="{url}" color="#ff4242"><strong>erratum</strong></a>'
+                    " concernant cet article"
+                ).format(url=erratum_url),
+                styles["h1"],
+            )
+        )
+        header.append(extra_large_spacer)
+
     # Article titles.
     titles = article.erudit_object.get_titles()
     if titles["main"].title is None and not titles["reviewed_works"]:
