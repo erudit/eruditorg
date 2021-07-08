@@ -2724,8 +2724,8 @@
       <!-- abstract title -->
       <xsl:element name="h3">
         <xsl:choose>
-          <xsl:when test="title">
-            <xsl:value-of select="title"/>
+          <xsl:when test="titre">
+            <xsl:value-of select="titre"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:choose>
@@ -2741,7 +2741,7 @@
       </xsl:element>
 
       <!-- abstract content -->
-      <xsl:apply-templates select="."/>
+      <xsl:apply-templates select="*[not(name()='titre')]"/>
 
       <!-- keywords -->
       <xsl:call-template name="motscles">
@@ -2766,12 +2766,19 @@
         <xsl:element name="p">
           <xsl:element name="strong">
             <xsl:choose>
-              <xsl:when test="@lang = 'fr'">Mots-clés&#160;:</xsl:when>
-              <xsl:when test="@lang = 'en'">Keywords:</xsl:when>
-              <xsl:when test="@lang = 'es'">Palabras clave:</xsl:when>
-              <xsl:when test="@lang = 'de'">Stichworte:</xsl:when>
-              <xsl:when test="@lang = 'pt'">Palavras chaves:</xsl:when>
-              <xsl:when test="@lang = 'it'">Parole chiave:</xsl:when>
+              <xsl:when test="titre">
+                <xsl:value-of select="titre"/>:
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:choose>
+                <xsl:when test="@lang = 'fr'">Mots-clés&#160;:</xsl:when>
+                <xsl:when test="@lang = 'en'">Keywords:</xsl:when>
+                <xsl:when test="@lang = 'es'">Palabras clave:</xsl:when>
+                <xsl:when test="@lang = 'de'">Stichworte:</xsl:when>
+                <xsl:when test="@lang = 'pt'">Palavras chaves:</xsl:when>
+                <xsl:when test="@lang = 'it'">Parole chiave:</xsl:when>
+                </xsl:choose>
+              </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
         </xsl:element>
