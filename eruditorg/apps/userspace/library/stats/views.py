@@ -1,12 +1,16 @@
 import datetime as dt
 from functools import singledispatch
+from io import TextIOWrapper
+from tempfile import TemporaryFile
 from typing import Type, Tuple
-from io import StringIO
 
 import requests
 from django.conf import settings
 
-from django.http import HttpResponse
+from django.http import (
+    HttpResponse,
+    FileResponse,
+)
 from django.views.generic import TemplateView
 
 from erudit.models import Organisation
@@ -85,7 +89,7 @@ def get_r4_report_response(form: CounterR4Form, organisation: Organisation) -> H
 
 
 @get_report_response.register(CounterR5Form)
-def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> HttpResponse:
+def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> FileResponse:
     begin_date, end_date = form.get_report_period()
     organisation_id = organisation.account_id
     config = get_counter_r5_config()
@@ -98,15 +102,30 @@ def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> H
         end_date=end_date,
     )
 
-    f = StringIO()
-    report.write_csv(f)
-    response = HttpResponse(f.getvalue(), content_type="application/csv; charset=utf-8-sig")
-    filename = (
-        f"{form.report_code}-{organisation_id}-"
-        f"{begin_date.strftime('%Y-%m-%d')}-{end_date.strftime('%Y-%m-%d')}"
-    )
-    response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
-    return response
+    f = TemporaryFile("w+b")
+    try:
+        # csv writers in R5 library want a text file, but FileResponse wants a binary file
+        # so the binary temp file is wrapped in a TextIOWrapper that does the conversion.
+        # `newline=""`, as asked by the csv module, and `write_through=False` because
+        # additional buffering is not needed in this case
+        text_wrapper = TextIOWrapper(f, encoding="utf-8-sig", newline="", write_through=True)
+        report.write_csv(text_wrapper)
+        # if not detached, TextIOWrapper would close the file when destroyed (ie. when it goes
+        # out of scope)
+        text_wrapper.detach()
+        f.seek(0)
+        response = FileResponse(f, content_type="application/csv; charset=utf-8-sig")
+        filename = (
+            f"{form.report_code}-{organisation_id}-"
+            f"{begin_date.strftime('%Y-%m-%d')}-{end_date.strftime('%Y-%m-%d')}"
+        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
+        return response
+    except Exception:
+        # if there is no exception, then the tempfile will be closed (and deleted) by
+        # ``FileResponse``.
+        f.close()
+        raise
 
 
 def get_counter_r5_config():
