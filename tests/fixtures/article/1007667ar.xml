@@ -1,0 +1,1409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd"
+         qualtraitement="complet" idproprio="1007667ar" typeart="article" lang="fr" ordseq="6">
+  <admin>
+    <infoarticle>
+      <idpublic scheme="doi">10.7202/1007667ar</idpublic>
+      <pagination>
+        <ppage>83</ppage>
+        <dpage>104</dpage>
+      </pagination>
+    </infoarticle>
+    <revue id="rse22" lang="fr">
+      <titrerev>Revue des sciences de l’éducation</titrerev>
+      <titrerevabr>rse</titrerevabr>
+      <idissn>0318-479X</idissn>
+      <idissnnum>1705-0065</idissnnum>
+      <directeur sexe="feminin">
+        <fonction lang="fr">Directrice</fonction>
+        <nompers>
+          <prenom>Monique</prenom>
+          <nomfamille>Noël-Gaudreault</nomfamille>
+        </nompers>
+      </directeur>
+      <redacteurchef typerc="regulier" sexe="masculin">
+        <nompers>
+          <prenom>Gilles</prenom>
+          <nomfamille>Raîche</nomfamille>
+        </nompers>
+      </redacteurchef>
+    </revue>
+    <numero id="rse01">
+      <volume>37</volume>
+      <nonumero>1</nonumero>
+      <pub>
+        <annee>2011</annee>
+      </pub>
+      <pubnum>
+        <date typedate="publication">2012-01-26</date>
+      </pubnum>
+    </numero>
+    <editeur>
+      <nomorg>Revue des sciences de l’éducation</nomorg>
+    </editeur>
+    <prodnum>
+      <nomorg>Érudit</nomorg>
+    </prodnum>
+    <diffnum>
+      <nomorg>Érudit</nomorg>
+    </diffnum>
+    <histpapier lang="fr">
+      <alinea>Texte reçu le : 10 septembre 2009, version finale reçue le : 26 août 2010, accepté le : 15 décembre 2010
+      </alinea>
+    </histpapier>
+    <schema nom="Erudit Article" version="3.0.0" lang="fr"/>
+    <droitsauteur>Tous droits réservés © <nomorg>Revue des sciences de l’éducation</nomorg>, 2011
+    </droitsauteur>
+  </admin>
+  <liminaire>
+    <grtitre>
+      <surtitre>Articles</surtitre>
+      <titre>L’engagement et la persévérance des étudiants dans trois programmes innovants de premier cycle en génie et
+        en médecine
+      </titre>
+      <titreparal lang="en">Students’ Engagement and Perseverance in Three Innovative Undergraduate Programs in
+        Engineering and Medicine
+      </titreparal>
+      <titreparal lang="es">El compromiso y la perseverancia de los estudiantes en tres programas innovadores de primer
+        ciclo en ingeniería y en medicina
+      </titreparal>
+    </grtitre>
+    <grauteur>
+      <auteur id="au1">
+        <contribution typecontrib="aut">Contribution : 50 %</contribution>
+        <nompers>
+          <prenom>Christelle</prenom>
+          <nomfamille>Lison</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Professeure, Université de Sherbrooke</alinea>
+        </affiliation>
+        <courriel>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1"
+                      xlink:href="mailto:christelle.Lison@usherbrooke.ca" xlink:type="simple">
+            christelle.Lison@usherbrooke.ca
+          </liensimple>
+        </courriel>
+      </auteur>
+      <auteur id="au2">
+        <contribution typecontrib="aut">Contribution : 30 %</contribution>
+        <nompers>
+          <prenom>Denis</prenom>
+          <nomfamille>Bédard</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Professeur, Université de Sherbrooke</alinea>
+        </affiliation>
+        <courriel>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2"
+                      xlink:href="mailto:denis.bedard@usherbrooke.ca" xlink:type="simple">denis.bedard@usherbrooke.ca
+          </liensimple>
+        </courriel>
+      </auteur>
+      <auteur id="au3">
+        <contribution typecontrib="aut">Contribution : 5 %</contribution>
+        <nompers>
+          <prenom>Noël</prenom>
+          <nomfamille>Boutin</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Professeur, Université de Sherbrooke</alinea>
+        </affiliation>
+        <courriel>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:noel.boutin@usherbrooke.ca"
+                      xlink:type="simple">noel.boutin@usherbrooke.ca
+          </liensimple>
+        </courriel>
+      </auteur>
+      <auteur id="au4">
+        <contribution typecontrib="aut">Contribution : 5 %</contribution>
+        <nompers>
+          <prenom>Daniel</prenom>
+          <autreprenom>J.</autreprenom>
+          <nomfamille>Côté</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Professeur, Université de Sherbrooke</alinea>
+        </affiliation>
+        <courriel>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4"
+                      xlink:href="mailto:daniel.j.cote@usherbrooke.ca" xlink:type="simple">daniel.j.cote@usherbrooke.ca
+          </liensimple>
+        </courriel>
+      </auteur>
+      <auteur id="au5">
+        <contribution typecontrib="aut">Contribution : 5 %</contribution>
+        <nompers>
+          <prenom>Daniel</prenom>
+          <nomfamille>Dalle</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Professeur, Université de Sherbrooke</alinea>
+        </affiliation>
+        <courriel>
+          <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="mailto:danel.dalle@usherbrooke.ca"
+                      xlink:type="simple">danel.dalle@usherbrooke.ca
+          </liensimple>
+        </courriel>
+      </auteur>
+      <auteur id="au6">
+        <contribution typecontrib="aut">Contribution : 5 %</contribution>
+        <nompers>
+          <prenom>Nathalie</prenom>
+          <nomfamille>Lefebvre</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Chargée de cours, Université de Sherbrooke</alinea>
+        </affiliation>
+      </auteur>
+    </grauteur>
+    <notegen typenoteg="edito">
+      <alinea>Ce texte a été révisé par : Milana Melkadze</alinea>
+    </notegen>
+    <resume typeresume="resume" lang="fr">
+      <alinea>Cet article présente les premiers résultats d’une recherche exploratoire qui visait à valider les
+        prédicteurs de l’engagement et de la persévérance, identifiés par une recension des écrits, auprès d’étudiants
+        et de professeurs à l’intérieur de trois programmes innovants de premier cycle à l’Université de Sherbrooke.
+        Plus précisément, il est question d’explorer quantitativement et qualitativement les caractéristiques de
+        l’engagement et de la persévérance des principaux acteurs du programme. Trois dispositifs de formation innovants
+        sont concernés : le baccalauréat en génie électrique, le baccalauréat en génie informatique et le pré- doctorat
+        en médecine. Cet article mettra en avant les données issues du questionnaire rempli par les étudiants.
+      </alinea>
+    </resume>
+    <resume typeresume="resume" lang="en">
+      <alinea>This article presents the initial results of an exploratory research whose general objective is to
+        validate the predictors of engagement and perseverance, identified by a literature review, for students and
+        professors in innovative programs in first cycle at the Université de Sherbrooke. More precisely, it is question
+        of exploring quantitatively and qualitatively the characteristics of engagement and perseverance of the main
+        actors of the program. Three innovative undergraduate programs at the University of Sherbrooke are examined :
+        the baccalaureate in electrical engineering, the baccalaureate in computer engineering and the pre-doctorate in
+        medicine. This article presents data from students’ questionnaires.
+      </alinea>
+    </resume>
+    <resume typeresume="resume" lang="es">
+      <alinea>Se presentan en este artículo los primeros resultados de una investigación exploratoria que tiene por
+        propósito validar los predictores de compromiso y de perseverancia, identificados mediante una revisión de
+        escritos, con estudiantes y profesores en tres programas innovadores de primer ciclo en la <marquage
+          typemarq="italique">Université de Sherbrooke</marquage>. En particular, se trata de explorar de manera
+        cuantitativa y cualitativa las características del compromiso y de la perseverancia de los principales actores
+        del programa. Tres programas innovadores de formación forman parte del estudio : la licenciatura en ingeniería
+        eléctrica, la licenciatura en ingeniería informática y el pre-doctorado en medicina. En este artículo se
+        presentan los datos procedentes del cuestionario completado por los estudiantes.
+      </alinea>
+    </resume>
+    <grmotcle lang="en">
+      <motcle>innovative program</motcle>
+      <motcle>perseverance</motcle>
+      <motcle>engagement</motcle>
+      <motcle>problem-based learning</motcle>
+      <motcle>project-based learning</motcle>
+    </grmotcle>
+    <grmotcle lang="fr">
+      <motcle>programme innovant</motcle>
+      <motcle>persévérance</motcle>
+      <motcle>engagement</motcle>
+      <motcle>apprentissage par problèmes</motcle>
+      <motcle>apprentissage par projets</motcle>
+    </grmotcle>
+    <grmotcle lang="es">
+      <motcle>programa innovador</motcle>
+      <motcle>perseverancia</motcle>
+      <motcle>compromiso</motcle>
+      <motcle>aprendizaje por problemas</motcle>
+      <motcle>aprendizaje por proyectos</motcle>
+    </grmotcle>
+  </liminaire>
+  <corps>
+    <section1 id="s1n1">
+      <no>1</no>
+      <titre>1. Introduction et problématique</titre>
+      <para id="pa1">
+        <no>1</no>
+        <alinea>Bien que plusieurs chercheurs se soient intéressés à l’engagement et à la persévérance des étudiants
+          dans l’enseignement supérieur (Kuh, Cruce, Shoup, Kinzie et Gonyea, 2008 ; Pintrinch et Schunk, 2002 ; Pirot
+          et De Ketele, 2000 ; Willis, 1993), très peu l’ont fait dans une perspective curriculaire. Notre recherche a
+          comme objectif d’identifier les prédicteurs de l’engagement et de la persévérance à l’apprentissage
+          d’étudiants engagés dans des programmes innovants en ingénierie et en médecine. Trois programmes de formation
+          au premier cycle de l’Université de Sherbrooke sont concernés : le baccalauréat en génie électrique, le
+          baccalauréat en génie informatique et le pré-doctorat en médecine.
+        </alinea>
+      </para>
+      <para id="pa2">
+        <no>2</no>
+        <alinea>Le présent article, qui met en avant les données colligées concernant les étudiants, est composé de cinq
+          grandes parties. Dans la première, nous faisons état de la problématique. Dans la deuxième, nous présentons le
+          cadre de référence et les différentes variables retenues. Dans la troisième partie, nous décrivons la
+          méthodologie mise en place. Dans la quatrième, nous exposons les résultats. Enfin, dans la dernière partie,
+          nous discutons de ces résultats en ouvrant des pistes de réflexion.
+        </alinea>
+      </para>
+      <para id="pa3">
+        <no>3</no>
+        <alinea>Depuis les années 1980, de plus en plus d’universités, tant nord-américaines qu’européennes, se montrent
+          soucieuses de la qualité de leur enseignement. Dans les années 1980 et 1990, la création de services de
+          soutien à l’enseignement dans la majorité des universités canadiennes (Taylor et Bédard, 2010) et ailleurs en
+          Europe en témoigne. En parallèle, depuis ces mêmes années, il n’est pas rare de voir des professeurs pratiquer
+          partiellement ou totalement autre chose que le traditionnel exposé magistral. En effet, au coeur du système
+          universitaire, sont apparues des méthodes comme l’apprentissage par problèmes, par projets, la méthode des cas
+          ou d’autres formes d’innovations pédagogiques. Si c’est un défi, pour un enseignant, de mettre en place une
+          innovation pédagogique dans le cadre de son cours, c’en est un autre, pour une faculté ou un département, de
+          la mettre en place dans le cadre d’un curriculum complet. Dans ce cas-là, on qualifiera ce programme
+          d’<marquage typemarq="italique">innovant</marquage>. Béchard (2001) s’est attardé à considérer ce qui
+          caractérisait ce genre de programme. Il a, entre autres, noté la présence d’une collégialité entre les
+          professeurs et d’un partage de leur savoir-faire pédagogique. Dans le même esprit, Hannan, English et Silver
+          (1999) soulignent la réduction du cloisonnement disciplinaire des curricula innovants. De leur côté, Lachiver
+          et Dalle (2003), de même que Van Driel, Verloop, Van Werven et Dekkers (1997), qualifient ces programmes d’<marquage
+            typemarq="italique">innovants
+          </marquage> lorsque l’enseignement est centré sur ou dirigé par l’étudiant. Ces mêmes curricula ont également
+          la particularité de proposer une formation où la contextualisation de l’enseignement et des apprentissages est
+          fortement mise de l’avant (Frenay et Bédard, 2004), de façon générale dans une optique de professionnalisation
+          (Tardif, 2004). Enfin, selon Van Driel et ses collaborateurs (1997), dans ces programmes de formation,
+          l’évaluation des apprentissages est cohérente avec l’innovation mise en place, en accordant une attention
+          particulière au transfert des apprentissages (Lynch, 2001). Le tableau 1 présente, en résumé, les
+          caractéristiques d’un programme innovant, identifiées par Bédard, Viau, Louis, Tardif et St-Pierre (2005).
+        </alinea>
+      </para>
+      <tableau id="ta1">
+        <no>Tableau 1</no>
+        <legende lang="fr">
+          <titre>Caractéristiques d’un programme innovant</titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im1" typeimage="tableau" xlink:type="simple"/>
+          <texte>CaractéristiquesAuteurs-clésProgramme innovant en enseignement supérieurEnseignement centré sur
+            l’étudiantVan Driel et collab. (1997)Contextualisation des apprentissagesFrenay et Bédard (2004)Réduction du
+            cloisonnement disciplinaireHannan et collab. (1999)Évaluation cohérente avec l’esprit de l’innovationTardif
+            (2004)Accent curriculaire sur le transfert des apprentissagesLynch (2001)Collégialité entre les
+            professeursBéchard (2001)
+          </texte>
+        </objetmedia>
+      </tableau>
+      <para id="pa4">
+        <no>4</no>
+        <alinea>Comme on peut le constater, la perspective d’un programme innovant est différente de celle d’un
+          programme traditionnel, et le degré d’innovation de certains curricula est tel qu’il déstabilise les étudiants
+          et les enseignants participants. En effet, dans de tels contextes, il peut y avoir un écart important avec les
+          pratiques habituelles et, dès lors, des changements importants au niveau des rôles et des tâches, tant pour le
+          corps professoral que pour les étudiants (Bédard et Béchard, 2009).
+        </alinea>
+      </para>
+      <para id="pa5">
+        <no>5</no>
+        <alinea>L’approche proposée par un curriculum innovant est fort différente de ce que l’étudiant a connu, sauf
+          exception, avant son entrée à l’Université (Bédard et collab., 2005). D’aucuns parlent alors de <marquage
+            typemarq="italique">rupture de contexte</marquage>, et ce, à différents niveaux (Parmentier, 1994). Ainsi,
+          les étudiants peuvent parfois s’adapter avec difficulté à ces nouveaux contextes d’apprentissage et
+          d’enseignement, malgré les mesures prises dans le cadre de l’innovation (Côté, Bellavance, Chamberland et
+          Graillon, 2004 ; Dalle et Lachiver, 2003). Il subsiste d’ailleurs encore un taux d’abandon plus important en
+          première année que dans les années qui suivent. Elder et Paul (1998) définissent la persévérance comme un
+          trait intellectuel qui peut être manipulé. Des recherches ont également indiqué que le succès dans les études
+          dépendait, entre autres, de la motivation, des attitudes (façons de penser) et des caractéristiques
+          socio-économiques des étudiants (Mok et Kwong, 1999). Bien que de nombreuses recherches aient considéré les
+          attributs et les indicateurs de la persévérance, il importe de proposer des projets de recherche qui étudient
+          cette variable dans le contexte de programmes innovants.
+        </alinea>
+      </para>
+      <para id="pa6">
+        <no>6</no>
+        <alinea>En ce qui a trait aux enseignants, il est également possible de noter la présence occasionnelle de
+          difficultés d’adaptation aux curricula innovants (Bédard, 2006 ; Des Marchais, Bureau, Dumais et Pigeon 1992 ;
+          Lachiver, Dalle, Boutin, Clavet, Mabilleau, Cherkaoui, Gonzalez-Rubio et Hivon, 2004 ; Walkington, 2002).
+          Parmi ces difficultés, on peut notamment observer une résistance passive au changement chez différents
+          enseignants engagés dans ces dispositifs de formation, particulièrement dans les premières années de la mise
+          en place de l’innovation (Dalle et Lachiver, 2003), ou encore lorsqu’ils s’intègrent à un dispositif
+          curriculaire déjà bien en place. De plus, leur rôle, sinon leur statut, étant redéfini, les enseignants se
+          questionnent sur leur contribution effective à l’apprentissage et au développement des connaissances des
+          étudiants (Bédard, Viau, Hivon, Louis, Tardif et St-Pierre, 2004).
+        </alinea>
+      </para>
+      <para id="pa7">
+        <no>7</no>
+        <alinea>Notons une fois encore qu’il s’agit bien, dans le cadre de cette recherche, de se pencher sur les
+          incidences du cursus de formation de façon générale, et non sur les activités de classe de façon particulière
+          et distincte. Cette perspective <marquage typemarq="italique">macro-pédagogique</marquage> sur les programmes
+          innovants amène deux questions : 1) <marquage typemarq="italique">Quels sont les prédicteurs de l’engagement
+            et de la persévérance des étudiants dans ces curricula</marquage> ? et 2) <marquage typemarq="italique">
+            L’engagement et la persévérance évoluent-ils dans le temps</marquage> ? L’étude globale s’intéresse aux
+          étudiants et aux enseignants, mais dans le présent article, nous ne traitons que de l’axe                        <marquage
+            typemarq="italique">étudiant</marquage>.
+        </alinea>
+      </para>
+    </section1>
+    <section1 id="s1n2">
+      <no>2</no>
+      <titre>2. Contexte théorique</titre>
+      <para id="pa8">
+        <no>8</no>
+        <alinea>Les questions liées à l’engagement et à la persévérance des étudiants ne sont pas nouvelles dans le
+          champ de l’éducation. De façon typique, les chercheurs ont considéré des tâches spécifiques ou des activités
+          pour essayer de comprendre ces deux manifestations ; par exemple, réaliser une tâche, passer un examen,
+          résoudre un problème (Pintrinch et Schunk, 2002 ; Pirot et De Ketele, 2000 ; Willis, 1993). Ce qui est
+          original dans notre approche, c’est que nous abordons ces questions dans une perspective curriculaire, et plus
+          spécifiquement au niveau des programmes innovants. De plus, nous regardons l’engagement et la persévérance
+          dans le temps (durée d’un programme de formation). Ainsi, n’ayant trouvé ni recherches ni modèles de ce type
+          dans la recension des écrits des chercheurs, nous considérons notre approche comme originale et requérant
+          l’utilisation d’un cadre de référence novateur.
+        </alinea>
+      </para>
+      <para id="pa9">
+        <no>9</no>
+        <alinea>La recension des écrits et un retour sur le modèle après la première année de collecte de données
+          (Bédard, Boutin, Côté, Dalle, Lison, Lefebvre et Lachiver, 2008) ont permis de produire un cadre de référence
+          (Figure 1), qui présente les facteurs susceptibles de prédire l’engagement et la persévérance des enseignants
+          et des étudiants universitaires engagés dans des programmes innovants. À la suite du tableau, nous décrivons
+          chacun des facteurs.
+        </alinea>
+      </para>
+      <figure id="fi1">
+        <no>Figure 1</no>
+        <legende lang="fr">
+          <titre>Cadre de référence permettant de prédire l’engagement et la persévérance des étudiants inscrits dans
+            des dispositifs curriculaires innovants
+          </titre>
+        </legende>
+        <objetmedia flot="bloc">
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im2" typeimage="figure" xlink:type="simple"/>
+        </objetmedia>
+      </figure>
+      <section2 id="s2n1">
+        <no>2.1</no>
+        <titre>2.1 Engagement</titre>
+        <para id="pa10">
+          <no>10</no>
+          <alinea>Une difficulté inhérente au concept d’engagement est que le jugement porté sur l’engagement s’appuie
+            souvent sur des perceptions (Tremblay, 2004). Selon Legendre (2005), l’engagement est défini comme le temps
+            investi par un étudiant pour la réalisation de tâches d’apprentissage. En 1984, Astin précisait qu’il
+            s’agissait d’une énergie physique et psychologique. Partant de ce constat, Pirot et De Ketele (2000)
+            considèrent l’engagement dans les études comme la mobilisation affective, conative, cognitive et
+            métacognitive dans une activité d’apprentissage. Cela implique que l’engagement devrait comprendre l’état
+            d’esprit ou la disposition des étudiants à s’engager, de même que leur comportement dans des tâches
+            universitaires et, enfin, le degré d’intensité ou d’investissement avec lequel ils réalisent ces tâches. En
+            ce sens, Prégent, Bernard et Kozanitis (2009) parlent d’<marquage typemarq="italique">engagement
+              comportemental</marquage>et
+            <marquage typemarq="italique">d’engagement</marquage>
+            <marquage typemarq="italique">cognitif</marquage>.
+          </alinea>
+        </para>
+        <para id="pa11">
+          <no>11</no>
+          <alinea>Il importe ici d’évoquer les deux types d’engagement que distingue Willis (1993) : 1)  l’engagement
+            académique, lié aux apprentissages ; et 2) l’engagement institutionnel, lié à la vie universitaire et
+            sociale. Même si on peut qualifier d’<marquage typemarq="italique">engagement académique</marquage>                    la
+            perspective que nous adoptons, il serait également possible de la qualifier d’<marquage typemarq="italique">
+              engagement programme</marquage>. En effet, nous ne considérons pas directement les activités
+            d’apprentissage d’un cours, mais davantage l’engagement dans le programme et l’investissement dans les
+            études (Tinto et Pusser, 2006).
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n2">
+        <no>2.2</no>
+        <titre>2.2 Persévérance</titre>
+        <para id="pa12">
+          <no>12</no>
+          <alinea>Les auteurs s’entendent rarement sur ce qu’est exactement la persévérance (McKeachie et Svinicki,
+            2010). Pour leur part, Pintrinch et Schunk (2002) définissent la persévérance (ou la persistance) comme le
+            choix conscient de poursuivre cognitivement, métacognitivement et affectivement une activité d’apprentissage
+            malgré les obstacles et les difficultés. Par ailleurs, Viau (2009) utilise le terme <marquage
+              typemarq="italique">persévérance
+            </marquage>                    dans le sens de <marquage typemarq="italique">ténacité</marquage>. Confronté
+            à des obstacles ou à des difficultés, l’apprenant fera preuve de ténacité et continuera de consacrer du
+            temps à l’activité d’apprentissage. Dans ce sens, la persévérance est associée étroitement avec le temps que
+            l’étudiant consacre à ses études en présence de contraintes.
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n3">
+        <no>2.3</no>
+        <titre>2.3 Sentiment d’efficacité</titre>
+        <para id="pa13">
+          <no>13</no>
+          <alinea>Pour Bandura (1982), plus le sentiment de confiance (ou de compétence) est présent chez le sujet, plus
+            ce dernier se montre persévérant devant la tâche, en termes de temps et d’efforts. Dans le cas contraire, le
+            sujet a tendance à tomber dans la facilité et à éviter d’utiliser des stratégies qu’il maîtrise plus ou
+            moins bien et qui peuvent générer un sentiment d’anxiété. Bandura (1997) définit la perception que le sujet
+            a de sa compétence comme le jugement que celui-ci élabore à propos de sa propre capacité à organiser et à
+            réaliser un ensemble de comportements spécifiques afin d’atteindre un certain niveau de performance. Pour
+            élaborer ce jugement, les individus se basent sur diverses sources d’informations à partir desquelles ils
+            vont réguler leur comportement.
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n4">
+        <no>2.4</no>
+        <titre>2.4 Facteurs de stress</titre>
+        <para id="pa14">
+          <no>14</no>
+          <alinea>Le concept de stress fait l’objet de beaucoup d’attention depuis les années 1960<marquage
+            typemarq="gras">.</marquage>Il est aujourd’hui admis que le concept de <marquage typemarq="italique">stress
+            perçu
+          </marquage> par des individus dans un environnement donné permet de mieux rendre compte de cette réalité
+            (Cohen, Kamarck et Mermelstein, 1983). Ainsi, l’impact des situations objectives de stress dans
+            l’environnement est médiatisé par la perception des individus qui peuvent leur accorder un degré
+            d’importance variable. Cette vision implique que les sujets interagissent activement avec leur environnement
+            et qu’ils jugent des événements potentiellement stressants ou menaçants à la lumière des ressources qu’ils
+            possèdent, ou non (Cohen et Williamson, 1988). On peut ainsi définir le stress comme la relation
+            particulière entre la personne et son environnement, relation qu’elle évalue comme dépassant ses propres
+            ressources et mettant en danger son bien-être (Lazarus et Folkman, 1984).
+          </alinea>
+        </para>
+        <para id="pa15">
+          <no>15</no>
+          <alinea>Étant donné les visées et la portée de la présente recherche, nous avons fait le choix de considérer
+            l’environnement et ses facteurs inhibiteurs (supports) ou déclencheurs (stresseurs) de stress comme deux
+            sous-dimensions, deux côtés d’une même médaille.
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n5">
+        <no>2.5</no>
+        <titre>2.5 Nouvelles tâches cognitives</titre>
+        <para id="pa16">
+          <no>16</no>
+          <alinea>Une des questions soulevées par l’introduction d’innovations pédagogiques est de savoir si cela a
+            modifié la manière de travailler et d’apprendre des étudiants et donc, leur engagement et leur persévérance
+            dans le programme. Il est effectivement attendu que les étudiants réalisent des tâches qui correspondent à
+            la réalité et aux particularités de l’innovation (par exemple, être un apprenant actif). Dans le présent
+            contexte d’innovation pédagogique, nous nous référons au modèle de l’apprentissage et de l’enseignement
+            contextualisé authentique (AECA) (Frenay et Bédard, 2004), pour retenir deux tâches cognitives attendues de
+            la part des étudiants : l’articulation des connaissances et la capacité de réflexion sur l’action (deux
+            sous-dimensions). La première renvoie à la capacité qu’a l’étudiant de distinguer les différentes
+            connaissances et stratégies afin de mieux les apprendre, de même qu’à sa capacité d’articuler ses
+            connaissances, son raisonnement et ses processus de résolution de problèmes lors de la réalisation d’une
+            tâche. La deuxième tâche souligne le fait que, de plus en plus, l’étudiant est
+            <marquage typemarq="italique">[…]</marquage>
+            <marquage typemarq="italique">invité ou mis dans la position de poser un regard critique ou évaluatif sur
+              ses actions ; par exemple, en comparant son processus de résolution de problèmes avec celui d’une personne
+              experte ou avec celui d’autres étudiants
+            </marquage>
+            (Vanpee, Frenay, Godin et Bédard, 2010).
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n6">
+        <no>2.6</no>
+        <titre>2.6 Postures épistémiques</titre>
+        <para id="pa17">
+          <no>17</no>
+          <alinea>Selon Lange (2005, p. 197), une posture épistémologique peut être considérée comme
+            <marquage typemarq="italique">[…]</marquage>
+            <marquage typemarq="italique">un positionnement épistémologique spontané qui conduit [les enseignants] à
+              chosifier le savoir</marquage>. Dans le cadre de cette recherche, nous avons tout d’abord travaillé avec
+            l’approche de Perry (1970, 1981), qui porte sur le développement intellectuel et éthique des adolescents et
+            des jeunes adultes (Belenky, Clinchy, Goldberger et Tarule, 1986). Perry (1970, 1981) propose un modèle du
+            développement de la posture intellectuelle des étudiants durant leurs études post-secondaires. Ce modèle
+            présente neuf positions que nous résumerons en trois stades. Le premier stade, le dualisme, correspond à une
+            position qui situe le savoir dans une logique de vérité unique où le dualisme prédomine : l’étudiant aborde
+            le savoir dans une perspective de <marquage typemarq="italique">vrai</marquage> ou <marquage
+              typemarq="italique">faux</marquage>. Le deuxième stade, nommé <marquage typemarq="italique">
+              subjectivisme</marquage>, correspond à une posture subjective du savoir. Dans cette position, l’individu
+            conçoit que chacun a droit d’énoncer sa position, son opinion : le <marquage typemarq="italique">je pense
+              que…
+            </marquage> occupe beaucoup l’espace des échanges et des représentations. Enfin, le troisième stade,
+            caractérisé par une posture relativiste, apparaît dans la façon de considérer le savoir. Ce relativisme peut
+            être de nature contextuelle (exemple, la perspective d’une situation problème) ou conceptuelle (exemple,
+            deux idées qui s’opposent ou se complètent), en fonction de différents points de vue.
+          </alinea>
+        </para>
+        <para id="pa18">
+          <no>18</no>
+          <alinea>S’ajoute à ces trois postures que sont le dualisme, le subjectivisme et le relativisme, la
+            contextualisation des savoirs (quatrième sous-dimension). Cette posture fait référence au fait que plus
+            l’étudiant prendra en compte les contextes dans lesquels les connaissances acquises seront utilisées (les
+            contextes de mobilisation), plus il sera en mesure de transférer ses connaissances à ces contextes (Bédard,
+            Frenay, Turgeon et Paquay, 2000).
+          </alinea>
+        </para>
+      </section2>
+    </section1>
+    <section1 id="s1n3">
+      <no>3</no>
+      <titre>3. Hypothèses</titre>
+      <para id="pa19">
+        <no>19</no>
+        <alinea>De nature exploratoire, notre recherche vise à identifier les prédicteurs de l’engagement et de la
+          persévérance auprès d’une population d’étudiants de premier cycle inscrits dans des dispositifs de formation
+          innovants à l’Université de Sherbrooke : les dispositifs curriculaires de premier cycle en génie électrique,
+          en génie informatique et en médecine. C’est dans ce sens que nous posons les quatre hypothèses suivantes :
+        </alinea>
+        <listerelation type="3">
+          <elemrelation>
+            <lrsource>
+              <alinea>H 1</alinea>
+            </lrsource>
+            <lrcible>
+              <alinea>Les quatre prédicteurs, subdivisés en un total de sept variables, permettent tous de prédire
+                l’engagement, et ce, pour les trois curricula innovants.
+              </alinea>
+            </lrcible>
+          </elemrelation>
+          <elemrelation>
+            <lrsource>
+              <alinea>H 2</alinea>
+            </lrsource>
+            <lrcible>
+              <alinea>Les quatre prédicteurs, subdivisés en un total de sept variables, permettent tous de prédire la
+                persévérance, et ce, pour les trois curricula innovants.
+              </alinea>
+            </lrcible>
+          </elemrelation>
+          <elemrelation>
+            <lrsource>
+              <alinea>H 3</alinea>
+            </lrsource>
+            <lrcible>
+              <alinea>L’engagement se maintient dans le temps, et ce pour les trois curricula innovants.</alinea>
+            </lrcible>
+          </elemrelation>
+          <elemrelation>
+            <lrsource>
+              <alinea>H 4</alinea>
+            </lrsource>
+            <lrcible>
+              <alinea>La persévérance se maintient dans le temps, et ce, pour les trois curricula innovants.</alinea>
+            </lrcible>
+          </elemrelation>
+        </listerelation>
+      </para>
+    </section1>
+    <section1 id="s1n4">
+      <no>4</no>
+      <titre>4. Méthodologie</titre>
+      <para id="pa20">
+        <no>20</no>
+        <alinea>Notre recherche s’inscrit dans le courant des travaux qui tentent d’identifier les déterminants de
+          l’engagement et de la persévérance, mais en contextes curriculaires innovants. De nature exploratoire, la
+          présente recherche tente de valider les prédicteurs de l’engagement et de la persévérance qui ont été
+          identifiés par la recension des écrits auprès d’une population d’étudiants de premier cycle à l’Université de
+          Sherbrooke inscrits dans des dispositifs de formation innovants. D’un point de vue pédagogique, il s’agit de
+          programmes qui ont recours à l’apprentissage par problèmes et par projets en ingénierie, de même qu’à
+          l’apprentissage par problèmes et à l’apprentissage au raisonnement clinique en médecine.
+        </alinea>
+      </para>
+      <para id="pa21">
+        <no>21</no>
+        <alinea>La présente recherche est de nature prédictive. La capacité de prédire ou d’expliquer un phénomène
+          représente deux postures centrales de la recherche scientifique. Plusieurs ambiguïtés ou controverses existent
+          encore quant à la distinction entre ces deux perspectives, raison pour laquelle nous souhaitons ici présenter
+          clairement la façon dont nous nous positionnons.
+        </alinea>
+      </para>
+      <para id="pa22">
+        <no>22</no>
+        <alinea>Soulignons d’entrée de jeu que la capacité de prédire un phénomène n’implique pas nécessairement la
+          capacité de l’expliquer, et vice versa.                        <marquage typemarq="italique">Dit simplement,
+            la prédiction ne requiert que la corrélation, alors que l’explication exige davantage
+          </marquage> (Scriven, 1959, p. 480). Ainsi, il est possible de prédire un orage à partir d’une baisse soudaine
+          de la pression barométrique. Par contre, il n’est pas possible de dire que cette baisse de pression cause
+          l’orage. Cette information n’est que prédictive du phénomène.
+        </alinea>
+      </para>
+      <para id="pa23">
+        <no>23</no>
+        <alinea>La distinction entre la recherche prédictive et la recherche explicative a des incidences importantes
+          sur l’utilisation et à l’interprétation valides des résultats de l’analyse de régression. La recherche
+          prédictive vise à optimiser la prédiction des variables prédictives, telles que, dans le cas présent, le
+          stress, les croyances épistémiques, le sentiment d’efficacité. Ainsi, dans de telles recherches, le choix des
+          variables est principalement déterminé par leur contribution à la prédiction du phénomène (<marquage
+            typemarq="italique">criterion</marquage>). Si la corrélation est élevée, aucun autre standard de référence
+          n’est nécessaire, même si intuitivement la présence d’une variable contredit une relation causale. À titre
+          d’exemple, <marquage typemarq="italique">bien que la psychothérapie contribue à réduire les probabilités
+            qu’une personne se suicide, dans une perspective de prédiction, il est également possible d’affirmer que
+            plus une personne a suivi de séances de psychothérapie, plus elle est susceptible de se suicider</marquage>(Cook
+          et Campbell, 1979, p. 296). Ainsi, la variable <marquage typemarq="italique">avoir suivi des psychothérapies
+          </marquage> peut prédire le suicide, mais ne pas en être la cause.
+        </alinea>
+      </para>
+      <para id="pa24">
+        <no>24</no>
+        <alinea>L’objectif de notre recherche est d’identifier les facteurs qui permettent de prédire l’engagement et la
+          persévérance des étudiants dans une perspective curriculaire. La cible principale de la recherche prédictive
+          concerne les applications pratiques des résultats, alors que l’accent est davantage mis sur la compréhension
+          du phénomène pour la recherche explicative. Bien sûr, les fruits de la recherche prédictive peuvent servir de
+          base à l’élaboration de modèles théoriques permettant d’expliquer un phénomène. Ainsi, la recherche prédictive
+          est caractéristique des premières avancées dans un domaine scientifique.
+        </alinea>
+      </para>
+      <para id="pa25">
+        <no>25</no>
+        <alinea>La perspective curriculaire que nous adoptons vis-à-vis de l’engagement et de la persévérance est
+          distincte des travaux antérieurs touchant ces phénomènes. En effet, les modèles explicatifs proposés dans les
+          écrits de recherche font essentiellement référence à un contexte immédiat de réalisation d’une tâche ou d’une
+          activité en classe (Eccles et Wigfield, 2002 ; Wigfield et Eccles, 2000). Les travaux de Tinto (1975, 1997)
+          permettent d’élargir la perspective considérée par la plupart des chercheurs. Ainsi, ces travaux prennent en
+          compte une réalité plus large, notamment les expériences d’apprentissage, mais s’inscrivent néanmoins dans une
+          approche <marquage typemarq="italique">classe</marquage>                    ponctuelle, c’est-à-dire dans le
+          court terme et liée à un cours.
+        </alinea>
+      </para>
+      <section2 id="s2n7">
+        <no>4.1</no>
+        <titre>4.1 Sujets</titre>
+        <para id="pa26">
+          <no>26</no>
+          <alinea>Nous avons rencontré 480 étudiants volontaires de premier cycle de l’Université de Sherbrooke à
+            l’automne 2006 et à l’hiver 2007. Le tableau 2 présente la répartition des sujets en fonction de la filière
+            d’études et du sexe.
+          </alinea>
+        </para>
+        <tableau id="ta2">
+          <no>Tableau 2</no>
+          <legende lang="fr">
+            <titre>Répartition de l’échantillon en fonction de la filière d’études et du sexe</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im3" typeimage="tableau" xlink:type="simple"/>
+            <texte>FilièresSexeGénie électriqueGénie
+              informatiquePrédoctoratMédecineTotal%Féminin12718320242 %Masculin967710527858 %Total10884288N =
+              480100 %%22 %18 %60 %100 %
+            </texte>
+          </objetmedia>
+        </tableau>
+        <para id="pa27">
+          <no>27</no>
+          <alinea>Les 480 sujets rencontrés se répartissent dans les différents programmes sur plusieurs années. Cette
+            variable est intéressante, car le degré d’avancement dans les études est susceptible d’avoir une influence
+            sur l’engagement ou la persévé-rance dans le processus d’apprentissage universitaire. Le tableau 3 présente
+            cette répartition.
+          </alinea>
+        </para>
+        <tableau id="ta3">
+          <no>Tableau 3</no>
+          <legende lang="fr">
+            <titre>Répartition de l’échantillon en fonction de la filière d’études et de l’année d’études</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im4" typeimage="tableau" xlink:type="simple"/>
+            <texte>FilièresAnnéesGénie électriqueGénie informatiquePrédoctoratMédecineTotalPremière
+              année268132166Deuxième année2832133193Troisième année36252384Quatrième année1819(NIL)37Total10884288N =
+              480
+            </texte>
+          </objetmedia>
+        </tableau>
+      </section2>
+      <section2 id="s2n8">
+        <no>4.2</no>
+        <titre>4.2 Instrumentation</titre>
+        <para id="pa28">
+          <no>28</no>
+          <alinea>Deux modalités ont été proposées pour accéder aux perceptions des étudiants : un questionnaire écrit
+            et un focus groupe (échantillon de ± 5 % des sujets). Notons que seules les données du questionnaire ont
+            servi à la validation du cadre de référence présenté précédemment et sont rapportées ici.
+          </alinea>
+        </para>
+        <para id="pa29">
+          <no>29</no>
+          <alinea>Le questionnaire a subi une procédure de validation en trois étapes. Premièrement, nous avons réalisé
+            une analyse de contenu auprès d’experts (<marquage typemarq="italique">n</marquage> = 5), ce qui a permis de
+            valider le contenu des énoncés en fonction de chacune des dimensions. Deuxièmement, nous avons procédé à une
+            analyse de construit auprès d’un groupe d’étudiants en génie (<marquage typemarq="italique">n</marquage> =
+            10), ce qui a permis de vérifier la clarté des énoncés. Enfin, il y a eu une analyse d’items auprès
+            d’étudiants en médecine (<marquage typemarq="italique">n</marquage> = 102), ce qui a permis de mesurer la
+            consistance interne du questionnaire (α de Cronbach et niveau d’homogénéité). Au final, le questionnaire
+            présentait 129 questions / énoncés auxquels les sujets devaient répondre par le biais d’une échelle de
+            Lickert à cinq points (jamais, rarement, plus ou moins, généralement, fortement). Notons que les répondants
+            avaient également l’occasion de cocher                        <marquage typemarq="italique">Ne s’applique
+              pas</marquage>. Les différents α de Cronbach étaient tous supérieurs à 0,70.
+          </alinea>
+        </para>
+        <para id="pa30">
+          <no>30</no>
+          <alinea>Les questions posées portaient sur 1) des données descriptives d’identification ; 2) le dispositif
+            curriculaire innovant en tant que tel ; 3) les quatre déterminants, subdivisés en un total de sept
+            variables ; et 4) les deux conséquences que sont l’engagement et la persévérance. Certaines questions
+            étaient formulées positivement et d’autres négativement, afin de forcer le répondant à rester attentif et à
+            ne pas toujours répondre par le même chiffre sur l’échelle de Lickert. Le tableau 4 propose un exemple de
+            question pour chacune des dimensions prises en compte dans les analyses.
+          </alinea>
+        </para>
+        <tableau id="ta4">
+          <no>Tableau 4</no>
+          <legende lang="fr">
+            <titre>Exemples d’affirmations par dimensions et sous-dimensions</titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im5" typeimage="tableau" xlink:type="simple"/>
+            <texte>Dimensions et sous-dimensionsQuestionSentiment d’efficacitéDans le cadre de mon programme, lorsque je
+              suis confronté à une nouvelle situation, je suis certain de pouvoir réussirFacteurs de stress SupportsMes
+              études m’offrent des possibilités de croissance personnelleStresseurs Mon programme ne m’apporte pas ce
+              que j’attendais ou espéraisNouvelles tâches cognitives Articulation des connaissances Dans une situation
+              d’apprentissage, j’utilise différentes stratégiesRéflexion sur l’actionDans une situation d’apprentissage,
+              je me pose des questions sur l’efficacité de mes actionsPostures épistémiquesCroissance des capacités
+              cognitives (stades de Perry [1970,1981]) :a) dualismeb) subjectivisme c) relativismea) Chaque problème
+              comporte une seule bonne solution b) Dans toute situation d’apprentissage, je trouve qu’il est important
+              que les étudiants participent à la solution c) Je crois que les solutions à un problème peuvent différer
+              selon le contexteContextualisation Apprendre à partir de problématiques concrètes m’aide à percevoir la
+              réalité du milieu professionnelEngagementLes études prennent une place importante dans ma
+              viePersévéranceMes difficultés personnelles ne m’empêchent pas de persévérer dans mes études
+            </texte>
+          </objetmedia>
+        </tableau>
+        <para id="pa31">
+          <no>31</no>
+          <alinea>À la suite de la collecte des premières données, nous avons quelque peu revu le questionnaire en
+            répétant les analyses d’items avec un nombre de sujets plus significatifs (<marquage typemarq="italique">n
+            </marquage> = 480). Des questions ont été supprimées sur la base des α de Cronbach et des analyses
+            factorielles réalisées sur la première cohorte de sujets. Ainsi, le questionnaire final comprend 118
+            questions / énoncés.
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n9">
+        <no>4.3</no>
+        <titre>4.3 Déroulement</titre>
+        <para id="pa32">
+          <no>32</no>
+          <alinea>En ce qui concerne la procédure de passation du questionnaire, nous avons rencontré les étudiants
+            avant ou après un moment pédagogique (temps de classe). Il s’agit d’un moment d’apprentissage, puisqu’il n’y
+            a pas de séances d’enseignement à proprement parler dans les programmes innovants dont il est question dans
+            cet article. Nous avons exposé aux étudiants les objectifs de la recherche, son fonctionnement et ses
+            possibles retombées. Ils ont volontairement accepté de répondre au questionnaire, et ce, de manière
+            confidentielle. En moyenne, le temps de passation était de 20 à 30 minutes.
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n10">
+        <no>4.4</no>
+        <titre>4.4 Méthode d’analyse des données</titre>
+        <para id="pa33">
+          <no>33</no>
+          <alinea>L’ensemble des données du questionnaire a été analysé en utilisant la version <marquage
+            typemarq="italique">12.0</marquage>de<marquage typemarq="italique">SPSS</marquage>. À partir du cadre de
+            référence présenté précédemment, d’une part, nous souhaitions explorer la possibilité que les quatre
+            déterminants (subdivisés en un total de sept variables) permettent de prédire l’engagement et la
+            persévérance des étudiants. Pour ce faire, nous avons utilisé l’analyse de régressions (méthode <marquage
+              typemarq="italique">Stepwise</marquage>). Nous avons considéré qu’une <marquage typemarq="italique">
+              p</marquage>-valeur &lt; 0,05 était statistiquement significative. D’autre part, nous souhaitions explorer
+            le maintien de l’engagement et de la persévérance dans le temps. Cette seconde partie a été réalisée par le
+            biais de comparaison de moyennes. C’est-à-dire qu’à l’aide d’Anova et de tests de comparaisons multiples <marquage
+              typemarq="italique">a posteriori
+            </marquage> (Bonferroni), les moyennes pour chacune des variables ont été comparées en fonction des années
+            d’études. Pour ces analyses, le seuil de signification est de 0,01. Notons que la variable <marquage
+              typemarq="italique">dispositif curriculaire innovant
+            </marquage> n’a pas été incluse dans les analyses, et fera essentiellement l’objet d’une analyse
+            documentaire pour chacun des programmes.
+          </alinea>
+        </para>
+      </section2>
+      <section2 id="s2n11">
+        <no>4.5</no>
+        <titre>4.5 Considérations éthiques</titre>
+        <para id="pa34">
+          <no>34</no>
+          <alinea>Une telle recherche ne pourrait être envisagée sans la participation volontaire des sujets. Comme le
+            demande le comité d’éthique de la recherche                        <marquage typemarq="italique">Éducation
+              et sciences sociales
+            </marquage> de l’Université de Sherbrooke, afin de s’assurer du consentement libre et éclairé des sujets,
+            ceux-ci ont été invités à signer un formulaire de consentement où nous les informions des objectifs de la
+            recherche et où nous leur décrivions la nature des activités dans lesquelles ils étaient invités à
+            s’engager. Rendues anonymes, les données ont été traitées par des personnes totalement indépendantes des
+            programmes considérés. Par ces considérations éthiques, il est possible de présumer que les droits des
+            étudiants ont été scrupuleusement respectés et qu’aucun préjudice ne leur a été causé. La recherche a
+            d’ailleurs été accréditée par le comité d’éthique <marquage typemarq="italique">ad hoc</marquage>. Les
+            résultats de la recherche ont été rendus accessibles aux sujets, d’une part par une présentation orale et
+            d’autre part par les articles rédigés qui leur ont été acheminés.
+          </alinea>
+        </para>
+      </section2>
+    </section1>
+    <section1 id="s1n5">
+      <no>5</no>
+      <titre>5. Résultats</titre>
+      <para id="pa35">
+        <no>35</no>
+        <alinea>Les deux premières hypothèses portent sur les modèles de prédiction pour l’engagement et la persévérance
+          des étudiants dans les trois programmes innovants distinctement.  Ces analyses ont été réalisées par le biais
+          de régressions linéaires. Les hypothèses trois et quatre ont, quant à elles, pour objectif de mesurer le degré
+          d’engagement et de persévérance des étudiants en fonction de l’année, dans les trois programmes innovants
+          distinctement. Pour ce faire, des descriptions de moyennes et par la suite des tests de comparaison de
+          moyennes ont été effectués.
+        </alinea>
+      </para>
+      <section2 id="s2n12">
+        <no>5.1</no>
+        <titre>5.1 Hypothèse 1</titre>
+        <para id="pa36">
+          <no>36</no>
+          <alinea>Si nous regardons la première hypothèse portant sur l’engagement des étudiants, en fonction des trois
+            dispositifs curriculaires, nous obtenons les résultats suivants.
+          </alinea>
+          <listenonord signe="nul">
+            <elemliste>
+              <alinea><marquage typemarq="souligne">Génie électrique</marquage> : Les analyses réalisées pour la
+                prédiction de l’engagement produisent un modèle significatif qui explique 57 % de la variance (
+                <marquage typemarq="italique">R</marquage>
+                <exposant>2</exposant>
+                = 0,56 ;
+                <marquage typemarq="italique">F</marquage>
+                <indice>(4, 103)</indice>
+                = 33,85 ; <marquage typemarq="italique">p</marquage> &lt; 0,00). Ce modèle se compose de quatre
+                variables : supports (sous-dimension des facteurs de stress) (<marquage typemarq="italique">b</marquage> =
+                0,42), contextualisation (sous-dimension des postures épistémiques) (<marquage typemarq="italique">b
+                </marquage> = 0,17), stresseurs (sous-dimension des facteurs de stress) (<marquage typemarq="italique">
+                  b
+                </marquage> = -0,26) et réflexion sur l’action (sous-dimension des nouvelles tâches cognitives) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,17).
+              </alinea>
+              <alinea>Notons que la variable <marquage typemarq="italique">supports</marquage> permet d’expliquer à elle
+                seule 48 % de l’engagement des étudiants en génie électrique.
+              </alinea>
+            </elemliste>
+            <elemliste>
+              <alinea><marquage typemarq="souligne">Génie informatique</marquage> : Les analyses réalisées pour la
+                prédiction de l’engagement produisent un modèle significatif qui explique 69 % de la variance (
+                <marquage typemarq="italique">R</marquage>
+                <exposant>2</exposant>
+                = 0,69,
+                <marquage typemarq="italique">F</marquage>
+                <indice>(3, 80)</indice>
+                = 60,26 ; <marquage typemarq="italique">p</marquage> &lt; 0,00). Ce modèle se compose de trois
+                variables : supports (sous-dimension des facteurs de stress) (<marquage typemarq="italique">b</marquage> =
+                0,62), réflexion sur l’action (sous-dimension des nouvelles tâches cognitives) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,24) et contextualisation (sous-dimension des postures épistémiques) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,19).
+              </alinea>
+              <alinea>Notons que la variable <marquage typemarq="italique">supports</marquage> permet d’expliquer à elle
+                seule 60 % de l’engagement des étudiants en génie informatique.
+              </alinea>
+            </elemliste>
+            <elemliste>
+              <alinea><marquage typemarq="souligne">Médecine</marquage> : Les analyses réalisées pour la prédiction de
+                l’engagement produisent un modèle significatif qui explique 66 % de la variance (
+                <marquage typemarq="italique">R</marquage>
+                <exposant>2</exposant>
+                = 0,66 ;
+                <marquage typemarq="italique">F</marquage>
+                <indice>(6, 281)</indice>
+                = 91,20 ; <marquage typemarq="italique">p</marquage> &lt; 0,00). Ce modèle se compose de six variables :
+                supports (sous-dmension des facteurs de stress) (<marquage typemarq="italique">b</marquage> = 0,55),
+                contextualisation (sous-dimension des postures épistémiques) (<marquage typemarq="italique">b</marquage> =
+                0,14), réflexion sur l’action (sous-dimension des nouvelles tâches cognitives) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,14), stresseurs (sous-dimension des facteurs de stress) (<marquage typemarq="italique">
+                  b
+                </marquage> = -0,18), stade subjectiviste de l’approche de Perry (sous-dimension des postures
+                épistémiques) (<marquage typemarq="italique">b</marquage> = 0,12) et sentiment d’efficacité (<marquage
+                  typemarq="italique">b
+                </marquage> = -0,10).
+              </alinea>
+              <alinea>À nouveau, la variable <marquage typemarq="italique">supports</marquage> arrive en premier, et
+                permet d’expliquer à elle seule 59 % de l’engagement des étudiants en médecine.
+              </alinea>
+            </elemliste>
+          </listenonord>
+        </para>
+      </section2>
+      <section2 id="s2n13">
+        <no>5.2</no>
+        <titre>5.2 Hypothèse 2</titre>
+        <para id="pa37">
+          <no>37</no>
+          <alinea>Si nous regardons la deuxième hypothèse portant sur la persévérance des étudiants, en fonction des
+            trois programmes, nous obtenons les résultats suivants.
+          </alinea>
+          <listenonord signe="nul">
+            <elemliste>
+              <alinea><marquage typemarq="souligne">Génie électrique</marquage> : Les analyses réalisées pour la
+                prédiction de la persévérance produisent un modèle significatif qui explique seulement 35 % de la
+                variance (
+                <marquage typemarq="italique">R</marquage>
+                <exposant>2</exposant>
+                = 0,35 ;
+                <marquage typemarq="italique">F</marquage>
+                <indice>(3, 104)</indice>
+                = 19,02, <marquage typemarq="italique">p</marquage>&lt; 0,00). Ce modèle se compose de trois variables :
+                supports (sous-dimension des facteurs de stress) (<marquage typemarq="italique">b</marquage> = 0,21),
+                stresseurs (sous-dimension des facteurs de stress) (<marquage typemarq="italique">b</marquage> = -0,32)
+                et stade subjectiviste de l’approche de Perry (sous-dimension des postures épistémiques) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,21).
+              </alinea>
+              <alinea>La variable <marquage typemarq="italique">supports</marquage> permet ici d’expliquer 27 % de la
+                persévérance des étudiants en génie électrique.
+              </alinea>
+            </elemliste>
+            <elemliste>
+              <alinea><marquage typemarq="souligne">Génie informatique</marquage> : Les analyses réalisées pour la
+                prédiction de la persévérance produisent un modèle significatif qui explique 51 % de la variance (
+                <marquage typemarq="italique">R</marquage>
+                <exposant>2</exposant>
+                = 0,51 ;
+                <marquage typemarq="italique">F</marquage>
+                <indice>(5, 78)</indice>
+                = 16,48 ; <marquage typemarq="italique">p</marquage>&lt; 0,00). Ce modèle se compose de cinq variables :
+                articulation des connaissances (sous-dimension des nouvelles tâches cognitives) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,26), stresseurs (sous-dimension des facteurs de stress) (<marquage typemarq="italique">
+                  b
+                </marquage> = -0,34), stade relativiste de l’approche de Perry (sous-dimension des postures
+                épistémiques) (<marquage typemarq="italique">b</marquage> = 0,25), contextualisation (sous-dimension des
+                postures épistémiques) (<marquage typemarq="italique">b</marquage> = -0,26) et supports (sous-dimension
+                des facteurs de stress) (<marquage typemarq="italique">b</marquage> = 0,22).
+              </alinea>
+              <alinea>Exceptionnellement, c’est la variable <marquage typemarq="italique">articulation des
+                connaissances
+              </marquage> qui permet d’expliquer le pourcentage le plus important de la variance, soit 32 % de la
+                persévérance des étudiants en génie informatique.
+              </alinea>
+            </elemliste>
+            <elemliste>
+              <alinea><marquage typemarq="souligne">Médecine</marquage> : Les analyses réalisées pour la prédiction de
+                la persévérance produi- sent un modèle significatif qui n’explique que 34 % de la variance (
+                <marquage typemarq="italique">R</marquage>
+                <exposant>2</exposant>
+                = 0,33 ;
+                <marquage typemarq="italique">F</marquage>
+                <indice>(4, 283)</indice>
+                = 35,785 ; <marquage typemarq="italique">p</marquage> &lt; 0,00). Ce modèle se compose de quatre
+                variables : supports (sous-dimension des facteurs de stress) (<marquage typemarq="italique">b</marquage> =
+                0,32), articulation des connaissances (sous-dimension des nouvelles tâches cognitives) (<marquage
+                  typemarq="italique">b
+                </marquage> = 0,20), stade relativiste de l’approche de Perry (sous-dimension des postures épistémiques)
+                (<marquage typemarq="italique">b</marquage> = 0,12) et réflexion sur l’action (sous-dimension des
+                nouvelles tâches cognitives) (<marquage typemarq="italique">b</marquage> = 0,10).
+              </alinea>
+              <alinea>À nouveau, la variable <marquage typemarq="italique">supports</marquage> arrive en premier, et
+                permet d’expliquer 27 % de la persévérance des étudiants en médecine.
+              </alinea>
+            </elemliste>
+          </listenonord>
+        </para>
+      </section2>
+      <section2 id="s2n14">
+        <no>5.3</no>
+        <titre>5.3 Hypothèses 3 et 4</titre>
+        <para id="pa38">
+          <no>38</no>
+          <alinea>Si nous considérons les troisième et quatrième hypothèses portant sur l’évolution positive dans le
+            temps de l’engagement et de la persévérance des étudiants des trois dispositifs curriculaires innovants,
+            nous obtenons les résultats suivants (Tableau 5).
+          </alinea>
+        </para>
+        <tableau id="ta5">
+          <no>Tableau 5</no>
+          <legende lang="fr">
+            <titre>Moyennes et écarts-types de l’engagement et de la persévérance en fonction de la filière d’études et
+              de l’année d’études
+            </titre>
+          </legende>
+          <objetmedia flot="bloc">
+            <image xmlns:xlink="http://www.w3.org/1999/xlink" id="im6" typeimage="tableau" xlink:type="simple"/>
+            <texte>
+              EngagementPersévéranceMoyenneETMoyenneETGE13,920,673,670,6923,870,443,840,3433,760,553,773,8543,890,603,850,35GI14,210,473,960,3524,020,623,780,5933,470,503,610,5843,980,503,570,50MED14,070,544,000,5424,070,493,950,4634,280,403,890,43
+            </texte>
+          </objetmedia>
+        </tableau>
+        <para id="pa39">
+          <no>39</no>
+          <alinea>En ce qui concerne l’engagement, le seul programme où des différences significatives en fonction des
+            années apparaissent est le programme de génie informatique (
+            <marquage typemarq="italique">F</marquage>
+            <indice>(3, 80)</indice>
+            = 6,56 ; <marquage typemarq="italique">p</marquage> &lt; 0,001). Les étudiants de troisième année ont une
+            moyenne de 3,47, significativement différente (moins élevée) des autres. En ce qui concerne la persévérance,
+            aucune différence significative n’apparaît.
+          </alinea>
+        </para>
+      </section2>
+    </section1>
+    <section1 id="s1n6">
+      <no>6</no>
+      <titre>6. Discussion des résultats</titre>
+      <para id="pa40">
+        <no>40</no>
+        <alinea>Par l’utilisation de régressions linéaires, nous avons exploré les résultats colligés chez les étudiants
+          inscrits aux trois dispositifs curriculaires de premier cycle. L’un des points clés est certainement la
+          variable <marquage typemarq="italique">supports</marquage> (sous-dimension des facteurs de stress) qui est, à
+          l’exception du modèle de persévérance en génie informatique, le meilleur prédicteur du modèle, et ce, tant
+          pour l’engagement que pour la persévérance. Bédard, Lison, Dalle et Boutin (2010) proposent l’analyse de
+          résultats d’entrevues qui mettent de l’avant des exemples concrets de supports que les étudiants jugent
+          aidants pour leur engagement et pour leur persévérance (exemples, le développement de stratégies efficaces, le
+          rôle du professeur, la collaboration avec les pairs, etc.). Tinto et Pusser (2006) insistent d’ailleurs sur
+          l’importance du soutien offert par l’institution pour l’engagement et la persévérance des étudiants.
+        </alinea>
+      </para>
+      <para id="pa41">
+        <no>41</no>
+        <alinea>Si l’on regarde plus en détails ces deux facteurs, nous constatons qu’en ce qui concerne l’engagement
+          (<marquage typemarq="italique">H1</marquage>), les modèles diffèrent selon le dispositif curriculaire, mais
+          que les quatre déterminants se retrouvent à un moment ou à un autre dans l’un ou l’autre des dispositifs
+          curriculaires. Par contre, la variable <marquage typemarq="italique">articulation des connaissances</marquage> (sous-dimension
+          des nouvelles tâches cognitives) n’apparaît pas comme explicative de l’engagement des étudiants, et ce, quel
+          que soit le dispositif curriculaire. De même, les trois postures épistémiques proposées par l’approche de
+          Perry (sous-dimension des postures épistémiques) et le sentiment d’efficacité ne ressortent qu’une seule fois
+          dans le modèle explicatif des étudiants de médecine.
+        </alinea>
+      </para>
+      <para id="pa42">
+        <no>42</no>
+        <alinea>En ce qui concerne la persévérance des étudiants (H2), nous pouvons constater que trois prédicteurs sont
+          présents (facteurs de stress, nouvelles tâches cognitives et postures épistémiques). Ainsi, seul le sentiment
+          d’efficacité semble n’avoir aucun poids dans la prédiction de la persévérance des étudiants. Ce résultat est
+          d’autant plus étonnant que les écrits soulignent la place importante qu’elle joue dans les modèles
+          motivationnels (Viau, 2009) et corrélationnel de la persévérance (Bandura, 1982). Selon Chemers, Hu et Garcia
+          (2001), le sentiment d’efficacité va même jusqu’à diminuer la perception du stress relié aux apprentissages en
+          première année. Au niveau des différents programmes, nous pouvons remarquer que la variable <marquage
+            typemarq="italique">supports
+          </marquage> est la plus signifiante pour les étudiants de génie électrique et de médecine, tandis qu’elle
+          arrive en cinquième position pour les étudiants de génie informatique. Cette constatation est surprenante et
+          méritera d’être regardée en détail à la lumière de l’analyse du dispositif curriculaire de baccalauréat en
+          génie informatique et dans les prochaines prises de données.
+        </alinea>
+      </para>
+      <para id="pa43">
+        <no>43</no>
+        <alinea>À la suite de ces deux premières hypothèses, force nous est de reconnaître que les variables du cadre de
+          référence proposé prédisent beaucoup mieux la variance du facteur <marquage typemarq="italique">engagement
+          </marquage> qu’ils ne le font pour le facteur <marquage typemarq="italique">persévérance</marquage>. Pour
+          l’engagement, le pourcentage de la variance expliquée est particulièrement élevé dans deux des programmes :
+          celui de génie informatique (69 %) et celui de médecine (66 %). En ce qui concerne la persévérance, c’est le
+          pourcentage expliqué pour le dispositif curriculaire de génie informatique qui se distingue, puisqu’il
+          explique mieux la variance (51 %) que les deux autres curricula (35 % et 34 %). Notons néanmoins que certaines
+          variables apparaissent jouer un rôle marginal en tant que déterminants de chacun des facteurs. C’est le cas
+          notamment de la variable <marquage typemarq="italique">sentiment d’efficacité</marquage>, qui n’apparaît que
+          dans un modèle prédictif, celui de l’engagement en médecine, où il arrive en dernier. Dans le sens positif,
+          c’est la variable <marquage typemarq="italique">supports</marquage> qui apparaît comme un déterminant
+          important, tant de l’engagement que de la persévérance (Bédard et collab., 2010 ; Tinto et Pusser, 2006).
+        </alinea>
+      </para>
+      <para id="pa44">
+        <no>44</no>
+        <alinea>Les troisième et quatrième hypothèses portent sur l’évolution positive, dans le temps, de l’engagement (<marquage
+          typemarq="italique">H3</marquage>) et de la persévérance (<marquage typemarq="italique">H4</marquage>) des
+          étudiants inscrits dans les dispositifs curriculaires innovants. En ce qui concerne l’engagement (<marquage
+            typemarq="italique">H3</marquage>), quel que soit le dispositif curriculaire, les moyennes sont assez
+          élevées, ce qui tend à montrer que les étudiants sont plutôt engagés dans leur dispositif curriculaire. Cette
+          capacité à maintenir les perceptions initiales généralement positives des étudiants dans le temps représente
+          un enjeu majeur en enseignement supérieur pour les professeurs et les responsables de programmes, comme le
+          soulignent Viau, Joly et Bédard (2004).
+        </alinea>
+      </para>
+      <para id="pa45">
+        <no>45</no>
+        <alinea>Dans notre recherche, un seul dispositif curriculaire présente des différences significatives en
+          fonction des années, celui de génie informatique. Il semble que la troisième année soit particulièrement
+          chargée au niveau du curriculum. Néanmoins, nous devrons regarder cet élément de près dans la suite des
+          analyses pour comprendre pourquoi la moyenne baisse autant. Notons que ce dispositif curriculaire innovant
+          concerne un petit nombre d’étudiants dans les cohortes, ce qui pourrait limiter la possibilité de généraliser
+          ces résultats.
+        </alinea>
+      </para>
+      <para id="pa46">
+        <no>46</no>
+        <alinea>En ce qui a trait à la persévérance (<marquage typemarq="italique">H4</marquage>), nous constatons que
+          les moyennes sont, dans l’ensemble, moins élevées et qu’il n’y a pas de différences significatives en fonction
+          des années, et ce, quel que soit le dispositif curriculaire innovant.
+        </alinea>
+      </para>
+      <para id="pa47">
+        <no>47</no>
+        <alinea>Cependant nous devons remarquer que les pourcentages explicatifs de variance diminuent avec le temps :
+          (par exemple, pour l’engagement : 73 % en première année ; 69 % en deuxième année et 56 % en troisième année),
+          ce qui semble aller à l’encontre de notre hypothèse. Nous tenons néanmoins à souligner que l’échantillon des
+          étudiants de troisième année est plutôt réduit, ce qui a très certainement pu avoir une influence sur les
+          résultats.
+        </alinea>
+      </para>
+    </section1>
+    <section1 id="s1n7">
+      <no>7</no>
+      <titre>7. Conclusion</titre>
+      <para id="pa48">
+        <no>48</no>
+        <alinea>Cet article présente les premiers résultats d’une recherche longitudinale qui s’étendait jusqu’à la fin
+          de l’année 2010. Celle-ci avait comme objectif d’identifier les déterminants de l’engagement et de la
+          persévérance en contextes curriculaires innovants (baccalauréat en génie électrique, baccalauréat en génie
+          informatique et pré-doctorat en médecine). Étant donné le caractère original de son contexte, il est difficile
+          de comparer ces résultats avec ceux d’autres recherches menées précédemment. Par contre, nous avons pu
+          constater que plusieurs recherches ont fait appel à un questionnaire pour mesurer les variables d’engagement
+          et de persévérance. Nous avons choisi de travailler, d’une part, à l’aide d’un questionnaire et, d’autre part,
+          avec des groupes de discussion.
+        </alinea>
+      </para>
+      <para id="pa49">
+        <no>49</no>
+        <alinea>À la suite de la présentation de la problématique et du cadre de référence, nous avons formulé quatre
+          hypothèses. Les deux premières hypothèses questionnaient les prédicteurs de l’engagement (<marquage
+            typemarq="italique">H1</marquage>) et de la persévérance (<marquage typemarq="italique">H2</marquage>) selon
+          les programmes considérés. Les troisième et quatrième hypothèses questionnaient l’évolution, dans le temps, de
+          l’engagement (<marquage typemarq="italique">H3</marquage>) et de la persévérance (<marquage
+            typemarq="italique">H4</marquage>).
+        </alinea>
+      </para>
+      <para id="pa50">
+        <no>50</no>
+        <alinea>Tous les éléments ci-dessus nous amènent à conclure que la recherche des facteurs qui influencent
+          l’engagement et la persévérance des étudiants dans le cadre de programmes innovants est certainement
+          pertinente pour les universités. Ainsi, force est de reconnaître que les étudiants semblent avoir des niveaux
+          d’engagement et de persévérance élevés, dès le début de leur formation, et que ceux-ci se maintiennent tout au
+          long de leurs études. Il s’agit là d’un résultat intéressant pour les directeurs de programme qui, comme ils
+          pouvaient le soupçonner, sont en mesure de constater que la première année, voire la première session, est
+          déterminante pour la suite du parcours universitaire. S’intéresser à ces premières semaines serait donc une
+          piste de recherche à explorer.
+        </alinea>
+      </para>
+      <para id="pa51">
+        <no>51</no>
+        <alinea>Nous pensons également que la question des supports (facteurs inhibiteurs de stress) mérite d’être
+          investiguée plus en profondeur pour en connaître la réelle portée. En effet, cette variable a, presque
+          systématiquement, été identifiée comme la plus prédictive pour l’engagement comme pour la persévérance, et ce,
+          dans les trois programmes.
+        </alinea>
+      </para>
+      <para id="pa52">
+        <no>52</no>
+        <alinea>Enfin, nous estimons que les analyses des dernières collectes de données (
+          <marquage typemarq="italique">focus</marquage>
+          <marquage typemarq="italique">groupes</marquage>
+          et suite des questionnaires) vont certainement nous permettre d’affiner nos analyses à propos des étudiants.
+          Nous pensons également que les résultats de la recherche sur le corps enseignant nous permettront de mieux
+          comprendre la dynamique dans laquelle s’inscrivent les deux principaux acteurs de la relation pédagogique, les
+          étudiants et l’enseignant, ainsi que leur engagement et leur persévérance dans le programme innovant au sein
+          duquel ils évoluent. Évidemment, nous restons conscients qu’une recherche de ce type peut amener un biais de
+          désirabilité sociale chez les sujets, mais nous pensons que l’utilisation de deux méthodes de collectes de
+          données dans des groupes différents peut tout de même atténuer cela. Enfin comme pour toute collecte, le
+          questionnaire pourrait être affiné et revu, afin d’être validé auprès d’autres populations étudiantes. Ainsi,
+          nous pourrions reformuler certaines questions qui semblent plus larges pour nous assurer d’obtenir une
+          information plus précise.
+        </alinea>
+      </para>
+    </section1>
+  </corps>
+  <partiesann lang="fr">
+    <merci>
+      <alinea>La présente recherche a été financée par le Conseil de recherche en sciences humaines (CRSH) du Canada
+        (2006-2009, n<exposant>o</exposant> 263728).
+      </alinea>
+    </merci>
+    <grbiblio>
+      <biblio>
+        <refbiblio id="rb1">Astin, A. W. (1984). Student involvement : A developmental theory for higher education : An
+          empirical typology of college students. <marquage typemarq="italique">Journal of college student
+            personnel</marquage>, <marquage typemarq="italique">25</marquage>(4), 297-308.
+        </refbiblio>
+        <refbiblio id="rb2"><idpublic scheme="doi">10.1037/0003-066X.37.2.122</idpublic>Bandura, A. (1982).
+          Self-efficacy mechanisms in human agency. <marquage typemarq="italique">American psychologist, 37</marquage>,
+          122-147.
+        </refbiblio>
+        <refbiblio id="rb3">Bandura, A. (1997). <marquage typemarq="italique">Self-efficacy : the exercise of
+          control</marquage>. New York, New York : W. H. Freeman.
+        </refbiblio>
+        <refbiblio id="rb4"><idpublic scheme="doi">10.7202/009933ar</idpublic>Béchard, J.-P. (2001). L’enseignement
+          supérieur et les innovations pédagogiques : une recension des écrits. <marquage typemarq="italique">Revue des
+            sciences de l’éducation, 27</marquage>(2), 257-281.
+        </refbiblio>
+        <refbiblio id="rb5">Bédard, D. (2006). Enseigner autrement, oui mais pourquoi et comment ? Le cas d’un cours
+          universitaire du premier cycle. Dans N. Rege Collet et M. Romainville (Dir.) : <marquage typemarq="italique">
+            La pratique enseignante en mutation à l’université</marquage>. Bruxelles, Belgique  : De Boeck.
+        </refbiblio>
+        <refbiblio id="rb6">Bédard, D. et Béchard, J.-P. (2009). L’innovation pédagogique dans le supérieur : un vaste
+          chantier. Dans D. Bédard et J.-P. Béchard (Dir.) : <marquage typemarq="italique">Innover dans l’enseignement
+            supérieur</marquage>. Paris, France : Presses universitaires de France.
+        </refbiblio>
+        <refbiblio id="rb7">Bédard, D., Boutin, N., Côté, D. J., Dalle, D., Lison, C., Lefebvre, N. et Lachiver, G.
+          (2008). <marquage typemarq="italique">Validation d’un modèle prédisant l’engagement et la persévérance en
+            contexte innovant.
+          </marquage> Actes du 5<exposant>e</exposant> Colloque QPES. Brest, France : Questions de Pédagogies dans
+          l’Enseignement Supérieur.
+        </refbiblio>
+        <refbiblio id="rb8">Bédard, D., Frenay, M., Turgeon, J. et Paquay, L. (2000). Les fondements de dispositifs
+          pédagogiques visant à favoriser le transfert de connaissances : les perspectives de « l’apprentissage et de
+          l’enseignement contextualisés authentiques ». <marquage typemarq="italique">Res
+            Academica</marquage>, <marquage typemarq="italique">18</marquage>(1-2), 21-47.
+        </refbiblio>
+        <refbiblio id="rb9">Bédard, D., Lison, C., Dalle, D. et Boutin, N. (2010). Predictors of student’s engagement
+          and persistence in an innovative PBL curriculum : applications for engineering education. <marquage
+            typemarq="italique">International journal of engineering education</marquage>, <marquage
+            typemarq="italique">26</marquage>(3), 511-522.
+        </refbiblio>
+        <refbiblio id="rb10">Bédard, D., Viau, R., Hivon, R., Louis, R., Tardif, J. et St-Pierre, L. (2004). <marquage
+          typemarq="italique">Recension des écrits et des pratiques en enseignement supérieur</marquage>. Rapport de
+          recherche. Sherbrooke, Québec : Université de Sherbrooke, Centre d’études et de recherche en enseignement
+          supérieur.
+        </refbiblio>
+        <refbiblio id="rb11">Bédard, D., Viau, R., Louis, R., Tardif, J. et St-Pierre, L. (2005). <marquage
+          typemarq="italique">Au-delà des réformes et des témoignages sur les pratiques pédagogiques innovantes.
+        </marquage> Actes du 22<exposant>e</exposant> congrès de l’AIPU. Genève, Suisse : Association internationale de
+          pédagogie universitaire.
+        </refbiblio>
+        <refbiblio id="rb12">Belenky, M. F., Clinchy, B. M., Goldberger, N. R. et Tarule, J. M. (1986). <marquage
+          typemarq="italique">Women’s ways of knowing. The development of self, voice and mind</marquage>. New York, New
+          York : Basic Books, Inc.
+        </refbiblio>
+        <refbiblio id="rb13"><idpublic scheme="doi">10.1037/0022-0663.93.1.55</idpublic>Chemers, M. M., Hu, L. et
+          Garcia, B. F. (2001). Academic self-efficacy and first-year college student performance and
+          adjustment. <marquage typemarq="italique">Journal of education psychology</marquage>, <marquage
+            typemarq="italique">93</marquage>(1), 55-64.
+        </refbiblio>
+        <refbiblio id="rb14"><idpublic scheme="doi">10.2307/2136404</idpublic>Cohen, S., Kamarck, T. et Mermelstein, R.
+          (1983). A global measure of perceived stress. <marquage typemarq="italique">Journal of health and social
+            behavior</marquage>,<marquage typemarq="italique">24</marquage>, 385-396.
+        </refbiblio>
+        <refbiblio id="rb15">Cohen, S. et Williamson, G. M. (1988). Perceived stress in a probability sample of the
+          United States. Dans S. Spacapan et S. Oskamp (Dir.) : <marquage typemarq="italique">The social psychology of
+            health</marquage>. Newbury Park, California : <marquage typemarq="majuscule">Sage</marquage>publications.
+        </refbiblio>
+        <refbiblio id="rb16">Cook, T. D. et Campbell, D. T. (1979). <marquage typemarq="italique">
+          Quasi-experimentation : Design and analysis issues for field settings.
+        </marquage> Skokie, Illinois : Rand McNally.
+        </refbiblio>
+        <refbiblio id="rb17"><idpublic scheme="doi">10.1051/pmed:2004019</idpublic>Côté, D., Bellavance, C.,
+          Chamberland, M. et Graillon, A. (2004). Un programme pour aider les étudiants en médecine à développer leurs
+          stratégies d’apprentissage. <marquage typemarq="italique">Pédagogie médicale, 5</marquage>, 95-102.
+        </refbiblio>
+        <refbiblio id="rb18">Dalle, D. et Lachiver, G. (2003). <marquage typemarq="italique">L’intégration des
+          formations par problèmes et par projets dans les programmes de génie électrique et de génie informatique : un
+          défi pour les étudiants et pour les professeurs</marquage>. Actes du 20<exposant>e</exposant> congrès de
+          l’AIPU. Sherbrooke, Québec : Association internationale de pédagogie universitaire.
+        </refbiblio>
+        <refbiblio id="rb19"><idpublic scheme="doi">10.1111/j.1365-2923.1992.tb00153.x</idpublic>Des Marchais, J. E.,
+          Bureau, M. A., Dumais, B. et Pigeon, G. (1992). From traditional to problem-based learning : a case report of
+          a complete curriculum reform. <marquage typemarq="italique">Medical education, 26</marquage>, 190-199.
+        </refbiblio>
+        <refbiblio id="rb20"><idpublic scheme="doi">10.1146/annurev.psych.53.100901.135153</idpublic>Eccles, J. S. et
+          Wigfield, A. (2002). Motivational beliefs, values, and goals. <marquage typemarq="italique">Annual review of
+            psychology</marquage>, <marquage typemarq="italique">53</marquage>, 109-132.
+        </refbiblio>
+        <refbiblio id="rb21">Elder, L. et Paul, R. (1998). Critical Thinking : developing intellectual traits. <marquage
+          typemarq="italique">Journal of developmental education</marquage>,<marquage typemarq="italique">21</marquage>(3),
+          34-35.
+        </refbiblio>
+        <refbiblio id="rb22">Frenay, M. et Bédard, D. (2004). Des dispositifs de formation universitaire s’inscrivant
+          dans la perspective d’un apprentissage et d’un enseignement contextualisés pour favoriser la construction de
+          connaissances et leur transfert. Dans A. Presseau et M. Frenay (Dir.) : <marquage typemarq="italique">Le
+            transfert des apprentissages</marquage>. Québec, Québec : Les Presses de l’Université Laval.
+        </refbiblio>
+        <refbiblio id="rb23"><idpublic scheme="doi">10.1080/03075079912331379895</idpublic>Hannan, A., English, S. et
+          Silver, H. (1999). Why innovate ? Some preliminary findings from a research project on «Innovations in
+          teaching and learning in higher education». <marquage typemarq="italique">Studies in higher education,
+            24</marquage>(3), 279-289.
+        </refbiblio>
+        <refbiblio id="rb24"><idpublic scheme="doi">10.1353/jhe.0.0019</idpublic>Kuh, G. D., Cruce, T. M., Shoup, R.,
+          Kinzie, J. et Gonyea, R. M. (2008). Unmasking the effects of student engagement on first-year college grades
+          and persistence. <marquage typemarq="italique">The journal of higher education</marquage>, <marquage
+            typemarq="italique">79</marquage>(5), 540-563.
+        </refbiblio>
+        <refbiblio id="rb25">Lachiver, G., Dalle, D., Boutin, N., Clavet, A., Mabilleau, P., Cherkaoui, S.,
+          Gonzalez-Rubio, R. et Hivon, R. (2004). <marquage typemarq="italique">The Computer Engineering Program at
+            Université de Sherbrooke</marquage>. Presentation at C3SEE. Calgary, Alberta : Canadian Conference on
+          Computer and Software Engineering Education.
+        </refbiblio>
+        <refbiblio id="rb26">Lachiver, G. et Dalle, D. (2003). <marquage typemarq="italique">Programmes d’ingénierie
+          axés sur le développement des compétences : conception et mise en oeuvre des programmes de génie électrique et
+          de génie informatique</marquage>. Actes du 20<exposant>e</exposant> congrès de l’AIPU. Sherbrooke, Québec :
+          Association internationale de pédagogie universitaire.
+        </refbiblio>
+        <refbiblio id="rb27">Lange, J.-M. (2005). Vers l’identification des savoirs en action dans l’enseignement des
+          SVT. Dans J.-P. Astolfi (Dir.) : <marquage typemarq="italique">Savoirs en action et acteurs de la
+            formation</marquage>. Rouen, France : Publications de l’Université de Rouen
+        </refbiblio>
+        <refbiblio id="rb28">Lazarus, R. S. et Folkman, S. (1984). <marquage typemarq="italique">Stress, appraisal, and
+          coping</marquage>. New York, New York : Springer.
+        </refbiblio>
+        <refbiblio id="rb29">Legendre, R. (2005). <marquage typemarq="italique">Dictionnaire actuel de l’éducation.
+        </marquage> Montréal, Québec : Guérin.
+        </refbiblio>
+        <refbiblio id="rb30">Lynch, B. (2001). Innovative teaching in a higher education establishment- how
+          extraordinary ? <marquage typemarq="italique">Journal of further and higher education, 25</marquage>(2),
+          175-194.
+        </refbiblio>
+        <refbiblio id="rb31">McKeachie, W. J. et Svinicki, M. (2010). <marquage typemarq="italique">Teaching tips :
+          strategies, research, and theory for college and university teachers
+        </marquage> (13<exposant>e</exposant> édition). Boston, Massachusetts : Houghton Mifflin.
+        </refbiblio>
+        <refbiblio id="rb32"><idpublic scheme="doi">10.1080/026013799293559</idpublic>Mok, Y. F. et Kwong, T. M. (1999).
+          Discriminating participants and non-participants in continuing professionnal education : the case of teachers. <marquage
+            typemarq="italique">International journal of lifelong education</marquage>,<marquage typemarq="italique">
+            18</marquage>(6), 505-519.
+        </refbiblio>
+        <refbiblio id="rb33">Parmentier, P. (1994). La réussite à l’université : étude de quelques facteurs explicatifs
+          de la performance académique en première candidature de médecine. <marquage typemarq="italique">Bulletin de
+            psychologie scolaire et d’orientation, 94</marquage>(2), 55-80.
+        </refbiblio>
+        <refbiblio id="rb34">Perry, W. G. (1970). <marquage typemarq="italique">Forms of intellectual and ethical
+          development in the college years : a scheme.
+        </marquage> New York, New York : Holt, Rinehart, and Winston.
+        </refbiblio>
+        <refbiblio id="rb35">Perry, W. G. (1981). Cognitive and ethical growth : The making of meaning. Dans A. W.
+          Chickering and Associates (Dir.) : <marquage typemarq="italique">The modern American College</marquage>. San
+          Francisco, California : Jossey-Bass.
+        </refbiblio>
+        <refbiblio id="rb36">Pintrinch, P. R. et Schunk, D. H. (2002). <marquage typemarq="italique">Motivation in
+          education : theory, research, and applications.
+        </marquage> New Jersey, New Jersey : Merrill Prentice Hall.
+        </refbiblio>
+        <refbiblio id="rb37">Pirot, L. et De Ketele, J.-M. (2000). L’engagement académique de l’étudiant comme facteur
+          de réussite à l’université. Étude exploratoire menée dans deux facultés contrastées. <marquage
+            typemarq="italique">Revue des sciences de l’éducation</marquage>, <marquage typemarq="italique">
+            26</marquage>(2), 367-394.
+        </refbiblio>
+        <refbiblio id="rb38">Prégent, R., Bernard, H. et Kozanitis, A. (2009). <marquage typemarq="italique">Enseigner à
+          l’université dans une approche-programme</marquage>. Montréal, Québec : Presses internationales Polytechnique.
+        </refbiblio>
+        <refbiblio id="rb39"><idpublic scheme="doi">10.1126/science.130.3374.477</idpublic>Scriven, M. (1959).
+          Explanation and prediction in evolutionary theory. <marquage typemarq="italique">Science</marquage>, <marquage
+            typemarq="italique">130</marquage>, 477-482.
+        </refbiblio>
+        <refbiblio id="rb40">Tardif, J. (2004). Axer la formation sur le développement de compétences : problématique de
+          l’organisation du travail, de l’apprentissage et de l’enseignement. Dans C. Pellois, J. Vivier, J. Aubret et
+          J-P. Boutinet (Dir.) : <marquage typemarq="italique">Bilan des compétences et mutations. L’accompagnement de
+            la personne</marquage>. Bern, Suisse : Peter Lang.
+        </refbiblio>
+        <refbiblio id="rb41">Taylor, L. et Bédard, D. (2010). Faculty development in Canadian universities. Dans A.
+          Saroyan et M. Frenay (Dir.) : <marquage typemarq="italique">Building teaching capacities in universities : A
+            comprehensive international model</marquage>. Sterling, Virginia : Stylus.
+        </refbiblio>
+        <refbiblio id="rb42">Tinto, V. (1975). Dropout from higher education : a theoretical synthesis of recent
+          research. <marquage typemarq="italique">Review of education research</marquage>, <marquage
+            typemarq="italique">45</marquage>(1), 89-125.
+        </refbiblio>
+        <refbiblio id="rb43"><idpublic scheme="doi">10.2307/2959965</idpublic>Tinto, V. (1997). Classrooms as
+          communities : exploring the educational character of student persistence. <marquage typemarq="italique">
+            Journal of higher education</marquage>, <marquage typemarq="italique">68</marquage>(6), 599-622.
+        </refbiblio>
+        <refbiblio id="rb44">Tinto, V. et Pusser, B. (2006). <marquage typemarq="italique">Moving from theory to
+          action : Building a model of institutional action for student success.
+        </marquage> Washington, District of Columbia : National Postsecondary Education Cooperative, Department of
+          Education.
+        </refbiblio>
+        <refbiblio id="rb45">Tremblay, J.-Y. (2004). L’engagement dans les études comme facteur de réussite : un concept
+          pas si simple à cerner. <marquage typemarq="italique">Pédagogie collégiale</marquage>, <marquage
+            typemarq="italique">18</marquage>(1), 39-42.
+        </refbiblio>
+        <refbiblio id="rb46"><idpublic scheme="doi">10.1023/A:1003063317210</idpublic>Van Driel, J. H., Verloop, N., Van
+          Werven, H. I. et Dekkers, H. (1997). Teachers’ craft knowledge and curriculum innovation in higher engineering
+          education. <marquage typemarq="italique">Higher education, 34</marquage>, 105-122.
+        </refbiblio>
+        <refbiblio id="rb47">Vanpee, D., Frenay, M., Godin, V. et Bédard, D. (2010). Ce que la perspective de
+          l’apprentissage et de l’enseignement contextualisés authentiques peut apporter pour optimaliser la qualité
+          pédagogique des stages d’externat. <marquage typemarq="italique">Pédagogie médicale, 4</marquage>(10),
+          253-266.
+        </refbiblio>
+        <refbiblio id="rb48">Viau, R. (2009). <marquage typemarq="italique">La motivation à apprendre en milieu
+          scolaire</marquage>. Saint-Laurent, Québec : Éditions du Renouveau pédagogique.
+        </refbiblio>
+        <refbiblio id="rb49"><idpublic scheme="doi">10.7202/011775ar</idpublic>Viau, R., Joly, J. et Bédard, D. (2004).
+          La motivation des étudiants en formation des maîtres à l’égard d’activités pédagogiques
+          innovatrices. <marquage typemarq="italique">Revue des sciences de l’éducation</marquage>, <marquage
+            typemarq="italique">30</marquage>(1), 163-176.
+        </refbiblio>
+        <refbiblio id="rb50"><idpublic scheme="doi">10.1080/03043790210129603</idpublic>Walkington, J. (2002). A process
+          of curriculum change in engineering education. <marquage typemarq="italique">European journal of engineering
+            education, 27</marquage>(2), 133-148.
+        </refbiblio>
+        <refbiblio id="rb51"><idpublic scheme="doi">10.1007/BF01384745</idpublic>Willis, D. (1993). Academic involvement
+          at university. <marquage typemarq="italique">Higher education</marquage>, <marquage typemarq="italique">
+            25</marquage>, 133-150.
+        </refbiblio>
+        <refbiblio id="rb52"><idpublic scheme="doi">10.1006/ceps.1999.1015</idpublic>Wigfield, A. et Eccles, J. S.
+          (2000). Expectancy-value theory of achievement motivation. <marquage typemarq="italique">Contemporary
+            educational psychology</marquage>, <marquage typemarq="italique">25</marquage>, 68-81
+        </refbiblio>
+      </biblio>
+    </grbiblio>
+  </partiesann>
+</article>

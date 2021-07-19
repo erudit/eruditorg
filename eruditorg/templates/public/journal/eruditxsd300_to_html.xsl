@@ -644,11 +644,33 @@
   <!-- author affiliations -->
   <xsl:template match="auteur" mode="affiliations">
     <xsl:for-each select=".">
-      <li class="auteur-affiliation">
-        <p>
-          <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb | membre/nompers | membre/affiliation/alinea" mode="affiliations"/>
-        </p>
-      </li>
+      <xsl:variable name="preceding_contribution" select="./preceding-sibling::*[1]/contribution" />
+      <xsl:variable name="current_contribution" select="./contribution" />
+      <xsl:choose>
+        <!-- author without the `contribution` element -->
+        <xsl:when test="not(child::contribution)">
+          <li class="auteur-affiliation">
+            <p>
+              <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb | membre/nompers | membre/affiliation/alinea" mode="affiliations"/>
+            </p>
+          </li>
+        </xsl:when>
+        <!-- author with the `contribution` element -->
+        <xsl:otherwise>
+          <xsl:if test="not($preceding_contribution != '') or $preceding_contribution != $current_contribution">
+            <li class="auteur-affiliation">
+              <p><xsl:value-of select="$current_contribution"/><br/>
+              <!-- look for every author that shares the `contribution` element with the current one -->
+              <xsl:for-each select="../auteur">
+                <xsl:if test="./contribution = $current_contribution">
+                  <xsl:apply-templates select="nompers | nomorg | affiliation/alinea | courriel | siteweb | membre/nompers | membre/affiliation/alinea" mode="affiliations"/><br/>
+                </xsl:if>
+              </xsl:for-each>
+              </p>
+            </li>
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:for-each>
   </xsl:template>
 

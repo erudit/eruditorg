@@ -1665,6 +1665,61 @@ class TestArticleDetailView:
             "</p></li>" in html
         )
 
+    @pytest.mark.parametrize(
+        "article, mentions_nb, expected_li_list",
+        (
+            (
+                "1007667ar",
+                3,
+                [
+                    '<li class="auteur-affiliation"><p>Contribution : 50 %<br/><strong>Christelle'
+                    "\n      Lison</strong><br/>Professeure, Université de Sherbrooke<br/>\n<a hre"
+                    'f="mailto:christelle.Lison@usherbrooke.ca" id="ls1" target="_blank">\n       '
+                    "     christelle.Lison@usherbrooke.ca\n          </a>\n<br/></p></li>",
+                    '<li class="auteur-affiliation"><p>Contribution\xa0: 30\xa0%<br/><strong>Denis'
+                    "\n      Bédard</strong><br/>Professeur, Université de Sherbrooke<br/>\n<a hre"
+                    'f="mailto:denis.bedard@usherbrooke.ca" id="ls2" target="_blank">denis.bedard@'
+                    "usherbrooke.ca\n          </a>\n<br/></p></li>",
+                    '<li class="auteur-affiliation"><p>Contribution\xa0: 5\xa0%<br/><strong>Noël\n'
+                    "      Boutin</strong><br/>Professeur, Université de Sherbrooke<br/>\n<a href="
+                    '"mailto:noel.boutin@usherbrooke.ca" id="ls3" target="_blank">noel.boutin@ushe'
+                    "rbrooke.ca\n          </a>\n<br/><strong>Daniel\n      J.\n      Côté</strong"
+                    '><br/>Professeur, Université de Sherbrooke<br/>\n<a href="mailto:daniel.j.cot'
+                    'e@usherbrooke.ca" id="ls4" target="_blank">daniel.j.cote@usherbrooke.ca\n    '
+                    "      </a>\n<br/><strong>Daniel\n      Dalle</strong><br/>Professeur, Univers"
+                    'ité de Sherbrooke<br/>\n<a href="mailto:danel.dalle@usherbrooke.ca" id="ls5" '
+                    'target="_blank">danel.dalle@usherbrooke.ca\n          </a>\n<br/><strong>Nath'
+                    "alie\n      Lefebvre</strong><br/>Chargée de cours, Université de Sherbrooke<"
+                    "br/></p></li>",
+                ],
+            ),
+            (
+                "1077936ar",
+                2,
+                [
+                    '<li class="auteur-affiliation"><p><strong>Suzanne\n      Chassé</strong></p><'
+                    "/li>",
+                    '<li class="auteur-affiliation"><p>en collaboration avec<br/><strong>le Groupe'
+                    " Promexpro inc.</strong><br/><strong>le Comité de la cité internationale du P"
+                    "ère Noël</strong><br/><strong>le ministère du Tourisme du Québec</strong><br/"
+                    "><strong>la Ville de Laval</strong><br/></p></li>",
+                ],
+            ),
+        ),
+    )
+    def test_article_displays_grouped_contributing_mentions(
+        self, article, mentions_nb, expected_li_list
+    ):
+        article = ArticleFactory(from_fixture=article)
+        url = article_detail_url(article)
+        response = Client().get(url)
+        html = response.content.decode()
+        dom = BeautifulSoup(html, "html.parser")
+        li_list = dom.find_all("li", {"class": "auteur-affiliation"})
+        assert len(li_list) == mentions_nb
+        for i, li in enumerate(li_list):
+            assert li.decode() == expected_li_list[i]
+
     def test_figure_groups_source_display(self):
         article = ArticleFactory(
             from_fixture="1058470ar",
