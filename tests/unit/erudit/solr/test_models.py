@@ -200,13 +200,14 @@ class TestInternalArticle:
         assert article.issue_url == expected_url
 
     @pytest.mark.parametrize(
-        "external_url, expected_url",
+        "external_url, url_document, expected_url",
         (
-            (None, "/fr/revues/journal/2020-issue/article/"),
-            ("https://www.exemple.com", "https://www.exemple.com"),
+            (None, "http://id.erudit.org", "/fr/revues/journal/2020-issue/article/"),
+            (None, "https://www.exemple.com", "https://www.exemple.com"),
+            ("https://www.exemple.com", "https://www.exemple.com", "https://www.exemple.com"),
         ),
     )
-    def test_url(self, external_url, expected_url):
+    def test_url(self, external_url, url_document, expected_url):
         issue = IssueFactory(
             journal__code="journal",
             localidentifier="issue",
@@ -216,20 +217,21 @@ class TestInternalArticle:
         article = InternalArticle(
             {
                 "ID": "article",
-                "URLDocument": ["https://www.exemple.com"],
+                "URLDocument": [url_document],
             },
             issue,
         )
         assert article.url == expected_url
 
     @pytest.mark.parametrize(
-        "external_url, expected_url",
+        "external_url, url_document, expected_url",
         (
-            (None, "/fr/revues/journal/2020-issue/article.pdf"),
-            ("https://www.exemple.com", None),
+            (None, "http://id.erudit.org", "/fr/revues/journal/2020-issue/article.pdf"),
+            (None, "https://www.exemple.com", None),
+            ("https://www.exemple.com", "https://www.exemple.com", None),
         ),
     )
-    def test_pdf_url(self, external_url, expected_url):
+    def test_pdf_url(self, external_url, url_document, expected_url):
         issue = IssueFactory(
             journal__code="journal",
             localidentifier="issue",
@@ -239,6 +241,7 @@ class TestInternalArticle:
         article = InternalArticle(
             {
                 "ID": "article",
+                "URLDocument": [url_document],
             },
             issue,
         )
