@@ -91,6 +91,7 @@ env = environ.Env(
     CSRF_FAILURE_VIEW=(str, "apps.public.views.forbidden_view"),
     COUNTER_R5_FIRST_AVAILABLE_MONTH=(str, "2017-05-01"),
     COUNTER_R5_AVAILABLE_AFTER=(int, 28),
+    COUNTER_R5_SERVER_URL=(str, "https://counter-r5-sushi.erudit.org"),
 )
 environ.Env.read_env(str(ROOT_DIR / ".env"))
 
@@ -552,7 +553,7 @@ REDIS_PORT = env("REDIS_PORT")
 REDIS_INDEX = env("REDIS_INDEX")
 
 
-# Elasticsearch (stats)
+# Elasticsearch (stats) - unused as of july 2021, but kept for future use (journals stats)
 ELASTICSEARCH_STATS_INDEX = env("ELASTICSEARCH_STATS_INDEX")
 ELASTICSEARCH_STATS_HOST = env("ELASTICSEARCH_STATS_HOST")
 ELASTICSEARCH_STATS_PORT = env("ELASTICSEARCH_STATS_PORT")
@@ -560,6 +561,8 @@ ELASTICSEARCH_STATS_PORT = env("ELASTICSEARCH_STATS_PORT")
 COUNTER_R5_AVAILABLE_AFTER = env("COUNTER_R5_AVAILABLE_AFTER")
 # First month for which counter R5 data is available
 COUNTER_R5_FIRST_AVAILABLE_MONTH = env("COUNTER_R5_FIRST_AVAILABLE_MONTH")
+# Base URL for R5 reports server (aka counter-sushi-django)
+COUNTER_R5_SERVER_URL = env("COUNTER_R5_SERVER_URL")
 
 SESSION_ENGINE = env("SESSION_ENGINE")
 
