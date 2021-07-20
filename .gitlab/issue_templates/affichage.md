@@ -13,4 +13,4 @@
 /label ~Support 
 /label ~EquipeProd
 /label ~ControleQualite
-/label ~"À trier" 
+/label ~"Étape::À trier" 
