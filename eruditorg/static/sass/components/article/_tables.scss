@@ -17,6 +17,10 @@
     padding: 0.25em 0.5em;
   }
 
+  td[class=lrsource] {
+    width: 40px;
+  }
+
   &.type2, &.type5 {
 
     .lrsource p {
