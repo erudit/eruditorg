@@ -1,21 +1,22 @@
+import datetime
 import datetime as dt
 from functools import singledispatch
-from io import TextIOWrapper
-from tempfile import TemporaryFile
+
 from typing import Type, Tuple
+from urllib.parse import urlencode
 
 import requests
-from django.conf import settings
 
-from django.http import (
-    HttpResponse,
-    FileResponse,
-)
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from counter_r5 import CounterR5Config
 
 from erudit.models import Organisation
 
-from django.contrib.auth.mixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from apps.public.site_messages.models import SiteMessage
@@ -28,8 +29,6 @@ from .forms import (
     CounterR5Form,
     DatesRange,
 )
-
-from counter_r5 import CounterR5Report, CounterR5Config
 
 
 def compute_r4_end_month(today: dt.date) -> dt.date:
@@ -89,55 +88,34 @@ def get_r4_report_response(form: CounterR4Form, organisation: Organisation) -> H
 
 
 @get_report_response.register(CounterR5Form)
-def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> FileResponse:
+def get_r5_report_response(form: CounterR5Form, organisation: Organisation) -> HttpResponse:
+    """Generate a redirect to counter"""
     begin_date, end_date = form.get_report_period()
-    organisation_id = organisation.account_id
-    config = get_counter_r5_config()
-    report = CounterR5Report(
-        config=config,
-        report_type=form.report_code,
-        customer_id=organisation.account_id,
-        customer_name=organisation.name,
-        begin_date=begin_date,
-        end_date=end_date,
-    )
-
-    f = TemporaryFile("w+b")
-    try:
-        # csv writers in R5 library want a text file, but FileResponse wants a binary file
-        # so the binary temp file is wrapped in a TextIOWrapper that does the conversion.
-        # `newline=""`, as asked by the csv module, and `write_through=False` because
-        # additional buffering is not needed in this case
-        text_wrapper = TextIOWrapper(f, encoding="utf-8-sig", newline="", write_through=True)
-        report.write_csv(text_wrapper)
-        # if not detached, TextIOWrapper would close the file when destroyed (ie. when it goes
-        # out of scope)
-        text_wrapper.detach()
-        f.seek(0)
-        response = FileResponse(f, content_type="application/csv; charset=utf-8-sig")
-        filename = (
-            f"{form.report_code}-{organisation_id}-"
-            f"{begin_date.strftime('%Y-%m-%d')}-{end_date.strftime('%Y-%m-%d')}"
-        )
-        response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
-        return response
-    except Exception:
-        # if there is no exception, then the tempfile will be closed (and deleted) by
-        # ``FileResponse``.
-        f.close()
-        raise
+    counter_sushi_params = {
+        "begin_date": datetime.date.strftime(begin_date, "%Y-%m-%d"),
+        "end_date": datetime.date.strftime(end_date, "%Y-%m-%d"),
+        "requestor_id": organisation.sushi_requester_id,
+        "customer_id": str(organisation.account_id),
+    }
+    query = urlencode(counter_sushi_params)
+    report_code = form.report_code.lower()
+    return redirect(f"{settings.COUNTER_R5_SERVER_URL}/csv_reports/{report_code}?{query}")
 
 
-def get_counter_r5_config():
+def get_counter_r5_config() -> CounterR5Config:
+    """Generate the config object for R5 reports from the Django settings.
+
+    Note that elasticsearch is not configured because the actual reports are generated on another
+    server. The config here is just used for the date checking logic.
+
+    """
     return CounterR5Config(
         first_available_month=dt.datetime.strptime(
             settings.COUNTER_R5_FIRST_AVAILABLE_MONTH, "%Y-%m-%d"
         ).date(),
         available_after=settings.COUNTER_R5_AVAILABLE_AFTER,
-        es_index=settings.ELASTICSEARCH_STATS_INDEX,
-        es_host=settings.ELASTICSEARCH_STATS_HOST,
-        es_port=settings.ELASTICSEARCH_STATS_PORT,
-        global_filters={"audit.is_legitimate": True},
+        es_index="",
+        es_host="",
     )
 
 

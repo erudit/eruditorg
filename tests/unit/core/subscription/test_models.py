@@ -37,7 +37,8 @@ class TestJournalAccessSubscription:
         basket = AccessBasketFactory(journals=[journal_1])
         subscription = JournalAccessSubscriptionFactory(basket=basket, journals=[journal_2])
         subscription.journals.add(journal_3)
-        assert list(subscription.get_journals()) == [journal_1, journal_2, journal_3]
+        expected = sorted([journal_1, journal_2, journal_3], key=lambda journal: journal.name)
+        assert list(subscription.get_journals()) == expected
 
     def test_basket_provides_access(self):
         j1, j2, j3 = JournalFactory.create_batch(3)
