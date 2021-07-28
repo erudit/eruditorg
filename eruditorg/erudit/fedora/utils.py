@@ -35,22 +35,19 @@ def get_pids(query):
 
 def is_issue_published_in_fedora(issue_pid, journal=None, journal_pid=None):
     """ Returns true if an issue is published """
-    try:
-        if journal:
-            journal_pid = journal.pid
-        fedora_journal = JournalDigitalObject(api, journal_pid)
-        assert fedora_journal.exists
-    except AssertionError:
+    if journal:
+        journal_pid = journal.pid
+    fedora_journal = JournalDigitalObject(api, journal_pid)
+    if not fedora_journal.exists:
         logger.error("journal.DoesNotExist", pid=journal.pid)
         return False
-    else:
-        publications_tree = remove_xml_namespaces(
-            et.fromstring(fedora_journal.publications.content.serialize())
-        )
-        xml_issue_nodes = publications_tree.findall(".//numero")
-        for issue_node in xml_issue_nodes:
-            if issue_node.get("pid") == issue_pid:
-                return True
+    publications_tree = remove_xml_namespaces(
+        et.fromstring(fedora_journal.publications.content.serialize())
+    )
+    xml_issue_nodes = publications_tree.findall(".//numero")
+    for issue_node in xml_issue_nodes:
+        if issue_node.get("pid") == issue_pid:
+            return True
     return False
 
 

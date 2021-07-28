@@ -121,11 +121,9 @@ class HomeView(TemplateView):
 
         if entries is None:
             # Fetches the blog entries
-            try:
-                parsed = rss_parse(feed_url)
-                status_code = parsed.get("status")
-                assert status_code == 200 or status_code == 304
-            except AssertionError:
+            parsed = rss_parse(feed_url)
+            status_code = parsed.get("status")
+            if status_code not in (200, 304):
                 # The feed is not available.
                 logger.error("apropos.unavailable", url=feed_url, request=self.request)
                 return []

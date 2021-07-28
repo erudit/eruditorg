@@ -10,7 +10,6 @@ from django.shortcuts import redirect, reverse
 
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
-from core.metrics.viewmixins import MetricCaptureMixin
 from erudit.solr.models import SolrDocument
 from erudit.utils import locale_aware_sort
 
@@ -110,13 +109,12 @@ class SavedCitationListView(ListView):
         return sort_by
 
 
-class SavedCitationAddView(MetricCaptureMixin, View):
+class SavedCitationAddView(View):
     """ Add an Érudit document to the list of documents associated to the current user. """
 
     http_method_names = [
         "post",
     ]
-    tracking_metric_name = "erudit__citation__add"
 
     def post(self, request):
         solr_id = request.POST.get("document_id", "")
@@ -125,13 +123,12 @@ class SavedCitationAddView(MetricCaptureMixin, View):
         return JsonAckResponse(saved_document_id=solr_id)
 
 
-class SavedCitationRemoveView(MetricCaptureMixin, View):
+class SavedCitationRemoveView(View):
     """ Remove an Érudit document from the list of documents associated to the current user. """
 
     http_method_names = [
         "post",
     ]
-    tracking_metric_name = "erudit__citation__remove"
 
     def post(self, request):
         solr_id = request.POST.get("document_id", "")
@@ -143,13 +140,12 @@ class SavedCitationRemoveView(MetricCaptureMixin, View):
         return JsonAckResponse(removed_document_id=solr_id)
 
 
-class SavedCitationBatchRemoveView(MetricCaptureMixin, View):
+class SavedCitationBatchRemoveView(View):
     """ Remove multiple Érudit documents from a list of documents. """
 
     http_method_names = [
         "post",
     ]
-    tracking_metric_name = "erudit__citation__remove"
 
     def post(self, request):
         solr_ids = request.POST.getlist("document_ids", [])

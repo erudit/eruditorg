@@ -97,13 +97,9 @@ def build_language_filter_choices(filter_languages=None):
     language_choices = []
     filter_languages = sorted(filter_languages, key=lambda x: x[1], reverse=True)
     for v, c in filter_languages:
-        try:
-            assert re.match(r"^[a-zA-Z]+$", v)
-            language_name = LANGUAGE_LABELS[v]
-        except AssertionError:  # pragma: no cover
+        if not re.match(r"^[a-zA-Z]+$", v):
             continue
-        except KeyError:
-            language_name = v
+        language_name = LANGUAGE_LABELS.get(v, v)
         language_choices.append(
             (v, "{language_name} ({c})".format(language_name=language_name, c=c))
         )

@@ -50,7 +50,6 @@ from eruditarticle.objects import SummaryArticle
 from erudit.utils import locale_aware_sort, qs_cache_key
 
 from base.pdf import add_coverpage_to_pdf, get_pdf_first_page
-from core.metrics.metric import metric
 from core.subscription.models import JournalAccessSubscription, InstitutionIPAddressRange
 from apps.public.campaign.models import Campaign
 
@@ -317,16 +316,12 @@ class JournalAuthorsListView(SingleJournalMixin, MetaInfoIssueMixin, TemplateVie
     def init_get_parameters(self, request):
         """ Initializes and verify GET parameters. """
         self.letter = request.GET.get("letter", None)
-        try:
-            assert self.letter is not None
+        if self.letter is not None:
             self.letter = str(self.letter).upper()
-            assert len(self.letter) == 1 and "A" <= self.letter <= "Z"
-        except AssertionError:
-            self.letter = None
+            if len(self.letter) != 1 or not ("A" <= self.letter <= "Z"):
+                self.letter = None
         self.article_type = request.GET.get("article_type", None)
-        try:
-            assert self.article_type in (Article.ARTICLE_DEFAULT, Article.ARTICLE_REPORT)
-        except AssertionError:
+        if self.article_type not in (Article.ARTICLE_DEFAULT, Article.ARTICLE_REPORT):
             self.article_type = None
 
     def get_solr_article_type(self):
@@ -1334,17 +1329,6 @@ class BaseExternalURLRedirectView(RedirectView):
 
         obj = get_object_or_404(
             self.model.objects.filter(external_url__isnull=False), **filter_arguments
-        )
-
-        # Tracks the redirection
-        metric(
-            "erudit__journal__{0}_redirect".format(self.model._meta.model_name.lower()),
-            tags={
-                "collection": self.get_collection(obj).code,
-            },
-            **{
-                "localidentifier": obj.localidentifier,
-            },
         )
         return obj.external_url
 

@@ -183,7 +183,6 @@ INSTALLED_APPS = (
     "core.citations",
     "core.editor",
     "core.journal",
-    "core.metrics",
     "core.subscription",
     "erudit.cache",
     # Third-party apps
@@ -217,9 +216,6 @@ INSTALLED_APPS = (
     "reversion",
 )
 
-if EXPOSE_OPENMETRICS:
-    INSTALLED_APPS = INSTALLED_APPS + ("django_prometheus",)
-
 MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -239,6 +235,8 @@ MIDDLEWARE = (
 )
 
 if EXPOSE_OPENMETRICS:
+    INSTALLED_APPS = INSTALLED_APPS + ("django_prometheus",)
+
     MIDDLEWARE = (
         ("django_prometheus.middleware.PrometheusBeforeMiddleware",)
         + MIDDLEWARE
@@ -433,15 +431,6 @@ Z3950_DATABASE = env("Z3950_DATABASE")
 
 ERUDIT_COUNTER_BACKEND_URL = env("ERUDIT_COUNTER_BACKEND_URL")
 
-
-# Metrics and analytics
-# -----------------------------------------------------------------------------
-METRICS_ACTIVATED = False
-# METRICS_INFLUXDB_HOST = env("METRICS_INFLUXDB_HOST", default='localhost')
-# METRICS_INFLUXDB_PORT = env("METRICS_INFLUXDB_PORT", default=0)
-# METRICS_INFLUXDB_DBNAME = env("METRICS_INFLUXDB_DBNAME", default="db")
-# METRICS_INFLUXDB_USER = env("METRICS_INFLUXDB_USER", default="db")
-# METRICS_INFLUXDB_PASSWORD = env("METRICS_INFLUXDB_PASSWORD", default="password")
 
 # Paths
 # -----------------------------------------------------------------------------

@@ -58,11 +58,8 @@ class AuthorizationCreateView(LoginRequiredMixin, RelatedAuthorizationsMixin, Cr
     def get_authorization_definition(self):
         """ Returns a tuple of the form (codename, label) for the considered authorization. """
         authorization_labels_dict = dict(self.get_related_authorization_choices())
-        try:
-            codename = self.request.GET.get("codename", None)
-            assert codename is not None
-            assert codename in authorization_labels_dict
-        except AssertionError:
+        codename = self.request.GET.get("codename", None)
+        if codename is None or codename not in authorization_labels_dict:
             raise Http404
         return codename, authorization_labels_dict[codename]
 

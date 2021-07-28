@@ -5,15 +5,6 @@ import structlog
 from structlog_sentry import SentryJsonProcessor
 
 
-# Metrics
-# -----------------------------------------------------------------------------
-METRICS_ACTIVATED = False
-# METRICS_INFLUXDB_HOST = "{{ influxdb_host }}"
-# METRICS_INFLUXDB_PORT = "{{ influxdb_port }}"
-# METRICS_INFLUXDB_DBNAME = "{{ influxdb_dbname }}"
-# METRICS_INFLUXDB_USER = "{{ influxdb_user }}"
-# METRICS_INFLUXDB_PASSWORD = "{{ influxdb_password }}"
-
 # Content providers
 # -----------------------------------------------------------------------------
 

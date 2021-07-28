@@ -227,18 +227,26 @@ class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, Temp
         ignored = []
         toadd = []
         for index, row in enumerate(csvreader):
-            try:
-                (email, first_name, last_name) = row
-                validator(email)
-                assert ";" not in first_name
-                assert ";" not in last_name
-            except (ValidationError, AssertionError, ValueError):
+            if len(row) != 3:
                 errors.append((index + 1, ";".join(row)))
+                continue
+
+            (email, first_name, last_name) = row
+
+            if ";" in first_name or ";" in last_name:
+                errors.append((index + 1, ";".join(row)))
+                continue
+
+            try:
+                validator(email)
+            except ValidationError:
+                errors.append((index + 1, ";".join(row)))
+                continue
+
+            if management_subscription.email_exists_or_is_pending(email):
+                ignored.append(email)
             else:
-                if management_subscription.email_exists_or_is_pending(email):
-                    ignored.append(email)
-                else:
-                    toadd.append((email, first_name, last_name))
+                toadd.append((email, first_name, last_name))
         if errors:
             # When there are errors, we don't show any toadd/ignored
             toadd = []
