@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.test import override_settings
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from fitz import Document
 
 from apps.public.journal.coverpage import get_coverpage
 from erudit.models import Article
@@ -78,7 +78,7 @@ class Command(BaseCommand):
         locale = options.get("locale")
 
         with open("./pdf_coverpages.pdf", "wb") as pdf:
-            pdf_writer = PdfFileWriter()
+            pdf_writer = Document()
 
             if additional_ids is not None and custom_ids is not None:
                 raise CommandError(
@@ -112,9 +112,9 @@ class Command(BaseCommand):
 
                 with override_settings(LANGUAGE_CODE=locale):
                     try:
-                        pdf_writer.addPage(PdfFileReader(get_coverpage(article)).getPage(0))
+                        pdf_writer.insertPDF(Document(stream=get_coverpage(article), filetype="pdf"))
                     except (KeyError, ValueError) as error:
                         raise CommandError('Error with ID "{}": {}'.format(fedora_id, error))
 
-            pdf_writer.write(pdf)
+            pdf.write(pdf_writer.write())
             self.stdout.write(self.style.SUCCESS("Success"))
