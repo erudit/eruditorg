@@ -40,6 +40,7 @@ FEDORA_IDS = [
     "erudit:erudit.rseau67.rseau04245.1055592ar",
     "erudit:erudit.rseau67.rseau3275.705195ar",
     "erudit:erudit.scesprit04995.scesprit05130.1067588ar",
+    "erudit:erudit.smq52.smq04494.1058611ar",
     "erudit:erudit.sp02131.sp04852.1064011ar",
     "erudit:erudit.sp02131.sp04857.1064453ar",
     "erudit:erudit.spirale1048177.spirale04246.89625ac",

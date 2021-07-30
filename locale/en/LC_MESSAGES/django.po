@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-08 17:54-0400\n"
+"POT-Creation-Date: 2021-07-29 20:59-0400\n"
 "PO-Revision-Date: 2016-08-04 18:48+0000\n"
 "Last-Translator: Maxime Turcotte <maxime.turcotte@erudit.org>, 2021\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -182,7 +182,7 @@ msgid "Collections d’actes ou de livres"
 msgstr "Series of proceedings or books "
 
 #: apps/public/book/models.py:61 apps/public/search/forms.py:29
-#: core/subscription/models.py:393
+#: core/subscription/models.py:366
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:50
 msgid "Titre"
 msgstr "Title"
@@ -216,7 +216,7 @@ msgstr "ISBN"
 msgid "ISBN numérique"
 msgstr "Digital ISBN"
 
-#: apps/public/book/models.py:118 apps/public/search/forms.py:273
+#: apps/public/book/models.py:118 apps/public/search/forms.py:269
 #: templates/public/journal/journal_authors_list.html:71
 #: templates/public/journal/journal_authors_list.html:81
 msgid "Auteurs"
@@ -353,31 +353,31 @@ msgstr "^export\\.ris$"
 msgid "^export\\.bib$"
 msgstr "^export\\.bib$"
 
-#: apps/public/citations/views.py:23 apps/public/thesis/views.py:105
+#: apps/public/citations/views.py:22 apps/public/thesis/views.py:105
 msgid "Auteur (A–Z)"
 msgstr "Author (A–Z)"
 
-#: apps/public/citations/views.py:24 apps/public/thesis/views.py:106
+#: apps/public/citations/views.py:23 apps/public/thesis/views.py:106
 msgid "Auteur (Z–A)"
 msgstr "Author (Z–A)"
 
-#: apps/public/citations/views.py:25
+#: apps/public/citations/views.py:24
 msgid "Année (croissant)"
 msgstr "Year (ascending)"
 
-#: apps/public/citations/views.py:26
+#: apps/public/citations/views.py:25
 msgid "Année (décroissant)"
 msgstr "Year (descending)"
 
-#: apps/public/citations/views.py:27 apps/public/search/forms.py:414
+#: apps/public/citations/views.py:26 apps/public/search/forms.py:410
 msgid "Titre (A–Z)"
 msgstr "Title (A–Z)"
 
-#: apps/public/citations/views.py:28 apps/public/search/forms.py:415
+#: apps/public/citations/views.py:27 apps/public/search/forms.py:411
 msgid "Titre (Z–A)"
 msgstr "Title (Z–A)"
 
-#: apps/public/citations/views.py:142
+#: apps/public/citations/views.py:139
 msgid "Ce document n'est pas présent dans les notices"
 msgstr "This document does not exist in the records."
 
@@ -386,72 +386,81 @@ msgstr "This document does not exist in the records."
 msgid "Document généré le %(now_dt)s"
 msgstr "Document generated on %(now_dt)s"
 
-#: apps/public/journal/coverpage.py:230 erudit/models/journal.py:1183
+#: apps/public/journal/coverpage.py:231
+#, python-brace-format
+msgid ""
+"--&gt; Voir l’<a href=\"{url}\" "
+"color=\"#ff4242\"><strong>erratum</strong></a> concernant cet article"
+msgstr ""
+"--&gt; See the <a href=\"{url}\" "
+"color=\"#ff4242\"><strong>erratum</strong></a> for this article"
+
+#: apps/public/journal/coverpage.py:244 erudit/models/journal.py:1183
 #: erudit/models/journal.py:1193
 #: templates/public/journal/eruditxsd300_to_html.xsl:580
 msgid "[Article sans titre]"
 msgstr "[Untitled article]"
 
-#: apps/public/journal/coverpage.py:351
+#: apps/public/journal/coverpage.py:365
 msgid "URI&nbsp;:"
 msgstr "URI:"
 
-#: apps/public/journal/coverpage.py:361
+#: apps/public/journal/coverpage.py:375
 msgid "DOI&nbsp;:"
 msgstr "DOI:"
 
-#: apps/public/journal/coverpage.py:382
+#: apps/public/journal/coverpage.py:396
 msgid "Aller au sommaire du numéro"
 msgstr "See table of contents"
 
-#: apps/public/journal/coverpage.py:396
+#: apps/public/journal/coverpage.py:410
 msgid "Éditeur(s)"
 msgstr "Publisher(s)"
 
-#: apps/public/journal/coverpage.py:414 apps/public/search/forms.py:35
+#: apps/public/journal/coverpage.py:428 apps/public/search/forms.py:35
 #: templates/public/journal/journal_base.html:168
 msgid "ISSN"
 msgstr "ISSN"
 
-#: apps/public/journal/coverpage.py:424
+#: apps/public/journal/coverpage.py:438
 #: templates/public/journal/journal_base.html:170
 msgid "imprimé"
 msgstr "print"
 
-#: apps/public/journal/coverpage.py:434
+#: apps/public/journal/coverpage.py:448
 #: templates/public/journal/journal_base.html:173
 msgid "numérique"
 msgstr "digital"
 
-#: apps/public/journal/coverpage.py:446
+#: apps/public/journal/coverpage.py:460
 msgid "Découvrir la revue"
 msgstr "Explore this journal"
 
-#: apps/public/journal/coverpage.py:458
+#: apps/public/journal/coverpage.py:472
 #: templates/public/journal/eruditxsd300_to_html.xsl:393
 #: templates/public/journal/partials/article_citation_modal_content.html:10
 #: templates/public/search/results.html:320
 msgid "Citer cet article"
 msgstr "Cite this article"
 
-#: apps/public/journal/coverpage.py:459
+#: apps/public/journal/coverpage.py:473
 msgid "Citer ce compte rendu"
 msgstr "Cite this review"
 
-#: apps/public/journal/coverpage.py:460
+#: apps/public/journal/coverpage.py:474
 #: templates/public/search/results.html:327
 msgid "Citer ce document"
 msgstr "Cite this document"
 
-#: apps/public/journal/coverpage.py:461
+#: apps/public/journal/coverpage.py:475
 msgid "Citer cette note"
 msgstr "Cite this note"
 
-#: apps/public/journal/coverpage.py:486
+#: apps/public/journal/coverpage.py:500
 msgid "Résumé de l'article"
 msgstr "Article abstract"
 
-#: apps/public/journal/coverpage.py:554
+#: apps/public/journal/coverpage.py:568
 msgid ""
 "Ce document est protégé par la loi sur le droit d’auteur. L’utilisation des "
 "services         d’Érudit (y compris la reproduction) est assujettie à sa "
@@ -461,11 +470,11 @@ msgstr ""
 "(including reproduction) is subject to its terms and conditions, which can "
 "be viewed online."
 
-#: apps/public/journal/coverpage.py:575
+#: apps/public/journal/coverpage.py:589
 msgid "Cet article est diffusé et préservé par Érudit."
 msgstr "This article is disseminated and preserved by Érudit."
 
-#: apps/public/journal/coverpage.py:583
+#: apps/public/journal/coverpage.py:597
 msgid ""
 "Érudit est un consortium interuniversitaire sans but lucratif composé de "
 "l’Université de         Montréal, l’Université Laval et l’Université du "
@@ -493,7 +502,7 @@ msgstr "New"
 msgid "Par type"
 msgstr "By type"
 
-#: apps/public/journal/forms.py:13 apps/public/search/forms.py:197
+#: apps/public/journal/forms.py:13 apps/public/search/forms.py:193
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés par les "
 "pairs ; les revues culturelles présentent des articles dans les domaines "
@@ -507,7 +516,7 @@ msgstr ""
 msgid "Par fonds"
 msgstr "By collection"
 
-#: apps/public/journal/forms.py:22 apps/public/search/forms.py:184
+#: apps/public/journal/forms.py:22 apps/public/search/forms.py:180
 msgid ""
 "Les revues diffusées sur Érudit sont consultables directement sur la "
 "plateforme ; les revues des collections Persée et NRC Research Press "
@@ -640,18 +649,18 @@ msgstr "^issue/(?P<localidentifier>[\\w-]+)/$"
 msgid "Nombre de consultations d'articles sous embargo par type d'abonnement"
 msgstr ""
 
-#: apps/public/journal/views.py:959
-#: templates/public/journal/partials/issue_detail_article_item.html:70
+#: apps/public/journal/views.py:954
+#: templates/public/journal/partials/issue_detail_article_item.html:87
 msgid "Notice"
 msgstr "Record"
 
-#: apps/public/journal/views.py:978 apps/public/search/forms.py:33
+#: apps/public/journal/views.py:973 apps/public/search/forms.py:33
 #: templates/public/journal/article_biblio.html:54
 #: templates/public/journal/article_biblio.html:64
 msgid "Bibliographie"
 msgstr "Bibliography"
 
-#: apps/public/journal/views.py:995
+#: apps/public/journal/views.py:990
 #: templates/public/journal/article_toc.html:54
 #: templates/public/journal/article_toc.html:64
 msgid "Plan complet de l’article"
@@ -774,54 +783,54 @@ msgctxt "Article Note"
 msgid "Note"
 msgstr "Note"
 
-#: apps/public/search/forms.py:114 templates/public/home.html:58
+#: apps/public/search/forms.py:110 templates/public/home.html:58
 #: templates/public/search/base.html:6
 msgid "Recherche"
 msgstr "Search"
 
-#: apps/public/search/forms.py:116
+#: apps/public/search/forms.py:112
 msgid "Inclure les champs"
 msgstr "Include fields"
 
-#: apps/public/search/forms.py:159
+#: apps/public/search/forms.py:155
 msgid "De…"
 msgstr "From…"
 
-#: apps/public/search/forms.py:165
+#: apps/public/search/forms.py:161
 msgid "À…"
 msgstr "To…"
 
-#: apps/public/search/forms.py:172
+#: apps/public/search/forms.py:168
 msgid "Dans Érudit depuis"
 msgstr "On Érudit since"
 
-#: apps/public/search/forms.py:179 apps/public/search/forms.py:275
+#: apps/public/search/forms.py:175 apps/public/search/forms.py:271
 #: erudit/models/core.py:84
 #: templates/public/journal/journal_list_per_names.html:142
 msgid "Fonds"
 msgstr "Collections"
 
-#: apps/public/search/forms.py:192
+#: apps/public/search/forms.py:188
 msgid "Types de publication"
 msgstr "Publication types"
 
-#: apps/public/search/forms.py:204 apps/public/search/forms.py:265
+#: apps/public/search/forms.py:200 apps/public/search/forms.py:261
 msgid "Types d’articles savants"
 msgstr "Scholarly article types"
 
-#: apps/public/search/forms.py:208 apps/public/search/forms.py:266
+#: apps/public/search/forms.py:204 apps/public/search/forms.py:262
 msgid "Ces filtres s’appliquent aux articles savants uniquement."
 msgstr "These options concern scholarly articles only. "
 
-#: apps/public/search/forms.py:211 erudit/models/journal.py:100
+#: apps/public/search/forms.py:207 erudit/models/journal.py:100
 msgid "Disciplines"
 msgstr "Disciplines"
 
-#: apps/public/search/forms.py:212 apps/public/search/forms.py:269
+#: apps/public/search/forms.py:208 apps/public/search/forms.py:265
 msgid "Langues"
 msgstr "Languages"
 
-#: apps/public/search/forms.py:213 core/editor/models.py:226
+#: apps/public/search/forms.py:209 core/editor/models.py:226
 #: core/subscription/models.py:91 core/subscription/models.py:142
 #: erudit/models/journal.py:265 templates/base.html:156
 #: templates/base.html:373 templates/public/home.html:73
@@ -842,24 +851,24 @@ msgstr "Languages"
 msgid "Revues"
 msgstr "Journals"
 
-#: apps/public/search/forms.py:231
+#: apps/public/search/forms.py:227
 msgid "Expression ou mot-clé"
 msgstr "Phrase or keyword"
 
-#: apps/public/search/forms.py:261
+#: apps/public/search/forms.py:257
 msgid "Dans les résultats"
 msgstr "In the results"
 
-#: apps/public/search/forms.py:263
+#: apps/public/search/forms.py:259
 msgid "Années"
 msgstr "Year"
 
-#: apps/public/search/forms.py:272
+#: apps/public/search/forms.py:268
 #: templates/userspace/library/collection/landing.html:5
 msgid "Collections"
 msgstr "Series"
 
-#: apps/public/search/forms.py:277
+#: apps/public/search/forms.py:273
 msgid ""
 "Les revues diffusées sur Érudit sont consultables\n"
 "                    directement sur la plateforme ; les revues des collections Persée et NRC\n"
@@ -869,11 +878,11 @@ msgstr ""
 "directly on our platform; journals from the Persée and NRC\n"
 "Research Press collections are redirected to the respective partner platform."
 
-#: apps/public/search/forms.py:284 templates/base.html:153
+#: apps/public/search/forms.py:280 templates/base.html:153
 msgid "Types de publications"
 msgstr "Publication types"
 
-#: apps/public/search/forms.py:286
+#: apps/public/search/forms.py:282
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés\n"
 "                    par les pairs ; les revues culturelles présentent des articles dans les\n"
@@ -883,37 +892,37 @@ msgstr ""
 "cultural journals present articles in the artistic, literary,\n"
 "and sociocultural fields."
 
-#: apps/public/search/forms.py:336
+#: apps/public/search/forms.py:332
 #: templates/public/search/advanced_search.html:55
 #: templates/public/search/partials/advanced_search_q.html:14
 msgid "Mots-clés"
 msgstr "Keywords"
 
-#: apps/public/search/forms.py:408
+#: apps/public/search/forms.py:404
 msgid "Résultats par page"
 msgstr "Results per page"
 
-#: apps/public/search/forms.py:411
+#: apps/public/search/forms.py:407
 msgid "Trier par..."
 msgstr "Sort by..."
 
-#: apps/public/search/forms.py:413
+#: apps/public/search/forms.py:409
 msgid "Pertinence"
 msgstr "Relevance"
 
-#: apps/public/search/forms.py:416
+#: apps/public/search/forms.py:412
 msgid "Premier auteur (A–Z)"
 msgstr "First Author (A–Z)"
 
-#: apps/public/search/forms.py:417
+#: apps/public/search/forms.py:413
 msgid "Premier auteur (Z–A)"
 msgstr "First Author (Z–A)"
 
-#: apps/public/search/forms.py:418 apps/public/thesis/views.py:107
+#: apps/public/search/forms.py:414 apps/public/thesis/views.py:107
 msgid "Date de publication (croissant)"
 msgstr "Date of publication (ascending)"
 
-#: apps/public/search/forms.py:419 apps/public/thesis/views.py:108
+#: apps/public/search/forms.py:415 apps/public/thesis/views.py:108
 msgid "Date de publication (décroissant)"
 msgstr "Date of publication (descending)"
 
@@ -952,11 +961,11 @@ msgstr " {op} (Published since{start})"
 msgid " {op} (Publié jusqu'à {end})"
 msgstr " {op} (Published until {end})"
 
-#: apps/public/search/views.py:253
+#: apps/public/search/views.py:247 apps/public/search/views.py:252
 msgid "Querystring incorrecte"
 msgstr "Incorrect query string."
 
-#: apps/public/search/views.py:275
+#: apps/public/search/views.py:274
 msgid "Cette recherche n'est pas sauvegardée"
 msgstr "The search has not been saved."
 
@@ -1133,7 +1142,7 @@ msgstr "^20years/$"
 
 #: apps/userspace/generic_apps/authorization/forms.py:17
 #: core/accounts/models.py:22 core/authorization/admin.py:24
-#: core/authorization/models.py:32 core/subscription/admin.py:139
+#: core/authorization/models.py:32 core/subscription/admin.py:129
 msgid "Utilisateur"
 msgstr "User"
 
@@ -1141,7 +1150,7 @@ msgstr "User"
 msgid "L’accès a été créé avec succès."
 msgstr "An access has been created successfully. "
 
-#: apps/userspace/generic_apps/authorization/views.py:102
+#: apps/userspace/generic_apps/authorization/views.py:99
 msgid "L’accès a été supprimé avec succès."
 msgstr "This access has been removed successfully. "
 
@@ -1424,24 +1433,24 @@ msgstr "Subscription successfully deleted."
 msgid "La proposition d'abonnement a été annulée avec succès"
 msgstr "Subscription offer successfully cancelled."
 
-#: apps/userspace/journal/subscription/views.py:274
+#: apps/userspace/journal/subscription/views.py:282
 msgid "{} invitation d'abonnement a été envoyée avec succès."
 msgid_plural "{} invitations d'abonnement ont été envoyées avec succès."
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/userspace/journal/subscription/views.py:295
+#: apps/userspace/journal/subscription/views.py:303
 msgid ""
 "Vous tentez d'abonner {} personnes alors qu'il reste {} places à votre "
 "forfait."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:300
-#: apps/userspace/journal/subscription/views.py:366
+#: apps/userspace/journal/subscription/views.py:308
+#: apps/userspace/journal/subscription/views.py:374
 msgid "Le CSV fourni n'est pas du bon format."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:347
+#: apps/userspace/journal/subscription/views.py:355
 msgid "{} abonnement a été supprimé avec succès."
 msgid_plural "{} abonnements ont été supprimé avec succès."
 msgstr[0] ""
@@ -1856,7 +1865,7 @@ msgstr "To be corrected"
 msgid "Validé"
 msgstr "Validated"
 
-#: core/editor/models.py:30 core/subscription/models.py:301
+#: core/editor/models.py:30 core/subscription/models.py:274
 #: erudit/models/journal.py:264 erudit/models/journal.py:438
 #: erudit/models/journal.py:1614
 #: templates/public/journal/journal_list_per_names.html:140
@@ -1998,48 +2007,48 @@ msgstr "This period conflicts with another period for this subscription."
 msgid "Votre abonnement a bien été pris en compte"
 msgstr "Your subscription has been taken into account."
 
-#: core/subscription/admin.py:51
+#: core/subscription/admin.py:41
 msgid "Type d'abonnement"
 msgstr "Subscription type"
 
-#: core/subscription/admin.py:56
+#: core/subscription/admin.py:46
 #: templates/userspace/journal/subscription/individualsubscription_list.html:4
 #: templates/userspace/journal/subscription/individualsubscription_list.html:7
 #: templates/userspace/journal/subscription/individualsubscription_list.html:11
 msgid "Abonnements individuels"
 msgstr "Individual subscriptions"
 
-#: core/subscription/admin.py:57
+#: core/subscription/admin.py:47
 #: templates/userspace/journal/subscription/organisationsubscription_list.html:4
 #: templates/userspace/journal/subscription/organisationsubscription_list.html:11
 msgid "Abonnements institutionnels"
 msgstr "Institutional subscriptions"
 
-#: core/subscription/admin.py:69
+#: core/subscription/admin.py:59
 msgid "Abonné à la revue"
 msgstr "Subscribed to the journal"
 
-#: core/subscription/admin.py:108
+#: core/subscription/admin.py:98
 msgid "Bénéficiaire"
 msgstr "Recipient"
 
-#: core/subscription/admin.py:117
+#: core/subscription/admin.py:107
 msgid "Revue(s) cibles"
 msgstr "Target Journal(s)"
 
-#: core/subscription/admin.py:132
+#: core/subscription/admin.py:122
 msgid "Forfait d'abonnement individuel"
 msgstr "Individual subscription package"
 
-#: core/subscription/admin.py:170 core/subscription/models.py:396
+#: core/subscription/admin.py:159 core/subscription/models.py:369
 msgid "Nombre de comptes"
 msgstr "Number of accounts"
 
-#: core/subscription/admin.py:191
+#: core/subscription/admin.py:180
 msgid "Nombre maximum de comptes"
 msgstr "Maximum number of accounts"
 
-#: core/subscription/admin.py:196
+#: core/subscription/admin.py:185
 msgid "Nombre d'abonnements"
 msgstr "Number of subscriptions"
 
@@ -2059,7 +2068,7 @@ msgstr "Individual subscriber"
 msgid "Abonné institutionnel"
 msgstr "Institutional subscriber "
 
-#: core/subscription/models.py:132 core/subscription/models.py:303
+#: core/subscription/models.py:132 core/subscription/models.py:276
 msgid "Forfait"
 msgstr "Package"
 
@@ -2071,84 +2080,71 @@ msgstr ""
 msgid "Commanditaire"
 msgstr "Sponsor"
 
-#: core/subscription/models.py:167 core/subscription/models.py:243
-#: core/subscription/models.py:252
-msgid "Abonnement aux revues"
-msgstr "Journal Subscription"
-
-#: core/subscription/models.py:168
-msgid "Abonnements aux revues"
-msgstr "Journal Subscriptions"
-
-#: core/subscription/models.py:172
-msgid "{} - Accès multiples"
-msgstr "{} - Multiple Access"
-
-#: core/subscription/models.py:232 core/subscription/models.py:421
-msgid "Abonnement"
-msgstr "Subscription"
-
-#: core/subscription/models.py:236
-msgid "Période d’abonnement aux revues"
-msgstr "Journal subscription period"
-
-#: core/subscription/models.py:237
-msgid "Périodes d’abonnement aux revues"
-msgstr "Journal subscription periods"
-
-#: core/subscription/models.py:247
+#: core/subscription/models.py:164
 msgid "URL référent"
 msgstr "Referrer URL"
 
-#: core/subscription/models.py:254 core/subscription/models.py:255
+#: core/subscription/models.py:170 core/subscription/models.py:225
+msgid "Abonnement aux revues"
+msgstr "Journal Subscription"
+
+#: core/subscription/models.py:171
+msgid "Abonnements aux revues"
+msgstr "Journal Subscriptions"
+
+#: core/subscription/models.py:175
+msgid "{} - Accès multiples"
+msgstr "{} - Multiple Access"
+
+#: core/subscription/models.py:227 core/subscription/models.py:228
 msgid "Adresse IP de début"
 msgstr "Starting IP Address"
 
-#: core/subscription/models.py:256 core/subscription/models.py:257
+#: core/subscription/models.py:229 core/subscription/models.py:230
 msgid "Adresse IP de fin"
 msgstr "Ending IP Address"
 
-#: core/subscription/models.py:260
+#: core/subscription/models.py:233
 msgid "Plage d’adresses IP d’institution"
 msgstr "Institutional IP address range"
 
-#: core/subscription/models.py:261
+#: core/subscription/models.py:234
 msgid "Plages d’adresses IP d’institution"
 msgstr "Institutional IP address ranges"
 
-#: core/subscription/models.py:273 core/subscription/models.py:277
+#: core/subscription/models.py:246 core/subscription/models.py:250
 #, python-brace-format
 msgid "{0} n’est pas une adresse IP valide"
 msgstr "{0} is not a valid IP address"
 
-#: core/subscription/models.py:280
+#: core/subscription/models.py:253
 msgid "L’adresse IP de début doit être inférieure à l’adresse IP de fin"
 msgstr "The start IP address must be lower than the end IP address"
 
-#: core/subscription/models.py:307
+#: core/subscription/models.py:280
 msgid "Abonnement aux forfaits d'abonnements individuels"
 msgstr "Subscription to the individual subscription packages"
 
-#: core/subscription/models.py:308
+#: core/subscription/models.py:281
 msgid "Abonnements aux forfaits d'abonnements individuels"
 msgstr "Subscriptions to the individual subscription packages"
 
-#: core/subscription/models.py:394 erudit/models/core.py:57
+#: core/subscription/models.py:367 erudit/models/core.py:57
 #: erudit/models/core.py:91 erudit/models/core.py:111
 #: erudit/models/journal.py:59 erudit/models/journal.py:91
 #: erudit/models/journal.py:135
 msgid "Code"
 msgstr "Code"
 
-#: core/subscription/models.py:397
+#: core/subscription/models.py:370
 msgid "Nombre maximal de comptes que ce forfait permet d’abonner"
 msgstr "Maximum account number that this package allows to subscribe"
 
-#: core/subscription/models.py:401
+#: core/subscription/models.py:374
 msgid "Illimité"
 msgstr "Unlimited"
 
-#: core/subscription/models.py:403
+#: core/subscription/models.py:376
 msgid ""
 "Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre "
 "illimité d’individus"
@@ -2156,19 +2152,23 @@ msgstr ""
 "Check if this individual subscription package allows an unlimited number of "
 "subscribers"
 
-#: core/subscription/models.py:408
+#: core/subscription/models.py:381
 msgid "Forfait d’abonnements individuels"
 msgstr "Individual subscription package"
 
-#: core/subscription/models.py:409
+#: core/subscription/models.py:382
 msgid "Forfaits d’abonnements individuels"
 msgstr "Individual subscription packages"
 
-#: core/subscription/models.py:426
+#: core/subscription/models.py:394
+msgid "Abonnement"
+msgstr "Subscription"
+
+#: core/subscription/models.py:399
 msgid "Période d’abonnement aux forfaits d’abonnements individuels"
 msgstr ""
 
-#: core/subscription/models.py:427
+#: core/subscription/models.py:400
 msgid "Périodes d’abonnement aux forfaits d’abonnements individuels"
 msgstr ""
 
@@ -2493,7 +2493,7 @@ msgid "&nbsp;»"
 msgstr "\""
 
 #: erudit/models/journal.py:1450
-#: templates/public/journal/eruditxsd300_to_html.xsl:765
+#: templates/public/journal/eruditxsd300_to_html.xsl:787
 msgid "p."
 msgstr "p."
 
@@ -2760,12 +2760,12 @@ msgstr ""
 msgid "Chinois"
 msgstr "Chinese"
 
-#: erudit/solr/models.py:139
+#: erudit/solr/models.py:143
 #, python-brace-format
 msgid "Pages {firstpage}-{lastpage}"
 msgstr "Pages {firstpage}-{lastpage}"
 
-#: erudit/solr/models.py:157
+#: erudit/solr/models.py:161
 msgid "(Sans titre)"
 msgstr "(Untitled)"
 
@@ -3130,7 +3130,7 @@ msgid "Modifier mon mot de passe"
 msgstr "Change My Password"
 
 #: templates/emails/auth/password_reset_registered_email.html:25
-#: templates/emails/auth/password_reset_unregistered_email.html:32
+#: templates/emails/auth/password_reset_unregistered_email.html:24
 #: templates/emails/editor/issue_files_deletion_content.html:34
 #: templates/emails/editor/issue_submission_action_needed_content.html:50
 #: templates/emails/organisation/new_member_content.html:26
@@ -3138,7 +3138,7 @@ msgid "L’Équipe Érudit"
 msgstr "The Érudit team"
 
 #: templates/emails/auth/password_reset_registered_email.html:26
-#: templates/emails/auth/password_reset_unregistered_email.html:33
+#: templates/emails/auth/password_reset_unregistered_email.html:25
 msgid ""
 "\n"
 "<a href=\"mailto:info@erudit.org?subject=Réinitialisation d’un mot de passe\" style=\"color:#ff4242; text-decoration:underline;\">info@erudit.org</a>\n"
@@ -3146,7 +3146,7 @@ msgstr ""
 "\n"
 "<a href=\"mailto:info@erudit.org?subject=Réinitialisation d’un mot de passe\" style=\"color:#ff4242; text-decoration:underline;\">info@erudit.org</a>\n"
 
-#: templates/emails/auth/password_reset_unregistered_email.html:13
+#: templates/emails/auth/password_reset_unregistered_email.html:11
 #, python-format
 msgid ""
 "Vous (ou quelqu'un d'autre) avez saisi cette adresse courriel lors de la "
@@ -3162,7 +3162,7 @@ msgstr ""
 "is not in our database of registered users and therefore the attempt was "
 "unsuccessful."
 
-#: templates/emails/auth/password_reset_unregistered_email.html:18
+#: templates/emails/auth/password_reset_unregistered_email.html:14
 #, python-format
 msgid ""
 "Si vous êtes un client d'Érudit et que vous attendiez ce courriel, veuillez "
@@ -3175,11 +3175,11 @@ msgstr ""
 "decoration:underline;\">clicking here</a> and using the email address you "
 "provided when opening your account.."
 
-#: templates/emails/auth/password_reset_unregistered_email.html:22
+#: templates/emails/auth/password_reset_unregistered_email.html:16
 msgid "Si vous n'êtes pas client d'Érudit, veuillez ignorer ce courriel."
 msgstr "If you are not an Érudit client, please ignore this email."
 
-#: templates/emails/auth/password_reset_unregistered_email.html:26
+#: templates/emails/auth/password_reset_unregistered_email.html:18
 msgid ""
 "Pour plus d'informations sur les services offerts par Érudit, veuillez "
 "visiter notre page <a href=\"https://apropos.erudit.org/fr/\" "
@@ -4375,7 +4375,7 @@ msgstr "A chapter from the publication"
 #: templates/public/journal/journal_detail.html:153
 #: templates/public/journal/journal_list_per_names.html:173
 #: templates/public/journal/journal_list_per_names.html:176
-#: templates/public/journal/partials/issue_detail_article_item.html:80
+#: templates/public/journal/partials/issue_detail_article_item.html:97
 #: templates/userspace/journal/base.html:15
 msgid "&nbsp;:"
 msgstr ":"
@@ -4754,7 +4754,7 @@ msgid "Effacer la sélection"
 msgstr "Clear selection"
 
 #: templates/public/citations/list.html:130
-#: templates/public/citations/list.html:184
+#: templates/public/citations/list.html:186
 #: templates/public/journal/eruditxsd300_to_html.xsl:378
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:164
@@ -4773,56 +4773,58 @@ msgid "Supprimer"
 msgstr "Delete"
 
 #: templates/public/citations/list.html:136
-#: templates/public/citations/list.html:189
+#: templates/public/citations/list.html:191
 msgid "Citer"
 msgstr "Cite"
 
 #: templates/public/citations/list.html:143
-#: templates/public/citations/list.html:194
+#: templates/public/citations/list.html:196
 #: templates/public/journal/eruditxsd300_to_html.xsl:386
 #: templates/public/journal/eruditxsd300_to_html.xsl:452
-#: templates/public/journal/partials/issue_detail_article_item.html:22
+#: templates/public/journal/partials/issue_detail_article_item.html:23
+#: templates/public/journal/partials/issue_detail_article_item.html:32
 #: templates/public/search/results.html:338
 #: templates/userspace/library/stats/stats_forms_partial.html:86
 msgid "Télécharger"
 msgstr "Download"
 
-#: templates/public/citations/list.html:149
-#: templates/public/journal/partials/issue_detail_article_item.html:30
+#: templates/public/citations/list.html:150
+#: templates/public/journal/partials/issue_detail_article_item.html:41
+#: templates/public/journal/partials/issue_detail_article_item.html:47
 #: templates/public/search/results.html:345
 msgid "Lire l'article en texte intégral"
 msgstr "Read the full text"
 
-#: templates/public/citations/list.html:174
-#: templates/public/citations/list.html:217
+#: templates/public/citations/list.html:176
+#: templates/public/citations/list.html:219
 msgid "Sélectionner"
 msgstr "Select"
 
-#: templates/public/citations/list.html:223
-#: templates/public/citations/list.html:267
+#: templates/public/citations/list.html:225
+#: templates/public/citations/list.html:269
 #: templates/public/journal/partials/article_citation_modal_content.html:4
 msgid "Outils de citation"
 msgstr "Citation Tools"
 
-#: templates/public/citations/list.html:225
+#: templates/public/citations/list.html:227
 msgid "Exporter la notice de ce document"
 msgstr "Export record for this document"
 
-#: templates/public/citations/list.html:237
-#: templates/public/citations/list.html:280
+#: templates/public/citations/list.html:239
+#: templates/public/citations/list.html:282
 #: templates/public/journal/partials/article_citation_modal_content.html:42
 msgid "(version X9.1 et +)"
 msgstr "(version X9.1 and above)"
 
-#: templates/public/citations/list.html:269
+#: templates/public/citations/list.html:271
 msgid "Exporter les notices sélectionnées"
 msgstr "Export selected records"
 
-#: templates/public/citations/list.html:293
+#: templates/public/citations/list.html:295
 msgid "Aucune notice&nbsp;!"
 msgstr "No saved records!"
 
-#: templates/public/citations/list.html:293
+#: templates/public/citations/list.html:295
 msgid ""
 "Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-"
 "page&nbsp;<i class=\"icon ion-ios-bookmark toolbox-save\"></i>."
@@ -5099,7 +5101,7 @@ msgid "Options d’accès"
 msgstr "Access options"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:116
-#: templates/public/journal/partials/issue_detail_article_item.html:40
+#: templates/public/journal/partials/issue_detail_article_item.html:57
 msgid ""
 "Le contenu de ce document est inaccessible en raison du droit d’auteur."
 msgstr "This document's content is inaccessible due to copyright reasons. "
@@ -5177,7 +5179,7 @@ msgid "Retour au début"
 msgstr "Back to top"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:243
-#: templates/public/journal/partials/issue_detail_article_item.html:77
+#: templates/public/journal/partials/issue_detail_article_item.html:94
 msgid "Résumé"
 msgstr "Abstract"
 
@@ -5253,7 +5255,7 @@ msgstr "A note"
 msgid "Un document"
 msgstr "A document"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:702
+#: templates/public/journal/eruditxsd300_to_html.xsl:724
 msgid ""
 "\n"
 "        --> Voir l’<a href=\"{@href}\"><strong>erratum</strong></a> concernant cet article\n"
@@ -5263,27 +5265,27 @@ msgstr ""
 "        --> See the <a href=\"{@href}\"><strong>erratum</strong></a> for this article\n"
 "        "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:735
+#: templates/public/journal/eruditxsd300_to_html.xsl:757
 msgid "Volume&#160;"
 msgstr "Volume&#160;"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:743
+#: templates/public/journal/eruditxsd300_to_html.xsl:765
 msgid "Numéro&#160;"
 msgstr "Issue&#160;"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:906
-#: templates/public/journal/eruditxsd300_to_html.xsl:919
-#: templates/public/journal/eruditxsd300_to_html.xsl:1177
-#: templates/public/journal/eruditxsd300_to_html.xsl:1190
-#: templates/public/journal/eruditxsd300_to_html.xsl:1203
-#: templates/public/journal/eruditxsd300_to_html.xsl:1216
-#: templates/public/journal/eruditxsd300_to_html.xsl:1230
-#: templates/public/journal/eruditxsd300_to_html.xsl:2563
-#: templates/public/journal/eruditxsd300_to_html.xsl:2576
+#: templates/public/journal/eruditxsd300_to_html.xsl:928
+#: templates/public/journal/eruditxsd300_to_html.xsl:941
+#: templates/public/journal/eruditxsd300_to_html.xsl:1199
+#: templates/public/journal/eruditxsd300_to_html.xsl:1212
+#: templates/public/journal/eruditxsd300_to_html.xsl:1225
+#: templates/public/journal/eruditxsd300_to_html.xsl:1238
+#: templates/public/journal/eruditxsd300_to_html.xsl:1252
+#: templates/public/journal/eruditxsd300_to_html.xsl:2593
+#: templates/public/journal/eruditxsd300_to_html.xsl:2606
 msgid "special"
 msgstr "special"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1373
+#: templates/public/journal/eruditxsd300_to_html.xsl:1395
 msgid ""
 "-> Voir la liste des <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if"
 " test=\"self::grtableau\">tableaux</xsl:if>"
@@ -5291,7 +5293,7 @@ msgstr ""
 "-> See the list of <xsl:if test=\"self::grfigure\">figures</xsl:if><xsl:if "
 "test=\"self::grtableau\">tables</xsl:if>"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1421
+#: templates/public/journal/eruditxsd300_to_html.xsl:1443
 msgid ""
 "-> Voir la liste des\n"
 "            <xsl:if test=\"self::figure\">figures</xsl:if>\n"
@@ -5307,11 +5309,11 @@ msgstr ""
 "            <xsl:if test=\"self::objet[@typeobj='audio']\">audio files</xsl:if>\n"
 "            "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1437
+#: templates/public/journal/eruditxsd300_to_html.xsl:1459
 msgid "(suite)"
 msgstr "(continuation)"
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1740
+#: templates/public/journal/eruditxsd300_to_html.xsl:1770
 msgid ""
 "Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
 "jour."
@@ -5319,7 +5321,7 @@ msgstr ""
 "Your browser does not support audio files. Please update it for optimal "
 "viewing of this site. "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1751
+#: templates/public/journal/eruditxsd300_to_html.xsl:1781
 msgid ""
 "Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
 "jour."
@@ -5327,11 +5329,11 @@ msgstr ""
 "Your browser does not support video files. Please update it for optimal "
 "viewing of this site. "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2302
+#: templates/public/journal/eruditxsd300_to_html.xsl:2332
 msgid "Parties annexes"
 msgstr "Appendices "
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2615
+#: templates/public/journal/eruditxsd300_to_html.xsl:2645
 msgid "alias"
 msgstr "alias"
 
@@ -5931,21 +5933,21 @@ msgstr "Other Articles From This Journal"
 msgid "Par"
 msgstr "By"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:47
+#: templates/public/journal/partials/issue_detail_article_item.html:64
 msgid "Lire l'article"
 msgstr "Read this article"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:61
+#: templates/public/journal/partials/issue_detail_article_item.html:78
 #, python-format
 msgid "p.&nbsp;%(first_page)s–%(last_page)s"
 msgstr "pp.&nbsp;%(first_page)s–%(last_page)s"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:63
+#: templates/public/journal/partials/issue_detail_article_item.html:80
 #, python-format
 msgid "p.&nbsp;%(page)s"
 msgstr "p.&nbsp;%(page)s"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:69
+#: templates/public/journal/partials/issue_detail_article_item.html:86
 msgid "Voir la notice"
 msgstr "See this article's record"
 
