@@ -113,7 +113,9 @@ class Command(BaseCommand):
 
                 with override_settings(LANGUAGE_CODE=locale):
                     try:
-                        pdf_writer.insertPDF(Document(stream=get_coverpage(article), filetype="pdf"))
+                        pdf_writer.insertPDF(
+                            Document(stream=get_coverpage(article), filetype="pdf")
+                        )
                     except (KeyError, ValueError) as error:
                         raise CommandError('Error with ID "{}": {}'.format(fedora_id, error))
 
