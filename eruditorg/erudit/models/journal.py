@@ -1479,7 +1479,11 @@ class Article(FedoraMixin):
         if self.issue.volume:
             cite_string += " <em>{}</em>".format(self.issue.volume)
         if self.issue.number:
-            cite_string += "({})".format(self.issue.number)
+            cite_string += (
+                "({})".format(self.issue.number)
+                if self.issue.volume
+                else " ({})".format(self.issue.number)
+            )
         if cite_string[-1] != ",":
             cite_string += ","
         if self.first_page:
