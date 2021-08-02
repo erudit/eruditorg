@@ -791,6 +791,17 @@ class TestArticle:
             "https://doi.org/10.7202/1075385ar"
         )
 
+    def test_cite_string_apa_no_issue_volume(self):
+        article = ArticleFactory(
+            from_fixture="1078481ar", issue__year="2021", issue__number="15-16"
+        )
+        assert (
+            article.cite_string_apa
+            == "Pere Mas, J. (2021). Approach to the Status and Management of Languages in the "
+            "Catalan Public Health Care System. <em>Inter</em>, (15-16), 167–197. "
+            "https://doi.org/10.7202/1078481ar"
+        )
+
     @pytest.mark.parametrize(
         "doi, expected_url_doi",
         (

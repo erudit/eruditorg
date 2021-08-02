@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="minimal" idproprio="1078481ar" typeart="article" lang="en" ordseq="8" idref="th1"><admin><infoarticle><idpublic scheme="doi">10.7202/1078481ar</idpublic><pagination> <ppage>167</ppage> <dpage>197</dpage>  
+       </pagination></infoarticle><revue id="minling048" lang="fr en"><titrerev>Minorités linguistiques et société</titrerev><titrerevparal lang="en">Linguistic Minorities and Society</titrerevparal><titrerevabr>minling</titrerevabr><idissnnum>1927-8632</idissnnum><directeur sexe="masculin"><fonction lang="fr">Directeur</fonction><nompers><prenom>Réal</prenom><nomfamille>Allard</nomfamille></nompers></directeur><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><contribution>Sous la direction de</contribution><nompers><prenom>Louise</prenom><nomfamille>Bouchard</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Fredrica</prenom><nomfamille>Nyqvist</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Isidor</prenom><nomfamille>Marí Mayans</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="feminin"><nompers><prenom>Solange</prenom><nomfamille>van Kemenade</nomfamille></nompers></redacteurchef><redacteurchef typerc="invite" idrefs="th1" sexe="masculin"><nompers><prenom>Alexander</prenom><autreprenom>R.</autreprenom><nomfamille>Maisonneuve</nomfamille></nompers></redacteurchef></revue><numero id="minling06133"><nonumero>15</nonumero><nonumero>16</nonumero><pub><annee>2021</annee></pub><pubnum><date typedate="publication">2021-06-28</date></pubnum><grtheme id="th1"><theme>Public Policy and Citizen-Based Practices That Support Social and Health Services for Official and Co-Official Language Minority Communities. An International Perspective: What Has Really Been Achieved and Where Are the Gaps?</theme><themeparal lang="fr">Politiques publiques et pratiques citoyennes soutenant les services sociaux et de santé pour les communautés minoritaires de langues officielles et coofficielles. Une perspective internationale : ce qui a été accompli et ce qui reste à faire</themeparal></grtheme></numero><editeur><nomorg>Institut canadien de recherche sur les minorités linguistiques / Canadian Institute for Research on Linguistic Minorities</nomorg></editeur><prodnum><nomorg>Érudit</nomorg></prodnum><diffnum><nomorg>Érudit</nomorg></diffnum><schema nom="Erudit Article" version="3.0.0" lang="fr"/><droitsauteur> © <nomorg>Institut canadien de recherche sur les minorités linguistiques / Canadian Institute for Research on Linguistic Minorities</nomorg>, 2021</droitsauteur></admin><liminaire><grtitre><surtitre>Articles</surtitre>
+      <titre>Approach to the Status and Management of Languages in the Catalan Public Health Care        System</titre>
+      
+    </grtitre><grauteur><auteur id="au1"><nompers>
+        <prenom>Jordi</prenom>
+        
+        <nomfamille>Pere Mas</nomfamille>
+        </nompers><affiliation>
+        <alinea><marquage typemarq="italique">Ministry of Health, Government of Catalonia</marquage></alinea>
+        </affiliation><courriel><liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:jordi.pere@gencat.cat" xlink:type="simple">jordi.pere@gencat.cat</liensimple></courriel></auteur></grauteur><resume typeresume="resume" lang="en">
+      <alinea>This article deals with the situation of languages in healthcare in Catalonia. It        reports on the measures being carried out by the Ministry of Health of the Government of        Catalonia to guarantee that the population may be attended to in their own official        language, whether Catalan, Spanish or Occitan, and specifically to promote knowledge and use        of Catalan among professionals working in the health system. It provides data on the        migratory flows of doctors and nurses and sociolinguistic data. Other sections deal with        healthcare services provided in non-official languages and in Catalan sign language, as well        as language-related complaints and the measures implemented to make Catalan a suitable and        prestigious language for medical and scientific communication. It concludes by listing the        challenges that still need to be tackled to give Catalan greater presence and to raise its        status in the field of health.</alinea>
+    </resume><resume typeresume="resume" lang="fr">
+      <alinea>Cet article porte sur la situation des langues dans les soins de santé en        Catalogne. Il rend compte des mesures prises par le ministère de la Santé du gouvernement de        la Catalogne pour garantir que la population puisse être prise en charge dans sa propre        langue officielle, que ce soit le catalan, l’espagnol ou l’occitan, et promouvoir la        connaissance et l’utilisation du catalan parmi les professionnels travaillant dans le        système de santé. On y fournit des données sur les flux migratoires de médecins et        d’infirmières et des données sociolinguistiques. D’autres sections portent sur les services        de santé fournis dans les langues non officielles et en langue des signes catalane, ainsi        que sur des plaintes liées à la langue et des mesures mises en oeuvre pour faire du catalan        une langue appropriée et prestigieuse pour la communication médicale et scientifique. Le        texte décrit enfin les défis qui doivent encore être relevés pour renforcer la présence du        catalan et élever son statut dans le domaine de la santé.</alinea>
+    </resume><resume typeresume="resume" lang="ca">
+      <titre><marquage typemarq="gras">Resum</marquage></titre><alinea>Aquest article aborda la situació de les llengües en l’assistència sanitària a        Catalunya. Informa de les actuacions que duu a terme el Departament de Salut de la        Generalitat de Catalunya per garantir que la població pugui ser atesa en la seva llengua        oficial, ja sigui el català, el castellà o l’occità, i específicament per promoure el        coneixement i l’ús de la llengua catalana entre els professionals que hi treballen.        Proporciona dades dels fluxos migratoris laborals dels metges i infermers i dades        sociolingüístiques. Altres apartats tracten dels serveis sanitaris que es presten en        llengües no oficials i en llengua de signes catalana; les reclamacions per motius        lingüístics o les actuacions realitzades per fer del català una llengua apta i de prestigi        per a la comunicació mèdica i científica. Conclou amb l’enumeració dels reptes pendents que        ha d’afrontar la llengua catalana per tenir més presència i millorar el seu estatus en        l’àmbit de la salut.</alinea>
+    </resume><resume typeresume="resume" lang="es">
+      <alinea>Este artículo aborda la situación de las lenguas en la asistencia sanitaria en        Cataluña. Informa de las actuaciones que lleva a cabo el Departamento de Salud de la        Generalidad de Cataluña para garantizar que la población pueda ser atendida en su lengua        oficial, ya sea el catalán, el castellano o el occitano, y específicamente para promover el        conocimiento y el uso del catalán entre los profesionales que trabajan en el sistema de        salud. Proporciona datos de los flujos migratorios laborales de los médicos y enfermeros y        datos sociolingüísticos. Otros apartados tratan de los servicios sanitarios que se prestan        en lenguas no oficiales y en lengua de signos catalana, así como de las reclamaciones por        motivos lingüísticos o las actuaciones realizadas para hacer del catalán una lengua apta y        de prestigio para la comunicación médica y científica. Concluye con la enumeración de los        retos pendientes que debe afrontar la lengua catalana para tener más presencia y mejorar su        estatus en el ámbito de la salud.</alinea>
+    </resume><grmotcle lang="en">
+      
+      <motcle>healthcare</motcle>
+      <motcle>health</motcle>
+      <motcle>Catalan</motcle>
+      <motcle>linguistic planning</motcle>
+      <motcle>healthcare professionals</motcle>
+      <motcle>official languages</motcle>
+      <motcle>Catalonia</motcle>
+    </grmotcle><grmotcle lang="fr">
+      
+      <motcle>soins de santé</motcle>
+      <motcle>santé</motcle>
+      <motcle>catalan</motcle>
+      <motcle>planification linguistique</motcle>
+      <motcle>professionnels de la santé</motcle>
+      <motcle>langues officielles</motcle>
+      <motcle>Catalogne</motcle>
+    </grmotcle><grmotcle lang="ca">
+      <titre><marquage typemarq="gras">Paraules clau</marquage></titre>
+      <motcle>assistència sanitària</motcle>
+      <motcle>salut</motcle>
+      <motcle>català</motcle>
+      <motcle>planificació lingüística</motcle>
+      <motcle>professionals sanitaris</motcle>
+      <motcle>llengües oficials</motcle>
+      <motcle>Catalunya</motcle>
+    </grmotcle><grmotcle lang="es">
+      
+      <motcle>asistencia sanitaria</motcle>
+      <motcle>salud</motcle>
+      <motcle>catalán</motcle>
+      <motcle>planificación lingüística</motcle>
+      <motcle>profesionales sanitarios</motcle>
+      <motcle>lenguas oficiales</motcle>
+      <motcle>Cataluña</motcle>
+    </grmotcle></liminaire><corps lang="en"><texte typetexte="libre">Approach to the Status and Management of Languages in the Catalan
+    Public Health Care System Jordi Pere Mas Ministry of Health, Government of Catalonia Abstract
+    This article deals with the situation of languages in healthcare in Catalonia. It reports on the
+    measures being carried out by the Ministry of Health of the Government of Catalonia to guarantee
+    that the population may be attended to in their own official language, whether Catalan, Spanish
+    or Occitan, and specifically to promote knowledge and use of Catalan among professionals working
+    in the health system. It provides data on the migratory flows of doctors and nurses and
+    sociolinguistic data. Other sections deal with healthcare services provided in non-official
+    languages and in Catalan sign language, as well as language-related complaints and the measures
+    implemented to make Catalan a suitable and prestigious language for medical and scientific
+    communication. It concludes by listing the challenges that still need to be tackled to give
+    Catalan greater presence and to raise its status in the field of health. Résumé Cet article
+    porte sur la situation des langues dans les soins de santé en Catalogne. Il rend compte des
+    mesures prises par le ministère de la Santé du gouvernement de la Catalogne pour garantir que la
+    population puisse être prise en charge dans sa propre langue officielle, que ce soit le catalan,
+    l’espagnol ou l’occitan, et promouvoir la connaissance et l’utilisation du catalan parmi les
+    professionnels travaillant dans le système de santé. On y fournit des données sur les flux
+    migratoires de médecins et d’infirmières et des données sociolinguistiques. D’autres sections
+    portent sur les services de santé fournis dans les langues non officielles et en langue des
+    signes catalane, ainsi que sur des plaintes liées à la langue et des mesures mises en oeuvre
+    pour faire du catalan une langue appropriée et prestigieuse pour la communication médicale et
+    scientifique. Le texte décrit enfin les défis qui doivent encore être relevés pour renforcer la
+    présence du catalan et élever son statut dans le domaine de la santé. Resum Aquest article
+    aborda la situació de les llengües en l’assistència sanitària a Catalunya. Informa de les
+    actuacions que duu a terme el Departament de Salut de la Generalitat de Catalunya per garantir
+    que la població pugui ser atesa en la seva llengua oficial, ja sigui el català, el castellà o
+    l’occità, i específicament per promoure el coneixement i l’ús de la llengua catalana entre els
+    professionals que hi treballen. Proporciona dades dels fluxos migratoris laborals dels metges i
+    infermers i dades sociolingüístiques. Altres apartats tracten dels serveis sanitaris que es
+    presten en llengües no oficials i en llengua de signes catalana; les reclamacions per motius
+    lingüístics o les actuacions realitzades per fer del català una llengua apta i de prestigi per a
+    la comunicació mèdica i científica. Conclou amb l’enumeració dels reptes pendents que ha
+    d’afrontar la llengua catalana per tenir més presència i millorar el seu estatus en l’àmbit de
+    la salut. Resumen Este artículo aborda la situación de las lenguas en la asistencia sanitaria en
+    Cataluña. Informa de las actuaciones que lleva a cabo el Departamento de Salud de la Generalidad
+    de Cataluña para garantizar que la población pueda ser atendida en su lengua oficial, ya sea el
+    catalán, el castellano o el occitano, y específicamente para promover el conocimiento y el uso
+    del catalán entre los profesionales que trabajan en el sistema de salud. Proporciona datos de
+    los flujos migratorios laborales de los médicos y enfermeros y datos sociolingüísticos. Otros
+    apartados tratan de los servicios sanitarios que se prestan en lenguas no oficiales y en lengua
+    de signos catalana, así como de las reclamaciones por motivos lingüísticos o las actuaciones
+    realizadas para hacer del catalán una lengua apta y de prestigio para la comunicación médica y
+    científica. Concluye con la enumeración de los retos pendientes que debe afrontar la lengua
+    catalana para tener más presencia y mejorar su estatus en el ámbito de la salud. Introduction In
+    Catalonia, the public health system, with three official languages—Catalan, Spanish and
+    Occitan—provides care for 7.5 million people. Patients have the right to receive service in
+    their preferred official language, with priority always placed on using the best language to
+    provide care for the health needs of patients. Catalan is the language of Catalonia and, as
+    such, the language of normal use in public administration bodies and the health system. The use
+    of Catalan is thought to be instrumental in the provision of quality services, as it favours
+    good communication and understanding between patients and professionals and strengthens their
+    relationship. This is even more important in pediatric care and for groups such as the elderly,
+    vulnerable people with chronic diseases and in residential care. Therefore, it is important to
+    ensure that health professionals have the knowledge required to provide patients with service in
+    their official language. The regulatory framework sets out the requirement for professionals to
+    provide proof of their level of Catalan during the staff selection and permanent position
+    assignment processes, based on the professional category. Furthermore, in the case of
+    professionals who are foreign nationals, they must also provide proof of their level of Spanish
+    proficiency. However, regulations state that when temporary staff are hired directly, they may
+    be exempt from having to prove their level of Catalan proficiency. In the first decade of this
+    century, Catalonia experienced an influx of immigrants, and it became necessary to hire foreign
+    physicians to meet health care needs. The situation currently remains the same, given the
+    shortage of professionals in certain specialties, such as primary care pediatrics. Each year,
+    through the system of official state examinations for resident physicians, more than 1,000
+    specialist training vacancies open up in Catalonia. For over forty years, these public entrance
+    examinations have been organized by the Spanish State, not Catalonia, and candidates are only
+    required to possess knowledge of Spanish. Under this system, the Catalan public health system
+    currently has four thousand resident physicians, of which, approximately half come from other
+    areas of Spain, and other European countries and continents. Despite the controversy that
+    frequently arises in political debate surrounding the Catalan language, the fact remains that
+    data from Catalan physicians’ colleges indicate that knowledge of the Catalan language
+    requirement does not dissuade professionals from coming to work in Catalonia, with greater
+    importance being placed on the prestige of many Catalan hospitals at the forefront of different
+    specialties. Regarding users, language-related grievances have no significant statistical
+    relevance among all health care complaints. Within this context, the Ministry of Health of the
+    Government of Catalonia directs language planning measures aimed at ensuring that users of the
+    health system receive service in their official language, in both spoken and written
+    communications and, more specifically, to promote the use and knowledge of Catalan and Occitan.
+    In this paper, we describe language use in Catalan governmental institutions including the
+    health care sector and present the language measures implemented, along with a demographic
+    portrait of health care staff, including the languages used in health care interactions.
+    Subsequently, we will discuss user satisfaction of language of service when receiving health
+    care and conclude with the linguistic attention received, as well as actions implemented to make
+    Catalan a language suitable for medical and scientific communication. Finally, major
+    deficiencies and challenges to be overcome are reviewed. Institutional Language Use by the
+    Government of Catalonia and Its Public Sector1 Language use in the Government of Catalonia is
+    based on the Reforma de l’Estatut d’autonomia de Catalunya [Reform of the Statute of Autonomy of
+    Catalonia] (2006), the Llei de política lingüística [Language Policy Act] (1998), the Llei de
+    llengua de signes [Catalan Sign Language Act] (2010), the Llei de l’occità [Occitan Language
+    Act] (2010), and the Decret que regula l’ús de les llengües oficials per part de l’Administració
+    de la Generalitat de Catalunya [Regulation of the Use of Official Languages by the
+    Administration of the Government of Catalonia Decree] (1987).2 In accordance with the Statute of
+    Autonomy of Catalonia of 2006 and the Language Policy Act of 1998, Catalan is the language that
+    should be used as standard by the Government of Catalonia in both internal communications and in
+    dealings with individuals and companies of the Catalan linguistic area. The Language Policy Act
+    adds that this principle also applies with dependent institutions and companies and their
+    service providers. If they wish, citizens have the right to receive communications and
+    notifications and to receive service orally in Spanish. In Aran, the Government should use
+    Aranese in the same way as the use of the Catalan language in the rest of Catalonia. In oral
+    communications within the health care setting, the language of normal communication among staff
+    is Catalan. Dealings with users—whether the conversation is initiated by them or by public
+    administration staff—are normally in Catalan, unless the user specifically asks to be addressed
+    in Spanish. Similarly, other languages or measures that facilitate communication can be used
+    where necessary, to provide the service requested. Telephone conversations are initiated in
+    Catalan. External calls are also answered by a greeting in Catalan. At public events, elected
+    representatives and public office officials of the Government of Catalonia and its public sector
+    should normally express themselves in Catalan. In written communications, Catalan is the normal
+    language of use. Internal documents (wage slips, contracts, reports, email messages, etc.) must
+    be in Catalan. External documents (letters, notices and notifications, forms, etc.) aimed at
+    users within the Catalan linguistic area must be in Catalan. Citizens may request a Spanish
+    version of the forms they need to complete and any communications or notifications that affect
+    them personally. All documents sent to other organizations within the Catalan linguistic area
+    (including the Valencian Country and the Balearic Islands) must be written in Catalan.3 The
+    Catalan language is also used on internal and external signs of the workplaces. On the other
+    hand, Spanish legislation provides that in administrative procedures handled by autonomous
+    community administrations and local authorities, language use is established by autonomous
+    legislation; it also states that the selection of public employees suitably qualified to cover
+    positions for autonomous communities be fluent in two official languages.4 Catalan is not
+    currently an official or working language of the European Union; therefore, it does not enjoy
+    the status of the other 24 languages, despite the fact that some of these official languages
+    have fewer speakers than Catalan. The European legal instrument for the protection of the
+    Catalan and Occitan languages is the European Charter for Regional or Minority Languages,
+    adopted by the Council of Europe. It came into force in 1998 and, after being ratified by the
+    Spanish State, has been in force in Spain since August 1, 2001. The text has the status of
+    Convention and is part of the Spanish legal system. The Charter establishes a series of
+    provisions that should be introduced in Spanish or Catalan legislation regarding health care. In
+    particular, the Charter undertakes signatory states: to ensure that social care facilities such
+    as hospitals, retirement homes and hostels offer the possibility of receiving and treating in
+    their own language persons using a regional or minority language who are in need of care on
+    grounds of ill-health, old age or for other reasons.5 The Health Care System and Professionals
+    The public health care system guarantees universal access to health care, regardless of legal
+    status, residency or occupation.6 It has a network of centres throughout the country within 7
+    health care regions of unequal population density and marked differences between coastal and
+    rural inland areas, where Catalan is more prevalent. Health care centres may be publicly owned
+    and managed by the Catalan Health Institute (ICS), run under public-private ownership, or
+    private and managed through mutual insurance funds, foundations or consortiums, with different
+    systems for hiring in each case. With respect to the ICS, which manages approximately 80% of
+    primary care and one third of hospital care, health professionals must pass a series of
+    selective exams to be admitted as civil servants, including a Catalan language test for those
+    who have no other certification proving their level of proficiency. Meanwhile, private and
+    semi-private centres are subject to a service provision contract with the Catalan Ministry of
+    Health that contains a clause on the commitment to comply with the linguistic obligations
+    established by the Llei de política lingüística [Language Policy Act] (1998); although they must
+    have knowledge of Catalan, health professionals are not civil servants and are hired under
+    regular employment contracts. Table 1 Levels Required by the Catalan Health Institute in
+    Accordance With the Common European Framework of Reference for Languages7 Professions Level of
+    proficiency in Catalan • Physicians • Nurses • Physiotherapists • Social workers •
+    Administrative officers • Administrative assistants Effective Operational Proficiency in Catalan
+    language (Level C1) • Nursing assistants • Specialist assistant • Specialist health care
+    technicians technicians • Hospital porters Threshold level of Catalan (Level B1) According to
+    the Pla de garantia de l’estabilitat laboral [Plan to Guarantee Employment Stability]
+    (Generalitat de Catalunya, 2017a), in 2015, there were 70,000 public health workers, of which
+    26% were physicians and 36.6% nurses. The ICS has 36,000 workers (not including training staff),
+    of which 48.5% are in primary health care and 50.6% in hospitals. In the context of shortages,
+    many of these employees have temporary contracts, although a process has been implemented to
+    stabilize the workforce, over the past two years. For example, for the most recent official
+    state examinations held in 2018, 64% of the 1,631 candidates provided proof of Catalan
+    proficiency, while the other 36% were required to take the corresponding test. With respect to
+    the different regional provincial colleges of physicians of Catalonia, in Barcelona, Tarragona,
+    Lleida and Girona, 80% of physicians and nurses are registered in Barcelona. If we look at the
+    demographic data from the annual reports of the College of Physicians of Barcelona, in 2018, of
+    its 34,556 members, 61% were born in Catalonia, 19% in the rest of Spain, and 20% in other
+    countries. Of the 20% born abroad, 78.7% were from Latin American countries (mainly Argentina,
+    Venezuela, Colombia, Peru, and Cuba), a fact which strengthens the weight of the Spanish
+    language within the health care system. Figure 1 Origin of Physicians Registered in Barcelona –
+    2018 Figure 2 Origin of Foreign Physicians Registered in Barcelona – 2018 In figure 3, it can be
+    seen that during the 2007-2018 period, the shortage in the number of physicians was covered by a
+    significant influx of physicians from other countries. Over this period, the number of new
+    foreign physicians joining the College of Physicians was consistently higher than the number
+    from Catalonia and the rest of Spain. Specifically, between 2007-2010, it can be seen that the
+    drop in new Catalan physicians—caused in part by emigration to other European countries in
+    search of better employment conditions—was compensated by a sharp increase in the number of
+    foreign physicians. On the other hand, the number of new physicians from the rest of Spain has
+    held steady over recent years, with a slight upward trend. Figure 3 Evolution in the Number of
+    New Members of the College of Physicians of Barcelona by origin – 2007-2018 The Informe Anual
+    2018 [2018 Annual Report] of the Col·legi de Metges de Barcelona (2019) [College of Physicians
+    of Barcelona] warns of the progressive ageing of professionals, stating that, in ten years, a
+    quarter of current registered physicians will have retired. They also highlight the continued
+    increase in the incorporation of physicians born abroad, reaching a high of 43.1% in 2018, and
+    point out some possible solutions, such as improving working conditions and increasing the
+    supply of jobs in medical schools. Training for Resident Physicians Each year, many new resident
+    physicians join the ranks of the Catalan public health care system. All physicians seeking to
+    become specialists must first complete a speciality training program. Therefore, at the start of
+    their training, they must pass an exam administered by the Spanish Ministry of Health to choose
+    a location. Once they have passed, and depending on their score, they can then choose the
+    hospital where they would like to do their training. This is a selective process controlled by
+    the state. The annual exam process is also open to physicians from within and outside the EU,
+    and positions are awarded based solely on the results of a written test and an evaluation of the
+    academic record of the candidate. Candidates must prove their level of Spanish proficiency (only
+    intra- and extra-community candidates), but they are not required to know any of the state’s
+    other official languages in their region, Catalan, Galician or Basque. The various autonomous
+    communities do not have the power to establish new requirements, such as requiring candidates
+    either to provide proof of knowledge of the regional official language where they will do their
+    training, or take a proficiency-level test.8 To help incorporate new residents into the workflow
+    of health care centres and reduce the impact of their limited knowledge of how the centres
+    operate and their resources, hospital teaching units follow a welcoming protocol that involves
+    providing documents on key information on the new work environment. These documents are
+    generally provided during a welcome/information session, which also includes a tour of the
+    facilities. The Ministry of Health makes efforts to ensure that these documents contain
+    information on Catalonia’s sociolinguistic context and the right of Catalan-speaking patients to
+    use their language freely when receiving medical treatment, as well as the many tools, materials
+    and face-to-face and online courses available for learning Catalan. To this end, on an annual
+    basis, it provides centres that provide medical training with the leaflet Toma el pulso a la
+    lengua catalana [Taking the Pulse of the Catalan Language] (Generalitat de Catalunya, 2017b),
+    containing this information. Efforts are made to convince resident physicians that using Catalan
+    helps to strengthen communication with the Catalan population and shows sensitivity and
+    acknowledgement of their culture. Furthermore, giving patients good medical care means not only
+    providing the correct diagnosis and treating their illness, but also being approachable and
+    offering human warmth and trust, something which is undoubtedly easier when using the patient’s
+    language. A lot of the paperwork and direct contact with patients is carried out by resident
+    physicians. Those who come from outside Catalonia often draft clinical records, medical reports
+    or research works in Spanish because, either they do not speak Catalan, or they do not feel
+    confident enough to use it. Medical briefings are also often conducted in Spanish. In 2018 there
+    were a total of 4,529 resident physicians representing 53 different nationalities in Catalonia,
+    spread across different medical specialties in around 60 health care centres throughout the
+    country. Most of them were located in the Barcelona area, particularly for hospital specialties.
+    Of the total number of residents, 1,440 came from elsewhere in Spain (31.8%) and 385 (8.5%) from
+    other EU countries. As such, the percentage of residents coming from other parts of Spain and
+    abroad over the past five years has been 40.3%, a figure which had attained almost 50% in
+    previous periods. Most residents are Italian nationals, coming from South American countries,
+    such as Brazil, Argentina, and Venezuela; followed by other Spanish-speaking countries, such as
+    Peru, Ecuador, Colombia, and Chile. Following the 2017 exam, a total of 1,216 people chose a
+    placement in Catalonia, of which 414 (36.2%) came from other parts of Spain, and 74 (6.1%) from
+    other countries. In the specific case of resident physicians, 28.8% came from other parts of
+    Spain and 13.7% from other countries. Regarding resident nurses, 80.2% came from other parts of
+    Spain.9 Figure 4 Origin of Resident Physicians – 2012-2017 If we analyse these percentages in
+    comparison to the previously-mentioned data, it can be seen that not all foreign physicians
+    registered in Catalonia did their residency here and that not all of the resident physicians
+    from other parts of Spain remain in Catalonia after their residency. The same can be said of
+    Catalan physicians returning to Catalonia after having completed their residency in hospitals
+    elsewhere in Spain. Therefore, it is clear that the origin of resident physicians is a factor
+    that conditions and determines whether they remain in or subsequently return to Catalonia.
+    Figure 5 Origin of Resident Nurses – 2016-2017 In recent years, Catalan universities have
+    offered approximately 1,900 placements each year to study nursing and 1,000 to study medicine.
+    However, we know that a significant number of students who complete their medical studies in
+    Catalonia do their training outside Catalonia. As such, from a linguistic point of view, it is
+    clear that the current training system is not ideal for promoting the use of Catalan in the
+    provision of health care; and it appears even less so, if we bear in mind that health science
+    courses in Catalan universities have the highest percentage of hours taught in Catalan.10 Unless
+    changes are made to the current resident selection and training system, residents who come to
+    Catalan health care centres from outside Catalonia need to be offered help to learn Catalan of
+    their own accord, or at least be able to use spoken and written Catalan with patients. To this
+    end a Catalan language training program has been developed for medical residents. Organized by
+    the Catalan Ministry of Health along with the Consortium for Language Normalization (CPNL), the
+    training program has centres across Catalonia and specializes in linguistic assessment and the
+    provision of Catalan courses for newcomers. These 20-hour courses cover basic situations that
+    residents might encounter in carrying out their duties, along with general and
+    health-care-specific vocabulary. The program is available online in hospitals throughout
+    Catalonia where they do not have enough students for face-to-face instruction. Language Use of
+    the Population in Its Interactions with Medical Staff In 2018, the Directorate-General for
+    Language Policy of the Ministry of Culture and the Statistical Institute of Catalonia (Idescat)
+    carried out the fourth Enquesta d’usos lingüístics de la població [Survey on the Language Uses
+    of the Population] (EULP) (Generalitat de Catalunya, 2019a). The results offer highly relevant
+    information on the social use of Catalan and its evolution over the past fifteen years (the
+    Survey was also carried out in 2003, 2008, and 2013). It consisted of close to 9,000 interviews,
+    conducted using a mixed online, telephone and face-to-face methodology, with the primary
+    objective of finding out about the linguistic uses of the population aged 15 and over in
+    Catalonia, particularly regarding its use of Catalan, and the other language or languages with
+    which the population most identifies. Other objectives included obtaining information on
+    knowledge of the official languages (Catalan, Occitan and Spanish) and other non-official
+    languages (especially English and French), measuring the use and knowledge of Aranese Occitan in
+    Aran, and learning about the population’s language attitudes and opinions on the use of Catalan.
+    Official data provided by the 2018 EULP were published in mid-2019 (Generalitat de Catalunya,
+    2019b), although an in-depth analysis is still pending to provide a broader perspective of the
+    linguistic situation in Catalonia and its evolution, which may serve as the basis for planning
+    the Government of Catalonia’s language policies. To contextualize the data on linguistic uses
+    with medical staff, it is first necessary to explain the concept of the usual language used in
+    this Survey and the evolution in recent years of Catalan, Spanish and other languages11. Usual
+    language is considered the language that the interviewee uses most often. During the 2003-2008
+    period, the percentage of people whose usual language was Catalan fell from 46% to 35.6%, while
+    between 2008 and 2018 it remained stable, rising to 36.1%, though it remained behind Spanish.
+    During the 2003-2018 period, the population whose usual language was Spanish rose to 48.6% from
+    44.1%, while for other languages, it went from 1.1% to 4.3%. Figure 6 Population Aged 15 and
+    Over by Usual Language – 2003-2018 Language Use with Medical Staff The EULP provides data on the
+    use of language in different fields. One of the fields studied is medicine, allowing us to see
+    which languages are used by the population when communicating with medical staff.12 Figure 7 Use
+    of Catalan as the Usual Language With Medical Staff – 2003-2018 According to this data, for the
+    2003-2018 period, the use of Catalan with medical staff saw a drop, which was sharper between
+    2003 and 2013 and smaller from 2013 to 2018. In 2003, the percentage of people who exclusively
+    used Catalan was 38.1%; in 2008, 34.4%; in 2013, 27.8%; and in 2018, 26.4%. If we consider these
+    figures for the use of Catalan with medical staff alongside the figures for Catalan as people’s
+    usual language, we can conclude that a portion of the population changes their language when
+    speaking to medical staff (7.94% in 2003; 1.24% in 2008; 8.49% in 2013; and 9.7% in 2018). It
+    should be noted that in the case of Spanish, which has more speakers, the same effect is seen in
+    similar percentages. If we add together the figures for “Only Catalan” and “More Catalan than
+    Spanish”, and then do the same with “Only Spanish” and “More Spanish than Catalan” we can see
+    that the distance between the two languages is only six points (39% and 45.2%, respectively).
+    Figure 8 Use of Language With Medical Staff – 2018 By age group, people 65 years of age and
+    older represent the group that most uses Catalan with medical staff while, on the other hand,
+    the 30 to 44 age group uses Catalan the least. The youngest respondents show the greatest
+    linguistic convergence with the language used by medical staff, even though they have a higher
+    level of Catalan and other languages. This can also be seen in other fields and is most
+    certainly due to the ability to use both Catalan and Spanish interchangeably and a lower degree
+    of linguistic awareness when it comes to the use of Catalan. Figure 9 Use of Language With
+    Medical Staff by Age Group – 2018 If we analyze the data by place of birth, we see that among
+    people born in other parts of Spain and abroad, there is a high percentage of exclusive Spanish
+    use with medical staff (66.4% and 72.2%, respectively). Figure 10 Use of Language With Medical
+    Staff by Place of Birth – 2018 By region, as with the other fields of language use, the central
+    regions and Terres de l’Ebre are the areas where Catalan is used the most with medical staff,
+    while it is used the least in the Barcelona Metropolitan Area. The use of Catalan with medical
+    staff is slightly above average for all the various fields of use. For example, it is above
+    average in small and large businesses, although it is significantly below average with the
+    Government of Catalonia. In Plataforma per la Llengua’s study Reanimar el català: dades i
+    propostes per a millorar la situació de la llengua en l’àmbit sanitari a Catalunya [Revive
+    Catalan: Data and Proposals to Improve the Linguistic Situation in Health Care in Catalonia]
+    (2019), which sets out to analyze the relationship between the use of language by health care
+    staff and patients based on a survey conducted in 2018 among 1,600 people aged 16 or over, it
+    concluded that between 70 and 90% of patients adopt the language used by the professional,
+    whether Catalan or Spanish. “En el cas concret del català, podem dir que tres de cada quatre
+    usuaris de la sanitat parlarien en català amb el personal sanitari si aquest fes un ús exclusiu
+    d’aquesta llengua.” [“In the specific case of Catalan, we can say that three out of four health
+    care users would speak to health care staff in Catalan if the latter used this language
+    exclusively.”] [loose translation]. According to this study, and as reaffirmed by 2018 EULP
+    data, it is young people who are the most adaptable when it comes to the language used by health
+    care staff, whether Catalan or Spanish. Even though “greater loyalty is seen towards Spanish
+    than Catalan” [“el castellà té una capacitat de fidelització més elevada que el català”] [loose
+    translation] as “el percentatge de la població que utilitzaria el castellà independentment de la
+    llengua que parlés el metge és el doble que la del català” [“the percentage of the population
+    that would use Spanish regardless of the language spoken by the physician is double that for
+    Catalan”] [loose translation]. It concluded that “un ús del català per part del personal
+    sanitari augmentaria l’ús del català per part dels castellanoparlants” [“the use of Catalan by
+    health care staff would increase the use of Catalan by Spanish speakers”] [loose translation]
+    (Plataforma per la Llengua, 2019, p. 40). Another tool used by the Ministry of Health to
+    determine people’s opinions regarding both public and private health care is the Baròmetre
+    sanitari de Catalunya. This is an annual survey carried out among two thousand people, with the
+    following question included in the last two surveys: “La darrera vegada que ha necessitat
+    contactar amb el sistema sanitari per algun motiu (visita mèdica, urgències, etc.) em podria
+    indicar en quin idioma li han respost?” [“The last time you needed to use the health care system
+    for any reason (physician visit, A&amp;E, etc.) could you tell me what language you were
+    responded to in?”] [loose translation]. In 2019, percentages were 56.4% of the time for Catalan,
+    and 23.8% of the time for Spanish (Generalitat de Catalunya. Centre d’Estudis d’Opinió. Servei
+    Català de la Salut. Baròmetre sanitari de Catalunya 2019).13 In 2020, percentages were 47.8% for
+    Catalan and 32% for Spanish.14 It should be noted that, in 2020, the Academy for Medical Science
+    and Health of Catalonia and the Balearic Islands, in collaboration with the Government of
+    Catalonia’s Directorate-General for Language Policy and the Ministry of Health, is planning to
+    conduct a study on the use of language by physicians and nurses within the public health care
+    system, both in primary health care and in hospitals.15 Provision of Health Care in Unofficial
+    Languages According to the study Els usos lingüístics de la població de Catalunya. Resultats de
+    l’Enquesta d’usos lingüístics de la població 2018 [Language Uses of the Population of Catalonia.
+    Results of the 2018 Survey on the Language Uses of the Population]: “l’any 2003 la població
+    nascuda a l’estranger representava un 9,3% sobre el conjunt de població i el 2018 representa un
+    18,2%. El gran creixement de la població nascuda a l’estranger es va produir entre 2003 i 2008,
+    amb un augment anual del 15,4%. En tot el període 2003-2018 ha estat d’un 8% anual.” [“In 2003,
+    the population born abroad represented 9.3% of the total population and in 2018 it represents
+    18.2%. This major growth in foreign-born residents occurred between 2003 and 2008, with an
+    annual increase of 15.4%. For the entire period of 2003-2018, there has been an annual increase
+    of 8%.”] [loose translation] (Generalitat de Catalunya, 2019a, p. 7) In absolute figures,
+    between 2003 and 2018, this translates into 756,773 people from other parts of the world. Apart
+    from Catalan and Spanish, the most widespread first languages in Catalonia are, in order of
+    importance, Arabic, Romanian, Galician, French, Berber, Russian, Portuguese, Italian, Chinese,
+    English, German and Occitan. According to the Statistical Institute of Catalonia (Idescat), by
+    nationality, most come from Morocco, followed in descending order by Romania, China, Italy,
+    Pakistan, Honduras, France, Bolivia, Colombia, and Ecuador. The 0-14 age group accounts for
+    15.6% of the immigrant population, which means they have access to learning both Catalan and
+    Spanish, as part of their compulsory education. During the first decade of the century, the
+    Ministry of Health translated certain public health care campaign information into the languages
+    spoken by immigrant populations, mainly Arabic, Chinese and Urdu, but also Spanish, English and
+    French, as international lingua francas. Linguistic support material was also created for health
+    professionals.16 More recently, there have been fewer translations into these languages, firstly
+    because the second decade of the century has not seen such high levels of immigration (even
+    though new immigrant populations have continued to arrive) and, secondly, because previous
+    newcomers have had time to learn one of the official languages. Despite this, when a need arises
+    to communicate directly with specific groups, materials are created in multiple languages
+    (always alongside the official languages), such as information leaflets and posters on
+    vaccinations, recommendations for pregnant women, information on infectious diseases and general
+    health warnings.17 To cater to linguistic minorities in Catalonia and tourists in coastal areas,
+    health professionals have access to a telephone interpreting service in over one hundred
+    languages, helping them resolve communication difficulties that may arise when providing medical
+    care. In 2020, over 3,000 telephone interpreting services were provided in 43 different
+    languages. By far the most frequently requested language was Arabic, followed by English,
+    Chinese, Urdu, French, and Russian. Provision of Health Care in Occitan According to data from
+    the 2018 EULP, in Aran, due to factors including the impact of winter sports tourism and
+    proximity of neighbouring provinces in Aragon, where Spanish is spoken, the most usual language
+    of the area’s 10,000 inhabitants is also Spanish, at 44.9%, followed by Occitan, at 19.7% and
+    Catalan, at 15.3%. Occitan is the first language for 21.4% of the population and the language of
+    identification for 24.7%. For the 65 and over age group, Occitan is the usual language for 33.3%
+    of the population. In terms of the language used with medical staff, the most commonly used
+    language is Spanish at 52.1%, followed by Catalan at 10.3%. In the 2008 EULP, the use of Occitan
+    with medical staff was 6.3%; in the 2018 EULP there is no data for the exclusive use of Occitan
+    with medical staff, only in combination with Catalan and Spanish (11.2%). Occitan is Aran’s own
+    language and one of Catalonia’s official languages, meaning it is also an official language of
+    the public health system. The two hundred health professionals who work in the system must be
+    able to provide service to patients in this language. The Ministry of Health works together with
+    the General Council of Aran to promote the use of the region’s language in health care by
+    organising training activities and publishing introductory and health care conversation
+    materials for professionals. For the general population, official public health care campaigns
+    also include information in Aranese Occitan (posters, leaflets, subtitled videos, etc.). Another
+    resource that is also available in Aranese Occitan, as well as Catalan and Spanish, is the La
+    Meva Salut website. Users are able to make requests and check information online; access their
+    personal health information from their visits to public clinics and hospitals; retrieve their
+    current medication plan, vaccination records, diagnoses, clinical reports, and test and scan
+    results. All of this information is available in the official language in which it was written
+    by the physician. Provision of Health Care in Catalan Sign Language Catalan sign language is the
+    language used by deaf and deafblind signers in Catalonia. It is a gestural and visual language
+    that is distinct from Spanish sign language. Even though there is no official data, it is used
+    by approximately 25,000 people, of whom 12,000 are deaf (Frigola, 2010). To guarantee the right
+    to use Catalan sign language when receiving health care, the Ministry of Health provides
+    financial aid to the Catalan Federation of Deaf People (FESOCA), for the provision of
+    interpreting services to anyone requesting it. However, it is also advisable for health care
+    centres to have staff members who are fluent in Catalan sign language, particularly user
+    information units and specialist ear, nose and throat units. In this regard, work is being done
+    to encourage the inclusion of Catalan sign language courses in staff training plans. Assistance
+    is also provided to ensure that sign language interpreters are available at relevant public
+    events and, in conjunction with the Directorate-General for Language Policy, work is being done
+    to provide information on sign language. It should be emphasized that the Salut Respon 061
+    service, through which deaf people have their inquiries answered by video call in Catalan sign
+    language, allows users to express their concerns and receive medical advice or treatment and
+    information on administrative procedures, and call for medical assistance or an ambulance, in
+    addition to other services. In 2020, over 700 video call services in Catalan sign language were
+    provided. Satisfaction with the Linguistic Attention Received Language grievances have no
+    significant statistical relevance among all health-care-related complaints submitted or overall
+    health care provided (47 million visits for primary care alone in 2018). For instance, in 2018,
+    the total number of complaints received was 54,059, of which only 63 (0.11%) were registered as
+    language complaints (Generalitat de Catalunya, Servei Català de la Salut, Memòria 2018, p. 10
+    &amp; p. 15; Generalitat de Catalunya. Departament de Cultura. Direcció General de Política
+    Lingüística (2019). Informe de política lingüística 2018, p. 101). However, language grievances
+    may be voiced and amplified through social networks or echoed by certain media. Although the
+    number of complaints is very low, every one of them is relevant at an individual level, as they
+    affect language rights protected by current regulations. They are even more important in the
+    case of categories of patients, such as the elderly, children, or people who are unwell and in
+    vulnerable circumstances and their accompanying relatives. In general, the patient’s priority is
+    to solve their health problems, and linguistic issues do not normally give cause for complaint.
+    Perhaps for this reason, of the small number of complaints made in health facilities or by other
+    means, only a few are related to health care and the treatment received from health
+    professionals. In recent years, the numbers of complaints from users who wish to be attended to
+    in Catalan or Spanish or receive administrative, clinical or informative documents in one or
+    another language have shown little variation. Another grievance, which arises only occasionally
+    and is difficult to manage, relates to the language used in group training sessions, for
+    instance in antenatal classes, when a participant asks the tutor to change languages because
+    they have difficulty understanding. The majority of complaints originate from health centres in
+    the Barcelona area, with most coming, firstly, from people in the 31 to 45 age group and,
+    secondly, the 46 to 60 age group. Elderly people do not normally make this type of complaint.
+    Despite this, it is important to ensure that elderly people receive adequate services at the
+    linguistic level, so that it is not they who must adapt to the language used by the health
+    professional, but rather the other way round. Elderly people may receive service from a wide
+    range of health professionals, such as physicians, nurses, nursing assistants, physiotherapists,
+    user information staff, care workers, etc. It must be understood that this may not be easy for
+    them and, if they are Catalan speakers, making themselves understood in a language that is not
+    their own and that they do not normally use may represent an additional burden. If they do not
+    wish to change languages, the health professional should be ready with authentic, everyday words
+    and expressions. The above-mentioned study carried out by Plataforma per la Llengua also
+    analyzes how the use of language in the area of health care is evaluated and concludes that
+    “tant les persones que tenen el català com a llengua habitual com les que tenen el castellà
+    estan majoritàriament satisfetes de l’atenció lingüística rebuda. Aquesta valoració, a més, és
+    més elevada entre els usuaris de la sanitat pública” [“both people whose usual language is
+    Catalan and those for whom it is Spanish are mostly satisfied with their treatment in terms of
+    language usage. Furthermore, this evaluation is higher among users of the public health care
+    system”] [loose translation] Similarly, it is worth highlighting that “les expectatives dels
+    catalanoparlants de veure respectats llurs drets lingüístics són molt més baixes que les dels
+    parlants de castellà” [“the expectations on the part of Catalan speakers that their linguistic
+    rights will be respected are much lower than those of Spanish speakers”] [loose translation],
+    who consider that adaptation by the professional to the user’s language is “un dels principals
+    motius per valorar positivament el sistema sanitari” [“one of the main reasons for satisfaction
+    with the health care system”] [loose translation]. (Plataforma per la Llengua (2019, p. 40-41)
+    Catalan as a Suitable Language for Medical and Scientific Communication Since its earliest days,
+    the Ministry of Health has promoted health science terminology in Catalan to achieve the
+    standardization of Catalan in the fields of science and health care. In written communication it
+    is observed that physicians often fill in medical documents in Spanish due to a lack of
+    confidence in their written Catalan. To provide professionals with terminology resources and
+    help them feel confident when using Catalan with medical documents, the Ministry of Health
+    provides training opportunities and regularly collaborates with the TERMCAT terminology centre
+    to promote and support terminology projects, in addition to creating its own linguistic
+    supports. Since 2001, over twenty terminology projects have been implemented in relation to
+    different branches of medicine and public health, and work has been carried out to adapt the
+    International Classification of Diseases into Catalan, all of which can be consulted in the
+    Language Services section of the Canal Salut website (Generalitat de Catalunya. Departament de
+    Salut. Web Canal Salut. Serveis lingüístics). Alongside this work, Canal Salut has provided
+    ongoing support for the various updates and editions of the Diccionari enciclopèdic de medicina
+    [Encyclopaedic Medical Dictionary] (DEMCAT), which aims to maintain its role as a key medical
+    terminology reference work. In the area of medical and health sciences, new terms are constantly
+    appearing related to new areas of knowledge. These are often introduced in the most dominant and
+    widespread languages, such as English and Spanish, and open up new fields of terminology work.
+    Despite the number of resources created, there are still many branches of medical science that
+    need to be worked on or updated, to stay current with recent knowledge. For example, work is
+    currently being carried out in areas such as bioethics, mental health and rare diseases.
+    Regarding the adaptation of the International Classification of Diseases into Catalan, a lot of
+    headway has been made, but much remains to be done. The Ministry of Health has coordinated
+    Catalan translations and subsequent updates of the ICD-9 and ICD-10 International
+    Classifications of Diseases, which are the versions currently used in the public health care
+    system. Along similar lines, with the development and implementation of new technology enabling
+    interoperability between health care management computer systems, it has also been necessary to
+    translate other international standards, such as the LOINC (Logical Observation Identifiers
+    Names and Codes) and the SNOMED CT (Systematized Nomenclature of Medicine Clinical Terms), which
+    are the clinical terminology standards that have been adopted for use with Catalonia’s
+    integrated electronic clinical records. As such, to ensure that Catalan continues to be a
+    suitable language for medical and scientific communication, work is required to detect and
+    support terminological requirements specific to this area; develop Catalan health science
+    terminology and implement its use among professionals, with the aim of attaining maximum
+    consensus around and spreading of neologisms and adapted terminology in the sector; keep the
+    terminology up-to-date; guarantee access to computerized translation systems and spellcheckers
+    for specialized terminology; encourage the creation of Catalan-language summaries of scientific
+    papers and research; and, finally, provide assistance for projects and share linguistic and
+    terminology resources with other regions where Catalan is an official language (the Balearic
+    Islands and Valencian Country), to realize economies of scale and generate a greater return on
+    investment. Future Challenges of the Catalan Language One of the health-related areas where
+    Catalan speakers are at a clear disadvantage compared to Spanish is in drug and medical device
+    labels, leaflets and instructions. The Government of Catalonia has authority over the
+    inspection, monitoring and control of prescription and non-prescription drugs for human and
+    veterinary use, and medical devices, cosmetics and personal care products, but not over the
+    assessment, registration and authorization of prescription drugs, whereas state regulations only
+    specify the requirement to provide drug labels and patient information sheets in Spanish.18
+    Pharmaceutical companies, many of which are based in Catalonia, are reluctant to add Catalan
+    translations, citing logistical problems and increased costs. At the present time, the only
+    products with multilingual instructions that include Catalan are certain own-brand personal care
+    products, like sanitary napkins and bandages, which are distributed by foods chains, most of
+    which are based in Catalonia or the Basque Country. State regulations for drug authorization and
+    registration are encouraging pharmaceutical companies to start including the use of Catalan in
+    their products, with the requirement of certifying that Catalan versions of patient information
+    leaflets are a faithful translation of the Spanish versions.19 Therefore, within Spain, the
+    Catalan language is treated in the same way as any other foreign language that may be used to
+    provide the information. The European Charter for Regional or Minority Languages highlights the
+    importance “to ensure by appropriate means that safety instructions are also drawn up in
+    regional or minority languages”20, however, the fact that Catalan is not recognized as an
+    official language of the European Union does not help. Other languages with fewer speakers than
+    Catalan have a status and recognition which Catalan does not, since it is considered to be a
+    regional minority language by the European Union, and also therefore by its regulatory body, the
+    European Medicines Agency. Unlike Spain, other European Union countries that have several
+    official languages may have patient information leaflets in the different languages, if they so
+    wish, as is the case with Belgium (with three languages: German, French and Dutch), Finland
+    (Finnish and Swedish), Ireland (English and Irish), Italy (Italian and German in the Bolzano
+    region) and Malta (English and Maltese) (European Medicines Agency, 2019). Also, there is still
+    much work to be done in the area of patient-reported outcome (PRO) questionnaires and scales.
+    These questionnaires are tools used by professionals—especially in primary, hospital and
+    long-term care, and primarily in Spanish, due to a lack of translated, validated versions in
+    Catalan—to evaluate health outcomes as perceived by patients. Most of the scales and
+    questionnaires have been created in the United States; they are normally protected by copyright,
+    and a complex systematic methodology must be followed for their translation and cultural
+    adaptation (Serra-Sutton &amp; Herdman, 2001). On the other hand, even though it is very
+    important to have standardized, uniform health care language, above all for written
+    communications, it is also important that when professionals—especially those coming from
+    outside Catalonia—speak to patients, in addition to having a certain level of Catalan, are
+    familiar with and can use common expressions and authentic vocabulary related to health and
+    illness. This will help create a climate for good communication using straightforward language,
+    creating better relationships and greater empathy between patients and health care staff. In
+    this regard, the use among professionals of Catalan’s rich everyday vocabulary for describing
+    health and, indirectly, helping to preserve this important linguistic heritage are challenges
+    that also need to be addressed. Another no less important challenge is the general, ongoing
+    implementation of new health care technologies, which have a considerable influence on the use
+    of language within the health system, as they are normally introduced in the most widespread
+    languages, such as Spanish and English. In this regard, by means of accreditation,
+    standardization, incentives and purchasing, the government must work to ensure that diagnostic
+    equipment and instruction manuals, computer programs used by professionals and health apps used
+    by patients are available in Catalan, or can be configured for use in this language. Digital
+    technologies offer a world of opportunities for Catalan, and it is essential that both the
+    number of digital health products and their consumption increase in line with the size of the
+    Catalan-speaking population. As such, Catalan must be a technologically strong language at the
+    forefront of the health sector. Finally, competent administrations need to take into account the
+    periodic reports of the Committee of Experts regarding the application of the European Charter
+    for Regional or Minority Languages, with proposals for recommendations to be addressed by the
+    Committee of Ministers of Spain. Regarding the Catalan language, the last report of October 2019
+    recognizes that “despite efforts made by authorities, deficiencies in terms of language in the
+    health service and elderly care still exist”, and it recommends “increasing the use of Catalan
+    in social and health care facilities”21. Conclusion The management of languages, preservation of
+    the linguistic rights of users, and promotion and protection of the Catalan language will
+    continue to be important within the health care system as new challenges arise—such as health
+    care technologies, new emerging terminologies, and the migratory flows of professionals—and the
+    sociolinguistic situation of Catalonia’s population continues to evolve. Given the
+    sociolinguistic situation of Catalonia, a commitment is required from health professionals, so
+    that they may understand all patients with different cultures and languages and, most
+    importantly, patients who use the autochthonous language of Catalonia. In this regard, although
+    Catalan does not and has never dissuaded health professionals from coming to work in Catalonia,
+    it is not relevant to consider the dilemma of having to choose between professionals who are
+    competent in the field of health care and those who are competent in the field of language, to
+    meet the shortage of health care professionals required. Medical and linguistic skills are by no
+    means incompatible, even less so in the case of physicians who have undergone a long period of
+    training of nine or ten years before entering the workforce. Therefore, the fact that
+    professionals from areas and countries outside Catalonia are required to attain a level of
+    language proficiency should not be seen as a career obstacle or setback, but rather an essential
+    requirement for being considered a competent physician or nurse who is empathetic and respectful
+    and considers it important to understand patients in their official language of preference.
+    Although the language used by health professionals does not normally give rise to patient
+    complaint, it is an important requirement to guaranteeing that patients may receive service in
+    their own official language, whether Catalan, Spanish or Occitan. Hence, we must maintain
+    efforts aimed at achieving the full linguistic competence of health care staff. Data on language
+    use by users with health professionals show that the use of the Catalan language with medical
+    staff dropped between 2003 and 2018, in comparison to the use of Catalan as usual language.
+    Regarding language use by health professionals, there are no up-to-date data available. Studies
+    that provide this information are needed to guide language planning actions in the near future.
+    However, on the basis of the reports of medical colleges, we know that many physicians are
+    expected to retire in the coming years and that new staff from other countries will enter our
+    health care system. This will require finding a balance to provide quality health care that
+    respects the linguistic rights of users. References Col·legi de Metges de Barcelona (2019).
+    Informe anual 2018 [2018 annual report], Barcelona, p. 18-19,
+    https://www.comb.cat/cat/actualitat/publicacions/anuari/anuari2018/pdf/Informe_CoMB_2018.pdf
+    Consorci per a la Normalització Lingüística. https://www.cpnl.cat, consulted in July 2019.
+    Council of Europe (2019). 10.4 European Charter for Regional or Minority Languages. A. Fifth
+    report of the Committee of Experts in respect of Spain, 1356th Meeting, 9 October 2019. Chapter
+    2.2.2, Catalan in Catalonia, section 44-45, and 2.2.2.2.II.c,
+    https://search.coe.int/cm/Pages/result_details.aspx?ObjectId=090000168096fa01 European Medicines
+    Agency (2019). List of official languages per country,
+    https://www.ema.europa.eu/en/documents/other/list-official-languages-country_en.pdf Federació de
+    Persones Sordes de Catalunya (FESOCA). http://www.fesoca.org Frigola, Santiago (2010). “La
+    comunidad sorda de Catalunya” [The deaf community of Catalonia], in Joan Martí &amp; Josep M.
+    Mestres (Eds.), Les llengües de signes com a llengües minoritàries: perspectives lingüístiques,
+    socials i polítiques, p. 29-54, Barcelona: IEC,
+    https://publicacions.iec.cat/repository/pdf/00000189/00000036.pdf Generalitat de Catalunya
+    (2019a). Els usos lingüístics de la població de Catalunya. Resultats de l’Enquesta d’usos
+    lingüístics de la població 2018 [The linguistic uses of the population of Catalonia. Results of
+    the 2018 Survey on the Language Uses of the Population],
+    https://llengua.gencat.cat/web/.content/documents/dadesestudis/altres/arxius/dossier-eulp-2018.pdf
+    Generalitat de Catalunya (2019b). Els usos lingüístics de la població de l’Aran. Principals
+    resultats de l’Enquesta d’usos lingüístics de la població 2018 [The linguistic uses of the
+    population of Aran. Principal results of the 2018 Survey on the Language Uses of the
+    Population],
+    https://llengua.gencat.cat/web/.content/documents/dadesestudis/altres/arxius/dossier_eulp-2018_aranes.pdf
+    Generalitat de Catalunya, Departament de Cultura, Direcció General de Política Lingüística. Usos
+    lingüístics institucionals a la Generalitat de Catalunya i el sector públic que en depèn =
+    Institutional language use by the Government of Catalonia and its public sector,
+    https://llengua.gencat.cat/en/serveis/legislacio_i_drets_linguistics/Preguntes-mes-frequeents/ambit-public/usos-lingueistics-a-la-generalitat
+    Generalitat de Catalunya, Departament de Cultura, Direcció General de Política Lingüística
+    (2019). Informe de política lingüística 2018 [2018 Language policy report],
+    https://llengua.gencat.cat/web/.content/documents/informepl/arxius/IPL-2018.pdf Generalitat de
+    Catalunya, Departament de Salut, Web Canal Salut. Serveis lingüístics [Linguistic services],
+    http://canalsalut.gencat.cat/ca/professionals/recursos/serveis_linguistics Generalitat de
+    Catalunya, Departament de Salut, Web Canal Salut. Publicacions sobre COVID-19 en altres llengües
+    [COVID-19 publications in other languages],
+    https://canalsalut.gencat.cat/ca/salut-a-z/c/coronavirus-2019-ncov/divulgacio/Materials-en-altres-llengues/
+    Generalitat de Catalunya. Departament de Salut. La Meva Salut [My health],
+    https://lamevasalut.gencat.cat/web/guest/pre-login-cps Generalitat de Catalunya, Departament de
+    Salut, Institut Català de la Salut (2000). Lèxic bàsic de conversa sanitària [Basic health
+    conversation vocabulary], Barcelona,
+    http://canalsalut.gencat.cat/web/.content/_Professionals/Recursos/altres_recursos_interes/serveis_linguistics/eines_traduccio/enllasos/programes_especials/lexic_basic_de_conversa_sanitaria_ics.pdf
+    Generalitat de Catalunya, Departament de Salut (2017a). Pla de garantia de l’estabilitat laboral
+    [Plan to guarantee employment stability],
+    http://www.consellinfermeres.cat/wp-content/uploads/estabilitat_laboral_17.pdf Generalitat de
+    Catalunya, Departament de Salut (2017b). Toma el pulso a la lengua catalana [Taking the pulse of
+    the Catalan language],
+    http://canalsalut.gencat.cat/web/.content/_Professionals/Recursos/serveis_linguistics/assessorament_linguistic/documents/Toma_pulso.pdf
+    Generalitat de Catalunya, Departament de Salut, Direcció General d’Ordenació Professional i
+    Regulació Sanitària (2018). Entitats d’assegurança sanitària lliure de Catalunya 2016 [2016 Free
+    health insurance companies in Catalonia], Barcelona,
+    http://observatorisalut.gencat.cat/web/.content/minisite/observatorisalut/ossc_dades_estadistiques/poblacio/poblacio_assegurada_entitats_asseguranca_lliure/fitxers_estatics/memoria_2016_entitats_asseguranca_lliure_assistencia_sanitaria.pdf
+    Generalitat de Catalunya, Departament de Salut (2019). Salut crea una nova eina de verificació
+    ortogràfica de textos mèdics en català [Salut creates a new tool for spellchecking medical texts
+    in Catalan],
+    https://govern.cat/salapremsa/notes-premsa/356022/salut-crea-nova-eina-verificacio-ortografica-textos-medics-catala
+    Generalitat de Catalunya. Servei Català de la Salut–Memòria 2018 [Catalan Health Service–2018
+    report], Barcelona,
+    https://scientiasalut.gencat.cat/bitstream/handle/11351/4555/servei_catala_salut_memoria_2018.pdf?sequence=4&amp;isAllowed=y
+    Generalitat de Catalunya, Centre d’Estudis d’Opinió, Servei Català de la Salut. Baròmetre
+    sanitari de Catalunya 2019 [2019 Catalan health barometer],
+    http://upceo.ceo.gencat.cat/wsceop/7788/Taules%20estad%C3%ADstiques%20-980.pdf Generalitat de
+    Catalunya, Institut d’Estadística de Catalunya. Enquesta d’usos lingüístics de la població
+    [Survey on the language uses of the population], https://www.idescat.cat/pub/?id=eulp Gobierno
+    de España, Ministerio de Sanidad, Consumo y Bienestar Social (2018). Encuesta Nacional de Salud
+    de España 2017 [2017 Spanish national health survey],
+    https://www.mscbs.gob.es/estadEstudios/estadisticas/encuestaNacional/encuesta2017.htm Gordillo,
+    Manuel (2004). “Els usos lingüístics en la documentació clínica als centres sanitaris de la
+    ciutat de Barcelona” [Linguistic uses in clinical documentation in health centres in the city of
+    Barcelona], Llengua i Ús, no 31, p. 59-61,
+    https://www.raco.cat/index.php/LlenguaUs/article/view/128199/177728 Institut d’Estudis Catalans;
+    Fundació Acadèmia de Ciències Mèdiques i de la Salut de Catalunya i de Balears; Enciclopèdia
+    Catalana, SAU; TERMCAT, Centre de Terminologia; Generalitat de Catalunya. Departament de Salut
+    (2015-2019). Diccionari enciclopèdic de medicina (DEMCAT) [Encyclopedic dictionary of medicine
+    (DEMCAT)], http://www.termcat.cat/ca/diccionaris-en-linia/183 Plataforma per la Llengua (2019).
+    Reanimar el català. Dades i propostes per a millorar la situació de la llengua en l’àmbit
+    sanitari a Catalunya [Revive Catalan. Data and proposals to improve the situation of the
+    language in the Catalan health field], Barcelona, p. 40-41,
+    https://www.plataforma-llengua.cat/media/upload/pdf/reanimar-el-catala_informe-salut_1551952254.pdf
+    Serra-Sutton, Vicky, &amp; Michael Herdman (2001). “Metodologia d’adaptació transcultural
+    d’instruments de mesura de la qualitat de vida relacionada amb la salut” [Methodology for the
+    cross-cultural adaptation of instruments for measuring health-related quality of life],
+    Informatiu AATM, no 24, p.18-20. Soler, Ivan, &amp; Solé Camardons, Joan (2004). “Enquesta sobre
+    els usos lingüístics als centres sanitaris 2004” [2004 Survey on language uses in health
+    centres], Llengua i Ús, no 31, p. 62-70,
+    https://www.raco.cat/index.php/LlenguaUs/article/view/128200/177729 Termcat, Centre de
+    Terminologia. https://www.termcat.cat/ca Legislation Regulatory provisions in Catalonia Llei
+    orgànica 6/2006, de reforma de l’Estatut d’autonomia de Catalunya [Reform of the Statute of
+    Autonomy of Catalonia Organic Act, nº 6/2006], art 6, 23, 32, 33, 36 &amp; 50. (Diari Oficial de
+    la Generalitat de Catalunya [Official Gazette of the Government of Catalonia], nº 4680, 20 July
+    2006, &amp; Boletín Oficial del Estado [Spanish Official Gazette], nº 172, 20 July),
+    https://www.parlament.cat/document/cataleg/150259.pdf Llei 1/1998, de política lingüística,
+    [Language Policy Act, nº 1/1998, art 9, 10 &amp; 11], (Diari Oficial de la Generalitat de
+    Catalunya [Official Gazette of the Government of Catalonia], nº 2553, 9 January 1998, &amp;
+    Boletín Oficial del Estado [Spanish Official Gazette], nº 36, 11 February), Following the entry
+    into force of the Reform of the Statute of Autonomy of Catalonia Organic Act, 2006, the
+    Linguistic Policy Act remains valid in its entirety,
+    https://llengua.gencat.cat/en/serveis/legislacio_i_drets_linguistics/llei_de_politica_linguistica/index.html
+    Llei 8/2007, de 30 de julio, de l’Institut Català de la Salut. [Catalan Institute of Health Act,
+    nº 8/2007, art 19]. (Diari Oficial de la Generalitat de Catalunya [Official Gazette of the
+    Government of Catalonia], nº 4940, 3 August 2007, &amp; Boletín Oficial del Estado [Spanish
+    Official Gazette], nº 197, 17 August),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa?action=fitxa&amp;documentId=445808
+    Llei 17/2010, del 3 de juny, de la llengua de signes catalana. [Catalan Sign Language Act, nº
+    17/2010]. (Diari Oficial de la Generalitat de Catalunya [Official Gazette of the Government of
+    Catalonia], nº 5647, 10 June 2010),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=541337&amp;language=ca_ES&amp;textWords=Llei%252017%2F2010&amp;mode=single
+    Llei 22/2010, del 20 de juliol, del Codi de consum de Catalunya. [Consumer Code Act, nº 22/2010,
+    art 128-1]. (Diari Oficial de la Generalitat de Catalunya [Official Gazette of the Government of
+    Catalonia], nº 5677, 23 July 2010),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=543841&amp;language=ca_ES&amp;textWords=Llei%252022%2F2010&amp;mode=single
+    Llei 22/ Llei 35/2010, d’1 d’octubre, de l’occità, aranès a l’Aran. [Occitan, Aranese in Aran,
+    Act, nº 35/2010]. (Diari Oficial de la Generalitat de Catalunya [Official Gazette of the
+    Government of Catalonia], nº 5745, 29 October 2010),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=560046&amp;language=ca_ES&amp;textWords=Llei%252035%2F2010&amp;mode=single
+    Decret legislatiu 1/1997, de 31 d’octubre, pel qual s’aprova la refosa en un Text únic dels
+    preceptes de determinats textos legals vigents a Catalunya en matèria de funció pública.
+    [Approval of the Revision in a Single Text of the Precepts of Certain Legal Texts in Force in
+    Catalonia in the Field of Public Service Legislative Decree, nº 1/1997, art 42]. (Diari Oficial
+    de la Generalitat de Catalunya [Official Gazette of the Government of Catalonia], nº 2509, 3
+    November 1997),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=174084
+    Decret 107/1987, de 13 de març, pel qual es regula l’ús de les llengües oficials per part de
+    l’Administració de la Generalitat de Catalunya. [Regulation of the Use of Official Languages by
+    the Administration of the Generalitat of Catalonia Decree, nº 107/1987]. (Diari Oficial de la
+    Generalitat de Catalunya [Official Gazette of the Government of Catalonia], nº 827, 10 April
+    1987),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;mode=single&amp;documentId=33449&amp;language=ca_ES
+    Decret 161/2002, d’11 de juny, sobre l’acreditació del coneixement del català i l’aranès en els
+    processos de selecció de personal i de provisió de llocs de treball de les administracions
+    públiques de Catalunya. [Accreditation of Knowledge of Catalan and Aranese in the Processes of
+    Selection of Staff and Provision of Jobs of the Public Administrations of Catalonia Decree, nº
+    161/2002]. (Diari Oficial de la Generalitat de Catalunya [Official Gazette of the Government of
+    Catalonia], nº 3660, 19 June 2002),
+    https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;versionId=1625826&amp;versionState=02&amp;language=ca_ES&amp;documentId=275078&amp;mode=single
+    Regulatory provisions in Spain Llei 39/2015, d’1 d’octubre, del procediment administratiu comú
+    de les administracions públiques. [Common Administrative Procedure of Public Administrations
+    Act, nº 1/2015, art 15]. (Boletín Oficial del Estado [Spanish Official Gazette], nº 236, 13
+    October), https://www.boe.es/boe_catalan/dias/2015/10/02/pdfs/BOE-A-2015-10565-C.pdf Reial
+    decret legislatiu 5/2015, de 30 d’octubre, pel qual s’aprova el text refós de la Llei de
+    l’Estatut bàsic de l’empleat públic. [Basic Statute of Public Employee Royal Legislative Decree,
+    nº 5/2015, art 54.11, 56.2 &amp; 61]. (Boletín Oficial del Estado [Spanish Official Gazette], nº
+    261, 31 October), https://www.boe.es/boe_catalan/dias/2015/10/31/pdfs/BOE-A-2015-11719-C.pdf
+    LLEI 29/2006, de 26 de juliol, de garanties i ús racional dels medicaments i productes
+    sanitaris. [Guarantees and Rational Use of Medicines and Health Products Act, nº 29/2006, art 15
+    &amp; 31]. (Boletín Oficial del Estado [Spanish Official Gazette], nº 178, 27 July 2006),
+    https://www.boe.es/boe_catalan/dias/2006/08/01/pdfs/A02327-02369.pdf Real Decreto 1345/2007, de
+    11 de octubre, por el que se regula el procedimiento de autorización, registro y condiciones de
+    dispensación de los medicamentos de uso humano fabricados industrialmente. [Regulation of the
+    Procedure for Authorization, Registration and Dispensing Conditions of Industrially Manufactured
+    Human Use Drugs Royal Decree, nº 1345/2007, art 30.2 &amp; 30.3]. (Boletín Oficial del Estado
+    [Spanish Official Gazette], nº 267, 7 November 2007),
+    https://www.boe.es/buscar/act.php?id=BOE-A-2007-19249&amp;tn=1&amp;p=20100505 Orden
+    SCB/925/2019, de 30 de agosto, por la que se aprueba la oferta de plazas y la convocatoria de
+    pruebas selectivas 2019 para el acceso en el año 2020, a plazas de formación sanitaria
+    especializada para las titulaciones universitarias de grado/licenciatura/diplomatura de
+    Medicina, Farmacia, Enfermería y ámbito de la Psicología, la Química, la Biología y la Física.
+    [Approval of the offer of places and the call for selective tests 2019 for access in 2020, to
+    places of specialized health training for university degree / bachelor’s degrees / diploma in
+    Medicine, Pharmacy, Nursing and the field of Psychology, Chemistry, Biology and Physics Order nº
+    SCB/925, 2019, 9th section]. (Boletín Oficial del Estado [Spanish Official Gazette], nº 216, 9
+    September), https://www.boe.es/boe/dias/2019/09/09/pdfs/BOE-A-2019-12897.pdf Regulatory
+    provisions in Europe Council of Europe. European Charter for Regional or Minority Languages (4
+    November 1992, ETS 148). Articles 10.2.a,b; 10.4.b; 13.2.c,d,
+    https://www.coe.int/en/web/conventions/full-list/-/conventions/rms/0900001680695175 Council of
+    Europe. European Charter for Regional or Minority Languages. Fifth report of the Committee of
+    Experts in respect of Spain. 1356th Meeting, 9 October 2019. Chapter 2.2.2. Catalan in
+    Catalonia, section 44-45 and 2.2.2.2.II.c,
+    https://search.coe.int/cm/Pages/result_details.aspx?ObjectId=090000168096fa01 European Medicines
+    Agency (15 June 2019). List of official languages per country,
+    https://www.ema.europa.eu/en/documents/other/list-official-languages-country_en.pdf Keywords
+    healthcare, health, Catalan, linguistic planning, healthcare professionals, official languages,
+    Catalonia Mots clés soins de santé, santé, catalan, planification linguistique, professionnels
+    de la santé, langues officielles, Catalogne Paraules clau assistència sanitària, salut, català,
+    planificació lingüística, professionals sanitaris, llengües oficials, Catalunya Palabras clave
+    asistencia sanitaria, salud, catalán, planificación lingüística, profesionales sanitarios,
+    lenguas oficiales, Cataluña Correspondence jordi.pere@gencat.cat 1. Generalitat de Catalunya.
+    Direcció General de Política Lingüística. Usos lingüístics institucionals a la Generalitat de
+    Catalunya i el sector públic que en depèn = Institutional language use by the Government of
+    Catalonia and its public sector. 2. Catalan, Spanish and European legislation on the use of
+    languages applicable to the Government of Catalonia and its public sector is detailed below in
+    the References section. 3. However, a recent judgment by the Spanish Supreme Court (STC
+    634/2020) requires the Government of the Valencian Country to communicate with the Government of
+    Catalonia in Spanish and thus the common linguistic area shared by the Valencian Country, the
+    Balearic Islands, and Catalonia is deemed legally invalid. 4. Common Administrative Procedure of
+    Public Administrations Act, nº 1/2015, art 15. 5. Council of Europe, European Charter for
+    Regional or Minority Languages, Article 13.2.c. 6. According to the study Entitats d’assegurança
+    lliure de Catalunya 2016 [2016 Free insurance companies in Catalonia], in 2016, 25.3% of the
+    Catalan population also had private health insurance. In contrast, according to the Encuesta
+    Nacional de Salud [Spanish National Health Survey], for Spain as a whole, in 2017, this figure
+    was 16.3% of the population. 7. Accreditation of Knowledge of Catalan and Aranese Occitan in
+    Staff Selection Procedures and the Provision of Work Positions in the Catalan Public
+    Administration Decree, nº 161/2002 (Diari Oficial de la Generalitat de Catalunya [Official
+    Gazette of the Government of Catalonia], nº 3660, of 19/6/2002). 8. The rules for the most
+    recent exam can be found in the Approval of the Offer of Places and the 2019 Selective Exam
+    Session for Access in 2020 to Specialist Health Care Training for Physicians, Pharmacists,
+    Nurses and Other Graduates in Psychology, Chemistry, Biology and Physics Order, nº SCB/925/2019
+    (Boletín Oficial del Estado [Spanish Official Gazette], nº 216, of 14/9/2019). 9.
+    Subdirectorate-General for Professional Regulation and Development. Directorate-General for
+    Healthcare Professionals. Ministry of Health. Government of Catalonia (unpublished data). 10.
+    Government of Catalonia. Ministry of Business and Knowledge. Secretariat for Universities and
+    Research (unpublished data). 11. Two other concepts are used in language analysis: The first
+    language, which is the language that the interviewee says they first spoke at home and the
+    language of identification or own language, which is the language that the interviewee considers
+    as their own language and with which they identify. For the purposes of this study, our focus is
+    usual language. 12. In the case of the EULP, medical staff refers exclusively to physicians,
+    both in the public and private systems; it does not refer to other health care or administrative
+    staff. 13. Unlike the EULP, the Health Barometer takes into account the relationship between
+    patients and all health care and administrative staff, not just physicians. Possibly for this
+    reason, and also due to the characteristics of the sample, the percentages for the two languages
+    differ from those of the EULP. 14. As of March 2021, the 2020 survey results had not yet been
+    published. 15. There is no updated data on language use by health professionals with users or
+    among professionals. The last two sociolinguistic studies were in 2003 and 2004. One study
+    analyzed language use and attitudes in Catalan health care facilities through surveys addressed
+    to professionals (Soler &amp; Solé, 2004), the other examined, from direct observation, language
+    use in the clinical documents of health facilities in the city of Barcelona (Gordillo, 2004).
+    16. For example, the Lèxic bàsic de conversa sanitària [Basic vocabulary for health care
+    conversations] (2000), was translated into seven languages, containing the most common
+    expressions and terms for health care, social and administrative use, with the aim of preventing
+    language barriers from leading to poor communication. 17. For example, many materials have been
+    recently published in international languages and in the languages of the immigrant population
+    due to the health crisis caused by COVID-19 (available on Canal Salut website). 18. Act 29/2006
+    on the guarantees and rational use of medicines and medical devices. Articles 15 and 31.
+    Guarantee of information. (Boletín Oficial del Estado, nº 178, of 27/7/2006). 19. Regulation of
+    the Authorization and Registration Procedure and Dispensing Conditions for Industrially Produced
+    Prescription Drugs for Human Use Royal Decree, nº 1345/2007, Article 30.2 Authorization of the
+    information contained in labels and patient information leaflets (Boletín Oficial del Estado
+    [Spanish Official Gazette], nº 267, of 7/11/2007). 20. European Charter for Regional or Minority
+    Languages, Article 13.2.d. 21. Council of Europe, 2019. Minorités linguistiques et société
+    Numéro 15 - 16 Linguistic Minorities and Society Number 15 - 16 2021 Source: Col·legi de Metges
+    de Barcelona (2019). Informe anual 2018. Barcelona. Source: Col·legi de Metges de Barcelona
+    (2019). Informe anual 2018. Barcelona European Union and Switzerland 10,6% Rest of Spain 19,0%
+    Other countries 20,0% Central and Eastern Europe 4,2% Middle East 3,1% Africa 1,9% Other 1,5%
+    Latin America and the Caribbean 78,7% Catalonia 61,0% Percentage 100 80 60 40 20 0 Source:
+    Col·legi de Metges de Barcelona (2019). Data taken from the 2016-2018 annual reports. Barcelona.
+    2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 46,6 38,7 14,6 56,9 29,7 13,4 Other
+    countries Catalonia Rest of Spain 57,8 28,0 14,2 54,3 27,7 18,0 47,7 33,4 18,9 41,9 38,1 20,0
+    41,5 38,5 20,0 40,4 36,6 23,0 39,8 36,3 23,9 39,0 35,9 25,1 42,8 33,7 23,5 43,1 33,0 23,9
+    Source: Subdirectorate-General for Professional Regulation and Development. Directorate-General
+    for Healthcare Professionals. Ministry of Health. Government of Catalonia. Rest of Spain 28%
+    Other countries 17,5% Catalonia 54,5% Source: Subdirectorate-General for Professional Regulation
+    and Development. Directorate-General for Healthcare Professionals. Ministry of Health.
+    Government of Catalonia. Rest of Spain 75.2% Other countries 0.4% Catalonia 24.5% Percentage 100
+    80 60 40 20 0 Source: Generalitat de Catalunya. Institut d’Estadística de Catalunya. Enquesta
+    d’usos lingüístics de la població. 46,0 41,1 1,1 2003 2008 2013 2018 Catalan Spanish Other
+    languages 45,9 35,6 4,8 50,7 36,3 4,7 48,6 36,1 4,3 Percentage 100 80 60 40 20 0 Source:
+    Generalitat de Catalunya. Institut d’Estadística de Catalunya. Enquesta d’usos lingüístics de la
+    població. Use of Catalan as usual language Use of Catalan with medical personnel 46,0 38,1 2003
+    2008 2013 2018 35,6 34,4 36,3 27,8 36,1 26,4 Source: Generalitat de Catalunya. Institut
+    d’Estadística de Catalunya. Enquesta d’usos lingüístics de la població. Spanish and other
+    languages 0,2% Only Spanish 38,4% More Spanish than Catalan 6,8% Only other languages 0,2% No
+    data 0,9% Both 14,5% Only Catalan 26,4% More Catalan than Spanish 12,6% Percentage 100 80 60 40
+    20 0 65 and over Source: Generalitat de Catalunya. Institut d’Estadística de Catalunya. Enquesta
+    d’usos lingüístics de la població. Source: Generalitat de Catalunya. Institut d’Estadística de
+    Catalunya. Enquesta d’usos lingüístics de la població. 45 to 64 30 to 44 15 to 29 38,7 Only
+    Catalan 9,8 6,3 18,4 More Catalan than Spanish 4,5 3,4 17,6 Both 11,9 7,7 6,7 More Spanish than
+    Catalan 6,8 7,2 17,5 Only Spanish 66,4 72,2 0 Only Catalan More Spanish than Catalan 24.7 22.3
+    26.5 33.3 Catalonia Rest of Spanish Foreign 20 13.4 More Catalan than Spanish 13.4 12.7 10.2 40
+    14.6 14.7 Only Spanish 18.0 11.1 Percentage 7.9 6.9 3.3 60 9.4 Both 39.9 41.3 39.0 80 31.4
+    100</texte></corps><partiesann lang="en">
+    <grbiblio>
+      <biblio><refbiblio id="rb1"><marquage typemarq="petitecap">Col·legi de Metges de Barcelona</marquage> (2019). <marquage typemarq="italique">Informe anual 2018</marquage>        [2018 annual report], Barcelona, p. 18-19, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="https://www.comb.cat/cat/actualitat/publicacions/anuari/anuari2018/pdf/Informe_CoMB_2018.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.comb.cat/cat/actualitat/publicacions/anuari/anuari2018/pdf/Informe_CoMB_2018.pdf</liensimple>        </refbiblio> <refbiblio id="rb2">Consorci per a la Normalització        Lingüística. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="https://www.cpnl.cat" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.cpnl.cat</liensimple>, consulted in July        2019.</refbiblio> <refbiblio id="rb3"><marquage typemarq="petitecap">Council of Europe</marquage> (2019). 10<marquage typemarq="italique">.4 European Charter for Regional or Minority        Languages. A. Fifth report of the Committee of Experts in respect of Spain</marquage>,        1356<exposant>th</exposant> Meeting, 9 October 2019. Chapter 2.2.2, Catalan in Catalonia, section        44-45, and 2.2.2.2.II.c, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="https://search.coe.int/cm/Pages/result_details.aspx?ObjectId=090000168096fa01" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://search.coe.int/cm/Pages/result_details.aspx?ObjectId=090000168096fa01</liensimple> </refbiblio> <refbiblio id="rb4"><marquage typemarq="petitecap">European        Medicines Agency</marquage> (2019). List of official languages per country, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="https://www.ema.europa.eu/en/documents/other/list-official-languages-country_en.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.ema.europa.eu/en/documents/other/list-official-languages-country_en.pdf</liensimple>        </refbiblio> <refbiblio id="rb5"><marquage typemarq="petitecap">Federació        de Persones Sordes de Catalunya</marquage> (FESOCA). <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:href="http://www.fesoca.org" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.fesoca.org</liensimple> </refbiblio> <refbiblio id="rb6"><marquage typemarq="petitecap">Frigola</marquage>, Santiago (2010). “La comunidad sorda de Catalunya”        [The deaf community of Catalonia], in Joan Martí &amp; Josep M. Mestres (Eds.), <marquage typemarq="italique">Les        llengües de signes com a llengües minoritàries: perspectives lingüístiques, socials i        polítiques</marquage>, p. 29-54, Barcelona: IEC, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls7" xlink:href="https://publicacions.iec.cat/repository/pdf/00000189/00000036.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://publicacions.iec.cat/repository/pdf/00000189/00000036.pdf</liensimple> </refbiblio> <refbiblio id="rb7"><marquage typemarq="petitecap">Generalitat de        Catalunya</marquage> (2019a). <marquage typemarq="italique">Els usos lingüístics de la població de Catalunya. Resultats de        l’Enquesta d’usos lingüístics de la població 2018</marquage> [The linguistic uses of the        population of Catalonia. Results of the 2018 Survey on the Language Uses of the Population],        <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls8" xlink:href="https://llengua.gencat.cat/web/.content/documents/dadesestudis/altres/arxius/dossier-eulp-2018.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://llengua.gencat.cat/web/.content/documents/dadesestudis/altres/arxius/dossier-eulp-2018.pdf</liensimple>        </refbiblio> <refbiblio id="rb8"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage> (2019b). <marquage typemarq="italique">Els usos lingüístics de la població de l’Aran.        Principals resultats de l’Enquesta d’usos lingüístics de la població 2018</marquage> [The        linguistic uses of the population of Aran. Principal results of the 2018 Survey on the        Language Uses of the Population], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls9" xlink:href="https://llengua.gencat.cat/web/.content/documents/dadesestudis/altres/arxius/dossier_eulp-2018_aranes.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://llengua.gencat.cat/web/.content/documents/dadesestudis/altres/arxius/dossier_eulp-2018_aranes.pdf</liensimple>        </refbiblio> <refbiblio id="rb9"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Cultura, Direcció        General de Política Lingüística</marquage>. Usos lingüístics institucionals a la Generalitat de        Catalunya i el sector públic que en depèn = Institutional language use by the Government of        Catalonia and its public sector, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls10" xlink:href="https://llengua.gencat.cat/en/serveis/legislacio_i_drets_linguistics/Preguntes-mes-frequeents/ambit-public/usos-lingueistics-a-la-generalitat" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://llengua.gencat.cat/en/serveis/legislacio_i_drets_linguistics/Preguntes-mes-frequeents/ambit-public/usos-lingueistics-a-la-generalitat</liensimple>        </refbiblio> <refbiblio id="rb10"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Cultura</marquage>,        <marquage typemarq="petitecap">Direcció General de Política Lingüística</marquage> (2019). <marquage typemarq="italique">Informe        de política lingüística 2018</marquage> [2018 Language policy report], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls11" xlink:href="https://llengua.gencat.cat/web/.content/documents/informepl/arxius/IPL-2018.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://llengua.gencat.cat/web/.content/documents/informepl/arxius/IPL-2018.pdf</liensimple> </refbiblio> <refbiblio id="rb11"><marquage typemarq="petitecap">Generalitat de        Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Salut</marquage>, <marquage typemarq="petitecap">Web Canal Salut</marquage>. <marquage typemarq="italique">Serveis lingüístics</marquage> [Linguistic        services], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls12" xlink:href="http://canalsalut.gencat.cat/ca/professionals/recursos/serveis_linguistics" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://canalsalut.gencat.cat/ca/professionals/recursos/serveis_linguistics</liensimple> </refbiblio> <refbiblio id="rb12"><marquage typemarq="petitecap">Generalitat de        Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Salut</marquage>, <marquage typemarq="petitecap">Web Canal Salut</marquage>. <marquage typemarq="italique">Publicacions sobre COVID-19 en altres        llengües</marquage> [COVID-19 publications in other languages], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls13" xlink:href="https://canalsalut.gencat.cat/ca/salut-a-z/c/coronavirus-2019-ncov/divulgacio/Materials-en-altres-llengues/" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://canalsalut.gencat.cat/ca/salut-a-z/c/coronavirus-2019-ncov/divulgacio/Materials-en-altres-llengues/</liensimple>        </refbiblio> <refbiblio id="rb13"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage>. <marquage typemarq="petitecap">Departament de Salut</marquage>.        <marquage typemarq="italique">La Meva Salut</marquage> [My health], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls14" xlink:href="https://lamevasalut.gencat.cat/web/guest/pre-login-cps" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://lamevasalut.gencat.cat/web/guest/pre-login-cps</liensimple> </refbiblio> <refbiblio id="rb14"><marquage typemarq="petitecap">Generalitat de        Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Salut</marquage>, <marquage typemarq="petitecap">Institut Català de la Salut</marquage> (2000). <marquage typemarq="italique">Lèxic bàsic de conversa        sanitària</marquage> [Basic health conversation vocabulary], Barcelona, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls15" xlink:href="http://canalsalut.gencat.cat/web/.content/_Professionals/Recursos/altres_recursos_interes/serveis_linguistics/eines_traduccio/enllasos/programes_especials/lexic_basic_de_conversa_sanitaria_ics.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://canalsalut.gencat.cat/web/.content/_Professionals/Recursos/altres_recursos_interes/serveis_linguistics/eines_traduccio/enllasos/programes_especials/lexic_basic_de_conversa_sanitaria_ics.pdf</liensimple>        </refbiblio> <refbiblio id="rb15"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Salut</marquage>        (2017a). <marquage typemarq="italique">Pla de garantia de l’estabilitat laboral</marquage> [Plan to guarantee employment        stability], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls16" xlink:href="http://www.consellinfermeres.cat/wp-content/uploads/estabilitat_laboral_17.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.consellinfermeres.cat/wp-content/uploads/estabilitat_laboral_17.pdf</liensimple> </refbiblio> <refbiblio id="rb16"><marquage typemarq="petitecap">Generalitat de        Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Salut</marquage> (2017b). <marquage typemarq="italique">Toma el        pulso a la lengua catalana</marquage> [Taking the pulse of the Catalan language], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls17" xlink:href="http://canalsalut.gencat.cat/web/.content/_Professionals/Recursos/serveis_linguistics/assessorament_linguistic/documents/Toma_pulso.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://canalsalut.gencat.cat/web/.content/_Professionals/Recursos/serveis_linguistics/assessorament_linguistic/documents/Toma_pulso.pdf</liensimple>        </refbiblio> <refbiblio id="rb17"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage>, <marquage typemarq="petitecap">Departament de Salut, Direcció        General d’Ordenació Professional i Regulació Sanitària</marquage> (2018). <marquage typemarq="italique">Entitats        d’assegurança sanitària lliure de Catalunya 2016</marquage> [2016 Free health insurance companies        in Catalonia], Barcelona, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls18" xlink:href="http://observatorisalut.gencat.cat/web/.content/minisite/observatorisalut/ossc_dades_estadistiques/poblacio/poblacio_assegurada_entitats_asseguranca_lliure/fitxers_estatics/memoria_2016_entitats_asseguranca_lliure_assistencia_sanitaria.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://observatorisalut.gencat.cat/web/.content/minisite/observatorisalut/ossc_dades_estadistiques/poblacio/poblacio_assegurada_entitats_asseguranca_lliure/fitxers_estatics/memoria_2016_entitats_asseguranca_lliure_assistencia_sanitaria.pdf</liensimple>        </refbiblio> <refbiblio id="rb18"><marquage typemarq="petitecap">Generalitat de Catalunya, Departament de Salut</marquage> (2019). <marquage typemarq="italique">Salut crea una nova eina        de verificació ortogràfica de textos mèdics en català</marquage> [Salut creates a new tool for        spellchecking medical texts in Catalan], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls19" xlink:href="https://govern.cat/salapremsa/notes-premsa/356022/salut-crea-nova-eina-verificacio-ortografica-textos-medics-catala" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://govern.cat/salapremsa/notes-premsa/356022/salut-crea-nova-eina-verificacio-ortografica-textos-medics-catala</liensimple>        </refbiblio> <refbiblio id="rb19"><marquage typemarq="petitecap">Generalitat de Catalunya</marquage>. <marquage typemarq="italique">Servei Català de la Salut–Memòria 2018</marquage> [Catalan        Health Service–2018 report], Barcelona, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls20" xlink:href="https://scientiasalut.gencat.cat/bitstream/handle/11351/4555/servei_catala_salut_memoria_2018.pdf?sequence=4&amp;isAllowed=y" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://scientiasalut.gencat.cat/bitstream/handle/11351/4555/servei_catala_salut_memoria_2018.pdf?sequence=4&amp;isAllowed=y</liensimple>        </refbiblio> <refbiblio id="rb20"><marquage typemarq="petitecap">Generalitat de Catalunya, Centre d’Estudis d’Opinió, Servei Català de la Salut</marquage>.        <marquage typemarq="italique">Baròmetre sanitari de Catalunya 2019</marquage> [2019 Catalan health barometer], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls21" xlink:href="http://upceo.ceo.gencat.cat/wsceop/7788/Taules%20estad%C3%ADstiques%20-980.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://upceo.ceo.gencat.cat/wsceop/7788/Taules%20estad%C3%ADstiques%20-980.pdf</liensimple> </refbiblio> <refbiblio id="rb21"><marquage typemarq="petitecap">Generalitat de        Catalunya, Institut d’Estadística de Catalunya</marquage>. <marquage typemarq="italique">Enquesta d’usos lingüístics de la        població</marquage> [Survey on the language uses of the population], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls22" xlink:href="https://www.idescat.cat/pub/?id=eulp" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.idescat.cat/pub/?id=eulp</liensimple> </refbiblio> <refbiblio id="rb22"><marquage typemarq="petitecap">Gobierno de        España, Ministerio de Sanidad, Consumo y Bienestar Social</marquage> (2018). <marquage typemarq="italique">Encuesta        Nacional de Salud de España 2017</marquage> [2017 Spanish national health survey], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls23" xlink:href="https://www.mscbs.gob.es/estadEstudios/estadisticas/encuestaNacional/encuesta2017.htm" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.mscbs.gob.es/estadEstudios/estadisticas/encuestaNacional/encuesta2017.htm</liensimple>        </refbiblio> <refbiblio id="rb23"><marquage typemarq="petitecap">Gordillo</marquage>, Manuel (2004). “Els usos lingüístics en la documentació clínica als        centres sanitaris de la ciutat de Barcelona” [Linguistic uses in clinical documentation in        health centres in the city of Barcelona], <marquage typemarq="italique">Llengua i Ús</marquage>, n<exposant>o</exposant> 31, p. 59-61,        <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls24" xlink:href="https://www.raco.cat/index.php/LlenguaUs/article/view/128199/177728" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.raco.cat/index.php/LlenguaUs/article/view/128199/177728</liensimple> </refbiblio> <refbiblio id="rb24"><marquage typemarq="petitecap">Institut        d’Estudis Catalans; Fundació Acadèmia de Ciències Mèdiques i de la Salut de Catalunya i de        Balears; Enciclopèdia Catalana, SAU; TERMCAT, Centre de Terminologia; Generalitat de        Catalunya. Departament </marquage><marquage typemarq="petitecap">de Salut</marquage> (2015-2019).        <marquage typemarq="italique">Diccionari enciclopèdic de medicina</marquage> (DEMCAT) [Encyclopedic dictionary of medicine        (DEMCAT)], <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls25" xlink:href="http://www.termcat.cat/ca/diccionaris-en-linia/183" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.termcat.cat/ca/diccionaris-en-linia/183</liensimple> </refbiblio> <refbiblio id="rb25"><marquage typemarq="petitecap">Plataforma per        la Llengua</marquage> (2019). <marquage typemarq="italique">Reanimar el català. Dades i propostes per a millorar la        situació de la llengua en l’àmbit sanitari a Catalunya</marquage> [Revive Catalan. Data and        proposals to improve the situation of the language in the Catalan health field], Barcelona,        p. 40-41, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls26" xlink:href="https://www.plataforma-llengua.cat/media/upload/pdf/reanimar-el-catala_informe-salut_1551952254.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.plataforma-llengua.cat/media/upload/pdf/reanimar-el-catala_informe-salut_1551952254.pdf</liensimple>        </refbiblio> <refbiblio id="rb26"><marquage typemarq="petitecap">Serra-Sutton</marquage>, Vicky, &amp; Michael <marquage typemarq="petitecap">Herdman</marquage> (2001).        “Metodologia d’adaptació transcultural d’instruments de mesura de la qualitat de vida        relacionada amb la salut” [Methodology for the cross-cultural adaptation of instruments for        measuring health-related quality of life], <marquage typemarq="italique">Informatiu AATM</marquage>, n<exposant>o</exposant> 24,        p.18-20.</refbiblio> <refbiblio id="rb27"><marquage typemarq="petitecap">Soler</marquage>, Ivan, &amp; <marquage typemarq="petitecap">Solé Camardons</marquage>, Joan (2004).        “Enquesta sobre els usos lingüístics als centres sanitaris 2004” [2004 Survey on language        uses in health centres], <marquage typemarq="italique">Llengua i Ús</marquage>, n<exposant>o</exposant> 31, p. 62-70, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls27" xlink:href="https://www.raco.cat/index.php/LlenguaUs/article/view/128200/177729" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.raco.cat/index.php/LlenguaUs/article/view/128200/177729</liensimple> </refbiblio> <refbiblio id="rb28">Termcat, Centre de Terminologia. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls28" xlink:href="https://www.termcat.cat/ca" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.termcat.cat/ca</liensimple> </refbiblio><divbiblio>
+        <titre>Legislation</titre>
+        
+        <subdivbiblio>
+          <titre>Regulatory provisions in Catalonia</titre>
+          <refbiblio id="rb29">Llei orgànica 6/2006,            de reforma de l’Estatut d’autonomia de Catalunya [<marquage typemarq="italique">Reform of the Statute of Autonomy            of Catalonia Organic Act</marquage>, nº 6/2006], art 6, 23, 32, 33, 36 &amp; 50. (<marquage typemarq="italique">Diari            Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official Gazette of the Government of            Cataloni</marquage><marquage typemarq="italique">a</marquage>], nº 4680, 20 July 2006, &amp; Boletín Oficial del Estado            [Spanish Official Gazette], nº 172, 20 July), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls29" xlink:href="https://www.parlament.cat/document/cataleg/150259.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.parlament.cat/document/cataleg/150259.pdf</liensimple> </refbiblio> <refbiblio id="rb30">Llei 1/1998, de política            lingüística, [<marquage typemarq="italique">Language Policy Act</marquage>, nº 1/1998, art 9, 10 &amp; 11], (<marquage typemarq="italique">Diari            Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official Gazette of the Government of            Cataloni</marquage><marquage typemarq="italique">a</marquage>], nº 2553, 9 January 1998, &amp; <marquage typemarq="italique">Boletín Oficial del            Estado</marquage> [<marquage typemarq="italique">Spanish Official Gazett</marquage><marquage typemarq="italique">e</marquage>], nº 36, 11 February), Following            the entry into force of the <marquage typemarq="italique">Reform of the Statute of Autonomy of Catalonia Organic            Act</marquage>, 2006, the <marquage typemarq="italique">Linguistic Policy Act</marquage> remains valid in its entirety, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls30" xlink:href="https://llengua.gencat.cat/en/serveis/legislacio_i_drets_linguistics/llei_de_politica_linguistica/index.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://llengua.gencat.cat/en/serveis/legislacio_i_drets_linguistics/llei_de_politica_linguistica/index.html</liensimple>            </refbiblio> <refbiblio id="rb31">Llei 8/2007, de 30 de            julio, de l’Institut Català de la Salut. [<marquage typemarq="italique">Catalan Institute of Health Act</marquage>,            nº 8/2007, art 19]. (<marquage typemarq="italique">Diari Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official            Gazette of the Government of Catalonia</marquage>], nº 4940, 3 August 2007, &amp; <marquage typemarq="italique">Boletín            Oficial del Estado</marquage> [<marquage typemarq="italique">Spanish Official Gazett</marquage><marquage typemarq="italique">e</marquage>], nº 197,            17 August), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls31" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa?action=fitxa&amp;documentId=445808" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa?action=fitxa&amp;documentId=445808</liensimple>            </refbiblio> <refbiblio id="rb32">Llei 17/2010, del 3 de            juny, de la llengua de signes catalana. [<marquage typemarq="italique">Catalan Sign Language Act</marquage>,            nº 17/2010]. (<marquage typemarq="italique">Diari Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official            Gazette of the Government of Cataloni</marquage><marquage typemarq="italique">a</marquage>], nº 5647, 10 June 2010), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls32" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=541337&amp;language=ca_ES&amp;textWords=Llei%252017%2F2010&amp;mode=single" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=541337&amp;language=ca_ES&amp;textWords=Llei%252017%2F2010&amp;mode=single</liensimple>            </refbiblio> <refbiblio id="rb33">Llei 22/2010, del 20 de            juliol, del Codi de consum de Catalunya. [<marquage typemarq="italique">Consumer Code Act</marquage>, nº 22/2010,            art 128-1]. (<marquage typemarq="italique">Diari Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official Gazette            of the Government of Cataloni</marquage><marquage typemarq="italique">a</marquage>], nº 5677, 23 July 2010), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls33" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=543841&amp;language=ca_ES&amp;textWords=Llei%252022%2F2010&amp;mode=single" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=543841&amp;language=ca_ES&amp;textWords=Llei%252022%2F2010&amp;mode=single</liensimple>            </refbiblio> <refbiblio id="rb34">Llei 22/ Llei 35/2010, d’1            d’octubre, de l’occità, aranès a l’Aran. [<marquage typemarq="italique">Occitan, Aranese in Aran, Act</marquage>,            nº 35/2010]. (<marquage typemarq="italique">Diari Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official            Gazette of the Government of Cataloni</marquage><marquage typemarq="italique">a</marquage>], nº 5745, 29 October 2010), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls34" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=560046&amp;language=ca_ES&amp;textWords=Llei%252035%2F2010&amp;mode=single" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=560046&amp;language=ca_ES&amp;textWords=Llei%252035%2F2010&amp;mode=single</liensimple>            </refbiblio> <refbiblio id="rb35">Decret legislatiu 1/1997,            de 31 d’octubre, pel qual s’aprova la refosa en un Text únic dels preceptes de            determinats textos legals vigents a Catalunya en matèria de funció pública. [Approval of            the Revision in a Single Text of the Precepts of Certain Legal Texts in Force in            Catalonia in the Field of Public Service Legislative Decree, nº 1/1997, art 42].            (<marquage typemarq="italique">Diari Oficial de la Generalitat de Catalunya</marquage> [Official Gazette of the            Government of Catalonia], nº 2509, 3 November 1997), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls35" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=174084" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;documentId=174084</liensimple>            </refbiblio> <refbiblio id="rb36">Decret 107/1987, de 13 de            març, pel qual es regula l’ús de les llengües oficials per part de l’Administració de la            Generalitat de Catalunya. [<marquage typemarq="italique">Regulation of the Use of Official Languages by the            Administration of the Generalitat of Catalonia Decree</marquage>, nº 107/1987]. (<marquage typemarq="italique">Diari            Oficial de la Generalitat de Catalunya</marquage> [<marquage typemarq="italique">Official Gazette of the Government of            Catalonia</marquage>], nº 827, 10 April 1987), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls36" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;mode=single&amp;documentId=33449&amp;language=ca_ES" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;mode=single&amp;documentId=33449&amp;language=ca_ES</liensimple>            </refbiblio> <refbiblio id="rb37">Decret 161/2002, d’11 de            juny, sobre l’acreditació del coneixement del català i l’aranès en els processos de            selecció de personal i de provisió de llocs de treball de les administracions públiques            de Catalunya. [<marquage typemarq="italique">Accreditation of Knowledge of Catalan and Aranese in the Processes of            Selection of Staff and Provision of Jobs of the Public Administrations of Catalonia            Decree</marquage>, nº 161/2002]. (<marquage typemarq="italique">Diari Oficial de la Generalitat de Catalunya</marquage>            [<marquage typemarq="italique">Official Gazette of the Government of Catalonia</marquage>], nº 3660, 19 June 2002), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls37" xlink:href="https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;versionId=1625826&amp;versionState=02&amp;language=ca_ES&amp;documentId=275078&amp;mode=single" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://portaljuridic.gencat.cat/ca/pjur_ocults/pjur_resultats_fitxa/?action=fitxa&amp;versionId=1625826&amp;versionState=02&amp;language=ca_ES&amp;documentId=275078&amp;mode=single</liensimple>            </refbiblio>
+        </subdivbiblio>
+        <subdivbiblio>
+          <titre>Regulatory provisions in Spain</titre>
+          <refbiblio id="rb38">Llei 39/2015, d’1            d’octubre, del procediment administratiu comú de les administracions públiques.            [<marquage typemarq="italique">Common Administrative Procedure of Public Administrations Act</marquage>, nº 1/2015,            art 15]. (<marquage typemarq="italique">Boletín Oficial del Estado</marquage> [<marquage typemarq="italique">Spanish Official Gazette</marquage>],            nº 236, 13 October), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls38" xlink:href="https://www.boe.es/boe_catalan/dias/2015/10/02/pdfs/BOE-A-2015-10565-C.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.boe.es/boe_catalan/dias/2015/10/02/pdfs/BOE-A-2015-10565-C.pdf</liensimple> </refbiblio> <refbiblio id="rb39">Reial decret legislatiu 5/2015, de            30 d’octubre, pel qual s’aprova el text refós de la Llei de l’Estatut bàsic de l’empleat            públic. [<marquage typemarq="italique">Basic Statute of Public Employee Royal Legislative Decree</marquage>, nº 5/2015,            art 54.11, 56.2 &amp; 61]. (<marquage typemarq="italique">Boletín Oficial del Estado</marquage> [<marquage typemarq="italique">Spanish Official            Gazette</marquage>], nº 261, 31 October), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls39" xlink:href="https://www.boe.es/boe_catalan/dias/2015/10/31/pdfs/BOE-A-2015-11719-C.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.boe.es/boe_catalan/dias/2015/10/31/pdfs/BOE-A-2015-11719-C.pdf</liensimple> </refbiblio> <refbiblio id="rb40">LLEI 29/2006, de 26 de juliol, de            garanties i ús racional dels medicaments i productes sanitaris. [<marquage typemarq="italique">Guarantees and            Rational Use of Medicines and Health Products Act</marquage>, nº 29/2006, art 15 &amp; 31].            (<marquage typemarq="italique">Boletín Oficial del Estado</marquage> [<marquage typemarq="italique">Spanish Official Gazette</marquage>], nº 178,            27 July 2006), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls40" xlink:href="https://www.boe.es/boe_catalan/dias/2006/08/01/pdfs/A02327-02369.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.boe.es/boe_catalan/dias/2006/08/01/pdfs/A02327-02369.pdf</liensimple> </refbiblio> <refbiblio id="rb41">Real Decreto 1345/2007, de 11 de            octubre, por el que se regula el procedimiento de autorización, registro y condiciones            de dispensación de los medicamentos de uso humano fabricados industrialmente.            [<marquage typemarq="italique">Regulation of the Procedure for Authorization, Registration and Dispensing            Conditions of Industrially Manufactured Human Use Drugs Royal Decree</marquage>, nº 1345/2007,            art 30.2 &amp; 30.3]. (<marquage typemarq="italique">Boletín Oficial del Estado</marquage> [<marquage typemarq="italique">Spanish Official            Gazette</marquage>], nº 267, 7 November 2007), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls41" xlink:href="https://www.boe.es/buscar/act.php?id=BOE-A-2007-19249&amp;tn=1&amp;p=20100505" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.boe.es/buscar/act.php?id=BOE-A-2007-19249&amp;tn=1&amp;p=20100505</liensimple> </refbiblio>            <refbiblio id="rb42">Orden SCB/925/2019, de 30 de            agosto, por la que se aprueba la oferta de plazas y la convocatoria de pruebas            selectivas 2019 para el acceso en el año 2020, a plazas de formación sanitaria            especializada para las titulaciones universitarias de grado/licenciatura/diplomatura de            Medicina, Farmacia, Enfermería y ámbito de la Psicología, la Química, la Biología y la            Física. [<marquage typemarq="italique">Approval of the offer of places and the call for selective tests 2019 for            access in 2020, to places of specialized health training for university degree /            bachelor’s degrees / diploma in Medicine, Pharmacy, Nursing and the field of Psychology,            Chemistry, Biology and Physics Order nº SCB/925</marquage>, 2019, 9<exposant>th</exposant> section].            (<marquage typemarq="italique">Boletín Oficial del Estado</marquage> [<marquage typemarq="italique">Spanish Official Gazette</marquage>], nº 216,            9 September), <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls42" xlink:href="https://www.boe.es/boe/dias/2019/09/09/pdfs/BOE-A-2019-12897.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.boe.es/boe/dias/2019/09/09/pdfs/BOE-A-2019-12897.pdf</liensimple> </refbiblio>
+        </subdivbiblio>
+        <subdivbiblio>
+          <titre>Regulatory provisions in Europe</titre>
+          <refbiblio id="rb43">Council of Europe.            <marquage typemarq="italique">European Charter for Regional or Minority Languages</marquage> (4 November 1992, ETS 148).            Articles 10.2.a,b; 10.4.b; 13.2.c,d, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls43" xlink:href="https://www.coe.int/en/web/conventions/full-list/-/conventions/rms/0900001680695175" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.coe.int/en/web/conventions/full-list/-/conventions/rms/0900001680695175</liensimple>            </refbiblio> <refbiblio id="rb44">Council of Europe. European            Charter for Regional or Minority Languages. <marquage typemarq="italique">Fifth report of the Committee of Experts            in respect of Spain</marquage>. 1356<exposant>th</exposant> Meeting, 9 October 2019. Chapter 2.2.2.            Catalan in Catalonia, section 44-45 and 2.2.2.2.II.c, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls44" xlink:href="https://search.coe.int/cm/Pages/result_details.aspx?ObjectId=090000168096fa01" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://search.coe.int/cm/Pages/result_details.aspx?ObjectId=090000168096fa01</liensimple> </refbiblio>            <refbiblio id="rb45">European Medicines Agency (15            June 2019). <marquage typemarq="italique">List of official languages per country</marquage>, <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls45" xlink:href="https://www.ema.europa.eu/en/documents/other/list-official-languages-country_en.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">https://www.ema.europa.eu/en/documents/other/list-official-languages-country_en.pdf</liensimple>            </refbiblio>
+        </subdivbiblio>
+        </divbiblio></biblio>
+    </grbiblio>
+  </partiesann></article>
