@@ -148,7 +148,7 @@ django-waffle==2.2.0
     # via -r requirements-test.txt
 django-widget-tweaks==1.4.8
     # via -r requirements-test.txt
-django==3.2.4
+django==3.2.6
     # via
     #   -r requirements-test.txt
     #   django-account-actions
@@ -285,7 +285,7 @@ pickleshare==0.7.5
     # via ipython
 pikepdf==2.12.2
     # via -r requirements-test.txt
-pillow==8.2.0
+pillow==8.3.1
     # via
     #   -r requirements-test.txt
     #   cairosvg
