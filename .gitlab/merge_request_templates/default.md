@@ -1,15 +1,14 @@
-## Qu'est-ce que le MR fait ? 
+## Qu'est-ce que le MR fait ?
 
 ## Comment tester ?
 
 ## Screenshots / vidéo
 
-
 ## À valider
 
 ### Documentation
 
-* [ ] Est-ce que la documentation compile ? Est-ce que `make html` retourne des erreurs ? 
+* [ ] Est-ce que la documentation compile ? Est-ce que `make html` retourne des erreurs ?
 
 ### Correction de bogues
 
@@ -17,18 +16,18 @@
 
 ### Nouvelle fonctionnalité
 
-* [ ] Est-ce que la fonctionnalité est documentée ? 
+* [ ] Est-ce que la fonctionnalité est documentée ?
 
 ### Internationalisation
 
 * [ ] Est-ce que les chaînes de caractères sont internationalisées ?
-* [ ] Est-ce que la langue de base est le français ? 
+* [ ] Est-ce que la langue de base est le français ?
 
 ### Changements au code
 
 * [ ] Est-ce que black passe ?
-* [ ] Est-ce que les tests passent ? 
-* [ ] Est-ce que tous les print / console.log ont été enlevés ? 
+* [ ] Est-ce que les tests passent ?
+* [ ] Est-ce que tous les print / console.log ont été enlevés ?
 * [ ] Est-ce que les requêtes HTTP ont un timeout explicite ?
 
 ### Git
