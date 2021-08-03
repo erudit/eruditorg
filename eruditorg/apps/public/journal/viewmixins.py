@@ -336,8 +336,11 @@ class ArticleAccessLogMixin:
             return response
 
         active_subscription = request.subscriptions.active_subscription
-        if active_subscription and active_subscription.organisation:
-            restriction_subscriber_id = active_subscription.organisation.account_id
+        if active_subscription:
+            if active_subscription.organisation:
+                restriction_subscriber_id = active_subscription.organisation.account_id
+            else:
+                restriction_subscriber_id = None
             is_subscribed_to_journal = active_subscription.provides_access_to(journal=journal)
         else:
             restriction_subscriber_id = None
