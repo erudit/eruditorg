@@ -9,6 +9,7 @@ from django.test import RequestFactory
 from django.test.utils import override_settings
 from django.views.generic import DetailView, View
 
+from base.test.factories import UserFactory
 from erudit.test.factories import (
     ArticleFactory,
     EmbargoedArticleFactory,
@@ -538,8 +539,9 @@ class TestArticleAccessLogMixin:
     @pytest.mark.parametrize(
         "active_subscription",
         (
-            (True),
-            (False),
+            ("institutional"),
+            ("individual"),
+            (None),
         ),
     )
     @pytest.mark.parametrize(
@@ -577,14 +579,26 @@ class TestArticleAccessLogMixin:
         request.COOKIES["article_access_log_session_key"] = "foo"
         request.subscriptions = UserSubscriptions()
         request.user = AnonymousUser()
-        if active_subscription:
+        if active_subscription == "institutional":
             subscription = JournalAccessSubscriptionFactory(
                 journals=[article.issue.journal],
                 post__valid=True,
                 organisation=OrganisationFactory(),
+                user=None,
             )
             request.subscriptions.add_subscription(subscription)
             restriction_subscriber_id = subscription.organisation.account_id
+        elif active_subscription == "individual":
+            user = UserFactory()
+            subscription = JournalAccessSubscriptionFactory(
+                journals=[article.issue.journal],
+                post__valid=True,
+                organisation=None,
+                user=user,
+            )
+            request.subscriptions.add_subscription(subscription)
+            restriction_subscriber_id = None
+            request.user = user
         else:
             restriction_subscriber_id = None
 
@@ -607,13 +621,13 @@ class TestArticleAccessLogMixin:
                 article_id=article.localidentifier,
                 article_full_pid=article.get_full_identifier(),
                 restriction_subscriber_id=restriction_subscriber_id,
-                is_subscribed_to_journal=active_subscription,
+                is_subscribed_to_journal=active_subscription is not None,
                 access_type="html_full_view",
                 content_access_granted=True,
                 is_issue_embargoed=article.issue.embargoed,
                 is_journal_open_access=article.issue.journal.open_access,
                 session_key="foo",
-                username="",
+                username=request.user.username or "",
             )
             assert article_access_log == expected_article_access_log
 
