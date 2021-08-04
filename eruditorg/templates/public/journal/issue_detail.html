@@ -163,6 +163,7 @@
         {% endif %}
       </span>
       {% for theme in themes %}
+      <span class="theme">
       {% for name in theme.names %}
       <span class="theme-title">
         {{ name|safe }}
@@ -173,6 +174,7 @@
         {% translate 'Sous la direction de' %} {{ theme.editors|person_list|safe }}
       </span>
       {% endif %}
+      </span>
       {% endfor %}
       {% if guest_editors %}
       <span class="theme-guest-editor">{% translate 'Sous la direction de' %} {{ guest_editors|person_list|safe }}</span>
