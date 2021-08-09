@@ -1064,7 +1064,7 @@ class TestIssueDetailView:
                 "https://test/",
                 '<a class="tool-btn" href="https://test/" title="Lire l\'article en texte '
                 'intégral"><span class="toolbox-html">HTML</span></a>',
-                lambda x, y: x in y,
+                lambda x, y: x not in y,
             ),
             (
                 "localidentifier",
