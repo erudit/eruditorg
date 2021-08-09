@@ -184,7 +184,7 @@ jsonfield==3.1.0
     # via
     #   -r requirements.txt
     #   django-post-office
-liberuditarticle==0.2.75
+liberuditarticle==0.2.76
     # via -r requirements.txt
 luqum==0.11.0
     # via -r requirements-test.in

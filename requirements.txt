@@ -130,7 +130,7 @@ isodate==0.6.0
     # via rdflib
 jsonfield==3.1.0
     # via django-post-office
-liberuditarticle==0.2.75
+liberuditarticle==0.2.76
     # via -r requirements.in
 lxml==4.6.3
     # via
