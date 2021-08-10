@@ -1,5 +1,5 @@
 {% extends "public/base.html" %}
-{% load humanize i18n static waffle_tags adv_cache %}
+{% load humanize i18n static waffle_tags adv_cache model_formatters %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -100,11 +100,7 @@
           <span>{{ chapter.title|safe }}</span>
           {% if chapter.subtitle %}<span>{{ chapter.subtitle|safe }}</span>{% endif %}
         </h1>
-        <ul class="doc-head__authors">
-          {% for author in chapter.authors %}
-          <li class="doc-head__author">{{ author }}{% if not forloop.last %}, {% endif %}</li>
-          {% endfor %}
-        </ul>
+        <p class="doc-head__authors">{{ chapter.authors|person_list|safe }}</p>
       </div>
       {% if book.cover %}
       <div class="col-xs-3">
