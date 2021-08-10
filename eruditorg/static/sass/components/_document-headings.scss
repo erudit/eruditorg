@@ -25,6 +25,10 @@
   > span + span {
     margin-top: 0.35em;
   }
+
+  .doc-head__subtitle {
+    color: $dark-grey;
+  }
 }
 
 .doc-head__authors {
