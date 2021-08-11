@@ -98,7 +98,7 @@
       <div class="col-xs-9">
         <h1 class="doc-head__title">
           <span>{{ chapter.title|safe }}</span>
-          {% if chapter.subtitle %}<span>{{ chapter.subtitle|safe }}</span>{% endif %}
+          {% if chapter.subtitle %}<span class="doc-head__subtitle">{{ chapter.subtitle|safe }}</span>{% endif %}
         </h1>
         <ul class="doc-head__authors">
           {% for author in chapter.authors %}
