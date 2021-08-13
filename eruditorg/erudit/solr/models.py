@@ -161,6 +161,17 @@ class SolrDocument:
         return _("(Sans titre)")
 
 
+class Book(SolrDocument):
+
+    @property
+    def series_display(self):
+        collection_title = self.solr_data.get("TitreContexte_fac")
+        if collection_title:
+            return collection_title[0]
+        else:
+            return super().series_display
+
+
 class BaseArticle(SolrDocument):
     """ Common methods for ExternalArticle & InternalArticle classes. """
 
@@ -351,7 +362,9 @@ class Thesis(SolrDocument):
 
 def get_model_instance(solr_data):
     generic = SolrDocument(solr_data)
-    if generic.document_type == "thesis":
+    if generic.document_type == "book":
+        return Book(solr_data)
+    elif generic.document_type == "thesis":
         return Thesis(solr_data)
     elif generic.document_type == "article":
         try:

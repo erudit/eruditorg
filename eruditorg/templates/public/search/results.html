@@ -224,9 +224,12 @@
                       {{ document.collection_display }}
                     {# metadata for books #}
                     {% elif document.document_type == 'book' %}
-                      {% if document.pages %}
-                        <span>{% if document.series_display %}{{ document.series_display }}, {% endif %}{% if document.volume %}{% translate "Volume" %} {{ document.volume }}, {% endif %}{% if document.year %}{{ document.year }}, {% endif %}{{ document.pages }}</span>
-                      {% endif %}
+                      <span>
+                        {% if document.series_display %}{% trans "Publié dans :"%} {{ document.series_display }}{% endif %}
+                        {% if document.volume %}, {% translate "Volume" %} {{ document.volume }}{% endif %}
+                        {% if document.year %}, {{ document.year }}{% endif %}
+                        {% if document.pages %}, {{ document.pages }}{% endif %}
+                      </span>
                     {% endif %}
 
                   </p>
